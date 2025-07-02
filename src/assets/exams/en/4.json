@@ -603,13 +603,13 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "Which two decision-making styles are quickest and would be used when there is little time to make a decision? (check two choices)",
       "explanation": "",
       "choices": [
         {
           "text": "Command Style",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Consultative Style",
@@ -621,7 +621,7 @@
         },
         {
           "text": "Majority Vote Style",
-          "correct": false
+          "correct": true
         }
       ]
     },
