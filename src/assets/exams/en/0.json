@@ -1803,21 +1803,21 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "The project team is defining certifications, technical competencies, and soft competencies for people, machinery, advance visualization software, workstations for physicians, and other supplies for a complex project that must be implemented in 5 months.nnIf the project team uses a resource breakdown structure (RBS), how will it help to organize and visualize the resources? (Choose three).",
       "explanation": "",
       "choices": [
         {
           "text": "By hierarchy",
-          "correct": false
+          "correct": true
         },
         {
           "text": "By source",
-          "correct": false
+          "correct": true
         },
         {
           "text": "By category",
-          "correct": false
+          "correct": true
         },
         {
           "text": "By type",
@@ -2037,17 +2037,17 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project manager is a part of a large business transformation project. The project's main goal is to increase production and create capacity to bring new products to the market. The project manager notices during a lunch break that employees are discussing the changes introduced by the project and are afraid that they will result in staff layoffs, even though it is not true.nnWhich groups should the project manager contact to address this concern and ensure that the project meets its goal? (Choose 3).",
       "explanation": "",
       "choices": [
         {
           "text": "The human resources (HR) department to ask for support to resolve the issue",
-          "correct": false
+          "correct": true
         },
         {
           "text": "The change manager to revise the communications management plan",
-          "correct": false
+          "correct": true
         },
         {
           "text": "The employees' functional managers to include the issue in their performance reviews",
@@ -2055,7 +2055,7 @@
         },
         {
           "text": "The employees' functional managers to ask for support in explaining the change",
-          "correct": false
+          "correct": true
         },
         {
           "text": "The sponsor to ask for executive support and reinforcement",
@@ -2156,7 +2156,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project manager is leading a large business transformation project that involves the entire organization. The project manager is working on the communications management plan.nnWhich two elements should the project manager consider while planning communications? (Choose 2).",
       "explanation": "",
       "choices": [
@@ -2170,11 +2170,11 @@
         },
         {
           "text": "Collecting feedback",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Multiple communication channels",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Best communication channel",
@@ -3816,13 +3816,13 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "What may cause leaders to ignore the Shared Leadership Potential in their teams? (Choose 2)",
       "explanation": "",
       "choices": [
         {
           "text": "Over-confidence in their own role",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Providing autonomy and control",
@@ -3830,7 +3830,7 @@
         },
         {
           "text": "Fear of becoming dispensable",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Trusting the team",
