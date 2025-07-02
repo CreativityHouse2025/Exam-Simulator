@@ -609,7 +609,7 @@
       "choices": [
         {
           "text": "أسلوب الأمر (Command Style)",
-          "correct": false
+          "correct": true
         },
         {
           "text": "الأسلوب الاستشاري (Consultative Style)",
@@ -621,7 +621,7 @@
         },
         {
           "text": "أسلوب التصويت بالأغلبية (Majority Vote Style)",
-          "correct": false
+          "correct": true
         }
       ]
     },
