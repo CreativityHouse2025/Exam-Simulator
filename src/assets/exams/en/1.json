@@ -373,17 +373,17 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A large transformation project that requires cross-functional effort from various business teams is in progress.nnWhich two actions should the project manager take first to complete the stakeholder register? (Choose two)",
       "explanation": "",
       "choices": [
         {
           "text": "Hold a workshop with key project team members to brainstorm and identify potential stakeholders.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Ask for referrals from the business sponsor or senior leadership.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Analyze the interest, influence, and impact of potential stakeholders from each business team.",
@@ -400,7 +400,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "One of the retrospective action items that has recurred for the past two iterations is related to the verification and validation of the delivered functionality before production readiness.nnWhich two solutions should the project manager use? (Choose two)",
       "explanation": "",
       "choices": [
@@ -410,7 +410,7 @@
         },
         {
           "text": "Incorporate unit and integration test criteria as part of the validation.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Modify the methodology of delivery to test-driven development.",
@@ -418,7 +418,7 @@
         },
         {
           "text": "Review the working agreement for acceptance criteria with the project team.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Include a product backlog item to build an integration test suite.",
@@ -1052,7 +1052,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project manager is managing a long-term project that is behind schedule. The client is concerned that the project will be delayed.nnWhich two actions should the project manager take to address the client's concerns? (Choose two)",
       "explanation": "",
       "choices": [
@@ -1066,7 +1066,7 @@
         },
         {
           "text": "Add more resources to critical path tasks.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Perform a risk reserve analysis.",
@@ -1074,7 +1074,7 @@
         },
         {
           "text": "Run some activities concurrently.",
-          "correct": false
+          "correct": true
         }
       ]
     },
@@ -1240,7 +1240,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A team member in a hybrid organization informs the project manager of a new way to execute an activity with a shorter duration. The project manager has not used the new process before, but a trusted team member explains that their previous experience with the process validates the efficacy of the new process.n Which two actions should the project manager take? (Choose two).",
       "explanation": "",
       "choices": [
@@ -1258,11 +1258,11 @@
         },
         {
           "text": "Assess the impact of adopting the new process.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Communicate the impact with key stakeholders.",
-          "correct": false
+          "correct": true
         }
       ]
     },
@@ -1359,13 +1359,13 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project is close to completion when an unidentified and influential stakeholder appears and threatens to put the project in jeopardy by not approving the closing documents.nnWhich two actions should the project manager have done to avoid this? (Choose two)",
       "explanation": "",
       "choices": [
         {
           "text": "The project manager should have carried out stakeholder identification during the initiation stage of the project.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "The project owner should have informed the project manager about the stakeholders of the project.",
@@ -1373,7 +1373,7 @@
         },
         {
           "text": "Identifying and analyzing stakeholders should have been performed as an ongoing task throughout the project duration.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "The stakeholder should have come forward for proper identification at the beginning of the project.",
@@ -1386,13 +1386,13 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project is challenged by a multitude of problems resulting in defects and stakeholder complaints. The project manager has been contemplating a quick and effective approach to address the problems.nnWhich two actions should the project manager take? (Choose two)",
       "explanation": "",
       "choices": [
         {
           "text": "Gather the project team members and have a brainstorming session.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Refer to the organizational process assets (OPAs) to assess lessons learned.",
@@ -1404,7 +1404,7 @@
         },
         {
           "text": "Use an Ishikawa diagram to help identify the problems.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Use a Pareto chart to identify how the challenges of the project should be addressed.",
@@ -1436,7 +1436,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project manager is working in the fifth month of an implementation for a construction project. The planner reported that the current schedule performance index (SPI) and cost performance index (CPI) are 0.8 and 0.9, respectively.nnWhich two options will help to accelerate the project? (Choose two)",
       "explanation": "",
       "choices": [
@@ -1450,11 +1450,11 @@
         },
         {
           "text": "Increase the number of resources to get more people involved and get activities done faster.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Rearrange the schedule so that some activities on the critical path can be done concurrently to reduce the project duration.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Ask the resources to work overtime to accelerate the project and achieve better results.",
