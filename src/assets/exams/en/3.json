@@ -212,17 +212,17 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "Project managers should wear a leadership face and drive the project team to achieve the expected deliverables. What qualities should a project manager have? (Choose 3).",
       "explanation": "",
       "choices": [
         {
           "text": "Lead",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Ethical",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Adapt",
@@ -234,22 +234,22 @@
         },
         {
           "text": "Empower",
-          "correct": false
+          "correct": true
         }
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project manager is on a project that has a significant dependence on market changes. The PMO recommended to use an agile approach and the project manager scheduled reference checks to select the implementation partner. To be successful, agile needs a high level of trust between the client and vendor.nnWhich of the following aspects should the project manager look for to build trust that the vendor can deliver? (Choose 2).",
       "explanation": "",
       "choices": [
         {
           "text": "Processes and tools - to ensure that the vendor used an efficient and repeatable delivery approach",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Technical excellence - to ensure that the deliverables were completed as soon as possible and of a high quality",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Perseverance - to ensure that the vendor overcome the challenges inherent to frequent scope change",
@@ -262,7 +262,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project being run by a project manager is implementing a new technology. The project manager wants to be sure that the project delivers business value.nnWhat roles are critical in ensuring that the organization will benefit from the project delivery? (Choose 3).",
       "explanation": "",
       "choices": [
@@ -272,15 +272,15 @@
         },
         {
           "text": "Project manager",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Business analyst",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Customer lead",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Technical architect",
@@ -1853,21 +1853,21 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "When managing a strategic project for their organization, what four tools should a project manager use for risk analysis? (Choose four)",
       "explanation": "",
       "choices": [
         {
           "text": "Brainstorming",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Inspection",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Risk checklists",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Product evaluation",
@@ -1875,7 +1875,7 @@
         },
         {
           "text": "Interviewing",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Decision tree analysis",
@@ -1884,13 +1884,13 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "The project team members are dispersed across different countries. Suddenly, travel restrictions do not allow team members to collocate.nnWhen analyzing project risks, which risk analysis tools should the project manager use? (Choose two).",
       "explanation": "",
       "choices": [
         {
           "text": "Risk checklist",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Context diagram",
@@ -1898,7 +1898,7 @@
         },
         {
           "text": "Meetings",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Data representation",
@@ -1934,7 +1934,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project manager is working on a complex project. The project includes many stakeholders with conflicting priorities.nnWhich two actions should the project manager take to be prepared for negotiations and gain support from all of the stakeholders? (Choose two)",
       "explanation": "",
       "choices": [
@@ -1948,11 +1948,11 @@
         },
         {
           "text": "Understand the politics and personal interests of the stakeholders.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Develop a good communications management plan.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Develop a good risk management plan.",
@@ -1961,13 +1961,13 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project manager is working on a complex project that has high interest from senior management. There are many stakeholders with competing priorities, which requires significant negotiation skills to overcome rising conflicts.nnWhich two principles should the project manager follow when developing the negotiation strategy? (Choose two).",
       "explanation": "",
       "choices": [
         {
           "text": "Separate the people from the problem.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Focus on political issues first.",
@@ -1979,7 +1979,7 @@
         },
         {
           "text": "Focus on interests, not positions.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Delegate the decisions to the team.",
@@ -2218,13 +2218,13 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "In two months, there will be a delivery of project machines from a factory. The project team is in the process of performing a follow-up meeting to review the commitments and dependencies regarding these machines.nnWhich actions should the project team take to ensure that the deliveries are properly performed by the factory? (Choose 2).",
       "explanation": "",
       "choices": [
         {
           "text": "Ensure that they track and monitor all dependencies and report at regular intervals.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Send an email to the research and development factory one week before delivery.",
@@ -2232,7 +2232,7 @@
         },
         {
           "text": "Specify exactly when a dependency is required and for how long this requirement holds.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Schedule a meeting with the factory regarding how the machine is going to be manufactured.",
@@ -2268,7 +2268,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project team decides to document new aspects of a regulation as additional elements in the work breakdown structure (WBS). Which of the following are potential downsides to this approach? (Choose 2).",
       "explanation": "",
       "choices": [
@@ -2278,11 +2278,11 @@
         },
         {
           "text": "Traceability of requirements becomes more difficult at the project level.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Some of these requirements may not be completed as part of the project itself.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Regulatory requirements are not necessarily tied to the scope of the project.",
@@ -2640,13 +2640,13 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project manager is assigned to a project that is already in progress because the original project manager left the organization unexpectedly. Unfortunately, the previous project manager did not adhere to the organization's knowledge transfer procedures prior to leaving the organization. What can the new project manager do to fill the knowledge gaps? (Choose 3)",
       "explanation": "",
       "choices": [
         {
           "text": "Review the project documentation, including the project plan, requirements document, and risk register.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Proceed with the project as planned and engage in job shadowing activities.",
@@ -2654,11 +2654,11 @@
         },
         {
           "text": "Meet with key stakeholders to understand their expectations and priorities.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Interview team members to learn about their areas of expertise and experience with the project.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Reach out to the previous project manager and request a comprehensive knowledge transfer.",
@@ -2736,13 +2736,13 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project is in the execution phase. Equipment and devices must be transported from the vendor's warehouse to the project site through five towns.nnWhich stakeholders should the project manager involve in planning and executing a safe transport? (Choose 3).",
       "explanation": "",
       "choices": [
         {
           "text": "City councils",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Project sponsor",
@@ -2750,11 +2750,11 @@
         },
         {
           "text": "Equipment installers",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Equipment suppliers",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Warehouse technician",
@@ -2855,21 +2855,21 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project manager is leading a project with 34 team members from six countries. The scope of the project is to modernize a process used for almost 40 years in the organization.nnWhat criteria should the project manager consider while developing the communication plan? (Choose 3).",
       "explanation": "",
       "choices": [
         {
           "text": "Personal diversity",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Age diversity",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Cultural diversity",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Skill diversity",
@@ -2878,13 +2878,13 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project steering group has made a decision to change the vendor that will deliver a component of a project.nnWhich of the following activities should be included in the handover? (Choose 2).",
       "explanation": "",
       "choices": [
         {
           "text": "The old vendor should provide training for the new one and assist with the transition.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Both vendors should provide additional incentives for staff during the transition.",
@@ -2892,7 +2892,7 @@
         },
         {
           "text": "The new vendor should take over activities as per the existing project plan.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "The new vendor should shadow the old vendor to ensure knowledge transfer.",
@@ -2901,7 +2901,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project manager is working on a large business transformation project. All of the build deliverables were signed off and the project manager is managing the transition to BAU (Business as Usual).nnWhich of the following are important operational readiness considerations that the project manager needs to consider? (Choose 2).",
       "explanation": "",
       "choices": [
@@ -2911,11 +2911,11 @@
         },
         {
           "text": "Formal training and access to documentation should be provided to all users.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Responsibility and accountability are formally handed over to operational teams.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "The project team remains responsible for operational support during BAU.",
@@ -3281,13 +3281,13 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "What is the difference between risks and issues? (Choose two).",
       "explanation": "",
       "choices": [
         {
           "text": "Risks are uncertain and issues are certain.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Risks are certain and issues are uncertain.",
@@ -3299,7 +3299,7 @@
         },
         {
           "text": "Risks may not occur and an issue has occurred.",
-          "correct": false
+          "correct": true
         }
       ]
     },
@@ -3373,7 +3373,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project manager needs to ensure that the products of the organization meet certain government standards and regulations. The project manager's team is developing a business requirements document (BRD) to help in this regard.nnn Which of the following statements are correct about compliance requirements? (Choose 2).",
       "explanation": "",
       "choices": [
@@ -3383,11 +3383,11 @@
         },
         {
           "text": "Compliance requirements are non-functional requirements and must be documented in the BRD.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Compliance requirements should be part of the project scope and should be managed by the project team.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Compliance requirements can be considered organization assets and do not need to be included in the BRD.",
@@ -3446,17 +3446,17 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project manager for a large government organization decides to save money by changing the local implementation partner, and is considering using offshore resources instead.nnWhat are the main risks associated with using offshore resources? (Choose 3).",
       "explanation": "",
       "choices": [
         {
           "text": "Offshore resources may need more supervision due to time and cultural differences",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Offshore resources may not have the same business domain knowledge as the previous vendor",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Offshore resources may need more effort in planning and managing project budgets",
@@ -3464,7 +3464,7 @@
         },
         {
           "text": "Offshore resources may need longer onboarding due to geopolitical differences",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Offshore resources may need detailed documentation due to time and cultural differences",
@@ -3473,7 +3473,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "A project manager is assigned to a very complex and technical project. The project manager is currently working on the resources plan, and intends to recommend to the project sponsor that external resources should be used instead.nnWhat risks can be mitigated using one or more vendors to deliver components of the project? (Choose 3).",
       "explanation": "",
       "choices": [
@@ -3483,11 +3483,11 @@
         },
         {
           "text": "Schedule",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Technical",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Political",
@@ -3495,7 +3495,7 @@
         },
         {
           "text": "Scope",
-          "correct": false
+          "correct": true
         }
       ]
     },
