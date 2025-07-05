@@ -2,7 +2,7 @@
   "title": "Creativity House",
   "description": "Situational Questions in Professional Project Management",
   "time": 13800,
-  "pass": 85,
+  "pass": 85, 
   "test": [
      {
     "type": "multiple-choice",
