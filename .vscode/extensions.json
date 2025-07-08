@@ -6,6 +6,7 @@
     "yoavbls.pretty-ts-errors",
     "yzhang.markdown-all-in-one",
     "christian-kohler.npm-intellisense",
-    "christian-kohler.path-intellisense"
+    "christian-kohler.path-intellisense",
+    "hbenl.vscode-mocha-test-adapter"
   ]
 }
