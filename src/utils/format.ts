@@ -58,6 +58,8 @@ export function formatExam(exam: Exam): Exam {
       q.answer = q.choices.findIndex((c) => c.correct)
     } else if (q.type === 'multiple-answer') {
       q.answer = q.choices.map((c, i) => (c.correct ? i : null)).filter((c) => c !== null)
+    } else {
+      throw new Error(`Unsupported question type: ${q.type}`)
     }
 
     exam.test[i] = q
