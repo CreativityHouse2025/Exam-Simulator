@@ -29,7 +29,7 @@ const AppComponent: React.FC<object> = ({}) => {
       if (resourceCache.has(cacheKey)) {
         examData = resourceCache.get(cacheKey)
       } else {
-        const data = await import(`./assets/exams/${lang.code}/${randNum}.json`)
+        const data = await import(`./data/exams/${lang.code}/${randNum}.json`)
         examData = data.default
         resourceCache.set(cacheKey, examData)
       }
@@ -48,7 +48,7 @@ const AppComponent: React.FC<object> = ({}) => {
       if (resourceCache.has(cacheKey)) {
         translations = resourceCache.get(cacheKey)
       } else {
-        const data = await import(`./langs/${code}.json`)
+        const data = await import(`./data/langs/${code}.json`)
         translations = data.default
         resourceCache.set(cacheKey, translations)
       }
