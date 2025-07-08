@@ -24,10 +24,6 @@ export type QuestionFilter = 'all' | GridTagTypes
 export type GridTagTypes = 'marked' | 'incomplete' | 'complete' | 'incorrect' | 'correct'
 
 export interface Exam {
-  /** exam title */
-  title: string
-  /** exam description */
-  description: string
   /** minimum passing score percentage */
   pass: number
   /** time limit in minutes */

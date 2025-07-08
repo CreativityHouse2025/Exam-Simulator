@@ -1,4 +1,4 @@
-import type { Exam, ThemedStyles } from '../types'
+import type { ThemedStyles } from '../types'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -70,14 +70,12 @@ const ButtonContainer = styled.div`
   gap: 0.5rem;
 `
 
-const CoverComponent: React.FC<CoverProps> = ({ exam, onStartNew, onContinue }) => {
-  const { title, description } = exam
-
+const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onContinue }) => {
   return (
     <CoverStyles id="cover">
       <Image src={Logo} alt={translate('cover.logo-alt')} />
-      <Title>{title}</Title>
-      <Description>{description}</Description>
+      <Title>{translate('about.title')}</Title>
+      <Description>{translate('about.description')}</Description>
 
       <ButtonContainer>
         <StartButton onClick={onStartNew}>{translate('cover.new')}</StartButton>
@@ -90,7 +88,6 @@ const CoverComponent: React.FC<CoverProps> = ({ exam, onStartNew, onContinue }) 
 export default CoverComponent
 
 export interface CoverProps {
-  exam: Exam
   onStartNew: () => void | Promise<void>
   onContinue?: () => void | Promise<void>
 }

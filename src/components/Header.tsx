@@ -1,7 +1,8 @@
-import type { Exam, ThemedStyles } from '../types'
+import type { ThemedStyles } from '../types'
 
 import React from 'react'
 import styled from 'styled-components'
+import { translate } from '../settings'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 
@@ -35,14 +36,12 @@ export const ImageStyles = styled.img<ThemedStyles>`
   height: 6rem;
 `
 
-const HeaderComponent: React.FC<HeaderProps> = ({ exam }) => {
-  if (!exam) return null
-
+const HeaderComponent: React.FC<HeaderProps> = ({}) => {
   return (
     <HeaderStyles id="header" $dir={'rtl'}>
       <InnerHeader id="inner-header" dir={'rtl'}>
         <ImageStyles src={Logo} />
-        <TitleStyles>{exam.title}</TitleStyles>
+        <TitleStyles>{translate('about.title')}</TitleStyles>
       </InnerHeader>
     </HeaderStyles>
   )
@@ -54,6 +53,4 @@ export interface HeaderStylesProps extends ThemedStyles {
   $dir: 'rtl' | 'ltr'
 }
 
-export interface HeaderProps {
-  exam: Exam | null
-}
+export interface HeaderProps {}

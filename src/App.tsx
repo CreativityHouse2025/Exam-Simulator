@@ -98,23 +98,19 @@ const AppComponent: React.FC<object> = ({}) => {
 
   return (
     <LangContext.Provider value={lang}>
-      <ExamContext.Provider value={exam}>
-        <Header exam={exam} />
+      <Header />
 
-        {coverVisible ? (
-          <Cover
-            exam={exam}
-            onStartNew={() => handleStarting(defaultSession)}
-            onContinue={() => handleStarting(session)}
-          />
-        ) : (
+      {coverVisible ? (
+        <Cover onStartNew={() => handleStarting(defaultSession)} onContinue={() => handleStarting(session)} />
+      ) : (
+        <ExamContext.Provider value={exam}>
           <Navigation
             startingSession={session}
             onSessionUpdate={updateSession}
             setLang={(code: LangCode) => setLang(langs[code])}
           />
-        )}
-      </ExamContext.Provider>
+        </ExamContext.Provider>
+      )}
     </LangContext.Provider>
   )
 }
