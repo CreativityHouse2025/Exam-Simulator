@@ -2242,12 +2242,29 @@
         }
       ]
     },
+   {
+  "type": "multiple-choice",
+  "text": "During a weekly team meeting, the project manager reviewed task progress and found that a senior team member did not follow the plan. They performed tasks by personal preference, without communicating with the project manager. The senior team member is an expert and a critical resource for the project.\n\nHow should the project manager address this?",
+  "explanation": "",
+  "choices": [
     {
-      "type": "multiple-choice",
-      "text": "During a weekly team meeting, the project manager reviewed task progress and found that a senior team member did not follow the plan. They performed tasks by personal preference, without communicating with the project manager. The senior team member is an expert and a critical resource for the project.nnHow should the project manager address this?",
-      "explanation": "",
-      "choices": []
+      "text": "Meet with the team member to discuss their behavior and clarify the importance of following the plan and communicating with the team.",
+      "correct": true
     },
+    {
+      "text": "Ignore the situation since the team member is experienced and the work was completed.",
+      "correct": false
+    },
+    {
+      "text": "Escalate the issue to upper management and request a replacement.",
+      "correct": false
+    },
+    {
+      "text": "Issue a formal written warning to the team member.",
+      "correct": false
+    }
+  ]
+},
     {
       "type": "multiple-choice",
       "text": "A junior project manager approaches a senior project manager and asks for assistance in initiating the final closeout process for a project. Before offering guidance, the senior project manager requires additional information.n What should the senior project manager do first?",
