@@ -21,6 +21,17 @@ const AppComponent: React.FC<object> = ({}) => {
   const [exam, setExam] = useState<Exam | null>(null)
   const forceUpdate = useForceUpdate()
 
+  const handleStarting = useCallback(
+    async (session: Session, exam: Exam | null) => {
+      if (exam) {
+        session = formatSession({ ...session, examState: 'in-progress' }, exam)
+      }
+
+      setSession(session)
+    },
+    [exam]
+  )
+
   const loadExam = useCallback(
     async (randNum: number, isMini: boolean) => {
       const examType = isMini ? 'mini' : ''
@@ -37,8 +48,10 @@ const AppComponent: React.FC<object> = ({}) => {
 
       const exam: Exam = formatExam(examData)
       setExam(exam)
+
+      handleStarting(defaultSession, exam)
     },
-    [lang.code]
+    [lang.code, handleStarting]
   )
 
   const loadTranslation = useCallback(
@@ -58,26 +71,6 @@ const AppComponent: React.FC<object> = ({}) => {
     },
     [lang]
   )
-
-  const handleStarting = useCallback(
-    (session: Session) => {
-      if (exam) {
-        let newSession: Session = formatSession({ ...session, examState: 'in-progress' }, exam)
-        setSession(newSession)
-      }
-    },
-    [exam]
-  )
-
-  const handleStartNew = useCallback(async () => {
-    await loadExam(examNumber, false)
-    handleStarting(defaultSession)
-  }, [loadExam, handleStarting])
-
-  const handleStartMini = useCallback(async () => {
-    await loadExam(miniExamNumber, true)
-    handleStarting(defaultSession)
-  }, [loadExam, handleStarting])
 
   const updateSession = useCallback((newSession: Session) => setSession(newSession), [setSession])
 
@@ -107,7 +100,11 @@ const AppComponent: React.FC<object> = ({}) => {
           />
         </ExamContext.Provider>
       ) : (
-        <Cover onStartNew={handleStartNew} onStartMini={handleStartMini} onContinue={() => handleStarting(session)} />
+        <Cover
+          onStartNew={() => loadExam(examNumber, false)}
+          onStartMini={() => loadExam(miniExamNumber, true)}
+          onContinue={() => handleStarting(session, null)}
+        />
       )}
     </LangContext.Provider>
   )
