@@ -960,11 +960,11 @@
       "choices": [
         {
           "text": "Escalate the case to a functional manager to bring a technical expert to the team.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Explain the situation to the customer and include an action plan.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Keep the team working on the sprint backlog in order to accomplish the next release milestone.",
