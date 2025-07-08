@@ -7,7 +7,8 @@
   "cover": {
     "logo-alt": "Logo",
     "continue": "Continue Last Exam",
-    "new": "Start New Exam"
+    "new": "Start New Exam",
+    "mini": "Start Mini Exam"
   },
   "nav": {
     "drawer": {

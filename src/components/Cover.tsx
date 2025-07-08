@@ -33,7 +33,7 @@ export const Title = styled.div<ThemedStyles>`
 export const Description = styled.div`
   font: 2.25rem 'Open Sans';
   padding: 1rem;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 `
 
 const StartButton = styled.button<ThemedStyles>`
@@ -70,7 +70,14 @@ const ButtonContainer = styled.div`
   gap: 0.5rem;
 `
 
-const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onContinue }) => {
+const ButtonRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+`
+
+const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onContinue }) => {
   return (
     <CoverStyles id="cover">
       <Image src={Logo} alt={translate('cover.logo-alt')} />
@@ -78,8 +85,19 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onContinue }) => {
       <Description>{translate('about.description')}</Description>
 
       <ButtonContainer>
-        <StartButton onClick={onStartNew}>{translate('cover.new')}</StartButton>
-        {onContinue && <ContinueButton onClick={onContinue}>{translate('cover.continue')}</ContinueButton>}
+        <ButtonRow>
+          <StartButton id="start-new-button" onClick={onStartNew}>
+            {translate('cover.new')}
+          </StartButton>
+          <StartButton id="start-mini-button" onClick={onStartMini}>
+            {translate('cover.mini')}
+          </StartButton>
+        </ButtonRow>
+        {onContinue && (
+          <ContinueButton id="continue-button" onClick={onContinue}>
+            {translate('cover.continue')}
+          </ContinueButton>
+        )}
       </ButtonContainer>
     </CoverStyles>
   )
@@ -89,5 +107,6 @@ export default CoverComponent
 
 export interface CoverProps {
   onStartNew: () => void | Promise<void>
+  onStartMini: () => void | Promise<void>
   onContinue?: () => void | Promise<void>
 }
