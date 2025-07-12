@@ -1228,7 +1228,7 @@
       "choices": [
         {
           "text": "Managing risks",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Coaching on global technical excellence",
@@ -1236,7 +1236,7 @@
         },
         {
           "text": "Escalating impediments",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Coaching on global continual improvement",
@@ -1244,7 +1244,7 @@
         },
         {
           "text": "Coaching on team continual improvement",
-          "correct": false
+          "correct": true
         }
       ]
     },

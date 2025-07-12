@@ -3047,7 +3047,7 @@
         },
         {
           "text": "Work Challenge Dividend.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Progressive Financial Rewards.",
@@ -3055,11 +3055,11 @@
         },
         {
           "text": "Stimulating Environment.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Problem Solving Techniques",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Theory of Constraints",
@@ -3189,11 +3189,11 @@
       "choices": [
         {
           "text": "Engage the team in the project process.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Be actively involved in the project tasks.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Treat each team member the same way.",
@@ -3201,7 +3201,7 @@
         },
         {
           "text": "Ask for feedback and analyze the results.",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Use democracy for all team decisions.",
@@ -3239,11 +3239,11 @@
       "choices": [
         {
           "text": "Have a discussion with the team to explain that the product success is not a direct result of the project and it does not reflect their performance",
-          "correct": false
+          "correct": true
         },
         {
           "text": "Have a meeting with the business to make sure they understand the project met its objectives",
-          "correct": false
+          "correct": true
         },
         {
           "text": "No action is necessary, as the project manager is only responsible for the project deliverables.",
