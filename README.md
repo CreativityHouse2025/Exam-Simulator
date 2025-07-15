@@ -1,4 +1,15 @@
-# Requirements
+
+## About
+
+A PMP exam simulator done for [Creativity House](https://creativity-house.com)
+
+Try the webapp here 👉 https://exam-simulator-flax.vercel.app
+
+### References
+
+The app was built from the source of [Exam Simulator](https://github.com/exam-simulator/simulator) by [Benjamin Brooke](https://github.com/benjaminadk)
+
+## Requirements
 
 ### Exam Structure
 
@@ -35,7 +46,6 @@
 ### Question & Answer Order:
 
 - [X] The **order of questions in the simulator is different** from the order in the file.
-- [ ] Users should have the **option to view correct answers while solving questions.** ????????????????????
 
 ### Exam Timing & Configuration
 
@@ -53,11 +63,7 @@
 
 ### Mini Exam Option
 
-- [ ] **Shorter Exam Mode:** Provide a **mini exam feature** that allows users to take a **shorter version** of the exam (e.g., 30-50 questions).
-
-### Post-Submission Review & Feedback
-
-- [ ] **Limited Review Option:** If a user submits an exam, they should have the option to **review the answers** but **no automatic explanation** for why an answer is correct. ????????????????????
+- [X] **Shorter Exam Mode:** Provide a **mini exam feature** that allows users to take a **shorter version** of the exam (e.g., 30-50 questions).
 
 ### Exam Result Display
 
@@ -66,138 +72,3 @@
 ### Language Support
 
 - [X] **Multi-Language Support:** Ensure the simulator provides an **option to change the language** based on user preference.
-
-# To Do
-
-## المكونات الأساسية
-
-- [ ] تجريد المكونات متعددة الاستخدامات
-- [ ] تفريع المكونات الرئيسية لحالات الاختبار الثلاثة
-  - [ ] قبيل بداية الاختبار
-  - [ ] أثناء الاختبار
-  - [ ] عرض نتائج الاختبار
-
-## آخر
-
-- [ ] تبسيط البيانات المرسلة للمكونات
-- [ ] تغيير اتجاه العنوان الرئيسي حسب اللغة
-- [ ] وراثة اتجاه الكتابة من المكونات الأب
-
-# تحسين الأداء
-
-(مقترحات من Claude.ai النسخة المجانية)
-
-Looking at your React exam application code, I've identified several key performance issues and can suggest structural improvements:
-
-## Critical Performance Issues
-
-### 1. **Excessive Re-renders from Context Updates**
-Your `SessionContext` is being updated frequently (timer updates, navigation, answers), causing all consuming components to re-render unnecessarily. This is particularly problematic for:
-- Timer updates every second
-- Answer selections
-- Navigation between questions
-
-### 2. **Inefficient State Management Pattern**
-The current reducer pattern with a single large session object means any small change (like timer tick) triggers updates to all session-dependent components.
-
-### 3. **Missing Memoization**
-Components and expensive operations lack memoization, causing repeated calculations and renders.
-
-## High-Level Structural Changes
-
-### 1. **Split Context for Better Granularity**
-```typescript
-// Instead of one large SessionContext, create focused contexts:
-const TimerContext = createContext<TimerState>()
-const ExamProgressContext = createContext<ExamProgressState>()
-const AnswersContext = createContext<AnswersState>()
-```
-
-### 2. **Implement State Colocation**
-Move timer logic to a dedicated hook/component that doesn't affect the main exam flow:
-```typescript
-// Isolate timer updates from exam state
-const useTimer = () => {
-  // Timer logic here, separate from main session
-}
-```
-
-### 3. **Optimize Data Flow Architecture**
-```
-Current: App → Navigation → Content → Exam/Review
-                ↓
-         Single SessionContext (causes cascading re-renders)
-
-Proposed: App → Multiple Focused Contexts
-               ↓
-         Components subscribe only to needed state slices
-```
-
-## Specific Performance Optimizations
-
-### 1. **Memoize Heavy Components**
-```typescript
-const Content = React.memo(({ session }) => {
-  return examFinished(session) ? <Review /> : <Exam />
-})
-
-const Navigation = React.memo(NavigationComponent)
-```
-
-### 2. **Separate Timer State**
-```typescript
-// Move timer to isolated context/hook
-const TimerProvider = ({ children }) => {
-  const [time, setTime] = useState(initialTime)
-  // Timer logic isolated here
-}
-```
-
-### 3. **Lazy Load Exam Data**
-```typescript
-// Instead of loading random exam on mount
-const [exam, setExam] = useState(null)
-const loadExam = useCallback(async (examId) => {
-  const examData = await import(`./assets/exams/${lang.code}/${examId}.json`)
-  setExam(formatExam(examData.default))
-}, [lang.code])
-```
-
-### 4. **Optimize Confirm Dialog Rendering**
-The current approach re-creates confirm dialogs on every render:
-```typescript
-// Pre-compute and memoize confirm configurations
-const confirmConfigs = useMemo(() => 
-  createConfirmConfigs(session, translate), [session.examState, session.timerState])
-```
-
-## Data Flow Improvements
-
-### 1. **Event-Driven Updates**
-Instead of passing dispatch functions through props, use event emitters or custom hooks for actions:
-```typescript
-const useExamActions = () => ({
-  startExam: () => dispatch(startExamAction()),
-  pauseExam: () => dispatch(pauseExamAction()),
-  // etc.
-})
-```
-
-### 2. **Selective Re-rendering**
-```typescript
-// Components only re-render when their specific data changes
-const ExamQuestion = () => {
-  const currentQuestion = useSelector(state => state.questions[state.currentIndex])
-  const userAnswer = useSelector(state => state.answers[state.currentIndex])
-  // Only re-renders when question or answer changes
-}
-```
-
-### 3. **Virtualization for Large Question Sets**
-If you have many questions, implement virtual scrolling in the drawer/navigation.
-
-## Implementation Priority
-
-1. **High Impact, Low Effort**: Add `React.memo` to major components
-2. **Medium Impact, Medium Effort**: Split contexts by responsibility
-3. **High Impact, High Effort**: Refactor to event-driven architecture
