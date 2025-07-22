@@ -7,6 +7,7 @@
     "yzhang.markdown-all-in-one",
     "christian-kohler.npm-intellisense",
     "christian-kohler.path-intellisense",
-    "hbenl.vscode-mocha-test-adapter"
+    "hbenl.vscode-mocha-test-adapter",
+    "nhoizey.gremlins"
   ]
 }
