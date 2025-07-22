@@ -535,29 +535,29 @@
         }
       ]
     },
-   {
-  "type": "multiple-choice",
-  "text": "A project manager completed plans for a project and submitted all documents for approval but did not allocate time for delays in obtaining approvals. In addition to selecting a risk owner to address this potential risk, what should the project manager have done?",
-  "explanation": "The correct answer is: Developed specific actions to implement the agreed-upon risk response strategy, including primary and backup strategies.\n\nExplanation:\n- Allocating time for potential approval delays is part of robust risk management.\n- Appointing a risk owner is a step forward, but it must be complemented by detailed plans to act on the risk if it occurs.\n- Having a primary (Plan A) and contingency (Plan B) ensures continuity if the risk materializes.\n\nWhy the other options are incorrect:\n- Escalation without a defined response plan may not be timely or effective.\n- Reducing work estimates without adjusting scope, resources, or timeline is unrealistic and could cause project failure.\n- Real options analysis is a useful tool, but it must follow the establishment of concrete mitigation strategies.",
-  "choices": [
     {
-      "text": "Asked the risk owner to escalate with approvers so that approvals are obtained as soon as possible.",
-      "correct": false
+      "type": "multiple-choice",
+      "text": "A project manager completed plans for a project and submitted all documents for approval but did not allocate time for delays in obtaining approvals. In addition to selecting a risk owner to address this potential risk, what should the project manager have done?",
+      "explanation": "The correct answer is: Developed specific actions to implement the agreed-upon risk response strategy, including primary and backup strategies.\n\nExplanation:\n- Allocating time for potential approval delays is part of robust risk management.\n- Appointing a risk owner is a step forward, but it must be complemented by detailed plans to act on the risk if it occurs.\n- Having a primary (Plan A) and contingency (Plan B) ensures continuity if the risk materializes.\n\nWhy the other options are incorrect:\n- Escalation without a defined response plan may not be timely or effective.\n- Reducing work estimates without adjusting scope, resources, or timeline is unrealistic and could cause project failure.\n- Real options analysis is a useful tool, but it must follow the establishment of concrete mitigation strategies.",
+      "choices": [
+        {
+          "text": "Asked the risk owner to escalate with approvers so that approvals are obtained as soon as possible.",
+          "correct": false
+        },
+        {
+          "text": "Adjusted the project plans by lowering work completion estimates so that the work can be completed on time despite the delay.",
+          "correct": false
+        },
+        {
+          "text": "Developed specific actions to implement the agreed-upon risk response strategy, including primary and backup strategies.",
+          "correct": true
+        },
+        {
+          "text": "Used a real options analysis to perform an economic analysis of alternative risk response strategies.",
+          "correct": false
+        }
+      ]
     },
-    {
-      "text": "Adjusted the project plans by lowering work completion estimates so that the work can be completed on time despite the delay.",
-      "correct": false
-    },
-    {
-      "text": "Developed specific actions to implement the agreed-upon risk response strategy, including primary and backup strategies.",
-      "correct": true
-    },
-    {
-      "text": "Used a real options analysis to perform an economic analysis of alternative risk response strategies.",
-      "correct": false
-    }
-  ]
-},
     {
       "type": "multiple-choice",
       "text": "A project manager is conducting risk identification based on high-level scope and expert judgement.nnWhat information in the project charter could support risk identification?",
@@ -2553,28 +2553,28 @@
       ]
     },
     {
-  "type": "multiple-choice",
-  "text": "A development project's earned value is US$640,000, and the planned value is US$800,000. What should the project manager do to control this variance?",
-  "explanation": "The correct answer is: Use project performance measurement and decide on corrective actions. Since the earned value (EV) is less than the planned value (PV), the project is behind schedule. The project manager should use tools such as schedule performance index (SPI = EV/PV) and variance analysis to assess the situation and then take corrective actions such as adjusting resources or schedules to bring the project back on track. The other options either bypass analysis or misallocate funds without a clear corrective plan.",
-  "choices": [
-    {
-      "text": "Calculate the earned value and change the project baseline to reflect the latest project status.",
-      "correct": false
+      "type": "multiple-choice",
+      "text": "A development project's earned value is US$640,000, and the planned value is US$800,000. What should the project manager do to control this variance?",
+      "explanation": "The correct answer is: Use project performance measurement and decide on corrective actions. Since the earned value (EV) is less than the planned value (PV), the project is behind schedule. The project manager should use tools such as schedule performance index (SPI = EV/PV) and variance analysis to assess the situation and then take corrective actions such as adjusting resources or schedules to bring the project back on track. The other options either bypass analysis or misallocate funds without a clear corrective plan.",
+      "choices": [
+        {
+          "text": "Calculate the earned value and change the project baseline to reflect the latest project status.",
+          "correct": false
+        },
+        {
+          "text": "Reallocate US$160,000 to project tasks that are behind schedule.",
+          "correct": false
+        },
+        {
+          "text": "Use project performance measurement and decide on corrective actions.",
+          "correct": true
+        },
+        {
+          "text": "Release US$160,000 to the supplier to fast-track the project so that it is completed on time and within budget.",
+          "correct": false
+        }
+      ]
     },
-    {
-      "text": "Reallocate US$160,000 to project tasks that are behind schedule.",
-      "correct": false
-    },
-    {
-      "text": "Use project performance measurement and decide on corrective actions.",
-      "correct": true
-    },
-    {
-      "text": "Release US$160,000 to the supplier to fast-track the project so that it is completed on time and within budget.",
-      "correct": false
-    }
-  ]
-},
     {
       "type": "multiple-choice",
       "text": "A project manager has identified a misalignment with the strategic and business objectives in the project charter and recognizes the need for realignment.nnWhat should the project manager do?",

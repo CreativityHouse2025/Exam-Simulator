@@ -2059,28 +2059,28 @@
       ]
     },
     {
-  "type": "multiple-choice",
-  "text": "A developer is expressing concerns about the time spent on daily standups, updating stories, creating tasks, and reviewing dependencies between stories instead of developing code. Other team members support the comment.\n\nWhat should a servant leader do next?",
-  "explanation": "The correct answer: Acknowledge the developer's frustration and emphasize the usefulness of each activity.\n\n- Explanation:\nA servant leader supports the team by listening to their concerns and empathizing with them, while explaining the value of each activity to improve teamwork and achieve project goals.\n- Reducing interaction may harm communication and coordination.\n- Asking for suggestions is important, but it should come after understanding the situation and acknowledging the team's feelings.\n- Explaining the concept of an 'information radiator' may be helpful, but it does not address the underlying concern of lost time.",
-  "choices": [
-    {
-      "text": "Ask for suggestions on how to manage their time more effectively.",
-      "correct": false
+      "type": "multiple-choice",
+      "text": "A developer is expressing concerns about the time spent on daily standups, updating stories, creating tasks, and reviewing dependencies between stories instead of developing code. Other team members support the comment.\n\nWhat should a servant leader do next?",
+      "explanation": "The correct answer: Acknowledge the developer's frustration and emphasize the usefulness of each activity.\n\n- Explanation:\nA servant leader supports the team by listening to their concerns and empathizing with them, while explaining the value of each activity to improve teamwork and achieve project goals.\n- Reducing interaction may harm communication and coordination.\n- Asking for suggestions is important, but it should come after understanding the situation and acknowledging the team's feelings.\n- Explaining the concept of an 'information radiator' may be helpful, but it does not address the underlying concern of lost time.",
+      "choices": [
+        {
+          "text": "Ask for suggestions on how to manage their time more effectively.",
+          "correct": false
+        },
+        {
+          "text": "Reduce the interactions among team members to increase development time.",
+          "correct": false
+        },
+        {
+          "text": "Explain the definition of an information radiator to the project team.",
+          "correct": false
+        },
+        {
+          "text": "Acknowledge the developer's frustration and emphasize the benefit of each activity.",
+          "correct": true
+        }
+      ]
     },
-    {
-      "text": "Reduce the interactions among team members to increase development time.",
-      "correct": false
-    },
-    {
-      "text": "Explain the definition of an information radiator to the project team.",
-      "correct": false
-    },
-    {
-      "text": "Acknowledge the developer's frustration and emphasize the benefit of each activity.",
-      "correct": true
-    }
-  ]
-},
     {
       "type": "multiple-choice",
       "text": "A developer has completed the deliverable for a feature. The product owner is not sure how to assess the quality of the deliverable.nnConsidering that the project is using an agile approach, what kind of tool or technique should the product owner use?",
@@ -2104,29 +2104,29 @@
         }
       ]
     },
-   {
-  "type": "multiple-choice",
-  "text": "A project manager is leading a complex software development project. The project team cannot agree on which process to use when solving a specific problem.\n\nWhat approach should the project manager take to help bring the team to consensus?",
-  "explanation": "The correct answer: Facilitate a meeting and encourage members to propose possible solutions.\n\n- Explanation:\nFacilitation is a method that promotes cooperation and encourages everyone's participation in finding solutions rather than imposing external decisions.\n- Imposing expert authority may reduce team enthusiasm and create resistance.\n- Updating the RACI matrix or changing the team does not address the cause of disagreement or encourage dialogue.\n- Appointing a new leader may be a long-term solution, but first it is better to try to facilitate consensus within the current team.",
-  "choices": [
     {
-      "text": "Exert expert authority and define the path forward for the team.",
-      "correct": false
+      "type": "multiple-choice",
+      "text": "A project manager is leading a complex software development project. The project team cannot agree on which process to use when solving a specific problem.\n\nWhat approach should the project manager take to help bring the team to consensus?",
+      "explanation": "The correct answer: Facilitate a meeting and encourage members to propose possible solutions.\n\n- Explanation:\nFacilitation is a method that promotes cooperation and encourages everyone's participation in finding solutions rather than imposing external decisions.\n- Imposing expert authority may reduce team enthusiasm and create resistance.\n- Updating the RACI matrix or changing the team does not address the cause of disagreement or encourage dialogue.\n- Appointing a new leader may be a long-term solution, but first it is better to try to facilitate consensus within the current team.",
+      "choices": [
+        {
+          "text": "Exert expert authority and define the path forward for the team.",
+          "correct": false
+        },
+        {
+          "text": "Update the responsible, accountable, consult, and inform (RACI) matrix and assign the work to a different team.",
+          "correct": false
+        },
+        {
+          "text": "Assign a new team lead who has experience in solving similar software development problems.",
+          "correct": false
+        },
+        {
+          "text": "Facilitate a meeting and encourage team members to come up with potential solutions.",
+          "correct": true
+        }
+      ]
     },
-    {
-      "text": "Update the responsible, accountable, consult, and inform (RACI) matrix and assign the work to a different team.",
-      "correct": false
-    },
-    {
-      "text": "Assign a new team lead who has experience in solving similar software development problems.",
-      "correct": false
-    },
-    {
-      "text": "Facilitate a meeting and encourage team members to come up with potential solutions.",
-      "correct": true
-    }
-  ]
-},
     {
       "type": "multiple-choice",
       "text": "During project closure, the team considers that the final sprint retrospective is not necessary because there are no remaining sprints. What could be a possible helpful outcome of holding this sprint retrospective?",
