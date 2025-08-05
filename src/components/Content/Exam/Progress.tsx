@@ -1,7 +1,7 @@
 import type { Exam, ThemedStyles } from '../../../types'
 import type { Session } from '../../../session'
 
-import React, { useMemo } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { calculateProgressStats } from '../../../utils/progress'
 
@@ -37,9 +37,7 @@ const StatNumber = styled.span<ThemedStyles>`
 `
 
 const ProgressComponent: React.FC<ProgressProps> = ({ exam, session }) => {
-  const { answeredCount, percentage } = useMemo(() => {
-    return calculateProgressStats(exam.test, session.answers)
-  }, [exam.test, session.answers])
+  const { answeredCount, percentage } = calculateProgressStats(exam.test, session.answers)
 
   if (!exam) return null
 
