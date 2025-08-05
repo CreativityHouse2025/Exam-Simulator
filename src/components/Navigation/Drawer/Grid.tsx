@@ -3,7 +3,7 @@ import type { GridTagTypes, QuestionFilter, ThemedStyles } from '../../../types'
 import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import { lighten } from 'polished'
-import { getGridItemBackground } from '../../../utils/analyze'
+import { gridItemBackgroundColor } from '../../../utils/color'
 import { ExamContext } from '../../../exam'
 import { SessionActionTypes, SessionContext } from '../../../session'
 import { translate } from '../../../settings'
@@ -155,7 +155,7 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
           <GridItem
             key={`grid-item-${questionIndex}`} // More descriptive key
             data-test={`Grid Item ${questionIndex}`}
-            $background={getGridItemBackground(questionIndex, bookmarks, answered)}
+            $background={gridItemBackgroundColor(questionIndex, bookmarks, answered)}
             $selected={questionIndex === session.index}
             onClick={() => onClickGridItem(questionIndex)}
           >
