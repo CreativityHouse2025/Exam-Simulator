@@ -18,11 +18,12 @@ const HeaderStyles = styled.div<HeaderStylesProps>`
 const InnerHeader = styled.div<ThemedStyles>`
   display: grid;
   align-items: center;
-  grid-template-columns: 8rem 1fr 10rem;
+  grid-template-columns: 15rem 1fr 15rem;
   background: ${({ theme }) => theme.primary};
 `
 
 const TitleStyles = styled.div<ThemedStyles>`
+  justify-self: center;
   font: 2rem 'Open Sans';
   font-weight: 700;
   color: ${({ theme }) => theme.black};

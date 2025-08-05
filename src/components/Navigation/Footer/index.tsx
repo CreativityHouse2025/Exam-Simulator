@@ -22,7 +22,7 @@ const InnerFooterStyles = styled.div<InnerFooterStylesProps>`
   width: ${({ $open }) => ($open ? 'calc(100% - 24rem)' : 'calc(100% - 5rem)')};
   height: 100%;
   display: grid;
-  grid-template-columns: 10rem 1fr 5rem;
+  grid-template-columns: 0.75fr 0.25fr;
   align-items: center;
   transition: 0.3s;
 `
@@ -31,9 +31,9 @@ const FooterComponent: React.FC<NavigationFooterProps> = ({ open, exam, session 
   return (
     <FooterStyles id="footer" $open={open}>
       <InnerFooterStyles id="inner-footer" $open={open}>
-        <Timer session={session} />
-
         <Arrows session={session} questionCount={exam.test.length} />
+
+        <Timer session={session} />
       </InnerFooterStyles>
     </FooterStyles>
   )
