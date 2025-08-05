@@ -89,15 +89,11 @@ const AppComponent: React.FC<object> = ({}) => {
 
   return (
     <LangContext.Provider value={lang}>
-      <Header />
+      <Header setLang={(code: LangCode) => setLang(langs[code])} />
 
       {exam ? (
         <ExamContext.Provider value={exam}>
-          <Navigation
-            startingSession={session}
-            onSessionUpdate={updateSession}
-            setLang={(code: LangCode) => setLang(langs[code])}
-          />
+          <Navigation startingSession={session} onSessionUpdate={updateSession} />
         </ExamContext.Provider>
       ) : (
         <Cover
