@@ -7,7 +7,7 @@ import theme from '../styles/theme.ts'
  * @param {number[]} marked - The indices of the questions that are marked.
  * @returns {string} - The color for the grid item based on the answer status.
  */
-export function getGridItemBackground(questionIndex: number, marked: number[], answered: number[]): string {
+export function gridItemBackgroundColor(questionIndex: number, marked: number[], answered: number[]): string {
   if (marked.includes(questionIndex)) {
     // Bookmarked grid item (question)
     return theme.quatro
