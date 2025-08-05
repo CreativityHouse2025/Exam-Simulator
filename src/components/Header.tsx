@@ -1,7 +1,10 @@
 import type { ThemedStyles } from '../types'
+import type { LangCode } from '../settings'
 
 import React from 'react'
 import styled from 'styled-components'
+import lighten from 'polished/lib/color/lighten'
+import { Language } from '@styled-icons/material/Language'
 import { translate } from '../settings'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
@@ -10,38 +13,50 @@ const HeaderStyles = styled.div<HeaderStylesProps>`
   position: fixed;
   width: 100%;
   height: 5rem;
-  top: 0;
-  z-index: 2;
-  transition: 0.3s;
+`
+
+const InnerHeader = styled.div<ThemedStyles>`
+  display: grid;
+  align-items: center;
+  grid-template-columns: 8rem 1fr 10rem;
   background: ${({ theme }) => theme.primary};
 `
 
-export const InnerHeader = styled.div<ThemedStyles>`
-  height: 5rem;
-  display: grid;
-  align-items: center;
-  grid-template-columns: 8rem 1fr;
-`
-
-export const TitleStyles = styled.div<ThemedStyles>`
+const TitleStyles = styled.div<ThemedStyles>`
   font: 2rem 'Open Sans';
   font-weight: 700;
   color: ${({ theme }) => theme.black};
   margin-left: 1rem;
 `
 
-export const ImageStyles = styled.img<ThemedStyles>`
-  justify-self: center;
+const ImageStyles = styled.img<ThemedStyles>`
   width: 6rem;
-  height: 6rem;
+  justify-self: center;
 `
 
-const HeaderComponent: React.FC<HeaderProps> = ({}) => {
+const LanguageStyles = styled.div<ThemedStyles>`
+  justify-self: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background: ${({ theme }) => lighten(0.2, theme.primary)};
+  }
+  svg {
+    color: ${({ theme }) => theme.black};
+  }
+`
+
+const HeaderComponent: React.FC<HeaderProps> = ({ setLang }) => {
   return (
     <HeaderStyles id="header" $dir={'rtl'}>
       <InnerHeader id="inner-header" dir={'rtl'}>
         <ImageStyles src={Logo} />
+
         <TitleStyles>{translate('about.title')}</TitleStyles>
+
+        <LanguageStyles onClick={() => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar')}>
+          <Language size={30} />
+        </LanguageStyles>
       </InnerHeader>
     </HeaderStyles>
   )
@@ -53,4 +68,6 @@ export interface HeaderStylesProps extends ThemedStyles {
   $dir: 'rtl' | 'ltr'
 }
 
-export interface HeaderProps {}
+export interface HeaderProps {
+  setLang: (lang: LangCode) => void
+}

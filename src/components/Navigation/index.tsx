@@ -9,9 +9,9 @@ import { Main } from '../../styles/Main'
 import { ExamContext } from '../../exam'
 import { SessionActionTypes, SessionContext, SessionReducer } from '../../session'
 import { timerHaveExpired, timerIsPaused } from '../../utils/state'
-import { translate, type LangCode } from '../../settings'
+import { translate } from '../../settings'
 
-const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate, setLang }) => {
+const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate }) => {
   const [session, updateSession] = useReducer(SessionReducer, startingSession)
   const exam = useContext(ExamContext)
   const [open, setOpen] = useState<boolean>(true)
@@ -66,7 +66,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
           <Content session={session} />
         </Main>
 
-        {exam && <Footer open={open} exam={exam} session={session} setLang={setLang} />}
+        {exam && <Footer open={open} exam={exam} session={session} />}
 
         {newConfirms
           .filter((c) => c.show)
@@ -90,7 +90,6 @@ export default NavigationComponent
 export interface NavigationProps {
   startingSession: Session
   onSessionUpdate: (session: Session) => void
-  setLang: (lang: LangCode) => void
 }
 
 export interface MyConfirmProps extends ConfirmProps {

@@ -1,11 +1,8 @@
 import type { Exam, ThemedStyles } from '../../../types'
-import type { LangCode } from '../../../settings'
 import type { Session } from '../../../session'
 
 import React from 'react'
 import styled from 'styled-components'
-import lighten from 'polished/lib/color/lighten'
-import { Language } from '@styled-icons/material/Language'
 import Timer from './Timer'
 import Arrows from './Arrows'
 
@@ -30,32 +27,13 @@ const InnerFooterStyles = styled.div<InnerFooterStylesProps>`
   transition: 0.3s;
 `
 
-const LanguageStyles = styled.div<ThemedStyles>`
-  height: 5rem;
-  display: grid;
-  justify-self: center;
-  align-items: center;
-  transition: 0.3s;
-  cursor: pointer;
-  &:hover {
-    background: ${({ theme }) => lighten(0.2, theme.primary)};
-  }
-  svg {
-    color: ${({ theme }) => theme.black};
-  }
-`
-
-const FooterComponent: React.FC<NavigationFooterProps> = ({ open, exam, session, setLang }) => {
+const FooterComponent: React.FC<NavigationFooterProps> = ({ open, exam, session }) => {
   return (
     <FooterStyles id="footer" $open={open}>
       <InnerFooterStyles id="inner-footer" $open={open}>
         <Timer session={session} />
 
         <Arrows session={session} questionCount={exam.test.length} />
-
-        <LanguageStyles onClick={() => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar')}>
-          <Language size={30} />
-        </LanguageStyles>
       </InnerFooterStyles>
     </FooterStyles>
   )
@@ -67,7 +45,6 @@ export interface NavigationFooterProps {
   open: boolean
   exam: Exam
   session: Session
-  setLang: (lang: LangCode) => void
 }
 
 export interface FooterStylesProps extends ThemedStyles {
