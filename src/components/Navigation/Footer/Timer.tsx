@@ -15,7 +15,7 @@ const TimerStyles = styled.div<TimerStylesProps>`
     color: inherit;
     margin-right: 0.5rem;
   }
-  & > :last-child {
+  & > :first-child {
     font: 2rem 'Open Sans';
     font-weight: 700;
   }
@@ -56,9 +56,9 @@ const TimerComponent: React.FC<TimerProps> = ({ session }) => {
 
   return (
     <TimerStyles id="timer" $warning={timer < 120}>
-      <Timer size={30} />
-
       <div data-test="Timer">{formatTimer(timer)}</div>
+
+      <Timer size={30} />
     </TimerStyles>
   )
 }
