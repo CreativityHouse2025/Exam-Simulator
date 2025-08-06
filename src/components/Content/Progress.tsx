@@ -1,9 +1,9 @@
-import type { Exam, ThemedStyles } from '../../../types'
-import type { Session } from '../../../session'
+import type { Exam, ThemedStyles } from '../../types'
+import type { Session } from '../../session'
 
 import React from 'react'
 import styled from 'styled-components'
-import { calculateProgressStats } from '../../../utils/progress'
+import { calculateProgressStats } from '../../utils/progress'
 
 const ProgressContainer = styled.div`
   display: flex;
@@ -38,8 +38,6 @@ const StatNumber = styled.span<ThemedStyles>`
 
 const ProgressComponent: React.FC<ProgressProps> = ({ exam, session }) => {
   const { answeredCount, percentage } = calculateProgressStats(exam.test, session.answers)
-
-  if (!exam) return null
 
   return (
     <ProgressContainer id="progress">

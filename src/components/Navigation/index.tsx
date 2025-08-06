@@ -63,7 +63,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
         <Drawer open={open} session={session} toggleOpen={toggleOpen} />
 
         <Main $open={open}>
-          <Content session={session} />
+          <Content exam={exam} session={session} />
         </Main>
 
         {exam && <Footer open={open} exam={exam} session={session} />}

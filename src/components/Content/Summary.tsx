@@ -1,10 +1,10 @@
-import type { Exam, ThemedStyles } from '../../../types'
-import type { Session } from '../../../session'
+import type { Exam, ThemedStyles } from '../../types'
+import type { Session } from '../../session'
 
 import React from 'react'
 import styled from 'styled-components'
-import { formatDate, formatTimer } from '../../../utils/format'
-import { translate } from '../../../settings'
+import { formatDate, formatTimer } from '../../utils/format'
+import { translate } from '../../settings'
 
 const SummaryStyles = styled.div`
   width: 100%;

@@ -1,28 +1,41 @@
-import type { ThemedStyles } from '../../types'
+import type { Exam, ThemedStyles } from '../../types'
 import type { Session } from '../../session'
 
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
-import Exam from './Exam'
-import Review from './Review'
+import ExamComponent from './Exam'
+import Summary from './Summary'
+import { LangContext } from '../../settings'
 
 const ContentStyles = styled.div<ThemedStyles>`
   display: grid;
   justify-items: center;
   align-items: center;
   padding: 2rem;
-  padding-right: 28rem;
+  padding-right: 25rem;
   transition: 0.3s;
 `
 
-const ContentComponent: React.FC<ContentProps> = ({ session }) => {
-  const finished = session.examState === 'completed'
+const ContentComponent: React.FC<ContentProps> = ({ exam, session }) => {
+  const lang = useContext(LangContext)
 
-  return <ContentStyles id="content">{finished ? <Review /> : <Exam />}</ContentStyles>
+  const finished = session.examState === 'completed'
+  const summary = session.reviewState === 'summary'
+
+  return (
+    <ContentStyles id="content">
+      {finished && summary ? (
+        <Summary exam={exam} session={session} />
+      ) : (
+        <ExamComponent exam={exam} session={session} lang={lang} isReview={finished} />
+      )}
+    </ContentStyles>
+  )
 }
 
 export default ContentComponent
 
 export interface ContentProps {
+  exam: Exam
   session: Session
 }
