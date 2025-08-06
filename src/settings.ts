@@ -31,7 +31,7 @@ const translation = new Map<string, string>()
 
 export function translate(key: string, replacements?: (string | number)[]): string {
   let val = translation.get(key)
-  if (!val) return ''
+  if (!val) return key
 
   if (replacements && replacements.length > 0)
     for (let i = 0; i < replacements.length; i++)
