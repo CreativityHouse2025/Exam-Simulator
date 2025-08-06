@@ -4,7 +4,6 @@ import { Slide } from '../../../styles/Slide'
 import TopDisplay from './TopDisplay'
 import Question from './Question'
 import MultipleChoice from './MultipleChoice'
-import MultipleAnswer from './MultipleAnswer'
 import Progress from './Progress'
 import { ExamContext } from '../../../exam'
 import { SessionContext } from '../../../session'
@@ -35,11 +34,7 @@ const ExamComponent: React.FC<object> = ({}) => {
       <Slide id="question-slide" key={session.index} direction="right">
         <Question {...question} />
 
-        {question.type === 'multiple-choice' ? (
-          <MultipleChoice exam={exam} session={session} lang={lang} />
-        ) : question.type === 'multiple-answer' ? (
-          <MultipleAnswer exam={exam} session={session} lang={lang} />
-        ) : null}
+        <MultipleChoice exam={exam} session={session} lang={lang} />
       </Slide>
     </TestStyles>
   )

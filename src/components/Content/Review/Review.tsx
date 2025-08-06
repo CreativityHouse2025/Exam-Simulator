@@ -8,7 +8,6 @@ import { Slide } from '../../../styles/Slide'
 import TopDisplay from './TopDisplay'
 import Question from '../Exam/Question'
 import MultipleChoice from '../Exam/MultipleChoice'
-import MultipleAnswer from '../Exam/MultipleAnswer'
 import Explanation from '../Exam/Explanation'
 
 const ReviewExamStyles = styled.div`
@@ -28,11 +27,7 @@ const ReviewComponent: React.FC<ReviewExamProps> = ({ exam, session, lang }) => 
       <Slide key={index} direction="right">
         <Question {...question} />
 
-        {question.type === 'multiple-choice' ? (
-          <MultipleChoice exam={exam} session={session} lang={lang} />
-        ) : question.type === 'multiple-answer' ? (
-          <MultipleAnswer exam={exam} session={session} lang={lang} />
-        ) : null}
+        <MultipleChoice exam={exam} session={session} lang={lang} />
 
         <Slide direction="bottom">
           <Explanation question={question} answer={session.answers[session.index]} lang={lang} />
