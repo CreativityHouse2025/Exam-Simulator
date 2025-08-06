@@ -13,12 +13,14 @@ export interface ProgressStats {
  * @returns ProgressStats object with all progress information
  */
 export function calculateProgressStats({ length }: Test, answers: Answers): ProgressStats {
-  const answeredCount = countAnsweredQuestions(answers)
-  const percentage = length > 0 ? Math.round((answeredCount / length) * 100) : 0
+  try {
+    const answeredCount = countAnsweredQuestions(answers)
+    const percentage = length > 0 ? Math.round((answeredCount / length) * 100) : 0
 
-  return {
-    answeredCount,
-    percentage
+    return { answeredCount, percentage }
+  } catch (err) {
+    console.error('Error in utils/progress.ts/calculateProgressStats:', err)
+    return { answeredCount: 0, percentage: 0 }
   }
 }
 
@@ -28,7 +30,12 @@ export function calculateProgressStats({ length }: Test, answers: Answers): Prog
  * @returns Number of answered questions
  */
 export function countAnsweredQuestions(answers: Answers): number {
-  return answers.filter((answer) => isAnswerProvided(answer)).length
+  try {
+    return answers.filter((answer) => isAnswerProvided(answer)).length
+  } catch (err) {
+    console.error('Error in utils/progress.ts/countAnsweredQuestions:', err)
+    return 0
+  }
 }
 
 /**
@@ -37,7 +44,12 @@ export function countAnsweredQuestions(answers: Answers): number {
  * @returns True if answer is provided
  */
 export function isAnswerProvided(answer: Answer<any>): boolean {
-  if (answer === null || answer === undefined) return false
-  if (Array.isArray(answer)) return answer.length > 0
-  return true
+  try {
+    if (answer === null || answer === undefined) return false
+    if (Array.isArray(answer)) return answer.length > 0
+    return true
+  } catch (err) {
+    console.error('Error in utils/progress.ts/isAnswerProvided:', err)
+    return false
+  }
 }

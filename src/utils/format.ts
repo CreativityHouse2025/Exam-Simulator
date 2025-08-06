@@ -10,7 +10,12 @@ import { formatDistance, format } from 'date-fns'
  * @returns {string} - The formatted date string.
  */
 export function formatCreatedAt(date: string): string {
-  return formatDistance(new Date(date), new Date()).replace(/about|over|almost|less/, '')
+  try {
+    return formatDistance(new Date(date), new Date()).replace(/about|over|almost|less/, '')
+  } catch (err) {
+    console.error('Error formatting created at date:', err)
+    return 'Unknown time'
+  }
 }
 
 /**
@@ -19,7 +24,12 @@ export function formatCreatedAt(date: string): string {
  * @returns {string} - The formatted date string.
  */
 export function formatDate(date: number | string | Date): string {
-  return format(new Date(date), 'MM/dd/RRRR')
+  try {
+    return format(new Date(date), 'MM/dd/RRRR')
+  } catch (err) {
+    console.error('Error formatting date:', err)
+    return '00/00/0000'
+  }
 }
 
 /**
@@ -28,10 +38,15 @@ export function formatDate(date: number | string | Date): string {
  * @returns {string}
  */
 export function formatTimer(sec: number): string {
-  const hours = Math.floor(sec / 3600) % 24
-  const minutes = Math.floor(sec / 60) % 60
-  const seconds = sec % 60
-  return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+  try {
+    const hours = Math.floor(sec / 3600) % 24
+    const minutes = Math.floor(sec / 60) % 60
+    const seconds = sec % 60
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+  } catch (err) {
+    console.error('Error formatting timer:', err)
+    return '00:00:00'
+  }
 }
 
 /**
@@ -40,32 +55,37 @@ export function formatTimer(sec: number): string {
  * @returns {Exam} - The formatted exam object.
  */
 export function formatExam(exam: Exam): Exam {
-  // Randomize the order of questions
-  exam.test = shuffleArray(exam.test)
+  try {
+    // Randomize the order of questions
+    exam.test = shuffleArray(exam.test)
 
-  for (let i = 0; i < exam.test.length; i++) {
-    const q = exam.test[i]
+    for (let i = 0; i < exam.test.length; i++) {
+      const q = exam.test[i]
 
-    // Create a mapping of original indices to new indices for choices
-    const indices = q.choices.map((_, i) => i)
-    const shuffledIndices = shuffleArray(indices)
+      // Create a mapping of original indices to new indices for choices
+      const indices = q.choices.map((_, i) => i)
+      const shuffledIndices = shuffleArray(indices)
 
-    // Randomize the order of choices
-    q.choices = shuffledIndices.map((i) => q.choices[i])
+      // Randomize the order of choices
+      q.choices = shuffledIndices.map((i) => q.choices[i])
 
-    // Update the answer indices to reflect the new order
-    if (q.type === 'multiple-choice') {
-      q.answer = q.choices.findIndex((c) => c.correct)
-    } else if (q.type === 'multiple-answer') {
-      q.answer = q.choices.map((c, i) => (c.correct ? i : null)).filter((c) => c !== null)
-    } else {
-      throw new Error(`Unsupported question type: ${q.type}`)
+      // Update the answer indices to reflect the new order
+      if (q.type === 'multiple-choice') {
+        q.answer = q.choices.findIndex((c) => c.correct)
+      } else if (q.type === 'multiple-answer') {
+        q.answer = q.choices.map((c, i) => (c.correct ? i : null)).filter((c) => c !== null)
+      } else {
+        throw new Error(`Unsupported question type: ${q.type}`)
+      }
+
+      exam.test[i] = q
     }
 
-    exam.test[i] = q
+    return exam
+  } catch (err) {
+    console.error('Error formatting exam:', err)
+    return exam
   }
-
-  return exam
 
   /**
    * Shuffle an array using Fisher-Yates algorithm
@@ -74,10 +94,12 @@ export function formatExam(exam: Exam): Exam {
    */
   function shuffleArray<T>(array: T[]): T[] {
     const shuffled = [...array]
+
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
       ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
     }
+
     return shuffled
   }
 }
@@ -89,11 +111,15 @@ export function formatExam(exam: Exam): Exam {
  * @returns {Session} - The formatted exam object.
  */
 export function formatSession(session: Session, exam: Exam): Session {
-  const nullArr = Array(exam.test.length - session.answers.length).fill(null)
-  session.answers = session.answers.concat(nullArr)
+  try {
+    const nullArr = Array(exam.test.length - session.answers.length).fill(null)
+    session.answers = session.answers.concat(nullArr)
 
-  session.maxTime = exam.time
-  session.time = exam.time
+    session.maxTime = exam.time
+    session.time = exam.time
+  } catch (err) {
+    console.error('Error formatting session:', err)
+  }
 
   return session
 }
@@ -105,13 +131,18 @@ export function formatSession(session: Session, exam: Exam): Session {
  * @returns {string} - The formatted answer label.
  */
 export function formatAnswerLabel({ type, answer }: Question, lang: LangCode): string {
-  if (type === 'multiple-choice' && typeof answer === 'number') {
-    return answer === null ? '..' : formatChoiceLabel(answer, lang)
-  } else if (type === 'multiple-answer' && Array.isArray(answer)) {
-    return answer.map((i: number) => formatChoiceLabel(i, lang)).join(', ')
-  }
+  try {
+    if (type === 'multiple-choice' && typeof answer === 'number') {
+      return answer === null ? '..' : formatChoiceLabel(answer, lang)
+    } else if (type === 'multiple-answer' && Array.isArray(answer)) {
+      return answer.map((i: number) => formatChoiceLabel(i, lang)).join(', ')
+    }
 
-  return answer?.toString() || '....'
+    return answer?.toString() || '....'
+  } catch (err) {
+    console.error(`Error formatting answer label for question type ${type} and language ${lang}:`, err)
+    return '....'
+  }
 }
 
 /**
@@ -182,5 +213,10 @@ export function formatChoiceLabel(index: number, lang: LangCode): string {
     ]
   }
 
-  return labels[lang][index]
+  try {
+    return labels[lang][index]
+  } catch (err) {
+    console.error(`Invalid index ${index} for language ${lang}. Returning default label 'A'.`)
+    return 'A'
+  }
 }
