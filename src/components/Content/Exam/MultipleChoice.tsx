@@ -1,14 +1,16 @@
 import type { Exam, ThemedStyles } from '../../../types'
-import type { AnswerOfMultipleChoice, Session } from '../../../session'
+import type { AnswerOfMultipleChoice, AnswerOfMultipleAnswer, Session } from '../../../session'
 
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { RadioButtonChecked } from '@styled-icons/material/RadioButtonChecked'
 import { RadioButtonUnchecked } from '@styled-icons/material/RadioButtonUnchecked'
+import { CheckBox } from '@styled-icons/material/CheckBox'
+import { CheckBoxOutlineBlank } from '@styled-icons/material/CheckBoxOutlineBlank'
 import { type Lang } from '../../../settings'
 import { formatChoiceLabel } from '../../../utils/format'
 
-export const MultipleStyles = styled.div<MultipleStylesProps>`
+export const ChoiceStyles = styled.div<ChoiceTextStylesProps>`
   display: grid;
   grid-template-columns: 3rem 1fr;
   margin-bottom: 0.5rem;
@@ -22,53 +24,90 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
   }
 `
 
-export const TextStyles = styled.div<MultipleStylesProps>`
+export const TextStyles = styled.div<ChoiceTextStylesProps>`
+  dir: inherit;
   display: flex;
   font: 2rem 'Open Sans';
   color: ${({ $review, $correct, theme }) => ($review ? ($correct ? theme.correct : theme.grey[5]) : theme.black)};
   & > :first-child {
     font-weight: 600;
-    ${({ dir }) => (dir === 'rtl' ? 'margin-left: 0.5rem;' : 'margin-right: 0.5rem;')}
+    margin-right: 1rem;
+    margin-left: 1rem;
   }
 `
 
-const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({
-  exam,
-  session: { index, answers, examState },
-  lang
-}) => {
-  const answer = answers[index] as AnswerOfMultipleChoice
-  const [value, setValue] = useState<AnswerOfMultipleChoice>(answer)
+const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, session, lang }) => {
+  const { index, answers } = session
+  const isReview = session.examState === 'completed'
+  const question = exam.test[index]
+  const isSingleAnswer = question.type === 'multiple-choice'
 
-  const onChoose = (i: number): void => {
+  const answer = answers[index] || (isSingleAnswer ? null : [])
+  const [value, setValue] = useState<AnswerOfMultipleChoice | AnswerOfMultipleAnswer>(answer)
+
+  const onChooseSingle = (i: number): void => {
     setValue(i)
-    answers[index] = i
+    session.answers[index] = i
+  }
+
+  const onChooseMultiple = (i: number): void => {
+    const currValues = (value as AnswerOfMultipleAnswer) || []
+    const newValues = currValues.includes(i) ? currValues.filter((el) => el !== i) : currValues.concat(i)
+
+    setValue(newValues)
+    session.answers[index] = newValues
+  }
+
+  const onChoose = isSingleAnswer ? onChooseSingle : onChooseMultiple
+
+  const isSelected = (i: number): boolean => {
+    if (isSingleAnswer) return value === i
+    return Array.isArray(value) && value.includes(i)
   }
 
   return (
-    <div id="multiple-choice">
-      {exam.test[index].choices.map(({ text, correct }, i) => (
-        <MultipleStyles
+    <div id={question.type} dir={lang.dir}>
+      {question.choices.map(({ text, correct }, i) => (
+        <ChoiceComponent
           key={i}
-          dir={lang.dir}
-          $review={examState === 'completed'}
-          $correct={correct}
+          isSingleAnswer={isSingleAnswer}
+          isSelected={isSelected(i)}
+          isReview={isReview}
+          isCorrect={correct}
+          content={[formatChoiceLabel(i, lang.code) + '.', text]}
           onClick={() => onChoose(i)}
-        >
-          {value === i ? <RadioButtonChecked className="selected" size={20} /> : <RadioButtonUnchecked size={20} />}
-
-          <TextStyles
-            className={`${value === i ? 'selected' : ''}`}
-            dir={lang.dir}
-            $review={examState === 'completed'}
-            $correct={correct}
-          >
-            <div>{formatChoiceLabel(i, lang.code)}.</div>
-            <div>{text}</div>
-          </TextStyles>
-        </MultipleStyles>
+        />
       ))}
     </div>
+  )
+}
+
+const ChoiceComponent: React.FC<ChoiceProps> = ({
+  isSingleAnswer,
+  isSelected,
+  isReview,
+  isCorrect,
+  content,
+  onClick
+}) => {
+  const renderIcon = (): React.ReactNode => {
+    if (isSelected) {
+      return React.createElement(isSingleAnswer ? RadioButtonChecked : CheckBox, { className: 'selected', size: 20 })
+    } else {
+      return React.createElement(isSingleAnswer ? RadioButtonUnchecked : CheckBoxOutlineBlank, { size: 20 })
+    }
+  }
+
+  return (
+    <ChoiceStyles $review={isReview} $correct={isCorrect} onClick={onClick}>
+      {renderIcon()}
+
+      <TextStyles className={isSelected ? 'selected' : ''} $review={isReview} $correct={isCorrect}>
+        {content.map((text, i) => (
+          <div key={i}>{text}</div>
+        ))}
+      </TextStyles>
+    </ChoiceStyles>
   )
 }
 
@@ -80,7 +119,16 @@ export interface MultipleChoiceProps {
   lang: Lang
 }
 
-export interface MultipleStylesProps extends ThemedStyles {
+export interface ChoiceProps {
+  isSingleAnswer: boolean
+  isSelected: boolean
+  isReview: boolean
+  isCorrect: boolean
+  content: string[]
+  onClick: () => void
+}
+
+export interface ChoiceTextStylesProps extends ThemedStyles {
   $review: boolean
   $correct: boolean
 }
