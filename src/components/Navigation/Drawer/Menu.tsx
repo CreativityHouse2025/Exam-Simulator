@@ -104,33 +104,36 @@ const MenuComponent: React.FC<MenuProps> = ({ open, session }) => {
     return items
   }, [session])
 
-  const renderMenuItem = (section: MenuSections) => {
-    if (section.type === 'filter' || section.type === 'action') {
-      const isFilter = section.type === 'filter'
+  const renderMenuItem = React.useCallback(
+    (section: MenuSections) => {
+      if (section.type === 'filter' || section.type === 'action') {
+        const isFilter = section.type === 'filter'
 
-      const key = isFilter ? section.filter : section.key
-      const selected = isFilter ? filter === key : false // @ts-ignore
-      const onClick = isFilter ? () => setFilter(key) : section.onClick
+        const key = isFilter ? section.filter : section.key
+        const selected = isFilter ? filter === key : false // @ts-ignore
+        const onClick = isFilter ? () => setFilter(key) : section.onClick
 
-      return (
-        <MenuItem key={key} data-test={translate(`nav.drawer.${key}`)} $selected={selected} onClick={onClick}>
-          {section.icon}
-          <MenuItemTextStyles>{translate(`nav.drawer.${key}`)}</MenuItemTextStyles>
-        </MenuItem>
-      )
-    }
+        return (
+          <MenuItem key={key} data-test={translate(`nav.drawer.${key}`)} $selected={selected} onClick={onClick}>
+            {section.icon}
+            <MenuItemTextStyles>{translate(`nav.drawer.${key}`)}</MenuItemTextStyles>
+          </MenuItem>
+        )
+      }
 
-    if (section.type === 'exam-grid' && open) {
-      return (
-        <React.Fragment key="exam-grid">
-          <Legends />
-          <Grid filter={filter} />
-        </React.Fragment>
-      )
-    }
+      if (section.type === 'exam-grid' && open) {
+        return (
+          <React.Fragment key="exam-grid">
+            <Legends />
+            <Grid filter={filter} />
+          </React.Fragment>
+        )
+      }
 
-    return null
-  }
+      return null
+    },
+    [filter, open, session]
+  )
 
   return <MainMenu>{menuItems.map(renderMenuItem)}</MainMenu>
 }

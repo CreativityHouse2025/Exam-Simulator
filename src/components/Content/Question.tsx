@@ -18,4 +18,4 @@ const QuestionComponent: React.FC<Question> = ({ text }) => {
   )
 }
 
-export default QuestionComponent
+export default React.memo(QuestionComponent)

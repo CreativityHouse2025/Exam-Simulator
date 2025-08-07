@@ -32,36 +32,44 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
     }) as SessionDispatch
   }, [startingSession])
 
-  const toggleOpen = () => setOpen(!open)
+  const toggleOpen = React.useCallback(() => setOpen(!open), [open])
 
   if (!exam) return null
 
-  const confirms: Omit<MyConfirmProps, 'title' | 'message' | 'buttons'>[] = [
-    {
-      id: 'expired',
-      show: timerHaveExpired(session),
-      onConfirm: () => {
-        session.update!(
-          [SessionActionTypes.SET_TIME, 0],
-          [SessionActionTypes.SET_TIMER_PAUSED, true],
-          [SessionActionTypes.SET_EXAM_STATE, 'completed']
-        )
+  const confirms: Omit<MyConfirmProps, 'title' | 'message' | 'buttons'>[] = React.useMemo(
+    () => [
+      {
+        id: 'expired',
+        show: timerHaveExpired(session),
+        onConfirm: () => {
+          session.update!(
+            [SessionActionTypes.SET_TIME, 0],
+            [SessionActionTypes.SET_TIMER_PAUSED, true],
+            [SessionActionTypes.SET_EXAM_STATE, 'completed']
+          )
+        }
+      },
+      {
+        id: 'pause',
+        show: timerIsPaused(session),
+        onConfirm: () => session.update!([SessionActionTypes.SET_TIMER_PAUSED, false])
       }
-    },
-    {
-      id: 'pause',
-      show: timerIsPaused(session),
-      onConfirm: () => session.update!([SessionActionTypes.SET_TIMER_PAUSED, false])
-    }
-  ]
-  const newConfirms: MyConfirmProps[] = confirms.map((c) => ({
-    ...c,
-    title: translate(`confirm.${c.id}.title`),
-    message: translate(`confirm.${c.id}.message`),
-    buttons: [translate(`confirm.${c.id}.button0`), translate(`confirm.${c.id}.button1`)].filter(
-      (str) => str !== ''
-    ) as [string, string]
-  }))
+    ],
+    [session]
+  )
+
+  const newConfirms: MyConfirmProps[] = React.useMemo(
+    () =>
+      confirms.map((c) => ({
+        ...c,
+        title: translate(`confirm.${c.id}.title`),
+        message: translate(`confirm.${c.id}.message`),
+        buttons: [translate(`confirm.${c.id}.button0`), translate(`confirm.${c.id}.button1`)].filter(
+          (str) => str !== ''
+        ) as [string, string]
+      })),
+    [confirms]
+  )
 
   return (
     <SessionContext.Provider value={session}>
