@@ -1,4 +1,5 @@
 import type { QuestionFilter, ThemedStyles } from '../../../types'
+import type { Session } from '../../../session'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -14,9 +15,10 @@ import { Cancel } from '@styled-icons/material/Cancel'
 import { Pause } from '@styled-icons/material/Pause'
 import { Stop } from '@styled-icons/material/Stop'
 import { Report } from '@styled-icons/boxicons-solid/Report'
+import Legends from './Legends'
 import Grid from './Grid'
 import { translate } from '../../../settings'
-import { type Session, SessionActionTypes } from '../../../session'
+import { SessionActionTypes } from '../../../session'
 import { timerIsRunning } from '../../../utils/state'
 
 const DrawerStyles = styled.div<ThemedStyles>`
@@ -185,8 +187,11 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
               {section.icon}
               <div>{section.text}</div>
             </MenuItem>
-          ) : section.type === 'exam-grid' ? (
-            <Grid key={i} open={open} show={filter} />
+          ) : section.type === 'exam-grid' && open ? (
+            <>
+              <Legends />
+              <Grid key={i} filter={filter} />
+            </>
           ) : null
         )}
       </MainMenu>
