@@ -24,7 +24,7 @@ export type QuestionFilter = 'all' | GridTagTypes
 export type GridTagTypes = 'marked' | 'incomplete' | 'complete' | 'incorrect' | 'correct'
 
 export type ExamType = 'exam' | 'miniexam'
-export type ExamID = `${ExamType}-${string}-${number}`
+export type ExamID = `${ExamType}-${number}`
 export interface Exam {
   /** minimum passing score percentage */
   pass: number
