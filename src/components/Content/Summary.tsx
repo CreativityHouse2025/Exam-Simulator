@@ -10,73 +10,70 @@ const SummaryStyles = styled.div`
   width: 100%;
   height: calc(100vh - 14rem);
   display: grid;
-  grid-template-rows: 3rem 1.5fr 3rem 2fr;
+  grid-template-rows: 8rem 2fr;
+  justify-items: center;
+  align-items: center;
 `
 
 export const TitleStyles = styled.div<ThemedStyles>`
-  justify-self: center;
-  font: 2rem 'Open Sans';
+  font: 4rem 'Open Sans';
   font-weight: 700;
   color: ${({ theme }) => theme.black};
-  transform: translateX(-3rem);
-`
-
-export const InnerSummaryStyles = styled.div`
-  justify-self: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
 `
 
 export const ColumnStyles = styled.div`
-  align-self: center;
   display: grid;
   grid-template-rows: repeat(4, 3rem);
+  margin-bottom: 5rem;
+  padding-left: 5rem;
 `
 
 export const RowStyles = styled.div<SummaryStylesProps>`
   display: grid;
-  grid-template-columns: 10rem 10rem;
-  align-items: center;
-  & > :first-child {
-    font: 1.2rem 'Open Sans';
-    font-weight: 700;
-    color: ${({ theme }) => theme.grey[10]};
-  }
+  grid-template-columns: 15rem 15rem;
   .status {
     color: ${({ $status, theme }) => ($status ? theme.correct : theme.incorrect)};
   }
 `
 
-export const DataStyles = styled.div<ThemedStyles>`
-    font: 1.25rem 'Open Sans';
-    font-weight: 700;
-    color: ${({ theme }) => theme.black};
-  }
+export const RowKeyStyles = styled.div<ThemedStyles>`
+  font: 2rem 'Open Sans';
+  font-weight: 700;
+  padding-left: 5rem;
+  color: ${({ theme }) => theme.grey[10]};
+`
+
+export const RowValueStyles = styled.div<ThemedStyles>`
+  font: 2rem 'Open Sans';
+  font-weight: 700;
+  color: ${({ theme }) => theme.black};
 `
 
 const SummaryComponent: React.FC<SummaryProps> = ({ exam, session }) => {
-  const incompleteQuestions = session.answers.filter((a) => a === null)
-  const completedQuestions = session.answers.filter((a) => a !== null)
-  const conrrectQuestions = completedQuestions.filter((a, i) => a === exam.test[i].answer)
-  const incorrectQuestions = completedQuestions.filter((a, i) => a !== exam.test[i].answer)
+  const questions = React.useMemo(() => {
+    // @ts-expect-error
+    const qArr: { incomplete: any[]; completed: any[]; correct: any[]; incorrect: any[] } = {
+      incomplete: session.answers.filter((a) => a === null),
+      completed: session.answers.filter((a) => a !== null),
+      correct: session.answers.filter((a, i) => a === exam.test[i].answer)
+    }
 
-  const score = Math.round((conrrectQuestions.length / exam.test.length) * 100)
+    qArr.incorrect = qArr.completed.filter((a, i) => a !== exam.test[i].answer)
+    return qArr
+  }, [exam, session])
+
+  const score = Math.round((questions.correct.length / exam.test.length) * 100)
   const status = score >= exam.pass
   const date = new Date()
   const elapsed = exam.time * 60 - session.time
 
   return (
-    <SummaryStyles>
+    <SummaryStyles id="summary">
       <TitleStyles id="title">{translate('content.review.summary.title')}</TitleStyles>
 
-      <InnerSummaryStyles id="summary">
+      <div id="columns">
         <ColumnStyles id="column">
-          {SummaryRow(
-            'status',
-            status ? translate('content.review.summary.pass') : translate('content.review.summary.fail'),
-            status,
-            true
-          )}
+          {SummaryRow('status', translate(`content.review.summary.${status ? 'pass' : 'fail'}`), status, true)}
           {SummaryRow('passing', `${exam.pass} %`, status)}
           {SummaryRow('time', formatTimer(elapsed), status)}
           {SummaryRow('date', formatDate(date), status)}
@@ -84,11 +81,11 @@ const SummaryComponent: React.FC<SummaryProps> = ({ exam, session }) => {
 
         <ColumnStyles id="column">
           {SummaryRow('score', `${score} %`, status)}
-          {SummaryRow('correct', `${conrrectQuestions.length} / ${exam.test.length}`, status)}
-          {SummaryRow('incorrect', `${incorrectQuestions.length} / ${exam.test.length}`, status)}
-          {SummaryRow('incomplete', `${incompleteQuestions.length} / ${exam.test.length}`, status)}
+          {SummaryRow('correct', `${questions.correct.length} / ${exam.test.length}`, status)}
+          {SummaryRow('incorrect', `${questions.incorrect.length} / ${exam.test.length}`, status)}
+          {SummaryRow('incomplete', `${questions.incomplete.length} / ${exam.test.length}`, status)}
         </ColumnStyles>
-      </InnerSummaryStyles>
+      </div>
     </SummaryStyles>
   )
 }
@@ -100,8 +97,8 @@ const SummaryRow = (key: string, value: string, status: boolean, isStatus?: bool
 
   return (
     <RowStyles data-test={`summary-row-${key}`} $status={status}>
-      <div>{translate(`content.review.summary.${key}`)}</div>
-      <DataStyles className={className}>{value}</DataStyles>
+      <RowKeyStyles>{translate(`content.review.summary.${key}`)}</RowKeyStyles>
+      <RowValueStyles className={className}>{value}</RowValueStyles>
     </RowStyles>
   )
 }
