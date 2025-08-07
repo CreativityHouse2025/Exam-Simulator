@@ -20,7 +20,6 @@ const FooterStyles = styled.div<FooterStylesProps>`
 
 const InnerFooterStyles = styled.div<InnerFooterStylesProps>`
   width: ${({ $open }) => ($open ? 'calc(100% - 24rem)' : 'calc(100% - 5rem)')};
-  height: 100%;
   display: grid;
   grid-template-columns: 0.75fr 0.25fr;
   align-items: center;
@@ -39,7 +38,7 @@ const FooterComponent: React.FC<NavigationFooterProps> = ({ open, exam, session 
   )
 }
 
-export default FooterComponent
+export default React.memo(FooterComponent)
 
 export interface NavigationFooterProps {
   open: boolean

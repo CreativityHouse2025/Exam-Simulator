@@ -47,7 +47,7 @@ const LegendComponent: React.FC<LegendItemProps> = ({ type }) => {
   )
 }
 
-export default LegendComponent
+export default React.memo(LegendComponent)
 
 export interface LegendItemProps {
   type: GridTagTypes

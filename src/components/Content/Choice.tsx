@@ -38,13 +38,13 @@ const ChoiceComponent: React.FC<ChoiceProps> = ({
 }) => {
   const name = isSelected ? 'selected' : ''
 
-  const renderIcon = (): React.ReactNode => {
+  const renderIcon = React.useCallback((): React.ReactNode => {
     if (isSelected) {
       return React.createElement(isSingleAnswer ? RadioButtonChecked : CheckBox, { className: name, size: 20 })
     } else {
       return React.createElement(isSingleAnswer ? RadioButtonUnchecked : CheckBoxOutlineBlank, { size: 20 })
     }
-  }
+  }, [isSelected, isSingleAnswer])
 
   return (
     <ChoiceStyles $review={isReview} $correct={isCorrect} onClick={onClick}>

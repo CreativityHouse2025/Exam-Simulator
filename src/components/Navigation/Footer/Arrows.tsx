@@ -1,6 +1,7 @@
 import type { ThemedStyles } from '../../../types'
+import type { MouseEventHandler } from 'react'
 
-import React, { MouseEventHandler } from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { lighten } from 'polished'
 import { SkipPrevious } from '@styled-icons/material/SkipPrevious'
@@ -20,48 +21,50 @@ const ArrowStyles = styled.div<ThemedStyles>`
   display: grid;
   justify-items: center;
   align-items: center;
-  transition: 0.3s;
   cursor: pointer;
+  color: ${({ theme }) => theme.black};
   &:hover {
     background: ${({ theme }) => lighten(0.2, theme.primary)};
-  }
-  svg {
-    color: ${({ theme }) => theme.black};
-    margin-right: 0.5rem;
   }
 `
 
 const ArrowsComponent: React.FC<ArrowsProps> = ({ session, questionCount }) => {
-  const { index } = session
+  const { index, update } = session
 
-  const onFirstQuestion = () => session.update!(SessionActionTypes.SET_INDEX, 0)
-  const onPrevQuestion = () => session.update!(SessionActionTypes.SET_INDEX, index - 1)
-  const onNextQuestion = () => session.update!(SessionActionTypes.SET_INDEX, index + 1)
-  const onLastQuestion = () => session.update!(SessionActionTypes.SET_INDEX, questionCount - 1)
+  const onFirstQuestion = useCallback(() => {
+    if (index === 0) return
+    update!(SessionActionTypes.SET_INDEX, 0)
+  }, [index, update])
 
-  const arrows: ArrowProps[] = [
-    {
-      func: onFirstQuestion,
-      Icon: SkipPrevious
-    },
-    {
-      func: onPrevQuestion,
-      Icon: KeyboardArrowLeft
-    },
-    {
-      func: onNextQuestion,
-      Icon: KeyboardArrowRight
-    },
-    {
-      func: onLastQuestion,
-      Icon: SkipNext
-    }
-  ]
+  const onPrevQuestion = useCallback(() => {
+    if (index === 0) return
+    update!(SessionActionTypes.SET_INDEX, index - 1)
+  }, [index, update])
+
+  const onNextQuestion = useCallback(() => {
+    if (index >= questionCount - 1) return
+    update!(SessionActionTypes.SET_INDEX, index + 1)
+  }, [index, questionCount, update])
+
+  const onLastQuestion = useCallback(() => {
+    if (index >= questionCount - 1) return
+    update!(SessionActionTypes.SET_INDEX, questionCount - 1)
+  }, [index, questionCount, update])
+
+  const arrows: ArrowProps[] = React.useMemo(
+    () => [
+      { func: onFirstQuestion, Icon: SkipPrevious },
+      { func: onPrevQuestion, Icon: KeyboardArrowLeft },
+      { func: onNextQuestion, Icon: KeyboardArrowRight },
+      { func: onLastQuestion, Icon: SkipNext }
+    ],
+    [onFirstQuestion, onPrevQuestion, onNextQuestion, onLastQuestion]
+  )
 
   return (
     <ArrowsStyles id="arrows">
-      {arrows.map(({ func, Icon }) => (
-        <ArrowStyles onClick={func}>
+      {arrows.map(({ func, Icon }, i) => (
+        <ArrowStyles key={i} onClick={func}>
           <Icon size={30} />
         </ArrowStyles>
       ))}

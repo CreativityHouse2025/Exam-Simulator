@@ -37,7 +37,9 @@ const StatNumber = styled.span<ThemedStyles>`
 `
 
 const ProgressComponent: React.FC<ProgressProps> = ({ exam, session }) => {
-  const { answeredCount, percentage } = calculateProgressStats(exam.test, session.answers)
+  const { answeredCount, percentage } = React.useMemo(() => {
+    return calculateProgressStats(exam.test, session.answers)
+  }, [exam, session])
 
   return (
     <ProgressContainer id="progress">

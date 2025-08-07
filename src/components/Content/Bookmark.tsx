@@ -17,26 +17,21 @@ const BookmarkStyles = styled.div<BookmarkStylesProps>`
 `
 
 const BookmarkButton: React.FC<BookmarkButtonProps> = ({ session: { index, bookmarks, update } }) => {
-  if (!update) return null
-
   const bookmarked = bookmarks.includes(index)
 
-  const onBookmarkQuestion = () => {
+  const onBookmarkQuestion = React.useCallback(() => {
     if (bookmarked) {
       bookmarks.splice(bookmarks.indexOf(index), 1)
     } else {
       bookmarks.push(index)
     }
 
-    update(SessionActionTypes.SET_BOOKMARKS, bookmarks)
-  }
+    update!(SessionActionTypes.SET_BOOKMARKS, bookmarks)
+  }, [bookmarked, bookmarks, index, update])
 
   return (
     <BookmarkStyles $bookmarked={bookmarked}>
-      {createElement(bookmarked ? Bookmark : BookmarkBorder, {
-        size: 40,
-        onClick: () => onBookmarkQuestion()
-      })}
+      {createElement(bookmarked ? Bookmark : BookmarkBorder, { size: 40, onClick: onBookmarkQuestion })}
     </BookmarkStyles>
   )
 }
@@ -48,5 +43,5 @@ export interface BookmarkButtonProps {
 }
 
 export interface BookmarkStylesProps extends ThemedStyles {
-  $bookmarked?: boolean
+  $bookmarked: boolean
 }
