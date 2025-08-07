@@ -1,4 +1,5 @@
-import type { Exam } from './types'
+import type { Exam, ExamID } from './types'
+import type { Lang, LangCode } from './settings'
 
 import React, { useCallback, useEffect, useState } from 'react'
 import Header from './components/Header'
@@ -6,101 +7,112 @@ import Navigation from './components/Navigation'
 import Cover from './components/Cover'
 import { defaultSession, type Session } from './session'
 import { ExamContext } from './exam'
-import { type Lang, LangContext, setTranslation, langs, LangCode } from './settings'
+import { LangContext, setTranslation, LANGUAGES } from './settings'
 import { useForceUpdate, useLocalStorage } from '@mantine/hooks'
 import { formatExam, formatSession } from './utils/format'
 
 // Cache for loaded resources to avoid re-importing
 const resourceCache = new Map<string, any>()
-const examNumber = Math.floor(Math.random() * 5)
-const miniExamNumber = Math.floor(Math.random() * 23)
 
-const AppComponent: React.FC<object> = ({}) => {
-  const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: langs.ar })
+// Random exam selection
+const getRandomExamNumber = () => Math.floor(Math.random() * 5)
+const getRandomMiniExamNumber = () => Math.floor(Math.random() * 23)
+
+const AppComponent: React.FC = () => {
+  const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: LANGUAGES.ar })
   const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: defaultSession })
   const [exam, setExam] = useState<Exam | null>(null)
   const forceUpdate = useForceUpdate()
 
-  const handleStarting = useCallback(
-    async (session: Session, exam: Exam | null) => {
-      if (exam) {
-        session = formatSession({ ...session, examState: 'in-progress' }, exam)
-      }
+  const loadResource = useCallback(async <T,>(path: string, cacheKey: string): Promise<T> => {
+    if (resourceCache.has(cacheKey)) return resourceCache.get(cacheKey)
 
-      setSession(session)
-    },
-    [exam]
-  )
-
-  const loadExam = useCallback(
-    async (randNum: number, isMini: boolean) => {
-      const examType = isMini ? 'mini' : ''
-      const cacheKey = `${examType}exam-${lang.code}-${randNum}`
-
-      let examData: Exam
-      if (resourceCache.has(cacheKey)) {
-        examData = resourceCache.get(cacheKey)
-      } else {
-        const data = await import(`./data/${examType}exams/${lang.code}/${randNum}.json`)
-        examData = data.default
-        resourceCache.set(cacheKey, examData)
-      }
-
-      const exam: Exam = formatExam(examData)
-      setExam(exam)
-
-      handleStarting(defaultSession, exam)
-    },
-    [lang.code, handleStarting]
-  )
+    const data = await import(path)
+    const resource = data.default
+    resourceCache.set(cacheKey, resource)
+    return resource
+  }, [])
 
   const loadTranslation = useCallback(
     async (code: LangCode) => {
-      const cacheKey = `translation-${code}`
-
-      let translations: object
-      if (resourceCache.has(cacheKey)) {
-        translations = resourceCache.get(cacheKey)
-      } else {
-        const data = await import(`./data/langs/${code}.json`)
-        translations = data.default
-        resourceCache.set(cacheKey, translations)
-      }
-
-      setTranslation(lang, translations)
+      const translations = await loadResource<object>(`./data/langs/${code}.json`, `translation-${code}`)
+      setTranslation(LANGUAGES[code], translations)
     },
-    [lang]
+    [loadResource]
   )
 
-  const updateSession = useCallback((newSession: Session) => setSession(newSession), [setSession])
+  const startExam = useCallback(
+    (newSession: Session, examData: Exam | null) => {
+      if (examData) {
+        newSession = formatSession({ ...newSession, examState: 'in-progress' }, examData)
+      }
+      setSession(newSession)
+    },
+    [setSession]
+  )
 
-  // Load translation and set document properties when language changes
+  const loadExam = useCallback(
+    async (examNumber: number, isMini: boolean) => {
+      const examType = isMini ? 'mini' : ''
+      const examPath = `./data/${examType}exams/${lang.code}/${examNumber}.json`
+      const examID: ExamID = `${examType}exam-${lang.code}-${examNumber}`
+      const examData = await loadResource<Exam>(examPath, examID)
+
+      const formattedExam = formatExam(examData)
+      setExam(formattedExam)
+      startExam({ ...defaultSession, examID }, formattedExam)
+    },
+    [lang, loadResource, startExam]
+  )
+
+  const loadOldExam = useCallback(
+    async (newSession: Session) => {
+      const examPath = `./data/${newSession.examID}.json`.replace('exam', 'exams').replaceAll('-', '/')
+      const examData = await loadResource<Exam>(examPath, newSession.examID as string)
+
+      const formattedExam = formatExam(examData)
+      setExam(formattedExam)
+      startExam(newSession, formattedExam)
+    },
+    [lang, loadResource, startExam]
+  )
+
+  const handleLanguageChange = useCallback((code: LangCode) => setLang(LANGUAGES[code]), [setLang])
+
+  const handleStartNew = useCallback(() => loadExam(getRandomExamNumber(), false), [loadExam])
+  const handleStartMini = useCallback(() => loadExam(getRandomMiniExamNumber(), true), [loadExam])
+
+  const handleContinue = useCallback(async () => {
+    try {
+      loadOldExam(session)
+    } catch (err) {
+      console.error('Failed to load previous exam:', err)
+      // Fallback to starting a new exam if loading fails
+      handleStartNew()
+    }
+  }, [session, loadOldExam, handleStartNew])
+
+  // Load translation when language changes
   useEffect(() => {
-    const loadLanguageData = async () => {
+    const initializeLanguage = async () => {
       await loadTranslation(lang.code)
       document.documentElement.lang = lang.code
-      // document.documentElement.dir = lang.dir
-
       forceUpdate()
     }
 
-    loadLanguageData()
-  }, [lang.code, loadTranslation])
+    initializeLanguage()
+  }, [lang, loadTranslation, forceUpdate])
 
   return (
     <LangContext.Provider value={lang}>
-      <Header setLang={(code: LangCode) => setLang(langs[code])} />
+      <Header setLang={handleLanguageChange} />
 
       {exam ? (
         <ExamContext.Provider value={exam}>
-          <Navigation startingSession={session} onSessionUpdate={updateSession} />
+          <Navigation startingSession={session} onSessionUpdate={setSession} />
         </ExamContext.Provider>
       ) : (
-        <Cover
-          onStartNew={() => loadExam(examNumber, false)}
-          onStartMini={() => loadExam(miniExamNumber, true)}
-          onContinue={() => handleStarting(session, null)}
-        />
+        <Cover onStartNew={handleStartNew} onStartMini={handleStartMini} onContinue={handleContinue} />
       )}
     </LangContext.Provider>
   )

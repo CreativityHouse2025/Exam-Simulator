@@ -1,63 +1,65 @@
 import { createContext } from 'react'
 
-// language
-
+// Language types and configuration
 export type LangDir = 'rtl' | 'ltr'
 export type LangCode = 'ar' | 'en'
 export type LangName = 'العربية' | 'English'
+
 export interface Lang {
   code: LangCode
   name: LangName
   dir: LangDir
 }
 
-export const langs: Record<LangCode, Lang> = {
-  ar: { code: 'ar', name: 'العربية', dir: 'rtl' } as Lang,
-  en: { code: 'en', name: 'English', dir: 'ltr' } as Lang
+export const LANGUAGES: Record<LangCode, Lang> = {
+  ar: { code: 'ar', name: 'العربية', dir: 'rtl' },
+  en: { code: 'en', name: 'English', dir: 'ltr' }
+} as const
+
+// Language validation utilities
+export const isLangCode = (code: string): code is LangCode => code in LANGUAGES
+
+export const isLangName = (name: string): name is LangName =>
+  Object.values(LANGUAGES).some((lang) => lang.name === name)
+
+export const LangContext = createContext<Lang>(LANGUAGES.ar)
+
+// Translation system
+const translations = new Map<string, string>()
+let currentLang: LangCode | null = null
+
+export const translate = (key: string, replacements?: (string | number)[]): string => {
+  const value = translations.get(key)
+  if (!value) return key
+
+  if (!replacements?.length) return value
+
+  // @ts-expect-error
+  return replacements.reduce(
+    // @ts-expect-error
+    (result, replacement, index) => result.replace(new RegExp(`\\$${index + 1}`, 'g'), replacement.toString()),
+    value
+  )
 }
 
-export function isLangCode(code: string): code is LangCode {
-  return code in Object.keys(langs)
-}
-export function isLangName(name: string): name is LangName {
-  return Object.values(langs).some((l) => l.name === name)
-}
+export const setTranslation = (lang: Lang, translationData: Record<string, any>): void => {
+  if (lang.code === currentLang) return
 
-export const LangContext = createContext<Lang>(langs.ar)
+  currentLang = lang.code
+  translations.clear()
 
-// translation
-
-const translation = new Map<string, string>()
-
-export function translate(key: string, replacements?: (string | number)[]): string {
-  let val = translation.get(key)
-  if (!val) return key
-
-  if (replacements && replacements.length > 0)
-    for (let i = 0; i < replacements.length; i++)
-      val = val.replace(new RegExp(`\\$${i + 1}`, 'g'), replacements[i].toString())
-
-  return val
-}
-
-export function setTranslation(lang: Lang, obj: object) {
-  if (lang.code === translation.get('lang')) return
-
-  translation.set('lang', lang.code)
-  flattenJson(obj)
-
+  flattenTranslations(translationData)
   document.documentElement.lang = lang.code
 }
 
-export function flattenJson(obj: object, parentKey?: string) {
-  for (const key in obj) {
-    const el: object | string = obj[key]
+const flattenTranslations = (obj: Record<string, any>, parentKey = ''): void => {
+  Object.entries(obj).forEach(([key, value]) => {
     const fullKey = parentKey ? `${parentKey}.${key}` : key
 
-    if (typeof el === 'object') {
-      flattenJson(el, fullKey)
-    } else {
-      translation.set(fullKey, el)
+    if (typeof value === 'object' && value !== null) {
+      flattenTranslations(value, fullKey)
+    } else if (typeof value === 'string') {
+      translations.set(fullKey, value)
     }
-  }
+  })
 }
