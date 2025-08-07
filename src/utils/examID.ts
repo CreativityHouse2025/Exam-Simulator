@@ -3,7 +3,7 @@ import type { Lang } from '../settings'
 
 export function toExamID(isMini: boolean, number: number): ExamID {
   const type = isMini ? 'mini' : ''
-  return `${type}-${number}` as ExamID
+  return `${type}exam-${number}` as ExamID
 }
 
 export function toExamStorageID(examID: ExamID, lang: Lang): ExamID {
