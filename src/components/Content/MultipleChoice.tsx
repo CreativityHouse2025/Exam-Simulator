@@ -11,7 +11,7 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, session,
   const question = exam.test[index]
   const isSingleAnswer = question.type === 'multiple-choice'
 
-  const answer = answers[index] || (isSingleAnswer ? null : [])
+  const answer = answers[index] !== null ? answers[index] : isSingleAnswer ? null : []
   const [value, setValue] = useState<AnswerOfMultipleChoice | AnswerOfMultipleAnswer>(answer)
 
   const onChooseSingle = (i: number): void => {
