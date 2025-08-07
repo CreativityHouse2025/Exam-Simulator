@@ -33,22 +33,22 @@ const ArrowsComponent: React.FC<ArrowsProps> = ({ session, questionCount }) => {
 
   const onFirstQuestion = useCallback(() => {
     if (index === 0) return
-    update!(SessionActionTypes.SET_INDEX, 0)
+    update!([SessionActionTypes.SET_INDEX, 0])
   }, [index, update])
 
   const onPrevQuestion = useCallback(() => {
     if (index === 0) return
-    update!(SessionActionTypes.SET_INDEX, index - 1)
+    update!([SessionActionTypes.SET_INDEX, index - 1])
   }, [index, update])
 
   const onNextQuestion = useCallback(() => {
     if (index >= questionCount - 1) return
-    update!(SessionActionTypes.SET_INDEX, index + 1)
+    update!([SessionActionTypes.SET_INDEX, index + 1])
   }, [index, questionCount, update])
 
   const onLastQuestion = useCallback(() => {
     if (index >= questionCount - 1) return
-    update!(SessionActionTypes.SET_INDEX, questionCount - 1)
+    update!([SessionActionTypes.SET_INDEX, questionCount - 1])
   }, [index, questionCount, update])
 
   const arrows: ArrowProps[] = React.useMemo(
