@@ -1,13 +1,15 @@
 import type { Exam } from '../../types'
 import type { Lang } from '../../settings'
-import type { AnswerOfMultipleChoice, AnswerOfMultipleAnswer, Session } from '../../session'
+import type { AnswerOfMultipleChoice, AnswerOfMultipleAnswer } from '../../session'
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Choice from './Choice'
 import { formatChoiceLabel } from '../../utils/format'
+import { SessionDataContext, SessionNavigationContext } from '../../session'
 
-const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, session, lang, isReview }) => {
-  const { index, answers } = session
+const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, lang, isReview }) => {
+  const { index } = useContext(SessionNavigationContext)
+  const { answers } = useContext(SessionDataContext)
   const question = exam.test[index]
   const isSingleAnswer = question.type === 'multiple-choice'
 
@@ -17,9 +19,9 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, session,
   const onChooseSingle = React.useCallback(
     (i: number): void => {
       setValue(i)
-      session.answers[index] = i
+      answers[index] = i
     },
-    [index, session]
+    [index, answers]
   )
 
   const onChooseMultiple = React.useCallback(
@@ -28,9 +30,9 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, session,
       const newValues = currValues.includes(i) ? currValues.filter((el) => el !== i) : currValues.concat(i)
 
       setValue(newValues)
-      session.answers[index] = newValues
+      answers[index] = newValues
     },
-    [index, session, value]
+    [index, answers, value]
   )
 
   const onChoose = React.useMemo(
@@ -68,7 +70,6 @@ export default MultipleChoiceComponent
 
 export interface MultipleChoiceProps {
   exam: Exam
-  session: Session
   lang: Lang
   isReview: boolean
 }

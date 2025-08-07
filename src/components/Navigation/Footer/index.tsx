@@ -1,5 +1,4 @@
 import type { Exam, ThemedStyles } from '../../../types'
-import type { Session } from '../../../session'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -26,13 +25,13 @@ const InnerFooterStyles = styled.div<InnerFooterStylesProps>`
   transition: 0.3s;
 `
 
-const FooterComponent: React.FC<NavigationFooterProps> = ({ open, exam, session }) => {
+const FooterComponent: React.FC<NavigationFooterProps> = ({ open, questionCount }) => {
   return (
     <FooterStyles id="footer" $open={open}>
       <InnerFooterStyles id="inner-footer" $open={open}>
-        <Arrows session={session} questionCount={exam.test.length} />
+        <Arrows questionCount={questionCount} />
 
-        <Timer session={session} />
+        <Timer />
       </InnerFooterStyles>
     </FooterStyles>
   )
@@ -42,8 +41,7 @@ export default React.memo(FooterComponent)
 
 export interface NavigationFooterProps {
   open: boolean
-  exam: Exam
-  session: Session
+  questionCount: number
 }
 
 export interface FooterStylesProps extends ThemedStyles {

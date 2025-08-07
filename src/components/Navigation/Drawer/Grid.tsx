@@ -4,7 +4,7 @@ import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import Cell from './Cell'
 import { ExamContext } from '../../../exam'
-import { SessionContext } from '../../../session'
+import { SessionDataContext } from '../../../session'
 
 const GridStyles = styled.div<ThemedStyles>`
   height: calc(100vh - 50rem);
@@ -19,17 +19,12 @@ const GridStyles = styled.div<ThemedStyles>`
 
 const GridComponent: React.FC<GridProps> = ({ filter }) => {
   const exam = useContext(ExamContext)
-  const session = useContext(SessionContext)
-  const [bookmarks, setBookmarks] = React.useState<number[]>(session.bookmarks)
-
-  useEffect(() => {
-    setBookmarks(session.bookmarks)
-  }, [session])
+  const { bookmarks, answers } = useContext(SessionDataContext)
 
   if (!exam || exam.test.length === 0) return null
 
   const answered = React.useMemo(() => {
-    return session.answers
+    return answers
       .map((answer, i) => {
         const isMultipleChoiceAnswered = answer !== null && !Number.isNaN(answer)
         const isMultipleAnswerAnswered = Array.isArray(answer) && answer.length > 0
@@ -39,10 +34,10 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
         }
       })
       .filter((i) => i !== undefined)
-  }, [exam, session])
+  }, [exam, answers])
 
   const getAnsweredCorrectly = React.useCallback(() => {
-    return session.answers
+    return answers
       .map((answer, i) => {
         let isCorrect = false
         if (Array.isArray(answer) && Array.isArray(exam.test[i].answer)) {
@@ -55,7 +50,7 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
         if (isCorrect) return i
       })
       .filter((i) => i !== undefined)
-  }, [exam, session])
+  }, [exam, answers])
 
   const getAnsweredIncorrectly = React.useCallback(() => {
     return answered.filter((i) => !getAnsweredCorrectly().includes(i))
@@ -77,7 +72,7 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
       default:
         return Array.from({ length: exam.test.length }, (_, i) => i)
     }
-  }, [exam, answered, getAnsweredCorrectly, getAnsweredIncorrectly, bookmarks, filter])
+  }, [filter, exam, bookmarks, answered, getAnsweredCorrectly, getAnsweredIncorrectly])
 
   return (
     <GridStyles id="grid">

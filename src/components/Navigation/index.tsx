@@ -7,29 +7,33 @@ import Confirm, { type ConfirmProps } from '../Confirm'
 import Content from '../Content'
 import { Main } from '../../styles/Main'
 import { ExamContext } from '../../exam'
-import { SessionActionTypes, SessionContext, SessionReducer } from '../../session'
+import {
+  SessionActionTypes,
+  SessionDataContext,
+  SessionExamContext,
+  SessionNavigationContext,
+  SessionReducer,
+  SessionTimerContext
+} from '../../session'
 import { timerHaveExpired, timerIsPaused } from '../../utils/state'
 import { translate } from '../../settings'
 
 const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate }) => {
-  const [session, updateSession] = useReducer(SessionReducer, startingSession)
   const exam = useContext(ExamContext)
+  const [session, updateSession] = useReducer(SessionReducer, startingSession)
   const [open, setOpen] = useState<boolean>(true)
 
-  session.update = ((...actions) => {
+  const sessionUpdate = ((...actions) => {
     const arr = actions.map(([type, payload]) => ({ type, payload }))
 
     updateSession(arr)
     onSessionUpdate(SessionReducer(session, arr))
   }) as SessionDispatch
 
-  useEffect(() => {
-    session.update = ((...actions) => {
-      const arr = actions.map(([type, payload]) => ({ type, payload }))
+  session.update = sessionUpdate
 
-      updateSession(arr)
-      onSessionUpdate(SessionReducer(session, arr))
-    }) as SessionDispatch
+  useEffect(() => {
+    session.update = sessionUpdate
   }, [startingSession])
 
   const toggleOpen = React.useCallback(() => setOpen(!open), [open])
@@ -72,30 +76,56 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
   )
 
   return (
-    <SessionContext.Provider value={session}>
-      <div id="navigation">
-        <Drawer open={open} session={session} toggleOpen={toggleOpen} />
+    <SessionNavigationContext.Provider value={{ index: session.index, update: session.update }}>
+      <SessionTimerContext.Provider
+        value={{
+          time: session.time,
+          maxTime: session.maxTime,
+          paused: session.paused,
+          update: session.update
+        }}
+      >
+        <SessionExamContext.Provider
+          value={{
+            examState: session.examState,
+            reviewState: session.reviewState,
+            update: session.update
+          }}
+        >
+          <SessionDataContext.Provider
+            value={{
+              bookmarks: session.bookmarks,
+              answers: session.answers,
+              examID: session.examID,
+              update: session.update
+            }}
+          >
+            <div id="navigation">
+              <Drawer open={open} toggleOpen={toggleOpen} />
 
-        <Main $open={open}>
-          <Content exam={exam} session={session} />
-        </Main>
+              <Main $open={open}>
+                <Content exam={exam} session={session} />
+              </Main>
 
-        {exam && <Footer open={open} exam={exam} session={session} />}
+              {exam && <Footer open={open} questionCount={exam.test.length} />}
 
-        {newConfirms
-          .filter((c) => c.show)
-          .map((c, i) => (
-            <Confirm
-              key={`${c.id}-${i}`}
-              title={c.title}
-              message={c.message}
-              buttons={c.buttons}
-              onConfirm={c.onConfirm}
-              onClose={c.onClose}
-            />
-          ))}
-      </div>
-    </SessionContext.Provider>
+              {newConfirms
+                .filter((c) => c.show)
+                .map((c, i) => (
+                  <Confirm
+                    key={`${c.id}-${i}`}
+                    title={c.title}
+                    message={c.message}
+                    buttons={c.buttons}
+                    onConfirm={c.onConfirm}
+                    onClose={c.onClose}
+                  />
+                ))}
+            </div>
+          </SessionDataContext.Provider>
+        </SessionExamContext.Provider>
+      </SessionTimerContext.Provider>
+    </SessionNavigationContext.Provider>
   )
 }
 

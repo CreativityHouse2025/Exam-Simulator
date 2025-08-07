@@ -1,7 +1,6 @@
 import type { QuestionFilter, ThemedStyles } from '../../../types'
-import type { Session } from '../../../session'
 
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { lighten } from 'polished'
 import { FormatListNumbered } from '@styled-icons/material/FormatListNumbered'
@@ -16,7 +15,7 @@ import { Report } from '@styled-icons/boxicons-solid/Report'
 import Legends from './Legends'
 import Grid from './Grid'
 import { translate } from '../../../settings'
-import { SessionActionTypes } from '../../../session'
+import { SessionActionTypes, SessionExamContext, SessionTimerContext } from '../../../session'
 import { timerIsRunning } from '../../../utils/state'
 
 const MainMenu = styled.div<ThemedStyles>`
@@ -47,7 +46,10 @@ const MenuItemTextStyles = styled.div`
   padding-left: 1rem;
 `
 
-const MenuComponent: React.FC<MenuProps> = ({ open, session }) => {
+const MenuComponent: React.FC<MenuProps> = ({ open }) => {
+  const { examState, update } = useContext(SessionExamContext)
+  const timerSession = useContext(SessionTimerContext)
+
   const [filter, setFilter] = React.useState<QuestionFilter>('all')
 
   const menuItems = React.useMemo(() => {
@@ -57,9 +59,9 @@ const MenuComponent: React.FC<MenuProps> = ({ open, session }) => {
       { type: 'filter', filter: 'incomplete', icon: <CheckBoxOutlineBlank size={20} /> }
     ]
 
-    if (session.examState === 'in-progress') {
+    if (examState === 'in-progress') {
       items.push({ type: 'filter', filter: 'complete', icon: <CheckBox size={20} /> })
-    } else if (session.examState === 'completed') {
+    } else if (examState === 'completed') {
       items.push(
         { type: 'filter', filter: 'incorrect', icon: <Cancel size={20} /> },
         { type: 'filter', filter: 'correct', icon: <DoneAll size={20} /> }
@@ -68,15 +70,15 @@ const MenuComponent: React.FC<MenuProps> = ({ open, session }) => {
 
     items.push({ type: 'exam-grid' })
 
-    if (session.examState === 'in-progress') {
+    if (examState === 'in-progress') {
       items.push(
         {
           type: 'action',
           key: 'pause',
           icon: <Pause size={20} />,
           onClick: () => {
-            if (timerIsRunning(session)) {
-              session.update!([SessionActionTypes.SET_TIMER_PAUSED, false])
+            if (timerIsRunning({ ...timerSession, examState })) {
+              update!([SessionActionTypes.SET_TIMER_PAUSED, false])
             }
           }
         },
@@ -85,24 +87,21 @@ const MenuComponent: React.FC<MenuProps> = ({ open, session }) => {
           key: 'stop',
           icon: <Stop size={20} />,
           onClick: () => {
-            session.update!(
-              [SessionActionTypes.SET_TIMER_PAUSED, true],
-              [SessionActionTypes.SET_EXAM_STATE, 'completed']
-            )
+            update!([SessionActionTypes.SET_TIMER_PAUSED, true], [SessionActionTypes.SET_EXAM_STATE, 'completed'])
           }
         }
       )
-    } else if (session.examState === 'completed') {
+    } else if (examState === 'completed') {
       items.push({
         type: 'action',
         key: 'summary',
         icon: <Report size={20} />,
-        onClick: () => session.update!([SessionActionTypes.SET_REVIEW_STATE, 'summary'])
+        onClick: () => update!([SessionActionTypes.SET_REVIEW_STATE, 'summary'])
       })
     }
 
     return items
-  }, [session])
+  }, [examState, update])
 
   const renderMenuItem = React.useCallback(
     (section: MenuSections) => {
@@ -132,7 +131,7 @@ const MenuComponent: React.FC<MenuProps> = ({ open, session }) => {
 
       return null
     },
-    [filter, open, session]
+    [filter, open]
   )
 
   return <MainMenu>{menuItems.map(renderMenuItem)}</MainMenu>
@@ -142,7 +141,6 @@ export default MenuComponent
 
 export interface MenuProps {
   open: boolean
-  session: Session
 }
 
 export interface MenuItemStylesProps extends ThemedStyles {

@@ -1,14 +1,14 @@
 import type { ThemedStyles } from '../../../types'
 import type { MouseEventHandler } from 'react'
 
-import React, { useCallback } from 'react'
+import React, { useCallback, useContext } from 'react'
 import styled from 'styled-components'
 import { lighten } from 'polished'
 import { SkipPrevious } from '@styled-icons/material/SkipPrevious'
 import { KeyboardArrowRight } from '@styled-icons/material/KeyboardArrowRight'
 import { KeyboardArrowLeft } from '@styled-icons/material/KeyboardArrowLeft'
 import { SkipNext } from '@styled-icons/material/SkipNext'
-import { Session, SessionActionTypes } from '../../../session'
+import { SessionActionTypes, SessionNavigationContext } from '../../../session'
 
 const ArrowsStyles = styled.div<ThemedStyles>`
   justify-self: center;
@@ -28,8 +28,8 @@ const ArrowStyles = styled.div<ThemedStyles>`
   }
 `
 
-const ArrowsComponent: React.FC<ArrowsProps> = ({ session, questionCount }) => {
-  const { index, update } = session
+const ArrowsComponent: React.FC<ArrowsProps> = ({ questionCount }) => {
+  const { index, update } = useContext(SessionNavigationContext)
 
   const onFirstQuestion = useCallback(() => {
     if (index === 0) return
@@ -75,7 +75,6 @@ const ArrowsComponent: React.FC<ArrowsProps> = ({ session, questionCount }) => {
 export default ArrowsComponent
 
 export interface ArrowsProps {
-  session: Session
   questionCount: number
 }
 
