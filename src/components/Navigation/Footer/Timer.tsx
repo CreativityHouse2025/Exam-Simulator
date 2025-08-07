@@ -63,7 +63,7 @@ const TimerComponent: React.FC<TimerProps> = ({ session }) => {
   )
 }
 
-export default TimerComponent
+export default React.memo(TimerComponent)
 
 export interface TimerProps {
   session: Session

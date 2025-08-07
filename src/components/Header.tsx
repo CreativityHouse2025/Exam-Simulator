@@ -63,7 +63,7 @@ const HeaderComponent: React.FC<HeaderProps> = ({ setLang }) => {
   )
 }
 
-export default HeaderComponent
+export default React.memo(HeaderComponent)
 
 export interface HeaderStylesProps extends ThemedStyles {
   $dir: 'rtl' | 'ltr'
