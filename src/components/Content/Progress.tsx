@@ -1,9 +1,9 @@
 import type { Exam, ThemedStyles } from '../../types'
-import type { Session } from '../../session'
 
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { calculateProgressStats } from '../../utils/progress'
+import { SessionDataContext } from '../../session'
 
 const ProgressContainer = styled.div`
   display: flex;
@@ -36,10 +36,12 @@ const StatNumber = styled.span<ThemedStyles>`
   color: ${({ theme }) => theme.primary};
 `
 
-const ProgressComponent: React.FC<ProgressProps> = ({ exam, session }) => {
+const ProgressComponent: React.FC<ProgressProps> = ({ exam }) => {
+  const { answers } = useContext(SessionDataContext)
+
   const { answeredCount, percentage } = React.useMemo(() => {
-    return calculateProgressStats(exam.test, session.answers)
-  }, [exam, session])
+    return calculateProgressStats(exam.test, answers)
+  }, [exam, answers])
 
   return (
     <ProgressContainer id="progress">
@@ -56,7 +58,6 @@ export default ProgressComponent
 
 export interface ProgressProps {
   exam: Exam
-  session: Session
 }
 
 export interface ProgressFillProps extends ThemedStyles {

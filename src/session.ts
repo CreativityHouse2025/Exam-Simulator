@@ -99,7 +99,16 @@ export const defaultSession: Session = {
   answers: []
 }
 
-export const SessionContext = createContext<Session>(defaultSession)
+export type SessionNavigation = Pick<Session, 'index' | 'update'>
+export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused' | 'update'>
+export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'update'>
+export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examID' | 'update'>
+
+// Split contexts for better performance
+export const SessionNavigationContext = createContext<SessionNavigation>({ index: 0 })
+export const SessionTimerContext = createContext<SessionTimer>({ time: 0, maxTime: 0, paused: false })
+export const SessionExamContext = createContext<SessionExam>({ examState: 'not-started', reviewState: 'summary' })
+export const SessionDataContext = createContext<SessionData>({ bookmarks: [], answers: [] })
 
 export const SessionReducer: SessionReducerFunc = (state: Session, actions: SessionActions): Session => {
   // Handle single action

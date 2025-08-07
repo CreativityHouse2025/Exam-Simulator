@@ -1,10 +1,10 @@
 import type { Exam, ThemedStyles } from '../../types'
-import type { Session } from '../../session'
 
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { formatDate, formatTimer } from '../../utils/format'
 import { translate } from '../../settings'
+import { SessionDataContext, SessionTimerContext } from '../../session'
 
 const SummaryStyles = styled.div`
   width: 100%;
@@ -49,23 +49,26 @@ export const RowValueStyles = styled.div<ThemedStyles>`
   color: ${({ theme }) => theme.black};
 `
 
-const SummaryComponent: React.FC<SummaryProps> = ({ exam, session }) => {
+const SummaryComponent: React.FC<SummaryProps> = ({ exam }) => {
+  const { answers } = useContext(SessionDataContext)
+  const { time } = useContext(SessionTimerContext)
+
   const questions = React.useMemo(() => {
     // @ts-expect-error
     const qArr: { incomplete: any[]; completed: any[]; correct: any[]; incorrect: any[] } = {
-      incomplete: session.answers.filter((a) => a === null),
-      completed: session.answers.filter((a) => a !== null),
-      correct: session.answers.filter((a, i) => a === exam.test[i].answer)
+      incomplete: answers.filter((a) => a === null),
+      completed: answers.filter((a) => a !== null),
+      correct: answers.filter((a, i) => a === exam.test[i].answer)
     }
 
     qArr.incorrect = qArr.completed.filter((a, i) => a !== exam.test[i].answer)
     return qArr
-  }, [exam, session])
+  }, [exam, answers])
 
   const score = Math.round((questions.correct.length / exam.test.length) * 100)
   const status = score >= exam.pass
   const date = new Date()
-  const elapsed = exam.time * 60 - session.time
+  const elapsed = exam.time * 60 - time
 
   return (
     <SummaryStyles id="summary">
@@ -105,7 +108,6 @@ const SummaryRow = (key: string, value: string, status: boolean, isStatus?: bool
 
 export interface SummaryProps {
   exam: Exam
-  session: Session
 }
 
 export interface SummaryStylesProps extends ThemedStyles {

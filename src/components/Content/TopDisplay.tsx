@@ -1,10 +1,12 @@
 import type { Exam, ThemedStyles } from '../../types'
+import type { Lang } from '../../settings'
 import type { Session } from '../../session'
 
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import BookmarkButton from './Bookmark'
-import { type Lang, translate } from '../../settings'
+import { translate } from '../../settings'
+import { SessionNavigationContext } from '../../session'
 
 export const TopDisplayStyles = styled.div`
   display: flex;
@@ -21,14 +23,16 @@ export const QuestionTextStyles = styled.div<ThemedStyles>`
   color: ${({ theme }) => theme.grey[10]};
 `
 
-const TopDisplayComponent: React.FC<TopDisplayProps> = ({ exam, session, lang, isReview = false }) => {
+const TopDisplayComponent: React.FC<TopDisplayProps> = ({ exam, lang, isReview = false }) => {
+  const { index } = useContext(SessionNavigationContext)
+
   return (
     <TopDisplayStyles id="top-display">
       <QuestionTextStyles id="question-text" dir={lang.dir}>
-        {translate('content.exam.top-display.question', [session.index + 1, exam.test.length])}
+        {translate('content.exam.top-display.question', [index + 1, exam.test.length])}
       </QuestionTextStyles>
 
-      {!isReview && <BookmarkButton session={session} />}
+      {!isReview && <BookmarkButton />}
     </TopDisplayStyles>
   )
 }
@@ -37,7 +41,6 @@ export default TopDisplayComponent
 
 export interface TopDisplayProps {
   exam: Exam
-  session: Session
   lang: Lang
   isReview?: boolean
 }

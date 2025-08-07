@@ -1,8 +1,7 @@
 import type { Exam } from '../../types'
-import type { Session } from '../../session'
 import type { Lang } from '../../settings'
 
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { Slide } from '../../styles/Slide'
 import TopDisplay from './TopDisplay'
@@ -10,6 +9,7 @@ import Question from './Question'
 import MultipleChoice from './MultipleChoice'
 import Progress from './Progress'
 import Explanation from './Explanation'
+import { SessionDataContext, SessionNavigationContext } from '../../session'
 
 const ExamStyles = styled.div`
   width: 100%;
@@ -18,23 +18,26 @@ const ExamStyles = styled.div`
   overflow-y: auto;
 `
 
-const ExamComponent: React.FC<ExamProps> = ({ exam, session, lang, isReview }) => {
-  const question = exam.test[session.index]
+const ExamComponent: React.FC<ExamProps> = ({ exam, lang, isReview }) => {
+  const { index } = useContext(SessionNavigationContext)
+  const { answers } = useContext(SessionDataContext)
+
+  const question = exam.test[index]
 
   return (
     <ExamStyles id="exam" dir={lang.dir}>
-      <TopDisplay exam={exam} session={session} lang={lang} />
+      <TopDisplay exam={exam} lang={lang} />
 
-      {!isReview && <Progress exam={exam} session={session} />}
+      {!isReview && <Progress exam={exam} />}
 
-      <Slide id="question-slide" key={session.index} direction="right">
+      <Slide id="question-slide" key={index} direction="right">
         <Question {...question} />
 
-        <MultipleChoice exam={exam} session={session} lang={lang} isReview={isReview} />
+        <MultipleChoice exam={exam} lang={lang} isReview={isReview} />
 
         {isReview && (
           <Slide direction="bottom">
-            <Explanation question={question} answer={session.answers[session.index]} lang={lang} />
+            <Explanation question={question} answer={answers[index]} lang={lang} />
           </Slide>
         )}
       </Slide>
@@ -46,7 +49,6 @@ export default ExamComponent
 
 export interface ExamProps {
   exam: Exam
-  session: Session
   lang: Lang
   isReview: boolean
 }

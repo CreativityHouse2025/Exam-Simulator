@@ -3,7 +3,7 @@ import type { ThemedStyles } from '../../../types'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { gridItemBackgroundColor } from '../../../utils/color'
-import { SessionActionTypes, SessionContext } from '../../../session'
+import { SessionActionTypes, SessionNavigationContext } from '../../../session'
 
 const CellStyles = styled.div<CellStylesProps>`
   width: 4.5rem;
@@ -22,25 +22,25 @@ const CellStyles = styled.div<CellStylesProps>`
   cursor: pointer;
 `
 
-const CellComponent: React.FC<CellProps> = ({ index, bookmarks, answered }) => {
-  const session = useContext(SessionContext)
+const CellComponent: React.FC<CellProps> = ({ index: myIndex, bookmarks, answered }) => {
+  const { index, update } = useContext(SessionNavigationContext)
 
   const onClickCell = React.useCallback(
     (question: number) => {
-      if (question === session.index) return
-      session.update!([SessionActionTypes.SET_INDEX, question], [SessionActionTypes.SET_REVIEW_STATE, 'question'])
+      if (question === index) return
+      update!([SessionActionTypes.SET_INDEX, question], [SessionActionTypes.SET_REVIEW_STATE, 'question'])
     },
-    [session]
+    [index, update]
   )
 
   return (
     <CellStyles
-      data-test={`Cell ${index}`}
-      $background={gridItemBackgroundColor(index, bookmarks, answered)}
-      $selected={index === session.index}
-      onClick={() => onClickCell(index)}
+      data-test={`Cell ${myIndex}`}
+      $background={gridItemBackgroundColor(myIndex, bookmarks, answered)}
+      $selected={myIndex === index}
+      onClick={() => onClickCell(myIndex)}
     >
-      {index + 1}
+      {myIndex + 1}
     </CellStyles>
   )
 }

@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import Legend from './Legend'
 import { LangContext } from '../../../settings'
-import { SessionContext } from '../../../session'
+import { SessionExamContext } from '../../../session'
 
 const LegendStyles = styled.div<ThemedStyles>`
   height: 3rem;
@@ -16,11 +16,11 @@ const LegendStyles = styled.div<ThemedStyles>`
 `
 
 const LegendsComponent: React.FC = () => {
-  const session = useContext(SessionContext)
+  const { examState } = useContext(SessionExamContext)
   const lang = useContext(LangContext)
 
-  const inProgress = session.examState === 'in-progress'
-  const completed = session.examState === 'completed'
+  const inProgress = examState === 'in-progress'
+  const completed = examState === 'completed'
 
   return (
     <LegendStyles dir={lang.dir}>

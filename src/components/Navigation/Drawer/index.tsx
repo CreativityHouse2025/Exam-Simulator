@@ -1,5 +1,4 @@
 import type { ThemedStyles } from '../../../types'
-import type { Session } from '../../../session'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -17,11 +16,11 @@ const DrawerStyles = styled.div<ThemedStyles>`
   background: ${({ theme }) => theme.grey[0]};
 `
 
-const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) => {
+const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen }) => {
   return (
     <DrawerStyles id="drawer">
       <Control open={open} toggleOpen={toggleOpen} />
-      <Menu open={open} session={session} />
+      <Menu open={open} />
     </DrawerStyles>
   )
 }
@@ -31,5 +30,4 @@ export default React.memo(DrawerComponent)
 export interface DrawerProps {
   open: boolean
   toggleOpen: () => void
-  session: Session
 }
