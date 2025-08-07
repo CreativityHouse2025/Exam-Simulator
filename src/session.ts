@@ -69,9 +69,12 @@ export interface SessionAction<T extends SessionActionTypes = SessionActionTypes
   payload: SessionActionsMap[T]['payload']
 }
 
+// Add support for multiple actions
+export type SessionActions = SessionAction | SessionAction[]
+
 // Function types
-export type SessionReducerFunc = (state: Session, action: SessionAction) => Session
-export type SessionDispatch = <T extends SessionActionTypes>(type: T, payload: SessionActionsMap[T]['payload']) => void
+export type SessionReducerFunc = (state: Session, actions: SessionActions) => Session
+export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, SessionActionsMap[T]['payload']][]) => void
 
 // Property mapping
 export const SessionActionProps: { [K in SessionActionTypes]: SessionActionsMap[K]['prop'] } = {
@@ -98,12 +101,37 @@ export const defaultSession: Session = {
 
 export const SessionContext = createContext<Session>(defaultSession)
 
-export const SessionReducer: SessionReducerFunc = (state: Session, { type, payload }: SessionAction): Session => {
-  const key = SessionActionProps[type]
+export const SessionReducer: SessionReducerFunc = (state: Session, actions: SessionActions): Session => {
+  // Handle single action
+  if (!Array.isArray(actions)) {
+    const { type, payload } = actions
+    const key = SessionActionProps[type]
 
-  if (payload !== state[key]) {
-    return { ...state, [key]: payload }
+    if (payload !== state[key]) {
+      return { ...state, [key]: payload }
+    }
+    return state
   }
 
-  return state
+  // Handle multiple actions
+  let newState = state
+  let hasChanges = false
+
+  for (const action of actions) {
+    const { type, payload } = action
+    const key = SessionActionProps[type]
+
+    if (payload !== newState[key]) {
+      if (!hasChanges) {
+        // Only create a new object on first change
+        newState = { ...newState }
+        hasChanges = true
+      }
+
+      // @ts-expect-error
+      newState[key] = payload
+    }
+  }
+
+  return newState
 }

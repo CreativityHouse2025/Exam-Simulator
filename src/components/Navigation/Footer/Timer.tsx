@@ -27,16 +27,16 @@ const TimerComponent: React.FC<TimerProps> = ({ session }) => {
   useEffect(() => {
     let interval: number = 0
 
-    session.update!(SessionActionTypes.SET_TIME, timer)
+    session.update!([SessionActionTypes.SET_TIME, timer])
 
     if (session.paused) {
       clearInterval(interval)
-      session.update!(SessionActionTypes.SET_TIME, timer)
+      session.update!([SessionActionTypes.SET_TIME, timer])
     } else {
       interval = setInterval(() => {
         setTimer((prev: number) => {
           const newTime = prev - 1
-          session.update!(SessionActionTypes.SET_TIME, newTime)
+          session.update!([SessionActionTypes.SET_TIME, newTime])
 
           if (newTime <= 0) {
             clearInterval(interval)
@@ -50,7 +50,7 @@ const TimerComponent: React.FC<TimerProps> = ({ session }) => {
 
     return () => {
       clearInterval(interval)
-      session.update!(SessionActionTypes.SET_TIME, timer)
+      session.update!([SessionActionTypes.SET_TIME, timer])
     }
   }, [session.paused])
 

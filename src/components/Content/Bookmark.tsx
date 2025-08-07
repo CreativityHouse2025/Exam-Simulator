@@ -26,7 +26,7 @@ const BookmarkButton: React.FC<BookmarkButtonProps> = ({ session: { index, bookm
       bookmarks.push(index)
     }
 
-    update!(SessionActionTypes.SET_BOOKMARKS, bookmarks)
+    update!([SessionActionTypes.SET_BOOKMARKS, bookmarks])
   }, [bookmarked, bookmarks, index, update])
 
   return (

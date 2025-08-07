@@ -76,7 +76,7 @@ const MenuComponent: React.FC<MenuProps> = ({ open, session }) => {
           icon: <Pause size={20} />,
           onClick: () => {
             if (timerIsRunning(session)) {
-              session.update!(SessionActionTypes.SET_TIMER_PAUSED, false)
+              session.update!([SessionActionTypes.SET_TIMER_PAUSED, false])
             }
           }
         },
@@ -85,8 +85,10 @@ const MenuComponent: React.FC<MenuProps> = ({ open, session }) => {
           key: 'stop',
           icon: <Stop size={20} />,
           onClick: () => {
-            session.update!(SessionActionTypes.SET_TIMER_PAUSED, true)
-            session.update!(SessionActionTypes.SET_EXAM_STATE, 'completed')
+            session.update!(
+              [SessionActionTypes.SET_TIMER_PAUSED, true],
+              [SessionActionTypes.SET_EXAM_STATE, 'completed']
+            )
           }
         }
       )
@@ -95,7 +97,7 @@ const MenuComponent: React.FC<MenuProps> = ({ open, session }) => {
         type: 'action',
         key: 'summary',
         icon: <Report size={20} />,
-        onClick: () => session.update!(SessionActionTypes.SET_REVIEW_STATE, 'summary')
+        onClick: () => session.update!([SessionActionTypes.SET_REVIEW_STATE, 'summary'])
       })
     }
 

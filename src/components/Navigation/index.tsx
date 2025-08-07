@@ -16,15 +16,19 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
   const exam = useContext(ExamContext)
   const [open, setOpen] = useState<boolean>(true)
 
-  session.update = ((type, payload) => {
-    updateSession({ type, payload })
-    onSessionUpdate(SessionReducer(session, { type, payload }))
+  session.update = ((...actions) => {
+    const arr = actions.map(([type, payload]) => ({ type, payload }))
+
+    updateSession(arr)
+    onSessionUpdate(SessionReducer(session, arr))
   }) as SessionDispatch
 
   useEffect(() => {
-    session.update = ((type, payload) => {
-      updateSession({ type, payload })
-      onSessionUpdate(SessionReducer(session, { type, payload }))
+    session.update = ((...actions) => {
+      const arr = actions.map(([type, payload]) => ({ type, payload }))
+
+      updateSession(arr)
+      onSessionUpdate(SessionReducer(session, arr))
     }) as SessionDispatch
   }, [startingSession])
 
@@ -37,15 +41,17 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
       id: 'expired',
       show: timerHaveExpired(session),
       onConfirm: () => {
-        session.update!(SessionActionTypes.SET_TIME, 0)
-        session.update!(SessionActionTypes.SET_TIMER_PAUSED, true)
-        session.update!(SessionActionTypes.SET_EXAM_STATE, 'completed')
+        session.update!(
+          [SessionActionTypes.SET_TIME, 0],
+          [SessionActionTypes.SET_TIMER_PAUSED, true],
+          [SessionActionTypes.SET_EXAM_STATE, 'completed']
+        )
       }
     },
     {
       id: 'pause',
       show: timerIsPaused(session),
-      onConfirm: () => session.update!(SessionActionTypes.SET_TIMER_PAUSED, false)
+      onConfirm: () => session.update!([SessionActionTypes.SET_TIMER_PAUSED, false])
     }
   ]
   const newConfirms: MyConfirmProps[] = confirms.map((c) => ({
