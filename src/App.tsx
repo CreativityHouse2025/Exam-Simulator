@@ -10,6 +10,7 @@ import { ExamContext } from './exam'
 import { LangContext, setTranslation, LANGUAGES } from './settings'
 import { useForceUpdate, useLocalStorage } from '@mantine/hooks'
 import { formatExam, formatSession } from './utils/format'
+import { toExamID, toExamPath, toExamStorageID } from './utils/examID'
 
 // Cache for loaded resources to avoid re-importing
 const resourceCache = new Map<string, any>()
@@ -52,23 +53,15 @@ const AppComponent: React.FC = () => {
   )
 
   const loadExam = useCallback(
-    async (examNumber: number, isMini: boolean) => {
-      const examType = isMini ? 'mini' : ''
-      const examPath = `./data/${examType}exams/${lang.code}/${examNumber}.json`
-      const examID: ExamID = `${examType}exam-${lang.code}-${examNumber}`
-      const examData = await loadResource<Exam>(examPath, examID)
-
-      const formattedExam = formatExam(examData)
-      setExam(formattedExam)
-      startExam({ ...defaultSession, examID }, formattedExam)
-    },
-    [lang, loadResource, startExam]
-  )
-
-  const loadOldExam = useCallback(
     async (newSession: Session) => {
-      const examPath = `./data/${newSession.examID}.json`.replace('exam', 'exams').replaceAll('-', '/')
-      const examData = await loadResource<Exam>(examPath, newSession.examID as string)
+      if (!newSession.examID) {
+        console.warn('No previous exam found in session.')
+        return
+      }
+
+      const examID = newSession.examID as ExamID
+      const examPath = toExamPath(examID, lang)
+      const examData = await loadResource<Exam>(examPath, toExamStorageID(examID, lang))
 
       const formattedExam = formatExam(examData)
       setExam(formattedExam)
@@ -77,20 +70,35 @@ const AppComponent: React.FC = () => {
     [lang, loadResource, startExam]
   )
 
-  const handleLanguageChange = useCallback((code: LangCode) => setLang(LANGUAGES[code]), [setLang])
+  const handleLanguageChange = useCallback(
+    (code: LangCode) => {
+      setLang(LANGUAGES[code])
 
-  const handleStartNew = useCallback(() => loadExam(getRandomExamNumber(), false), [loadExam])
-  const handleStartMini = useCallback(() => loadExam(getRandomMiniExamNumber(), true), [loadExam])
+      if (exam && session.examID) {
+        loadExam(session)
+      }
+    },
+    [setLang, exam, session, loadExam]
+  )
+
+  const handleStartNew = useCallback(
+    () => loadExam({ ...defaultSession, examID: toExamID(false, getRandomExamNumber()) }),
+    [loadExam]
+  )
+  const handleStartMini = useCallback(
+    () => loadExam({ ...defaultSession, examID: toExamID(true, getRandomMiniExamNumber()) }),
+    [loadExam]
+  )
 
   const handleContinue = useCallback(async () => {
     try {
-      loadOldExam(session)
+      loadExam(session)
     } catch (err) {
       console.error('Failed to load previous exam:', err)
       // Fallback to starting a new exam if loading fails
       handleStartNew()
     }
-  }, [session, loadOldExam, handleStartNew])
+  }, [session, loadExam, handleStartNew])
 
   // Load translation when language changes
   useEffect(() => {
