@@ -53,15 +53,15 @@ const AppComponent: React.FC = () => {
   )
 
   const loadExam = useCallback(
-    async (newSession: Session) => {
+    async (newSession: Session, newLang: Lang = lang) => {
       if (!newSession.examID) {
         console.warn('No previous exam found in session.')
         return
       }
 
       const examID = newSession.examID as ExamID
-      const examPath = toExamPath(examID, lang)
-      const examData = await loadResource<Exam>(examPath, toExamStorageID(examID, lang))
+      const examPath = toExamPath(examID, newLang)
+      const examData = await loadResource<Exam>(examPath, toExamStorageID(examID, newLang))
 
       const formattedExam = formatExam(examData)
       setExam(formattedExam)
@@ -72,10 +72,11 @@ const AppComponent: React.FC = () => {
 
   const handleLanguageChange = useCallback(
     (code: LangCode) => {
-      setLang(LANGUAGES[code])
+      const newLang = LANGUAGES[code]
+      setLang(newLang)
 
       if (exam && session.examID) {
-        loadExam(session)
+        loadExam(session, newLang)
       }
     },
     [setLang, exam, session, loadExam]
