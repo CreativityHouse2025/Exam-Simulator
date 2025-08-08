@@ -69,7 +69,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
         title: translate(`confirm.${c.id}.title`),
         message: translate(`confirm.${c.id}.message`),
         buttons: [translate(`confirm.${c.id}.button0`), translate(`confirm.${c.id}.button1`)].filter(
-          (str) => str !== ''
+          (str) => !str.startsWith('confirm.')
         ) as [string, string]
       })),
     [confirms]
