@@ -1,6 +1,6 @@
 import type { QuestionFilter, ThemedStyles } from '../../../types'
 
-import React, { useContext } from 'react'
+import React, { useCallback, useContext, useMemo } from 'react'
 import styled from 'styled-components'
 import { lighten } from 'polished'
 import { FormatListNumbered } from '@styled-icons/material/FormatListNumbered'
@@ -49,10 +49,25 @@ const MenuItemTextStyles = styled.div`
 const MenuComponent: React.FC<MenuProps> = ({ open }) => {
   const { examState, update } = useContext(SessionExamContext)
   const timerSession = useContext(SessionTimerContext)
-
   const [filter, setFilter] = React.useState<QuestionFilter>('all')
 
-  const menuItems = React.useMemo(() => {
+  // Memoize action handlers
+  const pauseHandler = useCallback(() => {
+    if (timerIsRunning({ ...timerSession, examState })) {
+      update!([SessionActionTypes.SET_TIMER_PAUSED, true])
+    }
+  }, [timerSession, examState, update])
+
+  const stopHandler = useCallback(() => {
+    update!([SessionActionTypes.SET_TIMER_PAUSED, true], [SessionActionTypes.SET_EXAM_STATE, 'completed'])
+  }, [update])
+
+  const summaryHandler = useCallback(() => {
+    update!([SessionActionTypes.SET_REVIEW_STATE, 'summary'])
+  }, [update])
+
+  // Memoize menu items with stable references
+  const menuItems = useMemo(() => {
     const items: MenuSections[] = [
       { type: 'filter', filter: 'all', icon: <FormatListNumbered size={20} /> },
       { type: 'filter', filter: 'marked', icon: <Bookmark size={20} /> },
@@ -72,36 +87,15 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
 
     if (examState === 'in-progress') {
       items.push(
-        {
-          type: 'action',
-          key: 'pause',
-          icon: <Pause size={20} />,
-          onClick: () => {
-            if (timerIsRunning({ ...timerSession, examState })) {
-              update!([SessionActionTypes.SET_TIMER_PAUSED, false])
-            }
-          }
-        },
-        {
-          type: 'action',
-          key: 'stop',
-          icon: <Stop size={20} />,
-          onClick: () => {
-            update!([SessionActionTypes.SET_TIMER_PAUSED, true], [SessionActionTypes.SET_EXAM_STATE, 'completed'])
-          }
-        }
+        { type: 'action', key: 'pause', icon: <Pause size={20} />, onClick: pauseHandler },
+        { type: 'action', key: 'stop', icon: <Stop size={20} />, onClick: stopHandler }
       )
     } else if (examState === 'completed') {
-      items.push({
-        type: 'action',
-        key: 'summary',
-        icon: <Report size={20} />,
-        onClick: () => update!([SessionActionTypes.SET_REVIEW_STATE, 'summary'])
-      })
+      items.push({ type: 'action', key: 'summary', icon: <Report size={20} />, onClick: summaryHandler })
     }
 
     return items
-  }, [examState, update])
+  }, [examState, pauseHandler, stopHandler, summaryHandler])
 
   const renderMenuItem = React.useCallback(
     (section: MenuSections) => {
