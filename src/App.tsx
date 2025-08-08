@@ -7,10 +7,11 @@ import Navigation from './components/Navigation'
 import Cover from './components/Cover'
 import { defaultSession, type Session } from './session'
 import { ExamContext } from './exam'
-import { LangContext, setTranslation, LANGUAGES } from './settings'
+import { LangContext, setTranslation, LANGUAGES, hasTranslation } from './settings'
 import { useForceUpdate, useLocalStorage } from '@mantine/hooks'
 import { formatExam, formatSession } from './utils/format'
 import { toExamID, toExamPath, toExamStorageID } from './utils/examID'
+import Loading from './components/Loading'
 
 // Cache for loaded resources to avoid re-importing
 const resourceCache = new Map<string, any>()
@@ -111,6 +112,10 @@ const AppComponent: React.FC = () => {
 
     initializeLanguage()
   }, [lang, loadTranslation, forceUpdate])
+
+  if (!session || !hasTranslation('about.title')) {
+    return <Loading size={200} />
+  }
 
   return (
     <LangContext.Provider value={lang}>
