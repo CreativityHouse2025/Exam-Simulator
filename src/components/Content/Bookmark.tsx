@@ -19,7 +19,6 @@ const BookmarkStyles = styled.div<BookmarkStylesProps>`
 const BookmarkButton: React.FC<BookmarkButtonProps> = () => {
   const { index, update } = useContext(SessionNavigationContext)
   const { bookmarks } = useContext(SessionDataContext)
-  const [_, setBookmarkCount] = React.useState<number>(bookmarks.length)
 
   const bookmarked = bookmarks.includes(index)
 
@@ -35,8 +34,7 @@ const BookmarkButton: React.FC<BookmarkButtonProps> = () => {
       }
     }
 
-    setBookmarkCount(bookmarks.length)
-    update!([SessionActionTypes.SET_BOOKMARKS, bookmarks])
+    update!([SessionActionTypes.SET_BOOKMARKS, [...bookmarks]])
   }, [bookmarked, bookmarks, index, update])
 
   return (

@@ -2,37 +2,38 @@ import type { Exam } from '../../types'
 import type { Lang } from '../../settings'
 import type { AnswerOfMultipleChoice, AnswerOfMultipleAnswer } from '../../session'
 
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import Choice from './Choice'
 import { formatChoiceLabel } from '../../utils/format'
-import { SessionDataContext, SessionNavigationContext } from '../../session'
+import { SessionActionTypes, SessionDataContext, SessionNavigationContext } from '../../session'
 
 const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, lang, isReview }) => {
-  const { index } = useContext(SessionNavigationContext)
+  const { index, update } = useContext(SessionNavigationContext)
   const { answers } = useContext(SessionDataContext)
+
   const question = exam.test[index]
   const isSingleAnswer = question.type === 'multiple-choice'
 
-  const answer = answers[index] !== null ? answers[index] : isSingleAnswer ? null : []
-  const [value, setValue] = useState<AnswerOfMultipleChoice | AnswerOfMultipleAnswer>(answer)
+  const answer: AnswerOfMultipleChoice | AnswerOfMultipleAnswer =
+    answers[index] !== null ? answers[index] : isSingleAnswer ? null : []
 
   const onChooseSingle = React.useCallback(
     (i: number): void => {
-      setValue(i)
       answers[index] = i
+      update!([SessionActionTypes.SET_ANSWERS, [...answers]])
     },
-    [index, answers]
+    [index, answers, answer]
   )
 
   const onChooseMultiple = React.useCallback(
     (i: number): void => {
-      const currValues = (value as AnswerOfMultipleAnswer) || []
+      const currValues = (answer as AnswerOfMultipleAnswer) || []
       const newValues = currValues.includes(i) ? currValues.filter((el) => el !== i) : currValues.concat(i)
 
-      setValue(newValues)
       answers[index] = newValues
+      update!([SessionActionTypes.SET_ANSWERS, [...answers]])
     },
-    [index, answers, value]
+    [index, answers, answer]
   )
 
   const onChoose = React.useMemo(
@@ -42,10 +43,10 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, lang, is
 
   const isSelected = React.useCallback(
     (i: number): boolean => {
-      if (isSingleAnswer) return value === i
-      return Array.isArray(value) && value.includes(i)
+      if (isSingleAnswer) return answer === i
+      return Array.isArray(answer) && answer.includes(i)
     },
-    [isSingleAnswer, value]
+    [isSingleAnswer, answer]
   )
 
   return (
