@@ -81,7 +81,9 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onConti
   return (
     <CoverStyles id="cover">
       <Image src={Logo} alt={translate('cover.logo-alt')} />
+
       <Title>{translate('about.title')}</Title>
+
       <Description>{translate('about.description')}</Description>
 
       <ButtonContainer>
@@ -89,10 +91,12 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onConti
           <StartButton id="start-new-button" onClick={onStartNew}>
             {translate('cover.new')}
           </StartButton>
+
           <StartButton id="start-mini-button" onClick={onStartMini}>
             {translate('cover.mini')}
           </StartButton>
         </ButtonRow>
+
         {onContinue && (
           <ContinueButton id="continue-button" onClick={onContinue}>
             {translate('cover.continue')}
@@ -103,7 +107,7 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onConti
   )
 }
 
-export default CoverComponent
+export default React.memo(CoverComponent)
 
 export interface CoverProps {
   onStartNew: () => void | Promise<void>
