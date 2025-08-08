@@ -8,7 +8,7 @@ import Cover from './components/Cover'
 import { defaultSession, type Session } from './session'
 import { ExamContext } from './exam'
 import { LangContext, setTranslation, LANGUAGES, hasTranslation } from './settings'
-import { useForceUpdate, useLocalStorage } from '@mantine/hooks'
+import { useLocalStorage } from '@mantine/hooks'
 import { formatExam, formatSession } from './utils/format'
 import { toExamID, toExamPath, toExamStorageID } from './utils/examID'
 import Loading from './components/Loading'
@@ -24,7 +24,7 @@ const AppComponent: React.FC = () => {
   const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: LANGUAGES.ar })
   const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: defaultSession })
   const [exam, setExam] = useState<Exam | null>(null)
-  const forceUpdate = useForceUpdate()
+  const [_, forceUpdate] = useState(false)
 
   const loadResource = useCallback(async <T,>(path: string, cacheKey: string): Promise<T> => {
     if (resourceCache.has(cacheKey)) return resourceCache.get(cacheKey)
@@ -107,7 +107,7 @@ const AppComponent: React.FC = () => {
     const initializeLanguage = async () => {
       await loadTranslation(lang.code)
       document.documentElement.lang = lang.code
-      forceUpdate()
+      forceUpdate((prev) => !prev) // Trigger re-render after language change
     }
 
     initializeLanguage()
