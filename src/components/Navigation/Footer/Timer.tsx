@@ -1,6 +1,6 @@
 import type { ThemedStyles } from '../../../types'
 
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { Timer } from '@styled-icons/material/Timer'
 import { formatTimer } from '../../../utils/format'
@@ -25,41 +25,41 @@ const TextStyles = styled.div`
 
 const TimerComponent: React.FC<TimerProps> = () => {
   const { time, paused, update } = useContext(SessionTimerContext)
-  const [timer, setTimer] = React.useState<number>(time)
+  const intervalRef = useRef<number | null>(null)
 
   useEffect(() => {
-    let interval: number = 0
+    // Clear any existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
 
-    update!([SessionActionTypes.SET_TIME, timer])
-
-    if (paused) {
-      clearInterval(interval)
-      update!([SessionActionTypes.SET_TIME, timer])
-    } else {
-      interval = setInterval(() => {
-        setTimer((prev: number) => {
-          const newTime = prev - 1
-          update!([SessionActionTypes.SET_TIME, newTime])
-
-          if (newTime <= 0) {
-            clearInterval(interval)
-            return 0
-          }
-
-          return newTime
-        })
+    if (!paused && time > 0) {
+      intervalRef.current = setInterval(() => {
+        update!([SessionActionTypes.SET_TIME, Math.max(0, time - 1)])
       }, 1000)
     }
 
     return () => {
-      clearInterval(interval)
-      update!([SessionActionTypes.SET_TIME, timer])
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
     }
-  }, [paused])
+  }, [paused, update]) // Remove 'timer' from dependencies to prevent restart on every tick
+
+  // Update context when timer reaches zero
+  useEffect(() => {
+    if (time <= 0 && intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+      update!([SessionActionTypes.SET_TIME, 0])
+    }
+  }, [time, update])
 
   return (
-    <TimerStyles id="timer" $warning={timer < 120}>
-      <TextStyles data-test="Timer">{formatTimer(timer)}</TextStyles>
+    <TimerStyles id="timer" $warning={time < 120}>
+      <TextStyles data-test="Timer">{formatTimer(time)}</TextStyles>
 
       <Timer size={30} />
     </TimerStyles>
