@@ -3,7 +3,7 @@ import type { Session, SessionDispatch } from '../../session'
 import React, { useContext, useEffect, useReducer, useState } from 'react'
 import Drawer from './Drawer'
 import Footer from './Footer'
-import Confirm, { type ConfirmProps } from '../Confirm'
+import Modal, { type ModalProps } from '../Modal'
 import Content from '../Content'
 import { Main } from '../../styles/Main'
 import { ExamContext } from '../../exam'
@@ -40,7 +40,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
 
   if (!exam) return null
 
-  const confirms: Omit<MyConfirmProps, 'title' | 'message' | 'buttons'>[] = React.useMemo(
+  const confirms: Omit<MyModalProps, 'title' | 'message' | 'buttons'>[] = React.useMemo(
     () => [
       {
         id: 'expired',
@@ -62,7 +62,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
     [session]
   )
 
-  const newConfirms: MyConfirmProps[] = React.useMemo(
+  const newConfirms: MyModalProps[] = React.useMemo(
     () =>
       confirms.map((c) => ({
         ...c,
@@ -112,7 +112,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
               {newConfirms
                 .filter((c) => c.show)
                 .map((c, i) => (
-                  <Confirm
+                  <Modal
                     key={`${c.id}-${i}`}
                     title={c.title}
                     message={c.message}
@@ -136,7 +136,7 @@ export interface NavigationProps {
   onSessionUpdate: (session: Session) => void
 }
 
-export interface MyConfirmProps extends ConfirmProps {
+export interface MyModalProps extends ModalProps {
   id: string
   show: boolean
 }
