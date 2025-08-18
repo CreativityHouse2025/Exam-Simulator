@@ -70,13 +70,18 @@ const SummaryComponent: React.FC<SummaryProps> = ({ exam }) => {
   const date = new Date()
   const elapsed = exam.time * 60 - time
 
+  const [title, _status] = React.useMemo(
+    () => [translate('content.review.summary.title'), translate(`content.review.summary.${status ? 'pass' : 'fail'}`)],
+    [document.documentElement.lang, translate, status]
+  )
+
   return (
     <SummaryStyles id="summary">
-      <TitleStyles id="title">{translate('content.review.summary.title')}</TitleStyles>
+      <TitleStyles id="title">{title}</TitleStyles>
 
       <div id="columns">
         <ColumnStyles id="column">
-          {SummaryRow('status', translate(`content.review.summary.${status ? 'pass' : 'fail'}`), status, true)}
+          {SummaryRow('status', _status, status, true)}
           {SummaryRow('passing', `${exam.pass} %`, status)}
           {SummaryRow('time', formatTimer(elapsed), status)}
           {SummaryRow('date', formatDate(date), status)}
@@ -98,9 +103,14 @@ export default SummaryComponent
 const SummaryRow = (key: string, value: string, status: boolean, isStatus?: boolean) => {
   const className = isStatus ? 'status' : ''
 
+  const _key = React.useMemo(
+    () => translate(`content.review.summary.${key}`),
+    [document.documentElement.lang, translate, key]
+  )
+
   return (
     <RowStyles data-test={`summary-row-${key}`} $status={status}>
-      <RowKeyStyles>{translate(`content.review.summary.${key}`)}</RowKeyStyles>
+      <RowKeyStyles>{_key}</RowKeyStyles>
       <RowValueStyles className={className}>{value}</RowValueStyles>
     </RowStyles>
   )

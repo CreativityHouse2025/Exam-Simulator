@@ -26,10 +26,15 @@ export const QuestionTextStyles = styled.div<ThemedStyles>`
 const TopDisplayComponent: React.FC<TopDisplayProps> = ({ exam, lang, isReview = false }) => {
   const { index } = useContext(SessionNavigationContext)
 
+  const question = React.useMemo(
+    () => translate('content.exam.top-display.question', [index + 1, exam.test.length]),
+    [document.documentElement.lang, translate, index, exam.test.length]
+  )
+
   return (
     <TopDisplayStyles id="top-display">
       <QuestionTextStyles id="question-text" dir={lang.dir}>
-        {translate('content.exam.top-display.question', [index + 1, exam.test.length])}
+        {question}
       </QuestionTextStyles>
 
       {!isReview && <BookmarkButton />}
