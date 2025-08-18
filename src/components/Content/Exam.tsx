@@ -1,7 +1,7 @@
 import type { Exam } from '../../types'
 import type { Lang } from '../../settings'
 
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Slide } from '../../styles/Slide'
 import TopDisplay from './TopDisplay'
@@ -19,8 +19,8 @@ const ExamStyles = styled.div`
 `
 
 const ExamComponent: React.FC<ExamProps> = ({ exam, lang, isReview }) => {
-  const { index } = useContext(SessionNavigationContext)
-  const { answers } = useContext(SessionDataContext)
+  const { index } = React.useContext(SessionNavigationContext)
+  const { answers } = React.useContext(SessionDataContext)
 
   const question = exam.test[index]
 

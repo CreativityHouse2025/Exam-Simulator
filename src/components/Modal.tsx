@@ -1,6 +1,6 @@
 import type { ThemedStyles } from '../types'
 
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import darken from 'polished/lib/color/darken'
 

@@ -1,6 +1,6 @@
 import type { Session, SessionDispatch } from '../../session'
 
-import React, { useContext, useEffect, useReducer, useState } from 'react'
+import React from 'react'
 import Drawer from './Drawer'
 import Footer from './Footer'
 import Modal, { type ModalProps } from '../Modal'
@@ -19,9 +19,9 @@ import { timerHaveExpired, timerIsPaused } from '../../utils/state'
 import { translate } from '../../settings'
 
 const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate }) => {
-  const exam = useContext(ExamContext)
-  const [session, updateSession] = useReducer(SessionReducer, startingSession)
-  const [open, setOpen] = useState<boolean>(true)
+  const exam = React.useContext(ExamContext)
+  const [session, updateSession] = React.useReducer(SessionReducer, startingSession)
+  const [open, setOpen] = React.useState<boolean>(true)
 
   const sessionUpdate = ((...actions) => {
     const arr = actions.map(([type, payload]) => ({ type, payload }))
@@ -32,7 +32,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
 
   session.update = sessionUpdate
 
-  useEffect(() => {
+  React.useEffect(() => {
     session.update = sessionUpdate
   }, [startingSession])
 

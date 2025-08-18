@@ -1,6 +1,6 @@
 import type { Exam, ThemedStyles } from '../../types'
 
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { calculateProgressStats } from '../../utils/progress'
 import { SessionDataContext } from '../../session'
@@ -37,7 +37,7 @@ const StatNumber = styled.span<ThemedStyles>`
 `
 
 const ProgressComponent: React.FC<ProgressProps> = ({ exam }) => {
-  const { answers } = useContext(SessionDataContext)
+  const { answers } = React.useContext(SessionDataContext)
 
   const { answeredCount, percentage } = React.useMemo(() => {
     return calculateProgressStats(exam.test, answers)

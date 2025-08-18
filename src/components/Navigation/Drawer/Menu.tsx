@@ -1,6 +1,6 @@
 import type { QuestionFilter, ThemedStyles } from '../../../types'
 
-import React, { useCallback, useContext, useMemo } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { lighten } from 'polished'
 import { FormatListNumbered } from '@styled-icons/material/FormatListNumbered'
@@ -47,27 +47,27 @@ const MenuItemTextStyles = styled.div`
 `
 
 const MenuComponent: React.FC<MenuProps> = ({ open }) => {
-  const { examState, update } = useContext(SessionExamContext)
-  const timerSession = useContext(SessionTimerContext)
+  const { examState, update } = React.useContext(SessionExamContext)
+  const timerSession = React.useContext(SessionTimerContext)
   const [filter, setFilter] = React.useState<QuestionFilter>('all')
 
   // Memoize action handlers
-  const pauseHandler = useCallback(() => {
+  const pauseHandler = React.useCallback(() => {
     if (timerIsRunning({ ...timerSession, examState })) {
       update!([SessionActionTypes.SET_TIMER_PAUSED, true])
     }
   }, [timerSession, examState, update])
 
-  const stopHandler = useCallback(() => {
+  const stopHandler = React.useCallback(() => {
     update!([SessionActionTypes.SET_TIMER_PAUSED, true], [SessionActionTypes.SET_EXAM_STATE, 'completed'])
   }, [update])
 
-  const summaryHandler = useCallback(() => {
+  const summaryHandler = React.useCallback(() => {
     update!([SessionActionTypes.SET_REVIEW_STATE, 'summary'])
   }, [update])
 
   // Memoize menu items with stable references
-  const menuItems = useMemo(() => {
+  const menuItems = React.useMemo(() => {
     const items: MenuSections[] = [
       { type: 'filter', filter: 'all', icon: <FormatListNumbered size={20} /> },
       { type: 'filter', filter: 'marked', icon: <Bookmark size={20} /> },
@@ -106,10 +106,12 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
         const selected = isFilter ? filter === key : false // @ts-ignore
         const onClick = isFilter ? () => setFilter(key) : section.onClick
 
+        const drawerKey = translate(`nav.drawer.${key}`)
+
         return (
-          <MenuItem key={key} data-test={translate(`nav.drawer.${key}`)} $selected={selected} onClick={onClick}>
+          <MenuItem key={key} data-test={drawerKey} $selected={selected} onClick={onClick}>
             {section.icon}
-            <MenuItemTextStyles>{translate(`nav.drawer.${key}`)}</MenuItemTextStyles>
+            <MenuItemTextStyles>{drawerKey}</MenuItemTextStyles>
           </MenuItem>
         )
       }
@@ -125,7 +127,7 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
 
       return null
     },
-    [filter, open]
+    [filter, open, document.documentElement.lang, translate]
   )
 
   return <MainMenu>{menuItems.map(renderMenuItem)}</MainMenu>

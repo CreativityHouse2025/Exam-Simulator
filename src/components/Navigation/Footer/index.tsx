@@ -1,4 +1,4 @@
-import type { Exam, ThemedStyles } from '../../../types'
+import type { ThemedStyles } from '../../../types'
 
 import React from 'react'
 import styled from 'styled-components'

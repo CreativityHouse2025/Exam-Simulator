@@ -1,8 +1,7 @@
 import type { Exam, ThemedStyles } from '../../types'
 import type { Lang } from '../../settings'
-import type { Session } from '../../session'
 
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import BookmarkButton from './Bookmark'
 import { translate } from '../../settings'
@@ -24,7 +23,7 @@ export const QuestionTextStyles = styled.div<ThemedStyles>`
 `
 
 const TopDisplayComponent: React.FC<TopDisplayProps> = ({ exam, lang, isReview = false }) => {
-  const { index } = useContext(SessionNavigationContext)
+  const { index } = React.useContext(SessionNavigationContext)
 
   const question = React.useMemo(
     () => translate('content.exam.top-display.question', [index + 1, exam.test.length]),
