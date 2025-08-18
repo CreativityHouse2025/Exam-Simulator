@@ -2,14 +2,14 @@ import type { Exam } from '../../types'
 import type { Lang } from '../../settings'
 import type { AnswerOfMultipleChoice, AnswerOfMultipleAnswer } from '../../session'
 
-import React, { useContext } from 'react'
+import React from 'react'
 import Choice from './Choice'
 import { formatChoiceLabel } from '../../utils/format'
 import { SessionActionTypes, SessionDataContext, SessionNavigationContext } from '../../session'
 
 const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, lang, isReview }) => {
-  const { index, update } = useContext(SessionNavigationContext)
-  const { answers } = useContext(SessionDataContext)
+  const { index, update } = React.useContext(SessionNavigationContext)
+  const { answers } = React.useContext(SessionDataContext)
 
   const question = exam.test[index]
   const isSingleAnswer = question.type === 'multiple-choice'

@@ -1,6 +1,6 @@
 import type { ThemedStyles } from '../../../types'
 
-import React, { useContext, useEffect, useRef } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Timer } from '@styled-icons/material/Timer'
 import { formatTimer } from '../../../utils/format'
@@ -23,11 +23,11 @@ const TextStyles = styled.div`
   padding: 0.5rem;
 `
 
-const TimerComponent: React.FC<TimerProps> = () => {
-  const { time, paused, update } = useContext(SessionTimerContext)
-  const intervalRef = useRef<number | null>(null)
+const TimerComponent: React.FC = () => {
+  const { time, paused, update } = React.useContext(SessionTimerContext)
+  const intervalRef = React.useRef<number | null>(null)
 
-  useEffect(() => {
+  React.useEffect(() => {
     // Clear any existing interval
     if (intervalRef.current) {
       clearInterval(intervalRef.current)
@@ -49,7 +49,7 @@ const TimerComponent: React.FC<TimerProps> = () => {
   }, [paused, update]) // Remove 'timer' from dependencies to prevent restart on every tick
 
   // Update context when timer reaches zero
-  useEffect(() => {
+  React.useEffect(() => {
     if (time <= 0 && intervalRef.current) {
       clearInterval(intervalRef.current)
       intervalRef.current = null
@@ -67,8 +67,6 @@ const TimerComponent: React.FC<TimerProps> = () => {
 }
 
 export default React.memo(TimerComponent)
-
-export interface TimerProps {}
 
 export interface TimerStylesProps extends ThemedStyles {
   $warning: boolean

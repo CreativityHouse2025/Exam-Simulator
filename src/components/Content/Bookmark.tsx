@@ -1,7 +1,7 @@
 import type { ThemedStyles } from '../../types'
 import { SessionActionTypes, SessionDataContext, SessionNavigationContext } from '../../session'
 
-import React, { createElement, useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Bookmark } from '@styled-icons/material/Bookmark'
 import { BookmarkBorder } from '@styled-icons/material/BookmarkBorder'
@@ -16,9 +16,9 @@ const BookmarkStyles = styled.div<BookmarkStylesProps>`
   }
 `
 
-const BookmarkButton: React.FC<BookmarkButtonProps> = () => {
-  const { index, update } = useContext(SessionNavigationContext)
-  const { bookmarks } = useContext(SessionDataContext)
+const BookmarkButton: React.FC = () => {
+  const { index, update } = React.useContext(SessionNavigationContext)
+  const { bookmarks } = React.useContext(SessionDataContext)
 
   const bookmarked = bookmarks.includes(index)
 
@@ -39,14 +39,12 @@ const BookmarkButton: React.FC<BookmarkButtonProps> = () => {
 
   return (
     <BookmarkStyles $bookmarked={bookmarked}>
-      {createElement(bookmarked ? Bookmark : BookmarkBorder, { size: 40, onClick: onBookmarkQuestion })}
+      {React.createElement(bookmarked ? Bookmark : BookmarkBorder, { size: 40, onClick: onBookmarkQuestion })}
     </BookmarkStyles>
   )
 }
 
 export default BookmarkButton
-
-export interface BookmarkButtonProps {}
 
 export interface BookmarkStylesProps extends ThemedStyles {
   $bookmarked: boolean

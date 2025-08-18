@@ -1,6 +1,6 @@
 import type { QuestionFilter, ThemedStyles } from '../../../types'
 
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Cell from './Cell'
 import { ExamContext } from '../../../exam'
@@ -18,8 +18,8 @@ const GridStyles = styled.div<ThemedStyles>`
 `
 
 const GridComponent: React.FC<GridProps> = ({ filter }) => {
-  const exam = useContext(ExamContext)
-  const { bookmarks, answers } = useContext(SessionDataContext)
+  const exam = React.useContext(ExamContext)
+  const { bookmarks, answers } = React.useContext(SessionDataContext)
 
   if (!exam || exam.test.length === 0) return null
 

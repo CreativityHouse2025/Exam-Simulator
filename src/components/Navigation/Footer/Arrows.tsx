@@ -1,7 +1,7 @@
 import type { ThemedStyles } from '../../../types'
 import type { MouseEventHandler } from 'react'
 
-import React, { useCallback, useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { lighten } from 'polished'
 import { SkipPrevious } from '@styled-icons/material/SkipPrevious'
@@ -29,24 +29,24 @@ const ArrowStyles = styled.div<ThemedStyles>`
 `
 
 const ArrowsComponent: React.FC<ArrowsProps> = ({ questionCount }) => {
-  const { index, update } = useContext(SessionNavigationContext)
+  const { index, update } = React.useContext(SessionNavigationContext)
 
-  const onFirstQuestion = useCallback(() => {
+  const onFirstQuestion = React.useCallback(() => {
     if (index === 0) return
     update!([SessionActionTypes.SET_INDEX, 0])
   }, [index, update])
 
-  const onPrevQuestion = useCallback(() => {
+  const onPrevQuestion = React.useCallback(() => {
     if (index === 0) return
     update!([SessionActionTypes.SET_INDEX, index - 1])
   }, [index, update])
 
-  const onNextQuestion = useCallback(() => {
+  const onNextQuestion = React.useCallback(() => {
     if (index >= questionCount - 1) return
     update!([SessionActionTypes.SET_INDEX, index + 1])
   }, [index, questionCount, update])
 
-  const onLastQuestion = useCallback(() => {
+  const onLastQuestion = React.useCallback(() => {
     if (index >= questionCount - 1) return
     update!([SessionActionTypes.SET_INDEX, questionCount - 1])
   }, [index, questionCount, update])

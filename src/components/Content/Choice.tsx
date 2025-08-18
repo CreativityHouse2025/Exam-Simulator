@@ -1,6 +1,6 @@
 import type { ThemedStyles } from '../../types'
 
-import React, { MouseEventHandler } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { RadioButtonChecked } from '@styled-icons/material/RadioButtonChecked'
 import { RadioButtonUnchecked } from '@styled-icons/material/RadioButtonUnchecked'
@@ -66,7 +66,7 @@ export interface ChoiceProps {
   isCorrect: boolean
   label: string
   text: string
-  onClick: MouseEventHandler<HTMLDivElement>
+  onClick: React.MouseEventHandler<HTMLDivElement>
 }
 
 export interface ChoiceTextStylesProps extends ThemedStyles {

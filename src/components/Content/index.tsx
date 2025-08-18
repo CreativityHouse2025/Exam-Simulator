@@ -1,7 +1,7 @@
 import type { Exam, ThemedStyles } from '../../types'
 import type { Session } from '../../session'
 
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import ExamComponent from './Exam'
 import Summary from './Summary'
@@ -18,8 +18,8 @@ const ContentStyles = styled.div<ThemedStyles>`
 `
 
 const ContentComponent: React.FC<ContentProps> = ({ exam }) => {
-  const { examState, reviewState } = useContext(SessionExamContext)
-  const lang = useContext(LangContext)
+  const { examState, reviewState } = React.useContext(SessionExamContext)
+  const lang = React.useContext(LangContext)
 
   const finished = examState === 'completed'
   const summary = reviewState === 'summary'

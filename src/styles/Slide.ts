@@ -1,5 +1,3 @@
-import type {} from '../types'
-
 import styled, { keyframes } from 'styled-components'
 
 const slideFromRight = keyframes`
