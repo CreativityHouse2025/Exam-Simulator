@@ -9,12 +9,9 @@ import { defaultSession, type Session } from './session'
 import { ExamContext } from './exam'
 import { LangContext, setTranslation, LANGUAGES, hasTranslation } from './settings'
 import { useLocalStorage } from '@mantine/hooks'
-import { formatExam, formatSession } from './utils/format'
-import { toExamID, toExamPath, toExamStorageID } from './utils/examID'
+import { randomizeTest, formatSession } from './utils/format'
+import { toExamID } from './utils/examID'
 import Loading from './components/Loading'
-
-// Cache for loaded resources to avoid re-importing
-const resourceCache = new Map<string, any>()
 
 // Random exam selection
 const getRandomExamNumber = () => Math.floor(Math.random() * 5)
@@ -24,63 +21,43 @@ const AppComponent: React.FC = () => {
   const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: LANGUAGES.ar })
   const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: defaultSession })
   const [exam, setExam] = useState<Exam | null>(null)
-  const [_, forceUpdate] = useState(false)
-
-  const loadResource = useCallback(async <T,>(path: string, cacheKey: string): Promise<T> => {
-    if (resourceCache.has(cacheKey)) return resourceCache.get(cacheKey)
-
-    const data = await import(path)
-    const resource = data.default
-    resourceCache.set(cacheKey, resource)
-    return resource
-  }, [])
 
   const loadTranslation = useCallback(
     async (code: LangCode) => {
-      const translations = await loadResource<object>(`./data/langs/${code}.json`, `translation-${code}`)
-      setTranslation(LANGUAGES[code], translations)
-    },
-    [loadResource]
-  )
+      const translations = (await import(`./data/langs/${code}.json`)).default
+      const newLang = LANGUAGES[code]
 
-  const startExam = useCallback(
-    (newSession: Session, examData: Exam | null) => {
-      if (examData) {
-        newSession = formatSession({ ...newSession, examState: 'in-progress' }, examData)
-      }
-      setSession(newSession)
+      setTranslation(newLang, translations)
+      setLang(newLang)
+      document.documentElement.lang = newLang.code
     },
-    [setSession]
+    [setTranslation, LANGUAGES]
   )
 
   const loadExam = useCallback(
-    async (newSession: Session, newLang: Lang = lang) => {
+    async (newSession: Session) => {
       if (!newSession.examID) {
-        console.warn('No previous exam found in session.')
+        console.warn('No exam ID found in session.')
         return
       }
 
-      const examID = newSession.examID as ExamID
-      const examPath = toExamPath(examID, newLang)
-      const examData = await loadResource<Exam>(examPath, toExamStorageID(examID, newLang))
+      try {
+        const [type, number] = newSession.examID.split('-')
+        let examData = (await import(`./data/${type}s/${lang.code}/${number}.json`)).default
 
-      const formattedExam = formatExam(examData)
-      setExam(formattedExam)
-      startExam(newSession, formattedExam)
-    },
-    [lang, loadResource, startExam]
-  )
+        if (newSession.examState !== 'in-progress') {
+          examData = randomizeTest(examData)
+          newSession = formatSession({ ...newSession, examState: 'in-progress' }, examData)
+        }
 
-  const handleLanguageChange = useCallback(
-    (code: LangCode) => {
-      const newLang = LANGUAGES[code]
-      setLang(newLang)
-
-      if (exam && session.examID) {
-        loadExam(session, newLang)
+        setExam(examData)
+        setSession(newSession)
+      } catch (error) {
+        console.error('Failed to load exam:', error)
+        setExam(null)
       }
     },
-    [setLang, exam, session, loadExam]
+    [lang]
   )
 
   const handleStartNew = useCallback(
@@ -102,16 +79,17 @@ const AppComponent: React.FC = () => {
     }
   }, [session, loadExam, handleStartNew])
 
-  // Load translation when language changes
+  // Load translation on start
   useEffect(() => {
-    const initializeLanguage = async () => {
-      await loadTranslation(lang.code)
-      document.documentElement.lang = lang.code
-      forceUpdate((prev) => !prev) // Trigger re-render after language change
-    }
+    loadTranslation(lang.code)
+  }, [])
 
-    initializeLanguage()
-  }, [lang, loadTranslation, forceUpdate])
+  // Load exam when loadExam (language) changes
+  useEffect(() => {
+    if (exam && session.examID) {
+      loadExam(session)
+    }
+  }, [loadExam])
 
   if (!session || !hasTranslation('about.title')) {
     return <Loading size={200} />
@@ -119,7 +97,7 @@ const AppComponent: React.FC = () => {
 
   return (
     <LangContext.Provider value={lang}>
-      <Header setLang={handleLanguageChange} />
+      <Header setLang={loadTranslation} />
 
       {exam ? (
         <ExamContext.Provider value={exam}>

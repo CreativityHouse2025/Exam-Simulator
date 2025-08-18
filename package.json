@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@mantine/hooks": "^8.2.5",
+    "@rollup/plugin-dynamic-import-vars": "^2.1.5",
     "@styled-icons/boxicons-solid": "^10.47.0",
     "@styled-icons/material": "^10.47.0",
     "date-fns": "^4.1.0",

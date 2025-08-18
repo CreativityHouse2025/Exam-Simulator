@@ -45,7 +45,7 @@ export const translate = (key: string, replacements?: (string | number)[]): stri
 export const hasTranslation = (key: string): boolean => translations.has(key)
 
 export const setTranslation = (lang: Lang, translationData: Record<string, any>): void => {
-  if (lang.code === currentLang) return
+  if (lang.code === currentLang && translations.size > 0) return
 
   currentLang = lang.code
   translations.clear()
