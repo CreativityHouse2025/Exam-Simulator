@@ -14,6 +14,8 @@
   "markdown.occurrencesHighlight.enabled": true,
   "markdown.extension.tableFormatter.normalizeIndentation": true,
 
+  "[html]": { "editor.defaultFormatter": "vscode.html-language-features" },
+
   "javascript.suggest.jsdoc.generateReturns": true,
   "javascript.suggest.completeJSDocs": true,
   "javascript.suggest.autoImports": true,
