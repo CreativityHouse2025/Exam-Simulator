@@ -40,23 +40,31 @@ const NormalText = styled.span`
 const ExplainationComponent: React.FC<ExplainationProps> = ({ question, answer, lang }) => {
   const correct: boolean = question.answer === answer
 
+  const [yours, _correct, _answer, explain] = React.useMemo(
+    () => [
+      translate('content.exam.explain.yours'),
+      translate(`content.exam.explain.${correct ? 'correct' : 'incorrect'}`),
+      translate('content.exam.explain.answer'),
+      translate('content.exam.explain.explain')
+    ],
+    [document.documentElement.lang, translate, correct]
+  )
+
   return (
     <ExplanationStyles id="explanation" $correct={correct}>
       <p>
-        {translate('content.exam.explain.yours')}
-        <StatusStyles $correct={correct}>
-          {translate(`content.exam.explain.${correct ? 'correct' : 'incorrect'}`)}
-        </StatusStyles>
+        {yours}
+        <StatusStyles $correct={correct}>{_correct}</StatusStyles>
       </p>
 
       <p>
-        {translate('content.exam.explain.answer')}
+        {_answer}
         <CorrectStyles>{formatAnswerLabel(question, lang.code)}</CorrectStyles>
       </p>
 
       {question.explanation && (
         <ExplanationTextStyles>
-          {translate('content.exam.explain.explain')}
+          {explain}
           <br />
           <NormalText>{question.explanation}</NormalText>
         </ExplanationTextStyles>

@@ -78,28 +78,40 @@ const ButtonRow = styled.div`
 `
 
 const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onContinue }) => {
+  const [logoAlt, title, description, _new, mini, _continue] = React.useMemo(
+    () => [
+      translate('cover.logo-alt'),
+      translate('about.title'),
+      translate('about.description'),
+      translate('cover.new'),
+      translate('cover.mini'),
+      translate('cover.continue')
+    ],
+    [document.documentElement.lang, translate]
+  )
+
   return (
     <CoverStyles id="cover">
-      <Image src={Logo} alt={translate('cover.logo-alt')} />
+      <Image src={Logo} alt={logoAlt} />
 
-      <Title>{translate('about.title')}</Title>
+      <Title>{title}</Title>
 
-      <Description>{translate('about.description')}</Description>
+      <Description>{description}</Description>
 
       <ButtonContainer>
         <ButtonRow>
           <StartButton id="start-new-button" onClick={onStartNew}>
-            {translate('cover.new')}
+            {_new}
           </StartButton>
 
           <StartButton id="start-mini-button" onClick={onStartMini}>
-            {translate('cover.mini')}
+            {mini}
           </StartButton>
         </ButtonRow>
 
         {onContinue && (
           <ContinueButton id="continue-button" onClick={onContinue}>
-            {translate('cover.continue')}
+            {_continue}
           </ContinueButton>
         )}
       </ButtonContainer>

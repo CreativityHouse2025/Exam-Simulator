@@ -48,12 +48,14 @@ const LanguageStyles = styled.div<ThemedStyles>`
 `
 
 const HeaderComponent: React.FC<HeaderProps> = ({ setLang }) => {
+  const title = React.useMemo(() => translate('about.title'), [document.documentElement.lang, translate])
+
   return (
     <HeaderStyles id="header" $dir={'rtl'}>
       <InnerHeader id="inner-header" dir={'rtl'}>
         <ImageStyles src={Logo} />
 
-        <TitleStyles>{translate('about.title')}</TitleStyles>
+        <TitleStyles>{title}</TitleStyles>
 
         <LanguageStyles onClick={() => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar')}>
           <Language size={30} />

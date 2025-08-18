@@ -39,15 +39,20 @@ const NameStyles = styled.div<ThemedStyles>`
 `
 
 const LegendComponent: React.FC<LegendItemProps> = ({ type }) => {
+  const legendName = React.useMemo(
+    () => translate(`nav.grid.${type}`),
+    [document.documentElement.lang, translate, type]
+  )
+
   return (
     <LegendStyles>
       <ColoredSquareStyles className={type} />
-      <NameStyles>{translate(`nav.grid.${type}`)}</NameStyles>
+      <NameStyles>{legendName}</NameStyles>
     </LegendStyles>
   )
 }
 
-export default React.memo(LegendComponent)
+export default LegendComponent
 
 export interface LegendItemProps {
   type: GridTagTypes
