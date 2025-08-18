@@ -1,8 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import path from 'path'
+import dynamicImportVars from '@rollup/plugin-dynamic-import-vars'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()]
+  plugins: [
+    react(),
+    dynamicImportVars({
+      include: ['src/data/**/*.json'],
+      exclude: ['node_modules/**']
+    })
+  ]
 })

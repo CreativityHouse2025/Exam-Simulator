@@ -54,7 +54,7 @@ export function formatTimer(sec: number): string {
  * @param {Exam} exam - The exam object to format.
  * @returns {Exam} - The formatted exam object.
  */
-export function formatExam(exam: Exam): Exam {
+export function randomizeTest(exam: Exam): Exam {
   try {
     // Randomize the order of questions
     exam.test = shuffleArray(exam.test)
