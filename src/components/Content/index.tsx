@@ -7,16 +7,15 @@ import Summary from './Summary'
 import { SessionExamContext } from '../../session'
 
 export const MainStyles = styled.main<MainStylesProps>`
-  position: fixed;
-  width: ${({ $open }) => ($open ? '80%' : '96%')};
-  ${({ dir }) => (dir === 'rtl' ? 'left' : 'right')}: 0;
-  top: 5rem;
-  bottom: 5rem;
-  z-index: 2;
+  height: 100%;
+  overflow: hidden;
   background: white;
 `
 
 const ContentStyles = styled.div<ThemedStyles>`
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
   display: grid;
   justify-items: center;
   align-items: center;

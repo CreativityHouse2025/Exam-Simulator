@@ -17,7 +17,6 @@ const ArrowsStyles = styled.div<ThemedStyles>`
 `
 
 const ArrowStyles = styled.div<ThemedStyles>`
-  height: 5rem;
   display: grid;
   justify-items: center;
   align-items: center;

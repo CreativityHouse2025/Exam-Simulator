@@ -11,6 +11,7 @@ import { SessionDataContext, SessionNavigationContext } from '../../session'
 
 const ExamStyles = styled.div`
   width: 100%;
+  height: 100%;
 `
 
 const ExamComponent: React.FC<ExamProps> = ({ exam, isReview }) => {
