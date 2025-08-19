@@ -9,7 +9,7 @@ import { translate } from '../settings'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 
-const HeaderStyles = styled.div<HeaderStylesProps>`
+const HeaderStyles = styled.div`
   position: fixed;
   width: 100%;
   height: 5rem;
@@ -30,7 +30,7 @@ const TitleStyles = styled.div<ThemedStyles>`
   margin-left: 1rem;
 `
 
-const ImageStyles = styled.img<ThemedStyles>`
+const ImageStyles = styled.img`
   width: 6rem;
   justify-self: center;
 `
@@ -51,8 +51,8 @@ const HeaderComponent: React.FC<HeaderProps> = ({ setLang }) => {
   const title = React.useMemo(() => translate('about.title'), [document.documentElement.lang, translate])
 
   return (
-    <HeaderStyles id="header" $dir={'rtl'}>
-      <InnerHeader id="inner-header" dir={'rtl'}>
+    <HeaderStyles id="header">
+      <InnerHeader id="inner-header">
         <ImageStyles src={Logo} />
 
         <TitleStyles>{title}</TitleStyles>
@@ -66,10 +66,6 @@ const HeaderComponent: React.FC<HeaderProps> = ({ setLang }) => {
 }
 
 export default HeaderComponent
-
-export interface HeaderStylesProps extends ThemedStyles {
-  $dir: 'rtl' | 'ltr'
-}
 
 export interface HeaderProps {
   setLang: (lang: LangCode) => void

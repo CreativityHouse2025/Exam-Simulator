@@ -12,9 +12,6 @@ import { SessionDataContext, SessionNavigationContext } from '../../session'
 
 const ExamStyles = styled.div`
   width: 100%;
-  height: calc(100vh - 14rem);
-  overflow-x: hidden;
-  overflow-y: auto;
 `
 
 const ExamComponent: React.FC<ExamProps> = ({ exam, isReview }) => {
