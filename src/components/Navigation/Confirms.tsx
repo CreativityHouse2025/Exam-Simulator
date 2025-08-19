@@ -32,21 +32,23 @@ const Confirms: React.FC<ConfirmsProps> = ({ session }) => {
 
   const translatedConfirms: MyModalProps[] = React.useMemo(
     () =>
-      confirms.map((c) => {
-        const [title, message, button0, button1] = [
-          translate(`confirm.${c.id}.title`),
-          translate(`confirm.${c.id}.message`),
-          translate(`confirm.${c.id}.button0`),
-          translate(`confirm.${c.id}.button1`)
-        ]
+      confirms
+        .filter((c) => c.show)
+        .map((c) => {
+          const [title, message, button0, button1] = [
+            translate(`confirm.${c.id}.title`),
+            translate(`confirm.${c.id}.message`),
+            translate(`confirm.${c.id}.button0`),
+            translate(`confirm.${c.id}.button1`)
+          ]
 
-        return {
-          ...c,
-          title,
-          message,
-          buttons: [button0, button1].filter((str) => !str.startsWith('confirm.')) as [string, string]
-        }
-      }),
+          return {
+            ...c,
+            title,
+            message,
+            buttons: [button0, button1].filter((str) => !str.startsWith('confirm.')) as [string, string]
+          }
+        }),
     [confirms, document.documentElement.lang, translate]
   )
 
