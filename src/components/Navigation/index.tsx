@@ -1,6 +1,7 @@
 import type { Session, SessionDispatch } from '../../session'
 
 import React from 'react'
+import { styled } from 'styled-components'
 import Drawer from './Drawer'
 import Footer from './Footer'
 import Content from '../Content'
@@ -13,6 +14,14 @@ import {
   SessionReducer,
   SessionTimerContext
 } from '../../session'
+
+const ContainerStyles = styled.div`
+  display: flex;
+  height: calc(100vh - 10rem);
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+  overflow: hidden;
+`
 
 const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate }) => {
   const exam = React.useContext(ExamContext)
@@ -43,15 +52,17 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
       <SessionTimerContext.Provider value={{ time, maxTime, paused, update }}>
         <SessionExamContext.Provider value={{ examState, reviewState, update }}>
           <SessionDataContext.Provider value={{ bookmarks, answers, examID, update }}>
-            <div id="navigation">
-              <Drawer open={open} toggleOpen={toggleOpen} />
+            <>
+              <ContainerStyles id="middle-container">
+                <Drawer open={open} toggleOpen={toggleOpen} />
 
-              <Content exam={exam} open={open} />
+                <Content exam={exam} open={open} />
+              </ContainerStyles>
 
               {exam && <Footer open={open} questionCount={exam.test.length} />}
 
               <Confirms session={session} />
-            </div>
+            </>
           </SessionDataContext.Provider>
         </SessionExamContext.Provider>
       </SessionTimerContext.Provider>

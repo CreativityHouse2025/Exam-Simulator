@@ -18,7 +18,7 @@ const Cover = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 3;
+  z-index: 5;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
@@ -28,7 +28,7 @@ const Window = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index: 4;
+  z-index: 10;
   transform: translate(-50%, -50%);
   animation: ${grow} 200ms ease;
 `

@@ -46,7 +46,7 @@ const StartButton = styled.button<ThemedStyles>`
   border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
-  min-width: 200px;
+  min-width: 100px;
   margin: 0.8rem;
 
   &:hover {
@@ -60,6 +60,7 @@ const StartButton = styled.button<ThemedStyles>`
 `
 
 const ContinueButton = styled(StartButton)<ThemedStyles>`
+  min-width: 300px;
   background: ${({ theme }) => theme.secondary || theme.grey[6]};
 `
 
@@ -92,14 +93,14 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onConti
 
   return (
     <CoverStyles id="cover">
-      <Image src={Logo} alt={logoAlt} />
+      <Image id="image" src={Logo} alt={logoAlt} />
 
-      <Title>{title}</Title>
+      <Title id="title">{title}</Title>
 
-      <Description>{description}</Description>
+      <Description id="description">{description}</Description>
 
-      <ButtonContainer>
-        <ButtonRow>
+      <ButtonContainer id="button-container">
+        <ButtonRow id="button-row">
           <StartButton id="start-new-button" onClick={onStartNew}>
             {_new}
           </StartButton>

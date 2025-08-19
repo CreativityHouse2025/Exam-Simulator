@@ -9,13 +9,9 @@ import { translate } from '../settings'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 
-const HeaderStyles = styled.div`
+const HeaderStyles = styled.div<ThemedStyles>`
   position: fixed;
   width: 100%;
-  height: 5rem;
-`
-
-const InnerHeader = styled.div<ThemedStyles>`
   display: grid;
   align-items: center;
   grid-template-columns: 15rem 1fr 15rem;
@@ -52,15 +48,13 @@ const HeaderComponent: React.FC<HeaderProps> = ({ setLang }) => {
 
   return (
     <HeaderStyles id="header">
-      <InnerHeader id="inner-header">
-        <ImageStyles src={Logo} />
+      <ImageStyles id="image" src={Logo} />
 
-        <TitleStyles>{title}</TitleStyles>
+      <TitleStyles id="title">{title}</TitleStyles>
 
-        <LanguageStyles onClick={() => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar')}>
-          <Language size={30} />
-        </LanguageStyles>
-      </InnerHeader>
+      <LanguageStyles id="language" onClick={() => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar')}>
+        <Language size={40} />
+      </LanguageStyles>
     </HeaderStyles>
   )
 }
