@@ -5,7 +5,6 @@ import Drawer from './Drawer'
 import Footer from './Footer'
 import Modal, { type ModalProps } from '../Modal'
 import Content from '../Content'
-import { Main } from '../../styles/Main'
 import { ExamContext } from '../../exam'
 import {
   SessionActionTypes,
@@ -110,9 +109,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
             <div id="navigation">
               <Drawer open={open} toggleOpen={toggleOpen} />
 
-              <Main $open={open}>
-                <Content exam={exam} session={session} />
-              </Main>
+              <Content exam={exam} session={session} open={open} />
 
               {exam && <Footer open={open} questionCount={exam.test.length} />}
 

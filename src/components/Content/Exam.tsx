@@ -2,7 +2,6 @@ import type { Exam } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
-import { Slide } from '../../styles/Slide'
 import TopDisplay from './TopDisplay'
 import Question from './Question'
 import MultipleChoice from './MultipleChoice'
@@ -31,17 +30,11 @@ const ExamComponent: React.FC<ExamProps> = ({ exam, isReview }) => {
 
       {!isReview && <Progress exam={exam} />}
 
-      <Slide id="question-slide" key={index} direction="right">
-        <Question {...question} />
+      <Question {...question} />
 
-        <MultipleChoice exam={exam} isReview={isReview} />
+      <MultipleChoice exam={exam} isReview={isReview} />
 
-        {isReview && (
-          <Slide direction="bottom">
-            <Explanation question={question} answer={answers[index]} />
-          </Slide>
-        )}
-      </Slide>
+      {isReview && <Explanation question={question} answer={answers[index]} />}
     </ExamStyles>
   )
 }
