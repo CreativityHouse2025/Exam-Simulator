@@ -1,5 +1,5 @@
 import { lighten } from 'polished'
-import theme from '../styles/theme.ts'
+import theme from '../theme.ts'
 
 /**
  * @param {number} questionIndex - The index of the question.

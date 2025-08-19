@@ -1,8 +1,8 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { ThemeProvider } from 'styled-components'
-import GlobalStyle from './components/GlobalStyle'
-import theme from './styles/theme'
+import GlobalStyle from './GlobalStyle'
+import theme from './theme'
 import App from './App'
 
 const container = document.getElementById('root')
