@@ -6,7 +6,6 @@ import styled from 'styled-components'
 import ExamComponent from './Exam'
 import Summary from './Summary'
 import { SessionExamContext } from '../../session'
-import { LangContext } from '../../settings'
 
 const ContentStyles = styled.div<ThemedStyles>`
   display: grid;
@@ -19,14 +18,13 @@ const ContentStyles = styled.div<ThemedStyles>`
 
 const ContentComponent: React.FC<ContentProps> = ({ exam }) => {
   const { examState, reviewState } = React.useContext(SessionExamContext)
-  const lang = React.useContext(LangContext)
 
   const finished = examState === 'completed'
   const summary = reviewState === 'summary'
 
   return (
     <ContentStyles id="content">
-      {finished && summary ? <Summary exam={exam} /> : <ExamComponent exam={exam} lang={lang} isReview={finished} />}
+      {finished && summary ? <Summary exam={exam} /> : <ExamComponent exam={exam} isReview={finished} />}
     </ContentStyles>
   )
 }

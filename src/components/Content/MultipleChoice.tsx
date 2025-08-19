@@ -1,15 +1,17 @@
 import type { Exam } from '../../types'
-import type { Lang } from '../../settings'
+import type { LangCode } from '../../settings'
 import type { AnswerOfMultipleChoice, AnswerOfMultipleAnswer } from '../../session'
 
 import React from 'react'
 import Choice from './Choice'
 import { formatChoiceLabel } from '../../utils/format'
 import { SessionActionTypes, SessionDataContext, SessionNavigationContext } from '../../session'
+import { LangContext } from '../../settings'
 
-const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, lang, isReview }) => {
+const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, isReview }) => {
   const { index, update } = React.useContext(SessionNavigationContext)
   const { answers } = React.useContext(SessionDataContext)
+  const { dir } = React.useContext(LangContext)
 
   const question = exam.test[index]
   const isSingleAnswer = question.type === 'multiple-choice'
@@ -50,7 +52,7 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, lang, is
   )
 
   return (
-    <div id={question.type} dir={lang.dir}>
+    <div id={question.type} dir={dir}>
       {question.choices.map(({ text, correct }, i) => (
         <Choice
           key={i}
@@ -58,7 +60,7 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, lang, is
           isSelected={isSelected(i)}
           isReview={isReview}
           isCorrect={correct}
-          label={formatChoiceLabel(i, lang.code)}
+          label={formatChoiceLabel(i, document.documentElement.lang as LangCode)}
           text={text}
           onClick={() => onChoose(i)}
         />
@@ -71,6 +73,5 @@ export default MultipleChoiceComponent
 
 export interface MultipleChoiceProps {
   exam: Exam
-  lang: Lang
   isReview: boolean
 }
