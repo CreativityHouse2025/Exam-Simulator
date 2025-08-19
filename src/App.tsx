@@ -30,6 +30,7 @@ const AppComponent: React.FC = () => {
       setTranslation(newLang, translations)
       setLang(newLang)
       document.documentElement.lang = newLang.code
+      document.documentElement.dir = newLang.dir
     },
     [setTranslation, LANGUAGES]
   )

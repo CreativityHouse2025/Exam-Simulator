@@ -13,7 +13,7 @@ const TimerStyles = styled.div<TimerStylesProps>`
   color: ${({ $warning, theme }) => ($warning ? theme.secondary : theme.black)};
   svg {
     color: inherit;
-    margin-right: 0.5rem;
+    margin: 0.5rem;
   }
 `
 

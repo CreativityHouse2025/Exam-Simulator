@@ -6,12 +6,10 @@ import React from 'react'
 import Choice from './Choice'
 import { formatChoiceLabel } from '../../utils/format'
 import { SessionActionTypes, SessionDataContext, SessionNavigationContext } from '../../session'
-import { LangContext } from '../../settings'
 
 const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, isReview }) => {
   const { index, update } = React.useContext(SessionNavigationContext)
   const { answers } = React.useContext(SessionDataContext)
-  const { dir } = React.useContext(LangContext)
 
   const question = exam.test[index]
   const isSingleAnswer = question.type === 'multiple-choice'
@@ -52,7 +50,7 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, isReview
   )
 
   return (
-    <div id={question.type} dir={dir}>
+    <div id={question.type} dir={document.documentElement.dir}>
       {question.choices.map(({ text, correct }, i) => (
         <Choice
           key={i}
