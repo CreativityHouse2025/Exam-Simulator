@@ -51,7 +51,6 @@ export const setTranslation = (lang: Lang, translationData: Record<string, any>)
   translations.clear()
 
   flattenTranslations(translationData)
-  document.documentElement.lang = lang.code
 }
 
 const flattenTranslations = (obj: Record<string, any>, parentKey = ''): void => {
