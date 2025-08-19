@@ -1,21 +1,15 @@
 import type { SessionExam, SessionTimer } from '../session'
 
-export function timerIsPaused({
-  examState,
-  paused,
-  time,
-  maxTime
-}: Pick<SessionExam, 'examState'> & Pick<SessionTimer, 'paused' | 'time' | 'maxTime'>): boolean {
-  return examState === 'in-progress' && paused && timerHasRan(time, maxTime)
+export function timerIsPaused(
+  session: Pick<SessionExam, 'examState'> & Pick<SessionTimer, 'paused' | 'time' | 'maxTime'>
+): boolean {
+  return session.paused && examStarted(session)
 }
 
-export function timerIsRunning({
-  examState,
-  paused,
-  time,
-  maxTime
-}: Pick<SessionExam, 'examState'> & Pick<SessionTimer, 'paused' | 'time' | 'maxTime'>): boolean {
-  return examState === 'in-progress' && !paused && timerHasRan(time, maxTime)
+export function timerIsRunning(
+  session: Pick<SessionExam, 'examState'> & Pick<SessionTimer, 'paused' | 'time' | 'maxTime'>
+): boolean {
+  return !session.paused && examStarted(session)
 }
 
 export function timerHaveExpired({
@@ -26,14 +20,10 @@ export function timerHaveExpired({
   return examState === 'in-progress' && !paused && time <= 0
 }
 
-export function remainingTime({ time, maxTime }: SessionTimer): number {
-  if (time < 0) {
-    return 0
-  }
-
-  return maxTime - time
+function examStarted(session: Pick<SessionExam, 'examState'> & Pick<SessionTimer, 'time' | 'maxTime'>): boolean {
+  return session.examState === 'in-progress' && timerHasRan(session)
 }
 
-function timerHasRan(time: number, maxTime: number): boolean {
+function timerHasRan({ time, maxTime }: Pick<SessionTimer, 'time' | 'maxTime'>): boolean {
   return time < maxTime && time > 0
 }
