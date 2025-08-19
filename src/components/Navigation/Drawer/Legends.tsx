@@ -17,13 +17,13 @@ const LegendStyles = styled.div<ThemedStyles>`
 
 const LegendsComponent: React.FC = () => {
   const { examState } = React.useContext(SessionExamContext)
-  const lang = React.useContext(LangContext)
+  const { dir } = React.useContext(LangContext)
 
   const inProgress = examState === 'in-progress'
   const completed = examState === 'completed'
 
   return (
-    <LegendStyles dir={lang.dir}>
+    <LegendStyles dir={dir}>
       <Legend type="marked" />
       <Legend type="incomplete" />
       {inProgress && <Legend type="complete" />}

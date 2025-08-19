@@ -1,10 +1,11 @@
 import type { Question, QuestionTypes, ThemedStyles } from '../../types'
 import type { Answer } from '../../session'
+import type { LangCode } from '../../settings'
 
 import React from 'react'
 import styled from 'styled-components'
 import { lighten, darken } from 'polished'
-import { type Lang, translate } from '../../settings'
+import { translate } from '../../settings'
 import { formatAnswerLabel } from '../../utils/format'
 
 const ExplanationStyles = styled.div<ExplanationStylesProps>`
@@ -37,7 +38,7 @@ const NormalText = styled.span`
   margin-bottom: 0.5rem;
 `
 
-const ExplainationComponent: React.FC<ExplainationProps> = ({ question, answer, lang }) => {
+const ExplainationComponent: React.FC<ExplainationProps> = ({ question, answer }) => {
   const correct: boolean = question.answer === answer
 
   const [yours, _correct, _answer, explain] = React.useMemo(
@@ -59,7 +60,7 @@ const ExplainationComponent: React.FC<ExplainationProps> = ({ question, answer, 
 
       <p>
         {_answer}
-        <CorrectStyles>{formatAnswerLabel(question, lang.code)}</CorrectStyles>
+        <CorrectStyles>{formatAnswerLabel(question, document.documentElement.lang as LangCode)}</CorrectStyles>
       </p>
 
       {question.explanation && (
@@ -78,7 +79,6 @@ export default ExplainationComponent
 export interface ExplainationProps {
   question: Question
   answer: Answer<QuestionTypes>
-  lang: Lang
 }
 
 export interface ExplanationStylesProps extends ThemedStyles {
