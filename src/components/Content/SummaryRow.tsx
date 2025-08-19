@@ -7,6 +7,8 @@ import { translate } from '../../settings'
 export const RowStyles = styled.div<SummaryStylesProps>`
   display: grid;
   grid-template-columns: 15rem 15rem;
+  justify-items: center;
+  align-items: center;
   .status {
     color: ${({ $status, theme }) => ($status ? theme.correct : theme.incorrect)};
   }

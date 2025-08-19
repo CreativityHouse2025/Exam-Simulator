@@ -7,26 +7,18 @@ import { translate } from '../../settings'
 import { formatDate, formatTimer } from '../../utils/format'
 import { SessionDataContext, SessionTimerContext } from '../../session'
 
-const SummaryStyles = styled.div`
-  width: 100%;
-  height: calc(100vh - 14rem);
-  display: grid;
-  grid-template-rows: 8rem 2fr;
-  justify-items: center;
-  align-items: center;
-`
-
 export const TitleStyles = styled.div<ThemedStyles>`
+  justify-self: center;
+  padding-top: 5rem;
   font: 4rem 'Open Sans';
   font-weight: 700;
   color: ${({ theme }) => theme.black};
 `
 
 export const ColumnStyles = styled.div`
+  padding-top: 5rem;
   display: grid;
   grid-template-rows: repeat(4, 3rem);
-  margin-bottom: 5rem;
-  padding-left: 5rem;
 `
 
 const SummaryComponent: React.FC<SummaryProps> = ({ exam }) => {
@@ -56,7 +48,7 @@ const SummaryComponent: React.FC<SummaryProps> = ({ exam }) => {
   )
 
   return (
-    <SummaryStyles id="summary">
+    <div id="summary">
       <TitleStyles id="title">{title}</TitleStyles>
 
       <div id="columns">
@@ -78,7 +70,7 @@ const SummaryComponent: React.FC<SummaryProps> = ({ exam }) => {
           />
         </ColumnStyles>
       </div>
-    </SummaryStyles>
+    </div>
   )
 }
 

@@ -1,9 +1,10 @@
 import type { Session, SessionDispatch } from '../../session'
+import type { ModalProps } from '../Modal'
 
 import React from 'react'
 import Drawer from './Drawer'
 import Footer from './Footer'
-import Modal, { type ModalProps } from '../Modal'
+import Modal from '../Modal'
 import Content from '../Content'
 import { ExamContext } from '../../exam'
 import {
@@ -35,9 +36,9 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
     session.update = sessionUpdate
   }, [startingSession])
 
-  const toggleOpen = React.useCallback(() => setOpen(!open), [open])
-
   if (!exam) return null
+
+  const toggleOpen = React.useCallback(() => setOpen(!open), [open])
 
   const confirms: Omit<MyModalProps, 'title' | 'message' | 'buttons'>[] = React.useMemo(
     () => [
@@ -81,35 +82,17 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
     [confirms, document.documentElement.lang, translate]
   )
 
+  const { answers, bookmarks, examState, index, maxTime, paused, reviewState, time, examID, update } = session
+
   return (
-    <SessionNavigationContext.Provider value={{ index: session.index, update: session.update }}>
-      <SessionTimerContext.Provider
-        value={{
-          time: session.time,
-          maxTime: session.maxTime,
-          paused: session.paused,
-          update: session.update
-        }}
-      >
-        <SessionExamContext.Provider
-          value={{
-            examState: session.examState,
-            reviewState: session.reviewState,
-            update: session.update
-          }}
-        >
-          <SessionDataContext.Provider
-            value={{
-              bookmarks: session.bookmarks,
-              answers: session.answers,
-              examID: session.examID,
-              update: session.update
-            }}
-          >
+    <SessionNavigationContext.Provider value={{ index, update }}>
+      <SessionTimerContext.Provider value={{ time, maxTime, paused, update }}>
+        <SessionExamContext.Provider value={{ examState, reviewState, update }}>
+          <SessionDataContext.Provider value={{ bookmarks, answers, examID, update }}>
             <div id="navigation">
               <Drawer open={open} toggleOpen={toggleOpen} />
 
-              <Content exam={exam} session={session} open={open} />
+              <Content exam={exam} open={open} />
 
               {exam && <Footer open={open} questionCount={exam.test.length} />}
 

@@ -26,7 +26,7 @@ const Control = styled.div<ControlStylesProps>`
 
 const ControlComponent: React.FC<DrawerControlProps> = ({ open, toggleOpen }) => {
   return (
-    <Control $open={open} onClick={toggleOpen}>
+    <Control id="control" $open={open} onClick={toggleOpen}>
       {open ? <ChevronLeft className="chevron" size={20} /> : <Menu size={20} />}
     </Control>
   )

@@ -1,5 +1,4 @@
 import type { Exam, ThemedStyles } from '../../types'
-import type { Session } from '../../session'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -14,7 +13,6 @@ export const MainStyles = styled.main<MainStylesProps>`
   right: ${({ $open }) => ($open ? '-24rem' : '-5rem')};
   z-index: 2;
   width: 100%;
-  height: calc(100vh - 10rem);
   transition: 0.3s;
   background: white;
 `
@@ -47,7 +45,6 @@ export default ContentComponent
 
 export interface ContentProps {
   exam: Exam
-  session: Session
   open: boolean
 }
 
