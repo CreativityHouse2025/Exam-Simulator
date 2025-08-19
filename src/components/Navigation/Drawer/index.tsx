@@ -7,25 +7,24 @@ import Menu from './Menu'
 
 const DrawerStyles = styled.div<ThemedStyles>`
   position: fixed;
-  left: 0;
-  z-index: 1;
-  width: 24rem;
-  height: 100%;
+  width: 20%;
+  ${({ dir }) => (dir === 'rtl' ? 'right' : 'left')}: 0;
   top: 5rem;
-  transition: 0.3s;
+  z-index: 1;
   background: ${({ theme }) => theme.grey[0]};
+  transition: 0.3s;
 `
 
 const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen }) => {
   return (
-    <DrawerStyles id="drawer">
+    <DrawerStyles id="drawer" dir={document.documentElement.dir}>
       <Control open={open} toggleOpen={toggleOpen} />
       <Menu open={open} />
     </DrawerStyles>
   )
 }
 
-export default React.memo(DrawerComponent)
+export default DrawerComponent
 
 export interface DrawerProps {
   open: boolean

@@ -3,6 +3,7 @@ import type { ThemedStyles } from '../../../types'
 import React from 'react'
 import styled from 'styled-components'
 import { Menu } from '@styled-icons/material/Menu'
+import { ChevronRight } from '@styled-icons/material/ChevronRight'
 import { ChevronLeft } from '@styled-icons/material/ChevronLeft'
 
 const Control = styled.div<ControlStylesProps>`
@@ -25,9 +26,14 @@ const Control = styled.div<ControlStylesProps>`
 `
 
 const ControlComponent: React.FC<DrawerControlProps> = ({ open, toggleOpen }) => {
+  const chevron = React.createElement(document.documentElement.dir === 'rtl' ? ChevronRight : ChevronLeft, {
+    className: 'chevron',
+    size: 20
+  })
+
   return (
     <Control id="control" $open={open} onClick={toggleOpen}>
-      {open ? <ChevronLeft className="chevron" size={20} /> : <Menu size={20} />}
+      {open ? chevron : <Menu size={20} />}
     </Control>
   )
 }

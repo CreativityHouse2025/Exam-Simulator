@@ -8,12 +8,11 @@ import { SessionExamContext } from '../../session'
 
 export const MainStyles = styled.main<MainStylesProps>`
   position: fixed;
+  width: ${({ $open }) => ($open ? '80%' : '96%')};
+  ${({ dir }) => (dir === 'rtl' ? 'left' : 'right')}: 0;
   top: 5rem;
   bottom: 5rem;
-  right: ${({ $open }) => ($open ? '-24rem' : '-5rem')};
   z-index: 2;
-  width: 100%;
-  transition: 0.3s;
   background: white;
 `
 
@@ -22,7 +21,6 @@ const ContentStyles = styled.div<ThemedStyles>`
   justify-items: center;
   align-items: center;
   padding: 2rem;
-  padding-right: 25rem;
   transition: 0.3s;
 `
 
@@ -33,7 +31,7 @@ const ContentComponent: React.FC<ContentProps> = ({ exam, open }) => {
   const summary = reviewState === 'summary'
 
   return (
-    <MainStyles id="main" $open={open}>
+    <MainStyles id="main" $open={open} dir={document.documentElement.dir}>
       <ContentStyles id="content">
         {finished && summary ? <Summary exam={exam} /> : <ExamComponent exam={exam} isReview={finished} />}
       </ContentStyles>

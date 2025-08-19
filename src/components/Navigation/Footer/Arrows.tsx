@@ -53,10 +53,10 @@ const ArrowsComponent: React.FC<ArrowsProps> = ({ questionCount }) => {
 
   const arrows: ArrowProps[] = React.useMemo(
     () => [
-      { func: onFirstQuestion, Icon: SkipPrevious },
-      { func: onPrevQuestion, Icon: KeyboardArrowLeft },
-      { func: onNextQuestion, Icon: KeyboardArrowRight },
-      { func: onLastQuestion, Icon: SkipNext }
+      { func: onFirstQuestion, Icon: document.documentElement.dir === 'rtl' ? SkipNext : SkipPrevious },
+      { func: onPrevQuestion, Icon: document.documentElement.dir === 'rtl' ? KeyboardArrowRight : KeyboardArrowLeft },
+      { func: onNextQuestion, Icon: document.documentElement.dir === 'rtl' ? KeyboardArrowLeft : KeyboardArrowRight },
+      { func: onLastQuestion, Icon: document.documentElement.dir === 'rtl' ? SkipPrevious : SkipNext }
     ],
     [onFirstQuestion, onPrevQuestion, onNextQuestion, onLastQuestion]
   )

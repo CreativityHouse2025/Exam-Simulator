@@ -3,7 +3,6 @@ import type { ThemedStyles } from '../../../types'
 import React from 'react'
 import styled from 'styled-components'
 import Legend from './Legend'
-import { LangContext } from '../../../settings'
 import { SessionExamContext } from '../../../session'
 
 const LegendStyles = styled.div<ThemedStyles>`
@@ -17,13 +16,12 @@ const LegendStyles = styled.div<ThemedStyles>`
 
 const LegendsComponent: React.FC = () => {
   const { examState } = React.useContext(SessionExamContext)
-  const { dir } = React.useContext(LangContext)
 
   const inProgress = examState === 'in-progress'
   const completed = examState === 'completed'
 
   return (
-    <LegendStyles dir={dir}>
+    <LegendStyles dir={document.documentElement.dir}>
       <Legend type="marked" />
       <Legend type="incomplete" />
       {inProgress && <Legend type="complete" />}

@@ -7,7 +7,6 @@ import Question from './Question'
 import MultipleChoice from './MultipleChoice'
 import Progress from './Progress'
 import Explanation from './Explanation'
-import { LangContext } from '../../settings'
 import { SessionDataContext, SessionNavigationContext } from '../../session'
 
 const ExamStyles = styled.div`
@@ -17,12 +16,11 @@ const ExamStyles = styled.div`
 const ExamComponent: React.FC<ExamProps> = ({ exam, isReview }) => {
   const { index } = React.useContext(SessionNavigationContext)
   const { answers } = React.useContext(SessionDataContext)
-  const { dir } = React.useContext(LangContext)
 
   const question = exam.test[index]
 
   return (
-    <ExamStyles id="exam" dir={dir}>
+    <ExamStyles id="exam">
       <TopDisplay exam={exam} />
 
       {!isReview && <Progress exam={exam} />}

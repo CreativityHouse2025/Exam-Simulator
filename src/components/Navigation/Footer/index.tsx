@@ -10,7 +10,7 @@ const FooterStyles = styled.div<FooterStylesProps>`
   width: 100%;
   height: 5rem;
   bottom: 0;
-  left: ${({ $open }) => ($open ? '24rem' : '5rem')};
+  ${({ dir }) => (dir === 'rtl' ? 'right' : 'left')}: ${({ $open }) => ($open ? '24rem' : '5rem')};
   z-index: 2;
   transition: 0.3s;
   background: ${({ theme }) => theme.grey[0]};
@@ -20,14 +20,14 @@ const FooterStyles = styled.div<FooterStylesProps>`
 const InnerFooterStyles = styled.div<InnerFooterStylesProps>`
   width: ${({ $open }) => ($open ? 'calc(100% - 24rem)' : 'calc(100% - 5rem)')};
   display: grid;
-  grid-template-columns: 0.75fr 0.25fr;
+  grid-template-columns: 0.5fr 0.5fr;
   align-items: center;
   transition: 0.3s;
 `
 
 const FooterComponent: React.FC<NavigationFooterProps> = ({ open, questionCount }) => {
   return (
-    <FooterStyles id="footer" $open={open}>
+    <FooterStyles id="footer" $open={open} dir={document.documentElement.dir}>
       <InnerFooterStyles id="inner-footer" $open={open}>
         <Arrows questionCount={questionCount} />
 
@@ -37,7 +37,7 @@ const FooterComponent: React.FC<NavigationFooterProps> = ({ open, questionCount 
   )
 }
 
-export default React.memo(FooterComponent)
+export default FooterComponent
 
 export interface NavigationFooterProps {
   open: boolean

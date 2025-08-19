@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import BookmarkButton from './Bookmark'
 import { translate } from '../../settings'
 import { SessionNavigationContext } from '../../session'
-import { LangContext } from '../../settings'
 
 export const TopDisplayStyles = styled.div`
   display: flex;
@@ -24,7 +23,6 @@ export const QuestionTextStyles = styled.div<ThemedStyles>`
 
 const TopDisplayComponent: React.FC<TopDisplayProps> = ({ exam, isReview = false }) => {
   const { index } = React.useContext(SessionNavigationContext)
-  const { dir } = React.useContext(LangContext)
 
   const question = React.useMemo(
     () => translate('content.exam.top-display.question', [index + 1, exam.test.length]),
@@ -33,7 +31,7 @@ const TopDisplayComponent: React.FC<TopDisplayProps> = ({ exam, isReview = false
 
   return (
     <TopDisplayStyles id="top-display">
-      <QuestionTextStyles id="question-text" dir={dir}>
+      <QuestionTextStyles id="question-text" dir={document.documentElement.dir}>
         {question}
       </QuestionTextStyles>
 
