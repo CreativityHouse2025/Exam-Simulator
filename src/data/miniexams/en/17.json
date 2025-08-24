@@ -3,7 +3,7 @@
   "pass": 85,
   "test": [
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nDuring a new technology project, confusion arises due to the lack of a clearly defined and communicated future state of the product. What should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager must ensure stakeholder responsibilities are clear, concise, and promote successful completion while maintaining stakeholder engagement.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project leader and a product owner had a side conversation about the status of the next delivery. The product owner raised concerns about the way the architecture owner is dealing with the coming delivery.\nWhat should the project leader do to address this issue?",
       "explanation": "",
       "choices": [
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nAfter several interviews with key stakeholders and checking the project charter, a project manager found that the current project organizational structure is no longer appropriate for the project's strategic goals. What should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager has started developing a plan for a new project. During the first planning meeting, the stakeholders ask about the project's value and how it relates to the organization's goals.\nWhat should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A parent company announces an integration project for all of its subsidiary companies. The integration project covers the legal, human resources (HR), and finance departments of the subsidiary companies. Senior management is investing in this as the company's first agile project and a new project manager has been assigne\nWhat should the project manager do first?",
       "explanation": "",
       "choices": [
@@ -141,7 +141,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nA project manager is not able to complete the list of project objectives due to conflicting directives from two department directors. Which approach would allow the directors to adjust their directives with a win/win outcome?",
       "explanation": "",
       "choices": [
@@ -164,7 +164,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager for a US$5 million construction project must meet a specific project milestone earlier than planned because a season-long pattern of extreme weather is expected soon. The project is already over budget, and the project sponsor is not prepared to provide additional funding.\nWhich tool or technique should the project manager use to achieve the milestone before the extreme weather begins?",
       "explanation": "",
       "choices": [
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager had just started a long-term project when the government implemented new legislation that all engineers working in the state need to be registere Registration is based on work area, experience, and professional development completed in the last 3 years. Due to budget constraints in the company for the past three years, there were limited opportunities for engineers to gain formal professional development.\nHow should the project manager handle the situation?",
       "explanation": "",
       "choices": [
@@ -210,7 +210,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "In the middle of project execution, the project sponsor leaves, and a new sponsor is assigne The new sponsor is requesting major revisions to the deliverables.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -233,7 +233,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A company is going through an organizational change. Most of the senior management has changed, including the project manager's direct supervisor. The supervisor has an aggressive working style, and has made critical comments to the project manager regarding the ongoing project, without really understanding the situation. The project manager feels uncomfortable working with the new supervisor.\nWhat should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -256,7 +256,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nThere is a conflict between two team members regarding a project task. Which conflict resolution method should project manager use to make it win-win situation?",
       "explanation": "",
       "choices": [
@@ -279,7 +279,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is working on a project that is part of a large business transformation initiative. The project has gained support from the quality department's executives. Even though the scope is not yet finalized, the sponsor was able to obtain a large contingency budget to cover any scope changes and they assured the project manager that money is not an issue. All of these changes are expedited due to the strategic importance of the project.\nWhat should be the project manager's primary focus in developing the strategy to manage change?",
       "explanation": "",
       "choices": [
@@ -302,7 +302,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nA project's original budget at completion (BAC) was calculated as US$00,000, but the estimate at completion (EAC) is US$20,000. If the schedule performance index (SPI) is equal to , what is the cost performance index (CPI)?",
       "explanation": "",
       "choices": [
@@ -325,7 +325,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager just completed a project in an organization that values lessons learne Leadership encourages all the project stakeholders to use the process, tools, and results from the lessons learned repository in future projects. Preparing to update the lessons learned repository, the project manager has gathered relevant project data and feedback.\nWhat should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -348,7 +348,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is managing an agile project. In order to make sure there is enough funding available for the project, the project sponsor is asking the project manager for an estimate when the project will be complete\nHow should the project manager respond to the sponsor?",
       "explanation": "",
       "choices": [
@@ -371,7 +371,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is working on a project that will deliver a solution in country  Due to the potential for a security breach, country A's government is banning the technology that will be used in the project's solution, adversely affecting the project. The project manager is close to completing the installation for the project after already procuring the materials and the banned technology.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -394,7 +394,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager recently completed a project in which they resolved numerous sub-standard deliverables rejected by the customer. The project manager noticed that when thirty (30) prioritized defects of the one hundred (00) total identified for the project were resolved, this resulted in the customer satisfaction feedback increasing to 00% and all deliverables being accepte\nWhich principle does this occurrence demonstrate?",
       "explanation": "",
       "choices": [
@@ -417,7 +417,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "While conducting a retrospective meeting, team members were surprised from the performance results of the team shared by the project lea The team have all expressed their ignorance of the measurements and availability of the different tools in place.\nWhat should have the project lead done to avoid this situation?",
       "explanation": "",
       "choices": [
@@ -440,7 +440,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A new Scrum project manager at a company is contracted to build a traffic measurement and control application for a municipality. The project manager is notified that the municipality has just rejected the traffic measurement portion of the application because it does not comply with longstanding national regulations.\nWhat should the project manager have done to avoid this situation?",
       "explanation": "",
       "choices": [
@@ -463,7 +463,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "The project manager for a complex project, aimed at improving the company's financial results, decides to use the Expected Monetary Value (EMV) method to select the best strategy. To achieve this, the project team defines three scenarios with the following probabilities of outcome: scenario  (25%), scenario 2 (50%), and scenario 3 (25%) for strategy A, with scores $60, $20, and -$20 respectively. The other strategy, strategy B, scored an EMV of $75.\nWhich strategy will the project manager prefer?",
       "explanation": "",
       "choices": [
@@ -486,7 +486,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is involved in an e-commerce development project. The project has been completed successfully using the hybrid model and initiated operations handover. The project manager notices that the development team is relaxed and not spending time on the handover process, which is impacting application support.\nHow should the project manager handle this situation?",
       "explanation": "",
       "choices": [
@@ -509,7 +509,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is leading an agile project that is in the execution phase. After a couple of sprints, the project manager realizes that the team's estimates are not realisti\nWhat action should the project manager take to remove this impediment?",
       "explanation": "",
       "choices": [
@@ -532,7 +532,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is tracking an infrastructure project that is dependent on a service provider. The service provider informed the project manager that some of the third-party components will no longer be manufactured or supporte Upon an initial review, this would significantly delay the schedule and increase the budget.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -555,7 +555,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nWhile reviewing a status report, a project manager notices that, over a period of six months, the coding quality for one developer is statistically lower than another developer assigned the same task. Which tool should the project manager use to trace the problem's source back to its actionable root cause?",
       "explanation": "",
       "choices": [
@@ -578,7 +578,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager complains that three engineers from different cultural backgrounds leave project meetings twice a day and assumes that they are \"gossiping and smoking\" for 5 minutes. The engineering manager replies that their absence is due to prayer time.\nWhat should the project manager do first to rectify their assumption?",
       "explanation": "",
       "choices": [
@@ -601,7 +601,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager for a small company is assigned to a project with a scope that is complex and new. The program manager recommends creating a team with individuals that can offer complementary expertise.\nWhat are the characteristics of the network that should be built?",
       "explanation": "",
       "choices": [
@@ -624,7 +624,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nAn agile practitioner has been assigned to lead a software development project in a relatively new industry where the external compliance standards are not clearly define What should the agile practitioner do to ensure that the project succeeds?",
       "explanation": "",
       "choices": [
@@ -647,7 +647,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Due to commitments to another project, an accountant fails to deliver an important report to a project manager on time. The project manager did not expect the delay and didn't realize the accountant had conflicting priorities.\nWhat should the project manager have done to avoid this?",
       "explanation": "",
       "choices": [
@@ -670,7 +670,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nAn unforeseen issue results in the need to procure a new piece of machinery critical for meeting quality specifications. From where may the necessary funds be obtained?",
       "explanation": "",
       "choices": [
@@ -693,7 +693,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager works in a matrix organization and manages an internal software development project to improve the company's tracking system. The project is scheduled to be completed in one month. Some benefits will be realized once the system is online, however, full benefits will not be realized for a while. Although the project manager will track benefits through project closure, they are concerned about tracking the benefits of post-project activities.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -716,7 +716,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During testing of a project component, a senior tester discovers a functionality that will ensure the future performance of the project's solution. This will create a change in scope.\nWhich type of change request should be made to include this functionality?",
       "explanation": "",
       "choices": [
@@ -739,7 +739,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nWhile reviewing project documentation, a project manager discovers that modifications were made without proper approvals. What should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -762,7 +762,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nA project manager is working on the development of a business case to secure funding and resources. What is needed to ensure that the right priority is assigned to the project?",
       "explanation": "",
       "choices": [
@@ -785,7 +785,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Following the start of a sprint, a key stakeholder constructed an email to a project team voicing displeasure of the work that just commenced, despite being inexperienced in agile. The stakeholder is insistent about changing the internal and external deliverables.\nWhat next step should the project manager take?",
       "explanation": "",
       "choices": [
@@ -808,7 +808,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During the execution phase of a project, a new project manager is assigned to replace the previous project manager. As the project manager starts managing the project, they discover that team performance is significantly decreasing, which is impacting the project's key performance indicators (KPIs). This team has delivered good performance on similar projects in the past.\nWhat should the project manager do next to improve this situation?",
       "explanation": "",
       "choices": [
@@ -831,7 +831,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project is in the testing phase, and the quality control team informs the project manager that the quality of the deliverables from one vendor is poor. Their investigation found that the staff assigned does not have the required certifications.\nHow did this issue arise?",
       "explanation": "",
       "choices": [
@@ -854,7 +854,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is managing a project with a very aggressive delivery schedule and a firm completion date. The project requires expensive and fragile components that are prone to rework and rejections. The project manager is developing the vendor selection criteri\nWhat should be the strategy for vendor selection?",
       "explanation": "",
       "choices": [
@@ -877,7 +877,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During the execution phase of your project, a Resource Manager informed you that one of the experts allocated to your project had to be motivated in order to perform very well.\nWhat would be the recommended actions to address this issue?",
       "explanation": "",
       "choices": [
@@ -900,7 +900,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is assigned to a water treatment investment project. The local government has recently passed a law that requires compliance with clean water according to global standards. This is a new regulation that was initiated in the last month and was quickly passe\nWhat should the project manager do?",
       "explanation": "",
       "choices": [

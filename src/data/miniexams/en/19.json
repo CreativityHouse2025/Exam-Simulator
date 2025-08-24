@@ -3,7 +3,7 @@
   "pass": 85,
   "test": [
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nA pilot project is ready to close and the project team wants to capture the challenges that were overcome and the opportunities for future work. Where will they document this information?",
       "explanation": "",
       "choices": [
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A complex technology project is in the execution phase. New technologies are added to the backlog based on customer requirements, which will involve significant changes to the deliverable.\nWhat should the project manager do to satisfy the customer?",
       "explanation": "",
       "choices": [
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nQuality management is a vital aspect of any project. Which of the following quality control aspects is a component of a high functioning measurement system?",
       "explanation": "",
       "choices": [
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nDuring project execution, a team member made a mistake resulting in a -week delay to the project schedule. What should the project manager do with regard to this error and delay?",
       "explanation": "",
       "choices": [
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A virtual project team is composed of members from various countries with cultural differences. The project manager is concerned that cultural differences may lead to miscommunication and conflict.\nWhat should the project manager do to effectively mitigate against potential conflicts?",
       "explanation": "",
       "choices": [
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A key stakeholder's input is essential to a project's success. However, the stakeholder is always late on critical project decisions.\nWhat can the project manager do to re-engage this stakeholder?",
       "explanation": "",
       "choices": [
@@ -141,7 +141,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "The team informed the project leader that they are not sure of the stakeholder needs, despite the multiple collection requirements efforts and engagement in status meetings.\nHow should the project manager approach this issue?",
       "explanation": "",
       "choices": [
@@ -164,7 +164,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nDuring a daily meeting, the project team raised an impediment that one of the business subject matter experts is frequently changing the definition of done, and expressed their fear that this is a sign of distrust. What should the project manager do?",
       "explanation": "",
       "choices": [
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nA project manager is managing a project whose sponsor has asked why some of the components of the project were developed in-house. Where can this information be found?",
       "explanation": "",
       "choices": [
@@ -210,7 +210,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager notices that the project is behind schedule because materials delivery was delaye The procurement team informs the project manager that new government-imposed rules for the procurement of these materials caused this delay.\nIn what plan should these new rules be documented?",
       "explanation": "",
       "choices": [
@@ -233,7 +233,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A complex project has multiple participants. The project manager agrees with the team that they need to better understand the perspective of all project participants for the optimal success of the project.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -256,7 +256,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nA business environment has become unstable because a stakeholder has altered the project deliverables and outcomes in the middle of the execution phase. Taking the stakeholder into consideration, how should the project manager ensure the project benefits are delivered?",
       "explanation": "",
       "choices": [
@@ -279,7 +279,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Reward Systems\nThe first version delivered to the quality control team has poor performance, and the testers are complaining that they cannot complete all the test cases as planne Which is a tool to help to monitor performance?",
       "explanation": "",
       "choices": [
@@ -302,7 +302,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is leading a wastewater treatment project for a factory. During project execution, the government unexpectedly releases new environmental protection standards that are stricter than the previous standards.\nTo ensure compliance with these updated regulations, what should the project manager's initial course of action be?",
       "explanation": "",
       "choices": [
@@ -325,7 +325,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During a retrospective meeting, team members show disengagement, stating that they are repeating the same ideas over and over.\nHow can the project manager best handle this situation?",
       "explanation": "",
       "choices": [
@@ -348,7 +348,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project has begun to develop a new software application that will be used by the company's sales team. The project is expected to take six months to complete and has a budget of $00,000. The project manager has identified software development tools, hardware, and training to be procure\nWhat is the most important thing for the project manager to do while developing the procurement plan?",
       "explanation": "",
       "choices": [
@@ -371,7 +371,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A majority portion of a local company was recently sold to an international company. The new parent company is mandating the use of health, safety, and environmental (HSE) regulations for all projects in the local company.\nWhat should the project managers do to remain compliant?",
       "explanation": "",
       "choices": [
@@ -394,7 +394,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nA project manager is helping their organization transition from utilizing predictive methods to agile methods. One team member asks when high-level requirements definition and solution design activities should be done in an agile methodology.\nHow should the project manager respond?",
       "explanation": "",
       "choices": [
@@ -417,7 +417,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager has been assigned to a project to implement an asset health management system. The executive business sponsor has indicated that the system is expected to improve the quality of operations and extend the life span of the assets.\nWhat should the project manager do in order to demonstrate the business value once the system is in production?",
       "explanation": "",
       "choices": [
@@ -440,7 +440,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "An agile project is in its last iteration. During the daily standup, the team realizes that they will not be able to complete all the activities that were planned for the sprint. The team members create a contingency plan.\nWhat should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -463,7 +463,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project team in the middle of an incremental delivery project decided they need the help of a subject matter expert (SME) who is working in a different department. The project team asked the SME to join their team and assist in a specific task and they informed the project leader about this action.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -486,7 +486,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nA project manager is finishing a project and the sponsor is requesting insights on benefits realization. How can the project manager calculate project outcomes value?",
       "explanation": "",
       "choices": [
@@ -509,7 +509,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During a retrospective meeting, the project team confirmed that all deliverables were completed according to the specifications provided in the product backlog. However, the number of errors found during testing increased dramatically.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -532,7 +532,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is leading an agile project. The product owner complains that the project team is constantly completing fewer story points than the Scrum team working on another project.\nWhat should the project manager do to address this issue?",
       "explanation": "",
       "choices": [
@@ -555,7 +555,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "In an agile environment, a project leader should always consider a time for open and free discussions between team members on how the team can increase their performance.\nWhy is this practice important for the team?",
       "explanation": "",
       "choices": [
@@ -578,7 +578,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "An educational institution raises a complaint after placing an order for a software module from a company using agile practices. The complaint claims that billing for payment of a partial delivery violates the Agile Manifesto if the customer was not involved in progress meetings.\nThe customer's claim is supported by which of the Four Values of the Agile Manifesto?",
       "explanation": "",
       "choices": [
@@ -601,7 +601,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "An operational support project is running smoothly, but a customer consistently complains about a lack of visibility into the quality of the support work.\nHow should the project manager address this customer concern?",
       "explanation": "",
       "choices": [
@@ -624,7 +624,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "3\nAfter an annual staff review, discussing project management and soft skills knowledge, the company made a decision to train all staff members to face new challenges. The method to train all staff members will be on a website where all content, exams,  templates, and other organizational assets are available.\nWhat method is being used for training purposes?",
       "explanation": "",
       "choices": [
@@ -647,7 +647,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During project execution, a project manager learns that a team member's functional manager wants to remove them from a project because they believe they should not execute a certain task due to conflicting priorities.\nWhat should the project manager do first?",
       "explanation": "",
       "choices": [
@@ -670,7 +670,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A team member approaches the project manager immediately after the end of the project meeting about his need for help to complete a late-due-date task.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -693,7 +693,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "In the middle of a project incremental delivery, due to a change in the technology, a team member informed the project leader that due to a lack of knowledge in the technology the delivery will be delayed and suggests outsourcing services.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -716,7 +716,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is working on a complex project with many stakeholders that have conflicting priorities. Senior management asked the project manager to avoid \"noise\" because this is a highly political project. The project manager opted to use expert opinion from well known industry profiles.\nWhat did the project manager do to satisfy senior management's request?",
       "explanation": "",
       "choices": [
@@ -739,7 +739,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is managing an agile project. A new team member, who has never worked in an agile team, joins the project. The new member asks the project manager to explain why an agile approach is use\nWhat should the project manager's response be?",
       "explanation": "",
       "choices": [
@@ -762,7 +762,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "7\nA group of stakeholders at a financial institution are conducting a project closure review. Some of the stakeholders are concerned that the project deliverables do not satisfy the established closure criteri What is the first thing that the project manager should do to address this issue?",
       "explanation": "",
       "choices": [
@@ -785,7 +785,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "An experienced project manager is managing a multi-million dollar agile project. The project manager communicates the ground rules to the team, but after 12 iterations, the project manager starts noticing that some team members are not following the ground rules.\nWhat should the project manager do first to ensure team adherence to the ground rules?",
       "explanation": "",
       "choices": [
@@ -808,7 +808,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project vendor has informed a project manager that an outsourced project deliverable will be available 6 months later than the agreed project schedule. The vendor stated that they are focusing on other project deliverables with priority dependencies, and this particular deliverable had no stated dependencies.\nWhat should the project manager do to avoid schedule delays in future?",
       "explanation": "",
       "choices": [
@@ -831,7 +831,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is facing a delay in a project due to a decision made by the functional manager to provide onsite support for another project without consulting other parties impacted by this decision.\nWhat should the project manager do first?",
       "explanation": "",
       "choices": [
@@ -854,7 +854,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "An impact assessment reveals that a deliverable could be delayed by two weeks. A key resource has not been available to work on a non-critical activity due to other priorities. This could cause work overload on the other remaining resources.\nSince cost is a major constraint for this project, what should the project manager do immediately?",
       "explanation": "",
       "choices": [
@@ -877,7 +877,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "An agile coach is counseling a large software organization that has been using waterfall methodology and now plans to start using agile or hybrid methodology.\nWhat would be a project manager's suggestion?",
       "explanation": "",
       "choices": [
@@ -900,7 +900,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A product team is using a prototyping approach to deliver a multiyear business initiative. The project manager notices that a few user stories are taking longer to be delivere\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
