@@ -27,14 +27,14 @@ export const LoadingStyles = styled.div<ThemedStyles>`
   }
 `
 
-const LoadingMainComponent: React.FC<LoadingMainProps> = ({ size }) => (
-  <LoadingStyles id="loading-main">
+const LoadingComponent: React.FC<LoadingProps> = ({ size }) => (
+  <LoadingStyles id="loading">
     <Repeat size={size} />
   </LoadingStyles>
 )
 
-export default React.memo(LoadingMainComponent)
+export default React.memo(LoadingComponent)
 
-export interface LoadingMainProps {
+export interface LoadingProps {
   size: number
 }

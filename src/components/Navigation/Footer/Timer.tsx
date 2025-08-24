@@ -25,7 +25,7 @@ const TextStyles = styled.div`
 
 const TimerComponent: React.FC = () => {
   const { time, paused, update } = React.useContext(SessionTimerContext)
-  const intervalRef = React.useRef<number | null>(null)
+  const intervalRef = React.useRef<NodeJS.Timeout | null>(null)
 
   React.useEffect(() => {
     // Clear any existing interval

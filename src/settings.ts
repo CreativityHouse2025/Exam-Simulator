@@ -12,8 +12,8 @@ export interface Lang {
 }
 
 export const LANGUAGES: Record<LangCode, Lang> = {
-  ar: { code: 'ar', name: 'العربية', dir: 'rtl' },
-  en: { code: 'en', name: 'English', dir: 'ltr' }
+  ar: { code: 'ar', name: 'العربية', dir: 'rtl' } as const,
+  en: { code: 'en', name: 'English', dir: 'ltr' } as const
 } as const
 
 // Language validation utilities
