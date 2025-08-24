@@ -30,7 +30,7 @@ const SummaryRowComponent: React.FC<SummaryRowProps> = ({ type, value, status, i
   const className = isStatus ? 'status' : ''
 
   const _type = React.useMemo(
-    () => translate(`content.review.summary.${type}`),
+    () => translate(`content.summary.${type}`),
     [document.documentElement.lang, translate, type]
   )
 

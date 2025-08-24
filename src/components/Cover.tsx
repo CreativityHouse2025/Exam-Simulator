@@ -48,12 +48,10 @@ const StartButton = styled.button<ThemedStyles>`
   cursor: pointer;
   min-width: 100px;
   margin: 0.8rem;
-
   &:hover {
     opacity: 0.9;
     transform: translateY(-2px);
   }
-
   &:active {
     transform: translateY(0);
   }

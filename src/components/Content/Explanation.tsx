@@ -43,10 +43,10 @@ const ExplainationComponent: React.FC<ExplainationProps> = ({ question, answer }
 
   const [yours, _correct, _answer, explain] = React.useMemo(
     () => [
-      translate('content.exam.explain.yours'),
-      translate(`content.exam.explain.${correct ? 'correct' : 'incorrect'}`),
-      translate('content.exam.explain.answer'),
-      translate('content.exam.explain.explain')
+      translate('content.explain.yours'),
+      translate(`content.explain.${correct ? 'correct' : 'incorrect'}`),
+      translate('content.explain.answer'),
+      translate('content.explain.explain')
     ],
     [document.documentElement.lang, translate, correct]
   )

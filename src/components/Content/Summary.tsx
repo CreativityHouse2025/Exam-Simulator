@@ -12,7 +12,6 @@ const passPercent = 85
 
 export const TitleStyles = styled.div<ThemedStyles>`
   justify-self: center;
-  padding-top: 5rem;
   font: 4rem 'Open Sans';
   font-weight: 700;
   color: ${({ theme }) => theme.black};
@@ -75,9 +74,9 @@ const SummaryComponent: React.FC = () => {
 
   const [title, _status, home] = React.useMemo(
     () => [
-      translate('content.review.summary.title'),
-      translate(`content.review.summary.${status ? 'pass' : 'fail'}`),
-      translate('content.review.summary.home')
+      translate('content.summary.title'),
+      translate(`content.summary.${status ? 'pass' : 'fail'}`),
+      translate('content.summary.home')
     ],
     [document.documentElement.lang, translate, status]
   )
