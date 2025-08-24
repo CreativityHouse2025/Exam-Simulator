@@ -31,9 +31,7 @@ const TopDisplayComponent: React.FC<TopDisplayProps> = ({ exam, isReview = false
 
   return (
     <TopDisplayStyles id="top-display">
-      <QuestionTextStyles id="question-text" dir={document.documentElement.dir}>
-        {question}
-      </QuestionTextStyles>
+      <QuestionTextStyles id="question-text">{question}</QuestionTextStyles>
 
       {!isReview && <BookmarkButton />}
     </TopDisplayStyles>

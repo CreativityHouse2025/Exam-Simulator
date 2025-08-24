@@ -30,7 +30,7 @@ const ContentComponent: React.FC<ContentProps> = ({ exam, open }) => {
   const summary = reviewState === 'summary'
 
   return (
-    <MainStyles id="main" $open={open} dir={document.documentElement.dir}>
+    <MainStyles id="main" $open={open}>
       <ContentStyles id="content">
         {finished && summary ? <Summary exam={exam} /> : <ExamComponent exam={exam} isReview={finished} />}
       </ContentStyles>
