@@ -44,11 +44,11 @@ const AppComponent: React.FC = () => {
 
       try {
         const [type, number] = newSession.examID.split('-')
-        let examData = (await import(`./data/${type}s/${lang.code}/${number}.json`)).default
+        let examData: Exam = (await import(`./data/${type}s/${lang.code}/${number}.json`)).default
 
         if (newSession.examState === 'not-started') {
           examData = randomizeTest(examData)
-          newSession = formatSession({ ...newSession, examState: 'in-progress' }, examData, type as ExamType)
+          newSession = formatSession({ ...newSession, examState: 'in-progress' }, examData.length, type as ExamType)
         }
 
         setExam(examData)
