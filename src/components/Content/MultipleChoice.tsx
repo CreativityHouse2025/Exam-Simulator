@@ -1,5 +1,5 @@
 import type { LangCode } from '../../settings'
-import type { AnswerOfMultipleChoice, AnswerOfMultipleAnswer } from '../../session'
+import type { AnswerOfMultipleQuestions } from '../../session'
 
 import React from 'react'
 import Choice from './Choice'
@@ -13,22 +13,11 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
   const exam = React.useContext(ExamContext)
 
   const question = exam[index]
-  const isSingleAnswer = question.type === 'single-answer'
+  const answer: AnswerOfMultipleQuestions = answers[index] || []
 
-  const answer: AnswerOfMultipleChoice | AnswerOfMultipleAnswer =
-    answers[index] !== null ? answers[index] : isSingleAnswer ? null : []
-
-  const onChooseSingle = React.useCallback(
+  const onChoose = React.useCallback(
     (i: number): void => {
-      answers[index] = i
-      update!([SessionActionTypes.SET_ANSWERS, [...answers]])
-    },
-    [index, answers, answer]
-  )
-
-  const onChooseMultiple = React.useCallback(
-    (i: number): void => {
-      const currValues = (answer as AnswerOfMultipleAnswer) || []
+      const currValues = (answer as AnswerOfMultipleQuestions) || []
       const newValues = currValues.includes(i) ? currValues.filter((el) => el !== i) : currValues.concat(i)
 
       answers[index] = newValues
@@ -37,17 +26,11 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
     [index, answers, answer]
   )
 
-  const onChoose = React.useMemo(
-    () => (isSingleAnswer ? onChooseSingle : onChooseMultiple),
-    [isSingleAnswer, onChooseSingle, onChooseMultiple]
-  )
-
   const isSelected = React.useCallback(
     (i: number): boolean => {
-      if (isSingleAnswer) return answer === i
       return Array.isArray(answer) && answer.includes(i)
     },
-    [isSingleAnswer, answer]
+    [answer]
   )
 
   return (
@@ -55,7 +38,7 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
       {question.choices.map(({ text, correct }, i) => (
         <Choice
           key={i}
-          isSingleAnswer={isSingleAnswer}
+          isSingleAnswer={question.answer.length === 1}
           isSelected={isSelected(i)}
           isReview={isReview}
           isCorrect={correct}

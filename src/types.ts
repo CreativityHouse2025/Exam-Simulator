@@ -27,7 +27,7 @@ export type ExamType = 'exam' | 'miniexam'
 export type ExamID = `${ExamType}-${number}`
 export type Exam = Question[]
 
-export type QuestionTypes = 'single-answer' | 'multiple-answer'
+export type QuestionTypes = 'multiple-choice'
 
 export interface Question<QT extends QuestionTypes = QuestionTypes> {
   /** question type */

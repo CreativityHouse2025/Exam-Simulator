@@ -70,9 +70,7 @@ export function randomizeTest(exam: Exam): Exam {
       q.choices = shuffledIndices.map((i) => q.choices[i])
 
       // Update the answer indices to reflect the new order
-      if (q.type === 'single-answer') {
-        q.answer = q.choices.findIndex((c) => c.correct)
-      } else if (q.type === 'multiple-answer') {
+      if (q.type === 'multiple-choice') {
         q.answer = q.choices.map((c, i) => (c.correct ? i : null)).filter((c) => c !== null)
       } else {
         throw new Error(`Unsupported question type: ${q.type}`)
@@ -133,9 +131,7 @@ export function formatSession(session: Session, questionCount: number, examType:
  */
 export function formatAnswerLabel({ type, answer }: Question, lang: LangCode): string {
   try {
-    if (type === 'single-answer' && typeof answer === 'number') {
-      return answer === null ? '..' : formatChoiceLabel(answer, lang)
-    } else if (type === 'multiple-answer' && Array.isArray(answer)) {
+    if (type === 'multiple-choice' && Array.isArray(answer)) {
       return answer.map((i: number) => formatChoiceLabel(i, lang)).join(', ')
     }
 

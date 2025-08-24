@@ -19,14 +19,14 @@ describe('Validation Functions', function () {
     /** @type {Exam} */
     const mockExam = [
       {
-        type: 'single-answer',
+        type: 'multiple-choice',
         text: 'What is 2 + 2?',
         explanation: '2 + 2 equals 4.',
         choices: [
           { text: '3', correct: false },
           { text: '4', correct: true }
         ],
-        answer: 1
+        answer: [1]
       }
     ]
 
@@ -38,7 +38,7 @@ describe('Validation Functions', function () {
   describe('validateQuestion()', function () {
     /** @type {Omit<Question, 'answer'>} */
     const mockQuestion = {
-      type: 'single-answer',
+      type: 'multiple-choice',
       text: 'What is 2 + 2?',
       explanation: '2 + 2 equals 4.',
       choices: [
@@ -55,7 +55,7 @@ describe('Validation Functions', function () {
   describe('validateChoices()', function () {
     /** @type {Pick<Question, 'type'|'choices'>} */
     const mockQuestion = {
-      type: 'single-answer',
+      type: 'multiple-choice',
       choices: [
         { text: 'choice 1', correct: false },
         { text: 'choice 2', correct: true }

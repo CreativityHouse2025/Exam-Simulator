@@ -1,6 +1,6 @@
 [
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A real estate organization conducts a monthly review of its strategic project portfolio.nnn n n Project An Project Bn n n n n Start daten March 2016n May 2017n n Expected completion daten April 2019n July 2020n n n Project managern PM-An PM-Bn n nnnDuring a review in March 2018, it was found that Project B is experiencing problems that had previously not been identified in its risk management process. With Project A starting approximately one year prior, what information should be requested from Project A so that Project B may take preventive and/or corrective actions?",
     "explanation": "The Lessons Learned Repository contains knowledge and experience gathered from a previous project (Project A), which helps Project B to identify potential challenges and risks and how to deal with them based on real experiences.\n\n- Why are other options wrong?\n- Work performance reports: Reflect the current state of the project and do not provide information on how to deal with past risks.\n- Issue log: focuses only on specific issues and not on how to manage them.\n- List of activities: not related to risks but to work schedules.",
     "choices": [
@@ -23,7 +23,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "After the kickoff meeting for an industrial project, the assigned project manager must lead the team in identifying project risks. As team members are distributed in 6 countries, which risk identification method is best used in this situation?",
     "explanation": "Delphi technology allows expert opinions to be collected independently and confidentially, and is especially useful when the team is geographically distributed, as sessions can be managed via remote means of communication.\n\n- Why are other options wrong?\n- Convergence aggregation scheme: usually needs face-to-face sessions.\n- Decision tree analysis: used to analyze options and not to identify risks.\n-  Monte Carlo analysis: used for quantitative analysis after identifying risks, not to identify them.",
     "choices": [
@@ -46,7 +46,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Several team members are discussing the project manager's management techniques and the team cannot agree if the focus is on management or leadership. What is the valid option?",
     "explanation": "The project manager needs to combine leadership and management skills together. He leads the team towards the goal (leadership) and controls resources, schedules, and processes (management). Focusing on only one aspect does not reflect the role of the project manager in a balanced way.\n\n- Why are other options wrong?\n- Acts as a manager because it focuses on control: This is only part of his tasks.\n- He acts as a leader because he brings people together: this is one aspect but not everything.\n- He acts as a manager because he enters into commands: not accurate as an overall answer.",
     "choices": [
@@ -69,7 +69,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is managing the build of an off-shore data center. In addition, the project manager is the custodian of the assets procured by the project. The project manager is informed by a team member that an asset was lost, and the team member is ready to pay for the missing asset.nnHow should the project manager handle this situation?",
     "explanation": "Loss of assets is a serious project liability issue and should be dealt with formally in accordance with policies and not individually. Opening an investigation helps to find out the real cause and address any gaps.\n\n- Why are other options wrong?\n- Ask the team member to purchase a replacement asset: This is an informal act and does not guarantee transparency.\n- Inform the customer and purchase the asset: It overrides the management role and may hide the cause of the problem.\n- Reporting only to management without the customer: Not sufficient in complex projects such as this type.",
     "choices": [
@@ -92,7 +92,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is leading a complex initiative with diverse stakeholders and must cultivate strong stakeholder relationships. The project manager also has to build a shared understanding of the project with all stakeholders.nnWhat should the project manager do?",
     "explanation": "Interactive workshops help bring stakeholders together in one place to discuss goals and expectations, help resolve conflicts and build a common understanding quickly and effectively.\n\n- Why are other options wrong?\n- Stakeholder map exercise: useful but does not directly build relationships.\n- Formal presentations: A one-way medium and does not guarantee interaction.\n- Distribution of documents: They do not necessarily have to be read or understood in an integrated manner.",
     "choices": [
@@ -115,7 +115,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "You are managing a project with significant regulatory aspects. A vendor responsible for a core module is undergoing an organization-wide transformation and it is unlikely that the deliverable will be ready on time. Your risk mitigation plan is to use paper forms until the module is implemented but this strategy is likely to slow down the frontline interactions.nnWhat kind of risk could you introduce to the project?",
     "explanation": "Secondary risk is a risk that arises as a result of implementing a response to another risk. Here, a decision was made to use paper forms to minimize the impact of resource lag, but this same decision brought a new risk of slow interaction with users.\n\n- Why are other options wrong?\n- Residual risk: It is a risk that cannot be completely eliminated even after the implementation of the response plan, and this is not the case here.\n- The primary risk: relates to the original risk, which is the delay of the supplier, but the question focuses on the risk resulting from the response plan.\n- Compliance risk: relates to legislation and laws, and is not related to the current situation.",
     "choices": [
@@ -138,7 +138,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Throughout the life cycle of a project, the project manager will normally face problems, gaps, inconsistencies, or conflicts that occur unexpectedly. This requires some action so that project performance is not impacted.nnWhich project document will be used to record and track this?",
     "explanation": "Issue Log is the official tool used by the project manager to document and track problems and conflicts that arise during project execution until they are resolved.\n\n- Why are other options wrong?\n- Risk log: Used to document potential events before they occur and not actual problems.\n- Lessons learned: usually occurs at the end of the project or phases and not while dealing with a direct problem.\n- Project management plan: contains strategies, not details of day-to-day problems.",
     "choices": [
@@ -161,7 +161,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "What leadership quality must a project manager have?",
     "explanation": "Honesty and transparency are the most important qualities of a successful leader, because they build trust between him and the team and stakeholders.\n\n- Why are other choices wrong?\n- Aggressiveness: It is not a positive leadership trait and negatively affects the work environment.\n- Force: If not used wisely, it becomes control instead of leadership.\n- Service leader: It is a leadership style and not a specific characteristic, and includes more than one aspect such as support and guidance.",
     "choices": [
@@ -184,7 +184,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A key stakeholder has submitted several requests for new functions for a product under development. The project manager just completed the scope definition for the product's next version release and communicated the scope statement to all stakeholders.nnWhat should the project manager do next?",
     "explanation": "When stakeholders submit new requests after submitting the scope statement, the project manager should refer to the domain management plan to see the specific process for evaluating and addressing these changes.\n\n- Why are other options wrong?\n- Review the communication management plan: It is not the primary reference for dealing with domain changes.\n- Review acceptance criteria: These are used to verify product acceptance after completion, not to review new applications.\n- Meeting with stakeholders: comes later after determining how to handle changes via the domain management plan.",
     "choices": [
@@ -207,7 +207,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "At the end of an iteration, a team member tells the project manager that a planned task is unfinished because of an issue that appeared days ago but could not be resolved. Why should the project manager discuss the issue during the retrospective to prevent this type of situation in the future?",
     "explanation": "The Retrospective meeting is dedicated to reviewing what happened during the course and identifying opportunities for collective improvement.\n\n- Why are other options wrong?\n- Processing during demo (demo): The presentation is for displaying achievements and not solving problems.\n- Solving the problem before the meeting: If it is not resolved, it should be discussed during the meeting and not relying on an individual solution.\n- Emphasize the use of time: not the primary goal of the review, but to improve processes continuously.",
     "choices": [
@@ -230,7 +230,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "The stakeholders and project team working on an agile project meet with the project manager at the end of an iteration. The project manager learns that the schedule is slipping, although all work was planned to meet the high-level objectives outlined in the project scope.nnWhat should the project manager have done to keep the project on track?",
     "explanation": "In agile projects, enabling the team to organize itself is a basic principle, which helps them manage the work in an effective way and achieve the set goals.\n\n- Why are the other options wrong?\n- Work with the team to understand their expectations: This is necessary at first, but it does not solve the problem of delay.\n- Prioritize work that can be completed early: This may lead to a loss of focus on real priorities.\n- Selection and arrangement of work to achieve general goals: This is the responsibility of the product owner, not the project manager.",
     "choices": [
@@ -253,7 +253,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "The director of security compliance is upset because the compliance team has not been informed about the product design decisions taken by the agile team members over the past five iterations.nnWhat should the project manager do to start correcting the situation?",
     "explanation": "This step helps you understand compliance needs and determine an appropriate way to integrate them into the workflow.\n\n- Why are other options wrong?\nInvite a representative to attend daily meetings: It may not be enough to solve the problem, but a clear plan is needed.\n- Request a full-time representative: An ineffective solution without strategic coordination first.\n- Request a budget increase: It is not a direct solution, and the priority is to address the root cause first.",
     "choices": [
@@ -276,7 +276,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is responsible for a new agile project that is global in nature. After a few sprints have been completed, the quality assurance team, based in a different country from the PM, has generated a long defect list. The PM is certain that these issues are not related to project quality, but are from language misinterpretation.nnWhat should the project manager do to address these issues",
     "explanation": "When there are differences caused by misunderstandings between international teams, the best procedure is to jointly review the requirements to ensure that everyone has the same understanding.\n\n- Why are other options wrong?\n- Request additional budget for a local team: Increases the cost without addressing the cause.\n- Merge teams at the end: Too late and does not solve the communication problem.\n- Meeting to criticize the quality assurance team: unconstructive and will affect the relationship between teams.",
     "choices": [
@@ -299,7 +299,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager and team have worked together in a predictive project management environment for five years. The organization has decided to implement agile project management and trains the project manager on this approach. The team begins their next project using agile, but after five sprints the team is still dependent on the project manager to make decisions related to the project.nnHow can the project manager help the team?",
     "explanation": "The team needs to develop its confidence and ability to make decisions on its own. The role of the project manager in Agile is to guide, not decide about the team.\n\n- Why are other options wrong?\n- Provide periodic feedback: This promotes dependency rather than independence.\n- Inform them only: without practical training or guidance will not help.\n- Appointing another team: Expensive and neglects the development of the current team.",
     "choices": [
@@ -322,7 +322,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager has started a new project with a 24 month timeline. Soon after the kickoff, the sponsor informs the project manager that the timeline needs to be shortened to 6 months.nnWhat should the project manager do in this scenario?",
     "explanation": "Shortening the project duration in this way requires focusing on the launchable minimum instead of trying to complete everything.\n\n- Why are the other options wrong?\n- Identifying quickly deliverable items without considering value may produce a useless product.\n- Increasing budget and hiring suppliers: may not be available.\n- Fast-track application: This type of radical change may not be appropriate.",
     "choices": [
@@ -345,7 +345,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project team has an after-hours get-together. One of the team members who was recently hired and new to the team did not receive an invitation to the get-together. At the next few standups, the new employee is visibly upset and does not participate much during the sessions.nnHow should the project manager address this situation?",
     "explanation": "Direct communication with the employee is the most appropriate way to understand their feelings and provide support, which helps to improve the relationship and integrate into the team.\n\n- Why are other options wrong?\n- Organizing another gathering: does not address the real cause of the problem.\n- Asking the employee to participate immediately: may increase the pressure on them.\n- After-work meeting: informal and the employee may not feel comfortable.",
     "choices": [
@@ -368,7 +368,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager has been assigned to a big project. The project sponsor would like the project manager to perform a stakeholder analysis.nnWhich points should the project manager consider while performing this analysis?",
     "explanation": "These aspects give a comprehensive picture of how stakeholders influence the project and how they are managed.\n\n- Why are other options wrong?\n- Contains unnecessary or imprecise elements within stakeholder analysis, such as ownership or knowledge only.",
     "choices": [
@@ -391,7 +391,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A team member is working on a critical task for a project, and approaches the project manager immediately before the start of a project meeting and informs the project manager that the task was not completed on time.nnWhat should the project manager do?",
     "explanation": "This approach stimulates teamwork and transparency in finding a solution.\n\n- Why are other options wrong?\n- Firing a team member: Unprofessional method.\n- Reallocating individually: May lead to unbalanced decisions.\n- Send email: Not immediate and may not be effective in an urgent situation.",
     "choices": [
@@ -414,7 +414,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During nondestructive testing at a construction site, it was discovered that certain components are failing workability tests. The project team has identified the root cause of these failures and proposed a solution. However, the project deadline is tight and the solution would require an increase in the budget.nnWhat should the project manager do?",
     "explanation": "When it appears that the proposed solution will affect the budget and schedule, you must follow the formal procedures for the project by submitting a change request. The Change Control Committee is responsible for evaluating and approving or rejecting these changes, which keeps the change management process organized and ensures alignment with project objectives.\n\n- Why are other options wrong?\n- Invite suppliers to provide low-cost solutions that do not guarantee approval or timeliness.\n- Requesting additional funding directly without change approval may result in budget overruns without oversight.\n- Updating the risk management plan is only useful after the change is approved, and it does not directly solve the problem.",
     "choices": [
@@ -437,7 +437,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project is experiencing delays because cultural differences are causing misunderstandings among some stakeholders.nnWhat should the project manager do to handle this situation?",
     "explanation": "Cultural differences require customized communication strategies that ensure a clear understanding between all parties. Review the stakeholder engagement plan Enables the project manager to modify communication methods, organize trainings or workshops to improve understanding and interaction, reducing misunderstandings and helping to speed up the project.\n\n- Why are other options wrong?\n- Reviewing the stakeholder register does not address the root causes of the problem.\n- Requesting a change to replace stakeholders is impractical and may lead to greater complications.\n- Monitoring communication only is insufficient without active intervention to improve it.",
     "choices": [
@@ -460,7 +460,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A company has been following a predictive approach and always waits for the preceding phase to be completed before evaluating the quality of their products. A new project manager with experience in hybrid approaches has been assigned to help increase the efficiency of the company's quality management process.nnWhat should the new project manager do to address the process improvements?",
     "explanation": "In order for a project manager to effectively improve the process, he must be fully aware of the technical and practical details and dependencies that affect product quality. This understanding helps in developing appropriate solutions that enhance process efficiency without disrupting workflow or overflowing resources.\n\n- Why are other options wrong?\n- Continuing the process as it is hinders opportunities for improvement and development.\n- Defining a general rule for compliance may not cover the specific characteristics of the company or project.\n- Discussing improvement with PMO only may overlook the opinions of the team working directly on the process.",
     "choices": [
@@ -483,7 +483,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project approval committee is concerned about a project plan that will take three years to complete. The committee is concerned that the deliverable may not meet industry needs and may be less valuable than anticipated.nnWhat can the project manager do to demonstrate the value of the deliverable to stakeholders?",
     "explanation": "Prototype allows stakeholders to see the prototype product and better understand its value, reducing concerns and boosting confidence in the project.\n\n- Why are other options wrong?\n- Adding an additional race may delay the project and not guarantee value improvement.\n- Recording concerns does not address anxiety but only documents.\n- Adding the committee to the communications plan does not directly solve the problem.",
     "choices": [
@@ -506,7 +506,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is on a hybrid project. The project manager meets with the sponsor to get the project milestones. The sponsor requests for more specific information in the project charter.nnHow should the project manager respond to this request?",
     "explanation": "Charter is the official document that gives the project permission to start and defines its scope and objectives, and must be approved before going deeper into detailed planning to ensure clarity of expectations.\n\n- Why are other options wrong?\n- Submitting a similar charter is not appropriate because each project is unique.\n- Approving the schedule first without a charter may lead to misunderstanding.\n-  The sponsor's invitation to review the team is ineffective without approved documentation.",
     "choices": [
@@ -529,7 +529,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Midway through a project, a project manager learns that the project management planning application is failing to record updates to the project. What should the project manager do in this situation?",
     "explanation": "Since the application is not working properly, you must modify the plan to ensure that the team focuses on critical tasks that achieve project goals, while reducing reliance on the application until it is fixed.\n\n- Why are other options wrong?\n- Assigning a member to manually update the plan may increase the burden and create errors.\n- Inform the PMO and request a solution that may take time and not address the immediate issue.\n- Logging the issue and working on a new application may prolong the delay without an immediate solution.",
     "choices": [
@@ -552,7 +552,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Operations for a new technology-based project are being transitioned to a new project team. Early in the execution phase, the project manager discovers major gaps in the documentation, which will hamper knowledge transfer. The solution launch date cannot be delayed, and the budget cannot be increased.nnHow should the project manager structure the project to optimize the work within the project constraints?",
     "explanation": "Agile races and kanban technology help organize work in a flexible way that allows continuous learning and early detection of problems, which improves performance within constraints.\n\n- Why are other options wrong?\n- Multiplying the team increases the cost and is not allowed.\n- Separating knowledge transfer and testing may cause delays.\n- Margin cancellation and strict replanning may put excessive pressure on the team.",
     "choices": [
@@ -575,7 +575,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During the execution phase of a project, a change in the baseline requirements needs to be done. As the project manager, which of the following is necessary to be performed?",
     "explanation": "Change management ensures that changes are evaluated, approved, and documented to ensure that they have an appropriate impact and do not negatively affect the project.\n\n- Why are other options wrong?\n- Re-estimate is a later step after the action is activated.\n- Validating the change is part of the procedure but not the first step.\n- Root cause analysis may not be necessary for every change.",
     "choices": [
@@ -598,7 +598,7 @@
     ]
   },
   {
-    "type": "multiple-answer",
+    "type": "multiple-choice",
     "text": "Which two decision-making styles are quickest and would be used when there is little time to make a decision? (check two choices)",
     "explanation": "These two methods allow quick decision making without the need for lengthy discussions.\n\n- Why are other options wrong?\n- The consultative method needs more time to gather opinions.\n-  The consensus method requires full consensus, and it is slower.",
     "choices": [
@@ -621,7 +621,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During a project status meeting, the project manager discovers that stakeholders have different expectations that are not aligned. None of these expectations have been met, which has created tension in the meeting.nnWhat should the project manager do to keep things moving on the project?",
     "explanation": "Special meeting allows discussion of different expectations in a calmer environment, and updating the matrix of responsibilities clarifies roles and responsibilities and reduces stress.\n\n- Why are other options wrong?\n- Updating the risk log does not directly resolve conflicting expectations.\n- The mailing request is immediate and does not resolve current disputes.\n- Viewing alignment with the workload structure does not address the difference in expectations.",
     "choices": [
@@ -644,7 +644,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager has been assigned to a new project that revisits a previously completed project. Why should the project manager refer to the previous project lessons learned knowledge base and historic information first?",
     "explanation": "Knowledge of previous problems helps to avoid recurrence and improve the layout of the new project.\n\n- Why are other options wrong?\n- Identifying resources is not the primary goal of lessons learned.\n- The definition of project requirements is based on a broader study and not just lessons.\n- Budgeting needs deeper analysis than historical data only.",
     "choices": [
@@ -667,7 +667,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A functional manager wants to use resources already allocated to a project. What should the project manager of that project do?",
     "explanation": "Negotiation helps to find a solution that balances project needs with available resources, and maintains the relationship with the managing director.\n\n- Why are other options wrong?\n- Escalation may cause unnecessary tensions.\n- Requesting a postponement of the Managing Director's project is not always practical.\n- Accepting delays without negotiation may adversely affect the project.",
     "choices": [
@@ -690,7 +690,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A new project is about to start and is subject to strict time and budget constraints. When reviewing the lessons learned repository, the project manager learns that constant scope creep caused a similar project to fail.n What should the project manager do now to avoid project failure?",
     "explanation": "Having a formal change management process helps control the scope of the project and prevents random changes that may lead to project failure.\n\n- Why are other options wrong?\n- Rejecting change requests outright may reduce project flexibility and create tensions with stakeholders.\n- Managing stakeholder expectations to exclude change entirely is unrealistic, because change is a natural part of the project.\n- Adjusting the scope and schedule in advance without a clear process may lead to a lack of planning and stakeholder dissatisfaction.",
     "choices": [
@@ -713,7 +713,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project is entering the user acceptance testing phase. After several business end users raised questions and concerns, the project manager discovered that critical business requirements were omitted from the business requirements analysis.nnnnWhat should the project manager do to resolve this issue?",
     "explanation": "The Change Control Committee is the body responsible for reviewing new applications and evaluating their impact on the project before making a decision.\n\n- Why are other options wrong?\n- Interviewing only the team will not solve the problem of omission of requirements.\n- Modifying the requirements management plan and informing stakeholders may be necessary but comes after CCB approval.\n- Informing the sponsor of users' concerns is indirect and does not address the problem immediately.",
     "choices": [
@@ -736,7 +736,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "While developing the initial schedule baseline, the project manager learns that a functional manager reassigned two resources needed for a critical task to another strategic project. What should the project manager do?",
     "explanation": "Direct negotiation with the job manager helps to find compromise solutions without escalating or disrupting the workflow.\n\n- Why are other options wrong?\n- Conducting a quantitative risk analysis is useful but comes after trying to resolve the problem.\n-  The request for review of reallocation by the CCB is inappropriate because it is not a formal change by the project.\n- Escalating the matter to the project sponsor may be a subsequent step if direct negotiations fail.",
     "choices": [
@@ -759,7 +759,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager has been assigned to a newly approved multi-national project. The successful implementation of the project relies on deliverables from a variety of departments.nnWhat is the most important thing the project manager can do to ensure the successful implementation of the project?",
     "explanation": "Compatibility of functional managers is necessary to secure resource support and ensure effective collaboration across departments.\n\n- Why are other options wrong?\n- Setting communication rules and developing a project plan are important tasks, but they come after providing administrative support.\n- Facilitating information gathering sessions is important, but it does not guarantee the support of key departments.\n- Developing a resource management plan is a next step that depends on the support of functional managers.",
     "choices": [
@@ -782,7 +782,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A stakeholder requests more frequent and detailed project status reports than a previous agreement. The stakeholder also expresses interest in getting more involved with the project.nnHow should the project manager address this situation?",
     "explanation": "Update the communication plan ensures that new expectations of stakeholders are clear and documented, and enhances team consensus on how to present information, improving communication and reducing ambiguities.\n\n- Explain other options:\n\n- Provide an update and send reports immediately:\nIt may cause an increase in work without alignment with the team and does not ensure the sustainability of communication.\n\n- Update the stakeholder engagement assessment matrix:\nIt does not address the way information is presented or aligned with the team, it only assesses the level of engagement.\n\n-  Stakeholder Cube Development:\nA useful tool but does not address the current problem of changing reporting and communication requirements.",
     "choices": [
@@ -805,7 +805,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A team for a project is composed of individuals from different backgrounds, ages, and interests. The team is struggling to work together.nnnnHow would you meet with the team to develop mutual values and a shared vision enable the project manager to facilitate better teamwork?",
     "explanation": "When the team meets to develop shared values and vision, each member can express their priorities, creating a culture of mutual respect, and facilitating communication.\n\n- Explain the rest of the options:\n\n-  A formal meeting with the team to discuss the importance of teamwork:\nImportant but it may be formal and does not change different backgrounds or resolve real conflicts.\n\n- Understand each member's point of view to identify areas of training:\nA good step, but it comes after establishing common values, otherwise training may not be effective.\n\n- Develop the manager's understanding of the project objectives: \nNecessary, but it does not guarantee team communication or a common culture among its members, and focusing on the manager only does not solve the team's problems.",
     "choices": [
@@ -828,7 +828,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager learns that a stakeholder thinks that only certain stakeholders are getting all the project updates and feels left out of the information loop. What should the project manager do?",
     "explanation": "Review the communication management plan helps verify that all selected stakeholders receive the right information at the right time, reducing the sense of exclusion and improving transparency.\n\n- Explain the rest of the options:\n\n- Prepare a status report and send it to everyone:\nGood procedure but may not solve the problem if the communication plan itself is incomplete or not up to date.\n\n- Meeting with stakeholders to compare information:\nIt may lead to conflicts and depends on voluntary cooperation, not a systematic solution.\n\n- Modify the communications strategy to distribute reports more frequently:\nIt is not necessary that redundancy be the problem, but distribution and inclusiveness in the plan.",
     "choices": [
@@ -851,7 +851,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager identifies a risk during the implementation phase of a project which was not anticipated during planning. How would facilitate a brainstorming session allow the project manager to mitigate the risk while keeping the project on schedule?",
     "explanation": "Brainstorming sessions quickly gather diverse ideas from the team, helping to find innovative solutions or risk reduction strategies without delaying project progress.\n\n- Explanation of other options:\n\n- Application of qualitative data analysis techniques:\nInaccurate here because brainstorming focuses on generating ideas, not analyzing data.\n\n- New assumptions from stakeholders:\nIt may not be associated with an effective brainstorming session or may delay the process.\n\n- Brainstorming on additional funding:\nis not the primary goal of brainstorming, and may not always be possible under project constraints.",
     "choices": [
@@ -874,7 +874,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "While reviewing the quality of deliverables with the team, the project manager determines that several quality issues could have been avoided by using a checklist. The project manager implements a checklist to ensure future deliverables would align with the project management plan.nnnnWhat did the project manager do in this situation?",
     "explanation": "Corrective action is a step taken to prevent recurrence of previously detected problems, such as implementing a checklist to ensure the quality of output in the future.\n\n- Explain the rest of the options:\n\n- Define new quality metrics: It may help in the future but does not directly address the current issue.\n\n- Facilitate the post-implementation review meeting: Important for improving processes but does not prevent the problem from recurring currently.\n\n- Convening a meeting to draw lessons learned: necessary for future improvement but a next step after addressing the problem.",
     "choices": [
@@ -897,7 +897,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A complex project is in the planning phase. The sponsor assigns a newly certified project manager to the project. Upon review of the project charter, the project manager uncovers several factors that could impact the project in unpredictable ways.nnnnWhat should the project manager do?",
     "explanation": "Develop a risk management plan that allows identifying, evaluating and monitoring these factors and their potential impact on the project, which helps in reducing or responding to risks effectively.\n\n- Explanation of the rest of the options:\n\n- Update the project plan with schedule and budget: necessary but does not directly address potential risks.\n\n- Inform the sponsor of potential impacts: important but a complementary step after developing a risk plan.\n\n- Expanding the problem record by analyzing what if: useful but less comprehensive than a full risk management plan.",
     "choices": [
@@ -920,7 +920,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A complex manufacturing project has multiple stakeholders in multiple locations. The project is entering a high-activity phase and the project manager needs to ensure that all stakeholders are kept informed with timely updates.nnWhat should the project manager do first?",
     "explanation": "Updating the communication management plan is the first step to ensuring that there is a structured and reliable mechanism for communicating information to all stakeholders according to a specific schedule, reducing the risk of miscommunication.\n\n- Explain the rest of the options:\n\n- Schedule training sessions: important but does not guarantee improved immediate communication.\n\n- Determining the most appropriate technology: Important, but after determining the communication plan.\n\n- Scheduling regular status reports:  Good but it's part of the communications plan that needs to be updated first.",
     "choices": [
@@ -943,7 +943,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During the planning phase for the expansion of a services company, stakeholders conducted a feasibility study to establish the type of new service the company should provide. During an alternatives analysis, another type of service was determined to be more effective. The change control board (CCB) has approved the change request for the alternative service.nnnnWhat should the project manager do?",
     "explanation": "Once the change monitoring committee approves the change, it is the responsibility of the project manager to implement the change as per the approval to ensure that the project objectives are achieved and the required value is achieved.\n\n- Explanation of the rest of the options:\n\n- Modify the change: may cause delay or complication without new approval.\n\n- Request for justification from the committee: Not necessary after approval.\n\n- Perform cost-benefit analysis:  It should have been done before the change was approved.",
     "choices": [
@@ -966,7 +966,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "The project sponsors for a multinational project have put a process in place that generates emails and reports at the end of each phase. The goal is to ensure the project remains unified across the company. The company plans to use the process as a model for future, similar projects.nnnnWhat should the project manager do?",
     "explanation": "Update the communication management plan ensures that the way these messages and reports are sent is documented and organized, supporting standardization and ensuring consistent communication between all teams and stakeholders.\n\n- Why are other options wrong?\n- Include a formal signature: does not address the issue of communication standardization.\n- Holding case meetings: may be useful but not the first step.\n- Update stakeholder engagement plan: does not focus directly on the required communication process.",
     "choices": [
@@ -989,7 +989,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A large project involving functional groups in four countries is nearing completion. The project manager is meeting with the functional managers to prepare closeout documents.nnnnWhy should the project sponsor sign off on the acceptance of project deliverables?",
     "explanation": "The project sponsor is the highest decision-maker and has the financial and administrative authority to formally accept the project outputs, ensuring commitment and accountability.\n\n- Why are other options wrong?\n- Communication with the customer: is not his sole responsibility.\n- Functional managers: do not have final powers to consent.\n- Geographical location: does not affect official permissions.",
     "choices": [
@@ -1012,7 +1012,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "After completing a project, the team meets to conduct a lessons learned session. During this meeting, the team sees that all deliverables were completed to the defined parameters. However, during the testing, there were a large number of errors identified.nnWhat should the project manager have done in this situation?",
     "explanation": "Monte Carlo analysis helps assess the impact of errors on the project and its future by simulating multiple scenarios, enabling the team to make informed decisions to mitigate risks in future projects.\n\n- Why are other options wrong?\n- Meeting with the test team: important but does not provide an adequate analysis of the severity of the problem.\n- Mitigation strategy evaluation: preceded by a comprehensive understanding of the risks using analysis tools.\n- Including errors in the risk log: a necessary but not sufficient step without a thorough analysis.",
     "choices": [
@@ -1035,7 +1035,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is working on an agile project. The project has 100 user stories broken down into ten iterations. Each user story is worth US$100. The actual expenditure is US$4,500 and 50 user stories have been delivered after 5 iterations.nnWhich statement is accurate?",
     "explanation": "50 out of 100 user stories were delivered after five cycles, which means progress is on schedule (50%). As for the budget, $4,500 was spent against $5,000 planned (50 stories × $100), so the budget is under control.\n\n- Why are the other options wrong?\n- Project delayed or advanced: Percentage of completion matches the schedule.\n- Budget overrun: Spending less than budget.",
     "choices": [
@@ -1058,7 +1058,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is assigned to join a mega industrial project already underway. The latest performance indices are CPI=0.42 and SPI=0.20. This project is:",
     "explanation": "CPI (cost performance index) below 1 means that the cost is higher than planned, and SPI (timeline performance index) less than 1 means lag in the schedule.\n\n- Why are the other options wrong?\n- Performance indicators indicate cost lag and overrun, not progress or under budget.",
     "choices": [
@@ -1081,7 +1081,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During an iteration the team realizes that the project will overrun the budget. This is due to the support resources being involved for longer than planned. Company policy requires immediate notification when there is any change to the budget.nnWhat should project manager do to manage the project budget?",
     "explanation": "Involving the team in reducing resource usage helps control cost without the need for formal changes or reducing the quality of work.\n\n- Why are other options wrong?\n- New budget estimate: A next step after trying to control costs.\n- Suddenly reducing resources: It may negatively affect the quality of work.\n- Risk acceptance: It may lead to financial problems if costs exceed the limits significantly.",
     "choices": [
@@ -1104,7 +1104,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is assigned a project for a customer with a history of being demanding and unclear about requirements. The customer has refused to accept previous deliverables without providing clear feedback.nnHow should the project manager proceed with this project?",
     "explanation": "MVP identification ensures clarity of requirements from the outset, reduces the risk of uncertainty of customer expectations, and helps focus on the core values that the customer expects.\n\n- Why are other options wrong?\n- Meeting with the sponsor only without involving the customer will not solve the problem of ambiguity of requirements.\n- Implementing an iterative approach alone without agreement on the MVP may lead to repeated rejection.\n- Stopping the project causes losses and does not reflect an effective management methodology.",
     "choices": [
@@ -1127,7 +1127,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is running an agile project that is half completed. During the most recent sprint retrospective, the team members see that they worked more hours than were originally scheduled.nnHow should the project manager address this situation?",
     "explanation": "Agile management relies on continuous improvement through review meetings and subsequent planning. Determining the cause is an essential step to improving performance and reducing drain.\n\n- Why are other options wrong?\n- Recording overtime does not solve the root cause.\n- Requesting additional members may be costly and unnecessary if the reason is planning.\n- Enabling the team alone without leader intervention may cause the problem to be ignored.",
     "choices": [
@@ -1150,7 +1150,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Which agile project parameter is least likely to change during project execution?",
     "explanation": "The vision of the project expresses the primary strategic goal that the project seeks to achieve. Even in changing and adaptive Agile environments, visibility remains constant for reference.\n\n- Why are other options wrong?\n- The definition of achievement may change according to priorities.\n- The product owner can be changed according to business conditions.\n-  The product record (Backlog) is constantly changing according to priorities and needs review.",
     "choices": [
@@ -1173,7 +1173,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "An agile team finds it difficult to complete a checklist because they have different interpretations of what the project aims to achieve. How can the project manager help them gain a common understanding of the project's overall purpose?",
     "explanation": "The project vision clarifies the overall goal and strategic purpose of the project. In Agile environments, if the team doesn't understand the purpose clearly, returning to the project vision helps them focus on what's really important.\n\n- Why are other options wrong?\n- Reviewing the full list of user stories helps with details, but does not clarify the general purpose.\n-  The  agile manifesto sets out general principles but does not give a project-specific vision.\n-  The Sprint Retrospective review is intended for internal improvement, not to clarify the vision of the project.",
     "choices": [
@@ -1196,7 +1196,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A team member informs the project manager during a project meeting that a due task was not completed on time because of a last-minute work crisis.nnWhat should the project manager do?",
     "explanation": "Professional behavior requires objectively assessing the situation with the team, whether by rescheduling or redistributing work. This maintains transparency and flexibility.\n\n- Why are other options wrong?\n- Checking task dependency is important, but it alone is not enough to decide the next step.\n- Asking to work overtime without discussion may harm the team.\n- Intervening team members without a clear plan may cause additional confusion.",
     "choices": [
@@ -1219,7 +1219,7 @@
     ]
   },
   {
-    "type": "multiple-answer",
+    "type": "multiple-choice",
     "text": "In a scaled agile framework, which responsibilities of a release train engineer can be performed by a project manager? (Choose 3).",
     "explanation": "Release Train Engineer (RTE) is responsible for facilitating the work of teams within the train and ensuring that work progresses smoothly, including:\n1. Manage risk to ensure that negative impacts are minimized.\n2. Escalate obstacles that cannot be solved at the team level.\n3. Support continuous team-level improvement to increase efficiency.\n\n- Why are other options wrong?\n- Guidance on global technical excellence is not a direct part of RTE's role, but rather an architectural or technical role.\n- Guidance on global continuous improvement concerns senior levels of the organization, not a direct responsibility of RTE.",
     "choices": [
@@ -1246,7 +1246,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A software developer who is working on a critical component has to take emergency leave from the project. Due to time constraints, the project manager cannot hire a new replacement developer for the team.nnWhat should the project manager do to manage the situation?",
     "explanation": "In agile environments, teams rely on collaboration and work distribution based on available capabilities. When an individual is absent, the team as a whole must reorganize itself to distribute tasks instead of relying on one person.\n\n- Why are other options wrong?\n- Moving the critical component to the final cycle may delay the project and expose it to risks.\n- The request to extend the project is contrary to the principles of flexibility and adaptation in Agile.\n-  The extension of the time cycle reduces efficiency and affects the  cadence of the team, and is against the principles of Agile.",
     "choices": [
@@ -1269,7 +1269,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager needs to hire suppliers for an international project that has a performance period of several years. The project manager needs to allow for conditions such as changes in inflation rates.nnWhat type of contract should the project manager use?",
     "explanation": "This type of contract (Fixed Price with Economic Price Adjustment) allows price adjustments related to external changes such as inflation, change in the price of raw materials, or new taxes.\n\n- Why are other options wrong?\n-  A time and material contract (T&M) that places risk on the buyer because it pays by time and materials without protection from budget overruns.\n- CPFF (Cost Plus Fixed Fee) is suitable when costs cannot be accurately estimated, but it does not provide adjustment due to inflation.\n- FPIF (Fixed Price Incentive Fee) links rewards to a certain performance but does not address the subject of inflation directly.",
     "choices": [
@@ -1292,7 +1292,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During project initiation, the project manager learns that a key stakeholder will leave the project for a month to consult on another strategic project.nnWhat should the project manager do first?",
     "explanation": "Issue Log is the appropriate tool to document this type of absence because it may affect decisions or the adoption of some outputs. After documentation, everyone must be informed to ensure that the team is prepared for this absence.\n\n- Why are other options wrong?\n- Requesting an alternative directly may be premature before the assessment.\n- Conducting an interview to gather information is good, but the priority is documentation and reporting.\n- Updating the risk management plan is not the first action but later after the case has been documented.",
     "choices": [
@@ -1315,7 +1315,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project's statement of work (SOW) requires that the project be delivered in nine months. The project manager believes that the timeline is not realistic.nnWhat should the project manager do?",
     "explanation": "The project manager must first verify his belief by consulting with subject matter experts (SMEs) who possess the necessary technical knowledge, as well as discussing this with the project sponsor to ensure that expectations are based on reality and not on assumptions.\n\n- Why are other options wrong?\n- Engaging the Change Control Committee (CCB)  is an advanced step that is later taken when needed to implement formal changes.\n- Submitting a request for additional resources and budget directly without prior evaluation may not be acceptable.\n- Negotiating with the sponsor about the timetable must first be based on expert advice and careful evaluation.",
     "choices": [
@@ -1338,7 +1338,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During project execution, the team finds that changes must be made to a component sourced from an outside supplier. The component is being used in the project.nnWhat should the project manager do?",
     "explanation": "In cases involving components purchased from external vendors, you should always first refer to the contractual terms and procurement management plan to confirm the rights and obligations related to the changes.\n\n- Why are other options wrong?\n- Meeting with the vendor is not the first step but comes after confirming the terms.\n- Listing risks is a next step, but it is not the priority.\n- Processing a change request internally before confirming the contract may lead to legal or financial problems.",
     "choices": [
@@ -1361,7 +1361,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project is in the execution phase when the project manager needs to assign new resources to the existing project team. What should the project manager do to ensure the team works effectively and meets project requirements on time?",
     "explanation": "When introducing new members to an existing team, it's important to integrate skills development activities to create harmony and improve team performance. This includes training new members and integrating them with the rest of the team.\n\n- Why are other options wrong?\n- Creating a service library is not directly related to the integration of new resources.\n- Brainstorming sessions may be useful for ideas, but they do not address the issue of team integration.\n- Monitoring team cohesion is important but a follow-up step, and should be preceded by skills development activities first.",
     "choices": [
@@ -1384,7 +1384,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is assigned to a new multinational project. This will be the project manager's first time working with team members from different countries.nnWhat should the project manager do to prepare themselves for the project?",
     "explanation": "In international projects, especially when dealing with multinational teams, cultural awareness is an essential part of ensuring cooperation and respect between all parties. Cultural sensitivity training helps the project manager understand different habits and expectations and communicate better with everyone.\n\n- Why are other options wrong?\n- Reviewing language skills may be useful but not enough without awareness of culture.\n- Team building exercises are a next step after understanding cultural backgrounds.\n- Developing an awareness of local customs is a general idea but does not replace specialized training.",
     "choices": [
@@ -1407,7 +1407,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "The owner of a consulting company initiates a project to expand the number of services the company provides. The company has a competitive advantage, outstanding expertise, and an excellent reputation. The executive team wants to evaluate and rank criteria such as uncertainty and valuation regarding the addition of these new services.nnWhich technique should the project manager use to help the company make this evaluation?",
     "explanation": "Multi-Criteria Decision Analysis (MCDA) is used to rank or evaluate multiple options based on different criteria such as cost, risk, feasibility, uncertainty, etc. This is very useful when evaluating new services.\n\n- Why are other options wrong?\n-  The cause and effect diagram is an analytical tool for problems and not for assessment and ranking.\n- Forecasting is about estimating the future but does not compare multiple alternatives according to criteria.\n-  The risk assessment matrix focuses on risk only without considering the rest of the criteria.",
     "choices": [
@@ -1430,7 +1430,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager has been assigned to a new project. The client has mentioned that the project's inception is based on ideas and assumptions put forward by their business partners. What should the project manager do to ensure that they have a clear understanding of the project objectives?",
     "explanation": "It is important to gather views from all stakeholders to ensure that the goals and assumptions are comprehensively understood and agreed.\n\n- Why are other options wrong?\n- Conducting in-depth interviews with partners only leaves other important parties out of the discussion.\n- Starting the project directly without ascertaining the goals may lead to subsequent problems.\n- Meeting with the client alone is not enough as long as there are other influential partners.",
     "choices": [
@@ -1453,7 +1453,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Team members express frustration because their functional manager does not listen to their opinions. They seem reluctant to devote themselves to the remainder of the project.nnWhat should the project manager do?",
     "explanation": "When team members feel that their voice is not heard, the role of the project manager becomes to support the team and promote a sense of belonging and appreciation. Showing support and participating in their discussions helps improve their morale and increase their commitment.\n\n- Why are other options wrong?\n- Dividing the work will not solve the underlying problem of frustration and not listening.\n- Prioritizing is a next step and does not address the root of the problem.\n- Discussing it with the job manager may be necessary later, but it is not the first step that gets the team back on track.",
     "choices": [
@@ -1476,7 +1476,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Midway through a project, the project manager identifies new stakeholders. Each of these new stakeholders plays a different project role.nnWhat should the project manager do first?",
     "explanation": "Stakeholder management plan outlines how to engage all stakeholders in terms of communications and expectations and involve them in decisions. Once new stakeholders emerge, they should be immediately included in this plan.\n\n- Why are other options wrong?\n- Meeting with the sponsor may not be necessary if the project manager is authorized to manage these updates.\n- Reviewing the stakeholder register is a secondary step, but the priority is to update the plan.\n- Submitting a change request is not necessary just to add new stakeholders.",
     "choices": [
@@ -1499,7 +1499,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During a project's execution phase, two stakeholders complain that they receive insufficient information on the project's status. The stakeholders have been included in the regular status meetings, and status reports are being shared with them.nnWhy should the project manager meet with these stakeholders?",
     "explanation": "Even if the project manager thinks he or she is providing sufficient information, it is essential to ensure that stakeholders receive the type and format that suits them. They may need more detail, reports in a different format, or information on specific topics.\n\n- Why are other options wrong?\n- Collecting data to update the case log is not the first goal.\n- Sending old messages may increase their frustration.\n- Developing a better working relationship is a step required but does not address the problem directly.",
     "choices": [
@@ -1522,7 +1522,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "An organization is redesigning and relaunching a key product. The stakeholders are all company executives and want to ensure that the product launch will be a success.nnWhat should the project manager do to ensure project success?",
     "explanation": "To ensure that the product meets the expectations of stakeholders, it is important to agree on key performance indicators (KPIs) that reflect success for them. Indicators ensure that there are clear benchmarks against which performance is measured.\n\n- Why are other options wrong?\n-  The communications plan is important but without clear performance indicators, communications remain public and undirected.\n- Informing the team and escalating issues is an operational step, but it does not guarantee that stakeholders agree on success criteria.\n- Involving executives in day-to-day meetings is impractical and may hinder rather than support work.",
     "choices": [
@@ -1545,7 +1545,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is developing the schedule for a new software development project. The project network diagram shows two separate paths:nnPath A: Tasks 1-2-3-4 (all with a duration of 5 days each)n Path B: Tasks 5-6-7 (durations of 3, 7, and 2 days respectively)n There are no external dependencies between these paths.nnWhat is the critical path for this project?",
     "explanation": "The critical path is the longest time because it determines the total duration of the project. The total duration of track A is 20 days (5+5+5+5), while Path B is 12 days (3+7+2). So, path A controls the end of the project.\n\n- Why are the other options wrong?\n- 5/6/2007 is a wrong number.\n- 1-2-3-4-5-6-7 is irrational because it combines the two paths into one path.\n- 1-2-6-7 does not follow the logical order of the scheme and does not reflect the critical path.",
     "choices": [
@@ -1568,7 +1568,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During a status review meeting, it was determined that the product will not meet project scope requirements in a particular scenario. What should the project manager do?",
     "explanation": "If a project deliverable does not meet the agreed scope requirements, a formal evaluation and approved change through the Integrated Change Control process is required to update the scope and plans.\n\n- Why are other options wrong?\n- Risk analysis is an auxiliary step, not the main solution.\n- Reviewing baselines is useful, but without going through change control, the review remains informal.\n- Informing the client directly and negotiating without going through formal change procedures is an unsystematic transgression.",
     "choices": [
@@ -1591,7 +1591,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "After all deliverables have been completed, a project manager needs to formally close a project. What should the project manager do?",
     "explanation": "A project can only be considered officially closed after it is confirmed that the final deliverables are accepted by stakeholders (such as the client or sponsor). This is an essential part of the project closure process according to the PMBOK guide.\n\n- Why are other options wrong?\n- Updating project documents is a subsequent step within the project closure but not the first step.\n- Team launch is only after formal confirmation of closure.\n- Consolidating the case log is part of the lessons learned and not the main closing procedure.",
     "choices": [
@@ -1614,7 +1614,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is assigned to a project that has completed the planning phase. The project sponsor is confident that the project management plan has allowed for sufficient budget and scheduled time. The project manager believes that unforeseen events could affect the ability to complete the project successfully.nnWhat should the project manager do?",
     "explanation": "Even with a solid plan, it is always necessary to proactively manage risks, and this includes identifying them, assessing them, and developing an appropriate response plan.\n\n- Why are other options wrong?\n- Requesting additional funding without risk analysis is an unjustified step.\n- Discussing the matter with the job manager is not a substitute for a comprehensive risk management plan.\n- Documenting constraints is important but does not replace the development of an actual risk response plan.",
     "choices": [
@@ -1637,7 +1637,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager and the project team identified risks, performed a qualitative risk analysis, and prepared a risk response plan. However, delays in the response to risk events are affecting the project schedule.nnHow would assigning risk owners to the risk responses help avoid these delays?",
     "explanation": "The presence of a person directly responsible for each risk ensures that the necessary action is taken in a timely manner without relying on collective decisions that may be delayed.\n\n- Why are other options wrong?\n- Risk owners do not work with the sponsor permanently but with the team.\n- Identifying constraints and assumptions is part of planning, not the role of the risk owner after the fact.\n- The risk report is not a substitute for appointing a risk owner responsible for taking appropriate action.",
     "choices": [
@@ -1660,7 +1660,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "While reviewing the approved project schedule, the project manager realizes that the milestones are unrealistic due to longer-than-expected procurement lead times for certain key project components. The project manager needs to update the schedule baseline to reflect the long lead times.nnWhat should the project manager do first?",
     "explanation": "Since the baseline of the timeline is part of the formal project management plan, any modification to it requires going through an integrated change control procedure in accordance with PMI practices.\n\n- Why are the other options wrong?\n- Modifying the WBS does not change the schedule directly and does not reflect supply routes.\n- Updating the assumption record is a supportive step but is not the first formal procedure.\n-  The amendment of the procurement management plan shall be followed after the approval of the Change Committee, not before.",
     "choices": [
@@ -1683,7 +1683,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A new project manager joins a project overseen by a senior project manager. The sponsor asks the new project manager to develop the quality management plan.nnWhy should the project manager initially consult with the senior project manager?",
     "explanation": "Ensuring that the quality management plan is aligned with the overall project strategies and objectives requires referring to pre-existing plans and approved standards defined by the senior project manager.\n\n- Why are other options wrong?\n- Defining requirements The responsibility of requirements management, is not directly related to the development of a quality management plan.\n- The development of cost-benefit analytics is not a direct part of the quality management plan.\n- Drafting a change request is not the first step here because the preparation of a quality management plan is done within the planning process, not the change.",
     "choices": [
@@ -1706,7 +1706,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During project execution, key stakeholders request a change to ensure that the final product will satisfy their requirements. Why should the project manager submit a change request?",
     "explanation": "This is the way to formally adjust and manage changes in any project to ensure that impacts on schedule, budget, scope and quality are reviewed.\n\n- Why are other options wrong?\n- Documentation of requirements and obtaining signature shall be subsequent after the approval of the Change Committee.\n- Provide justification for influencing a step within the change request form and not the main reason for submitting the request.\n- Stakeholder responsibility is not a formal part of the change management process in this sense.",
     "choices": [
@@ -1729,7 +1729,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is managing an agile project where the team is regularly missing user story due dates. What should the project manager do to resolve this situation?",
     "explanation": " The constant repetition of the team's failure to meet deadlines may indicate a lack of understanding or application of agile principles, so first make sure that the required competence is present.\n\n- Why other options are wrong:\n- Postponing the delivery date does not address the root cause.\n- Adjusting the duration of iterations without understanding the reason may increase the problem.\n- A rewards program is not a sustainable solution if the defect is skillful or systematic.",
     "choices": [
@@ -1752,7 +1752,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager was recently hired in a new organization and has been assigned to their first project. A colleague of the project manager warns about too much stakeholder involvement and adding extra complexity to the project.nnWhich behavior will neither add complexity nor uncertainty to the project during project scope process?",
     "explanation": "This behavior enhances the visibility of the scope of the project and reduces complexity, as it ensures that there is consensus and understanding between influencers.\n\n- Why other options are wrong:\n- Setting achievable goals may seem positive, but if done in isolation from a clear plan, it can lead to conflict.\n- Disagreement between stakeholders increases complexity.\n- Optimistic biases create risks and problems later.",
     "choices": [
@@ -1775,7 +1775,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A local government provides subsidies for healthcare activities. An organization plans to leverage this subsidy for a project to provide health testing services for at-risk populations. After the project has started, the government announces that this testing service might not qualify for the subsidy.nnWhat should the project manager do?",
     "explanation": "This is a strategic risk related to funding and directly affects the feasibility of the project, and requires a decision at the senior management level.\n\n- Why other options are wrong:\n- Meeting with the sponsor is part of the steps later, but first the risk must be escalated.\n- Develop an emergency plan that may occur later after a decision is made at the higher level.\n- Submit an inappropriate change request before the strategic risk impact assessment.",
     "choices": [
@@ -1798,7 +1798,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Due to regulatory changes, a government agency is now a key stakeholder in a complex project. An agency representative has asked the project manager to explain how well the advantages derived from the project align with the agency's business strategies.nnWhat should the project manager do?",
     "explanation": " The benefits management plan explains how the benefits of the project align with the strategies of the stakeholder, and is the official tool for presenting this alignment to stakeholders.\n\n- Why other options are wrong:\n- Meeting with other stakeholders does not provide the specific information required.\n- Review the assumption history does not cover the interpretation of benefits and linking them to strategies.\n- Updating the stakeholder engagement plan is important but not a tool to explain compliance.",
     "choices": [
@@ -1821,7 +1821,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager in a predictive environment has recently completed agile training and is starting to manage projects in an agile fashion. The organization is new to agile and not everyone understands the principles.nnHow should the project manager gain support going forward?",
     "explanation": " Direct awareness of stakeholders about the benefits of an agile approach helps build support and engagement.\n\n- Why other options are wrong:\n- Cost-benefit analysis does not guarantee stakeholder acceptance and understanding of the methodology.\n- Inviting stakeholders to a business refinement session is useful but does not guarantee public understanding.\n- Sending video links may be ineffective if not accompanied by direct communication.",
     "choices": [
@@ -1844,7 +1844,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager has been assigned to a new project. During the initial review of the project charter, the project manager reaches out to the project sponsor to discuss important information that is missing in the document.nnWhat piece of information is appropriate for the project manager to request?",
     "explanation": " Having measurable goals allows the success of the project to be accurately assessed, which is central to the project charter.\n\n- Why other options are wrong:\n- A detailed description of the final product may come within the scope of the project but is not an essential part of the project charter at this stage.\n-  The breakdown structure of labor (WBS) is developed later and not within the project charter.\n- A baseline for performance measurement is developed during planning and not within the charter.",
     "choices": [
@@ -1867,7 +1867,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager works for an organization that uses the predictive method of project management. The project manager has completed training for agile project management and begins to manage projects using the agile method. Stakeholders are not familiar with agile and are having difficulty understanding the new project methodology.nnHow should the project manager address this issue?",
     "explanation": " Stakeholders need direct and clear guidance on how Agile works and its value rather than just theoretical comparisons or written material.\n\nWhy other options are wrong:\n- Cost-benefit analysis Stakeholders don't know how to actually work in an environment Agile.\n- Inviting stakeholders to a business list refinement session helps in a limited part only.\n- Sending video links may be useful as a complement, but it is not enough to change the mindset of an entire team.",
     "choices": [
@@ -1890,7 +1890,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project management office (PMO) normally runs projects using the waterfall approach. A project currently in development is impacted by local regulations which are being updated regularly. The project team feels that implementing agile techniques would benefit the project due to the constantly changing regulations.nnWhat should the project manager do in this scenario?",
     "explanation": " Integrating agile into a waterfall environment requires formal study to ensure that this step is appropriate to the nature of the project and the culture of the organization.\n\nWhy are other options wrong:\n- Utilizing the financial reserve does not address the basic problem of the way it works.\n- Presenting the application directly without analysis may lead to an ill-considered rejection.\n- Executing the request directly without risk assessment and analysis is contrary to the foundations of organizational change management.",
     "choices": [
@@ -1913,7 +1913,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project team is brainstorming the best project management methodology to recommend to senior management for adoption. The project team's idea is characterized by frequent requirement changes, incremental and iterative changes, customer focus, and defined stages with specific documents produced to meet industry regulatory standards.nnWhich project management methodology is preferred in this case?",
     "explanation": "The hybrid methodology combines Agile and Waterfall so that flexibility is exploited in developing changing requirements while maintaining the documentation stages and procedures necessary for regulatory compliance.\n\nWhy other options are wrong:\n- Agile alone may not provide the level of documentation and control required by industry standards.\n-  Predictive The waterfall does not fit the nature of the ongoing changes mentioned in the project description.",
     "choices": [
@@ -1936,7 +1936,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project team has adopted a new project management methodology which entails holding regular review and retrospective meetings every two weeks. In addition, there are daily status meetings and whiteboards are the main tool used to document decisions and action points.nnWhich project management methodology has the team adopted?",
     "explanation": "Agile relies on short recurring cycles (Sprints), and there are fixed meetings such as:\n -  Retrospective meetings every two weeks to evaluate work and improve performance.\n -  Daily standups that aim to monitor the team's progress daily.\n -  The use of visual tools such as whiteboards is part of agile's culture of transparency.\n\n- Why are other options wrong?\n -  The traditional methodology relies on comprehensive planning from the beginning and does not use short periodic reviews in this form.\n -  Waterfall is based on a sequence of specific stages from start to finish without daily repetitions or meetings.\n -  Iteratives approach agile but do not necessarily impose the same number of meetings and daily interaction as agile has.",
     "choices": [
@@ -1959,7 +1959,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During a project performance evaluation meeting, a team established that the performance of the project as of the status date was as follows: schedule performance index (SPI) = 0.5; cost performance index (CPI) = 1.5. The client had identified cost and schedule performance as key in terms of value.nnBased on these performance figures, which of the following describes the value being delivered to the client as of the status date?",
     "explanation": " Timesheet Performance Indicator (SPI) = 0.5 means that the project is running less quickly than planned. That is, we only completed 50% of the planned work during the same time period.\n - Cost Performance Index (CPI) = 1.5 means that we spend less than expected, as every dollar spent results in a higher value than planned.\n - So we have a situation: the project is late but uses the budget efficiently.\n\n- Why are the other options wrong?\n - A weak cost value means CPI less than 1, which does not exist here.\n - A good timesheet value means a SPI close to 1, which does not exist here.\n - Both values are good or both are weak incorrect according to the numbers mentioned.",
     "choices": [
@@ -1982,7 +1982,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "An agile team is determining which activities to complete first during an upcoming project iteration for a new product development. Which factor should they use to rank the order of activities that will be delivered?",
     "explanation": " In agile, the goal is to quickly deliver the highest possible value.\n - So the work is arranged according to the so-called Value-Based Prioritization.\n - This makes stakeholders get the most important functions first even if the product is not fully completed.\n\n- Why are the other options wrong?\n -  The size of the activity affects the division of labor but does not prioritize it.\n -  The cost of the activity is financially important but is not the first factor in prioritizing agile.\n -  ease of implementation is sometimes considered, but does not come before the commercial value of stakeholders.",
     "choices": [
@@ -2005,7 +2005,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is midway through project delivery. The project manager decides to hold a stakeholder engagement meeting with senior management and the clients to examine if the project deliverables are achieving business value.nnWhich of the documents contains critical information to help the project manager with this?",
     "explanation": "The feasibility study determines from the outset why the project was implemented and how it will add value to the business. Contains a cost-benefit analysis, and strategic project objectives.\n\n- Why other options are wrong:\n-  The breakdown structure of labor (WBS) shows the distribution of work, not commercial value.\n-  The project management plan explains how the project is managed, not why.\n-  The project scope statement specifies what will be accomplished, but does not always address linking results to commercial value.",
     "choices": [
@@ -2028,7 +2028,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is part of a project management strategy focus group that is brainstorming the ways projects will be used to add business value to the organization in the upcoming quarter. Which statement(s) describes broadly how organizations use projects to add business value?",
     "explanation": "Projects are not only for new development, they may be to modify or improve what exists. This is what distinguishes projects from operational processes.\n\n- Why are other options wrong:\n- Development only or modification only does not include the full picture.\n- The delivery of daily activities is included in operational processes and not within projects as defined by PMI.",
     "choices": [
@@ -2051,7 +2051,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "What methodology uses new approaches to implement solutions to problems that are encountered daily?",
     "explanation": " Ideation 2.0 is a modern technique used in innovation environments to stimulate creative thinking and find new solutions to everyday problems.\n\n- Why other options are wrong:\n-  Scrum The agile methodology is used to manage software projects in particular.\n-  Kanban It focuses on improving flow and managing continuous work rather than generating new ideas.\n-  Hybrid mixes more than one methodology but does not focus directly on finding innovative solutions such as Ideation 2.0.",
     "choices": [
@@ -2074,7 +2074,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is halfway through a project using a predictive methodology when the organization announces a transition to a hybrid approach. The project sponsor instructs the team to transition to this new hybrid approach immediately, even though the team has no prior experience with hybrid projects.nnWhat is the best course of action for the project manager to take?",
     "explanation": " When moving from a predictive to a hybrid approach, evaluate activities that can be handled in agile style, and determine whether the transition will affect the core tasks.\n\n- Why other options are wrong:\n- Completing the project with the old methodology violates the management directive.\n- Extending the schedule is a secondary option after revaluation.\n- A complete redesign may result in unnecessary delay or loss of present value.",
     "choices": [
@@ -2097,7 +2097,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A global organization that has always used predictive project management is now moving towards agile project management. In the first agile project of the organization, members from remote teams are failing to attend the daily standup meetings.nnHow can the project manager resolve this issue?",
     "explanation": "Geographically distributed teams need proper communication tools and flexible scheduling.\n\n- Why other options are wrong:\n- Replacing team members goes against agile principles that focus on empowering teams.\n- Assigning less priority tasks may reduce team engagement.\n- Training is important but does not solve the problem of attending daily meetings in person.",
     "choices": [
@@ -2120,7 +2120,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is a part of a project that is using the Scrum framework. The project manager needs to monitor the impediments log and facilitate the resolution of impediments raised by the team.nnWhat is the correct order of the five steps used to manage the impediments log?",
     "explanation": " This sequence reflects best practice in Scrum:\n1. Register the obstacle first.\n2. Prioritize it against other obstacles.\n3. Publish it for the relevant parties.\n4. Process it by priority.\n5. Inform everyone of what has been done.\n\n- Why other options are wrong:\n- Any other arrangement that may result in processing delays or poor communication.",
     "choices": [
@@ -2143,7 +2143,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is assigned to a project with a lot of stakeholders and competing priorities. What will be the main objective to initiate and conduct negotiations?",
     "explanation": " Negotiations focus on resolving disputes between different stakeholders to minimize conflict and achieve consensus.\n\n- Why other options are wrong:\n- Defining the scope of work is an independent administrative process and not the primary goal of negotiations.\n- Cost reduction It may be a secondary goal but it is not the main goal here.\n- Reduce delivery time Focuses on schedule, not dispute resolution.",
     "choices": [
@@ -2166,7 +2166,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is planning a worldwide product launch. Manufacturing the product is subject to rigid time constraints related to the production line and raw material availability. There are also uncertainties around regional labeling regulations that are expected to evolve within the launch period.nnHow can the project manager integrate planning and development for the unknown labeling requirements?",
     "explanation": "The hybrid approach allows the use of a predictive method for fixed parts and agile for variable parts, which achieves flexibility in dealing with changes.\n\n- Why other options are wrong:\n- Merging predictive workflows into an agile table reflects logic and does not guarantee flexibility.\n- Applying agile entirely to manufacturing may be impractical.\n- Only predictive planning does not deal flexibly with expected changes.",
     "choices": [
@@ -2189,7 +2189,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "The project manager's company won a digital transformation project request for proposal (RFP) with clear scope, time and cost. As part of the RFP clause, the project manager's company also provided the number of resources required to complete the project. This is a very high investment project, and the customer wants to monitor the progress regularly.Since it is a fixed price project, what approach should the project manager use?",
     "explanation": "The combination of predictive approach accuracy and agile progress display flexibility achieves better follow-up.\n\n- Why other options are wrong:\n- A predictive approach only with daily reports does not guarantee continuous interaction.\n-  The agile-only approach is not suitable for fixed-price projects and strict specifications.\n- The predictive approach and the presentation of each unit only does not provide sufficient flexibility.",
     "choices": [
@@ -2212,7 +2212,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is assigned to a new environmental project. When reviewing a vendor's proposal, the project manager identifies a technical risk that will have an impact on the project manager's company's operational cost.nnWhat should the project manager do first?",
     "explanation": " Formally recording the risk in the risk log is the first step to documenting and managing it.\n\n- Why other options are wrong:\n- Consulting with the job manager may be useful later, but it is not the first step.\n- Accept the risk and proceed without an irresponsible assessment.\n- Risk assessment in a workshop is done after the risk is recorded.",
     "choices": [
@@ -2235,7 +2235,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A customer has informed the project manager that they do not accept the project deliverables. What should the project manager do to gain approval?",
     "explanation": " Ensuring that the outputs meet the required acceptance criteria is key to obtaining approval.\n\n- Why other options are wrong:\n-  The review of the project charter and the party engagement plan does not directly address the reasons for the client's rejection.\n- Examining the quality management plan is important but does not focus directly on the acceptance requirements.\n- Identifying objections and analyzing risks is useful later but not the first step.",
     "choices": [
@@ -2258,7 +2258,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "After receiving the project charter, a project manager starts to prepare the project management plan. Although there is a limited amount of detailed activity information in the project management office (PMO), the project manager needs to calculate the expected duration of the project.nnWhat should the project manager use to determine this?",
     "explanation": " This type of estimate is based on similar previous experiences and projects, and is appropriate when details are lacking.\n\n- Why other options are wrong:\n- Bottom-up estimation needs great detail about activities.\n- Launch meeting notes are insufficient to calculate accurate duration.\n- The project sponsor's input is important but not sufficient alone to estimate the duration.",
     "choices": [
@@ -2281,7 +2281,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project is in development when a functional manager leaves the company and is no longer involved with the project.nnWhat should the project manager do first?",
     "explanation": " The departure of a functional manager directly affects stakeholders, so their record should be updated to reflect the change and track the impact on the project.\n\n- Why other options are wrong:\n- Updating the change log is not the first step here because it does not indicate a formal change in the project but a change in human resources.\n- Updating the risk log is important but comes after an impact assessment, not the first action.\n- Updating the default record is not directly related to the departure of someone from the team.",
     "choices": [
@@ -2304,7 +2304,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A construction project is in the execution phase when several new team members from different countries are assigned to the project.nnWhich document should the project manager update first?",
     "explanation": " Adding new members from different countries requires modifying the communications plan to ensure effective communication across time and culture differences.\n\n- Why other options are wrong:\n-  The procurement management plan has nothing to do directly with hiring new individuals.\n-  The risk management plan may need to be updated later, but communication is the priority now.\n- The project charter is usually not amended during implementation to change personnel.",
     "choices": [
@@ -2327,7 +2327,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is committed to the success of a multinational project with tight deadlines. A new team member is continually late or misses status meetings. In a one-on-one with the project manager, the team member expresses the belief that working on deliverables is more important than attending status meetings.nnWhat should the project manager do?",
     "explanation": " Attending state meetings is important to ensure coordination between team members and ensure that work is progressing, and this behavior should be clear and uniform for all members.\n\n- Why other options are wrong:\n- Reassigning the member to another project does not solve the root problem.\n- Documenting the behavior only does not address the cause of the problem or improve performance.\n- Encouraging attendance while adapting may lead to poor communication and risks to project quality.",
     "choices": [
@@ -2350,7 +2350,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project sponsor assigns a project manager to a new, critical project. This project has tight budget and time constraints.nnWhat should the project manager do first?",
     "explanation": " Initially, the project manager needs to clearly understand the vision and goal of the project from the sponsor to ensure that planning and implementation align with his expectations, especially in critical projects with strict constraints.\n\n- Why other options are wrong:\n- Meeting with functional managers focuses on operational details and not on general objectives.\n- Meeting with stakeholders is important but not a priority before understanding the sponsor's purpose.\n- Updating the RMP is only done after the requirements are first collected and understood.",
     "choices": [
@@ -2373,7 +2373,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A manufacturing project is in the implementation phase. During a status meeting, a team member tells the project manager that a solution has been found for a persistent failure on equipment used in the implementation; however, this solution is temporary, and the equipment could fail again in the future.nnWhich document should the project manager update?",
     "explanation": "A problem that has been temporarily resolved is an ongoing issue and should be recorded in the case log to ensure follow-up and documentation.\n\n- Why other options are wrong:\n-  The risk management plan occurs when problems are expected, not when they actually occur.\n- The record of assumptions is for assumptions that may affect the project, not for confirmed problems.\n- Stakeholder record is not linked to technical problems in implementation.",
     "choices": [
@@ -2396,7 +2396,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project is showing a negative schedule variance. The project manager sees that one team is causing the delays.nnWhat should the project manager do?",
     "explanation": " In project management, it is always preferable to address problems directly with the responsible team first to find common solutions and motivate them to comply.\n\n- Why other options are wrong:\n- Meeting with the project sponsor may be later if the problem is not resolved at the team level.\n- Performing a risk analysis is useful but does not solve the problem immediately.\n- Meeting with HR is usually about administrative matters and not about schedule delays.",
     "choices": [
@@ -2419,7 +2419,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager in a global organization is responsible for a project involving six different companies. Midway through the project, one stakeholder moves from one company to another.nnWhich document should the project manager update?",
     "explanation": " A stakeholder register containing details of each stakeholder, such as their location, company, role, and impact on the project. When someone's position changes, this record must be updated to keep the information accurate.\n\n- Why other options are wrong:\n-  A stakeholder engagement plan outlines how to deal with them, but it depends on the stakeholder register that needs to be updated first.\n- The project charter is not modified when a stakeholder changes.\n- The project management plan includes an overview and is not used to update the details of individuals.",
     "choices": [
@@ -2442,7 +2442,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "After comparing actual results to the performance measurement baseline, the project manager discovers that the project's work and cost performance measures are better than expected. The project manager doubts that these positive variances can continue until the end of the project.nnWhat should the project manager do?",
     "explanation": " Even positive deviations are considered a positive risk (opportunity), and should be recorded and analyzed in the risk register to ensure that they are benefited.\n\n- Why other options are wrong:\n- Performance reviews are important but are a next step after the risk assessment.\n- Stakeholder reporting occurs after confirming the information.\n- Reviewing the project management plan is not the first procedure in this context.",
     "choices": [
@@ -2465,7 +2465,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A complex project is in the planning stage when the sponsor identifies a need for a specialist who is a citizen of a foreign country. The project manager knows that the budget does not allow for this specialist's travel expenses.nnWhat should the project manager do?",
     "explanation": " Forming a virtual team allows obtaining this person's expertise without incurring travel costs, which is a suitable solution in projects with financial constraints.\n\n- Why other options are wrong:\n- Training team members may take time that does not suit the requirements of the project.\n- Submitting a change request increases the budget and requires time to approve.\n- Finding a local alternative may not provide the same required experience.",
     "choices": [
@@ -2488,7 +2488,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A key project needs to be completed on time and exceed all established quality levels. Throughout the project, the project manager takes coffee breaks with the team and asks if they have ideas on how to improve their way of working.nnThe project manager's approach is in line with which theory?",
     "explanation": "Theory Y, according to Douglas McGregor, assumes that individuals are naturally responsible, looking to improve and develop their work, and need a motivational environment and involvement in decision-making.\n\n- Why other choices are wrong:\n- Theory X assumes that employees need strict control and external motivation.\n- Theory Q and theory T is not recognized in project management science as formal concepts.",
     "choices": [
@@ -2511,7 +2511,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is having difficulty managing stakeholders because the stakeholder register does not distinguish how aware of the project they need to be in order for the project to be successful. What should the project manager do?",
     "explanation": " This tool is used to determine the position of each stakeholder in terms of awareness, participation, advocacy, resistance, helping the project manager to design an effective communication plan.\n\n- Why other options are wrong:\n-  The Change Control Committee is not responsible for stakeholder management.\n-  The communication plan is updated later after the matrix is analyzed.\n- Determining the level of risk tolerance concerns the risk analysis, not the stakeholders.",
     "choices": [
@@ -2534,7 +2534,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "As a result of a drastic cut to the budget, a project's steering committee is replaced with a single sponsor. What should the project manager do?",
     "explanation": " When a change in the number or type of influential stakeholders, the communications plan must be updated to suit the new needs.\n\n- Why are other options wrong:\n- Formulate an update to a secondary action project after modifying the plan.\n- Submitting a change request is not required here because the change has been approved.\n- Scheduling a meeting with the sponsor is insufficient unless the communications plan is documented and modified.",
     "choices": [
@@ -2557,7 +2557,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager identifies new risks that might affect the completion of critical tasks. The project manager needs to present these new risks to project stakeholders in the monthly status report.nnIn addition to the risk report, which document should the project manager reference when preparing the status report?",
     "explanation": " The risk log contains details of all previously identified risks as well as new risks, and includes probability and impact assessments and response plans.\n\n- Why other options are wrong:\n- The assumption register contains assumptions and limitations and does not include detailed risks.\n-  The risk management plan outlines how risks are generally handled and does not contain details of the status of the project.\n- The probability and impact matrix is used for risk assessment but does not contain all the details needed for the monthly report.",
     "choices": [
@@ -2580,7 +2580,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager recognizes that certain components must be imported to meet the project's requirements. However, due to the potential impact of an unfavorable exchange rate, the project manager decides that incurring a loss is not justifiable and chooses not to take any action to mitigate it.nnWhich risk response strategy did the project manager employ?",
     "explanation": "The acceptance strategy means that the team chooses not to take any proactive action towards the risk, either because it is low-impact or because the cost of processing does not justify it.\n\n- Why other options are wrong:\n- Transfer means transfer of liability to another party (such as insurance).\n- Avoidance means canceling or modifying the plan to avoid risk.\n- Minimizing means trying to reduce the likelihood or impact of the risk.",
     "choices": [
@@ -2603,7 +2603,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project is nearing completion when the project manager learns that a change in market regulations may impact the project. What should the project manager do?",
     "explanation": " The risk management plan contains the procedures and policies necessary to deal with any new or changing risks. When a change such as new regulations appears, this plan must be updated first.\n\n- Why other options are wrong:\n-  The stakeholder register is not directly related to regulatory risk.\n-  The cost baseline is adjusted only after the impact is assessed and the change is formally introduced.\n- Cost-benefit analysis can be done later after the risk management plan has been reviewed, but it is not the first step.",
     "choices": [
@@ -2626,7 +2626,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A multinational company with a cross-border project wants to implement new software that will impact several departments. The project manager needs to guarantee alignment of stakeholder expectations with the final product.nnWhat should the project team develop?",
     "explanation": " A stakeholder engagement plan that shows how to identify stakeholders, analyze their needs and expectations, and develop communication strategies and manage their engagement throughout the project.\n\n- Why other options are wrong:\n- The Project Work Statement (SOW) focuses on describing the work required and not on managing stakeholder expectations.\n- The stakeholder engagement assessment matrix is used as an analysis tool, but it is not a comprehensive plan.\n-  The risk breakdown structure (RBS) is about risk management and not communication with stakeholders.",
     "choices": [
@@ -2649,7 +2649,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project team is working on an older server to develop a software application. The team has ordered a new server for end-user testing as the older server cannot perform this testing. The new server has not arrived in time for the scheduled testing window, delaying the end-user testing.nnWhat should the project manager do for this situation?",
     "explanation": "Modifying the timesheet is the most logical procedure because the new server is a technical necessity to perform the test, and it is indispensable.\n\n- Why are other options wrong:\n- Testing on the old server is impractical because the server does not support the test requirements.\n- Skipping user testing is unacceptable as this may affect product quality.\n- Requiring the supplier to speed up delivery may be done later, but the direct action is to deal with the current impact on the schedule.",
     "choices": [
@@ -2672,7 +2672,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is attempting to engage project stakeholders in a new project and has invited them to daily standup meetings. However, none of the stakeholders have attended any of the project meetings.nnWhat should the project manager do?",
     "explanation": "Understanding the reasons can help adapt the communication plan and make meetings or communication methods more appropriate for them.\n\n- Why other options are wrong:\n- Continuing meetings without assessing the situation is ineffective.\n- Canceling meetings is a hasty decision before trying to reach an understanding with stakeholders.\n- Escalation to the administration should be the last step after all attempts at direct communication have been exhausted.",
     "choices": [
@@ -2695,7 +2695,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project team is learning how to leverage agile methods in their projects. While meeting performance goals, the team is losing motivation and is visibly bored during the daily standups, so much so that it is becoming a distraction.nnWhat could be done in this scenario?",
     "explanation": "In agile environments, it is important to maintain team spirit and motivation through new challenges and continuous  improvement. When a team gets bored or loses motivation despite achieving goals, raising the challenge refreshes the team.\n\n- Why other options are wrong:\n- Team building exercises are useful but do not address the root cause.\n- Inviting a sponsor may cause additional stress instead of motivating the team.\n-  A motivation budget does not solve the problem of boredom caused by the absence of challenges.",
     "choices": [
@@ -2718,7 +2718,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project team is regularly missing milestones. Stakeholders are concerned that the project will miss the deliverable due date. The project manager has been aware of team conflict and learns that a team member is missing some skills needed for project completion.nnWhat should the project manager do in this scenario?",
     "explanation": "Communication is the first step in solving performance-related problems or conflicts. This way complete information can be collected before making an individual decision about individuals.\n\n- Why other options are wrong:\n- Reappointing a team member is a hasty decision before trying to support or train him.\n- Inform stakeholders of the delay without taking any action that reflects mismanagement.\n- Dismissing a team member should be the last solution after exhausting training and support means.",
     "choices": [
@@ -2741,7 +2741,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is leading a development project for an external customer in another country. The project manager's company is required to comply with certain regulations, and the project manager's project has been selected for an audit. The customer does not think the audit is necessary and has asked the project manager not to disturb the project team.nnWhat should the project manager do?",
     "explanation": "Compliance with laws and regulations is non-negotiable, but communicating with the client to explain the reason contributes to avoiding misunderstandings.\n\n- Why other options are wrong:\n- Excluding the team exposes the project and the company to legal risks.\n- Starting an audit without informing the customer negatively affects the business relationship.\n- An expanded meeting with the steering committee and stakeholders is exaggerated for this type of issue.",
     "choices": [
@@ -2764,7 +2764,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Who has the authority to act as an integral stakeholder and a key decision-maker throughout the life of each project in order to keep it aligned with the business objectives?",
     "explanation": "PMO is responsible for ensuring that projects are aligned with corporate strategy and objectives. In many organizations, PMO  retains the authority to supervise and make key decisions beyond the project manager.\n\n- Why other options are wrong:\n- The project manager focuses on executing the project according to plans.\n-  The project sponsor supports the project but does not have all the administrative and organizational powers such as the PMO.\n-  The customer is the ultimate beneficiary but does not have executive authority within the organization.",
     "choices": [
@@ -2787,7 +2787,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During a standup, a project team member suggests modifying some features to benefit from a new opportunity. Another team member expresses concern regarding the user experience resulting from the proposed feature.nnHow should the project manager address this situation?",
     "explanation": "In an agile environment, the product owner is responsible for managing the product menu and setting priorities. Decisions about adding or modifying features require assessing the value and its impact on the user experience.\n\n- Why other options are wrong:\n- Voting does not guarantee a balanced decision that reflects value and impact.\n- Postponing the discussion The team misses the opportunity to seize the opportunity at the right time.\n- Meeting with stakeholders and the team may be too early at this stage before evaluating the matter with the product owner.",
     "choices": [
@@ -2810,7 +2810,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "An organization has implemented agile for its recent projects, but all of the recent agile projects have missed their delivery milestones. The sponsors for the agile projects are regularly adding new requests to the projects. A project manager is given a new agile project and finds that it has a vague project objective and no clear definition of done (DoD).nnWhat should the project manager do?",
     "explanation": " A clear and agreed vision between the team and stakeholders determines what will be delivered and what is the definition of done. Lack of visibility is a major cause of failure in the agile environment.\n\n- Why other options are wrong:\n- Focusing on the communication plan does not address the lack of vision.\n- Allowing the team to choose technical resources is a next step after defining the vision.\n- Defining a project charter is more necessary in traditional methodologies than in agile, but the focus here should be on the vision and list of the product.",
     "choices": [
@@ -2833,7 +2833,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is managing an important agile project. During the kick-off meeting, the project manager sets the policies and procedures to be followed throughout the project. Midway through the project, the project manager finds that some of the project team are failing to follow the established procedures.nnWhat should the project manager do in this scenario?",
     "explanation": "In an agile environment, constant awareness and communication with the team is essential to ensure adherence to agreed rules. Sanctions or organ replacement are not appropriate solutions immediately before checking for misunderstandings or lack of clarification.\n\n- Why other options are wrong:\n- Legal documentation and getting the team to sign is a bureaucratic procedure that is not commensurate with the culture of agile.\n- Replacing members before trying with them is a hasty decision.\n-  An incentive program that may not address the root cause of the problem.",
     "choices": [
@@ -2856,7 +2856,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A stakeholder of an agile project asks the project manager to provide the remaining time planned for the project. What tool should the project manager use to provide this information?",
     "explanation": " This tool is used in agile to track progress against the release plan and clarify the remaining work to completion.\n\n- Why other options are wrong:\n-  Planning Poker is used to estimate tasks, not to follow the progress.\n- The number of story points expresses the remaining size but does not give a comprehensive visual visualization like a regression chart.\n- WBS is a traditional planning tool, not an agile tool.",
     "choices": [
@@ -2879,7 +2879,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager typically conducts retrospective sessions at the end of a project. However, the sponsor believes that retrospectives are a waste of time and budget, and instructs the project manager to significantly reduce or eliminate retrospectives in future projects.nnWhat potential outcome could arise from the sponsor's directive?",
     "explanation": " Retrospectives help the team improve performance by analyzing what happened, not just solving problems. Reducing them loses the team this opportunity.\n\n- Why other options are wrong:\n- Missing the opportunity for improvement is a by-result But the closest answer to the concept in agile is to focus on problems.\n- Focusing on stakeholder feedback is part of an external review and not the goal of a retrospective evaluation session.\n-  The time management plan is not the element directly affected.",
     "choices": [
@@ -2902,7 +2902,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project management office (PMO) is moving from waterfall to agile project management. The project team has been trained on agile but encounter issues working with company executives using the new processes.nnHow should project manager address this issue?",
     "explanation": " Training executives on agile methodologies helps build a common understanding and acceptance of new processes, facilitating collaboration and support.\n\n- Why other options are wrong:\n- Inviting executives to daily meetings is ineffective and does not fit their roles and responsibilities.\n- Inform the Bureau that the traditional approach is the solution reflects resistance to change and may hinder transformation.\n- Stakeholder replacement is practically impossible and unwise without a thorough assessment.",
     "choices": [
@@ -2925,7 +2925,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Two agile teams are collaborating on a project. Team A's output is not complete enough for Team B to integrate into their backlog. According to servant leadership and agile principles, how will the project manager resolve this situation?",
     "explanation": " Service leadership encourages teams to be empowered and supported to solve problems themselves, which enhances responsibility and commitment.\n\n- Why other options are wrong:\n- Submitting a change request from Team B to Team A may hinder collaboration.\n- Team B's determination of how to implement the change is against the principles of self-empowerment.\n-  The project manager's decision directly contradicts the philosophy of agile and service leadership.",
     "choices": [
@@ -2948,7 +2948,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Which is a key factor that servant leadership aims to establish in order to improve team performance?",
     "explanation": "Service leadership builds a culture of mutual trust between the leader and the team, which enhances performance and collaboration.\n\n- Why other choices are wrong:\n- Focus, speed, and accuracy are practical goals but depend on having basic trust to achieve them.",
     "choices": [
@@ -2971,7 +2971,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During a team meeting, team members were discussing the external dependencies of a project and asked the project manager for advice. What should the project manager ask the team to do?",
     "explanation": " Understanding external dependencies helps identify potential risks and challenges that may affect the schedule and quality of deliverables.\n\n- Why other options are wrong:\n- Limiting competitors' products and imitating their style is related to marketing analysis, not dependency management.\n- Listing the impact of entering a new competitor is part of the market study and does not directly address dependencies.\n- Ignoring dependencies may lead to formatting problems and delays in completion.",
     "choices": [
@@ -2994,7 +2994,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "In a new agile project, the team is using Kanban Method. Kanban board acts as an information radiator to anyone who sees it, providing up-to-date information on the status of the work of the team.nnHow is the Kanban board technology considered?",
     "explanation": " Kanban board is often physically simple but allows for transparency and continuous interaction between team members.\n\n- Why other options are wrong:\n- Not a direct tool in the PDCA cycle.\n- Not only shows the work done but displays the current workflow.\n- Not a tool for estimating story points, but for managing the flow of work and tasks.",
     "choices": [
@@ -3017,7 +3017,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Upon completion of a long-term contract, the project manager confirms with the release manager that all planned features are functioning properly as verified by the quality assurance team. The project manager informs the same to the customer and project stakeholders and obtains the approval to close the project. The project is now closed.nnFor ensuring that the knowledge gained during this project remains available for future reference, what should the project manager do next?",
     "explanation": "Documenting lessons learned enables future teams to benefit from the experience gained and improve the performance of upcoming projects.\n\n- Why are other options wrong:\n- Updating the risk register does not cover all aspects of the experience gained.\n- Updating and archiving the procurement file is part of the administrative closure, not the transfer of knowledge.\n- The closure of the seller's performance appraisal documents is for contracts and is not related to the knowledge gained.",
     "choices": [
@@ -3040,7 +3040,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is leading a project to deliver a new product to the market. The project sponsor has asked for a broadened scope and to deliver a \"scaled-up version\" of the final product.nnWhat should the project manager do?",
     "explanation": "Any request to scale up must undergo formal change control procedures to ensure impact assessment and appropriate decision-making.\n\n- Why other options are wrong:\n- Requesting formal confirmation of the change without starting the integrated process is insufficient.\n- Obtaining budget adjustment approval is part of the change control process, not a separate first step.\n- The project management plan should be updated after the change was approved, not before.",
     "choices": [
@@ -3063,7 +3063,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is leading a complex infrastructure project that is vital for the company's growth. During the project's initial stages, the project manager identifies a highly influential stakeholder who is resistant to the project. This stakeholder's support is crucial for the project's success, but they have expressed concerns and reservations. How should the project manager handle this situation?",
     "explanation": " Engaging opposing stakeholders and addressing their concerns helps turn opposition into support and reduces risk.\n\n- Why other options are wrong:\n- Excluding the stakeholder may increase resistance and harm the project.\n- Assigning a team member to manage this person without a clear plan may be ineffective.\n- Requesting the intervention of senior management may be a next step, not a first, in dealing with the situation.",
     "choices": [
@@ -3086,7 +3086,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During a periodic review with stakeholders, the project sponsor asks how the project will measure satisfactory completion of the deliverables and how those measurements are applied.nnWhere can the project manager find this information?",
     "explanation": " The Requirements Management Plan explains the acceptance criteria and how to measure the achievement of requirements and deliverables.\n\n- Why other options are wrong:\n-  The scope management plan defines only the scope of work and does not focus on detailed acceptance criteria.\n-  The quality management plan is concerned with quality in general, not specifically defining achievement measurement criteria.\n- Business performance reports show actual performance and are not a source of standards definition.",
     "choices": [
@@ -3109,7 +3109,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A functional manager questions whether certain aspects of a project are in compliance with the project's goals. Which document should the project manager review to address the functional manager's concern?",
     "explanation": " The project charter contains a clear definition of the project objectives and helps clarify the extent to which aspects of the project are compatible with those objectives.\n\n- Why other options are wrong:\n-  Statement of work (SOW) describes the scope of work and does not focus on the project objectives comprehensively.\n-  The project management plan includes implementation details and is not an identification document for the objectives.\n- The Project Management Information System (PMIS)  is a management support tool rather than a reference document for objectives.",
     "choices": [
@@ -3132,7 +3132,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A key stakeholder requests a change that will solve a critical issue that might affect continuity of operations. However, the project is nearing completion and the change would increase the overall project cost and delay the completion date.nnWhat should the project manager do?",
     "explanation": " A change that affects the cost and schedule needs to be reviewed and approved by the Change Control Committee to ensure that the effects are properly managed.\n\n- Why other options are wrong:\n- Delegating the decision to another stakeholder may lead to ill-considered decisions.\n- Adjusting the structure of the division of labor and the statement of scope must be done after the formal approval of the change.\n- Informing only the project sponsor is insufficient without a formal change control process.",
     "choices": [
@@ -3155,7 +3155,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project is in the execution phase when the project manager finds that information has not been sent to stakeholders in the level of detail they expected.nnWhich of the following is the most likely consequence of poor stakeholder communication in a project in the execution phase?",
     "explanation": " Poor communication leads to a lack of information and trust between stakeholders and the project team, which weakens support and cooperation.\n\n- Why other options are wrong:\n- Increased costs or scheduling delays may be a byproduct, but they are not the most direct impact.\n-  The low quality of the project is related to other reasons than poor communication only.",
     "choices": [
@@ -3178,7 +3178,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager notices schedule performance issues due to the expertise levels of project resources. Some experienced resources check unnecessary details, and some junior-level resources take a long time to complete tasks. What should the project manager do to help the team enhance their performance?",
     "explanation": "Training the team in the necessary skills increases the level of efficiency and reduces time wasted in unnecessary details.\n\n- Why other options are wrong:\n- Recording the issue in the risk log is useful but does not solve the problem directly.\n- Sponsor reporting does not provide a plan to improve team performance.\n- Meeting with HR may be a next step but training is the best initial solution.",
     "choices": [
@@ -3201,7 +3201,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project team lead meets with the project manager before a scheduled kick-off meeting. The team lead is worried that expectations regarding project deliverables might not be realistic.nnWhat should the project manager do?",
     "explanation": " Ensuring that expectations are supported by clear documentation helps address concerns objectively.\n\n- Why other options are wrong:\n- Facilitating a meeting with the project sponsor may be useful but comes after reviewing the basic documents.\n- Meeting with stakeholders and adjusting the risk register Subsequent steps after verifying the background information.",
     "choices": [
@@ -3224,7 +3224,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is concerned that team members spend too much time assisting operations and maintenance staff with a recently completed and delivered project component. The project manager has referred to the organizational process assets document to validate that the component was signed off and ownership was transferred.nnTo which additional documents should the project manager refer?",
     "explanation": "These documents contain performance summaries and final deliveries, which helps determine the delivery status and support phase.\n\n- Why other options are wrong:\n- Procurement work statement and work performance reports relate to the implementation phase, not closure and support.\n-  The requirements and change management plan focuses on changes, not final project deliverables.\n- The procurement management plan and project charter are planning documents and are not directly related to the post-delivery support phase.",
     "choices": [
@@ -3247,7 +3247,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project team implements a change that was approved by the change control board (CCB). The change was intended to minimize a risk but it had the opposite effect.nnWhat should the project manager have done to avoid this outcome?",
     "explanation": " Monitoring the implementation of risk management strategies and evaluating their effectiveness is necessary to avoid undesirable outcomes.\n\n- Why other options are wrong:\n- Updating the assumption log is important but not enough to ensure the success of the response.\n- Performing a risk analysis should be done before actions are taken, not just after they are carried out.\n- The development of a probability and impact matrix is a step in the initial assessment and not in follow-up.",
     "choices": [
@@ -3270,7 +3270,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "The supplier of a tool for a manufacturing project informs the project manager that delivery of the tool will be late. The project manager orders the tool from another supplier. After the tool from the second supplier arrives, the original supplier delivers the tool and submits an invoice according to the procurement agreement.nnWhat should the project manager do next?",
     "explanation": " Contractual obligations must be verified and appropriate legal action taken to ensure the rights of the project.\n\n- Why other options are wrong:\n- Refusal to pay or return the instrument may lead to legal problems if it is not agreed in advance.\n- Holding the instrument and paying the invoice without reviewing the contracts may cause unnecessary obligations.\n- Quality comparison and return of the instrument is ineffective without considering the contractual terms.",
     "choices": [
@@ -3293,7 +3293,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "An expert resource avoids assignments that include working with a foreign contractor. How should the project manager resolve the situation?",
     "explanation": " Open communication and respect promotes a healthy work environment and addresses personal problems without escalation.\n\n- Why other options are wrong:\n- Issuing a disciplinary warning that may lead to tension and lack of cooperation in the team.\n- Hiring a replacement consultant may solve the problem temporarily but does not address the root cause.\n- Reprimanding an expert in public can cause embarrassment and harm the team's culture.",
     "choices": [
@@ -3316,7 +3316,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project is using a hybrid approach and team performance is consistently excellent during the predictive stages. During the incremental stages, the team begins to show signs of low morale, low commitment, conflicts, and confusion. However, one team member continues to be very confident and excels in performance during this stage.nnWhat should the project manager do first?",
     "explanation": " The emergence of low morale and conflicts within the team indicates that there are problems that need to be addressed immediately through open communication. A team meeting allows for identifying the causes of problems and fosters collaboration to find effective solutions that get the team back on track.\n\n- Why other options are wrong:\n- Recognizing a high-performing team member may motivate this member but does not address the problems of the team as a whole.\n- Additional training on agile may be useful later on, but the current problem is conflicts and commitment, which need to be addressed directly.\n- Returning to a predictive approach only may result in a loss of flexibility and will not solve current problems within the team.",
     "choices": [
@@ -3339,7 +3339,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is working on an IT project. During an iteration review meeting, a couple of key stakeholders enter into a heated discussion about the prototype's capabilities.nnWhat should the project manager do next?",
     "explanation": " Conflict between stakeholders can hinder the progress of the project. It is important for the project manager to understand the root of the problem and deal with it directly to avoid a negative impact on the workflow.\n\n- Why other options are wrong:\n- A brainstorming session with the team is not the first step, but comes after understanding the problem.\n- Preparing a list of pros and cons may be helpful later but does not address the conflict directly.\n- Inviting the project sponsor to intervene is a subsequent step if the project manager fails to resolve the conflict himself.",
     "choices": [
@@ -3362,7 +3362,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project has the following characteristics:nnn The project manager is being asked to deliver a business result in a compressed timeline; the original timeline was one month, but the new requested timeline is two weeks.n In the resource planning activity, the project manager heard from another team member that no technical resources are available to join the team; however, the project manager knows the technical resource manager from a previous project.nnnWhat is the first action the project manager should take?",
     "explanation": "The product owner is the primary decision-maker regarding project priorities and scope, so they should be involved early to make informed decisions about resources and schedule.\n\n- Why other options are wrong:\n- Schedule and technical resources are not actions but information.\n- Escalating the issue or contacting an external vendor may be later steps after informing the product owner.\n- Meeting with the technical resources manager may help, but it is not the first step, which is to involve the product owner.",
     "choices": [
@@ -3393,7 +3393,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A hybrid project has the following characteristics:nnn It is in the early stages.n It has a brand new team.n The project manager will be very busy executing other projects during the first two weeks of the project.nnnDuring this early stage, how should the project manager develop the new project team?",
     "explanation": " At the early stage of a project, it is critical that the project manager focuses on team development, especially if the team is brand new. This stage is best for building team spirit and enhancing collaboration and team self-structuring.\n\n- Why other options are wrong:\n- Mentioning only the new team does not specify when it should be developed.\n-  The project manager's preoccupation does not prevent him from focusing on developing the team in appropriate ways or delegation.\n- Options related to ensuring understanding of self-organization, planning team-building events, daily updates, or one-on-one conversations are important steps but follow the understanding that the appropriate stage is early.",
     "choices": [
@@ -3428,7 +3428,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "All four key stakeholders of a project are concerned that the current release plan will not meet urgent business needs. The project manager needs to help ensure that the team delivers business value within the required timelines.nnWhat should the project manager do?",
     "explanation": " Setting the minimum deliverable product helps the team focus on delivering the most important value on time, meeting the urgent needs of stakeholders and ensuring that resources are used effectively.\n\n- Why are other options wrong:\n. Evaluation of the structure of the division of labor and renegotiation may delay the project and do not guarantee the desired value.\n- Calculating and escalating the schedule performance indicator does not solve the problem of prioritization.\n- Adjusting the baseline of the timeline without specifying an MVP may result in a failure to meet real business needs.",
     "choices": [
@@ -3451,7 +3451,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project has the following characteristics:nnn Reoccurring project reviews are set up for the project.n During the fourth review, the customer requests to change the technical approach for the product in development.nnnWhich action should the project manager take?",
     "explanation": " A request for a material change such as a change in technical approach needs to be carefully evaluated through discussion with the team and stakeholders to ensure that the change is consistent with the project's objectives, schedule, and budget.\n\n- Why other options are wrong:\n- Preparing periodic reviews is a pre-order, not an on-demand procedure.\n- Informing the team of the implementation of the approach immediately may lead to problems without considering the change.\n- Allowing the team to choose the approach and verify later without involving stakeholders may cause conflicts.\n- Studying the approach with stakeholders or making a benchmarking can be subsequent steps after agreeing on the fundamental change.",
     "choices": [
@@ -3482,7 +3482,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Within the fourth iteration of product development, the project manager realizes that the software used for the project management plan is not permitting planned updates.nnWhich action should the project manager take?",
     "explanation": " The project manager must deal with issues that affect the workflow quickly and effectively, especially if the problem is technical or internal administrative such as the difficulty of updating the plan.\n- This allows the rest of the team to focus on their tasks without distracting or disrupting production.\n\n- Why are other options wrong:\n. Selecting a member to update the template may not solve the technical or systemic issue with the tool.\n- Prioritizing activities based on commercial value does not address the specific technical issue.\n- Adding the issue as a risk register and corrective actions is important but does not solve the problem immediately.",
     "choices": [
@@ -3505,7 +3505,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A company that is heavily focused on delivering projects using predictive approaches on-boards a new project manager who uses hybrid approaches. The scope of the project contains a number of unclear requirements.nnHow should the project manager plan the delivery of the project?",
     "explanation": " In a hybrid approach, unclear requirements are progressively addressed by breaking down work into repeatable parts that enable adaptation to changes, allowing flexibility in delivery.\n\n- Why other options are wrong:\n- Escalating the issue and waiting may cause delays without ensuring resolution.\n- Ignoring unclear requirements may cause the project to fail to meet the needs.\n- Waiting until the requirements become clearer disrupts the start of work and damages the schedule.",
     "choices": [
@@ -3528,7 +3528,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is leading a key flagship solution initiative prioritizing agility, market adaptation, and rapid response to market trends.nnWhich activity should the project manager prioritize first to ensure success?",
     "explanation": " Early and clear agreement with the sponsor on goals and plans ensures that all parties are on the same page, and helps guide the team and focus on real priorities in line with market strategies.\n\n- Why other options are wrong:\n- Conduct periodic reviews that are important but not the first priority.\n- Requesting additional funding without a clear plan may result in unjustified resource consumption.\n- Creating a business case after a market review is an important step but follows agreement on basic goals and plans.",
     "choices": [
@@ -3551,7 +3551,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "An approved change request adds an incentive to a lump sum contract if the contractor is able to maintain the current baseline schedule. What should now be updated?",
     "explanation": " Adding a performance-related financial incentive to the timesheet directly affects the overall budget and cost, so the cost baseline should be updated to reflect this change.\n\n- Why other options are wrong:\n- The baseline of the range does not change only because of the modification of the financial incentives.\n-  The project management plan includes broader elements, but does not represent the specified baseline.\n- The baseline of the timeline has not changed, because the incentive is related to maintaining the current schedule and not changing it.",
     "choices": [
@@ -3574,7 +3574,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "An organization is developing a new product. What should the project manager of this development do first to improve the success of the project?",
     "explanation": "Defining the vision and initiative is the basis for the success of the project, as it guides all future plans and activities and ensures the compatibility of all parties.\n\n- Why other options are wrong:\n- Developing a detailed schedule before defining the vision may lead to unrealistic or inappropriate plans.\n- Market analysis is important but comes after defining a clear vision for the project.\n- The selection of team members is important, but it is done after setting goals and vision.",
     "choices": [
@@ -3597,7 +3597,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is working on an complex project with multiple stakeholders and competing priorities. Each stakeholder wants to maximize its share of the allocated resources for the requested functionality.nnWhat should the project manager focus on?",
     "explanation": " Focusing on common interests helps in balancing different parties and achieving project goals in general without taking sides.\n\n- Why other options are wrong:\n- Meeting personal interests may lead to conflicts and disruption of the project.\n- Maintaining relationships is important, but it is not at the expense of balancing the distribution of resources.\n- Pushing stakeholders to accept a manager's point of view without participation may cause resistance and failure in implementation.",
     "choices": [
@@ -3620,7 +3620,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "As a project manager of a technology firm, a change in the scope is required to implement a change in the project. What tools can be utilized to better understand the impact of the change?",
     "explanation": " The Deming cycle (Plan-Do-Check-Act) is a change management and continuous improvement tool that helps assess the impact of changes and implement them in an organized manner.\n\n- Why other options are wrong:\n- Pareto chart is used to identify the most influential causes, but does not fully cover the implementation of the change.\n- The fishbone chart is used to analyze the causes of problems but does not manage the change per se.\n- The cause and effect diagram is part of the analysis but does not include the implementation, review and correction cycle.",
     "choices": [
@@ -3643,7 +3643,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A new product is being constructed by an agile team, but the team has a limited amount of time to complete it. Due to these circumstances, it is important for the team to sustain collaboration for the duration of the project.nnTo build team solidarity, what should the project leader do?",
     "explanation": " Understanding individual and collective goals enhances communication and commitment and strengthens solidarity and cooperation among team members.\n\n- Why other options are wrong:\n- Creating protocols for sprint is important but does not guarantee building true solidarity.\n- Discussing product progress using a burn scheme as a monitoring tool, not for building solidarity.\n- Project map analysis is a planning tool and not a geared towards promoting solidarity among members.",
     "choices": [
@@ -3666,7 +3666,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Members from an agile team have been consistently tardy for stand-up meetings and are not meeting project target dates. The project leader assumes the issue may be difficult with self-managing tasks within the team.nnWhat action should the project leader take?",
     "explanation": "Agreements between team members promote self-responsibility and improve time management and group behavior, which is essential in the agile environment.\n\n- Why other options are wrong:\n- Having a problem review meeting is important but does not address the underlying problem of self-behavior.\n- Taking a higher leadership role may reduce team independence.\n- Organizing training that is useful but does not guarantee that the team adheres to behavioral standards.",
     "choices": [
@@ -3689,7 +3689,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "An agile project manager is leading a new software system development project that is in the user acceptance testing phase. The project manager has received positive feedback from the majority of business stakeholders, but the IT director is dissatisfied.nnWhat should the agile project manager do first?",
     "explanation": " The project manager should understand the IT manager's concern directly to identify real problems and deal with them effectively, rather than assuming or researching past actions.\n-  Live discussion allows critical points to be detected and resolved before the problem worsens.\n\n- Why other options are wrong:\\ n. Reviewing the IT manager's attendance at previous meetings may not reveal the reasons for the dissatisfaction.\n- Analyzing requirements with the IT manager assumes that the problem is related to requirements, which may be premature.\n- Discussing the CIO's concerns with the team without a thorough understanding may cause miscommunication or unjustified concern.",
     "choices": [
@@ -3712,7 +3712,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During a new agile project, there have been hindrances related to budgeting and time management. The remote quality assurance team reported a lengthy defect list following completion of a couple sprints. The project manager concluded that the issues stem from language misinterpretation and not project quality.nnWhat should the project manager do?",
     "explanation": "Linguistic misunderstanding needs to be clarified and improved communication between development and quality assurance teams, so explanatory sessions should be held that explain tasks and requirements jointly, minimizing defects resulting from misunderstandings.\n\n- Why other options are wrong:\n- Holding a meeting with the quality assurance team to express concern may raise tension and not solve the problem.\n- Requesting a financial increase to hire a local team that does not address the real cause of miscommunication.\n- Integrating the quality assurance team at the end and not during iterations will not improve the quality of defects in real time.",
     "choices": [
@@ -3735,7 +3735,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During the execution of a project, the finance team identified that they were not involved in building the business case for the project and will not approve the estimated return on investment (ROI). What should the project manager do?",
     "explanation": " Involving the finance team and the product owner in discussing and modifying the feasibility study and the expected return helps to address concerns collaboratively and ensures their support and project continuity.\n\n- Why other options are wrong:\n- Continuing to develop without addressing the problem may lead to project failure.\n- Reviewing the scope plan and recording it as a risk does not solve the core problem.\n- Reviewing the communication plan only may not address the issue of the finance team's involvement in financial decisions.",
     "choices": [
@@ -3758,7 +3758,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A product owner presented the backlog to the team, and the team raised concerns over implementing some of the features due to various impediments. What should the project manager suggest that the product owner do next?",
     "explanation": " In an agile environment, it's important to clearly record and prioritize obstacles related to the value the feature provides to the team and customers. This helps in making informed decisions about the sequence of work and dealing with the most value-bearing barriers.\n\n- Why other choices are wrong:\n- Estimating the financial impact and requesting additional funding may be necessary later, but it is not the first step.\n- Recording obstacles and informing management only without prioritizing reduces the effectiveness of dealing with problems.\n- Starting to remove easy barriers may enhance a sense of achievement but may not address vital value priorities.",
     "choices": [
@@ -3781,7 +3781,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "The product owner decides to launch a product after a couple of releases, knowing that the minimum viable product (MVP) lacks some features. One of the key stakeholders, the marketing vice president, is not happy with the results and questioned the release decision.nnWhat should the project manager do?",
     "explanation": " The project manager does not make product launch decisions, but rather supports the product owner who is responsible for the business list and MVP decisions. Improved stakeholder alignment enhances communication and reduces future conflicts.\n\n- Why other choices are wrong:\n- Coaching the team to make decisions is not the role of the direct project manager in this case.\n- Taking responsibility for launch decisions exceeds the authority of the project manager.\n- Escalating the matter to the sponsor due to stakeholder powers may create unnecessary tension.",
     "choices": [
@@ -3804,7 +3804,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A product company is transforming the way it develops and releases products in the market. Executives believe that this is a high-risk initiative, and this initiative must be successful.nnWhat should the project manager do in this scenario?",
     "explanation": " In a risky environment, it is wise to use a step-by-step approach (such as agile models) to deliver value continuously and reduce risk rather than risk a large and delayed delivery.\n\n- Why other options are wrong:\n- Develop a communications plan that is important but not the main priority for risk management.\n- Developing a detailed race plan may be part of the implementation but does not directly address the risks.\n- Preparing a feasibility study is necessary but usually before implementation begins.",
     "choices": [
@@ -3827,7 +3827,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A team is ready to start working on a project with a customer who was very difficult to work with in the past because the customer was unable to describe exactly what they wanted. What approach should the project manager take to remove this impediment?",
     "explanation": " MVP defines the minimum required functionality that meets the customer's core needs, reducing ambiguity and allowing efforts to be focused on delivering value quickly.\n\n- Why other options are wrong:\n- Developing a plan with deadlines is useful but does not address the ambiguity of customer requirements.\n- A predictive approach may lead to delays due to the need for formal acceptance of each feature.\n- Enhancing negotiation skills is important but does not solve the fundamental problem of lack of clarity of requirements.",
     "choices": [
@@ -3850,7 +3850,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager has been moved to a new division and is in charge of an existing project in an unfamiliar domain. When attempting to gain an understanding of the risks for this agile project, what is the primary tool the project manager should employ?",
     "explanation": "In the agile methodology, collaborative discussions between the team and stakeholders are used to jointly detect risks early.\n\n- Why other options are wrong:\n-  An interview with the project sponsor is useful but may not cover all potential risks.\n- Probability assessments are usually made after the risk is identified.\n- Risk avoidance workshops are important but depend on a preliminary understanding of the risks.",
     "choices": [
@@ -3873,7 +3873,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project's deliverables due date is approaching, but one team member's performance is negatively impacting the schedule. What should the project manager do?",
     "explanation": " Supporting team members and improving their performance through mentoring is the most appropriate solution to maintain a schedule and improve productivity.\n\n- Why other options are wrong:\n- Assign a more skilled resource that may not be available quickly or may affect the current dynamic of the team.\n- Removing the team member may lead to a decline in morale and other problems.\n- Requesting training from the employee's manager may be slow and not address the problem immediately.",
     "choices": [
@@ -3896,7 +3896,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is managing a project where requirements are not fully known and a high level of uncertainty exists. Which methodology should be used for this project?",
     "explanation": " Agile methodology is suitable for projects with unclear or variable requirements, as it allows work to be repeated and results to be adjusted continuously while reducing risk.\n\n- Why other options are wrong:\n- The hybrid methodology combines predictive and agile but is less flexible in situations of high uncertainty.\n- The predictive methodology relies on fixed and clear requirements, not suitable for situations with uncertainty.\n- The waterfall methodology relies on rigorous successive phases and is suitable for projects with fixed requirements.",
     "choices": [
@@ -3919,7 +3919,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A company is venturing into a new business but has no previous experience in that market. The project manager is having trouble visualizing project requirements.nnWhat should the project manager do next?",
     "explanation": " Getting customer input helps in better understanding market and product requirements, especially when in-house experience is limited.\n\n- Why other options are wrong:\n- Referring to the project charter is important but does not address the ambiguity of requirements directly.\n- Reevaluating the objectives of the business may be useful, but without market information it is insufficient.\n- A feasibility study may be conducted later after obtaining customer input.",
     "choices": [
@@ -3942,7 +3942,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project depends on the reliability of one component. The project manager proposes designing redundancy into the system to reduce the impact that failure of this component would have on the success of the project.nnWhat type of risk response is the project manager demonstrating?",
     "explanation": " Mitigation means taking action that reduces the likelihood or impact of risks, and in this context, replication of the component reduces the impact of failure.\n\n- Why other options are wrong:\n- Transfer means transferring risks to another party, which is not the case here.\n- Acceptance means accepting risks as they are without change.\n- Avoidance means changing the project plan to avoid risks, not minimize their impact.",
     "choices": [
@@ -3965,7 +3965,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A company that manufactures standard equipment for municipalities needs to ensure consistency in tasks performed regularly during product assembly. What should the project manager develop to achieve this?",
     "explanation": " Checklists help ensure that each step of work is completed consistently and in accordance with the required standards, reducing errors and standardizing procedures.\n\n- Why other options are wrong:\n- The process of estimating activity resources focuses on identifying the required resources and not ensuring consistency in implementation.\n- Design for Quality (DfX) Guidelinesrelates to the design of the product itself and not to assembly procedures.\n- Interviews with industry experts are useful for information but do not guarantee that tasks are carried out consistently.",
     "choices": [
@@ -3988,7 +3988,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is preparing the charter for a software development project that will outsource 33 percent of user interface (UI) evaluation. The project manager needs software developers to identify the parts of the UI that a third-party can evaluate. However, the software functional manager believes that the project will reduce staff in the software development department and refuses to cooperate.nnWhat should the project manager do first?",
     "explanation": " Meeting with the job manager to understand his concerns and review the scope of work helps clarify expectations and creates a collaborative environment, facilitating later collaboration.\n\n- Why other options are wrong:\n- Asking the project sponsor for justification may be helpful later but does not directly address resistance.\n- Providing a cost/benefit analysis is important but not the first step in resolving a rejection.\n- Explaining the evaluation objective to the job manager may be insufficient if his or her underlying concerns are not addressed first.",
     "choices": [
@@ -4011,7 +4011,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During a kick-off meeting for a critical project, three stakeholders with varying perspectives and interests engaged in a heated argument about the project's goals. How should the project manager address this situation?",
     "explanation": " In the face of disagreements between stakeholders, it is important that the project manager acts as a mediator who helps clarify different points of view, allowing for consensus and common approval that enhances the success of the project.\n\n- Why other options are wrong:\n- Interrupting arguments by force may increase tension and lead to more resistance.\n- Ending the meeting early without addressing the problem may exacerbate the conflict later.\n- Ignoring the argument and moving forward may leave problems alive and negatively affect team cohesion.",
     "choices": [
@@ -4034,7 +4034,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager needs to formally complete a project, but a supplier says an invoice has been paid twice. The project manager knows that the invoice was approved, but cannot find evidence of a duplicate payment. The project manager needs to close out this project in order to start a new project.nnWhat should the project manager do?",
     "explanation": " It is necessary to ensure that the issues of financial invoices are resolved accurately before closing the project, to avoid legal and financial problems that may affect the company and future projects.\n\n- Why are other options wrong:\n- Inform the supplier of the payment once and start closing the project without proof that may lead to a subsequent financial dispute.\n- Completing documentation and postponing work on the new project is impractical and may delay future projects without resolving the problem.\n- Starting a new project before closing the current one without solving financial problems may cause administrative complications.",
     "choices": [
