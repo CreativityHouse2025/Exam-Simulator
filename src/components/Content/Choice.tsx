@@ -12,7 +12,7 @@ export const ChoiceStyles = styled.div<ChoiceTextStylesProps>`
   grid-template-columns: 2rem 4rem 1fr;
   margin-bottom: 0.5rem;
   font: 2rem 'Open Sans';
-  cursor: pointer;
+  ${({ $disabled }) => !$disabled && 'cursor: pointer;'}
   color: ${({ $review, $correct, theme }) => ($review ? ($correct ? theme.correct : theme.grey[5]) : theme.grey[10])};
   svg {
     margin-right: 0.5rem;
@@ -28,26 +28,33 @@ const LabelStyles = styled.div`
 `
 
 const ChoiceComponent: React.FC<ChoiceProps> = ({
-  isSingleAnswer,
-  isSelected,
-  isReview,
-  isCorrect,
+  singleAnswer,
+  selected,
+  review,
+  correct,
+  disabled,
   label,
   text,
   onClick
 }) => {
-  const name = isSelected ? 'selected' : ''
+  const name = selected ? 'selected' : ''
+  const props = {
+    $review: review,
+    $correct: correct,
+    $disabled: disabled,
+    onClick: disabled ? undefined : onClick
+  }
 
   const renderIcon = React.useCallback((): React.ReactNode => {
-    if (isSelected) {
-      return React.createElement(isSingleAnswer ? RadioButtonChecked : CheckBox, { className: name, size: 20 })
+    if (selected) {
+      return React.createElement(singleAnswer ? RadioButtonChecked : CheckBox, { className: name, size: 20 })
     } else {
-      return React.createElement(isSingleAnswer ? RadioButtonUnchecked : CheckBoxOutlineBlank, { size: 20 })
+      return React.createElement(singleAnswer ? RadioButtonUnchecked : CheckBoxOutlineBlank, { size: 20 })
     }
-  }, [isSelected, isSingleAnswer])
+  }, [selected, singleAnswer])
 
   return (
-    <ChoiceStyles $review={isReview} $correct={isCorrect} onClick={onClick}>
+    <ChoiceStyles {...props}>
       {renderIcon()}
 
       <LabelStyles className={name}>{label}</LabelStyles>
@@ -60,10 +67,11 @@ const ChoiceComponent: React.FC<ChoiceProps> = ({
 export default ChoiceComponent
 
 export interface ChoiceProps {
-  isSingleAnswer: boolean
-  isSelected: boolean
-  isReview: boolean
-  isCorrect: boolean
+  singleAnswer: boolean
+  selected: boolean
+  review: boolean
+  correct: boolean
+  disabled: boolean
   label: string
   text: string
   onClick: React.MouseEventHandler<HTMLDivElement>
@@ -72,4 +80,5 @@ export interface ChoiceProps {
 export interface ChoiceTextStylesProps extends ThemedStyles {
   $review: boolean
   $correct: boolean
+  $disabled: boolean
 }
