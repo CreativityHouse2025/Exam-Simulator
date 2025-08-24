@@ -38,8 +38,9 @@ const NormalText = styled.span`
   margin-bottom: 0.5rem;
 `
 
-const ExplainationComponent: React.FC<ExplainationProps> = ({ question, answer }) => {
-  const correct: boolean = question.answer === answer
+const ExplanationComponent: React.FC<ExplanationProps> = ({ question, answer }) => {
+  const correct: boolean =
+    question.answer.length === answer.length && question.answer.every((ans, index) => ans === answer[index])
 
   const [yours, _correct, _answer, explain] = React.useMemo(
     () => [
@@ -74,9 +75,9 @@ const ExplainationComponent: React.FC<ExplainationProps> = ({ question, answer }
   )
 }
 
-export default ExplainationComponent
+export default ExplanationComponent
 
-export interface ExplainationProps {
+export interface ExplanationProps {
   question: Question
   answer: Answer<QuestionTypes>
 }

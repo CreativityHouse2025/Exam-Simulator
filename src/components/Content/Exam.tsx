@@ -21,6 +21,7 @@ const ExamComponent: React.FC<ExamProps> = ({ isReview }) => {
   const exam = React.useContext(ExamContext)
 
   const question = exam[index]
+  const answer = answers[index]
 
   return (
     <ExamStyles id="exam">
@@ -32,7 +33,7 @@ const ExamComponent: React.FC<ExamProps> = ({ isReview }) => {
 
       <MultipleChoice isReview={isReview} />
 
-      {isReview && <Explanation question={question} answer={answers[index]} />}
+      {isReview && <Explanation question={question} answer={answer} />}
     </ExamStyles>
   )
 }
