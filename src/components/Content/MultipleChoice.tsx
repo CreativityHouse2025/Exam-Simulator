@@ -50,7 +50,7 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, isReview
   )
 
   return (
-    <div id={question.type} dir={document.documentElement.dir}>
+    <div id={question.type}>
       {question.choices.map(({ text, correct }, i) => (
         <Choice
           key={i}

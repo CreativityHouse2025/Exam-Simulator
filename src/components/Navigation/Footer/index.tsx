@@ -18,7 +18,7 @@ const FooterStyles = styled.div<FooterStylesProps>`
 
 const FooterComponent: React.FC<NavigationFooterProps> = ({ open, questionCount }) => {
   return (
-    <FooterStyles id="footer" $open={open} dir={document.documentElement.dir}>
+    <FooterStyles id="footer" $open={open}>
       <Arrows questionCount={questionCount} />
 
       <Timer />

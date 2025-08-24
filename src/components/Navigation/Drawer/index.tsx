@@ -14,7 +14,7 @@ const DrawerStyles = styled.div<DrawerStylesProps>`
 
 const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen }) => {
   return (
-    <DrawerStyles id="drawer" $open={open} dir={document.documentElement.dir}>
+    <DrawerStyles id="drawer" $open={open}>
       <Control open={open} toggleOpen={toggleOpen} />
       <Menu open={open} />
     </DrawerStyles>

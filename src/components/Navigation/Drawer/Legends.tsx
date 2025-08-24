@@ -21,7 +21,7 @@ const LegendsComponent: React.FC = () => {
   const completed = examState === 'completed'
 
   return (
-    <LegendStyles dir={document.documentElement.dir}>
+    <LegendStyles>
       <Legend type="marked" />
       <Legend type="incomplete" />
       {inProgress && <Legend type="complete" />}
