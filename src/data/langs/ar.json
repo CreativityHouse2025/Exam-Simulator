@@ -30,33 +30,29 @@
     }
   },
   "content": {
-    "exam": {
-      "top-display": {
-        "question": "السؤال $1 من $2"
-      },
-      "explain": {
-        "explain": "التفسير",
-        "yours": "إجابتك ",
-        "answer": "الإجابة الصحيحة ",
-        "correct": "صحيحة",
-        "incorrect": "خاطئة"
-      }
+    "top-display": {
+      "question": "السؤال $1 من $2"
     },
-    "review": {
-      "summary": {
-        "title": "إحصائيات الاختبار",
-        "status": "الحالة",
-        "pass": "نجاح",
-        "fail": "رسوب",
-        "passing": "النجاح",
-        "time": "الوقت",
-        "date": "التاريخ",
-        "score": "الدرجة",
-        "correct": "صحيح",
-        "incorrect": "خطأ",
-        "incomplete": "ناقص",
-        "home": "العودة للصفحة الرئيسية"
-      }
+    "explain": {
+      "explain": "التفسير",
+      "yours": "إجابتك ",
+      "answer": "الإجابة الصحيحة ",
+      "correct": "صحيحة",
+      "incorrect": "خاطئة"
+    },
+    "summary": {
+      "title": "إحصائيات الاختبار",
+      "status": "الحالة",
+      "pass": "نجاح",
+      "fail": "رسوب",
+      "passing": "النجاح",
+      "time": "الوقت",
+      "date": "التاريخ",
+      "score": "الدرجة",
+      "correct": "صحيح",
+      "incorrect": "خطأ",
+      "incomplete": "ناقص",
+      "home": "العودة للصفحة الرئيسية"
     }
   },
   "confirm": {

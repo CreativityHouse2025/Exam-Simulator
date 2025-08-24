@@ -25,7 +25,7 @@ const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isRevie
   const { index } = React.useContext(SessionNavigationContext)
 
   const question = React.useMemo(
-    () => translate('content.exam.top-display.question', [index + 1, questionCount]),
+    () => translate('content.top-display.question', [index + 1, questionCount]),
     [document.documentElement.lang, translate, index, questionCount]
   )
 

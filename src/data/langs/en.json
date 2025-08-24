@@ -30,33 +30,29 @@
     }
   },
   "content": {
-    "exam": {
-      "top-display": {
-        "question": "Question $1 of $2"
-      },
-      "explain": {
-        "explain": "Explanation",
-        "yours": "Your answer is ",
-        "answer": "The correct answer is ",
-        "correct": "correct",
-        "incorrect": "incorrect"
-      }
+    "top-display": {
+      "question": "Question $1 of $2"
     },
-    "review": {
-      "summary": {
-        "title": "Exam Statistics",
-        "status": "Status",
-        "pass": "PASS",
-        "fail": "FAIL",
-        "passing": "Passing",
-        "time": "Time",
-        "date": "Date",
-        "score": "Score",
-        "correct": "Correct",
-        "incorrect": "Wrong",
-        "incomplete": "Unanswered",
-        "home": "Go Home"
-      }
+    "explain": {
+      "explain": "Explanation",
+      "yours": "Your answer is ",
+      "answer": "The correct answer is ",
+      "correct": "correct",
+      "incorrect": "incorrect"
+    },
+    "summary": {
+      "title": "Exam Statistics",
+      "status": "Status",
+      "pass": "PASS",
+      "fail": "FAIL",
+      "passing": "Passing",
+      "time": "Time",
+      "date": "Date",
+      "score": "Score",
+      "correct": "Correct",
+      "incorrect": "Wrong",
+      "incomplete": "Unanswered",
+      "home": "Go Home"
     }
   },
   "confirm": {
