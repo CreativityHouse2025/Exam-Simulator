@@ -23,7 +23,7 @@ describe('Validation Functions', function () {
       pass: 50,
       test: [
         {
-          type: 'multiple-choice',
+          type: 'single-answer',
           text: 'What is 2 + 2?',
           explanation: '2 + 2 equals 4.',
           choices: [
@@ -43,7 +43,7 @@ describe('Validation Functions', function () {
   describe('validateQuestion()', function () {
     /** @type {Omit<Question, 'answer'>} */
     const mockQuestion = {
-      type: 'multiple-choice',
+      type: 'single-answer',
       text: 'What is 2 + 2?',
       explanation: '2 + 2 equals 4.',
       choices: [
@@ -60,7 +60,7 @@ describe('Validation Functions', function () {
   describe('validateChoices()', function () {
     /** @type {Pick<Question, 'type'|'choices'>} */
     const mockQuestion = {
-      type: 'multiple-choice',
+      type: 'single-answer',
       choices: [
         { text: 'choice 1', correct: false },
         { text: 'choice 2', correct: true }

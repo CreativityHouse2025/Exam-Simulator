@@ -12,7 +12,7 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ exam, isReview
   const { answers } = React.useContext(SessionDataContext)
 
   const question = exam.test[index]
-  const isSingleAnswer = question.type === 'multiple-choice'
+  const isSingleAnswer = question.type === 'single-answer'
 
   const answer: AnswerOfMultipleChoice | AnswerOfMultipleAnswer =
     answers[index] !== null ? answers[index] : isSingleAnswer ? null : []

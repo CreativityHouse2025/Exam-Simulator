@@ -3,7 +3,7 @@
   "pass": 85,
   "test": [
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A scrum team is using a hybrid approach with 2-week sprints. The minimum viable product (MVP) release is at the end of the current sprint, and the team has d the must have and should have features; however, some of the other priority features are still in development. The project manager is preparing the monthly report for the steering committee.\nWhat should the project manager recommend?",
       "explanation": "",
       "choices": [
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During product development, two functional departments indicate that they are short on resources and cannot build and deliver all the products on time.\nWhat should the project manager do to address this concern?",
       "explanation": "",
       "choices": [
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is leading a hybrid project. The organization uses an agile approach and a risk register, but the development team prefers a Scrum approach and views risk management as a predictive process.\nWhat should the project manager prioritize?",
       "explanation": "",
       "choices": [
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "An agile team is receiving multiple unplanned requests for product enhancements in an iteration. This impediment is causing the team to miss scheduled tasks.\nHow should the project manager address this?",
       "explanation": "",
       "choices": [
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A pilot project is underway using an agile approach to development. The project is delivering the planned increments on time, but top management is concerned because they do not see the value that the project is adding.\nHow should the project manager communicate the value of the project to top management?",
       "explanation": "",
       "choices": [
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During week two of a two-week sprint, one of the core team members has an emergency and is unable to work on the project for the rest of the sprint.\nWhat should the project manager do first?",
       "explanation": "",
       "choices": [
@@ -141,7 +141,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project is currently in progress. The project manager has been notified of a new process that may be helpful if it is incorporated into the project.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -164,7 +164,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nA project manager is working with remote team members who are acting independently. What should the project manager do to promote collaboration among team members?",
       "explanation": "",
       "choices": [
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager received a complaint that the project team did not respond correctly to a client's request. However, the project manager understands that the team has received multiple out-of-scope requests from the client.\nWhich action should the project manager take?",
       "explanation": "",
       "choices": [
@@ -210,7 +210,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "At the first meeting about a road construction project, the project manager reminds the team of the importance of observing all rules when carrying out their duties and interacting with stakeholders. Later in the project, team members start coming to meetings late and do not follow other ground rules.\nTo ensure the project outcomes and schedule are not affected, what should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -233,7 +233,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During the planning phase, a project manager is creating the project schedule. The designated project team is finishing an unrelated project, so temporary resources are assigned to assist with planning and task duration estimation. The project team will replace the temporary resources prior to starting the project.\nWhat should the project manager do before the project schedule is finalized?",
       "explanation": "",
       "choices": [
@@ -256,7 +256,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A chief technology officer (CTO) is enthusiastic about an organization's recent adoption of servant leadership practices. The CTO requests that all project managers apply servant leadership practices, but seems to be unsure of the practical applications.\nWhich statement below best represents how the project manager should respond to the CTO's request?",
       "explanation": "",
       "choices": [
@@ -279,7 +279,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During a project planning session, the project manager is trying to define a release plan to achieve consistent value delivery and customer buy-in. A senior stakeholder suggests having a release at the end of the project to make sure the customer sees all of the product features at once.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -302,7 +302,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A remote project team consists of members from two countries. One of the teams is expecting to have three days off to celebrate a national holiday. The project manager tells the team that they must work during the holiday to achieve a key deliverable of the current iteration. The team is disgruntled and does not understand why they have to work if it is a national holiday.\nWhat should the project manager have clearly defined and communicated at the beginning of the project to avoid this?",
       "explanation": "",
       "choices": [
@@ -325,7 +325,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager believes that the project team could benefit from development activities to improve project performance and outcomes. The project manager decides to plan specific development activities for each team member.\nWhat should the project manager do first to ensure the success of this initiative?",
       "explanation": "",
       "choices": [
@@ -348,7 +348,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A new project manager is hired to replace a project manager who was recently transferred to another project. The team members tell the new project manager that the project is behind schedule due to delays in document approvals from the customer.\nWhat should the project manager do first?",
       "explanation": "",
       "choices": [
@@ -371,7 +371,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is leading a hybrid project with a self-organizing team. The team is unable to agree on the scope for the next increment.\nHow should the project manager resolve this issue?",
       "explanation": "",
       "choices": [
@@ -394,7 +394,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During a project schedule review meeting, the project team identified that one of the critical path activities has slipped due to external dependencies. The project schedule is now at risk.\nWhat should the project manager prioritize as the initial response to address the issue?",
       "explanation": "",
       "choices": [
@@ -417,7 +417,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager has been assigned to a new project with multiple high-level stakeholders. Each stakeholder has provided their expectations for the project, and the project manager realizes some expectations conflict.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -440,7 +440,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "At the beginning of an agile project, the project manager is developing the project charter with the team. They are unable to agree on the team values.\nWhat should the project manager discuss with the team to address the conflict?",
       "explanation": "",
       "choices": [
@@ -463,7 +463,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager for a building project has been informed that a required permit from the local government has not yet been obtaine Applying for the permit will delay project delivery by 2 days at a cost of US$40,000. The fine for not having the permit in place is US$,900 a day.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -486,7 +486,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "The first iteration of an agile project consists of a minimum viable product (MVP) that is now successfully  The team members are eager to hand the product over to the customer.\nHow should the product be confirmed as ready for customer use?",
       "explanation": "",
       "choices": [
@@ -509,7 +509,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Due to the complex nature of a predictive project, an organization decides to use an agile approach for a project phase. A team member does not really understand the agile approach and keeps allocating tasks to the rest of the team members. After a while, the team is not able to adjust by itself and conflicts arise, delaying the deliverables.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -532,7 +532,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "The lead sales manager and team are unable to submit a project status report on time for the new sales report integration project. Additionally, the report does not meet the expectations highlighted in the group review meetings.\nWhat should the project manager do first?",
       "explanation": "",
       "choices": [
@@ -555,7 +555,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "As part of a temporary assignment, a project manager is leading a business project. During a daily status meeting, it was discovered that the development team had not d a critical task. This issue is delaying the current iteration. The ability to take the actions needed to address this issue is beyond the authority of the project team.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -578,7 +578,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager has been assigned a project that involves a virtual, multicultural team including representatives from various countries. The project manager needs to prepare a kickoff meeting.\nWhat should the project manager do to prepare for the meeting?",
       "explanation": "",
       "choices": [
@@ -601,7 +601,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A company in a heavily regulated industry is planning to release a new product not previously available in the market. The CEO has asked the project manager to propose a way to ensure that competitors in the industry do not enter the market of this product before this company.\nWhich project delivery approach should the project manager use?",
       "explanation": "",
       "choices": [
@@ -624,7 +624,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nA project sponsor is increasingly anxious about the value returned from the investment made in a project and wants to ensure that the original dates are met. \nWhat should the project manager do to convince the sponsor that the project is on track?",
       "explanation": "",
       "choices": [
@@ -647,7 +647,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "In a project where a third-party provider is implementing a custom solution, the project manager must ensure that the local team will have the capacity to support the solution.\nWhat should the project manager do to ensure that the local team can support the solution?",
       "explanation": "",
       "choices": [
@@ -670,7 +670,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During the project kick-off meeting, the project manager announces that a hybrid approach will be used to deliver the project. Many of the team members raise a concern because they are used to working on predictive projects.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -693,7 +693,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A new project manager has taken over an ongoing project. Progress reports show that the project is within the allocated budget and schedule. However, a key supplier has indicated that they will not be able to supply critical materials as schedule\nWhat should the project manager do first to address this situation?",
       "explanation": "",
       "choices": [
@@ -716,7 +716,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is assigned to a top innovation project that has high visibility with the company executives. Recently, one of the project requirements changed and requires the use of new and innovative technology. The change requires the creation of a new position to be filled by someone familiar with the new technology. During a status meeting, a current team member expresses interest in the new role and confirms they are certified in this new technology.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -739,7 +739,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project is close to completion, and the customer wants to celebrate the success by sharing a business case about the benefits created by the project. The project manager and team feel apprehensive about sharing a business case at this stage.\nWhat is the most appropriate action for the project manager to take?",
       "explanation": "",
       "choices": [
@@ -762,7 +762,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A key resource approaches the project manager after the kick-off meeting and expresses concern that they will be unable to deliver their assigned tasks due to other priorities.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -785,7 +785,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nThe service provider and their client agree on about 80 of the scope of a project contract they are working on for the delivery of marketing content. The client has a fixed budget and target completion date and wants to get the most business value from the project as possible by increasing the scope based on a best-effort delivery close to the end of the project. What should the project manager do?",
       "explanation": "",
       "choices": [
@@ -808,7 +808,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "In a hybrid project, the need for customer involvement throughout the project is not understood by the customer. As a consequence, rework is beyond acceptable levels.\nWhat should the project manager do to address this issue?",
       "explanation": "",
       "choices": [
@@ -831,7 +831,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager assigned to an existing project finds that the deliverable quality has been inconsistent. The project manager finds that the team is not adhering to the development standards.\nWhat practice should the project manager employ to ensure higher quality?",
       "explanation": "",
       "choices": [
@@ -854,7 +854,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager notices that conflicts between team members are occurring in every sprint. After an investigation, the project manager discovers that the team needs to be trained in agile techniques in order to address these conflicts.\nWhat should the project manager do first?",
       "explanation": "",
       "choices": [
@@ -877,7 +877,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "In the planning stage of an upgrade project, a project manager benchmarked other recent projects that use the same technology. The project manager discovered that longer-than-planned outages occurred in most cases due to frequent maintenance activities.\nWhat will be the project manager's next step?",
       "explanation": "",
       "choices": [
@@ -900,7 +900,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During the execution phase of a project, a new director joined the management team and introduced a mandatory compliance requirement impacting all project tasks.\nWhat should the project manager do first?",
       "explanation": "",
       "choices": [

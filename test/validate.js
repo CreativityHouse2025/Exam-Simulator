@@ -64,7 +64,7 @@ export function validateExam(exam, filePath) {
  */
 export function validateQuestion(question, filePath) {
   const questionPath = `${filePath} - question: "${question.text}"`
-  const questionTypes = ['multiple-choice', 'multiple-answer']
+  const questionTypes = ['single-answer', 'multiple-answer']
 
   equal(typeof question, 'object', `Question must be an object: ${questionPath}`)
 
@@ -104,7 +104,7 @@ export function validateChoices(question, questionPath) {
 
   ok(correctCount > 0, `Question must have at least one correct choice: ${questionPath}`)
 
-  if (question.type === 'multiple-choice') {
+  if (question.type === 'single-answer') {
     equal(correctCount, 1, `Multiple-choice question must have exactly one correct choice: ${questionPath}`)
   } else if (question.type === 'multiple-answer') {
     ok(correctCount > 1, `Multiple-answer question must have more than one correct choice: ${questionPath}`)

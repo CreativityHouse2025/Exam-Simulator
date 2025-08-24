@@ -3,12 +3,12 @@ import { createContext } from 'react'
 
 // Answer types
 export type AnswerOf = {
-  'multiple-choice': number | null
+  'single-answer': number | null
   'multiple-answer': number[]
 }
 
 export type Answer<QT extends QuestionTypes> = AnswerOf[QT]
-export type AnswerOfMultipleChoice = AnswerOf['multiple-choice']
+export type AnswerOfMultipleChoice = AnswerOf['single-answer']
 export type AnswerOfMultipleAnswer = AnswerOf['multiple-answer']
 export type Answers = (AnswerOfMultipleChoice | AnswerOfMultipleAnswer)[]
 

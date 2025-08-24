@@ -36,7 +36,7 @@ export interface Exam {
 
 export type Test = Question[]
 
-export type QuestionTypes = 'multiple-choice' | 'multiple-answer'
+export type QuestionTypes = 'single-answer' | 'multiple-answer'
 
 export interface Question<QT extends QuestionTypes = QuestionTypes> {
   /** question type */

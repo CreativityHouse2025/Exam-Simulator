@@ -3,7 +3,7 @@
   "pass": 85,
   "test": [
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A new regulation has been approved that will impact the deliverables in the fourth phase of the project. The delivery is following an iterative approach and is currently completing the second phase.\nWhat should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nA project leader noticed that a new team member is demotivated and always arrives late to work, causing a delay in the deliverables. What should the project manager do?",
       "explanation": "",
       "choices": [
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During a product backlog refinement meeting, a stakeholder from the legal department and the product owner disagree on the prioritization of a particular item. The product owner states that the current prioritization is adding maximum value to the project, and the stakeholder states that the item should be prioritized because it is a governmental compliance requirement.\nWhat should the project manager do in this situation?",
       "explanation": "",
       "choices": [
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager leads two highly motivated teams who typically work on 3-4 concurrent short projects with tight deadlines. Recently, communication, morale, and project performance have declined across teams and the project manager wants to improve team effectiveness and project success.\nWhat should the project manager do first?",
       "explanation": "",
       "choices": [
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A team is assembled for a new project that will be using a predictive approach through requirements gathering and an agile approach for development and testing. Not everyone on the team has experience working in agile. The schedule has started slipping due to the unclear structure of the agile development approach.\nWhat should the project manager have done to avoid this situation?",
       "explanation": "",
       "choices": [
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project team discovers an opportunity to enhance software without impacting the budget or schedule. The team makes the enhancement without proper documentation, which later causes production issues.\nWhat process should have been conducted to prevent this?",
       "explanation": "",
       "choices": [
@@ -141,7 +141,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project management team is developing a project management information system (PMIS) as a collaboration tool for internal and external stakeholders. The project manager wants to develop a dashboard component within the system that will be updated with information on projects' performance.\nWhat should the project manager do first?",
       "explanation": "",
       "choices": [
@@ -164,7 +164,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "An agile project team is implementing a supporting technology platform across departments. They're planning a readiness review for the delivery.\nWho should the project manager propose to conduct the readiness review?",
       "explanation": "",
       "choices": [
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A team is working on a new product using a gated approach. After the third sprint they noticed that the market needs may be changing, and the product may not fit the new market needs.\nWhat should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -210,7 +210,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "In a project, there is a stakeholder who does not see any benefit for the project. Sometimes the stakeholder uses politics to place obstacles to prevent a successful project completion.\nWhat is the personality of this kind of stakeholder?",
       "explanation": "",
       "choices": [
@@ -233,7 +233,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A new system is being developed to replace an existing manual process. During a sprint demo, business stakeholders expressed the concern that they would not gain any value from using this system.\nWhat should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -256,7 +256,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A geographically dispersed team successfully completed a project. The project manager wants to quickly obtain the team's feedback for statistical analysis.\nWhat method should the project manager use?",
       "explanation": "",
       "choices": [
@@ -279,7 +279,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "An international company is implementing an innovative technology at one of its production plants. The technology has already demonstrated positive returns at another site.\nWhat should the project manager consider as a key aspect of the successful implementation of this technology?",
       "explanation": "",
       "choices": [
@@ -302,7 +302,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A startup in its early stages has been acquired by a major company. In light of this new scenario, the project manager has been requested to review the project's roadmap.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -325,7 +325,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "While forming a team to work on a global project, the project leader calls for an ice breaker meeting between the diverse team members.\nWhat should the project manager do to motivate the team to express their expectations?",
       "explanation": "",
       "choices": [
@@ -348,7 +348,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During a project governance assessment, and after expending 40% of the approved project budget, management approved the auditor's recommendation to have the project terminate\nWhat should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -371,7 +371,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is managing a hybrid project with a fixed time and fixed price agreement. The project manager is having difficulty getting the team to submit their time sheets. The feedback received from the team is that work will be delivered every two weeks, so no time sheets are require However, the project manager needs the time sheets to complete a cost assessment of the project.\nWhat should the project manager do to ensure all team members submit their time sheets as required?",
       "explanation": "",
       "choices": [
@@ -394,7 +394,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nDuring the development of a project, the project manager noticed that results are not as good as expecte Which tool or document shows which elements are impacting the key metrics?",
       "explanation": "",
       "choices": [
@@ -417,7 +417,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nWhat is the main goal of a Visionary leadership style?",
       "explanation": "",
       "choices": [
@@ -440,7 +440,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is managing a project that has a component using agile. The project sponsor asks the project manager to add a new component to this project which is government regulated with new complex tax-rules with enough time provided to implement these rules. The sponsor suggests implementing this new component using predictive non-agile approach due to its complexity.\nWhich methodology will the project manager use for this new component?",
       "explanation": "",
       "choices": [
@@ -463,7 +463,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "An aggressive and low-influence stakeholder disrupts a kick-off meeting by complaining about procedural violations in past projects. The project manager's research reveals that the violations had no significant impact.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -486,7 +486,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A company begins to implement Scrum. About halfway through the first sprint, communication issues develop. Some project team members are not in sync with other team members.\nWhat should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -509,7 +509,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project team is working on a regulatory application that has a fixed duration for delivery. The team is using a hybrid approach and has divided development into three sprints. The first two sprints have not produced the required results mainly due to delays from functional units. The finance director is agitated due to the imminent sanctions if the application is not completed, and the project team is demoralize\nWho is responsible for inspiring the project team?",
       "explanation": "",
       "choices": [
@@ -532,7 +532,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A new customer relations database is being deploye The schedule calls for migration from the previous system to occur over one weeken However, some key stakeholders believe it may take more time for the migration.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -555,7 +555,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nWhile performing a qualitative project risk analysis process the project manager finds that the product is missing the \"Definition of Done\". What type of risk is this?",
       "explanation": "",
       "choices": [
@@ -578,7 +578,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A client requests a major scope change due to a change in the market environment, which will significantly add to the project cost. This change is approved through the change control process.\nWhat should the project manager do to put the project on track?",
       "explanation": "",
       "choices": [
@@ -601,7 +601,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is assigned to a legacy system modernization project. The project management plan is solidified and the requirements have been handed off to the IT department for development. However, the company's CEO announces the company's new strategic direction and upcoming plans for an enterprise resource planning (ERP) implementation.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -624,7 +624,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager has been on a complex project that began eight months ago. The project manager has a quality team that has been working hard, is motivated, and successful.\nWhat type of management and leadership should the project manager use at this stage?",
       "explanation": "",
       "choices": [
@@ -647,7 +647,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nWhile executing a critical iterative phase of a project, a problem previously identified as a risk just became a confirmed issue, which has halted progress. After entering the new item in the issue log, what should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -670,7 +670,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager received an email from the factory regarding key equipment that will not be delivered as planne The project manager must make alternative arrangements with other vendors to implement a temporary fix.\nWho is responsible for confirming the resource availability for the fix?",
       "explanation": "",
       "choices": [
@@ -693,7 +693,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A new member joined a project during the execution phase. The work requires strong collaboration with other team members.\nWhat should the project manager do to foster a collaborative environment?",
       "explanation": "",
       "choices": [
@@ -716,7 +716,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A company has undertaken a large transformation project to prepare itself for the changing economy. During the execution of the transformation project, a new technology emerges that was not foreseen in the risk management plan.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -739,7 +739,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A key project stakeholder showed interest in the beginning of a complex agile project but has become less involved as the sprint has progressed due to additional responsibilities. A few sprints later, the key stakeholder rejected a feature deliverable. The team is reworking the rejected deliverable for the next sprint.\nWhat should the project manager have done to avoid this situation?",
       "explanation": "",
       "choices": [
@@ -762,7 +762,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "While forming the team to work on a global project with incremental deliveries, the project leader shared the performance measurement plan with the team. Team members did not appreciate the proposed plan, as they expressed it is not realisti\nWhat should the project leader do to ensure the team member's engagement in the implementation of the performance management plan?",
       "explanation": "",
       "choices": [
@@ -785,7 +785,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is working on a hybrid (predictive-agile) project. During a standup meeting, a team member mentions that because of experience on a previous project, they think that one of the upcoming deliverables may need to comply with government regulations.\nWhat should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -808,7 +808,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager oversees a complex project in which a vendor is responsible for delivering several essential components. The project manager and the vendor team are located in different time zones, and this time zone difference has become a significant challenge, leading to productivity issues within the project. Team members from both sides often struggle to coordinate meetings, share updates, and communicate effectively due to the time zone disparities.\nWhat should the project manager do to solve this issue?",
       "explanation": "",
       "choices": [
@@ -831,7 +831,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nA project manager is assigned to a project that will ensure that the organization meets regulatory compliance with new legislation. In which phase of the project should the project manager document compliance objectives?",
       "explanation": "",
       "choices": [
@@ -854,7 +854,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A critical software development project has been in development for the past six sprints. A demonstration for stakeholders took place two days before the final sprint, in which a new stakeholder voiced that the product would not meet expectations for the market.\nWhat should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -877,7 +877,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Question\nA senior business stakeholder with many years of experience is pressuring an agile team to deliver most of the promised functionality to the customer 8 months in the future as opposed to multiple, incremental deliveries over the course of the 8 months. What should the project lead do next?",
       "explanation": "",
       "choices": [
@@ -900,7 +900,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is working on a project with internal stakeholders only and was warned by the project sponsor that some stakeholders require special attention. The organization is very hierarchical.\nWhich of the following models should be used in this instance?",
       "explanation": "",
       "choices": [

@@ -3,7 +3,7 @@
   "pass": 85,
   "test": [
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "An agile project is running its fifth iteration out of 1. After the last retrospective, the team members realize that they had to work extra hours to deliver the committed work.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is managing a project involving a few vendors. The project sponsor asks how the project will acquire goods and external services.\nWhere should this information be documented?",
       "explanation": "",
       "choices": [
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "While preparing a project charter for a new project, a project manager reviews lessons learned from previous projects. The lessons learned documents show frequent issues with low engagement levels and stakeholder misalignment on project objectives.\nWhat should the project manager do to avoid repetition of this issue in the new project?",
       "explanation": "",
       "choices": [
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "1\nDuring a team meeting, team members asked the project manager to advise them on project dependencies. What should the project manager ask the team to do for internal dependencies?",
       "explanation": "",
       "choices": [
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "The sponsor notified the product owner that the budget was approved for a project. However, any additional investment for the project would have to wait until the next fiscal year. The product owner is concerned that this will hold up the project.\nWhat should the product owner do?",
       "explanation": "",
       "choices": [
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "15\nWhat interpersonal skills do project managers or teams need to monitor stakeholder relationships, evaluate engagement strategies, and modify these approaches as needed?",
       "explanation": "",
       "choices": [
@@ -141,7 +141,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "16\nA new project has high uncertainty in the cost required for completion. What approach should the project manager use to determine the expected costs?",
       "explanation": "",
       "choices": [
@@ -164,7 +164,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "An application developer took a story card to work that read \"Customer can pay using credit card\". After the implementation, the functionality was rejected because the application could not accept foreign credit cards.\nWhat should the project manager have done to avoid this issue?",
       "explanation": "",
       "choices": [
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "17\nIn a program, several groups are identifying problem solving techniques and each group presents a proposal. Among those listed, which is valid?",
       "explanation": "",
       "choices": [
@@ -210,7 +210,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is working on a new compliance project that is different from regular projects as it will involve multinational partners and several government departments. The project will result in the adoption of new standards and procedures.\nWhat must the project manager do from the onset?",
       "explanation": "",
       "choices": [
@@ -233,7 +233,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "1\nA project team is working on determining the dependencies for activities for an ongoing project. What action should the project team take first to manage dependencies successfully?",
       "explanation": "",
       "choices": [
@@ -256,7 +256,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A new warehouse facility is under construction. The project manager implements team development efforts such as training that will result in a lower defect ratio.\nWhat should the project manager do next?",
       "explanation": "",
       "choices": [
@@ -279,7 +279,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project team recently experienced delays due to noncompliance which have made the project schedule less flexible and increased risk to cost and poor quality. The team is brainstorming about ways to avoid this in future.\nWhat is most far-reaching implication for the organization if this noncompliance is not resolved?",
       "explanation": "",
       "choices": [
@@ -302,7 +302,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "The project manager of an AI project leads with grace and confidence. They provide support, listen attentively, and allow their team members to work under little supervision.\nWhat model of worker behavior does the project manager exhibit?",
       "explanation": "",
       "choices": [
@@ -325,7 +325,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "2\nA project manager decided to involve a third party to manage project risk given that they had more experience than the current project team. What kind of response strategy did the project manager apply to address overall project risk?",
       "explanation": "",
       "choices": [
@@ -348,7 +348,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A newly-hired project manager is running a project for the first time and is worried about rising tensions. Project team members are arguing during an effort-intensive phase and stakeholders have voiced some doubts about the project's performance. In a discussion with a senior project manager, the new project manager admits that they have a fear of conflict and asks the senior project manager how they perceive conflict.\nHow should the senior project manager respond?",
       "explanation": "",
       "choices": [
@@ -371,7 +371,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "21\nA project manager is assessing two investment opportunities. Project A is expected to generate cash flows of $1, per year for five years, with an initial investment of $35,. Project B is expected to generate cash flows of $, per year for five years, with an initial investment of $25,. The company's required rate of return is 1%. What is the Net Present Value (NPV) for each project, and which one should the project manager recommend?",
       "explanation": "",
       "choices": [
@@ -394,7 +394,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "22\nSome team members assigned to a new technology project expressed their lack of knowledge about the technology and the challenges they will face during implementation. What should the project manager do?",
       "explanation": "",
       "choices": [
@@ -417,7 +417,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is leading an agile project. For iterations one through five, the team’s velocity chart displays 1 story points, 3 story points, 22 story points, 23 story points, and 22 story points.\nWhat does this information demonstrate about the team's performance?",
       "explanation": "",
       "choices": [
@@ -440,7 +440,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project is being execute The project's life cycle is defined as predictive; however, a major deliverable will be handed over incrementally to the customer. The assigned resources are experienced and reliable and are willing to make decisions that the project manager used to make after each incremental delivery on other projects.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -463,7 +463,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "25\nA project manager discovers a significant flaw in a major project deliverable. Which project management process is being performed?",
       "explanation": "",
       "choices": [
@@ -486,7 +486,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "26\nA demanding project stakeholder insists that an additional feature be added to a project product without changing the scope, budget, or schedule. The project manager allows this feature to be included since it adds great value to the end product. However, the project manager discovers that adding this feature has lengthened the project schedule and increased project costs.\nWhich process should the project manager have followed before including the additional product feature?",
       "explanation": "",
       "choices": [
@@ -509,7 +509,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project team is faced with deciding on the next steps to take in order to address recently identified tasks schedule delays. The project manager expects team members to make the appropriate decisions for their respectively assigned tasks and proceed to implement them.\nWhich type of leadership style is the project manager using in this instance?",
       "explanation": "",
       "choices": [
@@ -532,7 +532,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "27\nWhich of the following project artifacts do not utilize the WBS as an input?",
       "explanation": "",
       "choices": [
@@ -555,7 +555,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A company is using Lean Six Sigma methodology on a project. Midway through the project, an external Lean consultant is invited to conduct an audit to ensure that the methodology is being properly applie\nWhich process is being employed?",
       "explanation": "",
       "choices": [
@@ -578,7 +578,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "2\nAfter an organization trained and implemented a new mandatory project management software application for all project staff, the project manager noticed that several team members show low levels of commitment to the new software. What is the cause for this?",
       "explanation": "",
       "choices": [
@@ -601,7 +601,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During project closure, the project manager finds it difficult to obtain successful project completion feedback. Some stakeholders disagree with the project's success criteria and have been frustrated with the project from the beginning.\nTo what should the project manager refer to address these concerns?",
       "explanation": "",
       "choices": [
@@ -624,7 +624,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Project manager B: moderately experienced mainly in construction projects, available the next day for 1 week\nWhich project manager should the PMO director choose and on what basis?",
       "explanation": "",
       "choices": [
@@ -647,7 +647,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "3\nA project manager's team has identified the lack of proper knowledge transfer expectations in the project. Which of the obstacles does not apply in this situation?",
       "explanation": "",
       "choices": [
@@ -670,7 +670,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is working with a team to develop work packages. The project manager noticed a gap in the requirements gathering where important points were missing, which would impact the project timeline.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -693,7 +693,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "32\nWhich one of the following is not a Resource-Based Power in relation to mega projects?",
       "explanation": "",
       "choices": [
@@ -716,7 +716,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A company is considering adopting the agile methodology for future projects. The project manager is leading a discussion focused on the benefits associated with the agile methodology.\nWhich of the following points should the project manager highlight?",
       "explanation": "",
       "choices": [
@@ -739,7 +739,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "3\nA team has been working for two months and has consistently missed planned user stories. How should the project manager address this issue?",
       "explanation": "",
       "choices": [
@@ -762,7 +762,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "3\nA project manager seeks to alleviate the IT department's workload while empowering the business to initiate new implementations and lay the groundwork for future solutions. How should the project manager facilitate this transition?",
       "explanation": "",
       "choices": [
@@ -785,7 +785,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "35\nA project manager is working on requirement management in a pharmaceutical company. Which improvement is something the project manager's organization should expect as an outcome of the project?",
       "explanation": "",
       "choices": [
@@ -808,7 +808,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "While developing the stakeholder management plan for a large project, a project manager organizes a workshop to identify and assess stakeholder power and influence. Due to time constraints, the workshop can only be one day long.\nWhat should the project manager do to achieve this goal within the workshop timeframe?",
       "explanation": "",
       "choices": [
@@ -831,7 +831,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager has engaged the sponsor and discussed concerns regarding noncompliance. The project manager understands that this could be a potential audit situation.\nWhat should the project manager do?",
       "explanation": "",
       "choices": [
@@ -854,7 +854,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "Project A = 5%, Project B = %, Project C = 3% , Project D = 1%.\nWhich of these projects should be selected based on these IRR figures provided?",
       "explanation": "",
       "choices": [
@@ -877,7 +877,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "A project manager is managing an agile project. The PMO manager is not familiar with agile delivery.\nWhich of the following statements describe the agile approach?",
       "explanation": "",
       "choices": [
@@ -900,7 +900,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "single-answer",
       "text": "During the team meeting, two of the team members who worked on the same tasks are arguing about who is at fault for the task being late. None of them want to be perceived as the one who caused the delay.\nWhat is the most likely cause of this issue?",
       "explanation": "",
       "choices": [
