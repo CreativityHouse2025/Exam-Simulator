@@ -17,20 +17,18 @@ describe('Validation Functions', function () {
 
   describe('validateExam()', function () {
     /** @type {Exam} */
-    const mockExam = {
-      test: [
-        {
-          type: 'single-answer',
-          text: 'What is 2 + 2?',
-          explanation: '2 + 2 equals 4.',
-          choices: [
-            { text: '3', correct: false },
-            { text: '4', correct: true }
-          ],
-          answer: 1
-        }
-      ]
-    }
+    const mockExam = [
+      {
+        type: 'single-answer',
+        text: 'What is 2 + 2?',
+        explanation: '2 + 2 equals 4.',
+        choices: [
+          { text: '3', correct: false },
+          { text: '4', correct: true }
+        ],
+        answer: 1
+      }
+    ]
 
     it('should validate a well-structured exam', function () {
       validateExam(mockExam, 'mock/path/to/exam.json')

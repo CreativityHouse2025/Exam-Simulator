@@ -1,4 +1,3 @@
-import type { Test } from '../types'
 import type { Answers, Answer } from '../session'
 
 export interface ProgressStats {
@@ -8,14 +7,14 @@ export interface ProgressStats {
 
 /**
  * Calculate comprehensive progress statistics for an exam session
- * @param {Test} test - The test object
+ * @param {number} questionCount - The total number of questions in the exam
  * @param {Answers} answers - Array of answers
  * @returns ProgressStats object with all progress information
  */
-export function calculateProgressStats({ length }: Test, answers: Answers): ProgressStats {
+export function calculateProgressStats(questionCount: number, answers: Answers): ProgressStats {
   try {
     const answeredCount = countAnsweredQuestions(answers)
-    const percentage = length > 0 ? Math.round((answeredCount / length) * 100) : 0
+    const percentage = questionCount > 0 ? Math.round((answeredCount / questionCount) * 100) : 0
 
     return { answeredCount, percentage }
   } catch (err) {

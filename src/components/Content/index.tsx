@@ -1,8 +1,8 @@
-import type { Exam, ThemedStyles } from '../../types'
+import type { ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
-import ExamComponent from './Exam'
+import Exam from './Exam'
 import Summary from './Summary'
 import { SessionExamContext } from '../../session'
 
@@ -23,7 +23,7 @@ const ContentStyles = styled.div<ThemedStyles>`
   transition: 0.3s;
 `
 
-const ContentComponent: React.FC<ContentProps> = ({ exam, open }) => {
+const ContentComponent: React.FC<ContentProps> = ({ open }) => {
   const { examState, reviewState } = React.useContext(SessionExamContext)
 
   const finished = examState === 'completed'
@@ -31,9 +31,7 @@ const ContentComponent: React.FC<ContentProps> = ({ exam, open }) => {
 
   return (
     <MainStyles id="main" $open={open}>
-      <ContentStyles id="content">
-        {finished && summary ? <Summary exam={exam} /> : <ExamComponent exam={exam} isReview={finished} />}
-      </ContentStyles>
+      <ContentStyles id="content">{finished && summary ? <Summary /> : <Exam isReview={finished} />}</ContentStyles>
     </MainStyles>
   )
 }
@@ -41,7 +39,6 @@ const ContentComponent: React.FC<ContentProps> = ({ exam, open }) => {
 export default ContentComponent
 
 export interface ContentProps {
-  exam: Exam
   open: boolean
 }
 

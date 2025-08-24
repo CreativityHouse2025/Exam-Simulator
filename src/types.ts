@@ -25,12 +25,7 @@ export type GridTagTypes = 'marked' | 'incomplete' | 'complete' | 'incorrect' | 
 
 export type ExamType = 'exam' | 'miniexam'
 export type ExamID = `${ExamType}-${number}`
-export interface Exam {
-  /** exam content */
-  test: Test
-}
-
-export type Test = Question[]
+export type Exam = Question[]
 
 export type QuestionTypes = 'single-answer' | 'multiple-answer'
 

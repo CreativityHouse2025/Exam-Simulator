@@ -43,14 +43,9 @@ export function loadExamFile(filePath) {
  * @param {string} filePath
  */
 export function validateExam(exam, filePath) {
-  equal(typeof exam, 'object', `Exam must be an object: ${filePath}`)
+  ok(Array.isArray(exam), `Exam must be an array: ${filePath}`)
 
-  ok(Array.isArray(exam.test), `Exam must have test property as array: ${filePath}`)
-
-  for (let i = 0; i < exam.test.length; i++) {
-    const question = exam.test[i]
-    validateQuestion(question, filePath)
-  }
+  exam.forEach((q) => validateQuestion(q, filePath))
 }
 
 /**
@@ -69,7 +64,7 @@ export function validateQuestion(question, filePath) {
   notEqual(question.text, '', `Question text mustn't be empty : ${questionPath}`)
 
   equal(typeof question.explanation, 'string', `Question explanation must be a string: ${questionPath}`)
-  // notEqual(question.explanation, '', `Question explanation mustn't be empty : ${questionPath}`)
+  notEqual(question.explanation, '', `Question explanation mustn't be empty : ${questionPath}`)
 
   ok(Array.isArray(question.choices), `Question choices must be an array: ${questionPath}`)
   ok(question.choices.length > 0, `Question must have at least one choice: ${questionPath}`)

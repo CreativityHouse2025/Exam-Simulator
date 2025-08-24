@@ -1,10 +1,11 @@
-import type { Exam, ThemedStyles } from '../../types'
+import type { ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
 import SummaryRow from './SummaryRow'
 import { translate } from '../../settings'
 import { formatDate, formatTimer } from '../../utils/format'
+import { ExamContext } from '../../exam'
 import { SessionDataContext, SessionTimerContext } from '../../session'
 
 const passPercent = 85
@@ -23,23 +24,24 @@ export const ColumnStyles = styled.div`
   grid-template-rows: repeat(4, 3rem);
 `
 
-const SummaryComponent: React.FC<SummaryProps> = ({ exam }) => {
+const SummaryComponent: React.FC = ({}) => {
   const { answers } = React.useContext(SessionDataContext)
   const { maxTime, time } = React.useContext(SessionTimerContext)
+  const exam = React.useContext(ExamContext)
 
   const questions = React.useMemo(() => {
     // @ts-expect-error
     const qArr: { incomplete: any[]; completed: any[]; correct: any[]; incorrect: any[] } = {
       incomplete: answers.filter((a) => a === null),
       completed: answers.filter((a) => a !== null),
-      correct: answers.filter((a, i) => a === exam.test[i].answer)
+      correct: answers.filter((a, i) => a === exam[i].answer)
     }
 
-    qArr.incorrect = qArr.completed.filter((a, i) => a !== exam.test[i].answer)
+    qArr.incorrect = qArr.completed.filter((a, i) => a !== exam[i].answer)
     return qArr
   }, [exam, answers])
 
-  const score = Math.round((questions.correct.length / exam.test.length) * 100)
+  const score = Math.round((questions.correct.length / exam.length) * 100)
   const status = score >= passPercent
   const date = new Date()
   const elapsed = maxTime * 60 - time
@@ -63,13 +65,9 @@ const SummaryComponent: React.FC<SummaryProps> = ({ exam }) => {
 
         <ColumnStyles id="column">
           <SummaryRow type="score" value={`${score} %`} status={status} />
-          <SummaryRow type="correct" value={`${questions.correct.length} / ${exam.test.length}`} status={status} />
-          <SummaryRow type="incorrect" value={`${questions.incorrect.length} / ${exam.test.length}`} status={status} />
-          <SummaryRow
-            type="incomplete"
-            value={`${questions.incomplete.length} / ${exam.test.length}`}
-            status={status}
-          />
+          <SummaryRow type="correct" value={`${questions.correct.length} / ${exam.length}`} status={status} />
+          <SummaryRow type="incorrect" value={`${questions.incorrect.length} / ${exam.length}`} status={status} />
+          <SummaryRow type="incomplete" value={`${questions.incomplete.length} / ${exam.length}`} status={status} />
         </ColumnStyles>
       </div>
     </div>
@@ -77,7 +75,3 @@ const SummaryComponent: React.FC<SummaryProps> = ({ exam }) => {
 }
 
 export default SummaryComponent
-
-export interface SummaryProps {
-  exam: Exam
-}

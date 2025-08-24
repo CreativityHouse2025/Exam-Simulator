@@ -2,4 +2,4 @@ import type { Exam } from './types'
 
 import { createContext } from 'react'
 
-export const ExamContext = createContext<Exam | null>(null)
+export const ExamContext = createContext<Exam>({} as Exam)
