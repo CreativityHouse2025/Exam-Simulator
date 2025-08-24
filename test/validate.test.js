@@ -1,8 +1,7 @@
-/** @import { Exam, Question, Choice } from '../src/types.js' */
+/** @import { Exam, Question } from '../src/types.js' */
 
-import { deepEqual, equal, notDeepEqual } from 'assert/strict'
+import { deepEqual, notDeepEqual } from 'assert/strict'
 import { getFileNumbersFromFiles, validateExam, validateQuestion, validateChoices } from './validate.js'
-import { type } from 'os'
 
 describe('Validation Functions', function () {
   describe('getFileNumbersFromFiles()', function () {
@@ -51,7 +50,7 @@ describe('Validation Functions', function () {
     }
 
     it('should validate a well-structured question', function () {
-      validateQuestion(mockQuestion, 0, 'mock/path/to/question.json')
+      validateQuestion(mockQuestion, 'mock/path/to/question.json')
     })
   })
 

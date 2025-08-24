@@ -42,13 +42,13 @@ export interface Session {
 
 // Action types
 export const SessionActionTypes = {
-  SET_INDEX: 'SET_INDEX',
-  SET_BOOKMARKS: 'SET_BOOKMARKS',
-  SET_ANSWERS: 'SET_ANSWERS',
-  SET_TIME: 'SET_TIME',
-  SET_TIMER_PAUSED: 'SET_TIMER_PAUSED',
-  SET_EXAM_STATE: 'SET_EXAM_STATE',
-  SET_REVIEW_STATE: 'SET_REVIEW_STATE'
+  SET_INDEX: 'SET_INDEX' as const,
+  SET_BOOKMARKS: 'SET_BOOKMARKS' as const,
+  SET_ANSWERS: 'SET_ANSWERS' as const,
+  SET_TIME: 'SET_TIME' as const,
+  SET_TIMER_PAUSED: 'SET_TIMER_PAUSED' as const,
+  SET_EXAM_STATE: 'SET_EXAM_STATE' as const,
+  SET_REVIEW_STATE: 'SET_REVIEW_STATE' as const
 } as const
 
 export type SessionActionTypes = keyof typeof SessionActionTypes
@@ -78,26 +78,26 @@ export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, Ses
 
 // Property mapping
 export const SessionActionProps: { [K in SessionActionTypes]: SessionActionsMap[K]['prop'] } = {
-  SET_INDEX: 'index',
-  SET_BOOKMARKS: 'bookmarks',
-  SET_ANSWERS: 'answers',
-  SET_TIME: 'time',
-  SET_TIMER_PAUSED: 'paused',
-  SET_EXAM_STATE: 'examState',
-  SET_REVIEW_STATE: 'reviewState'
+  SET_INDEX: 'index' as const,
+  SET_BOOKMARKS: 'bookmarks' as const,
+  SET_ANSWERS: 'answers' as const,
+  SET_TIME: 'time' as const,
+  SET_TIMER_PAUSED: 'paused' as const,
+  SET_EXAM_STATE: 'examState' as const,
+  SET_REVIEW_STATE: 'reviewState' as const
 } as const
 
 // Default session
 export const defaultSession: Session = {
-  index: 0,
-  maxTime: 0,
-  time: 0,
-  paused: false,
-  examState: 'not-started',
-  reviewState: 'summary',
-  bookmarks: [],
-  answers: []
-}
+  index: 0 as const,
+  maxTime: 0 as const,
+  time: 0 as const,
+  paused: false as const,
+  examState: 'not-started' as const,
+  reviewState: 'summary' as const,
+  bookmarks: [] as const,
+  answers: [] as const
+} as const
 
 export type SessionNavigation = Pick<Session, 'index' | 'update'>
 export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused' | 'update'>

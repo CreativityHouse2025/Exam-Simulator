@@ -1,4 +1,4 @@
-import type { Exam, ExamID, ExamType } from './types'
+import type { Exam, ExamType } from './types'
 import type { Lang, LangCode } from './settings'
 
 import React, { useCallback, useEffect, useState } from 'react'
