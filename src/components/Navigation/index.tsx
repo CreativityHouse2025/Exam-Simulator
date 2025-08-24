@@ -59,7 +59,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
                 <Content exam={exam} open={open} />
               </ContainerStyles>
 
-              {exam && <Footer open={open} questionCount={exam.test.length} />}
+              {exam && <Footer open={open} questionCount={exam.length} />}
 
               <Confirms session={session} />
             </>

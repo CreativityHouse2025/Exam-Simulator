@@ -57,10 +57,10 @@ export function formatTimer(sec: number): string {
 export function randomizeTest(exam: Exam): Exam {
   try {
     // Randomize the order of questions
-    exam.test = shuffleArray(exam.test)
+    exam = shuffleArray(exam)
 
-    for (let i = 0; i < exam.test.length; i++) {
-      const q = exam.test[i]
+    for (let i = 0; i < exam.length; i++) {
+      const q = exam[i]
 
       // Create a mapping of original indices to new indices for choices
       const indices = q.choices.map((_, i) => i)
@@ -78,7 +78,7 @@ export function randomizeTest(exam: Exam): Exam {
         throw new Error(`Unsupported question type: ${q.type}`)
       }
 
-      exam.test[i] = q
+      exam[i] = q
     }
 
     return exam
@@ -107,12 +107,12 @@ export function randomizeTest(exam: Exam): Exam {
 /**
  * Format the Session object.
  * @param {Session} session - The session object to format.
- * @param {Exam} exam - The exam object to format.
+ * @param {number} questionCount - The number of questions in the exam.
  * @returns {Session} - The formatted exam object.
  */
-export function formatSession(session: Session, exam: Exam, examType: ExamType): Session {
+export function formatSession(session: Session, questionCount: number, examType: ExamType): Session {
   try {
-    const nullArr = Array(exam.test.length - session.answers.length).fill(null)
+    const nullArr = Array(questionCount - session.answers.length).fill(null)
     session.answers = session.answers.concat(nullArr)
 
     const maxTime = examType === 'exam' ? 13800 : 2760

@@ -7,6 +7,7 @@ import Question from './Question'
 import MultipleChoice from './MultipleChoice'
 import Progress from './Progress'
 import Explanation from './Explanation'
+import { ExamContext } from '../../exam'
 import { SessionDataContext, SessionNavigationContext } from '../../session'
 
 const ExamStyles = styled.div`
@@ -14,21 +15,22 @@ const ExamStyles = styled.div`
   height: 100%;
 `
 
-const ExamComponent: React.FC<ExamProps> = ({ exam, isReview }) => {
+const ExamComponent: React.FC<ExamProps> = ({ isReview }) => {
   const { index } = React.useContext(SessionNavigationContext)
   const { answers } = React.useContext(SessionDataContext)
+  const exam = React.useContext(ExamContext)
 
-  const question = exam.test[index]
+  const question = exam[index]
 
   return (
     <ExamStyles id="exam">
-      <TopDisplay exam={exam} />
+      <TopDisplay questionCount={exam.length} />
 
-      {!isReview && <Progress exam={exam} />}
+      {!isReview && <Progress questionCount={exam.length} />}
 
       <Question {...question} />
 
-      <MultipleChoice exam={exam} isReview={isReview} />
+      <MultipleChoice isReview={isReview} />
 
       {isReview && <Explanation question={question} answer={answers[index]} />}
     </ExamStyles>
@@ -38,6 +40,5 @@ const ExamComponent: React.FC<ExamProps> = ({ exam, isReview }) => {
 export default ExamComponent
 
 export interface ExamProps {
-  exam: Exam
   isReview: boolean
 }

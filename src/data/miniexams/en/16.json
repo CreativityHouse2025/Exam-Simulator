@@ -1,901 +1,899 @@
-{
-  "test": [
-    {
-      "type": "single-answer",
-      "text": "Question\nA project team completes the identification of project and product requirements. Which of the following were used to accomplish this?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Benchmarking, network diagram, and trend analysis",
-          "correct": true
-        },
-        {
-          "text": "Work breakdown structure (WBS), trend analysis, and observation/conversation",
-          "correct": false
-        },
-        {
-          "text": "Brainstorming, affinity diagrams, and mind mapping",
-          "correct": false
-        },
-        {
-          "text": "Affinity diagrams, benchmarking, and observation/conversation",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "A customer requested a change in functionality for a product that will be delivered in the next sprint. The responsible specialist for this change is also assigned to a deliverable for another project. The project manager needs to negotiate the availability of the specialist.\nWho is responsible for confirming the specialist's availability?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Project sponsor",
-          "correct": true
-        },
-        {
-          "text": "Functional manager",
-          "correct": false
-        },
-        {
-          "text": "Product owner",
-          "correct": false
-        },
-        {
-          "text": "Human resources",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nA project manager notices that a project is not running well and deliverables are falling behin What is the first step the project manager should take in order to make a decision on how to progress with the project?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Identify the problem.",
-          "correct": true
-        },
-        {
-          "text": "Brainstorm solutions.",
-          "correct": false
-        },
-        {
-          "text": "Establish a measurement criteri",
-          "correct": false
-        },
-        {
-          "text": "Set a goal.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "A large-scale, multiyear transformation project was completed as per the defined requirements and within the approved budget and schedul The requirements were also validated and confirmed by the business. However, the post-delivery analysis of the project revealed that the project did not provide benefits as expecte\nWhat should the project manager have done to avoid this?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Ensured the requirements were properly captured in the product backlog.",
-          "correct": true
-        },
-        {
-          "text": "Created a business strategy to assist with organizational change management.",
-          "correct": false
-        },
-        {
-          "text": "Improved the status reporting processes to highlight specific project results.",
-          "correct": false
-        },
-        {
-          "text": "Measured and demonstrated business value throughout the project lifecycl",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Due to a budget issue, the project team decides to use low-cost equipment with higher testing uncertainty to reduce cost. However, the test results are unstable and are creating discrepancies. One of the team members is aware of the situation and proposes to use high-resolution equipment with lower test uncertainty to increase the testing quality.\nHow should the project manager respond to this proposal?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Reject the proposal due to budget constraints and follow the quality management plan.",
-          "correct": true
-        },
-        {
-          "text": "Accept the proposal because the high-resolution equipment produces precise test results with lower test uncertainty.",
-          "correct": false
-        },
-        {
-          "text": "Evaluate the proposal to determine if the high-resolution equipment produces precise test results with lower test uncertainty.",
-          "correct": false
-        },
-        {
-          "text": "Accept the proposal because budget is not an issue when quality assurance is taken into consideration.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nWhat approach should a project manager employ to encourage collaboration among developers in an agile development model?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Acceptance testing",
-          "correct": true
-        },
-        {
-          "text": "Behavior-driven development",
-          "correct": false
-        },
-        {
-          "text": "Joint application development",
-          "correct": false
-        },
-        {
-          "text": "Rapid application development",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Due to organizational changes, a key stakeholder is replaced by a new employe The next status review meeting to update project progress will not take place until next month.\nWhat should the project manager do next?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Schedule a separate meeting with the new stakeholder to brief them on project status.",
-          "correct": true
-        },
-        {
-          "text": "Prepare and send a project status report to the new stakeholder for review.",
-          "correct": false
-        },
-        {
-          "text": "Seek advice from the project sponsor on how to obtain support from the new stakeholder.",
-          "correct": false
-        },
-        {
-          "text": "Wait for the next communication window to share information with the new stakeholder.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "A project manager is leading a project that entails transitioning to agil The project will pilot the agile delivery modeled around using four resources from a vendor, working alongside two internal resources with no agile experienc The project manager needs to act as a coach for the project team and help them understand the differences between the functioning of a traditional project team and an agile team.\nWhat is the most important thing the project manager needs to do to establish agile team behavior?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Focus on the produced result of the team.",
-          "correct": true
-        },
-        {
-          "text": "Build trust within the team.",
-          "correct": false
-        },
-        {
-          "text": "Encourage collaboration among the team.",
-          "correct": false
-        },
-        {
-          "text": "Hold each team member accountabl",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nAt the completion of a project, customer agreement cannot be achieved through negotiations. What should the project manager do next?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Inform project team members.",
-          "correct": true
-        },
-        {
-          "text": "Initiate litigation since all work was complete",
-          "correct": false
-        },
-        {
-          "text": "Start the closing phas",
-          "correct": false
-        },
-        {
-          "text": "Explore arbitration.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nWhich statement correctly differentiates management from leadership?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Managers ask how and when; leaders ask what and why.",
-          "correct": true
-        },
-        {
-          "text": "Managers focus on long-term goals; leaders focus on short-term goals.",
-          "correct": false
-        },
-        {
-          "text": "Managers challenge the status quo; leaders accept the status quo.",
-          "correct": false
-        },
-        {
-          "text": "Managers inspire trust; leaders rely on control.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "A project is under scrutiny for its amount of water usage. The government's water licensing branch is changing its policy to be more restrictive.\nWhat should the project manager do?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Align project resources to oppose the new water license standar",
-          "correct": true
-        },
-        {
-          "text": "Cancel the project because of the uncertainty introduced with the policy change.",
-          "correct": false
-        },
-        {
-          "text": "Assess the impact of the policy change on the project scope.",
-          "correct": false
-        },
-        {
-          "text": "Create a new project schedule based on potential changes to the water policy.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "In a five-year program, many project team members have joined and left the subprojects. Because of this, conflict among team members often occurs.\nWhich technique should the project manager use to resolve the conflicts long term?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Forcing",
-          "correct": true
-        },
-        {
-          "text": "Smoothing",
-          "correct": false
-        },
-        {
-          "text": "Compromise",
-          "correct": false
-        },
-        {
-          "text": "Problem-solving",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "In a five-year program, many project team members have joined and left the subprojects. Because of this, conflict among team members often occurs.\nWhich technique should the project manager use to resolve the conflicts long term?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Forcing",
-          "correct": true
-        },
-        {
-          "text": "Smoothing",
-          "correct": false
-        },
-        {
-          "text": "Compromise",
-          "correct": false
-        },
-        {
-          "text": "Problem-solving",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Teams A and B are working on two different agile projects for the same customer. They are using the same method to calculate units of work, and each iteration is 2 weeks long. In the first two iterations, team A completed 50 units of work and team B completed 200 units of work. Both teams' tasks are getting completed as planne The customer reported 5 errors per unit of work for Team A and 0 errors per unit of work for Team\nWhat conclusion should the project manager have regarding the teams and their performances?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Team B is performing better than Team A as they have completed more units of work in the same duration.",
-          "correct": true
-        },
-        {
-          "text": "Teams A and B have completed their tasks as planned; therefore, they are both performing equally.",
-          "correct": false
-        },
-        {
-          "text": "Team A is performing better than Team B because there are fewer errors per unit of work.",
-          "correct": false
-        },
-        {
-          "text": "The teams have completed just two iterations; therefore, it is too early to assess their performance.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "During a feedback meeting, the project manager is informed by team members that validating deliverables is difficult due to the fact that technology requirements keep changing before the due dates of their handover causing rework. The project manager suggests a more appropriate project management methodology to be adopted to address this occurrence for upcoming projects.\nWhich project management methodology will work for this team?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Agile",
-          "correct": true
-        },
-        {
-          "text": "Predictive",
-          "correct": false
-        },
-        {
-          "text": "Waterfall",
-          "correct": false
-        },
-        {
-          "text": "Incremental",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "A project execution phase overlaps with a holiday in the country where the majority of team members are base This phase is critical, and all team members are required to work through the holiday. This negatively impacts team morale.\nWhat should the project manager have done to avoid this?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Requested help from other teams based in other countries",
-          "correct": true
-        },
-        {
-          "text": "Postponed project activities",
-          "correct": false
-        },
-        {
-          "text": "Prepared the stakeholder engagement plan",
-          "correct": false
-        },
-        {
-          "text": "Better developed the resource management plan",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "The implementation of a business requirement for an IT project impacts several applications. The application owner notices that changes to a function in application X can be started only upon completion of the development of a new feature in application Y.\nThis is an example of what dependency?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Start-to-start (SS)",
-          "correct": true
-        },
-        {
-          "text": "Finish-to-start (FS)",
-          "correct": false
-        },
-        {
-          "text": "Start-to-finish (SF)",
-          "correct": false
-        },
-        {
-          "text": "Finish-to-finish (FF)",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nA project manager takes over a recently approved project. What will play a key role in determining the communication method?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Stakeholder requirements",
-          "correct": true
-        },
-        {
-          "text": "Frequency of distribution",
-          "correct": false
-        },
-        {
-          "text": "Sender-receiver model",
-          "correct": false
-        },
-        {
-          "text": "Meeting management methods",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nA project manager is handling virtual teams around the worl What should the project manager do to overcome cross-cultural differences?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Create grapevine communication channels and invite team members to contribute freely",
-          "correct": true
-        },
-        {
-          "text": "Nurture stronger personal boundaries and individual sovereignty",
-          "correct": false
-        },
-        {
-          "text": "Create an environment where team members can openly communicate",
-          "correct": false
-        },
-        {
-          "text": "Create a shared understanding of team goals and objectives",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "A project is developing a product where the time to market is critical. During the execution phase, the client submits a change request to include the latest technology that will enhance the product features and provide a competitive advantage. The change will impact the project constraints, but the benefits outweigh the cost and effort.\nWhat should the project manager do next?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Adopt an incremental delivery approach and release essential features of the product into the market first to counter competition.",
-          "correct": true
-        },
-        {
-          "text": "Start a separate project to adopt the new technology incrementally to enhance the product features as the technology matures.",
-          "correct": false
-        },
-        {
-          "text": "Perform an integrated change control process and review the project constraints to effectively manage the enhanced scope.",
-          "correct": false
-        },
-        {
-          "text": "Close the current project and start a new project with an incremental delivery approach.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "A project manager begins to notice disengaged members arriving late, not delivering on time, not attending meetings, and producing low-quality deliveries.\nWhat action should the project manager take?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Investigate the reason for the team members' disengaged behavior and boost morale and participation.",
-          "correct": true
-        },
-        {
-          "text": "Ask the team members to change the way they are working to match the newest work trends.",
-          "correct": false
-        },
-        {
-          "text": "Encourage the team to double their efforts to pick up the slack from the disengaged team members.",
-          "correct": false
-        },
-        {
-          "text": "Request that the team members abandon the process that is slowing their progress.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "During project execution, an issue arises that requires additional budget and time to resolve the issue. The project team did not identify this issue as a risk during risk management planning. The project sponsor points out that this risk has occurred on past projects.\nWhat should the project manager have done to avoid this oversight?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Reviewed the risk management plan.",
-          "correct": true
-        },
-        {
-          "text": "Confirmed organizational risk appetite.",
-          "correct": false
-        },
-        {
-          "text": "Reviewed the lessons learned register.",
-          "correct": false
-        },
-        {
-          "text": "Allocated additional contingency reserves.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nDuring the last iteration of planning in an agile project, the team discovers that mandatory regulations were not included in the minimum viable product (MVP). What should the project manager do?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Ask the team to include this regulatory requirement in the iteration backlog.",
-          "correct": true
-        },
-        {
-          "text": "Ask the product owner to review the priority of this regulatory requirement.",
-          "correct": false
-        },
-        {
-          "text": "Ask the stakeholders to review the priority of this regulatory requirement.",
-          "correct": false
-        },
-        {
-          "text": "Ask the sponsor for approval to include this regulatory requirement in the iteration backlog.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "In your project you need some assistance facilitating meetings, following up on action items, introducing new team members, and mediating conflicts.\nWho would be the most suitable team member type to assist you with those activities?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Power Oriented team member.",
-          "correct": true
-        },
-        {
-          "text": "Affiliate Oriented team member.",
-          "correct": false
-        },
-        {
-          "text": "Achievement Oriented Team member.",
-          "correct": false
-        },
-        {
-          "text": "Delivery Oriented Team member.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "An organization has decided to implement agile and a project manager with Scrum Master has been selected to coach the project team to understand agile delivery. One of the team members asks the project manager what servant leadership hierarchy means.\nHow should the project manager respond?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Team members are supposed to serve their manager.",
-          "correct": true
-        },
-        {
-          "text": "Managers are supposed to serve their team members.",
-          "correct": false
-        },
-        {
-          "text": "Clients are supposed to serve the team members.",
-          "correct": false
-        },
-        {
-          "text": "Team Members are supposed to serve their clients.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "A project team has recently finished a sprint for developing two features for a fleet management system. Although the team delivered the required features, they encountered several issues and conflicts during the sprint. Team members were upset about this experience and are now showing a lack of motivation due to what has occurre\nWhat can the project manager do to help increase the team's motivation and engagement with the project?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Set up one-on-one meetings with the project team members.",
-          "correct": true
-        },
-        {
-          "text": "Review sprint progress with the project team members.",
-          "correct": false
-        },
-        {
-          "text": "Review sprint planning procedures with the project team members.",
-          "correct": false
-        },
-        {
-          "text": "Perform a sprint retrospective with the project team members.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "A new project manager is assigned to lead an agile project. The project manager wants to use motivation to encourage the team to perform well throughout the project.\nWhat should the project manager do?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Implement a reward system aimed to keep the team engaged and motivate",
-          "correct": true
-        },
-        {
-          "text": "Use the management reserves to fund some team-building activities.",
-          "correct": false
-        },
-        {
-          "text": "Inflate project estimates to provide a financial buffer for team activities.",
-          "correct": false
-        },
-        {
-          "text": "Ask project sponsor to fund more for team building activities.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "A project manager is leading a project that requires approval from a government agency. The agency is currently drafting legislation that will impact the project's approval process, but it is unclear when the legislation will become law. The project manager is concerned that the legislation may delay the project's key milestones or limit the project's development options.\nWhat should the project manager do?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Apply for an additional contingency to prepare for the anticipated delay in project milestones.",
-          "correct": true
-        },
-        {
-          "text": "Review the project scope and submit a request to exclude activities associated with the legislation.",
-          "correct": false
-        },
-        {
-          "text": "Continuously evaluate exposure to the risk to minimize negative impacts on the project and its outcomes.",
-          "correct": false
-        },
-        {
-          "text": "Proceed with the project with the understanding that the pending legislation will pass without delay.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nThe risk register is a document that records details of all identified individual risks to a project. What is the minimal content of this document?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Identified risks, risk categories, and effects on objectives",
-          "correct": true
-        },
-        {
-          "text": "Risks owners, potential risks responses, and risk triggers",
-          "correct": false
-        },
-        {
-          "text": "Identified risks, risk owners, and potential risks responses",
-          "correct": false
-        },
-        {
-          "text": "Issues log, metrics & trends, and distribution of risks across risk categories",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nDue to a downturn in the business environment, a customer is only able to make a project's payment in part, rather than the fully committed monthly payment. What should the project manager do?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Discuss it with management and pause the project because of the customer's budget constraint.",
-          "correct": true
-        },
-        {
-          "text": "Deliver the features with the highest business value, based on the available budget.",
-          "correct": false
-        },
-        {
-          "text": "Deliver the features that have small independent components, based on the available budget.",
-          "correct": false
-        },
-        {
-          "text": "Continue with the planned development and deliver only when full payment is made.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nA company has decided to form agile teams within the organization to improve project results and take advantage of new opportunities in the market. A project manager with extensive agile experience was recruited to oversee the process. What should the project manager do first?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Recruit, appoint, and evaluate new agile project practitioners.",
-          "correct": true
-        },
-        {
-          "text": "Implement an agile project management office (PMO).",
-          "correct": false
-        },
-        {
-          "text": "Determine the criteria for when to launch agile projects.",
-          "correct": false
-        },
-        {
-          "text": "Perform a retrospective analysis of prior project experiences.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nA project manager must make decisions daily, regardless of the decision's level of importance or criticality. What should a project manager do to ensure their decisions are unbiased and rational?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Utilize data without checking for accuracy",
-          "correct": true
-        },
-        {
-          "text": "Understand they cannot achieve everything",
-          "correct": false
-        },
-        {
-          "text": "Make decisions quickly",
-          "correct": false
-        },
-        {
-          "text": "Make decisions only when the results are certain",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "A project manager is asked to manage a project that will allow the company to comply with a new, upcoming regulation. Just after project kick-off, the scope is modified to have the project team now work on specific tasks, while a global team will manage the program for several countries in parallel. The project management plan has not yet been shared, and the deadline to complete the project is fixe\nWhat should the project manager do to handle the scope and changes?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Create a risk entry in the risk management plan due to the lack of a global project management plan.",
-          "correct": true
-        },
-        {
-          "text": "Formalize the change in the scope with the project sponsor to limit accountability for the specific tasks.",
-          "correct": false
-        },
-        {
-          "text": "Review the organizational process assets (OPAs) from similar situations and the approaches that were implemente",
-          "correct": false
-        },
-        {
-          "text": "Define an initial backlog and start working on the clearest tasks, then incrementally refine the scope.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nA project manager is assigned to a project and the first task is to assist in creating the Work Breakdown Structure (WBS). Which tool, technique or document is used as starting point for an effective WBS creation?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Scope baseline",
-          "correct": true
-        },
-        {
-          "text": "Activity list",
-          "correct": false
-        },
-        {
-          "text": "Project charter",
-          "correct": false
-        },
-        {
-          "text": "WBS dictionary",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "A project manager is leading a critical project to deliver a new solution. The CEO is highly invested in the project, and the CFO is the product owner. During the testing phase, the CFO requests an additional nonfunctional requirement to shorten the frequency of transaction processing. This new requirement will impact the launch date, and the CFO is insistent on having it implemente\nWhat should the project manager do to minimize the impact of the new requirement on the launch date and manage the expectations of the CEO and CFO?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Meet with the CFO and suggest delaying the implementation of the new requirement to the post-launch phase.",
-          "correct": true
-        },
-        {
-          "text": "Ask the CEO to intervene and stop the implementation of the new requirement, as development is complete.",
-          "correct": false
-        },
-        {
-          "text": "Tell the project team to update the product backlog with the new requirement and adjust the project plans.",
-          "correct": false
-        },
-        {
-          "text": "Assess the scope of the new nonfunctional requirement to determine its specific impact on the planned go-live date.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nA project team is actively engaged in the preparation of the last delivery before the final product is live in production. What should the project manager do to make sure that the whole team is in full sync?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Ensure the team is attending the daily meetings and participating actively",
-          "correct": true
-        },
-        {
-          "text": "Ensure that the needed information is available and accessible to each and every member",
-          "correct": false
-        },
-        {
-          "text": "Ensure to visualize the work to be done on a white board visual and accessible to all",
-          "correct": false
-        },
-        {
-          "text": "Ensure there is a room for the team to have regular conversation whenever needed",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "Question\nWhat are the main outputs of the risk identification process?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Risk report and risk register",
-          "correct": true
-        },
-        {
-          "text": "Risk report, risk register, and project documents updates",
-          "correct": false
-        },
-        {
-          "text": "Risk management plan, risk register, and risk responses",
-          "correct": false
-        },
-        {
-          "text": "Risk report, probability, and impact matrix",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "During a business status meeting, the project manager acknowledges that several market conditions have recently changed dramatically. As a result, the expected value of the project in progress may be threatene\nWhat should the project manager do next?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Stop the project immediately due to uncertainty that the project will deliver the expected value.",
-          "correct": true
-        },
-        {
-          "text": "Continue with the project since the project manager has not been formally informed of any change in market conditions.",
-          "correct": false
-        },
-        {
-          "text": "Ask the project team to investigate the evolution of market conditions during the last 6 months.",
-          "correct": false
-        },
-        {
-          "text": "Meet with the project sponsor to discuss the information and ask if the organization still supports delivery of the project.",
-          "correct": false
-        }
-      ]
-    },
-    {
-      "type": "single-answer",
-      "text": "A project manager is leading a Scrum team. During Business Acceptance Testing (BAT), the client rejects the deliverable due to poor quality, traced back to a lack of collaboration between team members.\nWhat should have the project manager done to prevent this?",
-      "explanation": "",
-      "choices": [
-        {
-          "text": "Provided detailed instructions on how and when the work should be done.",
-          "correct": true
-        },
-        {
-          "text": "Requested detailed documentation and sign-offs between project phases.",
-          "correct": false
-        },
-        {
-          "text": "Implemented detailed tracking of project progress, productivity, and costs.",
-          "correct": false
-        },
-        {
-          "text": "Provided a detailed vision and empowered the team making them accountable.",
-          "correct": false
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "type": "single-answer",
+    "text": "Question\nA project team completes the identification of project and product requirements. Which of the following were used to accomplish this?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Benchmarking, network diagram, and trend analysis",
+        "correct": true
+      },
+      {
+        "text": "Work breakdown structure (WBS), trend analysis, and observation/conversation",
+        "correct": false
+      },
+      {
+        "text": "Brainstorming, affinity diagrams, and mind mapping",
+        "correct": false
+      },
+      {
+        "text": "Affinity diagrams, benchmarking, and observation/conversation",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "A customer requested a change in functionality for a product that will be delivered in the next sprint. The responsible specialist for this change is also assigned to a deliverable for another project. The project manager needs to negotiate the availability of the specialist.\nWho is responsible for confirming the specialist's availability?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Project sponsor",
+        "correct": true
+      },
+      {
+        "text": "Functional manager",
+        "correct": false
+      },
+      {
+        "text": "Product owner",
+        "correct": false
+      },
+      {
+        "text": "Human resources",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nA project manager notices that a project is not running well and deliverables are falling behin What is the first step the project manager should take in order to make a decision on how to progress with the project?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Identify the problem.",
+        "correct": true
+      },
+      {
+        "text": "Brainstorm solutions.",
+        "correct": false
+      },
+      {
+        "text": "Establish a measurement criteri",
+        "correct": false
+      },
+      {
+        "text": "Set a goal.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "A large-scale, multiyear transformation project was completed as per the defined requirements and within the approved budget and schedul The requirements were also validated and confirmed by the business. However, the post-delivery analysis of the project revealed that the project did not provide benefits as expecte\nWhat should the project manager have done to avoid this?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Ensured the requirements were properly captured in the product backlog.",
+        "correct": true
+      },
+      {
+        "text": "Created a business strategy to assist with organizational change management.",
+        "correct": false
+      },
+      {
+        "text": "Improved the status reporting processes to highlight specific project results.",
+        "correct": false
+      },
+      {
+        "text": "Measured and demonstrated business value throughout the project lifecycl",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Due to a budget issue, the project team decides to use low-cost equipment with higher testing uncertainty to reduce cost. However, the test results are unstable and are creating discrepancies. One of the team members is aware of the situation and proposes to use high-resolution equipment with lower test uncertainty to increase the testing quality.\nHow should the project manager respond to this proposal?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Reject the proposal due to budget constraints and follow the quality management plan.",
+        "correct": true
+      },
+      {
+        "text": "Accept the proposal because the high-resolution equipment produces precise test results with lower test uncertainty.",
+        "correct": false
+      },
+      {
+        "text": "Evaluate the proposal to determine if the high-resolution equipment produces precise test results with lower test uncertainty.",
+        "correct": false
+      },
+      {
+        "text": "Accept the proposal because budget is not an issue when quality assurance is taken into consideration.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nWhat approach should a project manager employ to encourage collaboration among developers in an agile development model?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Acceptance testing",
+        "correct": true
+      },
+      {
+        "text": "Behavior-driven development",
+        "correct": false
+      },
+      {
+        "text": "Joint application development",
+        "correct": false
+      },
+      {
+        "text": "Rapid application development",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Due to organizational changes, a key stakeholder is replaced by a new employe The next status review meeting to update project progress will not take place until next month.\nWhat should the project manager do next?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Schedule a separate meeting with the new stakeholder to brief them on project status.",
+        "correct": true
+      },
+      {
+        "text": "Prepare and send a project status report to the new stakeholder for review.",
+        "correct": false
+      },
+      {
+        "text": "Seek advice from the project sponsor on how to obtain support from the new stakeholder.",
+        "correct": false
+      },
+      {
+        "text": "Wait for the next communication window to share information with the new stakeholder.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "A project manager is leading a project that entails transitioning to agil The project will pilot the agile delivery modeled around using four resources from a vendor, working alongside two internal resources with no agile experienc The project manager needs to act as a coach for the project team and help them understand the differences between the functioning of a traditional project team and an agile team.\nWhat is the most important thing the project manager needs to do to establish agile team behavior?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Focus on the produced result of the team.",
+        "correct": true
+      },
+      {
+        "text": "Build trust within the team.",
+        "correct": false
+      },
+      {
+        "text": "Encourage collaboration among the team.",
+        "correct": false
+      },
+      {
+        "text": "Hold each team member accountabl",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nAt the completion of a project, customer agreement cannot be achieved through negotiations. What should the project manager do next?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Inform project team members.",
+        "correct": true
+      },
+      {
+        "text": "Initiate litigation since all work was complete",
+        "correct": false
+      },
+      {
+        "text": "Start the closing phas",
+        "correct": false
+      },
+      {
+        "text": "Explore arbitration.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nWhich statement correctly differentiates management from leadership?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Managers ask how and when; leaders ask what and why.",
+        "correct": true
+      },
+      {
+        "text": "Managers focus on long-term goals; leaders focus on short-term goals.",
+        "correct": false
+      },
+      {
+        "text": "Managers challenge the status quo; leaders accept the status quo.",
+        "correct": false
+      },
+      {
+        "text": "Managers inspire trust; leaders rely on control.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "A project is under scrutiny for its amount of water usage. The government's water licensing branch is changing its policy to be more restrictive.\nWhat should the project manager do?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Align project resources to oppose the new water license standar",
+        "correct": true
+      },
+      {
+        "text": "Cancel the project because of the uncertainty introduced with the policy change.",
+        "correct": false
+      },
+      {
+        "text": "Assess the impact of the policy change on the project scope.",
+        "correct": false
+      },
+      {
+        "text": "Create a new project schedule based on potential changes to the water policy.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "In a five-year program, many project team members have joined and left the subprojects. Because of this, conflict among team members often occurs.\nWhich technique should the project manager use to resolve the conflicts long term?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Forcing",
+        "correct": true
+      },
+      {
+        "text": "Smoothing",
+        "correct": false
+      },
+      {
+        "text": "Compromise",
+        "correct": false
+      },
+      {
+        "text": "Problem-solving",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "In a five-year program, many project team members have joined and left the subprojects. Because of this, conflict among team members often occurs.\nWhich technique should the project manager use to resolve the conflicts long term?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Forcing",
+        "correct": true
+      },
+      {
+        "text": "Smoothing",
+        "correct": false
+      },
+      {
+        "text": "Compromise",
+        "correct": false
+      },
+      {
+        "text": "Problem-solving",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Teams A and B are working on two different agile projects for the same customer. They are using the same method to calculate units of work, and each iteration is 2 weeks long. In the first two iterations, team A completed 50 units of work and team B completed 200 units of work. Both teams' tasks are getting completed as planne The customer reported 5 errors per unit of work for Team A and 0 errors per unit of work for Team\nWhat conclusion should the project manager have regarding the teams and their performances?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Team B is performing better than Team A as they have completed more units of work in the same duration.",
+        "correct": true
+      },
+      {
+        "text": "Teams A and B have completed their tasks as planned; therefore, they are both performing equally.",
+        "correct": false
+      },
+      {
+        "text": "Team A is performing better than Team B because there are fewer errors per unit of work.",
+        "correct": false
+      },
+      {
+        "text": "The teams have completed just two iterations; therefore, it is too early to assess their performance.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "During a feedback meeting, the project manager is informed by team members that validating deliverables is difficult due to the fact that technology requirements keep changing before the due dates of their handover causing rework. The project manager suggests a more appropriate project management methodology to be adopted to address this occurrence for upcoming projects.\nWhich project management methodology will work for this team?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Agile",
+        "correct": true
+      },
+      {
+        "text": "Predictive",
+        "correct": false
+      },
+      {
+        "text": "Waterfall",
+        "correct": false
+      },
+      {
+        "text": "Incremental",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "A project execution phase overlaps with a holiday in the country where the majority of team members are base This phase is critical, and all team members are required to work through the holiday. This negatively impacts team morale.\nWhat should the project manager have done to avoid this?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Requested help from other teams based in other countries",
+        "correct": true
+      },
+      {
+        "text": "Postponed project activities",
+        "correct": false
+      },
+      {
+        "text": "Prepared the stakeholder engagement plan",
+        "correct": false
+      },
+      {
+        "text": "Better developed the resource management plan",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "The implementation of a business requirement for an IT project impacts several applications. The application owner notices that changes to a function in application X can be started only upon completion of the development of a new feature in application Y.\nThis is an example of what dependency?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Start-to-start (SS)",
+        "correct": true
+      },
+      {
+        "text": "Finish-to-start (FS)",
+        "correct": false
+      },
+      {
+        "text": "Start-to-finish (SF)",
+        "correct": false
+      },
+      {
+        "text": "Finish-to-finish (FF)",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nA project manager takes over a recently approved project. What will play a key role in determining the communication method?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Stakeholder requirements",
+        "correct": true
+      },
+      {
+        "text": "Frequency of distribution",
+        "correct": false
+      },
+      {
+        "text": "Sender-receiver model",
+        "correct": false
+      },
+      {
+        "text": "Meeting management methods",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nA project manager is handling virtual teams around the worl What should the project manager do to overcome cross-cultural differences?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Create grapevine communication channels and invite team members to contribute freely",
+        "correct": true
+      },
+      {
+        "text": "Nurture stronger personal boundaries and individual sovereignty",
+        "correct": false
+      },
+      {
+        "text": "Create an environment where team members can openly communicate",
+        "correct": false
+      },
+      {
+        "text": "Create a shared understanding of team goals and objectives",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "A project is developing a product where the time to market is critical. During the execution phase, the client submits a change request to include the latest technology that will enhance the product features and provide a competitive advantage. The change will impact the project constraints, but the benefits outweigh the cost and effort.\nWhat should the project manager do next?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Adopt an incremental delivery approach and release essential features of the product into the market first to counter competition.",
+        "correct": true
+      },
+      {
+        "text": "Start a separate project to adopt the new technology incrementally to enhance the product features as the technology matures.",
+        "correct": false
+      },
+      {
+        "text": "Perform an integrated change control process and review the project constraints to effectively manage the enhanced scope.",
+        "correct": false
+      },
+      {
+        "text": "Close the current project and start a new project with an incremental delivery approach.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "A project manager begins to notice disengaged members arriving late, not delivering on time, not attending meetings, and producing low-quality deliveries.\nWhat action should the project manager take?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Investigate the reason for the team members' disengaged behavior and boost morale and participation.",
+        "correct": true
+      },
+      {
+        "text": "Ask the team members to change the way they are working to match the newest work trends.",
+        "correct": false
+      },
+      {
+        "text": "Encourage the team to double their efforts to pick up the slack from the disengaged team members.",
+        "correct": false
+      },
+      {
+        "text": "Request that the team members abandon the process that is slowing their progress.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "During project execution, an issue arises that requires additional budget and time to resolve the issue. The project team did not identify this issue as a risk during risk management planning. The project sponsor points out that this risk has occurred on past projects.\nWhat should the project manager have done to avoid this oversight?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Reviewed the risk management plan.",
+        "correct": true
+      },
+      {
+        "text": "Confirmed organizational risk appetite.",
+        "correct": false
+      },
+      {
+        "text": "Reviewed the lessons learned register.",
+        "correct": false
+      },
+      {
+        "text": "Allocated additional contingency reserves.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nDuring the last iteration of planning in an agile project, the team discovers that mandatory regulations were not included in the minimum viable product (MVP). What should the project manager do?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Ask the team to include this regulatory requirement in the iteration backlog.",
+        "correct": true
+      },
+      {
+        "text": "Ask the product owner to review the priority of this regulatory requirement.",
+        "correct": false
+      },
+      {
+        "text": "Ask the stakeholders to review the priority of this regulatory requirement.",
+        "correct": false
+      },
+      {
+        "text": "Ask the sponsor for approval to include this regulatory requirement in the iteration backlog.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "In your project you need some assistance facilitating meetings, following up on action items, introducing new team members, and mediating conflicts.\nWho would be the most suitable team member type to assist you with those activities?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Power Oriented team member.",
+        "correct": true
+      },
+      {
+        "text": "Affiliate Oriented team member.",
+        "correct": false
+      },
+      {
+        "text": "Achievement Oriented Team member.",
+        "correct": false
+      },
+      {
+        "text": "Delivery Oriented Team member.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "An organization has decided to implement agile and a project manager with Scrum Master has been selected to coach the project team to understand agile delivery. One of the team members asks the project manager what servant leadership hierarchy means.\nHow should the project manager respond?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Team members are supposed to serve their manager.",
+        "correct": true
+      },
+      {
+        "text": "Managers are supposed to serve their team members.",
+        "correct": false
+      },
+      {
+        "text": "Clients are supposed to serve the team members.",
+        "correct": false
+      },
+      {
+        "text": "Team Members are supposed to serve their clients.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "A project team has recently finished a sprint for developing two features for a fleet management system. Although the team delivered the required features, they encountered several issues and conflicts during the sprint. Team members were upset about this experience and are now showing a lack of motivation due to what has occurre\nWhat can the project manager do to help increase the team's motivation and engagement with the project?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Set up one-on-one meetings with the project team members.",
+        "correct": true
+      },
+      {
+        "text": "Review sprint progress with the project team members.",
+        "correct": false
+      },
+      {
+        "text": "Review sprint planning procedures with the project team members.",
+        "correct": false
+      },
+      {
+        "text": "Perform a sprint retrospective with the project team members.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "A new project manager is assigned to lead an agile project. The project manager wants to use motivation to encourage the team to perform well throughout the project.\nWhat should the project manager do?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Implement a reward system aimed to keep the team engaged and motivate",
+        "correct": true
+      },
+      {
+        "text": "Use the management reserves to fund some team-building activities.",
+        "correct": false
+      },
+      {
+        "text": "Inflate project estimates to provide a financial buffer for team activities.",
+        "correct": false
+      },
+      {
+        "text": "Ask project sponsor to fund more for team building activities.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "A project manager is leading a project that requires approval from a government agency. The agency is currently drafting legislation that will impact the project's approval process, but it is unclear when the legislation will become law. The project manager is concerned that the legislation may delay the project's key milestones or limit the project's development options.\nWhat should the project manager do?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Apply for an additional contingency to prepare for the anticipated delay in project milestones.",
+        "correct": true
+      },
+      {
+        "text": "Review the project scope and submit a request to exclude activities associated with the legislation.",
+        "correct": false
+      },
+      {
+        "text": "Continuously evaluate exposure to the risk to minimize negative impacts on the project and its outcomes.",
+        "correct": false
+      },
+      {
+        "text": "Proceed with the project with the understanding that the pending legislation will pass without delay.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nThe risk register is a document that records details of all identified individual risks to a project. What is the minimal content of this document?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Identified risks, risk categories, and effects on objectives",
+        "correct": true
+      },
+      {
+        "text": "Risks owners, potential risks responses, and risk triggers",
+        "correct": false
+      },
+      {
+        "text": "Identified risks, risk owners, and potential risks responses",
+        "correct": false
+      },
+      {
+        "text": "Issues log, metrics & trends, and distribution of risks across risk categories",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nDue to a downturn in the business environment, a customer is only able to make a project's payment in part, rather than the fully committed monthly payment. What should the project manager do?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Discuss it with management and pause the project because of the customer's budget constraint.",
+        "correct": true
+      },
+      {
+        "text": "Deliver the features with the highest business value, based on the available budget.",
+        "correct": false
+      },
+      {
+        "text": "Deliver the features that have small independent components, based on the available budget.",
+        "correct": false
+      },
+      {
+        "text": "Continue with the planned development and deliver only when full payment is made.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nA company has decided to form agile teams within the organization to improve project results and take advantage of new opportunities in the market. A project manager with extensive agile experience was recruited to oversee the process. What should the project manager do first?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Recruit, appoint, and evaluate new agile project practitioners.",
+        "correct": true
+      },
+      {
+        "text": "Implement an agile project management office (PMO).",
+        "correct": false
+      },
+      {
+        "text": "Determine the criteria for when to launch agile projects.",
+        "correct": false
+      },
+      {
+        "text": "Perform a retrospective analysis of prior project experiences.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nA project manager must make decisions daily, regardless of the decision's level of importance or criticality. What should a project manager do to ensure their decisions are unbiased and rational?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Utilize data without checking for accuracy",
+        "correct": true
+      },
+      {
+        "text": "Understand they cannot achieve everything",
+        "correct": false
+      },
+      {
+        "text": "Make decisions quickly",
+        "correct": false
+      },
+      {
+        "text": "Make decisions only when the results are certain",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "A project manager is asked to manage a project that will allow the company to comply with a new, upcoming regulation. Just after project kick-off, the scope is modified to have the project team now work on specific tasks, while a global team will manage the program for several countries in parallel. The project management plan has not yet been shared, and the deadline to complete the project is fixe\nWhat should the project manager do to handle the scope and changes?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Create a risk entry in the risk management plan due to the lack of a global project management plan.",
+        "correct": true
+      },
+      {
+        "text": "Formalize the change in the scope with the project sponsor to limit accountability for the specific tasks.",
+        "correct": false
+      },
+      {
+        "text": "Review the organizational process assets (OPAs) from similar situations and the approaches that were implemente",
+        "correct": false
+      },
+      {
+        "text": "Define an initial backlog and start working on the clearest tasks, then incrementally refine the scope.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nA project manager is assigned to a project and the first task is to assist in creating the Work Breakdown Structure (WBS). Which tool, technique or document is used as starting point for an effective WBS creation?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Scope baseline",
+        "correct": true
+      },
+      {
+        "text": "Activity list",
+        "correct": false
+      },
+      {
+        "text": "Project charter",
+        "correct": false
+      },
+      {
+        "text": "WBS dictionary",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "A project manager is leading a critical project to deliver a new solution. The CEO is highly invested in the project, and the CFO is the product owner. During the testing phase, the CFO requests an additional nonfunctional requirement to shorten the frequency of transaction processing. This new requirement will impact the launch date, and the CFO is insistent on having it implemente\nWhat should the project manager do to minimize the impact of the new requirement on the launch date and manage the expectations of the CEO and CFO?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Meet with the CFO and suggest delaying the implementation of the new requirement to the post-launch phase.",
+        "correct": true
+      },
+      {
+        "text": "Ask the CEO to intervene and stop the implementation of the new requirement, as development is complete.",
+        "correct": false
+      },
+      {
+        "text": "Tell the project team to update the product backlog with the new requirement and adjust the project plans.",
+        "correct": false
+      },
+      {
+        "text": "Assess the scope of the new nonfunctional requirement to determine its specific impact on the planned go-live date.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nA project team is actively engaged in the preparation of the last delivery before the final product is live in production. What should the project manager do to make sure that the whole team is in full sync?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Ensure the team is attending the daily meetings and participating actively",
+        "correct": true
+      },
+      {
+        "text": "Ensure that the needed information is available and accessible to each and every member",
+        "correct": false
+      },
+      {
+        "text": "Ensure to visualize the work to be done on a white board visual and accessible to all",
+        "correct": false
+      },
+      {
+        "text": "Ensure there is a room for the team to have regular conversation whenever needed",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "Question\nWhat are the main outputs of the risk identification process?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Risk report and risk register",
+        "correct": true
+      },
+      {
+        "text": "Risk report, risk register, and project documents updates",
+        "correct": false
+      },
+      {
+        "text": "Risk management plan, risk register, and risk responses",
+        "correct": false
+      },
+      {
+        "text": "Risk report, probability, and impact matrix",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "During a business status meeting, the project manager acknowledges that several market conditions have recently changed dramatically. As a result, the expected value of the project in progress may be threatene\nWhat should the project manager do next?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Stop the project immediately due to uncertainty that the project will deliver the expected value.",
+        "correct": true
+      },
+      {
+        "text": "Continue with the project since the project manager has not been formally informed of any change in market conditions.",
+        "correct": false
+      },
+      {
+        "text": "Ask the project team to investigate the evolution of market conditions during the last 6 months.",
+        "correct": false
+      },
+      {
+        "text": "Meet with the project sponsor to discuss the information and ask if the organization still supports delivery of the project.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "single-answer",
+    "text": "A project manager is leading a Scrum team. During Business Acceptance Testing (BAT), the client rejects the deliverable due to poor quality, traced back to a lack of collaboration between team members.\nWhat should have the project manager done to prevent this?",
+    "explanation": "",
+    "choices": [
+      {
+        "text": "Provided detailed instructions on how and when the work should be done.",
+        "correct": true
+      },
+      {
+        "text": "Requested detailed documentation and sign-offs between project phases.",
+        "correct": false
+      },
+      {
+        "text": "Implemented detailed tracking of project progress, productivity, and costs.",
+        "correct": false
+      },
+      {
+        "text": "Provided a detailed vision and empowered the team making them accountable.",
+        "correct": false
+      }
+    ]
+  }
+]

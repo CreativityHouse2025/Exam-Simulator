@@ -1,4 +1,4 @@
-import type { Exam, ThemedStyles } from '../../types'
+import type { ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -21,12 +21,12 @@ export const QuestionTextStyles = styled.div<ThemedStyles>`
   color: ${({ theme }) => theme.grey[10]};
 `
 
-const TopDisplayComponent: React.FC<TopDisplayProps> = ({ exam, isReview = false }) => {
+const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isReview = false }) => {
   const { index } = React.useContext(SessionNavigationContext)
 
   const question = React.useMemo(
-    () => translate('content.exam.top-display.question', [index + 1, exam.test.length]),
-    [document.documentElement.lang, translate, index, exam.test.length]
+    () => translate('content.exam.top-display.question', [index + 1, questionCount]),
+    [document.documentElement.lang, translate, index, questionCount]
   )
 
   return (
@@ -41,6 +41,6 @@ const TopDisplayComponent: React.FC<TopDisplayProps> = ({ exam, isReview = false
 export default TopDisplayComponent
 
 export interface TopDisplayProps {
-  exam: Exam
+  questionCount: number
   isReview?: boolean
 }

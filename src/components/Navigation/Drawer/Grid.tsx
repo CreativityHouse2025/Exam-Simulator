@@ -21,7 +21,7 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
   const exam = React.useContext(ExamContext)
   const { bookmarks, answers } = React.useContext(SessionDataContext)
 
-  if (!exam || exam.test.length === 0) return null
+  if (!exam || exam.length === 0) return null
 
   const answered = React.useMemo(() => {
     return answers
@@ -40,11 +40,11 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
     return answers
       .map((answer, i) => {
         let isCorrect = false
-        if (Array.isArray(answer) && Array.isArray(exam.test[i].answer)) {
-          const arr: number[] = exam.test[i].answer
+        if (Array.isArray(answer) && Array.isArray(exam[i].answer)) {
+          const arr: number[] = exam[i].answer
           isCorrect = answer.length === arr.length && answer.every((val) => arr.includes(val))
         } else {
-          isCorrect = answer === exam.test[i].answer
+          isCorrect = answer === exam[i].answer
         }
 
         if (isCorrect) return i
@@ -67,10 +67,10 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
       case 'correct':
         return getAnsweredCorrectly()
       case 'incomplete':
-        return Array.from({ length: exam.test.length }, (_, i) => i).filter((i) => !answered.includes(i))
+        return Array.from({ length: exam.length }, (_, i) => i).filter((i) => !answered.includes(i))
       case 'all':
       default:
-        return Array.from({ length: exam.test.length }, (_, i) => i)
+        return Array.from({ length: exam.length }, (_, i) => i)
     }
   }, [filter, exam, bookmarks, answered, getAnsweredCorrectly, getAnsweredIncorrectly])
 
