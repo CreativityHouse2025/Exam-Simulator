@@ -1,6 +1,6 @@
 [
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A company is expanding its product manufacturing to a new country. The date the company will start operating is set and broadly communicated, but the project team is not sure if there is enough time to get all the product features implemented.\nWhat should the project manager do to ensure there is enough time to implement the critical features on the committed date?",
     "explanation": "",
     "choices": [
@@ -23,7 +23,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A company has hired a project manager to implement an adaptive project framework. The project has made some progress, but the team is frustrated because the client does not provide feedback or participate in defining acceptance criteria.\nWhat could have caused this situation?",
     "explanation": "",
     "choices": [
@@ -46,7 +46,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Question\nA project manager is preparing for an organization-wide software system replacement project that will have a significant impact on business operations. It is crucial to provide training to ensure that everyone within the organization can effectively use the new software system, but training resources are limited. What is the most effective action the project manager should take to ensure successful training for all organization members?",
     "explanation": "",
     "choices": [
@@ -69,7 +69,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager has been assigned to a project that is currently late and over budget. The project uses a predictive approach integrated with agile iterations for the most critical part of the scope. During the project assessment, the project manager notices that the team is afraid of making mistakes and is seeking individual recognition, while lacking accountability.\nHow should the project manager improve productivity?",
     "explanation": "",
     "choices": [
@@ -92,7 +92,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is working on an internal project and notes that the visions and goals of other department leaders are not clear. This creates confusion and ambiguity within the project team, and it is becoming difficult to distinguish between the wish list and scope items.\nWhich document should the project manager review to clarify this situation?",
     "explanation": "",
     "choices": [
@@ -115,7 +115,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A company is transitioning from a predictive to an agile project management approach. The project manager has noticed that team members have valuable ideas on how to improve productivity.\nHow can the project manager leverage these ideas?",
     "explanation": "",
     "choices": [
@@ -138,7 +138,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Some of the project's materials have been ordered from overseas. The supplier notifies the project team that the materials will not reach the site on time due to a customs clearance delay that will affect the critical path.\nWhat should the project manager do first?",
     "explanation": "",
     "choices": [
@@ -161,7 +161,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A co-located project team is facing communication and collaboration issues. Some team members have roles that require them to work different hours, some arriving early, others leaving later. At a recent weekly meeting, several team members were absent.\nWhat is the best way for the project manager to ensure the team can attend all necessary meetings?",
     "explanation": "",
     "choices": [
@@ -184,7 +184,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Part of a project has already been delivered as planned and on schedule. However, unclear requirements for some of the remaining requirements may negatively impact the scheduled completion.\nHow should the project manager approach the issue?",
     "explanation": "",
     "choices": [
@@ -207,7 +207,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Project team members inform their project manager of a challenge they are facing. This challenge will likely impact project timelines.\nWhat should the project manager do next?",
     "explanation": "",
     "choices": [
@@ -230,7 +230,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is working on a project charter and discovers that two key stakeholders are transferring to other departments and replacements have not been identified yet.\nWhat should the project manager do next?",
     "explanation": "",
     "choices": [
@@ -253,7 +253,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is assigned to take over an ongoing project. During the quality review, the team discovered that 40% of the deliverables have defects and require rework, with an expected worsening trend.\nWhat should the project manager's first step be?",
     "explanation": "",
     "choices": [
@@ -276,7 +276,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A virtual team is midway through a sprint of a complex task and is ahead of schedule. During the daily standup, a new team member interrupts and asks everyone to describe what they worked on prior to the current sprint.\nHow should the project manager handle this situation?",
     "explanation": "",
     "choices": [
@@ -299,7 +299,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager works in a matrix organization. Following a reorganization, several key project resources are reassigned to another project. The project no longer has the resources needed to successfully deliver the project.\nWhat should the project manager do?",
     "explanation": "",
     "choices": [
@@ -322,7 +322,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager oversees an agile project with an experienced project team. The project manager does not typically attend the daily stand-up meetings, but they sit in on them from time to time. After attending one particular meeting, the project manager noticed that the meeting was not productive.\nWhat should the project manager do to improve the situation?",
     "explanation": "",
     "choices": [
@@ -345,7 +345,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is working on a global project with team members in several different countries. To manage communications, the project manager plans to hold virtual meetings and on-site visits once a month.\nWhat should the project manager do next while working with this team?",
     "explanation": "",
     "choices": [
@@ -368,7 +368,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project is facing a one-month delay, and the project manager realizes that a change request is necessary. The change control board (CCB) will review the change request at their next meeting, which is in two weeks. However, if the implementation of this change is delayed by two weeks, upcoming supply chain disruptions will cause a two-month delay to the project schedule.\nWhat should the project manager do?",
     "explanation": "",
     "choices": [
@@ -391,7 +391,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "One day before starting a task, the technical lead proposed a new implementation approach that could reduce the schedule by one week. However, if the approach does not work, the task will be delayed by three days.\nWhat should the project manager do next?",
     "explanation": "",
     "choices": [
@@ -414,7 +414,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During a kick-off meeting with the project sponsor and various project members, it became clear that it was not necessary for some participants to be present. In addition, one required expert was not aware of the meeting and was not present at the meeting.\nWhat should the project manager have done to prevent this from happening?",
     "explanation": "",
     "choices": [
@@ -437,7 +437,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "An experienced project manager joins an ongoing project and wants to estimate the amount of time required to tackle several complex tasks. The team uses a kanban board but is open to new approaches. The project manager suggests using story points.\nWhat is the first thing the team should do before implementing this new approach?",
     "explanation": "",
     "choices": [
@@ -460,7 +460,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project manager is working on a virtual project with a global team for the first time and encounters an issue with stakeholder participation in team meetings. Some stakeholders do not participate, others complain about scheduling, and others do not acknowledge meeting invitations.\nWhat should the project manager do to address these issues and ensure smoother meetings?",
     "explanation": "",
     "choices": [
@@ -483,7 +483,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Question\nAfter a few iterations, the project manager feels that even though the team is completing the work as planned, the team is not completely comfortable with some of the agile processes followed in the project. When should the project manager talk about this and make adjustments?",
     "explanation": "",
     "choices": [
@@ -506,7 +506,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During a retrospective meeting, some team members expressed that they strongly disagree with how the product owner and scrum master handled some issues related to the scope of the last cycle.\nWhat should the project manager do first?",
     "explanation": "",
     "choices": [
@@ -529,7 +529,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A new program manager checks the status of a project. The forecast shows the project is slightly behind schedule. However, in reporting, the project manager stated that the project is on track. The program manager asks the project manager to explain the discrepancy. The project manager explains that the forecast discrepancy is due to a new estimation technique.\nWhat should the project manager have done to avoid this discrepancy?",
     "explanation": "",
     "choices": [
@@ -552,7 +552,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Question\nAn agile project manager is overseeing a Kanban project and wants to assess task completion roadblocks for an upcoming major milestone. What should the project manager do?",
     "explanation": "",
     "choices": [
@@ -575,7 +575,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "An agile project is in the first of six iterations. The team is located globally, so the meetings are in a virtual environment. After the fifth daily meeting, the project manager realizes that not all members are actively participating.\nWhat should the project manager do?",
     "explanation": "",
     "choices": [
@@ -598,7 +598,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project team is working on a complex technology project. A competitor introduces a product with a new feature, forcing the team to make changes to keep their product from becoming obsolete. The software that the team was using was outdated and could not accommodate the development of the new feature and must be replaced with new-to-market software. The team is excited, but they do not have experience working with the new software.\nWhat should the project manager do to address this knowledge gap?",
     "explanation": "",
     "choices": [
@@ -621,7 +621,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A developer is expressing concerns about the time spent on daily standups, updating stories, creating tasks, and reviewing dependencies between stories instead of developing code. Other team members support the comment.\nWhat should a servant leader do next?",
     "explanation": "",
     "choices": [
@@ -644,7 +644,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Question\nWhile closing a project, the client finds some defects in the deliverable. What should the project manager do next?",
     "explanation": "",
     "choices": [
@@ -667,7 +667,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Due to economic implications, a company announces imminent layoffs. A project is nearing delivery, and the team is worried about losing their jobs. Team morale is very low, and the project manager is experiencing increased delivery delays from the team.\nWhat should the project manager do to address team morale?",
     "explanation": "",
     "choices": [
@@ -690,7 +690,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "Question\nRegular check-ins with the delivery team reveal low morale and a lack of efficiency. What should the project manager do to address these concerns?",
     "explanation": "",
     "choices": [
@@ -713,7 +713,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A team member with sufficient experience and knowledge informs the project manager about a conflict with another team member and asks for advice and assistance. The project manager schedules a meeting to discuss the conflict with the team members involved.\nWhat should the project manager do during the meeting to resolve the conflict?",
     "explanation": "",
     "choices": [
@@ -736,7 +736,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "During project execution, a key stakeholder is replaced with a new team member who has approval authority. The new member states that the project deliverables are not aligned with the design and does not approve them. However, a few weeks later the project manager learns that the new team member had not been informed of changes during execution.\nWhat should the project manager have done to avoid this miscommunication?",
     "explanation": "",
     "choices": [
@@ -759,7 +759,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "A project team is creating a stakeholder engagement assessment matrix to govern stakeholder management activities during project execution. The team learns that a key stakeholder is aware of the project, but is unsupportive of the outcome.\nWhat type of stakeholder is this?",
     "explanation": "",
     "choices": [
@@ -782,7 +782,7 @@
     ]
   },
   {
-    "type": "single-answer",
+    "type": "multiple-choice",
     "text": "The project scope statement is approved by the project sponsor. The team members would like to modify the work breakdown structure (WBS) without changing the scope and send a request to the project manager.\nWhat should the project manager do with this request?",
     "explanation": "",
     "choices": [
