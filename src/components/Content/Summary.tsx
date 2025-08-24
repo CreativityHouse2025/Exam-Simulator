@@ -25,7 +25,7 @@ export const ColumnStyles = styled.div`
 
 const SummaryComponent: React.FC<SummaryProps> = ({ exam }) => {
   const { answers } = React.useContext(SessionDataContext)
-  const { time } = React.useContext(SessionTimerContext)
+  const { maxTime, time } = React.useContext(SessionTimerContext)
 
   const questions = React.useMemo(() => {
     // @ts-expect-error
@@ -42,7 +42,7 @@ const SummaryComponent: React.FC<SummaryProps> = ({ exam }) => {
   const score = Math.round((questions.correct.length / exam.test.length) * 100)
   const status = score >= passPercent
   const date = new Date()
-  const elapsed = exam.time * 60 - time
+  const elapsed = maxTime * 60 - time
 
   const [title, _status] = React.useMemo(
     () => [translate('content.review.summary.title'), translate(`content.review.summary.${status ? 'pass' : 'fail'}`)],
