@@ -1,7 +1,7 @@
 import type { Exam, ExamType } from './types'
 import type { Lang, LangCode } from './settings'
 
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 import Header from './components/Header'
 import Navigation from './components/Navigation'
 import Cover from './components/Cover'
@@ -20,9 +20,9 @@ const getRandomMiniExamNumber = () => Math.floor(Math.random() * 23)
 const AppComponent: React.FC = () => {
   const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: LANGUAGES.ar })
   const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: defaultSession })
-  const [exam, setExam] = useState<Exam | null>(null)
+  const [exam, setExam] = React.useState<Exam | null>(null)
 
-  const loadTranslation = useCallback(
+  const loadTranslation = React.useCallback(
     async (code: LangCode) => {
       const translations = (await import(`./data/langs/${code}.json`)).default
       const newLang = LANGUAGES[code]
@@ -35,7 +35,7 @@ const AppComponent: React.FC = () => {
     [setTranslation, LANGUAGES]
   )
 
-  const loadExam = useCallback(
+  const loadExam = React.useCallback(
     async (newSession: Session) => {
       if (!newSession.examID) {
         console.warn('No exam ID found in session.')
@@ -61,16 +61,16 @@ const AppComponent: React.FC = () => {
     [lang]
   )
 
-  const handleStartNew = useCallback(
+  const handleStartNew = React.useCallback(
     () => loadExam({ ...defaultSession, examID: toExamID(false, getRandomExamNumber()) }),
     [loadExam]
   )
-  const handleStartMini = useCallback(
+  const handleStartMini = React.useCallback(
     () => loadExam({ ...defaultSession, examID: toExamID(true, getRandomMiniExamNumber()) }),
     [loadExam]
   )
 
-  const handleContinue = useCallback(async () => {
+  const handleContinue = React.useCallback(async () => {
     try {
       loadExam(session)
     } catch (err) {
@@ -81,12 +81,12 @@ const AppComponent: React.FC = () => {
   }, [session, loadExam, handleStartNew])
 
   // Load translation on start
-  useEffect(() => {
+  React.useEffect(() => {
     loadTranslation(lang.code)
   }, [])
 
   // Load exam when loadExam (language) changes
-  useEffect(() => {
+  React.useEffect(() => {
     if (exam && session.examID) {
       loadExam(session)
     }
