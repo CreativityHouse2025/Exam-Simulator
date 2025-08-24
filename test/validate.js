@@ -47,9 +47,6 @@ export function validateExam(exam, filePath) {
 
   equal(typeof exam.time, 'number', `Exam must have time property of type number: ${filePath}`)
 
-  equal(typeof exam.pass, 'number', `Exam must have pass property of type number: ${filePath}`)
-  ok(exam.pass >= 0 && exam.pass <= 100, `Exam pass property must be between 0 and 100: ${filePath}`)
-
   ok(Array.isArray(exam.test), `Exam must have test property as array: ${filePath}`)
 
   for (let i = 0; i < exam.test.length; i++) {
