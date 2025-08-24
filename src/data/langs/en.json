@@ -54,7 +54,8 @@
         "score": "Score",
         "correct": "Correct",
         "incorrect": "Wrong",
-        "incomplete": "Unanswered"
+        "incomplete": "Unanswered",
+        "home": "Go Home"
       }
     }
   },

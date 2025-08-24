@@ -24,7 +24,30 @@ export const ColumnStyles = styled.div`
   grid-template-rows: repeat(4, 3rem);
 `
 
-const SummaryComponent: React.FC = ({}) => {
+const RestartButton = styled.button<ThemedStyles>`
+  background: ${({ theme }) => theme.primary};
+  color: white;
+  border: none;
+  padding: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-width: 300px;
+  margin: 3rem auto 2rem auto;
+  margin-top: 7rem;
+  display: block;
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(0);
+  }
+`
+
+const SummaryComponent: React.FC = () => {
   const { answers } = React.useContext(SessionDataContext)
   const { maxTime, time } = React.useContext(SessionTimerContext)
   const exam = React.useContext(ExamContext)
@@ -41,13 +64,21 @@ const SummaryComponent: React.FC = ({}) => {
     return qArr
   }, [exam, answers])
 
+  const onRestart = React.useCallback(() => {
+    window.location.reload()
+  }, [])
+
   const score = Math.round((questions.correct.length / exam.length) * 100)
   const status = score >= passPercent
   const date = new Date()
   const elapsed = maxTime * 60 - time
 
-  const [title, _status] = React.useMemo(
-    () => [translate('content.review.summary.title'), translate(`content.review.summary.${status ? 'pass' : 'fail'}`)],
+  const [title, _status, home] = React.useMemo(
+    () => [
+      translate('content.review.summary.title'),
+      translate(`content.review.summary.${status ? 'pass' : 'fail'}`),
+      translate('content.review.summary.home')
+    ],
     [document.documentElement.lang, translate, status]
   )
 
@@ -70,6 +101,10 @@ const SummaryComponent: React.FC = ({}) => {
           <SummaryRow type="incomplete" value={`${questions.incomplete.length} / ${exam.length}`} status={status} />
         </ColumnStyles>
       </div>
+
+      <RestartButton id="restart-button" onClick={onRestart}>
+        {home}
+      </RestartButton>
     </div>
   )
 }
