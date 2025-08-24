@@ -7,12 +7,14 @@ import Summary from './Summary'
 import { SessionExamContext } from '../../session'
 
 export const MainStyles = styled.main<MainStylesProps>`
+  width: 100%;
   height: 100%;
   overflow: hidden;
   background: white;
 `
 
 const ContentStyles = styled.div<ThemedStyles>`
+  width: 100%;
   height: 100%;
   overflow-y: auto;
   box-sizing: border-box;
