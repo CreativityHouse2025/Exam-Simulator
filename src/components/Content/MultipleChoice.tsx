@@ -18,12 +18,22 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
   const onChoose = React.useCallback(
     (i: number): void => {
       const currValues = (answer as AnswerOfMultipleQuestions) || []
-      const newValues = currValues.includes(i) ? currValues.filter((el) => el !== i) : currValues.concat(i)
+      let newValues: number[]
+
+      // Multiple answers: add/remove from array, respecting maxAnswers limit
+      if (currValues.includes(i)) {
+        newValues = currValues.filter((el) => el !== i)
+      } else if (currValues.length < question.answer.length) {
+        newValues = currValues.concat(i)
+      } else {
+        // Max answers reached, don't add more
+        return
+      }
 
       answers[index] = newValues
       update!([SessionActionTypes.SET_ANSWERS, [...answers]])
     },
-    [index, answers, answer]
+    [index, answers, answer, question.answer.length]
   )
 
   const isSelected = React.useCallback(
@@ -33,15 +43,25 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
     [answer]
   )
 
+  const isDisabled = React.useCallback(
+    (i: number): boolean => {
+      if (isReview) return true
+      if (isSelected(i)) return false
+      return answer.length >= question.answer.length
+    },
+    [isReview, isSelected, answer.length, question.answer.length]
+  )
+
   return (
     <div id={question.type}>
       {question.choices.map(({ text, correct }, i) => (
         <Choice
           key={i}
-          isSingleAnswer={question.answer.length === 1}
-          isSelected={isSelected(i)}
-          isReview={isReview}
-          isCorrect={correct}
+          singleAnswer={question.answer.length === 1}
+          selected={isSelected(i)}
+          review={isReview}
+          correct={correct}
+          disabled={isDisabled(i)}
           label={formatChoiceLabel(i, document.documentElement.lang as LangCode)}
           text={text}
           onClick={() => onChoose(i)}
