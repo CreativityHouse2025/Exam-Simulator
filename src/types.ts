@@ -26,8 +26,6 @@ export type GridTagTypes = 'marked' | 'incomplete' | 'complete' | 'incorrect' | 
 export type ExamType = 'exam' | 'miniexam'
 export type ExamID = `${ExamType}-${number}`
 export interface Exam {
-  /** minimum passing score percentage */
-  pass: number
   /** time limit in minutes */
   time: number
   /** exam content */

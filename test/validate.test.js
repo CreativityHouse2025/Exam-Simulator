@@ -20,7 +20,6 @@ describe('Validation Functions', function () {
     /** @type {Exam} */
     const mockExam = {
       time: 60,
-      pass: 50,
       test: [
         {
           type: 'single-answer',

@@ -7,6 +7,8 @@ import { translate } from '../../settings'
 import { formatDate, formatTimer } from '../../utils/format'
 import { SessionDataContext, SessionTimerContext } from '../../session'
 
+const passPercent = 85
+
 export const TitleStyles = styled.div<ThemedStyles>`
   justify-self: center;
   padding-top: 5rem;
@@ -38,7 +40,7 @@ const SummaryComponent: React.FC<SummaryProps> = ({ exam }) => {
   }, [exam, answers])
 
   const score = Math.round((questions.correct.length / exam.test.length) * 100)
-  const status = score >= exam.pass
+  const status = score >= passPercent
   const date = new Date()
   const elapsed = exam.time * 60 - time
 
@@ -54,7 +56,7 @@ const SummaryComponent: React.FC<SummaryProps> = ({ exam }) => {
       <div id="columns">
         <ColumnStyles id="column">
           <SummaryRow type="status" value={_status} status={status} isStatus />
-          <SummaryRow type="passing" value={`${exam.pass} %`} status={status} />
+          <SummaryRow type="passing" value={`${passPercent} %`} status={status} />
           <SummaryRow type="time" value={formatTimer(elapsed)} status={status} />
           <SummaryRow type="date" value={formatDate(date)} status={status} />
         </ColumnStyles>
