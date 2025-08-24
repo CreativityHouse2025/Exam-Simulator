@@ -19,7 +19,6 @@ describe('Validation Functions', function () {
   describe('validateExam()', function () {
     /** @type {Exam} */
     const mockExam = {
-      time: 60,
       test: [
         {
           type: 'single-answer',

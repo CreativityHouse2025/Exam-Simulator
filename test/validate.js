@@ -45,8 +45,6 @@ export function loadExamFile(filePath) {
 export function validateExam(exam, filePath) {
   equal(typeof exam, 'object', `Exam must be an object: ${filePath}`)
 
-  equal(typeof exam.time, 'number', `Exam must have time property of type number: ${filePath}`)
-
   ok(Array.isArray(exam.test), `Exam must have test property as array: ${filePath}`)
 
   for (let i = 0; i < exam.test.length; i++) {

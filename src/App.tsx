@@ -1,4 +1,4 @@
-import type { Exam, ExamID } from './types'
+import type { Exam, ExamID, ExamType } from './types'
 import type { Lang, LangCode } from './settings'
 
 import React, { useCallback, useEffect, useState } from 'react'
@@ -48,7 +48,7 @@ const AppComponent: React.FC = () => {
 
         if (newSession.examState === 'not-started') {
           examData = randomizeTest(examData)
-          newSession = formatSession({ ...newSession, examState: 'in-progress' }, examData)
+          newSession = formatSession({ ...newSession, examState: 'in-progress' }, examData, type as ExamType)
         }
 
         setExam(examData)

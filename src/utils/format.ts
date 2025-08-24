@@ -1,4 +1,4 @@
-import type { Exam, Question } from '../types'
+import type { Exam, ExamType, Question } from '../types'
 import type { Session } from '../session'
 import type { LangCode } from '../settings'
 
@@ -110,13 +110,14 @@ export function randomizeTest(exam: Exam): Exam {
  * @param {Exam} exam - The exam object to format.
  * @returns {Session} - The formatted exam object.
  */
-export function formatSession(session: Session, exam: Exam): Session {
+export function formatSession(session: Session, exam: Exam, examType: ExamType): Session {
   try {
     const nullArr = Array(exam.test.length - session.answers.length).fill(null)
     session.answers = session.answers.concat(nullArr)
 
-    session.maxTime = exam.time
-    session.time = exam.time
+    const maxTime = examType === 'exam' ? 13800 : 2760
+    session.maxTime = maxTime
+    session.time = maxTime
   } catch (err) {
     console.error('Error formatting session:', err)
   }
