@@ -51,15 +51,42 @@ const SummaryComponent: React.FC = () => {
   const exam = React.useContext(ExamContext)
 
   const questions = React.useMemo(() => {
-    // @ts-expect-error
-    const qArr: { incomplete: any[]; completed: any[]; correct: any[]; incorrect: any[] } = {
-      incomplete: answers.filter((a) => a === null),
-      completed: answers.filter((a) => a !== null),
-      correct: answers.filter((a, i) => a === exam[i].answer)
+    // Helper function to compare arrays
+    const arraysEqual = (a: number[] | null, b: number[]): boolean => {
+      if (a === null) return false
+      if (a.length !== b.length) return false
+      return a.every((val, index) => val === b[index])
     }
 
-    qArr.incorrect = qArr.completed.filter((a, i) => a !== exam[i].answer)
-    return qArr
+    const incomplete: number[] = []
+    const completed: number[] = []
+    const correct: number[] = []
+    const incorrect: number[] = []
+
+    for (let i = 0; i < answers.length; i++) {
+      const givenAnswer: number[] = answers[i]
+      const correctAnswer: number[] = exam[i].answer
+
+      if (givenAnswer === null || givenAnswer.length === 0) {
+        incomplete.push(i)
+        continue
+      }
+
+      completed.push(i)
+
+      if (arraysEqual(givenAnswer, correctAnswer)) {
+        correct.push(i)
+      } else {
+        incorrect.push(i)
+      }
+    }
+
+    return {
+      incomplete,
+      completed,
+      correct,
+      incorrect
+    }
   }, [exam, answers])
 
   const onRestart = React.useCallback(() => {
