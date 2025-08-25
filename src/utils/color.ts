@@ -1,5 +1,5 @@
 import { lighten } from 'polished'
-import theme from '../theme.ts'
+import { DEFAULT_THEME } from '../constants'
 
 /**
  * @param {number} questionIndex - The index of the question.
@@ -11,16 +11,16 @@ export function gridItemBackgroundColor(questionIndex: number, marked: number[],
   try {
     if (marked.includes(questionIndex)) {
       // Bookmarked grid item (question)
-      return theme.quatro
+      return DEFAULT_THEME.quatro
     } else if (answered.includes(questionIndex)) {
       // Completed grid item (question)
-      return lighten(0.2, theme.primary)
+      return lighten(0.2, DEFAULT_THEME.primary)
     } else {
       // Incompleted grid item (question)
-      return theme.grey[1]
+      return DEFAULT_THEME.grey[1]
     }
   } catch (err) {
     console.error('Error in utils/color.ts/gridItemBackgroundColor:', err)
-    return theme.grey[1]
+    return DEFAULT_THEME.grey[1]
   }
 }

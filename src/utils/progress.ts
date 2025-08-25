@@ -1,4 +1,4 @@
-import type { Answers, Answer } from '../session'
+import type { Answers, Answer } from '../types'
 
 export interface ProgressStats {
   answeredCount: number

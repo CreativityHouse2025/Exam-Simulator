@@ -3,8 +3,7 @@ import type { QuestionFilter, ThemedStyles } from '../../../types'
 import React from 'react'
 import styled from 'styled-components'
 import Cell from './Cell'
-import { ExamContext } from '../../../exam'
-import { SessionDataContext } from '../../../session'
+import { ExamContext, SessionDataContext } from '../../../contexts'
 
 const GridStyles = styled.div<ThemedStyles>`
   height: calc(100vh - 50rem);

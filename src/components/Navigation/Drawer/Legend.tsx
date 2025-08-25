@@ -3,7 +3,7 @@ import type { GridTagTypes, ThemedStyles } from '../../../types'
 import React from 'react'
 import styled from 'styled-components'
 import { lighten } from 'polished'
-import { translate } from '../../../settings'
+import { translate } from '../../../utils/translation'
 
 const LegendStyles = styled.div<ThemedStyles>`
   display: flex;

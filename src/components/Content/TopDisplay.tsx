@@ -3,8 +3,8 @@ import type { ThemedStyles } from '../../types'
 import React from 'react'
 import styled from 'styled-components'
 import BookmarkButton from './Bookmark'
-import { translate } from '../../settings'
-import { SessionNavigationContext } from '../../session'
+import { translate } from '../../utils/translation'
+import { SessionNavigationContext } from '../../contexts'
 
 export const TopDisplayStyles = styled.div`
   display: flex;

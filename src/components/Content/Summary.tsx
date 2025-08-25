@@ -3,10 +3,9 @@ import type { ThemedStyles } from '../../types'
 import React from 'react'
 import styled from 'styled-components'
 import SummaryRow from './SummaryRow'
-import { translate } from '../../settings'
 import { formatDate, formatTimer } from '../../utils/format'
-import { ExamContext } from '../../exam'
-import { SessionDataContext, SessionTimerContext } from '../../session'
+import { translate } from '../../utils/translation'
+import { ExamContext, SessionDataContext, SessionTimerContext } from '../../contexts'
 
 const passPercent = 85
 

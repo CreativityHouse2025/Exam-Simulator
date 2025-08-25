@@ -3,7 +3,8 @@ import type { ThemedStyles } from '../../../types'
 import React from 'react'
 import styled from 'styled-components'
 import { gridItemBackgroundColor } from '../../../utils/color'
-import { SessionActionTypes, SessionExamContext, SessionNavigationContext } from '../../../session'
+import { SessionExamContext, SessionNavigationContext } from '../../../contexts'
+import { SESSION_ACTION_TYPES } from '../../../constants'
 
 const CellStyles = styled.div<CellStylesProps>`
   width: 4.5rem;
@@ -33,7 +34,7 @@ const CellComponent: React.FC<CellProps> = ({ index: myIndex, bookmarks, answere
   const onClickCell = React.useCallback(
     (newIndex: number) => {
       if (isSelected()) return
-      update!([SessionActionTypes.SET_INDEX, newIndex], [SessionActionTypes.SET_REVIEW_STATE, 'question'])
+      update!([SESSION_ACTION_TYPES.SET_INDEX, newIndex], [SESSION_ACTION_TYPES.SET_REVIEW_STATE, 'question'])
     },
     [isSelected, update]
   )

@@ -1,11 +1,8 @@
-import type { Question, QuestionTypes, ThemedStyles } from '../../types'
-import type { Answer } from '../../session'
-import type { LangCode } from '../../settings'
+import type { Answer, LangCode, Question, QuestionTypes, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
 import { lighten, darken } from 'polished'
-import { translate } from '../../settings'
 import { formatAnswerLabel } from '../../utils/format'
 
 const ExplanationStyles = styled.div<ExplanationStylesProps>`
@@ -84,4 +81,7 @@ export interface ExplanationProps {
 
 export interface ExplanationStylesProps extends ThemedStyles {
   $correct: boolean
+}
+function translate(arg0: string): any {
+  throw new Error('Function not implemented.')
 }

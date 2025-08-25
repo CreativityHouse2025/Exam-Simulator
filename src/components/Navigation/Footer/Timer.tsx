@@ -4,7 +4,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Timer } from '@styled-icons/material/Timer'
 import { formatTimer } from '../../../utils/format'
-import { SessionActionTypes, SessionTimerContext } from '../../../session'
+import { SessionTimerContext } from '../../../contexts'
+import { SESSION_ACTION_TYPES } from '../../../constants'
 
 const TimerStyles = styled.div<TimerStylesProps>`
   display: flex;
@@ -36,7 +37,7 @@ const TimerComponent: React.FC = () => {
 
     if (!paused && time > 0) {
       intervalRef.current = setInterval(() => {
-        update!([SessionActionTypes.SET_TIME, Math.max(0, time - 1)])
+        update!([SESSION_ACTION_TYPES.SET_TIME, Math.max(0, time - 1)])
       }, 1000)
     }
 
@@ -53,7 +54,7 @@ const TimerComponent: React.FC = () => {
     if (time <= 0 && intervalRef.current) {
       clearInterval(intervalRef.current)
       intervalRef.current = null
-      update!([SessionActionTypes.SET_TIME, 0])
+      update!([SESSION_ACTION_TYPES.SET_TIME, 0])
     }
   }, [time, update])
 

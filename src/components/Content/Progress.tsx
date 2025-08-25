@@ -3,7 +3,7 @@ import type { ThemedStyles } from '../../types'
 import React from 'react'
 import styled from 'styled-components'
 import { calculateProgressStats } from '../../utils/progress'
-import { SessionDataContext } from '../../session'
+import { SessionDataContext } from '../../contexts'
 
 const ProgressContainer = styled.div`
   display: flex;

@@ -1,13 +1,12 @@
-import type { ThemedStyles } from '../types'
-import type { LangCode } from '../settings'
+import type { LangCode, ThemedStyles } from '../types'
 
 import React from 'react'
 import styled from 'styled-components'
 import lighten from 'polished/lib/color/lighten'
 import { Language } from '@styled-icons/material/Language'
-import { translate } from '../settings'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
+import { translate } from '../utils/translation'
 
 const HeaderStyles = styled.div<ThemedStyles>`
   position: fixed;

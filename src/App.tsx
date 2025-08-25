@@ -1,17 +1,16 @@
-import type { Exam, ExamType } from './types'
-import type { Lang, LangCode } from './settings'
+import type { Exam, ExamType, Lang, LangCode, Session } from './types'
 
 import React from 'react'
+import { useLocalStorage } from '@mantine/hooks'
 import Header from './components/Header'
 import Navigation from './components/Navigation'
 import Cover from './components/Cover'
-import { defaultSession, type Session } from './session'
-import { ExamContext } from './exam'
-import { LangContext, setTranslation, LANGUAGES, hasTranslation } from './settings'
-import { useLocalStorage } from '@mantine/hooks'
+import Loading from './components/Loading'
+import { hasTranslation, setTranslation } from './utils/translation'
 import { randomizeTest, formatSession } from './utils/format'
 import { toExamID } from './utils/examID'
-import Loading from './components/Loading'
+import { DEFAULT_SESSION, LANGUAGES } from './constants'
+import { ExamContext, LangContext } from './contexts'
 
 // Random exam selection
 const getRandomExamNumber = () => Math.floor(Math.random() * 5)
@@ -19,7 +18,7 @@ const getRandomMiniExamNumber = () => Math.floor(Math.random() * 23)
 
 const AppComponent: React.FC = () => {
   const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: LANGUAGES.ar })
-  const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: defaultSession })
+  const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: DEFAULT_SESSION })
   const [exam, setExam] = React.useState<Exam | null>(null)
 
   const loadTranslation = React.useCallback(
@@ -62,11 +61,11 @@ const AppComponent: React.FC = () => {
   )
 
   const handleStartNew = React.useCallback(
-    () => loadExam({ ...defaultSession, examID: toExamID(false, getRandomExamNumber()) }),
+    () => loadExam({ ...DEFAULT_SESSION, examID: toExamID(false, getRandomExamNumber()) }),
     [loadExam]
   )
   const handleStartMini = React.useCallback(
-    () => loadExam({ ...defaultSession, examID: toExamID(true, getRandomMiniExamNumber()) }),
+    () => loadExam({ ...DEFAULT_SESSION, examID: toExamID(true, getRandomMiniExamNumber()) }),
     [loadExam]
   )
 

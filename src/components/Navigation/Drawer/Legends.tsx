@@ -3,7 +3,7 @@ import type { ThemedStyles } from '../../../types'
 import React from 'react'
 import styled from 'styled-components'
 import Legend from './Legend'
-import { SessionExamContext } from '../../../session'
+import { SessionExamContext } from '../../../contexts'
 
 const LegendStyles = styled.div<ThemedStyles>`
   height: 3rem;

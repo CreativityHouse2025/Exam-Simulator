@@ -14,9 +14,10 @@ import { Stop } from '@styled-icons/material/Stop'
 import { Report } from '@styled-icons/boxicons-solid/Report'
 import Legends from './Legends'
 import Grid from './Grid'
-import { translate } from '../../../settings'
-import { SessionActionTypes, SessionExamContext, SessionTimerContext } from '../../../session'
 import { timerIsRunning } from '../../../utils/state'
+import { translate } from '../../../utils/translation'
+import { SESSION_ACTION_TYPES } from '../../../constants'
+import { SessionExamContext, SessionTimerContext } from '../../../contexts'
 
 const MainMenu = styled.div<ThemedStyles>`
   height: calc(100vh - 5rem);
@@ -54,16 +55,16 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
   // Memoize action handlers
   const pauseHandler = React.useCallback(() => {
     if (timerIsRunning({ ...timerSession, examState })) {
-      update!([SessionActionTypes.SET_TIMER_PAUSED, true])
+      update!([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, true])
     }
   }, [timerSession, examState, update])
 
   const stopHandler = React.useCallback(() => {
-    update!([SessionActionTypes.SET_TIMER_PAUSED, true], [SessionActionTypes.SET_EXAM_STATE, 'completed'])
+    update!([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, true], [SESSION_ACTION_TYPES.SET_EXAM_STATE, 'completed'])
   }, [update])
 
   const summaryHandler = React.useCallback(() => {
-    update!([SessionActionTypes.SET_REVIEW_STATE, 'summary'])
+    update!([SESSION_ACTION_TYPES.SET_REVIEW_STATE, 'summary'])
   }, [update])
 
   // Memoize menu items with stable references

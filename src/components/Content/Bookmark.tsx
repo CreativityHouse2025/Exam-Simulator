@@ -1,10 +1,11 @@
 import type { ThemedStyles } from '../../types'
-import { SessionActionTypes, SessionDataContext, SessionNavigationContext } from '../../session'
+import { SessionDataContext, SessionNavigationContext } from '../../contexts'
 
 import React from 'react'
 import styled from 'styled-components'
 import { Bookmark } from '@styled-icons/material/Bookmark'
 import { BookmarkBorder } from '@styled-icons/material/BookmarkBorder'
+import { SESSION_ACTION_TYPES } from '../../constants'
 
 const BookmarkStyles = styled.div<BookmarkStylesProps>`
   margin-right: 5rem;
@@ -34,7 +35,7 @@ const BookmarkButton: React.FC = () => {
       }
     }
 
-    update!([SessionActionTypes.SET_BOOKMARKS, [...bookmarks]])
+    update!([SESSION_ACTION_TYPES.SET_BOOKMARKS, [...bookmarks]])
   }, [bookmarked, bookmarks, index, update])
 
   return (
