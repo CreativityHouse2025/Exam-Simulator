@@ -4,6 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { lighten, darken } from 'polished'
 import { formatAnswerLabel } from '../../utils/format'
+import { translate } from '../../utils/translation'
 
 const ExplanationStyles = styled.div<ExplanationStylesProps>`
   background: ${({ $correct, theme }) => ($correct ? lighten(0.4, theme.correct) : lighten(0.4, theme.incorrect))};
@@ -81,7 +82,4 @@ export interface ExplanationProps {
 
 export interface ExplanationStylesProps extends ThemedStyles {
   $correct: boolean
-}
-function translate(arg0: string): any {
-  throw new Error('Function not implemented.')
 }
