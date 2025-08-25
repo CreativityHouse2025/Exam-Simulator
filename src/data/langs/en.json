@@ -5,7 +5,7 @@
   },
   "cover": {
     "logo-alt": "Logo",
-    "continue": "Continue Last Exam",
+    "continue": "Continue Previous Exams",
     "new": "Start New Exam",
     "mini": "Start Mini Exam"
   },
@@ -66,5 +66,15 @@
       "message": "Time has expired. Your exam has ended.",
       "button0": "Okay"
     }
+  },
+  "sessions": {
+    "title": "Exam Sessions",
+    "continue-tab": "Continue",
+    "completed-tab": "Completed",
+    "no-continue": "No exams to continue",
+    "no-completed": "No completed exams",
+    "delete": "Delete",
+    "full": "Full Exam",
+    "mini": "Mini Exam"
   }
 }

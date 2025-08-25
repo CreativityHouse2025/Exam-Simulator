@@ -1,4 +1,5 @@
 import type { ThemedStyles } from '../types'
+import type { StoredSession } from '../session'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -77,6 +78,18 @@ const ButtonRow = styled.div`
 `
 
 const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onContinue }) => {
+  const [showSessions, setShowSessions] = React.useState(false)
+  const [hasSessions, setHasSessions] = React.useState(false)
+
+  React.useEffect(() => {
+    setHasSessions(SessionStorageManager.getAllSessions().length > 0)
+  }, [])
+
+  const handleSessionSelect = (session: StoredSession) => {
+    setShowSessions(false)
+    onContinue && onContinue(session)
+  }
+
   const [logoAlt, title, description, _new, mini, _continue] = React.useMemo(
     () => [
       translate('cover.logo-alt'),
@@ -108,12 +121,14 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onConti
           </StartButton>
         </ButtonRow>
 
-        {onContinue && (
-          <ContinueButton id="continue-button" onClick={onContinue}>
+        {hasSessions && (
+          <ContinueButton id="continue-button" onClick={() => setShowSessions(true)}>
             {_continue}
           </ContinueButton>
         )}
       </ButtonContainer>
+
+      {showSessions && <SessionList onClose={() => setShowSessions(false)} onSelectSession={handleSessionSelect} />}
     </CoverStyles>
   )
 }
@@ -123,5 +138,5 @@ export default React.memo(CoverComponent)
 export interface CoverProps {
   onStartNew: () => void | Promise<void>
   onStartMini: () => void | Promise<void>
-  onContinue?: () => void | Promise<void>
+  onContinue?: (session: StoredSession) => void | Promise<void>
 }

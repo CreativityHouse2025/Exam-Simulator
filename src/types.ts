@@ -73,6 +73,13 @@ export type Answers = AnswerOfMultipleQuestions[]
 export type ExamState = 'not-started' | 'in-progress' | 'completed'
 export type ReviewState = 'summary' | 'question'
 
+// Extended session with metadata for storage
+export interface StoredSession extends Session {
+  id: string
+  createdAt: string
+  updatedAt: string
+}
+
 // Session interface
 export interface Session {
   /** the question number */

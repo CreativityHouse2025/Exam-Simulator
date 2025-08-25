@@ -18,7 +18,7 @@ const getRandomMiniExamNumber = () => Math.floor(Math.random() * 23)
 
 const AppComponent: React.FC = () => {
   const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: LANGUAGES.ar })
-  const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: DEFAULT_SESSION })
+  const [session, setSession] = React.useState<Session>(defaultSession)
   const [exam, setExam] = React.useState<Exam | null>(null)
 
   const loadTranslation = React.useCallback(
@@ -44,6 +44,9 @@ const AppComponent: React.FC = () => {
       try {
         const [type, number] = newSession.examID.split('-')
         let examData: Exam = (await import(`./data/${type}s/${lang.code}/${number}.json`)).default
+        console.log('📢 ---------------------------------------📢')
+        console.log('📢 | AppComponent | examData:', examData)
+        console.log('📢 ---------------------------------------📢')
 
         if (newSession.examState === 'not-started') {
           examData = randomizeTest(examData)
@@ -52,6 +55,7 @@ const AppComponent: React.FC = () => {
 
         setExam(examData)
         setSession(newSession)
+        SessionStorageManager.saveSession(newSession)
       } catch (error) {
         console.error('Failed to load exam:', error)
         setExam(null)
@@ -69,19 +73,23 @@ const AppComponent: React.FC = () => {
     [loadExam]
   )
 
-  const handleContinue = React.useCallback(async () => {
-    try {
-      loadExam(session)
-    } catch (err) {
-      console.error('Failed to load previous exam:', err)
-      // Fallback to starting a new exam if loading fails
-      handleStartNew()
-    }
-  }, [session, loadExam, handleStartNew])
+  const handleContinue = React.useCallback(
+    async (storedSession: StoredSession) => {
+      try {
+        // Load specific stored session
+        loadExam(storedSession)
+      } catch (err) {
+        console.error('Failed to load previous exam:', err)
+        // Fallback to starting a new exam if loading fails
+      }
+    },
+    [loadExam]
+  )
 
-  // Load translation on start
+  // Load translation on start and migrate old session data
   React.useEffect(() => {
     loadTranslation(lang.code)
+    SessionStorageManager.migrateOldSession()
   }, [])
 
   // Load exam when loadExam (language) changes
@@ -91,7 +99,15 @@ const AppComponent: React.FC = () => {
     }
   }, [loadExam])
 
-  if (!session || !hasTranslation('about.title')) {
+  const handleSessionUpdate = React.useCallback(
+    (updatedSession: Session) => {
+      setSession(updatedSession)
+      SessionStorageManager.saveSession(updatedSession)
+    },
+    [setSession]
+  )
+
+  if (!hasTranslation('about.title')) {
     return <Loading size={200} />
   }
 
@@ -101,7 +117,7 @@ const AppComponent: React.FC = () => {
 
       {exam ? (
         <ExamContext.Provider value={exam}>
-          <Navigation startingSession={session} onSessionUpdate={setSession} />
+          <Navigation startingSession={session} onSessionUpdate={handleSessionUpdate} />
         </ExamContext.Provider>
       ) : (
         <Cover onStartNew={handleStartNew} onStartMini={handleStartMini} onContinue={handleContinue} />
