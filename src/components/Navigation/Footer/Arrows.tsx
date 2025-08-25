@@ -8,7 +8,8 @@ import { SkipPrevious } from '@styled-icons/material/SkipPrevious'
 import { KeyboardArrowRight } from '@styled-icons/material/KeyboardArrowRight'
 import { KeyboardArrowLeft } from '@styled-icons/material/KeyboardArrowLeft'
 import { SkipNext } from '@styled-icons/material/SkipNext'
-import { SessionActionTypes, SessionNavigationContext } from '../../../session'
+import { SessionNavigationContext } from '../../../contexts'
+import { SESSION_ACTION_TYPES } from '../../../constants'
 
 const ArrowsStyles = styled.div<ThemedStyles>`
   justify-self: center;
@@ -32,22 +33,22 @@ const ArrowsComponent: React.FC<ArrowsProps> = ({ questionCount }) => {
 
   const onFirstQuestion = React.useCallback(() => {
     if (index === 0) return
-    update!([SessionActionTypes.SET_INDEX, 0])
+    update!([SESSION_ACTION_TYPES.SET_INDEX, 0])
   }, [index, update])
 
   const onPrevQuestion = React.useCallback(() => {
     if (index === 0) return
-    update!([SessionActionTypes.SET_INDEX, index - 1])
+    update!([SESSION_ACTION_TYPES.SET_INDEX, index - 1])
   }, [index, update])
 
   const onNextQuestion = React.useCallback(() => {
     if (index >= questionCount - 1) return
-    update!([SessionActionTypes.SET_INDEX, index + 1])
+    update!([SESSION_ACTION_TYPES.SET_INDEX, index + 1])
   }, [index, questionCount, update])
 
   const onLastQuestion = React.useCallback(() => {
     if (index >= questionCount - 1) return
-    update!([SessionActionTypes.SET_INDEX, questionCount - 1])
+    update!([SESSION_ACTION_TYPES.SET_INDEX, questionCount - 1])
   }, [index, questionCount, update])
 
   const arrows: ArrowProps[] = React.useMemo(

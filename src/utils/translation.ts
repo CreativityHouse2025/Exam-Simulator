@@ -1,28 +1,4 @@
-import { createContext } from 'react'
-
-// Language types and configuration
-export type LangDir = 'rtl' | 'ltr'
-export type LangCode = 'ar' | 'en'
-export type LangName = 'العربية' | 'English'
-
-export interface Lang {
-  code: LangCode
-  name: LangName
-  dir: LangDir
-}
-
-export const LANGUAGES: Record<LangCode, Lang> = {
-  ar: { code: 'ar', name: 'العربية', dir: 'rtl' } as const,
-  en: { code: 'en', name: 'English', dir: 'ltr' } as const
-} as const
-
-// Language validation utilities
-export const isLangCode = (code: string): code is LangCode => code in LANGUAGES
-
-export const isLangName = (name: string): name is LangName =>
-  Object.values(LANGUAGES).some((lang) => lang.name === name)
-
-export const LangContext = createContext<Lang>(LANGUAGES.ar)
+import type { Lang, LangCode } from '../types'
 
 // Translation system
 const translations = new Map<string, string>()

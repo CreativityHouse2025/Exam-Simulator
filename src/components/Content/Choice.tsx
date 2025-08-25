@@ -4,8 +4,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { RadioButtonChecked } from '@styled-icons/material/RadioButtonChecked'
 import { RadioButtonUnchecked } from '@styled-icons/material/RadioButtonUnchecked'
-import { CheckBox } from '@styled-icons/material/CheckBox'
 import { CheckBoxOutlineBlank } from '@styled-icons/material/CheckBoxOutlineBlank'
+import { CheckBox } from '@styled-icons/material/CheckBox'
 
 export const ChoiceStyles = styled.div<ChoiceTextStylesProps>`
   display: grid;

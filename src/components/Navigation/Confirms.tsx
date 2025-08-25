@@ -1,11 +1,11 @@
-import type { Session } from '../../session'
 import type { ModalProps } from '../Modal'
 
 import React from 'react'
 import Modal from '../Modal'
-import { SessionActionTypes } from '../../session'
 import { timerHaveExpired, timerIsPaused } from '../../utils/state'
-import { translate } from '../../settings'
+import { translate } from '../../utils/translation'
+import { Session } from '../../types'
+import { SESSION_ACTION_TYPES } from '../../constants'
 
 const Confirms: React.FC<ConfirmsProps> = ({ session }) => {
   const confirms: Omit<MyModalProps, 'title' | 'message' | 'buttons'>[] = React.useMemo(
@@ -15,16 +15,16 @@ const Confirms: React.FC<ConfirmsProps> = ({ session }) => {
         show: timerHaveExpired(session),
         onConfirm: () => {
           session.update!(
-            [SessionActionTypes.SET_TIME, 0],
-            [SessionActionTypes.SET_TIMER_PAUSED, true],
-            [SessionActionTypes.SET_EXAM_STATE, 'completed']
+            [SESSION_ACTION_TYPES.SET_TIME, 0],
+            [SESSION_ACTION_TYPES.SET_TIMER_PAUSED, true],
+            [SESSION_ACTION_TYPES.SET_EXAM_STATE, 'completed']
           )
         }
       },
       {
         id: 'pause',
         show: timerIsPaused(session),
-        onConfirm: () => session.update!([SessionActionTypes.SET_TIMER_PAUSED, false])
+        onConfirm: () => session.update!([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, false])
       }
     ],
     [session]

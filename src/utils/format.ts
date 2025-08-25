@@ -1,6 +1,4 @@
-import type { Exam, ExamType, Question } from '../types'
-import type { Session } from '../session'
-import type { LangCode } from '../settings'
+import type { Exam, ExamType, LangCode, Question, Session } from '../types'
 
 import { formatDistance, format } from 'date-fns'
 

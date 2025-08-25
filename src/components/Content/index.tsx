@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Exam from './Exam'
 import Summary from './Summary'
-import { SessionExamContext } from '../../session'
+import { SessionExamContext } from '../../contexts'
 
 export const MainStyles = styled.main<MainStylesProps>`
   width: 100%;

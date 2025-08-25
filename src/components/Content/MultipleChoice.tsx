@@ -1,11 +1,10 @@
-import type { LangCode } from '../../settings'
-import type { AnswerOfMultipleQuestions } from '../../session'
+import type { AnswerOfMultipleQuestions, LangCode } from '../../types'
 
 import React from 'react'
 import Choice from './Choice'
 import { formatChoiceLabel } from '../../utils/format'
-import { ExamContext } from '../../exam'
-import { SessionActionTypes, SessionDataContext, SessionNavigationContext } from '../../session'
+import { SESSION_ACTION_TYPES } from '../../constants'
+import { ExamContext, SessionDataContext, SessionNavigationContext } from '../../contexts'
 
 const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) => {
   const { index, update } = React.useContext(SessionNavigationContext)
@@ -31,7 +30,7 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
       }
 
       answers[index] = newValues
-      update!([SessionActionTypes.SET_ANSWERS, [...answers]])
+      update!([SESSION_ACTION_TYPES.SET_ANSWERS, [...answers]])
     },
     [index, answers, answer, question.answer.length]
   )

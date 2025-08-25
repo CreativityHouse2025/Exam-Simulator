@@ -2,9 +2,9 @@ import type { ThemedStyles } from '../types'
 
 import React from 'react'
 import styled from 'styled-components'
-import { translate } from '../settings'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
+import { translate } from '../utils/translation'
 
 const CoverStyles = styled.div<ThemedStyles>`
   width: 100vw;

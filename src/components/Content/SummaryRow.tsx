@@ -2,7 +2,7 @@ import type { ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
-import { translate } from '../../settings'
+import { translate } from '../../utils/translation'
 
 export const RowStyles = styled.div<SummaryStylesProps>`
   display: grid;

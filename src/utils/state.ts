@@ -1,4 +1,4 @@
-import type { SessionExam, SessionTimer } from '../session'
+import type { SessionExam, SessionTimer } from '../types'
 
 export function timerIsPaused(
   session: Pick<SessionExam, 'examState'> & Pick<SessionTimer, 'paused' | 'time' | 'maxTime'>

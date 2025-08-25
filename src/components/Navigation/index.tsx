@@ -1,19 +1,18 @@
-import type { Session, SessionDispatch } from '../../session'
-
 import React from 'react'
 import { styled } from 'styled-components'
 import Drawer from './Drawer'
 import Footer from './Footer'
 import Content from '../Content'
 import Confirms from './Confirms'
-import { ExamContext } from '../../exam'
 import {
+  ExamContext,
   SessionDataContext,
   SessionExamContext,
   SessionNavigationContext,
-  SessionReducer,
   SessionTimerContext
-} from '../../session'
+} from '../../contexts'
+import { SessionReducer } from '../../utils/session'
+import { Session, SessionDispatch } from '../../types'
 
 const ContainerStyles = styled.div`
   display: flex;
@@ -56,7 +55,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
               <ContainerStyles id="middle-container">
                 <Drawer open={open} toggleOpen={toggleOpen} />
 
-                <Content exam={exam} open={open} />
+                <Content open={open} />
               </ContainerStyles>
 
               {exam && <Footer open={open} questionCount={exam.length} />}

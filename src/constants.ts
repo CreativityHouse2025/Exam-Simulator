@@ -1,3 +1,6 @@
+import type { Lang, LangCode, Session } from './types'
+
+// Theme constants
 const colors = ['#b5965d', '#593752', '#301e2c', '#f8e3e0', '#000000', '#ffffff']
 
 const grey = [
@@ -47,7 +50,8 @@ const shadows = [
   '0px 11px 15px -7px rgba(0, 0, 0, 0.2),0px 24px 38px 3px rgba(0, 0, 0, 0.14),0px 9px 46px 8px rgba(0, 0, 0, 0.12)'
 ]
 
-export default {
+// Default theme object
+export const DEFAULT_THEME = {
   grey,
   black: '#333333',
   primary: colors[0],
@@ -60,4 +64,44 @@ export default {
   fontSize: '10px',
   correct: '#4CAF50',
   incorrect: '#F44336'
-}
+} as const
+
+// Session action types
+export const SESSION_ACTION_TYPES = {
+  SET_INDEX: 'SET_INDEX' as const,
+  SET_BOOKMARKS: 'SET_BOOKMARKS' as const,
+  SET_ANSWERS: 'SET_ANSWERS' as const,
+  SET_TIME: 'SET_TIME' as const,
+  SET_TIMER_PAUSED: 'SET_TIMER_PAUSED' as const,
+  SET_EXAM_STATE: 'SET_EXAM_STATE' as const,
+  SET_REVIEW_STATE: 'SET_REVIEW_STATE' as const
+} as const
+
+// Property mapping for session actions
+export const SESSION_ACTION_PROPS = {
+  SET_INDEX: 'index' as const,
+  SET_BOOKMARKS: 'bookmarks' as const,
+  SET_ANSWERS: 'answers' as const,
+  SET_TIME: 'time' as const,
+  SET_TIMER_PAUSED: 'paused' as const,
+  SET_EXAM_STATE: 'examState' as const,
+  SET_REVIEW_STATE: 'reviewState' as const
+} as const
+
+// Default session
+export const DEFAULT_SESSION: Session = {
+  index: 0 as const,
+  maxTime: 0 as const,
+  time: 0 as const,
+  paused: false as const,
+  examState: 'not-started' as const,
+  reviewState: 'summary' as const,
+  bookmarks: [] as const,
+  answers: [] as const
+} as const
+
+// Language configuration
+export const LANGUAGES: Record<LangCode, Lang> = {
+  ar: { code: 'ar', name: 'العربية', dir: 'rtl' } as const,
+  en: { code: 'en', name: 'English', dir: 'ltr' } as const
+} as const
