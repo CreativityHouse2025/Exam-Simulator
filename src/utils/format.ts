@@ -1,4 +1,4 @@
-import type { Exam, ExamType, LangCode, Question, Session } from '../types'
+import type { Answers, Exam, ExamType, LangCode, Question, Session } from '../types'
 
 import { formatDistance, format } from 'date-fns'
 
@@ -53,35 +53,7 @@ export function formatTimer(sec: number): string {
  * @returns {Exam} - The formatted exam object.
  */
 export function randomizeTest(exam: Exam): Exam {
-  try {
-    // Randomize the order of questions
-    exam = shuffleArray(exam)
-
-    for (let i = 0; i < exam.length; i++) {
-      const q = exam[i]
-
-      // Create a mapping of original indices to new indices for choices
-      const indices = q.choices.map((_, i) => i)
-      const shuffledIndices = shuffleArray(indices)
-
-      // Randomize the order of choices
-      q.choices = shuffledIndices.map((i) => q.choices[i])
-
-      // Update the answer indices to reflect the new order
-      if (q.type === 'multiple-choice') {
-        q.answer = q.choices.map((c, i) => (c.correct ? i : null)).filter((c) => c !== null)
-      } else {
-        throw new Error(`Unsupported question type: ${q.type}`)
-      }
-
-      exam[i] = q
-    }
-
-    return exam
-  } catch (err) {
-    console.error('Error formatting exam:', err)
-    return exam
-  }
+  return shuffleArray(exam.map((q) => ({ ...q, choices: shuffleArray(q.choices) })))
 
   /**
    * Shuffle an array using Fisher-Yates algorithm
@@ -101,6 +73,26 @@ export function randomizeTest(exam: Exam): Exam {
 }
 
 /**
+ * Format the Exam object.
+ * @param {Exam} exam - The exam object to format.
+ * @returns {Exam} - The formatted exam object.
+ */
+export function formatExam(exam: Exam): Exam {
+  return exam.map((q) => {
+    switch (q.type) {
+      case 'multiple-choice':
+        q.answer = q.choices.map((c, i) => (c.correct ? i : null)).filter((c) => c !== null)
+        break
+
+      default:
+        throw new Error(`Unsupported question type: ${q.type}`)
+    }
+
+    return q
+  })
+}
+
+/**
  * Format the Session object.
  * @param {Session} session - The session object to format.
  * @param {number} questionCount - The number of questions in the exam.
@@ -108,8 +100,8 @@ export function randomizeTest(exam: Exam): Exam {
  */
 export function formatSession(session: Session, questionCount: number, examType: ExamType): Session {
   try {
-    const nullArr = Array(questionCount - session.answers.length).fill(null)
-    session.answers = session.answers.concat(nullArr)
+    const defaultAnswers: Answers = Array<[]>(questionCount - session.answers.length).fill([])
+    session.answers = session.answers.concat(defaultAnswers)
 
     const maxTime = examType === 'exam' ? 13800 : 2760
     session.maxTime = maxTime

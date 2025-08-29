@@ -24,12 +24,13 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
 
   const answered = React.useMemo(() => {
     return answers
-      .map((answer, i) => {
-        const isMultipleChoiceAnswered = answer !== null && !Number.isNaN(answer)
-        const isMultipleAnswerAnswered = Array.isArray(answer) && answer.length > 0
+      .map((a, i) => {
+        switch (exam[i].type) {
+          case 'multiple-choice':
+            return Array.isArray(a) && a.length > 0 ? i : undefined
 
-        if (isMultipleChoiceAnswered || isMultipleAnswerAnswered) {
-          return i
+          default:
+            return a !== null && a !== undefined ? i : undefined
         }
       })
       .filter((i) => i !== undefined)
