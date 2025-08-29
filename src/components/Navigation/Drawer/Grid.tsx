@@ -38,13 +38,13 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
 
   const getAnsweredCorrectly = React.useCallback(() => {
     return answers
-      .map((answer, i) => {
+      .map((a, i) => {
         let isCorrect = false
-        if (Array.isArray(answer) && Array.isArray(exam[i].answer)) {
+        if (Array.isArray(a) && Array.isArray(exam[i].answer)) {
           const arr: number[] = exam[i].answer
-          isCorrect = answer.length === arr.length && answer.every((val) => arr.includes(val))
+          isCorrect = a.length === arr.length && a.every((val) => arr.includes(val))
         } else {
-          isCorrect = answer === exam[i].answer
+          isCorrect = a === exam[i].answer
         }
 
         if (isCorrect) return i
