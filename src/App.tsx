@@ -17,8 +17,8 @@ const getRandomExamNumber = () => Math.floor(Math.random() * 5)
 const getRandomMiniExamNumber = () => Math.floor(Math.random() * 23)
 
 const AppComponent: React.FC = () => {
-  const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: LANGUAGES.ar })
   const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: DEFAULT_SESSION })
+  const [lang, setLang] = React.useState<Lang>(LANGUAGES.ar)
   const [exam, setExam] = React.useState<Exam | null>(null)
 
   const loadTranslation = React.useCallback(
@@ -81,7 +81,7 @@ const AppComponent: React.FC = () => {
 
   // Load translation on start
   React.useEffect(() => {
-    loadTranslation(lang.code)
+    loadTranslation(LANGUAGES.en.code)
   }, [])
 
   // Load exam when loadExam (language) changes
