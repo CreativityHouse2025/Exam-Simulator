@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
+    direction: inherit;
   }
   ::-webkit-scrollbar {
     width: ${DEFAULT_THEME.scrollbar};
