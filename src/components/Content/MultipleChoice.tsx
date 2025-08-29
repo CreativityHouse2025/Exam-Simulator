@@ -15,40 +15,19 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
   const answer: AnswerOfMultipleChoice = answers[index] || []
 
   const onChoose = React.useCallback(
-    (i: number): void => {
-      const currValues = (answer as AnswerOfMultipleChoice) || []
-      let newValues: number[]
+    (idx: number) => {
+      if (isReview) return
 
-      // Multiple answers: add/remove from array, respecting maxAnswers limit
-      if (currValues.includes(i)) {
-        newValues = currValues.filter((el) => el !== i)
-      } else if (currValues.length < question.answer.length) {
-        newValues = currValues.concat(i)
-      } else {
-        // Max answers reached, don't add more
-        return
-      }
+      const newValues = answer.includes(idx)
+        ? answer.filter((i) => i !== idx)
+        : answer.length < question.answer.length
+          ? [...answer, idx]
+          : answer // Don't add if max answers reached
 
       answers[index] = newValues
       update!([SESSION_ACTION_TYPES.SET_ANSWERS, [...answers]])
     },
-    [index, answers, answer, question.answer.length]
-  )
-
-  const isSelected = React.useCallback(
-    (i: number): boolean => {
-      return Array.isArray(answer) && answer.includes(i)
-    },
-    [answer]
-  )
-
-  const isDisabled = React.useCallback(
-    (i: number): boolean => {
-      if (isReview) return true
-      if (isSelected(i)) return false
-      return answer.length >= question.answer.length
-    },
-    [isReview, isSelected, answer.length, question.answer.length]
+    [index, answers, answer, question.answer.length, isReview, update]
   )
 
   return (
@@ -57,10 +36,10 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
         <Choice
           key={i}
           singleAnswer={question.answer.length === 1}
-          selected={isSelected(i)}
+          selected={answer.includes(i)}
           review={isReview}
           correct={correct}
-          disabled={isDisabled(i)}
+          disabled={isReview || (!answer.includes(i) && answer.length >= question.answer.length)}
           label={formatChoiceLabel(i, document.documentElement.lang as LangCode)}
           text={text}
           onClick={() => onChoose(i)}

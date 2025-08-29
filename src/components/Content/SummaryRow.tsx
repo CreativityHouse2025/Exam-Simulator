@@ -27,17 +27,15 @@ export const RowValueStyles = styled.div<ThemedStyles>`
 `
 
 const SummaryRowComponent: React.FC<SummaryRowProps> = ({ type, value, status, isStatus }) => {
-  const className = isStatus ? 'status' : ''
-
-  const _type = React.useMemo(
+  const typeLabel = React.useMemo(
     () => translate(`content.summary.${type}`),
     [document.documentElement.lang, translate, type]
   )
 
   return (
     <RowStyles data-test={`summary-row-${type}`} $status={status}>
-      <RowKeyStyles>{_type}</RowKeyStyles>
-      <RowValueStyles className={className}>{value}</RowValueStyles>
+      <RowKeyStyles>{typeLabel}</RowKeyStyles>
+      <RowValueStyles className={isStatus ? 'status' : ''}>{value}</RowValueStyles>
     </RowStyles>
   )
 }

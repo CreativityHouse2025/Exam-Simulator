@@ -23,24 +23,17 @@ const BookmarkButton: React.FC = () => {
 
   const bookmarked = bookmarks.includes(index)
 
-  const onBookmarkQuestion = React.useCallback(() => {
-    if (bookmarked) {
-      const indexToRemove = bookmarks.indexOf(index)
-      if (indexToRemove > -1) {
-        bookmarks.splice(indexToRemove, 1)
-      }
-    } else {
-      if (!bookmarks.includes(index)) {
-        bookmarks.push(index)
-      }
-    }
+  const toggleBookmark = React.useCallback(() => {
+    const newBookmarks = bookmarked ? bookmarks.filter((i) => i !== index) : [...bookmarks, index]
 
-    update!([SESSION_ACTION_TYPES.SET_BOOKMARKS, [...bookmarks]])
+    update!([SESSION_ACTION_TYPES.SET_BOOKMARKS, newBookmarks])
   }, [bookmarked, bookmarks, index, update])
+
+  const IconComponent = bookmarked ? Bookmark : BookmarkBorder
 
   return (
     <BookmarkStyles $bookmarked={bookmarked} className="no-select">
-      {React.createElement(bookmarked ? Bookmark : BookmarkBorder, { size: 40, onClick: onBookmarkQuestion })}
+      <IconComponent size={40} onClick={toggleBookmark} />
     </BookmarkStyles>
   )
 }

@@ -29,34 +29,35 @@ const TimerComponent: React.FC = () => {
   const intervalRef = React.useRef<NodeJS.Timeout | null>(null)
 
   React.useEffect(() => {
-    // Clear any existing interval
+    // Clear existing interval
     if (intervalRef.current) {
       clearInterval(intervalRef.current)
       intervalRef.current = null
     }
 
+    // Start new interval if timer is active
     if (!paused && time > 0) {
       intervalRef.current = setInterval(() => {
         update!([SESSION_ACTION_TYPES.SET_TIME, Math.max(0, time - 1)])
       }, 1000)
     }
 
+    // Cleanup on unmount or dependency change
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current)
         intervalRef.current = null
       }
     }
-  }, [paused, update]) // Remove 'timer' from dependencies to prevent restart on every tick
+  }, [paused, time, update])
 
-  // Update context when timer reaches zero
+  // Handle timer expiration
   React.useEffect(() => {
     if (time <= 0 && intervalRef.current) {
       clearInterval(intervalRef.current)
       intervalRef.current = null
-      update!([SESSION_ACTION_TYPES.SET_TIME, 0])
     }
-  }, [time, update])
+  }, [time])
 
   return (
     <TimerStyles id="timer" $warning={time < 120}>

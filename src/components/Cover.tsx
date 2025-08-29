@@ -77,40 +77,40 @@ const ButtonRow = styled.div`
 `
 
 const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onContinue }) => {
-  const [logoAlt, title, description, _new, mini, _continue] = React.useMemo(
-    () => [
-      translate('cover.logo-alt'),
-      translate('about.title'),
-      translate('about.description'),
-      translate('cover.new'),
-      translate('cover.mini'),
-      translate('cover.continue')
-    ],
+  const translations = React.useMemo(
+    () => ({
+      logoAlt: translate('cover.logo-alt'),
+      title: translate('about.title'),
+      description: translate('about.description'),
+      new: translate('cover.new'),
+      mini: translate('cover.mini'),
+      continue: translate('cover.continue')
+    }),
     [document.documentElement.lang, translate]
   )
 
   return (
     <CoverStyles id="cover">
-      <Image id="image" src={Logo} alt={logoAlt} />
+      <Image id="image" src={Logo} alt={translations.logoAlt} />
 
-      <Title id="title">{title}</Title>
+      <Title id="title">{translations.title}</Title>
 
-      <Description id="description">{description}</Description>
+      <Description id="description">{translations.description}</Description>
 
       <ButtonContainer id="button-container">
         <ButtonRow id="button-row">
           <StartButton id="start-new-button" className="no-select" onClick={onStartNew}>
-            {_new}
+            {translations.new}
           </StartButton>
 
           <StartButton id="start-mini-button" className="no-select" onClick={onStartMini}>
-            {mini}
+            {translations.mini}
           </StartButton>
         </ButtonRow>
 
         {onContinue && (
           <ContinueButton id="continue-button" className="no-select" onClick={onContinue}>
-            {_continue}
+            {translations.continue}
           </ContinueButton>
         )}
       </ButtonContainer>

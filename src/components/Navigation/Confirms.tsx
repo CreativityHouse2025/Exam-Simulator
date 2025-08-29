@@ -13,13 +13,12 @@ const Confirms: React.FC<ConfirmsProps> = ({ session }) => {
       {
         id: 'expired',
         show: timerHaveExpired(session),
-        onConfirm: () => {
+        onConfirm: () =>
           session.update!(
             [SESSION_ACTION_TYPES.SET_TIME, 0],
             [SESSION_ACTION_TYPES.SET_TIMER_PAUSED, true],
             [SESSION_ACTION_TYPES.SET_EXAM_STATE, 'completed']
           )
-        }
       },
       {
         id: 'pause',
@@ -30,42 +29,23 @@ const Confirms: React.FC<ConfirmsProps> = ({ session }) => {
     [session]
   )
 
-  const translatedConfirms: MyModalProps[] = React.useMemo(
+  const activeConfirms: MyModalProps[] = React.useMemo(
     () =>
       confirms
         .filter((c) => c.show)
         .map((c) => {
-          const [title, message, button0, button1] = [
-            translate(`confirm.${c.id}.title`),
-            translate(`confirm.${c.id}.message`),
-            translate(`confirm.${c.id}.button0`),
-            translate(`confirm.${c.id}.button1`)
-          ]
+          const title = translate(`confirm.${c.id}.title`)
+          const message = translate(`confirm.${c.id}.message`)
+          const buttons = [translate(`confirm.${c.id}.button0`), translate(`confirm.${c.id}.button1`)].filter(
+            (btn) => !btn.startsWith('confirm.')
+          ) as [string, string]
 
-          return {
-            ...c,
-            title,
-            message,
-            buttons: [button0, button1].filter((str) => !str.startsWith('confirm.')) as [string, string]
-          }
+          return { ...c, title, message, buttons }
         }),
     [confirms, document.documentElement.lang, translate]
   )
 
-  return (
-    <>
-      {translatedConfirms.map((c, i) => (
-        <Modal
-          key={`${c.id}-${i}`}
-          title={c.title}
-          message={c.message}
-          buttons={c.buttons}
-          onConfirm={c.onConfirm}
-          onClose={c.onClose}
-        />
-      ))}
-    </>
-  )
+  return activeConfirms.map((c, i) => <Modal key={`${c.id}-${i}`} {...c} />)
 }
 
 export default Confirms

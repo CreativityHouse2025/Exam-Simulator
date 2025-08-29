@@ -7,7 +7,7 @@ import { formatAnswerLabel } from '../../utils/format'
 import { translate } from '../../utils/translation'
 
 const ExplanationStyles = styled.div<ExplanationStylesProps>`
-  background: ${({ $correct, theme }) => ($correct ? lighten(0.4, theme.correct) : lighten(0.4, theme.incorrect))};
+  background: ${({ $correct, theme }) => lighten(0.4, $correct ? theme.correct : theme.incorrect)};
   border: 1px solid ${({ theme }) => theme.grey[2]};
   margin-top: 5rem;
   padding-right: 1rem;
@@ -18,7 +18,7 @@ const ExplanationStyles = styled.div<ExplanationStylesProps>`
 const StatusStyles = styled.span<ExplanationStylesProps>`
   text-transform: uppercase;
   font-weight: 700;
-  color: ${({ $correct, theme }) => ($correct ? darken(0.1, theme.correct) : darken(0.1, theme.incorrect))};
+  color: ${({ $correct, theme }) => darken(0.1, $correct ? theme.correct : theme.incorrect)};
 `
 
 const CorrectStyles = styled.span<ThemedStyles>`
@@ -40,31 +40,31 @@ const ExplanationComponent: React.FC<ExplanationProps> = ({ question, answer }) 
   const correct: boolean =
     question.answer.length === answer.length && question.answer.every((ans, index) => ans === answer[index])
 
-  const [yours, _correct, _answer, explain] = React.useMemo(
-    () => [
-      translate('content.explain.yours'),
-      translate(`content.explain.${correct ? 'correct' : 'incorrect'}`),
-      translate('content.explain.answer'),
-      translate('content.explain.explain')
-    ],
+  const translated = React.useMemo(
+    () => ({
+      yours: translate('content.explain.yours'),
+      correct: translate(`content.explain.${correct ? 'correct' : 'incorrect'}`),
+      answer: translate('content.explain.answer'),
+      explain: translate('content.explain.explain')
+    }),
     [document.documentElement.lang, translate, correct]
   )
 
   return (
     <ExplanationStyles id="explanation" $correct={correct}>
       <p>
-        {yours}
-        <StatusStyles $correct={correct}>{_correct}</StatusStyles>
+        {translated.yours}
+        <StatusStyles $correct={correct}>{translated.correct}</StatusStyles>
       </p>
 
       <p>
-        {_answer}
+        {translated.answer}
         <CorrectStyles>{formatAnswerLabel(question, document.documentElement.lang as LangCode)}</CorrectStyles>
       </p>
 
       {question.explanation && (
         <ExplanationTextStyles>
-          {explain}
+          {translated.explain}
           <br />
           <NormalText>{question.explanation}</NormalText>
         </ExplanationTextStyles>
