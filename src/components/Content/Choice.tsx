@@ -47,9 +47,15 @@ const ChoiceComponent: React.FC<ChoiceProps> = ({
 
   const renderIcon = React.useCallback((): React.ReactNode => {
     if (selected) {
-      return React.createElement(singleAnswer ? RadioButtonChecked : CheckBox, { className: name, size: 20 })
+      return React.createElement(singleAnswer ? RadioButtonChecked : CheckBox, {
+        className: name + ' no-select',
+        size: 20
+      })
     } else {
-      return React.createElement(singleAnswer ? RadioButtonUnchecked : CheckBoxOutlineBlank, { size: 20 })
+      return React.createElement(singleAnswer ? RadioButtonUnchecked : CheckBoxOutlineBlank, {
+        className: ' no-select',
+        size: 20
+      })
     }
   }, [selected, singleAnswer])
 

@@ -45,7 +45,7 @@ const LegendComponent: React.FC<LegendItemProps> = ({ type }) => {
   )
 
   return (
-    <LegendStyles>
+    <LegendStyles className="no-select">
       <ColoredSquareStyles className={type} />
       <NameStyles>{legendName}</NameStyles>
     </LegendStyles>

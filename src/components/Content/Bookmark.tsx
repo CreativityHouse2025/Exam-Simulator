@@ -39,7 +39,7 @@ const BookmarkButton: React.FC = () => {
   }, [bookmarked, bookmarks, index, update])
 
   return (
-    <BookmarkStyles $bookmarked={bookmarked}>
+    <BookmarkStyles $bookmarked={bookmarked} className="no-select">
       {React.createElement(bookmarked ? Bookmark : BookmarkBorder, { size: 40, onClick: onBookmarkQuestion })}
     </BookmarkStyles>
   )

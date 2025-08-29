@@ -23,6 +23,12 @@ const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
+  .no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
 `
 
 const container = document.getElementById('root')

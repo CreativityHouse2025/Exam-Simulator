@@ -99,17 +99,17 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onConti
 
       <ButtonContainer id="button-container">
         <ButtonRow id="button-row">
-          <StartButton id="start-new-button" onClick={onStartNew}>
+          <StartButton id="start-new-button" className="no-select" onClick={onStartNew}>
             {_new}
           </StartButton>
 
-          <StartButton id="start-mini-button" onClick={onStartMini}>
+          <StartButton id="start-mini-button" className="no-select" onClick={onStartMini}>
             {mini}
           </StartButton>
         </ButtonRow>
 
         {onContinue && (
-          <ContinueButton id="continue-button" onClick={onContinue}>
+          <ContinueButton id="continue-button" className="no-select" onClick={onContinue}>
             {_continue}
           </ContinueButton>
         )}

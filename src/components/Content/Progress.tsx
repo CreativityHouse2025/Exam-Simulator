@@ -44,7 +44,7 @@ const ProgressComponent: React.FC<ProgressProps> = ({ questionCount }) => {
   }, [questionCount, answers])
 
   return (
-    <ProgressContainer id="progress">
+    <ProgressContainer id="progress" className="no-select">
       <StatNumber>{`✍️ ${answeredCount} (${percentage}%)`}</StatNumber>
 
       <ProgressBar id="progress-bar">

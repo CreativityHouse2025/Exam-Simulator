@@ -64,7 +64,7 @@ const ArrowsComponent: React.FC<ArrowsProps> = ({ questionCount }) => {
   return (
     <ArrowsStyles id="arrows">
       {arrows.map(({ func, Icon }, i) => (
-        <ArrowStyles key={i} onClick={func}>
+        <ArrowStyles key={i} className="no-select" onClick={func}>
           <Icon size={30} />
         </ArrowStyles>
       ))}
