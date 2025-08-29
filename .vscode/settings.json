@@ -2,11 +2,12 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSaveMode": "file",
   "editor.formatOnSave": true,
-  "editor.trimAutoWhitespace": true,
   "editor.insertSpaces": true,
+  "editor.trimAutoWhitespace": true,
   "editor.tabSize": 2,
 
   "files.eol": "\n",
+  "files.trimFinalNewlines": true,
   "files.insertFinalNewline": false,
 
   "[markdown]": { "editor.defaultFormatter": "yzhang.markdown-all-in-one" },
@@ -15,6 +16,7 @@
   "markdown.extension.tableFormatter.normalizeIndentation": true,
 
   "[html]": { "editor.defaultFormatter": "vscode.html-language-features" },
+  "[css]": { "editor.defaultFormatter": "vscode.css-language-features" },
 
   "javascript.suggest.jsdoc.generateReturns": true,
   "javascript.suggest.completeJSDocs": true,
