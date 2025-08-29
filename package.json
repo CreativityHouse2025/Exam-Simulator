@@ -10,7 +10,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "mocha ./test/**/*.test.js",
-    "format": "prettier . --write --ignore-path .gitignore"
+    "format": "prettier . --write"
   },
   "dependencies": {
     "@mantine/hooks": "^8.2.5",
