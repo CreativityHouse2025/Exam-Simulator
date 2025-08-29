@@ -66,8 +66,8 @@ export type AnswerOf = {
 }
 
 export type Answer<QT extends QuestionTypes> = AnswerOf[QT]
-export type AnswerOfMultipleQuestions = AnswerOf['multiple-choice']
-export type Answers = AnswerOfMultipleQuestions[]
+export type AnswerOfMultipleChoice = AnswerOf['multiple-choice']
+export type Answers = AnswerOfMultipleChoice[]
 
 // Session state types
 export type ExamState = 'not-started' | 'in-progress' | 'completed'

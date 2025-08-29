@@ -1,4 +1,4 @@
-import type { AnswerOfMultipleQuestions, LangCode } from '../../types'
+import type { AnswerOfMultipleChoice, LangCode } from '../../types'
 
 import React from 'react'
 import Choice from './Choice'
@@ -12,11 +12,11 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
   const exam = React.useContext(ExamContext)
 
   const question = exam[index]
-  const answer: AnswerOfMultipleQuestions = answers[index] || []
+  const answer: AnswerOfMultipleChoice = answers[index] || []
 
   const onChoose = React.useCallback(
     (i: number): void => {
-      const currValues = (answer as AnswerOfMultipleQuestions) || []
+      const currValues = (answer as AnswerOfMultipleChoice) || []
       let newValues: number[]
 
       // Multiple answers: add/remove from array, respecting maxAnswers limit

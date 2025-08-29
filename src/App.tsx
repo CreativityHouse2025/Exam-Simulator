@@ -93,7 +93,7 @@ const AppComponent: React.FC = () => {
     }
   }, [loadExam])
 
-  if (!session || !hasTranslation('about.title')) {
+  if (!hasTranslation()) {
     return <Loading size={200} />
   }
 
