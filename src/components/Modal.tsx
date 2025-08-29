@@ -57,10 +57,7 @@ const Message = styled.div`
   justify-content: center;
   font: 3rem 'Open Sans';
   font-weight: 600;
-  padding-right: 2rem;
-  padding-left: 2rem;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding: 3rem 2rem;
 `
 
 const Buttons = styled.div<ThemedStyles>`
@@ -102,9 +99,18 @@ const ButtonCancel = styled(Button)`
   }
 `
 
-const ConfirmComponent: React.FC<ModalProps> = ({ title, message, buttons, onConfirm, onClose }) => {
+const ModalComponent: React.FC<ModalProps> = ({ title, message, buttons, onConfirm, onClose }) => {
+  const handleBackdropClick = React.useCallback(
+    (e: React.MouseEvent) => {
+      if (e.target === e.currentTarget) {
+        ;(onClose || onConfirm)?.()
+      }
+    },
+    [onClose, onConfirm]
+  )
+
   return (
-    <Cover id="modal-cover" onClick={onClose || onConfirm}>
+    <Cover id="modal-cover" onClick={handleBackdropClick}>
       <Window id="modal-window">
         <Inner id="modal-inner">
           <Title id="title">{title}</Title>
@@ -128,7 +134,7 @@ const ConfirmComponent: React.FC<ModalProps> = ({ title, message, buttons, onCon
   )
 }
 
-export default ConfirmComponent
+export default ModalComponent
 
 export interface ModalProps {
   title: string

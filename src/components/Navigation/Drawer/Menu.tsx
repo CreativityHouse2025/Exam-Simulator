@@ -52,51 +52,44 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
   const timerSession = React.useContext(SessionTimerContext)
   const [filter, setFilter] = React.useState<QuestionFilter>('all')
 
-  // Memoize action handlers
-  const pauseHandler = React.useCallback(() => {
-    if (timerIsRunning({ ...timerSession, examState })) {
-      update!([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, true])
-    }
-  }, [timerSession, examState, update])
+  const actions = React.useMemo(
+    () => ({
+      pause: () =>
+        timerIsRunning({ ...timerSession, examState }) && update!([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, true]),
+      stop: () =>
+        update!([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, true], [SESSION_ACTION_TYPES.SET_EXAM_STATE, 'completed']),
+      summary: () => update!([SESSION_ACTION_TYPES.SET_REVIEW_STATE, 'summary'])
+    }),
+    [timerSession, examState, update]
+  )
 
-  const stopHandler = React.useCallback(() => {
-    update!([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, true], [SESSION_ACTION_TYPES.SET_EXAM_STATE, 'completed'])
-  }, [update])
-
-  const summaryHandler = React.useCallback(() => {
-    update!([SESSION_ACTION_TYPES.SET_REVIEW_STATE, 'summary'])
-  }, [update])
-
-  // Memoize menu items with stable references
   const menuItems = React.useMemo(() => {
-    const items: MenuSections[] = [
+    const baseItems: MenuSections[] = [
       { type: 'filter', filter: 'all', icon: <FormatListNumbered size={20} /> },
       { type: 'filter', filter: 'marked', icon: <Bookmark size={20} /> },
       { type: 'filter', filter: 'incomplete', icon: <CheckBoxOutlineBlank size={20} /> }
     ]
 
     if (examState === 'in-progress') {
-      items.push({ type: 'filter', filter: 'complete', icon: <CheckBox size={20} /> })
+      baseItems.push(
+        { type: 'filter', filter: 'complete', icon: <CheckBox size={20} /> },
+        { type: 'exam-grid' },
+        { type: 'action', key: 'pause', icon: <Pause size={20} />, onClick: actions.pause },
+        { type: 'action', key: 'stop', icon: <Stop size={20} />, onClick: actions.stop }
+      )
     } else if (examState === 'completed') {
-      items.push(
+      baseItems.push(
         { type: 'filter', filter: 'incorrect', icon: <Cancel size={20} /> },
-        { type: 'filter', filter: 'correct', icon: <DoneAll size={20} /> }
+        { type: 'filter', filter: 'correct', icon: <DoneAll size={20} /> },
+        { type: 'exam-grid' },
+        { type: 'action', key: 'summary', icon: <Report size={20} />, onClick: actions.summary }
       )
+    } else {
+      baseItems.push({ type: 'exam-grid' })
     }
 
-    items.push({ type: 'exam-grid' })
-
-    if (examState === 'in-progress') {
-      items.push(
-        { type: 'action', key: 'pause', icon: <Pause size={20} />, onClick: pauseHandler },
-        { type: 'action', key: 'stop', icon: <Stop size={20} />, onClick: stopHandler }
-      )
-    } else if (examState === 'completed') {
-      items.push({ type: 'action', key: 'summary', icon: <Report size={20} />, onClick: summaryHandler })
-    }
-
-    return items
-  }, [examState, pauseHandler, stopHandler, summaryHandler])
+    return baseItems
+  }, [examState, actions])
 
   const renderMenuItem = React.useCallback(
     (section: MenuSections) => {
@@ -104,15 +97,15 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
         const isFilter = section.type === 'filter'
 
         const key = isFilter ? section.filter : section.key
-        const selected = isFilter ? filter === key : false // @ts-ignore
-        const onClick = isFilter ? () => setFilter(key) : section.onClick
+        const selected = isFilter ? filter === key : false
+        const onClick = isFilter ? () => setFilter(key as QuestionFilter) : section.onClick
 
-        const drawerKey = translate(`nav.drawer.${key}`)
+        const label = translate(`nav.drawer.${key}`)
 
         return (
-          <MenuItem key={key} data-test={drawerKey} className="no-select" $selected={selected} onClick={onClick}>
+          <MenuItem key={key} data-test={label} className="no-select" $selected={selected} onClick={onClick}>
             {section.icon}
-            <MenuItemTextStyles>{drawerKey}</MenuItemTextStyles>
+            <MenuItemTextStyles>{label}</MenuItemTextStyles>
           </MenuItem>
         )
       }
@@ -145,17 +138,6 @@ export interface MenuItemStylesProps extends ThemedStyles {
 }
 
 export type MenuSections =
-  | {
-      type: 'filter'
-      icon: React.ReactNode
-      filter: QuestionFilter
-    }
-  | {
-      type: 'exam-grid'
-    }
-  | {
-      type: 'action'
-      key: string
-      icon: React.ReactNode
-      onClick: () => void
-    }
+  | { type: 'filter'; icon: React.ReactNode; filter: QuestionFilter }
+  | { type: 'exam-grid' }
+  | { type: 'action'; key: string; icon: React.ReactNode; onClick: () => void }

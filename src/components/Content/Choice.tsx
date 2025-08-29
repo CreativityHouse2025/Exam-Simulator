@@ -37,35 +37,31 @@ const ChoiceComponent: React.FC<ChoiceProps> = ({
   text,
   onClick
 }) => {
-  const name = selected ? 'selected' : ''
-  const props = {
-    $review: review,
-    $correct: correct,
-    $disabled: disabled,
-    onClick: disabled ? undefined : onClick
-  }
+  const selectedClass = selected ? 'selected' : ''
 
-  const renderIcon = React.useCallback((): React.ReactNode => {
-    if (selected) {
-      return React.createElement(singleAnswer ? RadioButtonChecked : CheckBox, {
-        className: name + ' no-select',
-        size: 20
-      })
-    } else {
-      return React.createElement(singleAnswer ? RadioButtonUnchecked : CheckBoxOutlineBlank, {
-        className: ' no-select',
-        size: 20
-      })
-    }
-  }, [selected, singleAnswer])
+  const iconComponents = React.useMemo(
+    () => ({
+      selected: singleAnswer ? RadioButtonChecked : CheckBox,
+      unselected: singleAnswer ? RadioButtonUnchecked : CheckBoxOutlineBlank
+    }),
+    [singleAnswer]
+  )
+
+  const IconComponent = selected ? iconComponents.selected : iconComponents.unselected
 
   return (
-    <ChoiceStyles {...props}>
-      {renderIcon()}
+    <ChoiceStyles
+      $review={review}
+      $correct={correct}
+      $disabled={disabled}
+      onClick={disabled ? undefined : onClick}
+      className="no-select"
+    >
+      <IconComponent className={`no-select ${selectedClass}`} size={20} />
 
-      <LabelStyles className={name}>{label}</LabelStyles>
+      <LabelStyles className={selectedClass}>{label}</LabelStyles>
 
-      <div className={name}>{text}</div>
+      <div className={selectedClass}>{text}</div>
     </ChoiceStyles>
   )
 }

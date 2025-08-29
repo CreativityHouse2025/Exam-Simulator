@@ -3,52 +3,50 @@ import type { Answers, Exam, ExamType, LangCode, Question, Session } from '../ty
 import { formatDistance, format } from 'date-fns'
 
 /**
- * Format a date string to a human-readable format.
+ * Format a date string to a human-readable format
  * @param {string} date - The date string to format.
  * @returns {string} - The formatted date string.
  */
 export function formatCreatedAt(date: string): string {
   try {
     return formatDistance(new Date(date), new Date()).replace(/about|over|almost|less/, '')
-  } catch (err) {
-    console.error('Error formatting created at date:', err)
+  } catch {
     return 'Unknown time'
   }
 }
 
 /**
- * Format a date string to 'MM/dd/yyyy'.
+ * Format a date to 'MM/dd/yyyy'
  * @param {string} date - The date string to format.
  * @returns {string} - The formatted date string.
  */
 export function formatDate(date: number | string | Date): string {
   try {
-    return format(new Date(date), 'MM/dd/RRRR')
-  } catch (err) {
-    console.error('Error formatting date:', err)
+    return format(new Date(date), 'MM/dd/yyyy')
+  } catch {
     return '00/00/0000'
   }
 }
 
 /**
- * Format seconds into MM:SS
+ * Format seconds into HH:MM:SS
  * @param {number} sec - The time in seconds to format.
  * @returns {string}
  */
 export function formatTimer(sec: number): string {
   try {
-    const hours = Math.floor(sec / 3600) % 24
-    const minutes = Math.floor(sec / 60) % 60
+    const hours = Math.floor(sec / 3600)
+    const minutes = Math.floor((sec % 3600) / 60)
     const seconds = sec % 60
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
-  } catch (err) {
-    console.error('Error formatting timer:', err)
+
+    return [hours, minutes, seconds].map((unit) => unit.toString().padStart(2, '0')).join(':')
+  } catch {
     return '00:00:00'
   }
 }
 
 /**
- * Format the exam object.
+ * Randomize exam questions and choices
  * @param {Exam} exam - The exam object to format.
  * @returns {Exam} - The formatted exam object.
  */
@@ -56,7 +54,7 @@ export function randomizeTest(exam: Exam): Exam {
   return shuffleArray(exam.map((q) => ({ ...q, choices: shuffleArray(q.choices) })))
 
   /**
-   * Shuffle an array using Fisher-Yates algorithm
+   * Shuffle array using Fisher-Yates algorithm
    * @param {T[]} array - The array to shuffle
    * @returns {T[]} - The shuffled array
    */
@@ -71,7 +69,7 @@ export function randomizeTest(exam: Exam): Exam {
 }
 
 /**
- * Format the Exam object.
+ * Format exam by setting correct answer indices
  * @param {Exam} exam - The exam object to format.
  * @returns {Exam} - The formatted exam object.
  */
@@ -79,7 +77,7 @@ export function formatExam(exam: Exam): Exam {
   return exam.map((q) => {
     switch (q.type) {
       case 'multiple-choice':
-        q.answer = q.choices.map((c, i) => (c.correct ? i : null)).filter((c) => c !== null)
+        q.answer = q.choices.map((c, i) => (c.correct ? i : null)).filter((i): i is number => i !== null)
         break
 
       default:
@@ -91,17 +89,20 @@ export function formatExam(exam: Exam): Exam {
 }
 
 /**
- * Format the Session object.
+ * Format session with default values
  * @param {Session} session - The session object to format.
  * @param {number} questionCount - The number of questions in the exam.
  * @returns {Session} - The formatted session object.
  */
 export function formatSession(session: Session, questionCount: number, examType: ExamType): Session {
   try {
-    const defaultAnswers: Answers = Array<[]>(questionCount - session.answers.length).fill([])
-    session.answers = session.answers.concat(defaultAnswers)
+    // Fill missing answers with empty arrays
+    const missingAnswers = questionCount - session.answers.length
+    if (missingAnswers > 0) {
+      session.answers = [...session.answers, ...Array(missingAnswers).fill([])]
+    }
 
-    const maxTime = examType === 'exam' ? 13800 : 2760
+    const maxTime = examType === 'exam' ? 13800 : 2760 // 3h50m : 46m
     session.maxTime = maxTime
     session.time = maxTime
   } catch (err) {
@@ -112,7 +113,7 @@ export function formatSession(session: Session, questionCount: number, examType:
 }
 
 /**
- * Format the answer label.
+ * Format answer label for display
  * @param {Question} question - The question object.
  * @param {LangCode} lang - The language code.
  * @returns {string} - The formatted answer label.
@@ -120,88 +121,31 @@ export function formatSession(session: Session, questionCount: number, examType:
 export function formatAnswerLabel({ type, answer }: Question, lang: LangCode): string {
   try {
     if (type === 'multiple-choice' && Array.isArray(answer)) {
-      return answer.map((i: number) => formatChoiceLabel(i, lang)).join(', ')
+      return answer.map((i) => formatChoiceLabel(i, lang)).join(', ')
     }
 
     return answer?.toString() || '....'
-  } catch (err) {
-    console.error(`Error formatting answer label for question type ${type} and language ${lang}:`, err)
+  } catch {
     return '....'
   }
 }
 
+// Choice labels for different languages
+const CHOICE_LABELS = {
+  en: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+  ar: 'أبجدهوزحطيكلمنسعفصقرشتثخذضظغ'.split('')
+} as const
+
 /**
- * Convert an index to a letter
- * @param {number} index - The index to convert.
- * @param {LangCode} lang - The language code to use for the conversion.
- * @returns {string} - The letter corresponding to the index.
+ * Convert index to choice label (A, B, C... or أ, ب, ج...)
+ * @param {number} index - The index of the choice
+ * @param {LangCode} lang - The language code
+ * @returns Formatted choice label
  */
 export function formatChoiceLabel(index: number, lang: LangCode): string {
-  const labels = {
-    en: [
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'W',
-      'X',
-      'Y',
-      'Z'
-    ],
-    ar: [
-      'أ',
-      'ب',
-      'ج',
-      'د',
-      'هـ',
-      'و',
-      'ز',
-      'ح',
-      'ط',
-      'ي',
-      'ك',
-      'ل',
-      'م',
-      'ن',
-      'س',
-      'ع',
-      'ف',
-      'ص',
-      'ق',
-      'ر',
-      'ش',
-      'ت',
-      'ث',
-      'خ',
-      'ذ',
-      'ض',
-      'ظ',
-      'غ'
-    ]
-  }
-
   try {
-    return labels[lang][index]
-  } catch (err) {
-    console.error(`Invalid index ${index} for language ${lang}. Returning default label 'A'.`)
+    return CHOICE_LABELS[lang][index] || 'A'
+  } catch {
     return 'A'
   }
 }

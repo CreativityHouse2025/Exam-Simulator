@@ -22,62 +22,56 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
 
   if (!exam || exam.length === 0) return null
 
-  const answered = React.useMemo(() => {
-    return answers
-      .map((a, i) => {
-        switch (exam[i].type) {
-          case 'multiple-choice':
-            return Array.isArray(a) && a.length > 0 ? i : undefined
+  const categorizedAnswers = React.useMemo(() => {
+    const answered: number[] = []
+    const correct: number[] = []
+    const incorrect: number[] = []
 
-          default:
-            return a !== null && a !== undefined ? i : undefined
-        }
-      })
-      .filter((i) => i !== undefined)
-  }, [exam, answers])
+    answers.forEach((answer, i) => {
+      const hasAnswer = answer.length > 0
 
-  const getAnsweredCorrectly = React.useCallback(() => {
-    return answers
-      .map((a, i) => {
-        let isCorrect = false
-        if (Array.isArray(a) && Array.isArray(exam[i].answer)) {
-          const arr: number[] = exam[i].answer
-          isCorrect = a.length === arr.length && a.every((val) => arr.includes(val))
+      if (hasAnswer) {
+        answered.push(i)
+
+        // Check if answer is correct
+        const examAnswer = exam[i].answer
+        const isCorrect = answer.length === examAnswer.length && answer.every((val) => examAnswer.includes(val))
+
+        if (isCorrect) {
+          correct.push(i)
         } else {
-          isCorrect = a === exam[i].answer
+          incorrect.push(i)
         }
+      }
+    })
 
-        if (isCorrect) return i
-      })
-      .filter((i) => i !== undefined)
+    const incomplete = Array.from({ length: exam.length }, (_, i) => i).filter((i) => !answered.includes(i))
+
+    return { answered, correct, incorrect, incomplete }
   }, [exam, answers])
 
-  const getAnsweredIncorrectly = React.useCallback(() => {
-    return answered.filter((i) => !getAnsweredCorrectly().includes(i))
-  }, [answered, getAnsweredCorrectly])
-
-  const getVisibleQuestions = React.useCallback(() => {
+  const visibleQuestions = React.useMemo(() => {
     switch (filter) {
       case 'marked':
         return bookmarks
       case 'complete':
-        return answered
+        return categorizedAnswers.answered
       case 'incorrect':
-        return getAnsweredIncorrectly()
+        return categorizedAnswers.incorrect
       case 'correct':
-        return getAnsweredCorrectly()
+        return categorizedAnswers.correct
       case 'incomplete':
-        return Array.from({ length: exam.length }, (_, i) => i).filter((i) => !answered.includes(i))
+        return categorizedAnswers.incomplete
       case 'all':
       default:
         return Array.from({ length: exam.length }, (_, i) => i)
     }
-  }, [filter, exam, bookmarks, answered, getAnsweredCorrectly, getAnsweredIncorrectly])
+  }, [filter, exam.length, bookmarks, categorizedAnswers])
 
   return (
     <GridStyles id="grid">
-      {getVisibleQuestions().map((i) => (
-        <Cell key={i} index={i} bookmarks={bookmarks} answered={answered} />
+      {visibleQuestions.map((i) => (
+        <Cell key={i} index={i} bookmarks={bookmarks} answered={categorizedAnswers.answered} />
       ))}
     </GridStyles>
   )

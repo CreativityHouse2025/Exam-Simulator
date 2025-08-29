@@ -30,41 +30,52 @@ const ArrowStyles = styled.div<ThemedStyles>`
 
 const ArrowsComponent: React.FC<ArrowsProps> = ({ questionCount }) => {
   const { index, update } = React.useContext(SessionNavigationContext)
+  const isLTR = document.documentElement.dir === 'ltr'
 
-  const onFirstQuestion = React.useCallback(() => {
-    if (index === 0) return
-    update!([SESSION_ACTION_TYPES.SET_INDEX, 0])
-  }, [index, update])
-
-  const onPrevQuestion = React.useCallback(() => {
-    if (index === 0) return
-    update!([SESSION_ACTION_TYPES.SET_INDEX, index - 1])
-  }, [index, update])
-
-  const onNextQuestion = React.useCallback(() => {
-    if (index >= questionCount - 1) return
-    update!([SESSION_ACTION_TYPES.SET_INDEX, index + 1])
-  }, [index, questionCount, update])
-
-  const onLastQuestion = React.useCallback(() => {
-    if (index >= questionCount - 1) return
-    update!([SESSION_ACTION_TYPES.SET_INDEX, questionCount - 1])
-  }, [index, questionCount, update])
+  const navigate = React.useCallback(
+    (target: number) => {
+      if (target >= 0 && target < questionCount && target !== index) {
+        update!([SESSION_ACTION_TYPES.SET_INDEX, target])
+      }
+    },
+    [index, questionCount, update]
+  )
 
   const arrows: ArrowProps[] = React.useMemo(
     () => [
-      { func: onFirstQuestion, Icon: document.documentElement.dir === 'rtl' ? SkipNext : SkipPrevious },
-      { func: onPrevQuestion, Icon: document.documentElement.dir === 'rtl' ? KeyboardArrowRight : KeyboardArrowLeft },
-      { func: onNextQuestion, Icon: document.documentElement.dir === 'rtl' ? KeyboardArrowLeft : KeyboardArrowRight },
-      { func: onLastQuestion, Icon: document.documentElement.dir === 'rtl' ? SkipPrevious : SkipNext }
+      {
+        onClick: () => navigate(0),
+        Icon: isLTR ? SkipPrevious : SkipNext,
+        disabled: index === 0
+      },
+      {
+        onClick: () => navigate(index - 1),
+        Icon: isLTR ? KeyboardArrowLeft : KeyboardArrowRight,
+        disabled: index === 0
+      },
+      {
+        onClick: () => navigate(index + 1),
+        Icon: isLTR ? KeyboardArrowRight : KeyboardArrowLeft,
+        disabled: index >= questionCount - 1
+      },
+      {
+        onClick: () => navigate(questionCount - 1),
+        Icon: isLTR ? SkipNext : SkipPrevious,
+        disabled: index >= questionCount - 1
+      }
     ],
-    [onFirstQuestion, onPrevQuestion, onNextQuestion, onLastQuestion]
+    [index, questionCount, navigate, isLTR]
   )
 
   return (
     <ArrowsStyles id="arrows">
-      {arrows.map(({ func, Icon }, i) => (
-        <ArrowStyles key={i} className="no-select" onClick={func}>
+      {arrows.map(({ onClick, Icon, disabled }, i) => (
+        <ArrowStyles
+          key={i}
+          className="no-select"
+          onClick={disabled ? undefined : onClick}
+          style={{ opacity: disabled ? 0.5 : 1, cursor: disabled ? 'not-allowed' : 'pointer' }}
+        >
           <Icon size={30} />
         </ArrowStyles>
       ))}
@@ -79,6 +90,7 @@ export interface ArrowsProps {
 }
 
 export interface ArrowProps {
-  func: MouseEventHandler<HTMLDivElement>
+  onClick: MouseEventHandler<HTMLDivElement>
   Icon: React.FC<{ size: number }>
+  disabled: boolean
 }

@@ -26,14 +26,12 @@ const Control = styled.div<ControlStylesProps>`
 `
 
 const ControlComponent: React.FC<DrawerControlProps> = ({ open, toggleOpen }) => {
-  const chevron = React.createElement(document.documentElement.dir === 'rtl' ? ChevronRight : ChevronLeft, {
-    className: 'chevron',
-    size: 20
-  })
+  const isLTR = document.documentElement.dir === 'ltr'
+  const ChevronIcon = isLTR ? ChevronLeft : ChevronRight
 
   return (
     <Control id="control" className="no-select" $open={open} onClick={toggleOpen}>
-      {open ? chevron : <Menu size={20} />}
+      {open ? <ChevronIcon className="chevron" size={20} /> : <Menu size={20} />}
     </Control>
   )
 }

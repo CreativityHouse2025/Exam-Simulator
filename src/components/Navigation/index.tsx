@@ -1,5 +1,5 @@
 import React from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 import Drawer from './Drawer'
 import Footer from './Footer'
 import Content from '../Content'
@@ -27,30 +27,33 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
   const [session, updateSession] = React.useReducer(SessionReducer, startingSession)
   const [open, setOpen] = React.useState<boolean>(true)
 
-  const sessionUpdate = ((...actions) => {
-    const arr = actions.map(([type, payload]) => ({ type, payload }))
-
-    updateSession(arr)
-    onSessionUpdate(SessionReducer(session, arr))
-  }) as SessionDispatch
-
-  session.update = sessionUpdate
+  const sessionUpdate = React.useCallback<SessionDispatch>(
+    (...actions) => {
+      const actionArray = actions.map(([type, payload]) => ({ type, payload }))
+      updateSession(actionArray)
+      onSessionUpdate(SessionReducer(session, actionArray))
+    },
+    [session, onSessionUpdate]
+  )
 
   React.useEffect(() => {
     session.update = sessionUpdate
-  }, [startingSession])
+  }, [sessionUpdate])
 
-  if (!exam) return null
+  const toggleOpen = React.useCallback(() => setOpen((prev) => !prev), [])
 
-  const toggleOpen = React.useCallback(() => setOpen(!open), [open])
-
-  const { answers, bookmarks, examState, index, maxTime, paused, reviewState, time, examID, update } = session
+  const contextValues = {
+    navigation: { index: session.index, update: sessionUpdate },
+    timer: { time: session.time, maxTime: session.maxTime, paused: session.paused, update: sessionUpdate },
+    exam: { examState: session.examState, reviewState: session.reviewState, update: sessionUpdate },
+    data: { bookmarks: session.bookmarks, answers: session.answers, examID: session.examID, update: sessionUpdate }
+  }
 
   return (
-    <SessionNavigationContext.Provider value={{ index, update }}>
-      <SessionTimerContext.Provider value={{ time, maxTime, paused, update }}>
-        <SessionExamContext.Provider value={{ examState, reviewState, update }}>
-          <SessionDataContext.Provider value={{ bookmarks, answers, examID, update }}>
+    <SessionNavigationContext.Provider value={contextValues.navigation}>
+      <SessionTimerContext.Provider value={contextValues.timer}>
+        <SessionExamContext.Provider value={contextValues.exam}>
+          <SessionDataContext.Provider value={contextValues.data}>
             <>
               <ContainerStyles id="middle-container">
                 <Drawer open={open} toggleOpen={toggleOpen} />
@@ -58,7 +61,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
                 <Content open={open} />
               </ContainerStyles>
 
-              {exam && <Footer open={open} questionCount={exam.length} />}
+              <Footer open={open} questionCount={exam.length} />
 
               <Confirms session={session} />
             </>

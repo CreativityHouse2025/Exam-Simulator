@@ -51,67 +51,55 @@ const SummaryComponent: React.FC = () => {
   const exam = React.useContext(ExamContext)
 
   const questions = React.useMemo(() => {
-    // Helper function to compare arrays
-    const arraysEqual = (a: number[] | null, b: number[]): boolean => {
-      if (a === null) return false
-      if (a.length !== b.length) return false
-      return a.every((val, index) => val === b[index])
-    }
+    const arraysEqual = (a: number[] | null, b: number[]): boolean =>
+      a !== null && a.length === b.length && a.every((val, index) => val === b[index])
 
-    const incomplete: number[] = []
-    const completed: number[] = []
-    const correct: number[] = []
-    const incorrect: number[] = []
+    const categorized = answers.reduce(
+      (acc, givenAnswer, i) => {
+        const correctAnswer = exam[i].answer
 
-    for (let i = 0; i < answers.length; i++) {
-      const givenAnswer: number[] = answers[i]
-      const correctAnswer: number[] = exam[i].answer
+        if (!givenAnswer || givenAnswer.length === 0) {
+          acc.incomplete.push(i)
+        } else {
+          acc.completed.push(i)
+          if (arraysEqual(givenAnswer, correctAnswer)) {
+            acc.correct.push(i)
+          } else {
+            acc.incorrect.push(i)
+          }
+        }
 
-      if (givenAnswer === null || givenAnswer.length === 0) {
-        incomplete.push(i)
-        continue
-      }
+        return acc
+      },
+      { incomplete: [] as number[], completed: [] as number[], correct: [] as number[], incorrect: [] as number[] }
+    )
 
-      completed.push(i)
-
-      if (arraysEqual(givenAnswer, correctAnswer)) {
-        correct.push(i)
-      } else {
-        incorrect.push(i)
-      }
-    }
-
-    return {
-      incomplete,
-      completed,
-      correct,
-      incorrect
-    }
+    return categorized
   }, [exam, answers])
-
-  const onRestart = React.useCallback(() => window.location.reload(), [])
 
   const score = Math.round((questions.correct.length / exam.length) * 100)
   const status = score >= passPercent
-  const date = new Date()
   const elapsed = maxTime * 60 - time
+  const date = new Date()
 
-  const [title, _status, home] = React.useMemo(
-    () => [
-      translate('content.summary.title'),
-      translate(`content.summary.${status ? 'pass' : 'fail'}`),
-      translate('content.summary.home')
-    ],
+  const translated = React.useMemo(
+    () => ({
+      title: translate('content.summary.title'),
+      status: translate(`content.summary.${status ? 'pass' : 'fail'}`),
+      home: translate('content.summary.home')
+    }),
     [document.documentElement.lang, translate, status]
   )
 
+  const onRestart = React.useCallback(() => window.location.reload(), [])
+
   return (
     <div id="summary">
-      <TitleStyles id="title">{title}</TitleStyles>
+      <TitleStyles id="title">{translated.title}</TitleStyles>
 
       <div id="columns">
         <ColumnStyles id="column">
-          <SummaryRow type="status" value={_status} status={status} isStatus />
+          <SummaryRow type="status" value={translated.status} status={status} isStatus />
           <SummaryRow type="passing" value={`${passPercent} %`} status={status} />
           <SummaryRow type="time" value={formatTimer(elapsed)} status={status} />
           <SummaryRow type="date" value={formatDate(date)} status={status} />
@@ -126,7 +114,7 @@ const SummaryComponent: React.FC = () => {
       </div>
 
       <RestartButton id="restart-button" className="no-select" onClick={onRestart}>
-        {home}
+        {translated.home}
       </RestartButton>
     </div>
   )
