@@ -89,9 +89,7 @@ const SummaryComponent: React.FC = () => {
     }
   }, [exam, answers])
 
-  const onRestart = React.useCallback(() => {
-    window.location.reload()
-  }, [])
+  const onRestart = React.useCallback(() => window.location.reload(), [])
 
   const score = Math.round((questions.correct.length / exam.length) * 100)
   const status = score >= passPercent

@@ -23,6 +23,7 @@ const TitleStyles = styled.div<ThemedStyles>`
   font-weight: 700;
   color: ${({ theme }) => theme.black};
   margin-left: 1rem;
+  cursor: pointer;
 `
 
 const ImageStyles = styled.img`
@@ -45,11 +46,15 @@ const LanguageStyles = styled.div<ThemedStyles>`
 const HeaderComponent: React.FC<HeaderProps> = ({ setLang }) => {
   const title = React.useMemo(() => translate('about.title'), [document.documentElement.lang, translate])
 
+  const resetApp = React.useCallback(() => window.location.reload(), [])
+
   return (
     <HeaderStyles id="header">
       <ImageStyles id="image" className="no-select" src={Logo} />
 
-      <TitleStyles id="title">{title}</TitleStyles>
+      <TitleStyles id="title" onClick={resetApp}>
+        {title}
+      </TitleStyles>
 
       <LanguageStyles
         id="language"
