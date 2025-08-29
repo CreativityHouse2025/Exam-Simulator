@@ -32,7 +32,7 @@ const ControlComponent: React.FC<DrawerControlProps> = ({ open, toggleOpen }) =>
   })
 
   return (
-    <Control id="control" $open={open} onClick={toggleOpen}>
+    <Control id="control" className="no-select" $open={open} onClick={toggleOpen}>
       {open ? chevron : <Menu size={20} />}
     </Control>
   )

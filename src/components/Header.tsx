@@ -47,11 +47,15 @@ const HeaderComponent: React.FC<HeaderProps> = ({ setLang }) => {
 
   return (
     <HeaderStyles id="header">
-      <ImageStyles id="image" src={Logo} />
+      <ImageStyles id="image" className="no-select" src={Logo} />
 
       <TitleStyles id="title">{title}</TitleStyles>
 
-      <LanguageStyles id="language" onClick={() => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar')}>
+      <LanguageStyles
+        id="language"
+        className="no-select"
+        onClick={() => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar')}
+      >
         <Language size={40} />
       </LanguageStyles>
     </HeaderStyles>

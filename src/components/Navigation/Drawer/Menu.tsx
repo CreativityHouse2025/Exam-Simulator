@@ -110,7 +110,7 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
         const drawerKey = translate(`nav.drawer.${key}`)
 
         return (
-          <MenuItem key={key} data-test={drawerKey} $selected={selected} onClick={onClick}>
+          <MenuItem key={key} data-test={drawerKey} className="no-select" $selected={selected} onClick={onClick}>
             {section.icon}
             <MenuItemTextStyles>{drawerKey}</MenuItemTextStyles>
           </MenuItem>

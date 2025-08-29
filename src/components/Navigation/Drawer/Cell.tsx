@@ -42,6 +42,7 @@ const CellComponent: React.FC<CellProps> = ({ index: myIndex, bookmarks, answere
   return (
     <CellStyles
       data-test={`Cell ${myIndex}`}
+      className="no-select"
       $background={gridItemBackgroundColor(myIndex, bookmarks, answered)}
       $selected={isSelected()}
       onClick={() => onClickCell(myIndex)}

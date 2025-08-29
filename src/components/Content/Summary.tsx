@@ -127,7 +127,7 @@ const SummaryComponent: React.FC = () => {
         </ColumnStyles>
       </div>
 
-      <RestartButton id="restart-button" onClick={onRestart}>
+      <RestartButton id="restart-button" className="no-select" onClick={onRestart}>
         {home}
       </RestartButton>
     </div>

@@ -112,12 +112,12 @@ const ConfirmComponent: React.FC<ModalProps> = ({ title, message, buttons, onCon
           <Message id="message">{message}</Message>
 
           <Buttons id="buttons">
-            <ButtonConfirm id="button-confirm" onClick={onConfirm}>
+            <ButtonConfirm id="button-confirm" className="no-select" onClick={onConfirm}>
               {buttons[0]}
             </ButtonConfirm>
 
             {onClose && (
-              <ButtonCancel id="button-cancel" onClick={onClose}>
+              <ButtonCancel id="button-cancel" className="no-select" onClick={onClose}>
                 {buttons[1]}
               </ButtonCancel>
             )}
