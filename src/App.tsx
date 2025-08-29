@@ -7,7 +7,7 @@ import Navigation from './components/Navigation'
 import Cover from './components/Cover'
 import Loading from './components/Loading'
 import { hasTranslation, setTranslation } from './utils/translation'
-import { randomizeTest, formatSession } from './utils/format'
+import { randomizeTest, formatSession, formatExam } from './utils/format'
 import { toExamID } from './utils/examID'
 import { DEFAULT_SESSION, LANGUAGES } from './constants'
 import { ExamContext, LangContext } from './contexts'
@@ -49,6 +49,8 @@ const AppComponent: React.FC = () => {
           examData = randomizeTest(examData)
           newSession = formatSession({ ...newSession, examState: 'in-progress' }, examData.length, type as ExamType)
         }
+
+        formatExam(examData)
 
         setExam(examData)
         setSession(newSession)
