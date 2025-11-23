@@ -40,18 +40,23 @@ const AppComponent: React.FC = () => {
         console.warn('No exam ID found in session.')
         return
       }
-
+      /* 
+      Problem is here:
+        the exam is randomized only for the first time, and the random order is not 
+        persisted in the session, when the exam is re-loaded (language or continue buttons)
+        the exam is continued in its original order
+       */
       try {
         const [type, number] = newSession.examID.split('-')
         let examData: Exam = (await import(`./data/${type}s/${lang.code}/${number}.json`)).default
-
-        if (newSession.examState === 'not-started') {
-          examData = randomizeTest(examData)
+        
+        // should persist the random order here
+        if (newSession.examState === 'not-started') { 
+          // examData = randomizeTest(examData) stop randomizing for now (temporary solution)
           newSession = formatSession({ ...newSession, examState: 'in-progress' }, examData.length, type as ExamType)
         }
 
-        formatExam(examData)
-
+        formatExam(examData)    
         setExam(examData)
         setSession(newSession)
       } catch (error) {
