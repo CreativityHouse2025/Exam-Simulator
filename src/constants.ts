@@ -88,6 +88,7 @@ export const SESSION_ACTION_PROPS = {
   SET_REVIEW_STATE: 'reviewState' as const
 } as const
 
+// Constant for the general category (mix of all categories)
 export const GENERAL_CATEGORY_ID = 0
 
 // Default session
