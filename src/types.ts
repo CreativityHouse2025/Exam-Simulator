@@ -46,7 +46,7 @@ export interface Question<QT extends QuestionTypes = QuestionTypes> {
   /** question id */
   id: number
   /** question type */
-  type: QT
+  type: QT | string // temporarily add string union (for testing generateExams)
   /** question type */
   categoryId: number
   /** question content */
@@ -56,7 +56,8 @@ export interface Question<QT extends QuestionTypes = QuestionTypes> {
   /** choices of the question */
   choices: Choice[]
   /** index of the correct choice for quick access */
-  answer: Answer<QT>
+  // temporarily make it optional
+  answer?: Answer<QT>
 }
 
 export interface Choice {
@@ -105,6 +106,13 @@ export interface Session {
   examID?: ExamID
   /** session update function - will be injected by reducer */
   update?: SessionDispatch
+}
+
+export interface GeneratedExam {
+  /** the list of questions to be used in the application's memory */
+  exam: Exam
+  /** the list of question ids to perserve question order in local storage */
+  questionIds: number[]
 }
 
 // Session action types

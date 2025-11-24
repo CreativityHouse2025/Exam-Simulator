@@ -1,4 +1,5 @@
-import type { Answers, Exam, ExamType, LangCode, Question, Session } from '../types'
+import { GENERAL_CATEGORY_ID } from '../constants'
+import type { Answers, Exam, ExamType, GeneratedExam, LangCode, Question, Session } from '../types'
 
 import { formatDistance, format } from 'date-fns'
 
@@ -46,6 +47,20 @@ export function formatTimer(sec: number): string {
 }
 
 /**
+   * Shuffle array using Fisher-Yates algorithm
+   * @param {T[]} array - The array to shuffle
+   * @returns {T[]} - The shuffled array
+   */
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
+
+/**
  * Randomize exam questions and choices
  * @param {Exam} exam - The exam object to format.
  * @returns {Exam} - The formatted exam object.
@@ -62,7 +77,7 @@ export function randomizeTest(exam: Exam): Exam {
     const shuffled = [...array]
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
-      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+        ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
     }
     return shuffled
   }
@@ -87,6 +102,47 @@ export function formatExam(exam: Exam): Exam {
     return q
   })
 }
+
+/**
+ * Format session with default values
+ * @param {number} questionCount - The size of the output question list
+ * @param {number} questions - The question bank
+ * @param {number} categoryId - The category of the questions
+ * @returns {GeneratedExam} - An object that has the Exam for the application memory 
+ * and corresponding question IDs list for local storage
+ */
+export function generateExam(questionCount: number, questions: Question[], categoryId: number): GeneratedExam {
+
+  if (questions.length < 0) {
+    throw new Error("Error: question list is empty")
+  }
+
+  let questionPool: Question[] = []
+
+  // if the category is general, skip filtering
+  if (categoryId === GENERAL_CATEGORY_ID) {
+    questionPool = [...questions]
+  } else {
+    questionPool = questions.filter((q: Question): boolean => q.categoryId === categoryId)
+  }
+
+  // shuffle array
+  questionPool = shuffleArray(questionPool)
+
+  // choose first questionCount questions
+  // note: Array.prototype.slice is safe, even if questionPool < questionCount, it will return an adjusted array
+  const chosenQuestions = questionPool.slice(0, questionCount);
+
+  // get questions order
+  const questionIds = chosenQuestions.map((q: Question): Question['id'] => q.id)
+  
+  const generatedExam: GeneratedExam = {
+    exam: chosenQuestions,
+    questionIds
+  }
+  return generatedExam
+}
+
 
 /**
  * Format session with default values

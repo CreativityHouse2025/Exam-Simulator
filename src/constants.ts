@@ -88,7 +88,7 @@ export const SESSION_ACTION_PROPS = {
   SET_REVIEW_STATE: 'reviewState' as const
 } as const
 
-const GENERAL_CATEGORY_ID = 0
+export const GENERAL_CATEGORY_ID = 0
 
 // Default session
 export const DEFAULT_SESSION: Session = {

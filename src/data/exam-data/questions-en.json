@@ -1,0 +1,252 @@
+[
+    {
+        "id": 1,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "What is the difference between let, const, and var in JavaScript?",
+        "explanation": "let allows reassignment, const is immutable, and var is function-scoped and can be hoisted.",
+        "choices": [
+            {
+                "text": "let allows reassignment, const is immutable, var is function-scoped",
+                "correct": true
+            },
+            {
+                "text": "var is block-scoped, let is function-scoped",
+                "correct": false
+            },
+            {
+                "text": "const can be reassigned",
+                "correct": false
+            },
+            {
+                "text": "All three are identical in behavior",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "What is a closure in JavaScript?",
+        "explanation": "A closure is a function that has access to its own scope, the outer function’s scope, and the global scope.",
+        "choices": [
+            {
+                "text": "A function bundled with its lexical scope",
+                "correct": true
+            },
+            {
+                "text": "A variable in the global scope",
+                "correct": false
+            },
+            {
+                "text": "An object method",
+                "correct": false
+            },
+            {
+                "text": "A loop structure",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "What is the purpose of useEffect in React?",
+        "explanation": "useEffect lets you perform side effects in functional components such as fetching data or updating the DOM.",
+        "choices": [
+            {
+                "text": "Perform side effects in functional components",
+                "correct": true
+            },
+            {
+                "text": "Define the component's state",
+                "correct": false
+            },
+            {
+                "text": "Render HTML only",
+                "correct": false
+            },
+            {
+                "text": "Handle routing between pages",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "What is a common method to improve web page performance?",
+        "explanation": "Optimizing images, minimizing scripts, and using caching are common methods to improve performance.",
+        "choices": [
+            {
+                "text": "Optimize images and scripts",
+                "correct": true
+            },
+            {
+                "text": "Add more CSS files",
+                "correct": false
+            },
+            {
+                "text": "Use only global variables",
+                "correct": false
+            },
+            {
+                "text": "Disable caching completely",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "Why are keys important in React lists?",
+        "explanation": "Keys help React identify which items have changed, are added, or are removed, improving performance.",
+        "choices": [
+            {
+                "text": "Identify elements for efficient updates",
+                "correct": true
+            },
+            {
+                "text": "Define CSS styling",
+                "correct": false
+            },
+            {
+                "text": "Handle events globally",
+                "correct": false
+            },
+            {
+                "text": "Replace component state",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "Which method removes the last element from an array in JavaScript?",
+        "explanation": "The pop() method removes the last element in the array and returns it.",
+        "choices": [
+            {
+                "text": "pop()",
+                "correct": true
+            },
+            {
+                "text": "push()",
+                "correct": false
+            },
+            {
+                "text": "shift()",
+                "correct": false
+            },
+            {
+                "text": "unshift()",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "Which keyword is used to define a type alias in TypeScript?",
+        "explanation": "The `type` keyword is used to define a type alias.",
+        "choices": [
+            {
+                "text": "interface",
+                "correct": false
+            },
+            {
+                "text": "type",
+                "correct": true
+            },
+            {
+                "text": "class",
+                "correct": false
+            },
+            {
+                "text": "enum",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "What is the result of '2' + 3 in JavaScript?",
+        "explanation": "JavaScript performs string concatenation, producing '23'.",
+        "choices": [
+            {
+                "text": "5",
+                "correct": false
+            },
+            {
+                "text": "'23'",
+                "correct": true
+            },
+            {
+                "text": "NaN",
+                "correct": false
+            },
+            {
+                "text": "'5'",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "Which CSS property centers items horizontally using flexbox?",
+        "explanation": "`justify-content: center` horizontally centers flex items.",
+        "choices": [
+            {
+                "text": "align-items: center",
+                "correct": false
+            },
+            {
+                "text": "justify-content: center",
+                "correct": true
+            },
+            {
+                "text": "text-align: center",
+                "correct": false
+            },
+            {
+                "text": "flex-direction: row",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "What is the output of `typeof null` in JavaScript?",
+        "explanation": "Because of an old bug, `typeof null` returns 'object'.",
+        "choices": [
+            {
+                "text": "'null'",
+                "correct": false
+            },
+            {
+                "text": "'undefined'",
+                "correct": false
+            },
+            {
+                "text": "'object'",
+                "correct": true
+            },
+            {
+                "text": "'number'",
+                "correct": false
+            }
+        ]
+    }
+]
