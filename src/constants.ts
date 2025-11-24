@@ -88,6 +88,8 @@ export const SESSION_ACTION_PROPS = {
   SET_REVIEW_STATE: 'reviewState' as const
 } as const
 
+const GENERAL_CATEGORY_ID = 0
+
 // Default session
 export const DEFAULT_SESSION: Session = {
   index: 0 as const,
@@ -96,8 +98,10 @@ export const DEFAULT_SESSION: Session = {
   paused: false as const,
   examState: 'not-started' as const,
   reviewState: 'summary' as const,
+  questions: [] as const,
+  answers: [] as const,
+  categoryId: GENERAL_CATEGORY_ID,
   bookmarks: [] as const,
-  answers: [] as const
 } as const
 
 // Language configuration

@@ -34,15 +34,21 @@ export interface Lang {
 export type QuestionFilter = 'all' | GridTagTypes
 export type GridTagTypes = 'marked' | 'incomplete' | 'complete' | 'incorrect' | 'correct'
 
-export type ExamType = 'exam' | 'miniexam'
+// v1.1: Add new type 'revision' for mistake revision exam
+export type ExamType = 'exam' | 'miniexam' | 'revision'
 export type ExamID = `${ExamType}-${number}`
 export type Exam = Question[]
 
 export type QuestionTypes = 'multiple-choice'
 
+// v1.1: Add id and categoryId
 export interface Question<QT extends QuestionTypes = QuestionTypes> {
+  /** question id */
+  id: number
   /** question type */
   type: QT
+  /** question type */
+  categoryId: number
   /** question content */
   text: string
   /** explanation of why the correct answer is correct */
@@ -87,10 +93,14 @@ export interface Session {
   examState: ExamState
   /** the state of the review */
   reviewState: ReviewState
-  /** the list of bookmarked questions */
-  bookmarks: number[]
+  /** the list of question IDs for this session, in the order they should appear */
+  questions: Question['id'][]
   /** the list of answers */
   answers: Answers
+  /** the category of the exam */
+  categoryId: number
+  /** the list of bookmarked questions */
+  bookmarks: number[]
   /** the ID of the exam */
   examID?: ExamID
   /** session update function - will be injected by reducer */

@@ -6,7 +6,7 @@
             "ar": "امتحان جديد"
         },
         "minQuestionCount": 175,
-        "maxQuestionCount": 175,
+        "maxQuestionCount": 180,
         "durationMinutes": 230,
         "allowRetake": true
     },

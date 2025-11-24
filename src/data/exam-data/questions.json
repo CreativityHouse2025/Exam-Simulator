@@ -2,7 +2,7 @@
     {
         "id": 1,
         "type": "multiple-choice",
-        "category": 1,
+        "categoryId": 1,
         "text": {
             "en": "What is the difference between let, const, and var in JavaScript?",
             "ar": "ما الفرق بين let و const و var في جافاسكريبت؟"
@@ -45,7 +45,7 @@
     {
         "id": 2,
         "type": "multiple-choice",
-        "category": 1,
+        "categoryId": 1,
         "text": {
             "en": "What is a closure in JavaScript?",
             "ar": "ما هو الـ closure في جافاسكريبت؟"
@@ -88,7 +88,7 @@
     {
         "id": 3,
         "type": "multiple-choice",
-        "category": 2,
+        "categoryId": 2,
         "text": {
             "en": "What is the purpose of useEffect in React?",
             "ar": "ما هو هدف useEffect في ريأكت؟"
@@ -131,7 +131,7 @@
     {
         "id": 4,
         "type": "multiple-choice",
-        "category": 3,
+        "categoryId": 3,
         "text": {
             "en": "What is a common method to improve web page performance?",
             "ar": "ما هي طريقة شائعة لتحسين أداء صفحة الويب؟"
@@ -174,7 +174,7 @@
     {
         "id": 5,
         "type": "multiple-choice",
-        "category": 2,
+        "categoryId": 2,
         "text": {
             "en": "Why are keys important in React lists?",
             "ar": "لماذا تعتبر الـ keys مهمة في قوائم ريأكت؟"
