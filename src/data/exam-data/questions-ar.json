@@ -1,0 +1,252 @@
+[
+    {
+        "id": 1,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "ما الفرق بين let و const و var في جافاسكريبت؟",
+        "explanation": "تسمح let بإعادة التعيين، و const ثابتة، و var نطاقها داخل الدالة ويمكن رفعها (hoisted).",
+        "choices": [
+            {
+                "text": "let يسمح بإعادة التعيين، const ثابتة، var ضمن نطاق الدالة",
+                "correct": true
+            },
+            {
+                "text": "var نطاقها داخل الكتلة، let نطاقها داخل الدالة",
+                "correct": false
+            },
+            {
+                "text": "const يمكن إعادة تعيينها",
+                "correct": false
+            },
+            {
+                "text": "جميعها متطابقة في السلوك",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "ما هو الـ closure في جافاسكريبت؟",
+        "explanation": "الـ closure هو دالة لها إمكانية الوصول إلى نطاقها الخاص ونطاق الدالة الخارجية والنطاق العام.",
+        "choices": [
+            {
+                "text": "دالة مرفقة بنطاقها المعجمي",
+                "correct": true
+            },
+            {
+                "text": "متغير في النطاق العام",
+                "correct": false
+            },
+            {
+                "text": "طريقة للكائن",
+                "correct": false
+            },
+            {
+                "text": "هيكل حلقي",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "ما هو هدف useEffect في ريأكت؟",
+        "explanation": "تسمح useEffect بتنفيذ التأثيرات الجانبية في المكونات الوظيفية مثل جلب البيانات أو تحديث الـ DOM.",
+        "choices": [
+            {
+                "text": "تنفيذ التأثيرات الجانبية في المكونات الوظيفية",
+                "correct": true
+            },
+            {
+                "text": "تعريف حالة المكون",
+                "correct": false
+            },
+            {
+                "text": "عرض HTML فقط",
+                "correct": false
+            },
+            {
+                "text": "إدارة التنقل بين الصفحات",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "ما هي طريقة شائعة لتحسين أداء صفحة الويب؟",
+        "explanation": "تحسين الصور، تقليل حجم السكربتات، واستخدام التخزين المؤقت من الطرق الشائعة لتحسين الأداء.",
+        "choices": [
+            {
+                "text": "تحسين الصور والسكربتات",
+                "correct": true
+            },
+            {
+                "text": "إضافة المزيد من ملفات CSS",
+                "correct": false
+            },
+            {
+                "text": "استخدام المتغيرات العامة فقط",
+                "correct": false
+            },
+            {
+                "text": "تعطيل التخزين المؤقت تمامًا",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "لماذا تعتبر الـ keys مهمة في قوائم ريأكت؟",
+        "explanation": "تساعد الـ keys ريأكت على تحديد العناصر التي تم تعديلها أو إضافتها أو حذفها، مما يحسن الأداء.",
+        "choices": [
+            {
+                "text": "تحديد العناصر للتحديثات الفعالة",
+                "correct": true
+            },
+            {
+                "text": "تعريف تنسيق CSS",
+                "correct": false
+            },
+            {
+                "text": "معالجة الأحداث بشكل عام",
+                "correct": false
+            },
+            {
+                "text": "استبدال حالة المكون",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "أي دالة تُستخدم لإزالة آخر عنصر من مصفوفة في JavaScript؟",
+        "explanation": "تقوم الدالة pop() بإزالة آخر عنصر في المصفوفة وإرجاعه.",
+        "choices": [
+            {
+                "text": "pop()",
+                "correct": true
+            },
+            {
+                "text": "push()",
+                "correct": false
+            },
+            {
+                "text": "shift()",
+                "correct": false
+            },
+            {
+                "text": "unshift()",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "أي كلمة مفتاحية تُستخدم لتعريف اسم نوع في TypeScript؟",
+        "explanation": "الكلمة المفتاحية type تُستخدم لتعريف اسم نوع.",
+        "choices": [
+            {
+                "text": "interface",
+                "correct": false
+            },
+            {
+                "text": "type",
+                "correct": true
+            },
+            {
+                "text": "class",
+                "correct": false
+            },
+            {
+                "text": "enum",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "ما ناتج '2' + 3 في JavaScript؟",
+        "explanation": "يقوم JavaScript بدمج النصوص، فينتج '23'.",
+        "choices": [
+            {
+                "text": "5",
+                "correct": false
+            },
+            {
+                "text": "'23'",
+                "correct": true
+            },
+            {
+                "text": "NaN",
+                "correct": false
+            },
+            {
+                "text": "'5'",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "أي خاصية في CSS تُستخدم لمركزة العناصر أفقيًا باستخدام flexbox؟",
+        "explanation": "justify-content: center تقوم بمركزية عناصر flex أفقيًا.",
+        "choices": [
+            {
+                "text": "align-items: center",
+                "correct": false
+            },
+            {
+                "text": "justify-content: center",
+                "correct": true
+            },
+            {
+                "text": "text-align: center",
+                "correct": false
+            },
+            {
+                "text": "flex-direction: row",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "ما ناتج typeof null في JavaScript؟",
+        "explanation": "بسبب خطأ قديم، typeof null تُرجع 'object'.",
+        "choices": [
+            {
+                "text": "'null'",
+                "correct": false
+            },
+            {
+                "text": "'undefined'",
+                "correct": false
+            },
+            {
+                "text": "'object'",
+                "correct": true
+            },
+            {
+                "text": "'number'",
+                "correct": false
+            }
+        ]
+    }
+]
