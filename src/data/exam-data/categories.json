@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": {
+            "en": "JavaScript Basics",
+            "ar": "أساسيات جافاسكريبت"
+        }
+    },
+    {
+        "id": 2,
+        "name": {
+            "en": "React",
+            "ar": "رياكت"
+        }
+    },
+    {
+        "id": 3,
+        "name": {
+            "en": "Web Performance",
+            "ar": "أداء الويب"
+        }
+    }
+]

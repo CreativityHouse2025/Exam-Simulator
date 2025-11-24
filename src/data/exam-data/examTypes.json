@@ -1,0 +1,35 @@
+[
+    {
+        "id": "exam",
+        "name": {
+            "en": "New Exam",
+            "ar": "امتحان جديد"
+        },
+        "minQuestionCount": 175,
+        "maxQuestionCount": 175,
+        "durationMinutes": 230,
+        "allowRetake": true
+    },
+    {
+        "id": "miniexam",
+        "name": {
+            "en": "Mini Exam",
+            "ar": "امتحان مصغر"
+        },
+        "minQuestionCount": 30,
+        "maxQuestionCount": 50,
+        "durationMinutes": 46,
+        "allowRetake": true
+    },
+    {
+        "id": "revision",
+        "name": {
+            "en": "Review Mistakes",
+            "ar": "مراجعة الأخطاء"
+        },
+        "minQuestionCount": null,
+        "maxQuestionCount": null,
+        "durationMinutes": null,
+        "allowRetake": false
+    }
+]
