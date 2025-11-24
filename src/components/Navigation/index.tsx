@@ -4,15 +4,8 @@ import Drawer from './Drawer'
 import Footer from './Footer'
 import Content from '../Content'
 import Confirms from './Confirms'
-import {
-  ExamContext,
-  SessionDataContext,
-  SessionExamContext,
-  SessionNavigationContext,
-  SessionTimerContext
-} from '../../contexts'
-import { SessionReducer } from '../../utils/session'
-import { Session, SessionDispatch } from '../../types'
+import { ExamContext } from '../../contexts'
+import { useSessionState } from '../../providers/SessionProvider'
 
 const ContainerStyles = styled.div`
   display: flex;
@@ -22,25 +15,12 @@ const ContainerStyles = styled.div`
   overflow: hidden;
 `
 
-const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate }) => {
+const NavigationComponent: React.FC = () => {
   const exam = React.useContext(ExamContext)
-  const [session, updateSession] = React.useReducer(SessionReducer, startingSession)
+  const session = useSessionState()
   const [open, setOpen] = React.useState<boolean>(true)
 
-  const sessionUpdate = React.useCallback<SessionDispatch>(
-    (...actions) => {
-      const actionArray = actions.map(([type, payload]) => ({ type, payload }))
-      updateSession(actionArray)
-      onSessionUpdate(SessionReducer(session, actionArray))
-    },
-    [session, onSessionUpdate]
-  )
-
-  React.useEffect(() => {
-    session.update = sessionUpdate
-  }, [sessionUpdate])
-
-  const toggleOpen = React.useCallback(() => setOpen((prev) => !prev), [])
+  if (!exam) return null
 
   const contextValues = {
     navigation: { index: session.index, update: sessionUpdate },
@@ -50,31 +30,18 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
   }
 
   return (
-    <SessionNavigationContext.Provider value={contextValues.navigation}>
-      <SessionTimerContext.Provider value={contextValues.timer}>
-        <SessionExamContext.Provider value={contextValues.exam}>
-          <SessionDataContext.Provider value={contextValues.data}>
-            <>
-              <ContainerStyles id="middle-container">
-                <Drawer open={open} toggleOpen={toggleOpen} />
+    <>
+      <ContainerStyles id="middle-container">
+        <Drawer open={open} toggleOpen={toggleOpen} />
 
-                <Content open={open} />
-              </ContainerStyles>
+        <Content open={open} />
+      </ContainerStyles>
 
               <Footer open={open} questionCount={exam.length} />
 
-              <Confirms session={session} />
-            </>
-          </SessionDataContext.Provider>
-        </SessionExamContext.Provider>
-      </SessionTimerContext.Provider>
-    </SessionNavigationContext.Provider>
+      <Confirms session={session} />
+    </>
   )
 }
 
 export default NavigationComponent
-
-export interface NavigationProps {
-  startingSession: Session
-  onSessionUpdate: (session: Session) => void
-}

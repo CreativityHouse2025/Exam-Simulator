@@ -1,7 +1,6 @@
 import type { Exam, ExamType, Lang, LangCode, Session } from './types'
 
 import React from 'react'
-import { useLocalStorage } from '@mantine/hooks'
 import Header from './components/Header'
 import Navigation from './components/Navigation'
 import Cover from './components/Cover'
@@ -11,15 +10,16 @@ import { randomizeTest, formatSession, formatExam } from './utils/format'
 import { toExamID } from './utils/examID'
 import { DEFAULT_SESSION, LANGUAGES } from './constants'
 import { ExamContext, LangContext } from './contexts'
+import { SessionProvider } from './providers/SessionProvider'
 
 // Random exam selection
 const getRandomExamNumber = () => Math.floor(Math.random() * 5)
 const getRandomMiniExamNumber = () => Math.floor(Math.random() * 23)
 
 const AppComponent: React.FC = () => {
-  const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: DEFAULT_SESSION })
   const [lang, setLang] = React.useState<Lang>(LANGUAGES.ar)
   const [exam, setExam] = React.useState<Exam | null>(null)
+  const [session, setSession] = React.useState<Session>(DEFAULT_SESSION)
 
   const loadTranslation = React.useCallback(
     async (code: LangCode) => {
@@ -103,7 +103,9 @@ const AppComponent: React.FC = () => {
 
       {exam ? (
         <ExamContext.Provider value={exam}>
-          <Navigation startingSession={session} onSessionUpdate={setSession} />
+          <SessionProvider initialSession={session} onSessionUpdate={setSession}>
+            <Navigation />
+          </SessionProvider>
         </ExamContext.Provider>
       ) : (
         <Cover onStartNew={handleStartNew} onStartMini={handleStartMini} onContinue={handleContinue} />

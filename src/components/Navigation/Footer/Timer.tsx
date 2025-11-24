@@ -4,8 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Timer } from '@styled-icons/material/Timer'
 import { formatTimer } from '../../../utils/format'
-import { SessionTimerContext } from '../../../contexts'
-import { SESSION_ACTION_TYPES } from '../../../constants'
+import { useTimer } from '../../../hooks/useTimer'
 
 const TimerStyles = styled.div<TimerStylesProps>`
   display: flex;
@@ -25,39 +24,7 @@ const TextStyles = styled.div`
 `
 
 const TimerComponent: React.FC = () => {
-  const { time, paused, update } = React.useContext(SessionTimerContext)
-  const intervalRef = React.useRef<NodeJS.Timeout | null>(null)
-
-  React.useEffect(() => {
-    // Clear existing interval
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-      intervalRef.current = null
-    }
-
-    // Start new interval if timer is active
-    if (!paused && time > 0) {
-      intervalRef.current = setInterval(() => {
-        update!([SESSION_ACTION_TYPES.SET_TIME, Math.max(0, time - 1)])
-      }, 1000)
-    }
-
-    // Cleanup on unmount or dependency change
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-        intervalRef.current = null
-      }
-    }
-  }, [paused, time, update])
-
-  // Handle timer expiration
-  React.useEffect(() => {
-    if (time <= 0 && intervalRef.current) {
-      clearInterval(intervalRef.current)
-      intervalRef.current = null
-    }
-  }, [time])
+  const { time } = useTimer()
 
   return (
     <TimerStyles id="timer" $warning={time < 120}>
