@@ -1,4 +1,5 @@
 import { GENERAL_CATEGORY_ID } from '../constants'
+import categories from '../data/exam-data/categories.json'
 import type { Answers, Exam, ExamType, GeneratedExam, LangCode, Question, Session } from '../types'
 
 import { formatDistance, format } from 'date-fns'
@@ -98,9 +99,27 @@ export function formatExam(exam: Exam): Exam {
  * and corresponding question IDs list for local storage
  */
 export function generateExam(questionCount: number, questions: Question[], categoryId: number): GeneratedExam {
+  // validate questionCount
+  if (questionCount === 0) {
+    return {
+      exam: [],
+      questionIds: []
+    }
+  }
 
-  if (questions.length < 0) {
-    throw new Error("Error: question list is empty")
+  if (questionCount < 0) {
+    throw new Error("number of exam questions cannot be negative")
+  }
+
+  // validate categoryId
+  const categoryIds = categories.map(c => c.id);
+  if (!categoryIds.includes(categoryId)) {
+    throw new Error("invalid category " + categoryId)
+  }
+
+  // validate list
+  if (questions.length === 0) {
+    throw new Error("question list is empty")
   }
 
   let questionPool: Question[] = []
@@ -111,17 +130,22 @@ export function generateExam(questionCount: number, questions: Question[], categ
   } else {
     questionPool = questions.filter((q: Question): boolean => q.categoryId === categoryId)
   }
+  // warn if there aren’t enough questions
+  if (questionPool.length < questionCount) {
+    console.warn(`Requested ${ questionCount } questions, but only ${ questionPool.length } available.`);
+  }
 
   // shuffle array
   questionPool = shuffleArray(questionPool)
-
+  
   // choose first questionCount questions
   // note: Array.prototype.slice is safe, even if questionPool < questionCount, it will return an adjusted array
   const chosenQuestions = questionPool.slice(0, questionCount);
 
+
   // get questions order
   const questionIds = chosenQuestions.map((q: Question): Question['id'] => q.id)
-  
+
   const generatedExam: GeneratedExam = {
     exam: chosenQuestions,
     questionIds
