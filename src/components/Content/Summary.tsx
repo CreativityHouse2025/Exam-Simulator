@@ -79,7 +79,7 @@ const SummaryComponent: React.FC = () => {
 
   const score = Math.round((questions.correct.length / exam.length) * 100)
   const status = score >= passPercent
-  const elapsed = maxTime * 60 - time
+  const elapsed = maxTime * 60 - time  
   const date = new Date()
 
   const translated = React.useMemo(

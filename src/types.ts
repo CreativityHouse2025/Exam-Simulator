@@ -86,7 +86,7 @@ export interface Session {
   index: number
   /** the maximum time allowed for the exam */
   maxTime: number
-  /** the time elapsed */
+  /** v1.1: the remaining time */
   time: number
   /** the state of the timer */
   paused: boolean
@@ -94,20 +94,21 @@ export interface Session {
   examState: ExamState
   /** the state of the review */
   reviewState: ReviewState
-  /** the list of question IDs for this session, in the order they should appear */
+  /** v1.1: the list of question IDs for this session, in the order they should appear */
   questions: Question['id'][]
   /** the list of answers */
   answers: Answers
-  /** the category of the exam */
+  /** v1.1: the category of the exam */
   categoryId: number
   /** the list of bookmarked questions */
   bookmarks: number[]
   /** the ID of the exam */
-  examID?: ExamID
+  examID?: ExamType
   /** session update function - will be injected by reducer */
   update?: SessionDispatch
 }
 
+// v1.1: type for exam generator output
 export interface GeneratedExam {
   /** the list of questions to be used in the application's memory */
   exam: Exam
