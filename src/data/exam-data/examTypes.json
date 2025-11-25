@@ -1,5 +1,5 @@
-[
-    {
+{
+    "exam": {
         "id": "exam",
         "name": {
             "en": "New Exam",
@@ -10,7 +10,7 @@
         "durationMinutes": 230,
         "allowRetake": true
     },
-    {
+    "miniexam": {
         "id": "miniexam",
         "name": {
             "en": "Mini Exam",
@@ -21,7 +21,7 @@
         "durationMinutes": 46,
         "allowRetake": true
     },
-    {
+    "revision": {
         "id": "revision",
         "name": {
             "en": "Review Mistakes",
@@ -32,4 +32,4 @@
         "durationMinutes": null,
         "allowRetake": false
     }
-]
+}

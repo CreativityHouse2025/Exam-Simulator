@@ -1,6 +1,5 @@
-import { GENERAL_CATEGORY_ID } from '../constants'
-import categories from '../data/exam-data/categories.json'
-import type { Answers, Exam, ExamType, GeneratedExam, LangCode, Question, Session } from '../types'
+import examTypes from '../data/exam-data/examTypes.json'
+import type { Exam, ExamType, LangCode, Question, Session } from '../types'
 
 import { formatDistance, format } from 'date-fns'
 
@@ -24,7 +23,7 @@ export function formatCreatedAt(date: string): string {
  */
 export function formatDate(date: number | string | Date): string {
   try {
-    return format(new Date(date), 'MM/dd/yyyy')
+    return format(new Date(date), 'dd/MM/yyyy')
   } catch {
     return '00/00/0000'
   }
@@ -48,29 +47,6 @@ export function formatTimer(sec: number): string {
 }
 
 /**
-   * Shuffle array using Fisher-Yates algorithm
-   * @param {T[]} array - The array to shuffle
-   * @returns {T[]} - The shuffled array
-   */
-function shuffleArray<T>(array: T[]): T[] {
-  const shuffled = [...array]
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-  }
-  return shuffled
-}
-
-/**
- * Randomize exam questions and choices
- * @param {Exam} exam - The exam object to format.
- * @returns {Exam} - The formatted exam object.
- */
-export function randomizeTest(exam: Exam): Exam {
-  return shuffleArray(exam.map((q) => ({ ...q, choices: shuffleArray(q.choices) })))
-}
-
-/**
  * Format exam by setting correct answer indices
  * @param {Exam} exam - The exam object to format.
  * @returns {Exam} - The formatted exam object.
@@ -90,77 +66,15 @@ export function formatExam(exam: Exam): Exam {
   })
 }
 
-/**
- * Format session with default values
- * @param {number} questionCount - The size of the output question list
- * @param {number} questions - The question bank
- * @param {number} categoryId - The category of the questions
- * @returns {GeneratedExam} - An object that has the Exam for the application memory 
- * and corresponding question IDs list for local storage
- */
-export function generateExam(questionCount: number, questions: Question[], categoryId: number): GeneratedExam {
-  // validate questionCount
-  if (questionCount === 0) {
-    return {
-      exam: [],
-      questionIds: []
-    }
-  }
-
-  if (questionCount < 0) {
-    throw new Error("number of exam questions cannot be negative")
-  }
-
-  // validate categoryId
-  const categoryIds = categories.map(c => c.id);
-  if (!categoryIds.includes(categoryId)) {
-    throw new Error("invalid category " + categoryId)
-  }
-
-  // validate list
-  if (questions.length === 0) {
-    throw new Error("question list is empty")
-  }
-
-  let questionPool: Question[] = []
-
-  // if the category is general, skip filtering
-  if (categoryId === GENERAL_CATEGORY_ID) {
-    questionPool = [...questions]
-  } else {
-    questionPool = questions.filter((q: Question): boolean => q.categoryId === categoryId)
-  }
-  // warn if there aren’t enough questions
-  if (questionPool.length < questionCount) {
-    console.warn(`Requested ${ questionCount } questions, but only ${ questionPool.length } available.`);
-  }
-
-  // shuffle array
-  questionPool = shuffleArray(questionPool)
-  
-  // choose first questionCount questions
-  // note: Array.prototype.slice is safe, even if questionPool < questionCount, it will return an adjusted array
-  const chosenQuestions = questionPool.slice(0, questionCount);
-
-
-  // get questions order
-  const questionIds = chosenQuestions.map((q: Question): Question['id'] => q.id)
-
-  const generatedExam: GeneratedExam = {
-    exam: chosenQuestions,
-    questionIds
-  }
-  return generatedExam
-}
-
-
+// TODO: make the exam format itself by only exam type
 /**
  * Format session with default values
  * @param {Session} session - The session object to format.
  * @param {number} questionCount - The number of questions in the exam.
+ * @param {ExamType} examType - The type of the exam
  * @returns {Session} - The formatted session object.
  */
-export function formatSession(session: Session, questionCount: number, examType: ExamType): Session {
+export function formatSession(session: Session, questionCount: number, examType: ExamType): Session { // loose function, uncompleted
   try {
     // Fill missing answers with empty arrays
     const missingAnswers = questionCount - session.answers.length
@@ -168,7 +82,13 @@ export function formatSession(session: Session, questionCount: number, examType:
       session.answers = [...session.answers, ...Array(missingAnswers).fill([])]
     }
 
-    const maxTime = examType === 'exam' ? 13800 : 2760 // 3h50m : 46m
+    const examDetails = examTypes[examType]
+    if (!examDetails.durationMinutes) {
+      throw new Error("exam duration is undefined")
+    }
+
+    const maxTime = examDetails.durationMinutes * 60;
+
     session.maxTime = maxTime
     session.time = maxTime
   } catch (err) {
