@@ -34,9 +34,8 @@ export interface Lang {
 export type QuestionFilter = 'all' | GridTagTypes
 export type GridTagTypes = 'marked' | 'incomplete' | 'complete' | 'incorrect' | 'correct'
 
-// v1.1: Add new type 'revision' for mistake revision exam
+// v1.1: Add new type 'revision' for mistake revision exam and remove ExamID type
 export type ExamType = 'exam' | 'miniexam' | 'revision'
-export type ExamID = `${ExamType}-${number}`
 export type Exam = Question[]
 
 export type QuestionTypes = 'multiple-choice'
