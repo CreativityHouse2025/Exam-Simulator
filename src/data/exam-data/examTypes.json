@@ -5,8 +5,8 @@
             "en": "New Exam",
             "ar": "امتحان جديد"
         },
-        "minQuestionCount": 175,
-        "maxQuestionCount": 180,
+        "minQuestionCount": 30,
+        "maxQuestionCount": 40,
         "durationMinutes": 230,
         "allowRetake": true
     },
@@ -17,7 +17,7 @@
             "ar": "امتحان مصغر"
         },
         "minQuestionCount": 30,
-        "maxQuestionCount": 50,
+        "maxQuestionCount": 40,
         "durationMinutes": 46,
         "allowRetake": true
     },
