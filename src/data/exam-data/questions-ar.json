@@ -3,23 +3,23 @@
         "id": 1,
         "type": "multiple-choice",
         "categoryId": 1,
-        "text": "ما الفرق بين let و const و var في جافاسكريبت؟",
-        "explanation": "تسمح let بإعادة التعيين، و const ثابتة، و var نطاقها داخل الدالة ويمكن رفعها (hoisted).",
+        "text": "ما الهدف الرئيسي من ميثاق المشروع؟",
+        "explanation": "يقوم ميثاق المشروع بتفويض المشروع رسميًا ومنح مدير المشروع صلاحية استخدام موارد المنظمة.",
         "choices": [
             {
-                "text": "let يسمح بإعادة التعيين، const ثابتة، var ضمن نطاق الدالة",
+                "text": "تفويض المشروع رسميًا وتعيين مدير المشروع",
                 "correct": true
             },
             {
-                "text": "var نطاقها داخل الكتلة، let نطاقها داخل الدالة",
+                "text": "توفير جدول زمني تفصيلي للمشروع",
                 "correct": false
             },
             {
-                "text": "const يمكن إعادة تعيينها",
+                "text": "توثيق جميع مخاطر المشروع",
                 "correct": false
             },
             {
-                "text": "جميعها متطابقة في السلوك",
+                "text": "تحديد استراتيجية التوريد",
                 "correct": false
             }
         ]
@@ -28,23 +28,23 @@
         "id": 2,
         "type": "multiple-choice",
         "categoryId": 1,
-        "text": "ما هو الـ closure في جافاسكريبت؟",
-        "explanation": "الـ closure هو دالة لها إمكانية الوصول إلى نطاقها الخاص ونطاق الدالة الخارجية والنطاق العام.",
+        "text": "أي عملية تركز على دمج جميع أعمال المشروع في كيان موحد؟",
+        "explanation": "تضمن إدارة تكامل المشروع تنسيق جميع جوانب المشروع بفعالية.",
         "choices": [
             {
-                "text": "دالة مرفقة بنطاقها المعجمي",
+                "text": "إدارة تكامل المشروع",
                 "correct": true
             },
             {
-                "text": "متغير في النطاق العام",
+                "text": "إدارة الجدول الزمني",
                 "correct": false
             },
             {
-                "text": "طريقة للكائن",
+                "text": "إدارة الاتصالات",
                 "correct": false
             },
             {
-                "text": "هيكل حلقي",
+                "text": "إدارة المشتريات",
                 "correct": false
             }
         ]
@@ -53,23 +53,23 @@
         "id": 3,
         "type": "multiple-choice",
         "categoryId": 2,
-        "text": "ما هو هدف useEffect في ريأكت؟",
-        "explanation": "تسمح useEffect بتنفيذ التأثيرات الجانبية في المكونات الوظيفية مثل جلب البيانات أو تحديث الـ DOM.",
+        "text": "ما هو الغرض من سجل المخاطر؟",
+        "explanation": "يوثق سجل المخاطر المخاطر المحددة وخصائصها والاستجابات المخطط لها.",
         "choices": [
             {
-                "text": "تنفيذ التأثيرات الجانبية في المكونات الوظيفية",
+                "text": "لتوثيق المخاطر المحددة والاستجابات لها",
                 "correct": true
             },
             {
-                "text": "تعريف حالة المكون",
+                "text": "لتخزين سجلات اتصالات المشروع",
                 "correct": false
             },
             {
-                "text": "عرض HTML فقط",
+                "text": "لتتبع مراجعات أداء الفريق",
                 "correct": false
             },
             {
-                "text": "إدارة التنقل بين الصفحات",
+                "text": "لتحديد ميزانية المشروع",
                 "correct": false
             }
         ]
@@ -77,24 +77,24 @@
     {
         "id": 4,
         "type": "multiple-choice",
-        "categoryId": 3,
-        "text": "ما هي طريقة شائعة لتحسين أداء صفحة الويب؟",
-        "explanation": "تحسين الصور، تقليل حجم السكربتات، واستخدام التخزين المؤقت من الطرق الشائعة لتحسين الأداء.",
+        "categoryId": 2,
+        "text": "ما هي التقنية الشائعة المستخدمة لتحديد أولويات مخاطر المشروع؟",
+        "explanation": "مصفوفة الاحتمالية والتأثير تحدد أولويات المخاطر بناءً على احتمالية وقوعها وتأثيرها.",
         "choices": [
             {
-                "text": "تحسين الصور والسكربتات",
+                "text": "مصفوفة الاحتمالية والتأثير",
                 "correct": true
             },
             {
-                "text": "إضافة المزيد من ملفات CSS",
+                "text": "تحليل التكلفة والعائد",
                 "correct": false
             },
             {
-                "text": "استخدام المتغيرات العامة فقط",
+                "text": "تحليل القيمة المكتسبة",
                 "correct": false
             },
             {
-                "text": "تعطيل التخزين المؤقت تمامًا",
+                "text": "تسوية الموارد",
                 "correct": false
             }
         ]
@@ -102,24 +102,24 @@
     {
         "id": 5,
         "type": "multiple-choice",
-        "categoryId": 2,
-        "text": "لماذا تعتبر الـ keys مهمة في قوائم ريأكت؟",
-        "explanation": "تساعد الـ keys ريأكت على تحديد العناصر التي تم تعديلها أو إضافتها أو حذفها، مما يحسن الأداء.",
+        "categoryId": 3,
+        "text": "ما هو الهدف الرئيسي من سجل أصحاب المصلحة؟",
+        "explanation": "يسرد سجل أصحاب المصلحة أصحاب المصلحة واهتماماتهم وتأثيرهم على المشروع.",
         "choices": [
             {
-                "text": "تحديد العناصر للتحديثات الفعالة",
+                "text": "تحديد أصحاب المصلحة وتوثيق اهتماماتهم وتأثيرهم",
                 "correct": true
             },
             {
-                "text": "تعريف تنسيق CSS",
+                "text": "تتبع حضور الفريق",
                 "correct": false
             },
             {
-                "text": "معالجة الأحداث بشكل عام",
+                "text": "تحديد قنوات الاتصال بالتفصيل",
                 "correct": false
             },
             {
-                "text": "استبدال حالة المكون",
+                "text": "تحديد نطاق المشروع",
                 "correct": false
             }
         ]
@@ -127,24 +127,24 @@
     {
         "id": 6,
         "type": "multiple-choice",
-        "categoryId": 1,
-        "text": "أي دالة تُستخدم لإزالة آخر عنصر من مصفوفة في JavaScript؟",
-        "explanation": "تقوم الدالة pop() بإزالة آخر عنصر في المصفوفة وإرجاعه.",
+        "categoryId": 3,
+        "text": "ما هو الهدف الرئيسي لإشراك أصحاب المصلحة؟",
+        "explanation": "يضمن إشراك أصحاب المصلحة مشاركتهم بشكل مناسب وإدارة توقعاتهم.",
         "choices": [
             {
-                "text": "pop()",
+                "text": "ضمان مشاركة أصحاب المصلحة وإدارة التوقعات",
                 "correct": true
             },
             {
-                "text": "push()",
+                "text": "الحد من مشاركة أصحاب المصلحة",
                 "correct": false
             },
             {
-                "text": "shift()",
+                "text": "تعيين أصحاب المصلحة لمهام المشروع",
                 "correct": false
             },
             {
-                "text": "unshift()",
+                "text": "تجنب النزاعات عن طريق تقييد الاتصالات",
                 "correct": false
             }
         ]
@@ -153,23 +153,23 @@
         "id": 7,
         "type": "multiple-choice",
         "categoryId": 2,
-        "text": "أي كلمة مفتاحية تُستخدم لتعريف اسم نوع في TypeScript؟",
-        "explanation": "الكلمة المفتاحية type تُستخدم لتعريف اسم نوع.",
+        "text": "ما هي استراتيجية الاستجابة للمخاطر السلبية؟",
+        "explanation": "التجنب، التخفيف، النقل، والقبول هي استراتيجيات للمخاطر السلبية.",
         "choices": [
             {
-                "text": "interface",
-                "correct": false
-            },
-            {
-                "text": "type",
+                "text": "التخفيف (Mitigation)",
                 "correct": true
             },
             {
-                "text": "class",
+                "text": "الاستغلال (Exploit)",
                 "correct": false
             },
             {
-                "text": "enum",
+                "text": "التعزيز (Enhance)",
+                "correct": false
+            },
+            {
+                "text": "المشاركة (Share)",
                 "correct": false
             }
         ]
@@ -178,23 +178,23 @@
         "id": 8,
         "type": "multiple-choice",
         "categoryId": 1,
-        "text": "ما ناتج '2' + 3 في JavaScript؟",
-        "explanation": "يقوم JavaScript بدمج النصوص، فينتج '23'.",
+        "text": "ماذا يفعل مجلس التحكم في التغيير (CCB)؟",
+        "explanation": "يقوم مجلس التحكم في التغيير (CCB) بمراجعة طلبات التغيير والموافقة عليها أو رفضها.",
         "choices": [
             {
-                "text": "5",
-                "correct": false
-            },
-            {
-                "text": "'23'",
+                "text": "مراجعة والموافقة أو الرفض على طلبات التغيير",
                 "correct": true
             },
             {
-                "text": "NaN",
+                "text": "تعيين أعضاء الفريق للمهام",
                 "correct": false
             },
             {
-                "text": "'5'",
+                "text": "مراقبة جودة المشروع",
+                "correct": false
+            },
+            {
+                "text": "إنشاء الجدول الزمني للمشروع",
                 "correct": false
             }
         ]
@@ -203,23 +203,23 @@
         "id": 9,
         "type": "multiple-choice",
         "categoryId": 3,
-        "text": "أي خاصية في CSS تُستخدم لمركزة العناصر أفقيًا باستخدام flexbox؟",
-        "explanation": "justify-content: center تقوم بمركزية عناصر flex أفقيًا.",
+        "text": "أي استراتيجية لإشراك أصحاب المصلحة تهدف إلى زيادة دعمهم؟",
+        "explanation": "تساعد استراتيجية الإشراك الاستباقي على زيادة دعم أصحاب المصلحة وتقليل مقاومتهم.",
         "choices": [
             {
-                "text": "align-items: center",
-                "correct": false
-            },
-            {
-                "text": "justify-content: center",
+                "text": "الإشراك الاستباقي",
                 "correct": true
             },
             {
-                "text": "text-align: center",
+                "text": "الإشراك السلبي",
                 "correct": false
             },
             {
-                "text": "flex-direction: row",
+                "text": "التواصل التفاعلي",
+                "correct": false
+            },
+            {
+                "text": "التقارير التقييدية",
                 "correct": false
             }
         ]
@@ -228,23 +228,773 @@
         "id": 10,
         "type": "multiple-choice",
         "categoryId": 2,
-        "text": "ما ناتج typeof null في JavaScript؟",
-        "explanation": "بسبب خطأ قديم، typeof null تُرجع 'object'.",
+        "text": "ما هي الأداة التي تساعد في تحديد السبب الجذري للمخاطر؟",
+        "explanation": "مخطط إيشيكاوا (عظمة السمكة) يحدد الأسباب الجذرية المحتملة لمشكلة أو مخاطرة.",
         "choices": [
             {
-                "text": "'null'",
-                "correct": false
-            },
-            {
-                "text": "'undefined'",
-                "correct": false
-            },
-            {
-                "text": "'object'",
+                "text": "مخطط إيشيكاوا (عظمة السمكة)",
                 "correct": true
             },
             {
-                "text": "'number'",
+                "text": "المدرج التكراري (Histogram)",
+                "correct": false
+            },
+            {
+                "text": "محاكاة مونت كارلو",
+                "correct": false
+            },
+            {
+                "text": "مخطط باريتو",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "ما هو الغرض من هيكل تجزئة العمل (WBS)؟",
+        "explanation": "يقوم هيكل تجزئة العمل (WBS) بتفصيل مخرجات المشروع إلى مكونات أصغر قابلة للإدارة.",
+        "choices": [
+            {
+                "text": "تجزئة مخرجات المشروع إلى مكونات قابلة للإدارة",
+                "correct": true
+            },
+            {
+                "text": "تعيين الموارد للمهام",
+                "correct": false
+            },
+            {
+                "text": "توثيق مخاطر المشروع",
+                "correct": false
+            },
+            {
+                "text": "توفير متطلبات المشتريات",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "أي وثيقة يتم تحديثها بعد تطبيق التغييرات المعتمدة؟",
+        "explanation": "يجب أن تنعكس التغييرات المعتمدة في خطة إدارة المشروع والوثائق ذات الصلة.",
+        "choices": [
+            {
+                "text": "خطة إدارة المشروع",
+                "correct": true
+            },
+            {
+                "text": "سجل أصحاب المصلحة",
+                "correct": false
+            },
+            {
+                "text": "سجل المشكلات",
+                "correct": false
+            },
+            {
+                "text": "نموذج تفويض العمل",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "أي عملية تضمن أن عمل المشروع يتماشى مع أهداف المشروع؟",
+        "explanation": "عملية التوجيه والإدارة لأعمال المشروع تضمن تنفيذ العمل لتحقيق الأهداف المخطط لها.",
+        "choices": [
+            {
+                "text": "توجيه وإدارة أعمال المشروع",
+                "correct": true
+            },
+            {
+                "text": "مراقبة الاتصالات",
+                "correct": false
+            },
+            {
+                "text": "مراقبة الجودة",
+                "correct": false
+            },
+            {
+                "text": "تطوير الفريق",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "ما هو المخرج الأساسي لعملية تنفيذ التحكم المتكامل في التغيير؟",
+        "explanation": "طلبات التغيير المعتمدة هي المخرج الرئيسي لهذه العملية.",
+        "choices": [
+            {
+                "text": "طلبات التغيير المعتمدة",
+                "correct": true
+            },
+            {
+                "text": "تحديث سجل المشكلات",
+                "correct": false
+            },
+            {
+                "text": "تحديث سجل المخاطر",
+                "correct": false
+            },
+            {
+                "text": "ميثاق المشروع",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "أي عنصر يتم تضمينه في خطة إدارة المشروع؟",
+        "explanation": "تتضمن الخطة خططًا فرعية مثل خطة النطاق، والجدول الزمني، والتكلفة.",
+        "choices": [
+            {
+                "text": "خطط الإدارة الفرعية",
+                "correct": true
+            },
+            {
+                "text": "قائمة متطلبات المنتج (Product Backlog)",
+                "correct": false
+            },
+            {
+                "text": "سجلات الاتصالات",
+                "correct": false
+            },
+            {
+                "text": "عقود الموارد",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "أي استجابة للمخاطر تهدف إلى إزالة التهديد بالكامل؟",
+        "explanation": "التجنب يزيل التهديد عن طريق تغيير خطة المشروع.",
+        "choices": [
+            {
+                "text": "تجنب (Avoid)",
+                "correct": true
+            },
+            {
+                "text": "تخفيف (Mitigate)",
+                "correct": false
+            },
+            {
+                "text": "نقل (Transfer)",
+                "correct": false
+            },
+            {
+                "text": "قبول (Accept)",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "ما هو الغرض من تحليل المخاطر النوعي؟",
+        "explanation": "يحدد أولويات المخاطر باستخدام الاحتمالية والتأثير.",
+        "choices": [
+            {
+                "text": "تحديد أولويات المخاطر بناءً على الاحتمالية والتأثير",
+                "correct": true
+            },
+            {
+                "text": "إنتاج نماذج رقمية للمخاطر",
+                "correct": false
+            },
+            {
+                "text": "إنشاء هيكل تجزئة للمخاطر",
+                "correct": false
+            },
+            {
+                "text": "تطوير خطط التخفيف",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "ما هي الأداة الشائعة الاستخدام في تحليل المخاطر الكمي؟",
+        "explanation": "محاكاة مونت كارلو تقدر نتائج المشروع باستخدام التوزيعات الاحتمالية.",
+        "choices": [
+            {
+                "text": "محاكاة مونت كارلو",
+                "correct": true
+            },
+            {
+                "text": "مخطط عظمة السمكة",
+                "correct": false
+            },
+            {
+                "text": "مخطط التقارب",
+                "correct": false
+            },
+            {
+                "text": "تحليل MoSCoW",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "ماذا يمثل محفز المخاطر؟",
+        "explanation": "المحفز هو مؤشر على أن حدث المخاطرة على وشك الحدوث.",
+        "choices": [
+            {
+                "text": "علامة إنذار مبكر لحدث مخاطرة",
+                "correct": true
+            },
+            {
+                "text": "تقرير إلزامي",
+                "correct": false
+            },
+            {
+                "text": "وثيقة قبول المخاطر",
+                "correct": false
+            },
+            {
+                "text": "شكوى من صاحب مصلحة",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "ما هي المخاطر الثانوية؟",
+        "explanation": "تنشأ المخاطر الثانوية كنتيجة مباشرة لتنفيذ استجابة للمخاطر.",
+        "choices": [
+            {
+                "text": "مخاطرة تنشأ عن تطبيق استجابة",
+                "correct": true
+            },
+            {
+                "text": "مخاطرة ذات أولوية منخفضة",
+                "correct": false
+            },
+            {
+                "text": "مخاطرة ليس لها مالك",
+                "correct": false
+            },
+            {
+                "text": "مخاطرة مغلقة",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 21,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "ما هو الغرض من تحليل أصحاب المصلحة؟",
+        "explanation": "يحدد تحليل أصحاب المصلحة اهتماماتهم وتأثيرهم وتوقعاتهم.",
+        "choices": [
+            {
+                "text": "تحديد اهتمامات وتأثير أصحاب المصلحة",
+                "correct": true
+            },
+            {
+                "text": "إعداد خطط الاتصالات",
+                "correct": false
+            },
+            {
+                "text": "تعيين حزم العمل",
+                "correct": false
+            },
+            {
+                "text": "تقييم نزاعات الفريق",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 22,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "ما هي استراتيجية إشراك أصحاب المصلحة الأفضل لأصحاب المصلحة الداعمين؟",
+        "explanation": "يجب إبقاء أصحاب المصلحة الداعمين راضين ومشاركين.",
+        "choices": [
+            {
+                "text": "إبقاءهم راضين (Keep Satisfied)",
+                "correct": true
+            },
+            {
+                "text": "إدارة عن قرب (Manage Closely)",
+                "correct": false
+            },
+            {
+                "text": "مراقبة (Monitor)",
+                "correct": false
+            },
+            {
+                "text": "إبقاءهم على اطلاع (Keep Informed)",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 23,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "أي أداة تساعد في تحديد تأثير واهتمام أصحاب المصلحة؟",
+        "explanation": "تصنف شبكة القوة/الاهتمام (Power/Interest Grid) أصحاب المصلحة بناءً على التأثير والاهتمام.",
+        "choices": [
+            {
+                "text": "شبكة القوة/الاهتمام",
+                "correct": true
+            },
+            {
+                "text": "مخطط RACI",
+                "correct": false
+            },
+            {
+                "text": "مخطط الشبكة",
+                "correct": false
+            },
+            {
+                "text": "مخطط السبب والنتيجة",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 24,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "أي عملية تضمن تلبية احتياجات أصحاب المصلحة باستمرار؟",
+        "explanation": "تضمن إدارة إشراك أصحاب المصلحة التعامل مع التوقعات بشكل استباقي.",
+        "choices": [
+            {
+                "text": "إدارة إشراك أصحاب المصلحة",
+                "correct": true
+            },
+            {
+                "text": "تخطيط الاتصالات",
+                "correct": false
+            },
+            {
+                "text": "تطوير ميثاق المشروع",
+                "correct": false
+            },
+            {
+                "text": "تحديد المخاطر",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 25,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "أي عامل يمكن أن يزيد من نزاع أصحاب المصلحة؟",
+        "explanation": "التوقعات غير الواضحة تسبب نزاعات أصحاب المصلحة بشكل شائع.",
+        "choices": [
+            {
+                "text": "توقعات غير واضحة",
+                "correct": true
+            },
+            {
+                "text": "التواصل المتكرر",
+                "correct": false
+            },
+            {
+                "text": "التخطيط الفعال",
+                "correct": false
+            },
+            {
+                "text": "الأدوار المحددة جيدًا",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 26,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "أي تقنية تساعد على ضمان تلبية مخرجات المشروع للمتطلبات؟",
+        "explanation": "تتحقق تدقيقات الجودة من الامتثال للسياسات والمعايير.",
+        "choices": [
+            {
+                "text": "تدقيقات الجودة",
+                "correct": true
+            },
+            {
+                "text": "اجتماعات الفريق",
+                "correct": false
+            },
+            {
+                "text": "تحليل التباين",
+                "correct": false
+            },
+            {
+                "text": "تحليل SWOT",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 27,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "أي وثيقة تحدد كيفية إدارة تغييرات المشروع؟",
+        "explanation": "تحدد خطة إدارة التغيير الإجراءات لإدارة التغييرات.",
+        "choices": [
+            {
+                "text": "خطة إدارة التغيير",
+                "correct": true
+            },
+            {
+                "text": "سجل المشكلات",
+                "correct": false
+            },
+            {
+                "text": "خطة الاستجابة للمخاطر",
+                "correct": false
+            },
+            {
+                "text": "سجل أصحاب المصلحة",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 28,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "أي نشاط يحدث أثناء إغلاق المشروع؟",
+        "explanation": "يتم توثيق الدروس المستفادة أثناء إغلاق المشروع.",
+        "choices": [
+            {
+                "text": "توثيق الدروس المستفادة",
+                "correct": true
+            },
+            {
+                "text": "جمع المتطلبات",
+                "correct": false
+            },
+            {
+                "text": "تحديد المخاطر",
+                "correct": false
+            },
+            {
+                "text": "تطوير هيكل تجزئة العمل (WBS)",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 29,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "ما هي الفائدة الرئيسية للتحكم المتكامل في التغيير؟",
+        "explanation": "يضمن تقييم التغييرات بشكل متسق والموافقة عليها بشكل صحيح.",
+        "choices": [
+            {
+                "text": "التقييم المتسق للتغييرات",
+                "correct": true
+            },
+            {
+                "text": "مشتريات أسرع",
+                "correct": false
+            },
+            {
+                "text": "ضمان نجاح المشروع",
+                "correct": false
+            },
+            {
+                "text": "تقليل حجم الفريق",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 30,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "ما هي مسؤولية إدارة التكوين؟",
+        "explanation": "تضمن إدارة التكوين النسخة الصحيحة من مخرجات المشروع.",
+        "choices": [
+            {
+                "text": "التحكم في إصدارات مخرجات المشروع",
+                "correct": true
+            },
+            {
+                "text": "توظيف أعضاء فريق المشروع",
+                "correct": false
+            },
+            {
+                "text": "تقييم معنويات الفريق",
+                "correct": false
+            },
+            {
+                "text": "إدارة موردي المشتريات",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 31,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "متى يجب تعيين مالك للمخاطر؟",
+        "explanation": "يتم تعيين مالكي المخاطر أثناء تخطيط إدارة المخاطر.",
+        "choices": [
+            {
+                "text": "أثناء تخطيط المخاطر",
+                "correct": true
+            },
+            {
+                "text": "بعد وقوع المخاطر",
+                "correct": false
+            },
+            {
+                "text": "أثناء إغلاق المشروع",
+                "correct": false
+            },
+            {
+                "text": "قبل تطوير الميثاق",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 32,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "ما هو الغرض من تدقيق المخاطر؟",
+        "explanation": "تقوم تدقيقات المخاطر بتقييم فعالية الاستجابات.",
+        "choices": [
+            {
+                "text": "تقييم فعالية الاستجابات للمخاطر",
+                "correct": true
+            },
+            {
+                "text": "تحديد مخاطر جديدة",
+                "correct": false
+            },
+            {
+                "text": "تحليل الاحتمالية",
+                "correct": false
+            },
+            {
+                "text": "إغلاق المخاطر",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 33,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "ما هو نوع المخاطرة الذي تعتبر فرصة؟",
+        "explanation": "الفرص هي مخاطر إيجابية.",
+        "choices": [
+            {
+                "text": "مخاطرة إيجابية",
+                "correct": true
+            },
+            {
+                "text": "مخاطرة سلبية",
+                "correct": false
+            },
+            {
+                "text": "مخاطرة محايدة",
+                "correct": false
+            },
+            {
+                "text": "مخاطرة منتهية الصلاحية",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 34,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "أي استجابة تزيد من المخاطر الإيجابية؟",
+        "explanation": "الاستغلال يضمن تحقيق الفرصة.",
+        "choices": [
+            {
+                "text": "استغلال (Exploit)",
+                "correct": true
+            },
+            {
+                "text": "نقل (Transfer)",
+                "correct": false
+            },
+            {
+                "text": "تخفيف (Mitigate)",
+                "correct": false
+            },
+            {
+                "text": "تجنب (Avoid)",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 35,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "ما هو تحمل المخاطر؟",
+        "explanation": "يشير تحمل المخاطر إلى مقدار المخاطر الذي يمكن لصاحب المصلحة تحمله.",
+        "choices": [
+            {
+                "text": "مستوى المخاطرة الذي يمكن أن يقبله صاحب المصلحة",
+                "correct": true
+            },
+            {
+                "text": "قاعدة تخفيف إلزامية",
+                "correct": false
+            },
+            {
+                "text": "مقياس لتخصيص الموارد",
+                "correct": false
+            },
+            {
+                "text": "قيد في المشروع",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 36,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "أي عامل يؤثر على احتياجات اتصال أصحاب المصلحة؟",
+        "explanation": "تؤثر الثقافة والموقع والتوقعات جميعها على احتياجات الاتصال.",
+        "choices": [
+            {
+                "text": "ثقافة وتوقعات أصحاب المصلحة",
+                "correct": true
+            },
+            {
+                "text": "هيكل رواتب الفريق",
+                "correct": false
+            },
+            {
+                "text": "نظام ألوان المشروع",
+                "correct": false
+            },
+            {
+                "text": "عدد الموردين",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 37,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "ما هو المخرج الرئيسي لعملية تحديد أصحاب المصلحة؟",
+        "explanation": "يوثق سجل أصحاب المصلحة أصحاب المصلحة الرئيسيين وسماتهم.",
+        "choices": [
+            {
+                "text": "سجل أصحاب المصلحة",
+                "correct": true
+            },
+            {
+                "text": "هيكل تجزئة العمل",
+                "correct": false
+            },
+            {
+                "text": "تقويم الموارد",
+                "correct": false
+            },
+            {
+                "text": "تقرير المخاطر",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 38,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "ما هي الاستراتيجية المناسبة لأصحاب المصلحة ذوي القوة العالية والاهتمام المنخفض؟",
+        "explanation": "يجب إبقاء أصحاب المصلحة ذوي القوة العالية والاهتمام المنخفض راضين.",
+        "choices": [
+            {
+                "text": "إبقاءهم راضين (Keep Satisfied)",
+                "correct": true
+            },
+            {
+                "text": "إدارة عن قرب (Manage Closely)",
+                "correct": false
+            },
+            {
+                "text": "إبقاءهم على اطلاع (Keep Informed)",
+                "correct": false
+            },
+            {
+                "text": "مراقبة (Monitor)",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 39,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "أي وثيقة تحدد متطلبات اتصال أصحاب المصلحة؟",
+        "explanation": "تحدد خطة إدارة الاتصالات ماذا ومتى وكيف يتم الاتصال.",
+        "choices": [
+            {
+                "text": "خطة إدارة الاتصالات",
+                "correct": true
+            },
+            {
+                "text": "خطة الاستجابة للمخاطر",
+                "correct": false
+            },
+            {
+                "text": "خط أساس النطاق",
+                "correct": false
+            },
+            {
+                "text": "تقرير الجودة",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 40,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "لماذا يعد إشراك أصحاب المصلحة مبكرًا أمرًا مهمًا؟",
+        "explanation": "الإشراك المبكر يقلل المقاومة ويزيد الدعم.",
+        "choices": [
+            {
+                "text": "يقلل المقاومة ويزيد الدعم",
+                "correct": true
+            },
+            {
+                "text": "يزيل جميع المخاطر",
+                "correct": false
+            },
+            {
+                "text": "يضمن نجاح المشروع",
+                "correct": false
+            },
+            {
+                "text": "يزيل الحاجة إلى التخطيط",
                 "correct": false
             }
         ]

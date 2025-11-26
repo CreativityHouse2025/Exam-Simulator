@@ -2,22 +2,22 @@
     {
         "id": 1,
         "name": {
-            "en": "JavaScript Basics",
-            "ar": "أساسيات جافاسكريبت"
+            "en": "Project Integration Management",
+            "ar": "إدارة تكامل المشروع"
         }
     },
     {
         "id": 2,
         "name": {
-            "en": "React",
-            "ar": "رياكت"
+            "en": "Risk Management",
+            "ar": "إدارة المخاطر"
         }
     },
     {
         "id": 3,
         "name": {
-            "en": "Web Performance",
-            "ar": "أداء الويب"
+            "en": "Stakeholder Management",
+            "ar": "إدارة أصحاب المصلحة"
         }
-    }   
+    }
 ]

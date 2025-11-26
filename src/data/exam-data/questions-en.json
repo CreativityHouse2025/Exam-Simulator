@@ -3,23 +3,23 @@
         "id": 1,
         "type": "multiple-choice",
         "categoryId": 1,
-        "text": "What is the difference between let, const, and var in JavaScript?",
-        "explanation": "let allows reassignment, const is immutable, and var is function-scoped and can be hoisted.",
+        "text": "What is the primary purpose of the Project Charter?",
+        "explanation": "The project charter formally authorizes the project and gives the project manager authority to apply organizational resources.",
         "choices": [
             {
-                "text": "let allows reassignment, const is immutable, var is function-scoped",
+                "text": "To formally authorize the project and assign the project manager",
                 "correct": true
             },
             {
-                "text": "var is block-scoped, let is function-scoped",
+                "text": "To provide a detailed project schedule",
                 "correct": false
             },
             {
-                "text": "const can be reassigned",
+                "text": "To document all project risks",
                 "correct": false
             },
             {
-                "text": "All three are identical in behavior",
+                "text": "To define the procurement strategy",
                 "correct": false
             }
         ]
@@ -28,23 +28,23 @@
         "id": 2,
         "type": "multiple-choice",
         "categoryId": 1,
-        "text": "What is a closure in JavaScript?",
-        "explanation": "A closure is a function that has access to its own scope, the outer function’s scope, and the global scope.",
+        "text": "Which process focuses on combining all project work into a unified whole?",
+        "explanation": "Project Integration Management ensures all aspects of the project are coordinated effectively.",
         "choices": [
             {
-                "text": "A function bundled with its lexical scope",
+                "text": "Project Integration Management",
                 "correct": true
             },
             {
-                "text": "A variable in the global scope",
+                "text": "Schedule Management",
                 "correct": false
             },
             {
-                "text": "An object method",
+                "text": "Communications Management",
                 "correct": false
             },
             {
-                "text": "A loop structure",
+                "text": "Procurement Management",
                 "correct": false
             }
         ]
@@ -53,23 +53,23 @@
         "id": 3,
         "type": "multiple-choice",
         "categoryId": 2,
-        "text": "What is the purpose of useEffect in React?",
-        "explanation": "useEffect lets you perform side effects in functional components such as fetching data or updating the DOM.",
+        "text": "What is the purpose of a risk register?",
+        "explanation": "The risk register documents identified risks, their characteristics, and planned responses.",
         "choices": [
             {
-                "text": "Perform side effects in functional components",
+                "text": "To document identified risks and responses",
                 "correct": true
             },
             {
-                "text": "Define the component's state",
+                "text": "To store project communication records",
                 "correct": false
             },
             {
-                "text": "Render HTML only",
+                "text": "To track team performance reviews",
                 "correct": false
             },
             {
-                "text": "Handle routing between pages",
+                "text": "To define the project budget",
                 "correct": false
             }
         ]
@@ -77,24 +77,24 @@
     {
         "id": 4,
         "type": "multiple-choice",
-        "categoryId": 3,
-        "text": "What is a common method to improve web page performance?",
-        "explanation": "Optimizing images, minimizing scripts, and using caching are common methods to improve performance.",
+        "categoryId": 2,
+        "text": "Which technique is commonly used to prioritize project risks?",
+        "explanation": "Probability and impact matrix prioritizes risks based on likelihood and impact.",
         "choices": [
             {
-                "text": "Optimize images and scripts",
+                "text": "Probability and impact matrix",
                 "correct": true
             },
             {
-                "text": "Add more CSS files",
+                "text": "Cost-benefit analysis",
                 "correct": false
             },
             {
-                "text": "Use only global variables",
+                "text": "Earned value analysis",
                 "correct": false
             },
             {
-                "text": "Disable caching completely",
+                "text": "Resource leveling",
                 "correct": false
             }
         ]
@@ -102,24 +102,24 @@
     {
         "id": 5,
         "type": "multiple-choice",
-        "categoryId": 2,
-        "text": "Why are keys important in React lists?",
-        "explanation": "Keys help React identify which items have changed, are added, or are removed, improving performance.",
+        "categoryId": 3,
+        "text": "What is the main purpose of a stakeholder register?",
+        "explanation": "A stakeholder register lists stakeholders, their interests, and their influence on the project.",
         "choices": [
             {
-                "text": "Identify elements for efficient updates",
+                "text": "Identify stakeholders and document their interests and influence",
                 "correct": true
             },
             {
-                "text": "Define CSS styling",
+                "text": "Track team attendance",
                 "correct": false
             },
             {
-                "text": "Handle events globally",
+                "text": "Detail the communication channels",
                 "correct": false
             },
             {
-                "text": "Replace component state",
+                "text": "Define the project scope",
                 "correct": false
             }
         ]
@@ -127,24 +127,24 @@
     {
         "id": 6,
         "type": "multiple-choice",
-        "categoryId": 1,
-        "text": "Which method removes the last element from an array in JavaScript?",
-        "explanation": "The pop() method removes the last element in the array and returns it.",
+        "categoryId": 3,
+        "text": "What is a key goal of stakeholder engagement?",
+        "explanation": "Stakeholder engagement ensures stakeholders are appropriately involved and their expectations are managed.",
         "choices": [
             {
-                "text": "pop()",
+                "text": "Ensure stakeholders are engaged and expectations are managed",
                 "correct": true
             },
             {
-                "text": "push()",
+                "text": "Limit stakeholder participation",
                 "correct": false
             },
             {
-                "text": "shift()",
+                "text": "Assign stakeholders to project tasks",
                 "correct": false
             },
             {
-                "text": "unshift()",
+                "text": "Avoid conflicts by restricting communications",
                 "correct": false
             }
         ]
@@ -153,23 +153,23 @@
         "id": 7,
         "type": "multiple-choice",
         "categoryId": 2,
-        "text": "Which keyword is used to define a type alias in TypeScript?",
-        "explanation": "The `type` keyword is used to define a type alias.",
+        "text": "What is a risk response strategy for negative risks?",
+        "explanation": "Avoidance, mitigation, transfer, and acceptance are strategies for negative risks.",
         "choices": [
             {
-                "text": "interface",
-                "correct": false
-            },
-            {
-                "text": "type",
+                "text": "Mitigation",
                 "correct": true
             },
             {
-                "text": "class",
+                "text": "Exploit",
                 "correct": false
             },
             {
-                "text": "enum",
+                "text": "Enhance",
+                "correct": false
+            },
+            {
+                "text": "Share",
                 "correct": false
             }
         ]
@@ -178,23 +178,23 @@
         "id": 8,
         "type": "multiple-choice",
         "categoryId": 1,
-        "text": "What is the result of '2' + 3 in JavaScript?",
-        "explanation": "JavaScript performs string concatenation, producing '23'.",
+        "text": "What does the change control board (CCB) do?",
+        "explanation": "The CCB reviews, approves, or rejects change requests.",
         "choices": [
             {
-                "text": "5",
-                "correct": false
-            },
-            {
-                "text": "'23'",
+                "text": "Review and approve or reject change requests",
                 "correct": true
             },
             {
-                "text": "NaN",
+                "text": "Assign team members to tasks",
                 "correct": false
             },
             {
-                "text": "'5'",
+                "text": "Monitor project quality",
+                "correct": false
+            },
+            {
+                "text": "Create the project schedule",
                 "correct": false
             }
         ]
@@ -203,23 +203,23 @@
         "id": 9,
         "type": "multiple-choice",
         "categoryId": 3,
-        "text": "Which CSS property centers items horizontally using flexbox?",
-        "explanation": "`justify-content: center` horizontally centers flex items.",
+        "text": "Which stakeholder engagement strategy aims to increase stakeholder support?",
+        "explanation": "A proactive engagement strategy helps increase stakeholder support and reduce resistance.",
         "choices": [
             {
-                "text": "align-items: center",
-                "correct": false
-            },
-            {
-                "text": "justify-content: center",
+                "text": "Proactive engagement",
                 "correct": true
             },
             {
-                "text": "text-align: center",
+                "text": "Passive engagement",
                 "correct": false
             },
             {
-                "text": "flex-direction: row",
+                "text": "Reactive communication",
+                "correct": false
+            },
+            {
+                "text": "Restrictive reporting",
                 "correct": false
             }
         ]
@@ -228,23 +228,773 @@
         "id": 10,
         "type": "multiple-choice",
         "categoryId": 2,
-        "text": "What is the output of `typeof null` in JavaScript?",
-        "explanation": "Because of an old bug, `typeof null` returns 'object'.",
+        "text": "Which tool helps determine the root cause of a risk?",
+        "explanation": "The Ishikawa (fishbone) diagram identifies potential root causes of a problem or risk.",
         "choices": [
             {
-                "text": "'null'",
-                "correct": false
-            },
-            {
-                "text": "'undefined'",
-                "correct": false
-            },
-            {
-                "text": "'object'",
+                "text": "Ishikawa (fishbone) diagram",
                 "correct": true
             },
             {
-                "text": "'number'",
+                "text": "Histogram",
+                "correct": false
+            },
+            {
+                "text": "Monte Carlo simulation",
+                "correct": false
+            },
+            {
+                "text": "Pareto chart",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "What is the purpose of the Work Breakdown Structure (WBS)?",
+        "explanation": "The WBS decomposes project deliverables into smaller, manageable components.",
+        "choices": [
+            {
+                "text": "Break down project deliverables into manageable components",
+                "correct": true
+            },
+            {
+                "text": "Assign resources to tasks",
+                "correct": false
+            },
+            {
+                "text": "Document project risks",
+                "correct": false
+            },
+            {
+                "text": "Provide procurement requirements",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "Which document is updated after approved changes are applied?",
+        "explanation": "Approved changes must be reflected in the project management plan and related documents.",
+        "choices": [
+            {
+                "text": "Project Management Plan",
+                "correct": true
+            },
+            {
+                "text": "Stakeholder Register",
+                "correct": false
+            },
+            {
+                "text": "Issue Log",
+                "correct": false
+            },
+            {
+                "text": "Work Authorization Form",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "Which process ensures that project work is aligned with the project objectives?",
+        "explanation": "Direct and Manage Project Work ensures that work is executed to meet planned objectives.",
+        "choices": [
+            {
+                "text": "Direct and Manage Project Work",
+                "correct": true
+            },
+            {
+                "text": "Monitor Communications",
+                "correct": false
+            },
+            {
+                "text": "Control Quality",
+                "correct": false
+            },
+            {
+                "text": "Develop Team",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "What is the primary output of Perform Integrated Change Control?",
+        "explanation": "Approved change requests are the main output of this process.",
+        "choices": [
+            {
+                "text": "Approved Change Requests",
+                "correct": true
+            },
+            {
+                "text": "Updated Issue Log",
+                "correct": false
+            },
+            {
+                "text": "Updated Risk Register",
+                "correct": false
+            },
+            {
+                "text": "Project Charter",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "Which element is included in the project management plan?",
+        "explanation": "The plan includes subsidiary plans like scope, schedule, and cost.",
+        "choices": [
+            {
+                "text": "Subsidiary Management Plans",
+                "correct": true
+            },
+            {
+                "text": "Product Backlog",
+                "correct": false
+            },
+            {
+                "text": "Communication Logs",
+                "correct": false
+            },
+            {
+                "text": "Resource Contracts",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "Which risk response aims to eliminate the threat entirely?",
+        "explanation": "Avoidance removes the threat by changing the project plan.",
+        "choices": [
+            {
+                "text": "Avoid",
+                "correct": true
+            },
+            {
+                "text": "Mitigate",
+                "correct": false
+            },
+            {
+                "text": "Transfer",
+                "correct": false
+            },
+            {
+                "text": "Accept",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "What is the purpose of qualitative risk analysis?",
+        "explanation": "It prioritizes risks using probability and impact.",
+        "choices": [
+            {
+                "text": "Prioritize risks based on probability and impact",
+                "correct": true
+            },
+            {
+                "text": "Produce numerical risk models",
+                "correct": false
+            },
+            {
+                "text": "Create a risk breakdown structure",
+                "correct": false
+            },
+            {
+                "text": "Develop mitigation plans",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "Which tool is commonly used in quantitative risk analysis?",
+        "explanation": "Monte Carlo simulation estimates project outcomes using probability distributions.",
+        "choices": [
+            {
+                "text": "Monte Carlo Simulation",
+                "correct": true
+            },
+            {
+                "text": "Fishbone Diagram",
+                "correct": false
+            },
+            {
+                "text": "Affinity Diagram",
+                "correct": false
+            },
+            {
+                "text": "MoSCoW Analysis",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "What does a risk trigger represent?",
+        "explanation": "A trigger is an indication that a risk event is about to occur.",
+        "choices": [
+            {
+                "text": "An early warning sign of a risk event",
+                "correct": true
+            },
+            {
+                "text": "A mandatory report",
+                "correct": false
+            },
+            {
+                "text": "A risk acceptance document",
+                "correct": false
+            },
+            {
+                "text": "A stakeholder complaint",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "What is a secondary risk?",
+        "explanation": "Secondary risks arise as a direct result of implementing a risk response.",
+        "choices": [
+            {
+                "text": "A risk created by implementing a response",
+                "correct": true
+            },
+            {
+                "text": "A low-priority risk",
+                "correct": false
+            },
+            {
+                "text": "A risk that has no owner",
+                "correct": false
+            },
+            {
+                "text": "A closed risk",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 21,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "What is the purpose of stakeholder analysis?",
+        "explanation": "Stakeholder analysis identifies stakeholder interests, influence, and expectations.",
+        "choices": [
+            {
+                "text": "Identify stakeholder interests and influence",
+                "correct": true
+            },
+            {
+                "text": "Prepare communication plans",
+                "correct": false
+            },
+            {
+                "text": "Assign work packages",
+                "correct": false
+            },
+            {
+                "text": "Assess team conflicts",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 22,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "Which stakeholder engagement strategy is best for supportive stakeholders?",
+        "explanation": "Supportive stakeholders should be kept satisfied and engaged.",
+        "choices": [
+            {
+                "text": "Keep Satisfied",
+                "correct": true
+            },
+            {
+                "text": "Manage Closely",
+                "correct": false
+            },
+            {
+                "text": "Monitor",
+                "correct": false
+            },
+            {
+                "text": "Keep Informed",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 23,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "Which tool helps identify stakeholder influence and interest?",
+        "explanation": "The Power/Interest Grid categorizes stakeholders based on influence and interest.",
+        "choices": [
+            {
+                "text": "Power/Interest Grid",
+                "correct": true
+            },
+            {
+                "text": "RACI Chart",
+                "correct": false
+            },
+            {
+                "text": "Network Diagram",
+                "correct": false
+            },
+            {
+                "text": "Cause-and-Effect Diagram",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 24,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "Which process ensures stakeholder needs are consistently met?",
+        "explanation": "Manage Stakeholder Engagement ensures expectations are handled proactively.",
+        "choices": [
+            {
+                "text": "Manage Stakeholder Engagement",
+                "correct": true
+            },
+            {
+                "text": "Plan Communications",
+                "correct": false
+            },
+            {
+                "text": "Develop Project Charter",
+                "correct": false
+            },
+            {
+                "text": "Identify Risks",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 25,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "Which factor can increase stakeholder conflict?",
+        "explanation": "Unclear expectations commonly cause stakeholder conflict.",
+        "choices": [
+            {
+                "text": "Unclear expectations",
+                "correct": true
+            },
+            {
+                "text": "Frequent communication",
+                "correct": false
+            },
+            {
+                "text": "Effective planning",
+                "correct": false
+            },
+            {
+                "text": "Well-defined roles",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 26,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "Which technique helps ensure project deliverables meet requirements?",
+        "explanation": "Quality audits check compliance with policies and standards.",
+        "choices": [
+            {
+                "text": "Quality Audits",
+                "correct": true
+            },
+            {
+                "text": "Team Meetings",
+                "correct": false
+            },
+            {
+                "text": "Variance Analysis",
+                "correct": false
+            },
+            {
+                "text": "SWOT Analysis",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 27,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "Which document defines how project changes will be managed?",
+        "explanation": "The Change Management Plan defines procedures for managing changes.",
+        "choices": [
+            {
+                "text": "Change Management Plan",
+                "correct": true
+            },
+            {
+                "text": "Issue Log",
+                "correct": false
+            },
+            {
+                "text": "Risk Response Plan",
+                "correct": false
+            },
+            {
+                "text": "Stakeholder Register",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 28,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "Which activity occurs during project closing?",
+        "explanation": "Lessons learned are documented during project closure.",
+        "choices": [
+            {
+                "text": "Document lessons learned",
+                "correct": true
+            },
+            {
+                "text": "Collect requirements",
+                "correct": false
+            },
+            {
+                "text": "Identify risks",
+                "correct": false
+            },
+            {
+                "text": "Develop WBS",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 29,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "What is a key benefit of integrated change control?",
+        "explanation": "It ensures changes are evaluated consistently and approved properly.",
+        "choices": [
+            {
+                "text": "Consistent evaluation of changes",
+                "correct": true
+            },
+            {
+                "text": "Faster procurement",
+                "correct": false
+            },
+            {
+                "text": "Guaranteed project success",
+                "correct": false
+            },
+            {
+                "text": "Reduced team size",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 30,
+        "type": "multiple-choice",
+        "categoryId": 1,
+        "text": "What is configuration management responsible for?",
+        "explanation": "Configuration management ensures the correct version of project deliverables.",
+        "choices": [
+            {
+                "text": "Controlling project deliverable versions",
+                "correct": true
+            },
+            {
+                "text": "Hiring project team members",
+                "correct": false
+            },
+            {
+                "text": "Evaluating team morale",
+                "correct": false
+            },
+            {
+                "text": "Managing procurement vendors",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 31,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "When should a risk owner be assigned?",
+        "explanation": "Risk owners are assigned during risk management planning.",
+        "choices": [
+            {
+                "text": "During risk planning",
+                "correct": true
+            },
+            {
+                "text": "After risks occur",
+                "correct": false
+            },
+            {
+                "text": "During project closing",
+                "correct": false
+            },
+            {
+                "text": "Before developing the charter",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 32,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "What is the purpose of a risk audit?",
+        "explanation": "Risk audits evaluate the effectiveness of responses.",
+        "choices": [
+            {
+                "text": "Evaluate effectiveness of risk responses",
+                "correct": true
+            },
+            {
+                "text": "Identify new risks",
+                "correct": false
+            },
+            {
+                "text": "Analyze probability",
+                "correct": false
+            },
+            {
+                "text": "Close risks",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 33,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "What type of risk is an opportunity?",
+        "explanation": "Opportunities are positive risks.",
+        "choices": [
+            {
+                "text": "Positive Risk",
+                "correct": true
+            },
+            {
+                "text": "Negative Risk",
+                "correct": false
+            },
+            {
+                "text": "Neutral Risk",
+                "correct": false
+            },
+            {
+                "text": "Expired Risk",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 34,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "Which response maximizes a positive risk?",
+        "explanation": "Exploitation ensures the opportunity is realized.",
+        "choices": [
+            {
+                "text": "Exploit",
+                "correct": true
+            },
+            {
+                "text": "Transfer",
+                "correct": false
+            },
+            {
+                "text": "Mitigate",
+                "correct": false
+            },
+            {
+                "text": "Avoid",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 35,
+        "type": "multiple-choice",
+        "categoryId": 2,
+        "text": "What is risk tolerance?",
+        "explanation": "Risk tolerance indicates how much risk a stakeholder can withstand.",
+        "choices": [
+            {
+                "text": "The level of risk a stakeholder can accept",
+                "correct": true
+            },
+            {
+                "text": "A mandatory mitigation rule",
+                "correct": false
+            },
+            {
+                "text": "A resource allocation metric",
+                "correct": false
+            },
+            {
+                "text": "A project constraint",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 36,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "Which factor influences stakeholder communication needs?",
+        "explanation": "Culture, location, and expectations all influence communication needs.",
+        "choices": [
+            {
+                "text": "Stakeholder culture and expectations",
+                "correct": true
+            },
+            {
+                "text": "Team salary structure",
+                "correct": false
+            },
+            {
+                "text": "Project color scheme",
+                "correct": false
+            },
+            {
+                "text": "Number of suppliers",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 37,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "What is a key output of Identify Stakeholders?",
+        "explanation": "The stakeholder register documents key stakeholders and their attributes.",
+        "choices": [
+            {
+                "text": "Stakeholder Register",
+                "correct": true
+            },
+            {
+                "text": "Work Breakdown Structure",
+                "correct": false
+            },
+            {
+                "text": "Resource Calendar",
+                "correct": false
+            },
+            {
+                "text": "Risk Report",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 38,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "Which strategy is appropriate for stakeholders with high power and low interest?",
+        "explanation": "High-power, low-interest stakeholders should be kept satisfied.",
+        "choices": [
+            {
+                "text": "Keep Satisfied",
+                "correct": true
+            },
+            {
+                "text": "Manage Closely",
+                "correct": false
+            },
+            {
+                "text": "Keep Informed",
+                "correct": false
+            },
+            {
+                "text": "Monitor",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 39,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "Which document outlines stakeholder communication requirements?",
+        "explanation": "The communication management plan defines what, when, and how communication occurs.",
+        "choices": [
+            {
+                "text": "Communication Management Plan",
+                "correct": true
+            },
+            {
+                "text": "Risk Response Plan",
+                "correct": false
+            },
+            {
+                "text": "Scope Baseline",
+                "correct": false
+            },
+            {
+                "text": "Quality Report",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "id": 40,
+        "type": "multiple-choice",
+        "categoryId": 3,
+        "text": "Why is early stakeholder engagement important?",
+        "explanation": "Early engagement reduces resistance and improves support.",
+        "choices": [
+            {
+                "text": "It reduces resistance and increases support",
+                "correct": true
+            },
+            {
+                "text": "It eliminates all risks",
+                "correct": false
+            },
+            {
+                "text": "It guarantees project success",
+                "correct": false
+            },
+            {
+                "text": "It removes the need for planning",
                 "correct": false
             }
         ]
