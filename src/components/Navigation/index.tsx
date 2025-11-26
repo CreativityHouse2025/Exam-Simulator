@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Drawer from './Drawer'
 import Footer from './Footer'
@@ -11,6 +11,7 @@ import {
   SessionNavigationContext,
   SessionTimerContext
 } from '../../contexts'
+import useMediaQuery from '../../hooks/useMediaQuery'
 import { SessionReducer } from '../../utils/session'
 import { Session, SessionDispatch } from '../../types'
 
@@ -22,10 +23,25 @@ const ContainerStyles = styled.div`
   overflow: hidden;
 `
 
+export interface NavigationProps {
+  startingSession: Session
+  onSessionUpdate: (session: Session) => void
+}
+
 const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate }) => {
   const exam = React.useContext(ExamContext)
   const [session, updateSession] = React.useReducer(SessionReducer, startingSession)
-  const [open, setOpen] = React.useState<boolean>(true)
+
+  const isMobile = useMediaQuery('(max-width: 48rem)'); // 768px, hook is called at each render  
+  const [open, setOpen] = React.useState<boolean>(() => !isMobile)
+
+  useEffect(() => {
+    if (isMobile) {
+      setOpen(false); // close navigation on mobile
+    } else {
+      setOpen(true); // open navigation on larger screens
+    }
+  }, [isMobile]);
 
   const sessionUpdate = React.useCallback<SessionDispatch>(
     (...actions) => {
@@ -73,8 +89,3 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
 }
 
 export default NavigationComponent
-
-export interface NavigationProps {
-  startingSession: Session
-  onSessionUpdate: (session: Session) => void
-}
