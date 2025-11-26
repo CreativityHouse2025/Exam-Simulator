@@ -8,7 +8,7 @@ import Cover from './components/Cover'
 import Loading from './components/Loading'
 import { hasTranslation, setTranslation } from './utils/translation'
 import { formatSession, formatExam } from './utils/format'
-import { generateExam, getExamByQuestionIds, initQuestionMap } from './utils/exam'
+import { generateNewExam, getExamByQuestionIds, initQuestionMap } from './utils/exam'
 import { DEFAULT_SESSION, LANGUAGES } from './constants'
 import { ExamContext, LangContext } from './contexts'
 
@@ -50,7 +50,7 @@ const AppComponent: React.FC = () => {
 
   const loadExam = React.useCallback(
     async (newSession: Session) => {
-      if (!newSession.examID) {
+      if (!newSession.examType) {
         console.warn('No exam ID found in session.')
         return
       }
@@ -59,10 +59,10 @@ const AppComponent: React.FC = () => {
 
         // if a new exam, generate questions
         if (newSession.examState === 'not-started') {
-          let generatedExam = generateExam(10, 0)
-          examData = generatedExam.exam
-          questionIds = generatedExam.questionIds
-          newSession = formatSession({ ...newSession, categoryId: 0, questions: questionIds, examState: 'in-progress' }, examData.length, newSession.examID as ExamType)
+          let examDetails = generateNewExam(newSession.examType, 0)
+          examData = examDetails.exam
+          questionIds = examDetails.questionIds
+          newSession = formatSession({ ...newSession, categoryId: 0, questions: questionIds, examState: 'in-progress' }, examData.length, examDetails.durationMinutes)
         } else {
           // if exam already exist, get the questions from the question map
           examData = getExamByQuestionIds(newSession.questions);
@@ -80,11 +80,11 @@ const AppComponent: React.FC = () => {
   )
 
   const handleStartNew = React.useCallback(
-    () => loadExam({ ...DEFAULT_SESSION, examID: 'exam' }),
+    () => loadExam({ ...DEFAULT_SESSION, examType: 'exam' }),
     [loadExam]
   )
   const handleStartMini = React.useCallback(
-    () => loadExam({ ...DEFAULT_SESSION, examID: 'miniexam' }),
+    () => loadExam({ ...DEFAULT_SESSION, examType: 'miniexam' }),
     [loadExam]
   )
 
@@ -111,7 +111,7 @@ const AppComponent: React.FC = () => {
       await initQuestionMap(lang.code);
       setLoading(false);
 
-      if (exam && session.examID) {
+      if (exam && session.examType) {
         loadExam(session)
       }
     }

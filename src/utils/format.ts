@@ -70,11 +70,11 @@ export function formatExam(exam: Exam): Exam {
 /**
  * Format session with default values
  * @param {Session} session - The session object to format.
- * @param {number} questionCount - The number of questions in the exam.
- * @param {ExamType} examType - The type of the exam
+ * @param {number} questionCount - The number of questions
+ * @param {number} durationMinutes - The duration of the exam in minutes
  * @returns {Session} - The formatted session object.
  */
-export function formatSession(session: Session, questionCount: number, examType: ExamType): Session { // loose function, uncompleted
+export function formatSession(session: Session, questionCount: number, durationMinutes: number): Session {
   try {
     // Fill missing answers with empty arrays
     const missingAnswers = questionCount - session.answers.length
@@ -82,12 +82,7 @@ export function formatSession(session: Session, questionCount: number, examType:
       session.answers = [...session.answers, ...Array(missingAnswers).fill([])]
     }
 
-    const examDetails = examTypes[examType]
-    if (!examDetails.durationMinutes) {
-      throw new Error("exam duration is undefined")
-    }
-
-    const maxTime = examDetails.durationMinutes * 60;
+    const maxTime = durationMinutes * 60;
 
     session.maxTime = maxTime
     session.time = maxTime

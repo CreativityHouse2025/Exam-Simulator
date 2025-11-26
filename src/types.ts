@@ -103,7 +103,7 @@ export interface Session {
   /** the list of bookmarked questions */
   bookmarks: number[]
   /** the ID of the exam */
-  examID?: ExamType
+  examType?: ExamType
   /** session update function - will be injected by reducer */
   update?: SessionDispatch
 }
@@ -114,6 +114,8 @@ export interface GeneratedExam {
   exam: Exam
   /** the list of question ids to perserve question order in local storage */
   questionIds: number[]
+  /** the duration of the exam in minutes */
+  durationMinutes: number
 }
 
 // Session action types
@@ -153,4 +155,4 @@ export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, Ses
 export type SessionNavigation = Pick<Session, 'index' | 'update'>
 export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused' | 'update'>
 export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'update'>
-export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examID' | 'update'>
+export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | 'update'>
