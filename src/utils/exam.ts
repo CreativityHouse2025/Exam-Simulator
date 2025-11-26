@@ -1,6 +1,7 @@
 import { GENERAL_CATEGORY_ID } from '../constants'
 import categories from '../data/exam-data/categories.json'
-import type { Exam, GeneratedExam, Question, LangCode } from '../types'
+import examTypes from '../data/exam-data/examTypes.json'
+import type { Exam, GeneratedExam, Question, LangCode, ExamType } from '../types'
 
 // Map to retrieve questions in order later (better performance O(M + N) instead of O(M * N))
 // M is size of questions in exam, N is size of question bank
@@ -42,17 +43,33 @@ function shuffleArray<T>(array: T[]): T[] {
 
 /**
  * Generate an exam from a list of questions
- * @param {number} questionCount - The size of the output question list
+ * @param {ExamType} examType - The size of the output question list
  * @param {number} categoryId - The category of the questions
  * @returns {GeneratedExam} - An object that has the Exam for the application memory 
  * and corresponding question IDs list for local storage
  */
-export function generateExam(questionCount: number, categoryId: number): GeneratedExam {
+export function generateNewExam(examType: ExamType, categoryId: number): GeneratedExam {
+    // generate random number inclusive of both ends
+    function getRandomInt(min: number, max: number) {
+        min = Math.ceil(min); // Ensure min is an integer
+        max = Math.floor(max); // Ensure max is an integer
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    const examDetails = examTypes[examType]
+    if (!examDetails) {
+        throw new Error("invalid exam type " + examType)
+    }
+    const { minQuestionCount, maxQuestionCount, durationMinutes } = examDetails
+    if (!minQuestionCount || !maxQuestionCount || !durationMinutes) {
+        throw new Error("invalid exam type property null")
+    }
+    const questionCount = getRandomInt(minQuestionCount, maxQuestionCount);
     // validate questionCount
     if (questionCount === 0) {
         return {
             exam: [],
-            questionIds: []
+            questionIds: [],
+            durationMinutes: 0
         }
     }
 
@@ -101,7 +118,8 @@ export function generateExam(questionCount: number, categoryId: number): Generat
 
     const generatedExam: GeneratedExam = {
         exam: chosenQuestions,
-        questionIds
+        questionIds,
+        durationMinutes
     }
     return generatedExam
 }
@@ -118,7 +136,7 @@ export function getExamByQuestionIds(questionIds: number[]): Exam {
     }
     // reference it to get rid of TypeScript error
     const map = questionMap;
-    
+
     if (map.size === 0) {
         throw new Error("question map is empty")
     }
