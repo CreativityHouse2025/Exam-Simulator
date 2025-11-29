@@ -1,4 +1,4 @@
-import type { Exam, ExamType, Lang, LangCode, Session } from './types'
+import type { Exam, Lang, LangCode, Session } from './types'
 
 import React from 'react'
 import { useLocalStorage } from '@mantine/hooks'
@@ -13,6 +13,7 @@ import { DEFAULT_SESSION, LANGUAGES } from './constants'
 import { ExamContext, LangContext } from './contexts'
 
 const AppComponent: React.FC = () => {
+  // TODO: create LangContextProvider, ExamContextProvider using custom hooks + context pattern
   const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: DEFAULT_SESSION })
   const [lang, setLang] = React.useState<Lang>(LANGUAGES.ar)
   const [exam, setExam] = React.useState<Exam | null>(null)

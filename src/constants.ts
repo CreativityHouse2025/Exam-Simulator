@@ -54,6 +54,7 @@ const shadows = [
 export const DEFAULT_THEME = {
   grey,
   black: '#333333',
+  white: colors[5],
   primary: colors[0],
   secondary: colors[1],
   tertiary: colors[2],
@@ -62,6 +63,7 @@ export const DEFAULT_THEME = {
   shadows,
   scrollbar: '8px',
   fontSize: '10px',
+  fontFamily: '"Open Sans", sans-serif',
   correct: '#4CAF50',
   incorrect: '#F44336'
 } as const
@@ -90,6 +92,9 @@ export const SESSION_ACTION_PROPS = {
 
 // Constant for the general category (mix of all categories)
 export const GENERAL_CATEGORY_ID = 0
+
+// Constant for category menu padding (shared variable)
+export const MENU_PADDING = "1.6rem 1.4rem"
 
 // Default session
 export const DEFAULT_SESSION: Session = {

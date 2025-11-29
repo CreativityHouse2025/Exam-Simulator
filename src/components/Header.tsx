@@ -26,6 +26,7 @@ const TitleStyles = styled.div<ThemedStyles>`
 `
 
 const ImageStyles = styled.img`
+  cursor: pointer;
   width: 6rem;
   justify-self: center;
 `
@@ -50,7 +51,7 @@ const HeaderComponent: React.FC<HeaderProps> = ({ setLang }) => {
 
   return (
     <HeaderStyles id="header">
-      <ImageStyles id="image" className="no-select" src={Logo} />
+      <ImageStyles id="image" className="no-select" src={Logo} onClick={resetApp}/>
 
       <TitleStyles id="title" className="no-select" onClick={resetApp}>
         {title}

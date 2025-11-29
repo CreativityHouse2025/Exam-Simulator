@@ -1,4 +1,5 @@
 import type { ThemedStyles } from '../types'
+import Dropdown from './Category/CategoryDropdown'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -89,6 +90,12 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onConti
     [document.documentElement.lang, translate]
   )
 
+  const options = [
+    { label: "1. Red Option", value: "red", color: "red" },
+    { label: "2. Blue Option", value: "blue", color: "blue" },
+    { label: "3. Green Option", value: "green", color: "green" },
+  ];
+
   return (
     <CoverStyles id="cover">
       <Image id="image" src={Logo} alt={translations.logoAlt} />
@@ -113,6 +120,8 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onConti
             {translations.continue}
           </ContinueButton>
         )}
+        <Dropdown onSelect={(value) => console.log(value)}/>
+        
       </ButtonContainer>
     </CoverStyles>
   )
