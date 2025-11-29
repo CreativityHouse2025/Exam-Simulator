@@ -1,6 +1,7 @@
 // Theme types
 export interface Theme {
   grey: string[]
+  white: string
   black: string
   primary: string
   secondary: string
@@ -12,6 +13,7 @@ export interface Theme {
   shadows: string[]
   scrollbar: string
   fontSize: string
+  fontFamily: string
 }
 
 export interface ThemedStyles {
@@ -115,6 +117,12 @@ export interface GeneratedExam {
   questionIds: number[]
   /** the duration of the exam in minutes */
   durationMinutes: number
+}
+
+// v1.1: type for category item
+export type Category = {
+  id: number
+  label: string
 }
 
 // Session action types
