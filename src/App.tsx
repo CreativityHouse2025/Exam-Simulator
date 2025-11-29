@@ -13,9 +13,11 @@ import { DEFAULT_SESSION, LANGUAGES } from './constants'
 import { ExamContext, LangContext } from './contexts'
 
 const AppComponent: React.FC = () => {
-  // TODO: create LangContextProvider, ExamContextProvider using custom hooks + context pattern
+  // TODO: 1. create LangContextProvider, ExamContextProvider using custom hooks + context pattern
+  // TODO: 2. Make category UI work with all exam types (flexible)
+  // TODO: 3. Test category functionality
   const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: DEFAULT_SESSION })
-  const [lang, setLang] = React.useState<Lang>(LANGUAGES.ar)
+  const [lang, setLang] = React.useState<Lang>(LANGUAGES.en)
   const [exam, setExam] = React.useState<Exam | null>(null)
   const [loading, setLoading] = React.useState<Boolean>(false);
 
@@ -105,8 +107,8 @@ const AppComponent: React.FC = () => {
   }, [])
 
   // Load question map and exam when loadExam (language) changes
-  React.useEffect(() => {
-    async function setUpExam() {
+  React.useEffect(() => {    
+    async function setUpExam() {      
 
       setLoading(true);
       await initQuestionMap(lang.code);
@@ -119,11 +121,11 @@ const AppComponent: React.FC = () => {
     setUpExam();
   }, [loadExam])
 
-  if (!hasTranslation()) {
+  if (!hasTranslation()) {    
     return <Loading size={200} />
   }
 
-  if (loading) {
+  if (loading) {    
     return <Loading size={200} />
   }
 
