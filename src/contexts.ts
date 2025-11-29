@@ -1,7 +1,7 @@
 import type { Exam, Lang, SessionNavigation, SessionTimer, SessionExam, SessionData } from './types'
 
 import { createContext } from 'react'
-import { LANGUAGES } from './constants'
+import { GENERAL_CATEGORY_ID, LANGUAGES } from './constants'
 
 // Exam context
 export const ExamContext = createContext<Exam>({} as Exam)
@@ -22,7 +22,8 @@ export const SessionTimerContext = createContext<SessionTimer>({
 
 export const SessionExamContext = createContext<SessionExam>({
   examState: 'not-started',
-  reviewState: 'summary'
+  reviewState: 'summary',
+  categoryId: GENERAL_CATEGORY_ID // add category to the context for metadata during exam
 })
 
 export const SessionDataContext = createContext<SessionData>({

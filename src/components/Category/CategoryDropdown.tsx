@@ -3,12 +3,17 @@ import { LangContext } from "../../contexts";
 import styled from "styled-components";
 import type { Category, Lang, ThemedStyles } from "../../types";
 import { Close } from '@styled-icons/material/Close'
-import { MENU_PADDING } from "../../constants";
+import { GENERAL_CATEGORY_ID, MENU_PADDING } from "../../constants";
 import MenuList from "./MenuList";
 import rawCategories from '../../data/exam-data/categories.json'
+import useCategoryLabel from "../../hooks/useCategoryLabel";
 
 type DropdownProps = {
-  onSelect: (value: Category['id']) => void;
+  title: string
+  open: boolean
+  setOpen: (open: boolean) => void
+  onSelect: (value: Category['id']) => void
+  buttonRef?: React.RefObject<HTMLButtonElement | null>
 };
 
 // overlay for blur effect
@@ -74,39 +79,51 @@ const CloseButton = styled.button<ThemedStyles>`
   }
 `;
 
-const CategoryDropdown: React.FC<DropdownProps> = ({ onSelect }) => {
-  const [open, setOpen] = useState(true);
+const CategoryDropdown: React.FC<DropdownProps> = ({ buttonRef, open, setOpen, title, onSelect }) => {
 
   const language: Lang = useContext(LangContext)
 
   const menuRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    let handler = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        // add delay for user experience
-        setTimeout(() => setOpen(false), 100)
+    const handler = (event: MouseEvent | TouchEvent) => {
+      const target = event.target as Node;
+
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(target) && // click is outside menu
+        (!buttonRef?.current || !buttonRef.current.contains(target)) // and outside button
+      ) {
+        setTimeout(() => setOpen(false), 100);
       }
-    }
-    document.addEventListener("mousedown", handler)
+    };
+
+    document.addEventListener("mousedown", handler);
+    document.addEventListener("touchstart", handler);
 
     return () => {
-      document.removeEventListener("mousedown", handler)
-    }
-  }, [])
+      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("touchstart", handler);
+    };
+  }, [buttonRef, setOpen]);
 
-  const categories: Category[] = rawCategories.map(c => ({
+
+  const generalCategory: Category = {
+    id: GENERAL_CATEGORY_ID,
+    label: useCategoryLabel(GENERAL_CATEGORY_ID) as string
+  }
+  const categories: Category[] = [generalCategory, ...rawCategories.map(c => ({
     id: c.id,
     label: c['name'][language.code]
-  }));
+  }))]
 
   return (
     <>
-      <Overlay open={open} onClick={() => setOpen(false)} />
+      <Overlay open={open} />
 
-      <MenuStyles style={{ pointerEvents: open ? "auto" : "none" }}>
+      <MenuStyles id="menu" style={{ pointerEvents: open ? "auto" : "none" }}>
         <Menu ref={menuRef} open={open}>
           <MenuHeader>
-            <Title>Choose a category</Title>
+            <Title>{title}</Title>
             <CloseButton onClick={() => setOpen(false)}>
               <Close size={25} />
             </CloseButton>

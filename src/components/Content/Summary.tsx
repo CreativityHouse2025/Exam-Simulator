@@ -5,7 +5,8 @@ import styled from 'styled-components'
 import SummaryRow from './SummaryRow'
 import { formatDate, formatTimer } from '../../utils/format'
 import { translate } from '../../utils/translation'
-import { ExamContext, SessionDataContext, SessionTimerContext } from '../../contexts'
+import { ExamContext, SessionDataContext, SessionExamContext, SessionTimerContext } from '../../contexts'
+import useCategoryLabel from '../../hooks/useCategoryLabel'
 
 const passPercent = 85
 
@@ -16,10 +17,16 @@ export const TitleStyles = styled.div<ThemedStyles>`
   color: ${({ theme }) => theme.black};
 `
 
+export const TopColumnStyles = styled.div`
+  padding-top: 5rem;
+  display: grid;
+  grid-template-rows: repeat(5, auto);
+`
+
 export const ColumnStyles = styled.div`
   padding-top: 5rem;
   display: grid;
-  grid-template-rows: repeat(4, 3rem);
+  grid-template-rows: repeat(4, auto);
 `
 
 const RestartButton = styled.button<ThemedStyles>`
@@ -48,6 +55,7 @@ const RestartButton = styled.button<ThemedStyles>`
 const SummaryComponent: React.FC = () => {
   const { answers } = React.useContext(SessionDataContext)
   const { maxTime, time } = React.useContext(SessionTimerContext)
+  const { categoryId } = React.useContext(SessionExamContext)
   const exam = React.useContext(ExamContext)
 
   const questions = React.useMemo(() => {
@@ -62,7 +70,7 @@ const SummaryComponent: React.FC = () => {
           acc.incomplete.push(i)
         } else {
           acc.completed.push(i)
-          if (arraysEqual(givenAnswer, correctAnswer)) {
+          if (arraysEqual(givenAnswer, correctAnswer as number[])) {
             acc.correct.push(i)
           } else {
             acc.incorrect.push(i)
@@ -81,6 +89,7 @@ const SummaryComponent: React.FC = () => {
   const status = score >= passPercent
   const elapsed = maxTime - time  
   const date = new Date()
+  const categoryLabel: string | undefined = useCategoryLabel(categoryId);
 
   const translated = React.useMemo(
     () => ({
@@ -98,12 +107,13 @@ const SummaryComponent: React.FC = () => {
       <TitleStyles id="title">{translated.title}</TitleStyles>
 
       <div id="columns">
-        <ColumnStyles id="column">
+        <TopColumnStyles id="column">
           <SummaryRow type="status" value={translated.status} status={status} isStatus />
           <SummaryRow type="passing" value={`${passPercent} %`} status={status} />
           <SummaryRow type="time" value={formatTimer(elapsed)} status={status} />
           <SummaryRow type="date" value={formatDate(date)} status={status} />
-        </ColumnStyles>
+          <SummaryRow type="category" value={categoryLabel as string} status={status} />
+        </TopColumnStyles>
 
         <ColumnStyles id="column">
           <SummaryRow type="score" value={`${score} %`} status={status} />

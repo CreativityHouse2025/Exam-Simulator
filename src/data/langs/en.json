@@ -7,7 +7,9 @@
     "logo-alt": "Logo",
     "continue": "Continue Last Exam",
     "new": "Start New Exam",
-    "mini": "Start Mini Exam"
+    "mini": "Start Mini Exam",
+    "select-category": "Choose a question category",
+    "general": "General"
   },
   "nav": {
     "drawer": {
@@ -46,6 +48,7 @@
       "pass": "PASS",
       "fail": "FAIL",
       "passing": "Passing",
+      "category": "Category",
       "time": "Time",
       "date": "Date",
       "score": "Score",

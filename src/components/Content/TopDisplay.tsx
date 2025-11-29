@@ -4,14 +4,36 @@ import React from 'react'
 import styled from 'styled-components'
 import BookmarkButton from './Bookmark'
 import { translate } from '../../utils/translation'
-import { SessionNavigationContext } from '../../contexts'
+import {  SessionExamContext, SessionNavigationContext } from '../../contexts'
+import useCategoryLabel from '../../hooks/useCategoryLabel'
 
 export const TopDisplayStyles = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  min-width: 100%;
 `
+
+const ExamHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+`
+
+const CategoryLabel = styled.div<ThemedStyles>`
+  padding: 0.6rem 1rem;
+  font-family: ${({ theme }) => theme.fontFamily};
+  background-color: ${({ theme }) => theme.grey[1]};
+  color: ${({ theme }) => theme.grey[10]};
+  font-size: calc(${({ theme }) => theme.fontSize} + 0.5rem);
+  font-weight: 600;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.10);
+  width: auto;
+`;
 
 export const QuestionTextStyles = styled.div<ThemedStyles>`
   display: flex;
@@ -23,18 +45,32 @@ export const QuestionTextStyles = styled.div<ThemedStyles>`
 
 const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isReview = false }) => {
   const { index } = React.useContext(SessionNavigationContext)
+  const { categoryId } = React.useContext(SessionExamContext)
+
+  let categoryLabel: string | undefined = useCategoryLabel(categoryId);
+  
 
   const question = React.useMemo(
     () => translate('content.top-display.question', [index + 1, questionCount]),
     [document.documentElement.lang, translate, index, questionCount]
   )
 
-  return (
-    <TopDisplayStyles id="top-display">
-      <QuestionTextStyles id="question-text">{question}</QuestionTextStyles>
+  const category = React.useMemo(
+    () => translate('content.summary.category'),
+    [document.documentElement.lang, translate]
+  )
 
-      {!isReview && <BookmarkButton />}
-    </TopDisplayStyles>
+  return (
+    <ExamHeader id="exam-header">
+      <TopDisplayStyles id="top-display">
+        <QuestionTextStyles id="question-text">{question}</QuestionTextStyles>
+
+        {!isReview && <BookmarkButton />}
+      </TopDisplayStyles>
+      <CategoryLabel>
+        {category}: {categoryLabel ?? "undefined category"}
+      </CategoryLabel>
+    </ExamHeader>
   )
 }
 
