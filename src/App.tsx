@@ -1,4 +1,4 @@
-import type { Exam, Lang, LangCode, Session } from './types'
+import type { Category, Exam, Lang, LangCode, Session } from './types'
 
 import React from 'react'
 import { useLocalStorage } from '@mantine/hooks'
@@ -60,10 +60,10 @@ const AppComponent: React.FC = () => {
 
         // if a new exam, generate questions
         if (newSession.examState === 'not-started') {
-          let examDetails = generateNewExam(newSession.examType, 0)
+          let examDetails = generateNewExam(newSession.examType, newSession.categoryId)
           examData = examDetails.exam
           questionIds = examDetails.questionIds
-          newSession = formatSession({ ...newSession, categoryId: 0, questions: questionIds, examState: 'in-progress' }, examData.length, examDetails.durationMinutes)
+          newSession = formatSession({ ...newSession, categoryId: newSession.categoryId, questions: questionIds, examState: 'in-progress' }, examData.length, examDetails.durationMinutes)
         } else {
           // if exam already exist, get the questions from the question map
           examData = getExamByQuestionIds(newSession.questions);
@@ -85,7 +85,7 @@ const AppComponent: React.FC = () => {
     [loadExam]
   )
   const handleStartMini = React.useCallback(
-    () => loadExam({ ...DEFAULT_SESSION, examType: 'miniexam' }),
+    (categoryId: Category['id']) => loadExam({ ...DEFAULT_SESSION, examType: 'miniexam', categoryId }),
     [loadExam]
   )
 

@@ -5,9 +5,12 @@ import { Category } from "../../types";
 import MenuItem from "./MenuItem";
 
 const MenuListStyles = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
   list-style: none;
   margin: 0;
-  margin-top: -1rem;
+  margin-top: -0.5rem;
   padding: ${MENU_PADDING};
 `;
 
@@ -21,7 +24,7 @@ const MenuList: React.FC<MenuListProps> = ({ categories, onSelect }) => {
         <MenuListStyles>
             {
                 categories.length > 0 ? categories.map((c) => (
-                    <MenuItem key={c.id} label={`${c.id + ". " + c.label}`} onSelect={() => onSelect(c.id)}/>
+                    <MenuItem key={c.id} label={`${c.label}`} onSelect={() => onSelect(c.id)}/>
                 )) : "There are no categories at the moment."
             }
         </MenuListStyles>

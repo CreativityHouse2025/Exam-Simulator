@@ -6,9 +6,10 @@ import { translate } from '../../utils/translation'
 
 export const RowStyles = styled.div<SummaryStylesProps>`
   display: grid;
-  grid-template-columns: 15rem 15rem;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
   justify-items: center;
-  align-items: center;
+  align-items: start;
   .status {
     color: ${({ $status, theme }) => ($status ? theme.correct : theme.incorrect)};
   }
@@ -16,12 +17,14 @@ export const RowStyles = styled.div<SummaryStylesProps>`
 
 export const RowKeyStyles = styled.div<ThemedStyles>`
   font: 2rem 'Open Sans';
+  text-align: center;
   font-weight: 700;
   color: ${({ theme }) => theme.grey[10]};
 `
 
 export const RowValueStyles = styled.div<ThemedStyles>`
   font: 2rem 'Open Sans';
+  text-align: center;
   font-weight: 700;
   color: ${({ theme }) => theme.black};
 `

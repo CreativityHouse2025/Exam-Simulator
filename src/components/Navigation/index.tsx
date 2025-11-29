@@ -61,7 +61,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
   const contextValues = {
     navigation: { index: session.index, update: sessionUpdate },
     timer: { time: session.time, maxTime: session.maxTime, paused: session.paused, update: sessionUpdate },
-    exam: { examState: session.examState, reviewState: session.reviewState, update: sessionUpdate },
+    exam: { examState: session.examState, reviewState: session.reviewState, update: sessionUpdate, categoryId: session.categoryId },
     data: { bookmarks: session.bookmarks, answers: session.answers, examType: session.examType, update: sessionUpdate }
   }
 

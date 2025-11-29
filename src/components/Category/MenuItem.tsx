@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Category } from "../../types"
 import type { ThemedStyles } from "../../types";
 
 type MenuItemProps = {
@@ -9,15 +8,19 @@ type MenuItemProps = {
 }
 
 const MenuItemStyles = styled.li<ThemedStyles>`
-  padding: 0.9rem 1rem;
+  box-sizing: border-box;
+  padding: 1.5rem 1rem;
   font-size: calc(${({ theme }) => theme.fontSize} + 0.7rem);
   font-weight: 500;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.15s ease;
-
+  border: 1px solid ${({ theme }) => theme.grey[1]};
+  box-shadow: none;
+  transition: all 0.15s ease;
+  background-color: ${({ theme }) => theme.grey[0]};
   &:hover {
-    background: rgba(0,0,0,0.06);
+    background: ${({ theme }) => theme.grey[1]};
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
   }
 `;
 

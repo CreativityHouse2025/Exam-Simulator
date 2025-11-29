@@ -1,11 +1,10 @@
-import type { ThemedStyles } from '../types'
-import Dropdown from './Category/CategoryDropdown'
-
-import React from 'react'
+import type { Category, ThemedStyles } from '../types'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
+import CategoryDropdown from './Category/CategoryDropdown'
 
 const CoverStyles = styled.div<ThemedStyles>`
   width: 100vw;
@@ -78,6 +77,11 @@ const ButtonRow = styled.div`
 `
 
 const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onContinue }) => {
+  const [dropdown, setDropdown] = useState<boolean>(false);
+
+  // button ref to fix immediate dropdown close on touch event
+  const miniButtonRef = useRef<HTMLButtonElement | null>(null);
+
   const translations = React.useMemo(
     () => ({
       logoAlt: translate('cover.logo-alt'),
@@ -85,16 +89,11 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onConti
       description: translate('about.description'),
       new: translate('cover.new'),
       mini: translate('cover.mini'),
-      continue: translate('cover.continue')
+      continue: translate('cover.continue'),
+      selectCategory: translate('cover.select-category')
     }),
     [document.documentElement.lang, translate]
   )
-
-  const options = [
-    { label: "1. Red Option", value: "red", color: "red" },
-    { label: "2. Blue Option", value: "blue", color: "blue" },
-    { label: "3. Green Option", value: "green", color: "green" },
-  ];
 
   return (
     <CoverStyles id="cover">
@@ -110,7 +109,7 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onConti
             {translations.new}
           </StartButton>
 
-          <StartButton id="start-mini-button" className="no-select" onClick={onStartMini}>
+          <StartButton id="start-mini-button" ref={miniButtonRef} className="no-select" onClick={() => {setDropdown(true)}}>
             {translations.mini}
           </StartButton>
         </ButtonRow>
@@ -120,7 +119,7 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onConti
             {translations.continue}
           </ContinueButton>
         )}
-        <Dropdown onSelect={(value) => console.log(value)}/>
+        <CategoryDropdown open={dropdown} setOpen={setDropdown} buttonRef={miniButtonRef} title={translations.selectCategory} onSelect={onStartMini}/>
         
       </ButtonContainer>
     </CoverStyles>
@@ -131,6 +130,6 @@ export default React.memo(CoverComponent)
 
 export interface CoverProps {
   onStartNew: () => void | Promise<void>
-  onStartMini: () => void | Promise<void>
+  onStartMini: (value: Category['id']) => void | Promise<void>
   onContinue?: () => void | Promise<void>
 }
