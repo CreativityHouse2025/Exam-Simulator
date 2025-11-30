@@ -100,6 +100,12 @@ export function generateNewExam(examType: ExamType, categoryId: number): Generat
     } else {
         questionPool = questionList.filter((q: Question): boolean => q.categoryId === categoryId)
     }
+
+    // throw error if there are no questions
+    if (questionPool.length === 0) {
+        throw new Error(`Category with id ${categoryId} does not have any questions yet.`)
+    }
+
     // warn if there aren’t enough questions
     if (questionPool.length < questionCount) {
         console.warn(`Requested ${questionCount} questions, but only ${questionPool.length} available.`);
