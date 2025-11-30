@@ -1,4 +1,4 @@
-import type { Category, Exam, Lang, LangCode, Session } from './types'
+import type { Category, Exam, ExamType, Lang, LangCode, Session } from './types'
 
 import React from 'react'
 import { useLocalStorage } from '@mantine/hooks'
@@ -9,7 +9,7 @@ import Loading from './components/Loading'
 import { hasTranslation, setTranslation } from './utils/translation'
 import { formatSession, formatExam } from './utils/format'
 import { generateNewExam, getExamByQuestionIds, initQuestionMap } from './utils/exam'
-import { DEFAULT_SESSION, LANGUAGES } from './constants'
+import { DEFAULT_SESSION, GENERAL_CATEGORY_ID, LANGUAGES } from './constants'
 import { ExamContext, LangContext } from './contexts'
 
 const AppComponent: React.FC = () => {
@@ -54,8 +54,7 @@ const AppComponent: React.FC = () => {
   const loadExam = React.useCallback(
     async (newSession: Session) => {
       if (!newSession.examType) {
-        console.warn('No exam ID found in session.')
-        return
+        throw new Error("No exam ID found in session")
       }
       try {
         let examData: Exam, questionIds: number[]
@@ -82,24 +81,20 @@ const AppComponent: React.FC = () => {
     [lang]
   )
 
-  const handleStartNew = React.useCallback(
-    () => loadExam({ ...DEFAULT_SESSION, examType: 'exam' }),
-    [loadExam]
-  )
-  const handleStartMini = React.useCallback(
-    (categoryId: Category['id']) => loadExam({ ...DEFAULT_SESSION, examType: 'miniexam', categoryId }),
+  const handlestart = React.useCallback(
+    (options: StartExamOptions) => loadExam({ ...DEFAULT_SESSION, examType: options.type, categoryId: options.categoryId}),
     [loadExam]
   )
 
   const handleContinue = React.useCallback(async () => {
     try {
-      loadExam(session)
+      await loadExam(session)
     } catch (err) {
       console.error('Failed to load previous exam:', err)
       // Fallback to starting a new exam if loading fails
-      handleStartNew()
+      handlestart({ type: 'exam', categoryId: GENERAL_CATEGORY_ID})
     }
-  }, [session, loadExam, handleStartNew])
+  }, [session, loadExam, handlestart])
 
   // Load translation on start
   React.useEffect(() => {
@@ -138,10 +133,15 @@ const AppComponent: React.FC = () => {
           <Navigation startingSession={session} onSessionUpdate={setSession} />
         </ExamContext.Provider>
       ) : (
-        <Cover onStartNew={handleStartNew} onStartMini={handleStartMini} onContinue={handleContinue} />
+        <Cover onStart={handlestart} canContinue={session.examType ? true : false} onContinue={handleContinue} />
       )}
     </LangContext.Provider>
   )
 }
+
+export type StartExamOptions = {
+  type: ExamType;
+  categoryId: Category['id'];
+};
 
 export default AppComponent

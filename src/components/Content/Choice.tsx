@@ -25,7 +25,7 @@ export const ChoiceStyles = styled.div<ChoiceTextStylesProps>`
 
 // add margin to align with radio buttons (Open Sans issue)
 const LabelStyles = styled.div`
-  margin-top: -1px; 
+  margin-top: -2px; 
   justify-self: center;
   font-weight: 600;
 `

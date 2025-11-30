@@ -31,7 +31,7 @@ const CategoryLabel = styled.div<ThemedStyles>`
   font-size: calc(${({ theme }) => theme.fontSize} + 0.5rem);
   font-weight: 600;
   border-radius: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.10);
+  border: 1px solid ${({ theme }) => theme.grey[2]};
   width: auto;
 `;
 

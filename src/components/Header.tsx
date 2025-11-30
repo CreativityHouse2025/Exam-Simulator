@@ -51,13 +51,13 @@ const HeaderComponent: React.FC<HeaderProps> = ({ setLang }) => {
 
   return (
     <HeaderStyles id="header">
-      <ImageStyles id="image" className="no-select" src={Logo} onClick={resetApp}/>
+      <ImageStyles title='Creativity House' alt='Creativity House Logo' id="image" className="no-select" src={Logo} onClick={resetApp}/>
 
       <TitleStyles id="title" className="no-select" onClick={resetApp}>
         {title}
       </TitleStyles>
 
-      <LanguageStyles id="language" className="no-select" onClick={toggleLanguage}>
+      <LanguageStyles title='Change language' aria-label='Language Icon' id="language" className="no-select" onClick={toggleLanguage}>
         <Language size={40} />
       </LanguageStyles>
     </HeaderStyles>
