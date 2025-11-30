@@ -1,4 +1,5 @@
 import type { Lang, LangCode, Session } from './types'
+import styled from "styled-components";
 
 // Theme constants
 const colors = ['#b5965d', '#593752', '#301e2c', '#f8e3e0', '#000000', '#ffffff']
@@ -115,3 +116,17 @@ export const LANGUAGES: Record<LangCode, Lang> = {
   ar: { code: 'ar', name: 'العربية', dir: 'rtl' } as const,
   en: { code: 'en', name: 'English', dir: 'ltr' } as const
 } as const
+
+// Wrappe component to query for reduced animations in user's device
+export const ReducedMotionWrapper = styled.div`
+  @media (prefers-reduced-motion: reduce) {
+    & *,
+    & *::before,
+    & *::after {
+      animation: none !important;
+      transition: none !important;
+      transform: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+`;

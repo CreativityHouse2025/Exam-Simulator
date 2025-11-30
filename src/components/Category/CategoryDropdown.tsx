@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { LangContext } from "../../contexts";
 import styled from "styled-components";
 import type { Category, Lang, ThemedStyles } from "../../types";
