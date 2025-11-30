@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
 import CategoryDropdown from './Category/CategoryDropdown'
+import { ReducedMotionWrapper } from '../constants'
 
 const CoverStyles = styled.div<ThemedStyles>`
   width: 100vw;
@@ -57,7 +58,7 @@ const StartButton = styled.button<ThemedStyles>`
   }
 `
 
-const ContinueButton = styled(StartButton)<ThemedStyles>`
+const ContinueButton = styled(StartButton) <ThemedStyles>`
   min-width: 300px;
   background: ${({ theme }) => theme.secondary || theme.grey[6]};
 `
@@ -96,33 +97,35 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onConti
   )
 
   return (
-    <CoverStyles id="cover">
-      <Image id="image" src={Logo} alt={translations.logoAlt} />
+    <ReducedMotionWrapper>
+      <CoverStyles id="cover">
+        <Image id="image" src={Logo} alt={translations.logoAlt} />
 
-      <Title id="title">{translations.title}</Title>
+        <Title id="title">{translations.title}</Title>
 
-      <Description id="description">{translations.description}</Description>
+        <Description id="description">{translations.description}</Description>
 
-      <ButtonContainer id="button-container">
-        <ButtonRow id="button-row">
-          <StartButton id="start-new-button" className="no-select" onClick={onStartNew}>
-            {translations.new}
-          </StartButton>
+        <ButtonContainer id="button-container">
+          <ButtonRow id="button-row">
+            <StartButton id="start-new-button" className="no-select" onClick={onStartNew}>
+              {translations.new}
+            </StartButton>
 
-          <StartButton id="start-mini-button" ref={miniButtonRef} className="no-select" onClick={() => {setDropdown(true)}}>
-            {translations.mini}
-          </StartButton>
-        </ButtonRow>
+            <StartButton id="start-mini-button" ref={miniButtonRef} className="no-select" onClick={() => { setDropdown(true) }}>
+              {translations.mini}
+            </StartButton>
+          </ButtonRow>
 
-        {onContinue && (
-          <ContinueButton id="continue-button" className="no-select" onClick={onContinue}>
-            {translations.continue}
-          </ContinueButton>
-        )}
-        <CategoryDropdown open={dropdown} setOpen={setDropdown} buttonRef={miniButtonRef} title={translations.selectCategory} onSelect={onStartMini}/>
-        
-      </ButtonContainer>
-    </CoverStyles>
+          {onContinue && (
+            <ContinueButton id="continue-button" className="no-select" onClick={onContinue}>
+              {translations.continue}
+            </ContinueButton>
+          )}
+          <CategoryDropdown open={dropdown} setOpen={setDropdown} buttonRef={miniButtonRef} title={translations.selectCategory} onSelect={onStartMini} />
+
+        </ButtonContainer>
+      </CoverStyles>
+    </ReducedMotionWrapper>
   )
 }
 
