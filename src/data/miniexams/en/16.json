@@ -13,11 +13,11 @@
         "correct": false
       },
       {
-        "text": "Brainstorming, affinity diagrams, and mind mapping",
+        "text": "Affinity diagrams, benchmarking, and observation/conversation",
         "correct": false
       },
       {
-        "text": "Affinity diagrams, benchmarking, and observation/conversation",
+        "text": "Brainstorming, affinity diagrams, and mind mapping",
         "correct": false
       }
     ]
@@ -28,11 +28,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Project sponsor",
-        "correct": true
-      },
-      {
-        "text": "Functional manager",
+        "text": "Human resources",
         "correct": false
       },
       {
@@ -40,7 +36,11 @@
         "correct": false
       },
       {
-        "text": "Human resources",
+        "text": "Project sponsor",
+        "correct": true
+      },
+      {
+        "text": "Functional manager",
         "correct": false
       }
     ]
@@ -51,20 +51,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Identify the problem.",
-        "correct": true
+        "text": "Establish a measurement criteri",
+        "correct": false
       },
       {
         "text": "Brainstorm solutions.",
         "correct": false
       },
       {
-        "text": "Establish a measurement criteri",
+        "text": "Set a goal.",
         "correct": false
       },
       {
-        "text": "Set a goal.",
-        "correct": false
+        "text": "Identify the problem.",
+        "correct": true
       }
     ]
   },
@@ -74,20 +74,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ensured the requirements were properly captured in the product backlog.",
-        "correct": true
-      },
-      {
-        "text": "Created a business strategy to assist with organizational change management.",
-        "correct": false
-      },
-      {
         "text": "Improved the status reporting processes to highlight specific project results.",
         "correct": false
       },
       {
         "text": "Measured and demonstrated business value throughout the project lifecycl",
         "correct": false
+      },
+      {
+        "text": "Created a business strategy to assist with organizational change management.",
+        "correct": false
+      },
+      {
+        "text": "Ensured the requirements were properly captured in the product backlog.",
+        "correct": true
       }
     ]
   },
@@ -97,11 +97,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Reject the proposal due to budget constraints and follow the quality management plan.",
-        "correct": true
-      },
-      {
-        "text": "Accept the proposal because the high-resolution equipment produces precise test results with lower test uncertainty.",
+        "text": "Accept the proposal because budget is not an issue when quality assurance is taken into consideration.",
         "correct": false
       },
       {
@@ -109,8 +105,12 @@
         "correct": false
       },
       {
-        "text": "Accept the proposal because budget is not an issue when quality assurance is taken into consideration.",
+        "text": "Accept the proposal because the high-resolution equipment produces precise test results with lower test uncertainty.",
         "correct": false
+      },
+      {
+        "text": "Reject the proposal due to budget constraints and follow the quality management plan.",
+        "correct": true
       }
     ]
   },
@@ -124,15 +124,15 @@
         "correct": true
       },
       {
+        "text": "Rapid application development",
+        "correct": false
+      },
+      {
         "text": "Behavior-driven development",
         "correct": false
       },
       {
         "text": "Joint application development",
-        "correct": false
-      },
-      {
-        "text": "Rapid application development",
         "correct": false
       }
     ]
@@ -143,19 +143,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Schedule a separate meeting with the new stakeholder to brief them on project status.",
-        "correct": true
-      },
-      {
         "text": "Prepare and send a project status report to the new stakeholder for review.",
         "correct": false
       },
       {
-        "text": "Seek advice from the project sponsor on how to obtain support from the new stakeholder.",
+        "text": "Wait for the next communication window to share information with the new stakeholder.",
         "correct": false
       },
       {
-        "text": "Wait for the next communication window to share information with the new stakeholder.",
+        "text": "Schedule a separate meeting with the new stakeholder to brief them on project status.",
+        "correct": true
+      },
+      {
+        "text": "Seek advice from the project sponsor on how to obtain support from the new stakeholder.",
         "correct": false
       }
     ]
@@ -165,10 +165,6 @@
     "text": "A project manager is leading a project that entails transitioning to agil The project will pilot the agile delivery modeled around using four resources from a vendor, working alongside two internal resources with no agile experienc The project manager needs to act as a coach for the project team and help them understand the differences between the functioning of a traditional project team and an agile team.\nWhat is the most important thing the project manager needs to do to establish agile team behavior?",
     "explanation": "",
     "choices": [
-      {
-        "text": "Focus on the produced result of the team.",
-        "correct": true
-      },
       {
         "text": "Build trust within the team.",
         "correct": false
@@ -180,6 +176,10 @@
       {
         "text": "Hold each team member accountabl",
         "correct": false
+      },
+      {
+        "text": "Focus on the produced result of the team.",
+        "correct": true
       }
     ]
   },
@@ -188,6 +188,10 @@
     "text": "Question\nAt the completion of a project, customer agreement cannot be achieved through negotiations. What should the project manager do next?",
     "explanation": "",
     "choices": [
+      {
+        "text": "Explore arbitration.",
+        "correct": false
+      },
       {
         "text": "Inform project team members.",
         "correct": true
@@ -199,10 +203,6 @@
       {
         "text": "Start the closing phas",
         "correct": false
-      },
-      {
-        "text": "Explore arbitration.",
-        "correct": false
       }
     ]
   },
@@ -212,16 +212,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Managers ask how and when; leaders ask what and why.",
-        "correct": true
+        "text": "Managers challenge the status quo; leaders accept the status quo.",
+        "correct": false
       },
       {
         "text": "Managers focus on long-term goals; leaders focus on short-term goals.",
         "correct": false
       },
       {
-        "text": "Managers challenge the status quo; leaders accept the status quo.",
-        "correct": false
+        "text": "Managers ask how and when; leaders ask what and why.",
+        "correct": true
       },
       {
         "text": "Managers inspire trust; leaders rely on control.",
@@ -239,15 +239,15 @@
         "correct": true
       },
       {
+        "text": "Create a new project schedule based on potential changes to the water policy.",
+        "correct": false
+      },
+      {
         "text": "Cancel the project because of the uncertainty introduced with the policy change.",
         "correct": false
       },
       {
         "text": "Assess the impact of the policy change on the project scope.",
-        "correct": false
-      },
-      {
-        "text": "Create a new project schedule based on potential changes to the water policy.",
         "correct": false
       }
     ]
@@ -281,16 +281,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Forcing",
-        "correct": true
-      },
-      {
         "text": "Smoothing",
         "correct": false
       },
       {
         "text": "Compromise",
         "correct": false
+      },
+      {
+        "text": "Forcing",
+        "correct": true
       },
       {
         "text": "Problem-solving",
@@ -304,19 +304,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Team B is performing better than Team A as they have completed more units of work in the same duration.",
-        "correct": true
+        "text": "The teams have completed just two iterations; therefore, it is too early to assess their performance.",
+        "correct": false
       },
       {
-        "text": "Teams A and B have completed their tasks as planned; therefore, they are both performing equally.",
-        "correct": false
+        "text": "Team B is performing better than Team A as they have completed more units of work in the same duration.",
+        "correct": true
       },
       {
         "text": "Team A is performing better than Team B because there are fewer errors per unit of work.",
         "correct": false
       },
       {
-        "text": "The teams have completed just two iterations; therefore, it is too early to assess their performance.",
+        "text": "Teams A and B have completed their tasks as planned; therefore, they are both performing equally.",
         "correct": false
       }
     ]
@@ -327,12 +327,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Agile",
-        "correct": true
-      },
-      {
         "text": "Predictive",
         "correct": false
+      },
+      {
+        "text": "Agile",
+        "correct": true
       },
       {
         "text": "Waterfall",
@@ -358,11 +358,11 @@
         "correct": false
       },
       {
-        "text": "Prepared the stakeholder engagement plan",
+        "text": "Better developed the resource management plan",
         "correct": false
       },
       {
-        "text": "Better developed the resource management plan",
+        "text": "Prepared the stakeholder engagement plan",
         "correct": false
       }
     ]
@@ -373,19 +373,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Start-to-start (SS)",
-        "correct": true
-      },
-      {
         "text": "Finish-to-start (FS)",
         "correct": false
       },
       {
-        "text": "Start-to-finish (SF)",
+        "text": "Finish-to-finish (FF)",
         "correct": false
       },
       {
-        "text": "Finish-to-finish (FF)",
+        "text": "Start-to-start (SS)",
+        "correct": true
+      },
+      {
+        "text": "Start-to-finish (SF)",
         "correct": false
       }
     ]
@@ -396,16 +396,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Stakeholder requirements",
-        "correct": true
-      },
-      {
         "text": "Frequency of distribution",
         "correct": false
       },
       {
         "text": "Sender-receiver model",
         "correct": false
+      },
+      {
+        "text": "Stakeholder requirements",
+        "correct": true
       },
       {
         "text": "Meeting management methods",
@@ -423,15 +423,15 @@
         "correct": true
       },
       {
+        "text": "Create a shared understanding of team goals and objectives",
+        "correct": false
+      },
+      {
         "text": "Nurture stronger personal boundaries and individual sovereignty",
         "correct": false
       },
       {
         "text": "Create an environment where team members can openly communicate",
-        "correct": false
-      },
-      {
-        "text": "Create a shared understanding of team goals and objectives",
         "correct": false
       }
     ]
@@ -465,19 +465,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Investigate the reason for the team members' disengaged behavior and boost morale and participation.",
-        "correct": true
+        "text": "Request that the team members abandon the process that is slowing their progress.",
+        "correct": false
       },
       {
         "text": "Ask the team members to change the way they are working to match the newest work trends.",
         "correct": false
       },
       {
-        "text": "Encourage the team to double their efforts to pick up the slack from the disengaged team members.",
-        "correct": false
+        "text": "Investigate the reason for the team members' disengaged behavior and boost morale and participation.",
+        "correct": true
       },
       {
-        "text": "Request that the team members abandon the process that is slowing their progress.",
+        "text": "Encourage the team to double their efforts to pick up the slack from the disengaged team members.",
         "correct": false
       }
     ]
@@ -488,8 +488,8 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Reviewed the risk management plan.",
-        "correct": true
+        "text": "Allocated additional contingency reserves.",
+        "correct": false
       },
       {
         "text": "Confirmed organizational risk appetite.",
@@ -500,8 +500,8 @@
         "correct": false
       },
       {
-        "text": "Allocated additional contingency reserves.",
-        "correct": false
+        "text": "Reviewed the risk management plan.",
+        "correct": true
       }
     ]
   },
@@ -511,15 +511,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Ask the stakeholders to review the priority of this regulatory requirement.",
+        "correct": false
+      },
+      {
         "text": "Ask the team to include this regulatory requirement in the iteration backlog.",
         "correct": true
       },
       {
         "text": "Ask the product owner to review the priority of this regulatory requirement.",
-        "correct": false
-      },
-      {
-        "text": "Ask the stakeholders to review the priority of this regulatory requirement.",
         "correct": false
       },
       {
@@ -534,16 +534,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Power Oriented team member.",
-        "correct": true
+        "text": "Achievement Oriented Team member.",
+        "correct": false
       },
       {
         "text": "Affiliate Oriented team member.",
         "correct": false
       },
       {
-        "text": "Achievement Oriented Team member.",
-        "correct": false
+        "text": "Power Oriented team member.",
+        "correct": true
       },
       {
         "text": "Delivery Oriented Team member.",
@@ -561,7 +561,7 @@
         "correct": true
       },
       {
-        "text": "Managers are supposed to serve their team members.",
+        "text": "Team Members are supposed to serve their clients.",
         "correct": false
       },
       {
@@ -569,7 +569,7 @@
         "correct": false
       },
       {
-        "text": "Team Members are supposed to serve their clients.",
+        "text": "Managers are supposed to serve their team members.",
         "correct": false
       }
     ]
@@ -580,8 +580,8 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Set up one-on-one meetings with the project team members.",
-        "correct": true
+        "text": "Perform a sprint retrospective with the project team members.",
+        "correct": false
       },
       {
         "text": "Review sprint progress with the project team members.",
@@ -592,8 +592,8 @@
         "correct": false
       },
       {
-        "text": "Perform a sprint retrospective with the project team members.",
-        "correct": false
+        "text": "Set up one-on-one meetings with the project team members.",
+        "correct": true
       }
     ]
   },
@@ -602,6 +602,10 @@
     "text": "A new project manager is assigned to lead an agile project. The project manager wants to use motivation to encourage the team to perform well throughout the project.\nWhat should the project manager do?",
     "explanation": "",
     "choices": [
+      {
+        "text": "Ask project sponsor to fund more for team building activities.",
+        "correct": false
+      },
       {
         "text": "Implement a reward system aimed to keep the team engaged and motivate",
         "correct": true
@@ -613,10 +617,6 @@
       {
         "text": "Inflate project estimates to provide a financial buffer for team activities.",
         "correct": false
-      },
-      {
-        "text": "Ask project sponsor to fund more for team building activities.",
-        "correct": false
       }
     ]
   },
@@ -626,19 +626,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Apply for an additional contingency to prepare for the anticipated delay in project milestones.",
-        "correct": true
-      },
-      {
         "text": "Review the project scope and submit a request to exclude activities associated with the legislation.",
         "correct": false
       },
       {
-        "text": "Continuously evaluate exposure to the risk to minimize negative impacts on the project and its outcomes.",
+        "text": "Proceed with the project with the understanding that the pending legislation will pass without delay.",
         "correct": false
       },
       {
-        "text": "Proceed with the project with the understanding that the pending legislation will pass without delay.",
+        "text": "Apply for an additional contingency to prepare for the anticipated delay in project milestones.",
+        "correct": true
+      },
+      {
+        "text": "Continuously evaluate exposure to the risk to minimize negative impacts on the project and its outcomes.",
         "correct": false
       }
     ]
@@ -649,19 +649,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Identified risks, risk categories, and effects on objectives",
-        "correct": true
-      },
-      {
         "text": "Risks owners, potential risks responses, and risk triggers",
         "correct": false
       },
       {
-        "text": "Identified risks, risk owners, and potential risks responses",
-        "correct": false
+        "text": "Identified risks, risk categories, and effects on objectives",
+        "correct": true
       },
       {
         "text": "Issues log, metrics & trends, and distribution of risks across risk categories",
+        "correct": false
+      },
+      {
+        "text": "Identified risks, risk owners, and potential risks responses",
         "correct": false
       }
     ]
@@ -676,15 +676,15 @@
         "correct": true
       },
       {
+        "text": "Continue with the planned development and deliver only when full payment is made.",
+        "correct": false
+      },
+      {
         "text": "Deliver the features with the highest business value, based on the available budget.",
         "correct": false
       },
       {
         "text": "Deliver the features that have small independent components, based on the available budget.",
-        "correct": false
-      },
-      {
-        "text": "Continue with the planned development and deliver only when full payment is made.",
         "correct": false
       }
     ]
@@ -695,19 +695,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Recruit, appoint, and evaluate new agile project practitioners.",
-        "correct": true
+        "text": "Perform a retrospective analysis of prior project experiences.",
+        "correct": false
       },
       {
-        "text": "Implement an agile project management office (PMO).",
-        "correct": false
+        "text": "Recruit, appoint, and evaluate new agile project practitioners.",
+        "correct": true
       },
       {
         "text": "Determine the criteria for when to launch agile projects.",
         "correct": false
       },
       {
-        "text": "Perform a retrospective analysis of prior project experiences.",
+        "text": "Implement an agile project management office (PMO).",
         "correct": false
       }
     ]
@@ -722,7 +722,7 @@
         "correct": true
       },
       {
-        "text": "Understand they cannot achieve everything",
+        "text": "Make decisions only when the results are certain",
         "correct": false
       },
       {
@@ -730,7 +730,7 @@
         "correct": false
       },
       {
-        "text": "Make decisions only when the results are certain",
+        "text": "Understand they cannot achieve everything",
         "correct": false
       }
     ]
@@ -745,15 +745,15 @@
         "correct": true
       },
       {
-        "text": "Formalize the change in the scope with the project sponsor to limit accountability for the specific tasks.",
-        "correct": false
-      },
-      {
         "text": "Review the organizational process assets (OPAs) from similar situations and the approaches that were implemente",
         "correct": false
       },
       {
         "text": "Define an initial backlog and start working on the clearest tasks, then incrementally refine the scope.",
+        "correct": false
+      },
+      {
+        "text": "Formalize the change in the scope with the project sponsor to limit accountability for the specific tasks.",
         "correct": false
       }
     ]
@@ -764,19 +764,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Scope baseline",
-        "correct": true
-      },
-      {
         "text": "Activity list",
         "correct": false
       },
       {
-        "text": "Project charter",
+        "text": "WBS dictionary",
         "correct": false
       },
       {
-        "text": "WBS dictionary",
+        "text": "Scope baseline",
+        "correct": true
+      },
+      {
+        "text": "Project charter",
         "correct": false
       }
     ]
@@ -791,11 +791,11 @@
         "correct": true
       },
       {
-        "text": "Ask the CEO to intervene and stop the implementation of the new requirement, as development is complete.",
+        "text": "Tell the project team to update the product backlog with the new requirement and adjust the project plans.",
         "correct": false
       },
       {
-        "text": "Tell the project team to update the product backlog with the new requirement and adjust the project plans.",
+        "text": "Ask the CEO to intervene and stop the implementation of the new requirement, as development is complete.",
         "correct": false
       },
       {
@@ -814,11 +814,11 @@
         "correct": true
       },
       {
-        "text": "Ensure that the needed information is available and accessible to each and every member",
+        "text": "Ensure to visualize the work to be done on a white board visual and accessible to all",
         "correct": false
       },
       {
-        "text": "Ensure to visualize the work to be done on a white board visual and accessible to all",
+        "text": "Ensure that the needed information is available and accessible to each and every member",
         "correct": false
       },
       {
@@ -837,15 +837,15 @@
         "correct": true
       },
       {
+        "text": "Risk report, probability, and impact matrix",
+        "correct": false
+      },
+      {
         "text": "Risk report, risk register, and project documents updates",
         "correct": false
       },
       {
         "text": "Risk management plan, risk register, and risk responses",
-        "correct": false
-      },
-      {
-        "text": "Risk report, probability, and impact matrix",
         "correct": false
       }
     ]
@@ -856,11 +856,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Stop the project immediately due to uncertainty that the project will deliver the expected value.",
-        "correct": true
-      },
-      {
-        "text": "Continue with the project since the project manager has not been formally informed of any change in market conditions.",
+        "text": "Meet with the project sponsor to discuss the information and ask if the organization still supports delivery of the project.",
         "correct": false
       },
       {
@@ -868,7 +864,11 @@
         "correct": false
       },
       {
-        "text": "Meet with the project sponsor to discuss the information and ask if the organization still supports delivery of the project.",
+        "text": "Stop the project immediately due to uncertainty that the project will deliver the expected value.",
+        "correct": true
+      },
+      {
+        "text": "Continue with the project since the project manager has not been formally informed of any change in market conditions.",
         "correct": false
       }
     ]
@@ -879,16 +879,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Provided detailed instructions on how and when the work should be done.",
-        "correct": true
+        "text": "Implemented detailed tracking of project progress, productivity, and costs.",
+        "correct": false
       },
       {
         "text": "Requested detailed documentation and sign-offs between project phases.",
         "correct": false
       },
       {
-        "text": "Implemented detailed tracking of project progress, productivity, and costs.",
-        "correct": false
+        "text": "Provided detailed instructions on how and when the work should be done.",
+        "correct": true
       },
       {
         "text": "Provided a detailed vision and empowered the team making them accountable.",

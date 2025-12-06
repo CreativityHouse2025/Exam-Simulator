@@ -5,11 +5,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Before the start of each iteration",
-        "correct": true
-      },
-      {
-        "text": "During the daily standup meeting",
+        "text": "After every scrum meeting",
         "correct": false
       },
       {
@@ -17,8 +13,12 @@
         "correct": false
       },
       {
-        "text": "After every scrum meeting",
+        "text": "During the daily standup meeting",
         "correct": false
+      },
+      {
+        "text": "Before the start of each iteration",
+        "correct": true
       }
     ]
   },
@@ -28,16 +28,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Audit Schedule",
-        "correct": true
-      },
-      {
         "text": "Plan Quality Management",
         "correct": false
       },
       {
         "text": "Control Quality",
         "correct": false
+      },
+      {
+        "text": "Audit Schedule",
+        "correct": true
       },
       {
         "text": "Manage Quality",
@@ -51,11 +51,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "What-if scenario analysis",
-        "correct": true
-      },
-      {
-        "text": "Business case review",
+        "text": "Scope definition",
         "correct": false
       },
       {
@@ -63,8 +59,12 @@
         "correct": false
       },
       {
-        "text": "Scope definition",
+        "text": "Business case review",
         "correct": false
+      },
+      {
+        "text": "What-if scenario analysis",
+        "correct": true
       }
     ]
   },
@@ -82,11 +82,11 @@
         "correct": false
       },
       {
-        "text": "Notify all stakeholders after revising the project plan with new contents adde",
+        "text": "Hold all upcoming sprint review meetings with the new stakeholder in attendance and revise the project plan.",
         "correct": false
       },
       {
-        "text": "Hold all upcoming sprint review meetings with the new stakeholder in attendance and revise the project plan.",
+        "text": "Notify all stakeholders after revising the project plan with new contents adde",
         "correct": false
       }
     ]
@@ -97,16 +97,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Retrospective session",
-        "correct": true
+        "text": "Team building",
+        "correct": false
       },
       {
         "text": "Backlog analysis",
         "correct": false
       },
       {
-        "text": "Team building",
-        "correct": false
+        "text": "Retrospective session",
+        "correct": true
       },
       {
         "text": "Team motivation",
@@ -120,15 +120,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Misunderstanding stakeholder expectations",
+        "correct": false
+      },
+      {
         "text": "Lack of buy-in commitment",
         "correct": true
       },
       {
         "text": "Poor team communication",
-        "correct": false
-      },
-      {
-        "text": "Misunderstanding stakeholder expectations",
         "correct": false
       },
       {
@@ -143,19 +143,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Describe the executive's support level, expectations, risk threshold, and appropriate communications for various project needs.",
-        "correct": true
+        "text": "Describe the executive's involvement in similar past projects in order to decide the appropriate engagement level on a case-by-case basis.",
+        "correct": false
       },
       {
-        "text": "Rank the executive in an organizational chart and illustrate any affinities or hostilities with other stakeholders.",
-        "correct": false
+        "text": "Describe the executive's support level, expectations, risk threshold, and appropriate communications for various project needs.",
+        "correct": true
       },
       {
         "text": "Label the executive as \"supportive\" and ensure that email, phone numbers, and absence/vacation times are up to date.",
         "correct": false
       },
       {
-        "text": "Describe the executive's involvement in similar past projects in order to decide the appropriate engagement level on a case-by-case basis.",
+        "text": "Rank the executive in an organizational chart and illustrate any affinities or hostilities with other stakeholders.",
         "correct": false
       }
     ]
@@ -166,20 +166,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ask Human Resources department which incentives should be provide",
-        "correct": true
-      },
-      {
-        "text": "Check on budget availability in order to determine specific reward amounts.",
-        "correct": false
-      },
-      {
         "text": "Provide an opportunity for publicly presenting the outcomes.",
         "correct": false
       },
       {
         "text": "Identify the specific needs for each team member to determine incentives.",
         "correct": false
+      },
+      {
+        "text": "Check on budget availability in order to determine specific reward amounts.",
+        "correct": false
+      },
+      {
+        "text": "Ask Human Resources department which incentives should be provide",
+        "correct": true
       }
     ]
   },
@@ -189,20 +189,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Acts as coordinator for the resources and activities",
-        "correct": true
+        "text": "Performs risk analyses of compliance risks",
+        "correct": false
       },
       {
         "text": "Conducts audits for the compliance requirement",
         "correct": false
       },
       {
-        "text": "Performs risk analyses of compliance risks",
+        "text": "Changes process assets of the organization",
         "correct": false
       },
       {
-        "text": "Changes process assets of the organization",
-        "correct": false
+        "text": "Acts as coordinator for the resources and activities",
+        "correct": true
       }
     ]
   },
@@ -212,19 +212,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Start working on the project management plan with work packages, a detailed schedule, and work assignments for team members.",
-        "correct": true
-      },
-      {
-        "text": "Work directly with stakeholders on the work breakdown structure (WBS) and assign tasks with a required timeline for each team member to start the work.",
-        "correct": false
-      },
-      {
         "text": "Work with the team to decompose the scope into a WBS and work packages in order to create required deliverables and timelines.",
         "correct": false
       },
       {
+        "text": "Start working on the project management plan with work packages, a detailed schedule, and work assignments for team members.",
+        "correct": true
+      },
+      {
         "text": "Create the requirements management plan to outline how project requirements will be collected, analyzed, and documented, and then assign requirements to team members.",
+        "correct": false
+      },
+      {
+        "text": "Work directly with stakeholders on the work breakdown structure (WBS) and assign tasks with a required timeline for each team member to start the work.",
         "correct": false
       }
     ]
@@ -235,20 +235,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Request for Information (RFI)",
-        "correct": true
-      },
-      {
-        "text": "Request for Quote (RFQ)",
-        "correct": false
-      },
-      {
         "text": "Request for Proposal (RFP)",
         "correct": false
       },
       {
         "text": "Request for Contract (RFC)",
         "correct": false
+      },
+      {
+        "text": "Request for Quote (RFQ)",
+        "correct": false
+      },
+      {
+        "text": "Request for Information (RFI)",
+        "correct": true
       }
     ]
   },
@@ -281,10 +281,6 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Design a travel schedule so that timely, onsite assistance can be provide",
-        "correct": true
-      },
-      {
         "text": "Include the expert on the team using a virtual environment.",
         "correct": false
       },
@@ -295,6 +291,10 @@
       {
         "text": "Ask team members to contact the expert as an external expertise source on an as-needed basis.",
         "correct": false
+      },
+      {
+        "text": "Design a travel schedule so that timely, onsite assistance can be provide",
+        "correct": true
       }
     ]
   },
@@ -308,15 +308,15 @@
         "correct": true
       },
       {
-        "text": "Dependent",
-        "correct": false
-      },
-      {
         "text": "Demanding",
         "correct": false
       },
       {
         "text": "Definitive",
+        "correct": false
+      },
+      {
+        "text": "Dependent",
         "correct": false
       }
     ]
@@ -327,11 +327,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Project objectives are not clearly defined",
-        "correct": true
-      },
-      {
-        "text": "The business environment is very dynamic",
+        "text": "Roles & Responsibilities are not clearly defined",
         "correct": false
       },
       {
@@ -339,8 +335,12 @@
         "correct": false
       },
       {
-        "text": "Roles & Responsibilities are not clearly defined",
+        "text": "The business environment is very dynamic",
         "correct": false
+      },
+      {
+        "text": "Project objectives are not clearly defined",
+        "correct": true
       }
     ]
   },
@@ -350,20 +350,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Increased the authorized budget, and requested additional resources",
-        "correct": true
+        "text": "Fast tracked and crashed the schedule",
+        "correct": false
       },
       {
         "text": "Redefined the project scope to include the new design",
         "correct": false
       },
       {
-        "text": "Fast tracked and crashed the schedule",
+        "text": "Thoroughly assessed the request in accordance with the risk management plan",
         "correct": false
       },
       {
-        "text": "Thoroughly assessed the request in accordance with the risk management plan",
-        "correct": false
+        "text": "Increased the authorized budget, and requested additional resources",
+        "correct": true
       }
     ]
   },
@@ -373,19 +373,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Change management",
-        "correct": true
-      },
-      {
         "text": "Risk management",
         "correct": false
       },
       {
-        "text": "Stakeholder management",
+        "text": "Communication management",
         "correct": false
       },
       {
-        "text": "Communication management",
+        "text": "Change management",
+        "correct": true
+      },
+      {
+        "text": "Stakeholder management",
         "correct": false
       }
     ]
@@ -395,10 +395,6 @@
     "text": "77\nDuring a project steering committee meeting, the project manager reports that a formerly supportive key team member has become resistant to and negative about changes. Where should this information be captured?",
     "explanation": "",
     "choices": [
-      {
-        "text": "Responsible, accountable, consult, and inform (RACI) matrix",
-        "correct": true
-      },
       {
         "text": "Stakeholders engagement assessment matrix",
         "correct": false
@@ -410,6 +406,10 @@
       {
         "text": "Work performance reports",
         "correct": false
+      },
+      {
+        "text": "Responsible, accountable, consult, and inform (RACI) matrix",
+        "correct": true
       }
     ]
   },
@@ -419,15 +419,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Develop a strategy to align the internal and vendor processes and tools.",
+        "correct": false
+      },
+      {
         "text": "Coach the internal project team to use the vendor's processes and tools.",
         "correct": true
       },
       {
         "text": "Train the vendor to use the same processes and tools as the internal team.",
-        "correct": false
-      },
-      {
-        "text": "Develop a strategy to align the internal and vendor processes and tools.",
         "correct": false
       },
       {
@@ -442,19 +442,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Review lessons learned from previous projects.",
-        "correct": true
-      },
-      {
         "text": "Review the project charter.",
         "correct": false
       },
       {
-        "text": "Conduct a brainstorming session with the project team.",
-        "correct": false
+        "text": "Review lessons learned from previous projects.",
+        "correct": true
       },
       {
         "text": "Review the organization chart.",
+        "correct": false
+      },
+      {
+        "text": "Conduct a brainstorming session with the project team.",
         "correct": false
       }
     ]
@@ -469,7 +469,7 @@
         "correct": true
       },
       {
-        "text": "Scrum Master",
+        "text": "Stakeholder",
         "correct": false
       },
       {
@@ -477,7 +477,7 @@
         "correct": false
       },
       {
-        "text": "Stakeholder",
+        "text": "Scrum Master",
         "correct": false
       }
     ]
@@ -492,11 +492,11 @@
         "correct": true
       },
       {
-        "text": "Give continuous positive feedback to all team members.",
+        "text": "Remind the team that they are using an agile approach.",
         "correct": false
       },
       {
-        "text": "Remind the team that they are using an agile approach.",
+        "text": "Give continuous positive feedback to all team members.",
         "correct": false
       },
       {
@@ -511,12 +511,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "They must be kept satisfied by ensuring their concerns and s are addressed adequately.",
-        "correct": true
-      },
-      {
         "text": "They require minimal management effort.",
         "correct": false
+      },
+      {
+        "text": "They must be kept satisfied by ensuring their concerns and s are addressed adequately.",
+        "correct": true
       },
       {
         "text": "They must be kept informed and updated on the project.",
@@ -534,11 +534,11 @@
     "explanation": "",
     "choices": [
       {
-        "text": "When starting the project and as each risk is close",
-        "correct": true
+        "text": "While organizing, preparing, and carrying out the work.",
+        "correct": false
       },
       {
-        "text": "While organizing, preparing, and carrying out the work.",
+        "text": "Regularly and throughout the project.",
         "correct": false
       },
       {
@@ -546,8 +546,8 @@
         "correct": false
       },
       {
-        "text": "Regularly and throughout the project.",
-        "correct": false
+        "text": "When starting the project and as each risk is close",
+        "correct": true
       }
     ]
   },
@@ -557,11 +557,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Update the project management plan.",
-        "correct": true
-      },
-      {
-        "text": "Stop the release of the deliverable to the customer.",
+        "text": "Update the risk register.",
         "correct": false
       },
       {
@@ -569,7 +565,11 @@
         "correct": false
       },
       {
-        "text": "Update the risk register.",
+        "text": "Update the project management plan.",
+        "correct": true
+      },
+      {
+        "text": "Stop the release of the deliverable to the customer.",
         "correct": false
       }
     ]
@@ -580,12 +580,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Weekly colocated meetings with the relevant stakeholders",
-        "correct": true
-      },
-      {
         "text": "Biweekly written status reports from the relevant stakeholders",
         "correct": false
+      },
+      {
+        "text": "Weekly colocated meetings with the relevant stakeholders",
+        "correct": true
       },
       {
         "text": "Weekly one-on-one meetings with each of the relevant stakeholders",
@@ -603,19 +603,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Good quality, go-live should have zero critical defects.",
-        "correct": true
-      },
-      {
-        "text": "Good user interface developed by talented graphical artists",
-        "correct": false
-      },
-      {
         "text": "Good change management planning and execution",
         "correct": false
       },
       {
+        "text": "Good quality, go-live should have zero critical defects.",
+        "correct": true
+      },
+      {
         "text": "Good change control process with fast approvals",
+        "correct": false
+      },
+      {
+        "text": "Good user interface developed by talented graphical artists",
         "correct": false
       }
     ]
@@ -626,12 +626,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Schedule a meeting with the stakeholder and a team member.",
-        "correct": true
-      },
-      {
         "text": "Ask the stakeholder to explain and implement the requirements immediately.",
         "correct": false
+      },
+      {
+        "text": "Schedule a meeting with the stakeholder and a team member.",
+        "correct": true
       },
       {
         "text": "Host a meeting with all team members to discuss the requirements.",
@@ -649,16 +649,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Hire additional resources for the team to mitigate this risk.",
-        "correct": true
-      },
-      {
         "text": "Discuss with the team to find options to mitigate the risk.",
         "correct": false
       },
       {
         "text": "Escalate the risk to upper management as critical for timely delivery.",
         "correct": false
+      },
+      {
+        "text": "Hire additional resources for the team to mitigate this risk.",
+        "correct": true
       },
       {
         "text": "Add the risk to the risk register to be monitored and reviewe",
@@ -676,15 +676,15 @@
         "correct": true
       },
       {
+        "text": "Identify new quality policies and procedures for the project.",
+        "correct": false
+      },
+      {
         "text": "Assign a resource to focus solely on the project’s quality.",
         "correct": false
       },
       {
         "text": "Ensure that quality is tied to performance reviews.",
-        "correct": false
-      },
-      {
-        "text": "Identify new quality policies and procedures for the project.",
         "correct": false
       }
     ]
@@ -695,16 +695,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Responded to positive actions of the stakeholders to reward actions",
-        "correct": true
-      },
-      {
         "text": "Acted in a manner that was consistent in the use of words and actions",
         "correct": false
       },
       {
         "text": "Engaged with stakeholders by cooperating toward mutual goals",
         "correct": false
+      },
+      {
+        "text": "Responded to positive actions of the stakeholders to reward actions",
+        "correct": true
       },
       {
         "text": "Acted based on the power authorized by senior management",
@@ -722,15 +722,15 @@
         "correct": true
       },
       {
+        "text": "Surrogate measurements",
+        "correct": false
+      },
+      {
         "text": "A release burndown chart",
         "correct": false
       },
       {
         "text": "Story points for the remaining user stories",
-        "correct": false
-      },
-      {
-        "text": "Surrogate measurements",
         "correct": false
       }
     ]
@@ -745,15 +745,15 @@
         "correct": true
       },
       {
-        "text": "Ask the mentor to use a collaborative servant leader approach to perform the usual duties along with the mentor role.",
-        "correct": false
-      },
-      {
         "text": "Cancel the mentor plan and focus on keeping the graduate motivated by learning through an intensive immersion.",
         "correct": false
       },
       {
         "text": "Ask three more team members to share the mentor role in order to reduce the individual mentor workload by 75%.",
+        "correct": false
+      },
+      {
+        "text": "Ask the mentor to use a collaborative servant leader approach to perform the usual duties along with the mentor role.",
         "correct": false
       }
     ]
@@ -764,20 +764,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Conduct individualized skills assessments and provide targeted training for each team member.",
-        "correct": true
+        "text": "Faciliate open communication and build buy-in from all project stakeholders.",
+        "correct": false
       },
       {
         "text": "Monitor external regulations and adapt project management practices accordingly.",
         "correct": false
       },
       {
-        "text": "Faciliate open communication and build buy-in from all project stakeholders.",
+        "text": "Implement a project management change management plan aligned with industry best practices.",
         "correct": false
       },
       {
-        "text": "Implement a project management change management plan aligned with industry best practices.",
-        "correct": false
+        "text": "Conduct individualized skills assessments and provide targeted training for each team member.",
+        "correct": true
       }
     ]
   },
@@ -787,11 +787,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ask the individual who is hosting the event to mark it as private.",
-        "correct": true
-      },
-      {
-        "text": "Set up a meeting with the distracted team member to discuss any issues.",
+        "text": "Add a social events section to the charter to handle these situations.",
         "correct": false
       },
       {
@@ -799,8 +795,12 @@
         "correct": false
       },
       {
-        "text": "Add a social events section to the charter to handle these situations.",
+        "text": "Set up a meeting with the distracted team member to discuss any issues.",
         "correct": false
+      },
+      {
+        "text": "Ask the individual who is hosting the event to mark it as private.",
+        "correct": true
       }
     ]
   },
@@ -810,11 +810,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Allow the team to self-organize and have them analyze the situation in their retrospective session and self correct.",
-        "correct": true
-      },
-      {
-        "text": "Challenge the team to find new ways to achieve higher levels of performance to improve the situation.",
+        "text": "Have the team inform senior management of the situation and ask for recommendations.",
         "correct": false
       },
       {
@@ -822,7 +818,11 @@
         "correct": false
       },
       {
-        "text": "Have the team inform senior management of the situation and ask for recommendations.",
+        "text": "Allow the team to self-organize and have them analyze the situation in their retrospective session and self correct.",
+        "correct": true
+      },
+      {
+        "text": "Challenge the team to find new ways to achieve higher levels of performance to improve the situation.",
         "correct": false
       }
     ]
@@ -832,6 +832,10 @@
     "text": "1\nWhat are the four team-building leadership styles?",
     "explanation": "",
     "choices": [
+      {
+        "text": "Visionary, affiliative, coaching and high waters",
+        "correct": false
+      },
       {
         "text": "Visionary, affiliative, coaching and participative",
         "correct": true
@@ -843,10 +847,6 @@
       {
         "text": "Visionary, affiliative, coaching and directive",
         "correct": false
-      },
-      {
-        "text": "Visionary, affiliative, coaching and high waters",
-        "correct": false
       }
     ]
   },
@@ -856,16 +856,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Request a budget increase.",
-        "correct": true
-      },
-      {
         "text": "Submit a change request.",
         "correct": false
       },
       {
         "text": "Change the project schedule.",
         "correct": false
+      },
+      {
+        "text": "Request a budget increase.",
+        "correct": true
       },
       {
         "text": "Update the requirements document.",
@@ -879,6 +879,10 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Use the agile toolkit and ask team members to choose between agile and predictive methods so that they will work more effectively and productively.",
+        "correct": false
+      },
+      {
         "text": "Use the agile toolkit to leverage the ability of agile methods to respond effectively to change, while maintaining the benefits of a predictive approach to project management.",
         "correct": true
       },
@@ -888,10 +892,6 @@
       },
       {
         "text": "Use the agile toolkit to compare agile against predictive methods, then choose the best approach for future projects.",
-        "correct": false
-      },
-      {
-        "text": "Use the agile toolkit and ask team members to choose between agile and predictive methods so that they will work more effectively and productively.",
         "correct": false
       }
     ]
@@ -910,11 +910,11 @@
         "correct": false
       },
       {
-        "text": "Continue working on the project execution, as the business strategy is not responsibility of the project manager.",
+        "text": "Halt the project immediately, as the project manager knows it will be useless to the client.",
         "correct": false
       },
       {
-        "text": "Halt the project immediately, as the project manager knows it will be useless to the client.",
+        "text": "Continue working on the project execution, as the business strategy is not responsibility of the project manager.",
         "correct": false
       }
     ]
@@ -948,19 +948,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Analyze",
-        "correct": true
-      },
-      {
         "text": "Monitor",
         "correct": false
       },
       {
-        "text": "Engage",
+        "text": "Identify",
         "correct": false
       },
       {
-        "text": "Identify",
+        "text": "Analyze",
+        "correct": true
+      },
+      {
+        "text": "Engage",
         "correct": false
       }
     ]
@@ -971,19 +971,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Negotiate with the executives and agree on a process.",
-        "correct": true
-      },
-      {
-        "text": "Train the executives on agile practices.",
-        "correct": false
-      },
-      {
         "text": "Include the executives in team retrospectives.",
         "correct": false
       },
       {
         "text": "Request that the executives use agile practices.",
+        "correct": false
+      },
+      {
+        "text": "Negotiate with the executives and agree on a process.",
+        "correct": true
+      },
+      {
+        "text": "Train the executives on agile practices.",
         "correct": false
       }
     ]
@@ -994,19 +994,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Hold a kick-off meeting with all stakeholders.",
-        "correct": true
-      },
-      {
         "text": "Create a stakeholder register and communication plan.",
         "correct": false
       },
       {
-        "text": "Identify the stakeholders' needs and expectations.",
+        "text": "Document the stakeholders' concerns and risks.",
         "correct": false
       },
       {
-        "text": "Document the stakeholders' concerns and risks.",
+        "text": "Hold a kick-off meeting with all stakeholders.",
+        "correct": true
+      },
+      {
+        "text": "Identify the stakeholders' needs and expectations.",
         "correct": false
       }
     ]
@@ -1017,19 +1017,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "The client should be exposed to the agile approach in advance to understand the cost estimating process.",
-        "correct": true
-      },
-      {
         "text": "The agile approach should not be used if the client requires reliable cost estimates.",
         "correct": false
       },
       {
-        "text": "During the first iteration of a project, time should be allocated to define the scope and ensure that reliable cost estimates are performe",
-        "correct": false
+        "text": "The client should be exposed to the agile approach in advance to understand the cost estimating process.",
+        "correct": true
       },
       {
         "text": "Client communications should be included in the daily standups.",
+        "correct": false
+      },
+      {
+        "text": "During the first iteration of a project, time should be allocated to define the scope and ensure that reliable cost estimates are performe",
         "correct": false
       }
     ]
@@ -1040,12 +1040,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Problem solving",
-        "correct": true
-      },
-      {
         "text": "Compromising",
         "correct": false
+      },
+      {
+        "text": "Problem solving",
+        "correct": true
       },
       {
         "text": "Accommodating",
@@ -1063,19 +1063,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Implement regular status reporting.",
-        "correct": true
+        "text": "Invite the senior manager to daily project meetings.",
+        "correct": false
       },
       {
         "text": "Escalate this risk to senior management.",
         "correct": false
       },
       {
-        "text": "Develop a highly detailed project management plan",
-        "correct": false
+        "text": "Implement regular status reporting.",
+        "correct": true
       },
       {
-        "text": "Invite the senior manager to daily project meetings.",
+        "text": "Develop a highly detailed project management plan",
         "correct": false
       }
     ]
@@ -1086,19 +1086,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Add an information gap to the risk register.",
-        "correct": true
+        "text": "Review the business case with the sponsoring organization to confirm that the project aligns with business needs.",
+        "correct": false
       },
       {
-        "text": "Review the project statement of work (SOW) to create the project charter.",
-        "correct": false
+        "text": "Add an information gap to the risk register.",
+        "correct": true
       },
       {
         "text": "Revise the business case to narrow the project scope and create the project charter.",
         "correct": false
       },
       {
-        "text": "Review the business case with the sponsoring organization to confirm that the project aligns with business needs.",
+        "text": "Review the project statement of work (SOW) to create the project charter.",
         "correct": false
       }
     ]

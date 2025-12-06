@@ -9,7 +9,7 @@
         "correct": true
       },
       {
-        "text": "Get approval for the additional budget from the steering committee.",
+        "text": "Acquire approval for an exception to the implementation of the new regulation.",
         "correct": false
       },
       {
@@ -17,7 +17,7 @@
         "correct": false
       },
       {
-        "text": "Acquire approval for an exception to the implementation of the new regulation.",
+        "text": "Get approval for the additional budget from the steering committee.",
         "correct": false
       }
     ]
@@ -27,6 +27,10 @@
     "text": "Question\nA project leader noticed that a new team member is demotivated and always arrives late to work, causing a delay in the deliverables. What should the project manager do?",
     "explanation": "",
     "choices": [
+      {
+        "text": "Talk with the team member on a one-to-one basis, emphasizing the importance of teamwork and the value of each member's contributions.",
+        "correct": false
+      },
       {
         "text": "Ask HR to deal with the team member's attendance, advise them to arrive on time, and remind them of the incentives at the end of the project.",
         "correct": true
@@ -38,10 +42,6 @@
       {
         "text": "During the daily meeting, ask all team members to arrive on time, and plan an event after working hours to celebrate the project progress.",
         "correct": false
-      },
-      {
-        "text": "Talk with the team member on a one-to-one basis, emphasizing the importance of teamwork and the value of each member's contributions.",
-        "correct": false
       }
     ]
   },
@@ -51,20 +51,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Yield to the product owner's prioritization authority and remind the stakeholder that it is not their responsibility.",
-        "correct": true
-      },
-      {
-        "text": "Examine previous situations in the lessons learned register to find a solution and prioritize the backlog accordingly.",
-        "correct": false
-      },
-      {
         "text": "Use negotiation techniques to convince the product owner to prioritize the backlog as suggested by the stakeholder.",
         "correct": false
       },
       {
         "text": "Facilitate a discussion between the product owner and the stakeholder to discuss their perspectives and concerns.",
         "correct": false
+      },
+      {
+        "text": "Examine previous situations in the lessons learned register to find a solution and prioritize the backlog accordingly.",
+        "correct": false
+      },
+      {
+        "text": "Yield to the product owner's prioritization authority and remind the stakeholder that it is not their responsibility.",
+        "correct": true
       }
     ]
   },
@@ -78,7 +78,7 @@
         "correct": true
       },
       {
-        "text": "Conduct individual performance reviews to identify and address performance issues within each team.",
+        "text": "Facilitate open communication sessions to identify and address underlying challenges.",
         "correct": false
       },
       {
@@ -86,7 +86,7 @@
         "correct": false
       },
       {
-        "text": "Facilitate open communication sessions to identify and address underlying challenges.",
+        "text": "Conduct individual performance reviews to identify and address performance issues within each team.",
         "correct": false
       }
     ]
@@ -97,11 +97,11 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Set up weekly status meetings to review team progress and regularly escalate delays.",
-        "correct": true
+        "text": "Met with the team, allowed team members to make decisions about what to do, and established performance goals.",
+        "correct": false
       },
       {
-        "text": "Met with the team, allowed team members to make decisions about what to do, and established performance goals.",
+        "text": "Conducted routine meetings and identified team members who are under performing.",
         "correct": false
       },
       {
@@ -109,8 +109,8 @@
         "correct": false
       },
       {
-        "text": "Conducted routine meetings and identified team members who are under performing.",
-        "correct": false
+        "text": "Set up weekly status meetings to review team progress and regularly escalate delays.",
+        "correct": true
       }
     ]
   },
@@ -120,16 +120,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Control Schedule",
-        "correct": true
-      },
-      {
         "text": "Perform Qualitative Risk Analysis",
         "correct": false
       },
       {
         "text": "Plan Scope Management",
         "correct": false
+      },
+      {
+        "text": "Control Schedule",
+        "correct": true
       },
       {
         "text": "Perform Integrated Change Control",
@@ -143,19 +143,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Identify the data that will be displaye",
-        "correct": true
+        "text": "Define the communication needs of the stakeholders.",
+        "correct": false
       },
       {
         "text": "Select the appropriate visualization tools.",
         "correct": false
       },
       {
-        "text": "Determine the frequency of dashboard updates.",
-        "correct": false
+        "text": "Identify the data that will be displaye",
+        "correct": true
       },
       {
-        "text": "Define the communication needs of the stakeholders.",
+        "text": "Determine the frequency of dashboard updates.",
         "correct": false
       }
     ]
@@ -166,16 +166,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "The product owner is responsible for product vision and backlog management.",
-        "correct": true
+        "text": "The quality assurance (QA) manager is responsible for proposing measures for delivery improvement.",
+        "correct": false
       },
       {
         "text": "The quality control (QC) manager is responsible for ensuring delivery quality and efficiency.",
         "correct": false
       },
       {
-        "text": "The quality assurance (QA) manager is responsible for proposing measures for delivery improvement.",
-        "correct": false
+        "text": "The product owner is responsible for product vision and backlog management.",
+        "correct": true
       },
       {
         "text": "The subject matter expert (SME) is responsible for a deep understanding of the platform and requirements.",
@@ -189,19 +189,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Survey the market for possible impacts on the project.",
-        "correct": true
-      },
-      {
         "text": "Change the product’s scope to meet the new needs.",
         "correct": false
       },
       {
-        "text": "Finalize the product on time and budget to launch as planne",
+        "text": "Review the backlog to see the impact of the new needs.",
         "correct": false
       },
       {
-        "text": "Review the backlog to see the impact of the new needs.",
+        "text": "Survey the market for possible impacts on the project.",
+        "correct": true
+      },
+      {
+        "text": "Finalize the product on time and budget to launch as planne",
         "correct": false
       }
     ]
@@ -216,11 +216,11 @@
         "correct": true
       },
       {
-        "text": "Neutral",
+        "text": "Champion",
         "correct": false
       },
       {
-        "text": "Champion",
+        "text": "Neutral",
         "correct": false
       },
       {
@@ -239,15 +239,15 @@
         "correct": true
       },
       {
+        "text": "Review the performance metrics with stakeholders to ensure the system accomplished agreed-upon metrics.",
+        "correct": false
+      },
+      {
         "text": "Call a steering committee meeting to determine critical success factors for the project.",
         "correct": false
       },
       {
         "text": "Create a project benefits management plan and review it with the stakeholders.",
-        "correct": false
-      },
-      {
-        "text": "Review the performance metrics with stakeholders to ensure the system accomplished agreed-upon metrics.",
         "correct": false
       }
     ]
@@ -262,7 +262,7 @@
         "correct": true
       },
       {
-        "text": "Focus group",
+        "text": "Email",
         "correct": false
       },
       {
@@ -270,7 +270,7 @@
         "correct": false
       },
       {
-        "text": "Email",
+        "text": "Focus group",
         "correct": false
       }
     ]
@@ -285,7 +285,7 @@
         "correct": true
       },
       {
-        "text": "Consult with the technology manager to ensure the technology can fit in the new site.",
+        "text": "Develop the project charter for implementation at the new site using the lessons learned from the first site.",
         "correct": false
       },
       {
@@ -293,7 +293,7 @@
         "correct": false
       },
       {
-        "text": "Develop the project charter for implementation at the new site using the lessons learned from the first site.",
+        "text": "Consult with the technology manager to ensure the technology can fit in the new site.",
         "correct": false
       }
     ]
@@ -304,11 +304,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Determine the definition of value with the stakeholders and reprioritize the project's backlog accordingly.",
-        "correct": true
-      },
-      {
-        "text": "Reprioritize the project's backlog by prioritizing those features that maximize the return on investment (ROI).",
+        "text": "Launch a customer survey to better evaluate the key project features prior to reprioritizing the roadmap.",
         "correct": false
       },
       {
@@ -316,7 +312,11 @@
         "correct": false
       },
       {
-        "text": "Launch a customer survey to better evaluate the key project features prior to reprioritizing the roadmap.",
+        "text": "Determine the definition of value with the stakeholders and reprioritize the project's backlog accordingly.",
+        "correct": true
+      },
+      {
+        "text": "Reprioritize the project's backlog by prioritizing those features that maximize the return on investment (ROI).",
         "correct": false
       }
     ]
@@ -331,15 +331,15 @@
         "correct": true
       },
       {
+        "text": "Start by doing a team self-assessment to increase team autonomy",
+        "correct": false
+      },
+      {
         "text": "Ask direct questions to each team member and wait for their responses",
         "correct": false
       },
       {
         "text": "Inform the team members about the incentives of the project success",
-        "correct": false
-      },
-      {
-        "text": "Start by doing a team self-assessment to increase team autonomy",
         "correct": false
       }
     ]
@@ -377,11 +377,11 @@
         "correct": true
       },
       {
-        "text": "Send a weekly reminder to each team member notifying them to submit their time sheets.",
+        "text": "Explain the impact of not submitting time sheets on the project's cost assessment.",
         "correct": false
       },
       {
-        "text": "Explain the impact of not submitting time sheets on the project's cost assessment.",
+        "text": "Send a weekly reminder to each team member notifying them to submit their time sheets.",
         "correct": false
       },
       {
@@ -396,12 +396,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Pareto chart",
-        "correct": true
-      },
-      {
         "text": "Run chart",
         "correct": false
+      },
+      {
+        "text": "Pareto chart",
+        "correct": true
       },
       {
         "text": "Project charter",
@@ -419,19 +419,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "To support the team to self organise and decide a common vision.",
-        "correct": true
-      },
-      {
-        "text": "To champion the adoption of the latest technologies and practices.",
-        "correct": false
-      },
-      {
         "text": "To provide long-term direction and engage the team to deliver it.",
         "correct": false
       },
       {
         "text": "To prioritise and assign the tasks that are aligned with the vision.",
+        "correct": false
+      },
+      {
+        "text": "To support the team to self organise and decide a common vision.",
+        "correct": true
+      },
+      {
+        "text": "To champion the adoption of the latest technologies and practices.",
         "correct": false
       }
     ]
@@ -446,11 +446,11 @@
         "correct": true
       },
       {
-        "text": "Use hybrid approach by continuing to manage the existing component using agile, and the new component using predictive.",
+        "text": "Manage the existing component as well as the new component using predictive plan-based approach.",
         "correct": false
       },
       {
-        "text": "Manage the existing component as well as the new component using predictive plan-based approach.",
+        "text": "Use hybrid approach by continuing to manage the existing component using agile, and the new component using predictive.",
         "correct": false
       },
       {
@@ -465,8 +465,8 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Apply a withdraw/avoid conflict resolution metho",
-        "correct": true
+        "text": "Apply a compromise/reconcile resolution metho",
+        "correct": false
       },
       {
         "text": "Apply a smooth/accommodate conflict resolution metho",
@@ -477,8 +477,8 @@
         "correct": false
       },
       {
-        "text": "Apply a compromise/reconcile resolution metho",
-        "correct": false
+        "text": "Apply a withdraw/avoid conflict resolution metho",
+        "correct": true
       }
     ]
   },
@@ -488,19 +488,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Educate the team on the importance of communication in Scrum.",
-        "correct": true
+        "text": "Monitor the team's communication and provide feedback.",
+        "correct": false
       },
       {
-        "text": "Establish clear communication guidelines.",
-        "correct": false
+        "text": "Educate the team on the importance of communication in Scrum.",
+        "correct": true
       },
       {
         "text": "Identify the root cause of the communication issues.",
         "correct": false
       },
       {
-        "text": "Monitor the team's communication and provide feedback.",
+        "text": "Establish clear communication guidelines.",
         "correct": false
       }
     ]
@@ -510,6 +510,10 @@
     "text": "A project team is working on a regulatory application that has a fixed duration for delivery. The team is using a hybrid approach and has divided development into three sprints. The first two sprints have not produced the required results mainly due to delays from functional units. The finance director is agitated due to the imminent sanctions if the application is not completed, and the project team is demoralize\nWho is responsible for inspiring the project team?",
     "explanation": "",
     "choices": [
+      {
+        "text": "Project Manager",
+        "correct": false
+      },
       {
         "text": "Product Owner",
         "correct": true
@@ -521,10 +525,6 @@
       {
         "text": "Functional Manager",
         "correct": false
-      },
-      {
-        "text": "Project Manager",
-        "correct": false
       }
     ]
   },
@@ -534,19 +534,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Assess the concerns and risks of not deploying within the scheduled time frame and react accordingly.",
-        "correct": true
+        "text": "Modify the schedule to increase the time frame of the deployment plan.",
+        "correct": false
       },
       {
-        "text": "Change the deployment plan such that additional resources are available to perform the weekend deployment.",
-        "correct": false
+        "text": "Assess the concerns and risks of not deploying within the scheduled time frame and react accordingly.",
+        "correct": true
       },
       {
         "text": "Review and revise as necessary the risk management plan",
         "correct": false
       },
       {
-        "text": "Modify the schedule to increase the time frame of the deployment plan.",
+        "text": "Change the deployment plan such that additional resources are available to perform the weekend deployment.",
         "correct": false
       }
     ]
@@ -561,15 +561,15 @@
         "correct": true
       },
       {
-        "text": "External Risk",
-        "correct": false
-      },
-      {
         "text": "Management Risk",
         "correct": false
       },
       {
         "text": "Technical Risk",
+        "correct": false
+      },
+      {
+        "text": "External Risk",
         "correct": false
       }
     ]
@@ -580,16 +580,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Reevaluate the scope baseline and impact on the project objectives.",
-        "correct": true
-      },
-      {
         "text": "Use the management reserve to account for the schedule uncertainty.",
         "correct": false
       },
       {
         "text": "Monitor risks to ensure the effectiveness of the risk management process.",
         "correct": false
+      },
+      {
+        "text": "Reevaluate the scope baseline and impact on the project objectives.",
+        "correct": true
       },
       {
         "text": "Reevaluate the cost management plan to address the impact of the change.",
@@ -607,15 +607,15 @@
         "correct": true
       },
       {
+        "text": "Review the project schedule to ensure the project will be completed on time.",
+        "correct": false
+      },
+      {
         "text": "Understand and clarify how the existing project aligns with the overall organization vision.",
         "correct": false
       },
       {
         "text": "Conduct a project team meeting to plan and confirm resource assignments for the new project.",
-        "correct": false
-      },
-      {
-        "text": "Review the project schedule to ensure the project will be completed on time.",
         "correct": false
       }
     ]
@@ -626,19 +626,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Empower them to improve results",
-        "correct": true
+        "text": "Feedback, coaching, or help only when they ask for it",
+        "correct": false
       },
       {
         "text": "Support with periodic iterations and feedback",
         "correct": false
       },
       {
-        "text": "Help with conflict resolution",
-        "correct": false
+        "text": "Empower them to improve results",
+        "correct": true
       },
       {
-        "text": "Feedback, coaching, or help only when they ask for it",
+        "text": "Help with conflict resolution",
         "correct": false
       }
     ]
@@ -649,12 +649,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Increase communications and involve stakeholders in the resolution whenever necessary.",
-        "correct": true
-      },
-      {
         "text": "Change the communications management plan and assign ownership to a team member.",
         "correct": false
+      },
+      {
+        "text": "Increase communications and involve stakeholders in the resolution whenever necessary.",
+        "correct": true
       },
       {
         "text": "Escalate the issue within the team during the next project retrospective meeting.",
@@ -672,6 +672,10 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Human resources",
+        "correct": false
+      },
+      {
         "text": "Service provider",
         "correct": true
       },
@@ -681,10 +685,6 @@
       },
       {
         "text": "Product owner",
-        "correct": false
-      },
-      {
-        "text": "Human resources",
         "correct": false
       }
     ]
@@ -699,15 +699,15 @@
         "correct": true
       },
       {
-        "text": "Share all information available and allocate time to explain in detail the work in progress.",
-        "correct": false
-      },
-      {
         "text": "Ask each member to describe their interests and experience in the next team meeting.",
         "correct": false
       },
       {
         "text": "Organize a one-day workshop with the entire team to bring the new member up to spee",
+        "correct": false
+      },
+      {
+        "text": "Share all information available and allocate time to explain in detail the work in progress.",
         "correct": false
       }
     ]
@@ -718,11 +718,11 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Escalate this to the IT department and organize training for the impacted team members.",
-        "correct": true
+        "text": "Revisit the procurement management plan and identify the impacted contracts for upcoming purchases.",
+        "correct": false
       },
       {
-        "text": "Revisit the procurement management plan and identify the impacted contracts for upcoming purchases.",
+        "text": "Escalate the issue to the next steering committee and facilitate a brainstorming meeting.",
         "correct": false
       },
       {
@@ -730,8 +730,8 @@
         "correct": false
       },
       {
-        "text": "Escalate the issue to the next steering committee and facilitate a brainstorming meeting.",
-        "correct": false
+        "text": "Escalate this to the IT department and organize training for the impacted team members.",
+        "correct": true
       }
     ]
   },
@@ -741,12 +741,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Documented the project vision and objectives.",
-        "correct": true
-      },
-      {
         "text": "Analyzed the changes in stakeholder attributes.",
         "correct": false
+      },
+      {
+        "text": "Documented the project vision and objectives.",
+        "correct": true
       },
       {
         "text": "Involved the key stakeholders in the decision-making process.",
@@ -768,7 +768,7 @@
         "correct": true
       },
       {
-        "text": "Include self-assessments at the start, middle, and end of the project to increase the autonomy of the team.",
+        "text": "Talk to the team member on a one-on-one basis to convince them about the benefits of the proposed plan.",
         "correct": false
       },
       {
@@ -776,7 +776,7 @@
         "correct": false
       },
       {
-        "text": "Talk to the team member on a one-on-one basis to convince them about the benefits of the proposed plan.",
+        "text": "Include self-assessments at the start, middle, and end of the project to increase the autonomy of the team.",
         "correct": false
       }
     ]
@@ -787,19 +787,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Escalate the issue with the project management office (PMO) so they can determine if any compliance is require",
-        "correct": true
+        "text": "Remove the task from the critical path and assign the resource to work on another requirement.",
+        "correct": false
       },
       {
         "text": "Stop the project until it is confirmed that the deliverable is subject to any regulations.",
         "correct": false
       },
       {
-        "text": "Review lessons learned from the previous project to determine if any compliance is require",
-        "correct": false
+        "text": "Escalate the issue with the project management office (PMO) so they can determine if any compliance is require",
+        "correct": true
       },
       {
-        "text": "Remove the task from the critical path and assign the resource to work on another requirement.",
+        "text": "Review lessons learned from the previous project to determine if any compliance is require",
         "correct": false
       }
     ]
@@ -810,19 +810,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Closely monitor the project schedule and take action if milestones are misse",
-        "correct": true
+        "text": "Terminate the engagement and find a new vendor in the local time zone.",
+        "correct": false
       },
       {
-        "text": "Ask both teams to change their working hours to a common time zone.",
-        "correct": false
+        "text": "Closely monitor the project schedule and take action if milestones are misse",
+        "correct": true
       },
       {
         "text": "Find a common space and relocate the vendor team with the project team.",
         "correct": false
       },
       {
-        "text": "Terminate the engagement and find a new vendor in the local time zone.",
+        "text": "Ask both teams to change their working hours to a common time zone.",
         "correct": false
       }
     ]
@@ -837,15 +837,15 @@
         "correct": true
       },
       {
+        "text": "Closing phase",
+        "correct": false
+      },
+      {
         "text": "Planning phase",
         "correct": false
       },
       {
         "text": "Execution phase",
-        "correct": false
-      },
-      {
-        "text": "Closing phase",
         "correct": false
       }
     ]
@@ -860,15 +860,15 @@
         "correct": true
       },
       {
+        "text": "Follow the change management plan and revise the scope and plan upon the stakeholders' request.",
+        "correct": false
+      },
+      {
         "text": "Review the scope and plan of the project with the new stakeholder.",
         "correct": false
       },
       {
         "text": "Review the list of required tasks with the development team and new stakeholder.",
-        "correct": false
-      },
-      {
-        "text": "Follow the change management plan and revise the scope and plan upon the stakeholders' request.",
         "correct": false
       }
     ]
@@ -878,6 +878,10 @@
     "text": "Question\nA senior business stakeholder with many years of experience is pressuring an agile team to deliver most of the promised functionality to the customer 8 months in the future as opposed to multiple, incremental deliveries over the course of the 8 months. What should the project lead do next?",
     "explanation": "",
     "choices": [
+      {
+        "text": "Work with the stakeholder to understand what the concerns are while, at the same time, conveying the benefits of incremental deliveries.",
+        "correct": false
+      },
       {
         "text": "Work with the agile team to schedule the incremental deliveries to enable delivery of business value sooner to the customer.",
         "correct": true
@@ -889,10 +893,6 @@
       {
         "text": "Provide details of the concern to the agile team and adjust their goals and release plans to conform to the stakeholder's request.",
         "correct": false
-      },
-      {
-        "text": "Work with the stakeholder to understand what the concerns are while, at the same time, conveying the benefits of incremental deliveries.",
-        "correct": false
       }
     ]
   },
@@ -902,15 +902,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Interest-Influence Grid",
+        "correct": false
+      },
+      {
         "text": "Power-Interest Grid",
         "correct": true
       },
       {
         "text": "Power-Influence Grid",
-        "correct": false
-      },
-      {
-        "text": "Interest-Influence Grid",
         "correct": false
       },
       {
