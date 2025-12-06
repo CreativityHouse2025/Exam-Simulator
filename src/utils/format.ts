@@ -4,6 +4,20 @@ import type { Exam, ExamType, LangCode, Question, Session } from '../types'
 import { formatDistance, format } from 'date-fns'
 
 /**
+   * Shuffle array using Fisher-Yates algorithm
+   * @param {T[]} array - The array to shuffle
+   * @returns {T[]} - The shuffled array
+   */
+export function shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1))
+            ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    return shuffled
+}
+
+/**
  * Format a date string to a human-readable format
  * @param {string} date - The date string to format.
  * @returns {string} - The formatted date string.
@@ -129,4 +143,11 @@ export function formatChoiceLabel(index: number, lang: LangCode): string {
   } catch {
     return 'A'
   }
+}
+
+export function randomizeChoices(exam: Exam): Exam {
+  if (exam.length < 1) {
+    throw new Error("Cannot randomize empty exam");
+  }
+  return exam.map((q) => ({ ...q, choices: shuffleArray(q.choices) }));
 }
