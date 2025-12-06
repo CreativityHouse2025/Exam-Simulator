@@ -52,7 +52,7 @@ const AppComponent: React.FC = () => {
         
         // should persist the random order here
         if (newSession.examState === 'not-started') { 
-          // examData = randomizeTest(examData) stop randomizing for now (temporary solution)
+          // examData = randomizeTest(examData)
           newSession = formatSession({ ...newSession, examState: 'in-progress' }, examData.length, type as ExamType)
         }
 

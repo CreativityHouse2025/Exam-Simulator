@@ -9,15 +9,15 @@
         "correct": true
       },
       {
-        "text": "Using false assumptions",
-        "correct": false
-      },
-      {
         "text": "Checking with others",
         "correct": false
       },
       {
         "text": "Applying logical errors",
+        "correct": false
+      },
+      {
+        "text": "Using false assumptions",
         "correct": false
       }
     ]
@@ -28,11 +28,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Enroll the team in training so they can be equipped with the needed expertise.",
-        "correct": true
-      },
-      {
-        "text": "Request the availability of the needed resources with expertise from the project sponsor.",
+        "text": "Define and share the work agreement with the team to coordinate activities to acquire expertise.",
         "correct": false
       },
       {
@@ -40,8 +36,12 @@
         "correct": false
       },
       {
-        "text": "Define and share the work agreement with the team to coordinate activities to acquire expertise.",
+        "text": "Request the availability of the needed resources with expertise from the project sponsor.",
         "correct": false
+      },
+      {
+        "text": "Enroll the team in training so they can be equipped with the needed expertise.",
+        "correct": true
       }
     ]
   },
@@ -51,8 +51,8 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Deliverable oriented",
-        "correct": true
+        "text": "Customer focused",
+        "correct": false
       },
       {
         "text": "Hierarchical",
@@ -63,8 +63,8 @@
         "correct": false
       },
       {
-        "text": "Customer focused",
-        "correct": false
+        "text": "Deliverable oriented",
+        "correct": true
       }
     ]
   },
@@ -73,6 +73,10 @@
     "text": "A project team just completed an environmental scan and have uncovered a lot of related hindrances that could potentially affect the project delivery negatively. The project manager is working with the team to understand the details of each identified hindrance and how the hindrances relate to each other, in order to understand the overall complexity of the project. This will enable the team to arrive at a plan that addresses the challenges identifie\nWhich of the following techniques has the project manager used in this instance?",
     "explanation": "",
     "choices": [
+      {
+        "text": "Total quality management",
+        "correct": false
+      },
       {
         "text": "Pareto analysis",
         "correct": true
@@ -84,10 +88,6 @@
       {
         "text": "Systems thinking",
         "correct": false
-      },
-      {
-        "text": "Total quality management",
-        "correct": false
       }
     ]
   },
@@ -97,19 +97,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "High directive, high supportive",
-        "correct": true
+        "text": "Low directive, low supportive",
+        "correct": false
       },
       {
-        "text": "Low directive, high supportive",
-        "correct": false
+        "text": "High directive, high supportive",
+        "correct": true
       },
       {
         "text": "High directive, low supportive",
         "correct": false
       },
       {
-        "text": "Low directive, low supportive",
+        "text": "Low directive, high supportive",
         "correct": false
       }
     ]
@@ -120,16 +120,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Direct, result-oriented, and firm",
-        "correct": true
+        "text": "Accommodating, patient, humble, tactful",
+        "correct": false
       },
       {
         "text": "Outgoing, enthusiastic, optimistic",
         "correct": false
       },
       {
-        "text": "Accommodating, patient, humble, tactful",
-        "correct": false
+        "text": "Direct, result-oriented, and firm",
+        "correct": true
       },
       {
         "text": "Analytical, reserved, and precise",
@@ -147,15 +147,15 @@
         "correct": true
       },
       {
+        "text": "Wait until the legal requirements are finalized so the change in scope can be concretely define",
+        "correct": false
+      },
+      {
         "text": "Ask the legal department to raise the issue in the next contract negotiation with the customer.",
         "correct": false
       },
       {
         "text": "Update the risk register with the issue and plan risk response with the project sponsor and client.",
-        "correct": false
-      },
-      {
-        "text": "Wait until the legal requirements are finalized so the change in scope can be concretely define",
         "correct": false
       }
     ]
@@ -166,20 +166,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Honesty",
-        "correct": true
+        "text": "Transparency",
+        "correct": false
       },
       {
         "text": "Effective communication",
         "correct": false
       },
       {
-        "text": "Transparency",
+        "text": "Reliability",
         "correct": false
       },
       {
-        "text": "Reliability",
-        "correct": false
+        "text": "Honesty",
+        "correct": true
       }
     ]
   },
@@ -189,19 +189,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Initiate a risk audit.",
-        "correct": true
-      },
-      {
         "text": "Issue a change request.",
         "correct": false
       },
       {
-        "text": "Review the cost impact.",
+        "text": "Update the contingency plan.",
         "correct": false
       },
       {
-        "text": "Update the contingency plan.",
+        "text": "Initiate a risk audit.",
+        "correct": true
+      },
+      {
+        "text": "Review the cost impact.",
         "correct": false
       }
     ]
@@ -212,19 +212,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Agile delivery can improve quality through incremental delivery and efficient defect repair.",
-        "correct": true
-      },
-      {
         "text": "Agile teams offer flexibility in accommodating planned changes while streamlining the approval process.",
         "correct": false
       },
       {
-        "text": "The product owner utilizes a list known as the backlog to prioritize work items, including planned changes.",
+        "text": "Agile delivery is well-suited for handling unforeseen changes and shifting business expectations.",
         "correct": false
       },
       {
-        "text": "Agile delivery is well-suited for handling unforeseen changes and shifting business expectations.",
+        "text": "Agile delivery can improve quality through incremental delivery and efficient defect repair.",
+        "correct": true
+      },
+      {
+        "text": "The product owner utilizes a list known as the backlog to prioritize work items, including planned changes.",
         "correct": false
       }
     ]
@@ -235,8 +235,8 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Pull",
-        "correct": true
+        "text": "Interpersonal",
+        "correct": false
       },
       {
         "text": "Interactive",
@@ -247,8 +247,8 @@
         "correct": false
       },
       {
-        "text": "Interpersonal",
-        "correct": false
+        "text": "Pull",
+        "correct": true
       }
     ]
   },
@@ -258,19 +258,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Use a world clock to identify a few potential times that work for all stakeholders.",
-        "correct": true
+        "text": "Record the meeting and send it to stakeholders to watch on their own time.",
+        "correct": false
       },
       {
         "text": "Send a survey to stakeholders asking them for their availability during the week.",
         "correct": false
       },
       {
-        "text": "Schedule two separate meetings, one for stakeholders in each country.",
-        "correct": false
+        "text": "Use a world clock to identify a few potential times that work for all stakeholders.",
+        "correct": true
       },
       {
-        "text": "Record the meeting and send it to stakeholders to watch on their own time.",
+        "text": "Schedule two separate meetings, one for stakeholders in each country.",
         "correct": false
       }
     ]
@@ -281,8 +281,8 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Quantitative benefit",
-        "correct": true
+        "text": "Real benefit",
+        "correct": false
       },
       {
         "text": "Qualitative benefit",
@@ -293,8 +293,8 @@
         "correct": false
       },
       {
-        "text": "Real benefit",
-        "correct": false
+        "text": "Quantitative benefit",
+        "correct": true
       }
     ]
   },
@@ -304,15 +304,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Withdrawal",
+        "correct": false
+      },
+      {
         "text": "Forcing",
         "correct": true
       },
       {
         "text": "Collaboration",
-        "correct": false
-      },
-      {
-        "text": "Withdrawal",
         "correct": false
       },
       {
@@ -335,11 +335,11 @@
         "correct": false
       },
       {
-        "text": "Suggest that the engineering team is correct and ensure that the product is delivered on time and within budget.",
+        "text": "Suggest that the engineering and marketing teams compete to see who can come up with the best solution.",
         "correct": false
       },
       {
-        "text": "Suggest that the engineering and marketing teams compete to see who can come up with the best solution.",
+        "text": "Suggest that the engineering team is correct and ensure that the product is delivered on time and within budget.",
         "correct": false
       }
     ]
@@ -349,6 +349,10 @@
     "text": "A customer requires knowing exactly the state of a product, the overall project, and the next steps planned for the next month each month.\nHow should the project manager communicate with this customer?",
     "explanation": "",
     "choices": [
+      {
+        "text": "Present the project progress in monthly increments with a formal validation and comprehensive understanding of the status.",
+        "correct": false
+      },
       {
         "text": "Send a weekly status email, including a complete assessment of earned value.",
         "correct": true
@@ -360,10 +364,6 @@
       {
         "text": "Have a monthly call with the customer to summarize what happened recently and give a general review of the product.",
         "correct": false
-      },
-      {
-        "text": "Present the project progress in monthly increments with a formal validation and comprehensive understanding of the status.",
-        "correct": false
       }
     ]
   },
@@ -373,8 +373,8 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Procurement management plan",
-        "correct": true
+        "text": "Inspections",
+        "correct": false
       },
       {
         "text": "Request for proposal (RFP)",
@@ -385,8 +385,8 @@
         "correct": false
       },
       {
-        "text": "Inspections",
-        "correct": false
+        "text": "Procurement management plan",
+        "correct": true
       }
     ]
   },
@@ -396,16 +396,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Resource assignments",
-        "correct": true
-      },
-      {
         "text": "Resource histogram",
         "correct": false
       },
       {
         "text": "Responsibility assignment matrix (RAM)",
         "correct": false
+      },
+      {
+        "text": "Resource assignments",
+        "correct": true
       },
       {
         "text": "Project organization chart",
@@ -419,20 +419,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Scrum",
-        "correct": true
+        "text": "Kanban",
+        "correct": false
       },
       {
         "text": "Waterfall",
         "correct": false
       },
       {
-        "text": "Kanban",
+        "text": "Predictive",
         "correct": false
       },
       {
-        "text": "Predictive",
-        "correct": false
+        "text": "Scrum",
+        "correct": true
       }
     ]
   },
@@ -442,19 +442,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Reward all team members equally with formal awards to publicly recognize their achievements.",
-        "correct": true
-      },
-      {
-        "text": "Implement initiatives based on the project manager's understanding of what motivates others.",
-        "correct": false
-      },
-      {
         "text": "Delegate motivation to team members, assuming they are professionals who self-motivate.",
         "correct": false
       },
       {
+        "text": "Reward all team members equally with formal awards to publicly recognize their achievements.",
+        "correct": true
+      },
+      {
         "text": "Offer a diverse range of motivational incentives tailored to individual team member needs.",
+        "correct": false
+      },
+      {
+        "text": "Implement initiatives based on the project manager's understanding of what motivates others.",
         "correct": false
       }
     ]
@@ -469,7 +469,7 @@
         "correct": true
       },
       {
-        "text": "Growth and well-being of people and communities they belong to.",
+        "text": "Productivity and efficiency to achieve commitments made.",
         "correct": false
       },
       {
@@ -477,7 +477,7 @@
         "correct": false
       },
       {
-        "text": "Productivity and efficiency to achieve commitments made.",
+        "text": "Growth and well-being of people and communities they belong to.",
         "correct": false
       }
     ]
@@ -488,19 +488,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Check the risk status.",
-        "correct": true
-      },
-      {
         "text": "Check the cost performance.",
         "correct": false
       },
       {
-        "text": "Determine a management strategy.",
-        "correct": false
+        "text": "Check the risk status.",
+        "correct": true
       },
       {
         "text": "Tell the team the new objectives.",
+        "correct": false
+      },
+      {
+        "text": "Determine a management strategy.",
         "correct": false
       }
     ]
@@ -511,19 +511,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Inform the stakeholder that the correct procedure for new requirements is to provide it directly to the project manager.",
-        "correct": true
-      },
-      {
-        "text": "Inform the stakeholder that the correct procedure for new requirements is to provide it directly to the change control board (CCB).",
-        "correct": false
-      },
-      {
         "text": "Inform the scrum master regarding the stakeholder's request for a change and the impact this has had on productivity.",
         "correct": false
       },
       {
         "text": "Inform the scrum master so that the change can be discussed directly with the stakeholder.",
+        "correct": false
+      },
+      {
+        "text": "Inform the stakeholder that the correct procedure for new requirements is to provide it directly to the project manager.",
+        "correct": true
+      },
+      {
+        "text": "Inform the stakeholder that the correct procedure for new requirements is to provide it directly to the change control board (CCB).",
         "correct": false
       }
     ]
@@ -534,20 +534,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Test-Driven Development (TDD)",
-        "correct": true
+        "text": "Behavior-Driven Development",
+        "correct": false
       },
       {
         "text": "Continuous Delivery",
         "correct": false
       },
       {
-        "text": "Behavior-Driven Development",
+        "text": "Spikes",
         "correct": false
       },
       {
-        "text": "Spikes",
-        "correct": false
+        "text": "Test-Driven Development (TDD)",
+        "correct": true
       }
     ]
   },
@@ -561,7 +561,7 @@
         "correct": true
       },
       {
-        "text": "Storming",
+        "text": "Performing",
         "correct": false
       },
       {
@@ -569,7 +569,7 @@
         "correct": false
       },
       {
-        "text": "Performing",
+        "text": "Storming",
         "correct": false
       }
     ]
@@ -580,12 +580,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Executed only compliant deliverables.",
-        "correct": true
-      },
-      {
         "text": "Clarified interpretation of compliance guidelines.",
         "correct": false
+      },
+      {
+        "text": "Executed only compliant deliverables.",
+        "correct": true
       },
       {
         "text": "Translated business requirements to design.",
@@ -611,11 +611,11 @@
         "correct": false
       },
       {
-        "text": "Give and take",
+        "text": "Strict orders",
         "correct": false
       },
       {
-        "text": "Strict orders",
+        "text": "Give and take",
         "correct": false
       }
     ]
@@ -626,19 +626,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Distribute tasks and observe the quality of the deliverables.",
-        "correct": true
-      },
-      {
         "text": "Talk about personal preferences and make sure the team understands your approach.",
         "correct": false
       },
       {
-        "text": "Ask some team members to share information about other members to become familiar with the team.",
-        "correct": false
+        "text": "Distribute tasks and observe the quality of the deliverables.",
+        "correct": true
       },
       {
         "text": "Ask the team members directly about both personal and work-related matters.",
+        "correct": false
+      },
+      {
+        "text": "Ask some team members to share information about other members to become familiar with the team.",
         "correct": false
       }
     ]
@@ -653,11 +653,11 @@
         "correct": true
       },
       {
-        "text": "Send the change request to the client for approval.",
+        "text": "Complete an impact analysis of each requested change.",
         "correct": false
       },
       {
-        "text": "Complete an impact analysis of each requested change.",
+        "text": "Send the change request to the client for approval.",
         "correct": false
       },
       {
@@ -672,19 +672,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Develop the project charter.",
-        "correct": true
+        "text": "Create the work breakdown structure (WBS).",
+        "correct": false
       },
       {
-        "text": "Develop the responsible, accountable, consult, and inform (RACI) matrix.",
-        "correct": false
+        "text": "Develop the project charter.",
+        "correct": true
       },
       {
         "text": "Define the project scope statement.",
         "correct": false
       },
       {
-        "text": "Create the work breakdown structure (WBS).",
+        "text": "Develop the responsible, accountable, consult, and inform (RACI) matrix.",
         "correct": false
       }
     ]
@@ -695,19 +695,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Send an email asking all project team members to complete updates at the end of the day.",
-        "correct": true
-      },
-      {
-        "text": "Set up a training session for all project team members.",
-        "correct": false
-      },
-      {
         "text": "Reach out to the functional managers for support.",
         "correct": false
       },
       {
+        "text": "Send an email asking all project team members to complete updates at the end of the day.",
+        "correct": true
+      },
+      {
         "text": "Speak individually with each project team member about making the needed updates.",
+        "correct": false
+      },
+      {
+        "text": "Set up a training session for all project team members.",
         "correct": false
       }
     ]
@@ -718,15 +718,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Arrange a meeting for team members to discuss any concerns regarding requirements and project scope.",
+        "correct": false
+      },
+      {
         "text": "Send a welcome email and host a team introductory event with the team members so they get to know each other.",
         "correct": true
       },
       {
         "text": "Send a project management plan and charter to team members to familiarize them with project goals and procedures.",
-        "correct": false
-      },
-      {
-        "text": "Arrange a meeting for team members to discuss any concerns regarding requirements and project scope.",
         "correct": false
       },
       {
@@ -745,7 +745,7 @@
         "correct": true
       },
       {
-        "text": "Break the work down into smaller tasks and estimate each individually.",
+        "text": "Compare the new unit to the existing ones and adjust the existing estimates.",
         "correct": false
       },
       {
@@ -753,7 +753,7 @@
         "correct": false
       },
       {
-        "text": "Compare the new unit to the existing ones and adjust the existing estimates.",
+        "text": "Break the work down into smaller tasks and estimate each individually.",
         "correct": false
       }
     ]
@@ -764,16 +764,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Review the project charter.",
-        "correct": true
-      },
-      {
         "text": "Provide more recognition to team members.",
         "correct": false
       },
       {
         "text": "Discuss the situation with the team.",
         "correct": false
+      },
+      {
+        "text": "Review the project charter.",
+        "correct": true
       },
       {
         "text": "Request additional resources.",
@@ -787,19 +787,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Problem Definition",
-        "correct": true
-      },
-      {
         "text": "Problem Solution Generation",
         "correct": false
       },
       {
-        "text": "Ideas to Action",
-        "correct": false
+        "text": "Problem Definition",
+        "correct": true
       },
       {
         "text": "Solution Action Planning",
+        "correct": false
+      },
+      {
+        "text": "Ideas to Action",
         "correct": false
       }
     ]
@@ -810,19 +810,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "External with high power/influence",
-        "correct": true
+        "text": "External with antagonist/resistant support level",
+        "correct": false
       },
       {
         "text": "Internal with high power/influence",
         "correct": false
       },
       {
-        "text": "Internal with antagonist/resistant support level",
-        "correct": false
+        "text": "External with high power/influence",
+        "correct": true
       },
       {
-        "text": "External with antagonist/resistant support level",
+        "text": "Internal with antagonist/resistant support level",
         "correct": false
       }
     ]
@@ -833,19 +833,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Team A as they have calculated fewer story points than team",
-        "correct": true
-      },
-      {
-        "text": "Team B as they have calculated more story points than team",
-        "correct": false
-      },
-      {
         "text": "The team that completes the most stories selected from the sprint backlog.",
         "correct": false
       },
       {
+        "text": "Team A as they have calculated fewer story points than team",
+        "correct": true
+      },
+      {
         "text": "The team with the least amount of defects in their deliverables.",
+        "correct": false
+      },
+      {
+        "text": "Team B as they have calculated more story points than team",
         "correct": false
       }
     ]
@@ -864,11 +864,11 @@
         "correct": false
       },
       {
-        "text": "Executing Process Group",
+        "text": "Monitoring and Controlling Process Group",
         "correct": false
       },
       {
-        "text": "Monitoring and Controlling Process Group",
+        "text": "Executing Process Group",
         "correct": false
       }
     ]
@@ -883,11 +883,11 @@
         "correct": true
       },
       {
-        "text": "Contact the project management office (PMO) and request them to assign another team member who has the knowledge to perform this task to the team.",
+        "text": "Help the team member to perform the quantitative risk analysis through coaching, mentoring, and training.",
         "correct": false
       },
       {
-        "text": "Help the team member to perform the quantitative risk analysis through coaching, mentoring, and training.",
+        "text": "Contact the project management office (PMO) and request them to assign another team member who has the knowledge to perform this task to the team.",
         "correct": false
       },
       {
@@ -902,11 +902,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ask every team in the organization to implement the same agile methodology so that a one-size-fits-all solution can provide consistency across all teams.",
-        "correct": true
-      },
-      {
-        "text": "Tailor the implementation by deliberately adapting the approach to make it more suitable for the given environment and work at han",
+        "text": "Ask one team to implement scrum as a pilot so that all other teams in the organization can also implement scrum by learning from this team.",
         "correct": false
       },
       {
@@ -914,8 +910,12 @@
         "correct": false
       },
       {
-        "text": "Ask one team to implement scrum as a pilot so that all other teams in the organization can also implement scrum by learning from this team.",
+        "text": "Tailor the implementation by deliberately adapting the approach to make it more suitable for the given environment and work at han",
         "correct": false
+      },
+      {
+        "text": "Ask every team in the organization to implement the same agile methodology so that a one-size-fits-all solution can provide consistency across all teams.",
+        "correct": true
       }
     ]
   }
