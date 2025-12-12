@@ -35,7 +35,7 @@ const AppComponent: React.FC = () => {
       console.warn("Old session detected, resetting to default...");
       setSession(DEFAULT_SESSION);
     }
-    
+
   }, []);
 
   const loadTranslation = React.useCallback(
@@ -82,7 +82,7 @@ const AppComponent: React.FC = () => {
   )
 
   const handlestart = React.useCallback(
-    (options: StartExamOptions) => loadExam({ ...DEFAULT_SESSION, examType: options.type, categoryId: options.categoryId}),
+    (options: StartExamOptions) => loadExam({ ...DEFAULT_SESSION, examType: options.type, categoryId: options.categoryId }),
     [loadExam]
   )
 
@@ -92,7 +92,7 @@ const AppComponent: React.FC = () => {
     } catch (err) {
       console.error('Failed to load previous exam:', err)
       // Fallback to starting a new exam if loading fails
-      handlestart({ type: 'exam', categoryId: GENERAL_CATEGORY_ID})
+      handlestart({ type: 'exam', categoryId: GENERAL_CATEGORY_ID })
     }
   }, [session, loadExam, handlestart])
 
@@ -102,8 +102,8 @@ const AppComponent: React.FC = () => {
   }, [])
 
   // Load question map and exam when loadExam (language) changes
-  React.useEffect(() => {    
-    async function setUpExam() {      
+  React.useEffect(() => {
+    async function setUpExam() {
 
       setLoading(true);
       await initQuestionMap(lang.code);
@@ -116,11 +116,11 @@ const AppComponent: React.FC = () => {
     setUpExam();
   }, [loadExam])
 
-  if (!hasTranslation()) {    
+  if (!hasTranslation()) {
     return <Loading size={200} />
   }
 
-  if (loading) {    
+  if (loading) {
     return <Loading size={200} />
   }
 

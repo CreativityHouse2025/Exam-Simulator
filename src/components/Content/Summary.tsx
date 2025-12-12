@@ -7,6 +7,9 @@ import { formatDate, formatTimer } from '../../utils/format'
 import { translate } from '../../utils/translation'
 import { ExamContext, SessionDataContext, SessionExamContext, SessionTimerContext } from '../../contexts'
 import useCategoryLabel from '../../hooks/useCategoryLabel'
+import { generateExamReportBase64Pdf } from '../../utils/report'
+// @ts-expect-error
+import logo from "../../assets/logo-compressed.jpeg"
 
 const passPercent = 85
 
@@ -100,6 +103,11 @@ const SummaryComponent: React.FC = () => {
     [document.documentElement.lang, translate, status]
   )
 
+  function hanldeSaveReport() {
+    const questionIds = exam.map(q => q.id);
+    const base64Report = generateExamReportBase64Pdf(questionIds, answers, "English", "Mohammed Alsadawi", logo);
+  }
+
   const onRestart = React.useCallback(() => window.location.reload(), [])
 
   return (
@@ -126,6 +134,8 @@ const SummaryComponent: React.FC = () => {
       <RestartButton id="restart-button" className="no-select" onClick={onRestart}>
         {translated.home}
       </RestartButton>
+
+      <button onClick={hanldeSaveReport}>Save Report</button>
     </div>
   )
 }

@@ -1,5 +1,4 @@
-import examTypes from '../data/exam-data/examTypes.json'
-import type { Exam, ExamType, LangCode, Question, Session } from '../types'
+import type { Exam, LangCode, Question, Session } from '../types'
 
 import { formatDistance, format } from 'date-fns'
 
@@ -143,11 +142,4 @@ export function formatChoiceLabel(index: number, lang: LangCode): string {
   } catch {
     return 'A'
   }
-}
-
-export function randomizeChoices(exam: Exam): Exam {
-  if (exam.length < 1) {
-    throw new Error("Cannot randomize empty exam");
-  }
-  return exam.map((q) => ({ ...q, choices: shuffleArray(q.choices) }));
 }

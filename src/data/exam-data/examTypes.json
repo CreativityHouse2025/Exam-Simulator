@@ -8,6 +8,7 @@
         "minQuestionCount": 30,
         "maxQuestionCount": 40,
         "durationMinutes": 230,
+        "passingRate": 75,
         "allowRetake": true
     },
     "miniexam": {
@@ -19,6 +20,7 @@
         "minQuestionCount": 30,
         "maxQuestionCount": 40,
         "durationMinutes": 46,
+        "passingRate": 85,
         "allowRetake": true
     },
     "revision": {
@@ -30,6 +32,7 @@
         "minQuestionCount": null,
         "maxQuestionCount": null,
         "durationMinutes": null,
+        "passingRate": null,
         "allowRetake": false
     }
 }
