@@ -47,7 +47,7 @@ export interface Question<QT extends QuestionTypes = QuestionTypes> {
   /** question id */
   id: number
   /** question type */
-  type: QT | string // temporarily add string union (for testing generateExams)
+  type: QT
   /** question type */
   categoryId: number
   /** question content */

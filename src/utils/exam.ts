@@ -2,7 +2,7 @@ import { GENERAL_CATEGORY_ID } from '../constants'
 import categories from '../data/exam-data/categories.json'
 import examTypes from '../data/exam-data/examTypes.json'
 import type { Exam, GeneratedExam, Question, LangCode, ExamType } from '../types'
-import { randomizeChoices, shuffleArray } from './format'
+import { shuffleArray } from './format'
 
 // Map to retrieve questions in order later (better performance O(M + N) instead of O(M * N))
 // M is size of questions in exam, N is size of question bank
@@ -110,7 +110,7 @@ export function generateNewExam(examType: ExamType, categoryId: number): Generat
     const questionIds = chosenQuestions.map((q: Question): Question['id'] => q.id)
 
     const generatedExam: GeneratedExam = {
-        exam: randomizeChoices(chosenQuestions),
+        exam: chosenQuestions,
         questionIds,
         durationMinutes
     }
