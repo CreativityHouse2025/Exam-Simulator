@@ -52,7 +52,7 @@ const AppComponent: React.FC = () => {
   )
 
   const loadExam = React.useCallback(
-    async (newSession: Session) => {
+    (newSession: Session) => {
       if (!newSession.examType) {
         throw new Error("No exam ID found in session")
       }
@@ -86,9 +86,9 @@ const AppComponent: React.FC = () => {
     [loadExam]
   )
 
-  const handleContinue = React.useCallback(async () => {
+  const handleContinue = React.useCallback(() => {
     try {
-      await loadExam(session)
+      loadExam(session)
     } catch (err) {
       console.error('Failed to load previous exam:', err)
       // Fallback to starting a new exam if loading fails
@@ -98,7 +98,10 @@ const AppComponent: React.FC = () => {
 
   // Load translation on start
   React.useEffect(() => {
-    loadTranslation(LANGUAGES.en.code)
+    async function setUpTranslation() {
+      await loadTranslation(LANGUAGES.en.code)
+    }
+    setUpTranslation();
   }, [])
 
   // Load question map and exam when loadExam (language) changes
@@ -106,11 +109,15 @@ const AppComponent: React.FC = () => {
     async function setUpExam() {
 
       setLoading(true);
-      await initQuestionMap(lang.code);
-      setLoading(false);
 
-      if (exam && session.examType) {
-        loadExam(session)
+      try {
+        await initQuestionMap(lang.code);
+        if (exam && session.examType) {
+          loadExam(session)
+        }
+      } finally {
+        setLoading(false);
+
       }
     }
     setUpExam();
