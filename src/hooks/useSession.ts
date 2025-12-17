@@ -1,4 +1,4 @@
-import { useLocalStorage } from '@mantine/hooks';
+import { useLocalStorage } from './useLocalStorage';
 import { DEFAULT_SESSION } from '../constants';
 import type { Session } from '../types';
 
@@ -7,8 +7,5 @@ import type { Session } from '../types';
  * @returns [session, setSession]
  */
 export function useSession() {
-	return useLocalStorage<Session>({
-		key: 'session',
-		defaultValue: DEFAULT_SESSION,
-	});
+	return useLocalStorage<Session>('session', DEFAULT_SESSION);
 }
