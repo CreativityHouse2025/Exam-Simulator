@@ -1,13 +1,13 @@
-import type { Exam, Lang, SessionNavigation, SessionTimer, SessionExam, SessionData } from './types'
+import type { Exam, SessionNavigation, SessionTimer, SessionExam, SessionData, SettingsContextType } from './types'
 
 import { createContext } from 'react'
-import { GENERAL_CATEGORY_ID, LANGUAGES } from './constants'
+import { GENERAL_CATEGORY_ID } from './constants'
 
 // Exam context
 export const ExamContext = createContext<Exam>({} as Exam)
 
-// Language context
-export const LangContext = createContext<Lang>(LANGUAGES.ar)
+// Settings context
+export const SettingsContext = createContext<SettingsContextType>({} as SettingsContextType)
 
 // Split session contexts for better performance
 export const SessionNavigationContext = createContext<SessionNavigation>({

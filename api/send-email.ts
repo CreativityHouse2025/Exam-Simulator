@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import nodemailer from "nodemailer";
+import { SendEmailRequest } from '../src/types'
 
 const SENDER_EMAIL = process.env.SENDER;
 const APP_PASSWORD = process.env.APP_PASSWORD;
@@ -22,26 +23,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { to, subject, text, filename, reportBase64 } = req.body as {
-      to: string;
-      subject: string;
-      text: string;
-      filename: string;
-      reportBase64: string; // encoded pdf exam report
-    };
+    const emailRequest = req.body as SendEmailRequest;
 
-    // if (!reportBase64) {
-    //   return res.status(400).json({ error: "Missing reportBase64" });
-    // }
+    const { to, subject, text, attachments } = emailRequest;
 
-    // const reportBuffer = Buffer.from(reportBase64, "base64");
+    if (!to || !subject || !text) {
+      return res.status(400).json({ error: "Missing request information" });
+    }
 
     const info = await transporter.sendMail({
       from: SENDER_EMAIL,
       to,
       subject,
       text,
-      // attachments: [{ filename, content: reportBuffer, contentType: "application/pdf" }],
+      attachments,
     });
 
     return res.status(200).json({ message: "Email sent successfully", id: info.messageId });

@@ -163,3 +163,33 @@ export type SessionNavigation = Pick<Session, 'index' | 'update'>
 export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused' | 'update'>
 export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'update' | 'categoryId'>
 export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | 'update'>
+
+// Email API arguments type
+export type SendEmailRequest = {
+  to: string;
+  subject: string;
+  text: string;
+  attachments?: {
+    filename: string;
+    reportBase64: string;
+  }[]
+}
+
+// User settings (initially null until user inserts data)
+export type Settings = {
+  /** the full name of the user for report display */
+  fullName?: string,
+  /** the email of user */
+  email?: string,
+  /** last choice of language */
+  language: Lang['code']
+  /** app version for future updates */
+  appVersion: string
+}
+
+export type SettingsContextType = {
+  /** current user settings state */
+  settings: Settings
+  /** state setter */
+  setSettings: React.Dispatch<React.SetStateAction<Settings>>
+}
