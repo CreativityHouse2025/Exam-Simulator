@@ -1,7 +1,6 @@
 import type { Category, Exam, ExamType, Lang, LangCode, Session } from './types'
 
 import React from 'react'
-import { useLocalStorage } from '@mantine/hooks'
 import Header from './components/Header'
 import Navigation from './components/Navigation'
 import Cover from './components/Cover'
@@ -10,14 +9,21 @@ import { hasTranslation, setTranslation } from './utils/translation'
 import { formatSession, formatExam } from './utils/format'
 import { generateNewExam, getExamByQuestionIds, initQuestionMap } from './utils/exam'
 import { DEFAULT_SESSION, GENERAL_CATEGORY_ID, LANGUAGES } from './constants'
-import { ExamContext, LangContext } from './contexts'
+import { ExamContext } from './contexts'
+import SettingsProvider from './providers/SettingsContextProvider'
+import { useSession } from './hooks/useSession'
+import useSettings from './hooks/useSettings'
 
 const AppComponent: React.FC = () => {
   // TODO: 1. create LangContextProvider, ExamContextProvider using custom hooks + context pattern
   // TODO: 2. Make category UI work with all exam types (flexible)
   // TODO: 3. Test category functionality
-  const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: DEFAULT_SESSION })
-  const [lang, setLang] = React.useState<Lang>(LANGUAGES.en)
+  const [session, setSession] = useSession();
+
+  // get settings to set default
+  const { settings } = useSettings();
+  const [lang, setLang] = React.useState<Lang>(LANGUAGES[settings.language])
+
   const [exam, setExam] = React.useState<Exam | null>(null)
   const [loading, setLoading] = React.useState<Boolean>(false);
 
@@ -99,7 +105,7 @@ const AppComponent: React.FC = () => {
   // Load translation on start
   React.useEffect(() => {
     async function setUpTranslation() {
-      await loadTranslation(LANGUAGES.en.code)
+      await loadTranslation(lang.code)
     }
     setUpTranslation();
   }, [])
@@ -132,7 +138,7 @@ const AppComponent: React.FC = () => {
   }
 
   return (
-    <LangContext.Provider value={lang}>
+    <SettingsProvider>
       <Header setLang={loadTranslation} />
 
       {exam ? (
@@ -142,7 +148,7 @@ const AppComponent: React.FC = () => {
       ) : (
         <Cover onStart={handlestart} canContinue={session.examType ? true : false} onContinue={handleContinue} />
       )}
-    </LangContext.Provider>
+    </SettingsProvider>
   )
 }
 

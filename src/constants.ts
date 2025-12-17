@@ -1,4 +1,4 @@
-import type { Lang, LangCode, Session } from './types'
+import type { Lang, LangCode, Session, Settings } from './types'
 import styled from "styled-components";
 
 // Theme constants
@@ -117,7 +117,7 @@ export const LANGUAGES: Record<LangCode, Lang> = {
   en: { code: 'en', name: 'English', dir: 'ltr' } as const
 } as const
 
-// Wrappe component to query for reduced animations in user's device
+// Wrapper component to query for reduced animations in user's device
 export const ReducedMotionWrapper = styled.div`
   @media (prefers-reduced-motion: reduce) {
     & *,
@@ -130,3 +130,9 @@ export const ReducedMotionWrapper = styled.div`
     }
   }
 `;
+
+// Default user settings
+export const DEFAULT_USER_SETTINGS: Settings = {
+  language: 'en',
+  appVersion: '1.1'
+}
