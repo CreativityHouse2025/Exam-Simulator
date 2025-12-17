@@ -20,13 +20,14 @@ const AppComponent: React.FC = () => {
   const [session, setSession] = useSession();
 
   // get settings to set default
-  const { settings } = useSettings();
-  const [lang, setLang] = React.useState<Lang>(LANGUAGES[settings.language])
+  const { settings, updateLanguage } = useSettings();  
+
+  const langCode = settings.language;
 
   const [exam, setExam] = React.useState<Exam | null>(null)
-  const [loading, setLoading] = React.useState<Boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
-  // check for old versions
+  // check for old versions (will use appVersion inside settings in next update)
   React.useEffect(() => {
     // if categoryId (a new key) not in the current structure of the user, reset (first time entering the new vresion)
     const raw = localStorage.getItem('session')
@@ -49,12 +50,17 @@ const AppComponent: React.FC = () => {
       const newLang = LANGUAGES[code]
 
       setTranslation(newLang, translations)
-      setLang(newLang)
       document.documentElement.lang = newLang.code
       document.documentElement.dir = newLang.dir
     },
-    [setTranslation, LANGUAGES]
+    []
   )
+
+  const toggleLanguage = React.useCallback(async () => {
+    const nextCode = settings.language === "ar" ? "en" : "ar"
+    updateLanguage(nextCode)             // update settings
+    await loadTranslation(nextCode)      // load translations
+  }, [settings.language, updateLanguage, loadTranslation])
 
   const loadExam = React.useCallback(
     (newSession: Session) => {
@@ -83,7 +89,7 @@ const AppComponent: React.FC = () => {
         setExam(null)
       }
     },
-    [lang]
+    []
   )
 
   const handlestart = React.useCallback(
@@ -101,32 +107,26 @@ const AppComponent: React.FC = () => {
     }
   }, [session, loadExam, handlestart])
 
-  // Load translation on start
+  // load translation on start
   React.useEffect(() => {
-    async function setUpTranslation() {
-      await loadTranslation(lang.code)
+    async function initTranslation() {
+      await loadTranslation(settings.language)
     }
-    setUpTranslation();
+    initTranslation()
   }, [])
 
-  // Load question map and exam when loadExam (language) changes
+  // Load questions from disk to memory map
   React.useEffect(() => {
-    async function setUpExam() {
-
+    const initMap = async () => {
       setLoading(true);
-
       try {
-        await initQuestionMap(lang.code);
-        if (exam && session.examType) {
-          loadExam(session)
-        }
+        await initQuestionMap(langCode);
       } finally {
         setLoading(false);
-
       }
     }
-    setUpExam();
-  }, [loadExam])
+    initMap()
+  }, [langCode]) // run only once per language change
 
   if (!hasTranslation()) {
     return <Loading size={200} />
@@ -138,7 +138,7 @@ const AppComponent: React.FC = () => {
 
   return (
     <>
-      <Header setLang={loadTranslation} />
+      <Header onLanguage={toggleLanguage} />
 
       {exam ? (
         <ExamContext.Provider value={exam}>
