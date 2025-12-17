@@ -134,5 +134,5 @@ export const ReducedMotionWrapper = styled.div`
 // Default user settings
 export const DEFAULT_USER_SETTINGS: Settings = {
   language: 'en',
-  appVersion: '1.1'
+  appVersion: '5'
 }

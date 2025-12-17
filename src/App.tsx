@@ -1,4 +1,4 @@
-import type { Category, Exam, ExamType, Lang, LangCode, Session } from './types'
+import type { Category, Exam, ExamType, LangCode, Session } from './types'
 
 import React from 'react'
 import Header from './components/Header'
@@ -14,18 +14,14 @@ import { useSession } from './hooks/useSession'
 import useSettings from './hooks/useSettings'
 
 const AppComponent: React.FC = () => {
-  // TODO: 1. create LangContextProvider, ExamContextProvider using custom hooks + context pattern
-  // TODO: 2. Make category UI work with all exam types (flexible)
-  // TODO: 3. Test category functionality
   const [session, setSession] = useSession();
 
   // get settings to set default
   const { settings, updateLanguage } = useSettings();  
-
-  const langCode = settings.language;
-
   const [exam, setExam] = React.useState<Exam | null>(null)
   const [loading, setLoading] = React.useState<boolean>(false);
+  
+  const langCode = settings.language;    
 
   // check for old versions (will use appVersion inside settings in next update)
   React.useEffect(() => {
@@ -59,8 +55,7 @@ const AppComponent: React.FC = () => {
   const toggleLanguage = React.useCallback(async () => {
     const nextCode = settings.language === "ar" ? "en" : "ar"
     updateLanguage(nextCode)             // update settings
-    await loadTranslation(nextCode)      // load translations
-  }, [settings.language, updateLanguage, loadTranslation])
+  }, [settings.language, updateLanguage])
 
   const loadExam = React.useCallback(
     (newSession: Session) => {
@@ -89,7 +84,7 @@ const AppComponent: React.FC = () => {
         setExam(null)
       }
     },
-    []
+    [setExam, setSession, generateNewExam, getExamByQuestionIds, formatSession, formatExam]
   )
 
   const handlestart = React.useCallback(
@@ -107,13 +102,13 @@ const AppComponent: React.FC = () => {
     }
   }, [session, loadExam, handlestart])
 
-  // load translation on start
+  // load translation on render
   React.useEffect(() => {
     async function initTranslation() {
-      await loadTranslation(settings.language)
+      await loadTranslation(langCode)
     }
     initTranslation()
-  }, [])
+  }, [langCode, loadTranslation]) // load per language
 
   // Load questions from disk to memory map
   React.useEffect(() => {
