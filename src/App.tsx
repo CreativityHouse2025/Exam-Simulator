@@ -128,8 +128,8 @@ const AppComponent: React.FC = () => {
         setLoading(false);
       }
     }
-    initMap()
-  }, [langCode, session, loadExam]) // run only once per language change
+    initMap()    
+  }, [langCode, loadExam]) // run only once per language change
 
   if (!hasTranslation()) {
     return <Loading size={200} />
