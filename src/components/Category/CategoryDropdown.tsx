@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { LangContext } from "../../contexts";
 import styled from "styled-components";
-import type { Category, Lang, ThemedStyles } from "../../types";
+import type { Category, Lang, LangCode, ThemedStyles } from "../../types";
 import { Close } from '@styled-icons/material/Close'
 import { GENERAL_CATEGORY_ID, MENU_PADDING } from "../../constants";
 import MenuList from "./MenuList";
 import rawCategories from '../../data/exam-data/categories.json'
 import useCategoryLabel from "../../hooks/useCategoryLabel";
+import useSettings from "../../hooks/useSettings";
 
 type DropdownProps = {
   title: string
@@ -81,7 +81,8 @@ const CloseButton = styled.button<ThemedStyles>`
 
 const CategoryDropdown: React.FC<DropdownProps> = ({ buttonRef, open, setOpen, title, onSelect }) => {
 
-  const language: Lang = useContext(LangContext)
+  const { settings } = useSettings();
+  const langCode: LangCode = settings.language;
 
   const menuRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
@@ -113,7 +114,7 @@ const CategoryDropdown: React.FC<DropdownProps> = ({ buttonRef, open, setOpen, t
   }
   const categories: Category[] = [generalCategory, ...rawCategories.map(c => ({
     id: c.id,
-    label: c['name'][language.code]
+    label: c['name'][langCode]
   }))]
 
   return (

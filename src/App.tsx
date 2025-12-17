@@ -10,7 +10,6 @@ import { formatSession, formatExam } from './utils/format'
 import { generateNewExam, getExamByQuestionIds, initQuestionMap } from './utils/exam'
 import { DEFAULT_SESSION, GENERAL_CATEGORY_ID, LANGUAGES } from './constants'
 import { ExamContext } from './contexts'
-import SettingsProvider from './providers/SettingsContextProvider'
 import { useSession } from './hooks/useSession'
 import useSettings from './hooks/useSettings'
 
@@ -138,7 +137,7 @@ const AppComponent: React.FC = () => {
   }
 
   return (
-    <SettingsProvider>
+    <>
       <Header setLang={loadTranslation} />
 
       {exam ? (
@@ -148,7 +147,7 @@ const AppComponent: React.FC = () => {
       ) : (
         <Cover onStart={handlestart} canContinue={session.examType ? true : false} onContinue={handleContinue} />
       )}
-    </SettingsProvider>
+    </>
   )
 }
 
