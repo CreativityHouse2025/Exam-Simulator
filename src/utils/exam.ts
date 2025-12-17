@@ -4,12 +4,16 @@ import examTypes from '../data/exam-data/examTypes.json'
 import type { Exam, GeneratedExam, Question, LangCode, ExamType } from '../types'
 import { shuffleArray } from './format'
 
-// Map to retrieve questions in order later (better performance O(M + N) instead of O(M * N))
+// Map to retrieve questions in order later
 // M is size of questions in exam, N is size of question bank
 let questionMap: Map<Question["id"], Question> | null = null;
 // question list for easy access
 let questionList: Question[] | null = null;
 
+/**
+ * Loads questions from disk to memory based on language 
+ * @param {LangCode} langCode - The code of the language
+ */
 export async function initQuestionMap(langCode: LangCode) {
     try {
         const module = await import(`../data/exam-data/questions-${langCode}.json`);
@@ -137,6 +141,7 @@ export function getExamByQuestionIds(questionIds: number[]): Exam {
     // for safety, missing IDs count
     let missingIdCount = 0;
 
+    // get questions in order
     const exam = (questionIds.map(id => map.get(id)))
         .filter((q): q is Question => {
             const isValid = Boolean(q);

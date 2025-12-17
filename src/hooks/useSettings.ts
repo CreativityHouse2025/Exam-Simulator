@@ -1,5 +1,6 @@
 import { useContext, useCallback } from "react"
 import { SettingsContext } from "../contexts"
+import { LangCode } from "../types"
 
 export default function useSettings() {
 	const context = useContext(SettingsContext)
@@ -9,6 +10,13 @@ export default function useSettings() {
 	}
 
 	const { settings, setSettings } = context
+
+	const updateLanguage = useCallback((newCode: LangCode) => {
+		setSettings((prev) => ({
+			...prev,
+			language: newCode
+		}))
+	}, [setSettings])
 
 	const updateFullName = useCallback((fullName: string) => {
 		setSettings((prev) => ({
@@ -28,5 +36,6 @@ export default function useSettings() {
 		settings,
 		updateFullName,
 		updateEmail,
+		updateLanguage
 	}
 }

@@ -6,6 +6,7 @@ import { Language } from '@styled-icons/material/Language'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
+import useSettings from '../hooks/useSettings'
 
 const HeaderStyles = styled.div<ThemedStyles>`
   position: fixed;
@@ -40,24 +41,19 @@ const LanguageStyles = styled.div<ThemedStyles>`
   }
 `
 
-const HeaderComponent: React.FC<HeaderProps> = ({ setLang }) => {
+const HeaderComponent: React.FC<HeaderProps> = ({ onLanguage }) => {
   const title = React.useMemo(() => translate('about.title'), [document.documentElement.lang, translate])
   const resetApp = React.useCallback(() => window.location.reload(), [])
 
-  const toggleLanguage = React.useCallback(
-    () => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar'),
-    [setLang]
-  )
-
   return (
     <HeaderStyles id="header">
-      <ImageStyles title='Creativity House' alt='Creativity House Logo' id="image" className="no-select" src={Logo} onClick={resetApp}/>
+      <ImageStyles title='Creativity House' alt='Creativity House Logo' id="image" className="no-select" src={Logo} onClick={resetApp} />
 
       <TitleStyles id="title" className="no-select" onClick={resetApp}>
         {title}
       </TitleStyles>
 
-      <LanguageStyles title='Change language' aria-label='Language Icon' id="language" className="no-select" onClick={toggleLanguage}>
+      <LanguageStyles title='Change language' aria-label='Language Icon' id="language" className="no-select" onClick={onLanguage}>
         <Language size={40} />
       </LanguageStyles>
     </HeaderStyles>
@@ -67,5 +63,5 @@ const HeaderComponent: React.FC<HeaderProps> = ({ setLang }) => {
 export default HeaderComponent
 
 export interface HeaderProps {
-  setLang: (lang: LangCode) => void
+  onLanguage: () => void
 }
