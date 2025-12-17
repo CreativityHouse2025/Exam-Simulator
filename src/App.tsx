@@ -38,7 +38,7 @@ const AppComponent: React.FC = () => {
       setSession(DEFAULT_SESSION);
     }
 
-  }, []);
+  }, [setSession]);
 
   const loadTranslation = React.useCallback(
     async (code: LangCode) => {
@@ -52,7 +52,7 @@ const AppComponent: React.FC = () => {
     []
   )  
 
-  const toggleLanguage = React.useCallback(async () => {
+  const toggleLanguage = React.useCallback(() => {
     const nextCode = settings.language === "ar" ? "en" : "ar"
     updateLanguage(nextCode)             // update settings
   }, [settings.language, updateLanguage])
@@ -84,7 +84,7 @@ const AppComponent: React.FC = () => {
         setExam(null)
       }
     },
-    [setExam, setSession, generateNewExam, getExamByQuestionIds, formatSession, formatExam]
+    [setExam, setSession]
   )
 
   const handlestart = React.useCallback(
@@ -110,18 +110,26 @@ const AppComponent: React.FC = () => {
     initTranslation()
   }, [langCode, loadTranslation]) // load per language
 
+  // Load exam on language change while the exam exists
+  const onMap = React.useEffectEvent(() => {
+    if (exam && session.examType) {
+      loadExam(session)
+    }
+  });
+
   // Load questions from disk to memory map
   React.useEffect(() => {
     const initMap = async () => {
       setLoading(true);
       try {
         await initQuestionMap(langCode);
+        onMap();
       } finally {
         setLoading(false);
       }
     }
     initMap()
-  }, [langCode]) // run only once per language change
+  }, [langCode, session, loadExam]) // run only once per language change
 
   if (!hasTranslation()) {
     return <Loading size={200} />
