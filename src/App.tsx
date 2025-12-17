@@ -50,7 +50,7 @@ const AppComponent: React.FC = () => {
       document.documentElement.dir = newLang.dir
     },
     []
-  )
+  )  
 
   const toggleLanguage = React.useCallback(async () => {
     const nextCode = settings.language === "ar" ? "en" : "ar"
