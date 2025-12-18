@@ -28,5 +28,6 @@ export const SessionExamContext = createContext<SessionExam>({
 
 export const SessionDataContext = createContext<SessionData>({
   bookmarks: [],
-  answers: []
+  answers: [],
+  emailSent: false
 })

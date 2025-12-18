@@ -77,7 +77,8 @@ export const SESSION_ACTION_TYPES = {
   SET_TIME: 'SET_TIME' as const,
   SET_TIMER_PAUSED: 'SET_TIMER_PAUSED' as const,
   SET_EXAM_STATE: 'SET_EXAM_STATE' as const,
-  SET_REVIEW_STATE: 'SET_REVIEW_STATE' as const
+  SET_REVIEW_STATE: 'SET_REVIEW_STATE' as const,
+  SET_EMAIL_SENT: 'SET_EMAIL_SENT' as const
 } as const
 
 // Property mapping for session actions
@@ -88,7 +89,8 @@ export const SESSION_ACTION_PROPS = {
   SET_TIME: 'time' as const,
   SET_TIMER_PAUSED: 'paused' as const,
   SET_EXAM_STATE: 'examState' as const,
-  SET_REVIEW_STATE: 'reviewState' as const
+  SET_REVIEW_STATE: 'reviewState' as const,
+  SET_EMAIL_SENT: 'emailSent' as const
 } as const
 
 // Constant for the general category (mix of all categories)
@@ -107,6 +109,7 @@ export const DEFAULT_SESSION: Session = {
   reviewState: 'summary' as const,
   questions: [] as const,
   answers: [] as const,
+  emailSent: false,
   categoryId: GENERAL_CATEGORY_ID,
   bookmarks: [] as const,
 } as const
@@ -134,5 +137,5 @@ export const ReducedMotionWrapper = styled.div`
 // Default user settings
 export const DEFAULT_USER_SETTINGS: Settings = {
   language: 'en',
-  appVersion: '5'
+  appVersion: '1.1'
 }

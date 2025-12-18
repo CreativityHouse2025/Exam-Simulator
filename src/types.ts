@@ -99,6 +99,8 @@ export interface Session {
   questions: Question['id'][]
   /** the list of answers */
   answers: Answers
+  /** v1.1: flag to ensure that email is sent only once per session completion */
+  emailSent: boolean
   /** v1.1: the category of the exam */
   categoryId: number
   /** the list of bookmarked questions */
@@ -134,6 +136,7 @@ export type SessionActionTypes =
   | 'SET_TIMER_PAUSED'
   | 'SET_EXAM_STATE'
   | 'SET_REVIEW_STATE'
+  | 'SET_EMAIL_SENT'
 
 // Session actions mapping
 type SessionActionsMap = {
@@ -144,6 +147,7 @@ type SessionActionsMap = {
   SET_TIMER_PAUSED: { payload: boolean; prop: 'paused' }
   SET_EXAM_STATE: { payload: ExamState; prop: 'examState' }
   SET_REVIEW_STATE: { payload: ReviewState; prop: 'reviewState' }
+  SET_EMAIL_SENT: { payload: Session['emailSent']; prop: 'emailSent' }
 }
 
 export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {
@@ -162,7 +166,7 @@ export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, Ses
 export type SessionNavigation = Pick<Session, 'index' | 'update'>
 export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused' | 'update'>
 export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'update' | 'categoryId'>
-export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | 'update'>
+export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | 'update' | 'emailSent'>
 
 // Email API arguments type
 export type SendEmailRequest = {
@@ -171,7 +175,8 @@ export type SendEmailRequest = {
   text: string;
   attachments?: {
     filename: string;
-    reportBase64: string;
+    /** pdf content in base64 */
+    content: string;
   }[]
 }
 
