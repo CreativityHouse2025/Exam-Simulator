@@ -175,12 +175,24 @@ export type SendEmailRequest = {
   }[]
 }
 
+// Translations to pass in the API (serverless doesn't share app runtime state)
+export type Translations = {
+  companyName: string
+  reportTitle: string
+  missing: string
+  correct: string
+  incorrect: string
+  explanation: string
+  fullName: string
+}
+
 // Generate report API arguments type
 export type GenerateReportRequest = {
   exam: Exam
   userAnswers: Answers
   langCode: LangCode
   userFullName: string
+  translations: Translations
 }
 
 // User settings (initially null until user inserts data)

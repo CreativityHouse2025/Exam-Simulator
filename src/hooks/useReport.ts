@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react"
-import { GenerateReportRequest } from "../types"
+import { GenerateReportRequest, Translations } from "../types"
+import { translate } from "../utils/translation"
 
 type UseReportProps = GenerateReportRequest
 
@@ -24,10 +25,19 @@ export function useReport() {
             setPdfBase64(null)
 
             try {
+                const translations: Translations = {
+                    companyName: translate("about.title"),
+                    reportTitle: translate("report.title"),
+                    missing: translate("content.explain.yours") + translate("content.explain.missing"),
+                    correct: translate("content.explain.yours") + translate("content.explain.correct"),
+                    incorrect: translate("content.explain.yours") + translate("content.explain.incorrect"),
+                    explanation: translate("content.explain.explain"),
+                    fullName: translate("report.full-name"),
+                }
                 const res = await fetch("/api/generate-report", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ exam, userAnswers, langCode, userFullName })
+                    body: JSON.stringify({ exam, userAnswers, langCode, userFullName, translations })
                 })
 
                 if (!res.ok) {
