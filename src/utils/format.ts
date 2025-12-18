@@ -79,7 +79,6 @@ export function formatExam(exam: Exam): Exam {
   })
 }
 
-// TODO: make the exam format itself by only exam type
 /**
  * Format session with default values
  * @param {Session} session - The session object to format.
@@ -142,4 +141,8 @@ export function formatChoiceLabel(index: number, lang: LangCode): string {
   } catch {
     return 'A'
   }
+}
+
+export function isEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }

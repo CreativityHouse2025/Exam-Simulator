@@ -11,6 +11,10 @@ export default function useSettings() {
 
 	const { settings, setSettings } = context
 
+	/**
+	 * Update the language in the storage
+	 * @param {LangCode} newCode - The code of the new language
+	 */
 	const updateLanguage = useCallback((newCode: LangCode) => {
 		setSettings((prev) => ({
 			...prev,
@@ -18,6 +22,10 @@ export default function useSettings() {
 		}))
 	}, [setSettings])
 
+	/**
+	 * Update the full name in the storage
+	 * @param {string} fullName - The new name
+	 */
 	const updateFullName = useCallback((fullName: string) => {
 		setSettings((prev) => ({
 			...prev,
@@ -25,6 +33,10 @@ export default function useSettings() {
 		}))
 	}, [setSettings])
 
+	/**
+	 * Update the email in the storage
+	 * @param {string} email - The new email
+	 */
 	const updateEmail = useCallback((email: string) => {
 		setSettings((prev) => ({
 			...prev,
