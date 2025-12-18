@@ -9,6 +9,8 @@ import { ExamContext, SessionDataContext, SessionExamContext, SessionTimerContex
 import useCategoryLabel from '../../hooks/useCategoryLabel'
 import { useReport } from '../../hooks/useReport'
 import useSettings from '../../hooks/useSettings'
+import { useEmail } from '../../hooks/useEmail'
+import { SESSION_ACTION_TYPES } from '../../constants'
 
 const passPercent = 85
 
@@ -105,23 +107,6 @@ const SummaryComponent: React.FC = () => {
     [langCode, translate, status]
   )
 
-  const { error: reportError, loading, generateReport, downloadReport } = useReport();
-  async function hanldeSaveReport() {
-    try {
-      await generateReport({
-        exam,
-        userAnswers: answers,
-        langCode,
-        userFullName: "Mohammed Alsadawi"
-      })
-      downloadReport()
-      
-    } catch (error) {
-      console.log(error);
-      
-    }
-  }
-
   const onRestart = React.useCallback(() => window.location.reload(), [])
 
   return (
@@ -148,8 +133,6 @@ const SummaryComponent: React.FC = () => {
       <RestartButton id="restart-button" className="no-select" onClick={onRestart}>
         {translated.home}
       </RestartButton>
-
-      <button onClick={hanldeSaveReport}>Save Report</button>
     </div>
   )
 }

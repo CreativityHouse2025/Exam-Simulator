@@ -2,7 +2,7 @@ import { useState, useCallback } from "react"
 import { GenerateReportRequest, Translations } from "../types"
 import { translate } from "../utils/translation"
 
-type UseReportProps = GenerateReportRequest
+type UseReportProps = Omit<GenerateReportRequest, 'translations'>
 
 /**
  * Custom hook to generate a report PDf Base64 using generate-report API

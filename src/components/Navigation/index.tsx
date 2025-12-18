@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Drawer from './Drawer'
 import Footer from './Footer'
@@ -35,7 +35,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
   const isMobile = useMediaQuery('(max-width: 48rem)'); // 768px, hook is called at each render  
   const [open, setOpen] = React.useState<boolean>(() => !isMobile)
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isMobile) {
       setOpen(false); // close navigation on mobile
     } else {
@@ -62,7 +62,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
     navigation: { index: session.index, update: sessionUpdate },
     timer: { time: session.time, maxTime: session.maxTime, paused: session.paused, update: sessionUpdate },
     exam: { examState: session.examState, reviewState: session.reviewState, update: sessionUpdate, categoryId: session.categoryId },
-    data: { bookmarks: session.bookmarks, answers: session.answers, examType: session.examType, update: sessionUpdate }
+    data: { bookmarks: session.bookmarks, answers: session.answers, examType: session.examType, emailSent: session.emailSent, update: sessionUpdate }
   }
 
   return (
