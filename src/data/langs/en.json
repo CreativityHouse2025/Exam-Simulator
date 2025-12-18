@@ -40,7 +40,8 @@
       "yours": "Your answer is ",
       "answer": "The correct answer is ",
       "correct": "correct",
-      "incorrect": "incorrect"
+      "incorrect": "incorrect",
+      "missing": "missing"
     },
     "summary": {
       "title": "Exam Statistics",
@@ -69,5 +70,10 @@
       "message": "Time has expired. Your exam has ended.",
       "button0": "Okay"
     }
+  },
+  "report": {
+    "title": "Exam Report",
+    "fullName": "Full Name",
+    "timestamp": "Finished at"
   }
 }
