@@ -4,34 +4,12 @@ import { LangCode, GenerateReportRequest } from "../src/types"
 import fs from "fs"
 import reshaper from "arabic-persian-reshaper"
 
-import bidiFactory from "bidi-js";
-const bidi: any = bidiFactory(); // do this once
-
 function shapeArabic(text: string): string {
     if (!text) return text;
 
-    // 1. Reshape the characters (joining logic)
     const reshaped = reshaper.ArabicShaper.convertArabic(text);
-
-    // 2. Compute embedding levels for the reshaped text (treat overall as RTL)
-    const embeddingLevels = bidi.getEmbeddingLevels(reshaped, "rtl");
-
-    // 3. Get the ranges that need visual reversal
-    const flips = bidi.getReorderSegments(reshaped, embeddingLevels);
-
-    // 4. Apply reversals to get visual order
-    const chars = reshaped.split("");
-    // @ts-ignore
-    flips.forEach(([start, end]) => {
-        const segment = chars.slice(start, end + 1).reverse();
-        chars.splice(start, segment.length, ...segment);
-    });
-
-    const visual = chars.join("");
-
-    return visual;
+    return reshaped;
 }
-
 function prepareText(text: string, langCode: LangCode): string {
     return langCode === "ar" ? shapeArabic(text) : text
 }

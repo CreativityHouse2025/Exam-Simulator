@@ -7,6 +7,7 @@ import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
 import CategoryDropdown from './Category/CategoryDropdown'
 import { GENERAL_CATEGORY_ID, ReducedMotionWrapper } from '../constants'
+import useSettings from '../hooks/useSettings'
 
 const CoverStyles = styled.div<ThemedStyles>`
   width: 100vw;
@@ -81,6 +82,10 @@ const ButtonRow = styled.div`
 const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue }) => {
   const [dropdown, setDropdown] = useState<boolean>(false);
 
+  const { settings } = useSettings();
+
+  const langCode = settings.language;
+
   // button ref to fix immediate dropdown close on touch event
   const miniButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -94,7 +99,7 @@ const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue
       continue: translate('cover.continue'),
       selectCategory: translate('cover.select-category')
     }),
-    [document.documentElement.lang, translate]
+    [langCode, translate]
   )
 
   return (
