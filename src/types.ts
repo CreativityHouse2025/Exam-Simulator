@@ -175,6 +175,14 @@ export type SendEmailRequest = {
   }[]
 }
 
+// Generate report API arguments type
+export type GenerateReportRequest = {
+  exam: Exam
+  userAnswers: Answers
+  langCode: LangCode
+  userFullName: string
+}
+
 // User settings (initially null until user inserts data)
 export type Settings = {
   /** the full name of the user for report display */

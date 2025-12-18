@@ -7,9 +7,8 @@ import { formatDate, formatTimer } from '../../utils/format'
 import { translate } from '../../utils/translation'
 import { ExamContext, SessionDataContext, SessionExamContext, SessionTimerContext } from '../../contexts'
 import useCategoryLabel from '../../hooks/useCategoryLabel'
-import { generateExamReportBase64Pdf } from '../../utils/report'
-// @ts-expect-error
-import logo from "../../assets/logo-compressed.jpeg"
+import { useReport } from '../../hooks/useReport'
+import useSettings from '../../hooks/useSettings'
 
 const passPercent = 85
 
@@ -61,6 +60,9 @@ const SummaryComponent: React.FC = () => {
   const { categoryId } = React.useContext(SessionExamContext)
   const exam = React.useContext(ExamContext)
 
+  const { settings } = useSettings();
+  const langCode = settings.language;
+
   const questions = React.useMemo(() => {
     const arraysEqual = (a: number[] | null, b: number[]): boolean =>
       a !== null && a.length === b.length && a.every((val, index) => val === b[index])
@@ -92,7 +94,7 @@ const SummaryComponent: React.FC = () => {
   const status = score >= passPercent
   const elapsed = maxTime - time  
   const date = new Date()
-  const categoryLabel: string | undefined = useCategoryLabel(categoryId);
+  const categoryLabel: string | undefined = useCategoryLabel(categoryId);  
 
   const translated = React.useMemo(
     () => ({
@@ -100,12 +102,24 @@ const SummaryComponent: React.FC = () => {
       status: translate(`content.summary.${status ? 'pass' : 'fail'}`),
       home: translate('content.summary.home')
     }),
-    [document.documentElement.lang, translate, status]
+    [langCode, translate, status]
   )
 
-  function hanldeSaveReport() {
-    const questionIds = exam.map(q => q.id);
-    const base64Report = generateExamReportBase64Pdf(questionIds, answers, "English", "Mohammed Alsadawi", logo);
+  const { error: reportError, loading, generateReport, downloadReport } = useReport();
+  async function hanldeSaveReport() {
+    try {
+      await generateReport({
+        exam,
+        userAnswers: answers,
+        langCode,
+        userFullName: "Mohammed Alsadawi"
+      })
+      downloadReport()
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
   }
 
   const onRestart = React.useCallback(() => window.location.reload(), [])
