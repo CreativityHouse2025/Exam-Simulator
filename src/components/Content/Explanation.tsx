@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { lighten, darken } from 'polished'
 import { formatAnswerLabel } from '../../utils/format'
 import { translate } from '../../utils/translation'
+import useSettings from '../../hooks/useSettings'
 
 const ExplanationStyles = styled.div<ExplanationStylesProps>`
   background: ${({ $correct, theme }) => lighten(0.4, $correct ? theme.correct : theme.incorrect)};
@@ -40,6 +41,9 @@ const ExplanationComponent: React.FC<ExplanationProps> = ({ question, answer }) 
   const correct: boolean =
     question.answer.length === answer.length && question.answer.every((ans, index) => ans === answer[index])
 
+  const { settings } = useSettings();
+  const langCode = settings.language;
+
   const translated = React.useMemo(
     () => ({
       yours: translate('content.explain.yours'),
@@ -47,7 +51,7 @@ const ExplanationComponent: React.FC<ExplanationProps> = ({ question, answer }) 
       answer: translate('content.explain.answer'),
       explain: translate('content.explain.explain')
     }),
-    [document.documentElement.lang, translate, correct]
+    [langCode, translate, correct]
   )
 
   return (
@@ -59,7 +63,7 @@ const ExplanationComponent: React.FC<ExplanationProps> = ({ question, answer }) 
 
       <p>
         {translated.answer}
-        <CorrectStyles>{formatAnswerLabel(question, document.documentElement.lang as LangCode)}</CorrectStyles>
+        <CorrectStyles>{formatAnswerLabel(question, langCode as LangCode)}</CorrectStyles>
       </p>
 
       {question.explanation && (

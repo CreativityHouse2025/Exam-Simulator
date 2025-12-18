@@ -18,6 +18,7 @@ import { timerIsRunning } from '../../../utils/state'
 import { translate } from '../../../utils/translation'
 import { SESSION_ACTION_TYPES } from '../../../constants'
 import { SessionExamContext, SessionTimerContext } from '../../../contexts'
+import useSettings from '../../../hooks/useSettings'
 
 const MainMenu = styled.div<ThemedStyles>`
   height: calc(100vh - 5rem);
@@ -62,6 +63,9 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
     }),
     [timerSession, examState, update]
   )
+
+  const { settings } = useSettings();
+  const langCode = settings.language;
 
   const menuItems = React.useMemo(() => {
     const baseItems: MenuSections[] = [
@@ -121,7 +125,7 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
 
       return null
     },
-    [filter, open, document.documentElement.lang, translate]
+    [filter, open, langCode, translate]
   )
 
   return <MainMenu>{menuItems.map(renderMenuItem)}</MainMenu>

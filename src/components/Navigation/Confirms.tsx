@@ -6,6 +6,7 @@ import { timerHaveExpired, timerIsPaused } from '../../utils/state'
 import { translate } from '../../utils/translation'
 import { Session } from '../../types'
 import { SESSION_ACTION_TYPES } from '../../constants'
+import useSettings from '../../hooks/useSettings'
 
 const Confirms: React.FC<ConfirmsProps> = ({ session }) => {
   const confirms: Omit<MyModalProps, 'title' | 'message' | 'buttons'>[] = React.useMemo(
@@ -29,6 +30,9 @@ const Confirms: React.FC<ConfirmsProps> = ({ session }) => {
     [session]
   )
 
+  const { settings } = useSettings();
+  const langCode = settings.language;
+
   const activeConfirms: MyModalProps[] = React.useMemo(
     () =>
       confirms
@@ -42,7 +46,7 @@ const Confirms: React.FC<ConfirmsProps> = ({ session }) => {
 
           return { ...c, title, message, buttons }
         }),
-    [confirms, document.documentElement.lang, translate]
+    [confirms, langCode, translate]
   )
 
   return activeConfirms.map((c, i) => <Modal key={`${c.id}-${i}`} {...c} />)

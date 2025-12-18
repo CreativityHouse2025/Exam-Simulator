@@ -4,8 +4,9 @@ import React from 'react'
 import styled from 'styled-components'
 import BookmarkButton from './Bookmark'
 import { translate } from '../../utils/translation'
-import {  SessionExamContext, SessionNavigationContext } from '../../contexts'
+import { SessionExamContext, SessionNavigationContext } from '../../contexts'
 import useCategoryLabel from '../../hooks/useCategoryLabel'
+import useSettings from '../../hooks/useSettings'
 
 export const TopDisplayStyles = styled.div`
   display: flex;
@@ -48,16 +49,18 @@ const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isRevie
   const { categoryId } = React.useContext(SessionExamContext)
 
   let categoryLabel: string | undefined = useCategoryLabel(categoryId);
-  
+
+  const { settings } = useSettings();
+  const langCode = settings.language;
 
   const question = React.useMemo(
     () => translate('content.top-display.question', [index + 1, questionCount]),
-    [document.documentElement.lang, translate, index, questionCount]
+    [langCode, translate, index, questionCount]
   )
 
   const category = React.useMemo(
     () => translate('content.summary.category'),
-    [document.documentElement.lang, translate]
+    [langCode, translate]
   )
 
   return (

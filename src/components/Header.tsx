@@ -42,7 +42,9 @@ const LanguageStyles = styled.div<ThemedStyles>`
 `
 
 const HeaderComponent: React.FC<HeaderProps> = ({ onLanguage }) => {
-  const title = React.useMemo(() => translate('about.title'), [document.documentElement.lang, translate])
+  const { settings } = useSettings();
+  const langCode = settings.language;
+  const title = React.useMemo(() => translate('about.title'), [langCode, translate])
   const resetApp = React.useCallback(() => window.location.reload(), [])
 
   return (
