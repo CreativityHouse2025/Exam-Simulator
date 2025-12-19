@@ -11,6 +11,9 @@ import useSettings from '../../hooks/useSettings'
 import { SESSION_ACTION_TYPES } from '../../constants'
 import useToast from '../../hooks/useToast'
 import { translate } from '../../utils/translation'
+import { formatTimer, formatDate } from '../../utils/format'
+import type { Results } from '../../types'
+import useResults from '../../hooks/useResults'
 
 export const MainStyles = styled.main<MainStylesProps>`
   width: 100%;
@@ -42,7 +45,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open }) => {
   const finished = examState === 'completed'
   const summary = reviewState === 'summary'
 
-  const { error: reportError, loading: reportLoading, generateReport, downloadReport } = useReport();
+  const { error: reportError, loading: reportLoading, generateReport } = useReport();
   const { sendEmail, loading: emailLoading, error: emailError } = useEmail();
   const { showToast } = useToast();
 
@@ -51,6 +54,70 @@ const ContentComponent: React.FC<ContentProps> = ({ open }) => {
     "sent": translate("report.sent"),
     "error": translate("report.error")
   }), [langCode, translate])
+
+  const results = useResults(finished);  
+
+  const writeEmail = React.useCallback(
+    (fullName: string, results: Results) => {
+      const timestamp = new Date().toISOString().replace(/[:.-]/g, "")
+      const company = translate('about.title')
+
+      const rawSubject = translate('report.email.subject')
+      const rawBody = translate('report.email.body')
+
+      const replacePlaceholders = (text: string, ...values: string[]) =>
+        values.reduce((str, val, i) => str.replace(`$${i + 1}`, val), text)
+
+      const subject = replacePlaceholders(rawSubject, company)
+
+      const rows: Array<{ type: string; value: string }> = [
+        ...(results.pass !== undefined
+          ? [{ type: 'status', value: translate(`content.summary.${results.pass ? 'pass' : 'fail'}`) }]
+          : []),
+
+        ...(results.passPercent !== undefined
+          ? [{ type: 'passing', value: `${results.passPercent} %` }]
+          : []),
+
+        { type: 'score', value: `${results.score} %` },
+        { type: 'time', value: formatTimer(results.elapsedTime) },
+        { type: 'date', value: formatDate(results.date) },
+        { type: 'category', value: results.categoryLabel },
+        {
+          type: 'correct',
+          value: `${results.correctCount} / ${results.totalQuestions}`
+        },
+        {
+          type: 'incorrect',
+          value: `${results.incorrectCount} / ${results.totalQuestions}`
+        },
+        {
+          type: 'incomplete',
+          value: `${results.incompleteCount} / ${results.totalQuestions}`
+        }
+      ]
+
+      const summary = rows
+        .map(
+          ({ type, value }) =>
+            `${translate(`content.summary.${type}`)}: ${value}`
+        )
+        .join('\n')
+
+      const body = replacePlaceholders(
+        rawBody,
+        fullName,
+        company,
+        summary
+      )
+
+      const filename = `Report_${fullName.replace(/\s+/g, '_')}_${timestamp}.pdf`
+
+      return { subject, body, filename }
+    },
+    [langCode]
+  )
+
 
   React.useEffect(() => {
     if (emailLoading || reportLoading) {
@@ -70,19 +137,35 @@ const ContentComponent: React.FC<ContentProps> = ({ open }) => {
 
     async function generateAndSend() {
       try {
+        const userFullName = settings.fullName;
+        const email = writeEmail("Mohammed Alsadawi", results as Results) 
+        console.log(email);
+
+        if (!userFullName) {
+          console.warn("User fullname is missing")
+          return;
+        };
         const pdf = await generateReport({
           exam,
           userAnswers: answers,
           langCode,
-          userFullName: settings.fullName as string,
+          userFullName,
         });
         // TODO: 1. Generate dynamic subject, text, and filename
         // TODO: 2. Prompt user for email & full name
+        const userEmail = settings.email;
+        if (!userEmail) {
+          console.warn("User email is missing")
+          return;
+        }
+        // use as results because writeEmail is only called if exam is finished
+        
+
         await sendEmail({
-          to: "sadawe147@gmail.com",
-          subject: "Software design report",
-          text: "Your report is ready to download.",
-          attachments: [{ filename: "report.pdf", content: pdf }],
+          to: userEmail,
+          subject: email.subject,
+          text: email.body,
+          attachments: [{ filename: email.filename, content: pdf }],
         });
         update!([SESSION_ACTION_TYPES.SET_EMAIL_SENT, true]);
         showToast(feedback.sent, 5000)
@@ -92,7 +175,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open }) => {
     }
 
     generateAndSend();
-  }, [finished, emailSent, generateReport, sendEmail, exam, answers, langCode, settings.fullName, update]);
+  }, [finished, emailSent, writeEmail, generateReport, sendEmail, exam, answers, langCode, settings.fullName, update]);
 
 
 

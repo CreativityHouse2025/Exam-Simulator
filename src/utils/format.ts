@@ -1,6 +1,7 @@
 import type { Exam, LangCode, Question, Session } from '../types'
 
 import { formatDistance, format } from 'date-fns'
+import { translate } from './translation';
 
 /**
    * Shuffle array using Fisher-Yates algorithm

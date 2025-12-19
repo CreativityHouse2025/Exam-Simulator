@@ -73,10 +73,14 @@
   },
   "report": {
     "title": "Exam Report",
-    "fullName": "Full Name",
+    "full-name": "Full Name",
     "timestamp": "Finished at",
     "sending": "Sending the report to your email...",
     "sent": "Report sent successfully",
-    "error": "Failed to send the report"
+    "error": "Failed to send the report",
+    "email": {
+      "subject": "Your Exam Report - $1",
+      "body": "Hello $1,\n\nHere is your exam summary at $2:\n\n$3\n"
+    }
   }
 }
