@@ -34,7 +34,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
 
   const isMobile = useMediaQuery('(max-width: 48rem)'); // 768px, hook is called at each render  
   const [open, setOpen] = React.useState<boolean>(() => !isMobile)
-
+  
   React.useEffect(() => {
     if (isMobile) {
       setOpen(false); // close navigation on mobile

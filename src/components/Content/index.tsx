@@ -59,7 +59,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open }) => {
         // TODO: 2. Prompt user for email & full name
         await sendEmail({
           to: "sadawe147@gmail.com",
-          subject: "Report",
+          subject: "Software design report",
           text: "Your report is ready to download.",
           attachments: [{ filename: "report.pdf", content: pdf }],
         });

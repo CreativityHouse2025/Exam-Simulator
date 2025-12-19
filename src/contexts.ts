@@ -1,4 +1,7 @@
-import type { Exam, SessionNavigation, SessionTimer, SessionExam, SessionData, SettingsContextType } from './types'
+import React from "react";
+
+export const ToastContext = React.createContext<ToastContextType | undefined>(undefined);
+import type { Exam, SessionNavigation, SessionTimer, SessionExam, SessionData, SettingsContextType, ToastContextType } from './types'
 
 import { createContext } from 'react'
 import { GENERAL_CATEGORY_ID } from './constants'

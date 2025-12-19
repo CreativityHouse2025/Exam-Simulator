@@ -12,6 +12,7 @@ import { DEFAULT_SESSION, GENERAL_CATEGORY_ID, LANGUAGES } from './constants'
 import { ExamContext } from './contexts'
 import { useSession } from './hooks/useSession'
 import useSettings from './hooks/useSettings'
+import ToastContextProvider from './providers/ToastContextProvider'
 
 const AppComponent: React.FC = () => {
   const [session, setSession] = useSession();
@@ -140,7 +141,7 @@ const AppComponent: React.FC = () => {
   }
 
   return (
-    <>
+    <ToastContextProvider>
       <Header onLanguage={toggleLanguage} />
 
       {exam ? (
@@ -150,7 +151,7 @@ const AppComponent: React.FC = () => {
       ) : (
         <Cover onStart={handlestart} canContinue={session.examType ? true : false} onContinue={handleContinue} />
       )}
-    </>
+    </ToastContextProvider>
   )
 }
 
