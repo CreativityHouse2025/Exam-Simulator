@@ -147,3 +147,10 @@ export function formatChoiceLabel(index: number, lang: LangCode): string {
 export function isEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
+
+export function hasInvalidNameChars(name: string): boolean {
+  // \p{L} = any kind of letter from any language
+  // \s = space
+  const invalidPattern = /[^\p{L}\s]/u;
+  return invalidPattern.test(name);
+}
