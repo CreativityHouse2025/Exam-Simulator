@@ -15,7 +15,7 @@ const slideDown = keyframes`
 	}
 `;
 
-const ToastContainer = styled.div<{ visible: boolean } & ThemedStyles>`
+const ToastContainer = styled.div<{ $visible: boolean } & ThemedStyles>`
 	position: fixed;
 	top: 7rem;
 	left: 50%;
@@ -31,10 +31,10 @@ const ToastContainer = styled.div<{ visible: boolean } & ThemedStyles>`
     gap: 1rem;
 	align-items: center;
 	pointer-events: auto;
-	opacity: ${({ visible }) => (visible ? 1 : 0)};
+	opacity: ${({ $visible }) => ($visible ? 1 : 0)};
 	transform: translateX(-50%);
-	${({ visible }) =>
-		visible &&
+	${({ $visible }) =>
+		$visible &&
 		css`
 			animation: ${slideDown} 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 		`}
@@ -60,7 +60,7 @@ const CloseButton = styled.button<ThemedStyles>`
 const Toast: React.FC = () => {
 	const { visible, message, closeToast } = useToast();
 	return (
-		<ToastContainer visible={visible} role="alert" aria-live="assertive">
+		<ToastContainer $visible={visible} role="alert" aria-live="assertive">
 			<span style={{ flex: 1 }}>{message}</span>
 			<CloseButton aria-label="Close" onClick={closeToast}>
 				×
