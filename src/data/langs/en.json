@@ -82,5 +82,19 @@
       "subject": "Your Exam Report - $1",
       "body": "Hello $1,\n\nHere is your exam summary at $2:\n\n$3\n"
     }
-  }
+  },
+  "form": {
+    "user-info": {
+      "title": "Get Started",
+      "full-name": {
+        "label": "Full Name",
+        "placeholder": "Enter your full name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "submit": "Submit"
+    }
+  } 
 }

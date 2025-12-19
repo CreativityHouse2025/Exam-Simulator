@@ -138,9 +138,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open }) => {
     async function generateAndSend() {
       try {
         const userFullName = settings.fullName;
-        const email = writeEmail("Mohammed Alsadawi", results as Results) 
-        console.log(email);
-
+        
         if (!userFullName) {
           console.warn("User fullname is missing")
           return;
@@ -151,8 +149,6 @@ const ContentComponent: React.FC<ContentProps> = ({ open }) => {
           langCode,
           userFullName,
         });
-        // TODO: 1. Generate dynamic subject, text, and filename
-        // TODO: 2. Prompt user for email & full name
         const userEmail = settings.email;
         if (!userEmail) {
           console.warn("User email is missing")
@@ -160,7 +156,8 @@ const ContentComponent: React.FC<ContentProps> = ({ open }) => {
         }
         // use as results because writeEmail is only called if exam is finished
         
-
+        const email = writeEmail(userFullName, results as Results) 
+        
         await sendEmail({
           to: userEmail,
           subject: email.subject,

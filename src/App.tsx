@@ -14,12 +14,15 @@ import { useSession } from './hooks/useSession'
 import useSettings from './hooks/useSettings'
 import ToastContextProvider from './providers/ToastContextProvider'
 import Toast from './components/Toast'
+import UserInfoForm from './components/UserInfoForm'
 
 const AppComponent: React.FC = () => {
   const [session, setSession] = useSession();
+  const [visible, setVisible] = React.useState(true);
+  const [showForm, setShowForm] = React.useState(true);
 
   // get settings to set default
-  const { settings, updateLanguage } = useSettings();  
+  const { settings, updateLanguage, updateEmail, updateFullName } = useSettings();  
   const [exam, setExam] = React.useState<Exam | null>(null)
   const [loading, setLoading] = React.useState<boolean>(false);
   
@@ -104,6 +107,18 @@ const AppComponent: React.FC = () => {
     }
   }, [session, loadExam, handlestart])
 
+
+  const handleFormSubmit = React.useCallback((name: string, email: string) => {
+    updateEmail(email);
+    updateFullName(name);
+  }, [updateEmail, updateFullName]);
+
+  // Smooth close handler
+  const handleFormClose = React.useCallback(() => {
+    setVisible(false);
+    setTimeout(() => setShowForm(false), 250); // match transition duration
+  }, []);
+
   // load translation on render
   React.useEffect(() => {
     async function initTranslation() {
@@ -144,6 +159,10 @@ const AppComponent: React.FC = () => {
   return (
     <ToastContextProvider>
       <Header onLanguage={toggleLanguage} />
+
+      {showForm && (
+        <UserInfoForm visible={visible} onSubmit={handleFormSubmit} onClose={handleFormClose} />
+      )}
 
       {exam ? (
         <ExamContext.Provider value={exam}>

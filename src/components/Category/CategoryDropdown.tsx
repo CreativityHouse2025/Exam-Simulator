@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import type { Category, Lang, LangCode, ThemedStyles } from "../../types";
 import { Close } from '@styled-icons/material/Close'
@@ -84,8 +84,8 @@ const CategoryDropdown: React.FC<DropdownProps> = ({ buttonRef, open, setOpen, t
   const { settings } = useSettings();
   const langCode: LangCode = settings.language;
 
-  const menuRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
+  const menuRef = React.useRef<HTMLDivElement | null>(null);
+  React.useEffect(() => {
     const handler = (event: MouseEvent | TouchEvent) => {
       const target = event.target as Node;
 
