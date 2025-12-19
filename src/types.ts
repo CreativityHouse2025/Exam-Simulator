@@ -218,3 +218,15 @@ export type SettingsContextType = {
   /** state setter */
   setSettings: React.Dispatch<React.SetStateAction<Settings>>
 }
+
+// Type for the toast component state
+export type ToastState = {
+  message: string;
+  visible: boolean;
+};
+
+export interface ToastContextType {
+  message: string;
+  visible: boolean;
+  setToast: React.Dispatch<React.SetStateAction<ToastState>>
+}
