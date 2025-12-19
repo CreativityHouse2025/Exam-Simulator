@@ -88,11 +88,14 @@
       "title": "Get Started",
       "full-name": {
         "label": "Full Name",
-        "placeholder": "Enter your full name"
+        "placeholder": "Enter your full name",
+        "invalid": "Only letters are allowed in the name",
+        "missing": "Full name is required"
       },
       "email": {
         "label": "Email",
-        "placeholder": "Enter your email"
+        "placeholder": "Enter your email",
+        "invalid": "Please enter a valid name"
       },
       "submit": "Submit"
     }

@@ -18,15 +18,15 @@ import UserInfoForm from './components/UserInfoForm'
 
 const AppComponent: React.FC = () => {
   const [session, setSession] = useSession();
-  const [visible, setVisible] = React.useState(true);
-  const [showForm, setShowForm] = React.useState(true);
+  const [showForm, setShowForm] = React.useState(false);
+  const [pendingAction, setPendingAction] = React.useState<null | (() => void)>(null);
 
   // get settings to set default
-  const { settings, updateLanguage, updateEmail, updateFullName } = useSettings();  
+  const { settings, updateLanguage, updateEmail, updateFullName } = useSettings();
   const [exam, setExam] = React.useState<Exam | null>(null)
   const [loading, setLoading] = React.useState<boolean>(false);
-  
-  const langCode = settings.language;    
+
+  const langCode = settings.language;
 
   // check for old versions (will use appVersion inside settings in next update)
   React.useEffect(() => {
@@ -55,7 +55,7 @@ const AppComponent: React.FC = () => {
       document.documentElement.dir = newLang.dir
     },
     []
-  )  
+  )
 
   const toggleLanguage = React.useCallback(() => {
     const nextCode = settings.language === "ar" ? "en" : "ar"
@@ -92,7 +92,7 @@ const AppComponent: React.FC = () => {
     [setExam, setSession]
   )
 
-  const handlestart = React.useCallback(
+  const handleStart = React.useCallback(
     (options: StartExamOptions) => loadExam({ ...DEFAULT_SESSION, examType: options.type, categoryId: options.categoryId }),
     [loadExam]
   )
@@ -103,20 +103,30 @@ const AppComponent: React.FC = () => {
     } catch (err) {
       console.error('Failed to load previous exam:', err)
       // Fallback to starting a new exam if loading fails
-      handlestart({ type: 'exam', categoryId: GENERAL_CATEGORY_ID })
+      handleStart({ type: 'exam', categoryId: GENERAL_CATEGORY_ID })
     }
-  }, [session, loadExam, handlestart])
-
+  }, [session, loadExam, handleStart])
 
   const handleFormSubmit = React.useCallback((name: string, email: string) => {
     updateEmail(email);
     updateFullName(name);
-  }, [updateEmail, updateFullName]);
+    setTimeout(() => setShowForm(false), 250);
+    if (pendingAction) {
+      pendingAction();
+      setPendingAction(null);
+    }
+  }, [updateEmail, updateFullName, pendingAction]);
+
+  // Show form and store action to run after info is filled
+  const requireUserInfo = React.useCallback((action: () => void) => {
+    setPendingAction(() => action);
+    setShowForm(true);
+  }, []);
 
   // Smooth close handler
   const handleFormClose = React.useCallback(() => {
-    setVisible(false);
-    setTimeout(() => setShowForm(false), 250); // match transition duration
+    setShowForm(false)
+    setPendingAction(null);
   }, []);
 
   // load translation on render
@@ -145,7 +155,7 @@ const AppComponent: React.FC = () => {
         setLoading(false);
       }
     }
-    initMap()    
+    initMap()
   }, [langCode, loadExam]) // run only once per language change
 
   if (!hasTranslation()) {
@@ -160,16 +170,36 @@ const AppComponent: React.FC = () => {
     <ToastContextProvider>
       <Header onLanguage={toggleLanguage} />
 
-      {showForm && (
-        <UserInfoForm visible={visible} onSubmit={handleFormSubmit} onClose={handleFormClose} />
-      )}
+      <UserInfoForm
+        visible={showForm}
+        onSubmit={handleFormSubmit}
+        onClose={handleFormClose} // make sure the form supports this
+      />
 
       {exam ? (
         <ExamContext.Provider value={exam}>
           <Navigation startingSession={session} onSessionUpdate={setSession} />
         </ExamContext.Provider>
       ) : (
-        <Cover onStart={handlestart} canContinue={session.examType ? true : false} onContinue={handleContinue} />
+          <Cover
+            onStart={(options) => {
+              if (!settings.fullName || !settings.email) {
+                // show form first, then start exam after user fills info
+                requireUserInfo(() => handleStart(options));
+              } else {
+                handleStart(options);
+              }
+            }}
+            canContinue={session.examType ? true : false}
+            onContinue={() => {
+              if (!settings.fullName || !settings.email) {
+                // show form first, then continue exam after user fills info
+                requireUserInfo(handleContinue);
+              } else {
+                handleContinue();
+              }
+            }}
+          />
       )}
 
       <Toast />

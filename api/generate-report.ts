@@ -39,15 +39,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const xStart = isArabic ? pageWidth - margin : margin;
 
         // --- HEADER ---
-        let headerY = 150;
+        let headerY = 100;
         const fileBuffer = fs.readFileSync(`${process.cwd()}/src/assets/logo-compressed.jpeg`);
         const logoBase64 = fileBuffer.toString("base64");
         doc.setFont(baseFont, "normal");
         doc.setFontSize(22);
         doc.text(translations.companyName, pageWidth / 2, headerY, { align: "center", isOutputRtl: isArabic, isSymmetricSwapping: isArabic });
-        headerY += 10;
+        headerY += 30;
         doc.addImage(logoBase64, "JPEG", pageWidth / 2 - 40, headerY, 80, 80, "", "FAST");
-        headerY += 100;
+        headerY += 120;
 
         // Report title
         doc.setFontSize(18);

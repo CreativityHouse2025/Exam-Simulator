@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Close } from '@styled-icons/material/Close';
 import styled from 'styled-components';
 import { hasInvalidNameChars, isEmail } from '../utils/format';
@@ -77,7 +77,7 @@ const Label = styled.label<{ align: string } & ThemedStyles>`
   font-weight: 600;
   color: ${({ theme }) => theme.black};
   margin-bottom: 0.5rem;
-  text-align: ${({align}) => align};
+  text-align: ${({ align }) => align};
 `;
 
 const Input = styled.input<ThemedStyles>`
@@ -127,10 +127,10 @@ const Button = styled.button<ThemedStyles>`
 type UserInfoFormProps = {
 	onSubmit: (fullName: string, email: string) => void;
 	visible: boolean;
-	onClose?: () => void;
+	onClose: () => void;
 }
 
-const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible = true }) => {
+const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible }) => {
 	const [fullName, setFullName] = useState('');
 	const [email, setEmail] = useState('');
 	const [error, setError] = useState('');
@@ -149,6 +149,9 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible 
 			fullNamePlaceholder: translate('form.user-info.full-name.placeholder'),
 			emailLabel: translate('form.user-info.email.label'),
 			emailPlaceholder: translate('form.user-info.email.placeholder'),
+			invalidEmail: translate('form.user-info.email.invalid'),
+			invalidName: translate('form.user-info.full-name.invalid'),
+			missingName: translate('form.user-info.full-name.missingName'),
 		}
 	), [langCode])
 
@@ -168,30 +171,41 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible 
 		};
 	}, [onClose]);
 
+	const handleClose = useCallback(() => {
+		onClose();
+		setTimeout(() => {
+			setFullName('');
+			setEmail('')
+			setError('')
+		}, 250)
+	}, [])
+
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!fullName.trim()) {
-			setError('Full name is required.');
+			setError(translations.missingName);
 			return;
 		}
 		if (hasInvalidNameChars(fullName)) {
-			setError('Only letters are allowed in the name.');
+			setError(translations.invalidName);
 			return;
 		}
 		if (!isEmail(email)) {
-			setError('Please enter a valid email address.');
+			setError(translations.invalidEmail);
 			return;
 		}
 		setError('');
+		handleClose();
 		onSubmit(fullName.trim(), email.trim());
 	};
+
 
 	return (
 		<Overlay visible={visible}>
 			<FormContainer ref={formRef} onSubmit={handleSubmit} noValidate visible={visible}>
 				<FormHeader>
 					<Title>{translations.title}</Title>
-					<CloseButton type="button" aria-label="Close" onClick={onClose}>
+					<CloseButton type="button" aria-label="Close" onClick={handleClose}>
 						<Close size={24} />
 					</CloseButton>
 				</FormHeader>
@@ -207,7 +221,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible 
 					/>
 				</FieldGroup>
 				<FieldGroup>
-					<Label align={labelAlignment}  htmlFor="email">{translations.emailLabel}</Label>
+					<Label align={labelAlignment} htmlFor="email">{translations.emailLabel}</Label>
 					<Input
 						id="email"
 						type="email"
