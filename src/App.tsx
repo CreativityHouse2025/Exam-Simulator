@@ -13,6 +13,7 @@ import { ExamContext } from './contexts'
 import { useSession } from './hooks/useSession'
 import useSettings from './hooks/useSettings'
 import ToastContextProvider from './providers/ToastContextProvider'
+import Toast from './components/Toast'
 
 const AppComponent: React.FC = () => {
   const [session, setSession] = useSession();
@@ -151,6 +152,8 @@ const AppComponent: React.FC = () => {
       ) : (
         <Cover onStart={handlestart} canContinue={session.examType ? true : false} onContinue={handleContinue} />
       )}
+
+      <Toast />
     </ToastContextProvider>
   )
 }
