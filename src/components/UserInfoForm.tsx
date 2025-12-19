@@ -6,21 +6,21 @@ import { ThemedStyles } from '../types';
 import useSettings from '../hooks/useSettings';
 import { translate } from '../utils/translation';
 
-const Overlay = styled.div<{ visible: boolean }>`
+const Overlay = styled.div<{ $visible: boolean }>`
   position: fixed;
   inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  pointer-events: ${({ visible }) => (visible ? 'auto' : 'none')};
-  background: ${({ visible }) => (visible ? 'rgba(0,0,0,0.3)' : 'transparent')};
-  backdrop-filter: ${({ visible }) => (visible ? 'blur(6px)' : 'none')};
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  pointer-events: ${({ $visible }) => ($visible ? 'auto' : 'none')};
+  background: ${({ $visible }) => ($visible ? 'rgba(0,0,0,0.3)' : 'transparent')};
+  backdrop-filter: ${({ $visible }) => ($visible ? 'blur(6px)' : 'none')};
+  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transition: opacity 0.25s, backdrop-filter 0.25s, background 0.25s;
 `;
 
-const FormContainer = styled.form<{ visible: boolean } & ThemedStyles>`
+const FormContainer = styled.form<{ $visible: boolean } & ThemedStyles>`
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -33,8 +33,8 @@ const FormContainer = styled.form<{ visible: boolean } & ThemedStyles>`
   z-index: 1010;
   font-family: ${({ theme }) => theme.fontFamily || "'Open Sans', sans-serif"};
   position: relative;
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transform: translateY(${({ visible }) => (visible ? '0' : '20px')});
+  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+  transform: translateY(${({ $visible }) => ($visible ? '0' : '20px')});
   transition: opacity 0.25s, transform 0.25s;
 `;
 
@@ -72,12 +72,12 @@ const FieldGroup = styled.div`
   flex-direction: column;
 `;
 
-const Label = styled.label<{ align: string } & ThemedStyles>`
+const Label = styled.label<{ $align: string } & ThemedStyles>`
   font-size: 1.6rem;
   font-weight: 600;
   color: ${({ theme }) => theme.black};
   margin-bottom: 0.5rem;
-  text-align: ${({ align }) => align};
+  text-align: ${({ $align }) => $align};
 `;
 
 const Input = styled.input<ThemedStyles>`
@@ -201,8 +201,8 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible 
 
 
 	return (
-		<Overlay visible={visible}>
-			<FormContainer ref={formRef} onSubmit={handleSubmit} noValidate visible={visible}>
+		<Overlay $visible={visible}>
+			<FormContainer ref={formRef} onSubmit={handleSubmit} noValidate $visible={visible}>
 				<FormHeader>
 					<Title>{translations.title}</Title>
 					<CloseButton type="button" aria-label="Close" onClick={handleClose}>
@@ -210,7 +210,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible 
 					</CloseButton>
 				</FormHeader>
 				<FieldGroup>
-					<Label align={labelAlignment} htmlFor="fullName">{translations.fullNameLabel}</Label>
+					<Label $align={labelAlignment} htmlFor="fullName">{translations.fullNameLabel}</Label>
 					<Input
 						id="fullName"
 						type="text"
@@ -221,7 +221,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible 
 					/>
 				</FieldGroup>
 				<FieldGroup>
-					<Label align={labelAlignment} htmlFor="email">{translations.emailLabel}</Label>
+					<Label $align={labelAlignment} htmlFor="email">{translations.emailLabel}</Label>
 					<Input
 						id="email"
 						type="email"
