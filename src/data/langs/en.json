@@ -74,6 +74,9 @@
   "report": {
     "title": "Exam Report",
     "fullName": "Full Name",
-    "timestamp": "Finished at"
+    "timestamp": "Finished at",
+    "sending": "Sending the report to your email...",
+    "sent": "Report sent successfully",
+    "error": "Failed to send the report"
   }
 }
