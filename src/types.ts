@@ -230,3 +230,25 @@ export interface ToastContextType {
   visible: boolean;
   setToast: React.Dispatch<React.SetStateAction<ToastState>>
 }
+
+
+export type Results = {
+    // status-related
+    pass?: boolean
+    score: number
+    passPercent?: number
+
+    // time & meta
+    elapsedTime: number
+    date: Date
+    categoryLabel: string
+
+    // question stats
+    correctCount: number
+    incorrectCount: number
+    incompleteCount: number
+    totalQuestions: number
+
+    // for review
+    wrongQuestions: Question['id'][]
+}

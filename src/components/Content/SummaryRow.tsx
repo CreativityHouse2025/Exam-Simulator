@@ -11,8 +11,10 @@ export const RowStyles = styled.div<SummaryStylesProps>`
   column-gap: 1rem;
   justify-items: center;
   align-items: start;
+
   .status {
-    color: ${({ $status, theme }) => ($status ? theme.correct : theme.incorrect)};
+    color: ${({ $status, theme }) =>
+    $status === false ? theme.incorrect : theme.correct};
   }
 `
 
@@ -31,18 +33,20 @@ export const RowValueStyles = styled.div<ThemedStyles>`
 `
 
 const SummaryRowComponent: React.FC<SummaryRowProps> = ({ type, value, status, isStatus }) => {
-  const { settings } = useSettings();
-  const langCode = settings.language;
+  const { settings } = useSettings()
+  const langCode = settings.language
 
   const typeLabel = React.useMemo(
     () => translate(`content.summary.${type}`),
-    [langCode, translate, type]
+    [langCode, type]
   )
 
   return (
     <RowStyles data-test={`summary-row-${type}`} $status={status}>
       <RowKeyStyles>{typeLabel}</RowKeyStyles>
-      <RowValueStyles className={isStatus ? 'status' : ''}>{value}</RowValueStyles>
+      <RowValueStyles className={isStatus ? 'status' : ''}>
+        {value}
+      </RowValueStyles>
     </RowStyles>
   )
 }
@@ -52,10 +56,10 @@ export default SummaryRowComponent
 export interface SummaryRowProps {
   type: string
   value: string
-  status: boolean
+  status?: boolean
   isStatus?: boolean
 }
 
 export interface SummaryStylesProps extends ThemedStyles {
-  $status: boolean
+  $status?: boolean
 }
