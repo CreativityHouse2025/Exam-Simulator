@@ -14,6 +14,7 @@ import {
 import useMediaQuery from '../../hooks/useMediaQuery'
 import { SessionReducer } from '../../utils/session'
 import { Session, SessionDispatch } from '../../types'
+import { RevisionExamOptions } from '../../App'
 
 const ContainerStyles = styled.div`
   display: flex;
@@ -26,9 +27,10 @@ const ContainerStyles = styled.div`
 export interface NavigationProps {
   startingSession: Session
   onSessionUpdate: (session: Session) => void
+  onRevision: (options: RevisionExamOptions) => void
 }
 
-const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate }) => {
+const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate, onRevision }) => {
   const exam = React.useContext(ExamContext)
   const [session, updateSession] = React.useReducer(SessionReducer, startingSession)
 
@@ -74,7 +76,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
               <ContainerStyles id="middle-container">
                 <Drawer open={open} toggleOpen={toggleOpen} />
 
-                <Content open={open} />
+                <Content onRevision={onRevision} open={open} />
               </ContainerStyles>
 
               <Footer open={open} questionCount={exam.length} />

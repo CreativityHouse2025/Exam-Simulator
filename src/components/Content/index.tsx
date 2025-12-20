@@ -15,6 +15,7 @@ import { formatTimer, formatDate } from '../../utils/format'
 import type { Results } from '../../types'
 import useResults from '../../hooks/useResults'
 import { isRetakeAllowed } from '../../utils/exam'
+import { RevisionExamOptions } from '../../App'
 
 export const MainStyles = styled.main<MainStylesProps>`
   width: 100%;
@@ -35,7 +36,7 @@ const ContentStyles = styled.div<ThemedStyles>`
   transition: 0.3s;
 `
 
-const ContentComponent: React.FC<ContentProps> = ({ open }) => {
+const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
   const { examState, reviewState } = React.useContext(SessionExamContext)
   const { emailSent, answers, examType, update } = React.useContext(SessionDataContext)
   const exam = React.useContext(ExamContext)
@@ -172,12 +173,13 @@ const ContentComponent: React.FC<ContentProps> = ({ open }) => {
       }
     }
 
+    // TODO: uncomment this
     // generateAndSend();
   }, [finished, emailSent, writeEmail, generateReport, sendEmail, exam, answers, langCode, settings.fullName, update]);
 
   return (
     <MainStyles id="main" $open={open}>
-      <ContentStyles id="content">{finished && summary ? <Summary canRetake={isRetakeAllowed(examType as ExamType)}/> : <Exam isReview={finished} />}</ContentStyles>
+      <ContentStyles id="content">{finished && summary ? <Summary onRevision={onRevision} canRetake={isRetakeAllowed(examType as ExamType)}/> : <Exam isReview={finished} />}</ContentStyles>
     </MainStyles>
   )
 }
@@ -186,6 +188,7 @@ export default ContentComponent
 
 export interface ContentProps {
   open: boolean
+  onRevision: (options: RevisionExamOptions) => void
 }
 
 export interface MainStylesProps {

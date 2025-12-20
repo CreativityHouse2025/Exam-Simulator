@@ -36,8 +36,7 @@ export async function initQuestionMap(langCode: LangCode) {
  * Generate an exam from a list of questions
  * @param {ExamType} examType - The size of the output question list
  * @param {number} categoryId - The category of the questions
- * @returns {GeneratedExam} - An object that has the Exam for the application memory 
- * and corresponding question IDs list for local storage
+ * @returns {GeneratedExam} - An object that has the corresponding generated question IDs list
  */
 export function generateNewExam(examType: ExamType, categoryId: number): GeneratedExam {
     // generate random number inclusive of both ends
@@ -58,7 +57,6 @@ export function generateNewExam(examType: ExamType, categoryId: number): Generat
     // validate questionCount
     if (questionCount === 0) {
         return {
-            exam: [],
             questionIds: [],
             durationMinutes: 0
         }
@@ -114,7 +112,6 @@ export function generateNewExam(examType: ExamType, categoryId: number): Generat
     const questionIds = chosenQuestions.map((q: Question): Question['id'] => q.id)
 
     const generatedExam: GeneratedExam = {
-        exam: chosenQuestions,
         questionIds,
         durationMinutes
     }

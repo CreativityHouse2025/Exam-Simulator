@@ -1,4 +1,4 @@
-import type { Exam, LangCode, Question, Session } from '../types'
+import type { Exam, ExamType, LangCode, Question, Session } from '../types'
 
 import { formatDistance, format } from 'date-fns'
 import { translate } from './translation';
@@ -81,7 +81,7 @@ export function formatExam(exam: Exam): Exam {
 }
 
 /**
- * Format session with default values
+ * Format a new session with default values
  * @param {Session} session - The session object to format.
  * @param {number} questionCount - The number of questions
  * @param {number} durationMinutes - The duration of the exam in minutes
@@ -99,6 +99,7 @@ export function formatSession(session: Session, questionCount: number, durationM
 
     session.maxTime = maxTime
     session.time = maxTime
+    session.id = createSessionId(session.examType as ExamType)
   } catch (err) {
     console.error('Error formatting session:', err)
   }
@@ -154,3 +155,7 @@ export function hasInvalidNameChars(name: string): boolean {
   const invalidPattern = /[^\p{L}\s]/u;
   return invalidPattern.test(name);
 }
+
+// generates a unique id for the session
+export const createSessionId = (examType: ExamType) =>
+  `${examType}-attempt-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;

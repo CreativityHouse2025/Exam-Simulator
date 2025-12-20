@@ -83,6 +83,8 @@ export type ReviewState = 'summary' | 'question'
 
 // Session interface
 export interface Session {
+  /** v1.1: the list of question IDs for this session, in the order they should appear */
+  id: string
   /** the question number */
   index: number
   /** the maximum time allowed for the exam */
@@ -113,8 +115,6 @@ export interface Session {
 
 // v1.1: type for exam generator output
 export interface GeneratedExam {
-  /** the list of questions to be used in the application's memory */
-  exam: Exam
   /** the list of question ids to perserve question order in local storage */
   questionIds: number[]
   /** the duration of the exam in minutes */
@@ -231,24 +231,29 @@ export interface ToastContextType {
   setToast: React.Dispatch<React.SetStateAction<ToastState>>
 }
 
+export type RevisionDetails = {
+  maxTime: Session['maxTime']
+  questions: Session['questions']
+  categoryId: Session['categoryId']
+}
 
 export type Results = {
-    // status-related
-    pass?: boolean
-    score: number
-    passPercent?: number
+  // status-related
+  pass?: boolean
+  score: number
+  passPercent?: number
 
-    // time & meta
-    elapsedTime: number
-    date: Date
-    categoryLabel: string
+  // time & meta
+  elapsedTime: number
+  date: Date
+  categoryLabel: string
 
-    // question stats
-    correctCount: number
-    incorrectCount: number
-    incompleteCount: number
-    totalQuestions: number
+  // question stats
+  correctCount: number
+  incorrectCount: number
+  incompleteCount: number
+  totalQuestions: number
 
-    // for review
-    wrongQuestions: Question['id'][]
+  // for review
+  revisionDetails: RevisionDetails
 }
