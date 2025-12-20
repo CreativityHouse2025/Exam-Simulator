@@ -56,7 +56,8 @@
       "correct": "Correct",
       "incorrect": "Wrong",
       "incomplete": "Unanswered",
-      "home": "Go Home"
+      "home": "Go Home",
+      "retake-wrong": "Retry Mistakes"
     }
   },
   "confirm": {
@@ -99,5 +100,5 @@
       },
       "submit": "Submit"
     }
-  } 
+  }
 }

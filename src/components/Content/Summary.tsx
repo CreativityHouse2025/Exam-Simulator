@@ -12,19 +12,27 @@ export const TitleStyles = styled.div<ThemedStyles>`
   justify-self: center;
   font: 4rem 'Open Sans';
   font-weight: 700;
+  text-align: center;
   color: ${({ theme }) => theme.black};
 `
 
 export const TopColumnStyles = styled.div`
-  padding-top: 5rem;
   display: grid;
   grid-template-rows: repeat(5, auto);
+  width: 100%;
 `
 
 export const ColumnStyles = styled.div`
   padding-top: 5rem;
   display: grid;
   grid-template-rows: repeat(4, auto);
+  width: 100%;
+`
+
+const SummaryContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
 `
 
 const RestartButton = styled.button<ThemedStyles>`
@@ -37,10 +45,34 @@ const RestartButton = styled.button<ThemedStyles>`
   border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
-  min-width: 300px;
-  margin: 3rem auto 2rem auto;
-  margin-top: 7rem;
-  display: block;
+  min-width: 200px;
+  width: 100%;
+  max-width: 300px;
+  display: inline-block;
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`
+
+const RetakeButton = styled.button<ThemedStyles>`
+  background: ${({ theme }) => theme.secondary};
+  color: white;
+  border: none;
+  padding: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-width: 200px;
+  width: 100%;
+  max-width: 300px;
+  display: inline-block;
 
   &:hover {
     opacity: 0.9;
@@ -52,7 +84,16 @@ const RestartButton = styled.button<ThemedStyles>`
   }
 `
 
-const SummaryComponent: React.FC = () => {
+const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 1rem;
+`
+
+const SummaryComponent: React.FC<{ canRetake: boolean }> = ({ canRetake }) => {
   const { settings } = useSettings()
   const langCode = settings.language
 
@@ -76,7 +117,8 @@ const SummaryComponent: React.FC = () => {
         pass !== undefined
           ? translate(`content.summary.${pass ? 'pass' : 'fail'}`)
           : '',
-      home: translate('content.summary.home')
+      home: translate('content.summary.home'),
+      retake: translate('content.summary.retake-wrong'),
     }),
     [langCode, pass]
   )
@@ -84,10 +126,10 @@ const SummaryComponent: React.FC = () => {
   const onRestart = React.useCallback(() => window.location.reload(), [])
 
   return (
-    <div id="summary">
+    <SummaryContainer id="summary">
       <TitleStyles id="title">{translated.title}</TitleStyles>
 
-      <div id="columns">
+      <div id="columns" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <TopColumnStyles id="column">
           {pass !== undefined && (
             <SummaryRow type="status" value={translated.status} status={pass} isStatus />
@@ -110,10 +152,15 @@ const SummaryComponent: React.FC = () => {
         </ColumnStyles>
       </div>
 
-      <RestartButton id="restart-button" className="no-select" onClick={onRestart}>
-        {translated.home}
-      </RestartButton>
-    </div>
+      <ButtonsContainer>
+        {canRetake && <RetakeButton id="retake-button" title='Revise your mistakes' className="no-select" onClick={() => console.log('Retake clicked')}>
+          {translated.retake}
+        </RetakeButton>}
+        <RestartButton id="restart-button" title='Homepage' className="no-select" onClick={onRestart}>
+          {translated.home}
+        </RestartButton>
+      </ButtonsContainer>
+    </SummaryContainer>
   )
 }
 

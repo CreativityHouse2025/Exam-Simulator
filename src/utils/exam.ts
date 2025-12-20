@@ -155,3 +155,18 @@ export function getExamByQuestionIds(questionIds: number[]): Exam {
     }
     return exam
 }
+
+/**
+ * Checks whether the user is allowed to retake the exam based on type
+ * @param {ExamType} examType - The order of the questions
+ * @returns {boolean}
+ */
+export function isRetakeAllowed(examType: ExamType): boolean {
+    const exam = examTypes[examType];
+
+    if (!exam) {
+        throw new Error(`Unknown exam type: ${examType}`);
+    }
+
+    return exam.allowRetake;
+}
