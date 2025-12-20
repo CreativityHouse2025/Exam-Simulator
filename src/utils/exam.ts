@@ -1,4 +1,4 @@
-import { GENERAL_CATEGORY_ID } from '../constants'
+import { GENERAL_CATEGORY_ID, RETAKE_MIN_MISTAKES } from '../constants'
 import categories from '../data/exam-data/categories.json'
 import examTypes from '../data/exam-data/examTypes.json'
 import type { Exam, GeneratedExam, Question, LangCode, ExamType } from '../types'
@@ -158,11 +158,15 @@ export function getExamByQuestionIds(questionIds: number[]): Exam {
  * @param {ExamType} examType - The order of the questions
  * @returns {boolean}
  */
-export function isRetakeAllowed(examType: ExamType): boolean {
+export function isRetakeAllowed(examType: ExamType, mistakeCount: number): boolean {
     const exam = examTypes[examType];
 
     if (!exam) {
         throw new Error(`Unknown exam type: ${examType}`);
+    }
+
+    if (mistakeCount < RETAKE_MIN_MISTAKES) {
+        return false;
     }
 
     return exam.allowRetake;

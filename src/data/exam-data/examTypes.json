@@ -5,8 +5,8 @@
             "en": "New Exam",
             "ar": "امتحان جديد"
         },
-        "minQuestionCount": 30,
-        "maxQuestionCount": 40,
+        "minQuestionCount": 11,
+        "maxQuestionCount": 16,
         "durationMinutes": 230,
         "passingRate": 75,
         "allowRetake": true
