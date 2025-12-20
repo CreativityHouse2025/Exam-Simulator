@@ -21,7 +21,7 @@
         "maxQuestionCount": 40,
         "durationMinutes": 46,
         "passingRate": 85,
-        "allowRetake": true
+        "allowRetake": false
     },
     "revision": {
         "id": "revision",

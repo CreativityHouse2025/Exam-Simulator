@@ -1,4 +1,4 @@
-import type { ThemedStyles } from '../../types'
+import type { ExamType, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -14,6 +14,7 @@ import { translate } from '../../utils/translation'
 import { formatTimer, formatDate } from '../../utils/format'
 import type { Results } from '../../types'
 import useResults from '../../hooks/useResults'
+import { isRetakeAllowed } from '../../utils/exam'
 
 export const MainStyles = styled.main<MainStylesProps>`
   width: 100%;
@@ -36,7 +37,7 @@ const ContentStyles = styled.div<ThemedStyles>`
 
 const ContentComponent: React.FC<ContentProps> = ({ open }) => {
   const { examState, reviewState } = React.useContext(SessionExamContext)
-  const { emailSent, answers, update } = React.useContext(SessionDataContext)
+  const { emailSent, answers, examType, update } = React.useContext(SessionDataContext)
   const exam = React.useContext(ExamContext)
 
   const { settings } = useSettings();
@@ -171,14 +172,12 @@ const ContentComponent: React.FC<ContentProps> = ({ open }) => {
       }
     }
 
-    generateAndSend();
+    // generateAndSend();
   }, [finished, emailSent, writeEmail, generateReport, sendEmail, exam, answers, langCode, settings.fullName, update]);
-
-
 
   return (
     <MainStyles id="main" $open={open}>
-      <ContentStyles id="content">{finished && summary ? <Summary /> : <Exam isReview={finished} />}</ContentStyles>
+      <ContentStyles id="content">{finished && summary ? <Summary canRetake={isRetakeAllowed(examType as ExamType)}/> : <Exam isReview={finished} />}</ContentStyles>
     </MainStyles>
   )
 }

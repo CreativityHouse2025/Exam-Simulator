@@ -8,9 +8,10 @@ import useSettings from '../../hooks/useSettings'
 export const RowStyles = styled.div<SummaryStylesProps>`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 1rem;
+  column-gap: 5rem;
   justify-items: center;
   align-items: start;
+
 
   .status {
     color: ${({ $status, theme }) =>
