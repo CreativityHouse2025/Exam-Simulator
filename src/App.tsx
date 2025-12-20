@@ -1,4 +1,4 @@
-import type { Category, Exam, ExamType, LangCode, Session } from './types'
+import type { Category, Exam, ExamType, LangCode, Session, RevisionDetails } from './types'
 
 import React from 'react'
 import Header from './components/Header'
@@ -70,16 +70,29 @@ const AppComponent: React.FC = () => {
       try {
         let examData: Exam, questionIds: number[]
 
-        // if a new exam, generate questions
-        if (newSession.examState === 'not-started') {
+        // if the exam is a revision, get the (wrong) questions passed to the options
+        /**
+         * revision session required options:
+         * 1. maxTime from previous session
+         * 2. questionIds from previous session
+         * 3. categoryId from previous session
+         * 4. exam type 'revision'
+         */
+        if (newSession.examType === "revision") {
+          questionIds = newSession.questions;
+          newSession = formatSession(newSession, questionIds.length, newSession.maxTime / 60)
+        } else if (newSession.examState === 'not-started') { // else if a new exam, generate questions 
           let examDetails = generateNewExam(newSession.examType, newSession.categoryId)
-          examData = examDetails.exam
           questionIds = examDetails.questionIds
-          newSession = formatSession({ ...newSession, categoryId: newSession.categoryId, questions: questionIds, examState: 'in-progress' }, examData.length, examDetails.durationMinutes)
-        } else {
-          // if exam already exist, get the questions from the question map
-          examData = getExamByQuestionIds(newSession.questions);
+          newSession = formatSession({ ...newSession, examState: 'in-progress', questions: questionIds }, examDetails.questionIds.length, examDetails.durationMinutes)
         }
+        // always get the exam by the session's question Ids
+        /* 
+        Case 1. Revision: questions in the session exist
+        Case 2. Not started: session is formatted and questions are assigned
+        Case 3. Continue: session is ready
+        */
+        examData = getExamByQuestionIds(newSession.questions);
 
         formatExam(examData)
         setExam(examData)
@@ -94,6 +107,11 @@ const AppComponent: React.FC = () => {
 
   const handleStart = React.useCallback(
     (options: StartExamOptions) => loadExam({ ...DEFAULT_SESSION, examType: options.type, categoryId: options.categoryId }),
+    [loadExam]
+  )
+
+  const handleRevision = React.useCallback(
+    (options: RevisionExamOptions) => loadExam({ ...DEFAULT_SESSION, examState: 'in-progress', questions: options.questions, maxTime: options.maxTime, examType: options.type, categoryId: options.categoryId }),
     [loadExam]
   )
 
@@ -177,29 +195,29 @@ const AppComponent: React.FC = () => {
       />
 
       {exam ? (
-        <ExamContext.Provider value={exam}>
-          <Navigation startingSession={session} onSessionUpdate={setSession} />
+        <ExamContext.Provider value={exam} key={session.id}>
+          <Navigation onRevision={handleRevision} startingSession={session} onSessionUpdate={setSession} />
         </ExamContext.Provider>
       ) : (
-          <Cover
-            onStart={(options) => {
-              if (!settings.fullName || !settings.email) {
-                // show form first, then start exam after user fills info
-                requireUserInfo(() => handleStart(options));
-              } else {
-                handleStart(options);
-              }
-            }}
-            canContinue={session.examType ? true : false}
-            onContinue={() => {
-              if (!settings.fullName || !settings.email) {
-                // show form first, then continue exam after user fills info
-                requireUserInfo(handleContinue);
-              } else {
-                handleContinue();
-              }
-            }}
-          />
+        <Cover
+          onStart={(options) => {
+            if (!settings.fullName || !settings.email) {
+              // show form first, then start exam after user fills info
+              requireUserInfo(() => handleStart(options));
+            } else {
+              handleStart(options);
+            }
+          }}
+          canContinue={session.examType ? true : false}
+          onContinue={() => {
+            if (!settings.fullName || !settings.email) {
+              // show form first, then continue exam after user fills info
+              requireUserInfo(handleContinue);
+            } else {
+              handleContinue();
+            }
+          }}
+        />
       )}
 
       <Toast />
@@ -210,6 +228,10 @@ const AppComponent: React.FC = () => {
 export type StartExamOptions = {
   type: ExamType;
   categoryId: Category['id'];
+};
+
+export type RevisionExamOptions = RevisionDetails & {
+  type: ExamType;
 };
 
 export default AppComponent

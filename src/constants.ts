@@ -101,6 +101,7 @@ export const MENU_PADDING = "1.6rem 1.4rem"
 
 // Default session
 export const DEFAULT_SESSION: Session = {
+  id: '' as const,
   index: 0 as const,
   maxTime: 0 as const,
   time: 0 as const,

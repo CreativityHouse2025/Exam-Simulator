@@ -7,6 +7,7 @@ import { formatDate, formatTimer } from '../../utils/format'
 import { translate } from '../../utils/translation'
 import useSettings from '../../hooks/useSettings'
 import useResults from '../../hooks/useResults'
+import { RevisionExamOptions } from '../../App'
 
 export const TitleStyles = styled.div<ThemedStyles>`
   justify-self: center;
@@ -93,7 +94,7 @@ const ButtonsContainer = styled.div`
   gap: 1rem;
 `
 
-const SummaryComponent: React.FC<{ canRetake: boolean }> = ({ canRetake }) => {
+const SummaryComponent: React.FC<{ canRetake: boolean, onRevision: (options: RevisionExamOptions) => void }> = ({ canRetake, onRevision }) => {
   const { settings } = useSettings()
   const langCode = settings.language
 
@@ -107,7 +108,8 @@ const SummaryComponent: React.FC<{ canRetake: boolean }> = ({ canRetake }) => {
     correctCount,
     incorrectCount,
     incompleteCount,
-    totalQuestions
+    totalQuestions,
+    revisionDetails
   } = useResults(true) as Results // use true because it will only render when exam is finished
 
   const translated = React.useMemo(
@@ -124,6 +126,13 @@ const SummaryComponent: React.FC<{ canRetake: boolean }> = ({ canRetake }) => {
   )
 
   const onRestart = React.useCallback(() => window.location.reload(), [])
+
+  const handleRevision = React.useCallback(() => {
+    onRevision({
+      ...revisionDetails,
+      type: 'revision'
+    });
+  }, [])
 
   return (
     <SummaryContainer id="summary">
@@ -153,7 +162,7 @@ const SummaryComponent: React.FC<{ canRetake: boolean }> = ({ canRetake }) => {
       </div>
 
       <ButtonsContainer>
-        {canRetake && <RetakeButton id="retake-button" title='Revise your mistakes' className="no-select" onClick={() => console.log('Retake clicked')}>
+        {canRetake && <RetakeButton id="retake-button" title='Revise your mistakes' className="no-select" onClick={handleRevision}>
           {translated.retake}
         </RetakeButton>}
         <RestartButton id="restart-button" title='Homepage' className="no-select" onClick={onRestart}>
