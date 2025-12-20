@@ -179,7 +179,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
 
   return (
     <MainStyles id="main" $open={open}>
-      <ContentStyles id="content">{finished && summary ? <Summary onRevision={onRevision} canRetake={isRetakeAllowed(examType as ExamType)}/> : <Exam isReview={finished} />}</ContentStyles>
+      <ContentStyles id="content">{finished && summary ? <Summary onRevision={onRevision} examType={examType as ExamType}/> : <Exam isReview={finished} />}</ContentStyles>
     </MainStyles>
   )
 }

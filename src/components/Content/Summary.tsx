@@ -1,4 +1,4 @@
-import type { Results, ThemedStyles } from '../../types'
+import type { ExamState, ExamType, Results, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -8,6 +8,7 @@ import { translate } from '../../utils/translation'
 import useSettings from '../../hooks/useSettings'
 import useResults from '../../hooks/useResults'
 import { RevisionExamOptions } from '../../App'
+import { isRetakeAllowed } from '../../utils/exam'
 
 export const TitleStyles = styled.div<ThemedStyles>`
   justify-self: center;
@@ -94,7 +95,7 @@ const ButtonsContainer = styled.div`
   gap: 1rem;
 `
 
-const SummaryComponent: React.FC<{ canRetake: boolean, onRevision: (options: RevisionExamOptions) => void }> = ({ canRetake, onRevision }) => {
+const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: RevisionExamOptions) => void }> = ({ examType, onRevision }) => {
   const { settings } = useSettings()
   const langCode = settings.language
 
@@ -111,6 +112,8 @@ const SummaryComponent: React.FC<{ canRetake: boolean, onRevision: (options: Rev
     totalQuestions,
     revisionDetails
   } = useResults(true) as Results // use true because it will only render when exam is finished
+
+  const canRetake = isRetakeAllowed(examType, revisionDetails.questions.length)
 
   const translated = React.useMemo(
     () => ({
