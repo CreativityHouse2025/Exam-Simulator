@@ -136,6 +136,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
   React.useEffect(() => {
     if (!finished) return;
     if (emailSent) return;
+    if (emailLoading || reportLoading) return; 
 
     async function generateAndSend() {
       try {

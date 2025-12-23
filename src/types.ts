@@ -212,6 +212,8 @@ export type Settings = {
   appVersion: string
 }
 
+export type AccountForm = Required<Pick<Settings, "fullName" | "email">>;
+
 export type SettingsContextType = {
   /** current user settings state */
   settings: Settings

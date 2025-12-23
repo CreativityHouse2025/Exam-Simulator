@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Close } from '@styled-icons/material/Close';
 import styled from 'styled-components';
 import { hasInvalidNameChars, isEmail } from '../utils/format';
-import { ThemedStyles } from '../types';
+import { AccountForm, ThemedStyles } from '../types';
 import useSettings from '../hooks/useSettings';
 import { translate } from '../utils/translation';
 
@@ -125,16 +125,21 @@ const Button = styled.button<ThemedStyles>`
 `;
 
 type UserInfoFormProps = {
-	onSubmit: (fullName: string, email: string) => void;
-	visible: boolean;
-	onClose: () => void;
+	onSubmit: (fullName: string, email: string) => void
+	visible: boolean
+	onClose: () => void
+	initialValues: AccountForm
 }
 
-const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible }) => {
-	const [fullName, setFullName] = useState('');
-	const [email, setEmail] = useState('');
+const UserInfoForm: React.FC<UserInfoFormProps> = ({ initialValues, onSubmit, onClose, visible }) => {
+	const [form, setForm] = useState<AccountForm>(initialValues);
 	const [error, setError] = useState('');
 	const formRef = useRef<HTMLFormElement | null>(null);
+
+	useEffect(() => {
+		// keep form state up to date with props
+		setForm(initialValues)
+	}, [initialValues])
 
 	const { settings } = useSettings();
 	const langCode = settings.language;
@@ -154,13 +159,20 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible 
 			missingName: translate('form.user-info.full-name.missingName'),
 		}
 	), [langCode])
+	
+	const handleClose = useCallback(() => {
+		onClose();		
+		setError('')
+		setForm(initialValues);		
+	}, [onClose, initialValues])
+
 
 	useEffect(() => {
-		if (!onClose) return;
+		if (!handleClose) return;
 		const handler = (event: MouseEvent | TouchEvent) => {
 			const target = event.target as Node;
 			if (formRef.current && !formRef.current.contains(target)) {
-				onClose();
+				handleClose();
 			}
 		};
 		document.addEventListener('mousedown', handler);
@@ -169,34 +181,38 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible 
 			document.removeEventListener('mousedown', handler);
 			document.removeEventListener('touchstart', handler);
 		};
-	}, [onClose]);
+	}, [handleClose]);
 
-	const handleClose = useCallback(() => {
-		onClose();
-		setTimeout(() => {
-			setFullName('');
-			setEmail('')
-			setError('')
-		}, 250)
+
+	const handleChange = React.useCallback((
+		e: React.ChangeEvent<HTMLInputElement>
+	) => {
+
+		const { name, value } = e.target;
+
+		setForm(prev => ({
+			...prev,
+			[name]: value,
+		}));
 	}, [])
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		if (!fullName.trim()) {
+		if (!form.fullName.trim()) {
 			setError(translations.missingName);
 			return;
 		}
-		if (hasInvalidNameChars(fullName)) {
+		if (hasInvalidNameChars(form.fullName)) {
 			setError(translations.invalidName);
 			return;
 		}
-		if (!isEmail(email)) {
+		if (!isEmail(form.email)) {
 			setError(translations.invalidEmail);
 			return;
 		}
+		onSubmit(form.fullName.trim(), form.email.trim());
+		onClose();
 		setError('');
-		handleClose();
-		onSubmit(fullName.trim(), email.trim());
 	};
 
 
@@ -214,8 +230,9 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible 
 					<Input
 						id="fullName"
 						type="text"
-						value={fullName}
-						onChange={e => setFullName(e.target.value)}
+						name="fullName"
+						value={form.fullName}
+						onChange={handleChange}
 						placeholder={translations.fullNamePlaceholder}
 						autoComplete="name"
 					/>
@@ -225,8 +242,9 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible 
 					<Input
 						id="email"
 						type="email"
-						value={email}
-						onChange={e => setEmail(e.target.value)}
+						name="email"
+						value={form.email}
+						onChange={handleChange}
 						placeholder={translations.emailPlaceholder}
 						autoComplete="email"
 					/>
@@ -238,4 +256,4 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, onClose, visible 
 	);
 };
 
-export default UserInfoForm;
+export default React.memo(UserInfoForm);
