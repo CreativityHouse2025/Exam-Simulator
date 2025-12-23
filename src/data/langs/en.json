@@ -86,7 +86,7 @@
   },
   "form": {
     "user-info": {
-      "title": "Get Started",
+      "title": "Personal Information",
       "full-name": {
         "label": "Full Name",
         "placeholder": "Enter your full name",

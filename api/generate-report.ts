@@ -22,11 +22,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const isArabic = langCode === "ar";
         const baseFont = isArabic ? "Amiri" : "Helvetica";
 
-        if (isArabic) {
-            const regularFontData = fs.readFileSync(`${process.cwd()}/src/assets/fonts/Amiri-Regular.ttf`, "base64");
-            doc.addFileToVFS("Amiri-Regular.ttf", regularFontData);
-            doc.addFont("Amiri-Regular.ttf", "Amiri", "normal");
+        // inlcude AR font to handle arabic user names
+        const regularFontData = fs.readFileSync(`${process.cwd()}/src/assets/fonts/Amiri-Regular.ttf`, "base64");
+        doc.addFileToVFS("Amiri-Regular.ttf", regularFontData);
+        doc.addFont("Amiri-Regular.ttf", "Amiri", "normal");
 
+        if (isArabic) {
             const boldFontData = fs.readFileSync(`${process.cwd()}/src/assets/fonts/Amiri-Bold.ttf`, "base64");
             doc.addFileToVFS("Amiri-Bold.ttf", boldFontData);
             doc.addFont("Amiri-Bold.ttf", "Amiri", "bold");
@@ -54,6 +55,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         doc.text(translations.reportTitle, pageWidth / 2, headerY, { align: "center", isOutputRtl: isArabic, isSymmetricSwapping: isArabic });
         headerY += 30;
         doc.setFontSize(16);
+        // Make font to Amiri to handle arabic names
+        doc.setFont('Amiri', "normal");
         doc.text(translations.fullName + ": " + userFullName, pageWidth / 2, headerY, { align: "center", isOutputRtl: isArabic, isSymmetricSwapping: isArabic });
 
         headerY += 500;
@@ -168,6 +171,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         });
 
         const pdfBase64 = doc.output("datauristring").split(",")[1];
+        // TODO: remove disk save
         doc.save("report.pdf")
         res.status(200).json({ pdfBase64 });
     } catch (err) {

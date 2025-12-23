@@ -29,6 +29,8 @@ const AppComponent: React.FC = () => {
 
   const langCode = settings.language;
 
+  const initialAccount = React.useMemo(() => ({ fullName: settings.fullName ?? '', email: settings.email ?? '' }), [settings])
+
   // check for old versions (will use appVersion inside settings in next update)
   React.useEffect(() => {
     // if categoryId (a new key) not in the current structure of the user, reset (first time entering the new vresion)
@@ -148,6 +150,11 @@ const AppComponent: React.FC = () => {
     setPendingAction(null);
   }, []);
 
+  // Account icon handler
+  const handleAccount = React.useCallback(() => {
+    setShowForm(true);
+  }, [])
+
   // load translation on render
   React.useEffect(() => {
     async function initTranslation() {
@@ -187,9 +194,10 @@ const AppComponent: React.FC = () => {
 
   return (
     <ToastContextProvider>
-      <Header onLanguage={toggleLanguage} />
+      <Header onLanguage={toggleLanguage} onAccount={handleAccount}/>
 
       <UserInfoForm
+        initialValues={initialAccount}
         visible={showForm}
         onSubmit={handleFormSubmit}
         onClose={handleFormClose} // make sure the form supports this
