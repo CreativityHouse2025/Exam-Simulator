@@ -96,7 +96,7 @@
       "email": {
         "label": "Email",
         "placeholder": "Enter your email",
-        "invalid": "Please enter a valid name"
+        "invalid": "Please enter a valid email"
       },
       "submit": "Submit"
     }

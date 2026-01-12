@@ -1,4 +1,4 @@
-import type { ExamState, ExamType, Results, ThemedStyles } from '../../types'
+import type { ExamType, Results, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -111,7 +111,7 @@ const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: Rev
     incompleteCount,
     totalQuestions,
     revisionDetails
-  } = useResults(true) as Results // use true because it will only render when exam is finished
+  } = useResults(true) as Results // use true because component will only render when exam is finished
 
   const canRetake = isRetakeAllowed(examType, revisionDetails.questions.length)
 

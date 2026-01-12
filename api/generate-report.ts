@@ -43,7 +43,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         let headerY = 100;
         const fileBuffer = fs.readFileSync(`${process.cwd()}/src/assets/logo-compressed.jpeg`);
         const logoBase64 = fileBuffer.toString("base64");
-        doc.setFont(baseFont, "normal");
+        doc.setFont('Amiri', "normal");
         doc.setFontSize(22);
         doc.text(translations.companyName, pageWidth / 2, headerY, { align: "center", isOutputRtl: isArabic, isSymmetricSwapping: isArabic });
         headerY += 30;
