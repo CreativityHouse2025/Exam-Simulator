@@ -161,12 +161,12 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
         
         const email = writeEmail(userFullName, results as Results) 
         
-        await sendEmail({
-          to: userEmail,
-          subject: email.subject,
-          text: email.body,
-          attachments: [{ filename: email.filename, content: pdf }],
-        });
+        // await sendEmail({
+        //   to: userEmail,
+        //   subject: email.subject,
+        //   text: email.body,
+        //   attachments: [{ filename: email.filename, content: pdf }],
+        // });
         update!([SESSION_ACTION_TYPES.SET_EMAIL_SENT, true]);
         showToast(feedback.sent, 5000)
       } catch (error) {
@@ -175,7 +175,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
     }
 
     // TODO: uncomment this
-    // generateAndSend();
+    generateAndSend();
   }, [finished, emailSent, writeEmail, generateReport, sendEmail, exam, answers, langCode, settings.fullName, update]);
 
   return (

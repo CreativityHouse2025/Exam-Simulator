@@ -133,7 +133,7 @@ type UserInfoFormProps = {
 
 const UserInfoForm: React.FC<UserInfoFormProps> = ({ initialValues, onSubmit, onClose, visible }) => {
 	const [form, setForm] = useState<AccountForm>(initialValues);
-	const [error, setError] = useState('');
+	const [error, setError] = useState<string>('');
 	const formRef = useRef<HTMLFormElement | null>(null);
 
 	useEffect(() => {
