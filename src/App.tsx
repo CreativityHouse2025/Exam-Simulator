@@ -1,25 +1,52 @@
-import type { Exam, ExamType, Lang, LangCode, Session } from './types'
+import type { Category, Exam, ExamType, LangCode, Session, RevisionDetails } from './types'
 
 import React from 'react'
-import { useLocalStorage } from '@mantine/hooks'
 import Header from './components/Header'
 import Navigation from './components/Navigation'
 import Cover from './components/Cover'
 import Loading from './components/Loading'
 import { hasTranslation, setTranslation } from './utils/translation'
-import { randomizeTest, formatSession, formatExam } from './utils/format'
-import { toExamID } from './utils/examID'
-import { DEFAULT_SESSION, LANGUAGES } from './constants'
-import { ExamContext, LangContext } from './contexts'
-
-// Random exam selection
-const getRandomExamNumber = () => Math.floor(Math.random() * 5)
-const getRandomMiniExamNumber = () => Math.floor(Math.random() * 23)
+import { formatSession, formatExam } from './utils/format'
+import { generateNewExam, getExamByQuestionIds, initQuestionMap } from './utils/exam'
+import { DEFAULT_SESSION, GENERAL_CATEGORY_ID, LANGUAGES } from './constants'
+import { ExamContext } from './contexts'
+import { useSession } from './hooks/useSession'
+import useSettings from './hooks/useSettings'
+import ToastContextProvider from './providers/ToastContextProvider'
+import Toast from './components/Toast'
+import UserInfoForm from './components/UserInfoForm'
 
 const AppComponent: React.FC = () => {
-  const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: DEFAULT_SESSION })
-  const [lang, setLang] = React.useState<Lang>(LANGUAGES.ar)
+  // TODO: 1. Test email, retake functionality
+  const [session, setSession] = useSession();
+  const [showForm, setShowForm] = React.useState(false);
+  const [pendingAction, setPendingAction] = React.useState<null | (() => void)>(null);
+
+  // get settings to set default
+  const { settings, updateLanguage, updateEmail, updateFullName } = useSettings();
   const [exam, setExam] = React.useState<Exam | null>(null)
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const langCode = settings.language;
+
+  const initialAccount = React.useMemo(() => ({ fullName: settings.fullName ?? '', email: settings.email ?? '' }), [settings])
+
+  // check for old versions (will use appVersion inside settings in next update)
+  React.useEffect(() => {
+    // if categoryId (a new key) not in the current structure of the user, reset (first time entering the new vresion)
+    const raw = localStorage.getItem('session')
+    if (!raw) {
+      return
+    }
+
+    const parsed: Partial<Session> = JSON.parse(raw);
+
+    if (!("categoryId" in parsed)) {
+      console.warn("Old session detected, resetting to default...");
+      setSession(DEFAULT_SESSION);
+    }
+
+  }, [setSession]);
 
   const loadTranslation = React.useCallback(
     async (code: LangCode) => {
@@ -27,36 +54,50 @@ const AppComponent: React.FC = () => {
       const newLang = LANGUAGES[code]
 
       setTranslation(newLang, translations)
-      setLang(newLang)
       document.documentElement.lang = newLang.code
       document.documentElement.dir = newLang.dir
     },
-    [setTranslation, LANGUAGES]
+    []
   )
 
-  const loadExam = React.useCallback(
-    async (newSession: Session) => {
-      if (!newSession.examID) {
-        console.warn('No exam ID found in session.')
-        return
-      }
-      /* 
-      Problem is here:
-        the exam is randomized only for the first time, and the random order is not 
-        persisted in the session, when the exam is re-loaded (language or continue buttons)
-        the exam is continued in its original order
-       */
-      try {
-        const [type, number] = newSession.examID.split('-')
-        let examData: Exam = (await import(`./data/${type}s/${lang.code}/${number}.json`)).default
-        
-        // should persist the random order here
-        if (newSession.examState === 'not-started') { 
-          // examData = randomizeTest(examData)
-          newSession = formatSession({ ...newSession, examState: 'in-progress' }, examData.length, type as ExamType)
-        }
+  const toggleLanguage = React.useCallback(() => {
+    const nextCode = settings.language === "ar" ? "en" : "ar"
+    updateLanguage(nextCode)             // update settings
+  }, [settings.language, updateLanguage])
 
-        formatExam(examData)    
+  const loadExam = React.useCallback(
+    (newSession: Session) => {
+      if (!newSession.examType) {
+        throw new Error("No exam ID found in session")
+      }
+      try {
+        let examData: Exam, questionIds: number[]
+
+        // if the exam is a revision, get the (wrong) questions passed to the options
+        /**
+         * revision session required options:
+         * 1. maxTime from previous session
+         * 2. questionIds from previous session
+         * 3. categoryId from previous session
+         * 4. exam type 'revision'
+         */
+        if (newSession.examType === "revision") {
+          questionIds = newSession.questions;
+          newSession = formatSession(newSession, questionIds.length, newSession.maxTime / 60)
+        } else if (newSession.examState === 'not-started') { // else if a new exam, generate questions 
+          let examDetails = generateNewExam(newSession.examType, newSession.categoryId)
+          questionIds = examDetails.questionIds
+          newSession = formatSession({ ...newSession, examState: 'in-progress', questions: questionIds }, examDetails.questionIds.length, examDetails.durationMinutes)
+        }
+        // always get the exam by the session's question Ids
+        /* 
+        Case 1. Revision: questions in the session exist
+        Case 2. Not started: session is formatted and questions are assigned
+        Case 3. Continue: session is ready
+        */
+        examData = getExamByQuestionIds(newSession.questions);
+
+        formatExam(examData)
         setExam(examData)
         setSession(newSession)
       } catch (error) {
@@ -64,57 +105,142 @@ const AppComponent: React.FC = () => {
         setExam(null)
       }
     },
-    [lang]
+    [setExam, setSession]
   )
 
-  const handleStartNew = React.useCallback(
-    () => loadExam({ ...DEFAULT_SESSION, examID: toExamID(false, getRandomExamNumber()) }),
-    [loadExam]
-  )
-  const handleStartMini = React.useCallback(
-    () => loadExam({ ...DEFAULT_SESSION, examID: toExamID(true, getRandomMiniExamNumber()) }),
+  const handleStart = React.useCallback(
+    (options: StartExamOptions) => loadExam({ ...DEFAULT_SESSION, examType: options.type, categoryId: options.categoryId }),
     [loadExam]
   )
 
-  const handleContinue = React.useCallback(async () => {
+  const handleRevision = React.useCallback(
+    (options: RevisionExamOptions) => loadExam({ ...DEFAULT_SESSION, examState: 'in-progress', questions: options.questions, maxTime: options.maxTime, examType: options.type, categoryId: options.categoryId }),
+    [loadExam]
+  )
+
+  const handleContinue = React.useCallback(() => {
     try {
       loadExam(session)
     } catch (err) {
       console.error('Failed to load previous exam:', err)
       // Fallback to starting a new exam if loading fails
-      handleStartNew()
+      handleStart({ type: 'exam', categoryId: GENERAL_CATEGORY_ID })
     }
-  }, [session, loadExam, handleStartNew])
+  }, [session, loadExam, handleStart])
 
-  // Load translation on start
-  React.useEffect(() => {
-    loadTranslation(LANGUAGES.en.code)
+  const handleFormSubmit = React.useCallback((name: string, email: string) => {
+    updateEmail(email);
+    updateFullName(name);
+    setTimeout(() => setShowForm(false), 250);
+    if (pendingAction) {
+      pendingAction();
+      setPendingAction(null);
+    }
+  }, [updateEmail, updateFullName, pendingAction]);
+
+  // Show form and store action to run after info is filled
+  const requireUserInfo = React.useCallback((action: () => void) => {
+    setPendingAction(() => action);
+    setShowForm(true);
+  }, []);
+
+  // Smooth close handler
+  const handleFormClose = React.useCallback(() => {
+    setShowForm(false)
+    setPendingAction(null);
+  }, []);
+
+  // Account icon handler
+  const handleAccount = React.useCallback(() => {
+    setShowForm(true);
   }, [])
 
-  // Load exam when loadExam (language) changes
+  // load translation on render
   React.useEffect(() => {
-    if (exam && session.examID) {
+    async function initTranslation() {
+      await loadTranslation(langCode)
+    }
+    initTranslation()
+  }, [langCode, loadTranslation]) // load per language
+
+  // Load exam on language change while the exam exists
+  const onMap = React.useEffectEvent(() => {
+    if (exam && session.examType) {
       loadExam(session)
     }
-  }, [loadExam])
+  });
+
+  // Load questions from disk to memory map
+  React.useEffect(() => {
+    const initMap = async () => {
+      setLoading(true);
+      try {
+        await initQuestionMap(langCode);
+        onMap();
+      } finally {
+        setLoading(false);
+      }
+    }
+    initMap()
+  }, [langCode, loadExam]) // run only once per language change
 
   if (!hasTranslation()) {
     return <Loading size={200} />
   }
 
+  if (loading) {
+    return <Loading size={200} />
+  }
+
   return (
-    <LangContext.Provider value={lang}>
-      <Header setLang={loadTranslation} />
+    <ToastContextProvider>
+      <Header onLanguage={toggleLanguage} onAccount={handleAccount}/>
+
+      <UserInfoForm
+        initialValues={initialAccount}
+        visible={showForm}
+        onSubmit={handleFormSubmit}
+        onClose={handleFormClose} // make sure the form supports this
+      />
 
       {exam ? (
-        <ExamContext.Provider value={exam}>
-          <Navigation startingSession={session} onSessionUpdate={setSession} />
+        <ExamContext.Provider value={exam} key={session.id}>
+          <Navigation onRevision={handleRevision} startingSession={session} onSessionUpdate={setSession} />
         </ExamContext.Provider>
       ) : (
-        <Cover onStartNew={handleStartNew} onStartMini={handleStartMini} onContinue={handleContinue} />
+        <Cover
+          onStart={(options) => {
+            if (!settings.fullName || !settings.email) {
+              // show form first, then start exam after user fills info
+              requireUserInfo(() => handleStart(options));
+            } else {
+              handleStart(options);
+            }
+          }}
+          canContinue={session.examType ? true : false}
+          onContinue={() => {
+            if (!settings.fullName || !settings.email) {
+              // show form first, then continue exam after user fills info
+              requireUserInfo(handleContinue);
+            } else {
+              handleContinue();
+            }
+          }}
+        />
       )}
-    </LangContext.Provider>
+
+      <Toast />
+    </ToastContextProvider>
   )
 }
+
+export type StartExamOptions = {
+  type: ExamType;
+  categoryId: Category['id'];
+};
+
+export type RevisionExamOptions = RevisionDetails & {
+  type: ExamType;
+};
 
 export default AppComponent

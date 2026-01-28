@@ -11,8 +11,10 @@ import {
   SessionNavigationContext,
   SessionTimerContext
 } from '../../contexts'
+import useMediaQuery from '../../hooks/useMediaQuery'
 import { SessionReducer } from '../../utils/session'
 import { Session, SessionDispatch } from '../../types'
+import { RevisionExamOptions } from '../../App'
 
 const ContainerStyles = styled.div`
   display: flex;
@@ -22,10 +24,26 @@ const ContainerStyles = styled.div`
   overflow: hidden;
 `
 
-const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate }) => {
+export interface NavigationProps {
+  startingSession: Session
+  onSessionUpdate: (session: Session) => void
+  onRevision: (options: RevisionExamOptions) => void
+}
+
+const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate, onRevision }) => {
   const exam = React.useContext(ExamContext)
   const [session, updateSession] = React.useReducer(SessionReducer, startingSession)
-  const [open, setOpen] = React.useState<boolean>(true)
+
+  const isMobile = useMediaQuery('(max-width: 48rem)'); // 768px, hook is called at each render  
+  const [open, setOpen] = React.useState<boolean>(() => !isMobile)
+  
+  React.useEffect(() => {
+    if (isMobile) {
+      setOpen(false); // close navigation on mobile
+    } else {
+      setOpen(true); // open navigation on larger screens
+    }
+  }, [isMobile]);
 
   const sessionUpdate = React.useCallback<SessionDispatch>(
     (...actions) => {
@@ -45,8 +63,8 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
   const contextValues = {
     navigation: { index: session.index, update: sessionUpdate },
     timer: { time: session.time, maxTime: session.maxTime, paused: session.paused, update: sessionUpdate },
-    exam: { examState: session.examState, reviewState: session.reviewState, update: sessionUpdate },
-    data: { bookmarks: session.bookmarks, answers: session.answers, examID: session.examID, update: sessionUpdate }
+    exam: { examState: session.examState, reviewState: session.reviewState, update: sessionUpdate, categoryId: session.categoryId },
+    data: { bookmarks: session.bookmarks, answers: session.answers, examType: session.examType, emailSent: session.emailSent, update: sessionUpdate }
   }
 
   return (
@@ -58,7 +76,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
               <ContainerStyles id="middle-container">
                 <Drawer open={open} toggleOpen={toggleOpen} />
 
-                <Content open={open} />
+                <Content onRevision={onRevision} open={open} />
               </ContainerStyles>
 
               <Footer open={open} questionCount={exam.length} />
@@ -72,9 +90,4 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
   )
 }
 
-export default NavigationComponent
-
-export interface NavigationProps {
-  startingSession: Session
-  onSessionUpdate: (session: Session) => void
-}
+export default React.memo(NavigationComponent)

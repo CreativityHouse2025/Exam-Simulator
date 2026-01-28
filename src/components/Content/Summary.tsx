@@ -1,25 +1,40 @@
-import type { ThemedStyles } from '../../types'
+import type { ExamType, Results, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
 import SummaryRow from './SummaryRow'
 import { formatDate, formatTimer } from '../../utils/format'
 import { translate } from '../../utils/translation'
-import { ExamContext, SessionDataContext, SessionTimerContext } from '../../contexts'
-
-const passPercent = 85
+import useSettings from '../../hooks/useSettings'
+import useResults from '../../hooks/useResults'
+import { RevisionExamOptions } from '../../App'
+import { isRetakeAllowed } from '../../utils/exam'
 
 export const TitleStyles = styled.div<ThemedStyles>`
   justify-self: center;
   font: 4rem 'Open Sans';
   font-weight: 700;
+  text-align: center;
   color: ${({ theme }) => theme.black};
+`
+
+export const TopColumnStyles = styled.div`
+  display: grid;
+  grid-template-rows: repeat(5, auto);
+  width: 100%;
 `
 
 export const ColumnStyles = styled.div`
   padding-top: 5rem;
   display: grid;
-  grid-template-rows: repeat(4, 3rem);
+  grid-template-rows: repeat(4, auto);
+  width: 100%;
+`
+
+const SummaryContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
 `
 
 const RestartButton = styled.button<ThemedStyles>`
@@ -32,91 +47,132 @@ const RestartButton = styled.button<ThemedStyles>`
   border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
-  min-width: 300px;
-  margin: 3rem auto 2rem auto;
-  margin-top: 7rem;
-  display: block;
+  min-width: 200px;
+  width: 100%;
+  max-width: 300px;
+  display: inline-block;
   &:hover {
     opacity: 0.9;
     transform: translateY(-2px);
   }
+
   &:active {
     transform: translateY(0);
   }
 `
 
-const SummaryComponent: React.FC = () => {
-  const { answers } = React.useContext(SessionDataContext)
-  const { maxTime, time } = React.useContext(SessionTimerContext)
-  const exam = React.useContext(ExamContext)
+const RetakeButton = styled.button<ThemedStyles>`
+  background: ${({ theme }) => theme.secondary};
+  color: white;
+  border: none;
+  padding: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-width: 200px;
+  width: 100%;
+  max-width: 300px;
+  display: inline-block;
 
-  const questions = React.useMemo(() => {
-    const arraysEqual = (a: number[] | null, b: number[]): boolean =>
-      a !== null && a.length === b.length && a.every((val, index) => val === b[index])
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
 
-    const categorized = answers.reduce(
-      (acc, givenAnswer, i) => {
-        const correctAnswer = exam[i].answer
+  &:active {
+    transform: translateY(0);
+  }
+`
 
-        if (!givenAnswer || givenAnswer.length === 0) {
-          acc.incomplete.push(i)
-        } else {
-          acc.completed.push(i)
-          if (arraysEqual(givenAnswer, correctAnswer)) {
-            acc.correct.push(i)
-          } else {
-            acc.incorrect.push(i)
-          }
-        }
+const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 1rem;
+`
 
-        return acc
-      },
-      { incomplete: [] as number[], completed: [] as number[], correct: [] as number[], incorrect: [] as number[] }
-    )
+const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: RevisionExamOptions) => void }> = ({ examType, onRevision }) => {
+  const { settings } = useSettings()
+  const langCode = settings.language
 
-    return categorized
-  }, [exam, answers])
+  const {
+    pass,
+    passPercent,
+    score,
+    elapsedTime,
+    date,
+    categoryLabel,
+    correctCount,
+    incorrectCount,
+    incompleteCount,
+    totalQuestions,
+    revisionDetails
+  } = useResults(true) as Results // use true because component will only render when exam is finished
 
-  const score = Math.round((questions.correct.length / exam.length) * 100)
-  const status = score >= passPercent
-  const elapsed = maxTime * 60 - time
-  const date = new Date()
+  const canRetake = isRetakeAllowed(examType, revisionDetails.questions.length)
 
   const translated = React.useMemo(
     () => ({
       title: translate('content.summary.title'),
-      status: translate(`content.summary.${status ? 'pass' : 'fail'}`),
-      home: translate('content.summary.home')
+      status:
+        pass !== undefined
+          ? translate(`content.summary.${pass ? 'pass' : 'fail'}`)
+          : '',
+      home: translate('content.summary.home'),
+      retake: translate('content.summary.retake-wrong'),
     }),
-    [document.documentElement.lang, translate, status]
+    [langCode, pass]
   )
 
   const onRestart = React.useCallback(() => window.location.reload(), [])
 
+  const handleRevision = React.useCallback(() => {
+    onRevision({
+      ...revisionDetails,
+      type: 'revision'
+    });
+  }, [])
+
   return (
-    <div id="summary">
+    <SummaryContainer id="summary">
       <TitleStyles id="title">{translated.title}</TitleStyles>
 
-      <div id="columns">
-        <ColumnStyles id="column">
-          <SummaryRow type="status" value={translated.status} status={status} isStatus />
-          <SummaryRow type="passing" value={`${passPercent} %`} status={status} />
-          <SummaryRow type="time" value={formatTimer(elapsed)} status={status} />
-          <SummaryRow type="date" value={formatDate(date)} status={status} />
-        </ColumnStyles>
+      <div id="columns" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <TopColumnStyles id="column">
+          {pass !== undefined && (
+            <SummaryRow type="status" value={translated.status} status={pass} isStatus />
+          )}
+
+          {passPercent && (
+            <SummaryRow type="passing" value={`${passPercent} %`} status={pass} />
+          )}
+
+          <SummaryRow type="time" value={formatTimer(elapsedTime)} status={pass} />
+          <SummaryRow type="date" value={formatDate(date)} status={pass} />
+          <SummaryRow type="category" value={categoryLabel} status={pass} />
+        </TopColumnStyles>
 
         <ColumnStyles id="column">
-          <SummaryRow type="score" value={`${score} %`} status={status} />
-          <SummaryRow type="correct" value={`${questions.correct.length} / ${exam.length}`} status={status} />
-          <SummaryRow type="incorrect" value={`${questions.incorrect.length} / ${exam.length}`} status={status} />
-          <SummaryRow type="incomplete" value={`${questions.incomplete.length} / ${exam.length}`} status={status} />
+          <SummaryRow type="score" value={`${score} %`} status={pass} />
+          <SummaryRow type="correct" value={`${correctCount} / ${totalQuestions}`} status={pass} />
+          <SummaryRow type="incorrect" value={`${incorrectCount} / ${totalQuestions}`} status={pass} />
+          <SummaryRow type="incomplete" value={`${incompleteCount} / ${totalQuestions}`} status={pass} />
         </ColumnStyles>
       </div>
 
-      <RestartButton id="restart-button" className="no-select" onClick={onRestart}>
-        {translated.home}
-      </RestartButton>
-    </div>
+      <ButtonsContainer>
+        {canRetake && <RetakeButton id="retake-button" title='Revise your mistakes' className="no-select" onClick={handleRevision}>
+          {translated.retake}
+        </RetakeButton>}
+        <RestartButton id="restart-button" title='Homepage' className="no-select" onClick={onRestart}>
+          {translated.home}
+        </RestartButton>
+      </ButtonsContainer>
+    </SummaryContainer>
   )
 }
 

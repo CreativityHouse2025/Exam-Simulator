@@ -1,4 +1,5 @@
-import type { Lang, LangCode, Session } from './types'
+import type { Lang, LangCode, Session, Settings } from './types'
+import styled from "styled-components";
 
 // Theme constants
 const colors = ['#b5965d', '#593752', '#301e2c', '#f8e3e0', '#000000', '#ffffff']
@@ -54,6 +55,7 @@ const shadows = [
 export const DEFAULT_THEME = {
   grey,
   black: '#333333',
+  white: colors[5],
   primary: colors[0],
   secondary: colors[1],
   tertiary: colors[2],
@@ -62,6 +64,7 @@ export const DEFAULT_THEME = {
   shadows,
   scrollbar: '8px',
   fontSize: '10px',
+  fontFamily: '"Open Sans", sans-serif',
   correct: '#4CAF50',
   incorrect: '#F44336'
 } as const
@@ -74,7 +77,8 @@ export const SESSION_ACTION_TYPES = {
   SET_TIME: 'SET_TIME' as const,
   SET_TIMER_PAUSED: 'SET_TIMER_PAUSED' as const,
   SET_EXAM_STATE: 'SET_EXAM_STATE' as const,
-  SET_REVIEW_STATE: 'SET_REVIEW_STATE' as const
+  SET_REVIEW_STATE: 'SET_REVIEW_STATE' as const,
+  SET_EMAIL_SENT: 'SET_EMAIL_SENT' as const
 } as const
 
 // Property mapping for session actions
@@ -85,19 +89,30 @@ export const SESSION_ACTION_PROPS = {
   SET_TIME: 'time' as const,
   SET_TIMER_PAUSED: 'paused' as const,
   SET_EXAM_STATE: 'examState' as const,
-  SET_REVIEW_STATE: 'reviewState' as const
+  SET_REVIEW_STATE: 'reviewState' as const,
+  SET_EMAIL_SENT: 'emailSent' as const
 } as const
+
+// Constant for the general category (mix of all categories)
+export const GENERAL_CATEGORY_ID = 0
+
+// Constant for category menu padding (shared variable)
+export const MENU_PADDING = "1.6rem 1.4rem"
 
 // Default session
 export const DEFAULT_SESSION: Session = {
+  id: '' as const,
   index: 0 as const,
   maxTime: 0 as const,
   time: 0 as const,
   paused: false as const,
   examState: 'not-started' as const,
   reviewState: 'summary' as const,
+  questions: [] as const,
+  answers: [] as const,
+  emailSent: false,
+  categoryId: GENERAL_CATEGORY_ID,
   bookmarks: [] as const,
-  answers: [] as const
 } as const
 
 // Language configuration
@@ -105,3 +120,26 @@ export const LANGUAGES: Record<LangCode, Lang> = {
   ar: { code: 'ar', name: 'العربية', dir: 'rtl' } as const,
   en: { code: 'en', name: 'English', dir: 'ltr' } as const
 } as const
+
+// Wrapper component to query for reduced animations in user's device
+export const ReducedMotionWrapper = styled.div`
+  @media (prefers-reduced-motion: reduce) {
+    & *,
+    & *::before,
+    & *::after {
+      animation: none !important;
+      transition: none !important;
+      transform: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+`;
+
+// Default user settings
+export const DEFAULT_USER_SETTINGS: Settings = {
+  language: 'en',
+  appVersion: '1.1'
+}
+
+// Minimum required number of mistakes to allow for a retake
+export const RETAKE_MIN_MISTAKES = 10

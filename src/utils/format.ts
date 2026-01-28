@@ -1,6 +1,21 @@
-import type { Answers, Exam, ExamType, LangCode, Question, Session } from '../types'
+import type { Exam, ExamType, LangCode, Question, Session } from '../types'
 
 import { formatDistance, format } from 'date-fns'
+import { translate } from './translation';
+
+/**
+   * Shuffle array using Fisher-Yates algorithm
+   * @param {T[]} array - The array to shuffle
+   * @returns {T[]} - The shuffled array
+   */
+export function shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1))
+            ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    return shuffled
+}
 
 /**
  * Format a date string to a human-readable format
@@ -22,7 +37,7 @@ export function formatCreatedAt(date: string): string {
  */
 export function formatDate(date: number | string | Date): string {
   try {
-    return format(new Date(date), 'MM/dd/yyyy')
+    return format(new Date(date), 'dd/MM/yyyy')
   } catch {
     return '00/00/0000'
   }
@@ -42,29 +57,6 @@ export function formatTimer(sec: number): string {
     return [hours, minutes, seconds].map((unit) => unit.toString().padStart(2, '0')).join(':')
   } catch {
     return '00:00:00'
-  }
-}
-
-/**
- * Randomize exam questions and choices
- * @param {Exam} exam - The exam object to format.
- * @returns {Exam} - The formatted exam object.
- */
-export function randomizeTest(exam: Exam): Exam {
-  return shuffleArray(exam.map((q) => ({ ...q, choices: shuffleArray(q.choices) })))
-
-  /**
-   * Shuffle array using Fisher-Yates algorithm
-   * @param {T[]} array - The array to shuffle
-   * @returns {T[]} - The shuffled array
-   */
-  function shuffleArray<T>(array: T[]): T[] {
-    const shuffled = [...array]
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-    }
-    return shuffled
   }
 }
 
@@ -89,12 +81,13 @@ export function formatExam(exam: Exam): Exam {
 }
 
 /**
- * Format session with default values
+ * Format a new session with default values
  * @param {Session} session - The session object to format.
- * @param {number} questionCount - The number of questions in the exam.
+ * @param {number} questionCount - The number of questions
+ * @param {number} durationMinutes - The duration of the exam in minutes
  * @returns {Session} - The formatted session object.
  */
-export function formatSession(session: Session, questionCount: number, examType: ExamType): Session {
+export function formatSession(session: Session, questionCount: number, durationMinutes: number): Session {
   try {
     // Fill missing answers with empty arrays
     const missingAnswers = questionCount - session.answers.length
@@ -102,9 +95,11 @@ export function formatSession(session: Session, questionCount: number, examType:
       session.answers = [...session.answers, ...Array(missingAnswers).fill([])]
     }
 
-    const maxTime = examType === 'exam' ? 13800 : 2760 // 3h50m : 46m
+    const maxTime = durationMinutes * 60;
+
     session.maxTime = maxTime
     session.time = maxTime
+    session.id = createSessionId(session.examType as ExamType)
   } catch (err) {
     console.error('Error formatting session:', err)
   }
@@ -149,3 +144,18 @@ export function formatChoiceLabel(index: number, lang: LangCode): string {
     return 'A'
   }
 }
+
+export function isEmail(email: string) {
+  return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)
+}
+
+export function hasInvalidNameChars(name: string): boolean {
+  // \p{L} = any kind of letter from any language
+  // \s = space
+  const invalidPattern = /[^\p{L}\s]/u;
+  return invalidPattern.test(name);
+}
+
+// generates a unique id for the session
+export const createSessionId = (examType: ExamType) =>
+  `${examType}-attempt-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;

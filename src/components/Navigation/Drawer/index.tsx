@@ -12,7 +12,7 @@ const DrawerStyles = styled.div<DrawerStylesProps>`
   transition: 0.3s;
 `
 
-const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen }) => {
+const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen }) => {  
   return (
     <DrawerStyles id="drawer" $open={open}>
       <Control open={open} toggleOpen={toggleOpen} />
@@ -21,7 +21,7 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen }) => {
   )
 }
 
-export default DrawerComponent
+export default React.memo(DrawerComponent)
 
 export interface DrawerProps {
   open: boolean

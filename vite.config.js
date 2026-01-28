@@ -10,5 +10,8 @@ export default defineConfig({
       include: ['src/data/**/*.json'],
       exclude: ['node_modules/**']
     })
-  ]
+  ],
+  server: {
+    allowedHosts: ['brashiest-lon-superevangelically.ngrok-free.dev'],
+  }
 })
