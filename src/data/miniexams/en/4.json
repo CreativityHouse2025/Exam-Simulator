@@ -9,11 +9,11 @@
         "correct": true
       },
       {
-        "text": "Collaborate with the project team to estimate the size of the minimum viable product (MVP) functionalities.",
+        "text": "Cut operations documentation because this can be completed after product delivery and operation starts.",
         "correct": false
       },
       {
-        "text": "Cut operations documentation because this can be completed after product delivery and operation starts.",
+        "text": "Collaborate with the project team to estimate the size of the minimum viable product (MVP) functionalities.",
         "correct": false
       },
       {
@@ -28,11 +28,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "The development team has no experience in managing an adaptive project.",
-        "correct": true
-      },
-      {
-        "text": "The client plans to implement the project and does not need to participate.",
+        "text": "The development team has not produced a complete prototype.",
         "correct": false
       },
       {
@@ -40,7 +36,11 @@
         "correct": false
       },
       {
-        "text": "The development team has not produced a complete prototype.",
+        "text": "The development team has no experience in managing an adaptive project.",
+        "correct": true
+      },
+      {
+        "text": "The client plans to implement the project and does not need to participate.",
         "correct": false
       }
     ]
@@ -51,11 +51,11 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Incorporate a detailed training and coaching component as a project deliverable.",
-        "correct": true
+        "text": "Determine the specific needs and requirements of different user functions.",
+        "correct": false
       },
       {
-        "text": "Determine the specific needs and requirements of different user functions.",
+        "text": "Prioritize training efforts by identifying which features are most essential.",
         "correct": false
       },
       {
@@ -63,8 +63,8 @@
         "correct": false
       },
       {
-        "text": "Prioritize training efforts by identifying which features are most essential.",
-        "correct": false
+        "text": "Incorporate a detailed training and coaching component as a project deliverable.",
+        "correct": true
       }
     ]
   },
@@ -78,15 +78,15 @@
         "correct": true
       },
       {
+        "text": "Request approval to replace a few team members so the project team can understand the importance of meeting goals.",
+        "correct": false
+      },
+      {
         "text": "Enable collaboration, create common goals, and celebrate group achievements, while providing group rewards.",
         "correct": false
       },
       {
         "text": "Reinforce and communicate the next milestone, following individual performance and execution on a detailed level.",
-        "correct": false
-      },
-      {
-        "text": "Request approval to replace a few team members so the project team can understand the importance of meeting goals.",
         "correct": false
       }
     ]
@@ -97,15 +97,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Risk Register",
+        "correct": false
+      },
+      {
         "text": "Project Charter",
         "correct": true
       },
       {
         "text": "Communications Management Plan",
-        "correct": false
-      },
-      {
-        "text": "Risk Register",
         "correct": false
       },
       {
@@ -120,19 +120,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Make use of project retrospective sessions for discussions and learning.",
-        "correct": true
-      },
-      {
-        "text": "Use iteration planning to discuss and adopt new ways of working.",
-        "correct": false
-      },
-      {
         "text": "Develop and share guidelines for team training and mentoring.",
         "correct": false
       },
       {
         "text": "Engage with the product owner to facilitate fast-tracking of the transition.",
+        "correct": false
+      },
+      {
+        "text": "Make use of project retrospective sessions for discussions and learning.",
+        "correct": true
+      },
+      {
+        "text": "Use iteration planning to discuss and adopt new ways of working.",
         "correct": false
       }
     ]
@@ -143,16 +143,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ask the logistics team to arrange an expedited clearance.",
-        "correct": true
-      },
-      {
         "text": "Revisit the risk register and implement the respective risk response.",
         "correct": false
       },
       {
         "text": "Identify the root cause of the delay and add it to the bid documents.",
         "correct": false
+      },
+      {
+        "text": "Ask the logistics team to arrange an expedited clearance.",
+        "correct": true
       },
       {
         "text": "Ensure the suppliers cover any additional costs due to the delay.",
@@ -170,7 +170,7 @@
         "correct": true
       },
       {
-        "text": "Discuss the meeting with the missing team members.",
+        "text": "Schedule team meetings during overlapping core hours.",
         "correct": false
       },
       {
@@ -178,7 +178,7 @@
         "correct": false
       },
       {
-        "text": "Schedule team meetings during overlapping core hours.",
+        "text": "Discuss the meeting with the missing team members.",
         "correct": false
       }
     ]
@@ -193,15 +193,15 @@
         "correct": true
       },
       {
+        "text": "Acquire additional resources to complete all of the requirements on time.",
+        "correct": false
+      },
+      {
         "text": "Initiate a change request for project sponsor approval for a scope change.",
         "correct": false
       },
       {
         "text": "Record the issue and escalate it to the steering committee for a decision.",
-        "correct": false
-      },
-      {
-        "text": "Acquire additional resources to complete all of the requirements on time.",
         "correct": false
       }
     ]
@@ -220,11 +220,11 @@
         "correct": false
       },
       {
-        "text": "Work with the team to assess the impact on the overall project.",
+        "text": "Escalate to the project sponsor for proper resolution.",
         "correct": false
       },
       {
-        "text": "Escalate to the project sponsor for proper resolution.",
+        "text": "Work with the team to assess the impact on the overall project.",
         "correct": false
       }
     ]
@@ -239,15 +239,15 @@
         "correct": true
       },
       {
-        "text": "Involve senior management to resolve the challenge.",
-        "correct": false
-      },
-      {
         "text": "Obtain support from the project sponsor to continue the project.",
         "correct": false
       },
       {
         "text": "Perform an impact analysis of the possible delays.",
+        "correct": false
+      },
+      {
+        "text": "Involve senior management to resolve the challenge.",
         "correct": false
       }
     ]
@@ -258,19 +258,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Evaluate the cost of the rework.",
-        "correct": true
-      },
-      {
         "text": "Review the quality management plan.",
         "correct": false
       },
       {
-        "text": "Review the user stories.",
-        "correct": false
+        "text": "Evaluate the cost of the rework.",
+        "correct": true
       },
       {
         "text": "Perform a root cause analysis.",
+        "correct": false
+      },
+      {
+        "text": "Review the user stories.",
         "correct": false
       }
     ]
@@ -280,10 +280,6 @@
     "text": "A virtual team is midway through a sprint of a complex task and is ahead of schedule. During the daily standup, a new team member interrupts and asks everyone to describe what they worked on prior to the current sprint.\nHow should the project manager handle this situation?",
     "explanation": "",
     "choices": [
-      {
-        "text": "Thank the new team member for their interest and direct them to the project documentation.",
-        "correct": true
-      },
       {
         "text": "Explain to the new team member that the daily standup is not the best time for this discussion.",
         "correct": false
@@ -295,6 +291,10 @@
       {
         "text": "Ask all team members to list their completed tasks prior to the current sprint.",
         "correct": false
+      },
+      {
+        "text": "Thank the new team member for their interest and direct them to the project documentation.",
+        "correct": true
       }
     ]
   },
@@ -304,20 +304,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Refuse to release the newly reassigned resources.",
-        "correct": true
-      },
-      {
-        "text": "Review the communications management plan.",
-        "correct": false
-      },
-      {
         "text": "Review resource allocation and utilization plans.",
         "correct": false
       },
       {
         "text": "Review resource needs with the functional manager.",
         "correct": false
+      },
+      {
+        "text": "Review the communications management plan.",
+        "correct": false
+      },
+      {
+        "text": "Refuse to release the newly reassigned resources.",
+        "correct": true
       }
     ]
   },
@@ -331,11 +331,11 @@
         "correct": true
       },
       {
-        "text": "Ask the team to send meeting minutes to the project manager after each daily meeting.",
+        "text": "Start attending daily meetings to promote a better collaboration effort with the team.",
         "correct": false
       },
       {
-        "text": "Start attending daily meetings to promote a better collaboration effort with the team.",
+        "text": "Ask the team to send meeting minutes to the project manager after each daily meeting.",
         "correct": false
       },
       {
@@ -350,19 +350,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ask the IT manager of each site to manage the technical components of the virtual meetings.",
-        "correct": true
+        "text": "Request the budget for weekly in-person meetings with the entire team to allow for direct contact.",
+        "correct": false
       },
       {
-        "text": "Request the team members' résumés and become familiar with the teams' experiences.",
-        "correct": false
+        "text": "Ask the IT manager of each site to manage the technical components of the virtual meetings.",
+        "correct": true
       },
       {
         "text": "Propose and establish a team charter with the rules and principles to be followed.",
         "correct": false
       },
       {
-        "text": "Request the budget for weekly in-person meetings with the entire team to allow for direct contact.",
+        "text": "Request the team members' résumés and become familiar with the teams' experiences.",
         "correct": false
       }
     ]
@@ -377,15 +377,15 @@
         "correct": true
       },
       {
-        "text": "Revise the change request to incorporate the additional two-month delay due to upcoming supply chain disruptions.",
-        "correct": false
-      },
-      {
         "text": "Meet with the sponsor and ask them to contact the CCB and request their immediate approval.",
         "correct": false
       },
       {
         "text": "Request that the CEO approve and implement the change to avoid the potential two-month delay.",
+        "correct": false
+      },
+      {
+        "text": "Revise the change request to incorporate the additional two-month delay due to upcoming supply chain disruptions.",
         "correct": false
       }
     ]
@@ -400,15 +400,15 @@
         "correct": true
       },
       {
+        "text": "Communicate the possible three-day delay to the sponsor.",
+        "correct": false
+      },
+      {
         "text": "Tell the technical lead that the new approach is not feasible.",
         "correct": false
       },
       {
         "text": "Refer to the network diagram to determine the float for this task.",
-        "correct": false
-      },
-      {
-        "text": "Communicate the possible three-day delay to the sponsor.",
         "correct": false
       }
     ]
@@ -419,19 +419,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Established a fixed communication platform to provide updates on the project to all stakeholders.",
-        "correct": true
+        "text": "Created a responsibility matrix to notify stakeholders of the meetings they are required to attend.",
+        "correct": false
       },
       {
         "text": "Managed stakeholder engagement by involving the stakeholders in the appropriate phases of the project.",
         "correct": false
       },
       {
-        "text": "Developed the project charter including the roles and responsibilities of all the stakeholders.",
-        "correct": false
+        "text": "Established a fixed communication platform to provide updates on the project to all stakeholders.",
+        "correct": true
       },
       {
-        "text": "Created a responsibility matrix to notify stakeholders of the meetings they are required to attend.",
+        "text": "Developed the project charter including the roles and responsibilities of all the stakeholders.",
         "correct": false
       }
     ]
@@ -442,19 +442,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Calculate the story points only for new backlog items.",
-        "correct": true
+        "text": "Measure and track story points over several sprints.",
+        "correct": false
       },
       {
-        "text": "Estimate the story points required for the entire task board.",
-        "correct": false
+        "text": "Calculate the story points only for new backlog items.",
+        "correct": true
       },
       {
         "text": "Convert all work in progress (WIP) items to story points.",
         "correct": false
       },
       {
-        "text": "Measure and track story points over several sprints.",
+        "text": "Estimate the story points required for the entire task board.",
         "correct": false
       }
     ]
@@ -464,6 +464,10 @@
     "text": "A project manager is working on a virtual project with a global team for the first time and encounters an issue with stakeholder participation in team meetings. Some stakeholders do not participate, others complain about scheduling, and others do not acknowledge meeting invitations.\nWhat should the project manager do to address these issues and ensure smoother meetings?",
     "explanation": "",
     "choices": [
+      {
+        "text": "Reschedule meetings for different times and dates according to time zones.",
+        "correct": false
+      },
       {
         "text": "Allow the stakeholders to participate in asynchronous meetings using written communication.",
         "correct": true
@@ -475,10 +479,6 @@
       {
         "text": "Review the organizational culture and structure to properly coordinate meetings.",
         "correct": false
-      },
-      {
-        "text": "Reschedule meetings for different times and dates according to time zones.",
-        "correct": false
       }
     ]
   },
@@ -488,11 +488,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "At the next daily standup meeting.",
-        "correct": true
-      },
-      {
-        "text": "At the lessons learned workshop.",
+        "text": "At the next iteration planning meeting.",
         "correct": false
       },
       {
@@ -500,7 +496,11 @@
         "correct": false
       },
       {
-        "text": "At the next iteration planning meeting.",
+        "text": "At the next daily standup meeting.",
+        "correct": true
+      },
+      {
+        "text": "At the lessons learned workshop.",
         "correct": false
       }
     ]
@@ -515,11 +515,11 @@
         "correct": true
       },
       {
-        "text": "Collect all available information from the team and address the problem.",
+        "text": "Schedule a meeting with the specific team members to discuss the issue.",
         "correct": false
       },
       {
-        "text": "Schedule a meeting with the specific team members to discuss the issue.",
+        "text": "Collect all available information from the team and address the problem.",
         "correct": false
       },
       {
@@ -534,10 +534,6 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Asked the program manager to use the old forecasting technique",
-        "correct": true
-      },
-      {
         "text": "Educated the program manager on the new forecasting technique",
         "correct": false
       },
@@ -548,6 +544,10 @@
       {
         "text": "Ensured that the program manager has the necessary knowledge to understand estimation techniques",
         "correct": false
+      },
+      {
+        "text": "Asked the program manager to use the old forecasting technique",
+        "correct": true
       }
     ]
   },
@@ -556,6 +556,10 @@
     "text": "Question\nAn agile project manager is overseeing a Kanban project and wants to assess task completion roadblocks for an upcoming major milestone. What should the project manager do?",
     "explanation": "",
     "choices": [
+      {
+        "text": "Host a stakeholder meeting to discuss task completion roadblocks.",
+        "correct": false
+      },
       {
         "text": "Create a performance metric using the work in progress limit.",
         "correct": true
@@ -566,10 +570,6 @@
       },
       {
         "text": "Review the blocked items with the team during standup meetings.",
-        "correct": false
-      },
-      {
-        "text": "Host a stakeholder meeting to discuss task completion roadblocks.",
         "correct": false
       }
     ]
@@ -584,15 +584,15 @@
         "correct": true
       },
       {
-        "text": "Engage and guide the team to encourage all members to participate.",
-        "correct": false
-      },
-      {
         "text": "Ask each team member individually to participate in future meetings.",
         "correct": false
       },
       {
         "text": "Allow the team to find their own way to fully participate.",
+        "correct": false
+      },
+      {
+        "text": "Engage and guide the team to encourage all members to participate.",
         "correct": false
       }
     ]
@@ -603,12 +603,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Train the team to use the new software.",
-        "correct": true
-      },
-      {
         "text": "Hire new team members with software knowledge.",
         "correct": false
+      },
+      {
+        "text": "Train the team to use the new software.",
+        "correct": true
       },
       {
         "text": "Ignore the technological advancements.",
@@ -626,20 +626,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ask for suggestions on how to manage their time more effectively.",
-        "correct": true
+        "text": "Explain the definition of an information radiator to the project team.",
+        "correct": false
       },
       {
         "text": "Reduce the interactions among team members to increase development time.",
         "correct": false
       },
       {
-        "text": "Explain the definition of an information radiator to the project team.",
+        "text": "Acknowledge the developer's frustration and emphasize the benefit of each activity.",
         "correct": false
       },
       {
-        "text": "Acknowledge the developer's frustration and emphasize the benefit of each activity.",
-        "correct": false
+        "text": "Ask for suggestions on how to manage their time more effectively.",
+        "correct": true
       }
     ]
   },
@@ -649,11 +649,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Review the output against the acceptance criteria.",
-        "correct": true
-      },
-      {
-        "text": "Extend the project until all deliverables are accepted.",
+        "text": "Pay the penalty for the defective item.",
         "correct": false
       },
       {
@@ -661,8 +657,12 @@
         "correct": false
       },
       {
-        "text": "Pay the penalty for the defective item.",
+        "text": "Extend the project until all deliverables are accepted.",
         "correct": false
+      },
+      {
+        "text": "Review the output against the acceptance criteria.",
+        "correct": true
       }
     ]
   },
@@ -672,8 +672,8 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Replace team members who are not delivering optimally to improve overall productivity.",
-        "correct": true
+        "text": "Meet with the project team to assure them that they will not be laid off and their jobs are safe.",
+        "correct": false
       },
       {
         "text": "Provide regular updates on the layoff situation and discuss its impact on the team and the project.",
@@ -684,8 +684,8 @@
         "correct": false
       },
       {
-        "text": "Meet with the project team to assure them that they will not be laid off and their jobs are safe.",
-        "correct": false
+        "text": "Replace team members who are not delivering optimally to improve overall productivity.",
+        "correct": true
       }
     ]
   },
@@ -695,20 +695,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Perform a skill assessment.",
-        "correct": true
-      },
-      {
-        "text": "Conduct teambuilding exercises.",
-        "correct": false
-      },
-      {
         "text": "Remove all project roadblocks.",
         "correct": false
       },
       {
         "text": "Conduct a satisfaction evaluation.",
         "correct": false
+      },
+      {
+        "text": "Conduct teambuilding exercises.",
+        "correct": false
+      },
+      {
+        "text": "Perform a skill assessment.",
+        "correct": true
       }
     ]
   },
@@ -726,11 +726,11 @@
         "correct": false
       },
       {
-        "text": "Separate the team members.",
+        "text": "Identify who instigated the issue.",
         "correct": false
       },
       {
-        "text": "Identify who instigated the issue.",
+        "text": "Separate the team members.",
         "correct": false
       }
     ]
@@ -745,7 +745,7 @@
         "correct": true
       },
       {
-        "text": "Updated the stakeholder register to include the new team member.",
+        "text": "Updated the project charter during the execution phase to include all the changes.",
         "correct": false
       },
       {
@@ -753,7 +753,7 @@
         "correct": false
       },
       {
-        "text": "Updated the project charter during the execution phase to include all the changes.",
+        "text": "Updated the stakeholder register to include the new team member.",
         "correct": false
       }
     ]
@@ -764,11 +764,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Resistant",
-        "correct": true
-      },
-      {
-        "text": "Leading",
+        "text": "Supportive",
         "correct": false
       },
       {
@@ -776,8 +772,12 @@
         "correct": false
       },
       {
-        "text": "Supportive",
+        "text": "Leading",
         "correct": false
+      },
+      {
+        "text": "Resistant",
+        "correct": true
       }
     ]
   },
@@ -787,12 +787,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Determine which changes to implement and inform the team.",
-        "correct": true
-      },
-      {
         "text": "Refuse the request and escalate it to the project sponsor.",
         "correct": false
+      },
+      {
+        "text": "Determine which changes to implement and inform the team.",
+        "correct": true
       },
       {
         "text": "Tell the team that they cannot modify the established WBS.",

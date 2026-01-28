@@ -5,11 +5,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Escalate this issue to the human resources (HR) manager.",
-        "correct": true
-      },
-      {
-        "text": "Replace the team member with a more interested team member.",
+        "text": "Increase the team member's salary and bonus opportunities.",
         "correct": false
       },
       {
@@ -17,8 +13,12 @@
         "correct": false
       },
       {
-        "text": "Increase the team member's salary and bonus opportunities.",
+        "text": "Replace the team member with a more interested team member.",
         "correct": false
+      },
+      {
+        "text": "Escalate this issue to the human resources (HR) manager.",
+        "correct": true
       }
     ]
   },
@@ -28,19 +28,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Update the product backlog.",
-        "correct": true
+        "text": "Update the issue log.",
+        "correct": false
       },
       {
-        "text": "Update the project charter.",
-        "correct": false
+        "text": "Update the product backlog.",
+        "correct": true
       },
       {
         "text": "Update the risk register.",
         "correct": false
       },
       {
-        "text": "Update the issue log.",
+        "text": "Update the project charter.",
         "correct": false
       }
     ]
@@ -51,19 +51,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Conduct a brainstorming meeting.",
-        "correct": true
+        "text": "Use prototypes to refine the design.",
+        "correct": false
       },
       {
         "text": "Employ the nominal group technique.",
         "correct": false
       },
       {
-        "text": "Conduct a release plan meeting.",
-        "correct": false
+        "text": "Conduct a brainstorming meeting.",
+        "correct": true
       },
       {
-        "text": "Use prototypes to refine the design.",
+        "text": "Conduct a release plan meeting.",
         "correct": false
       }
     ]
@@ -74,12 +74,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Review the reason for the rejection, and check the deliverable against its acceptance criteria.",
-        "correct": true
-      },
-      {
         "text": "Analyze the customer requirements, and rework the deliverable to an acceptable quality.",
         "correct": false
+      },
+      {
+        "text": "Review the reason for the rejection, and check the deliverable against its acceptance criteria.",
+        "correct": true
       },
       {
         "text": "Create a deliverable improvement plan, and implement it for the remainder of the project.",
@@ -97,15 +97,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Schedule a workshop with vendor representatives to provide an overview of the project specifications.",
+        "correct": false
+      },
+      {
         "text": "Assign project personnel to oversee the vendor's facility to ensure compliance with the specifications.",
         "correct": true
       },
       {
         "text": "Review the production contract to determine if the referenced specifications were included.",
-        "correct": false
-      },
-      {
-        "text": "Schedule a workshop with vendor representatives to provide an overview of the project specifications.",
         "correct": false
       },
       {
@@ -120,20 +120,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Prepare a scope change request to include the additional equipment because it is beneficial to the marketing team.",
-        "correct": true
+        "text": "Conduct a survey among steering committee members to assess their individual project requirements for a consensus decision.",
+        "correct": false
       },
       {
         "text": "Provide a clear rationale for its exclusion based on the business case and its impact on the project timelines.",
         "correct": false
       },
       {
-        "text": "Conduct a survey among steering committee members to assess their individual project requirements for a consensus decision.",
+        "text": "Request the project sponsor to escalate the issue to the steering committee member to avoid delaying project approval.",
         "correct": false
       },
       {
-        "text": "Request the project sponsor to escalate the issue to the steering committee member to avoid delaying project approval.",
-        "correct": false
+        "text": "Prepare a scope change request to include the additional equipment because it is beneficial to the marketing team.",
+        "correct": true
       }
     ]
   },
@@ -143,16 +143,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Reorganize the project team to include people with the necessary knowledge and skills.",
-        "correct": true
+        "text": "Organize adequate training for the project team to close the knowledge gap.",
+        "correct": false
       },
       {
         "text": "Review the timeline and budget to consider training, outsourcing, or other alternatives.",
         "correct": false
       },
       {
-        "text": "Organize adequate training for the project team to close the knowledge gap.",
-        "correct": false
+        "text": "Reorganize the project team to include people with the necessary knowledge and skills.",
+        "correct": true
       },
       {
         "text": "Search for alternative ways to achieve project objectives without the required skills.",
@@ -166,10 +166,6 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Exert expert authority and define the path forward for the team.",
-        "correct": true
-      },
-      {
         "text": "Update the responsible, accountable, consult, and inform (RACI) matrix and assign the work to a different team.",
         "correct": false
       },
@@ -180,6 +176,10 @@
       {
         "text": "Facilitate a meeting and encourage team members to come up with potential solutions.",
         "correct": false
+      },
+      {
+        "text": "Exert expert authority and define the path forward for the team.",
+        "correct": true
       }
     ]
   },
@@ -188,10 +188,6 @@
     "text": "A client has contracted a company to manage a large project in an agile environment with many subcontractors. The client is giving direct orders to the subcontractors, rather than to the contractor's project manager. This has created conflict within the team.\nWhat should the project manager do to prevent this situation from occurring again?",
     "explanation": "",
     "choices": [
-      {
-        "text": "Keep the team informed about client expectations.",
-        "correct": true
-      },
       {
         "text": "Invite the client to the team planning meeting.",
         "correct": false
@@ -203,6 +199,10 @@
       {
         "text": "Ask the client not to give direct orders to the subcontractors.",
         "correct": false
+      },
+      {
+        "text": "Keep the team informed about client expectations.",
+        "correct": true
       }
     ]
   },
@@ -212,16 +212,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Raise this problem in the quarterly project status report.",
-        "correct": true
+        "text": "Escalate the problem to the project steering committee.",
+        "correct": false
       },
       {
         "text": "Add the problem to the lessons learned report.",
         "correct": false
       },
       {
-        "text": "Escalate the problem to the project steering committee.",
-        "correct": false
+        "text": "Raise this problem in the quarterly project status report.",
+        "correct": true
       },
       {
         "text": "Discuss the problem with the client's project manager.",
@@ -235,16 +235,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Review and update the communications management plan.",
-        "correct": true
+        "text": "Review and update the responsibility assignment matrix.",
+        "correct": false
       },
       {
         "text": "Review and update the schedule management plan.",
         "correct": false
       },
       {
-        "text": "Review and update the responsibility assignment matrix.",
-        "correct": false
+        "text": "Review and update the communications management plan.",
+        "correct": true
       },
       {
         "text": "Review and update the resource management plan.",
@@ -262,15 +262,15 @@
         "correct": true
       },
       {
+        "text": "Talk to the sponsor to find out what the team leader has shared with the sponsor directly.",
+        "correct": false
+      },
+      {
         "text": "Talk to the team leader to find out if they have any personal issues with the project manager.",
         "correct": false
       },
       {
         "text": "Modify the team's agreements to obtain project manager approval prior to sending out any communication.",
-        "correct": false
-      },
-      {
-        "text": "Talk to the sponsor to find out what the team leader has shared with the sponsor directly.",
         "correct": false
       }
     ]
@@ -281,8 +281,8 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Escalate the issue to senior management.",
-        "correct": true
+        "text": "Request additional resources for your project.",
+        "correct": false
       },
       {
         "text": "Communicate the importance of the project to the team.",
@@ -293,8 +293,8 @@
         "correct": false
       },
       {
-        "text": "Request additional resources for your project.",
-        "correct": false
+        "text": "Escalate the issue to senior management.",
+        "correct": true
       }
     ]
   },
@@ -335,11 +335,11 @@
         "correct": false
       },
       {
-        "text": "Review the definition of done (DoD).",
+        "text": "Update the product release plan.",
         "correct": false
       },
       {
-        "text": "Update the product release plan.",
+        "text": "Review the definition of done (DoD).",
         "correct": false
       }
     ]
@@ -354,11 +354,11 @@
         "correct": true
       },
       {
-        "text": "Identify gaps and mentor stakeholders on the iterative approach.",
+        "text": "Record the iteration review and share it with stakeholders.",
         "correct": false
       },
       {
-        "text": "Record the iteration review and share it with stakeholders.",
+        "text": "Identify gaps and mentor stakeholders on the iterative approach.",
         "correct": false
       },
       {
@@ -373,20 +373,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Created a contingency plan to mitigate the impact of community opposition.",
-        "correct": true
+        "text": "Held community meetings to keep stakeholders informed of progress and changes.",
+        "correct": false
       },
       {
         "text": "Established an internal review board to integrate quality assurance activities.",
         "correct": false
       },
       {
-        "text": "Held community meetings to keep stakeholders informed of progress and changes.",
+        "text": "Ensured that the project planning was confidential and well-documented.",
         "correct": false
       },
       {
-        "text": "Ensured that the project planning was confidential and well-documented.",
-        "correct": false
+        "text": "Created a contingency plan to mitigate the impact of community opposition.",
+        "correct": true
       }
     ]
   },
@@ -400,15 +400,15 @@
         "correct": true
       },
       {
+        "text": "Notify the team that productivity must improve.",
+        "correct": false
+      },
+      {
         "text": "Conduct job shadowing within the project team.",
         "correct": false
       },
       {
         "text": "Institute project milestone completion incentives.",
-        "correct": false
-      },
-      {
-        "text": "Notify the team that productivity must improve.",
         "correct": false
       }
     ]
@@ -423,15 +423,15 @@
         "correct": true
       },
       {
+        "text": "Explain to the stakeholder that modifying the schedule now will increase the delivery risk.",
+        "correct": false
+      },
+      {
         "text": "Use key performance indicators (KPIs) to verify that the project is progressing on schedule.",
         "correct": false
       },
       {
         "text": "Ask the stakeholder for a change request and submit it to the change control board (CCB).",
-        "correct": false
-      },
-      {
-        "text": "Explain to the stakeholder that modifying the schedule now will increase the delivery risk.",
         "correct": false
       }
     ]
@@ -450,11 +450,11 @@
         "correct": false
       },
       {
-        "text": "Revise the project management plan.",
+        "text": "Initiate a change request for the updated regulation.",
         "correct": false
       },
       {
-        "text": "Initiate a change request for the updated regulation.",
+        "text": "Revise the project management plan.",
         "correct": false
       }
     ]
@@ -465,16 +465,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Asked for the report from the team member earlier to ensure it was in the requested format.",
-        "correct": true
-      },
-      {
         "text": "Requested that the CEO provide more detailed format requirements for creating monthly status reports.",
         "correct": false
       },
       {
         "text": "Used interactive communication to confirm that the team member acknowledges the specified format.",
         "correct": false
+      },
+      {
+        "text": "Asked for the report from the team member earlier to ensure it was in the requested format.",
+        "correct": true
       },
       {
         "text": "Modified the communications management plan to include the new report format requirements.",
@@ -492,15 +492,15 @@
         "correct": true
       },
       {
+        "text": "Prioritize stakeholders based on the stakeholder register.",
+        "correct": false
+      },
+      {
         "text": "Categorize key stakeholders using a workbook register.",
         "correct": false
       },
       {
         "text": "Update the communications management plan with stakeholder preferences.",
-        "correct": false
-      },
-      {
-        "text": "Prioritize stakeholders based on the stakeholder register.",
         "correct": false
       }
     ]
@@ -511,11 +511,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Build the product according to the previously agreed customer requirements.",
-        "correct": true
-      },
-      {
-        "text": "Discuss the feasibility and impact of the new features with the product owner.",
+        "text": "Release increments of the additional features for customer validation.",
         "correct": false
       },
       {
@@ -523,7 +519,11 @@
         "correct": false
       },
       {
-        "text": "Release increments of the additional features for customer validation.",
+        "text": "Build the product according to the previously agreed customer requirements.",
+        "correct": true
+      },
+      {
+        "text": "Discuss the feasibility and impact of the new features with the product owner.",
         "correct": false
       }
     ]
@@ -534,11 +534,11 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Validated iteration backlog items using the definition of done (DoD).",
-        "correct": true
+        "text": "Scheduled longer delivery timelines for project iteration cycles.",
+        "correct": false
       },
       {
-        "text": "Scheduled longer delivery timelines for project iteration cycles.",
+        "text": "Asked team members to demo their work as soon as it was ready.",
         "correct": false
       },
       {
@@ -546,8 +546,8 @@
         "correct": false
       },
       {
-        "text": "Asked team members to demo their work as soon as it was ready.",
-        "correct": false
+        "text": "Validated iteration backlog items using the definition of done (DoD).",
+        "correct": true
       }
     ]
   },
@@ -557,19 +557,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Discuss this with the resource personally, then update the resource management plan if necessary.",
-        "correct": true
-      },
-      {
         "text": "Discuss this with the functional manager, then update the resource management plan if necessary.",
         "correct": false
       },
       {
-        "text": "Discuss this with the functional manager, then update the team charter if necessary.",
+        "text": "Discuss this with the resource personally, then update the team charter if necessary.",
         "correct": false
       },
       {
-        "text": "Discuss this with the resource personally, then update the team charter if necessary.",
+        "text": "Discuss this with the resource personally, then update the resource management plan if necessary.",
+        "correct": true
+      },
+      {
+        "text": "Discuss this with the functional manager, then update the team charter if necessary.",
         "correct": false
       }
     ]
@@ -580,19 +580,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Minimum viable product (MVP) description",
-        "correct": true
+        "text": "Acceptance criteria on the user story",
+        "correct": false
       },
       {
-        "text": "Definition of done (DoD)",
-        "correct": false
+        "text": "Minimum viable product (MVP) description",
+        "correct": true
       },
       {
         "text": "Definition of ready (DoR)",
         "correct": false
       },
       {
-        "text": "Acceptance criteria on the user story",
+        "text": "Definition of done (DoD)",
         "correct": false
       }
     ]
@@ -603,11 +603,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Submit the change request to the CCB as the customer will be comfortable absorbing all additional costs.",
-        "correct": true
-      },
-      {
-        "text": "Submit the change request to the CCB and advise the panel to consider rejecting the request due to its impact.",
+        "text": "Submit the change request to show the change as having no impact, then proceed without notifying the CCB.",
         "correct": false
       },
       {
@@ -615,7 +611,11 @@
         "correct": false
       },
       {
-        "text": "Submit the change request to show the change as having no impact, then proceed without notifying the CCB.",
+        "text": "Submit the change request to the CCB as the customer will be comfortable absorbing all additional costs.",
+        "correct": true
+      },
+      {
+        "text": "Submit the change request to the CCB and advise the panel to consider rejecting the request due to its impact.",
         "correct": false
       }
     ]
@@ -626,19 +626,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Determine the impact of the situation.",
-        "correct": true
-      },
-      {
         "text": "Modify the schedule to reflect the situation.",
         "correct": false
       },
       {
-        "text": "Inform the stakeholders about the problem.",
-        "correct": false
+        "text": "Determine the impact of the situation.",
+        "correct": true
       },
       {
         "text": "Have the project team brainstorm a solution.",
+        "correct": false
+      },
+      {
+        "text": "Inform the stakeholders about the problem.",
         "correct": false
       }
     ]
@@ -653,11 +653,11 @@
         "correct": true
       },
       {
-        "text": "Request feedback from the stakeholder so that the project meets the stakeholder's expectations and can be delivered as planned.",
+        "text": "Add the stakeholder to the risk register and quantify the level of impact that the stakeholder could have on the project goals.",
         "correct": false
       },
       {
-        "text": "Add the stakeholder to the risk register and quantify the level of impact that the stakeholder could have on the project goals.",
+        "text": "Request feedback from the stakeholder so that the project meets the stakeholder's expectations and can be delivered as planned.",
         "correct": false
       },
       {
@@ -672,10 +672,6 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Examine and evaluate documents to gain insights and extract meaningful information.",
-        "correct": true
-      },
-      {
         "text": "Compare actual results to planned ones by analyzing the differences between actual performance and budgeted values.",
         "correct": false
       },
@@ -686,6 +682,10 @@
       {
         "text": "Assess the economic feasibility of the project, by comparing the costs with the benefits expected by senior management.",
         "correct": false
+      },
+      {
+        "text": "Examine and evaluate documents to gain insights and extract meaningful information.",
+        "correct": true
       }
     ]
   },
@@ -695,11 +695,11 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Trust the sign-off from the outgoing team member and proceed with the project as planned.",
-        "correct": true
+        "text": "Conduct a thorough review of the untested parts of the application before proceeding.",
+        "correct": false
       },
       {
-        "text": "Conduct a thorough review of the untested parts of the application before proceeding.",
+        "text": "Ensure that the outgoing team member creates a knowledge transfer document for the new team member.",
         "correct": false
       },
       {
@@ -707,8 +707,8 @@
         "correct": false
       },
       {
-        "text": "Ensure that the outgoing team member creates a knowledge transfer document for the new team member.",
-        "correct": false
+        "text": "Trust the sign-off from the outgoing team member and proceed with the project as planned.",
+        "correct": true
       }
     ]
   },
@@ -722,11 +722,11 @@
         "correct": true
       },
       {
-        "text": "Schedule a team out activity to allow people to know each other better and feel comfortable talking.",
+        "text": "Allow the team to self-organize before the next iteration to solve the problem.",
         "correct": false
       },
       {
-        "text": "Allow the team to self-organize before the next iteration to solve the problem.",
+        "text": "Schedule a team out activity to allow people to know each other better and feel comfortable talking.",
         "correct": false
       },
       {
@@ -741,15 +741,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Increase the frequency of team meetings to discuss any questions.",
+        "correct": false
+      },
+      {
         "text": "Work independently until it is necessary to integrate the work.",
         "correct": true
       },
       {
         "text": "Review the communications management plan and increase information sharing.",
-        "correct": false
-      },
-      {
-        "text": "Increase the frequency of team meetings to discuss any questions.",
         "correct": false
       },
       {
@@ -764,10 +764,6 @@
     "explanation": "",
     "choices": [
       {
-        "text": "The product owner should request specialists to be assigned to the team only when they are required.",
-        "correct": true
-      },
-      {
         "text": "The team should consist of generalists and specialists capable of adapting to changing requirements.",
         "correct": false
       },
@@ -778,6 +774,10 @@
       {
         "text": "Customer involvement should be reduced in order to avoid disruptions and confusion.",
         "correct": false
+      },
+      {
+        "text": "The product owner should request specialists to be assigned to the team only when they are required.",
+        "correct": true
       }
     ]
   },
@@ -791,7 +791,7 @@
         "correct": true
       },
       {
-        "text": "Suggest terminating all contracts that are misaligned.",
+        "text": "Request that the customer revise the contracts.",
         "correct": false
       },
       {
@@ -799,7 +799,7 @@
         "correct": false
       },
       {
-        "text": "Request that the customer revise the contracts.",
+        "text": "Suggest terminating all contracts that are misaligned.",
         "correct": false
       }
     ]
@@ -814,15 +814,15 @@
         "correct": true
       },
       {
+        "text": "Work with the product manager to define the number of iterations.",
+        "correct": false
+      },
+      {
         "text": "Work with the team to establish a team site and product artifacts.",
         "correct": false
       },
       {
         "text": "Meet with the product manager to analyze upcoming user stories.",
-        "correct": false
-      },
-      {
-        "text": "Work with the product manager to define the number of iterations.",
         "correct": false
       }
     ]
@@ -837,7 +837,7 @@
         "correct": true
       },
       {
-        "text": "Change the project scope.",
+        "text": "Buy new personal computers.",
         "correct": false
       },
       {
@@ -845,7 +845,7 @@
         "correct": false
       },
       {
-        "text": "Buy new personal computers.",
+        "text": "Change the project scope.",
         "correct": false
       }
     ]
@@ -856,19 +856,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Conducted frequent reviews and assessments to identify and address any potential risks.",
-        "correct": true
-      },
-      {
         "text": "Aligned project objectives with the expectations and requirements of the project sponsor.",
         "correct": false
       },
       {
-        "text": "Communicated regularly with the project sponsor to provide updates and address any concerns.",
-        "correct": false
+        "text": "Conducted frequent reviews and assessments to identify and address any potential risks.",
+        "correct": true
       },
       {
         "text": "Implemented strict control measures to ensure that project milestones and deliverables are met.",
+        "correct": false
+      },
+      {
+        "text": "Communicated regularly with the project sponsor to provide updates and address any concerns.",
         "correct": false
       }
     ]
