@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import nodemailer from "nodemailer";
-import { SendEmailRequest } from '../src/types'
+import { SendEmailRequest } from '../src/types.js'
 import { Attachment } from 'nodemailer/lib/mailer';
 
 const SENDER_EMAIL = process.env.SENDER;

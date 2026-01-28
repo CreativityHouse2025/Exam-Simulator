@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { jsPDF } from "jspdf"
-import { GenerateReportRequest } from "../src/types"
+import { GenerateReportRequest } from "../src/types.js"
 import fs from "fs"
 import { formatChoiceLabel } from '../src/utils/format.js'
 
