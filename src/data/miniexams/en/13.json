@@ -5,16 +5,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Reschedule the MVP release review until all the agreed-on features have been",
-        "correct": true
-      },
-      {
         "text": "Update the project management plan to include in the release only the features",
         "correct": false
       },
       {
         "text": "the sprint review and release the MVP with the d features.",
         "correct": false
+      },
+      {
+        "text": "Reschedule the MVP release review until all the agreed-on features have been",
+        "correct": true
       },
       {
         "text": "Estimate the effort required and submit a change request to add more resources to the team.",
@@ -28,16 +28,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Escalate the issue to the sponsor and request confirmation of the project scope.",
-        "correct": true
-      },
-      {
         "text": "Ask the functional manager to hire additional resources to meet the requirements.",
         "correct": false
       },
       {
         "text": "Request team members work extra hours to meet the commercial needs.",
         "correct": false
+      },
+      {
+        "text": "Escalate the issue to the sponsor and request confirmation of the project scope.",
+        "correct": true
       },
       {
         "text": "Analyze the critical path to deliver the minimum viable product (MVP).",
@@ -59,11 +59,11 @@
         "correct": false
       },
       {
-        "text": "Ask the developers to use the risk register because this is an organizational requirement.",
+        "text": "Consider a hybrid approach and integrate elements from the risk register and Scrum processes.",
         "correct": false
       },
       {
-        "text": "Consider a hybrid approach and integrate elements from the risk register and Scrum processes.",
+        "text": "Ask the developers to use the risk register because this is an organizational requirement.",
         "correct": false
       }
     ]
@@ -78,15 +78,15 @@
         "correct": true
       },
       {
-        "text": "Ask the product owner to include requested enhancements in the current iteration.",
-        "correct": false
-      },
-      {
         "text": "Request that the project team reprioritizes all of the committed activities.",
         "correct": false
       },
       {
         "text": "Ask the product owner to add the enhancement requests to the product backlog.",
+        "correct": false
+      },
+      {
+        "text": "Ask the product owner to include requested enhancements in the current iteration.",
         "correct": false
       }
     ]
@@ -97,20 +97,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Include top management in all future sprint reviews to address their concerns in real time.",
-        "correct": true
-      },
-      {
-        "text": "Send top management weekly status reports and invite them to retrospectives.",
-        "correct": false
-      },
-      {
         "text": "Demonstrate how the project's objectives align with the organization's strategic goals.",
         "correct": false
       },
       {
         "text": "Customize progress reports to address top management's requirements.",
         "correct": false
+      },
+      {
+        "text": "Send top management weekly status reports and invite them to retrospectives.",
+        "correct": false
+      },
+      {
+        "text": "Include top management in all future sprint reviews to address their concerns in real time.",
+        "correct": true
       }
     ]
   },
@@ -120,19 +120,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Request that the product manager increase the project timeline.",
-        "correct": true
+        "text": "Get additional resources from other teams to  the sprint.",
+        "correct": false
       },
       {
         "text": "Identify tasks that can be reassigned to other team members.",
         "correct": false
       },
       {
-        "text": "Extend the sprint to offset the loss of the core team member.",
-        "correct": false
+        "text": "Request that the product manager increase the project timeline.",
+        "correct": true
       },
       {
-        "text": "Get additional resources from other teams to  the sprint.",
+        "text": "Extend the sprint to offset the loss of the core team member.",
         "correct": false
       }
     ]
@@ -142,10 +142,6 @@
     "text": "A project is currently in progress. The project manager has been notified of a new process that may be helpful if it is incorporated into the project.\nWhat should the project manager do?",
     "explanation": "",
     "choices": [
-      {
-        "text": "Evaluate how the new process can be incorporate",
-        "correct": true
-      },
       {
         "text": "Issue a priority order for the change.",
         "correct": false
@@ -157,6 +153,10 @@
       {
         "text": "Modify the requirements document for the change.",
         "correct": false
+      },
+      {
+        "text": "Evaluate how the new process can be incorporate",
+        "correct": true
       }
     ]
   },
@@ -166,19 +166,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Include the team members in all emails regarding the project.",
-        "correct": true
-      },
-      {
         "text": "Call team members individually to collect information and provide updates weekly.",
         "correct": false
       },
       {
-        "text": "Promote regular meetings using video conferencing.",
-        "correct": false
+        "text": "Include the team members in all emails regarding the project.",
+        "correct": true
       },
       {
         "text": "Ask each team member to fill out a task log for daily updates.",
+        "correct": false
+      },
+      {
+        "text": "Promote regular meetings using video conferencing.",
         "correct": false
       }
     ]
@@ -189,19 +189,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Encourage the team members to ask the \"five whys\" during their communications with the client.",
-        "correct": true
+        "text": "Request to be included in all future communications between the project team members and the client.",
+        "correct": false
       },
       {
-        "text": "Ask the client to better explain the requests and issues they shared with the team.",
-        "correct": false
+        "text": "Encourage the team members to ask the \"five whys\" during their communications with the client.",
+        "correct": true
       },
       {
         "text": "Review the scope with the client so that additional requests can be documented and processed as change requests.",
         "correct": false
       },
       {
-        "text": "Request to be included in all future communications between the project team members and the client.",
+        "text": "Ask the client to better explain the requests and issues they shared with the team.",
         "correct": false
       }
     ]
@@ -216,7 +216,7 @@
         "correct": true
       },
       {
-        "text": "Remove the team members who violated the ground rules.",
+        "text": "Allow the team to investigate any team members who violate the ground rules.",
         "correct": false
       },
       {
@@ -224,7 +224,7 @@
         "correct": false
       },
       {
-        "text": "Allow the team to investigate any team members who violate the ground rules.",
+        "text": "Remove the team members who violated the ground rules.",
         "correct": false
       }
     ]
@@ -239,7 +239,7 @@
         "correct": true
       },
       {
-        "text": "Check the task durations of previous projects.",
+        "text": "Request approval from the project sponsor.",
         "correct": false
       },
       {
@@ -247,7 +247,7 @@
         "correct": false
       },
       {
-        "text": "Request approval from the project sponsor.",
+        "text": "Check the task durations of previous projects.",
         "correct": false
       }
     ]
@@ -258,19 +258,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Explain that servant leadership can be adapted and applied to any project situation.",
-        "correct": true
-      },
-      {
-        "text": "Remind the CTO that servant leadership is more suited for projects using agile methods.",
-        "correct": false
-      },
-      {
         "text": "Clarify that servant leadership practices typically focus on the client's preferences.",
         "correct": false
       },
       {
         "text": "Affirm that servant leadership only works for projects with substantial resources.",
+        "correct": false
+      },
+      {
+        "text": "Explain that servant leadership can be adapted and applied to any project situation.",
+        "correct": true
+      },
+      {
+        "text": "Remind the CTO that servant leadership is more suited for projects using agile methods.",
         "correct": false
       }
     ]
@@ -281,11 +281,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ask the project team to propose a release schedule based on the complexity of specific product features.",
-        "correct": true
-      },
-      {
-        "text": "Recommend three releases with one at the beginning, one in the middle, and one at the end of the project.",
+        "text": "Propose that the product be delivered over the course of multiple iterations to gather customer feedback.",
         "correct": false
       },
       {
@@ -293,8 +289,12 @@
         "correct": false
       },
       {
-        "text": "Propose that the product be delivered over the course of multiple iterations to gather customer feedback.",
+        "text": "Recommend three releases with one at the beginning, one in the middle, and one at the end of the project.",
         "correct": false
+      },
+      {
+        "text": "Ask the project team to propose a release schedule based on the complexity of specific product features.",
+        "correct": true
       }
     ]
   },
@@ -304,19 +304,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Team agreements",
-        "correct": true
-      },
-      {
-        "text": "Milestones",
-        "correct": false
-      },
-      {
         "text": "Individual roles",
         "correct": false
       },
       {
+        "text": "Team agreements",
+        "correct": true
+      },
+      {
         "text": "Team hierarchy",
+        "correct": false
+      },
+      {
+        "text": "Milestones",
         "correct": false
       }
     ]
@@ -350,19 +350,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Meet with the customer to discuss the delays and negotiate a new deadline.",
-        "correct": true
-      },
-      {
-        "text": "Talk to the previous project manager to understand the situation better.",
-        "correct": false
-      },
-      {
         "text": "Reach out to the customer and request expedited document approvals.",
         "correct": false
       },
       {
+        "text": "Meet with the customer to discuss the delays and negotiate a new deadline.",
+        "correct": true
+      },
+      {
         "text": "Assess the impact of the delays on the project schedule and budget.",
+        "correct": false
+      },
+      {
+        "text": "Talk to the previous project manager to understand the situation better.",
         "correct": false
       }
     ]
@@ -373,19 +373,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Facilitate a team discussion to understand why the team is unable to agree on the scope for the next increment.",
-        "correct": true
-      },
-      {
-        "text": "Escalate the issue to the project sponsor so that the risk posed by the disagreements over scope becomes visible.",
-        "correct": false
-      },
-      {
         "text": "Collaborate with a suitable subject matter expert (SME) to determine the scope for the next increment.",
         "correct": false
       },
       {
         "text": "Request that the team votes on the options and identify the appropriate scope based on a majority vote.",
+        "correct": false
+      },
+      {
+        "text": "Facilitate a team discussion to understand why the team is unable to agree on the scope for the next increment.",
+        "correct": true
+      },
+      {
+        "text": "Escalate the issue to the project sponsor so that the risk posed by the disagreements over scope becomes visible.",
         "correct": false
       }
     ]
@@ -396,19 +396,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Issue a change request and meet with the customer.",
-        "correct": true
-      },
-      {
         "text": "Rebaseline the schedule and notify the project sponsor.",
         "correct": false
       },
       {
-        "text": "Update the documentation and identify corrective actions.",
+        "text": "Notify the customer and request that the timeline be extende",
         "correct": false
       },
       {
-        "text": "Notify the customer and request that the timeline be extende",
+        "text": "Issue a change request and meet with the customer.",
+        "correct": true
+      },
+      {
+        "text": "Update the documentation and identify corrective actions.",
         "correct": false
       }
     ]
@@ -419,15 +419,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Update the stakeholder register with the stakeholders' expectations.",
+        "correct": false
+      },
+      {
         "text": "Facilitate a meeting to address and resolve conflicting expectations.",
         "correct": true
       },
       {
         "text": "Prioritize the expectations of stakeholders with the highest authority.",
-        "correct": false
-      },
-      {
-        "text": "Update the stakeholder register with the stakeholders' expectations.",
         "correct": false
       },
       {
@@ -442,19 +442,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Sustainable pace",
-        "correct": true
-      },
-      {
-        "text": "Definition of done (DoD)",
-        "correct": false
-      },
-      {
         "text": "Respecting the timebox",
         "correct": false
       },
       {
         "text": "Project ceremonies",
+        "correct": false
+      },
+      {
+        "text": "Sustainable pace",
+        "correct": true
+      },
+      {
+        "text": "Definition of done (DoD)",
         "correct": false
       }
     ]
@@ -465,6 +465,10 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Allocate the fine amount as an additional project expense.",
+        "correct": false
+      },
+      {
         "text": "Apply for the permit and delay project delivery by 2 days.",
         "correct": true
       },
@@ -474,10 +478,6 @@
       },
       {
         "text": "Attempt to negotiate with the local government for a pardon.",
-        "correct": false
-      },
-      {
-        "text": "Allocate the fine amount as an additional project expense.",
         "correct": false
       }
     ]
@@ -492,7 +492,7 @@
         "correct": true
       },
       {
-        "text": "The project team agrees the MVP meets the definition of done (DoD).",
+        "text": "The product owner decides that the MVP passes all required quality tests.",
         "correct": false
       },
       {
@@ -500,7 +500,7 @@
         "correct": false
       },
       {
-        "text": "The product owner decides that the MVP passes all required quality tests.",
+        "text": "The project team agrees the MVP meets the definition of done (DoD).",
         "correct": false
       }
     ]
@@ -510,10 +510,6 @@
     "text": "Due to the complex nature of a predictive project, an organization decides to use an agile approach for a project phase. A team member does not really understand the agile approach and keeps allocating tasks to the rest of the team members. After a while, the team is not able to adjust by itself and conflicts arise, delaying the deliverables.\nWhat should the project manager do?",
     "explanation": "",
     "choices": [
-      {
-        "text": "Replace the team member with someone who has agile experience.",
-        "correct": true
-      },
       {
         "text": "Wait until the team is finally able to solve the conflict by itself and reorganize.",
         "correct": false
@@ -525,6 +521,10 @@
       {
         "text": "Take control of the sprint backlog and assign tasks to the team members.",
         "correct": false
+      },
+      {
+        "text": "Replace the team member with someone who has agile experience.",
+        "correct": true
       }
     ]
   },
@@ -538,11 +538,11 @@
         "correct": true
       },
       {
-        "text": "Confirm the plan is documented and shared among the team and stakeholders.",
+        "text": "Increase the frequency of the team meetings for the status report submission.",
         "correct": false
       },
       {
-        "text": "Increase the frequency of the team meetings for the status report submission.",
+        "text": "Confirm the plan is documented and shared among the team and stakeholders.",
         "correct": false
       },
       {
@@ -561,11 +561,11 @@
         "correct": true
       },
       {
-        "text": "Invite the project team to a swarming session to define a solution.",
+        "text": "Adjust the project timeline to accommodate the development delay.",
         "correct": false
       },
       {
-        "text": "Adjust the project timeline to accommodate the development delay.",
+        "text": "Invite the project team to a swarming session to define a solution.",
         "correct": false
       },
       {
@@ -580,16 +580,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Set rules and regulations that must be followed during the project.",
-        "correct": true
+        "text": "Consider various time zones, communication capabilities, and possible constraints.",
+        "correct": false
       },
       {
         "text": "Ask the sponsor for different resources to facilitate the project.",
         "correct": false
       },
       {
-        "text": "Consider various time zones, communication capabilities, and possible constraints.",
-        "correct": false
+        "text": "Set rules and regulations that must be followed during the project.",
+        "correct": true
       },
       {
         "text": "Set up the project sponsor's language as the official project communication language.",
@@ -603,19 +603,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Use a predictive approach as the company has previous experience with it.",
-        "correct": true
-      },
-      {
         "text": "Include adequate resources in the budget to fast track the project.",
         "correct": false
       },
       {
-        "text": "Implement iterations early in the product development processes, and schedule predictive tasks to be performed just before the rollout phase.",
-        "correct": false
+        "text": "Use a predictive approach as the company has previous experience with it.",
+        "correct": true
       },
       {
         "text": "Request an agile coach be included on the agile team to increase the speed of the releases.",
+        "correct": false
+      },
+      {
+        "text": "Implement iterations early in the product development processes, and schedule predictive tasks to be performed just before the rollout phase.",
         "correct": false
       }
     ]
@@ -630,11 +630,11 @@
         "correct": true
       },
       {
-        "text": "Increase the number of project status reports.",
+        "text": "Present past forecasts and current performance.",
         "correct": false
       },
       {
-        "text": "Present past forecasts and current performance.",
+        "text": "Increase the number of project status reports.",
         "correct": false
       },
       {
@@ -649,16 +649,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Delegate the responsibility of supporting the custom solution to the third-party provider.",
-        "correct": true
+        "text": "Reduce the responsibilities of the local team to minimize the need for support.",
+        "correct": false
       },
       {
         "text": "Conduct comprehensive training sessions for the local team on the new solution.",
         "correct": false
       },
       {
-        "text": "Reduce the responsibilities of the local team to minimize the need for support.",
-        "correct": false
+        "text": "Delegate the responsibility of supporting the custom solution to the third-party provider.",
+        "correct": true
       },
       {
         "text": "Hire additional personnel to provide ongoing support for the local team.",
@@ -672,11 +672,11 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Escalate the issue to the project sponsor to ensure the team is aligned with the project delivery approach.",
-        "correct": true
+        "text": "Engage the project management office (PMO) since they identify the approach to delivering projects.",
+        "correct": false
       },
       {
-        "text": "Engage the project management office (PMO) since they identify the approach to delivering projects.",
+        "text": "Change to a predictive approach to be aligned with the skills of the team members.",
         "correct": false
       },
       {
@@ -684,8 +684,8 @@
         "correct": false
       },
       {
-        "text": "Change to a predictive approach to be aligned with the skills of the team members.",
-        "correct": false
+        "text": "Escalate the issue to the project sponsor to ensure the team is aligned with the project delivery approach.",
+        "correct": true
       }
     ]
   },
@@ -695,11 +695,11 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Submit a change request to the change control board (CCB).",
-        "correct": true
+        "text": "Review the performance against the project baseline.",
+        "correct": false
       },
       {
-        "text": "Review the performance against the project baseline.",
+        "text": "Immediately terminate the contract with the supplier.",
         "correct": false
       },
       {
@@ -707,8 +707,8 @@
         "correct": false
       },
       {
-        "text": "Immediately terminate the contract with the supplier.",
-        "correct": false
+        "text": "Submit a change request to the change control board (CCB).",
+        "correct": true
       }
     ]
   },
@@ -718,19 +718,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Reassign the team member to the task to support their growth at the organization, and acquire a resource to replace the team member's old role.",
-        "correct": true
-      },
-      {
         "text": "Ask the team member to continue the current job assignment while also taking on the new assignment as time allows.",
         "correct": false
       },
       {
-        "text": "Escalate the request to the project sponsor in order to determine if the team member can be assigned to the new assignment.",
-        "correct": false
+        "text": "Reassign the team member to the task to support their growth at the organization, and acquire a resource to replace the team member's old role.",
+        "correct": true
       },
       {
         "text": "Hire a new team member and ask the existing team member to provide the training needed for the new team member to obtain certification.",
+        "correct": false
+      },
+      {
+        "text": "Escalate the request to the project sponsor in order to determine if the team member can be assigned to the new assignment.",
         "correct": false
       }
     ]
@@ -741,16 +741,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Collaborate with the customer to create a business case highlighting project benefits.",
-        "correct": true
-      },
-      {
         "text": "Acknowledge the request but emphasize the limitations of a business case at this stage.",
         "correct": false
       },
       {
         "text": "Refer the customer to the project team for details on the benefits created by the project.",
         "correct": false
+      },
+      {
+        "text": "Collaborate with the customer to create a business case highlighting project benefits.",
+        "correct": true
       },
       {
         "text": "Inform the customer that a business case would require additional work and resources.",
@@ -764,20 +764,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Schedule a team meeting to assess and manage priorities.",
-        "correct": true
-      },
-      {
-        "text": "Document the lack of availability as a risk in the risk register.",
-        "correct": false
-      },
-      {
         "text": "Escalate this issue to the project sponsor for executive support.",
         "correct": false
       },
       {
         "text": "Update the project management plan accordingly to reflect a potential delay.",
         "correct": false
+      },
+      {
+        "text": "Document the lack of availability as a risk in the risk register.",
+        "correct": false
+      },
+      {
+        "text": "Schedule a team meeting to assess and manage priorities.",
+        "correct": true
       }
     ]
   },
@@ -791,15 +791,15 @@
         "correct": true
       },
       {
+        "text": "Increase the number of resources in the contract to deliver the requirements.",
+        "correct": false
+      },
+      {
         "text": "Ensure that a change control process is documented in the contract.",
         "correct": false
       },
       {
         "text": "Propose a dynamic scope contract option and add a fixed number of iterations.",
-        "correct": false
-      },
-      {
-        "text": "Increase the number of resources in the contract to deliver the requirements.",
         "correct": false
       }
     ]
@@ -814,11 +814,11 @@
         "correct": true
       },
       {
-        "text": "Add this customer issue to the backlog for prioritization and review.",
+        "text": "Meet with the customer to highlight the importance of their engagement for project success.",
         "correct": false
       },
       {
-        "text": "Meet with the customer to highlight the importance of their engagement for project success.",
+        "text": "Add this customer issue to the backlog for prioritization and review.",
         "correct": false
       },
       {
@@ -833,6 +833,10 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Add a unit of work for a specific period of time to prove the solution is viable.",
+        "correct": false
+      },
+      {
         "text": "Perform a full inspection since there is no margin for error.",
         "correct": true
       },
@@ -843,10 +847,6 @@
       {
         "text": "Implement a continuous improvement process to ensure consistent outcomes.",
         "correct": false
-      },
-      {
-        "text": "Add a unit of work for a specific period of time to prove the solution is viable.",
-        "correct": false
       }
     ]
   },
@@ -856,12 +856,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Develop a training plan for the team.",
-        "correct": true
-      },
-      {
         "text": "Schedule training sessions for the team.",
         "correct": false
+      },
+      {
+        "text": "Develop a training plan for the team.",
+        "correct": true
       },
       {
         "text": "Conduct a training needs assessment for the team.",
@@ -879,19 +879,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Benchmark projects using other technologies to establish a more objective baseline.",
-        "correct": true
-      },
-      {
         "text": "Compare other similar technologies and recommend the implementation of another technology.",
         "correct": false
       },
       {
-        "text": "Create a risk item in the risk register and incorporate the thresholds according to the benchmarks.",
-        "correct": false
+        "text": "Benchmark projects using other technologies to establish a more objective baseline.",
+        "correct": true
       },
       {
         "text": "Discuss the probable downtime with the sponsor and obtain approval for outages.",
+        "correct": false
+      },
+      {
+        "text": "Create a risk item in the risk register and incorporate the thresholds according to the benchmarks.",
         "correct": false
       }
     ]
@@ -902,16 +902,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Notify the team of the new requirement and proceed with the project as planne",
-        "correct": true
-      },
-      {
         "text": "Update the project schedule and budget to reflect the demands of the new requirement.",
         "correct": false
       },
       {
         "text": "Review the new requirement and assess the impact on project tasks and deliverables.",
         "correct": false
+      },
+      {
+        "text": "Notify the team of the new requirement and proceed with the project as planne",
+        "correct": true
       },
       {
         "text": "Update the risk register to reflect the potential risks associated with the new requirement.",

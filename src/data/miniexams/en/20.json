@@ -5,11 +5,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ask the team to have a lower commitment for the next iteration.",
-        "correct": true
-      },
-      {
-        "text": "Ask for additional team members to maintain the velocity.",
+        "text": "Implement a checkpoint in the iteration to verify if the team is on track.",
         "correct": false
       },
       {
@@ -17,8 +13,12 @@
         "correct": false
       },
       {
-        "text": "Implement a checkpoint in the iteration to verify if the team is on track.",
+        "text": "Ask for additional team members to maintain the velocity.",
         "correct": false
+      },
+      {
+        "text": "Ask the team to have a lower commitment for the next iteration.",
+        "correct": true
       }
     ]
   },
@@ -28,19 +28,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "In the Procurement Management Plan",
-        "correct": true
-      },
-      {
         "text": "In the Master Service Agreement",
         "correct": false
       },
       {
-        "text": "In the Bill of Materials Contract",
-        "correct": false
+        "text": "In the Procurement Management Plan",
+        "correct": true
       },
       {
         "text": "In the Service Level Agreement",
+        "correct": false
+      },
+      {
+        "text": "In the Bill of Materials Contract",
         "correct": false
       }
     ]
@@ -51,19 +51,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Allow any stakeholder to join the change control board (CCB) at any time in the project.",
-        "correct": true
-      },
-      {
-        "text": "Include all stakeholders in the responsibility assignment matrix (RAM) for acceptance of the deliverables.",
-        "correct": false
-      },
-      {
         "text": "Gather all the requirements provided by every individual stakeholder and include in the work breakdown structure (WBS).",
         "correct": false
       },
       {
+        "text": "Allow any stakeholder to join the change control board (CCB) at any time in the project.",
+        "correct": true
+      },
+      {
         "text": "Build a common understanding among stakeholders about key deliverables described in the approved project charter.",
+        "correct": false
+      },
+      {
+        "text": "Include all stakeholders in the responsibility assignment matrix (RAM) for acceptance of the deliverables.",
         "correct": false
       }
     ]
@@ -74,11 +74,11 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Become familiar with the latest organizational changes.",
-        "correct": true
+        "text": "Read about the merger with a competing organization.",
+        "correct": false
       },
       {
-        "text": "Read about the merger with a competing organization.",
+        "text": "Become familiar with the upgrade of the Internet provider.",
         "correct": false
       },
       {
@@ -86,8 +86,8 @@
         "correct": false
       },
       {
-        "text": "Become familiar with the upgrade of the Internet provider.",
-        "correct": false
+        "text": "Become familiar with the latest organizational changes.",
+        "correct": true
       }
     ]
   },
@@ -97,8 +97,8 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Track the budget based on the release plan and show the value to the business.",
-        "correct": true
+        "text": "Ensure that the project manager monitors every invoice from the project.",
+        "correct": false
       },
       {
         "text": "Explain that the project is just starting and the budget will need to be adjuste",
@@ -109,8 +109,8 @@
         "correct": false
       },
       {
-        "text": "Ensure that the project manager monitors every invoice from the project.",
-        "correct": false
+        "text": "Track the budget based on the release plan and show the value to the business.",
+        "correct": true
       }
     ]
   },
@@ -128,11 +128,11 @@
         "correct": false
       },
       {
-        "text": "Active listening, team building, leadership, and networking",
+        "text": "Networking, influencing, and cultural awareness",
         "correct": false
       },
       {
-        "text": "Networking, influencing, and cultural awareness",
+        "text": "Active listening, team building, leadership, and networking",
         "correct": false
       }
     ]
@@ -147,15 +147,15 @@
         "correct": true
       },
       {
-        "text": "Statistical techniques estimating",
-        "correct": false
-      },
-      {
         "text": "Parametric estimating",
         "correct": false
       },
       {
         "text": "Three-point estimating",
+        "correct": false
+      },
+      {
+        "text": "Statistical techniques estimating",
         "correct": false
       }
     ]
@@ -166,19 +166,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Described the user story in more detail.",
-        "correct": true
+        "text": "Gathered more detailed requirement specifications from end users.",
+        "correct": false
       },
       {
-        "text": "Scheduled the user story for the next iteration.",
-        "correct": false
+        "text": "Described the user story in more detail.",
+        "correct": true
       },
       {
         "text": "Performed iterative backlog grooming with the team.",
         "correct": false
       },
       {
-        "text": "Gathered more detailed requirement specifications from end users.",
+        "text": "Scheduled the user story for the next iteration.",
         "correct": false
       }
     ]
@@ -212,16 +212,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ensure that the business requirements are defined and met",
-        "correct": true
+        "text": "Ensure execution and handover are done effectively",
+        "correct": false
       },
       {
         "text": "Ensure solution design is available from the start of the project",
         "correct": false
       },
       {
-        "text": "Ensure execution and handover are done effectively",
-        "correct": false
+        "text": "Ensure that the business requirements are defined and met",
+        "correct": true
       },
       {
         "text": "Ensure the interpretation of compliance guidance and validation",
@@ -235,19 +235,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Monitor and track the dependencies.",
-        "correct": true
-      },
-      {
-        "text": "Communicate the dependencies to the sponsor.",
-        "correct": false
-      },
-      {
         "text": "Assess and document the dependencies.",
         "correct": false
       },
       {
         "text": "Appoint project schedulers for all tasks.",
+        "correct": false
+      },
+      {
+        "text": "Monitor and track the dependencies.",
+        "correct": true
+      },
+      {
+        "text": "Communicate the dependencies to the sponsor.",
         "correct": false
       }
     ]
@@ -258,16 +258,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Introduce a training program.",
-        "correct": true
+        "text": "Increase quality control reviews.",
+        "correct": false
       },
       {
         "text": "Update the resource management plan.",
         "correct": false
       },
       {
-        "text": "Increase quality control reviews.",
-        "correct": false
+        "text": "Introduce a training program.",
+        "correct": true
       },
       {
         "text": "Add training costs to the budget.",
@@ -281,11 +281,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Business survival and continuity",
-        "correct": true
-      },
-      {
-        "text": "Unhappy clients or end users",
+        "text": "Fines and penalties",
         "correct": false
       },
       {
@@ -293,8 +289,12 @@
         "correct": false
       },
       {
-        "text": "Fines and penalties",
+        "text": "Unhappy clients or end users",
         "correct": false
+      },
+      {
+        "text": "Business survival and continuity",
+        "correct": true
       }
     ]
   },
@@ -304,12 +304,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Expectancy theory",
-        "correct": true
-      },
-      {
         "text": "Theory X",
         "correct": false
+      },
+      {
+        "text": "Expectancy theory",
+        "correct": true
       },
       {
         "text": "Theory Y",
@@ -327,16 +327,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Avoid",
-        "correct": true
+        "text": "Transfer",
+        "correct": false
       },
       {
         "text": "Exploit",
         "correct": false
       },
       {
-        "text": "Transfer",
-        "correct": false
+        "text": "Avoid",
+        "correct": true
       },
       {
         "text": "Reduce",
@@ -350,19 +350,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Conflict in projects is inevitable - focus on managing it.",
-        "correct": true
-      },
-      {
-        "text": "Conflict in projects is preventable - replan the mitigation.",
-        "correct": false
-      },
-      {
         "text": "Conflict in projects is disastrous - prepare a recovery plan.",
         "correct": false
       },
       {
+        "text": "Conflict in projects is inevitable - focus on managing it.",
+        "correct": true
+      },
+      {
         "text": "Conflict in projects is healthy - refrain from interfering.",
+        "correct": false
+      },
+      {
+        "text": "Conflict in projects is preventable - replan the mitigation.",
         "correct": false
       }
     ]
@@ -372,6 +372,10 @@
     "text": "21\nA project manager is assessing two investment opportunities. Project A is expected to generate cash flows of $1, per year for five years, with an initial investment of $35,. Project B is expected to generate cash flows of $, per year for five years, with an initial investment of $25,. The company's required rate of return is 1%. What is the Net Present Value (NPV) for each project, and which one should the project manager recommend?",
     "explanation": "",
     "choices": [
+      {
+        "text": "The NPV for Project A is $21,62.75, and for Project B is $1,5.3. The project manager should recommend Project A because it has a higher NPV.",
+        "correct": false
+      },
       {
         "text": "The NPV for Project A is -$21,62.75, and for Project B is -$1,5.3. The project manager should recommend Project B because it has a lower NPV.",
         "correct": true
@@ -383,10 +387,6 @@
       {
         "text": "The NPV for Project A is -$21,62.75, and for Project B is -$1,5.3. The project manager should recommend neither project as both have negative NPVs.",
         "correct": false
-      },
-      {
-        "text": "The NPV for Project A is $21,62.75, and for Project B is $1,5.3. The project manager should recommend Project A because it has a higher NPV.",
-        "correct": false
       }
     ]
   },
@@ -396,19 +396,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Due to the project due dates, replace the members with more knowledgeable staff.",
-        "correct": true
-      },
-      {
-        "text": "Ask the team members to do some research and self-learning efforts about the technology.",
-        "correct": false
-      },
-      {
         "text": "Reallocate the members to work on and complete different tasks for which they have experience.",
         "correct": false
       },
       {
         "text": "Reassure the team members that a training path is in place to learn the new technology.",
+        "correct": false
+      },
+      {
+        "text": "Due to the project due dates, replace the members with more knowledgeable staff.",
+        "correct": true
+      },
+      {
+        "text": "Ask the team members to do some research and self-learning efforts about the technology.",
         "correct": false
       }
     ]
@@ -418,6 +418,10 @@
     "text": "A project manager is leading an agile project. For iterations one through five, the team’s velocity chart displays 1 story points, 3 story points, 22 story points, 23 story points, and 22 story points.\nWhat does this information demonstrate about the team's performance?",
     "explanation": "",
     "choices": [
+      {
+        "text": "The team needs to change their agile methodology.",
+        "correct": false
+      },
       {
         "text": "The team is not following agile practices properly.",
         "correct": true
@@ -429,10 +433,6 @@
       {
         "text": "The team is lagging behind as per the schedule.",
         "correct": false
-      },
-      {
-        "text": "The team needs to change their agile methodology.",
-        "correct": false
       }
     ]
   },
@@ -442,11 +442,11 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Inform the team that although this is a hybrid environment, the project manager must still be responsible for making decisions.",
-        "correct": true
+        "text": "Consult the product owner about letting the resources make decisions.",
+        "correct": false
       },
       {
-        "text": "Consult the product owner about letting the resources make decisions.",
+        "text": "Schedule a steering committee meeting and obtain their approval on the request.",
         "correct": false
       },
       {
@@ -454,8 +454,8 @@
         "correct": false
       },
       {
-        "text": "Schedule a steering committee meeting and obtain their approval on the request.",
-        "correct": false
+        "text": "Inform the team that although this is a hybrid environment, the project manager must still be responsible for making decisions.",
+        "correct": true
       }
     ]
   },
@@ -469,11 +469,11 @@
         "correct": true
       },
       {
-        "text": "Control Quality",
+        "text": "Plan Quality Management",
         "correct": false
       },
       {
-        "text": "Plan Quality Management",
+        "text": "Control Quality",
         "correct": false
       },
       {
@@ -488,19 +488,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Change control",
-        "correct": true
-      },
-      {
         "text": "Schedule planning",
         "correct": false
       },
       {
-        "text": "Procurement planning",
+        "text": "Quality audit",
         "correct": false
       },
       {
-        "text": "Quality audit",
+        "text": "Change control",
+        "correct": true
+      },
+      {
+        "text": "Procurement planning",
         "correct": false
       }
     ]
@@ -511,19 +511,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Democratic",
-        "correct": true
-      },
-      {
-        "text": "Autocratic",
-        "correct": false
-      },
-      {
         "text": "Free rein",
         "correct": false
       },
       {
         "text": "Smoothing",
+        "correct": false
+      },
+      {
+        "text": "Democratic",
+        "correct": true
+      },
+      {
+        "text": "Autocratic",
         "correct": false
       }
     ]
@@ -538,7 +538,7 @@
         "correct": true
       },
       {
-        "text": "Project scope",
+        "text": "Quality plan",
         "correct": false
       },
       {
@@ -546,7 +546,7 @@
         "correct": false
       },
       {
-        "text": "Quality plan",
+        "text": "Project scope",
         "correct": false
       }
     ]
@@ -557,11 +557,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Manage Quality",
-        "correct": true
-      },
-      {
-        "text": "Control Quality",
+        "text": "Plan Quality Management",
         "correct": false
       },
       {
@@ -569,8 +565,12 @@
         "correct": false
       },
       {
-        "text": "Plan Quality Management",
+        "text": "Control Quality",
         "correct": false
+      },
+      {
+        "text": "Manage Quality",
+        "correct": true
       }
     ]
   },
@@ -580,8 +580,8 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Fear of the unknown",
-        "correct": true
+        "text": "Too much communication",
+        "correct": false
       },
       {
         "text": "Lack of required skills",
@@ -592,8 +592,8 @@
         "correct": false
       },
       {
-        "text": "Too much communication",
-        "correct": false
+        "text": "Fear of the unknown",
+        "correct": true
       }
     ]
   },
@@ -603,19 +603,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Project charter",
-        "correct": true
-      },
-      {
-        "text": "Quality management plan",
-        "correct": false
-      },
-      {
         "text": "Scope statement",
         "correct": false
       },
       {
+        "text": "Project charter",
+        "correct": true
+      },
+      {
         "text": "Requirements documentation",
+        "correct": false
+      },
+      {
+        "text": "Quality management plan",
         "correct": false
       }
     ]
@@ -626,11 +626,11 @@
     "explanation": "",
     "choices": [
       {
-        "text": "A is available immediately and has more experience to plan quickly and correctly.",
-        "correct": true
+        "text": "B better understands the complexities of predictive planning and has use of a network of subject matter experts (SMEs).",
+        "correct": false
       },
       {
-        "text": "B better understands the complexities of predictive planning and has use of a network of subject matter experts (SMEs).",
+        "text": "B will be available to work for a longer period in case the submission deadline is misse",
         "correct": false
       },
       {
@@ -638,8 +638,8 @@
         "correct": false
       },
       {
-        "text": "B will be available to work for a longer period in case the submission deadline is misse",
-        "correct": false
+        "text": "A is available immediately and has more experience to plan quickly and correctly.",
+        "correct": true
       }
     ]
   },
@@ -649,19 +649,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "A systematic review of the completed project",
-        "correct": true
-      },
-      {
-        "text": "Personally handled failures and mistakes",
-        "correct": false
-      },
-      {
         "text": "Insufficient individual motivation to document the lessons learned",
         "correct": false
       },
       {
         "text": "Sparse leadership involvement to promote knowledge transfer",
+        "correct": false
+      },
+      {
+        "text": "A systematic review of the completed project",
+        "correct": true
+      },
+      {
+        "text": "Personally handled failures and mistakes",
         "correct": false
       }
     ]
@@ -672,15 +672,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Meet with the product manager to create a backlog with the missing requirements.",
+        "correct": false
+      },
+      {
         "text": "Meet with the project sponsor to discuss canceling the project.",
         "correct": true
       },
       {
         "text": "Meet with the project sponsor and stakeholders to request a budget increase.",
-        "correct": false
-      },
-      {
-        "text": "Meet with the product manager to create a backlog with the missing requirements.",
         "correct": false
       },
       {
@@ -695,19 +695,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Recruiting on a contractual basis",
-        "correct": true
-      },
-      {
         "text": "Recruiting expert talents",
         "correct": false
       },
       {
-        "text": "Recruitment on the basis of secondment",
-        "correct": false
+        "text": "Recruiting on a contractual basis",
+        "correct": true
       },
       {
         "text": "Recruitment via Direct Control",
+        "correct": false
+      },
+      {
+        "text": "Recruitment on the basis of secondment",
         "correct": false
       }
     ]
@@ -718,12 +718,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Transparency is central, early and reliable delivery, methodology embraces change",
-        "correct": true
-      },
-      {
         "text": "Product based method, divides projects into valuable phases, focuses on business justification",
         "correct": false
+      },
+      {
+        "text": "Transparency is central, early and reliable delivery, methodology embraces change",
+        "correct": true
       },
       {
         "text": "Clear documentation exist, single point of responsibility, effective collaboration",
@@ -741,10 +741,6 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Promote changing the iteration duration in order to commit as planne",
-        "correct": true
-      },
-      {
         "text": "Ensure the sprint size is appropriate for the iteration duration.",
         "correct": false
       },
@@ -755,6 +751,10 @@
       {
         "text": "Consider using a reward system to encourage timely delivery.",
         "correct": false
+      },
+      {
+        "text": "Promote changing the iteration duration in order to commit as planne",
+        "correct": true
       }
     ]
   },
@@ -764,11 +764,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Enforce stringent IT governance policies centralized within the IT department, ensuring uniformity and control over all IT endeavors.",
-        "correct": true
-      },
-      {
-        "text": "Mandate comprehensive IT project proposals to the IT department for assessment and approval before any project can commence.",
+        "text": "Collaborate with cross-functional IT business teams to jointly plan and execute IT projects, fostering cooperation between stakeholders.",
         "correct": false
       },
       {
@@ -776,8 +772,12 @@
         "correct": false
       },
       {
-        "text": "Collaborate with cross-functional IT business teams to jointly plan and execute IT projects, fostering cooperation between stakeholders.",
+        "text": "Mandate comprehensive IT project proposals to the IT department for assessment and approval before any project can commence.",
         "correct": false
+      },
+      {
+        "text": "Enforce stringent IT governance policies centralized within the IT department, ensuring uniformity and control over all IT endeavors.",
+        "correct": true
       }
     ]
   },
@@ -791,11 +791,11 @@
         "correct": true
       },
       {
-        "text": "Increased costs",
+        "text": "Reduced risks",
         "correct": false
       },
       {
-        "text": "Reduced risks",
+        "text": "Increased costs",
         "correct": false
       },
       {
@@ -810,12 +810,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Use a Power-Interest Matrix",
-        "correct": true
-      },
-      {
         "text": "Use Nominal Group Technique",
         "correct": false
+      },
+      {
+        "text": "Use a Power-Interest Matrix",
+        "correct": true
       },
       {
         "text": "Use a Stakeholder Cube Model",
@@ -833,19 +833,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Do nothing and continue to work as before, assuming there will be an audit.",
-        "correct": true
-      },
-      {
-        "text": "Disengage the noncompliant department, as this is problemati",
-        "correct": false
-      },
-      {
         "text": "Disclose the source of the problem to the auditors and let them decide.",
         "correct": false
       },
       {
         "text": "Gain the commitment and approval from leadership on noncompliance.",
+        "correct": false
+      },
+      {
+        "text": "Do nothing and continue to work as before, assuming there will be an audit.",
+        "correct": true
+      },
+      {
+        "text": "Disengage the noncompliant department, as this is problemati",
         "correct": false
       }
     ]
@@ -855,6 +855,10 @@
     "text": "Project A = 5%, Project B = %, Project C = 3% , Project D = 1%.\nWhich of these projects should be selected based on these IRR figures provided?",
     "explanation": "",
     "choices": [
+      {
+        "text": "Project D",
+        "correct": false
+      },
       {
         "text": "Project A",
         "correct": true
@@ -866,10 +870,6 @@
       {
         "text": "Project C",
         "correct": false
-      },
-      {
-        "text": "Project D",
-        "correct": false
       }
     ]
   },
@@ -879,19 +879,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Responding to change over following a plan",
-        "correct": true
-      },
-      {
         "text": "Customer collaboration over following a plan",
         "correct": false
       },
       {
-        "text": "Responding to change over processes and tools",
+        "text": "Customer collaboration over comprehensive testing",
         "correct": false
       },
       {
-        "text": "Customer collaboration over comprehensive testing",
+        "text": "Responding to change over following a plan",
+        "correct": true
+      },
+      {
+        "text": "Responding to change over processes and tools",
         "correct": false
       }
     ]
@@ -906,11 +906,11 @@
         "correct": true
       },
       {
-        "text": "Unclear Responsibilities",
+        "text": "Personal Competition",
         "correct": false
       },
       {
-        "text": "Personal Competition",
+        "text": "Unclear Responsibilities",
         "correct": false
       },
       {

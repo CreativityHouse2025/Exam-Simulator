@@ -9,11 +9,11 @@
         "correct": true
       },
       {
-        "text": "Schedule a session to let the existing team members explain to the new ones about the current social contract.",
+        "text": "Organize a meeting with all of the team members to communicate the current social agreement.",
         "correct": false
       },
       {
-        "text": "Organize a meeting with all of the team members to communicate the current social agreement.",
+        "text": "Schedule a session to let the existing team members explain to the new ones about the current social contract.",
         "correct": false
       },
       {
@@ -28,19 +28,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Referred to lessons learned from previous projects.",
-        "correct": true
+        "text": "Revised the stakeholder engagement plan.",
+        "correct": false
       },
       {
         "text": "Notified stakeholders of the factory acceptance tests for meters.",
         "correct": false
       },
       {
-        "text": "Ensured compliance with the stakeholder requirements.",
-        "correct": false
+        "text": "Referred to lessons learned from previous projects.",
+        "correct": true
       },
       {
-        "text": "Revised the stakeholder engagement plan.",
+        "text": "Ensured compliance with the stakeholder requirements.",
         "correct": false
       }
     ]
@@ -51,15 +51,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Have the technical lead escalate the issue to the functional manager.",
+        "correct": false
+      },
+      {
         "text": "Work with the vendor to understand the alternatives.",
         "correct": true
       },
       {
         "text": "Review and update the release date with the team.",
-        "correct": false
-      },
-      {
-        "text": "Have the technical lead escalate the issue to the functional manager.",
         "correct": false
       },
       {
@@ -82,11 +82,11 @@
         "correct": false
       },
       {
-        "text": "Improve productivity through the use of Scrum techniques.",
+        "text": "Communicate project information and updates effectively.",
         "correct": false
       },
       {
-        "text": "Communicate project information and updates effectively.",
+        "text": "Improve productivity through the use of Scrum techniques.",
         "correct": false
       }
     ]
@@ -101,7 +101,7 @@
         "correct": true
       },
       {
-        "text": "Prepare and present a cost-benefit analysis to investors.",
+        "text": "Plan development activities to engage stakeholders in various phases of the project.",
         "correct": false
       },
       {
@@ -109,7 +109,7 @@
         "correct": false
       },
       {
-        "text": "Plan development activities to engage stakeholders in various phases of the project.",
+        "text": "Prepare and present a cost-benefit analysis to investors.",
         "correct": false
       }
     ]
@@ -119,6 +119,10 @@
     "text": "A project team is in the planning phase of a complex project. The project has an end-date constraint to launch a new product with which they have no previous experience. The project sponsor is requesting a detailed schedule, but the team is unable to predict when tasks will occur throughout the project lifecycle, especially because some of them are dependent on deliverables by other business units.\nWhat life cycle methodology should the project manager use in this situation?",
     "explanation": "",
     "choices": [
+      {
+        "text": "An iterative life cycle including task durations and a budget approved by the sponsor",
+        "correct": false
+      },
       {
         "text": "A hybrid life cycle including a prioritized product backlog approved by the sponsor",
         "correct": true
@@ -130,10 +134,6 @@
       {
         "text": "An agile life cycle including a detailed schedule in agreement with all business units.",
         "correct": false
-      },
-      {
-        "text": "An iterative life cycle including task durations and a budget approved by the sponsor",
-        "correct": false
       }
     ]
   },
@@ -142,10 +142,6 @@
     "text": "A project manager is assigned to a project in a country where the company has not previously done business. At the beginning of the project, the project manager realizes that there are certain regulatory requirements for which the project team has no experience.\nWhat should the project manager do next?",
     "explanation": "",
     "choices": [
-      {
-        "text": "Assign sufficient budget in case such requirements have to be met.",
-        "correct": true
-      },
       {
         "text": "Consult with a subject matter expert on how to avoid such requirements.",
         "correct": false
@@ -157,6 +153,10 @@
       {
         "text": "Escalate concerns about the requirements to the project sponsor.",
         "correct": false
+      },
+      {
+        "text": "Assign sufficient budget in case such requirements have to be met.",
+        "correct": true
       }
     ]
   },
@@ -166,11 +166,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Restart the procurement process and select a new vendor.",
-        "correct": true
-      },
-      {
-        "text": "Review the contract type that will be awarded to the vendor.",
+        "text": "Engage the steering committee and escalate the issue.",
         "correct": false
       },
       {
@@ -178,8 +174,12 @@
         "correct": false
       },
       {
-        "text": "Engage the steering committee and escalate the issue.",
+        "text": "Review the contract type that will be awarded to the vendor.",
         "correct": false
+      },
+      {
+        "text": "Restart the procurement process and select a new vendor.",
+        "correct": true
       }
     ]
   },
@@ -189,19 +189,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Review the change control log for approved variances in the project deliverable.",
-        "correct": true
-      },
-      {
-        "text": "Review the communications management plan and stakeholder engagement plan.",
-        "correct": false
-      },
-      {
         "text": "Review the project performance metrics and acceptance test results.",
         "correct": false
       },
       {
+        "text": "Review the change control log for approved variances in the project deliverable.",
+        "correct": true
+      },
+      {
         "text": "Review the project objectives and success criteria.",
+        "correct": false
+      },
+      {
+        "text": "Review the communications management plan and stakeholder engagement plan.",
         "correct": false
       }
     ]
@@ -212,16 +212,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Use a RACI chart to facilitate team task accountability.",
-        "correct": true
-      },
-      {
         "text": "Use a Gantt chart to ensure milestones are accomplished.",
         "correct": false
       },
       {
         "text": "Ask the sponsors who have responsibility.",
         "correct": false
+      },
+      {
+        "text": "Use a RACI chart to facilitate team task accountability.",
+        "correct": true
       },
       {
         "text": "Use a work breakdown structure (WBS) to ensure requirements are covered.",
@@ -235,19 +235,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Send the updated information to key stakeholders one day prior to the meeting.",
-        "correct": true
-      },
-      {
-        "text": "Determine the meeting agenda with the key stakeholders, and share it in advance.",
-        "correct": false
-      },
-      {
         "text": "Meet with the key stakeholders separately in advance before every status meeting.",
         "correct": false
       },
       {
         "text": "Ask the sponsor to align key stakeholders to the project’s current meeting cadence.",
+        "correct": false
+      },
+      {
+        "text": "Send the updated information to key stakeholders one day prior to the meeting.",
+        "correct": true
+      },
+      {
+        "text": "Determine the meeting agenda with the key stakeholders, and share it in advance.",
         "correct": false
       }
     ]
@@ -258,12 +258,12 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Perform a strengths, weaknesses, opportunities, and threats (SWOT) analysis to quickly identify the team's status and take appropriate action.",
-        "correct": true
-      },
-      {
         "text": "Place a hold on all activities and gather the team for a meeting to discuss the new challenges identified so they can be immediately addressed.",
         "correct": false
+      },
+      {
+        "text": "Perform a strengths, weaknesses, opportunities, and threats (SWOT) analysis to quickly identify the team's status and take appropriate action.",
+        "correct": true
       },
       {
         "text": "Wait until the next daily scrum meeting to address the challenges so that the entire team knows what is going on and the issues can be discussed.",
@@ -281,19 +281,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Conduct a comprehensive business impact analysis and explore options for using alternative materials or resources.",
-        "correct": true
+        "text": "Close the current project and initiate a new project that is better aligned with the changing competitive landscape.",
+        "correct": false
       },
       {
         "text": "Assess the impact of the competitor's product changes and seek approval from the change control board (CCB) to address them.",
         "correct": false
       },
       {
-        "text": "Continue the project as planned, adhering to the existing project schedule and avoiding any scope or quality changes.",
-        "correct": false
+        "text": "Conduct a comprehensive business impact analysis and explore options for using alternative materials or resources.",
+        "correct": true
       },
       {
-        "text": "Close the current project and initiate a new project that is better aligned with the changing competitive landscape.",
+        "text": "Continue the project as planned, adhering to the existing project schedule and avoiding any scope or quality changes.",
         "correct": false
       }
     ]
@@ -327,10 +327,6 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ignore the complaints and assume that the new team members will adapt over time.",
-        "correct": true
-      },
-      {
         "text": "Schedule a meeting to discuss the concerns and provide clarity on the training's importance.",
         "correct": false
       },
@@ -341,6 +337,10 @@
       {
         "text": "Send a memo outlining the mandatory training and consequences for non-compliance.",
         "correct": false
+      },
+      {
+        "text": "Ignore the complaints and assume that the new team members will adapt over time.",
+        "correct": true
       }
     ]
   },
@@ -354,15 +354,15 @@
         "correct": true
       },
       {
-        "text": "Allow the week to pass by, then send a complaint to the customer.",
-        "correct": false
-      },
-      {
         "text": "Discuss the matter with the project manager's senior management team.",
         "correct": false
       },
       {
         "text": "Understand the situation by speaking with the team members and the customer.",
+        "correct": false
+      },
+      {
+        "text": "Allow the week to pass by, then send a complaint to the customer.",
         "correct": false
       }
     ]
@@ -372,10 +372,6 @@
     "text": "An oil refinery project is in the middle of the execution phase. The project team found that the project is delayed because of an environmental regulation change, procurement delays, and a change in government. However, the project deliverable is still urgently needed.\nWhat should the project manager do next?",
     "explanation": "",
     "choices": [
-      {
-        "text": "Terminate the project immediately, avoid further loss through more expenditure, and absorb the current loss.",
-        "correct": true
-      },
       {
         "text": "Review the impact of the changes, comply with the new regulations, and then propose a realistic plan.",
         "correct": false
@@ -387,6 +383,10 @@
       {
         "text": "Stop the project and negotiate with the new government to pay the invoices for work done up to that point.",
         "correct": false
+      },
+      {
+        "text": "Terminate the project immediately, avoid further loss through more expenditure, and absorb the current loss.",
+        "correct": true
       }
     ]
   },
@@ -396,11 +396,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ensure that the team assignments are clear.",
-        "correct": true
-      },
-      {
-        "text": "Obtain stakeholder feedback and team insights.",
+        "text": "Update the change log and issue log.",
         "correct": false
       },
       {
@@ -408,8 +404,12 @@
         "correct": false
       },
       {
-        "text": "Update the change log and issue log.",
+        "text": "Obtain stakeholder feedback and team insights.",
         "correct": false
+      },
+      {
+        "text": "Ensure that the team assignments are clear.",
+        "correct": true
       }
     ]
   },
@@ -419,20 +419,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Involve management to help resolve the conflicts.",
-        "correct": true
+        "text": "Raise the issues in the retrospective and propose solutions.",
+        "correct": false
       },
       {
         "text": "Inform management that commitments will not be met.",
         "correct": false
       },
       {
-        "text": "Raise the issues in the retrospective and propose solutions.",
+        "text": "Coach the team both as a whole and individually.",
         "correct": false
       },
       {
-        "text": "Coach the team both as a whole and individually.",
-        "correct": false
+        "text": "Involve management to help resolve the conflicts.",
+        "correct": true
       }
     ]
   },
@@ -442,19 +442,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Discuss the impacts on project delivery with the functional manager and develop an appropriate course of action.",
-        "correct": true
+        "text": "Escalate this issue to the project sponsor to develop an appropriate course of action.",
+        "correct": false
       },
       {
-        "text": "Register this as a risk in the risk register and implement the appropriate response.",
-        "correct": false
+        "text": "Discuss the impacts on project delivery with the functional manager and develop an appropriate course of action.",
+        "correct": true
       },
       {
         "text": "Ensure that team members are cross-trained on all project tasks to increase the potential value of the project outcome.",
         "correct": false
       },
       {
-        "text": "Escalate this issue to the project sponsor to develop an appropriate course of action.",
+        "text": "Register this as a risk in the risk register and implement the appropriate response.",
         "correct": false
       }
     ]
@@ -465,11 +465,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Documented the risk of a materials cost deviation in the project's risk matrix.",
-        "correct": true
-      },
-      {
-        "text": "Provided training on the material acquisition process and reporting requirements.",
+        "text": "Avoided the inclusion of new engineers on a strategic project with a fixed budget.",
         "correct": false
       },
       {
@@ -477,7 +473,11 @@
         "correct": false
       },
       {
-        "text": "Avoided the inclusion of new engineers on a strategic project with a fixed budget.",
+        "text": "Documented the risk of a materials cost deviation in the project's risk matrix.",
+        "correct": true
+      },
+      {
+        "text": "Provided training on the material acquisition process and reporting requirements.",
         "correct": false
       }
     ]
@@ -488,19 +488,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Assign a team member to execute performance testing and ensure the product's performance is acceptable.",
-        "correct": true
+        "text": "Negotiate with the stakeholders to slow down product development until a viable solution is available.",
+        "correct": false
       },
       {
-        "text": "Hire external experts to assess the product architecture and come up with a resolution plan.",
-        "correct": false
+        "text": "Assign a team member to execute performance testing and ensure the product's performance is acceptable.",
+        "correct": true
       },
       {
         "text": "Engage with the product owner on the new development and prioritize the solution on the product backlog.",
         "correct": false
       },
       {
-        "text": "Negotiate with the stakeholders to slow down product development until a viable solution is available.",
+        "text": "Hire external experts to assess the product architecture and come up with a resolution plan.",
         "correct": false
       }
     ]
@@ -515,11 +515,11 @@
         "correct": true
       },
       {
-        "text": "Improve application of test automation techniques.",
+        "text": "Increase project management office (PMO) involvement.",
         "correct": false
       },
       {
-        "text": "Increase project management office (PMO) involvement.",
+        "text": "Improve application of test automation techniques.",
         "correct": false
       },
       {
@@ -534,19 +534,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ask the managing director to intervene with the PMO manager to explain why this is necessary.",
-        "correct": true
+        "text": "Implement a training program on agile for all staff to ensure there is congruence of learning for everyone.",
+        "correct": false
       },
       {
-        "text": "Ask the project team to support the transformation regardless of the PMO manager's negativity.",
-        "correct": false
+        "text": "Ask the managing director to intervene with the PMO manager to explain why this is necessary.",
+        "correct": true
       },
       {
         "text": "Implement a change management strategy to ensure that the process meets governance requirements.",
         "correct": false
       },
       {
-        "text": "Implement a training program on agile for all staff to ensure there is congruence of learning for everyone.",
+        "text": "Ask the project team to support the transformation regardless of the PMO manager's negativity.",
         "correct": false
       }
     ]
@@ -557,20 +557,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Assess the impact of the new requirement and update the risk register.",
-        "correct": true
+        "text": "Collect the co-sponsor requirements and perform the integrated change control process.",
+        "correct": false
       },
       {
         "text": "Complete the current project as planned and update it later with the new requirements.",
         "correct": false
       },
       {
-        "text": "Collect the co-sponsor requirements and perform the integrated change control process.",
+        "text": "Convince the co-sponsor to maintain the current scope and complete the project as planned.",
         "correct": false
       },
       {
-        "text": "Convince the co-sponsor to maintain the current scope and complete the project as planned.",
-        "correct": false
+        "text": "Assess the impact of the new requirement and update the risk register.",
+        "correct": true
       }
     ]
   },
@@ -580,11 +580,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Check the communications management plan.",
-        "correct": true
-      },
-      {
-        "text": "Perform a systemic stakeholder analysis.",
+        "text": "Colocate the team to guarantee better teamwork.",
         "correct": false
       },
       {
@@ -592,7 +588,11 @@
         "correct": false
       },
       {
-        "text": "Colocate the team to guarantee better teamwork.",
+        "text": "Check the communications management plan.",
+        "correct": true
+      },
+      {
+        "text": "Perform a systemic stakeholder analysis.",
         "correct": false
       }
     ]
@@ -603,19 +603,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Expert judgment",
-        "correct": true
+        "text": "Checklists",
+        "correct": false
       },
       {
         "text": "Decision making",
         "correct": false
       },
       {
-        "text": "Demonstrations/reviews",
-        "correct": false
+        "text": "Expert judgment",
+        "correct": true
       },
       {
-        "text": "Checklists",
+        "text": "Demonstrations/reviews",
         "correct": false
       }
     ]
@@ -626,19 +626,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Ask the project sponsor to apply the management reserve to cover the remaining cost of the response.",
-        "correct": true
+        "text": "Use the contingency reserve and assess options to reduce the budget to cover the remaining work.",
+        "correct": false
       },
       {
         "text": "Ask the project sponsor to provide an additional budget to compensate for the cost overage.",
         "correct": false
       },
       {
-        "text": "Issue a change request to modify the scope, cost, and schedule baselines to support the new plan.",
-        "correct": false
+        "text": "Ask the project sponsor to apply the management reserve to cover the remaining cost of the response.",
+        "correct": true
       },
       {
-        "text": "Use the contingency reserve and assess options to reduce the budget to cover the remaining work.",
+        "text": "Issue a change request to modify the scope, cost, and schedule baselines to support the new plan.",
         "correct": false
       }
     ]
@@ -653,15 +653,15 @@
         "correct": true
       },
       {
+        "text": "Communicate the project needs and influence the vendor to accept the terms as soon as possible for successful project delivery.",
+        "correct": false
+      },
+      {
         "text": "Meet with the vendor to discuss a path forward and identify an alternative vendor if necessary.",
         "correct": false
       },
       {
         "text": "Meet with the project sponsor and seek their support in replacing the vendor due to the inability to negotiate an agreement.",
-        "correct": false
-      },
-      {
-        "text": "Communicate the project needs and influence the vendor to accept the terms as soon as possible for successful project delivery.",
         "correct": false
       }
     ]
@@ -695,20 +695,20 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Escalate the issue to the sponsor to make a decision to redefine the scope and solve the problem.",
-        "correct": true
+        "text": "Continue with the project as planned and register the contract scope issue in the issue log.",
+        "correct": false
       },
       {
         "text": "Work with the client to negotiate and ensure the inclusion of the missing crucial features in the project.",
         "correct": false
       },
       {
-        "text": "Continue with the project as planned and register the contract scope issue in the issue log.",
+        "text": "Review the lessons learned to find a solution for contract negotiation and scope issues.",
         "correct": false
       },
       {
-        "text": "Review the lessons learned to find a solution for contract negotiation and scope issues.",
-        "correct": false
+        "text": "Escalate the issue to the sponsor to make a decision to redefine the scope and solve the problem.",
+        "correct": true
       }
     ]
   },
@@ -718,11 +718,7 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Develop mitigation strategies to address the risks of evolving requirements.",
-        "correct": true
-      },
-      {
-        "text": "Use a product backlog and complete the highest priority requirements first.",
+        "text": "Develop a feature burndown chart and show progress on requirements.",
         "correct": false
       },
       {
@@ -730,7 +726,11 @@
         "correct": false
       },
       {
-        "text": "Develop a feature burndown chart and show progress on requirements.",
+        "text": "Develop mitigation strategies to address the risks of evolving requirements.",
+        "correct": true
+      },
+      {
+        "text": "Use a product backlog and complete the highest priority requirements first.",
         "correct": false
       }
     ]
@@ -741,19 +741,19 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Schedule a meeting to keep the stakeholders informed.",
-        "correct": true
-      },
-      {
         "text": "Inform the stakeholders at the next scheduled review meeting.",
         "correct": false
       },
       {
-        "text": "Update the risk register with this risk to project resources.",
-        "correct": false
+        "text": "Schedule a meeting to keep the stakeholders informed.",
+        "correct": true
       },
       {
         "text": "Request resource leveling.",
+        "correct": false
+      },
+      {
+        "text": "Update the risk register with this risk to project resources.",
         "correct": false
       }
     ]
@@ -768,11 +768,11 @@
         "correct": true
       },
       {
-        "text": "Transactional leadership",
+        "text": "Directive leadership",
         "correct": false
       },
       {
-        "text": "Directive leadership",
+        "text": "Transactional leadership",
         "correct": false
       },
       {
@@ -787,15 +787,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Assisting the overseas office leader in communicating with the corporate headquarters staff about the project.",
+        "correct": false
+      },
+      {
         "text": "Informing the overseas office leader of the project's strategic value, key deliverables, and their expected involvement.",
         "correct": true
       },
       {
         "text": "Reaching an agreement on the choice of procurement strategies to be employed by the overseas office.",
-        "correct": false
-      },
-      {
-        "text": "Assisting the overseas office leader in communicating with the corporate headquarters staff about the project.",
         "correct": false
       },
       {
@@ -814,15 +814,15 @@
         "correct": true
       },
       {
+        "text": "Refer team members to training review notes to find the information they need.",
+        "correct": false
+      },
+      {
         "text": "Create an information radiator with the key takeaways from the training.",
         "correct": false
       },
       {
         "text": "Invite team members to reattend the training if they need a refresher.",
-        "correct": false
-      },
-      {
-        "text": "Refer team members to training review notes to find the information they need.",
         "correct": false
       }
     ]
@@ -833,16 +833,16 @@
     "explanation": "",
     "choices": [
       {
-        "text": "Analyze the business impact in order to reprioritize the deliverables.",
-        "correct": true
-      },
-      {
         "text": "Request to negotiate with the vendors for a longer support period.",
         "correct": false
       },
       {
         "text": "Ask to order new equipment immediately so there will be no support issue.",
         "correct": false
+      },
+      {
+        "text": "Analyze the business impact in order to reprioritize the deliverables.",
+        "correct": true
       },
       {
         "text": "Acknowledge these constraints and take them into account when planning.",
@@ -864,11 +864,11 @@
         "correct": false
       },
       {
-        "text": "Review the guidelines for meeting attendance including when remote attendance is allowed and under what circumstances.",
+        "text": "Communicate the reasons for attending standup meetings in person and the benefits of doing so.",
         "correct": false
       },
       {
-        "text": "Communicate the reasons for attending standup meetings in person and the benefits of doing so.",
+        "text": "Review the guidelines for meeting attendance including when remote attendance is allowed and under what circumstances.",
         "correct": false
       }
     ]
@@ -879,15 +879,15 @@
     "explanation": "",
     "choices": [
       {
+        "text": "Maintain the original six-week timeline and milestone schedule.",
+        "correct": false
+      },
+      {
         "text": "Work with stakeholders to determine the best course of action.",
         "correct": true
       },
       {
         "text": "Change the project scope to include additional deliverables.",
-        "correct": false
-      },
-      {
-        "text": "Maintain the original six-week timeline and milestone schedule.",
         "correct": false
       },
       {
