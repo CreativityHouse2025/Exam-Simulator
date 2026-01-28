@@ -7,7 +7,9 @@
     "logo-alt": "Logo",
     "continue": "Continue Last Exam",
     "new": "Start New Exam",
-    "mini": "Start Mini Exam"
+    "mini": "Start Mini Exam",
+    "select-category": "Choose a question category",
+    "general": "General"
   },
   "nav": {
     "drawer": {
@@ -38,7 +40,8 @@
       "yours": "Your answer is ",
       "answer": "The correct answer is ",
       "correct": "correct",
-      "incorrect": "incorrect"
+      "incorrect": "incorrect",
+      "missing": "missing"
     },
     "summary": {
       "title": "Exam Statistics",
@@ -46,13 +49,15 @@
       "pass": "PASS",
       "fail": "FAIL",
       "passing": "Passing",
+      "category": "Category",
       "time": "Time",
       "date": "Date",
       "score": "Score",
       "correct": "Correct",
       "incorrect": "Wrong",
       "incomplete": "Unanswered",
-      "home": "Go Home"
+      "home": "Go Home",
+      "retake-wrong": "Retry Mistakes"
     }
   },
   "confirm": {
@@ -65,6 +70,35 @@
       "title": "Time Expired",
       "message": "Time has expired. Your exam has ended.",
       "button0": "Okay"
+    }
+  },
+  "report": {
+    "title": "Exam Report",
+    "full-name": "Full Name",
+    "timestamp": "Finished at",
+    "sending": "Sending the report to your email...",
+    "sent": "Report sent successfully",
+    "error": "Failed to send the report",
+    "email": {
+      "subject": "Your Exam Report - $1",
+      "body": "Hello $1,\n\nHere is your exam summary at $2:\n\n$3\n"
+    }
+  },
+  "form": {
+    "user-info": {
+      "title": "Personal Information",
+      "full-name": {
+        "label": "Full Name",
+        "placeholder": "Enter your full name",
+        "invalid": "Only letters are allowed in the name",
+        "missing": "Full name is required"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email",
+        "invalid": "Please enter a valid email"
+      },
+      "submit": "Submit"
     }
   }
 }

@@ -10,6 +10,7 @@ import { CheckBox } from '@styled-icons/material/CheckBox'
 export const ChoiceStyles = styled.div<ChoiceTextStylesProps>`
   display: grid;
   grid-template-columns: 2rem 4rem 1fr;
+  align-items: center;
   margin-bottom: 0.5rem;
   font: 2rem 'Open Sans';
   ${({ $disabled }) => !$disabled && 'cursor: pointer;'}
@@ -22,7 +23,9 @@ export const ChoiceStyles = styled.div<ChoiceTextStylesProps>`
   }
 `
 
+// add margin to align with radio buttons (Open Sans issue)
 const LabelStyles = styled.div`
+  margin-top: -2px; 
   justify-self: center;
   font-weight: 600;
 `

@@ -1,0 +1,3352 @@
+[
+  {
+    "id": 0,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Andy is a project manager for a software project. The scope of the project was approved by the customer and key stakeholders at the beginning of the project, but whenever the customer validates deliverables, he comes up with new requirements that he would like to add into the product. Andy is working with the customer to find what requirements were missed in the planning stages of the project and how to plan better in the future. What is the best description of his project’s current situation?",
+    "explanation": "Scope creep means the uncontrolled expansion to product or project scope without adjustments to time, cost, and resources. Domain = Process. PMBOK 6th edition, Page 168 and PMBOK 7th edition, Page 87",
+    "choices": [
+      {
+        "text": "Rolling wave planning",
+        "correct": false
+      },
+      {
+        "text": "Scope creep",
+        "correct": true
+      },
+      {
+        "text": "Alternatives analysis",
+        "correct": false
+      },
+      {
+        "text": "Product analysis",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "You are a project manager for a large construction project. The project is to build a new hotel. The project is divided into five phases and it is highly visible in your organization. To ensure formalizing acceptance of the completed project deliverables, you decided to validate scope with the customer to ensure that the project is on track from the customer point of view. When should the Validate Scope process be performed?",
+    "explanation": "The scope is validated at the end of each phase to ensure that the phase deliverables are accepted by the customer before moving forward to the next phase. Domain = Process. PMBOK 6th edition, Page 164",
+    "choices": [
+      {
+        "text": "At the end of each phase of the project",
+        "correct": true
+      },
+      {
+        "text": "At the beginning of the project",
+        "correct": false
+      },
+      {
+        "text": "At the end of the project",
+        "correct": false
+      },
+      {
+        "text": "During the planning process",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Peter is a product owner for a software project that is being implemented using agile methodology. During an iteration review, the team demonstrates theA software project that is being implemented using agile methodology. During an iteration review, the team demonstrates the completed product increment during the last iteration. He rejects one of the product features that the development team demonstrated. What should happen next?",
+    "explanation": "As the feature is rejected, so it means that it does not meet the definition of done or there is a difference between what was done and what was expected. So, it is needed to close this gap by re-writing the related user stories. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "The team should try to convince the product owner to accept the feature.",
+        "correct": false
+      },
+      {
+        "text": "The related user stories should be added to the next iteration backlog.",
+        "correct": false
+      },
+      {
+        "text": "The team should re-write the related user stories to address the rejection reason.",
+        "correct": true
+      },
+      {
+        "text": "The related user stories are returned back to the product backlog for re-prioritization.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "An automobile manufacturer has started a project to build more fuel-efficient cars using a hybrid development approach. The project consists of five sequential phases and each phase has multiple deliverables. The project manager mainly use predictive life cycle with some agile practices. Which agile practices can the project manager recommend to the team to make certain that the deliverables are completed and delivered as expected?",
+    "explanation": "The definition of done is a checklist of all the criteria required to be met so that a deliverable can be considered ready for customer use. This approach helps ensure that stakeholders agree at the start of the project that the work is not only completed, but a shared understanding of done and the criteria to accept the work are exactly defined. Domain = Process. PMBOK 7th edition, Page 85",
+    "choices": [
+      {
+        "text": "Retrospective",
+        "correct": false
+      },
+      {
+        "text": "Iteration planning",
+        "correct": false
+      },
+      {
+        "text": "Definition of done",
+        "correct": true
+      },
+      {
+        "text": "Backlog refinement",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Which of the following is a basic rule for creating a work breakdown structure?",
+    "explanation": "The WBS is a hierarchical decomposition of the total scope of work. Each descending level of the WBS represents an increasingly detailed definition of the project work. Domain = Process. PMBOK 6th edition, Page 161 and PMBOK 7th edition, Page 84",
+    "choices": [
+      {
+        "text": "Each level of a work breakdown structure is a smaller segment of the level above.",
+        "correct": true
+      },
+      {
+        "text": "It should list the relationships between different activities.",
+        "correct": false
+      },
+      {
+        "text": "Each level of a work breakdown structure is a larger segment of the level above.",
+        "correct": false
+      },
+      {
+        "text": "The planned work is contained within the highest level of WBS components.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Sam is managing a project to develop a new billing system for an organization. He has finished collecting project requirements when it was discovered that the finance manager requirements were not collected. Which of the following documents is outdated and caused this issue?",
+    "explanation": "It is clear that the finance manager was not added to the stakeholder register that is why his requirements were missed. Domain = Process. PMBOK 6th edition, Page 41 and PMBOK 7th edition, Page 12",
+    "choices": [
+      {
+        "text": "Requirements documentation",
+        "correct": false
+      },
+      {
+        "text": "Project charter",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder register",
+        "correct": true
+      },
+      {
+        "text": "Requirements traceability matrix",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "A large electronics organization has initiated a project to develop a new gaming device. The initial schedule to develop the new device with a set of pre-defined features is 6 months. Another competitor has launched a similar product with the same features. The project team has increased the number of features to stay relevant with the market. This pushes the launch date two more months. This is known as:",
+    "explanation": "In this situation, the definition of the project goal being delivered or “done” is constantly moving. Project teams track the planned rate of project goal achievement relative to the rate of progress toward completion. The longer the project takes to complete, the further the project goal of “done” is likely to move. This is sometimes referred to as “done drift.”\n Domain = Process. PMBOK 7th edition, Page 85",
+    "choices": [
+      {
+        "text": "Gold plating",
+        "correct": false
+      },
+      {
+        "text": "Scope decomposition",
+        "correct": false
+      },
+      {
+        "text": "Done drift",
+        "correct": false
+      },
+      {
+        "text": "Scope creep",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "You have been assigned to manage a software project that should be completed within three months. A project charter has been created. You met with the customer, sponsor and key stakeholders to collect requirements and developed a project scope statement. A project management plan has been developed and approved by key stakeholders. You met with the actual user who will use the product of the project to demonstrate how the product of the project will work and discovered that the user's requirements are different from the ones you were initially given and approved by key stakeholders. What should you do?",
+    "explanation": "You must collect new requirements of the user which will lead to changing parts of the project management plan through change request. Domain = Process. PMBOK 6th edition, Page 168 and PMBOK 7th edition, Page 83",
+    "choices": [
+      {
+        "text": "Complete the work as originally planned.",
+        "correct": false
+      },
+      {
+        "text": "Re-plan the project to include the new requirements.",
+        "correct": false
+      },
+      {
+        "text": "Try to meet other users to collect other requirements.",
+        "correct": false
+      },
+      {
+        "text": "Create a change request for the user's requirements.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Following the shown cumulative flow diagram, what happened at point A?",
+    "explanation": "The total story points were 500 and they increased to 600, so the best answer is that additional scope was added to the project. Domain = Process. Agile Practice Guide, Page 70",
+    "choices": [
+      {
+        "text": "Additional scope was added to the project.",
+        "correct": true
+      },
+      {
+        "text": "Bottleneck",
+        "correct": false
+      },
+      {
+        "text": "Excess WIP",
+        "correct": false
+      },
+      {
+        "text": "More resources were added to the project.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "A team member informs the project manager that he has added an extra functionality to the work package assigned to him which was not included in the design. The new functionality did not add any extra cost and he created it during his weekend. The team member believes that it will satisfy the customer and he will appreciate it. What should the project manager do?",
+    "explanation": "Adding unplanned functionality is referred to as gold plating and it is not recommended. The team should build what was designed only. Domain = Process.",
+    "choices": [
+      {
+        "text": "Reward the team member for meeting and exceeding customer expectations.",
+        "correct": false
+      },
+      {
+        "text": "Remove the new functionality and instruct the team member to build only what is included in the design.",
+        "correct": true
+      },
+      {
+        "text": "Thanks the team member for his effort and invite the customer for a meeting to inform him about the new added functionality.",
+        "correct": false
+      },
+      {
+        "text": "Submit a change request to add the new functionality to design.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Following the shown diagram, what does line A represent?",
+    "explanation": "The big advantage of using a burnup chart is that it can show total scope and changes in scope, making the impact of those changes visible. Domain = Process. Agile Practice Guide, Page 63",
+    "choices": [
+      {
+        "text": "Project velocity",
+        "correct": false
+      },
+      {
+        "text": "Work remaining",
+        "correct": false
+      },
+      {
+        "text": "Work completed",
+        "correct": false
+      },
+      {
+        "text": "Project scope",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "You are managing an industrial project. The project team has successfully produced the first release of the project deliverables. The deliverables are being inspected by the quality control department in the organization. What should be done next?",
+    "explanation": "Project deliverables are reviewed with the customer to gain formal acceptance of the product through the Validate Scope process. Domain = Process. PMBOK 6th edition, Page 164",
+    "choices": [
+      {
+        "text": "Verified deliverables should be reviewed with the customer to gain formal acceptance of the product.",
+        "correct": true
+      },
+      {
+        "text": "Verified deliverables should be delivered to the customer and begin project closure procedures.",
+        "correct": false
+      },
+      {
+        "text": "Document lessons learned and begin project closure procedures.",
+        "correct": false
+      },
+      {
+        "text": "Continue producing the remaining project deliverables.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "You are the project manager performing intranet project for your company. During planning the project with your team, you divide up all of the work into work packages and create a WBS. For each one of the work packages, you write down details such as initial estimates, assumptions, predecessor and successor work packages. Where do you store all of that information?",
+    "explanation": "WBS dictionary gives all the details that you know about each work package in the WBS, including estimates and billing information. Domain = Process. PMBOK 6th edition, Page 162 and PMBOK 7th edition, Page 85",
+    "choices": [
+      {
+        "text": "Scope Management Plan",
+        "correct": false
+      },
+      {
+        "text": "WBS",
+        "correct": false
+      },
+      {
+        "text": "WBS Dictionary",
+        "correct": true
+      },
+      {
+        "text": "Project Scope Statement",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Tony is a project manager for a complex software project. The project is very large and is very important to the customer. He has finished the software system, and obtained acceptance from customer, but few days later, the software system was found to give unexpected results. The customer is very angry and he needs a solution for this problem. Which of the following best describes what should he do first?",
+    "explanation": "Reviewing the customer’s inspection process is not the responsibility of the project manager. He may apologize to the customer later when he knows the root cause of the problem. Doing nothing is against the professional and social responsibility of the project manager. So, the best choice is to review the validate scope process during which the product was accepted. Domain = Process. PMBOK 6th edition, Page 164",
+    "choices": [
+      {
+        "text": "He should do nothing, the customer has accepted the project.",
+        "correct": false
+      },
+      {
+        "text": "He should apologize to the customer.",
+        "correct": false
+      },
+      {
+        "text": "He should review the validate scope process.",
+        "correct": true
+      },
+      {
+        "text": "He should review the customer’s inspection process.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "You are leading an agile team working on a software project to develop a mobile application. You and the team have completed the last iteration and are going to demonstrate the completed product increment to the stakeholders during the sprint review. What is the most valuable feedback of the product demo?",
+    "explanation": "\"All the required features exist in the increment\" means that the objectives are met and product increment is accepted. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "All the required features exist in the increment.",
+        "correct": true
+      },
+      {
+        "text": "The customer representative wants to thanks the team for their efforts.",
+        "correct": false
+      },
+      {
+        "text": "The customer may assign future projects to your team.",
+        "correct": false
+      },
+      {
+        "text": "The marketing manager liked the product increment and wants to show it to the customer.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Chris has been assigned to manage a large construction project which involves a large number of stakeholders. Chris has started with the project team to collect project requirements from stakeholders. It seems that many stakeholders have contradicting requirements and some stakeholders have unclear requirements. What should Chris and his team do in this situation?",
+    "explanation": "Requirements should be collected from all stakeholders. Filling a survey will neither uncover all requirements nor clear conflicts between contradicting requirements. The best option is to hold face-to-face meetings with all stakeholders to understand their requirements and expectations. Domain = Process. PMBOK 6th edition, Page 140 and PMBOK 7th edition, Page 82",
+    "choices": [
+      {
+        "text": "To effectively collect the exact needed requirements, the project team needs to collect requirements from key stakeholders only.",
+        "correct": false
+      },
+      {
+        "text": "To remove the conflict between contradicting requirements, the project team needs to use Delphi technique as a form of expert judgment.",
+        "correct": false
+      },
+      {
+        "text": "To build consensus regarding the project requirements, the project team needs to hold face-to-face meetings with all stakeholders to understand their requirements and expectations.",
+        "correct": true
+      },
+      {
+        "text": "To collect requirements from a large number of stakeholders, the project team needs to send a survey template to be filled out by all stakeholders.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Brian has just joined a large construction company as a project manager. He has been assigned to manage his first project in the company. Midway through the project, he noticed that the customer is getting frequent change requests implemented by informally approaching the team members. This has resulted in work disruption and discontent among team members. What should be his first priority to remedy the situation?",
+    "explanation": "Controlling the project scope ensures all requested changes and recommended corrective or preventive actions are processed through the Perform Integrated Change Control process.\n Domain = Process.\n PMBOK 6th edition, Page 168 and PMBOK 7th edition, Page 87.",
+    "choices": [
+      {
+        "text": "Begin creating a detailed project scope statement.",
+        "correct": false
+      },
+      {
+        "text": "Call for a meeting with the customer and team members to solve the problem.",
+        "correct": false
+      },
+      {
+        "text": "Modify the project management plan so that all change requests must be approved by you.",
+        "correct": false
+      },
+      {
+        "text": "Ensure proper project scope control.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "For which of the following can a work breakdown structure be used?",
+    "explanation": "WBS doesn't show durations, relationships, or reasons to initiate a project. It is a component of scope baseline which is used as a basis of comparison between actual performance and what was planned. Domain = Process. PMBOK 6th edition, Page 161 and PMBOK 7th edition, Page 84",
+    "choices": [
+      {
+        "text": "Showing the relationships between activities",
+        "correct": false
+      },
+      {
+        "text": "Communicating with the customer",
+        "correct": true
+      },
+      {
+        "text": "Showing durations for each work package",
+        "correct": false
+      },
+      {
+        "text": "Showing the reasons to initiate the project",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Sergio is the sponsor of a large software project. The project includes 1250 stakeholders located in three different countries. He assigned Michael as a project manager for this project. Mario, a business analyst with a good experience, is assigned to this project to conduct business analysis. Who is responsible for ensuring that requirements-related work is accounted for in the project management plan and that requirements-related activities are performed on time and within budget?",
+    "explanation": "The project manager is responsible for ensuring that requirements-related work is accounted for in the project management plan and that requirements-related activities are performed on time and within budget and deliver value. Domain = Process. PMBOK 6th edition, Page 132",
+    "choices": [
+      {
+        "text": "Sergio",
+        "correct": false
+      },
+      {
+        "text": "Michael",
+        "correct": true
+      },
+      {
+        "text": "Mario",
+        "correct": false
+      },
+      {
+        "text": "Project team members",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Following the shown burnup chart, what happened at point A?",
+    "explanation": "The total story points were 100 and they increased to 120, so the best answer is that additional scope was added to the project. Domain = Process. Agile Practice Guide, Page 63Hello.",
+    "choices": [
+      {
+        "text": "Additional scope was added to the project.",
+        "correct": true
+      },
+      {
+        "text": "More resources were added to the project.",
+        "correct": false
+      },
+      {
+        "text": "Resources were pulled off to another project.",
+        "correct": false
+      },
+      {
+        "text": "Project is descoped.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Sergio is the sponsor of a large software project. The project includes 1250 stakeholders located in three different countries. He assigned Michael as a project manager for this project. Mario, a business analyst with a good experience, is assigned to this project to conduct business analysis. Who is responsible for requirements related activities in this project?",
+    "explanation": "If a business analyst is assigned to a project, requirement-related activities are the responsibility of that role. Domain = Process. PMBOK 6th edition, Page 132",
+    "choices": [
+      {
+        "text": "Sergio",
+        "correct": false
+      },
+      {
+        "text": "Michael",
+        "correct": false
+      },
+      {
+        "text": "Mario",
+        "correct": true
+      },
+      {
+        "text": "Project team members",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "The development team of an agile project has not completed any new features during the last iteration. They are going to hold a product demonstration with the customer representative and stakeholders. What should they do?",
+    "explanation": "Lessons learned and why no new features were completed can be discussed during the retrospective. During product demonstration (iteration review), the team and stakeholders review what was accomplished in the iteration and collaborate on what to do next. The Product Backlog may also be adjusted to meet new opportunities. Domain = Process. Agile Practice Guide.",
+    "choices": [
+      {
+        "text": "They should discuss the user stories to be added to the next iteration.",
+        "correct": true
+      },
+      {
+        "text": "The product demonstration should be cancelled.",
+        "correct": false
+      },
+      {
+        "text": "They should discuss the root cause of having no new completed features during this iteration.",
+        "correct": false
+      },
+      {
+        "text": "They should discuss the lessons learned during the last iteration.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "An agile team has completed 10 story points in the current iteration, although the team has committed to complete 15 story points per iteration. What should the team do?",
+    "explanation": "The project team should complete the 10 user stories and add the remaining 5 user stories to the product backlog. Domain = Process. Agile Practice Guide Page 64",
+    "choices": [
+      {
+        "text": "Add more resources to the current iteration.",
+        "correct": false
+      },
+      {
+        "text": "Re-estimate the team velocity.",
+        "correct": false
+      },
+      {
+        "text": "Complete 10 story points and add remaining 5 story points to the product backlog.",
+        "correct": true
+      },
+      {
+        "text": "Extend the current iteration.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Joseph is a project manager for a hardware design project. The project is about to be completed when the customer refused to sign one of the last invoices saying that a user manual for the hardware must be delivered. Joseph is surprised because the user manual shouldn't be completed by his company, this happened most likely because:",
+    "explanation": "The scope statement should state clearly what is as is not included in project work. Domain = Process. PMBOK 6th edition, Page 154",
+    "choices": [
+      {
+        "text": "The work packages were not decomposed to project activities.",
+        "correct": false
+      },
+      {
+        "text": "Project exclusions were not clearly identified in the project scope statement.",
+        "correct": true
+      },
+      {
+        "text": "This requirement is not related to achieving any of the project objectives, so it was removed from the requirements traceability matrix.",
+        "correct": false
+      },
+      {
+        "text": "This requirement was not included in the requirements management plan.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "A project is on its third iteration review. One of the stakeholders has raised a concern about the product increment of this iteration. Which of the following is the best course of action?",
+    "explanation": "It is needed to know the stakeholder's concern in more details. So, arranging a meeting with the stakeholder and the product owner to know his concern in details and then the product owner can add the stakeholder's requirement in the product backlog. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "Add an entry in the issue log and reassess requirements collection process.",
+        "correct": false
+      },
+      {
+        "text": "Hold a meeting with the team and the product owner to address the stakeholder concern.",
+        "correct": false
+      },
+      {
+        "text": "Ask the product owner to add the stakeholder concern to the next iteration.",
+        "correct": false
+      },
+      {
+        "text": "The agile coach should facilitate a meeting with the stakeholder and the product owner to discuss his concern.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Which of the following is the correct matching?",
+    "explanation": "Done drift means the definition of the project goal being delivered or “done” is constantly moving. Scope creep means when additional scope or requirements are accepted without adjusting the corresponding schedule. Gold plating happens when the project team adds extra features that were not part of the original scope. Domain = Process. PMBOK 7th edition, Page 85-87",
+    "choices": [
+      {
+        "text": "(1-B), (2-A), (3-C)",
+        "correct": false
+      },
+      {
+        "text": "(1-A), (2-C), (3-B)",
+        "correct": false
+      },
+      {
+        "text": "(1-B), (2-C), (3-A)",
+        "correct": true
+      },
+      {
+        "text": "(1-C), (2-A), (3-B)",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "For the shown burndown chart, all of the following are probable reasons for having a flat line at point A, except:",
+    "explanation": "Having a flat line means that after some time the remaining story points are still the same (did not decrease). The most probable causes for this is that additional scope was added to the scope of the current sprint, resources were pulled off to another project or slower progress by the team. Domain = Process. Agile Practice Guide, Page 62",
+    "choices": [
+      {
+        "text": "Slower progress by the team.",
+        "correct": false
+      },
+      {
+        "text": "Resources were pulled off to another project.",
+        "correct": false
+      },
+      {
+        "text": "More story points were added to this sprint.",
+        "correct": false
+      },
+      {
+        "text": "The product owner has removed some story points from the current sprint.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "For the shown burndown chart, what is the status of the project?",
+    "explanation": "The project is in jeopardy as the amount of completed work is less than the amount of planned work, so at the end of the iteration, the work will not be completed. Domain = Process. Agile Practice Guide, Page 62",
+    "choices": [
+      {
+        "text": "The project is on budget and on schedule.",
+        "correct": false
+      },
+      {
+        "text": "Not enough information.",
+        "correct": false
+      },
+      {
+        "text": "The project is ahead of schedule.",
+        "correct": false
+      },
+      {
+        "text": "The project is in jeopardy.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "According to this Work Breakdown Structure (WBS), the component with ID (2) is a/an:",
+    "explanation": "A control account is a management control point where scope, budget, and schedule are integrated and compared to the earned value for performance measurement. A control account has two or more work packages, though each work package is associated with a single control account. Domain = Process. PMBOK 6th edition, Page 161",
+    "choices": [
+      {
+        "text": "Control Account",
+        "correct": true
+      },
+      {
+        "text": "Work Package",
+        "correct": false
+      },
+      {
+        "text": "Activity",
+        "correct": false
+      },
+      {
+        "text": "Project Exclusion",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Two team members of your project team are discussing together about the correct order of the Monitoring and Controlling processes for Scope Management. One of them said that the Validate Scope process should be performed first, while the other member said that the Control Scope process should be performed first. Which of the following is the correct order of Monitoring and Controlling processes for Scope Management?",
+    "explanation": "Validate Scope occurs with each deliverable or phase review and Control Scope is an ongoing process. Domain = Process. PMBOK 6th edition, Page 131",
+    "choices": [
+      {
+        "text": "First Validate Scope, then Control Scope.",
+        "correct": false
+      },
+      {
+        "text": "First Control Scope, then Validate Scope.",
+        "correct": false
+      },
+      {
+        "text": "Both happen simultaneously.",
+        "correct": false
+      },
+      {
+        "text": "There is not enough information to decide.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "According to this Work Breakdown Structure (WBS), the component with ID (4.1.2.1) is a/an:",
+    "explanation": "The lowest level of the WBS is a work package with a unique identifier. Domain = Process. PMBOK 6th edition, Page 161",
+    "choices": [
+      {
+        "text": "Control Account",
+        "correct": false
+      },
+      {
+        "text": "Work Package",
+        "correct": true
+      },
+      {
+        "text": "Planning Package",
+        "correct": false
+      },
+      {
+        "text": "Deliverable",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Product scope management involves the requirements that relate to the product of the project. Project scope management involves:",
+    "explanation": "Project scope is the work performed to deliver a product, service, or result with the specified features and functions. The term “project scope” is sometimes viewed as including product scope. Domain = Process. PMBOK 6th edition, Page 131",
+    "choices": [
+      {
+        "text": "The work the project manager will do to manage the project.",
+        "correct": false
+      },
+      {
+        "text": "The project management efforts done by the project manager.",
+        "correct": false
+      },
+      {
+        "text": "All work included in the scope management plan.",
+        "correct": false
+      },
+      {
+        "text": "The work the project will do to deliver the product scope.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Kevin is working on a large software project using adaptive approach. He wants to find the changes in project scope and their impact on the project progress. Which of the following tools is the most appropriate to use?",
+    "explanation": "The big advantage of using a burnup chart is that it can show changes in scope, making the impact of those changes visible. Domain = Process. Agile Practice Guide, Page 63",
+    "choices": [
+      {
+        "text": "Burndown chart",
+        "correct": false
+      },
+      {
+        "text": "Burnup chart",
+        "correct": true
+      },
+      {
+        "text": "Kanban board",
+        "correct": false
+      },
+      {
+        "text": "Product backlog",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Lucas is an agile practitioner leading an agile project. Midway through the project, he and the team discover that they have committed to deliver 50 story points during the current iteration, but actually they will be able to deliver 40 story points only. Which of the following is the best course of action?",
+    "explanation": "Extending the iteration is not a good solution as it violates the timeboxing concept. Working overtime and modifying the iteration plan are not proactive solutions. The best answer is to complete 40 story points and add the uncompleted stories to the backlog. Domain = Process. Agile Practice Guide Page 64",
+    "choices": [
+      {
+        "text": "Extend the current iteration till the team completes the committed story points.",
+        "correct": false
+      },
+      {
+        "text": "Adjust the iteration plan to have 40 points instead of 50.",
+        "correct": false
+      },
+      {
+        "text": "Complete 40 story points and add 10 story points to the product backlog.",
+        "correct": true
+      },
+      {
+        "text": "Work overtime to complete the committed story points during the current iteration.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "type": "multiple-choice",
+    "categoryId": 1,
+    "text": "Which of the following is not an example of the definition of \"done\" in an agile project?",
+    "explanation": "Creating a shared definition of done is crucial for satisfying our stakeholders’ expectations. Therefore, a shared definition of done is necessary at every level of an agile project (user story – release – product). An objective (quantified) criteria should be used for the definition of done, subjective criteria should not be used. Agile Practice Guide Page 50",
+    "choices": [
+      {
+        "text": "The product is considered to be (done), when development work is complete, code is documented and refactored.",
+        "correct": true
+      },
+      {
+        "text": "The release will be considered as (done) when mobile application version is accepted and there are no Priority 1 defects or change requests.",
+        "correct": false
+      },
+      {
+        "text": "The website is considered to be (done) when the high priority features are complete and beta version gets at least 80% score in user satisfaction survey.",
+        "correct": false
+      },
+      {
+        "text": "The user story is considered to be (done) when the code development is complete, documented and user acceptance tested.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "Physical resource management is concentrated in all of the following except:",
+    "explanation": "Identifying roles and responsibilities of team members clearly without ambiguity is parts of managing human resources not physical resources. Domain = Process. PMBOK 6th edition, Page 310 and PMBOK 7th edition, Page 65",
+    "choices": [
+      {
+        "text": "Keeping enough inventory.",
+        "correct": false
+      },
+      {
+        "text": "Allocating and using equipments.",
+        "correct": false
+      },
+      {
+        "text": "Identifying roles and responsibilities of team members clearly without ambiguity.",
+        "correct": true
+      },
+      {
+        "text": "Securing critical equipment and material on time.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "If your organization is using Kaizen and and Just-In-Time (JIT) methods, you must take them into consideration when you manage your projects because they will mostly affect on:",
+    "explanation": "Due to the scarce nature of critical resources, in some industries, several trends have become popular in the past several years. There is extensive literature about lean management, just-in-time (JIT) manufacturing, Kaizen, total productive maintenance (TPM), Theory of constraints (TOC), and other methods. A Project Manager should determine if the performing organisation has adopted one or more resource management tools and adapt to the project accordingly. Domain = process. PMBOK 6th edition, page 310.",
+    "choices": [
+      {
+        "text": "Resource Management",
+        "correct": true
+      },
+      {
+        "text": "Procurement Management",
+        "correct": false
+      },
+      {
+        "text": "Communication Management",
+        "correct": false
+      },
+      {
+        "text": "",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "You are the project manager for a software project. The project sponsor has asked you for a forecast for the cost of project completion. Which of the following is the best metric to use for forecasting?",
+    "explanation": "Only ETC & VAC look forward (forecast), while CPI, SPI, SV, CV, EV & AC look backward. Domain = Process. PMBOK 6th edition, Page 265 and PMBOK 7th edition, Page 104",
+    "choices": [
+      {
+        "text": "EV and AC",
+        "correct": false
+      },
+      {
+        "text": "SV and CV",
+        "correct": false
+      },
+      {
+        "text": "ETC and VAC",
+        "correct": true
+      },
+      {
+        "text": "SPI and CPI",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "Which of the following statements is true regarding project resources management?",
+    "explanation": "Project resources management is concerned with managing physical and human resources. There is some overlap between Project Resource Management and Project Stakeholder Management. Domain = Process. PMBOK 6th edition, Page 309 and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Project resources management is concerned with managing physical resources, while project stakeholders management is concerned with managing human resources.",
+        "correct": false
+      },
+      {
+        "text": "Project resources management is concerned with managing human resources, while project scope management is concerned with managing physical resources.",
+        "correct": false
+      },
+      {
+        "text": "Project resource management is concerned with managing human resources only.",
+        "correct": false
+      },
+      {
+        "text": "Project resources management is concerned with managing physical and human resources.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "A project is being implemented using an adaptive approach. During a meeting with the customer, he requested to add a new requirement to the next iteration which might need other resources outside the project team. The needed resources are available within the organization. The project team wants to ensure resources availability to perform the new requirement, however there is a risk that the customer may cancel or postpone the new requirement before the next iteration starts. What should the project team do?",
+    "explanation": "Soft booking is the term for the process of scheduling resources in a project that haven't been confirmed yet. If the resource or service hasn't yet been confirmed, you have to make assumptions about when they'll be available and what their costs will be. Domain = Process.",
+    "choices": [
+      {
+        "text": "Inform the customer that they will assign the needed resources and he will pay their fees in case of cancellation.",
+        "correct": false
+      },
+      {
+        "text": "Use soft booking for the needed resources.",
+        "correct": true
+      },
+      {
+        "text": "Don't hire the needed resources unless there is a written confirmation from the customer for the new requirement.",
+        "correct": false
+      },
+      {
+        "text": "Assign two team members to learn the needed skills to perform the new requirements.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "A RACI chart is an example of:",
+    "explanation": "A RACI is a detailed responsibility assignment matrix. Domain = Process. PMBOK 6th edition, Page 317 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "Hierarchical-type organization chart",
+        "correct": false
+      },
+      {
+        "text": "Text-oriented position description",
+        "correct": false
+      },
+      {
+        "text": "Responsibility assignment matrix",
+        "correct": true
+      },
+      {
+        "text": "Control Charts",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "Sarah has been assigned as a project manager for a software project. She developed the shown chart to determine the number of resources required to implement the project in each month to know when she will have a spike in using resources. What is the name of this diagram?",
+    "explanation": "Resource Histogram is a bar chart showing the amount of time that a resource is scheduled to work over a series of time periods. Domain = Process. PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "Resource Histogram",
+        "correct": true
+      },
+      {
+        "text": "Resource Calendar",
+        "correct": false
+      },
+      {
+        "text": "Physical Resources Assignment",
+        "correct": false
+      },
+      {
+        "text": "Project Team Assignments",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "Which of the following statements best describes the team charter?",
+    "explanation": "The team charter is a document that establishes the team values, agreements, and operating guidelines for the team. Domain = Process. PMBOK 7th edition, Page 192",
+    "choices": [
+      {
+        "text": "The team charter is a document that contains the project objectives, high level project plan and success criteria.",
+        "correct": false
+      },
+      {
+        "text": "The team charter is a document that contains the KPI's and appraisals of the project team members.",
+        "correct": false
+      },
+      {
+        "text": "The team charter is a document that establishes the team values, agreements, and operating guidelines for the team.",
+        "correct": true
+      },
+      {
+        "text": "The team charter is a document that contains the roles and responsibilities of the project team members.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "An agile team is involved in a network installation project using scrum methodology. A network migration activity must be done during downtime and a team member must be assigned to this task. None of the team members wants to sign up for this task. How should this situation be addressed?",
+    "explanation": "Task assignments are done by the team as the team is self-managed and self-organized. Domain = Process. Agile Practice Guide Page 44",
+    "choices": [
+      {
+        "text": "The senior most team member should be assigned to this task.",
+        "correct": false
+      },
+      {
+        "text": "The scrum master should try first to reschedule the activity to daytime.",
+        "correct": false
+      },
+      {
+        "text": "The scrum master should decide who will pick up this task.",
+        "correct": false
+      },
+      {
+        "text": "The team should decide who will pick up this task.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "Which of the following describes the contents of a resources management plan?",
+    "explanation": "Conflict resolution techniques, personnel performance appraisal and team performance assessment are not included in the resources management plan. Domain = Process. PMBOK 6th edition, Page 318",
+    "choices": [
+      {
+        "text": "Guidance on how to acquire team and physical resources, project organization charts, conflict resolution techniques and release plan.",
+        "correct": false
+      },
+      {
+        "text": "Competence, roles, personnel performance appraisal and recognition and rewards.",
+        "correct": false
+      },
+      {
+        "text": "Identification of resources, release plan, staff training needs, and team performance assessment.",
+        "correct": false
+      },
+      {
+        "text": "Authority, Training Needs, Recognition and Rewards, and Release Plan.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "George is responsible for managing the spare parts in a large tele-communication project. He monitors the spare parts usage in a timely manner. He always informs the project manager if any spare part has shortage or surplus and takes the needed actions to adjust spare parts usage. Which process is he involved in?",
+    "explanation": "Control Resources is concerned with identifying and dealing with resource shortage/surplus in a timely manner. Domain = Process. PMBOK 6th edition, Page 354",
+    "choices": [
+      {
+        "text": "Monitor Risks",
+        "correct": false
+      },
+      {
+        "text": "Acquire Resources",
+        "correct": false
+      },
+      {
+        "text": "Control Resources",
+        "correct": true
+      },
+      {
+        "text": "Control Scope",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "What is the focus of the Control Resources process?",
+    "explanation": "Control Resources is the process of ensuring that the physical resources assigned and allocated to the project are available as planned, as well as monitoring the planned versus actual utilization of resources and taking corrective action as necessary. Domain = Process. PMBOK 6th edition, Page 352",
+    "choices": [
+      {
+        "text": "Ensuring that the physical resources assigned and allocated to the project are available as planned.",
+        "correct": true
+      },
+      {
+        "text": "Ensuring that the physical and human resources assigned and allocated to the project are available as planned.",
+        "correct": false
+      },
+      {
+        "text": "Ensuring that the physical, human and monetary resources assigned and allocated to the project are available as planned.",
+        "correct": false
+      },
+      {
+        "text": "Ensuring that the human resources assigned and allocated to the project are available as planned.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "You are a project manager for a complex software project. You need to assign a web developer to your project to perform some complex activities. The needed developer should have great experience to perform the needed activities. You asked the resource manager to assign Steve, who is known that he is an excellent web developer in the organization and he has great experience. The resource manager rejected because Steve is assigned full time to another higher priority project in the organization. You have a conflict with the resource manager because assigning any other developer to perform these activities has great risk to your project, because all other developers within the organization have little experience. Which process are you involved in?",
+    "explanation": "You are involved in the Acquire Resources process, because the project manager here negotiates with the resource manager to provide the required resources for the project. Domain = Process. PMBOK 6th edition, Page 330",
+    "choices": [
+      {
+        "text": "Manage Team",
+        "correct": false
+      },
+      {
+        "text": "Acquire Resources",
+        "correct": true
+      },
+      {
+        "text": "Estimate Activity Resources",
+        "correct": false
+      },
+      {
+        "text": "Control Resources",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "Your team has made great achievements during your project, and you want to reward them for their great performance. Which of the following contains the bonus plan for your project?",
+    "explanation": "The Resources Management plan includes a “Reward and Recognition” section that describes how you’ll reward your team for good performance Domain = Process. PMBOK 6th edition, Page 319 and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Resource Breakdown Structure",
+        "correct": false
+      },
+      {
+        "text": "The resources management plan",
+        "correct": true
+      },
+      {
+        "text": "The resource histogram",
+        "correct": false
+      },
+      {
+        "text": "The resource calendars",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "Matt is a project manager for a large tele-communication project. He and his team are now determining the types, quantities and skills of the needed resources for each project activity. They will need to store their spare parts in a warehouse as it will be needed for all the project duration. They are now evaluating whether to buy a warehouse and hire employees to manage it or to outsource the warehousing activities to another company. Which process are they involved in and which tool are they using?",
+    "explanation": "As they are determining the types, quantities and skills of the needed resources, so they are involved in the Estimate Activity Resources. As they are evaluating identified options in order to select the options or approaches to use to execute and perform the work of the project, so they are using alternatives analysis which is an example of data analysis. Domain = Process. PMBOK 6th edition Page 325",
+    "choices": [
+      {
+        "text": "Estimate Activity Resources and Data Analysis",
+        "correct": true
+      },
+      {
+        "text": "Plan Resources Management and Data Representation",
+        "correct": false
+      },
+      {
+        "text": "Acquire Resources and Decision Making",
+        "correct": false
+      },
+      {
+        "text": "Estimate Activity Resources and Analogous Estimating",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "Which of the following are included in the responsibility assignment matrix (RAM)?",
+    "explanation": "A responsibility assignment matrix (RAM) is a grid that shows the project resources assigned to each activity or work package. Domain = Process. PMBOK 6th edition, Page 317 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "Activity and resource",
+        "correct": true
+      },
+      {
+        "text": "Resource and time estimate",
+        "correct": false
+      },
+      {
+        "text": "Activity and attributes",
+        "correct": false
+      },
+      {
+        "text": "Activity and calendar date",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "Resource management plan is concerned with planning for all the following resources except:",
+    "explanation": "Monetary resources is addressed through the Estimate Costs process. Domain = Process. PMBOK 6th edition, Page 313 and 240",
+    "choices": [
+      {
+        "text": "Facilities",
+        "correct": false
+      },
+      {
+        "text": "Monetary resources",
+        "correct": true
+      },
+      {
+        "text": "Team members",
+        "correct": false
+      },
+      {
+        "text": "Supplies",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "Paul is managing an industrial project. In the middle of the project, a project team member noticed that there is a sudden increase in the usage of fuel in a machine. The machine normally consumes 3 litres per day, and its consumption became 5 litres per day with the same level of effort. The team member informed Paul about the problem. In order to control the usage of fuel, Paul asked the team member to cooperate with the technical support team to investigate the problem. They found a defect in a component in the machine which caused the abnormal usage when it is fixed the machine worked normally with the original consumption rate. Which process are they involved in?",
+    "explanation": "Control Resources is concerned with influencing the factors that can create resources utilization change. Domain = Process. PMBOK 6th edition, Page 354",
+    "choices": [
+      {
+        "text": "Control Resources",
+        "correct": true
+      },
+      {
+        "text": "Control Quality",
+        "correct": false
+      },
+      {
+        "text": "Manage Quality",
+        "correct": false
+      },
+      {
+        "text": "Control Scope",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "Match each action with its associated team building stage in Tuckman Ladder. Which of the following is the correct matching?",
+    "explanation": "Team members tend to be independent and not as open in Forming stage. In Storming stage, the team begins to address the project work. If team members are not collaborative, conflicts will arise. In Norming stage, team members begin to work together and adjust their work habits. In Performing stage, team function as a well-organized unit and become interdependent. In Adjourning stage, the team completes the work and moves on from the project. Domain = Process. PMBOK 7th edition, Page 166",
+    "choices": [
+      {
+        "text": "1- Performing 2- Storming 3- Forming 4- Adjourning 5- Norming",
+        "correct": true
+      },
+      {
+        "text": "1- Forming 2- Storming 3- Norming 4- Performing 5- Adjourning",
+        "correct": false
+      },
+      {
+        "text": "1- Forming 2- Storming 3- Performing 4- Adjourning 5- Norming",
+        "correct": false
+      },
+      {
+        "text": "1- Norming 2- Storming 3- Forming 4- Adjourning 5- Performing",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "Which of the following statements is true regarding acquiring project resources?",
+    "explanation": "The resources needed for the project can be internal or external to the project-performing organization. Internal resources are acquired (assigned) from functional or resource managers. External resources are acquired through the procurement processes. Domain = Process. PMBOK 6th edition, Page 329 and PMBOK Guide 7th edition, Page 65",
+    "choices": [
+      {
+        "text": "Internal resources are acquired from functional or resource managers. External resources are acquired through the procurement processes.",
+        "correct": false
+      },
+      {
+        "text": "Internal resources are acquired through procurement processes. External resources are acquired from functional or resource managers.",
+        "correct": false
+      },
+      {
+        "text": "Internal resources are acquired from functional or resource managers. External resources are acquired through the procurement processes.",
+        "correct": true
+      },
+      {
+        "text": "Internal and external resources are acquired from functional or resource managers.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "type": "multiple-choice",
+    "categoryId": 2,
+    "text": "Which of the following statements is true?",
+    "explanation": "The Control Resources process is concerned with physical resources such as equipment, materials, facilities, and infrastructure. Team members are addressed in the Manage Team process. Domain = Process. PMBOK 6th edition, Page 353",
+    "choices": [
+      {
+        "text": "The Control Resources process is concerned with controlling physical resources only, while Manage Team is concerned with managing all resources.",
+        "correct": false
+      },
+      {
+        "text": "The Control Resources process is concerned with controlling all resources, while Manage Team is concerned with managing all resources.",
+        "correct": false
+      },
+      {
+        "text": "The Control Resources process is concerned with controlling physical resources only, while Manage Team is concerned with managing team members.",
+        "correct": true
+      },
+      {
+        "text": "The Control Resources process is concerned with controlling all resources, while Manage Team is concerned with managing team members.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "A key stakeholder has expressed his concerns about the status reports sent from the project team. He said that he is struggling to obtain the needed information about the project status as the report is overstuffed with unnecessary information. Which of the following is the best course of action for the project manager?",
+    "explanation": "Reports communicate relevant (usually summary level) information to stakeholders. Often reports are given to stakeholders who are interested in the project status, such as sponsors, business owners, or PMOs. They should be tailored to meet the stakeholders needs. Domain = Process. PMBOK 6th edition, Page 385 and PMBOK 7th edition, Page 190",
+    "choices": [
+      {
+        "text": "Inform the stakeholder that the format of the status report has been agreed upon in the communication management plan. If he wants to change it, he can raise a change request.",
+        "correct": false
+      },
+      {
+        "text": "Ask the stakeholder about his information needs and include them in the status report.",
+        "correct": true
+      },
+      {
+        "text": "Inform the stakeholder that the status report addresses different stakeholders' needs. It is not tailored according to this particular stakeholder's needs only.",
+        "correct": false
+      },
+      {
+        "text": "Send a separate report to this particular stakeholder tailored according to his needs.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "Martin is a project manager for a large construction project. He is having difficulties in keeping the project schedule on track. The project is budgeted at $3,000,000, and has 310 human resources. The project duration is three months and has 380 activities. There are 90 activities on the critical path. The project SPI is 0.78 and CPI is 1.09. Under these circumstances. What should the monthly status report contain?",
+    "explanation": "Status report contains the status of the project in accordance to the project management plan and possible options. Domain = Process. PMBOK 6th edition, Page 385 and PMBOK 7th edition, Page 190",
+    "choices": [
+      {
+        "text": "That the project will need more resources.",
+        "correct": false
+      },
+      {
+        "text": "The issues and options.",
+        "correct": true
+      },
+      {
+        "text": "That the project is doing well.",
+        "correct": false
+      },
+      {
+        "text": "That the project will finish after the required completion date.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "Nathalie is managing a product development project. During the last project status meeting, she displayed the earned value measurements to the project team and project sponsor. SPI = 1.09 and CPI = 0.79. It is clear that the project is running over budget. The project sponsor is very angry and requested from her to share with him the cost incurred on a weekly basis. Which process should she undergo to provide the needed information to the project sponsor?",
+    "explanation": "Project communications artifacts may include cost incurred. Domain = Process. PMBOK 6th edition, Page 387",
+    "choices": [
+      {
+        "text": "Control Costs",
+        "correct": false
+      },
+      {
+        "text": "Determine Budget",
+        "correct": false
+      },
+      {
+        "text": "Estimate Costs",
+        "correct": false
+      },
+      {
+        "text": "Manage Communications",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "After the weekly project status meeting with the project team members, you asked a project team member to send minutes of meeting to all the attendees. Meeting minutes is classified as:",
+    "explanation": "Formal Communication includes reports, formal meetings (both regular and ad hoc), meeting agendas and minutes, stakeholder briefings, and presentations. Domain = Process. PMBOK 7th edition, Page 13",
+    "choices": [
+      {
+        "text": "Formal Communication",
+        "correct": true
+      },
+      {
+        "text": "Informal Communication",
+        "correct": false
+      },
+      {
+        "text": "External Communication",
+        "correct": false
+      },
+      {
+        "text": "Oral Communication",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "Which of the following projects needs to communicate evolving and emerging details more frequently and quickly than other projects?",
+    "explanation": "Generally projects that subject to various elements of ambiguity and change like projects that adopt agile life cycles have an inherent need to communicate evolving and emerging details more frequently and quickly. In this question the IT project with not clear scope where the detailed scope is defined and approved before the start of each iteration adopts adaptive or agile life cycle. Other mentioned projects are all examples of projects with predictive life cycles. Domain = Process. PMBOK 6th edition, Page 365",
+    "choices": [
+      {
+        "text": "An IT project with not clear scope, as the detailed scope is defined and approved before the start of each iteration.",
+        "correct": true
+      },
+      {
+        "text": "A construction project where scope, time, and cost are determined in the early phases of the project life cycle.",
+        "correct": false
+      },
+      {
+        "text": "A tele-communications project with predictive life cycle and has 550 stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "An industrial project where changes to the scope are carefully managed.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "All of the following are examples of non-verbal communication except:",
+    "explanation": "Examples of nonverbal communication include appropriate body language to transmit meaning through gestures, tone of voice, and facial expressions. Mirroring and eye contact are also important techniques. Domain = Process. PMBOK 6th edition, Page 384 and PMBOK 7th edition, Page 13",
+    "choices": [
+      {
+        "text": "A project manager is waving his hands to a team member to welcome him.",
+        "correct": false
+      },
+      {
+        "text": "A trainer is looking at the eyes of his trainees to know if they understand what he said or not.",
+        "correct": false
+      },
+      {
+        "text": "A team leader advising a team member about how to use non-verbal communication.",
+        "correct": true
+      },
+      {
+        "text": "A team leader is using an angry look to a team member who came to work late.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "Due to external factors, a project has been terminated early. The project manager sends the final project report to project stakeholders when a functional manager requests a copy of the report. What should the project manager do in this situation?",
+    "explanation": "The communications management plan contains which information should be sent to which stakeholder. Domain = Process. PMBOK 6th edition, Page 377 and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Ask the functional manager why he needs the report.",
+        "correct": false
+      },
+      {
+        "text": "Don't send the report and inform his manager.",
+        "correct": false
+      },
+      {
+        "text": "Send the report.",
+        "correct": false
+      },
+      {
+        "text": "Consult the communication management plan.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "All of the following are included in the project communications management plan, except:",
+    "explanation": "Contact details of each stakeholder are included in the stakeholder register. Domain = Process. PMBOK 6th edition, Page 377 and 514 and and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Guidelines and templates for project status meetings",
+        "correct": false
+      },
+      {
+        "text": "The use of a project website and project management software",
+        "correct": false
+      },
+      {
+        "text": "Contact details of each stakeholder",
+        "correct": true
+      },
+      {
+        "text": "Resources allocated for communication activities, including time and budget",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "What is the purpose of the communications management plan?",
+    "explanation": "The communications management plan is a component of the project management plan that describes how project communications will be planned, structured, implemented, and monitored for effectiveness. Domain = Process. PMBOK 6th edition, Page 377 and PMBOK 7th edition, Page 79 and 186",
+    "choices": [
+      {
+        "text": "The project management plan is a subsidiary plan of the overall communications management plan.",
+        "correct": false
+      },
+      {
+        "text": "The communications management plan describes why you need to communicate with each stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "The communications management plan describes the information delivery needs including format and level of detail.",
+        "correct": true
+      },
+      {
+        "text": "The communications management plan focuses on the use of communications technologies by the project management team.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "The project sponsor has asked the project team to increase the frequency of sending the project status report instead of weekly to be daily. Moreover, he has asked also to send a daily report for the progress of outstanding tasks. The team objects to the sponsor's request because preparing such report takes much time. Which of the following is the best course of action for the project manager?",
+    "explanation": "The project manager should review the communication management plan which describes the type, frequency and responsible person for sending each report. If it needs to be changed, it must be done through a change request as it is a part of the project management plan. Domain = Process. PMBOK 6th edition, Page 377 and PMBOK 7th edition, Page 79 and 186",
+    "choices": [
+      {
+        "text": "Ask the sponsor to hire additional resources.",
+        "correct": false
+      },
+      {
+        "text": "Try to convince both sides to accept sending the report twice a week.",
+        "correct": false
+      },
+      {
+        "text": "Review the communication management plan and submit a change request if needed.",
+        "correct": true
+      },
+      {
+        "text": "Meet with the project sponsor and convince him that this is too much work for the team members to do.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "Which of the following is the purpose of project status meetings?",
+    "explanation": "The project status meeting is the best method to discuss the status of the project and exchange information about the project. Other choices can be done outside project status meeting. Domain = Process. PMBOK 6th edition, Page 376 and PMBOK 7th edition, Page 180",
+    "choices": [
+      {
+        "text": "Exchange information about the project.",
+        "correct": true
+      },
+      {
+        "text": "Approving project changes.",
+        "correct": false
+      },
+      {
+        "text": "Have team members report on what they are doing.",
+        "correct": false
+      },
+      {
+        "text": "Issue project status reports.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "Frank is managing a major construction project valued at $ 30,000,000. The project SPI is 1.01and CPI is 0.99. The sponsor called him to express concern about the project. He is worried because the project end date is after two weeks. He doesn’t know the status of the project. Frank informed him that his team sends a weekly status report by email. He told him that he doesn't prefer emails because he receives more than 500 emails per day. He doesn't check all emails and he prefers verbal updates. This situation indicates a problem in which project management process?",
+    "explanation": "The Plan Communication Management process includes determining the stakeholders communication requirements which includes the preferred communication method for each stakeholder. When he informed the project sponsor that his team sends weekly project status report via email, so they are following the communication management plan. So the communication management plan doesn't reflect stakeholders communication requirements. Domain = Process. PMBOK 6th edition, Page 377",
+    "choices": [
+      {
+        "text": "Monitor Communications",
+        "correct": false
+      },
+      {
+        "text": "Plan Communications Management",
+        "correct": true
+      },
+      {
+        "text": "Manage Stakeholder Engagement",
+        "correct": false
+      },
+      {
+        "text": "Manage Communications",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "Which of the following statements is true regarding project communications in projects with adaptive life cycle?",
+    "explanation": "Project environments subject to various elements of ambiguity and change have an inherent need to communicate evolving and emerging details more frequently and quickly. Domain = Process. PMBOK 6th edition, Page 365",
+    "choices": [
+      {
+        "text": "Projects with predictive life cycle have an inherent need to communicate evolving and emerging details more frequently and quickly than projects with iterative or incremental life cycle.",
+        "correct": false
+      },
+      {
+        "text": "Projects with predictive life cycle have an inherent need to communicate evolving and emerging details more frequently and quickly than projects with adaptive life cycle.",
+        "correct": false
+      },
+      {
+        "text": "There is no difference between communication in projects with adaptive life cycle and communication in projects with predictive life cycle.",
+        "correct": false
+      },
+      {
+        "text": "Projects with adaptive life cycle have an inherent need to communicate evolving and emerging details more frequently and quickly than projects with predictive life cycle.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "During developing the communication management plan for your software project, a team member asks you whether social media can be included as a communication tool to the project communication strategy. What would be your answer?",
+    "explanation": "The standard communication strategy for project stakeholder communications embraces and selects from all technologies and respects cultural, practical, and personal preferences for language, media, content, and delivery. When appropriate, social media and other advanced computing technologies may be included. Domain = Process. PMBOK 6th edition, Page 364",
+    "choices": [
+      {
+        "text": "Yes, social media can be included in the communication strategy because everyone is using social media in communication.",
+        "correct": false
+      },
+      {
+        "text": "Yes, social media can be included in the communication strategy with respect to cultural, practical, and personal preferences for language, media, content, and delivery.",
+        "correct": true
+      },
+      {
+        "text": "No, social media can't be included in the communication strategy because it is informal communication. You must select a formal communication tool.",
+        "correct": false
+      },
+      {
+        "text": "No, social media can't be included in the communication strategy because it is not available in some countries.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "A project is being implemented as part of a large program. During project executing, the program manager informs the project manager that due to an organizational change, his project will be terminated. The project manager wants to inform the project stakeholders and project team about project closure. Which document should he refer to?",
+    "explanation": "An effective communications management plan recognizes the diverse information needs of the project’s stakeholders. It includes stakeholder communication requirements, information to be communicated, including language, format, content, and level of detail..etc. Domain = Process. PMBOK 6th edition, Page 377 and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Communication Management Plan",
+        "correct": true
+      },
+      {
+        "text": "Stakeholder Engagement Plan",
+        "correct": false
+      },
+      {
+        "text": "Project Closure Guidelines",
+        "correct": false
+      },
+      {
+        "text": "Change Management Plan",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "type": "multiple-choice",
+    "categoryId": 3,
+    "text": "Communication barriers can cause miscommunications, it may influence communication when sending or receiving information. Which of the following is not a barrier?",
+    "explanation": "Feedback is a tool for improving communication not a barrier. Domain = Process. PMBOK 6th edition, Page 373",
+    "choices": [
+      {
+        "text": "Prejudices and Hostility",
+        "correct": false
+      },
+      {
+        "text": "Distance",
+        "correct": false
+      },
+      {
+        "text": "Culture and Language",
+        "correct": false
+      },
+      {
+        "text": "Feedback",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "You are managing a project to develop a new pharmaceutical compound. The project is very difficult and has a tight schedule. A quality auditor came to you to perform a quality audit on your project. Your team is already under pressure to complete the project. They object to the audit due to the work pressure. You should explain to the team that the purpose of a quality audit is:",
+    "explanation": "The project manager is not authorized to check if the customer is following the quality process. Inspecting the deliverables and prevent defect ones to go to the customer is the focus of Control Quality process. The quality audits are tools of the Perform Quality Assurance process which focus on following processes and procedures. Although ISO 9000 is a quality standard, but it is not the main focus of quality audits. So the best answer is to identify inefficient and ineffective policies. Domain = Process. PMBOK 6th edition, Page 294",
+    "choices": [
+      {
+        "text": "To check if the customer is following the quality process.",
+        "correct": false
+      },
+      {
+        "text": "To inspect deliverables and prevent defective ones to go to the customer.",
+        "correct": false
+      },
+      {
+        "text": "To satisfy part of an ISO 9000 investigation.",
+        "correct": false
+      },
+      {
+        "text": "To identify inefficient and ineffective policies.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "During the execution of your new product development project, a new quality standard is issued and your project team is holding a meeting with the quality department to determine how the standard will apply to the running project. This is part of which quality management process?",
+    "explanation": "Team is defining how to meet the new standard, it is part of the Plan Quality Management process. Domain = Process. PMBOK 6th edition, Page 277",
+    "choices": [
+      {
+        "text": "Plan Quality Management",
+        "correct": true
+      },
+      {
+        "text": "Manage Quality",
+        "correct": false
+      },
+      {
+        "text": "Total Quality Management",
+        "correct": false
+      },
+      {
+        "text": "Control Quality",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Catherine is closing her first project, she is collecting lessons learned with project team members and stakeholders. Many stakeholders were not satisfied about the project and they complained that their needs were not fully met. Her boss asks her about the steps she took on her project to improve customer satisfaction. Which subsidiary plan would she consult to determine this information?",
+    "explanation": "The quality management plan is a component of the project management plan that describes how applicable policies, procedures, and guidelines will be implemented to achieve the quality objectives. It describes the activities and resources necessary for the project management team to achieve the quality objectives set for the project. Domain = Process. PMBOK 6th edition, Page 286 and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Quality Management Plan",
+        "correct": true
+      },
+      {
+        "text": "Scope Management Plan",
+        "correct": false
+      },
+      {
+        "text": "Stakeholders Management Plan",
+        "correct": false
+      },
+      {
+        "text": "Risk Management Plan",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "A project manager of a manufacturing project is analyzing activities that doesn’t add value to the project and wastes company resources and time. A team member informed him that a process is not understood and another one informed him that two processes he works on, he thinks they are not needed. The project manager must be leading which of the following?",
+    "explanation": "Manage Quality process is concerned with following and improving processes and increasing its efficiency. Domain = Process. PMBOK 6th edition, Page 290",
+    "choices": [
+      {
+        "text": "Manage Quality",
+        "correct": true
+      },
+      {
+        "text": "Control Quality",
+        "correct": false
+      },
+      {
+        "text": "A process rather than a project",
+        "correct": false
+      },
+      {
+        "text": "Plan Quality Management",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Samuel is managing a project to develop a new pharmaceutical compound. He noticed that the packing process has many problems, so he held a meeting with his team to examine problems and non-value-added activities that occur during packing process. They also identified many opportunities to improve the process. Which process are they involved in and which tool are they using?",
+    "explanation": "Process analysis identifies opportunities for process improvements. This analysis also examines problems, constraints, and non-value-added activities that occur during a process.",
+    "choices": [
+      {
+        "text": "Plan Quality Management, mind mapping",
+        "correct": false
+      },
+      {
+        "text": "Control Quality, performance reviews",
+        "correct": false
+      },
+      {
+        "text": "Control Quality, product evaluation",
+        "correct": false
+      },
+      {
+        "text": "Manage Quality, process analysis",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Luke is a project manager in a construction company. He was assigned to manage a construction project to build a new shopping center. During performing the strength tests, he found severe failure in the strength tests. He assigned Steve to investigate this problem. Steve started tracking the problem to determine and solve the main reasons behind it. Which tool should Steve use to track the problem?",
+    "explanation": "Cause-and-effect (Fishbone) diagrams are used to trace the problem's source back to its root cause. Domain = Process. PMBOK 6th edition, Page 293",
+    "choices": [
+      {
+        "text": "Fishbone diagram",
+        "correct": true
+      },
+      {
+        "text": "Histogram",
+        "correct": false
+      },
+      {
+        "text": "Design of experiments",
+        "correct": false
+      },
+      {
+        "text": "Design for X",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "A new medicine has been released in market by a large pharmaceutical company. A serious side effect has been discovered which may cause a sudden decrease in blood pressure. The company has recalled all products from the market. The incurred cost for recalling the medicine is known as:",
+    "explanation": "Cost of failures found by the customer is considered a cost of non conformance. Domain = Process. PMBOK 6th edition, Page 283 and PMBOK 7th edition, Page 88",
+    "choices": [
+      {
+        "text": "Cost of conformance",
+        "correct": false
+      },
+      {
+        "text": "Cost of non conformance",
+        "correct": true
+      },
+      {
+        "text": "Cost of prevention",
+        "correct": false
+      },
+      {
+        "text": "Cost of inspection",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Catherine is a project manager for a new product development project. After the product of the project has been released, it was found to have numerous features more than any other similar product in the market, but obvious defects have been found by the users of the product. The product is categorized as:",
+    "explanation": "The high-grade product has numerous features and the low quality product has many defects. Domain = Process. PMBOK 6th edition, Page 274",
+    "choices": [
+      {
+        "text": "High grade, low quality",
+        "correct": true
+      },
+      {
+        "text": "Low grade, low quality",
+        "correct": false
+      },
+      {
+        "text": "Low grade, high quality",
+        "correct": false
+      },
+      {
+        "text": "High grade, high quality",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Smith is managing a large product development project. The customer of the project has very tight quality tolerance and will not accept any defected product. He has set strict quality control measures and feedback verification loops from a similar previous project. However during scope validation, the customer has rejected a high percentage of the products due to defects found. Which of the following is the best course of action?",
+    "explanation": "It is clear that in this situation the quality control procedures including verification and feedback loops were taken from a similar project without tailoring. Quality control procedures and quality assurance steps need to be tailored for the specific needs for this project. Domain = Process. PMBOK 7th edition, Page 151",
+    "choices": [
+      {
+        "text": "Escalate this topic to the steering committee.",
+        "correct": false
+      },
+      {
+        "text": "More tailoring for quality control procedures and quality assurance steps.",
+        "correct": true
+      },
+      {
+        "text": "Demonstrate the quality control measures and feedback verification loops to the customer.",
+        "correct": false
+      },
+      {
+        "text": "Review the customer's inspection process.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "The project team is in the design phase of a new car prototype. The team is analyzing which type of motors and wheels would provide a high speed with more safety. Which of the following is the most likely technique would they use to determine these variables?",
+    "explanation": "Design of experiments helps to determine a group of variables to improve quality. Domain = Process. PMBOK 6th edition, Page 290",
+    "choices": [
+      {
+        "text": "Matrix diagrams",
+        "correct": false
+      },
+      {
+        "text": "Cost-benefit analysis",
+        "correct": false
+      },
+      {
+        "text": "Design for X",
+        "correct": false
+      },
+      {
+        "text": "Design of experiments",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "You are a project manager for a new construction project. Your project is to build a new housing compound which contains 10,000 houses. The houses are substantially similar. What must you do?",
+    "explanation": "If the project has some repeated activities, the lessons learned of the first few installations can be used to improve the process on the remaining installations. Domain = Process. PMBOK 6th edition, Page 289",
+    "choices": [
+      {
+        "text": "Plan in continuous improvement activities.",
+        "correct": true
+      },
+      {
+        "text": "Make sure the first and last of these work packages is scheduled close in time to each other.",
+        "correct": false
+      },
+      {
+        "text": "See what can be done to remove the similarity.",
+        "correct": false
+      },
+      {
+        "text": "Make sure the same resource completes all the similar work packages.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "While testing the stability of the electronic board used in your project, you discover that it becomes unstable when it works in high temperature which doesn’t meet your company’s quality standards. You are sure that it will function as it is with the customer, and you don’t think the board needs to meet the quality level specified. What should you do?",
+    "explanation": "Stating in your reports that the board simply “meets our quality needs” or changing the quality standards to meet the achieved level are against the professional and social responsibility of the project manager. Documenting the problem in lessons learned register maybe done later because it doesn't solve the current problem. So the best solution is to report the lesser quality and try to find a solution. Domain = Process. PMBOK 6th edition, Page 299",
+    "choices": [
+      {
+        "text": "State in your reports that the board simply “meets our quality needs”.",
+        "correct": false
+      },
+      {
+        "text": "Change the quality standards to meet the achieved level.",
+        "correct": false
+      },
+      {
+        "text": "Document this problem in lessons learned register and send this board to customer.",
+        "correct": false
+      },
+      {
+        "text": "Report the lesser quality and try to find a solution.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "You are in the middle of executing a major new construction project. The project is very important and highly visible in your organization. The sponsor informed you that he is worried that the project will not meet the quality standards it was intended to. If the project doesn't meet the quality standard, the customer will not be satisfied. What should you do in this situation?",
+    "explanation": "Assuring the sponsor that the project would meet the quality standards is not a solution. Historical information of your past projects don't indicate the status of the current project. The Quality Management Plan doesn't indicate the current situation. Forming a quality assurance team will indicate if the team is following the correct processes and procedures which meets the quality standards and metrics. Domain = Process. PMBOK 6th edition, Page 294",
+    "choices": [
+      {
+        "text": "Assure the sponsor that during the Plan Quality Management process, it was determined that the project would meet the quality standards.",
+        "correct": false
+      },
+      {
+        "text": "Form a quality assurance team.",
+        "correct": true
+      },
+      {
+        "text": "Show him the historical information of your past projects that they all met the quality standards.",
+        "correct": false
+      },
+      {
+        "text": "Check the results from the last quality management plan.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Adam is managing an industrial project when one of the project team members informed him that the dimensions of one of the project deliverables are different than the planned dimensions and thus it will be unable to operate with the machine. Adam asked the team member to determine the basic underlying reasons that cause this variance and also to determine whether these reasons might cause other variances in other project deliverables. Which tool should the team member use in this situation?",
+    "explanation": "Root cause analysis is an analytical technique used to determine the basic underlying reason that causes a variance, defect, or risk. A root cause may underlie more than one variance, defect, or risk. Domain = Process. PMBOK 6th edition, Page 292 and PMBOK 7th edition, Page 177",
+    "choices": [
+      {
+        "text": "Audits",
+        "correct": false
+      },
+      {
+        "text": "Alternatives analysis",
+        "correct": false
+      },
+      {
+        "text": "Root cause analysis (RCA)",
+        "correct": true
+      },
+      {
+        "text": "Process analysis",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Project changes are approved during the _____  process and verified during the______ process.",
+    "explanation": "Project changes are approved during the Perform Integrated Change Control process and verified during the Control Quality process. Domain = Process PMBOK 6th edition, Page 301",
+    "choices": [
+      {
+        "text": "Perform Integrated Change Control, Control Quality.",
+        "correct": true
+      },
+      {
+        "text": "Perform Integrated Change Control, Validate Scope.",
+        "correct": false
+      },
+      {
+        "text": "Perform Integrated Change Control, Control Scope.",
+        "correct": false
+      },
+      {
+        "text": "Monitor and Control Project Work, Validate Scope..",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "During planning your project, you are balancing project constraints scope, time, cost, quality,..The customer required that quality of this project must be as high as possible. This type of projects is relatively new to your organization. What is the best thing to do in this situation?",
+    "explanation": "Benchmarking is not effective here because this type of projects is new. Using Ishikawa diagram or control charts are not proactive solutions. So the best answer is to audit work as it is being completed to look for any needed improvements. Domain = Process. PMBOK 6th edition, Page 294",
+    "choices": [
+      {
+        "text": "Audit work as it is being completed to look for any needed improvements.",
+        "correct": true
+      },
+      {
+        "text": "Use Ishikawa diagram when there is a defect.",
+        "correct": false
+      },
+      {
+        "text": "Benchmark the current project quality standards to identify best practices.",
+        "correct": false
+      },
+      {
+        "text": "Use control charts to make sure that the process is in control.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Alex is a project manager working for automobile manufacturer for a project to build more fuel-efficient, high stability small cars. He and his team determine how to inspect the product of the project to meet the stakeholders’ needs and expectations, as well as to meet the goal for the product’s performance and reliability. In which process are they involved and which tool are they using?",
+    "explanation": "During the planning phase in the Plan Quality Management process, the project manager and the project team determine how to test or inspect the product, deliverable, or service to meet the stakeholders’ needs and expectations, as well as how to meet the goal for the product’s performance and reliability. Domain = Process. PMBOK 6th edition, Page 285",
+    "choices": [
+      {
+        "text": "Manage Quality, Process Analysis",
+        "correct": false
+      },
+      {
+        "text": "Manage Quality, Audits",
+        "correct": false
+      },
+      {
+        "text": "Control Quality, Inspection",
+        "correct": false
+      },
+      {
+        "text": "Plan Quality Management, Test and inspection planning",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "While analyzing the last year performance of the company, it was found that the company has lost many customers especially who used the products of the company during last year. The CEO informed all the project managers to pay more attention to quality management. He focused not just on giving customers products without any defects by keeping the defective ones out of the customer hands, but keeping errors out of the process of producing deliverables. Keeping errors out of the process is known as:",
+    "explanation": "Prevention means keeping errors out of the process and inspection means keeping errors out of the hands of the customer. Domain = Process. PMBOK 6th edition, Page 274",
+    "choices": [
+      {
+        "text": "Variable sampling",
+        "correct": false
+      },
+      {
+        "text": "Attribute sampling",
+        "correct": false
+      },
+      {
+        "text": "Prevention",
+        "correct": true
+      },
+      {
+        "text": "Inspection",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Thomas is managing a large project to produce a new pharmaceutical drug. The project is very important for his company and quality has a top priority. Strict quality standards have been put in place and they must be followed. In order to achieve the required quality standard, Thomas approved on a business trip for two team members to have training on the new quality standards. The cost of team members training is an example of:",
+    "explanation": "Prevention costs are costs related to the prevention of poor quality in the products, deliverables, or services of the specific project. Examples on prevention costs are training and equipment. Domain = Process. PMBOK 6th edition, Page 282 and PMBOK 7th edition, Page 88",
+    "choices": [
+      {
+        "text": "Failure costs",
+        "correct": false
+      },
+      {
+        "text": "Cost of nonconformance",
+        "correct": false
+      },
+      {
+        "text": "Appraisal cost",
+        "correct": false
+      },
+      {
+        "text": "Prevention cost",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "A project team adopts extreme programming method (XP) is working on a software project. XP applies the concept of pair programming where the team members are writing software code together as a pair and reviewing each other's work to determine if the code conforms to the requirements documentation or not. What will be a result of these reviews?",
+    "explanation": "A goal of the Control Quality process is to determine the correctness of deliverables. The results of performing the Control Quality process are verified deliverables that become an input to the Validate Scope process for formalized acceptance. As the two developers inspect each other completed work, so they are doing the same as Control Quality process. Domain = Process. Agile Practice Guide, Page 102 and PMBOK 6th edition, Page 305",
+    "choices": [
+      {
+        "text": "Product Increment",
+        "correct": false
+      },
+      {
+        "text": "Minimum Viable Product",
+        "correct": false
+      },
+      {
+        "text": "Accepted Deliverables",
+        "correct": false
+      },
+      {
+        "text": "Verified deliverable",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "A new cell phone has been released in markets as a product of a project in a multi-national organization. It seems that some defects have been noticed by customers in the new cell phone. The organization decided to make a survey in all shops to collect data about the defects. The cost regarding defects identified in the surveys may be considered as:",
+    "explanation": "The cost regarding defects identified in the surveys may be considered external failure costs in the COQ model and can have extensive cost implications for the organization. Domain = Process. PMBOK 6th edition, Page 303 and PMBOK 7th edition, Page 88",
+    "choices": [
+      {
+        "text": "Prevention costs",
+        "correct": false
+      },
+      {
+        "text": "Appraisal costs",
+        "correct": false
+      },
+      {
+        "text": "Internal failure costs",
+        "correct": false
+      },
+      {
+        "text": "External failure costs",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Which of the following statements indicates the optimal cost of quality?",
+    "explanation": "The optimal COQ is one that reflects the appropriate balance for investing in the cost of prevention and appraisal to avoid failure costs. So costs of conformance should be less than costs of nonconformance. Domain = Process. PMBOK 6th edition, Page 282 and PMBOK 7th edition, Page 88",
+    "choices": [
+      {
+        "text": "Appraisal costs should be less than prevention costs.",
+        "correct": false
+      },
+      {
+        "text": "Costs of conformance should be less than costs of nonconformance.",
+        "correct": true
+      },
+      {
+        "text": "Prevention costs should be more than external failure costs.",
+        "correct": false
+      },
+      {
+        "text": "Internal failure costs should be less than prevention costs.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Which of the following is the correct matching for cost of quality (COQ)?",
+    "explanation": "Prevention costs are incurred to keep defects and failures out of a product like quality planning, quality assurance and training. Appraisal costs are incurred to determine the degree of conformance to quality requirements like verification, quality audits and supplier rating. Internal failure costs are associated with finding and correcting defects before the customer receives the product like waste, scrap and rework. External failure costs are associated with defects found after the customer has the product and with remediation like repairs, warranty and reputation. Domain = Process. PMBOK 7th edition, Page 88-89",
+    "choices": [
+      {
+        "text": "(1-C), (2-B), (3-A), (4-D)",
+        "correct": false
+      },
+      {
+        "text": "(1-B), (2-C), (3-A), (4-D)",
+        "correct": false
+      },
+      {
+        "text": "(1-B), (2-C), (3-D), (4-A)",
+        "correct": true
+      },
+      {
+        "text": "(1-C), (2-B), (3-D), (4-A)",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Costs of testing and inspections are examples of:",
+    "explanation": "Appraisal costs are costs related to evaluating, measuring, auditing, and testing the products, deliverables, or services of the specific project like testing and inspection. Domain = Process. PMBOK 6th edition, Page 283 and PMBOK 7th edition, Page 88",
+    "choices": [
+      {
+        "text": "Failure costs",
+        "correct": false
+      },
+      {
+        "text": "Cost of nonconformance",
+        "correct": false
+      },
+      {
+        "text": "Appraisal cost",
+        "correct": true
+      },
+      {
+        "text": "Prevention cost",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "William is a project manager in a chemicals industrial company. The PMO in this company has authorized William to manage a project to lessen environmental impacts of one of its products. He found that replacing one type of material used in the product with another new environment friendly material, will decrease environmental impacts. He and his team are studying the consequences of removing the material and using the new material on the product technical properties like quality and price. Which technique should help the team in this situation?",
+    "explanation": "A scatter diagram is a graph that shows the relationship between two variables. Scatter diagrams can demonstrate a relationship between any element of a process, environment, or activity on one axis and a quality defect on the other axis. Domain = Process. PMBOK 6th edition, Page 293 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "Matrix diagrams",
+        "correct": false
+      },
+      {
+        "text": "Cause- and- effect diagram",
+        "correct": false
+      },
+      {
+        "text": "Scatter diagram",
+        "correct": true
+      },
+      {
+        "text": "Histogram",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "A project manager for a new electronic chips manufacturing project needs to make sure that the deliverables meet the quality standards. The project team produces about 100,000 chips per day, so testing all the deliverables would take much time and cost. The chips are so small that inspection would destroy them. Under these circumstances, what should the project manager do?",
+    "explanation": "You need to take a valid sample of the products of the project if inspecting the entire population would take much time, or if inspecting the products would be destructive. Domain = Process. PMBOK 6th edition, Page 303",
+    "choices": [
+      {
+        "text": "Inspect a sample of the deliverables.",
+        "correct": true
+      },
+      {
+        "text": "Outsource the inspection to another company with more expertise.",
+        "correct": false
+      },
+      {
+        "text": "Test all the deliverables to meet the quality standard.",
+        "correct": false
+      },
+      {
+        "text": "Form a quality assurance team to audit the manufacturing process.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Testing the stability of one of the electronic chips manufactured by your company to determine if it meets your quality standards is an example of:",
+    "explanation": "Statistical sampling involves choosing part of a population of interest for inspection. Domain = Process. PMBOK 6th edition, Page 303",
+    "choices": [
+      {
+        "text": "Benchmarking",
+        "correct": false
+      },
+      {
+        "text": "Design of experiments",
+        "correct": false
+      },
+      {
+        "text": "Statistical sampling",
+        "correct": true
+      },
+      {
+        "text": "Design for X",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Andrew is a project manager in an industrial firm. He is taking over a manufacturing project from another project manager who resigned two weeks ago. Previously the company has faced criticism for the project deliverables from the customer. The previous project manager didn't pay much attention to quality of deliverables. Andrew hired inspectors to inspect the product of the project and prevent the defective ones from reaching the customer. He required from the extra inspectors to record the inspection results of the products as either conform or do not conform to quality requirements. This technique is known as:",
+    "explanation": "Attribute sampling means that the result either conforms or does not conform and variable sampling means that the result is rated on a continuous scale that measures the degree of conformity. Domain = Process. PMBOK 6th edition, Page 274",
+    "choices": [
+      {
+        "text": "Variable sampling",
+        "correct": false
+      },
+      {
+        "text": "Attribute sampling",
+        "correct": true
+      },
+      {
+        "text": "Prevention",
+        "correct": false
+      },
+      {
+        "text": "Statistical sampling",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Luis is a project manager in an electronics firm. He has been assigned to manage a new project to develop a faster, cheaper, and smaller laptop. He is analyzing the defects found in the product by graphical representation of this numerical data. The graph shows the ranking of the cause of defects and the number of defects found per deliverable. Which data representation technique is he using?",
+    "explanation": "Histograms show a graphical representation of numerical data. Histograms can show the number of defects per deliverable, a ranking of the cause of defects, the number of times each process is noncompliant, or other representations of project or product defects. Domain = Process. PMBOK 6th edition, Page 293",
+    "choices": [
+      {
+        "text": "Histogram",
+        "correct": true
+      },
+      {
+        "text": "Scatter Diagram",
+        "correct": false
+      },
+      {
+        "text": "Matrix diagram",
+        "correct": false
+      },
+      {
+        "text": "Cause-and-effect diagram",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "A project manager is executing a construction project. He is working with the quality assurance team to ensure that the project will satisfy the quality standards and metrics. Which of the following must they have before they start this process?",
+    "explanation": "Quality control measurements are used to analyze and evaluate the quality of the processes and deliverables of the project against the standards of the performing organization or the requirements specified. Quality control measurements can also compare the processes used to create the measurements and validate actual measurements to determine their level of correctness. Domain = Process. PMBOK 6th edition, Page 288",
+    "choices": [
+      {
+        "text": "Quality control measurements",
+        "correct": true
+      },
+      {
+        "text": "Quality assurance plan",
+        "correct": false
+      },
+      {
+        "text": "Verified deliverables",
+        "correct": false
+      },
+      {
+        "text": "Quality reports",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "A project manager for a product development project was informed by a team member that a defect was found in a deliverable that must be delivered to customer tomorrow according to the project schedule. The project manager knows that the customer doesn’t have the technical understanding to notice the defect. The deliverable meets the contract requirements, but it doesn’t meet the project manager’s quality standard. What is the best course of action for the project manager?",
+    "explanation": "Issuing the deliverable although it doesn't meet quality requirements is against the professional and social responsibility of a project manager. Documenting the problem in lessons learned register is a good solution for future projects, but it doesn't solve the current situation. Informing the customer that the deliverable will be late may breach the contract and harm the relationship, so the best option is to discuss the issue with the customer. Domain = Process. PMBOK 6th edition, Page 299",
+    "choices": [
+      {
+        "text": "Issue the deliverable and get formal acceptance from the customer, as the deliverable meets his quality standard.",
+        "correct": false
+      },
+      {
+        "text": "Inform the customer that the deliverable will be late and fix the fault.",
+        "correct": false
+      },
+      {
+        "text": "Discuss the issue with the customer.",
+        "correct": true
+      },
+      {
+        "text": "Note the problem in the lessons learned register so future projects do not face the same problem.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Chris is managing a product development project. He receives a call from a team member informing him that they have found the same defect which has been identified before during a previous inspection. Chris is confused how this could have happened. He has raised a change request before to repair this defect and the change was approved. After investigation, he learns that the team did not implement the approved change. This situation indicates a gap in which process?",
+    "explanation": "A part of the Control Quality process is to review approved changes. Approved change requests may include modifications such as defect repairs, revised work methods, and revised schedules. The implementation of approved changes should be verified, confirmed for completeness, retested, and certified as correct. Domain = Process. PMBOK 6th edition, Page 301",
+    "choices": [
+      {
+        "text": "Plan Quality Management",
+        "correct": false
+      },
+      {
+        "text": "Control Scope",
+        "correct": false
+      },
+      {
+        "text": "Control Quality",
+        "correct": true
+      },
+      {
+        "text": "Perform Integrated Change Control",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Which of the following statements best describes the difference between Validate Scope and Control Quality?",
+    "explanation": "Validate Scope is concerned with the acceptance of deliverables while the Control Quality is concerned with correctness of the deliverables. Verified deliverables is an output of the Control Quality process and input to the Validate Scope process. Generally Control Quality is performed before the Validate Scope process. Domain = Process. PMBOK 6th edition, Page 164",
+    "choices": [
+      {
+        "text": "Validate Scope is generally performed before Control Quality.",
+        "correct": false
+      },
+      {
+        "text": "Validate Scope is concerned with the acceptance of deliverables while the Control Quality is concerned with correctness of the deliverables.",
+        "correct": true
+      },
+      {
+        "text": "Verified deliverables are outputs of the Validate Scope process and input to the Control Quality process.",
+        "correct": false
+      },
+      {
+        "text": "Accepted deliverables are outputs of the Control Quality process and input to the Validate Scope process.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "During a retrospective, a stakeholder expressed his concerns about the quality of the product increments delivered so far. The stakeholder has mentioned that the team is not able to deliver high-quality product increment. Which of the following is the best course of action?",
+    "explanation": "The best answer is that the project leader and the team need to further discuss the quality related topics first and review the quality processes. If further assistance is needed they can involve the functional manager. Domain = Process. PMBOK 6th edition, Page 299 and PMBOK 7th edition, Page 87",
+    "choices": [
+      {
+        "text": "Involve the quality manager to investigate the project quality processes.",
+        "correct": false
+      },
+      {
+        "text": "Arrange training sessions for the team members to improve the quality of the product increments.",
+        "correct": false
+      },
+      {
+        "text": "Assign more quality subject matter experts to the project to improve quality processes.",
+        "correct": false
+      },
+      {
+        "text": "The project leader should discuss this topic with the team and review the quality processes.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "The project team has found that the team velocity has dropped significantly and they have a critical deliverable due in two weeks. The team members decide to skip final test in order to bring the project back on track and don't miss the deliverable due date. Which of the following is a likely result of the team decision?",
+    "explanation": "Removing a test will lead to technical debt which means degraded deliverables quality. Domain = Process. Agile Practice Guide, Page 58",
+    "choices": [
+      {
+        "text": "Increased technical debt",
+        "correct": true
+      },
+      {
+        "text": "Increased customer satisfaction",
+        "correct": false
+      },
+      {
+        "text": "Increased return on investment",
+        "correct": false
+      },
+      {
+        "text": "Increased resources cost",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "You are managing a new construction project that is budgeted at $3,000,000. Too many activities are being executed underway on your project. You are getting worried about the accuracy of the progress reporting your team members are doing. How could you verify whether there is a problem or not?",
+    "explanation": "Perform a quality audit as part of the Manage Quality process to verify that there is a problem or not. Domain = Process. PMBOK 6th edition, Page 294 and PMBOK 7th edition, Page 87",
+    "choices": [
+      {
+        "text": "Feasibility studies",
+        "correct": false
+      },
+      {
+        "text": "Quality audits",
+        "correct": true
+      },
+      {
+        "text": "Sensitivity analysis",
+        "correct": false
+      },
+      {
+        "text": "Monte Carlo Analysis",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Barbara is managing a large industrial project. Recently, her company received many complaints due to defects found by the customer in the first deliverable. The customer is not satisfied at all with the first project deliverable. The project sponsor is very angry and told her that the company may lose the contract with the customer if they find defects in the next deliverables. In order to reduce sponsor's stress, she told him that they will compare the product’s quality standards to those of another comparable successful products to identify best practices and increase the probability of customer acceptance. Which tool is she using?",
+    "explanation": "Benchmarking is the comparison of actual or planned practices of your project to those of other projects to identify best practices and improve performance. Domain = Process. PMBOK 6th edition, Page 284",
+    "choices": [
+      {
+        "text": "Matrix diagrams",
+        "correct": false
+      },
+      {
+        "text": "Logical data model",
+        "correct": false
+      },
+      {
+        "text": "Benchmarking",
+        "correct": true
+      },
+      {
+        "text": "Mind mapping",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Bill is managing an industrial project. He requested from his team to organize potential causes of quality problems into groups to know which causes they should focus on. Which tool should the team use in this situation?",
+    "explanation": "Affinity diagrams can organize potential causes of defects into groups showing areas that should be focused on the most. Domain = Process. PMBOK 6th edition, Page 293 and PMBOK 7th edition, Page 178",
+    "choices": [
+      {
+        "text": "Control Charts",
+        "correct": false
+      },
+      {
+        "text": "Scatter diagrams",
+        "correct": false
+      },
+      {
+        "text": "Affinity diagrams",
+        "correct": true
+      },
+      {
+        "text": "Why-why diagram",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "A project manager for a hardware design project and his team are using cause and effect diagram, trying to determine how various factors might have contributed to project problems. The project manager is involved in which part of the quality management process?",
+    "explanation": "The key word here is (might have contributed) this means that the problem already happened, so they are involved in the Control Quality process. Domain = Process. PMBOK 6th edition, Page 304",
+    "choices": [
+      {
+        "text": "Total Quality Management",
+        "correct": false
+      },
+      {
+        "text": "Control Quality",
+        "correct": true
+      },
+      {
+        "text": "Manage Quality",
+        "correct": false
+      },
+      {
+        "text": "Plan Quality Management",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "You are a project manager for an industrial project. Your project is being audited by the company’s quality assurance department. They have found that your team has implemented the process inefficiently, which lead to defects in your product. What’s the next thing that should happen on your project?",
+    "explanation": "They are now involved in the Manage Quality process. One of the outputs of this process is Change Request. Domain = Process. PMBOK 6th edition, Page 296",
+    "choices": [
+      {
+        "text": "Add the problem to the risk register and develop a response plan.",
+        "correct": false
+      },
+      {
+        "text": "Suggest corrective actions and submit them to the change control board.",
+        "correct": true
+      },
+      {
+        "text": "Add the results of the audit to the lessons learned.",
+        "correct": false
+      },
+      {
+        "text": "You meet with the manager of the quality assurance department to find a solution of the problem.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Project deliverables are produced during the ______ process, verified during the ______ process and formally accepted during the ______ process.",
+    "explanation": "Project deliverables are produced during the Direct and manage project work process, verified during the Control Quality process and formally accepted during the Validate Scope process. Domain = Process. PMBOK 6th edition, Page 299 and 305",
+    "choices": [
+      {
+        "text": "Perform Integrated Change Control, Control Quality, Validate Scope",
+        "correct": false
+      },
+      {
+        "text": "Direct and manage project work, Validate Scope, Control Quality",
+        "correct": false
+      },
+      {
+        "text": "Direct and Manage Project Work, Control Quality, Control Scope",
+        "correct": false
+      },
+      {
+        "text": "Direct and manage project work, Control Quality, Validate Scope",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "All of the following are examples of cost of quality except:",
+    "explanation": "The cost of quality is the cost incurred to prevent, discover or repair a defect. Domain = Process. PMBOK 6th edition, Page 283 and PMBOK 7th edition, Page 88",
+    "choices": [
+      {
+        "text": "Having team members spend extra time reviewing requirements with the stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "Paying extra labor to help meet a deadline.",
+        "correct": true
+      },
+      {
+        "text": "Hiring extra inspectors to look for defects.",
+        "correct": false
+      },
+      {
+        "text": "Sending a technician to repair a defective product that was delivered to the client.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "David is managing a software project. He wants to find the strength of relationships among different factors. He asked John a more experienced project manager, John told him there is a tool that can give him information about the relationship, such as its strength, the roles played by various individuals or measurements. What is the tool which John refers to?",
+    "explanation": "Matrix diagrams help find the strength of relationships among different factors, causes, and objectives that exist between the rows and columns that form the matrix. Domain = Process. PMBOK 6th edition, Page 284",
+    "choices": [
+      {
+        "text": "Matrix diagrams",
+        "correct": true
+      },
+      {
+        "text": "Logical data model",
+        "correct": false
+      },
+      {
+        "text": "Flowcharts",
+        "correct": false
+      },
+      {
+        "text": "Mind mapping",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 115,
+    "type": "multiple-choice",
+    "categoryId": 4,
+    "text": "Quality audits should be",
+    "explanation": "Quality audits may be scheduled or random, and may be conducted by internal or external auditors Domain = Process. PMBOK 6th edition, Page 295",
+    "choices": [
+      {
+        "text": "Scheduled with external auditors",
+        "correct": false
+      },
+      {
+        "text": "Random with internal auditors",
+        "correct": false
+      },
+      {
+        "text": "Scheduled or random with internal or external auditors",
+        "correct": true
+      },
+      {
+        "text": "Scheduled with internal auditors",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 116,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "You are identifying stakeholders at the beginning of your project. You need to classify them in order to perform stakeholder analysis. You grouped the stakeholders based on their active involvement in the project and their ability to effect changes to the project’s planning or execution. Which classification model did you use?",
+    "explanation": "Impact/influence grid involves grouping the stakeholders based on their active involvement (“influence”) in the project and their ability to effect changes to the project’s planning or execution (“impact”). Domain = Process. PMBOK 6th edition, Page 512",
+    "choices": [
+      {
+        "text": "Power/interest grid",
+        "correct": false
+      },
+      {
+        "text": "Power/influence grid",
+        "correct": false
+      },
+      {
+        "text": "Impact/influence grid",
+        "correct": true
+      },
+      {
+        "text": "Salience model",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 117,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "Caroline is a project manager for a multi-national project which involves 350 stakeholders from 6 countries. She believs that stakeholder engagement is a key factor for successful projects, so she pays more attention to stakeholder engagement. She is creating a document to help her and her team find the communication gaps with project stakeholders. This document is known as:",
+    "explanation": "A stakeholder engagement assessment matrix supports comparison between the current engagement levels of stakeholders and the desired engagement levels required for successful project delivery. Domain = Process. PMBOK 6th edition, Page 522 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "Stakeholder Management Plan",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder Register",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder Engagement Plan",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder Engagement Assessment Matrix",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 118,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "Dave is assigned to manage a large and complex project under a contract with the government. The project is to replace existing copper cables by optical fiber cables. The project is very important and critical to the organization. The project charter has been approved. Dave and his team start to identify project stakeholders. It is clear that the project involves a large and complex community of stakeholders with different power and influence levels. Dave needs to determine the relative importance of each identified stakeholder. Which of the following categorization methods is the most appropriate to use?",
+    "explanation": "The salience model is useful for large complex communities of stakeholders or where there are complex networks of relationships within the community. It is also useful in determining the relative importance of the identified stakeholders. Domain = Process. PMBOK 6th edition, Page 513 and PMBOK 7th edition, Page 171",
+    "choices": [
+      {
+        "text": "Salience model",
+        "correct": true
+      },
+      {
+        "text": "Stakeholder cube",
+        "correct": false
+      },
+      {
+        "text": "Power/influence grid",
+        "correct": false
+      },
+      {
+        "text": "Impact/influence grid",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 119,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "You are managing a construction project to build a new factory. You are partway through the project, and your team has just delivered the design of the factory . Your team makes a presentation to the project sponsor and key stakeholders. Later, the sponsor informs you that there is an important representative from the government who must approve the design to give you the license to the new factory, and whose requirements are not being met. As a result, you must now make a large and expensive change to accommodate that representative's requirements. What is the best explanation for this?",
+    "explanation": "Stakeholder analysis means talking to the stakeholders and figuring out their needs. If there is an important client who has needs that your project is supposed to fulfill, that client is always a stakeholder. Domain = Process. PMBOK 7th edition, Page 11-12",
+    "choices": [
+      {
+        "text": "The government representative should have informed with all his requirements at the beginning of the project.",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder analysis was not performed adequately.",
+        "correct": true
+      },
+      {
+        "text": "The team made a serious mistake and you need to use penalty power to correct it.",
+        "correct": false
+      },
+      {
+        "text": "You do not have enough budget to perform the project.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "All of the following are stakeholders except:",
+    "explanation": "A stakeholder may affect or be affected by project. Domain = Process. PMBOK 7th edition, Page 9",
+    "choices": [
+      {
+        "text": "The bank from which you get a loan to fund your project",
+        "correct": false
+      },
+      {
+        "text": "A financial expert at your company’s competitor",
+        "correct": true
+      },
+      {
+        "text": "A risk management expert in your organization who will help you in evaluating risks on your project",
+        "correct": false
+      },
+      {
+        "text": "The user of the product of the project",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 121,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "Which of the following statements best describes when stakeholders identification is performed during the project?",
+    "explanation": "Detailed stakeholder identification is a continuous activity throughout the project. Domain = Process. PMBOK 7th edition, Page 11",
+    "choices": [
+      {
+        "text": "At the beginning of the project",
+        "correct": false
+      },
+      {
+        "text": "Throughout the project",
+        "correct": true
+      },
+      {
+        "text": "Only when a new stakeholder is discovered",
+        "correct": false
+      },
+      {
+        "text": "Before starting to prepare the project management plan",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 122,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "You have been promoted to a project manager position and assigned to manage a project that involves multiple stakeholders from five countries. You are being mentored by a senior project manager who has a great experience of managing large scale and multinational projects within your organization. He advised you to pay more attention to evaluating the engagement levels of the identified stakeholders. Which of the following documents contains specific strategies for engaging stakeholders in your project?",
+    "explanation": "The stakeholder engagement plan may include specific strategies or approaches for engaging with individuals or groups of stakeholders. Domain = Process. PMBOK 6th edition, Page 522 and PMBOK 7th edition, Page 187",
+    "choices": [
+      {
+        "text": "Stakeholder Management Plan",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder Register",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder Engagement Plan",
+        "correct": true
+      },
+      {
+        "text": "Communication Management Plan",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 123,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "Smith is a project manager for a large software implementation project. The project includes a large number of stakeholders. He is an experienced project manager and knows that stakeholder engagement is a key factor to project success. After identifying all stakeholders, he needs to categorize them according to their power, interest and influence. Which of the following categorization models is the most appropriate to use?",
+    "explanation": "Stakeholder cube combines power, interest and influence which already exist in power/ interest and power/influence grids into a three-dimensional model that can be useful to project managers and teams in identifying and engaging their stakeholder community. Domain = Process. PMBOK 6th edition, Page 513",
+    "choices": [
+      {
+        "text": "Power/interest grid",
+        "correct": false
+      },
+      {
+        "text": "Power/influence grid",
+        "correct": false
+      },
+      {
+        "text": "Power/interest and power/ influence grids",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder cube",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 124,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "Stakeholder register can include all of the following, except:",
+    "explanation": "Current and desired engagement levels of each stakeholder are included in the stakeholder engagement assessment matrix. Domain = Process. PMBOK 6th edition, Page 514 and 521 and PMBOK 7th edition, Page 185",
+    "choices": [
+      {
+        "text": "Name, organizational position, location and role on the project of each stakeholder.",
+        "correct": false
+      },
+      {
+        "text": "Major requirements, expectations and potential for influencing project outcomes.",
+        "correct": false
+      },
+      {
+        "text": "Current and desired engagement levels of each stakeholder.",
+        "correct": true
+      },
+      {
+        "text": "Stakeholder classification whether each stakeholder is Internal/external, impact/influence/ power/interest, upward/downward/ outward/sideward.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "You are managing a large software project that’s been broken down into sub-projects (or phases). Each of these sub-projects is scheduled to take between four and seven months to complete. At the end of each sub-project, you plan to go through the closing processes and document lessons learned. Which of the following best describes what you must do at the beginning of each sub-project or phase?",
+    "explanation": "You should identify stakeholders at the beginning of each phase. Domain = Process. PMBOK 7th edition, Page 11",
+    "choices": [
+      {
+        "text": "Make sure that each team member knows the activities assigned to him.",
+        "correct": false
+      },
+      {
+        "text": "Identify the stakeholders.",
+        "correct": true
+      },
+      {
+        "text": "Make sure that performance measurement baselines are ready for the next phase.",
+        "correct": false
+      },
+      {
+        "text": "Release all resources from the project and contact sellers to renegotiate all contracts.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 126,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "The main difference between stakeholders and key stakeholders is that the key stakeholders are:",
+    "explanation": "All other choices are valid for stakeholders, while key stakeholders are decision makers. Domain = Process. PMBOK 7th edition, Page 12",
+    "choices": [
+      {
+        "text": "A person, group, or organization that is affected by the project.",
+        "correct": false
+      },
+      {
+        "text": "A person, group, or organization that is in a decision making position.",
+        "correct": true
+      },
+      {
+        "text": "A person, group, or organization that affects the project.",
+        "correct": false
+      },
+      {
+        "text": "A person, group, or organization that executes the project work.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 127,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "You have been assigned as a project manager for a new construction project. The sponsor has issued the charter and you have compiled a list of potential stakeholders. You are classifying them with regard to the direction of their influence. The project sponsor is classified as:",
+    "explanation": "Senior management of the performing organization or customer organization, sponsor, and steering committee are classified as upward stakeholders. Domain = Process. PMBOK 6th edition, Page 513",
+    "choices": [
+      {
+        "text": "Upward",
+        "correct": true
+      },
+      {
+        "text": "Downward",
+        "correct": false
+      },
+      {
+        "text": "Outward",
+        "correct": false
+      },
+      {
+        "text": "Sideward",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 128,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "Stakeholders are any people or organizations whose interests may be positively or negatively impacted by the project or product. When do they have the most influence on a project?",
+    "explanation": "Stakeholders have influence throughout the project, but they must be identified and involved at the beginning of the project to determine their requirements and expectations at the beginning. If this effort was not done, you will discover their requirements later which will be more costly than if they are included at the beginning of the project. Domain = Process. PMBOK 6th edition, Page 549",
+    "choices": [
+      {
+        "text": "Throughout the project",
+        "correct": false
+      },
+      {
+        "text": "During the executing process group",
+        "correct": false
+      },
+      {
+        "text": "At the beginning of the project",
+        "correct": true
+      },
+      {
+        "text": "During the monitoring and controlling process group",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 129,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "You have just been authorized to manage a new software project for your company. Which of the following statements best describes your first action?",
+    "explanation": "As you have just been authorized, so the project charter is issued, the project charter gives the project manager authority. Domain = Process. PMBOK 6th edition, Page 563 and PMBOK 7th edition, Page 11",
+    "choices": [
+      {
+        "text": "Create the project scope statement.",
+        "correct": false
+      },
+      {
+        "text": "Develop the project management plan.",
+        "correct": false
+      },
+      {
+        "text": "Begin creating the project charter.",
+        "correct": false
+      },
+      {
+        "text": "Figure out who has a stake in the project.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 130,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "Dan is managing a large engineering project containing 450 stakeholders located in 3 countries. He is classifying project stakeholders according to their level of authority, need for immediate attention and whether their involvement is appropriate. Which stakeholder classification model is he using?",
+    "explanation": "Salience model describes classes of stakeholders based on assessments of their power (level of authority or ability to influence the outcomes of the project), urgency (need for immediate attention, either time-constrained or relating to the stakeholders’ high stake in the outcome), and legitimacy (their involvement is appropriate). Domain = Process. PMBOK 6th edition, Page 513 and PMBOK 7th edition, Page 171",
+    "choices": [
+      {
+        "text": "Power/interest grid",
+        "correct": false
+      },
+      {
+        "text": "Power/influence grid",
+        "correct": false
+      },
+      {
+        "text": "Impact/influence grid",
+        "correct": false
+      },
+      {
+        "text": "Salience model",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 131,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "Laurence has been assigned to manage his first project using a waterfall approach. The project charter has been issued. Laurence and his team are identifying the project stakeholders. A team member asks Laurence why he is checking the agreements documents while they are identifying project stakeholders. Which of the following represents the best answer to the team member's question?",
+    "explanation": "The parties of an agreement are project stakeholders. The agreement can contain references to additional stakeholders. Domain = Process. PMBOK 6th edition, Page 510 and PMBOK 7th edition, Page 11",
+    "choices": [
+      {
+        "text": "The agreement includes a complete list of project stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "The agreement includes the results of market research to identify additional stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "Because some of project stakeholders may be involved in the agreement.",
+        "correct": false
+      },
+      {
+        "text": "Because all parties of the agreement are stakeholders.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 132,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "For which of the following can a stakeholder engagement assessment matrix be used?",
+    "explanation": "Stakeholders engagement assessment matrix contains the current and desired engagement levels of stakeholders. When there is a variance between the current and desired engagement levels this means that you need to do more communication with those persons to increase their engagement. Domain = Process. PMBOK 6th edition, Page 521 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "It can be used to identify communication gaps with stakeholders.",
+        "correct": true
+      },
+      {
+        "text": "It can be used to identify relationships between stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "It can be used to identify required skill levels of stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "It can be used to identify roles of stakeholders.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 133,
+    "type": "multiple-choice",
+    "categoryId": 5,
+    "text": "A project has been initiated in an organization to automate the reporting process within the organization. A stakeholder who did this task manually feels that he might lose his job as a result of the project because, all the manual work he is doing, will be done automatically. He always tries to delay the project activities as much as he can which lead the project to be three months behind schedule. What might have been done differently during project planning to avoid this situation?",
+    "explanation": "The stakeholder engagement assessment matrix is used to identify stakeholders with their current and desired engagement level. In this case, identifying the current and desired engagement levels of the stakeholder might have allowed the project manager to take action to address the undesirable engagement levels and prevent the stakeholder's resistance from negatively impact the project’s performance. Domain = Process. PMBOK 6th edition, Page 521",
+    "choices": [
+      {
+        "text": "Promising the stakeholder that he will have another job in the organization.",
+        "correct": false
+      },
+      {
+        "text": "Assigning the activities to another stakeholder.",
+        "correct": false
+      },
+      {
+        "text": "Creating stakeholders engagement assessment matrix.",
+        "correct": true
+      },
+      {
+        "text": "Reporting the stakeholder's behavior to his functional manager.",
+        "correct": false
+      }
+    ]
+  }
+]

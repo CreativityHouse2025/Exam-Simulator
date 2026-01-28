@@ -1,13 +1,16 @@
-import type { Exam, Lang, SessionNavigation, SessionTimer, SessionExam, SessionData } from './types'
+import React from "react";
+
+export const ToastContext = React.createContext<ToastContextType | undefined>(undefined);
+import type { Exam, SessionNavigation, SessionTimer, SessionExam, SessionData, SettingsContextType, ToastContextType } from './types'
 
 import { createContext } from 'react'
-import { LANGUAGES } from './constants'
+import { GENERAL_CATEGORY_ID } from './constants'
 
 // Exam context
 export const ExamContext = createContext<Exam>({} as Exam)
 
-// Language context
-export const LangContext = createContext<Lang>(LANGUAGES.ar)
+// Settings context
+export const SettingsContext = createContext<SettingsContextType>({} as SettingsContextType)
 
 // Split session contexts for better performance
 export const SessionNavigationContext = createContext<SessionNavigation>({
@@ -22,10 +25,12 @@ export const SessionTimerContext = createContext<SessionTimer>({
 
 export const SessionExamContext = createContext<SessionExam>({
   examState: 'not-started',
-  reviewState: 'summary'
+  reviewState: 'summary',
+  categoryId: GENERAL_CATEGORY_ID // add category to the context for metadata during exam
 })
 
 export const SessionDataContext = createContext<SessionData>({
   bookmarks: [],
-  answers: []
+  answers: [],
+  emailSent: false
 })

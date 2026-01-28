@@ -1,10 +1,13 @@
-import type { ThemedStyles } from '../types'
-
-import React from 'react'
+import type { Category, ThemedStyles } from '../types'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
+import { StartExamOptions } from '../App'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
+import CategoryDropdown from './Category/CategoryDropdown'
+import { GENERAL_CATEGORY_ID, ReducedMotionWrapper } from '../constants'
+import useSettings from '../hooks/useSettings'
 
 const CoverStyles = styled.div<ThemedStyles>`
   width: 100vw;
@@ -57,7 +60,7 @@ const StartButton = styled.button<ThemedStyles>`
   }
 `
 
-const ContinueButton = styled(StartButton)<ThemedStyles>`
+const ContinueButton = styled(StartButton) <ThemedStyles>`
   min-width: 300px;
   background: ${({ theme }) => theme.secondary || theme.grey[6]};
 `
@@ -76,7 +79,16 @@ const ButtonRow = styled.div`
   gap: 1rem;
 `
 
-const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onContinue }) => {
+const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue }) => {
+  const [dropdown, setDropdown] = useState<boolean>(false);
+
+  const { settings } = useSettings();
+
+  const langCode = settings.language;
+
+  // button ref to fix immediate dropdown close on touch event
+  const miniButtonRef = useRef<HTMLButtonElement | null>(null);
+
   const translations = React.useMemo(
     () => ({
       logoAlt: translate('cover.logo-alt'),
@@ -84,44 +96,49 @@ const CoverComponent: React.FC<CoverProps> = ({ onStartNew, onStartMini, onConti
       description: translate('about.description'),
       new: translate('cover.new'),
       mini: translate('cover.mini'),
-      continue: translate('cover.continue')
+      continue: translate('cover.continue'),
+      selectCategory: translate('cover.select-category')
     }),
-    [document.documentElement.lang, translate]
+    [langCode, translate]
   )
 
   return (
-    <CoverStyles id="cover">
-      <Image id="image" src={Logo} alt={translations.logoAlt} />
+    <ReducedMotionWrapper>
+      <CoverStyles id="cover">
+        <Image id="image" src={Logo} alt={translations.logoAlt} />
 
-      <Title id="title">{translations.title}</Title>
+        <Title id="title">{translations.title}</Title>
 
-      <Description id="description">{translations.description}</Description>
+        <Description id="description">{translations.description}</Description>
 
-      <ButtonContainer id="button-container">
-        <ButtonRow id="button-row">
-          <StartButton id="start-new-button" className="no-select" onClick={onStartNew}>
-            {translations.new}
-          </StartButton>
+        <ButtonContainer id="button-container">
+          <ButtonRow id="button-row">
+            <StartButton title='Start a new exam' type='button' id="start-new-button" className="no-select" onClick={() => onStart({type: 'exam', categoryId: GENERAL_CATEGORY_ID})}>
+              {translations.new}
+            </StartButton>
 
-          <StartButton id="start-mini-button" className="no-select" onClick={onStartMini}>
-            {translations.mini}
-          </StartButton>
-        </ButtonRow>
+            <StartButton title='Start a mini-exam' type='button' id="start-mini-button" ref={miniButtonRef} className="no-select" onClick={() => { setDropdown(true) }}>
+              {translations.mini}
+            </StartButton>
+          </ButtonRow>
 
-        {onContinue && (
-          <ContinueButton id="continue-button" className="no-select" onClick={onContinue}>
-            {translations.continue}
-          </ContinueButton>
-        )}
-      </ButtonContainer>
-    </CoverStyles>
+          {canContinue && onContinue && (
+            <ContinueButton title='Continue last exam' type='button' id="continue-button" className="no-select" onClick={onContinue}>
+              {translations.continue}
+            </ContinueButton>
+          )}
+          <CategoryDropdown open={dropdown} setOpen={setDropdown} buttonRef={miniButtonRef} title={translations.selectCategory} onSelect={(categoryId: Category['id']) => onStart({type: 'miniexam', categoryId})} />
+
+        </ButtonContainer>
+      </CoverStyles>
+    </ReducedMotionWrapper>
   )
 }
 
 export default React.memo(CoverComponent)
 
 export interface CoverProps {
-  onStartNew: () => void | Promise<void>
-  onStartMini: () => void | Promise<void>
+  onStart: (options: StartExamOptions) => void | Promise<void>
+  canContinue: boolean
   onContinue?: () => void | Promise<void>
 }

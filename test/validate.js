@@ -94,3 +94,5 @@ export function validateChoices(question, questionPath) {
 
   ok(correctCount > 0, `Question must have at least one correct choice: ${questionPath}`)
 }
+
+// TODO: write a test to ensure that no question is duplicated (id or text). And that the categories are valid

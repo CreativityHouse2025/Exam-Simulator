@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { DEFAULT_THEME } from './constants'
 import App from './App'
+import SettingsProvider from './providers/SettingsContextProvider'
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -38,9 +39,11 @@ if (!container) {
 
 createRoot(container).render(
   <React.StrictMode>
-    <ThemeProvider theme={DEFAULT_THEME}>
-      <GlobalStyle />
-      <App />
-    </ThemeProvider>
+    <SettingsProvider>
+      <ThemeProvider theme={DEFAULT_THEME}>
+        <GlobalStyle />
+        <App />
+      </ThemeProvider>
+    </SettingsProvider>
   </React.StrictMode>
 )
