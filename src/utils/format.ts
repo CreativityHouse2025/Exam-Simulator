@@ -1,7 +1,6 @@
-import type { Exam, ExamType, LangCode, Question, Session } from '../types'
+import type { Exam, ExamType, LangCode, Question, Session } from '../types.js'
 
 import { formatDistance, format } from 'date-fns'
-import { translate } from './translation';
 
 /**
    * Shuffle array using Fisher-Yates algorithm
