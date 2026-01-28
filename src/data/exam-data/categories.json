@@ -2,22 +2,15 @@
     {
         "id": 1,
         "name": {
-            "en": "Project Integration Management",
-            "ar": "إدارة تكامل المشروع"
-        }
-    },
-    {
-        "id": 2,
-        "name": {
-            "en": "Risk Management",
-            "ar": "إدارة المخاطر"
+            "en": "Scope",
+            "ar": "النطاق"
         }
     },
     {
         "id": 3,
         "name": {
-            "en": "Stakeholder Management",
-            "ar": "إدارة أصحاب المصلحة"
+            "en": "Communication",
+            "ar": "التواصل"
         }
     }
 ]
