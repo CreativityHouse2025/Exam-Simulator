@@ -10,7 +10,7 @@
 endobj
 4 0 obj
 <<
-/Length 797
+/Length 772
 >>
 stream
 0.200025 w
@@ -37,15 +37,15 @@ BT
 /F15 16 Tf
 18.3999999999999986 TL
 0 g
-191.3759999999999764 561.8899999999999864 Td
-<18051831182818280001180d181d1829182117f90001180c182b1824181d1829182918211820000118001828182f181d1820181d18331825> Tj
+223.0079999999999814 561.8899999999999864 Td
+<18051831182818280001180d181d1829182117f90001041a03f50037041803ff040d0037000103e1040d03d303f2> Tj
 ET
 BT
 /F15 12 Tf
 13.7999999999999989 TL
 0 g
-217.6419999999999959 61.8899999999999864 Td
-<18031821181f18211829181e1821182e000117f217f017ed000117f117ef17f117f40001181d1830000117ef17f417f917f217f30001180f180c> Tj
+223.617999999999995 61.8899999999999864 Td
+<1809181d182a1831181d182e1835000117f117f717ed000117f117ef17f117f50001181d1830000117ef17f817f917f417f60001180f180c> Tj
 ET
 endstream
 endobj
@@ -59,7 +59,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Length 3354
+/Length 4308
 >>
 stream
 0.200025 w
@@ -69,196 +69,217 @@ BT
 16.0999999999999979 TL
 0 g
 50. 791.8899999999999864 Td
-(1. Why is early stakeholder engagement important?) Tj
+(1. According to this Work Breakdown Structure \(WBS\), the component with ID \(4.1.2.1\) is a/an:) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+70. 765.8899999999999864 Td
+(A. Control Account) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0. 0.502 0. rg
-70. 765.8899999999999864 Td
-(A. It reduces resistance and increases support) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
 70. 744.8899999999999864 Td
-(B. It eliminates all risks) Tj
+(B. Work Package) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.588 g
 70. 723.8899999999999864 Td
-(C. It guarantees project success) Tj
+(C. Planning Package) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.588 g
 70. 702.8899999999999864 Td
-(D. It removes the need for planning) Tj
+(D. Deliverable) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.502 0. 0. rg
 50. 677.8899999999999864 Td
-(Your answer is missing) Tj
+(Your answer is incorrect) Tj
 ET
 BT
 /F1 11 Tf
 12.6499999999999986 TL
 0. g
 50. 657.8899999999999864 Td
-(Explanation: Early engagement reduces resistance and improves support.) Tj
-ET
-BT
-/F1 14 Tf
-16.0999999999999979 TL
-0. g
-50. 613.8899999999999864 Td
-(2. Which element is included in the project management plan?) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0. 0.502 0. rg
-70. 587.8899999999999864 Td
-(A. Subsidiary Management Plans) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 566.8899999999999864 Td
-(B. Product Backlog) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 545.8899999999999864 Td
-(C. Communication Logs) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 524.8899999999999864 Td
-(D. Resource Contracts) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.502 0. 0. rg
-50. 499.8899999999999864 Td
-(Your answer is missing) Tj
+(Explanation: The lowest level of the WBS is a work package with a unique identifier. Domain) Tj
 ET
 BT
 /F1 11 Tf
 12.6499999999999986 TL
 0. g
-50. 479.8899999999999864 Td
-(Explanation: The plan includes subsidiary plans like scope, schedule, and cost.) Tj
+50. 643.8899999999999864 Td
+(= Process. PMBOK 6th edition, Page 161) Tj
 ET
 BT
 /F1 14 Tf
 16.0999999999999979 TL
+0. g
+50. 599.8899999999999864 Td
+(2. After the weekly project status meeting with the project team members, you asked a project team) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 583.8899999999999864 Td
+(member to send minutes of meeting to all the attendees. Meeting minutes is classified as:) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 557.8899999999999864 Td
+(A. Formal Communication) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 536.8899999999999864 Td
+(B. Informal Communication) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 515.8899999999999864 Td
+(C. External Communication) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 494.8899999999999864 Td
+(D. Oral Communication) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+50. 469.8899999999999864 Td
+(Your answer is correct) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 449.8899999999999864 Td
+(Explanation: Formal Communication includes reports, formal meetings \(both regular and ad) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
 0. g
 50. 435.8899999999999864 Td
-(3. Which technique is commonly used to prioritize project risks?) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0. 0.502 0. rg
-70. 409.8899999999999864 Td
-(A. Probability and impact matrix) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 388.8899999999999864 Td
-(B. Cost-benefit analysis) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 367.8899999999999864 Td
-(C. Earned value analysis) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 346.8899999999999864 Td
-(D. Resource leveling) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.502 0. 0. rg
-50. 321.8899999999999864 Td
-(Your answer is missing) Tj
+(hoc\), meeting agendas and minutes, stakeholder briefings, and presentations. Domain =) Tj
 ET
 BT
 /F1 11 Tf
 12.6499999999999986 TL
 0. g
-50. 301.8899999999999864 Td
-(Explanation: Probability and impact matrix prioritizes risks based on likelihood and impact.) Tj
+50. 421.8899999999999864 Td
+(Process. PMBOK 7th edition, Page 13) Tj
 ET
 BT
 /F1 14 Tf
 16.0999999999999979 TL
 0. g
-50. 257.8899999999999864 Td
-(4. Which factor can increase stakeholder conflict?) Tj
+50. 377.8899999999999864 Td
+(3. Joseph is a project manager for a hardware design project. The project is about to be completed) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 361.8899999999999864 Td
+(when the customer refused to sign one of the last invoices saying that a user manual for the hardware) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 345.8899999999999864 Td
+(must be delivered. Joseph is surprised because the user manual shouldn't be completed by his) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 329.8899999999999864 Td
+(company, this happened most likely because:) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 303.8899999999999864 Td
+(A. The work packages were not decomposed to project activities.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0. 0.502 0. rg
-70. 231.8899999999999864 Td
-(A. Unclear expectations) Tj
+70. 282.8899999999999864 Td
+(B. Project exclusions were not clearly identified in the project scope statement.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+70. 261.8899999999999864 Td
+(C. This requirement is not related to achieving any of the project objectives, so it) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+70. 245.8899999999999864 Td
+(was removed from the requirements traceability matrix.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.588 g
-70. 210.8899999999999864 Td
-(B. Frequent communication) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 189.8899999999999864 Td
-(C. Effective planning) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 168.8899999999999864 Td
-(D. Well-defined roles) Tj
+70. 224.8899999999999864 Td
+(D. This requirement was not included in the requirements management plan.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.502 0. 0. rg
-50. 143.8899999999999864 Td
-(Your answer is missing) Tj
+50. 199.8899999999999864 Td
+(Your answer is incorrect) Tj
 ET
 BT
 /F1 11 Tf
 12.6499999999999986 TL
 0. g
-50. 123.8899999999999864 Td
-(Explanation: Unclear expectations commonly cause stakeholder conflict.) Tj
+50. 179.8899999999999864 Td
+(Explanation: The scope statement should state clearly what is as is not included in project) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 165.8899999999999864 Td
+(work. Domain = Process. PMBOK 6th edition, Page 154) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 121.8899999999999864 Td
+(4. Which of the following is a basic rule for creating a work breakdown structure?) Tj
 ET
 endstream
 endobj
@@ -272,213 +293,248 @@ endobj
 endobj
 8 0 obj
 <<
-/Length 3455
+/Length 5191
 >>
 stream
 0.200025 w
 0 G
 BT
-/F1 14 Tf
-16.0999999999999979 TL
-0. g
-50. 791.8899999999999864 Td
-(5. Which document is updated after approved changes are applied?) Tj
-ET
-BT
 /F1 12 Tf
 13.7999999999999989 TL
 0. 0.502 0. rg
-70. 765.8899999999999864 Td
-(A. Project Management Plan) Tj
+70. 791.8899999999999864 Td
+(A. Each level of a work breakdown structure is a smaller segment of the level above.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.588 g
-70. 744.8899999999999864 Td
-(B. Stakeholder Register) Tj
+70. 770.8899999999999864 Td
+(B. It should list the relationships between different activities.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.588 g
-70. 723.8899999999999864 Td
-(C. Issue Log) Tj
+70. 749.8899999999999864 Td
+(C. Each level of a work breakdown structure is a larger segment of the level above.) Tj
 ET
 BT
-/F1 12 Tf
+/F2 12 Tf
 13.7999999999999989 TL
-0.588 g
-70. 702.8899999999999864 Td
-(D. Work Authorization Form) Tj
+0.502 0. 0. rg
+70. 728.8899999999999864 Td
+(D. The planned work is contained within the highest level of WBS components.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.502 0. 0. rg
-50. 677.8899999999999864 Td
+50. 703.8899999999999864 Td
+(Your answer is incorrect) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 683.8899999999999864 Td
+(Explanation: The WBS is a hierarchical decomposition of the total scope of work. Each) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 669.8899999999999864 Td
+(descending level of the WBS represents an increasingly detailed definition of the project work.) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 655.8899999999999864 Td
+(Domain = Process. PMBOK 6th edition, Page 161 and PMBOK 7th edition, Page 84) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 611.8899999999999864 Td
+(5. Which of the following is not an example of the definition of "done" in an agile project?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 585.8899999999999864 Td
+(A. The product is considered to be \(done\), when development work is complete, code is) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 569.8899999999999864 Td
+(documented and refactored.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+70. 548.8899999999999864 Td
+(B. The release will be considered as \(done\) when mobile application version is) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+70. 532.8899999999999864 Td
+(accepted and there are no Priority 1 defects or change requests.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 511.8899999999999864 Td
+(C. The website is considered to be \(done\) when the high priority features are complete) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 495.8899999999999864 Td
+(and beta version gets at least 80% score in user satisfaction survey.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 474.8899999999999864 Td
+(D. The user story is considered to be \(done\) when the code development is complete,) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 458.8899999999999864 Td
+(documented and user acceptance tested.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 433.8899999999999864 Td
+(Your answer is incorrect) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 413.8899999999999864 Td
+(Explanation: Creating a shared definition of done is crucial for satisfying our stakeholdersí) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 399.8899999999999864 Td
+(expectations. Therefore, a shared definition of done is necessary at every level of an agile) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 385.8899999999999864 Td
+(project \(user story ñ release ñ product\). An objective \(quantified\) criteria should be used for) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 371.8899999999999864 Td
+(the definition of done, subjective criteria should not be used. Agile Practice Guide Page 50) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 327.8899999999999864 Td
+(6. You are leading an agile team working on a software project to develop a mobile application. You) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 311.8899999999999864 Td
+(and the team have completed the last iteration and are going to demonstrate the completed product) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 295.8899999999999864 Td
+(increment to the stakeholders during the sprint review. What is the most valuable feedback of the) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 279.8899999999999864 Td
+(product demo?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 253.8899999999999864 Td
+(A. All the required features exist in the increment.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 232.8899999999999864 Td
+(B. The customer representative wants to thanks the team for their efforts.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 211.8899999999999864 Td
+(C. The customer may assign future projects to your team.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 190.8899999999999864 Td
+(D. The marketing manager liked the product increment and wants to show it to the) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 174.8899999999999864 Td
+(customer.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 149.8899999999999864 Td
 (Your answer is missing) Tj
 ET
 BT
 /F1 11 Tf
 12.6499999999999986 TL
 0. g
-50. 657.8899999999999864 Td
-(Explanation: Approved changes must be reflected in the project management plan and) Tj
+50. 129.8899999999999864 Td
+(Explanation: "All the required features exist in the increment" means that the objectives are) Tj
 ET
 BT
 /F1 11 Tf
 12.6499999999999986 TL
 0. g
-50. 643.8899999999999864 Td
-(related documents.) Tj
-ET
-BT
-/F1 14 Tf
-16.0999999999999979 TL
-0. g
-50. 599.8899999999999864 Td
-(6. What is the purpose of the Work Breakdown Structure \(WBS\)?) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0. 0.502 0. rg
-70. 573.8899999999999864 Td
-(A. Break down project deliverables into manageable components) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 552.8899999999999864 Td
-(B. Assign resources to tasks) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 531.8899999999999864 Td
-(C. Document project risks) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 510.8899999999999864 Td
-(D. Provide procurement requirements) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.502 0. 0. rg
-50. 485.8899999999999864 Td
-(Your answer is missing) Tj
-ET
-BT
-/F1 11 Tf
-12.6499999999999986 TL
-0. g
-50. 465.8899999999999864 Td
-(Explanation: The WBS decomposes project deliverables into smaller, manageable) Tj
-ET
-BT
-/F1 11 Tf
-12.6499999999999986 TL
-0. g
-50. 451.8899999999999864 Td
-(components.) Tj
-ET
-BT
-/F1 14 Tf
-16.0999999999999979 TL
-0. g
-50. 407.8899999999999864 Td
-(7. What is a key benefit of integrated change control?) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0. 0.502 0. rg
-70. 381.8899999999999864 Td
-(A. Consistent evaluation of changes) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 360.8899999999999864 Td
-(B. Faster procurement) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 339.8899999999999864 Td
-(C. Guaranteed project success) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 318.8899999999999864 Td
-(D. Reduced team size) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.502 0. 0. rg
-50. 293.8899999999999864 Td
-(Your answer is missing) Tj
-ET
-BT
-/F1 11 Tf
-12.6499999999999986 TL
-0. g
-50. 273.8899999999999864 Td
-(Explanation: It ensures changes are evaluated consistently and approved properly.) Tj
-ET
-BT
-/F1 14 Tf
-16.0999999999999979 TL
-0. g
-50. 229.8899999999999864 Td
-(8. Which process focuses on combining all project work into a unified whole?) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0. 0.502 0. rg
-70. 203.8899999999999864 Td
-(A. Project Integration Management) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 182.8899999999999864 Td
-(B. Schedule Management) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 161.8899999999999864 Td
-(C. Communications Management) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 140.8899999999999864 Td
-(D. Procurement Management) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.502 0. 0. rg
 50. 115.8899999999999864 Td
-(Your answer is missing) Tj
+(met and product increment is accepted. Domain = Process. Agile Practice Guide, Page 55) Tj
 ET
 endstream
 endobj
@@ -492,206 +548,248 @@ endobj
 endobj
 10 0 obj
 <<
-/Length 3407
+/Length 4945
 >>
 stream
 0.200025 w
 0 G
 BT
-/F1 11 Tf
-12.6499999999999986 TL
+/F1 14 Tf
+16.0999999999999979 TL
 0. g
 50. 791.8899999999999864 Td
-(Explanation: Project Integration Management ensures all aspects of the project are) Tj
-ET
-BT
-/F1 11 Tf
-12.6499999999999986 TL
-0. g
-50. 777.8899999999999864 Td
-(coordinated effectively.) Tj
+(7. Kevin is working on a large software project using adaptive approach. He wants to find the changes) Tj
 ET
 BT
 /F1 14 Tf
 16.0999999999999979 TL
 0. g
-50. 733.8899999999999864 Td
-(9. Which stakeholder engagement strategy aims to increase stakeholder support?) Tj
+50. 775.8899999999999864 Td
+(in project scope and their impact on the project progress. Which of the following tools is the most) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 759.8899999999999864 Td
+(appropriate to use?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 733.8899999999999864 Td
+(A. Burndown chart) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0. 0.502 0. rg
-70. 707.8899999999999864 Td
-(A. Proactive engagement) Tj
+70. 712.8899999999999864 Td
+(B. Burnup chart) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.588 g
-70. 686.8899999999999864 Td
-(B. Passive engagement) Tj
+70. 691.8899999999999864 Td
+(C. Kanban board) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.588 g
-70. 665.8899999999999864 Td
-(C. Reactive communication) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 644.8899999999999864 Td
-(D. Restrictive reporting) Tj
+70. 670.8899999999999864 Td
+(D. Product backlog) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.502 0. 0. rg
-50. 619.8899999999999864 Td
+50. 645.8899999999999864 Td
 (Your answer is missing) Tj
 ET
 BT
 /F1 11 Tf
 12.6499999999999986 TL
 0. g
-50. 599.8899999999999864 Td
-(Explanation: A proactive engagement strategy helps increase stakeholder support and reduce) Tj
+50. 625.8899999999999864 Td
+(Explanation: The big advantage of using a burnup chart is that it can show changes in scope,) Tj
 ET
 BT
 /F1 11 Tf
 12.6499999999999986 TL
 0. g
-50. 585.8899999999999864 Td
-(resistance.) Tj
+50. 611.8899999999999864 Td
+(making the impact of those changes visible. Domain = Process. Agile Practice Guide, Page) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 597.8899999999999864 Td
+(63) Tj
 ET
 BT
 /F1 14 Tf
 16.0999999999999979 TL
 0. g
-50. 541.8899999999999864 Td
-(10. What is the purpose of a risk audit?) Tj
+50. 553.8899999999999864 Td
+(8. You have been assigned to manage a software project that should be completed within three) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 537.8899999999999864 Td
+(months. A project charter has been created. You met with the customer, sponsor and key stakeholders) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 521.8899999999999864 Td
+(to collect requirements and developed a project scope statement. A project management plan has) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 505.8899999999999864 Td
+(been developed and approved by key stakeholders. You met with the actual user who will use the) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 489.8899999999999864 Td
+(product of the project to demonstrate how the product of the project will work and discovered that the) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 473.8899999999999864 Td
+(user's requirements are different from the ones you were initially given and approved by key) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 457.8899999999999864 Td
+(stakeholders. What should you do?) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+70. 431.8899999999999864 Td
+(A. Complete the work as originally planned.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 410.8899999999999864 Td
+(B. Re-plan the project to include the new requirements.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 389.8899999999999864 Td
+(C. Try to meet other users to collect other requirements.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0. 0.502 0. rg
-70. 515.8899999999999864 Td
-(A. Evaluate effectiveness of risk responses) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 494.8899999999999864 Td
-(B. Identify new risks) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 473.8899999999999864 Td
-(C. Analyze probability) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 452.8899999999999864 Td
-(D. Close risks) Tj
+70. 368.8899999999999864 Td
+(D. Create a change request for the user's requirements.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.502 0. 0. rg
-50. 427.8899999999999864 Td
-(Your answer is missing) Tj
+50. 343.8899999999999864 Td
+(Your answer is incorrect) Tj
 ET
 BT
 /F1 11 Tf
 12.6499999999999986 TL
 0. g
-50. 407.8899999999999864 Td
-(Explanation: Risk audits evaluate the effectiveness of responses.) Tj
+50. 323.8899999999999864 Td
+(Explanation: You must collect new requirements of the user which will lead to changing parts) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 309.8899999999999864 Td
+(of the project management plan through change request. Domain = Process. PMBOK 6th) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 295.8899999999999864 Td
+(edition, Page 168 and PMBOK 7th edition, Page 83) Tj
 ET
 BT
 /F1 14 Tf
 16.0999999999999979 TL
 0. g
-50. 363.8899999999999864 Td
-(11. What is the purpose of qualitative risk analysis?) Tj
+50. 251.8899999999999864 Td
+(9. Lucas is an agile practitioner leading an agile project. Midway through the project, he and the team) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 235.8899999999999864 Td
+(discover that they have committed to deliver 50 story points during the current iteration, but actually) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 219.8899999999999864 Td
+(they will be able to deliver 40 story points only. Which of the following is the best course of action?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 193.8899999999999864 Td
+(A. Extend the current iteration till the team completes the committed story points.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 172.8899999999999864 Td
+(B. Adjust the iteration plan to have 40 points instead of 50.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0. 0.502 0. rg
-70. 337.8899999999999864 Td
-(A. Prioritize risks based on probability and impact) Tj
+70. 151.8899999999999864 Td
+(C. Complete 40 story points and add 10 story points to the product backlog.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.588 g
-70. 316.8899999999999864 Td
-(B. Produce numerical risk models) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 295.8899999999999864 Td
-(C. Create a risk breakdown structure) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 274.8899999999999864 Td
-(D. Develop mitigation plans) Tj
+70. 130.8899999999999864 Td
+(D. Work overtime to complete the committed story points during the current iteration.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.502 0. 0. rg
-50. 249.8899999999999864 Td
+50. 105.8899999999999864 Td
 (Your answer is missing) Tj
-ET
-BT
-/F1 11 Tf
-12.6499999999999986 TL
-0. g
-50. 229.8899999999999864 Td
-(Explanation: It prioritizes risks using probability and impact.) Tj
-ET
-BT
-/F1 14 Tf
-16.0999999999999979 TL
-0. g
-50. 185.8899999999999864 Td
-(12. What is the primary purpose of the Project Charter?) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0. 0.502 0. rg
-70. 159.8899999999999864 Td
-(A. To formally authorize the project and assign the project manager) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 138.8899999999999864 Td
-(B. To provide a detailed project schedule) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 117.8899999999999864 Td
-(C. To document all project risks) Tj
 ET
 endstream
 endobj
@@ -705,7 +803,1020 @@ endobj
 endobj
 12 0 obj
 <<
-/Length 2297
+/Length 5021
+>>
+stream
+0.200025 w
+0 G
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 791.8899999999999864 Td
+(Explanation: Extending the iteration is not a good solution as it violates the timeboxing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 777.8899999999999864 Td
+(concept. Working overtime and modifying the iteration plan are not proactive solutions. The) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 763.8899999999999864 Td
+(best answer is to complete 40 story points and add the uncompleted stories to the backlog.) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 749.8899999999999864 Td
+(Domain = Process. Agile Practice Guide Page 64) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 705.8899999999999864 Td
+(10. A key stakeholder has expressed his concerns about the status reports sent from the project team.) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 689.8899999999999864 Td
+(He said that he is struggling to obtain the needed information about the project status as the report is) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 673.8899999999999864 Td
+(overstuffed with unnecessary information. Which of the following is the best course of action for the) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 657.8899999999999864 Td
+(project manager?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 631.8899999999999864 Td
+(A. Inform the stakeholder that the format of the status report has been agreed upon in the) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 615.8899999999999864 Td
+(communication management plan. If he wants to change it, he can raise a change) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 599.8899999999999864 Td
+(request.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 578.8899999999999864 Td
+(B. Ask the stakeholder about his information needs and include them in the status report.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 557.8899999999999864 Td
+(C. Inform the stakeholder that the status report addresses different stakeholders' needs. It) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 541.8899999999999864 Td
+(is not tailored according to this particular stakeholder's needs only.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 520.8899999999999864 Td
+(D. Send a separate report to this particular stakeholder tailored according to his needs.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 495.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 475.8899999999999864 Td
+(Explanation: Reports communicate relevant \(usually summary level\) information to) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 461.8899999999999864 Td
+(stakeholders. Often reports are given to stakeholders who are interested in the project status,) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 447.8899999999999864 Td
+(such as sponsors, business owners, or PMOs. They should be tailored to meet the) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 433.8899999999999864 Td
+(stakeholders needs. Domain = Process. PMBOK 6th edition, Page 385 and PMBOK 7th) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 419.8899999999999864 Td
+(edition, Page 190) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 375.8899999999999864 Td
+(11. According to this Work Breakdown Structure \(WBS\), the component with ID \(2\) is a/an:) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 349.8899999999999864 Td
+(A. Control Account) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 328.8899999999999864 Td
+(B. Work Package) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 307.8899999999999864 Td
+(C. Activity) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 286.8899999999999864 Td
+(D. Project Exclusion) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 261.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 241.8899999999999864 Td
+(Explanation: A control account is a management control point where scope, budget, and) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 227.8899999999999864 Td
+(schedule are integrated and compared to the earned value for performance measurement. A) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 213.8899999999999864 Td
+(control account has two or more work packages, though each work package is associated) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 199.8899999999999864 Td
+(with a single control account. Domain = Process. PMBOK 6th edition, Page 161) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 155.8899999999999864 Td
+(12. You are managing an industrial project. The project team has successfully produced the first) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 139.8899999999999864 Td
+(release of the project deliverables. The deliverables are being inspected by the quality control) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 123.8899999999999864 Td
+(department in the organization. What should be done next?) Tj
+ET
+endstream
+endobj
+13 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 14 0 R
+>>
+endobj
+14 0 obj
+<<
+/Length 4722
+>>
+stream
+0.200025 w
+0 G
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 791.8899999999999864 Td
+(A. Verified deliverables should be reviewed with the customer to gain formal acceptance) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 775.8899999999999864 Td
+(of the product.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 754.8899999999999864 Td
+(B. Verified deliverables should be delivered to the customer and begin project closure) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 738.8899999999999864 Td
+(procedures.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 717.8899999999999864 Td
+(C. Document lessons learned and begin project closure procedures.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 696.8899999999999864 Td
+(D. Continue producing the remaining project deliverables.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 671.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 651.8899999999999864 Td
+(Explanation: Project deliverables are reviewed with the customer to gain formal acceptance of) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 637.8899999999999864 Td
+(the product through the Validate Scope process. Domain = Process. PMBOK 6th edition,) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 623.8899999999999864 Td
+(Page 164) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 579.8899999999999864 Td
+(13. Peter is a product owner for a software project that is being implemented using agile methodology.) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 563.8899999999999864 Td
+(During an iteration review, the team demonstrates theA software project that is being implemented) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 547.8899999999999864 Td
+(using agile methodology. During an iteration review, the team demonstrates the completed product) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 531.8899999999999864 Td
+(increment during the last iteration. He rejects one of the product features that the development team) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 515.8899999999999864 Td
+(demonstrated. What should happen next?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 489.8899999999999864 Td
+(A. The team should try to convince the product owner to accept the feature.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 468.8899999999999864 Td
+(B. The related user stories should be added to the next iteration backlog.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 447.8899999999999864 Td
+(C. The team should re-write the related user stories to address the rejection reason.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 426.8899999999999864 Td
+(D. The related user stories are returned back to the product backlog for re-prioritization.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 401.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 381.8899999999999864 Td
+(Explanation: As the feature is rejected, so it means that it does not meet the definition of done) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 367.8899999999999864 Td
+(or there is a difference between what was done and what was expected. So, it is needed to) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 353.8899999999999864 Td
+(close this gap by re-writing the related user stories. Domain = Process. Agile Practice Guide,) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 339.8899999999999864 Td
+(Page 55) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 295.8899999999999864 Td
+(14. Following the shown burnup chart, what happened at point A?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 269.8899999999999864 Td
+(A. Additional scope was added to the project.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 248.8899999999999864 Td
+(B. More resources were added to the project.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 227.8899999999999864 Td
+(C. Resources were pulled off to another project.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 206.8899999999999864 Td
+(D. Project is descoped.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 181.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 161.8899999999999864 Td
+(Explanation: The total story points were 100 and they increased to 120, so the best answer is) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 147.8899999999999864 Td
+(that additional scope was added to the project. Domain = Process. Agile Practice Guide,) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 133.8899999999999864 Td
+(Page 63Hello.) Tj
+ET
+endstream
+endobj
+15 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 16 0 R
+>>
+endobj
+16 0 obj
+<<
+/Length 4980
+>>
+stream
+0.200025 w
+0 G
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 791.8899999999999864 Td
+(15. Due to external factors, a project has been terminated early. The project manager sends the final) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 775.8899999999999864 Td
+(project report to project stakeholders when a functional manager requests a copy of the report. What) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 759.8899999999999864 Td
+(should the project manager do in this situation?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 733.8899999999999864 Td
+(A. Ask the functional manager why he needs the report.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 712.8899999999999864 Td
+(B. Don't send the report and inform his manager.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 691.8899999999999864 Td
+(C. Send the report.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 670.8899999999999864 Td
+(D. Consult the communication management plan.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 645.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 625.8899999999999864 Td
+(Explanation: The communications management plan contains which information should be) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 611.8899999999999864 Td
+(sent to which stakeholder. Domain = Process. PMBOK 6th edition, Page 377 and PMBOK 7th) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 597.8899999999999864 Td
+(edition, Page 186) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 553.8899999999999864 Td
+(16. The development team of an agile project has not completed any new features during the last) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 537.8899999999999864 Td
+(iteration. They are going to hold a product demonstration with the customer representative and) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 521.8899999999999864 Td
+(stakeholders. What should they do?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 495.8899999999999864 Td
+(A. They should discuss the user stories to be added to the next iteration.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 474.8899999999999864 Td
+(B. The product demonstration should be cancelled.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 453.8899999999999864 Td
+(C. They should discuss the root cause of having no new completed features during this) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 437.8899999999999864 Td
+(iteration.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 416.8899999999999864 Td
+(D. They should discuss the lessons learned during the last iteration.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 391.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 371.8899999999999864 Td
+(Explanation: Lessons learned and why no new features were completed can be discussed) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 357.8899999999999864 Td
+(during the retrospective. During product demonstration \(iteration review\), the team and) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 343.8899999999999864 Td
+(stakeholders review what was accomplished in the iteration and collaborate on what to do) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 329.8899999999999864 Td
+(next. The Product Backlog may also be adjusted to meet new opportunities. Domain =) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 315.8899999999999864 Td
+(Process. Agile Practice Guide.) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 271.8899999999999864 Td
+(17. The project sponsor has asked the project team to increase the frequency of sending the project) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 255.8899999999999864 Td
+(status report instead of weekly to be daily. Moreover, he has asked also to send a daily report for the) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 239.8899999999999864 Td
+(progress of outstanding tasks. The team objects to the sponsor's request because preparing such) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 223.8899999999999864 Td
+(report takes much time. Which of the following is the best course of action for the project manager?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 197.8899999999999864 Td
+(A. Ask the sponsor to hire additional resources.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 176.8899999999999864 Td
+(B. Try to convince both sides to accept sending the report twice a week.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 155.8899999999999864 Td
+(C. Review the communication management plan and submit a change request if needed.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 134.8899999999999864 Td
+(D. Meet with the project sponsor and convince him that this is too much work for the team) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 118.8899999999999864 Td
+(members to do.) Tj
+ET
+endstream
+endobj
+17 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 18 0 R
+>>
+endobj
+18 0 obj
+<<
+/Length 4867
+>>
+stream
+0.200025 w
+0 G
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 791.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 771.8899999999999864 Td
+(Explanation: The project manager should review the communication management plan which) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 757.8899999999999864 Td
+(describes the type, frequency and responsible person for sending each report. If it needs to) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 743.8899999999999864 Td
+(be changed, it must be done through a change request as it is a part of the project) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 729.8899999999999864 Td
+(management plan. Domain = Process. PMBOK 6th edition, Page 377 and PMBOK 7th) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 715.8899999999999864 Td
+(edition, Page 79 and 186) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 671.8899999999999864 Td
+(18. For the shown burndown chart, what is the status of the project?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 645.8899999999999864 Td
+(A. The project is on budget and on schedule.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 624.8899999999999864 Td
+(B. Not enough information.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 603.8899999999999864 Td
+(C. The project is ahead of schedule.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 582.8899999999999864 Td
+(D. The project is in jeopardy.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 557.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 537.8899999999999864 Td
+(Explanation: The project is in jeopardy as the amount of completed work is less than the) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 523.8899999999999864 Td
+(amount of planned work, so at the end of the iteration, the work will not be completed.) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 509.8899999999999864 Td
+(Domain = Process. Agile Practice Guide, Page 62) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 465.8899999999999864 Td
+(19. Frank is managing a major construction project valued at $ 30,000,000. The project SPI is 1.01and) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 449.8899999999999864 Td
+(CPI is 0.99. The sponsor called him to express concern about the project. He is worried because the) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 433.8899999999999864 Td
+(project end date is after two weeks. He doesnít know the status of the project. Frank informed him that) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 417.8899999999999864 Td
+(his team sends a weekly status report by email. He told him that he doesn't prefer emails because he) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 401.8899999999999864 Td
+(receives more than 500 emails per day. He doesn't check all emails and he prefers verbal updates.) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 385.8899999999999864 Td
+(This situation indicates a problem in which project management process?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 359.8899999999999864 Td
+(A. Monitor Communications) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 338.8899999999999864 Td
+(B. Plan Communications Management) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 317.8899999999999864 Td
+(C. Manage Stakeholder Engagement) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 296.8899999999999864 Td
+(D. Manage Communications) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 271.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 251.8899999999999864 Td
+(Explanation: The Plan Communication Management process includes determining the) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 237.8899999999999864 Td
+(stakeholders communication requirements which includes the preferred communication) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 223.8899999999999864 Td
+(method for each stakeholder. When he informed the project sponsor that his team sends) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 209.8899999999999864 Td
+(weekly project status report via email, so they are following the communication management) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 195.8899999999999864 Td
+(plan. So the communication management plan doesn't reflect stakeholders communication) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 181.8899999999999864 Td
+(requirements. Domain = Process. PMBOK 6th edition, Page 377) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 137.8899999999999864 Td
+(20. Which of the following statements is true regarding project communications in projects with) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 121.8899999999999864 Td
+(adaptive life cycle?) Tj
+ET
+endstream
+endobj
+19 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 20 0 R
+>>
+endobj
+20 0 obj
+<<
+/Length 5006
 >>
 stream
 0.200025 w
@@ -715,7 +1826,510 @@ BT
 13.7999999999999989 TL
 0.588 g
 70. 791.8899999999999864 Td
-(D. To define the procurement strategy) Tj
+(A. Projects with predictive life cycle have an inherent need to communicate evolving and) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 775.8899999999999864 Td
+(emerging details more frequently and quickly than projects with iterative or incremental) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 759.8899999999999864 Td
+(life cycle.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 738.8899999999999864 Td
+(B. Projects with predictive life cycle have an inherent need to communicate evolving and) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 722.8899999999999864 Td
+(emerging details more frequently and quickly than projects with adaptive life cycle.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 701.8899999999999864 Td
+(C. There is no difference between communication in projects with adaptive life cycle and) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 685.8899999999999864 Td
+(communication in projects with predictive life cycle.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 664.8899999999999864 Td
+(D. Projects with adaptive life cycle have an inherent need to communicate evolving and) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 648.8899999999999864 Td
+(emerging details more frequently and quickly than projects with predictive life cycle.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 623.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 603.8899999999999864 Td
+(Explanation: Project environments subject to various elements of ambiguity and change have) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 589.8899999999999864 Td
+(an inherent need to communicate evolving and emerging details more frequently and quickly.) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 575.8899999999999864 Td
+(Domain = Process. PMBOK 6th edition, Page 365) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 531.8899999999999864 Td
+(21. All of the following are included in the project communications management plan, except:) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 505.8899999999999864 Td
+(A. Guidelines and templates for project status meetings) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 484.8899999999999864 Td
+(B. The use of a project website and project management software) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 463.8899999999999864 Td
+(C. Contact details of each stakeholder) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 442.8899999999999864 Td
+(D. Resources allocated for communication activities, including time and budget) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 417.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 397.8899999999999864 Td
+(Explanation: Contact details of each stakeholder are included in the stakeholder register.) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 383.8899999999999864 Td
+(Domain = Process. PMBOK 6th edition, Page 377 and 514 and and PMBOK 7th edition,) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 369.8899999999999864 Td
+(Page 186) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 325.8899999999999864 Td
+(22. Martin is a project manager for a large construction project. He is having difficulties in keeping the) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 309.8899999999999864 Td
+(project schedule on track. The project is budgeted at $3,000,000, and has 310 human resources. The) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 293.8899999999999864 Td
+(project duration is three months and has 380 activities. There are 90 activities on the critical path. The) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 277.8899999999999864 Td
+(project SPI is 0.78 and CPI is 1.09. Under these circumstances. What should the monthly status) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 261.8899999999999864 Td
+(report contain?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 235.8899999999999864 Td
+(A. That the project will need more resources.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 214.8899999999999864 Td
+(B. The issues and options.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 193.8899999999999864 Td
+(C. That the project is doing well.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 172.8899999999999864 Td
+(D. That the project will finish after the required completion date.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 147.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 127.8899999999999864 Td
+(Explanation: Status report contains the status of the project in accordance to the project) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 113.8899999999999864 Td
+(management plan and possible options. Domain = Process. PMBOK 6th edition, Page 385) Tj
+ET
+endstream
+endobj
+21 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 22 0 R
+>>
+endobj
+22 0 obj
+<<
+/Length 4757
+>>
+stream
+0.200025 w
+0 G
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 791.8899999999999864 Td
+(and PMBOK 7th edition, Page 190) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 747.8899999999999864 Td
+(23. Following the shown cumulative flow diagram, what happened at point A?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 721.8899999999999864 Td
+(A. Additional scope was added to the project.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 700.8899999999999864 Td
+(B. Bottleneck) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 679.8899999999999864 Td
+(C. Excess WIP) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 658.8899999999999864 Td
+(D. More resources were added to the project.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 633.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 613.8899999999999864 Td
+(Explanation: The total story points were 500 and they increased to 600, so the best answer is) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 599.8899999999999864 Td
+(that additional scope was added to the project. Domain = Process. Agile Practice Guide,) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 585.8899999999999864 Td
+(Page 70) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 541.8899999999999864 Td
+(24. A project is on its third iteration review. One of the stakeholders has raised a concern about the) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 525.8899999999999864 Td
+(product increment of this iteration. Which of the following is the best course of action?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 499.8899999999999864 Td
+(A. Add an entry in the issue log and reassess requirements collection process.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 478.8899999999999864 Td
+(B. Hold a meeting with the team and the product owner to address the stakeholder) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 462.8899999999999864 Td
+(concern.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 441.8899999999999864 Td
+(C. Ask the product owner to add the stakeholder concern to the next iteration.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 420.8899999999999864 Td
+(D. The agile coach should facilitate a meeting with the stakeholder and the product owner) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 404.8899999999999864 Td
+(to discuss his concern.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 379.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 359.8899999999999864 Td
+(Explanation: It is needed to know the stakeholder's concern in more details. So, arranging a) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 345.8899999999999864 Td
+(meeting with the stakeholder and the product owner to know his concern in details and then) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 331.8899999999999864 Td
+(the product owner can add the stakeholder's requirement in the product backlog. Domain =) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 317.8899999999999864 Td
+(Process. Agile Practice Guide, Page 55) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 273.8899999999999864 Td
+(25. During developing the communication management plan for your software project, a team member) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 257.8899999999999864 Td
+(asks you whether social media can be included as a communication tool to the project communication) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 241.8899999999999864 Td
+(strategy. What would be your answer?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 215.8899999999999864 Td
+(A. Yes, social media can be included in the communication strategy because everyone is) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 199.8899999999999864 Td
+(using social media in communication.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 178.8899999999999864 Td
+(B. Yes, social media can be included in the communication strategy with respect to) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 162.8899999999999864 Td
+(cultural, practical, and personal preferences for language, media, content, and delivery.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 141.8899999999999864 Td
+(C. No, social media can't be included in the communication strategy because it is informal) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 125.8899999999999864 Td
+(communication. You must select a formal communication tool.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 104.8899999999999864 Td
+(D. No, social media can't be included in the communication strategy because it is not) Tj
+ET
+endstream
+endobj
+23 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 24 0 R
+>>
+endobj
+24 0 obj
+<<
+/Length 5082
+>>
+stream
+0.200025 w
+0 G
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 791.8899999999999864 Td
+(available in some countries.) Tj
 ET
 BT
 /F1 12 Tf
@@ -729,129 +2343,541 @@ BT
 12.6499999999999986 TL
 0. g
 50. 746.8899999999999864 Td
-(Explanation: The project charter formally authorizes the project and gives the project manager) Tj
+(Explanation: The standard communication strategy for project stakeholder communications) Tj
 ET
 BT
 /F1 11 Tf
 12.6499999999999986 TL
 0. g
 50. 732.8899999999999864 Td
-(authority to apply organizational resources.) Tj
+(embraces and selects from all technologies and respects cultural, practical, and personal) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 718.8899999999999864 Td
+(preferences for language, media, content, and delivery. When appropriate, social media and) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 704.8899999999999864 Td
+(other advanced computing technologies may be included. Domain = Process. PMBOK 6th) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 690.8899999999999864 Td
+(edition, Page 364) Tj
 ET
 BT
 /F1 14 Tf
 16.0999999999999979 TL
 0. g
-50. 688.8899999999999864 Td
-(13. Which tool helps identify stakeholder influence and interest?) Tj
+50. 646.8899999999999864 Td
+(26. Tony is a project manager for a complex software project. The project is very large and is very) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 630.8899999999999864 Td
+(important to the customer. He has finished the software system, and obtained acceptance from) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 614.8899999999999864 Td
+(customer, but few days later, the software system was found to give unexpected results. The) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 598.8899999999999864 Td
+(customer is very angry and he needs a solution for this problem. Which of the following best describes) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 582.8899999999999864 Td
+(what should he do first?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 556.8899999999999864 Td
+(A. He should do nothing, the customer has accepted the project.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 535.8899999999999864 Td
+(B. He should apologize to the customer.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0. 0.502 0. rg
-70. 662.8899999999999864 Td
-(A. Power/Interest Grid) Tj
+70. 514.8899999999999864 Td
+(C. He should review the validate scope process.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.588 g
-70. 641.8899999999999864 Td
-(B. RACI Chart) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 620.8899999999999864 Td
-(C. Network Diagram) Tj
-ET
-BT
-/F1 12 Tf
-13.7999999999999989 TL
-0.588 g
-70. 599.8899999999999864 Td
-(D. Cause-and-Effect Diagram) Tj
+70. 493.8899999999999864 Td
+(D. He should review the customerís inspection process.) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.502 0. 0. rg
-50. 574.8899999999999864 Td
+50. 468.8899999999999864 Td
 (Your answer is missing) Tj
 ET
 BT
 /F1 11 Tf
 12.6499999999999986 TL
 0. g
-50. 554.8899999999999864 Td
-(Explanation: The Power/Interest Grid categorizes stakeholders based on influence and) Tj
+50. 448.8899999999999864 Td
+(Explanation: Reviewing the customerís inspection process is not the responsibility of the) Tj
 ET
 BT
 /F1 11 Tf
 12.6499999999999986 TL
 0. g
-50. 540.8899999999999864 Td
-(interest.) Tj
+50. 434.8899999999999864 Td
+(project manager. He may apologize to the customer later when he knows the root cause of) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 420.8899999999999864 Td
+(the problem. Doing nothing is against the professional and social responsibility of the project) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 406.8899999999999864 Td
+(manager. So, the best choice is to review the validate scope process during which the) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 392.8899999999999864 Td
+(product was accepted. Domain = Process. PMBOK 6th edition, Page 164) Tj
 ET
 BT
 /F1 14 Tf
 16.0999999999999979 TL
 0. g
-50. 496.8899999999999864 Td
-(14. What does the change control board \(CCB\) do?) Tj
+50. 348.8899999999999864 Td
+(27. You are a project manager for a large construction project. The project is to build a new hotel. The) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 332.8899999999999864 Td
+(project is divided into five phases and it is highly visible in your organization. To ensure formalizing) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 316.8899999999999864 Td
+(acceptance of the completed project deliverables, you decided to validate scope with the customer to) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 300.8899999999999864 Td
+(ensure that the project is on track from the customer point of view. When should the Validate Scope) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 284.8899999999999864 Td
+(process be performed?) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0. 0.502 0. rg
-70. 470.8899999999999864 Td
-(A. Review and approve or reject change requests) Tj
+70. 258.8899999999999864 Td
+(A. At the end of each phase of the project) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.588 g
-70. 449.8899999999999864 Td
-(B. Assign team members to tasks) Tj
+70. 237.8899999999999864 Td
+(B. At the beginning of the project) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.588 g
-70. 428.8899999999999864 Td
-(C. Monitor project quality) Tj
+70. 216.8899999999999864 Td
+(C. At the end of the project) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.588 g
-70. 407.8899999999999864 Td
-(D. Create the project schedule) Tj
+70. 195.8899999999999864 Td
+(D. During the planning process) Tj
 ET
 BT
 /F1 12 Tf
 13.7999999999999989 TL
 0.502 0. 0. rg
-50. 382.8899999999999864 Td
+50. 170.8899999999999864 Td
 (Your answer is missing) Tj
 ET
 BT
 /F1 11 Tf
 12.6499999999999986 TL
 0. g
-50. 362.8899999999999864 Td
-(Explanation: The CCB reviews, approves, or rejects change requests.) Tj
+50. 150.8899999999999864 Td
+(Explanation: The scope is validated at the end of each phase to ensure that the phase) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 136.8899999999999864 Td
+(deliverables are accepted by the customer before moving forward to the next phase. Domain) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 122.8899999999999864 Td
+(= Process. PMBOK 6th edition, Page 164) Tj
+ET
+endstream
+endobj
+25 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 26 0 R
+>>
+endobj
+26 0 obj
+<<
+/Length 4775
+>>
+stream
+0.200025 w
+0 G
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 791.8899999999999864 Td
+(28. Product scope management involves the requirements that relate to the product of the project.) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 775.8899999999999864 Td
+(Project scope management involves:) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 749.8899999999999864 Td
+(A. The work the project manager will do to manage the project.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 728.8899999999999864 Td
+(B. The project management efforts done by the project manager.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 707.8899999999999864 Td
+(C. All work included in the scope management plan.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 686.8899999999999864 Td
+(D. The work the project will do to deliver the product scope.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 661.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 641.8899999999999864 Td
+(Explanation: Project scope is the work performed to deliver a product, service, or result with) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 627.8899999999999864 Td
+(the specified features and functions. The term ìproject scopeî is sometimes viewed as) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 613.8899999999999864 Td
+(including product scope. Domain = Process. PMBOK 6th edition, Page 131) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 569.8899999999999864 Td
+(29. Two team members of your project team are discussing together about the correct order of the) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 553.8899999999999864 Td
+(Monitoring and Controlling processes for Scope Management. One of them said that the Validate) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 537.8899999999999864 Td
+(Scope process should be performed first, while the other member said that the Control Scope process) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 521.8899999999999864 Td
+(should be performed first. Which of the following is the correct order of Monitoring and Controlling) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 505.8899999999999864 Td
+(processes for Scope Management?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 479.8899999999999864 Td
+(A. First Validate Scope, then Control Scope.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 458.8899999999999864 Td
+(B. First Control Scope, then Validate Scope.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 437.8899999999999864 Td
+(C. Both happen simultaneously.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 416.8899999999999864 Td
+(D. There is not enough information to decide.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 391.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 371.8899999999999864 Td
+(Explanation: Validate Scope occurs with each deliverable or phase review and Control Scope) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 357.8899999999999864 Td
+(is an ongoing process. Domain = Process. PMBOK 6th edition, Page 131) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 313.8899999999999864 Td
+(30. Brian has just joined a large construction company as a project manager. He has been assigned to) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 297.8899999999999864 Td
+(manage his first project in the company. Midway through the project, he noticed that the customer is) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 281.8899999999999864 Td
+(getting frequent change requests implemented by informally approaching the team members. This has) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 265.8899999999999864 Td
+(resulted in work disruption and discontent among team members. What should be his first priority to) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0. g
+50. 249.8899999999999864 Td
+(remedy the situation?) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 223.8899999999999864 Td
+(A. Begin creating a detailed project scope statement.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 202.8899999999999864 Td
+(B. Call for a meeting with the customer and team members to solve the problem.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 181.8899999999999864 Td
+(C. Modify the project management plan so that all change requests must be approved by) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.588 g
+70. 165.8899999999999864 Td
+(you.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0. 0.502 0. rg
+70. 144.8899999999999864 Td
+(D. Ensure proper project scope control.) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0.502 0. 0. rg
+50. 119.8899999999999864 Td
+(Your answer is missing) Tj
+ET
+endstream
+endobj
+27 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 28 0 R
+>>
+endobj
+28 0 obj
+<<
+/Length 670
+>>
+stream
+0.200025 w
+0 G
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 791.8899999999999864 Td
+(Explanation: Controlling the project scope ensures all requested changes and recommended) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 777.8899999999999864 Td
+(corrective or preventive actions are processed through the Perform Integrated Change) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 763.8899999999999864 Td
+(Control process.) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 749.8899999999999864 Td
+( Domain = Process.) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0. g
+50. 735.8899999999999864 Td
+( PMBOK 6th edition, Page 168 and PMBOK 7th edition, Page 87.) Tj
 ET
 endstream
 endobj
 1 0 obj
 <</Type /Pages
-/Kids [3 0 R 5 0 R 7 0 R 9 0 R 11 0 R ]
-/Count 5
+/Kids [3 0 R 5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R 21 0 R 23 0 R 25 0 R 27 0 R ]
+/Count 13
 >>
 endobj
-13 0 obj
+29 0 obj
 <<
 /Type /Font
 /BaseFont /Helvetica
@@ -861,7 +2887,7 @@ endobj
 /LastChar 255
 >>
 endobj
-14 0 obj
+30 0 obj
 <<
 /Type /Font
 /BaseFont /Helvetica-Bold
@@ -871,7 +2897,7 @@ endobj
 /LastChar 255
 >>
 endobj
-15 0 obj
+31 0 obj
 <<
 /Type /Font
 /BaseFont /Helvetica-Oblique
@@ -881,7 +2907,7 @@ endobj
 /LastChar 255
 >>
 endobj
-16 0 obj
+32 0 obj
 <<
 /Type /Font
 /BaseFont /Helvetica-BoldOblique
@@ -891,7 +2917,7 @@ endobj
 /LastChar 255
 >>
 endobj
-17 0 obj
+33 0 obj
 <<
 /Type /Font
 /BaseFont /Courier
@@ -901,7 +2927,7 @@ endobj
 /LastChar 255
 >>
 endobj
-18 0 obj
+34 0 obj
 <<
 /Type /Font
 /BaseFont /Courier-Bold
@@ -911,7 +2937,7 @@ endobj
 /LastChar 255
 >>
 endobj
-19 0 obj
+35 0 obj
 <<
 /Type /Font
 /BaseFont /Courier-Oblique
@@ -921,7 +2947,7 @@ endobj
 /LastChar 255
 >>
 endobj
-20 0 obj
+36 0 obj
 <<
 /Type /Font
 /BaseFont /Courier-BoldOblique
@@ -931,7 +2957,7 @@ endobj
 /LastChar 255
 >>
 endobj
-21 0 obj
+37 0 obj
 <<
 /Type /Font
 /BaseFont /Times-Roman
@@ -941,7 +2967,7 @@ endobj
 /LastChar 255
 >>
 endobj
-22 0 obj
+38 0 obj
 <<
 /Type /Font
 /BaseFont /Times-Bold
@@ -951,7 +2977,7 @@ endobj
 /LastChar 255
 >>
 endobj
-23 0 obj
+39 0 obj
 <<
 /Type /Font
 /BaseFont /Times-Italic
@@ -961,7 +2987,7 @@ endobj
 /LastChar 255
 >>
 endobj
-24 0 obj
+40 0 obj
 <<
 /Type /Font
 /BaseFont /Times-BoldItalic
@@ -971,7 +2997,7 @@ endobj
 /LastChar 255
 >>
 endobj
-25 0 obj
+41 0 obj
 <<
 /Type /Font
 /BaseFont /ZapfDingbats
@@ -980,7 +3006,7 @@ endobj
 /LastChar 255
 >>
 endobj
-26 0 obj
+42 0 obj
 <<
 /Type /Font
 /BaseFont /Symbol
@@ -989,14 +3015,16 @@ endobj
 /LastChar 255
 >>
 endobj
-27 0 obj
+43 0 obj
 <<
-/Length 67860
-/Length1 67860
+/Length 68336
+/Length1 68336
 >>
 stream
     
- 0 E pcmap	]∂ˇ   ¨  "glyf¶éRÿ  –  (loca 8 Ì  /¯  gÑhmtx„8”W  ó|  gXhhea/|+  ˛‘   $maxpAÑ  ˛¯    post˛ 2  ˇ    name,¯ˇ  ˇ8  	Bhead”$îw |   6OS/2ûvü ¥   `        à      $    à  
+ 0 E pcmap	]∂ˇ   ¨  "glyfëÓΩ±  –   loca ¶}ª  1‘  gÑhmtx„8”W  ôX  gXhhea/|+  ∞   $maxpAÑ  ‘    post˛ 2  Ù    name,¯ˇ   	Bhead”$îw 
+X   6OS/2ûvü 
+ê   `        à      $    à  
    $     d             !      "   '  Â   (   )      *   -  Î   .   /      0   Z  Ô   [   ]      ^   z     {   }   
    ~   ~  7   †   †      °   •  8   ¶   ¶      ß   ™  =   ´   ´      ¨   ∫  A   ª   ª      º    P  Ê  Á    7  7    ª  º    æ  ø    ∆  «    ÿ  ›         #  
   
@@ -1006,22 +3034,36 @@ stream
 % Pê†¨∂—‰
 $(@V`jÄíñÚ     $ & ( 0 2 8 > B D O p t ¨"""%Ã.A˚P˚±˚”˚Â˚¸˚˝˝P˝í˝˛p˛t˛v˛Ä˛Ú˛ˇˇˇ  øˇ¨º    ïˇUî.ﬂ\[UE#"!˙˙˘¿¯∞¯¢¯ó¯é√¯h˚2˚,˚ ˚˚˚˙Ú˙Í˙‰˙‘˙»˙∆˙l·g˘P˘N˘M˘L·O˘C˘B˘>˘;˘8·;·1˘˘¯÷˜qﬂj˜k€µ”A    ˚‡˙ÍË¿NML  (&  †       ∏ æ                                                                                                                     `                    .        ÂÊÁËÈÍ  ÎÏÌÓ   
   7 89:;< =>?@  ÅÉ ãÑÖÜ éáàâ êäãå äçéè èêëí âìîï ¥ñóò ∂ôöõ îúùû ìü†° ñ¢£§ ó•¶ß ù® ú© û™ ò´ ®¨ °≠ πÆØ∞ ø±≤≥ √¥µ∂ ¡∑∏π  ∫ ÀªºΩ –æ —ø¿¡ Œ¬√ƒ ‚≈ „ Ω◊ÿŸ ◊⁄ ÷€ ÿ‹ á €› ’ﬁ Ÿﬂ ‡ 1 2Ã 3Õ 4Œ 5œ 6–—“ 7” 8‘’÷ 9◊ :ÿŸ⁄ ;€‹› <ﬁﬂ‡ =·‚„ >‰ÂÊ ?Á @Ë AÈ BÍ CÎÏÌ DÓÔ EÒÚÛ FÙıˆ G˜¯˘ H˙˚¸ I˝˛ˇ J  Q R S	
- T U V W X Y Z    !  *ö    3!'3#!	Ë««ö˝f!X  ˇx í x   72"&5>54&&546h#(	
+ T U V W X Y Z    !  *ö    3!'3#!	Ë««ö˝f!Xˇˇ :ˇ˚ ±œ∑  ˇˇ '   ◊∂  ˇˇ 5˝„Ú∆  ˇˇˇÂˇûÅ„  ˇˇˇÂˇûÅÚ&„   \6pˇˇˇÿˇ˙êCª  ˇˇˇÓ   x ‘  ˇˇˇ≤˛Âo Ì Óˇn  ˇˇ 9˝º£ c&   ]p˝æ  '   ◊   62#"'&&'&&'&7M]	É	–õnh~\"6z3g4hÅR
+  :ˇ˚ ±œ   6'&56'4''&7Y&/û1/ı˛µYTi∫µ ˇÿˇ˙êC   %2''"'&7667&'&7676n"\]~7	(;<0Vk3C$Z#6mh&2	
+*FA*$  5˝„Ú A  27676'&7%6636'&77&'&56—:(ñÜ$<._∏	j@Q&(yR	AA+'˛ŒwfÊ}X4	
+O#"*5PSIw<'
+	"ZLño,k ˇÓ   x  "  67632"#&74767&&'&&''&
+!
+ N7
+
+î$		
+-	4˘5ü>''|SSf9 ˇÂˇûÅ / <  2#"&''&7667&'&#"#"'&76767632676&7676-,[ï8
+4
+(4#	 J,({z9G8&
+:hi! " 0/CG*$F&A20$kó4$	  D˛Â Ì ) 3  '&767674'&'&76676762632##'&72◊û&$\
+S~k'J!#	))	2
+5≤G	?+H=l:	>'(Dh*  9˛¶£ c -  6766767676'&'&'&76676#"'&@
+O&6ï≠Ä
+==1$O8az(≈zH9t1=-	êJlk8!/	):%&Ü	B5 ˇºˇ˛ C Ç   '6'&&'&7(/" L ˇÜˇ˛ u ò   76'&&''&&'&776"#0&" 1ïL;I  ˇx í x   72"&5>54&&546h#(	
  x	65+
 +   5ˇ˝ﬂr    2#"&&5466"326654&&
-E_12_DB`32`H);  7$,:7rVèUUèWWèUUèV$K~MLLNÇLM{I  èˇ˝Üs 2  74&#"&50547>33203&&#"&67266766Ò	.	(M32.qã
-%1-˛l&&  B  ”s 1  %!&&5>76654&#""&5>323267632”
+E_12_DB`32`H);  7$,:7rVèUUèWWèUUèV$K~MLLNÇLM{I  B  ”s 1  %!&&5>76654&#""&5>323267632”
 ˛Æ)VN=/':$0?'/M-"SJ¬%	í=4		.db),B$2D"(
-	+/!/J**J *_S%&  Rˇ˚¡s @  2#"&'&&54632326654&&#"&547>54&#""&5><++@-+GX.9'5$$9 !	'F+6*./>s8(4&&C02Q9C8(=$
-	$9*'4+  1ˇ˙‚u    232#0#"55!&&5663å:D#˛Ì>8€€u˛´®†u˛‚  Rˇ˚¡u ?  2#"&'&&54632326654&&#""&5>732661##66
-:Q,+GX.9'5$D96ê*	8&R		AÇ4O*2Q9C8C/		7n_,[)  9ˇı §•    4632#"&4632#"&9    p!!˛“!! ˇÚˇ˝ká X f  70>766323&&#"&67267654.10&#&"#""#""103.#"&4726766033267261] )*'«. "-"	&,
-*!	!	+…Y5%à1Tgmd&˝ˆ:
-	+63!(7"
-	
-/£Ó  /ˇ˙iã 5  20#"'.#"32676676#".54>y0i6'J=6X?!?_@-?
+	+/!/J**J *_S%&  Rˇ˚¡u ?  2#"&'&&54632326654&&#""&5>732661##66
+:Q,+GX.9'5$D96ê*	8&R		AÇ4O*2Q9C8C/		7n_,[)  Gˇ˙Õx  1  2#".5467>726632654&&#"3E)5Y8,G20.#[_)OP@@b,/<6,3Ç&;A6]9'@O'KÜ2&@.
+
+$<[AW"!H>'XB*H,  =ˇ˚◊m !  2632#"&5>1#"#"&'667é,
+˛ˇ <?9-¯j	
+#˝€&lxt_9$'(S  Rˇ˜¬t $ 7 K  2#"&&54>76'.54662654.'&#""321276654&&,I,$3;'4U15S.*+/!-J&09".((% 1#1#0$*t"@.&8(4@#1N-(H/ 4(	-<$*H-˝¶<15)@/(98@,%3 <(6$  Hˇ˙Õx  1  7>7#".546632"&6654.#"326^OPAA3E)5Z7,G2//"\_),.=6,3
+$<[A&;A7\9'@O'KÜ2&@-5"!H>'XB)I,  9ˇı §•    4632#"&4632#"&9    p!!˛“!!  /ˇ˙iã 5  20#"'.#"32676676#".54>y0i6'J=6X?!?_@-?
 (fDHxW/1Xyã)7-.2#1Se39nY5@
-*1&3YsAEy^5  (ˇ˝ÑÜ $ ?  2##&6726676654&'.#&&7326326654.#"-köR"QägÙ  :PB/FuH-Ma5 ÉSè[>v^7&°'s˛`<{_StI!
-!  (ˇ¸"à j  263#"'&&##"332>7632#"'.'.#"33267667632"&#"#&6726676654&'.#&&7†E¶O:'T 3#'
+*1&3YsAEy^5  (ˇ¸"à j  263#"'&&##"332>7632#"'.'.#"33267667632"&#"#&6726676654&'.#&&7†E¶O:'T 3#'
 	$+!
 /#D!Oúb"6  :Ç%>!; 
  ∂∏	∫,5(Z &°'  (ˇ˝ˆà a  263#"'&&##"332>7632#"'.'.#"3&&#"#&6726676654&'.#&&7†E¶O:'T 3#'
@@ -1029,7 +3071,8 @@ E_12_DB`32`H);  7$,:7rVèUUèWWèUUèV$K~MLLNÇLM{I  èˇ˝Üs 2  74&#"&50547>
  ∂∏	∑
 &°'  (ˇ˝ùÜ å  267"1326706554&'.#&&73267"3&&#"&67266766554&1&&#"13&&#"&6726676654&'.#&&7†7 $L)#Q!9779"M&D@ 7:  :Ç
  ´™''˛e&&¬¬
-&õ'  ˇ˝WÜ è  267327>7>132671"3&&#"&&726676654&5.'4&#"'&#3&&#"&&72667667>54&'.#"47ü&!-42./	/A7 "2"301Ó#$* "."#"ÇPmzy4JwwH6(	f|02
+&õ' ˇöˇ"Ü 2  267"#"&'&5463232>54&'.#&&7ö8 ;gB*	
+9Ç'˛dzñD 	>rX°'  ˇ˝WÜ è  267327>7>132671"3&&#"&&726676654&5.'4&#"'&#3&&#"&&72667667>54&'.#"47ü&!-42./	/A7 "2"301Ó#$* "."#"ÇPmzy4JwwH6(	f|02
 #GÉâOKÄw{G:@àÄg?
 X¢ÅQ	  $ˇ˚‹â Z  2274&'.#&6732667"#"&'3&&#"&&726676654&'.#&67å*
 BX^X !3 # 
@@ -1038,19 +3081,14 @@ E_12_DB`32`H);  7$,:7rVèUUèWWèUUèV$K~MLLNÇLM{I  èˇ˝Üs 2  74&#"&50547>
 $ ,23 7: 9CñEQ	%4&E,Ñ*?*#B2+HG+.BK$∂
 &°'≤@R	+Ã#?  $ˇ¯ò™ < J  232672#"&'#"&5467>766554&&#"#"&5467>26655Î1!&%0B!E<&	%8G(:"&™$<&…*A/+
 	+ /&˛ÉÖ
-&)  ˇ˘¿¶ 1 B  "&'&'&&"&56654&'&&#"&7667207>32"326654&Œ-	$%G*2,C-?m6.*#;$O*∂
- 	,)¿
-%;G!@k@yÌ 1K'U`  &ˇ¯Ä¨ )  #"&'&&#"32672#"&&54>32u3!\B)5
-	&:&;Y1-GS&6"y'H4UP&
-'8Z36W@"  &ˇ¯Â¶ = L  22554&'&&#"&76672023##"&554#"&&54>"326554&,$%G%
-;*-6,O1/IP%5 >,!4?¨k	,)˛^9	"	7_;0S=#)/J).N0˜  'ˇ¯¨ ' 4  7326672#"&&54>32732676&&#"l,J+,	&:&9X2#9D ,9!
+&)  'ˇ¯¨ ' 4  7326672#"&&54>32732676&&#"l,J+,	&:&9X2#9D ,9!
 	5DB.ü	#(	Ú>T)
 '6\91U?$,,$
-,$#-#  ˇ˝Ò¶ ^  23&&#"&67266766554&&#"3&&#"&6726676654&'&&#"&766720327>,56.-*&+ .-#%F
--6¨,\Gl&&b=EÃ&&∞
- 	,)›"ˇˇ ˇ˝ ˜t '*} ,≈    ˇ˝ È¶ -  4&'&&#"&7667203&&#"&672667665W#%F.-!	,)˛0&&  ˇ˝˚Æ ë  266323&&#"&67266766544554&&#"3&&#"&67266766554&#"3&&#"&67266766554&'.#&&76672327>8,7 M#56-.&(,-.'5*-.&H(3¨%,4,\Gl&
+,$#-#ˇˇ ˇ˝ ˜t '*} ,≈    ˇ˝ È¶ -  4&'&&#"&7667203&&#"&672667665W#%F.-!	,)˛0&&  ˇ˝˚Æ ë  266323&&#"&67266766544554&&#"3&&#"&67266766554&#"3&&#"&67266766554&'.#&&76672327>8,7 M#56-.&(,-.'5*-.&H(3¨%,4,\Gl&
 i1D$	*x&&dYEÃ&&≤
-$		  (ˇ˘…≠    2#"&&5466"326654&&¯A]36^;@_37^0)2=,*1 <≠8`=?e;9a=?d:!1M*/^>1N)0]>  ˇ#ÃÆ F V  2#"&'03&&#"&6726676654&'.#&&76672327>"326654&-C+(BQ)&.-&I*/&+)9P¨&>E /UA&^''è
+$		  ˇ˝ˇÆ _  23&&#"&67266766554&&#"3&&#"&67266766554&'.#&&76672327>;56-.*&+ -.&H
+-6¨,\Gl&&b=EÃ&&≤
+$		"  (ˇ˘…≠    2#"&&5466"326654&&¯A]36^;@_37^0)2=,*1 <≠8`=?e;9a=?d:!1M*/^>1N)0]>  ˇ#ÃÆ F V  2#"&'03&&#"&6726676654&'.#&&76672327>"326654&-C+(BQ)&.-&I*/&+)9P¨&>E /UA&^''è
  		:Í 1L'W]  ˇ˝hÆ I  2#"&'&&#"3&&#"&67266766554&'.#&&7667227>("
 #$(>4&H
 %.´#*ó&&∂
@@ -1065,21 +3103,24 @@ $		  (ˇ˘…≠    2#"&&5466"326654&&¯A]36^;@_3
 
 $Õ/-%;D|
  
-(êNI ˇˇˇıœ§ ?  267#"0>76654&#"473267#"#"'&&'&&#"1&&7d)k "#!$/G)$	&ü˛¯+CN"	4TOU4q∏R   ˇı¡§ d  267"6654&'&&#&473267"6676654&&'&&73267"#"'#"'.'&&#&47c)	2)&)
-	,0+(/
- ++
-lj%#'%	%ü	xa_g# nhGuDkkD˛ı9[UY7  
+(êNI ˇˇˇıœ§ ?  267#"0>76654&#"473267#"#"'&&'&&#"1&&7d)k "#!$/G)$	&ü˛¯+CN"	4TOU4q∏R  
 ˇ˝À§ u  267">54&&'"#&&73267#"132&&#"&636654'0.'2&&#"&676670>7.1&&#"47x5@ &+
 	*!"!'&- 
 %%#$6! +-üf,%
 		<.&21 	()5 ')$10 
    ˇ!À§ O  267#"0>76654&#"473267#"#"&54672667>7.'&&#"1"47c9h/'#!#"-#!01$	6ü˛¯+CN"	4TOU4-Z'	+(Fyu>  ˇ˝ ˜Æ /  73&&#"&67266766554&'.#&&76672±-.&Hq&&∂
- 		 ˛÷Êˇ8H   4632#"&˛÷       %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   p   p   ‘  f  ˜  ≠  	  æ  æ  æ  æ  æ  	  	  	  	  	  	  	        π  r  ñ  ¢  ¢  
-#  
-#  
-#  
-#  
-#  Æ  µ  µ  å  å  ú  ú  ú  ú  ú  ú  ú  ú  ú  ú  ú  ú  m  +  •  x          0  0  0  ∫  H  H  ´  û  û  q    è  r  )  K  å  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  l  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  ˚  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (  (l !$   Î @  í  ,= DX i íX i ,ç é » Kç á$   » Gü 1ü /n ˆ , )U á ˜ ˜ \ +b (/ (Ù 'q Z< "ü ') *  ˇˇ  ˇˇ      ˇˇ  ˇÊ  ˇ˚   3   O   Ç   ö   §q Z    ¢ Ht Hù ¸ 6} 8 Ÿˇj Í  êˇ¨ Ÿ +¸ 6 Ÿ :û *q 5û *û *ï ï ï ¬ =¬ =èˇ≠èˇ≠‡ 9‡ 9º =º = 8 8 8 8≤ <≤ <¸ 6¸ 6¸ 6 πˇﬁ◊ <Ø :ë ?[ >ƒ 8< <q 5êˇ¨¸ 6¸ 6   t   Ç   t   Ä   |   Ä   ?   V  ˇ  ˇä  ˇä   `   ~   p   f  ˇ§  ˇ™       |   Ä  ˛ˇI ÕI ÕI lI ?I ãI zI \I LI NI xï (+ + %  *û *Ø :   ` Ÿˇ‡ ŸˇP Ÿˇ†} 8V :ˇ¨ˇ¨y 6û *û *û *û *û *û *û *û *ï ï ï ï ï ï ï ¬ =¬ =¬ =¬ =¬ =¬ =¬ =¬ =¬ =èˇ≠èˇ≠èˇ≠èˇ≠èˇ≠èˇ≠èˇ≠èˇ≠èˇ≠‡ 9‡ 9‡ 9º =º = 8 8◊ <◊ <◊ <◊ <◊ <◊ <Ø :Ø :≤ <k 9≤ <ë ?ë ?ë ?≤ <≤ <≤ <≤ <≤ <≤ <[ >[ >[ >[ >< << << << << <` ï q 5q 5q 5q 5êˇ¨êˇ¨êˇ¨êˇ¨êˇ¨êˇ¨êˇ¨êˇ¨¸ 6¸ˇÊ¸ 6êˇ¨¸ 6¸ 6á <á <Î Aq 5  ˇ˝  ˇ˝     ˇ˛  ˇÏ   9    ˇ ,å ,   Z   e   N   #      ˇHM )ó   ˇ˜   ü *   É  ˇÿ  ˇˇ   ¥¬ =èˇ≠I ÕI ÕI lI ?I kI VI BI LI NI x‡ 9º = 8} 8ƒ 8` û *û *û *û *û *û *û *ï ï ¬ =¬ =èˇ≠‡ 9 8 8 8◊ <◊ <≤ <≤ <≤ <ƒ 8ƒ 8< << << <[ >èˇ≠èˇ≠‡ 9ï ï ‡ 9èˇ≠ï ˇÙˇﬁ¸ 6¸ 6¸ 6êˇ¨êˇ¨á <á <ï ‡ 9‡ 9ë ?r  r  û *; :û *û *û *èˇ≠¸ 6◊ <Ø :< <   ä   ®   Ü   l   >   r   g   g   B   g   g   B   â   7   â  ˇÏ   l   Ä  ˇÚ   ;   -   ;   -   -  ˇå  ˇå   TÙ  Ë  Ù  Ë  M   ˙   ¶  Ë  =   »   í        ˇÒ  ˇº  ˇÒ  ˇy          ˇÒ  ˇz  ˇº  ˇÒ  ˇ! »   {ˇüq Zß ,q Zˇ˝s 4 æˇÊ ÙˇËs 4 æˇÊ ÙˇËs 4 æˇÊ ÙˇËs 4 æˇÊ ÙˇËs 4 æˇ  ÙˇËs 4 æˇÀ ÙˇËÌ ?'ˇÍzˇÎÌ ?'ˇËzˇÎ 5èˇÎbˇ‰ 5èˇÎbˇ‰ 5èˇÎbˇ‰ 5èˇÎbˇ‰◊ %◊ %◊ %◊ %Wˇ´Wˇ´l <ìˇÂLˇÂl <ìˇÂLˇÂl <ìˇÂLˇÂl <ìˇµLˇµg <g < æˇÀ ÙˇË{ =ò Gƒˇ“ÃˇË
+ 		 ˛÷Êˇ8H   4632#"&˛÷        %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   %   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   E   E   E   E   E   E   E   E   E   E   E   E   E   E   U   U   U   U   U   U   U   U   U   U   U   U   U   U   U   U   U   e   e   e   }   }   }   }   }   }   }   }   }   }   ç   ç   ç   ç   ç   ç   ç   ç   ç   ç   ç   ç   ç   ç   ù   ù   ù   ù   ù   ù   ù   ù   ù   ù   ù   Ø   Ø   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «   «  !  b  b  b  b  ∆  ∆  ∆  ∆  ∆  ∆  ∆  ∆  ∆  ∆  ∆  ô  ô  ô  ô  ô  ô  ô  ô  ô  ô  ô  ô  ô  ô                                Ã  Ã  Ã  Ã  Ã  Ã  Ã  Ã  Ã  Ã  Ã  q  q                                                                                                                                                                                                                          B  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  §  Ô  Ô  S  S  ‰  ‰  ‰  ô  *  ê  	j  	˚  
+F  
+F  
+F  
+F  
+F  
+F  
+F  
+F  
+F  
+ﬂ  
+ﬂ        ê  ê  '  '  '  ≤  π  π  ê  ê  †  †  †  †  †  †  †  †  †  †  †  †  q  q  q  q                   ™  8  E  ®  õ  õ  n    å  o  &  &  g  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  G  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷  ÷                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  l !$   Î @  í  ,= DX i íX i ,ç é » Kç á$   » Gü 1ü /n ˆ , )U á ˜ ˜ \ +b (/ (Ù 'q Z< "ü ') *  ˇˇ  ˇˇ      ˇˇ  ˇÊ  ˇ˚   3   O   Ç   ö   §q Z    ¢ Ht Hù ¸ 6} 8 Ÿˇj Í  êˇ¨ Ÿ +¸ 6 Ÿ :û *q 5û *û *ï ï ï ¬ =¬ =èˇ≠èˇ≠‡ 9‡ 9º =º = 8 8 8 8≤ <≤ <¸ 6¸ 6¸ 6 πˇﬁ◊ <Ø :ë ?[ >ƒ 8< <q 5êˇ¨¸ 6¸ 6   t   Ç   t   Ä   |   Ä   ?   V  ˇ  ˇä  ˇä   `   ~   p   f  ˇ§  ˇ™       |   Ä  ˛ˇI ÕI ÕI lI ?I ãI zI \I LI NI xï (+ + %  *û *Ø :   ` Ÿˇ‡ ŸˇP Ÿˇ†} 8V :ˇ¨ˇ¨y 6û *û *û *û *û *û *û *û *ï ï ï ï ï ï ï ¬ =¬ =¬ =¬ =¬ =¬ =¬ =¬ =¬ =èˇ≠èˇ≠èˇ≠èˇ≠èˇ≠èˇ≠èˇ≠èˇ≠èˇ≠‡ 9‡ 9‡ 9º =º = 8 8◊ <◊ <◊ <◊ <◊ <◊ <Ø :Ø :≤ <k 9≤ <ë ?ë ?ë ?≤ <≤ <≤ <≤ <≤ <≤ <[ >[ >[ >[ >< << << << << <` ï q 5q 5q 5q 5êˇ¨êˇ¨êˇ¨êˇ¨êˇ¨êˇ¨êˇ¨êˇ¨¸ 6¸ˇÊ¸ 6êˇ¨¸ 6¸ 6á <á <Î Aq 5  ˇ˝  ˇ˝     ˇ˛  ˇÏ   9    ˇ ,å ,   Z   e   N   #      ˇHM )ó   ˇ˜   ü *   É  ˇÿ  ˇˇ   ¥¬ =èˇ≠I ÕI ÕI lI ?I kI VI BI LI NI x‡ 9º = 8} 8ƒ 8` û *û *û *û *û *û *û *ï ï ¬ =¬ =èˇ≠‡ 9 8 8 8◊ <◊ <≤ <≤ <≤ <ƒ 8ƒ 8< << << <[ >èˇ≠èˇ≠‡ 9ï ï ‡ 9èˇ≠ï ˇÙˇﬁ¸ 6¸ 6¸ 6êˇ¨êˇ¨á <á <ï ‡ 9‡ 9ë ?r  r  û *; :û *û *û *èˇ≠¸ 6◊ <Ø :< <   ä   ®   Ü   l   >   r   g   g   B   g   g   B   â   7   â  ˇÏ   l   Ä  ˇÚ   ;   -   ;   -   -  ˇå  ˇå   TÙ  Ë  Ù  Ë  M   ˙   ¶  Ë  =   »   í        ˇÒ  ˇº  ˇÒ  ˇy          ˇÒ  ˇz  ˇº  ˇÒ  ˇ! »   {ˇüq Zß ,q Zˇ˝s 4 æˇÊ ÙˇËs 4 æˇÊ ÙˇËs 4 æˇÊ ÙˇËs 4 æˇÊ ÙˇËs 4 æˇ  ÙˇËs 4 æˇÀ ÙˇËÌ ?'ˇÍzˇÎÌ ?'ˇËzˇÎ 5èˇÎbˇ‰ 5èˇÎbˇ‰ 5èˇÎbˇ‰ 5èˇÎbˇ‰◊ %◊ %◊ %◊ %Wˇ´Wˇ´l <ìˇÂLˇÂl <ìˇÂLˇÂl <ìˇÂLˇÂl <ìˇµLˇµg <g < æˇÀ ÙˇË{ =ò Gƒˇ“ÃˇË
  ƒˇ⁄Üˇ·; < < ¥  ¥       + +  ‡  «  «  ∂ A A 6 ?ìˇÂLˇÂYˇ≤Yˇ≤Yˇ≤Yˇ≤Yˇ≤Yˇ≤I 9 æˇÊ ÙˇË æˇÊ ÙˇË£ 'Ÿ '9 =o =ˇ≤Mˇ≤ˇ≤Mˇ≤ˇ≤Mˇ≤ˇ≤Mˇ≤ﬁ 2Ÿ 8◊ˇﬂﬁ 2Ÿ 8◊ˇﬂI 9 æˇÊ ÙˇËá 0á 0R ﬁ 2ﬁ 2á 0á 0á 0R ﬁ 2ﬁ 2á 0á 0á 0R ﬁ 2ﬁ 2á 0R ﬁ 2ﬁ 2C 0ö 0C 0ö 0C 0C 0ö 0 . . .é Nπ .J Nπ .π .π .J N∑ 5B 0B 0© 0Ë 0© 0Ë 0“ 0“ 0“ 01 0… 2… 2“ 01 0… 2… 2 , 0, 0, 0• 5 ’ 2’ 2π 0π 0π 0π Œ 2Œ 2ò 0ò 0ò 0è 0^ 2^ 2á 0á 0á 0R ﬁ 2ﬁ 2∏ 0Œ 0 2 2á 0á 0á 0R ﬁ 2ﬁ 2¬ =èˇ≠¸ 6$ ?$ ?$ ?$ ?$ ?$ ?&ˇ¨&ˇ¨1 N˘ +Ÿ 8Ÿ 8&ˇ¨&ˇ¨1 N˘ +Ÿ 8Ÿ 8&ˇ¨&ˇ¨1 N˘ +Ÿ 8Ÿ 8&ˇ¨&ˇ¨1 N˘ +Ÿ 8Ÿ 8Ü 2Ü 2Ü 2Ü 2Õ k 5µ &ø ø „ 8ô  ô  µ '⁄ 0&ˇ¨&ˇ¨1 N˘ +Ÿ 8Ÿ 8I 9&ˇ¨&ˇ¨1 N˘ +Ÿ 8Ÿ 8Éˇ‚Éˇ‚Éˇ‚∂ˇÊˇËÉˇ‚Éˇ‚Éˇ‚∂ˇÊˇËÉˇ‚Éˇ‚Éˇ‚∂ˇÊˇË∂ˇÊƒˇ‚€ˇŸƒˇ‚€ˇŸƒˇ‚€ˇŸªˇ‚ªˇ‚ªˇ‚ªˇÊ_ˇ‚_ˇ‚8ˇÊ_ˇ‚_ˇ‚_ˇ‚8ˇÊöˇ‰ˇÂXˇ‚√ˇŸXˇ‚√ˇŸëˇ‚ëˇ‚ëˇ‚àˇŸëˇ‚àˇŸÍˇ‚Íˇ‚Íˇ‚ˇæˆˇŸxˇ‚xˇ‚xˇ‚dˇ⁄—ˇ⁄]ˇ‚]ˇ‚]ˇ‚∆ˇÊÉˇ‚Éˇ‚Éˇ‚∂ˇÊˇËáˇ‚úˇŸƒˇ“Éˇ‚Éˇ‚Éˇ‚∂ˇÊˇËƒˇÂ ˇËƒˇÂ ˇËƒˇÂ ˇËƒˇÂ ˇËˇÂIˇËˇÂIˇË—ˇæˇŸ’ˇÁƒˇÂ ˇËƒˇÂ ˇË πˇÀ πˇÀ πˇÀÅ 9Å 90 20 20 20 23 83 83 83 8D 2D 2D 2D 2D 2D 2Ô 8Ô 8Ô 8Ô 8 . . .é NÇˇ™Çˇ™>ˇ™>ˇ™q 9q 9r r r r W 8W 8W 8W 8¨ 9¨ 9¨ 9¨ 9¨ 9¨ 9Ÿ 8Ÿ 8Ÿ 8Ÿ 8∏ 5∏ 5∏ 5≤ N¶ˇ™¶ˇ™(ˇ™(ˇ™ªˇ‚ªˇ‚ªˇ‚ªˇÊ%ˇË%ˇËˇÂõˇ‰õˇ‰õˇ‰õˇ‰õˇ‰õˇ‰˜ˇÂ˜ˇÂ Âˇ£ Ÿˇ”  ê  /ˇŸ÷ 5Âˇ‰ˇŸˇŸéˇ‚éˇ‚éˇ‚± 5=ˇ‰| 9| 9ˇ‰ˇ‰Â 9à 5ˇ‰ˇ‰ 0ãˇÂ¥ 5¬ˇ‰¨ 0• 0ãˇÂÂ 9à 5ˇ‰ 0ãˇÂ~ 9? 0/ˇÂw 5jˇ‰◊ˇÂA 9€ 0H 0ìˇÂà 9H 0à 9à 9Á 0aˇÂ… 5T 02 0r 9r 9üˇ÷ß 52 0äˇÊU 5zˇ‚øˇ‰€ˇŸ| 9øˇ‰€ˇŸøˇ‰€ˇŸøˇ‰˛ˇ‰lˇÂˇŸ† 9` 0ˇŸ† 9 9 9Œ 0ÜˇÂ† 9† 9† 9† 9† 9 9 9| 9 9| 9Â 9~ 9Â 9~ 9r 9 9† 9† 9 9È 9î 9† 9Íˇ‰äˇÊà 9W 9Âˇ‰| 9äˇÊ 02 0÷ 5 9 9| 9î 9† 9∆ˇÂ(ˇÂˇÂÂ 9† 9ª <( <º 6ìˇ¨≥ %¯ 0} >ª =¨ 8S  ˇ˚†ˇ˚è >,´ G$ t πˇŒ$ Ç$ t$ Ä πˇ—$ | πˇ√$ Ä πˇﬁ$ ? πˇÀ$ V πˇﬁGˇ∏! "Yˇ≤ Â I + æˇﬂ ÙˇË Â 's 4 æˇÊ ÙˇË{ s 4 æˇŸ ÙˇËs 4 æˇﬂ ÙˇË 5èˇÎbˇ‰ 5èˇÎbˇ‰ 5èˇÎbˇ‰◊ %◊ %Wˇ´Wˇ´7 98ˇÁ8ˇË7 98ˇÁ8ˇËù /∫ˇÂ“ˇ„ù /∫ˇÂ“ˇ„Ô ;7ˇÁ'ˇ‹Ô ;7ˇÁ'ˇ‹Ì ›ˇ€nˇÿÌ ›ˇ€nˇÿÌ ?'ˇÍzˇÎ_ ,'ˇÍzˇÎ6 ?ìˇÂLˇÂÑ 5 ØˇÓ ≈ˇ›
  0Öˇ·œˇÂg < æˇÊ ÙˇË{ =ƒˇ“Üˇ·Yˇ≤I 9I 9 æˇÊ ÙˇËÉˇü≥ˇ°Éˇ¯≥ˇ˜É <≥ˇˆÉ <≥ ?     œ 4î %+ ﬁ ; : ;+  3ı 2á :Q 9π 32 7÷ 4	 3Œ 7≥ 9• 5 ;÷ 4î %î %+ ﬁ ;≥ 9 3	 3î %2 7Œ 7• 5± 4≥ 0V %≥ 0ª >Á ;∏ 4“ 3± 4Å 53 5	 4 5	 4Å 5± 4± 4≥ 0 53 5) #) #M :ƒ :¥ :O :) 4 : :O :) # :) 4¥ : :¥ 9R 9∂ 9R 9* 9¥ 9à 9w 9¥ 9* 9É 9 9≠ 9 9* 9¥ 9¥ 9R 9≠ 9* 9É 9¥ 9 9f 7î %Ì &¡ 8» 8, 7, 7Ì &D 8ı 3Q 9ÿ 72 5÷ 4Â :Œ 8¥ (• 5, 7÷ 4î %î %Ì &¡ 8¥ (D 8Â :£ %6 0∂ 55 93 46 08 8 8i ;€ 3E :È 4( › 9  .π 3 4È 4£ %£ %6 0∂ 5  .8 8( ∂ 3%   A Â ' Ÿ :Ì ›ˇ€ 8nˇÿs 4 æˇÊû * ÙˇË◊ %¬ =Ì ?'ˇÍ◊ <zˇÎ 5èˇÎï bˇ‰{ =ƒˇ“q 5Üˇ·6 ?aˇﬁìˇÂë ?LˇÂÑ 5 ØˇÓ[ > ≈ˇ›
  0Öˇ·ƒ 8œˇÂg << <_ ,Ø :
@@ -1098,14 +3139,14 @@ $		  (ˇ˘…≠    2#"&&5466"326654&&¯A]36^;@_3
  ', ƒ (˜ ƒ (˜ ƒ (˜ u   'Ú Í 0h (Í 0h )c / c / c / nˇ˚¿  nˇ˚¿  nˇ˚¿  j ¥  ˜ /ˇGˇÚ   q :q : 9& ;C ;^ ; Õ + Õ " Õ  Õ r +r #r r Ö "ù .n N Õ /2 /Õ + ú 0	 0ü X- , *LïX  j $0 7 '> "* &/ *? +≥  T BG =˜ˇı Î ? ˇ $ ˇ ì  ¸ Má  ˝  ÿ  » J Ÿ (÷ ÷ ("    -  .  #  * ı     ˛ß  ˛™  ˛ó  ˛∞  ˛Ü  ˛Ü  ˛ùÀ ê, M  ˇ  5;  ”  ¿ !· 
 ∫ !‚ 2π ‰ 7· -   / ∑ 1∑ x∑ ;∑ H∑ .∑ H∑ ?∑ 7∑ H∑ ?$ $ 6$ $ $ $ $ $ $ #$   ˇÒˇºˇŒˇŒˇŒˇŒˇŒˇŒˇŒˇŒˇŒˇŒˇŒˇŒˇŒˇŒˇŒˇŒˇŒˇŒˇŒ   d˝Ü  ,´˛J”F,ÀË              Ã   ‡ p +              "        ˛  2                         	   §Ñ  	  
 z  	  l  	  0<  	  "  	    	  Ó  	  ‹  	 	 ƒ  	 
-∂  	  (é  	  4Z  	 "8  	  6  	  ƒ>  	  *  	 6ﬁ  	 \Ç  	 D>  	 ` ﬁ  	 2 ¨  	 H d  	 d   K a s r a   i s   p l a c e d   b e l o w   S h a d d a   i n s t e a d   o f   b a s e   g l y p h A l t e r n a t e ,   m o r e   n a s k h - l i k e ,   G a f   f o r m L o c a l i s e d   @   a n d   &   s y m b o l s A l t e r n a t e   m e d i a l   M e e m   a n d   f i n a l   A l e f   c o m b i n a t i o n L o w   B a a   d o t   f o l l o w i n g   a   R a a   o r   W a w N o   a u t o m a t i c   v o w e l   i n s e r t i o n   a b o v e   n a m e   o f   G o d D i s a b l e   c u r v i l i n e a r   K a s h i d a I n v e r t e d   A r a b i c   c o m m a5PAR  .NDRBN  .NHR/M  CNEP+RDP  qD4QNER3P  %P0R  (N2N:N*R  JN-R8NIp  qD6QN,PJ9O  (PGN'  FN,RDN'!N  EP9R7N'1P . h t t p s : / / o p e n f o n t l i c e n s e . o r g T h i s   F o n t   S o f t w a r e   i s   l i c e n s e d   u n d e r   t h e   S I L   O p e n   F o n t   L i c e n s e ,   V e r s i o n   1 . 1 .   T h i s   l i c e n s e   i s   a v a i l a b l e   w i t h   a   F A Q   a t :   h t t p s : / / o p e n f o n t l i c e n s e . o r g h t t p s : / / a l i f t y p e . c o m / a m i r i h t t p s : / / a l i f t y p e . c o m A m i r i   i s   a   c l a s s i c a l   A r a b i c   t y p e f a c e   i n   N a s k h   s t y l e   f o r   t y p e s e t t i n g   b o o k s   a n d   o t h e r   r u n n i n g   t e x t .   I t s   d e s i g n   i s   a   r e v i v a l   o f   t h e   b e a u t i f u l   t y p e f a c e   p i o n e e r e d   i n   e a r l y   2 0 t h   c e n t u r y   b y   B u l a q   P r e s s   i n   C a i r o ,   a l s o   k n o w n   a s   A m i r i a   P r e s s ,   a f t e r   w h i c h   t h e   f o n t   i s   n a m e d . K h a l e d   H o s n y A l i f   T y p e A m i r i - R e g u l a r V e r s i o n   1 . 0 0 2 A m i r i   R e g u l a r 1 . 0 0 2 ; A L I F ; A m i r i - R e g u l a r R e g u l a r A m i r i C o p y r i g h t   2 0 1 0 - 2 0 2 2   T h e   A m i r i   P r o j e c t   A u t h o r s   ( h t t p s : / / g i t h u b . c o m / a l i f t y p e / a m i r i ) .       É±⁄Òk_<ı Ë    »
+∂  	  (é  	  4Z  	 "8  	  6  	  ƒ>  	  *  	 6ﬁ  	 \Ç  	 D>  	 ` ﬁ  	 2 ¨  	 H d  	 d   K a s r a   i s   p l a c e d   b e l o w   S h a d d a   i n s t e a d   o f   b a s e   g l y p h A l t e r n a t e ,   m o r e   n a s k h - l i k e ,   G a f   f o r m L o c a l i s e d   @   a n d   &   s y m b o l s A l t e r n a t e   m e d i a l   M e e m   a n d   f i n a l   A l e f   c o m b i n a t i o n L o w   B a a   d o t   f o l l o w i n g   a   R a a   o r   W a w N o   a u t o m a t i c   v o w e l   i n s e r t i o n   a b o v e   n a m e   o f   G o d D i s a b l e   c u r v i l i n e a r   K a s h i d a I n v e r t e d   A r a b i c   c o m m a5PAR  .NDRBN  .NHR/M  CNEP+RDP  qD4QNER3P  %P0R  (N2N:N*R  JN-R8NIp  qD6QN,PJ9O  (PGN'  FN,RDN'!N  EP9R7N'1P . h t t p s : / / o p e n f o n t l i c e n s e . o r g T h i s   F o n t   S o f t w a r e   i s   l i c e n s e d   u n d e r   t h e   S I L   O p e n   F o n t   L i c e n s e ,   V e r s i o n   1 . 1 .   T h i s   l i c e n s e   i s   a v a i l a b l e   w i t h   a   F A Q   a t :   h t t p s : / / o p e n f o n t l i c e n s e . o r g h t t p s : / / a l i f t y p e . c o m / a m i r i h t t p s : / / a l i f t y p e . c o m A m i r i   i s   a   c l a s s i c a l   A r a b i c   t y p e f a c e   i n   N a s k h   s t y l e   f o r   t y p e s e t t i n g   b o o k s   a n d   o t h e r   r u n n i n g   t e x t .   I t s   d e s i g n   i s   a   r e v i v a l   o f   t h e   b e a u t i f u l   t y p e f a c e   p i o n e e r e d   i n   e a r l y   2 0 t h   c e n t u r y   b y   B u l a q   P r e s s   i n   C a i r o ,   a l s o   k n o w n   a s   A m i r i a   P r e s s ,   a f t e r   w h i c h   t h e   f o n t   i s   n a m e d . K h a l e d   H o s n y A l i f   T y p e A m i r i - R e g u l a r V e r s i o n   1 . 0 0 2 A m i r i   R e g u l a r 1 . 0 0 2 ; A L I F ; A m i r i - R e g u l a r R e g u l a r A m i r i C o p y r i g h t   2 0 1 0 - 2 0 2 2   T h e   A m i r i   P r o j e c t   A u t h o r s   ( h t t p s : / / g i t h u b . c o m / a l i f t y p e / a m i r i ) .       É⁄>•b_<ı Ë    »
 1±    |%∞Ä˛J¸|,À          »ê   äX   KäX  ^ 2           †  oÇ  C       ALIF ¿  ˇˇd˝Ü  :é   ”   ±Ü     
 endstream
 endobj
-28 0 obj
+44 0 obj
 <<
-/Length 823
-/Length1 823
+/Length 888
+/Length1 888
 >>
 stream
 /CIDInit /ProcSet findresource begin
@@ -1121,35 +3162,41 @@ begincmap
 1 begincodespacerange
 <0000><ffff>
 endcodespacerange
-38 beginbfchar
+43 beginbfchar
 <0001><0020>
+<0037><fe8d>
+<03d3><fe8e>
+<03e1><fea2>
+<03f2><febb>
+<03f5><febf>
+<03ff><fecc>
+<040d><fedf>
+<0418><feee>
+<041a><fef2>
 <17ed><002c>
 <17ef><0030>
-<17f0><0031>
 <17f1><0032>
-<17f2><0033>
-<17f3><0034>
 <17f4><0035>
+<17f5><0036>
+<17f6><0037>
+<17f7><0038>
+<17f8><0039>
 <17f9><003a>
-<1800><0041>
 <1802><0043>
-<1803><0044>
 <1804><0045>
 <1805><0046>
 <1807><0048>
+<1809><004a>
 <180c><004d>
 <180d><004e>
 <180f><0050>
 <1811><0052>
 <181d><0061>
-<181e><0062>
-<181f><0063>
-<1820><0064>
 <1821><0065>
-<1824><0068>
 <1825><0069>
 <1828><006c>
 <1829><006d>
+<182a><006e>
 <182b><006f>
 <182c><0070>
 <182e><0072>
@@ -1157,7 +3204,6 @@ endcodespacerange
 <1830><0074>
 <1831><0075>
 <1832><0076>
-<1833><0077>
 <1834><0078>
 <1835><0079>
 endbfchar
@@ -1167,11 +3213,11 @@ end
 end
 endstream
 endobj
-29 0 obj
+45 0 obj
 <<
 /Type /FontDescriptor
 /FontName /Amiri
-/FontFile2 27 0 R
+/FontFile2 43 0 R
 /FontBBox [-438 -900 11467 1815]
 /Flags 32
 /StemV 0
@@ -1181,12 +3227,12 @@ endobj
 /CapHeight 646
 >>
 endobj
-30 0 obj
+46 0 obj
 <<
 /Type /Font
 /BaseFont /Amiri
-/FontDescriptor 29 0 R
-/W [6146 [658] 6190 [374] 6177 [419] 6173 [420] 6192 [303] 6181 [263] 6194 [461] 6197 [458] 1 [292] 6151 [708] 6187 [497] 6193 [502] 6191 [360] 6148 [573] 6196 [464] 6185 [771] 6161 [606] 6188 [498] 6149 [522] 6184 [249] 6157 [757] 6137 [220] 6156 [885] 6180 [503] 6176 [502] 6144 [612] 6195 [704] 6147 [693] 6175 [413] 6174 [486] 6130 [532] 6128 [532] 6125 [196] 6129 [532] 6127 [532] 6132 [532] 6131 [532] 6159 [535]]
+/FontDescriptor 45 0 R
+/W [6146 [658] 6190 [374] 6177 [419] 6173 [420] 6192 [303] 6181 [263] 6194 [461] 6197 [458] 1 [292] 6151 [708] 6187 [497] 6193 [502] 6191 [360] 6148 [573] 6196 [464] 6185 [771] 6161 [606] 6188 [498] 6149 [522] 6184 [249] 6157 [757] 6137 [220] 1050 [585] 1013 [698] 55 [217] 1048 [345] 1023 [366] 1037 [175] 993 [639] 979 [229] 1010 [698] 6153 [305] 6186 [519] 6129 [532] 6135 [532] 6125 [196] 6127 [532] 6133 [532] 6136 [532] 6132 [532] 6134 [532] 6159 [535] 6156 [885]]
 /CIDToGIDMap /Identity
 /DW 1000
 /Subtype /CIDFontType2
@@ -1198,17 +3244,17 @@ endobj
 >>
 >>
 endobj
-31 0 obj
+47 0 obj
 <<
 /Type /Font
 /Subtype /Type0
-/ToUnicode 28 0 R
+/ToUnicode 44 0 R
 /BaseFont /Amiri
 /Encoding /Identity-H
-/DescendantFonts [30 0 R]
+/DescendantFonts [46 0 R]
 >>
 endobj
-32 0 obj
+48 0 obj
 <<
 /Type /XObject
 /Subtype /Image
@@ -1248,34 +3294,34 @@ endobj
 <<
 /ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
 /Font <<
-/F1 13 0 R
-/F2 14 0 R
-/F3 15 0 R
-/F4 16 0 R
-/F5 17 0 R
-/F6 18 0 R
-/F7 19 0 R
-/F8 20 0 R
-/F9 21 0 R
-/F10 22 0 R
-/F11 23 0 R
-/F12 24 0 R
-/F13 25 0 R
-/F14 26 0 R
-/F15 31 0 R
+/F1 29 0 R
+/F2 30 0 R
+/F3 31 0 R
+/F4 32 0 R
+/F5 33 0 R
+/F6 34 0 R
+/F7 35 0 R
+/F8 36 0 R
+/F9 37 0 R
+/F10 38 0 R
+/F11 39 0 R
+/F12 40 0 R
+/F13 41 0 R
+/F14 42 0 R
+/F15 47 0 R
 >>
 /XObject <<
-/I0 32 0 R
+/I0 48 0 R
 >>
 >>
 endobj
-33 0 obj
+49 0 obj
 <<
 /Producer (jsPDF 3.0.4)
-/CreationDate (D:20251231173454+08'00')
+/CreationDate (D:20260128215722+08'00')
 >>
 endobj
-34 0 obj
+50 0 obj
 <<
 /Type /Catalog
 /Pages 1 0 R
@@ -1284,49 +3330,65 @@ endobj
 >>
 endobj
 xref
-0 35
+0 51
 0000000000 65535 f 
-0000014274 00000 n 
-0000095954 00000 n 
+0000057595 00000 n 
+0000139924 00000 n 
 0000000015 00000 n 
 0000000152 00000 n 
-0000001000 00000 n 
-0000001137 00000 n 
-0000004543 00000 n 
-0000004680 00000 n 
-0000008187 00000 n 
-0000008325 00000 n 
-0000011785 00000 n 
-0000011924 00000 n 
-0000014356 00000 n 
-0000014482 00000 n 
-0000014613 00000 n 
-0000014747 00000 n 
-0000014885 00000 n 
-0000015009 00000 n 
-0000015138 00000 n 
-0000015270 00000 n 
-0000015406 00000 n 
-0000015534 00000 n 
-0000015661 00000 n 
-0000015790 00000 n 
-0000015923 00000 n 
-0000016025 00000 n 
-0000016121 00000 n 
-0000084050 00000 n 
-0000084938 00000 n 
-0000085126 00000 n 
-0000085751 00000 n 
-0000085884 00000 n 
-0000096230 00000 n 
-0000096316 00000 n 
+0000000975 00000 n 
+0000001112 00000 n 
+0000005472 00000 n 
+0000005609 00000 n 
+0000010852 00000 n 
+0000010990 00000 n 
+0000015988 00000 n 
+0000016127 00000 n 
+0000021201 00000 n 
+0000021340 00000 n 
+0000026115 00000 n 
+0000026254 00000 n 
+0000031287 00000 n 
+0000031426 00000 n 
+0000036346 00000 n 
+0000036485 00000 n 
+0000041544 00000 n 
+0000041683 00000 n 
+0000046493 00000 n 
+0000046632 00000 n 
+0000051767 00000 n 
+0000051906 00000 n 
+0000056734 00000 n 
+0000056873 00000 n 
+0000057734 00000 n 
+0000057860 00000 n 
+0000057991 00000 n 
+0000058125 00000 n 
+0000058263 00000 n 
+0000058387 00000 n 
+0000058516 00000 n 
+0000058648 00000 n 
+0000058784 00000 n 
+0000058912 00000 n 
+0000059039 00000 n 
+0000059168 00000 n 
+0000059301 00000 n 
+0000059403 00000 n 
+0000059499 00000 n 
+0000127904 00000 n 
+0000128857 00000 n 
+0000129045 00000 n 
+0000129721 00000 n 
+0000129854 00000 n 
+0000140200 00000 n 
+0000140286 00000 n 
 trailer
 <<
-/Size 35
-/Root 34 0 R
-/Info 33 0 R
-/ID [ <6824CD399CD2FEB98115D36AD65467A1> <6824CD399CD2FEB98115D36AD65467A1> ]
+/Size 51
+/Root 50 0 R
+/Info 49 0 R
+/ID [ <4171BD22688A838EC55E31520315B3E6> <4171BD22688A838EC55E31520315B3E6> ]
 >>
 startxref
-96420
+140390
 %%EOF
