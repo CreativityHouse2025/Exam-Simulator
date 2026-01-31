@@ -1,16 +1,107 @@
 [
-    {
-        "id": 1,
-        "name": {
-            "en": "Scope",
-            "ar": "النطاق"
-        }
-    },
-    {
-        "id": 3,
-        "name": {
-            "en": "Communication",
-            "ar": "التواصل"
-        }
+  {
+    "id": 1,
+    "name": {
+      "en": "Budget",
+      "ar": "الميزانية"
     }
+  },
+  {
+    "id": 2,
+    "name": {
+      "en": "Building Shared",
+      "ar": "بناء مشترك"
+    }
+  },
+  {
+    "id": 3,
+    "name": {
+      "en": "Communication",
+      "ar": "التواصل"
+    }
+  },
+  {
+    "id": 4,
+    "name": {
+      "en": "Leading A Team",
+      "ar": "قيادة فريق"
+    }
+  },
+  {
+    "id": 5,
+    "name": {
+      "en": "Organizational Changes",
+      "ar": "التغييرات التنظيمية"
+    }
+  },
+  {
+    "id": 6,
+    "name": {
+      "en": "Quality",
+      "ar": "الجودة"
+    }
+  },
+  {
+    "id": 7,
+    "name": {
+      "en": "Resources",
+      "ar": "الموارد"
+    }
+  },
+  {
+    "id": 8,
+    "name": {
+      "en": "Risk",
+      "ar": "المخاطر"
+    }
+  },
+  {
+    "id": 9,
+    "name": {
+      "en": "Scope",
+      "ar": "النطاق"
+    }
+  },
+  {
+    "id": 10,
+    "name": {
+      "en": "Schedule",
+      "ar": "الجدول الزمني"
+    }
+  },
+  {
+    "id": 11,
+    "name": {
+      "en": "Stakeholders",
+      "ar": "أصحاب المصلحة (المعنيين)"
+    }
+  },
+  {
+    "id": 12,
+    "name": {
+      "en": "Procurement",
+      "ar": "المشتريات"
+    }
+  },
+  {
+    "id": 13,
+    "name": {
+      "en": "Compliance",
+      "ar": "الامتثال"
+    }
+  },
+  {
+    "id": 14,
+    "name": {
+      "en": "External Changes",
+      "ar": "التغييرات الخارجية"
+    }
+  },
+  {
+    "id": 15,
+    "name": {
+      "en": "Closure Transition",
+      "ar": "الإغلاق"
+    }
+  }
 ]
