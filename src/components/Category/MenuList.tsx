@@ -5,8 +5,8 @@ import { Category } from "../../types";
 import MenuItem from "./MenuItem";
 
 const MenuListStyles = styled.ul`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.7rem;
   list-style: none;
   margin: 0;

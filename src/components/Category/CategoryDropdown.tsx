@@ -44,7 +44,7 @@ const Menu = styled.div<{ open: boolean } & ThemedStyles>`
   background: ${({ theme }) => theme.white};
   color: ${({ theme }) => theme.black};
   border-radius: 10px;
-  width: clamp(28rem, 30vw, 40rem);
+  width: clamp(45rem, 50vw, 70rem);
   box-shadow: 0 8px 20px rgba(0,0,0,0.18);
   opacity: ${(p) => (p.open ? 1 : 0)};
   transform: translateY(${(p) => (p.open ? "0" : "10px")});
