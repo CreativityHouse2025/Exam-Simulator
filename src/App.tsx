@@ -163,26 +163,23 @@ const AppComponent: React.FC = () => {
     initTranslation()
   }, [langCode, loadTranslation]) // load per language
 
-  // Load exam on language change while the exam exists
-  const onMap = React.useEffectEvent(() => {
-    if (exam && session.examType) {
-      loadExam(session)
-    }
-  });
-
   // Load questions from disk to memory map
   React.useEffect(() => {
     const initMap = async () => {
       setLoading(true);
       try {
         await initQuestionMap(langCode);
-        onMap();
+        if (exam && session.examType) {
+          loadExam(session);
+        }
+      } catch (error) {
+        console.error("Failed to load questions: ", error)
       } finally {
         setLoading(false);
       }
     }
     initMap()
-  }, [langCode, loadExam]) // run only once per language change
+  }, [langCode]) // run only once per language change
 
   if (!hasTranslation()) {
     return <Loading size={200} />

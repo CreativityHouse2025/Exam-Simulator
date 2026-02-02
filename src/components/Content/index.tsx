@@ -1,8 +1,8 @@
-import type { ExamType, ThemedStyles } from '../../types'
+import type { Answers, Exam, ExamType, LangCode, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
-import Exam from './Exam'
+import ExamComponent from './Exam'
 import Summary from './Summary'
 import { ExamContext, SessionDataContext, SessionExamContext } from '../../contexts'
 import { useReport } from '../../hooks/useReport'
@@ -14,7 +14,6 @@ import { translate } from '../../utils/translation'
 import { formatTimer, formatDate } from '../../utils/format'
 import type { Results } from '../../types'
 import useResults from '../../hooks/useResults'
-import { isRetakeAllowed } from '../../utils/exam'
 import { RevisionExamOptions } from '../../App'
 
 export const MainStyles = styled.main<MainStylesProps>`
@@ -55,7 +54,19 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
     "sending": translate("report.sending"),
     "sent": translate("report.sent"),
     "error": translate("report.error")
-  }), [langCode, translate])
+  }), [langCode])
+
+    React.useEffect(() => {
+    if (emailLoading || reportLoading) {
+      showToast(feedback.sending, 5000)
+    }
+  }, [emailLoading, reportLoading, showToast])
+
+  React.useEffect(() => {
+    if (emailError || reportError) {
+      showToast(feedback.error, 5000)
+    }
+  }, [emailError, reportError, showToast])
 
   const results = useResults(finished);  
 
@@ -105,58 +116,61 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
             `${translate(`content.summary.${type}`)}: ${value}`
         )
         .join('\n')
-
-      const body = replacePlaceholders(
-        rawBody,
-        fullName,
-        company,
-        summary
-      )
-
-      const filename = `Report_${fullName.replace(/\s+/g, '_')}_${timestamp}.pdf`
-
-      return { subject, body, filename }
+        
+        const body = replacePlaceholders(
+          rawBody,
+          fullName,
+          company,
+          summary
+        )
+        
+        const filename = `Report_${fullName.replace(/\s+/g, '_')}_${timestamp}.pdf`
+        
+        return { subject, body, filename }
     },
     [langCode]
   )
+  
 
-
-  React.useEffect(() => {
-    if (emailLoading || reportLoading) {
-      showToast(feedback.sending, 5000)
-    }
-  }, [emailLoading, reportLoading, showToast])
+  const emailInitiatedRef = React.useRef<boolean>(false);
+  const emailDataRef = React.useRef<EmailDataRef>(null);
 
   React.useEffect(() => {
-    if (emailError || reportError) {
-      showToast(feedback.error, 5000)
+    if (!finished) return;
+    if (!settings.email || !settings.fullName) return;
+    
+    // Capture values when exam finishes
+    if (!emailDataRef.current) {
+        emailDataRef.current = {
+            exam,
+            answers,
+            langCode,
+            fullName: settings.fullName,
+            email: settings.email
+        };
     }
-  }, [emailError, reportError, showToast])
+}, [finished, exam, answers, langCode, settings]);
 
   React.useEffect(() => {
     if (!finished) return;
     if (emailSent) return;
-    if (emailLoading || reportLoading) return; 
-
+    if (!emailDataRef.current) return;
+    
     async function generateAndSend() {
+      if (emailInitiatedRef.current) return;
+      emailInitiatedRef.current = true;
+
       try {
-        const userFullName = settings.fullName;
+        const userFullName = emailDataRef.current?.fullName as string;
         
-        if (!userFullName) {
-          console.warn("User fullname is missing")
-          return;
-        };
-        const pdf = await generateReport({
-          exam,
-          userAnswers: answers,
-          langCode,
+        const userEmail = emailDataRef.current?.email as string;
+        
+        const pdf = await generateReport({ // @ts-ignore
+          exam: emailDataRef.current?.exam, // @ts-ignore
+          userAnswers: emailDataRef.current?.answers, // @ts-ignore
+          langCode: emailDataRef.current?.langCode,
           userFullName,
         });
-        const userEmail = settings.email;
-        if (!userEmail) {
-          console.warn("User email is missing")
-          return;
-        }
         // use as results because writeEmail is only called if exam is finished
         
         const email = writeEmail(userFullName, results as Results) 
@@ -171,15 +185,16 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
         showToast(feedback.sent, 5000)
       } catch (error) {
         console.error("Error sending email: ", error);
+        emailInitiatedRef.current = false; // reset on failure to allow retry
       }
     }
 
     generateAndSend();
-  }, [finished, emailSent, writeEmail, generateReport, sendEmail, exam, answers, langCode, settings.fullName, update]);
+  }, [finished, emailSent, writeEmail, generateReport, sendEmail, update]);
 
   return (
     <MainStyles id="main" $open={open}>
-      <ContentStyles id="content">{finished && summary ? <Summary onRevision={onRevision} examType={examType as ExamType}/> : <Exam isReview={finished} />}</ContentStyles>
+      <ContentStyles id="content">{finished && summary ? <Summary onRevision={onRevision} examType={examType as ExamType}/> : <ExamComponent isReview={finished} />}</ContentStyles>
     </MainStyles>
   )
 }
@@ -194,3 +209,11 @@ export interface ContentProps {
 export interface MainStylesProps {
   $open: boolean
 }
+
+type EmailDataRef = {
+    exam: Exam;
+    answers: Answers;
+    langCode: LangCode;
+    fullName: string;
+    email: string;
+} | null
