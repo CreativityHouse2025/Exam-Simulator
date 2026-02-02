@@ -26,8 +26,9 @@ export function useEmail() {
             return data; // contains { message, id }
         } catch (err: any) {
             setError(err.message || "Unknown error");
-            setLoading(false);
             throw err;
+        } finally {
+            setLoading(false);
         }
     }, []);
 

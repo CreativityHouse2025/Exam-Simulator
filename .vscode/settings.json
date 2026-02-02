@@ -21,5 +21,8 @@
   "javascript.suggest.jsdoc.generateReturns": true,
   "javascript.suggest.completeJSDocs": true,
   "javascript.suggest.autoImports": true,
-  "js/ts.implicitProjectConfig.checkJs": true
+  "js/ts.implicitProjectConfig.checkJs": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
 }
