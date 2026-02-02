@@ -262,7 +262,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         });
 
         const pdfBase64 = doc.output("datauristring").split(",")[1];
-        doc.save("report.pdf")
         res.status(200).json({ pdfBase64 });
     } catch (err) {
         console.error(err);
