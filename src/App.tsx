@@ -26,6 +26,7 @@ const AppComponent: React.FC = () => {
   const { settings, updateLanguage, updateEmail, updateFullName } = useSettings();
   const [exam, setExam] = React.useState<Exam | null>(null)
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [translationReady, setTranslationReady] = React.useState<boolean>(hasTranslation());
 
   const langCode = settings.language;
 
@@ -157,31 +158,42 @@ const AppComponent: React.FC = () => {
 
   // load translation on render
   React.useEffect(() => {
+    let cancelled = false
     async function initTranslation() {
-      await loadTranslation(langCode)
+      setTranslationReady(false)
+      try {
+        await loadTranslation(langCode)
+      } catch (error) {
+        console.error("Failed to load translation: ", error)
+      } finally {
+        if (!cancelled) setTranslationReady(true)
+      }
     }
     initTranslation()
+    return () => { cancelled = true }
   }, [langCode, loadTranslation]) // load per language
 
   // Load questions from disk to memory map
   React.useEffect(() => {
+    let cancelled = false
     const initMap = async () => {
       setLoading(true);
       try {
         await initQuestionMap(langCode);
-        if (exam && session.examType) {
+        if (!cancelled && exam && session.examType) {
           loadExam(session);
         }
       } catch (error) {
         console.error("Failed to load questions: ", error)
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }
     initMap()
+    return () => { cancelled = true }
   }, [langCode]) // run only once per language change
 
-  if (!hasTranslation()) {
+  if (!translationReady) {
     return <Loading size={200} />
   }
 
