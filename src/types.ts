@@ -173,6 +173,7 @@ export type SendEmailRequest = {
   to: string;
   subject: string;
   text: string;
+  html?: string;
   attachments?: {
     filename: string;
     /** pdf content in base64 */

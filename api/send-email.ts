@@ -1,7 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import nodemailer from "nodemailer";
 import { SendEmailRequest } from '../src/types.js'
-import { Attachment } from 'nodemailer/lib/mailer';
 
 const SENDER_EMAIL = process.env.SENDER;
 const APP_PASSWORD = process.env.APP_PASSWORD;
@@ -25,16 +24,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const emailRequest = req.body as SendEmailRequest;
 
-    const { to, subject, text, attachments } = emailRequest;
-    if (!attachments) {
-      throw new Error("Error: no report was attached")
-    }
-    const bufferedAttachments: Attachment[] = attachments.map((a) => (
-      { 
-        filename: a.filename,
-        content: Buffer.from(a.content, 'base64')
-      }
-    ))
+    const { to, subject, text, html } = emailRequest;
 
     if (!to || !subject || !text) {
       return res.status(400).json({ error: "Missing request information" });
@@ -45,7 +35,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       to,
       subject,
       text,
-      attachments: bufferedAttachments,
+      html
     });
 
     return res.status(200).json({ message: "Email sent successfully", id: info.messageId });
