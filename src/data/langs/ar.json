@@ -9,7 +9,9 @@
     "new": "بدء امتحان جديد",
     "mini": "بدء امتحان صغير",
     "select-category": "اختر تصنيف الأسئلة",
-    "general": "عام"
+    "select-fullexam": "اختر الامتحان للبدء",
+    "general": "عام",
+    "random": "اختبار عشوائي"
   },
   "nav": {
     "drawer": {
