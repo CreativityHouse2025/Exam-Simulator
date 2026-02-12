@@ -31,7 +31,7 @@ interface ExamStrategy {
 
 class MiniExam implements ExamStrategy {
   buildExam(categoryId: number, examId?: number) {
-    const examDetails = examTypes["exam"]
+    const examDetails = examTypes["miniexam"]
 
     const { minQuestionCount, maxQuestionCount, durationMinutes } = examDetails
     const questionCount = getRandomInt(minQuestionCount, maxQuestionCount);
