@@ -30,7 +30,7 @@ interface ExamStrategy {
 }
 
 class MiniExam implements ExamStrategy {
-  buildExam(categoryId: number, examId?: number) {
+  buildExam(categoryId: number, _examId?: number) {
     const examDetails = examTypes["miniexam"]
 
     const { minQuestionCount, maxQuestionCount, durationMinutes } = examDetails
@@ -84,7 +84,7 @@ class MiniExam implements ExamStrategy {
 }
 
 class FullExam implements ExamStrategy {
-  buildExam(categoryId: number, examId?: number) {
+  buildExam(_categoryId: number, examId?: number) {
     const examDetails = examTypes["exam"]
 
     const { minQuestionCount, maxQuestionCount, durationMinutes } = examDetails
