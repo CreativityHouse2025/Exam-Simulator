@@ -121,10 +121,10 @@ export interface GeneratedExam {
   durationMinutes: number
 }
 
-// v1.1: type for category item
-export type Category = {
-  id: number
-  label: string
+// v2.0: Type for the generic dropdown item (category or fullexam)
+export type DropdownItem<TId = number, TLabel = string> = {
+  id: TId
+  label: TLabel
 }
 
 // Session action types

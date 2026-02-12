@@ -1,15 +1,14 @@
-import { useContext } from "react";
 import categories from "../data/exam-data/categories.json"
 import { GENERAL_CATEGORY_ID } from "../constants";
 import { translate } from "../utils/translation";
-import { Category } from "../types";
+import type { DropdownItem } from "../types";
 import useSettings from "./useSettings";
 
 /**
  * Custom hook to get a category label from its ID
  * @param id - Category id
  */
-export default function useCategoryLabel(id: Category['id']): string | undefined{
+export default function useDropdownItemLabel(id: DropdownItem['id']): string | undefined {
     const { settings } = useSettings();
     const langCode = settings.language;
 

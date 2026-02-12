@@ -1,19 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import type { Category, Lang, LangCode, ThemedStyles } from "../../types";
-import { Close } from '@styled-icons/material/Close'
-import { GENERAL_CATEGORY_ID, MENU_PADDING } from "../../constants";
+import type { DropdownItem, ThemedStyles } from "../../types";
+import { Close } from "@styled-icons/material/Close";
+import { MENU_PADDING } from "../../constants";
 import MenuList from "./MenuList";
-import rawCategories from '../../data/exam-data/categories.json'
-import useCategoryLabel from "../../hooks/useCategoryLabel";
-import useSettings from "../../hooks/useSettings";
 
-type DropdownProps = {
+type DropdownProps<TId = number, TLabel = string> = {
   title: string
   open: boolean
   setOpen: (open: boolean) => void
-  onSelect: (value: Category['id']) => void
+  onSelect: (value: TId) => void
+  items: DropdownItem<TId, TLabel>[]
   buttonRef?: React.RefObject<HTMLButtonElement | null>
+  emptyMessage?: string
 };
 
 // overlay for blur effect
@@ -79,20 +78,25 @@ const CloseButton = styled.button<ThemedStyles>`
   }
 `;
 
-const CategoryDropdown: React.FC<DropdownProps> = ({ buttonRef, open, setOpen, title, onSelect }) => {
-
-  const { settings } = useSettings();
-  const langCode: LangCode = settings.language;
-
+const Dropdown = <TId, TLabel>({
+  buttonRef,
+  open,
+  setOpen,
+  title,
+  onSelect,
+  items,
+  emptyMessage
+}: DropdownProps<TId, TLabel>) => {
   const menuRef = React.useRef<HTMLDivElement | null>(null);
+
   React.useEffect(() => {
     const handler = (event: MouseEvent | TouchEvent) => {
       const target = event.target as Node;
 
       if (
         menuRef.current &&
-        !menuRef.current.contains(target) && // click is outside menu
-        (!buttonRef?.current || !buttonRef.current.contains(target)) // and outside button
+        !menuRef.current.contains(target) &&
+        (!buttonRef?.current || !buttonRef.current.contains(target))
       ) {
         setTimeout(() => setOpen(false), 100);
       }
@@ -107,16 +111,6 @@ const CategoryDropdown: React.FC<DropdownProps> = ({ buttonRef, open, setOpen, t
     };
   }, [buttonRef, setOpen]);
 
-
-  const generalCategory: Category = {
-    id: GENERAL_CATEGORY_ID,
-    label: useCategoryLabel(GENERAL_CATEGORY_ID) as string
-  }
-  const categories: Category[] = [generalCategory, ...rawCategories.map(c => ({
-    id: c.id,
-    label: c['name'][langCode]
-  }))]
-
   return (
     <>
       <Overlay open={open} />
@@ -129,11 +123,18 @@ const CategoryDropdown: React.FC<DropdownProps> = ({ buttonRef, open, setOpen, t
               <Close size={25} />
             </CloseButton>
           </MenuHeader>
-          <MenuList categories={categories} onSelect={(value) => { onSelect(value); setOpen(false)} }/>
+          <MenuList
+            items={items}
+            onSelect={(value) => {
+              onSelect(value);
+              setOpen(false);
+            }}
+            emptyMessage={emptyMessage}
+          />
         </Menu>
       </MenuStyles>
     </>
   );
 };
 
-export default CategoryDropdown;
+export default Dropdown;
