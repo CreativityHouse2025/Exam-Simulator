@@ -64,7 +64,7 @@ export default function useResults(isExamFinished: boolean): Results | null {
 
     const revisionDetails = {
         maxTime,
-        questions: wrongQuestions,
+        wrongQuestions,
         categoryId,
     }
 
