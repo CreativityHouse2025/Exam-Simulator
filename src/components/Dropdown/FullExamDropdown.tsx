@@ -3,6 +3,8 @@ import type { DropdownItem, LangCode } from "../../types";
 import Dropdown from "./Dropdown";
 import rawFullExams from '../../data/exam-data/fullExams.json'
 import useSettings from "../../hooks/useSettings";
+import { GENERAL_CATEGORY_ID, RANDOM_EXAM_ID } from "../../constants";
+import useFullExamLabel from "../../hooks/useFullExamLabel";
 
 type FullExamDropdownProps = {
   title: string
@@ -23,8 +25,8 @@ const FullExamDropdown: React.FC<FullExamDropdownProps> = ({
   const langCode: LangCode = settings.language;
 
   const randomExam: DropdownItem = {
-    id: 0,
-    label: "Random"
+    id: RANDOM_EXAM_ID,
+    label: useFullExamLabel(GENERAL_CATEGORY_ID)
   }
 
   const exams: DropdownItem[] = [randomExam, ...rawFullExams.map(e => ({

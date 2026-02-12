@@ -1,5 +1,5 @@
 import type { ExamType, Question } from "../types"
-import { GENERAL_CATEGORY_ID } from "../constants";
+import { GENERAL_CATEGORY_ID, RANDOM_EXAM_ID } from "../constants";
 import examTypes from '../data/exam-data/examTypes.json'
 import exams from '../data/exam-data/fullExams.json'
 import { getQuestionList } from "./exam";
@@ -10,6 +10,15 @@ function getRandomInt(min: number, max: number) {
   min = Math.ceil(min); // Ensure min is an integer
   max = Math.floor(max); // Ensure max is an integer
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Helper function to ensure the list is valid
+function getValidatedQuestionList(): Question[] {
+  const list = getQuestionList();
+  if (list.length === 0) {
+    throw new Error("question list is empty");
+  }
+  return list;
 }
 
 interface BuiltExam {
@@ -42,8 +51,7 @@ class MiniExam implements ExamStrategy {
       }
     }
 
-    let questionList = getQuestionList();
-    if (questionList.length === 0) throw new Error("question list is empty")
+    const questionList = getValidatedQuestionList()
 
     let questionPool: Question[] = []
 
@@ -88,7 +96,7 @@ class FullExam implements ExamStrategy {
     const examDetails = examTypes["exam"]
 
     const { minQuestionCount, maxQuestionCount, durationMinutes } = examDetails
-    const questionCount = getRandomInt(minQuestionCount, maxQuestionCount);
+    const questionCount = getRandomInt(minQuestionCount, maxQuestionCount)
     if (questionCount <= 0) { // safety for wrong configurations
       return {
         questionIds: [],
@@ -96,8 +104,7 @@ class FullExam implements ExamStrategy {
       }
     }
 
-    let questionList = getQuestionList();
-    if (questionList.length === 0) throw new Error("question list is empty")
+    const questionList = getValidatedQuestionList()
 
     let questionPool: Question[] = questionList
 
@@ -111,10 +118,10 @@ class FullExam implements ExamStrategy {
     // if it is a random exam (random 180 questions) shuffle
     let questionIds: BuiltExam['questionIds'] = []
 
-    if (examId === 0) {
+    if (examId === RANDOM_EXAM_ID) {
       // choose first questionCount questions
       // note: Array.prototype.slice is safe, even if questionPool < questionCount, it will return an adjusted array
-      shuffleArray(questionPool)
+      questionPool = shuffleArray(questionPool)
       questionIds = questionPool.slice(0, questionCount).map((q: Question): Question['id'] => q.id)
     } else {
       if (!examId) throw new Error("exam id is not provided")

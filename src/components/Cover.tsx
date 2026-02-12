@@ -99,7 +99,8 @@ const CoverComponent: React.FC<CoverProps> = ({ onMiniExam, onFullExam, canConti
       new: translate('cover.new'),
       mini: translate('cover.mini'),
       continue: translate('cover.continue'),
-      selectCategory: translate('cover.select-category')
+      selectCategory: translate('cover.select-category'),
+      selectFullExam: translate('cover.select-fullexam')
     }),
     [langCode, translate]
   )
@@ -133,10 +134,16 @@ const CoverComponent: React.FC<CoverProps> = ({ onMiniExam, onFullExam, canConti
             open={fullExamDropdown}
             setOpen={setFullExamDropdown}
             buttonRef={fullButtonRef}
-            title={translations.new}
+            title={translations.selectFullExam}
             onSelect={(examId: DropdownItem['id']) => onFullExam(examId)}
           />
-          <CategoryDropdown open={dropdown} setOpen={setDropdown} buttonRef={miniButtonRef} title={translations.selectCategory} onSelect={(categoryId: DropdownItem['id']) => onMiniExam(categoryId)} />
+          <CategoryDropdown
+            open={dropdown}
+            setOpen={setDropdown}
+            buttonRef={miniButtonRef}
+            title={translations.selectCategory}
+            onSelect={(categoryId: DropdownItem['id']) => onMiniExam(categoryId)}
+          />
 
         </ButtonContainer>
       </CoverStyles>

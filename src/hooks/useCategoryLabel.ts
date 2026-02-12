@@ -8,7 +8,7 @@ import useSettings from "./useSettings";
  * Custom hook to get a category label from its ID
  * @param id - Category id
  */
-export default function useDropdownItemLabel(id: DropdownItem['id']): string | undefined {
+export default function useCategoryLabel(id: DropdownItem['id']): string {
     const { settings } = useSettings();
     const langCode = settings.language;
 

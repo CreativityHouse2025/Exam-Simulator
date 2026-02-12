@@ -9,7 +9,9 @@
     "new": "Start New Exam",
     "mini": "Start Mini Exam",
     "select-category": "Choose a question category",
-    "general": "General"
+    "select-fullexam": "Choose an exam to start",
+    "general": "General",
+    "random": "Random Exam"
   },
   "nav": {
     "drawer": {
