@@ -1,11 +1,12 @@
-import type { Category, ThemedStyles } from '../types'
+import type { DropdownItem, ThemedStyles } from '../types'
 import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 import { StartExamOptions } from '../App'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
-import CategoryDropdown from './Category/CategoryDropdown'
+import CategoryDropdown from './Dropdown/CategoryDropdown'
+import FullExamDropdown from './Dropdown/FullExamDropdown'
 import { GENERAL_CATEGORY_ID, ReducedMotionWrapper } from '../constants'
 import useSettings from '../hooks/useSettings'
 
@@ -81,12 +82,14 @@ const ButtonRow = styled.div`
 
 const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue }) => {
   const [dropdown, setDropdown] = useState<boolean>(false);
+  const [fullExamDropdown, setFullExamDropdown] = useState<boolean>(false);
 
   const { settings } = useSettings();
 
   const langCode = settings.language;
 
   // button ref to fix immediate dropdown close on touch event
+  const fullButtonRef = useRef<HTMLButtonElement | null>(null);
   const miniButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const translations = React.useMemo(
@@ -113,7 +116,7 @@ const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue
 
         <ButtonContainer id="button-container">
           <ButtonRow id="button-row">
-            <StartButton title='Start a new exam' type='button' id="start-new-button" className="no-select" onClick={() => onStart({type: 'exam', categoryId: GENERAL_CATEGORY_ID})}>
+            <StartButton title='Start a new exam' type='button' id="start-new-button" ref={fullButtonRef} className="no-select" onClick={() => { setFullExamDropdown(true) }}>
               {translations.new}
             </StartButton>
 
@@ -127,7 +130,14 @@ const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue
               {translations.continue}
             </ContinueButton>
           )}
-          <CategoryDropdown open={dropdown} setOpen={setDropdown} buttonRef={miniButtonRef} title={translations.selectCategory} onSelect={(categoryId: Category['id']) => onStart({type: 'miniexam', categoryId})} />
+          <FullExamDropdown
+            open={fullExamDropdown}
+            setOpen={setFullExamDropdown}
+            buttonRef={fullButtonRef}
+            title={translations.new}
+            onSelect={() => onStart({ type: 'exam', categoryId: GENERAL_CATEGORY_ID })}
+          />
+          <CategoryDropdown open={dropdown} setOpen={setDropdown} buttonRef={miniButtonRef} title={translations.selectCategory} onSelect={(categoryId: DropdownItem['id']) => onStart({ type: 'miniexam', categoryId })} />
 
         </ButtonContainer>
       </CoverStyles>

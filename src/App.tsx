@@ -1,4 +1,4 @@
-import type { Category, Exam, ExamType, LangCode, Session, RevisionDetails } from './types'
+import type { DropdownItem, Exam, ExamType, LangCode, Session, RevisionDetails } from './types'
 
 import React from 'react'
 import Header from './components/Header'
@@ -203,7 +203,7 @@ const AppComponent: React.FC = () => {
 
   return (
     <ToastContextProvider>
-      <Header onLanguage={toggleLanguage} onAccount={handleAccount}/>
+      <Header onLanguage={toggleLanguage} onAccount={handleAccount} />
 
       <UserInfoForm
         initialValues={initialAccount}
@@ -245,7 +245,7 @@ const AppComponent: React.FC = () => {
 
 export type StartExamOptions = {
   type: ExamType;
-  categoryId: Category['id'];
+  categoryId: DropdownItem['id'];
 };
 
 export type RevisionExamOptions = RevisionDetails & {
