@@ -83,7 +83,7 @@ export type ReviewState = 'summary' | 'question'
 
 // Session interface
 export interface Session {
-  /** v1.1: the list of question IDs for this session, in the order they should appear */
+  /** v1.1: Session id */
   id: string
   /** the question number */
   index: number
@@ -107,18 +107,12 @@ export interface Session {
   categoryId: number
   /** the list of bookmarked questions */
   bookmarks: number[]
-  /** the ID of the exam */
+  /** the type of the exam */
   examType?: ExamType
+  /** the ID of the full exam (if it is a full exam) */
+  examId?: number
   /** session update function - will be injected by reducer */
   update?: SessionDispatch
-}
-
-// v1.1: type for exam generator output
-export interface GeneratedExam {
-  /** the list of question ids to perserve question order in local storage */
-  questionIds: number[]
-  /** the duration of the exam in minutes */
-  durationMinutes: number
 }
 
 // v2.0: Type for the generic dropdown item (category or fullexam)
@@ -236,7 +230,7 @@ export interface ToastContextType {
 
 export type RevisionDetails = {
   maxTime: Session['maxTime']
-  questions: Session['questions']
+  wrongQuestions: Session['questions']
   categoryId: Session['categoryId']
 }
 

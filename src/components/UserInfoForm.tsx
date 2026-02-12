@@ -156,7 +156,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ initialValues, onSubmit, on
 			emailPlaceholder: translate('form.user-info.email.placeholder'),
 			invalidEmail: translate('form.user-info.email.invalid'),
 			invalidName: translate('form.user-info.full-name.invalid'),
-			missingName: translate('form.user-info.full-name.missingName'),
+			missingName: translate('form.user-info.full-name.missing'),
 		}
 	), [langCode])
 	

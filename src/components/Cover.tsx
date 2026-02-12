@@ -1,13 +1,12 @@
 import type { DropdownItem, ThemedStyles } from '../types'
 import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
-import { StartExamOptions } from '../App'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
 import CategoryDropdown from './Dropdown/CategoryDropdown'
 import FullExamDropdown from './Dropdown/FullExamDropdown'
-import { GENERAL_CATEGORY_ID, ReducedMotionWrapper } from '../constants'
+import { ReducedMotionWrapper } from '../constants'
 import useSettings from '../hooks/useSettings'
 
 const CoverStyles = styled.div<ThemedStyles>`
@@ -80,7 +79,7 @@ const ButtonRow = styled.div`
   gap: 1rem;
 `
 
-const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue }) => {
+const CoverComponent: React.FC<CoverProps> = ({ onMiniExam, onFullExam, canContinue, onContinue }) => {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const [fullExamDropdown, setFullExamDropdown] = useState<boolean>(false);
 
@@ -135,9 +134,9 @@ const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue
             setOpen={setFullExamDropdown}
             buttonRef={fullButtonRef}
             title={translations.new}
-            onSelect={() => onStart({ type: 'exam', categoryId: GENERAL_CATEGORY_ID })}
+            onSelect={(examId: DropdownItem['id']) => onFullExam(examId)}
           />
-          <CategoryDropdown open={dropdown} setOpen={setDropdown} buttonRef={miniButtonRef} title={translations.selectCategory} onSelect={(categoryId: DropdownItem['id']) => onStart({ type: 'miniexam', categoryId })} />
+          <CategoryDropdown open={dropdown} setOpen={setDropdown} buttonRef={miniButtonRef} title={translations.selectCategory} onSelect={(categoryId: DropdownItem['id']) => onMiniExam(categoryId)} />
 
         </ButtonContainer>
       </CoverStyles>
@@ -148,7 +147,8 @@ const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue
 export default React.memo(CoverComponent)
 
 export interface CoverProps {
-  onStart: (options: StartExamOptions) => void | Promise<void>
+  onMiniExam: (categoryId: DropdownItem['id']) => void | Promise<void>
+  onFullExam: (examId: DropdownItem['id']) => void | Promise<void>
   canContinue: boolean
   onContinue?: () => void | Promise<void>
 }
