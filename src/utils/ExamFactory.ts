@@ -30,7 +30,7 @@ interface BuiltExam {
 
 interface ExamStrategy {
   /** 
- * Generate an exam from a list of questions
+ * Generate an exam based on configuration
  * @param {number} categoryId - The category of the questions
  * @param {number} examId - The ID of the full exam (optional)
  * @returns {BuiltExam} - An object that has the corresponding generated question IDs list
@@ -118,13 +118,13 @@ class FullExam implements ExamStrategy {
     // if it is a random exam (random 180 questions) shuffle
     let questionIds: BuiltExam['questionIds'] = []
 
+    if (examId === undefined) throw new Error("exam id is not provided")
     if (examId === RANDOM_EXAM_ID) {
       // choose first questionCount questions
       // note: Array.prototype.slice is safe, even if questionPool < questionCount, it will return an adjusted array
       questionPool = shuffleArray(questionPool)
       questionIds = questionPool.slice(0, questionCount).map((q: Question): Question['id'] => q.id)
     } else {
-      if (!examId) throw new Error("exam id is not provided")
       const exam = exams.find(e => e.id === examId)
       if (!exam) {
         throw new Error("exam with id " + examId + " doesn't exist")
