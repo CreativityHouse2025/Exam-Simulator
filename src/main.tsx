@@ -4,6 +4,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { DEFAULT_THEME } from './constants'
 import App from './App'
 import SettingsProvider from './providers/SettingsContextProvider'
+import ToastContextProvider from './providers/ToastContextProvider'
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -42,7 +43,9 @@ createRoot(container).render(
     <SettingsProvider>
       <ThemeProvider theme={DEFAULT_THEME}>
         <GlobalStyle />
-        <App />
+        <ToastContextProvider>
+          <App />
+        </ToastContextProvider>
       </ThemeProvider>
     </SettingsProvider>
   </React.StrictMode>

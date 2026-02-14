@@ -12,10 +12,10 @@ import { DEFAULT_SESSION, LANGUAGES } from './constants'
 import { ExamContext } from './contexts'
 import { useSession } from './hooks/useSession'
 import useSettings from './hooks/useSettings'
-import ToastContextProvider from './providers/ToastContextProvider'
 import Toast from './components/Toast'
 import UserInfoForm from './components/UserInfoForm'
 import { ExamFactory } from './utils/ExamFactory'
+import useToast from './hooks/useToast'
 
 const AppComponent: React.FC = () => {
   // TODO: 1. Test email, retake functionality
@@ -28,6 +28,8 @@ const AppComponent: React.FC = () => {
   const [exam, setExam] = React.useState<Exam | null>(null)
   const [loading, setLoading] = React.useState<boolean>(false);
   const [translationReady, setTranslationReady] = React.useState<boolean>(hasTranslation());
+
+  const { showToast } = useToast()
 
   const langCode = settings.language;
 
@@ -73,7 +75,7 @@ const AppComponent: React.FC = () => {
         throw new Error("No exam ID found in session")
       }
       try {
-        let examData: Exam
+        let examData: Exam | null
 
         /**
          * Exam has two cases: 
@@ -84,21 +86,24 @@ const AppComponent: React.FC = () => {
          *      then get exam data from questionIds in the new session (shared logic)
          */
 
-        const examState = newSession.examState;        
+        const examState = newSession.examState;
         if (examState === "not-started") {
           const examType = newSession.examType
           if (examType === "revision") {
-            newSession = formatSession(newSession, newSession.questions.length, newSession.maxTime / 60)
+            // maxTime is in seconds
+            const durationInMinutes = newSession.maxTime / 60;
+            newSession = formatSession(newSession, newSession.questions.length, durationInMinutes)
           } else {
-            // Use ExamFactory to get the corresponding exam strategy
+            // Use ExamFactory to get the corresponding exam strategy (categorized {mini}/non-categorized {full})
             const examStrategy = ExamFactory.create(examType)
 
             let examDetails = examStrategy.buildExam(newSession.categoryId, newSession.examId)
 
-            newSession = formatSession({ 
+            newSession = formatSession({
               ...newSession, examState: 'in-progress',
-               questions: examDetails.questionIds 
-              }, examDetails.questionIds.length, examDetails.durationMinutes)
+              questions: examDetails.questionIds
+            },
+              examDetails.questionIds.length, examDetails.durationMinutes)
           }
         }
 
@@ -111,7 +116,15 @@ const AppComponent: React.FC = () => {
 
         examData = getExamByQuestionIds(newSession.questions);
 
-        formatExam(examData)
+        if (examData !== null) {
+          formatExam(examData)
+        } else {
+          const message = langCode === "ar" ? "لا يمكن بدء هذا الاختبار بسبب نقص الأسئلة. اختر اختبارًا آخر" :
+            "Cannot start the exam due to missing questions. Please choose another one."
+          showToast(message, 5000)
+          return
+        }
+
         setExam(examData)
         setSession(newSession)
       } catch (error) {
@@ -124,8 +137,8 @@ const AppComponent: React.FC = () => {
 
   const handleFullExam = React.useCallback(
     // categoryId will be 0 by DEFAULT_SESSION, indicating it's uncategorized
-    (examId: number) => {      
-      loadExam({ ...DEFAULT_SESSION, examType: "exam", examId }) 
+    (examId: number) => {
+      loadExam({ ...DEFAULT_SESSION, examType: "exam", examId })
     },
     [loadExam]
   )
@@ -234,7 +247,7 @@ const AppComponent: React.FC = () => {
   }
 
   return (
-    <ToastContextProvider>
+    <>
       <Header onLanguage={toggleLanguage} onAccount={handleAccount} />
 
       <UserInfoForm
@@ -258,7 +271,7 @@ const AppComponent: React.FC = () => {
       )}
 
       <Toast />
-    </ToastContextProvider>
+    </>
   )
 }
 

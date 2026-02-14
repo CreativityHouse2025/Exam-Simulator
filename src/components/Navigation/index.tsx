@@ -32,7 +32,7 @@ export interface NavigationProps {
 
 const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate, onRevision }) => {
   const exam = React.useContext(ExamContext)
-  const [session, updateSession] = React.useReducer(SessionReducer, startingSession)
+  const [session, updateSession] = React.useReducer(SessionReducer, startingSession)  
 
   const isMobile = useMediaQuery('(max-width: 48rem)'); // 768px, hook is called at each render  
   const [open, setOpen] = React.useState<boolean>(() => !isMobile)

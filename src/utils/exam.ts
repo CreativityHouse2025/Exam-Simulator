@@ -39,12 +39,12 @@ export function getQuestionList() {
 }
 
 /**
- * Get a started exam from a list of questions
+ * Get a started exam from a list of questions, returns null if there are missing questions in the files
  * @param {number} questionIds - The order of the questions
  * @returns {Exam} - The started exam (in order)
  * and corresponding question IDs list for local storage
  */
-export function getExamByQuestionIds(questionIds: number[]): Exam {
+export function getExamByQuestionIds(questionIds: number[]): Exam | null {
     if (!questionMap) {
         throw new Error("question map is null")
     }
@@ -69,6 +69,7 @@ export function getExamByQuestionIds(questionIds: number[]): Exam {
     // if there are missing questions
     if (missingIdCount !== 0) {
         console.warn(`${missingIdCount} question IDs are missing`)
+        return null
     }
     return exam
 }
