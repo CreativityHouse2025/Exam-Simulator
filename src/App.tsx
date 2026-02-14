@@ -5,7 +5,7 @@ import Header from './components/Header'
 import Navigation from './components/Navigation'
 import Cover from './components/Cover'
 import Loading from './components/Loading'
-import { hasTranslation, setTranslation } from './utils/translation'
+import { hasTranslation, setTranslation, translate } from './utils/translation'
 import { formatSession, formatExam } from './utils/format'
 import { getExamByQuestionIds, initQuestionMap } from './utils/exam'
 import { DEFAULT_SESSION, LANGUAGES } from './constants'
@@ -119,8 +119,7 @@ const AppComponent: React.FC = () => {
         if (examData !== null) {
           formatExam(examData)
         } else {
-          const message = langCode === "ar" ? "لا يمكن بدء هذا الاختبار بسبب نقص الأسئلة. اختر اختبارًا آخر" :
-            "Cannot start the exam due to missing questions. Please choose another one."
+          const message = translate("cover.invalid-exam-message")
           showToast(message, 5000)
           return
         }

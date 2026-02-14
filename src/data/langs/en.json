@@ -11,7 +11,8 @@
     "select-category": "Choose a question category",
     "select-fullexam": "Choose an exam to start",
     "general": "General",
-    "random": "Random Exam"
+    "random": "Random Exam",
+    "invalid-exam-message": "Cannot start the exam due to missing questions. Please choose another one."
   },
   "nav": {
     "drawer": {
