@@ -68,7 +68,7 @@ const TimerComponent: React.FC = () => {
   )
 }
 
-export default React.memo(TimerComponent)
+export default TimerComponent
 
 export interface TimerStylesProps extends ThemedStyles {
   $warning: boolean

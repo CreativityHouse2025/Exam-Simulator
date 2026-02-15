@@ -90,4 +90,4 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
   )
 }
 
-export default React.memo(NavigationComponent)
+export default NavigationComponent
