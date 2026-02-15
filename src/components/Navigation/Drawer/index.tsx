@@ -21,7 +21,7 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen }) => {
   )
 }
 
-export default React.memo(DrawerComponent)
+export default DrawerComponent
 
 export interface DrawerProps {
   open: boolean

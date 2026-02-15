@@ -33,7 +33,7 @@ const LoadingComponent: React.FC<LoadingProps> = ({ size }) => (
   </LoadingStyles>
 )
 
-export default React.memo(LoadingComponent)
+export default LoadingComponent
 
 export interface LoadingProps {
   size: number

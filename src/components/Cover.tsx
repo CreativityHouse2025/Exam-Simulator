@@ -127,7 +127,7 @@ const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue
   )
 }
 
-export default React.memo(CoverComponent)
+export default CoverComponent
 
 export interface CoverProps {
   onStart: (options: StartExamOptions) => void | Promise<void>

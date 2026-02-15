@@ -254,4 +254,4 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ initialValues, onSubmit, on
 	);
 };
 
-export default React.memo(UserInfoForm);
+export default UserInfoForm
