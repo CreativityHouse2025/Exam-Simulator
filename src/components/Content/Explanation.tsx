@@ -44,15 +44,13 @@ const ExplanationComponent: React.FC<ExplanationProps> = ({ question, answer }) 
   const { settings } = useSettings();
   const langCode = settings.language;
 
-  const translated = React.useMemo(
-    () => ({
-      yours: translate('content.explain.yours'),
-      correct: translate(`content.explain.${correct ? 'correct' : 'incorrect'}`),
-      answer: translate('content.explain.answer'),
-      explain: translate('content.explain.explain')
-    }),
-    [langCode, translate, correct]
-  )
+  const translated = {
+    yours: translate('content.explain.yours'),
+    correct: translate(`content.explain.${correct ? 'correct' : 'incorrect'}`),
+    answer: translate('content.explain.answer'),
+    explain: translate('content.explain.explain')
+  }
+
 
   return (
     <ExplanationStyles id="explanation" $correct={correct}>

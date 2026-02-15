@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import SummaryRow from './SummaryRow'
 import { formatDate, formatTimer } from '../../utils/format'
 import { translate } from '../../utils/translation'
-import useSettings from '../../hooks/useSettings'
 import useResults from '../../hooks/useResults'
 import { RevisionExamOptions } from '../../App'
 import { isRetakeAllowed } from '../../utils/exam'
@@ -96,9 +95,6 @@ const ButtonsContainer = styled.div`
 `
 
 const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: RevisionExamOptions) => void }> = ({ examType, onRevision }) => {
-  const { settings } = useSettings()
-  const langCode = settings.language
-
   const {
     pass,
     passPercent,
@@ -115,18 +111,15 @@ const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: Rev
 
   const canRetake = isRetakeAllowed(examType, revisionDetails.questions.length)
 
-  const translated = React.useMemo(
-    () => ({
-      title: translate('content.summary.title'),
-      status:
-        pass !== undefined
-          ? translate(`content.summary.${pass ? 'pass' : 'fail'}`)
-          : '',
-      home: translate('content.summary.home'),
-      retake: translate('content.summary.retake-wrong'),
-    }),
-    [langCode, pass]
-  )
+  const translated = {
+    title: translate('content.summary.title'),
+    status:
+      pass !== undefined
+        ? translate(`content.summary.${pass ? 'pass' : 'fail'}`)
+        : '',
+    home: translate('content.summary.home'),
+    retake: translate('content.summary.retake-wrong'),
+  }
 
   const onRestart = React.useCallback(() => window.location.reload(), [])
 

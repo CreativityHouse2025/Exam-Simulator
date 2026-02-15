@@ -18,7 +18,6 @@ import { timerIsRunning } from '../../../utils/state'
 import { translate } from '../../../utils/translation'
 import { SESSION_ACTION_TYPES } from '../../../constants'
 import { SessionExamContext, SessionTimerContext } from '../../../contexts'
-import useSettings from '../../../hooks/useSettings'
 
 const MainMenu = styled.div<ThemedStyles>`
   height: calc(100vh - 5rem);
@@ -64,9 +63,6 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
     [timerSession, examState, update]
   )
 
-  const { settings } = useSettings();
-  const langCode = settings.language;
-
   const menuItems = React.useMemo(() => {
     const baseItems: MenuSections[] = [
       { type: 'filter', filter: 'all', icon: <FormatListNumbered size={20} /> },
@@ -95,7 +91,7 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
     return baseItems
   }, [examState, actions])
 
-  const renderMenuItem = React.useCallback(
+  const renderMenuItem =
     (section: MenuSections) => {
       if (section.type === 'filter' || section.type === 'action') {
         const isFilter = section.type === 'filter'
@@ -124,9 +120,7 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
       }
 
       return null
-    },
-    [filter, open, langCode, translate]
-  )
+    }
 
   return <MainMenu>{menuItems.map(renderMenuItem)}</MainMenu>
 }
