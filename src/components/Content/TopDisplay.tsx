@@ -6,7 +6,6 @@ import BookmarkButton from './Bookmark'
 import { translate } from '../../utils/translation'
 import { SessionExamContext, SessionNavigationContext } from '../../contexts'
 import useCategoryLabel from '../../hooks/useCategoryLabel'
-import useSettings from '../../hooks/useSettings'
 
 export const TopDisplayStyles = styled.div`
   display: flex;
@@ -50,18 +49,9 @@ const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isRevie
 
   let categoryLabel: string | undefined = useCategoryLabel(categoryId);
 
-  const { settings } = useSettings();
-  const langCode = settings.language;
+  const question = translate('content.top-display.question', [index + 1, questionCount])
 
-  const question = React.useMemo(
-    () => translate('content.top-display.question', [index + 1, questionCount]),
-    [langCode, translate, index, questionCount]
-  )
-
-  const category = React.useMemo(
-    () => translate('content.summary.category'),
-    [langCode, translate]
-  )
+  const category = translate('content.summary.category')
 
   return (
     <ExamHeader id="exam-header">

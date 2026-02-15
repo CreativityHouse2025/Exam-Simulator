@@ -4,7 +4,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { lighten } from 'polished'
 import { translate } from '../../../utils/translation'
-import useSettings from '../../../hooks/useSettings'
 
 const LegendStyles = styled.div<ThemedStyles>`
   display: flex;
@@ -40,12 +39,7 @@ const NameStyles = styled.div<ThemedStyles>`
 `
 
 const LegendComponent: React.FC<LegendItemProps> = ({ type }) => {
-  const { settings } = useSettings();
-    const langCode = settings.language;
-  const legendName = React.useMemo(
-    () => translate(`nav.grid.${type}`),
-    [langCode, translate, type]
-  )
+  const legendName = translate(`nav.grid.${type}`)
 
   return (
     <LegendStyles className="no-select">

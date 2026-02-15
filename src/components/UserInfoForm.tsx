@@ -146,24 +146,22 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ initialValues, onSubmit, on
 
 	const labelAlignment = langCode === "en" ? "left" : "right"
 
-	const translations = React.useMemo(() => (
-		{
-			title: translate('form.user-info.title'),
-			submit: translate('form.user-info.submit'),
-			fullNameLabel: translate('form.user-info.full-name.label'),
-			fullNamePlaceholder: translate('form.user-info.full-name.placeholder'),
-			emailLabel: translate('form.user-info.email.label'),
-			emailPlaceholder: translate('form.user-info.email.placeholder'),
-			invalidEmail: translate('form.user-info.email.invalid'),
-			invalidName: translate('form.user-info.full-name.invalid'),
-			missingName: translate('form.user-info.full-name.missingName'),
-		}
-	), [langCode])
-	
+	const translations = {
+		title: translate('form.user-info.title'),
+		submit: translate('form.user-info.submit'),
+		fullNameLabel: translate('form.user-info.full-name.label'),
+		fullNamePlaceholder: translate('form.user-info.full-name.placeholder'),
+		emailLabel: translate('form.user-info.email.label'),
+		emailPlaceholder: translate('form.user-info.email.placeholder'),
+		invalidEmail: translate('form.user-info.email.invalid'),
+		invalidName: translate('form.user-info.full-name.invalid'),
+		missingName: translate('form.user-info.full-name.missingName'),
+	}
+
 	const handleClose = useCallback(() => {
-		onClose();		
+		onClose();
 		setError('')
-		setForm(initialValues);		
+		setForm(initialValues);
 	}, [onClose, initialValues])
 
 

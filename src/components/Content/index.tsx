@@ -49,11 +49,11 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
   const { sendEmail, loading: emailLoading, error: emailError } = useEmail();
   const { showToast } = useToast();
 
-  const feedback = React.useMemo(() => ({
+  const feedback = {
     "sending": translate("report.sending"),
     "sent": translate("report.sent"),
     "error": translate("report.error")
-  }), [langCode])
+  }
 
   React.useEffect(() => {
     if (emailLoading) {
@@ -191,7 +191,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
         )
         .join('\n')
 
-        // text body as a fallback if HTML didn't work in nodemailer
+      // text body as a fallback if HTML didn't work in nodemailer
       const textBody = replacePlaceholders(
         rawBody,
         fullName,

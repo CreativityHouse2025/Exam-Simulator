@@ -7,7 +7,6 @@ import { AccountCircle } from '@styled-icons/material/AccountCircle'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
-import useSettings from '../hooks/useSettings'
 
 const HeaderStyles = styled.div<ThemedStyles>`
   display: flex;
@@ -56,9 +55,7 @@ const IconStyles = styled.div<ThemedStyles>`
 
 
 const HeaderComponent: React.FC<HeaderProps> = ({ onLanguage, onAccount }) => {
-  const { settings } = useSettings();
-  const langCode = settings.language;
-  const title = React.useMemo(() => translate('about.title'), [langCode, translate])
+  const title = translate('about.title')
   const resetApp = React.useCallback(() => window.location.reload(), [])
 
   return (

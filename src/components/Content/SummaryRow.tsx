@@ -3,7 +3,6 @@ import type { ThemedStyles } from '../../types'
 import React from 'react'
 import styled from 'styled-components'
 import { translate } from '../../utils/translation'
-import useSettings from '../../hooks/useSettings'
 
 export const RowStyles = styled.div<SummaryStylesProps>`
   display: grid;
@@ -34,13 +33,7 @@ export const RowValueStyles = styled.div<ThemedStyles>`
 `
 
 const SummaryRowComponent: React.FC<SummaryRowProps> = ({ type, value, status, isStatus }) => {
-  const { settings } = useSettings()
-  const langCode = settings.language
-
-  const typeLabel = React.useMemo(
-    () => translate(`content.summary.${type}`),
-    [langCode, type]
-  )
+  const typeLabel = translate(`content.summary.${type}`)
 
   return (
     <RowStyles data-test={`summary-row-${type}`} $status={status}>
