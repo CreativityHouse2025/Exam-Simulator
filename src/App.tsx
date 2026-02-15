@@ -49,6 +49,8 @@ const AppComponent: React.FC = () => {
 
   }, [setSession]);
 
+
+  // TODO: make translation update source of truth unified in useSettigns's updateLanguage instead of three different calls
   const loadTranslation = React.useCallback(
     async (code: LangCode) => {
       const translations = (await import(`./data/langs/${code}.json`)).default
