@@ -42,7 +42,9 @@ class MiniExam implements ExamStrategy {
   buildExam(categoryId: number, _examId?: number) {
     const examDetails = examTypes["miniexam"]
 
-    const { minQuestionCount, maxQuestionCount, durationMinutes } = examDetails
+    const { durationMinutes } = examDetails
+    const minQuestionCount = 30; // business ruls
+    const maxQuestionCount = 50; // business ruls
     const questionCount = getRandomInt(minQuestionCount, maxQuestionCount);
     if (questionCount <= 0) { // safety for wrong configurations
       return {
@@ -95,14 +97,8 @@ class FullExam implements ExamStrategy {
   buildExam(_categoryId: number, examId?: number) {
     const examDetails = examTypes["exam"]
 
-    const { minQuestionCount, maxQuestionCount, durationMinutes } = examDetails
-    const questionCount = getRandomInt(minQuestionCount, maxQuestionCount)
-    if (questionCount <= 0) { // safety for wrong configurations
-      return {
-        questionIds: [],
-        durationMinutes: 0
-      }
-    }
+    const { durationMinutes } = examDetails
+    let questionCount = 180; // business rule
 
     const questionList = getValidatedQuestionList()
 
@@ -129,10 +125,17 @@ class FullExam implements ExamStrategy {
       if (!exam) {
         throw new Error("exam with id " + examId + " doesn't exist")
       }
+      questionCount = exam.questionCount;
+      if (questionCount <= 0) { // safety for wrong configurations
+        return {
+          questionIds: [],
+          durationMinutes: 0
+        }
+      }
       questionIds = exam['questionIds']
     }
 
-    // warn if the questions returned are lower than 180
+    // warn if the questions returned are lower than questionCount
     if (questionIds.length < questionCount) {
       console.warn(`Requested ${questionCount} questions, but full exam with id ${examId} has only ${questionIds.length}.`);
     }
