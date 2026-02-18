@@ -39957,5 +39957,255 @@
       }
     ],
     "id": 1607
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 22,
+    "text": "You are a project manager for a hardware design project. The project is going well until the research and development manager discovered that two of his staff members were working on different versions of the software driver of the hardware, a product of your project. Which of the following best describes what needs the attention of the project manager on this project?",
+    "explanation": "Configuration management involves making sure that everyone is working off the same documents. It describes how information about the items of the project will be recorded and updated so that the product, service or result of the project remains consistent. Domain = Process. PMBOK 6th edition, Page 88",
+    "choices": [
+      {
+        "text": "Resource allocation",
+        "correct": false
+      },
+      {
+        "text": "Quality management",
+        "correct": false
+      },
+      {
+        "text": "Configuration management",
+        "correct": true
+      },
+      {
+        "text": "Scope Management",
+        "correct": false
+      }
+    ],
+    "id": 1608
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 22,
+    "text": "An organization adopts agile transformation. They hired an agile coach to train the teams about agile methodologies. A team member asks the agile coach: \"I have the impression that agile teams do not plan upfront for their projects. Is this true?\". The agile coach explains the difference between planning in predictive and adaptive environments. He can mention all of the following, except:",
+    "explanation": "There is a myth saying that planning doesn't happen in agile projects. Planning is critical to project success but it is different than traditional projects. Planning is an ongoing process and provides multiple mechanisms to proactively update the plan. It is not one time stand-alone activity. Total planning may be more but distributed. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "Planning doesn't happen in agile projects as there is no",
+        "correct": true
+      },
+      {
+        "text": "In agile projects planning is an ongoing process and provides multiple mechanisms to proactively update the plan.",
+        "correct": false
+      },
+      {
+        "text": "In agile projects, planning is not one time stand-alone activity.",
+        "correct": false
+      },
+      {
+        "text": "In agile projects, total planning may be more than traditional projects but it is distributed along the project.",
+        "correct": false
+      }
+    ],
+    "id": 1609
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 22,
+    "text": "A project manager is assigned to new project chartered to build a bridge between two islands. This type of project has never been done before in his organization. The project manager has decided to build a basic project schedule and to detail the work of each part as the current part nears completion. What best describes what the project manager is doing?",
+    "explanation": "Progressive elaboration is the iterative process of increasing the level of detail in a project management plan as greater amounts of information and more accurate estimates become available. Domain = Process. PMBOK 6th edition, Page 565",
+    "choices": [
+      {
+        "text": "The process of Define Scope",
+        "correct": false
+      },
+      {
+        "text": "The process of progressive elaboration",
+        "correct": true
+      },
+      {
+        "text": "The process of Integrated Change Control",
+        "correct": false
+      },
+      {
+        "text": "The process of controlling the project by taking corrective action when necessary",
+        "correct": false
+      }
+    ],
+    "id": 1610
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 22,
+    "text": "The planning of your project is complete. As a project manager you are about to conduct the kick-off meeting with all stakeholders and you feel that the strategic directions for the project need to be presented first. Who is the best person to present it in the kick-off meeting?",
+    "explanation": "The Sponsor is who presents the strategic directions for the project. Domain = Process. PMBOK 6th edition, Page 86 and PMBOK 7th edition, Page 179",
+    "choices": [
+      {
+        "text": "The Project Manager",
+        "correct": false
+      },
+      {
+        "text": "The Sponsor",
+        "correct": true
+      },
+      {
+        "text": "The Customer",
+        "correct": false
+      },
+      {
+        "text": "The project management team",
+        "correct": false
+      }
+    ],
+    "id": 1611
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 22,
+    "text": "During an audit on Paul's agile project by PMO in his organization, they found that there are iteration plans for the current and next iteration only. The PMO representative asks Paul where are the plans for the remaining iterations of the project. What is the best course of action?",
+    "explanation": "Progressive elaboration refers to the process of adding more detail as new information emerges. Agile methods rely on progressive elaboration to first create, and then refine, many kinds of project assets to make them increasingly accurate as the team learns more about the project. These “progressively elaborated” assets might include plans, estimates, requirements definition,..etc. Domain = Process. Agile Practice Guide Page 58",
+    "choices": [
+      {
+        "text": "Accept a red flag for having incomplete plan and discuss it with the team in next retrospective.",
+        "correct": false
+      },
+      {
+        "text": "Inform the PMO representative that the project is being progressively elaborated.",
+        "correct": true
+      },
+      {
+        "text": "Ask the team to create plan for the remainder of the project.",
+        "correct": false
+      },
+      {
+        "text": "Create detailed plans for the remaining iterations of the project.",
+        "correct": false
+      }
+    ],
+    "id": 1612
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 22,
+    "text": "You are managing a network upgrade project. Your project schedule performance index is 0.79. You need to take a corrective action to bring the project back on track. Which response would you choose that will affect the resources management plan?",
+    "explanation": "Crashing is a technique used to shorten the schedule duration for the least incremental cost by adding resources to critical path activities. Adding resources will update the resources management plan to reflect the rates, roles and calendars for the added resources. Domain = Process. PMBOK 6th edition, Page 215 and PMBOK 7th edition, Page 59",
+    "choices": [
+      {
+        "text": "Crashing",
+        "correct": true
+      },
+      {
+        "text": "Fast Tracking",
+        "correct": false
+      },
+      {
+        "text": "Teaming Agreement",
+        "correct": false
+      },
+      {
+        "text": "Sharing",
+        "correct": false
+      }
+    ],
+    "id": 1613
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 22,
+    "text": "You are managing a four phases construction project to build a new industrial park. The project is very large and involves more than four hundreds stakeholders and four subcontractors. A team member who has never worked before in large projects like this one ask you about when the project kick-off meeting will be held. What would be your answer?",
+    "explanation": "Multi-phase projects will include a kick-off meeting at the beginning of each phase. Domain = Process. PMBOK 6th edition, Page 86 and PMBOK 7th edition, Page",
+    "choices": [
+      {
+        "text": "Before project initiating.",
+        "correct": false
+      },
+      {
+        "text": "At the end of the project.",
+        "correct": false
+      },
+      {
+        "text": "At the beginning of each phase.",
+        "correct": true
+      },
+      {
+        "text": "At the end of project planning and start of project executing.",
+        "correct": false
+      }
+    ],
+    "id": 1614
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 22,
+    "text": "Julian is a assigned as a team member in a small product development project. The project has low budget and scheduled to be completed within 20 days. The project includes another team member and Albert, the project manager. They are all co-located in the same room. After they finalized the project management plan, Julian asked Albert why the project management plan doesn't include stakeholder engagement plan and communication management plan. How should Albert answer him?",
+    "explanation": "The appropriate project management processes should be tailored to manage a project. Domain = Process. PMBOK 7th edition, Page 135",
+    "choices": [
+      {
+        "text": "Both communication management plan and stakeholder engagement plan are not needed.",
+        "correct": true
+      },
+      {
+        "text": "A stakeholder engagement plan is necessary to avoid stakeholders resistance, while a communication management plan is not needed because the team is small.",
+        "correct": false
+      },
+      {
+        "text": "Julian is right, a stakeholder engagement plan and a communication management plan must be added to the project management plan.",
+        "correct": false
+      },
+      {
+        "text": "A communication management plan must be added to the project management plan, while stakeholder engagement plan is not necessary.",
+        "correct": false
+      }
+    ],
+    "id": 1615
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 22,
+    "text": "All of the following are among the objectives of the project kick-off meeting except:",
+    "explanation": "Discussing how the project is linked to the strategic objectives of the organization occurs during project initiating not in the kick-off meeting. Domain = Process. PMBOK 6th edition, Page 86",
+    "choices": [
+      {
+        "text": "Gain commitment of the project team members.",
+        "correct": false
+      },
+      {
+        "text": "Discuss how the project is linked to the strategic objectives of the organization.",
+        "correct": true
+      },
+      {
+        "text": "Communicate project objectives to project stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "Explain roles and responsibilities of each stakeholder.",
+        "correct": false
+      }
+    ],
+    "id": 1616
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 22,
+    "text": "During developing the project management plan for your project, a team member asks you about the level of details in the project management plan for your project. How should you determine the level of detail to be included in the plan?",
+    "explanation": "The project management plan's content varies depending on the application area and complexity of the project. Domain = Process. PMBOK 6th edition, Page 83 and PMBOK 7th edition, Page 67",
+    "choices": [
+      {
+        "text": "During the development of the project management plan, you should provide high level plan.",
+        "correct": false
+      },
+      {
+        "text": "You should provide the details as requested by your boss.",
+        "correct": false
+      },
+      {
+        "text": "You should provide the maximum level of details possible.",
+        "correct": false
+      },
+      {
+        "text": "You should provide the level of details based on the application area and the degree of complexity of the project.",
+        "correct": true
+      }
+    ],
+    "id": 1617
   }
 ]
