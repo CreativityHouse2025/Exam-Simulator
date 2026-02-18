@@ -103,5 +103,12 @@
       "en": "Closure Transition",
       "ar": "الإغلاق"
     }
+  },
+  {
+    "id": 16,
+    "name": {
+      "en": "Artifacts",
+      "ar": "عناصر العمل"
+    }
   }
 ]

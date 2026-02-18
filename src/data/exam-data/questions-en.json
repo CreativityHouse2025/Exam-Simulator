@@ -35357,5 +35357,680 @@
       }
     ],
     "id": 1406
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "Project teams tailor the appropriate framework that will enable the flexibility to consistently produce positive outcomes within the context of the life cycle of the project. All of the following should be “just enough,” except:",
+    "explanation": "Tailoring aims to maximize value, manage constraints, and improve performance by using “just enough” processes, methods, templates, and artifacts to achieve the desired outcome from the project. Domain = Process. The Standard for Project Management, Page 44",
+    "choices": [
+      {
+        "text": "Processes",
+        "correct": false
+      },
+      {
+        "text": "Value",
+        "correct": true
+      },
+      {
+        "text": "Artifacts",
+        "correct": false
+      },
+      {
+        "text": "Templates",
+        "correct": false
+      }
+    ],
+    "id": 1407
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "You are managing a project for establishing guidelines for handling toxic material. One of the key stakeholders required to change the duration of an activity on the critical path, which will change the schedule baseline. The change is submitted to the change control board and the change was approved. You need to update the schedule baseline to reflect the change. Where can you find the most updated version of the Schedule Baseline?",
+    "explanation": "Configuration management involves making sure that everyone is working off the same documents. It describes how information about the items of the project will be recorded and updated so that the product, service or result of the project remains consistent. Domain = Process. PMBOK 6th edition, Page 88",
+    "choices": [
+      {
+        "text": "In the configuration management system",
+        "correct": true
+      },
+      {
+        "text": "In the corporate knowledge base",
+        "correct": false
+      },
+      {
+        "text": "In the change management system",
+        "correct": false
+      },
+      {
+        "text": "In the project status reports",
+        "correct": false
+      }
+    ],
+    "id": 1408
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "A large software project has been initiated in an organization using an adaptive approach. The project is very large and there are multiple teams working on it. The project has multiple releases and each release has multiple iterations with many features. The project teams sometimes get lost and lack a holistic view of what they are building and why. Which of the following artifacts can help them in this situation?",
+    "explanation": "A story map is a visual model of all the features and functionality desired for a given product, created to give the project team a holistic view of what they are building and why. Domain = Process. PMBOK 7th edition, Page 190",
+    "choices": [
+      {
+        "text": "Burnup chart",
+        "correct": false
+      },
+      {
+        "text": "Story map",
+        "correct": true
+      },
+      {
+        "text": "Cumulative flow diagram (CFD)",
+        "correct": false
+      },
+      {
+        "text": "Burndown chart",
+        "correct": false
+      }
+    ],
+    "id": 1409
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "You are a project manager for an electrical system implementation project using traditional approach. A team member approaches you with a change that could cut your schedule down by two weeks. What is the first thing you should do?",
+    "explanation": "It’s important to check how the project will impact the other two constraints. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66",
+    "choices": [
+      {
+        "text": "Write up a change request and submit it to the change control board.",
+        "correct": false
+      },
+      {
+        "text": "Make the change ASAP; it’s going to save time and nobody will want the project to take longer than it should.",
+        "correct": false
+      },
+      {
+        "text": "Figure out the impact on the scope of the work and the cost before you write up the change request.",
+        "correct": true
+      },
+      {
+        "text": "Tell the team member that you’ve already communicated the deadline for the project, so you can’t make any changes now.",
+        "correct": false
+      }
+    ],
+    "id": 1410
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "A change request has been approved by change control board to change the scope baseline. Which of the following documents is updated first?",
+    "explanation": "The change log is normally updated after the change has been approved to reflect the change status. Then, any other document, baseline or subsidiary plan may be updated. Domain = Process. PMBOK 6th edition, Page 120 and PMBOK 7th edition, Page 79",
+    "choices": [
+      {
+        "text": "Project management plan",
+        "correct": false
+      },
+      {
+        "text": "Project scope statement",
+        "correct": false
+      },
+      {
+        "text": "Change management plan",
+        "correct": false
+      },
+      {
+        "text": "Change log",
+        "correct": true
+      }
+    ],
+    "id": 1411
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "A key stakeholder has approached the project team who are working on a software project using an adaptive approach with a concern. The stakeholder can’t find the features that at intermediate states, such as features designed but not yet constructed, those in quality assurance, or those in testing in any of the project artifacts. To which of the following artifacts can the project team guide him?",
+    "explanation": "Cumulative flow diagram (CFD) indicates features completed over time, features in development, and those in the backlog. It may also include features at intermediate states, such as features designed but not yet constructed, those in quality assurance, or those in testing. Domain = Process. PMBOK 7th edition, Page 188",
+    "choices": [
+      {
+        "text": "Cumulative flow diagram (CFD)",
+        "correct": true
+      },
+      {
+        "text": "Release plan",
+        "correct": false
+      },
+      {
+        "text": "Burnup chart",
+        "correct": false
+      },
+      {
+        "text": "Iteration plan",
+        "correct": false
+      }
+    ],
+    "id": 1412
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "A project has been initiated in ABC organization to develop a new HR system for a customer. The project team will adopt an adaptive approach for this project. The project team wants to clarify and organize the customer requirements for the new system. The project team is working with the customer to clarify all possible sequences of interactions between the system and the users the particular goals to achieve. Which of the following artifacts can the project team and customer use in this situation?",
+    "explanation": "Use case describes and explores how a user interacts with a system to achieve a specific goal. Domain = Process. PMBOK 7th edition, Page 190",
+    "choices": [
+      {
+        "text": "Throughput chart",
+        "correct": false
+      },
+      {
+        "text": "User story",
+        "correct": false
+      },
+      {
+        "text": "Use case",
+        "correct": true
+      },
+      {
+        "text": "Story map",
+        "correct": false
+      }
+    ],
+    "id": 1413
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "Remon is managing a project to design more fuel-efficient cars. During product inspection, it was found that there is leakage in freon system. The leakage was due to installing a screw larger than the correct one. Remon submitted a change request to solve this problem. The change control board approved on changing the defected parts with other ones to conform with the planned requirements. This is known as:",
+    "explanation": "Defect repair is an intentional activity to modify a nonconforming product or product component. And in this situation the long screw caused the product to be nonconforming to the planned requirements. Domain = Process. PMBOK 6th edition, Page 96",
+    "choices": [
+      {
+        "text": "Corrective action",
+        "correct": false
+      },
+      {
+        "text": "Preventive action",
+        "correct": false
+      },
+      {
+        "text": "Defect repair",
+        "correct": true
+      },
+      {
+        "text": "Updates",
+        "correct": false
+      }
+    ],
+    "id": 1414
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "Luis is assigned as a project manager for a new telecommunication network to swap the old mobile phone network in a city to a new network. He is collecting everything to initiate the new project. He collects historical information, high level requirements from key stakeholders, what is included in the project, high level schedule and high level budget. Which of the following should not be taken into consideration during this stage of the project?",
+    "explanation": "Rough order of magnitude estimates, Constraints, assumptions, and Initial project organization are all determined in project initiating. What to purchase or make or buy decisions occur in the Plan Procurement Management process during planning process group. Domain = Process. PMBOK 6th edition, Page 77 and 468 and PMBOK 7th edition, Page 46",
+    "choices": [
+      {
+        "text": "What to purchase",
+        "correct": true
+      },
+      {
+        "text": "Rough order of magnitude estimates",
+        "correct": false
+      },
+      {
+        "text": "Constraints and assumptions",
+        "correct": false
+      },
+      {
+        "text": "Initial project organization",
+        "correct": false
+      }
+    ],
+    "id": 1415
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "A project team member asks you about who is responsible to distribute the risk status to project stakeholders. Where should he look to know who is responsible for this task?",
+    "explanation": "Communications Management Plan contains information to be communicated, including language, format, content, and level of detail; person responsible for communicating the information; and person or groups who will receive the information. Domain = Process. PMBOK 6th edition, Page 377 and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Communication management plan",
+        "correct": true
+      },
+      {
+        "text": "Risk management plan",
+        "correct": false
+      },
+      {
+        "text": "Risk register",
+        "correct": false
+      },
+      {
+        "text": "Responsibility assignment matrix (RAM)",
+        "correct": false
+      }
+    ],
+    "id": 1416
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "Which of the following statements best describes an \"issue\"?",
+    "explanation": "A negative project risk that has occurred is considered an issue. Domain = Process. PMBOK 6th edition, Page 397 and PMBOK 7th edition, Page 53",
+    "choices": [
+      {
+        "text": "A project risk that has occurred.",
+        "correct": false
+      },
+      {
+        "text": "A negative project risk that has occurred.",
+        "correct": true
+      },
+      {
+        "text": "A negative risk that may occur.",
+        "correct": false
+      },
+      {
+        "text": "A positive risk that has occurred.",
+        "correct": false
+      }
+    ],
+    "id": 1417
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "Which of the following documents are most subjected to reviews and approvals?",
+    "explanation": "Although all project documents may be subject to some form of review and approval, the legally binding nature of a contract means it will be subjected to a more extensive approval process, often involving the legal department. Domain = Process. PMBOK 6th edition, Page 461 and PMBOK 7th edition, Page 191",
+    "choices": [
+      {
+        "text": "Project charter",
+        "correct": false
+      },
+      {
+        "text": "Project management plan",
+        "correct": false
+      },
+      {
+        "text": "Contracts",
+        "correct": true
+      },
+      {
+        "text": "Benefits management plan",
+        "correct": false
+      }
+    ],
+    "id": 1418
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "The project team members in a construction project are suffering from some bottlenecks presented in long times waiting for approvals on invoices, change requests, and signing some documents. According to the existing processes, only very few persons are authorized to do this. How can this issue be best tackled?",
+    "explanation": "The approval process needs to be tailored by streamlining approval decisions through fewer people authorized to make decisions up to certain value thresholds. For example approval within certain amount to be approved by X and above this amount to be approved by Y and so on. Domain = Process. PMBOK 7th edition, Page 151",
+    "choices": [
+      {
+        "text": "Try to reduce the items that need approval as much as possible.",
+        "correct": false
+      },
+      {
+        "text": "Team members should keep reminding the approvers till their dependencies are cleared out.",
+        "correct": false
+      },
+      {
+        "text": "Account for the delays due to bottlenecks in the contingency reserve.",
+        "correct": false
+      },
+      {
+        "text": "Tailor the existing processes by streamlining approval decisions through fewer people authorized to make decisions up to certain value thresholds.",
+        "correct": true
+      }
+    ],
+    "id": 1419
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "Manuel is managing a mega project similar to the project he has just completed. He used most of the processes and artifacts from the previous project. Midway through the project, he notices that some team members are stuck in their work. They are unsure how to proceed or undertake their work. However, he did not face the same issue in the previous project. Which of the following is the best course of action?",
+    "explanation": "As the project manager used most of the processes and artifacts from the previous project, he needs to tailor them to the needs of the current project. Domain = Process. PMBOK 7th edition, Page 151",
+    "choices": [
+      {
+        "text": "More tailoring to guidance and training.",
+        "correct": true
+      },
+      {
+        "text": "Replace those team members with more skilled ones.",
+        "correct": false
+      },
+      {
+        "text": "Discuss this issue with the functional managers of those team members.",
+        "correct": false
+      },
+      {
+        "text": "Reduce their work assignment and add this work to the skilled members.",
+        "correct": false
+      }
+    ],
+    "id": 1420
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "Which of the following statements best describes the difference between a project charter and a contract?",
+    "explanation": "A project charter can't be considered as a contract. A project charter is not sufficient when performing a project for an external organization, a contract must be signed. Correct answer is that project charter establishes a partnership between the performing and requesting organization. For external project a formal contract is the preferred way to establish an agreement. Domain = Process. PMBOK 6th edition, Page 77 and PMBOK 7th edition, Page 46",
+    "choices": [
+      {
+        "text": "A project charter can be considered as a contract because it initiates and authorizes a project.",
+        "correct": false
+      },
+      {
+        "text": "A project charter is sufficient when performing a project for an external customer.",
+        "correct": false
+      },
+      {
+        "text": "A contract is issued by the project initiator or sponsor to formally authorize a project.",
+        "correct": false
+      },
+      {
+        "text": "A project charter establishes a partnership between the performing and requesting organization. For external project a formal contract is the preferred way to establish an agreement.",
+        "correct": true
+      }
+    ],
+    "id": 1421
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "A project team is working on a software project using an adaptive approach. Midway through the project, a key stakeholder asked the project team about the features which have been completed over time, features which are still in development, and those that are still in the backlog. To which of the following artifacts can the project team guide him?",
+    "explanation": "Cumulative flow diagram (CFD) indicates features completed over time, features in development, and those in the backlog. It may also include features at intermediate states, such as features designed but not yet constructed, those in quality assurance, or those in testing. Domain = Process. PMBOK 7th edition, Page 188",
+    "choices": [
+      {
+        "text": "Roadmap",
+        "correct": false
+      },
+      {
+        "text": "Burndown chart",
+        "correct": false
+      },
+      {
+        "text": "Burnup chart",
+        "correct": false
+      },
+      {
+        "text": "Cumulative flow diagram (CFD)",
+        "correct": true
+      }
+    ],
+    "id": 1422
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "Amit is the project manager of a software project to create a mobile application that is scheduled to be completed in four months. The project charter is signed and Amit is working now to collect requirements from project stakeholders. The customer requested that the design of the project should be completed after one month. In which document should this condition be documented?",
+    "explanation": "This condition is a milestone date and it is considered as a constraint. Constraints are documented in the assumption log. Domain = Process. PMBOK 6th edition, Page 155 and PMBOK 7th edition, Page 83",
+    "choices": [
+      {
+        "text": "Requirements traceability matrix",
+        "correct": false
+      },
+      {
+        "text": "Assumptions log",
+        "correct": true
+      },
+      {
+        "text": "Scope management plan",
+        "correct": false
+      },
+      {
+        "text": "Requirements management plan",
+        "correct": false
+      }
+    ],
+    "id": 1423
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "Which of the following is a strategy artifact?",
+    "explanation": "Only project vision statement is a strategy artifacts which is created prior to or at the start of the project. Project vision statement is a concise, high-level description of the project that states the purpose, and inspires the project team to contribute to the project. Domain = Process. PMBOK 7th edition, Page 184",
+    "choices": [
+      {
+        "text": "Team charter",
+        "correct": false
+      },
+      {
+        "text": "Release plan",
+        "correct": false
+      },
+      {
+        "text": "Project vision statement",
+        "correct": true
+      },
+      {
+        "text": "Risk-adjusted backlog",
+        "correct": false
+      }
+    ],
+    "id": 1424
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "A scrum team is working on a large project which requires 5 scrum sub-teams working in parallel. How many product backlogs should they work on?",
+    "explanation": "If scrum teams become too large, they should consider reorganizing into multiple cohesive scrum teams, each focused on the same product. Therefore, they should share the same product goal, product backlog, and product owner. Domain = Process. Agile Practice Guide Page 113",
+    "choices": [
+      {
+        "text": "5",
+        "correct": false
+      },
+      {
+        "text": "1",
+        "correct": true
+      },
+      {
+        "text": "Either 1 or 5 according to the product owner preference.",
+        "correct": false
+      },
+      {
+        "text": "Either 1 or 5 according to the scrum master preference.",
+        "correct": false
+      }
+    ],
+    "id": 1425
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "Which of the following is the correct order from highest level to lowest level?",
+    "explanation": "Product vision drives product roadmap which drives release plans. Release plan establishes the iterations. Iteration plans schedules feature development. Domain = Process. PMBOK 6th edition, Page 216",
+    "choices": [
+      {
+        "text": "Product roadmap - Feature - Release plan - Iteration plan",
+        "correct": false
+      },
+      {
+        "text": "Feature - Product roadmap - Release plan - Iteration plan",
+        "correct": false
+      },
+      {
+        "text": "Product roadmap - Iteration plan - Release plan - Feature",
+        "correct": false
+      },
+      {
+        "text": "Product roadmap - Release plan - Iteration plan - Feature",
+        "correct": true
+      }
+    ],
+    "id": 1426
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "Which of the following is the correct order from lowest level to highest level?",
+    "explanation": "A user story is divided into a group of tasks. An iteration is a group of user stories. A release is a group of iterations. So the correct order from lowest level to highest level is task - user story - iteration - release. Domain = Process. PMBOK 6th edition, Page 216",
+    "choices": [
+      {
+        "text": "Task - User Story - Iteration - Release",
+        "correct": true
+      },
+      {
+        "text": "User Story - Task - Iteration - Release",
+        "correct": false
+      },
+      {
+        "text": "Task - User Story - Release - Iteration",
+        "correct": false
+      },
+      {
+        "text": "Task - Iteration - User Story - Release",
+        "correct": false
+      }
+    ],
+    "id": 1427
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "The project team is working on a large software project. They adopt an adaptive approach. After the first iteration review, the customer has accepted the product increment. The team wants to track the accepted deliverables over time for the next iterations. Which of the following artifacts can they use?",
+    "explanation": "Throughput chart shows the accepted deliverables over time. A throughput chart may be shown as a scatter diagram or a bar chart. Domain = Process. PMBOK 7th edition, Page 190",
+    "choices": [
+      {
+        "text": "Burndown chart",
+        "correct": false
+      },
+      {
+        "text": "Story map",
+        "correct": false
+      },
+      {
+        "text": "Cumulative flow diagram (CFD)",
+        "correct": false
+      },
+      {
+        "text": "Throughput chart",
+        "correct": true
+      }
+    ],
+    "id": 1428
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "During a retrospective, the project team discusses the high rate of scrap during the last iteration. This rate is the highest all over the project. Which of the following should the project team use to tackle this issue?",
+    "explanation": "The project team may use techniques like value stream mapping to visualize the work, identify the issues, identify the wastes, and propose solutions. Domain = Process. PMBOK 7th edition, Page 151",
+    "choices": [
+      {
+        "text": "Story map",
+        "correct": false
+      },
+      {
+        "text": "Burndown charts",
+        "correct": false
+      },
+      {
+        "text": "Value stream mapping",
+        "correct": true
+      },
+      {
+        "text": "Burnup charts",
+        "correct": false
+      }
+    ],
+    "id": 1429
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "The project sponsor wants to know what will the project deliver in each release and when these releases will be completed. Which agile artifact would address his needs?",
+    "explanation": "The product roadmap shows what each release will deliver (at high level) and the dates of releases. Domain = Process. Agile Practice Guide Page 52",
+    "choices": [
+      {
+        "text": "Product backlog",
+        "correct": false
+      },
+      {
+        "text": "Product roadmap",
+        "correct": true
+      },
+      {
+        "text": "Agile charter",
+        "correct": false
+      },
+      {
+        "text": "Sprint backlog",
+        "correct": false
+      }
+    ],
+    "id": 1430
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "A project is being initiated in a lean start-up. Which of the following documents can be used as a summary document to describe the high level information about the project?",
+    "explanation": "Business model canvas is a one-page visual summary that describes the value proposition, infrastructure, customers, and finances. These are often used in lean start-up situations. Domain = Process. PMBOK 7th edition, Page 184",
+    "choices": [
+      {
+        "text": "Backlog",
+        "correct": false
+      },
+      {
+        "text": "Business model canvas",
+        "correct": true
+      },
+      {
+        "text": "Product breakdown structure",
+        "correct": false
+      },
+      {
+        "text": "Dashboards",
+        "correct": false
+      }
+    ],
+    "id": 1431
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "All of the following artifacts are created prior to the start of the project, except:",
+    "explanation": "A backlog is an ordered list of work to be done. It is created after the start of the project. All other documents are created prior to or at the start of the project that address strategic, business, or high-level information about the project. Domain = Process. PMBOK 7th edition, Page 184-185",
+    "choices": [
+      {
+        "text": "Backlog",
+        "correct": true
+      },
+      {
+        "text": "Business model canvas",
+        "correct": false
+      },
+      {
+        "text": "Project vision statement",
+        "correct": false
+      },
+      {
+        "text": "Roadmap",
+        "correct": false
+      }
+    ],
+    "id": 1432
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 16,
+    "text": "The project team discovers unexpected problem that the safety stock level of a needed component for the project is not enough. Which project document should be updated with the description of the situation along with its progress and resolution?",
+    "explanation": "The issue log is a project document where all the issues are recorded and tracked. Lessons learned register is not used to track progress and resolution of issues. Domain = Process. PMBOK 6th edition, Page 96",
+    "choices": [
+      {
+        "text": "Issue log",
+        "correct": true
+      },
+      {
+        "text": "Risk register",
+        "correct": false
+      },
+      {
+        "text": "Risk report",
+        "correct": false
+      },
+      {
+        "text": "Lessons learned register",
+        "correct": false
+      }
+    ],
+    "id": 1433
   }
 ]
