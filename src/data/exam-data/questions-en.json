@@ -38757,5 +38757,1205 @@
       }
     ],
     "id": 1542
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "In an adaptive environment, the team knows the acceptance criteria and needs to work backward to develop the code. This is known as:",
+    "explanation": "TDD stands for Test Driven Development. In this software development technique, we create the test cases first and then write the code underlying those test cases. Domain = Process. Agile Practice Guide, Page 56",
+    "choices": [
+      {
+        "text": "Conduct a spike",
+        "correct": false
+      },
+      {
+        "text": "Test-Driven Development (TDD)",
+        "correct": true
+      },
+      {
+        "text": "Behavior-Driven Development",
+        "correct": false
+      },
+      {
+        "text": "Refactoring",
+        "correct": false
+      }
+    ],
+    "id": 1560
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "The value of the daily standup is for:",
+    "explanation": "Teams run their own standups. When run well, standups can be very useful, provided the nature of the team’s work requires intense collaboration. Make a conscious decision about when the team needs, or can effectively use, standups. Domain = Process. Agile Practice Guide Page 54",
+    "choices": [
+      {
+        "text": "The scrum master, to monitor team progress.",
+        "correct": false
+      },
+      {
+        "text": "The product owner, to know what has been completed from the sprint backlog.",
+        "correct": false
+      },
+      {
+        "text": "Team members, to keep them apprised of the work within the iteration.",
+        "correct": true
+      },
+      {
+        "text": "Team leader, to be updated about each team members tasks.",
+        "correct": false
+      }
+    ],
+    "id": 1561
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Christian is a scrum master for a software project in his organization. He is going on a leave for 3 weeks. What should happen to the daily scrum during his absence?",
+    "explanation": "In a Daily Scrum, the scrum master's role is to listen and record any obstacles to the team's progress for immediate follow up. The team is self organized and the discussion is run by the team for the team, so there is no need for facilitator. Domain = Process. Agile Practice Guide Page 53",
+    "choices": [
+      {
+        "text": "Updates can be collected through emails.",
+        "correct": false
+      },
+      {
+        "text": "The daily scrum should be held daily and the product owner can facilitate the event instead of the scrum master.",
+        "correct": false
+      },
+      {
+        "text": "The daily scrum should be postponed during the absence of the scrum master.",
+        "correct": false
+      },
+      {
+        "text": "The daily scrum should be held daily regardless the absence of the scrum master.",
+        "correct": true
+      }
+    ],
+    "id": 1562
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "An industrial organization is going to perform an infrastructure project. The project is very large and involves rigorous safety requirements. Which of the following approaches will most fit this project?",
+    "explanation": "Products that have rigorous safety requirements often use a predictive approach as there is a need for significant up-front planning to ensure that all the safety requirements are identified, planned for, created, integrated, and tested. Domain = Process. PMBOK 7th edition, Page 40",
+    "choices": [
+      {
+        "text": "Traditional",
+        "correct": true
+      },
+      {
+        "text": "It is not relevant.",
+        "correct": false
+      },
+      {
+        "text": "Hybrid",
+        "correct": false
+      },
+      {
+        "text": "There is not enough information to decide.",
+        "correct": false
+      }
+    ],
+    "id": 1563
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "In scrum of scrums daily meeting, the representative of each team should answer an extra question more than the questions asked in the daily scrum. What is this question?",
+    "explanation": "The daily meeting is conducted similar to the daily standup in Scrum where the representative reports completed work, next set of work, any current impediments, and potential upcoming impediments that might block the other team(s). Domain = Process. Agile Practice Guide Page 111",
+    "choices": [
+      {
+        "text": "Is there any risks that may impact the overall product of the project?",
+        "correct": false
+      },
+      {
+        "text": "Is there potential upcoming impediments that might block the other team?",
+        "correct": true
+      },
+      {
+        "text": "Did your team establish a reliable velocity?",
+        "correct": false
+      },
+      {
+        "text": "Are there any user stories still not assigned to team members?",
+        "correct": false
+      }
+    ],
+    "id": 1564
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Which of the following is the best definition of WIP limits?",
+    "explanation": "Limit WIP (work in progress) means restricting the amount of work in progress in a particular state which improves productivity, increases the visibility of issues and bottlenecks, and facilitates continuous improvement. Domain = Process. Agile Practice Guide Page 25",
+    "choices": [
+      {
+        "text": "is the maximum number of features in each release.",
+        "correct": false
+      },
+      {
+        "text": "is the maximum number of iterations in each release.",
+        "correct": false
+      },
+      {
+        "text": "is the maximum number of items that can be in a particular state.",
+        "correct": true
+      },
+      {
+        "text": "is the maximum number of user stories in each iteration.",
+        "correct": false
+      }
+    ],
+    "id": 1565
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "A company is moving to a new location and at the same time is adopting transformation from waterfall to agile. What is the most suitable design for team space?",
+    "explanation": "Companies are designing their offices to balance common and social areas (sometimes called “caves and common”) with quiet areas or private spaces where individuals can work without being interrupted. Domain = Process. Agile Practice Guide Page 46",
+    "choices": [
+      {
+        "text": "Aqile teams should work in one room without separators to provide open and collaborative work environment.",
+        "correct": false
+      },
+      {
+        "text": "Caves and common",
+        "correct": true
+      },
+      {
+        "text": "Private spaces where individuals can work without being interrupted.",
+        "correct": false
+      },
+      {
+        "text": "Distributed offices with instant messaging and video conferencing tools.",
+        "correct": false
+      }
+    ],
+    "id": 1566
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "An organization is leading an agile transformation. The first project using agile methodology has been initiated. The project team has never worked on agile projects before. One team team members asks about the project management plan. The agile coach has clarified to him that planning in agile projects is different than traditional projects. Agile projects use adaptive planning. Which Agile Manifesto value is concerned with adaptive planning?",
+    "explanation": "In agile projects, planning is critical to project success but it is different than traditional projects. Planning is an ongoing process and provides multiple mechanisms to proactively update the plan. It is not one time stand-alone activity. Total planning is more but distributed, adaptive planning means plan to replan and responding to change is a way to uncover requirements",
+    "choices": [
+      {
+        "text": "Customer collaboration over contract negotiation",
+        "correct": false
+      },
+      {
+        "text": "Working software over comprehensive documentation",
+        "correct": false
+      },
+      {
+        "text": "Responding to change over following a plan",
+        "correct": true
+      },
+      {
+        "text": "Individuals and interactions over processes and tools",
+        "correct": false
+      }
+    ],
+    "id": 1567
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "A software organization has decided to adopt agile approach. In a large new project, they are struggling to coordinate between multiple scrum teams. Which of the following is the best approach to solve this problem?",
+    "explanation": "As Scrum projects get larger, multiple Scrum teams might need to coordinate their work.To do this, they commonly use an approach called “scrum of scrums.” As the name suggests, this is a meeting in which a representative from each team reports their progress to the representatives of the other teams. Domain = Process. Agile Practice Guide Page 111",
+    "choices": [
+      {
+        "text": "Switch to waterfall approach.",
+        "correct": false
+      },
+      {
+        "text": "Perform a spike.",
+        "correct": false
+      },
+      {
+        "text": "Scrum of scrums.",
+        "correct": true
+      },
+      {
+        "text": "All hands meeting.",
+        "correct": false
+      }
+    ],
+    "id": 1568
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "A company is adopting transformation from waterfall to agile. Catherine is a project manager in this organization who has been assigned an agile coach role. Which of the following tasks will not be one of her tasks in the new position?",
+    "explanation": "It is the team coach/scrum master who acts as a servant leader. The tasks of the servant leader includes removing obstacles, providing encouragement and support to the team, shielding the team from interruptions and doing administrative activities for the team. Domain = Process.",
+    "choices": [
+      {
+        "text": "Providing encouragement and support",
+        "correct": false
+      },
+      {
+        "text": "Creating a project plan",
+        "correct": true
+      },
+      {
+        "text": "Shielding the team from interruptions",
+        "correct": false
+      },
+      {
+        "text": "Removing roadblocks",
+        "correct": false
+      }
+    ],
+    "id": 1569
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "The testing team members always complain that they are overloaded and they are always requested to do more work than they can handle. What is the best way to handle this issue?",
+    "explanation": "Limiting the WIP will address the issue of being overwhelmed with work. Domain = Process. Agile Practice Guide, Page 65",
+    "choices": [
+      {
+        "text": "Use generalizing specialists who can work as developers and testers.",
+        "correct": false
+      },
+      {
+        "text": "Use automated testing.",
+        "correct": false
+      },
+      {
+        "text": "Add more testers to the testing team.",
+        "correct": false
+      },
+      {
+        "text": "Use Kanban system and limit the WIP at testing stage.",
+        "correct": true
+      }
+    ],
+    "id": 1570
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "A medical devices manufacturer is adopting agile methodology in their current projects. A project team is working to develop a medical product that require a lot of documentation. What should they do?",
+    "explanation": "It is true that the second value of Agile Manifesto states that we value working software (product) over comprehensive documentation. However, some highly regulated industries, such as medical devices, require alot of documentation—that’s just part of the work that needs to be done. Which means that the required documentation is a project deliverable, it is a part of the product of the project. This value refers to the kind of documentation that isn’t included in getting the work done properly. Domain = Process. Agile Practice Guide, Page 8",
+    "choices": [
+      {
+        "text": "Create the needed documentation.",
+        "correct": true
+      },
+      {
+        "text": "Create the medical product and if they have available time create the needed documentation.",
+        "correct": false
+      },
+      {
+        "text": "Consult the project sponsor.",
+        "correct": false
+      },
+      {
+        "text": "Follow the Agile Manifesto values and give more attention to a working product over documentation.",
+        "correct": false
+      }
+    ],
+    "id": 1571
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "An external customer has requested from XYZ organization to develop a new mobile application. This customer has worked three times before with the organization on three different previous projects. He is known that his requirements evolve throughout the project and might end up with a totally different product than which was originally required. In light of this, which of the following approaches will most fit this project?",
+    "explanation": "When requirements are uncertain, volatile, or complex and are expected to evolve throughout the project, a more adaptive approach may be a better fit. Domain = Process. PMBOK 7th edition, Page 39",
+    "choices": [
+      {
+        "text": "Waterfall",
+        "correct": false
+      },
+      {
+        "text": "It is not relevant.",
+        "correct": false
+      },
+      {
+        "text": "Adaptive",
+        "correct": true
+      },
+      {
+        "text": "There is not enough information to decide.",
+        "correct": false
+      }
+    ],
+    "id": 1572
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Which of the following is an example of the agile principle \"Continuous attention to technical excellence and good design enhances agility\"?",
+    "explanation": "Refactoring is the housekeeping, cleanup, and simplifications that need to be made to code to ensure it is stable and can be maintained over the long term. It is an example of technical excellence. Domain = Process. Agile Practice Guide Page 121",
+    "choices": [
+      {
+        "text": "Minimum Viable Product (MVP)",
+        "correct": false
+      },
+      {
+        "text": "Refactoring",
+        "correct": true
+      },
+      {
+        "text": "Value prioritization",
+        "correct": false
+      },
+      {
+        "text": "Limiting WIP",
+        "correct": false
+      }
+    ],
+    "id": 1573
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Which of the following is a minimum viable product (MVP)?",
+    "explanation": "A mobile application without user interface and a computer without operating system are unusable products. A pencil that has eraser and cushion grip has features more than the essential needed features for a pencil. They are all unlikely to be MVP. A chair that has no back is a MVP because it has the minimum feature that it can be used to sit on. Domain = Process. Agile Practice Guide Page 61",
+    "choices": [
+      {
+        "text": "A pencil with eraser and cushion grip.",
+        "correct": false
+      },
+      {
+        "text": "A mobile application that has no user interface.",
+        "correct": false
+      },
+      {
+        "text": "A computer without an operating system.",
+        "correct": false
+      },
+      {
+        "text": "A chair that has no back.",
+        "correct": true
+      }
+    ],
+    "id": 1574
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "After the completion of the first iteration, the product owner holds a meeting with the team. The product owner moves some features to top of the product backlog to be added to the next iteration, because those features will provide higher value for the customer. This is closely related to which Agile Manifesto value?",
+    "explanation": "The backlog refinement “grooming the backlog” means that everyone involved in the project gathers to discuss and update the items in the backlog. It is more closely related to the Agile Manifesto value of \"Responding to change over following a plan\" as items in the backlog can change in priority according to stakeholders request, there is no fixed plan like traditional projects that must be followed and changed only through change requests Domain = Process. Agile Practice Guide, Page 97",
+    "choices": [
+      {
+        "text": "Customer collaboration over contract negotiation",
+        "correct": false
+      },
+      {
+        "text": "Working software over comprehensive documentation",
+        "correct": false
+      },
+      {
+        "text": "Individuals and interactions over processes and tools",
+        "correct": false
+      },
+      {
+        "text": "Responding to change over following a plan",
+        "correct": true
+      }
+    ],
+    "id": 1575
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "A software project has been initiated in an adaptive environment. The team decided to build the demo first and add features to the initial product. This is known as:",
+    "explanation": "Continuous Delivery is the practice of delivering feature increments immediately to customers, often through the use of small batches of work and automation technology. Domain = Process. Agile Practice Guide, Page 151",
+    "choices": [
+      {
+        "text": "Conduct a spike",
+        "correct": false
+      },
+      {
+        "text": "Test-Driven Development (TDD)",
+        "correct": false
+      },
+      {
+        "text": "Behavior-Driven Development",
+        "correct": false
+      },
+      {
+        "text": "Continuous Delivery",
+        "correct": true
+      }
+    ],
+    "id": 1576
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "A team member has moved from a team that adopts traditional approach for their projects to another team that adopts agile approach. He has difficulties to understand what incremental delivery means. What should his team leader tell him?",
+    "explanation": "With incremental delivery, the team regularly deploys working increments of the product over the course of the project. So it is an opportunity to start realizing the benefits of the product and get an early return on investment. Incremental delivery reduces the amount of rework by finding issues earlier and thereby contributing to the delivery of value on the project. Domain = Process. Agile Practice Guide Page 57",
+    "choices": [
+      {
+        "text": "The team regularly deploys non-functional increments of the product over the course of the project.",
+        "correct": false
+      },
+      {
+        "text": "The team regularly improves agile processes over the course of the project.",
+        "correct": false
+      },
+      {
+        "text": "The team regularly improves the quality of the product over the course of the project.",
+        "correct": false
+      },
+      {
+        "text": "The team regularly deploys functional increments of the product over the course of the project.",
+        "correct": true
+      }
+    ],
+    "id": 1577
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Which of the following best describes the difference between waterfall and adaptive life cycles?",
+    "explanation": "The term plan-driven or waterfall is used to describe the emphasis on an upfront plan and then execution of that plan. Adaptive life cycles are agile, iterative, or incremental. The detailed scope is defined and approved before the start of an iteration. Adaptive life cycles are also referred to as agile or change-driven life cycles. Domain = Process. Agile Practice Guide, Page 17 and PMBOK 7th edition, Page 35",
+    "choices": [
+      {
+        "text": "Projects that adopt waterfall life cycles use co-located teams while projects that adopt adaptive life cycles use virtual teams.",
+        "correct": false
+      },
+      {
+        "text": "Projects that adopt waterfall life cycles produce tangible products while projects that adopt adaptive life cycles produce services or results.",
+        "correct": false
+      },
+      {
+        "text": "Waterfall is plan-driven, while adaptive is change-driven.",
+        "correct": true
+      },
+      {
+        "text": "They are the same.",
+        "correct": false
+      }
+    ],
+    "id": 1578
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "A project manager on a hardware design project using plan-driven approach has decided to incorporate some agile principles and tools to his project. He asks the team to use iteration demos. What would be a likely result if the team uses iteration demos?",
+    "explanation": "As the team completes the features usually in the form of user stories, the team periodically demonstrates the working product. The stakeholders sees the demonstration and accepts or declines stories. As the stakeholders will provide feedback on a product increment not the whole product which prevents the team from heading in a wrong direction. So the cost of change will be much less, because it will be a modification to a small piece of work which has been produced during the iteration. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "Less number of defects in the product increment",
+        "correct": false
+      },
+      {
+        "text": "Validate scope less frequently",
+        "correct": false
+      },
+      {
+        "text": "Reduced cost of change",
+        "correct": true
+      },
+      {
+        "text": "Less number of change requests",
+        "correct": false
+      }
+    ],
+    "id": 1579
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Which of the following is not a question to be asked during the daily standup?",
+    "explanation": "During daily standup the scrum team discuss what did I complete since the last standup? What am I planning to complete between now and the next standup? And What are my impediments (or risks or problems)? An antipattern typically seen in standups is that the team begins to solve problems as they become apparent. Standups are for realizing there are problems—not for solving them. Domain = Process. Agile Practice Guide Page 54",
+    "choices": [
+      {
+        "text": "Are there any roadblocks?",
+        "correct": false
+      },
+      {
+        "text": "What do you plan to finish today?",
+        "correct": false
+      },
+      {
+        "text": "What have you worked on since last meeting?",
+        "correct": false
+      },
+      {
+        "text": "Are there any other issues need to be discussed before we finish the daily standup?",
+        "correct": true
+      }
+    ],
+    "id": 1580
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Two team members are working on an agile project in two different countries. As per the communication management plan, they should hold a daily standup through video conference. How can the agile coach best monitor the effectiveness of their communication and coordination?",
+    "explanation": "As per agile Manifesto that working product is the primary measure of progress. Domain = Process. Agile Practice Guide Page 8",
+    "choices": [
+      {
+        "text": "Periodically ask team members if the product components are fitting together as planned.",
+        "correct": true
+      },
+      {
+        "text": "Listen in on the daily standups once a week to monitor the conversations.",
+        "correct": false
+      },
+      {
+        "text": "Meet with the two team leaders every week to check on their progress.",
+        "correct": false
+      },
+      {
+        "text": "Trust that the plan is working and rely on the team leaders to notify him of any problems.",
+        "correct": false
+      }
+    ],
+    "id": 1581
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Which of the following statements is not correct?",
+    "explanation": "The most efficient way to convey information to and within the project team is face-to-face communication. It transfers the most information in a given period of time. Domain = Process. Agile Practice Guide Page 8",
+    "choices": [
+      {
+        "text": "We value individuals and interactions over processes and tools. So, agile projects prefer face-to-face communication.",
+        "correct": false
+      },
+      {
+        "text": "We value customer collaboration over contract negotiation. However, procurement in agile projects is always challenging as scope can't be fully defined prior to contract signature.",
+        "correct": false
+      },
+      {
+        "text": "We value working software over comprehensive documentation. However, comprehensive documentation is the most efficient method of conveying information within the project team.",
+        "correct": true
+      },
+      {
+        "text": "We value responding to change over following a plan. However planning an agile project is critical to project success.",
+        "correct": false
+      }
+    ],
+    "id": 1582
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Ricardo is managing a software project to produce a mobile application. The product of the project has ten main functionalities as per the customer requirements. Ricardo agreed with the customer that the project will be performed in five months and 12,000 $ budget. They agreed that the product of the project will be produced through a series of iterations that successively add required functionalities within the predetermined time frame. The product will be considered complete after adding the final functionality. Which type of project life cycle is used here?",
+    "explanation": "In an incremental life cycle, the deliverable is produced through a series of iterations that successively add functionality within a predetermined time frame. The deliverable contains the necessary and sufficient capability to be considered complete only after the final iteration. Domain = Process. PMBOK 6th edition, Page 19 and PMBOK 7th edition, Page 36",
+    "choices": [
+      {
+        "text": "Waterfall",
+        "correct": false
+      },
+      {
+        "text": "Iterative",
+        "correct": false
+      },
+      {
+        "text": "Incremental",
+        "correct": true
+      },
+      {
+        "text": "Adaptive",
+        "correct": false
+      }
+    ],
+    "id": 1583
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Mary has been assigned to manage a new project. In order to measure the project complexity, she decides to use Stacey matrix. Which two dimensions will she use to determine the relative complexity of her project?",
+    "explanation": "Stacey matrix looks at two dimensions to determine the relative complexity of a project: (a) the relative uncertainty of the requirements for the deliverable, and (b) the relative uncertainty of the technology that will be used to create the deliverable. Based on the relative uncertainty of these dimensions, a project is considered simple, complicated, complex, or chaotic. Domain = Process. PMBOK 7th edition, Page 165",
+    "choices": [
+      {
+        "text": "The relative uncertainty of the requirements for the deliverable, and the relative uncertainty of the technology that will be used to create the deliverable.",
+        "correct": true
+      },
+      {
+        "text": "The relative accuracy of the project estimates and the rate of changing initial requirements.",
+        "correct": false
+      },
+      {
+        "text": "The project expected return on investment ROI and the total contract value.",
+        "correct": false
+      },
+      {
+        "text": "The project net present value and the project budget.",
+        "correct": false
+      }
+    ],
+    "id": 1584
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Patrick is a project manager who had previous agile experience. His organization - which adopts traditional approach - has contracted with ABC company to develop a website and assigned Patrick as a project manager from the organization's side. The ABC company is using agile approach to develop the website. How can Patrick assess their progress?",
+    "explanation": "During iteration review (product demo) the team demonstrates all completed work items at the end of the iteration. It is better for Patrick to see the completed work himself instead of sending reports. As per agile Manifesto that working product is the primary measure of progress. Domain = Process. Agile Practice Guide Page 55",
+    "choices": [
+      {
+        "text": "Attend the daily standup with the project team of ABC company.",
+        "correct": false
+      },
+      {
+        "text": "Ask the agile coach in ABC company to send him weekly progress reports.",
+        "correct": false
+      },
+      {
+        "text": "Review iteration plans of the development team in ABC company.",
+        "correct": false
+      },
+      {
+        "text": "Attend the iteration reviews to review released versions of the required work.",
+        "correct": true
+      }
+    ],
+    "id": 1585
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "You are an agile practitioner working on an agile project to create a customer facing website for an electronic devices shop. The team has developed a working prototype that you and the product owner are delighted with. However, when you show it to the sponsor, the sponsor complains that the website doesn't look as professional as the other competitors' websites. How should you respond?",
+    "explanation": "A minimum viable product MVP is a package of functionality that is complete enough to be useful to the users or the market, yet still small enough that it does not represent the entire project. Domain = Process. Agile Practice Guide Page 23",
+    "choices": [
+      {
+        "text": "This sample just tests the product concept, features, and technology, it's not the final release version.",
+        "correct": false
+      },
+      {
+        "text": "This is just the minimum viable product; it will be improved in the next release.",
+        "correct": true
+      },
+      {
+        "text": "The product owner has confirmed that this prototype includes all the features that are required.",
+        "correct": false
+      },
+      {
+        "text": "If you want a more polished website we will need to add a design specialist to the team.",
+        "correct": false
+      }
+    ],
+    "id": 1586
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "You are the CEO of a cars maintenance center and desire to improve project management practices in your company. What is the best thing to do in order to manage the maintenance of each car?",
+    "explanation": "The project is a temporary endeavor, it has a beginning and an end and it produces unique deliverables. In this situation, the cars maintenance centers doesn't perform projects but it performs operational work (maintenance is ongoing and repetitive work). So functional organizations are more suitable for operational work. Domain = Process. PMBOK 6th edition, Page 16",
+    "choices": [
+      {
+        "text": "Identify all the stakeholders for this project.",
+        "correct": false
+      },
+      {
+        "text": "Issue a project charter for each car.",
+        "correct": false
+      },
+      {
+        "text": "Retain the functional organizational structure.",
+        "correct": true
+      },
+      {
+        "text": "Set up a PMO.",
+        "correct": false
+      }
+    ],
+    "id": 1587
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "ABC is a large organization which has a long history of managing projects in predictive environment. Recently, there is an initiative for switching to hybrid environment as there is a high demand on projects that require agile and hybrid development approaches. Which of the following transition strategies is the most appropriate?",
+    "explanation": "A gradual transition involves adding more iterative techniques to improve learning and alignment among teams and stakeholders. Later, consider adding more incremental techniques to accelerate value and return on investment to sponsors. Try these new techniques on a less risky project with a medium- to low-degree of uncertainty. Then, when the organization is successful with a hybrid approach, try more complex projects that require more of those techniques to be added. Domain = Process. Agile Practice Guide, Page 30",
+    "choices": [
+      {
+        "text": "Fixing a due date for transition after a reasonable period and ask teams to learn new approach before deadline.",
+        "correct": false
+      },
+      {
+        "text": "An abrupt transition by switching to hybrid immediately will force the teams to follow and learn new approach.",
+        "correct": false
+      },
+      {
+        "text": "A gradual transition by adding more iterative techniques to improve learning and alignment among teams and stakeholders.",
+        "correct": true
+      },
+      {
+        "text": "Hiring new employees with experience in agile and hybrid projects.",
+        "correct": false
+      }
+    ],
+    "id": 1588
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Which of the following would not be appropriate to mention during the daily scrum?",
+    "explanation": "During daily standup the scrum team discuss what did I complete since the last standup? What am I planning to complete between now and the next standup? And What are my impediments (or risks or problems)? An antipattern typically seen in standups is that the team begins to solve problems as they become apparent. Standups are for realizing there are problems—not for solving them.",
+    "choices": [
+      {
+        "text": "The new software saved much time as it automated the reporting process.",
+        "correct": true
+      },
+      {
+        "text": "I have successfully activated two sites.",
+        "correct": false
+      },
+      {
+        "text": "We are trying to fix the bug discovered yesterday which caused game crash.",
+        "correct": false
+      },
+      {
+        "text": "The customer contact is out of office this week which will delay the current activity till next week.",
+        "correct": false
+      }
+    ],
+    "id": 1589
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Which of the following approaches can be considered as a hybrid of both agile and waterfall methods?",
+    "explanation": "Estimating and planning in story points is an agile approach and using traditional vendor contracts based on product specifications is a waterfall approach. Using Gantt charts and WBS are both waterfall approaches. Using pull system, daily standup, co-location and delivering in releases are all agile approaches. Domain = Process. PMBOK 7th edition, Page 36",
+    "choices": [
+      {
+        "text": "Using Gantt charts for tracking progress with a WBS for planning the work.",
+        "correct": false
+      },
+      {
+        "text": "Holding daily stand-ups while using a pull system to move work through the process.",
+        "correct": false
+      },
+      {
+        "text": "Estimating and planning in story points while using traditional vendor contracts based on product specifications.",
+        "correct": true
+      },
+      {
+        "text": "Co-locating the team while delivering the product in releases.",
+        "correct": false
+      }
+    ],
+    "id": 1590
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "A project has just been initiated in an organization. The project team want to assess the degree of complexity within the project in order to tailor methods and practices according to the project needs. Which of the following models can they use?",
+    "explanation": "Stacey matrix looks at two dimensions to determine the relative complexity of a project: (a) the relative uncertainty of the requirements for the deliverable, and (b) the relative uncertainty of the technology that will be used to create the deliverable. Based on the relative uncertainty of these dimensions, a project is considered simple, complicated, complex, or chaotic. Domain = Process. PMBOK 7th edition, Page 165",
+    "choices": [
+      {
+        "text": "OSCAR",
+        "correct": false
+      },
+      {
+        "text": "Virginia Satir",
+        "correct": false
+      },
+      {
+        "text": "Stacey Matrix",
+        "correct": true
+      },
+      {
+        "text": "Transition Model",
+        "correct": false
+      }
+    ],
+    "id": 1591
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "A project manager wants to incorporate some agile practices into his plan-driven project. He suggests for the team to attend a daily standup. What might be needed from the team prior to attending a daily standup in a plan-driven project?",
+    "explanation": "The organization's tools might include burndown charts, burnup charts, Kanban boards,..etc.They are powerful information radiators used to reflect the team's progress towards their goals and objectives. Updating individual's progress prior to the daily standup meetings enables the team to collectively see their progress. Domain = Process. Agile Practice Guide, Page 53",
+    "choices": [
+      {
+        "text": "Try to remove any impediments to individual's work progress.",
+        "correct": false
+      },
+      {
+        "text": "Update the progress of their tasks on the organization's tools.",
+        "correct": true
+      },
+      {
+        "text": "Send a progress report to the project manager for the tasks assigned to each individual.",
+        "correct": false
+      },
+      {
+        "text": "Complete the work mentioned in the previous standup.",
+        "correct": false
+      }
+    ],
+    "id": 1592
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "You are an agile practitioner working on a product development project using agile approach. The organization you are working on has a long history of managing projects using waterfall approach and has recently adopted agile approach for some projects. The development team for your project has been holding product demos at the end of each iteration and you are pleased with their progress. However, you hear that the project sponsor has told another stakeholder that \"nothing is getting done using that agile approach.\" What should you do?",
+    "explanation": "During iteration review (product demo) the team demonstrates all completed work items at the end of the iteration. It is better for the sponsor to see the completed work himself instead of sending reports. Domain = Process. Agile Practice Guide Page 55",
+    "choices": [
+      {
+        "text": "Ask the product owner to send performance reports to the sponsor.",
+        "correct": false
+      },
+      {
+        "text": "Invite the sponsor to attend the team's next product demo.",
+        "correct": true
+      },
+      {
+        "text": "Educate the sponsor about Agile's incremental approach.",
+        "correct": false
+      },
+      {
+        "text": "Ask the team to start showing working product that has business value rather than prototypes.",
+        "correct": false
+      }
+    ],
+    "id": 1593
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "An organization is performing agile transformation. They are checking which of the current projects can be performed using agile approach. Which of the following is the best answer?",
+    "explanation": "Agile projects are suitable when the team is co-located and when the team can work together. The attributes of successful agile teams include colocotion which leads to better communication, knowledge sharing and improving team dynamics. High levels of ambiguity and complexity exist in chaotic environments which need to stabilize first. Agile projects are not suitable for chaotic environments. Domain = Process. Agile Practice Guide, Page 40",
+    "choices": [
+      {
+        "text": "The projects which have high level of complexity and ambiguity.",
+        "correct": false
+      },
+      {
+        "text": "The projects which don't require comprehensive documentation.",
+        "correct": false
+      },
+      {
+        "text": "The projects which can be performed using virtual teams and high level of uncertainty.",
+        "correct": false
+      },
+      {
+        "text": "The projects which have co-located team and the project team can work effectively together.",
+        "correct": true
+      }
+    ],
+    "id": 1594
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "In an adaptive project, the business analyst has written use cases before the sprint starts. This is known as:",
+    "explanation": "BDD stands for Behavior Driven Development. BDD is an extension to TDD where instead of writing the test cases, we start by writing a behavior. Later, we develop the code which is required for our application to perform the behavior. Domain = Process. Agile Practice Guide, Page 56",
+    "choices": [
+      {
+        "text": "Conduct a spike",
+        "correct": false
+      },
+      {
+        "text": "Test-Driven Development (TDD)",
+        "correct": false
+      },
+      {
+        "text": "Behavior-Driven Development",
+        "correct": true
+      },
+      {
+        "text": "Continuous Delivery",
+        "correct": false
+      }
+    ],
+    "id": 1595
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "What is the first activity done in Test Driven Development (TDD)?",
+    "explanation": "Test-Driven Development (TDD) or Behavior-Driven Development (BDD) involves writing automated tests before writing/creating the product actually helps people design and mistake-proof the product. Domain = Process. Agile Practice Guide Page 56",
+    "choices": [
+      {
+        "text": "Refactor",
+        "correct": false
+      },
+      {
+        "text": "Write Code",
+        "correct": false
+      },
+      {
+        "text": "Write Test",
+        "correct": true
+      },
+      {
+        "text": "Perform a spike",
+        "correct": false
+      }
+    ],
+    "id": 1596
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "What is the purpose of the questions asked during the daily standup?",
+    "explanation": "During daily standup the scrum team discuss what did I complete since the last standup? What am I planning to complete between now and the next standup? And What are my impediments (or risks or problems)? An antipattern typically seen in standups is that the team begins to solve problems as they become apparent. Standups are for realizing there are problems—not for solving them. Domain = Process. Agile Practice Guide Page 54",
+    "choices": [
+      {
+        "text": "Define impediments and discuss planned work",
+        "correct": false
+      },
+      {
+        "text": "Identify problems and discuss accomplishments",
+        "correct": true
+      },
+      {
+        "text": "Remove impediments and discuss achievements",
+        "correct": false
+      },
+      {
+        "text": "Fix problems and discuss achievements",
+        "correct": false
+      }
+    ],
+    "id": 1597
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "An organization has started a project to move a data center from one city to another one. The project team decides to adopt predictive approach for the physical building construction of the new data center, use iterative approach for establishing the computing and network capabilities and use a predictive approach for network migration and shutting down the old network. Which of the following statements best describes this situation?",
+    "explanation": "Deciding on a life cycle and the phases of the life cycle is an example of tailoring. Additional tailoring can be done when selecting the development and delivery approach for the project. Some large projects may use a combination of development and delivery approaches simultaneously. Domain = Process. PMBOK 7th edition, Page 134",
+    "choices": [
+      {
+        "text": "It is one project, the project team should have adopted one development approach.",
+        "correct": false
+      },
+      {
+        "text": "It is not the project team decision to select the project development approach.",
+        "correct": false
+      },
+      {
+        "text": "The project team are managing a program.",
+        "correct": false
+      },
+      {
+        "text": "The project team tailors the life cycle and development approach.",
+        "correct": true
+      }
+    ],
+    "id": 1598
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Simplicity - the art of maximizing the work not done - is essential. What does this principle mean?",
+    "explanation": "Principle 10 of the agile manifesto states that Simplicity—the art of maximizing the amount of work not done—is essential which means that we should look for simpler solutions to avoid overengineering and prevent unnecessary work by keeping the essential requirements only. Domain = Process. Agile Practice Guide Page 53",
+    "choices": [
+      {
+        "text": "Agile teams consist of 9–12 persons only.",
+        "correct": false
+      },
+      {
+        "text": "Boiling down the requirements to their essential elements only.",
+        "correct": true
+      },
+      {
+        "text": "Working in short iterations automatically leads to simplicity.",
+        "correct": false
+      },
+      {
+        "text": "Agile approaches focus on team empowerment.",
+        "correct": false
+      }
+    ],
+    "id": 1599
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "The organization is going to undertake a multi-phase IT project. The requirements of the first phase which is the design phase are well-known, however the organization is unfamiliar with the technology required to implement the those requirements. The second phase which is the deployment phase is similar to previous projects within the organization. Which development approach should be selected for this project?",
+    "explanation": "In this scenario, the hybrid approach is the most appropriate as the first phase has high technology uncertainty and requirements are well-known, so adaptive approach is appropriate for the first phase and waterfall approach is appropriate for the second phase. Having one phase using adaptive approach and another one using waterfall approach is an example of using hybrid approach. Domain = Process.",
+    "choices": [
+      {
+        "text": "Waterfall",
+        "correct": false
+      },
+      {
+        "text": "Incremental",
+        "correct": false
+      },
+      {
+        "text": "Hybrid",
+        "correct": true
+      },
+      {
+        "text": "Iterative",
+        "correct": false
+      }
+    ],
+    "id": 1600
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "A project manager who is managing a project using plan-driven approach has incorporated some agile practices to his project. Due to adopting this hybrid approach, the team members complain that they have to update both the plan-driven tools like Gantt chart, requirements documentation, activity attributes,..etc. and the agile tools as well like Kanban board, burndown chart, burnup chart,.etc. They feel that the new hybrid approach has added much workload on them. Which of the following should the project manager do?",
+    "explanation": "The intent of using tools is to assist the teams, stakeholders, and project organizations in managing their data and methodology. So, they need to determine which tools give them the needed insights and stop using other tools. Domain = Process.",
+    "choices": [
+      {
+        "text": "Follow the Agile Manifesto value",
+        "correct": false
+      },
+      {
+        "text": "Take a step back and stop agile transformation.",
+        "correct": false
+      },
+      {
+        "text": "He needs to determine which tools provide the needed project insights.",
+        "correct": true
+      },
+      {
+        "text": "Ask them to continue using both traditional and agile artifacts.",
+        "correct": false
+      }
+    ],
+    "id": 1601
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "Richard is a product owner for an agile project. It is known that he is very pushy because he always pushes the team to accept more work during each iteration. This will lead to the team burnout. Which of the following represents the best course of action?",
+    "explanation": "The best solution that the scrum master/agile coach should explain to the product owner the risk of the team burnout. Adding resources is not a proactive solution. Padding the estimates is not a professional solution. Domain = Process. Agile Practice Guide, Page 9",
+    "choices": [
+      {
+        "text": "The team should escalate the product owner to the project sponsor.",
+        "correct": false
+      },
+      {
+        "text": "The team should pad their estimates with extra buffers.",
+        "correct": false
+      },
+      {
+        "text": "The scrum master should explain to the product owner the risk of the team burnout.",
+        "correct": true
+      },
+      {
+        "text": "More team members should be added to the project team.",
+        "correct": false
+      }
+    ],
+    "id": 1602
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "An agile team is working on a project to develop a product for a client. The product is relatively new and the team did not work on similar product like this before. The team needs to investigate a new approach to develop the product. Which of the following is the best course of action?",
+    "explanation": "A spike is a short effort (usually timeboxed) that is devoted to exploring an approach. Domain = Process. Agile Practice Guide, Page 56",
+    "choices": [
+      {
+        "text": "Conduct a spike",
+        "correct": true
+      },
+      {
+        "text": "Test-Driven Development (TDD)",
+        "correct": false
+      },
+      {
+        "text": "Behavior-Driven Development",
+        "correct": false
+      },
+      {
+        "text": "Refactoring",
+        "correct": false
+      }
+    ],
+    "id": 1603
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "A project has been initiated to prepare for a chemical compound using an adaptive approach. One of the suppliers who are contracted to deliver the chemical components does not have any experience in agile projects and has never worked on agile projects before. So, the supplier will not be able to deliver the components incrementally. Which of the following is the best course of action?",
+    "explanation": "The overall approach should not be changed as it has been selected based on many factors not just the suppliers. But the delivery of the supplier can be integrated into the project. Domain = Process. PMBOK 7th edition, Page 134",
+    "choices": [
+      {
+        "text": "Change the delivery approach to plan-driven as it is more convenient to most of the suppliers.",
+        "correct": false
+      },
+      {
+        "text": "Request from the project management office PMO to provide training for all the suppliers in incremental delivery.",
+        "correct": false
+      },
+      {
+        "text": "Replace the supplier by another one with more experience in agile projects and incremental delivery.",
+        "correct": false
+      },
+      {
+        "text": "The overall agile approach should not be changed. The supplier can deliver the components using any other approach and then integrated into the project.",
+        "correct": true
+      }
+    ],
+    "id": 1604
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "An organization has contracted with the government to build three railroad stations. The project will be implemented using waterfall approach with three sequential phases with each phase delivering one station. After the first phase of the project is complete, what should happen next?",
+    "explanation": "As the first station is complete this means that the five process groups for the first project from initiating to closing are complete. As the project consists of three sequential phases, so there is no overlap between phases. After the first phase is complete, the second phase should start by initiating process group. Domain = Process. PMBOK 6th edition, Page 23",
+    "choices": [
+      {
+        "text": "Start the initiating process group for the second station.",
+        "correct": true
+      },
+      {
+        "text": "Start the planning process group for the second station.",
+        "correct": false
+      },
+      {
+        "text": "Start the closing process group for the first station.",
+        "correct": false
+      },
+      {
+        "text": "Start the executing process group for the second station.",
+        "correct": false
+      }
+    ],
+    "id": 1605
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "ABC Organization has decided to initiate a new project to develop an infrastructure solution which includes power systems that are energy efficient, high availability, and scalable. The solution involves high degree of innovation. Which of the following development approaches will most fit this project?",
+    "explanation": "Deliverables that have a high degree of innovation or where the project team does not have experience are better suited to a more adaptive approach. Domain = Process. PMBOK 7th edition, Page 39",
+    "choices": [
+      {
+        "text": "Traditional",
+        "correct": false
+      },
+      {
+        "text": "It is not relevant.",
+        "correct": false
+      },
+      {
+        "text": "Adaptive",
+        "correct": true
+      },
+      {
+        "text": "There is not enough information to decide.",
+        "correct": false
+      }
+    ],
+    "id": 1606
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 21,
+    "text": "An organization is performing agile transformation. They have hired an agile coach to mentor the project teams. He is coaching them about incremental delivery in agile projects. Which of the following is a likely result for incremental delivery?",
+    "explanation": "With incremental delivery, the team regularly deploys working increments of the product over the course of the project. So it is an opportunity to start realizing the benefits of the product and get an early return on investment. Incremental delivery reduces the amount of rework by finding issues earlier and thereby contributing to the delivery of value on the project and reduces cost of change. Domain = Process. Agile Practice Guide Page 57",
+    "choices": [
+      {
+        "text": "Improved quality",
+        "correct": false
+      },
+      {
+        "text": "Reduced cost of change",
+        "correct": true
+      },
+      {
+        "text": "Engaged stakeholders",
+        "correct": false
+      },
+      {
+        "text": "Enhanced agile processes",
+        "correct": false
+      }
+    ],
+    "id": 1607
   }
 ]
