@@ -38760,6 +38760,431 @@
   },
   {
     "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "Midway through the project you are managing, a functional manager has pulled four resources from your project to be assigned to another more important project in the organization. This action has affected your project badly, as it is behind schedule due to the delayed tasks assigned to those resources. After negotiation, you reach an agreement that the functional manager will assign two resources for your project and another two resources will be assigned later after hiring process is complete. Which conflict resolution technique did you use in this situation?",
+    "explanation": "Compromise/reconcile is searching for solutions that bring some degree of satisfaction to all parties in order to temporarily or partially resolve the conflict. This approach occasionally results in a lose-lose situation. Domain = People. PMBOK 6th edition, Page 349 and PMBOK 7th edition, Page 168",
+    "choices": [
+      {
+        "text": "Problem solve",
+        "correct": false
+      },
+      {
+        "text": "Direct",
+        "correct": false
+      },
+      {
+        "text": "Reconcile",
+        "correct": true
+      },
+      {
+        "text": "Accommodate",
+        "correct": false
+      }
+    ],
+    "id": 1543
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "You are managing a software project to develop a website. You are now in the design phase of the project. The graphic designer on the project recommends a blue background for the new website. When you informed the customer, he rejected and said that he wants the background to be yellow. The graphic designer explained that blue is more comfortable, attractive and calming. A decision must be made today in order not to delay the project schedule. How should this requirements conflict be resolved?",
+    "explanation": "The project’s success is directly influenced by active stakeholder involvement in the discovery and decomposition of needs into project and product requirements. The customer has high influence on the project, so any conflict should be resolved in favor of the customer. Domain = People. PMBOK 6th edition, Page 140 and PMBOK 7th edition, Page 83",
+    "choices": [
+      {
+        "text": "Use the expert judgment",
+        "correct": false
+      },
+      {
+        "text": "Compromise between the two options and use green",
+        "correct": false
+      },
+      {
+        "text": "Use yellow",
+        "correct": true
+      },
+      {
+        "text": "Use blue",
+        "correct": false
+      }
+    ],
+    "id": 1544
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "Victor is a project manager for a software project. Two team members Kevin and Tom are having a conflict. Kevin explains his opinion, and presents a possible solution. But before Tom starts to explain his opinion, the project manager says, “It is OK, I’ve heard enough, and I’ve decided to go with the solution of Kevin.” This is an example of:",
+    "explanation": "Here the project manager is pushing his viewpoint at the expense of others; offering only win-lose solutions. Domain = People. PMBOK 7th edition, Page 169",
+    "choices": [
+      {
+        "text": "Withdrawal",
+        "correct": false
+      },
+      {
+        "text": "Compromise",
+        "correct": false
+      },
+      {
+        "text": "Smoothing",
+        "correct": false
+      },
+      {
+        "text": "Forcing",
+        "correct": true
+      }
+    ],
+    "id": 1545
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "During an industrial project, two team members are in conflict because of difference in opinions concerning the correct order of steps to test the final product of the project. Who is initially responsible for resolving this conflict?",
+    "explanation": "Project team members are initially responsible for resolving it. If conflict escalates, the project manager should help facilitate a satisfactory resolution using suitable conflict resolution technique. Domain = People. PMBOK 6th edition, Page 348 and PMBOK 7th edition, Page 168",
+    "choices": [
+      {
+        "text": "The project manager",
+        "correct": false
+      },
+      {
+        "text": "Both team members",
+        "correct": true
+      },
+      {
+        "text": "The human resources department",
+        "correct": false
+      },
+      {
+        "text": "Their functional manager",
+        "correct": false
+      }
+    ],
+    "id": 1546
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "During creating the quality management plan, two team members are arguing about which technique to use in testing the products of the project. One of them suggests that they should test only a sample of the product, because the population would be too much to be tested. The other team member objects to this opinion and suggests to test all the products because the quality should be as high as possible. If the project manager tells the team, \"We will schedule this discussion for our team meeting next week\", the project manager is:",
+    "explanation": "Postpone solving the problem means withdrawal. Domain = People. PMBOK 7th edition, Page 169",
+    "choices": [
+      {
+        "text": "Compromising",
+        "correct": false
+      },
+      {
+        "text": "Forcing",
+        "correct": false
+      },
+      {
+        "text": "Withdrawing",
+        "correct": true
+      },
+      {
+        "text": "Confronting",
+        "correct": false
+      }
+    ],
+    "id": 1547
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "Midway through the project, one of the scheduled project activities could not be implemented as its scheduled time and resource contradicts with a regular maintenance activity. Which of the following is the best course of action?",
+    "explanation": "Rescheduling the project activity without looking for possible options is not a good solution. The project manager should discuss all possible options first with functional manager. Domain = People. PMBOK 6th edition, Page 348 and PMBOK 7th edition, Page 168",
+    "choices": [
+      {
+        "text": "Submit a change request to reschedule the project activity.",
+        "correct": false
+      },
+      {
+        "text": "The project manager should inform the assigned resource to prioritize the project activity.",
+        "correct": false
+      },
+      {
+        "text": "The project manager should discuss with the functional manager to check if the schedule can be adjusted.",
+        "correct": true
+      },
+      {
+        "text": "The project manager should ask PMO to formally prioritize the project work over the operational work.",
+        "correct": false
+      }
+    ],
+    "id": 1548
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "During executing a major motor design project, two team members are having disagreement about choosing the type of a component that will be used in the project. The project manager has offered to help. The project manager suggests a compromise, and the team members want to solve the problem. Who should decide on the best course of action?",
+    "explanation": "Conflict is best resolved by those involved in the conflict. The project manager should try to resolve conflicts as long as he has authority. If not, the sponsor or functional managers may be called to assist. Domain = People. PMBOK 6th edition, Page 348 and PMBOK 7th edition, Page 168",
+    "choices": [
+      {
+        "text": "Customer",
+        "correct": false
+      },
+      {
+        "text": "Team members",
+        "correct": true
+      },
+      {
+        "text": "Project manager",
+        "correct": false
+      },
+      {
+        "text": "Sponsor",
+        "correct": false
+      }
+    ],
+    "id": 1549
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "Two team members have a conflict on the type of material to be used in a specific activity. The conflict is not significant and is not escalated to the project manager. Which of the following is the best course of action for the project manager?",
+    "explanation": "The parties to the conflict are primarily responsible for resolving the conflict. If they cannot resolve the conflict, it must be escalated to the project manager. If the dispute is escalated to a higher level, it must be escalated to the human resources department. If the dispute is technical, the situation must be escalated to the functional manager. Domain = People. PMBOK 6th edition",
+    "choices": [
+      {
+        "text": "Try to find a compromise that brings some degree of satisfaction to both parties.",
+        "correct": false
+      },
+      {
+        "text": "Involve their functional managers as it is a technical conflict.",
+        "correct": false
+      },
+      {
+        "text": "Allow the team members to resolve the conflict themselves.",
+        "correct": true
+      },
+      {
+        "text": "Have a meeting with both team members and try to find a solution using a direct and collaborative approach.",
+        "correct": false
+      }
+    ],
+    "id": 1550
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "Two team members are arguing about the design of new network they are building. One has experience from a prior project and argues for a wireless design; the other is concerned about the business risk and wants a more sophisticated wired design. The second team member asks you to resolve the disagreement, implying that the other team member doesn't have enough experience to create the more complex wired network design. As the project manager, how should you approach this conflict?",
+    "explanation": "The team members should try to resolve the conflict themselves first. Domain = People. PMBOK 7th edition, Page 168",
+    "choices": [
+      {
+        "text": "Tell them they need to resolve their technical differences between themselves.",
+        "correct": true
+      },
+      {
+        "text": "Report the team members to human resources for disrespectful behavior toward each other.",
+        "correct": false
+      },
+      {
+        "text": "Explain their different communication styles to help them understand each other better.",
+        "correct": false
+      },
+      {
+        "text": "Have one of the team members transferred to another team, since they obviously don't get along.",
+        "correct": false
+      }
+    ],
+    "id": 1551
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "Two team members are having a disagreement over order of activities in your project. A team member thinks that you should document everything before starting work, while the other thinks you can do the work while you finish the documentation. You meet with both of them and listen to their argument. Then you decide that you will document most of it first but will start doing the work when you are 80% done with the documentation. What conflict resolution technique are you using?",
+    "explanation": "Each party has to give up something. This is an example of compromise. Domain = People. PMBOK 7th edition, Page 169",
+    "choices": [
+      {
+        "text": "Forcing",
+        "correct": false
+      },
+      {
+        "text": "Confronting",
+        "correct": false
+      },
+      {
+        "text": "Smoothing",
+        "correct": false
+      },
+      {
+        "text": "Compromise",
+        "correct": true
+      }
+    ],
+    "id": 1552
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "You are a project manager for a large software project to develop a mobile application. Your project team consists of 25 persons located in the same office. In the middle of the project, you noticed that conflicts arise between two project team members on both technical and interpersonal levels. What should you do to handle these conflicts?",
+    "explanation": "No need to solve a conflict between two team members in a team meeting. The issue should be handled between the two team members only. Solving the root cause of the problem is better than withdrawal or forcing. Domain = People. PMBOK 7th edition, Page 169",
+    "choices": [
+      {
+        "text": "Postpone handling these conflicts whenever possible to allow those involved in the conflict to calm down which makes solving conflict easier.",
+        "correct": false
+      },
+      {
+        "text": "Handle the conflict in the project team meeting so that the entire team can participate in finding a solution.",
+        "correct": false
+      },
+      {
+        "text": "Address the conflict in private using a direct, collaborative approach.",
+        "correct": true
+      },
+      {
+        "text": "Use your power to push the correct point of view to focus on achieving the project objectives.",
+        "correct": false
+      }
+    ],
+    "id": 1553
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "Marcos is managing a large construction project. During project execution, he finds that the floor plans received from the customer seem to be incomplete. What should Marcos do first?",
+    "explanation": "The best solution is to resolve the conflict in a direct collaborative approach. Domain = People. PMBOK 6th edition, Page 348 and PMBOK 7th edition, Page 168",
+    "choices": [
+      {
+        "text": "Raise a change request to extend the project end date to accommodate the expected delay.",
+        "correct": false
+      },
+      {
+        "text": "Escalate this topic to the project sponsor.",
+        "correct": false
+      },
+      {
+        "text": "Use the floor plan provided by the customer as the customer is accountable to provide the correct floor plan.",
+        "correct": false
+      },
+      {
+        "text": "Consult with the customer to determine if the project execution should be continued.",
+        "correct": true
+      }
+    ],
+    "id": 1554
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "Monica is a project manager on a large software project. The customer required a change to a major work package. She evaluates the impact of the change and informs the customer with the impact on project schedule and budget. But the customer won’t allow any change to the schedule and won’t pay anything more for implementing the change. Monica explains that the proposed change is outside the documented scope of the original work. The customer tells Monica that he doesn’t care what was in the original scope and that she needs to implement the change with no impact to schedule or budget. What conflict resolution technique is the customer using?",
+    "explanation": "Here the customer is pushing his viewpoint at the expense of others; offering only win-lose solutions. Domain = People. PMBOK 7th edition, Page 169",
+    "choices": [
+      {
+        "text": "Confronting",
+        "correct": false
+      },
+      {
+        "text": "Withdrawal",
+        "correct": false
+      },
+      {
+        "text": "Smoothing",
+        "correct": false
+      },
+      {
+        "text": "Forcing",
+        "correct": true
+      }
+    ],
+    "id": 1555
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "You signed a contract with a supplier to deliver raw materials for your project. He always delivers these materials later than the due date. He asked you to accept late deliverables and in exchange he will decrease the material cost. This is an example of:",
+    "explanation": "In this situation, neither parties get everything. Each party has to give up something, so it is an example for compromising. Domain = People. PMBOK 6th edition, Page 349 and PMBOK 7th edition, Page 168",
+    "choices": [
+      {
+        "text": "Compromising",
+        "correct": true
+      },
+      {
+        "text": "Smoothing",
+        "correct": false
+      },
+      {
+        "text": "Forcing",
+        "correct": false
+      },
+      {
+        "text": "Confronting",
+        "correct": false
+      }
+    ],
+    "id": 1556
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "Prior to the product release, the project team has requested detailed feedback from all key stakeholders. All the key stakeholders have provided their feedback except one key stakeholders. The project team members have reminded him many times to provide feedback, but he didn't. Which of the following is the best course of action for the project manager?",
+    "explanation": "The best solution is to resolve the conflict in a direct collaborative approach. Domain = People. PMBOK 6th edition, Page 348 and PMBOK 7th edition, Page 168",
+    "choices": [
+      {
+        "text": "Exclude this particular stakeholder's feedback and proceed to product release.",
+        "correct": false
+      },
+      {
+        "text": "Escalate this topic to the project sponsor.",
+        "correct": false
+      },
+      {
+        "text": "Hold a meeting with the project team and the stakeholder to resolve the conflict.",
+        "correct": true
+      },
+      {
+        "text": "Call the stakeholder privately to understand the reason of the conflict.",
+        "correct": false
+      }
+    ],
+    "id": 1557
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "You are managing a large construction project which involves four contracts with four different sellers. You are about to finish your project, so you are preparing to close all the contracts and trying to settle all disputes. A dispute with one seller can't be settled by negotiation. What should you do?",
+    "explanation": "If settlement cannot be achieved through direct negotiation, some form of alternative dispute resolution (ADR). Domain = People. PMBOK 6th edition, Page 498",
+    "choices": [
+      {
+        "text": "It should be handled in accordance with alternative dispute resolution.",
+        "correct": true
+      },
+      {
+        "text": "The issues should be documented in the issue log and marked as unresolved.",
+        "correct": false
+      },
+      {
+        "text": "The contract should be terminated according to the terms and conditions.",
+        "correct": false
+      },
+      {
+        "text": "You should escalate the issue to the project sponsor.",
+        "correct": false
+      }
+    ],
+    "id": 1558
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 20,
+    "text": "Miley and Elena are two team members of a tele- communication project. They are both reporting to Henry who is their functional manager. Sandy is assigned as the project manager for this project. The two team members are now in a conflict about which type of power supply units they will use in the project. Miley wants to use type A because it was used before in similar projects, while Elena wants to use type B because it has better performance than A. The conflict didn't affect the project schedule till now, but the issues are going more and more complex. Who should initialy solve the conflict between the two team members?",
+    "explanation": "Project team members are initially responsible for resolving the conflict. Domain = People. PMBOK 6th edition, Page 348 and PMBOK 7th edition, Page 168",
+    "choices": [
+      {
+        "text": "Miley and Elena",
+        "correct": true
+      },
+      {
+        "text": "Henry",
+        "correct": false
+      },
+      {
+        "text": "Sandy",
+        "correct": false
+      },
+      {
+        "text": "Project sponsor",
+        "correct": false
+      }
+    ],
+    "id": 1559
+  },
+  {
+    "type": "multiple-choice",
     "categoryId": 21,
     "text": "In an adaptive environment, the team knows the acceptance criteria and needs to work backward to develop the code. This is known as:",
     "explanation": "TDD stands for Test Driven Development. In this software development technique, we create the test cases first and then write the code underlying those test cases. Domain = Process. Agile Practice Guide, Page 56",
