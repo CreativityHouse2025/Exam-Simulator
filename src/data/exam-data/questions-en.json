@@ -40207,5 +40207,930 @@
       }
     ],
     "id": 1617
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "Diana is a project manager for a new IT project. She is working with project key stakeholders to analyze and prioritize requirements. She pays more attention to customer satisfaction because one of the project requirements is to achieve a high-level of customer satisfaction for the product of the project. What is the risk here in project requirements?",
+    "explanation": "Requirements need to be measurable and customer satisfaction is not measurable. Domain = Business Environment. PMBOK 6th edition, Page 147",
+    "choices": [
+      {
+        "text": "Achieving high-level customer satisfaction is an assumption and it should be documented in the project assumptions log.",
+        "correct": false
+      },
+      {
+        "text": "Achieving high-level customer satisfaction is an assumption and it should be documented in the project assumptions log.",
+        "correct": true
+      },
+      {
+        "text": "Achieving high-level customer satisfaction is a constraint and it must be balanced with other constraints like time, scope and cost.",
+        "correct": false
+      },
+      {
+        "text": "Achieving high-level customer satisfaction is a top risk and it must be identified, analyzed and appropriate response should be planned for it.",
+        "correct": false
+      }
+    ],
+    "id": 1618
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "To support value realization from projects, project teams should most focus on:",
+    "explanation": "To support value realization from projects, project teams shift focus from deliverables to the intended outcomes. Doing so allows project teams to deliver on the vision or purpose of the project, rather than simply creating a specific deliverable. Domain = Business Environment. The Standard for Project Management, Page 36",
+    "choices": [
+      {
+        "text": "Producing high quality project deliverables.",
+        "correct": false
+      },
+      {
+        "text": "Stakeholders Satisfaction",
+        "correct": false
+      },
+      {
+        "text": "On-time Delivery",
+        "correct": false
+      },
+      {
+        "text": "Achieving Intended Outcome",
+        "correct": true
+      }
+    ],
+    "id": 1619
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "The organization has 4 projects to select one of them for implementation. Project A has NPV $50,000 and payback period of 2 years. Project B has NPV of $30,000 and payback period of 6 months. Project C has NPV of $40,000 and payback period of 1 year. Project D has NPV of 35000$ and payback period of 18 months. Based on this data which project will the organization select to implement, if they want to achieve profit in the shortest time period?",
+    "explanation": "If the organization wants to achieve profit in the shortest time period, so the project with the shortest payback period is selected. Domain = Business Environment. PMBOK 7th edition, Page 102",
+    "choices": [
+      {
+        "text": "Project A",
+        "correct": false
+      },
+      {
+        "text": "Project B",
+        "correct": true
+      },
+      {
+        "text": "Project C",
+        "correct": false
+      },
+      {
+        "text": "Project D",
+        "correct": false
+      }
+    ],
+    "id": 1620
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "A project team has created a software as a project deliverable for a customer. The customer has initiated the project and requested a software solution because they think that the solution resolves the business need for higher productivity. The software which is the output of the project does not enable the productivity outcome that is intended. The project stakeholders feel that the project has failed. Which of the following is the best course of action from the project team?",
+    "explanation": "The main issue here is the focus on deliverables not on the intended outcomes. To support value realization from projects, project teams shift focus from deliverables to the intended outcomes. Doing so allows project teams to deliver on the vision or purpose of the project, rather than simply creating a specific deliverable. Domain = Business Environment. The Standard for Project Management, Page 36",
+    "choices": [
+      {
+        "text": "Ask customer to issue a change request and include the needed modifications to the software to be assessed by the change control board.",
+        "correct": false
+      },
+      {
+        "text": "No action needed, the project team has delivered the project deliverable which was requested by the customer.",
+        "correct": false
+      },
+      {
+        "text": "Adding a new deliverable of training and coaching on the use of the software to enable a better productivity outcome.",
+        "correct": true
+      },
+      {
+        "text": "Close the current project and start a new one with clear objectives.",
+        "correct": false
+      }
+    ],
+    "id": 1621
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "The PMO is trying to select one of the potential projects to implement within the organization. They are preparing some financial information to calculate the potential benefits of the candidate projects. They want to calculate how much money each candidate project will return. Which of the following financial metrics should they use?",
+    "explanation": "Return on Investment (ROI) measures the profitability of an investment by calculating the ratio of the benefits received from the investment to the money invested in it. Domain = Business Environment. PMBOK 7th edition, Page 102",
+    "choices": [
+      {
+        "text": "Net Present Value (NPV)",
+        "correct": false
+      },
+      {
+        "text": "Internal Rate of Return (IRR)",
+        "correct": false
+      },
+      {
+        "text": "Payback Period",
+        "correct": false
+      },
+      {
+        "text": "Return on Investment (ROI)",
+        "correct": true
+      }
+    ],
+    "id": 1622
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "Tom is a newly assigned project manager in agriculture engineering company. He is assigned by Frank, the project sponsor, to manage a new project to produce new organic soil fertilizer. Ronald, the PMO manager, met with both Tom and Frank to discuss the project business documents. Ronald clarified the importance of alignment between the project business documents, project management plan and project charter. Who is responsible for providing recommendations and oversight to keep the project business case, project management plan, project charter and project benefits management plan success measures in alignment with one another?",
+    "explanation": "The project manager is responsible for providing recommendations and oversight to keep the project business case, project management plan, project charter, and project benefits management plan, success measures in alignment with one another, and with the goals and objectives of the organization. Domain = Business Environment. PMBOK 6th edition, page 29.",
+    "choices": [
+      {
+        "text": "Tom",
+        "correct": true
+      },
+      {
+        "text": "Frank",
+        "correct": false
+      },
+      {
+        "text": "Ronald",
+        "correct": false
+      },
+      {
+        "text": "None of them",
+        "correct": false
+      }
+    ],
+    "id": 1623
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "The second value of the Agile Manifesto states that: \"Agile teams value working software over comprehensive documentation\". Which of the following agile techniques is closely related to this Agile Manifesto value?",
+    "explanation": "Work in progress (WIP) is the term given to work that has been started but has not yet been completed. Excessive levels of WIP are associated with a number of problems like hiding bottlenecks, representing risk in the form of potential rework, and consuming investment capital and delivering no return. The second principle of Agile Manifesto states that we value working software over comprehensive documentation, so it is closely related to WIP. Domain = Business Environment. Agile Practice Guide, Page 97",
+    "choices": [
+      {
+        "text": "Work in progress (WIP)",
+        "correct": true
+      },
+      {
+        "text": "Daily standup",
+        "correct": false
+      },
+      {
+        "text": "Retrospectives",
+        "correct": false
+      },
+      {
+        "text": "Agile charter",
+        "correct": false
+      }
+    ],
+    "id": 1624
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "During project planning, a mechanical engineer informed the project manager that the life cycle cost of the new machine is higher than the life cycle cost of another machine. In light of this, what should the project manager do?",
+    "explanation": "Generally, the product with lower life cycle cost is preferable to be selected. Domain = Business Environment. PMBOK 6th edition, Page 245",
+    "choices": [
+      {
+        "text": "Select the product with the lower life cycle cost.",
+        "correct": true
+      },
+      {
+        "text": "Select the product with the cheaper price.",
+        "correct": false
+      },
+      {
+        "text": "Use the contingency reserve to purchase the other machine.",
+        "correct": false
+      },
+      {
+        "text": "Select the product with the lowest maintenance cost.",
+        "correct": false
+      }
+    ],
+    "id": 1625
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "The finance department in ABC organization measures the profit and loss for all the projects that are being implemented in the organization. They measured the cost-benefit ratio of one of the projects over several months and find it always greater than 1. They communicated these measures to the project steering committee. Which of the following is not a correct decision for steering committee?",
+    "explanation": "The cost-benefit ratio is used to determine if the costs of a project outweigh its benefits. If the costs are greater than the benefits, the result will be greater than 1.0. In this case, the project should not be considered unless there are regulatory, social good, or other reasons to do the project. Domain = Business Environment. PMBOK 7th edition, Page 102",
+    "choices": [
+      {
+        "text": "The steering committee decides to complete the project due to regulatory compliance.",
+        "correct": false
+      },
+      {
+        "text": "The steering committee decides to complete the project to achieve intended profit.",
+        "correct": true
+      },
+      {
+        "text": "The steering committee decides to complete the project due to social need.",
+        "correct": false
+      },
+      {
+        "text": "The steering committee decides to start project closure procedures.",
+        "correct": false
+      }
+    ],
+    "id": 1626
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "Which of the following is not true about projects and systems thinking?",
+    "explanation": "Systems thinking entails taking a holistic view of how project parts interact with each other and with external systems. A project might work within other larger systems like programs or portfolios and may have subsystems that are required to integrate effectively to deliver the intended outcome. Domain = Business Environment. The Standard for Project Management, Page 37",
+    "choices": [
+      {
+        "text": "Systems thinking entails taking a holistic view of how project parts interact with each other and with external systems.",
+        "correct": false
+      },
+      {
+        "text": "A project might work within other larger systems, and a project deliverable may become part of a larger system to realize benefits.",
+        "correct": false
+      },
+      {
+        "text": "A project may have subsystems that are required to integrate effectively to deliver the intended outcome.",
+        "correct": false
+      },
+      {
+        "text": "A project might either work within other larger systems or might have subsystems, can't work with both at the same time.",
+        "correct": true
+      }
+    ],
+    "id": 1627
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "The first principle of the Agile Manifesto states that: \"Our highest priority is to satisfy the customer through early and continuous delivery of valuable software\". How can the team ensure that the features or deliverables they create are valuable for the customer?",
+    "explanation": "The product owner continuously maintain and refine the product backlog and prioritizes the features with the highest value to the customer to be on the top of the backlog. Domain = Business Environment. Agile Practice Guide, Page 52",
+    "choices": [
+      {
+        "text": "By creating and prioritizing the product backlog by the product owner.",
+        "correct": true
+      },
+      {
+        "text": "By having daily standups to review what has been achieved so far.",
+        "correct": false
+      },
+      {
+        "text": "By continuously communicating with the customer throughout the iteration.",
+        "correct": false
+      },
+      {
+        "text": "By creating Kanban board and working on the high value features first.",
+        "correct": false
+      }
+    ],
+    "id": 1628
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "Which of the following Agile Manifesto principles is more related to value driven delivery?",
+    "explanation": "The reason projects are undertaken is to generate business value. This definition of progress as “working systems” or \"working software\" creates a results-oriented view of the project and encourages the team to have value-driven delivery as their focus throughout the project.",
+    "choices": [
+      {
+        "text": "The best architectures, requirements, and designs emerge from self-organizing teams.",
+        "correct": false
+      },
+      {
+        "text": "Simplicity—the art of maximizing the amount of work not done—is essential.",
+        "correct": false
+      },
+      {
+        "text": "Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done.",
+        "correct": false
+      },
+      {
+        "text": "Working software is the primary measure of progress.",
+        "correct": true
+      }
+    ],
+    "id": 1629
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "Which of the following Agile Manifesto values are closely related to work in progress (WIP)?",
+    "explanation": "Work in progress (WIP), is the term given to work that has been started but has not yet been completed. Excessive levels of WIP are associated with a number of problems like hiding bottlenecks, representing risk in the form of potential rework, and consuming investment capital, and delivering no return. The second principle of Agile Manifesto states that we value working software over comprehensive documentation, so it is closely related to WIP. Domain = Business Environment. Agile Practice Guide Page 8 and 25",
+    "choices": [
+      {
+        "text": "Customer collaboration over contract negotiation",
+        "correct": false
+      },
+      {
+        "text": "Working software over comprehensive documentation",
+        "correct": true
+      },
+      {
+        "text": "Individuals and interactions over processes and tools",
+        "correct": false
+      },
+      {
+        "text": "Responding to change over following a plan",
+        "correct": false
+      }
+    ],
+    "id": 1630
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "During an iteration review, after the team has demonstrated the product increment, the project stakeholders have expressed their concern about the product increment being demonstrated as it presents some low priority features and it does not represent their expectations. What is most likely the cause of this situation?",
+    "explanation": "The product owner should maintain the product backlog so that it represents the customer needs. As the product increment contains low priority items, so this means that the product backlog has not been maintained and prioritized to reflect the customer needs. Domain = Business Environment. Agile Practice Guide Page 52",
+    "choices": [
+      {
+        "text": "The product owner did not properly prioritize the product backlog.",
+        "correct": true
+      },
+      {
+        "text": "The product owner has not properly defined the acceptance criteria.",
+        "correct": false
+      },
+      {
+        "text": "The team has developed a minimal viable product.",
+        "correct": false
+      },
+      {
+        "text": "The team has created a prototype.",
+        "correct": false
+      }
+    ],
+    "id": 1631
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "All of the following statements are true about project business case, except:",
+    "explanation": "The business case may be used throughout the project life cycle. Domain = Business Environment. PMBOK 6th edition, Page 30",
+    "choices": [
+      {
+        "text": "The business case may be used only before and during the project initiation and may result in a go/no-go decision for the project.",
+        "correct": true
+      },
+      {
+        "text": "The business case lists the objectives and reasons for project initiation.",
+        "correct": false
+      },
+      {
+        "text": "The project business case helps measure the project success at the end of the project against the project objectives.",
+        "correct": false
+      },
+      {
+        "text": "The project business case is used as a basis for the authorization of further project management activities.",
+        "correct": false
+      }
+    ],
+    "id": 1632
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "Midway through the project, the project team want to measure business value to ensure that the project deliverables are still aligned with the business case and benefits realization plan. Which of the following measures can the project team use?",
+    "explanation": "Business value measurements are used to ensure the project deliverable stays aligned to the business case and the benefits realization plans. Metrics that measure financial business value include ROI, NPV, cost-benefit ratio and planned benefits delivery compared to actual benefits delivery. Domain = Business Environment. PMBOK 7th edition, Page 102",
+    "choices": [
+      {
+        "text": "TCPI",
+        "correct": false
+      },
+      {
+        "text": "NPS",
+        "correct": false
+      },
+      {
+        "text": "SPI",
+        "correct": false
+      },
+      {
+        "text": "ROI",
+        "correct": true
+      }
+    ],
+    "id": 1633
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "Which of the following is the best interpretation for the Agile Manifesto value \"working software over comprehensive documentation\"?",
+    "explanation": "The second principle of Agile Manifesto states that we value working software over comprehensive documentation. This value reminds us to focus on the purpose or business value were trying to deliver, rather than paperwork. Agile documentation should be “barely sufficient”—just enough to cover our needs. Domain = Business Environment. Agile Practice Guide Page 8",
+    "choices": [
+      {
+        "text": "Creating a high quality software should be done before creating project documentation.",
+        "correct": false
+      },
+      {
+        "text": "Creating a high quality software is the top priority, because creating a documentation without a working software has no value.",
+        "correct": true
+      },
+      {
+        "text": "Software projects normally don't need documentation.",
+        "correct": false
+      },
+      {
+        "text": "Creating a high quality software is a top priority and creating project documentation can be done if there is available time in each sprint.",
+        "correct": false
+      }
+    ],
+    "id": 1634
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "A new product development project is currently being implemented using adaptive approach. The customer has agreed with the performing organization on delivery milestones to deliver specific features on each milestone. Midway through the project, the customer wants to show a tangible deliverable of the project with some specific features to his stakeholders as soon as possible which will require shifting some milestones to earlier dates. Which of the following is the best course of action?",
+    "explanation": "As per the agile manifesto values 3 and 4 that agile team value customer collaboration over contract negotiation and value responding to change over following a plan. So they should try to support the customer to reprioritize his requirements and try to deliver the features with highest priority to the customer as soon as possible. At the same time the team should check internally whether the customer requirements are achievable or not. Domain = Business Environment. Agile Practice Guide, Page 8",
+    "choices": [
+      {
+        "text": "The team should discuss with the customer his priorities and the features he would like to be delivered early and discuss internally what can be delivered early.",
+        "correct": true
+      },
+      {
+        "text": "The customer requirements will impact the delivery milestones and hence the contract. The team should ask the customer to raise a change request.",
+        "correct": false
+      },
+      {
+        "text": "The team should escalate this issue to the project sponsor for decision making.",
+        "correct": false
+      },
+      {
+        "text": "The team should assess the customer request and inform him that shifting any milestone will have serious implications.",
+        "correct": false
+      }
+    ],
+    "id": 1635
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "You are working on a software project using adaptive approach when a key stakeholder has informs you that he needs to give feature E a higher priority than other features and implement it in the next iteration. What should you do?",
+    "explanation": "The product owner is responsible for guiding the direction of the product. Product owners rank the work based on its business value. Domain = Business Environment. Agile Practice Guide, Page 52",
+    "choices": [
+      {
+        "text": "Respond politely, inform the stakeholder that his request can't be implemented because customer has given other features higher priority.",
+        "correct": false
+      },
+      {
+        "text": "Inform the project sponsor about this request and ask him to take the appropriate decision.",
+        "correct": false
+      },
+      {
+        "text": "Respond politely and inform the stakeholder that his request can't be implemented because some other features have higher business values.",
+        "correct": false
+      },
+      {
+        "text": "Inform the stakeholder that you will discuss his request with the product owner.",
+        "correct": true
+      }
+    ],
+    "id": 1636
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "Which of the following Agile Manifesto principles is more related to prioritizing value?",
+    "explanation": "Prioritization is a fundamental agile process. If the customer has been continuously prioritizing the backlog, then any new requirement is simply inserted at the appropriate place in the backlog. Domain = Business Environment. Agile Practice Guide Page 8 and 52",
+    "choices": [
+      {
+        "text": "Working software is the primary measure of progress.",
+        "correct": false
+      },
+      {
+        "text": "Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale.",
+        "correct": false
+      },
+      {
+        "text": "Welcome changing requirements, even late in development. Agile processes harness change for the customer’s competitive advantage.",
+        "correct": true
+      },
+      {
+        "text": "Our highest priority is to satisfy the customer through early and continuous delivery of valuable software.",
+        "correct": false
+      }
+    ],
+    "id": 1637
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "An organization wants to select one of two projects to implement. Project A is expected to result in a $30 million net profit, while project B is expected to result in $25 net profit. The organization does not have the capability to undertake both projects. If the organization selects project A, what will be the opportunity cost?",
+    "explanation": "The opportunity cost is the cost of the project which has not been selected. Domain = Business Environment.",
+    "choices": [
+      {
+        "text": "$5 million",
+        "correct": false
+      },
+      {
+        "text": "$25 million",
+        "correct": true
+      },
+      {
+        "text": "$30 million",
+        "correct": false
+      },
+      {
+        "text": "$55 million",
+        "correct": false
+      }
+    ],
+    "id": 1638
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "The seventh principle of the Agile Manifesto states that: \"Working software is the primary measure of progress\". Which of the following agile practices and techniques is closely related to this principle?",
+    "explanation": "In agile projects, teams assess progress based on the emerging product or service they are creating. Teams want to focus instead on the primary goal of the project which is a product that delivers value to the business. So, Teams are focused on flowing work through the system to completion and not beginning new work until work in progress is completed. They try to remove bottlenecks and have a cap on items in each queue to limit work in progress. Domain = Business Environment. Agile Practice Guide Page 8",
+    "choices": [
+      {
+        "text": "Daily Standups",
+        "correct": false
+      },
+      {
+        "text": "Work in progress (WIP)",
+        "correct": true
+      },
+      {
+        "text": "Retrospectives",
+        "correct": false
+      },
+      {
+        "text": "Timeboxing",
+        "correct": false
+      }
+    ],
+    "id": 1639
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "Which of the following is a good metric that can be used to compare two agile teams?",
+    "explanation": "Return on Investment (ROI) measures the profitability of an investment by calculating the ratio of the benefits received from the investment to the money invested in it. Velocity is team specific. Domain = Business Environment. Agile Practice Guide Page 61",
+    "choices": [
+      {
+        "text": "Velocity",
+        "correct": false
+      },
+      {
+        "text": "Cycle Time",
+        "correct": false
+      },
+      {
+        "text": "ROI",
+        "correct": true
+      },
+      {
+        "text": "Work in progress (WIP)",
+        "correct": false
+      }
+    ],
+    "id": 1640
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "The tenth principle of the Agile Manifesto states that: \"Simplicity—the art of maximizing the amount of work not done is essential\". Which of the following agile practices and techniques is closely related to this principle?",
+    "explanation": "In order not to build unnecessary features that will not add value to the customer, so teams will need to boil down the requirements to their essential elements only. Backlog grooming (refinement) means continuously updating and prioritizing features into the backlog of work to be done according to their business values. Domain = Business Environment. Agile Practice Guide, Page 52 and 80",
+    "choices": [
+      {
+        "text": "Backlog refinement",
+        "correct": true
+      },
+      {
+        "text": "Timeboxing",
+        "correct": false
+      },
+      {
+        "text": "Continuous integration",
+        "correct": false
+      },
+      {
+        "text": "Test-Driven Development (TDD)",
+        "correct": false
+      }
+    ],
+    "id": 1641
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "All of the following may be included in project business case, except:",
+    "explanation": "The expected tangible and intangible value to be gained by the implementation of the project is one of the contents of the project benefits management plan. Domain = Business Environment. PMBOK 6th edition, Page 31 and 32",
+    "choices": [
+      {
+        "text": "Gap analysis of capabilities needed for the project versus existing capabilities of the organization.",
+        "correct": false
+      },
+      {
+        "text": "Identification of critical success factors.",
+        "correct": false
+      },
+      {
+        "text": "The expected tangible and intangible value to be gained by the implementation of the project.",
+        "correct": true
+      },
+      {
+        "text": "Statement describing the plan for measuring benefits the project will deliver.",
+        "correct": false
+      }
+    ],
+    "id": 1642
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "You have a meeting with potential sponsors to select between three projects. Project A has a net present value of $64,350 and will take seven months to complete. Project B has a net present value of $92,100 and will take three years to complete. Project C has a net present value of $35,000 and a benefit-cost ratio of 5:3. Which project should you select?",
+    "explanation": "Select highest NPV regardless number of years. Domain = Business Environment. PMBOK 6th edition, Page 34 and PMBOK 7th edition, Page 102",
+    "choices": [
+      {
+        "text": "Project A",
+        "correct": false
+      },
+      {
+        "text": "Project B",
+        "correct": true
+      },
+      {
+        "text": "Project C",
+        "correct": false
+      },
+      {
+        "text": "There is not enough information to decide",
+        "correct": false
+      }
+    ],
+    "id": 1643
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "Smith has just been assigned as the manager of a project to build an electric sub-station that is part of a major electric power distribution system in a new city. The company management decided to run the project two weeks before his assignment and without his involvement. Some basic decisions on deliverables, staffing, budgeting and completion date have already been made as well. Which of the following best describes what he should do first?",
+    "explanation": "This is a new project which must have a project charter to formally authorize the existence of the project, provide the project manager with authority and link the project to the strategy and ongoing work of the organization. Domain = Business Environment. PMBOK 6th edition, Page 75 and PMBOK 7th edition, Page 140",
+    "choices": [
+      {
+        "text": "Create a project charter which links the project to the strategy and ongoing work of the organization and documents the high level plan.",
+        "correct": true
+      },
+      {
+        "text": "Create a project scope statement for his project that describes the detailed project scope and product scope.",
+        "correct": false
+      },
+      {
+        "text": "Start identifying stakeholders for his project and collect their requirements and expectations.",
+        "correct": false
+      },
+      {
+        "text": "Begin working on the project management plan.",
+        "correct": false
+      }
+    ],
+    "id": 1644
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "According to Barry Boehm model, the sweet spot is:",
+    "explanation": "The Barry Boehm model helps identify the optimum amount of planning, sometimes called the sweet spot. The sweet spot is different for every project. Domain = Business Environment. PMBOK 7th edition, Page 170",
+    "choices": [
+      {
+        "text": "The point at which the project expenditures equals to the project returns.",
+        "correct": false
+      },
+      {
+        "text": "The point at which the project team reaches the optimum amount of up front planning.",
+        "correct": true
+      },
+      {
+        "text": "The point at which the project team reaches the required engagement level of stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "The point at which the project team achieves the project intended revenue.",
+        "correct": false
+      }
+    ],
+    "id": 1645
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "Which of the following best represents a sprint goal?",
+    "explanation": "The sprint goal is the team's commitment for the functionality that they will deliver in the sprint. It must be quantified, so that it can be measured. They should produce a product increment of releasable quality. Domain = Business Environment.",
+    "choices": [
+      {
+        "text": "Deliver and deploy the final product into production.",
+        "correct": false
+      },
+      {
+        "text": "Produce a software version of the application that includes the first six mentioned features in the product backlog and it should pass the acceptance test.",
+        "correct": true
+      },
+      {
+        "text": "Produce a high quality product increment that includes as many features as possible from the mentioned features in the product backlog.",
+        "correct": false
+      },
+      {
+        "text": "Produce a defect free product.",
+        "correct": false
+      }
+    ],
+    "id": 1646
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "There are over 40 stakeholders on a new Java training project, and no one can agree on project objectives. One stakeholder believes the project can achieve a 30% improvement in team’s knowledge of Java while another believes a 40% improvement is possible. The project manager believes a 20% improvement is more realistic. What is the best course of action?",
+    "explanation": "The best action is to perform a feasibility study. Other choices are all subjective evaluation. Domain = Business Environment. PMBOK 6th edition, Page 30 and The Standard for Project Management, Page 34",
+    "choices": [
+      {
+        "text": "Perform feasibility analysis",
+        "correct": true
+      },
+      {
+        "text": "Use the average of these numbers",
+        "correct": false
+      },
+      {
+        "text": "Ask the sponsor to make the final decision",
+        "correct": false
+      },
+      {
+        "text": "Use your decision as you are the project manager",
+        "correct": false
+      }
+    ],
+    "id": 1647
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "Your manager calls you into her office to informally discuss a new potential project for your organization. The project involves moving a call center to a new building 30 km away, installing new equipment and devices and implement a new monitoring software, and giving the staff five days of intensive, product specific training. She asks your opinion of this work. How should you respond?",
+    "explanation": "Many projects mentioned here not only one project. Domain = Business Environment. PMBOK 6th edition, Page 4 and The Standard for Project Management, Page 4",
+    "choices": [
+      {
+        "text": "You should inform your manager that this initiative may involve more than one project.",
+        "correct": true
+      },
+      {
+        "text": "You need to meet with the IT and call center managers to get more details on the plan.",
+        "correct": false
+      },
+      {
+        "text": "You should suggest that the project needs a formal charter.",
+        "correct": false
+      },
+      {
+        "text": "You should tell your manager that the staff intensive training should comply with the recognition and reward system.",
+        "correct": false
+      }
+    ],
+    "id": 1648
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "During product demonstration of the third iteration out of five, the product owner is not satisfied with the delivered product increment of this iteration and states that there is no value delivered. The team has completed all the user stories in the iteration backlog which were agreed during the iteration planning. What should the team facilitator do in this situation?",
+    "explanation": "The project team has completed all the user stories in the iteration backlog, however no value is delivered. The team has nothing to do, this topic should be addressed by the team facilitator and the product owner. They should review the benefits management plan which describes how and when the benefits of the project will be delivered, and describes the mechanisms that should be in place to measure those benefits. Domain = Business Environment. PMBOK 6th edition, Page 33 and PMBOK 7th edition, Page 236",
+    "choices": [
+      {
+        "text": "Ask the product owner to formally accept the product increment.",
+        "correct": false
+      },
+      {
+        "text": "Review the benefits management plan with the product owner.",
+        "correct": true
+      },
+      {
+        "text": "Escalate this topic to the project steering committee.",
+        "correct": false
+      },
+      {
+        "text": "Ask the project team to work with the product owner to add more valuable features to the next iteration backlog.",
+        "correct": false
+      }
+    ],
+    "id": 1649
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "An organization is going to undertake a project for regulatory compliance using agile approach which doesn’t have an easily determined monetary value. What can the organization do to assess the value of the project?",
+    "explanation": "Some projects are undertaken for safety or regulatory compliance purposes and don’t have an easily determined monetary value. To assess the value of these projects, the organization might look at the financial ramifications of not undertaking the project. Domain = Business Environment. PMBOK 7th edition, Page 102",
+    "choices": [
+      {
+        "text": "Use traditional approach.",
+        "correct": false
+      },
+      {
+        "text": "Evaluate financial impacts of not undertaking the project.",
+        "correct": true
+      },
+      {
+        "text": "Find a way to calculate Return on Investment (ROI).",
+        "correct": false
+      },
+      {
+        "text": "Don’t implement the project as it doesn’t deliver business value.",
+        "correct": false
+      }
+    ],
+    "id": 1650
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "You are an agile practitioner assigned to a software project to make some modifications to an online shopping company's website to increase revenue and enhance the customer experience, based on customer feedback. The modifications will be delivered over multiple releases. How can you measure the business value delivered during the project?",
+    "explanation": "Agile approach follows the principle of incremental delivery which means that each release will deliver value. To measure the delivered value there should be a defined target to compare against. Domain = Business Environment. PMBOK 7th edition, Page 102",
+    "choices": [
+      {
+        "text": "After each release, review the achieved revenue and customer satisfaction ratings, comparing them to predefined targets.",
+        "correct": true
+      },
+      {
+        "text": "At the end of the project, compare project revenues before and after the project.",
+        "correct": false
+      },
+      {
+        "text": "Calculate the average revenue per release, and check whether the revenue of each release is above or below this average.",
+        "correct": false
+      },
+      {
+        "text": "After each release, conduct a customer satisfaction survey and track the results over time.",
+        "correct": false
+      }
+    ],
+    "id": 1651
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "The first principle of the Agile Manifesto states that: \"Our highest priority is to satisfy the customer through early and continuous delivery of valuable software\". Which of the following agile practices and techniques is closely related to this principle?",
+    "explanation": "This principle includes three main points: The first is to satisfy the customer. The second point is early and continuous delivery. The final point is that what agile teams are delivering is valuable software (deliverable). Planning the project into releases and iterations with the highest value features to be delivered first allows early and continuous delivery. Domain = Business Environment. Agile Practice Guide, Page 55 and 80",
+    "choices": [
+      {
+        "text": "Burndown chart",
+        "correct": false
+      },
+      {
+        "text": "Information radiators",
+        "correct": false
+      },
+      {
+        "text": "Daily standup",
+        "correct": false
+      },
+      {
+        "text": "Iteration planning",
+        "correct": true
+      }
+    ],
+    "id": 1652
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "A new project has been initiated in ABC organization. The project is risky as it will be delivered in a new market for the organization and the project team doesn't have experience with the product of the project. Some of the project team members want to spend more time to plan up front to reduce uncertainty, oversights, and rework. While some other team members find that the longer the time spent planning, the longer it takes to get a return on investment and the more market share could be lost. Which of the following represents the optimum amount of planning required for this project?",
+    "explanation": "By taking more time to plan up front, many projects can reduce uncertainty, oversights, and rework. However, the longer the time spent planning, the longer it takes to get a return on investment and the more market share could be lost. The Barry Boehm model helps identify the optimum amount of planning, sometimes called the sweet spot. The sweet spot is different for every project (not standard); therefore, there is no correct answer for the right amount of planning overall. Domain = Business Environment. PMBOK 7th edition, Page 170",
+    "choices": [
+      {
+        "text": "The team should spend more time in planning to reduce uncertainty.",
+        "correct": false
+      },
+      {
+        "text": "The team should not spend much time in up front planning in order not to lose market share.",
+        "correct": false
+      },
+      {
+        "text": "There is a standard sweet spot for this type of project to help identify the optimum amount of planning.",
+        "correct": false
+      },
+      {
+        "text": "There is no correct answer for the right amount of planning overall.",
+        "correct": true
+      }
+    ],
+    "id": 1653
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 23,
+    "text": "You are working with potential sponsors to determine which project your company will select from the following projects. Based on the benefit-to-cost (BCR) ratios Project A has a BCR of 5:2, Project B has a BCR of 5:3, Project C has a BCR of 3:1, and Project D has a BCR of 2:1. Which of the four projects should you recommend?",
+    "explanation": "You should select the project with highest BCR. Domain = Business Environment. PMBOK 6th edition, Page 34 and PMBOK 7th edition, Page 102",
+    "choices": [
+      {
+        "text": "Project A",
+        "correct": false
+      },
+      {
+        "text": "Project B",
+        "correct": false
+      },
+      {
+        "text": "Project C",
+        "correct": true
+      },
+      {
+        "text": "Project D",
+        "correct": false
+      }
+    ],
+    "id": 1654
   }
 ]
