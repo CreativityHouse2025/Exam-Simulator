@@ -3,7 +3,7 @@
     "id": 1,
     "name": {
       "en": "PMP Full Exam 1",
-      "ar": "الاختبار الكامل 1"
+      "ar": "اختبار PMP الكامل 1"
     },
     "questionCount": 175,
     "questionIds": [
@@ -188,7 +188,7 @@
     "id": 2,
     "name": {
       "en": "PMP Full Exam 2",
-      "ar": "الاختبار الكامل 2"
+      "ar": "اختبار PMP الكامل 2"
     },
     "questionCount": 175,
     "questionIds": [
@@ -373,7 +373,7 @@
     "id": 3,
     "name": {
       "en": "PMP Full Exam 3",
-      "ar": "الاختبار الكامل 3"
+      "ar": "اختبار PMP الكامل 3"
     },
     "questionCount": 175,
     "questionIds": [
@@ -558,7 +558,7 @@
     "id": 4,
     "name": {
       "en": "PMP Full Exam 4",
-      "ar": "الاختبار الكامل 4"
+      "ar": "اختبار PMP الكامل 4"
     },
     "questionCount": 175,
     "questionIds": [
@@ -743,7 +743,7 @@
     "id": 5,
     "name": {
       "en": "PMP Full Exam 5",
-      "ar": "الاختبار الكامل 5"
+      "ar": "اختبار PMP الكامل 5"
     },
     "questionCount": 175,
     "questionIds": [
