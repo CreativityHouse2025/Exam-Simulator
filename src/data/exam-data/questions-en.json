@@ -37082,5 +37082,1305 @@
       }
     ],
     "id": 1475
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "A new organization has implemented few projects and outcomes were successfully delivered to the customers. The organization's PMO wants to evaluate the degree of customers' satisfaction with the products and the projects and whether those customers are willing to recommend a product or service to others. Which of the following metrics can they use?",
+    "explanation": "A Net Promoter Score measures the degree to which a stakeholder is willing to recommend a product or service to others. It is true that turnover and mood chart are metrics that can be used to measure stakeholders satisfaction, but they can't be used to measure the degree to which a stakeholder is willing to recommend a product or service to others. They are more suitable for internal stakeholders.",
+    "choices": [
+      {
+        "text": "Mood Chart",
+        "correct": false
+      },
+      {
+        "text": "NPS",
+        "correct": true
+      },
+      {
+        "text": "Turnover",
+        "correct": false
+      },
+      {
+        "text": "NPV",
+        "correct": false
+      }
+    ],
+    "id": 1476
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Pedro has just been promoted to a project manager position in his organization and he is getting ready to manage his first project. He has been given approved project charter. What is the first thing he should do?",
+    "explanation": "After issuing the project charter, the project manager must determine which stakeholders have participated in the high level scope. Identify Stakeholders is an initiating process, other processes are planning processes. Domain = People. PMBOK 6th edition, Page 508 and PMBOK 7th edition, Page 11-12",
+    "choices": [
+      {
+        "text": "Create a project scope statement",
+        "correct": false
+      },
+      {
+        "text": "Confirm which stakeholders had input to the scope",
+        "correct": true
+      },
+      {
+        "text": "Begin working on a project management plan",
+        "correct": false
+      },
+      {
+        "text": "Start collecting requirements from stakeholders",
+        "correct": false
+      }
+    ],
+    "id": 1477
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Which of the following Agile Manifesto principles is more related to Working Collaboratively?",
+    "explanation": "The Agile Manifesto highlights stakeholder collaboration in its fourth principle “Business people and developers must work together daily throughout the project”. By working with business representatives daily, we can learn about the business in a way that is far beyond what a collection of requirements-gathering meetings can ever achieve. Domain = People. Agile Practice Guide Page 8 and 35",
+    "choices": [
+      {
+        "text": "Business people and developers must work together daily throughout the project.",
+        "correct": true
+      },
+      {
+        "text": "Welcome changing requirements, even late in development. Agile processes harness change for the customer’s competitive advantage.",
+        "correct": false
+      },
+      {
+        "text": "Simplicity—the art of maximizing the amount of work not done—is essential.",
+        "correct": false
+      },
+      {
+        "text": "Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale.",
+        "correct": false
+      }
+    ],
+    "id": 1478
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "The intrinsic motivators include all of the following, except:",
+    "explanation": "There are three types of intrinsic motivators: autonomy, mastery, and purpose. Salary and rewards are extrinsic motivators. Domain = People. PMBOK 7th edition, Page 159",
+    "choices": [
+      {
+        "text": "Autonomy",
+        "correct": false
+      },
+      {
+        "text": "Mastery",
+        "correct": false
+      },
+      {
+        "text": "Purpose",
+        "correct": false
+      },
+      {
+        "text": "Rewards",
+        "correct": true
+      }
+    ],
+    "id": 1479
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "The sixth principle of the Agile Manifesto states that: \"The most efficient and effective method of conveying information to and within a development team is face-to-face conversation\". Which of the following agile practices and techniques is closely related to this principle?",
+    "explanation": "Face-to-face communication allows individuals to quickly transfer alot of information in a richer way that includes emotions and body language. Teams use standups to microcommit to each other, uncover problems, and ensure the work flows smoothly through the team. Domain = People. Agile Practice Guide, Page 53 and 80",
+    "choices": [
+      {
+        "text": "Daily Standups",
+        "correct": true
+      },
+      {
+        "text": "Test-Driven Development (TDD)",
+        "correct": false
+      },
+      {
+        "text": "Self-organizing teams",
+        "correct": false
+      },
+      {
+        "text": "Timeboxing",
+        "correct": false
+      }
+    ],
+    "id": 1480
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Which of the following is the highest richness communication channels that a project team can use to transfer a broad spectrum of information and why?",
+    "explanation": "Richness in communication allows a broad spectrum of information to be conveyed rapidly. Face-to-face communication is the richest communication channel. It is used to transfer the most information in a given period of time. Domain = People. PMBOK 7th edition, Page 157",
+    "choices": [
+      {
+        "text": "Videoconferencing, because it allows distributed stakeholders to communicate as if they are co-located.",
+        "correct": false
+      },
+      {
+        "text": "Face-to-face, because it is used to transfer the most information in a given period of time.",
+        "correct": true
+      },
+      {
+        "text": "Instant messaging, because it allows stakeholders to communicate urgent information immediately regardless they are co-located or not.",
+        "correct": false
+      },
+      {
+        "text": "Emails, because it keeps record of all sent and received messages if they are needed later in the project.",
+        "correct": false
+      }
+    ],
+    "id": 1481
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "According to Alistair Cockburn's Communication Effectiveness model, which of the following is the correct order from highest to lowest for richness of communication channels?",
+    "explanation": "The richness of different communication channels from lowest to highest is paper, email, audio recording, video recording, IM, phone, face-to-face. Domain = People. PMBOK 7th edition, Page 157",
+    "choices": [
+      {
+        "text": "Phone, instant messaging, audio recording, paper",
+        "correct": true
+      },
+      {
+        "text": "Face-to-face, phone, video recording, instant messaging",
+        "correct": false
+      },
+      {
+        "text": "Face-to-face, video recording, paper, email",
+        "correct": false
+      },
+      {
+        "text": "Face-to-face, audio recording, phone, paper",
+        "correct": false
+      }
+    ],
+    "id": 1482
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "A project team is having a weekly meeting. This team meeting during project executing is the best format to :",
+    "explanation": "Meetings -by definition - is a communication tool. There are other methods to know the project status like sending status reports for example. There are also other methods to make changes to the project and to making team building activities. The project team should use meetings for effective communication. Domain = People. PMBOK 6th edition, Page 376 and 381",
+    "choices": [
+      {
+        "text": "Determine project status",
+        "correct": false
+      },
+      {
+        "text": "Make team building activities",
+        "correct": false
+      },
+      {
+        "text": "Make changes to the project",
+        "correct": false
+      },
+      {
+        "text": "Communicate",
+        "correct": true
+      }
+    ],
+    "id": 1483
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "A project manager is concerned about sending progress reports. Another project manager advised him that he should also watch what is going on in his project, ask about problems, and help team members. Which of the following is the biggest disadvantage of progress reports as compared to watching what is going on in a project, asking questions, and assisting team members?",
+    "explanation": "Sending progress reports is important, but not like effective project management like watching what is happening, asking about problems and helping team members. Usually project reports are sent one or two weeks later after performing actual work, so reports shows problems after they have occurred. Domain = People. PMBOK 6th edition, Page 385 and 392",
+    "choices": [
+      {
+        "text": "Progress reports supply information about trends.",
+        "correct": false
+      },
+      {
+        "text": "Progress reports are not detailed enough.",
+        "correct": false
+      },
+      {
+        "text": "Progress reports require expending time gathering information from stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "Progress reports generally show problems after they have occurred.",
+        "correct": true
+      }
+    ],
+    "id": 1484
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "You are managing an accounting project when a new financial manager is hired at your company. He will be affected by all accounting projects in your company. What’s the best thing for you to do?",
+    "explanation": "The manager is affected by your project, that means he’s a stakeholder, so you should get the new stakeholder’s opinion incorporated in the project. Domain = People. PMBOK 7th edition, Page 11",
+    "choices": [
+      {
+        "text": "Show him the project charter so that he knows that you are in charge of the project.",
+        "correct": false
+      },
+      {
+        "text": "Work with him to understand the current requirements and determine if he has new ones to add to the project.",
+        "correct": true
+      },
+      {
+        "text": "Do nothing.",
+        "correct": false
+      },
+      {
+        "text": "Add him to the communications management plan.",
+        "correct": false
+      }
+    ],
+    "id": 1485
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Which form of communication is appropriate for a project manager to report the final status of the closed contract to the stakeholders?",
+    "explanation": "These reports must be formal written. Domain = People. PMBOK 7th edition, Page 13",
+    "choices": [
+      {
+        "text": "Informal written",
+        "correct": false
+      },
+      {
+        "text": "Informal verbal",
+        "correct": false
+      },
+      {
+        "text": "Formal written",
+        "correct": true
+      },
+      {
+        "text": "Formal verbal",
+        "correct": false
+      }
+    ],
+    "id": 1486
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "A project has been initiated to build a new factory in a city. The project manager has obtained the necessary approvals and government permits for building the factory. When the project execution has started, it was found that the neighbours went to the location and object to building a factory in this location. What should the project manager do to move forward with the project?",
+    "explanation": "Stakeholders are the people, groups, or organizations that could impact or be impacted by the project. Neighbours here are stakeholders who may impact the project negatively. They are resistant to the project. The project manager should discuss with them the project objectives, understand their requirements and try to increase their engagement level and move them from resistant stakeholders to neutral stakeholders. Domain = People. PMBOK 6th edition, Page 521 and The Standard for Project Management, Page 32",
+    "choices": [
+      {
+        "text": "Call the police.",
+        "correct": false
+      },
+      {
+        "text": "Add a risk to the risk register for neighbours resistance and document its negative impact on the project progress.",
+        "correct": false
+      },
+      {
+        "text": "Disregard the stakeholders requirements and continue building the factory.",
+        "correct": false
+      },
+      {
+        "text": "Meet with the neighbours, explain the project objectives and discuss their requirements.",
+        "correct": true
+      }
+    ],
+    "id": 1487
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Which of the following statements best describes how stakeholders are involved on a project?",
+    "explanation": "The project manager is the one who creates the project schedule not the stakeholders during the Develop Schedule process. The project manager determines the resource needs for the project during the Estimate Activity Resources process. The project sponsor issues the project charter and approves it, not the stakeholders. So the best answer is that the stakeholders help the project manager determine the project constraints and product deliverables. Domain = People. PMBOK 7th edition, Page 14",
+    "choices": [
+      {
+        "text": "They help to determine project constraints and product deliverables.",
+        "correct": true
+      },
+      {
+        "text": "They help determine the project deliverables and project schedule.",
+        "correct": false
+      },
+      {
+        "text": "They help to provide project assumptions and determine the resources needs on the project.",
+        "correct": false
+      },
+      {
+        "text": "They create the project management plan and approve the project charter.",
+        "correct": false
+      }
+    ],
+    "id": 1488
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Scott is the project manager for a large and complex software project in his organization. The organization has only one web developer and he is assigned full time to this project. Maria is the IT manager, she needs to assign some functional work to the same resource. Maria is classified in this project according to the direction of influence as:",
+    "explanation": "Sideward stakeholders are the peers of the project manager, such as other project managers or middle managers who are in competition for scarce project resources or who collaborate with the project manager in sharing resources or information. Domain = People. PMBOK 6th edition, Page 513",
+    "choices": [
+      {
+        "text": "Upward",
+        "correct": false
+      },
+      {
+        "text": "Downward",
+        "correct": false
+      },
+      {
+        "text": "Outward",
+        "correct": false
+      },
+      {
+        "text": "Sideward",
+        "correct": true
+      }
+    ],
+    "id": 1489
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Which of the following theories focuses on motivating employees by creating a work-life balance?",
+    "explanation": "Theory Z focuses on motivating employees by creating a job for life where the focus is on the well-being of employees and their families. This style of management seeks to promote high productivity, morale, and satisfaction. Domain = People. PMBOK 7th edition, Page 160",
+    "choices": [
+      {
+        "text": "Theory X",
+        "correct": false
+      },
+      {
+        "text": "Theory Y",
+        "correct": false
+      },
+      {
+        "text": "Theory Z",
+        "correct": true
+      },
+      {
+        "text": "Theory of needs",
+        "correct": false
+      }
+    ],
+    "id": 1490
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Chris and Anne are two key stakeholders in a software project. They expressed their concern to the project manager that they are not updated with project changes. During last week change control board approved two change requests to the scope baseline and they were not updated. The project manager apologized to them and solved the problem by sending an automated notification email from the organization’s change control system whenever a change request is approved to the concerned stakeholders. Which document should be updated accordingly?",
+    "explanation": "The communications management plan is a component of the project management plan that describes how project communications will be planned, structured, implemented, and monitored for effectiveness. It includes stakeholder communication requirements, information to be communicated and person or groups who will receive the information. Domain = People. PMBOK 6th edition, Page 377 and PMBOK 7th edition, Page 79",
+    "choices": [
+      {
+        "text": "Stakeholder engagement plan",
+        "correct": false
+      },
+      {
+        "text": "Communication management plan",
+        "correct": true
+      },
+      {
+        "text": "Stakeholder register",
+        "correct": false
+      },
+      {
+        "text": "Change management plan",
+        "correct": false
+      }
+    ],
+    "id": 1491
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "George is the project manager for a large software project. He has impleemnetd an automated reporting system, so that all stakeholders can get their needed reports automatically at any time using the electronic reporting system. Stakeholders don't need to wait for any report to be sent. Later, he was contacted by Peter, a senior manager, who has asked him to send him the project status report using a template which has been used before implementing the new system. What should George do in this situation?",
+    "explanation": "The senior manager may find his needed information in the new system, but he finds some difficulties that is why he requested from the project manager to send him the status report in the old format. The best solution is to contact the senior manager and know his requirements in details. Domain = People. PMBOK 6th edition, Page 367 and PMBOK 7th edition, Page 11",
+    "choices": [
+      {
+        "text": "Modify the reporting system to include the project status report with the old template.",
+        "correct": false
+      },
+      {
+        "text": "Send him the needed report with the needed template.",
+        "correct": false
+      },
+      {
+        "text": "Contact Peter and ask him about his needs in details.",
+        "correct": true
+      },
+      {
+        "text": "Grant Peter access to the new reporting system.",
+        "correct": false
+      }
+    ],
+    "id": 1492
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Pierre is managing a large software project which involves many stakeholders. His organization had a high turnover rate during the last year. To avoid the risks resulting from high turnover rate, he needs to measure the team members satisfaction. He decided to use mood chart. He informed the project team that at the end of each day, project team members can use emojis to indicate their frame of mind. What is a disadvantage of using mood chart that might affect these measures?",
+    "explanation": "A mood chart can track the mood or reactions of a group of very important stakeholders—the project team. At the end of each day, project team members can use colors, numbers, or emojis to indicate their frame of mind. Tracking the project team’s mood or individual project team member’s moods can help to identify potential issues and areas for improvement to reduce turnover rate. Mood charts can be subjective. Domain = People. PMBOK 7th edition, Page 103",
+    "choices": [
+      {
+        "text": "Mood charts will not help to reduce turnover rate.",
+        "correct": false
+      },
+      {
+        "text": "Mood charts will not help to identify potential team issues.",
+        "correct": false
+      },
+      {
+        "text": "Mood charts does not measure the project team morale.",
+        "correct": false
+      },
+      {
+        "text": "Mood charts can be subjective.",
+        "correct": true
+      }
+    ],
+    "id": 1493
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Sam has just taken over a project which is being executed using predictive approach. He has noticed that the project team members waste much time in responding to stakeholders questions and inquiries. Stakeholders usually interrupt the team members anywhere anytime which makes the team members unable to focus on project work. Which of the following should Sam do first?",
+    "explanation": "Sam needs first to review the communications management plan to determine how stakeholder questions and inquiries should be managed. Then can judge whether the stakeholders are violating the plan or not. Then, he can make whatever changes that might be needed to shield the project team from wasting their time in responding to the stakeholders' questions. Domain = People. PMBOK 6th edition, Page 389 and PMBOK 7th edition, Page 13",
+    "choices": [
+      {
+        "text": "Ask the team to better manage their time and dedicate a slot to answer stakeholders questions and inquiries.",
+        "correct": false
+      },
+      {
+        "text": "Ask the stakeholders to formally address their questions to him.",
+        "correct": false
+      },
+      {
+        "text": "Ask the team members not to respond to any stakeholders inquiries as this is not their responsibility.",
+        "correct": false
+      },
+      {
+        "text": "Review the communication management plan and submit change request if needed.",
+        "correct": true
+      }
+    ],
+    "id": 1494
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Which of the following represents a win-win negotiation?",
+    "explanation": "The buyer gets the work completed and the seller gets a reasonable profit is an example of win-win negotiation. Domain = People. PMBOK 7th edition, Page 167",
+    "choices": [
+      {
+        "text": "Fine, we agree on the price you asked for as you will provide the service we need with all mentioned specifications.",
+        "correct": true
+      },
+      {
+        "text": "We will go with Sam's suggestion, all others are rejected.",
+        "correct": false
+      },
+      {
+        "text": "Let's accept the less profit for now, this will give us an opportunity to penetrate this new market.",
+        "correct": false
+      },
+      {
+        "text": "We will implement the first part of the approach proposed by Mike and the second part of the approach proposed by Julia.",
+        "correct": false
+      }
+    ],
+    "id": 1495
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "What is the best method to report to the project team the status of the project schedule during project executing?",
+    "explanation": "Bar Charts are the best method to report to project team, as they determine what has been achieved in the project. Domain = People. PMBOK 6th edition, Page 217",
+    "choices": [
+      {
+        "text": "Milestone chart",
+        "correct": false
+      },
+      {
+        "text": "Network diagram",
+        "correct": false
+      },
+      {
+        "text": "Activity list",
+        "correct": false
+      },
+      {
+        "text": "Bar chart",
+        "correct": true
+      }
+    ],
+    "id": 1496
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Linda is managing a cyber security project for ABC company. During project executing, the customer representative has been changed. Few weeks later, the new representative complains that he is not aware that the project has fallen behind schedule because he did not receive any project status reports since he has been assigned. However, all other stakeholders are aware of the status. Usually, Linda share the project status at the end of each week via email. How should she address this situation?",
+    "explanation": "It is clear that the stakeholder register and the communication management plan were not updated when the new representative joined the project, because all other stakeholders are aware of the project status except him. So, the best answer is to update the stakeholder register and the communication management plan with the new representative information and ask him if he has any other communication requirements. Domain = People. PMBOK 6th edition, Page 389, 508 and PMBOK 7th edition, Page 11",
+    "choices": [
+      {
+        "text": "Update the stakeholder register and communication management plan and discuss the project requirements with the new representative.",
+        "correct": true
+      },
+      {
+        "text": "Apologize to the new representative and send him the project status report.",
+        "correct": false
+      },
+      {
+        "text": "Share the communication management plan with the new representative.",
+        "correct": false
+      },
+      {
+        "text": "Update the list of recipients of the project status report email.",
+        "correct": false
+      }
+    ],
+    "id": 1497
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Chris has been assigned to manage a large software project using virtual team distributed in four countries. There are many internal and external stakeholders involved in this project. At the beginning of the project, Chris and the project team are developing a stakeholder engagement strategy to properly engage both internal and external stakeholders. Which of the following approaches should they follow?",
+    "explanation": "The project manager and project team should develop and tailor appropriate management strategies for effectively engaging stakeholders in project decisions and execution. Domain = People. PMBOK 6th edition, Page 503 and PMBOK 7th edition, Page 10",
+    "choices": [
+      {
+        "text": "Analyze all stakeholders and tailor an engagement strategy for each stakeholder.",
+        "correct": true
+      },
+      {
+        "text": "Develop one engagement strategy for all stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "Arrange regular face to face meetings with both internal and external stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "Ask the project sponsor to take the responsibility of senior management engagement.",
+        "correct": false
+      }
+    ],
+    "id": 1498
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Which of the following represents a lose-lose negotiation?",
+    "explanation": "Compromise entails that all parties will not be satisfied 100% and each has to give up something. Domain = People. PMBOK 7th edition, Page 168-169",
+    "choices": [
+      {
+        "text": "The project manager decides to give up on his own approach and use the approach provided by Mark in order to gain confidence.",
+        "correct": false
+      },
+      {
+        "text": "The technical team negotiates different approaches and they will implement Phillip's approach rather than the approach provided by Mary.",
+        "correct": false
+      },
+      {
+        "text": "The project manager has agreed with the two team members who are in a conflict to compromise.",
+        "correct": true
+      },
+      {
+        "text": "The supplier succeeded in negotiation with the procurement manager to reach a fair and reasonable price for the service which he will provide.",
+        "correct": false
+      }
+    ],
+    "id": 1499
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Stephen and Ann are two stakeholders are discussing about the impact of the project on their departments. They both were not satisfied with the impacts. Stephen asked Ann if the project is on budget. Ann informed him that CPI is 1.03. Stephen and Ann agreed that they are not sure that the project manager knows their concerns. The project manager heard this conversation between them. What is the best thing he can do?",
+    "explanation": "Directing any questions to the project manager in writing is not the best choice. Make a presentation to all the stakeholders regarding the status of the project is not a good solution because only two stakeholders have this problem. The issue log is the record where stakeholders' problems with the project are recorded, but here the project manager is unaware of the reservations of both stakeholders regarding the project. Consequently, using the issue log is not the best solution. It is better to arrange a meeting with both stakeholders to learn about their reservations.",
+    "choices": [
+      {
+        "text": "Send both stakeholders a copy of the issue log and ask for additional comments.",
+        "correct": false
+      },
+      {
+        "text": "Ask both stakeholders to direct any questions to the project manager in writing.",
+        "correct": false
+      },
+      {
+        "text": "Make a presentation to all the stakeholders regarding the status of the project.",
+        "correct": false
+      },
+      {
+        "text": "Arrange a meeting with both stakeholders to allow them to voice any concerns they may have.",
+        "correct": true
+      }
+    ],
+    "id": 1500
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "All of the following are stakeholders satisfaction measures, except:",
+    "explanation": "Stakeholder satisfaction can be measured with surveys or by inferring satisfaction, or lack thereof, and by looking at related metrics, such as morale, net promoter score, mood chart and turnover. Throughput analysis assesses the number of items being completed in a fixed time frame. Domain = People. PMBOK 7th edition, Page 103",
+    "choices": [
+      {
+        "text": "Mood Chart",
+        "correct": false
+      },
+      {
+        "text": "Net Promoter Score",
+        "correct": false
+      },
+      {
+        "text": "Throughput analysis",
+        "correct": true
+      },
+      {
+        "text": "Morale",
+        "correct": false
+      }
+    ],
+    "id": 1501
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Thomas is the finance manager in the organization and he is known to be an unsupportive stakeholder. He is a key stakeholder in the new IT project. Harold has been assigned as a project manager for this project. He held a meeting with Thomas to identify the preferred communication method, format, and content for planned communication activities. Which skill did Harold use?",
+    "explanation": "Communication styles assessment is a technique used to assess communication styles and identify the preferred communication method, format, and content for planned communication activities. Often used with unsupportive stakeholders. Domain = People. PMBOK 6th edition, Page 375",
+    "choices": [
+      {
+        "text": "Communication styles assessment",
+        "correct": true
+      },
+      {
+        "text": "Political awareness",
+        "correct": false
+      },
+      {
+        "text": "Cultural awareness",
+        "correct": false
+      },
+      {
+        "text": "Problem solving",
+        "correct": false
+      }
+    ],
+    "id": 1502
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "During a weekly project status meeting, you ask one of the stakeholders if he reviewed the document you sent him last week. He said: “I’m not sure, I don’t know what you are talking about”. Which engagement level is this stakeholder displaying?",
+    "explanation": "Here the situation indicates that the person doesn't know anything about his role and responsibility in the project, so he is unaware. Domain = People. PMBOK 6th edition, Page 521",
+    "choices": [
+      {
+        "text": "Unaware",
+        "correct": true
+      },
+      {
+        "text": "Resistant",
+        "correct": false
+      },
+      {
+        "text": "Supportive",
+        "correct": false
+      },
+      {
+        "text": "Leading",
+        "correct": false
+      }
+    ],
+    "id": 1503
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "You are an agile practitioner working on a product development project. A stakeholder asks you about the remaining features to be delivered. What should you do in this situation?",
+    "explanation": "Information radiators are usually displayed in high-traffic areas to maximize exposure,where they can quickly inform stakeholders about the project’s status. Domain = People. PMBOK 7th edition, Page 108",
+    "choices": [
+      {
+        "text": "Ask him to contact the product owner.",
+        "correct": false
+      },
+      {
+        "text": "Send him the burndown chart.",
+        "correct": false
+      },
+      {
+        "text": "Guide him to the information radiator.",
+        "correct": true
+      },
+      {
+        "text": "Apologize to him and send a detailed report about the project status including remaining features to be delivered.",
+        "correct": false
+      }
+    ],
+    "id": 1504
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Net Promoter Score can be used to measure:",
+    "explanation": "A Net Promoter Score measures the degree to which a stakeholder is willing to recommend a product or service to others. Domain = People. PMBOK 7th edition, Page 103",
+    "choices": [
+      {
+        "text": "Stakeholders Satisfaction",
+        "correct": true
+      },
+      {
+        "text": "Business Value",
+        "correct": false
+      },
+      {
+        "text": "Deviation from Baselines",
+        "correct": false
+      },
+      {
+        "text": "Deliverables Attributes",
+        "correct": false
+      }
+    ],
+    "id": 1505
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Tom is the sponsor of a large construction project. He is meeting with all the stakeholders to ask for their participation and support in the next testing events. How would you best describe his level of engagement?",
+    "explanation": "Here Tom is trying to increase stakeholders engagement, so he has a leading role. Domain = People. PMBOK 6th edition, Page 521",
+    "choices": [
+      {
+        "text": "Unaware",
+        "correct": false
+      },
+      {
+        "text": "Resistant",
+        "correct": false
+      },
+      {
+        "text": "Supportive",
+        "correct": false
+      },
+      {
+        "text": "Leading",
+        "correct": true
+      }
+    ],
+    "id": 1506
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Peter is a project manager for a tele-communication project in a multinational company. The project team members are located in three countries with different time zones. As per the communications management plan, the project team has a weekly status meeting through videoconferencing. Which communication method are they using?",
+    "explanation": "Interactive communication is between two or more parties performing a multidirectional exchange of information in real time. It employs communications artifacts such as meetings, phone calls, instant messaging, some forms of social media, and videoconferencing. Domain = People. PMBOK 7th edition, Page 13",
+    "choices": [
+      {
+        "text": "Push communication",
+        "correct": false
+      },
+      {
+        "text": "Pull communication",
+        "correct": false
+      },
+      {
+        "text": "Formal communication",
+        "correct": false
+      },
+      {
+        "text": "Interactive communication",
+        "correct": true
+      }
+    ],
+    "id": 1507
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "During weekly project status meeting, the project stakeholders keep asking questions like \"what is the current status of the project?\", \"are we ahead or behind schedule?\", \"Did we miss this milestone or not?\",..etc. What is the most probable reason for these questions?",
+    "explanation": "In case of lack of visibility and understanding of project progress, check to ensure appropriate measures are being collected, analyzed, shared, and discussed during team and stakeholder meetings; validate agreement with the measures within the team and with stakeholders. The project team is not using the preferred communication method for project stakeholders has low probability, because this issue happened with many stakeholders. Having no communication management plan has low probability, because there is a weekly status meeting which is being determined and scheduled as part of the communication management plan. Domain = People. PMBOK 7th edition, Page 151",
+    "choices": [
+      {
+        "text": "Appropriate measures are not being collected, analyzed, shared or discussed during team and stakeholder meetings.",
+        "correct": true
+      },
+      {
+        "text": "The project stakeholders don't read the project status report before the project status meeting.",
+        "correct": false
+      },
+      {
+        "text": "The project team don't use the preferred communication method for project stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "There is no communication management plan in place.",
+        "correct": false
+      }
+    ],
+    "id": 1508
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "You are a project manager for a large software project in a multinational organizai­on. Your project consists of 370 stakeholders located in three countries. In the middle of the project, the customer has requested a change to the project scope. You have evaluated the impacts of the change and found that it will add one week to the project critical path and 3,000$ to the project budget. You want to document the impacts of the change. Which communications method would you use in this situation?",
+    "explanation": "Here you are dealing with large and international audience, so pull communication is more effective. Domain = People. PMBOK 7th edition, Page 13",
+    "choices": [
+      {
+        "text": "Push communication",
+        "correct": false
+      },
+      {
+        "text": "Pull communication",
+        "correct": true
+      },
+      {
+        "text": "Verbal communication",
+        "correct": false
+      },
+      {
+        "text": "Interactive communication",
+        "correct": false
+      }
+    ],
+    "id": 1509
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "The project team working on a construction project noticed that stakeholders are not engaged enough and they only share negative feedback about the project. However, the project team usually communicates with stakeholders. All of the following might be reasons behind this issue, except:",
+    "explanation": "Evaluate whether sufficient information is being shared with stakeholders; feedback loops are present and working; and deeper engagement may work better than simply communicating. Domain = People. PMBOK 7th edition, Page 151",
+    "choices": [
+      {
+        "text": "Insufficient information is being shared with stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "All stakeholders contributed in creating the project management plan.",
+        "correct": true
+      },
+      {
+        "text": "Feedback loops are not present or not working.",
+        "correct": false
+      },
+      {
+        "text": "The project team don't engage deeper with stakeholders.",
+        "correct": false
+      }
+    ],
+    "id": 1510
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "All of the following are examples of motivation models that can be used by the project manager to understanding what motivates project team members and other stakeholders, except:",
+    "explanation": "Motivation models include theory X, theory Y, and theory Z, hygiene factors, theory of needs and intrinsic and extrinsic motivation. Drexler/Sibbet is a team performance model. Domain = People. PMBOK 7th edition, Page 167",
+    "choices": [
+      {
+        "text": "Theory X, Theory Y, and Theory Z",
+        "correct": false
+      },
+      {
+        "text": "Drexler/Sibbet",
+        "correct": true
+      },
+      {
+        "text": "Hygiene factors",
+        "correct": false
+      },
+      {
+        "text": "Theory of needs",
+        "correct": false
+      }
+    ],
+    "id": 1511
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "You are managing a multi-million dollars product development project which includes 350 stakeholders located in four countries. You are identifying stakeholders and analyzing their impact on your project to properly manage their engagement throughout the project life cycle. You noticed that there is a gap between current and desired engagement levels of a key stakeholder in the project. What is the best course of action in this situation?",
+    "explanation": "The gap between current and desired for each stakeholder will direct the level of communications necessary to effectively engage the stakeholder. During planning for stakeholders engagement, you don't need to analyze why there is a gap between current and desired level of engagement, it is normal to find gaps according to the needs of the project. You are still at the beginning of the project and you have not done any effort yet to increase the level of engagement of stakeholders. Domain = People. PMBOK 7th edition, Page 12 and 13",
+    "choices": [
+      {
+        "text": "Increase the level of communications to effectively engage the stakeholder.",
+        "correct": true
+      },
+      {
+        "text": "Submit a change request to the stakeholder engagement plan to effectively engage the stakeholder.",
+        "correct": false
+      },
+      {
+        "text": "Change his location on the power/influence grid to high power/ high influence.",
+        "correct": false
+      },
+      {
+        "text": "Try to understand why there is a gap between his current and desired level of engagement.",
+        "correct": false
+      }
+    ],
+    "id": 1512
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Patricia has been assigned to manage a large product development project. Midway through the project, she notices that many stakeholders ask her about the project status. She was asked from many stakeholders questions like \"Are we on budget?\", \"Are we ahead or behind schedule?\" and so on. She sends a weekly status report to a list of stakeholders. In light of this, what should she do?",
+    "explanation": "There is a communication gap here. The project manager thinks that the project status report is sent to all relevant stakeholders. However, some stakeholders are missed. So the project manager should regularly assess the project communication effectiveness. Domain = People. PMBOK 6th edition, Page 389 and PMBOK 7th edition, Page 14",
+    "choices": [
+      {
+        "text": "Assign a team member to address the stakeholders communication concerns.",
+        "correct": false
+      },
+      {
+        "text": "Ask those stakeholders to check their emails.",
+        "correct": false
+      },
+      {
+        "text": "Hold a weekly project status meeting with all stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "Update the list of recipients of the project status email.",
+        "correct": true
+      }
+    ],
+    "id": 1513
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Charles is the risk manager in the organization and at the same time he is the project sponsor for the new project. Laurence is the project manager of this project. In a critical risk, Laurence reaches out to Charles for guidance. This request is considered as:",
+    "explanation": "Laurence consulted Charles because of his expertise in risk management. So, it is considered as expert judgement. Domain = People. PMBOK 6th edition, Page 369",
+    "choices": [
+      {
+        "text": "Project Communications",
+        "correct": false
+      },
+      {
+        "text": "Project Reporting",
+        "correct": false
+      },
+      {
+        "text": "Risk Identification",
+        "correct": false
+      },
+      {
+        "text": "Expert Judgement",
+        "correct": true
+      }
+    ],
+    "id": 1514
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Ivan is the project manager for a new project to develop electronic tickets instead of paper tickets. He identified all stakeholders of the project and is analyzing the current and desired level of engagement for each stakeholder. Piere is the leader of the printing team, he is aware of the project and thinks that he may be released from the organization after the project is completed becuase there will be no more need for paper tickets. Piere is trying to put obstacles in the way of project completion in order not to be fired from the organization. How should Ivan classify the engagement level of Piere?",
+    "explanation": "Resistant stakeholder is aware of the project and potential impacts but resistant to any changes that may occur as a result of the work or outcomes of the project. These stakeholders will be unsupportive of the work or outcomes of the project. Domain = People. PMBOK 6th edition, Page 521 and PMBOK 7th edition, Page 11–12",
+    "choices": [
+      {
+        "text": "Unaware",
+        "correct": false
+      },
+      {
+        "text": "Resistant",
+        "correct": true
+      },
+      {
+        "text": "Neutral",
+        "correct": false
+      },
+      {
+        "text": "Supportive",
+        "correct": false
+      }
+    ],
+    "id": 1515
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "You are managing a large tele-communication project. A senior manager has a great deal of authority regarding project decisions, however he does not have much interest in the project. In order to have a successful completion for your project, you will need continuous support from the senior manager in many project decisions. Which of the following engagement strategies should you use with the senior manager to keep him engaged?",
+    "explanation": "According to the power/interest grid, the senior manager has high power and low interest. So the best engagement strategy is to keep him satisfied. Domain = People. PMBOK 6th edition, Page 512",
+    "choices": [
+      {
+        "text": "Manage him closely.",
+        "correct": false
+      },
+      {
+        "text": "Keep him informed.",
+        "correct": false
+      },
+      {
+        "text": "Keep him satisfied.",
+        "correct": true
+      },
+      {
+        "text": "Monitor his actions.",
+        "correct": false
+      }
+    ],
+    "id": 1516
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "The human resources department in an industrial company has just sent an email to all employees, just to inform them that next Monday is a vacation to all employees because of the country's national day. This is an example of:",
+    "explanation": "Push communication is sent or distributed directly to specific recipients who need to receive the information. This ensures that the information is distributed but does not ensure that it actually reached or was understood by the intended audience. Push communications artifacts include letters, memos, reports, emails, faxes, voice mails, blogs, and press releases. Domain = People. PMBOK 7th",
+    "choices": [
+      {
+        "text": "Interactive communications",
+        "correct": false
+      },
+      {
+        "text": "Push communications",
+        "correct": true
+      },
+      {
+        "text": "Pull communications",
+        "correct": false
+      },
+      {
+        "text": "Verbal communications",
+        "correct": false
+      }
+    ],
+    "id": 1517
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Which of the following can be a result of not engaging stakeholders effectively?",
+    "explanation": "Not engaging stakeholders effectively can lead to product recalls or loss of organizational or project reputation. Domain = People. PMBOK 7th edition, Page 12",
+    "choices": [
+      {
+        "text": "Stakeholder commitment",
+        "correct": false
+      },
+      {
+        "text": "Project is completed on budget",
+        "correct": false
+      },
+      {
+        "text": "Project is completed on time",
+        "correct": false
+      },
+      {
+        "text": "Product recalls",
+        "correct": true
+      }
+    ],
+    "id": 1518
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "What is the purpose of effective communication?",
+    "explanation": "Communication occur throughout the project, not only during project executing. Project information should be provided in the correct format not just in writing. Information should be provided at the right time not as early as possible and with the intended impact. Domain = People. PMBOK 6th edition, Page 379",
+    "choices": [
+      {
+        "text": "Information is distributed in project executing, in the requested format, to the right recipients.",
+        "correct": false
+      },
+      {
+        "text": "Information is in the right format, sent as early as possible, with the intended impact.",
+        "correct": false
+      },
+      {
+        "text": "Information is provided, in writing, at the right time, to the right recipients.",
+        "correct": false
+      },
+      {
+        "text": "Information is provided in the right format, at the right time, with the intended impact.",
+        "correct": true
+      }
+    ],
+    "id": 1519
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Many project team members requested from the project manager to send them the training material.The project manager has uploaded all the training material on the company's intranet to be accessible to all team members. This is an example of:",
+    "explanation": "Pull communication. Used for large complex information sets, or for large audiences, and requires the recipients to access content at their own discretion subject to security procedures. These methods include web portals, intranet sites, e-learning, lessons learned databases, or knowledge repositories. Domain = People. PMBOK 7th edition, Page 13",
+    "choices": [
+      {
+        "text": "Interactive communications",
+        "correct": false
+      },
+      {
+        "text": "Push communications",
+        "correct": false
+      },
+      {
+        "text": "Pull communications",
+        "correct": true
+      },
+      {
+        "text": "Formal communications",
+        "correct": false
+      }
+    ],
+    "id": 1520
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "You are a project manager working on a project to move a call center to a new city. You include a representative from a transportation company as a stakeholder. The transportation company will transfer computers and furniture from the old place to the new one. You include meetings with that representative in the WBS. The sponsor objects to such activities as unnecessary. The best response is to inform the sponsor that:",
+    "explanation": "The transportation company representative is a stakeholder because he can negatively impact the project. So you need to communicate more with him to increase his engagement. Domain = People. PMBOK 7th edition, Page 8",
+    "choices": [
+      {
+        "text": "The transportation company representative is a stakeholder since the call center will be in his city.",
+        "correct": false
+      },
+      {
+        "text": "The transportation company representative is a stakeholder because he will be a customer for the call center.",
+        "correct": false
+      },
+      {
+        "text": "The transportation company representative knows the call center needs better than either of us.",
+        "correct": false
+      },
+      {
+        "text": "The transportation company representative can negatively impact the project.",
+        "correct": true
+      }
+    ],
+    "id": 1521
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "The project manager assigned Mark to send a weekly email update to the project key stakeholders to explain the status of the project. Which communication method does this email update represent?",
+    "explanation": "Push communication is sent or distributed directly to specific recipients who need to receive the information. This ensures that the information is distributed but does not ensure that it actually reached or was understood by the intended audience. Push communications artifacts include letters, memos, reports, emails, faxes, voice mails, blogs, and press releases. Domain = People. PMBOK 7th edition, Page 13",
+    "choices": [
+      {
+        "text": "Push communication",
+        "correct": true
+      },
+      {
+        "text": "Pull communication",
+        "correct": false
+      },
+      {
+        "text": "Formal communication",
+        "correct": false
+      },
+      {
+        "text": "Interactive communication",
+        "correct": false
+      }
+    ],
+    "id": 1522
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Why does Agile Manifesto value individuals and interactions over processes and tools?",
+    "explanation": "While processes and tools will likely be necessary on our projects, we should try to focus the team’s attention on the individuals and interactions involved. This is because projects are undertaken by people, not tools, and problems get solved by people, not processes. Likewise, projects are accepted by people, scope is debated by people, and the definition of a successfully “done” project is negotiated by people. Domain = People. Agile Practice Guide Page 8",
+    "choices": [
+      {
+        "text": "Because agile projects don't need intense planning, so processes and tools don't have great importance.",
+        "correct": false
+      },
+      {
+        "text": "Because normally processes and tools are less important for agile projects than people interactions.",
+        "correct": false
+      },
+      {
+        "text": "Because processes and tools cannot help in successfully completing a project.",
+        "correct": false
+      },
+      {
+        "text": "Because projects are undertaken by people, accepted by people, scope is debated by people, and the definition of “done” is negotiated by people.",
+        "correct": true
+      }
+    ],
+    "id": 1523
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Fred is managing a large software project with a virtual team. Several concerns have been raised from the project team that they are not engaged because of the collaboration tools that are being used in the project. Several team members have suggested to use other collaboration tools that are being used in other projects instead of the existing ones. In light of this, what should Fred do?",
+    "explanation": "The best solution is to discuss with the team all the recommended tools and select the appropriate one.As the tool is being used in other projects in the organization, so it can be used in this project. Domain = People. PMBOK 6th edition, Page 362 and PMBOK 7th edition, Page 13",
+    "choices": [
+      {
+        "text": "Ask the team to raise a formal change request.",
+        "correct": false
+      },
+      {
+        "text": "Discuss this topic with the project team and select the appropriate tool.",
+        "correct": true
+      },
+      {
+        "text": "Inform the team that they must use the existing collaboration tools as they are recommended by the organization.",
+        "correct": false
+      },
+      {
+        "text": "Ask the team to immediately use the recommended tools.",
+        "correct": false
+      }
+    ],
+    "id": 1524
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "During performing stakeholder analysis and collecting their expectations about the project, you should pay more attention to documenting quantifiable expectations. Which of the following expectations is quantifiable?",
+    "explanation": "Requirements should be unambiguous (measurable and testable), All other choices can't be measured. Domain = People. PMBOK 6th edition, Page 147",
+    "choices": [
+      {
+        "text": "The project must improve stakeholder satisfaction.",
+        "correct": false
+      },
+      {
+        "text": "The project should be high quality.",
+        "correct": false
+      },
+      {
+        "text": "The project must achieve a 10% reduction in repair cost",
+        "correct": true
+      },
+      {
+        "text": "The product of the project must be",
+        "correct": false
+      }
+    ],
+    "id": 1525
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Martin is managing a project for exploring for oil in a city in another country. Two weeks after starting the project work, he was informed that a police officer went to the work location and forced the workers to stop their work. He said that they received many complaints from the neighbors because of the noise and pollution resulting from using the drilling machines. In light of this situation what is the most probable cause of this problem?",
+    "explanation": "The cause of the problem was concerning the early identification of neighbors as stakeholders and analyzing their level of influence on the project. Domain = People. PMBOK 7th edition, Page 8",
+    "choices": [
+      {
+        "text": "Martin didn't include neighbors in the communications management plan.",
+        "correct": false
+      },
+      {
+        "text": "The project team didn't identify the risk of stopping work due to neighbors complaints.",
+        "correct": false
+      },
+      {
+        "text": "Martin doesn't know about the applicable laws in the other country.",
+        "correct": false
+      },
+      {
+        "text": "Neighbors and their influence levels on the project were not identified and analyzed at the beginning of the project.",
+        "correct": true
+      }
+    ],
+    "id": 1526
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 18,
+    "text": "Richard is a project manager for a very large software project. He is an experienced project manager, it is his fourth project managing virtual teams. His team consists of 245 persons located in three countries. So, he created a communication management plan and all the team members are strictly following the plan. During project executing, some team members need to know the current risk status, what are the current risks, closed risks and accepted risks. Which communication method would he use in this situation?",
+    "explanation": "In this situation, it is better to use pull communication which is used for large audience and requires the recipients to access the communication content at their own discretion. Domain = People. PMBOK 7th edition, Page 13",
+    "choices": [
+      {
+        "text": "Push communication",
+        "correct": false
+      },
+      {
+        "text": "Pull communication",
+        "correct": true
+      },
+      {
+        "text": "Interactive Communication",
+        "correct": false
+      },
+      {
+        "text": "Feedback",
+        "correct": false
+      }
+    ],
+    "id": 1527
   }
 ]
