@@ -38382,5 +38382,380 @@
       }
     ],
     "id": 1527
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "Which of the following Agile Manifesto principles is the most related to team empowerment?",
+    "explanation": "Since the development team is such an important factor, agile methods promote empowered teams. People work better when they are given the autonomy to organize and plan their own work. Agile methods advocate freeing the team from the micromanagement. Domain = People. Agile Practice Guide Page 8 and 33",
+    "choices": [
+      {
+        "text": "The most efficient and effective method of conveying information to and within a development team is face-to-face conversation.",
+        "correct": false
+      },
+      {
+        "text": "Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done.",
+        "correct": true
+      },
+      {
+        "text": "Working software is the primary measure of progress.",
+        "correct": false
+      },
+      {
+        "text": "Agile processes promote sustainable development. The sponsors, developers, and users should be able to maintain a constant pace indefinitely.",
+        "correct": false
+      }
+    ],
+    "id": 1528
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "The eighth principle of the Agile Manifesto states that: “Agile processes promote sustainable development. The sponsors, developers, and users should be able to maintain a constant pace indefinitely”. Which of the following agile practices and techniques is closely related to this principle?",
+    "explanation": "Agile methods recognize the value of a sustainable pace that allows team members to maintain a work-life balance. Allowing the team to create their own team charter with team norms and values will help create an agile environment in which team members can work to the best of their ability as a team. Domain = People. Agile Practice Guide, Page 50 and 80",
+    "choices": [
+      {
+        "text": "Backlog refinement",
+        "correct": false
+      },
+      {
+        "text": "Continuous integration",
+        "correct": false
+      },
+      {
+        "text": "Team charter",
+        "correct": true
+      },
+      {
+        "text": "Iteration planning",
+        "correct": false
+      }
+    ],
+    "id": 1529
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "The sponsor asks the developers in a scrum team to add a very important item to the current sprint. What should they do?",
+    "explanation": "The team must inform the product owner first as he is responsible to prioritize items in the backlog. Domain = People.",
+    "choices": [
+      {
+        "text": "Add the item to the next sprint.",
+        "correct": false
+      },
+      {
+        "text": "Inform other members of the scrum team so they can take decision.",
+        "correct": true
+      },
+      {
+        "text": "Add the item to the current sprint.",
+        "correct": false
+      },
+      {
+        "text": "Cancel the current sprint and start a new sprint including this item.",
+        "correct": false
+      }
+    ],
+    "id": 1530
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "Albert is a project manager for a large project to develop electronic tickets for railroad stations instead of paper tickets. He is being mentored by Jim, an experienced project manager. Albert is discussing with Jim that the project is very large and he needs to delgate some work to specialists. Jim advised him that he can delgate some work to specialists but the accountability of _____ can't be delegated or transferred.",
+    "explanation": "The accountability of Integration Management can't be delegated or transferred. The project manager is the one who combines the results of other Knowledge Areas and has the overall view of the project. Domain = People. PMBOK 6th edition, Page 72",
+    "choices": [
+      {
+        "text": "Schedule Management",
+        "correct": false
+      },
+      {
+        "text": "Procurement Management",
+        "correct": false
+      },
+      {
+        "text": "Integration Management",
+        "correct": true
+      },
+      {
+        "text": "Quality Management",
+        "correct": false
+      }
+    ],
+    "id": 1531
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "Diego has just joined a construction project as a design team leader instead of Roberto who has resigned from the organization. The project management plan has been already completed and the project team are currently executing the project work. Diego wants to know the roles and responsibilities of his team members in details. Which of the following techniques is used to provide detailed description of team members responsibilities?",
+    "explanation": "Team member responsibilities that require detailed descriptions can be specified in text oriented formats. Domain = People. PMBOK 6th edition, Page 317",
+    "choices": [
+      {
+        "text": "Resource Breakdown Structure",
+        "correct": false
+      },
+      {
+        "text": "Responsibility Assignment Matrix",
+        "correct": false
+      },
+      {
+        "text": "RACI chart",
+        "correct": false
+      },
+      {
+        "text": "Text-oriented formats",
+        "correct": true
+      }
+    ],
+    "id": 1532
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "Midway during a sprint, one of the developers determines that the scrum team will not be able to complete the items in the sprint backlog. Who should be present to review and adjust the product backlog accordingly?",
+    "explanation": "During the sprint, scope may be clarified and re-negotiated between the product owner and developers as more is discovered. Domain = People. Agile Practice Guide Page 41",
+    "choices": [
+      {
+        "text": "The product owner",
+        "correct": false
+      },
+      {
+        "text": "The developers",
+        "correct": false
+      },
+      {
+        "text": "The scrum team",
+        "correct": false
+      },
+      {
+        "text": "The product owner and developers",
+        "correct": true
+      }
+    ],
+    "id": 1533
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "Who should know the most about the progress toward a business objective or a release in a scrum team?",
+    "explanation": "The product owner is responsible for ordering the product backlog and making it visible and transparent to all stakeholders. So, he knows most about the progress toward business objectives. Domain = People. Agile Practice Guide Page 41",
+    "choices": [
+      {
+        "text": "The project sponsor",
+        "correct": false
+      },
+      {
+        "text": "The scrum master",
+        "correct": false
+      },
+      {
+        "text": "The product owner",
+        "correct": true
+      },
+      {
+        "text": "The developers",
+        "correct": false
+      }
+    ],
+    "id": 1534
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "Midway through the iteration, a major organization change is about to take place and the team members don't have a clear vision about the future direction of the product. The team members feel that the iteration should be placed on hold till more clarity about the future of the product emerges. Who should take this decision?",
+    "explanation": "The product owner is the one who has the authority to cancel the iteration or put it on hold. Domain = People. Agile Practice Guide Page 41",
+    "choices": [
+      {
+        "text": "The product owner",
+        "correct": true
+      },
+      {
+        "text": "The agile coach",
+        "correct": false
+      },
+      {
+        "text": "The team",
+        "correct": false
+      },
+      {
+        "text": "The project sponsor",
+        "correct": false
+      }
+    ],
+    "id": 1535
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "It has been noticed by the agile coach that the team is working extra hours in order to complete the current iteration. Which of the following is the best course of action?",
+    "explanation": "It is true that the team should maintain a constant pace, that's why they should commit only to what they can deliver according to the user stories sizes estimates and the team velocity. Domain = People. Agile Practice Guide, Page 9",
+    "choices": [
+      {
+        "text": "The team should commit to complete less stories in the next iterations.",
+        "correct": true
+      },
+      {
+        "text": "Extra resources should be added to maintain constant pace.",
+        "correct": false
+      },
+      {
+        "text": "The team should increase their velocity.",
+        "correct": false
+      },
+      {
+        "text": "Recalculate the team velocity and move some user stories back to the product backlog.",
+        "correct": false
+      }
+    ],
+    "id": 1536
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "The first value of the Agile Manifesto states that: \"Agile teams value individuals and interactions over processes and tools\". Which of the following agile techniques is closely related to this Agile Manifesto value?",
+    "explanation": "While processes and tools will likely be necessary on our projects, we should try to focus the team's attention on the individuals and interactions involved. This is because projects are undertaken by people, not tools, and problems get solved by people, not processes. Likewise, projects are accepted by people, scope is debated by people, and accepted by people. So it is vital to agile projects success to have empowered teams. Domain = People. Agile Practice Guide, Page 97",
+    "choices": [
+      {
+        "text": "Information radiators",
+        "correct": false
+      },
+      {
+        "text": "Team empowerment",
+        "correct": true
+      },
+      {
+        "text": "Timeboxing",
+        "correct": false
+      },
+      {
+        "text": "Delivery cadence",
+        "correct": false
+      }
+    ],
+    "id": 1537
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "The project team is discussing the goals for the next iteration with the customer and product owner, then they will select the user stories they will commit to deliver as part of the next iteration. This behavior does comply with which agile principle?",
+    "explanation": "As the team is self organized, it would be important for the team to discuss the goals for the next iteration with the customer and then select the user stories they will commit to deliver as part of the next iteration. The team is self organized, the product owner can't just select the next top story points’ worth of functionality off the top of the backlog and then tell the team to get on with the work. Domain = People. Agile Practice Guide Page 8 and 54",
+    "choices": [
+      {
+        "text": "Our highest priority is to satisfy the customer through early and continuous delivery of valuable software.",
+        "correct": false
+      },
+      {
+        "text": "Welcome changing requirements, even late in development. Agile processes harness change for the customer's competitive advantage.",
+        "correct": false
+      },
+      {
+        "text": "Simplicity—the art of maximizing the amount of work not done—is essential.",
+        "correct": false
+      },
+      {
+        "text": "The best architectures, requirements, and designs emerge from self-organizing teams.",
+        "correct": true
+      }
+    ],
+    "id": 1538
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "Midway through the project, a conflict arises between the project manager and a team member. The project manager believes that a specific task should be executed by the team member, while the team member is convinced that it should be executed by another person. The team member escalates the situation to his functional manager. In order to resolve the conflict, the project manager should consult _________.",
+    "explanation": "A RACI chart is a useful tool to use to ensure clear assignment of roles and responsibilities when the team consists of internal and external resources. Domain = People. PMBOK 6th edition, Page 317 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "Resource calendars",
+        "correct": false
+      },
+      {
+        "text": "Resource management plan",
+        "correct": false
+      },
+      {
+        "text": "Resource breakdown structure",
+        "correct": false
+      },
+      {
+        "text": "RACI chart",
+        "correct": true
+      }
+    ],
+    "id": 1539
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "Samuel has just been assigned as a project manager for an ongoing tele-communications project instead of Gary who has recently resigned from the company. The project is very large and has a budget of 5,000,000$. The project is being performed in two cities using 75 team members. There was a problem regarding the testing activities that Samuel doesn't know who is responsible to perform these activities. What should he do?",
+    "explanation": "A responsibility assignment matrix shows the project resources assigned to each work package. It is used to illustrate the connections between work packages, or activities, and project team members. Domain = People. PMBOK 6th edition, Page 317 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "He should refer to the project sponsor for guidance.",
+        "correct": false
+      },
+      {
+        "text": "He should call Gary to ask him about each one's role.",
+        "correct": false
+      },
+      {
+        "text": "He should consult the resources management plan.",
+        "correct": false
+      },
+      {
+        "text": "He should consult the responsibility assignment matrix.",
+        "correct": true
+      }
+    ],
+    "id": 1540
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "The eleventh principle of the Agile Manifesto states that: \"The best architectures, requirements, and designs emerge from self-organizing teams\". Which of the following agile practices and techniques is closely related to this principle?",
+    "explanation": "Self-organizing teams that have the autonomy to make local decisions have a higher level of ownership and pride in the architectures,requirements, and designs they create than in those that are suggested by external sources. Most of the agile team members are generalizing specialists with a focus specialty plus breadth of experience across multiple skills. Domain = People. Agile Practice Guide. Page 40 and 80",
+    "choices": [
+      {
+        "text": "Backlog grooming",
+        "correct": false
+      },
+      {
+        "text": "Generalizing specialists",
+        "correct": true
+      },
+      {
+        "text": "Demonstrations",
+        "correct": false
+      },
+      {
+        "text": "Continuous integration",
+        "correct": false
+      }
+    ],
+    "id": 1541
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 19,
+    "text": "During a retrospective the team dicusses the low velocity of the team during last iteration. After investigating the root cause, it was found that the reason is due to a junior team member who does not have enough experience to complete the assigned user stories to him in their estimated time. What is the best course of action?",
+    "explanation": "As per the first value of the agile manifesto that we value individuals and interactions over processes and tools, it will not be good to replace the team member. It would be better to assign low priority and easy task to him till he gains the needed experience. Domain = People. Agile Practice Guide, Page 8",
+    "choices": [
+      {
+        "text": "Assign the low priority or easy tasks to the junior team member.",
+        "correct": true
+      },
+      {
+        "text": "Replace the junior team member with a more experienced one to maintain the team velocity.",
+        "correct": false
+      },
+      {
+        "text": "Reduce the team's velocity for the coming iterations till the junior team member gains the needed experience.",
+        "correct": false
+      },
+      {
+        "text": "Assign another junior team member to the team to maintain the team's velocity.",
+        "correct": false
+      }
+    ],
+    "id": 1542
   }
 ]
