@@ -72,7 +72,7 @@ const AppComponent: React.FC = () => {
   const loadExam = React.useCallback(
     (newSession: Session) => {
       if (!newSession.examType) {
-        throw new Error("No exam ID found in session")
+        throw new Error("No exam type found in session")
       }
       try {
         let examData: Exam | null
@@ -131,7 +131,7 @@ const AppComponent: React.FC = () => {
         setExam(null)
       }
     },
-    [setExam, setSession]
+    [setExam, setSession, showToast]
   )
 
   const handleFullExam = React.useCallback(
@@ -224,6 +224,7 @@ const AppComponent: React.FC = () => {
       setLoading(true);
       try {
         await initQuestionMap(langCode);
+        // if an exam session is running load its questions
         if (!cancelled && exam && session.examType) {
           loadExam(session);
         }

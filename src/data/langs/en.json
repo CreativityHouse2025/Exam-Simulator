@@ -36,7 +36,9 @@
   },
   "content": {
     "top-display": {
-      "question": "Question $1 of $2"
+      "question": "Question $1 of $2",
+      "category": "Category",
+      "exam": "Exam"
     },
     "explain": {
       "explain": "Explanation",
@@ -52,7 +54,6 @@
       "pass": "PASS",
       "fail": "FAIL",
       "passing": "Passing",
-      "category": "Category",
       "time": "Time",
       "date": "Date",
       "score": "Score",

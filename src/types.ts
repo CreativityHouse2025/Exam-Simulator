@@ -159,7 +159,7 @@ export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, Ses
 // Session context slice types
 export type SessionNavigation = Pick<Session, 'index' | 'update'>
 export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused' | 'update'>
-export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'update' | 'categoryId'>
+export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'update' | 'categoryId'| 'examId'>
 export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | 'update' | 'emailSent'>
 
 // Email API arguments type
