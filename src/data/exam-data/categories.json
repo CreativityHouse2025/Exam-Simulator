@@ -126,10 +126,17 @@
     }
   },
   {
-    "id": 20,
+    "id": 19,
     "name": {
       "en": "Empowering Stakeholders",
       "ar": "تقوية أصحاب المصلحة"
+    }
+  },
+  {
+    "id": 20,
+    "name": {
+      "en": "Managing Conflicts",
+      "ar": "إدارة النزاعات"
     }
   },
   {
