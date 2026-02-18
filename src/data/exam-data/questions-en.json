@@ -36032,5 +36032,1055 @@
       }
     ],
     "id": 1433
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "The fourth value of the Agile Manifesto states that: \"Agile teams value responding to change over following a plan\". Which of the following agile techniques is closely related to this Agile Manifesto value?",
+    "explanation": "In agile projects, we know that the initial plans are inadequate, since they are based on insufficient information. So instead of investing effort in trying to bring the project back in line with the original plan, agile teams want to spend more effort and energy responding to the changes that will inevitably arise. In product demos, the team demonstrates all completed work items at the end of the iteration. So team members can get feedback that prevents them from heading in a wrong direction. Domain = Process. Agile Practice Guide, Page 55 and 97.",
+    "choices": [
+      {
+        "text": "Kanban board",
+        "correct": false
+      },
+      {
+        "text": "Information radiators",
+        "correct": false
+      },
+      {
+        "text": "Demonstrations",
+        "correct": true
+      },
+      {
+        "text": "Iteration planning",
+        "correct": false
+      }
+    ],
+    "id": 1434
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "An organization has adopted an agile approach recently for a new project. The project sponsor directs their project manager, who has been assigned as a team facilitator, to add a new high-priority feature to the product. How should the project manager handle this scope change?",
+    "explanation": "It is the ultimate responsibility of the product owner to manage and prioritize the product backlog. Domain = Process. Agile Practice Guide Page 52.",
+    "choices": [
+      {
+        "text": "The project manager should add the new feature to the product backlog and make it the top priority.",
+        "correct": false
+      },
+      {
+        "text": "On an agile project, changes are welcomed at any time, so this feature should be assigned to the team for development.",
+        "correct": false
+      },
+      {
+        "text": "Communicate the new feature request to the product owner to be considered in the next backlog session.",
+        "correct": false
+      },
+      {
+        "text": "Tell the sponsor to talk with the product owner about this feature, reminding them that the product owner has authority to prioritize features.",
+        "correct": true
+      }
+    ],
+    "id": 1435
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "Helen is managing a product development project using a traditional approach. A change has occurred on her project. She has documented the change, submitted a change request on the change control system, and submitted that request to the change control board. What's the next thing that must happen on the project?",
+    "explanation": "After submitting the change to the Change Control Board (CCB), the CCB evaluates the change for approval or rejection using expert judgment. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "She should update the project management plan and project documents to reflect the change.",
+        "correct": false
+      },
+      {
+        "text": "She should inform the CCB whether or not to approve the change.",
+        "correct": false
+      },
+      {
+        "text": "Stakeholders on the CCB use expert judgment to evaluate the requested change for approval.",
+        "correct": true
+      },
+      {
+        "text": "She should meet with the team to analyze the impact of the change on the project's time, scope, and cost.",
+        "correct": false
+      }
+    ],
+    "id": 1436
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "Which of the following activities is closely related to Agile Principle 2: \"Welcome changing requirements, even late in development. Agile processes harness change for the customer's competitive advantage\"?",
+    "explanation": "As expressed in Agile Manifesto Principle 2, staying flexible to meet the customer's changing business needs is fundamental to agile, and the backlog is one of the key ways that agile teams ensure this adaptability. The backlog is always evolving, and it needs to be kept continually updated with the latest requirements and new information. Domain = Process. Agile Practice Guide Page 8.",
+    "choices": [
+      {
+        "text": "Limiting WIP",
+        "correct": false
+      },
+      {
+        "text": "Grooming the backlog",
+        "correct": true
+      },
+      {
+        "text": "Frequent verification and validation",
+        "correct": false
+      },
+      {
+        "text": "Minimizing waste",
+        "correct": false
+      }
+    ],
+    "id": 1437
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "During product demonstration, the team presents the product increment to the stakeholders. The customer requests some new features to be added. Which of the following is the best course of action? (1) The team should analyze the impact of adding the new features. (2) Add the new features to the next iteration. (3) Submit a change request. (4) Ask the customer about the priority of the new features. (5) The product owner should maintain the product backlog.",
+    "explanation": "As the team completes the features usually in the form of user stories, the team periodically demonstrates the working product. The product owner sees the demonstration and accepts or declines stories. If the stakeholders want to add new features, they should clarify their priorities and accordingly the product owner will add them to the product backlog. Domain = Process. Agile Practice Guide, Page 55.",
+    "choices": [
+      {
+        "text": "(1) and (3)",
+        "correct": false
+      },
+      {
+        "text": "(2) and (5)",
+        "correct": false
+      },
+      {
+        "text": "(4) and (5)",
+        "correct": true
+      },
+      {
+        "text": "All of them.",
+        "correct": false
+      }
+    ],
+    "id": 1438
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "A change has been made to the project which is being implemented in a predictive environment. What should you do next?",
+    "explanation": "The change has been already made; the next step is to update the project management plan and project documents. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Evaluate impacts.",
+        "correct": false
+      },
+      {
+        "text": "Request change control board involvement.",
+        "correct": false
+      },
+      {
+        "text": "Prevent the root cause of change.",
+        "correct": false
+      },
+      {
+        "text": "Revise the project management plan and/or project documents.",
+        "correct": true
+      }
+    ],
+    "id": 1439
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "During break time, the customer meets a project team member and they talk about the project, its status, progress, etc. The team member informs the customer that the project will face some delays and two milestones will be missed due to changing project requirements. The project manager hears about this conversation from the customer. What should the project manager do?",
+    "explanation": "The most important thing is to assess the new requirements through a formal change request and uncover the impact to schedule and budget. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Reprimand the team member and check available resources to consider replacing him.",
+        "correct": false
+      },
+      {
+        "text": "Submit a change request to reflect new requirements.",
+        "correct": true
+      },
+      {
+        "text": "Inform the customer that all information related to project progress should be communicated by the project manager only.",
+        "correct": false
+      },
+      {
+        "text": "Ask team members not to talk to the customer again, unless permission is taken from the project manager.",
+        "correct": false
+      }
+    ],
+    "id": 1440
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "During executing a mechanical project using a waterfall approach, an experienced engineer calls the project manager in private and informs him that there is a simpler design which is more fuel-efficient and it could achieve great cost savings. What should the project manager do?",
+    "explanation": "It is not the responsibility of the engineer to evaluate impacts of the change on project constraints. A change request should be raised with the engineer's suggestion for the new design and it will be assessed and approved or rejected by the Change Control Board. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Do nothing, the plan has already been approved including the old design.",
+        "correct": false
+      },
+      {
+        "text": "Ask the engineer to submit a change request.",
+        "correct": true
+      },
+      {
+        "text": "Ask the engineer to evaluate the impacts on other project constraints.",
+        "correct": false
+      },
+      {
+        "text": "Hold a meeting with the engineer and the designer of the old system to discover variances.",
+        "correct": false
+      }
+    ],
+    "id": 1441
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "You are managing a railroad construction project using traditional approach. One of the stakeholders has discovered a problem in the design, and as a result you have requested a change. The change will cost the project extra two weeks and $10,000 added cost, but without it there will be problems with the final product of the project. What should you do next?",
+    "explanation": "Review change control procedures, you must first evaluate the impacts of the change on all constraints, then submit it to the Change Control Board. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66",
+    "choices": [
+      {
+        "text": "Update the project management plan to reflect the change.",
+        "correct": false
+      },
+      {
+        "text": "Call for a meeting with the stakeholders to figure out whether or not to make the change.",
+        "correct": false
+      },
+      {
+        "text": "Document the change and its impact, and submit it to the change control board.",
+        "correct": true
+      },
+      {
+        "text": "Instruct the change control board to approve the change in order not to cause problems to the product.",
+        "correct": false
+      }
+    ],
+    "id": 1442
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "You are a project manager for a product development project which uses a traditional life cycle. A team member approaches you with a change that could cut your schedule down by one week and the change is easy to make. What is the first thing you should do?",
+    "explanation": "Review change control procedures; you must first evaluate the impacts of the change on all constraints. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Write up a change request and submit it to the change control board.",
+        "correct": false
+      },
+      {
+        "text": "Make the change; it’s going to save time and nobody will want the project to take longer than it should.",
+        "correct": false
+      },
+      {
+        "text": "Figure out the impact on the scope of the work and the cost before you write up the change request.",
+        "correct": true
+      },
+      {
+        "text": "Tell the team member that you’ve already communicated the deadline for the project, so you can’t make any changes now.",
+        "correct": false
+      }
+    ],
+    "id": 1443
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "You are a project manager of a software project in a predictive environment. The customer required a change to a major work package. After many meetings and discussions, finally, the project team members determined the specifications of the change. What should you do first?",
+    "explanation": "After determining the specifications of the change, you must calculate the risks associated with the change (the impacts on other project constraints), then you can write the change request and submit it to the CCB for approval. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Calculate the risks associated with the change.",
+        "correct": true
+      },
+      {
+        "text": "Make the change as its specifications are determined.",
+        "correct": false
+      },
+      {
+        "text": "Look for other changes from the customer before making the change.",
+        "correct": false
+      },
+      {
+        "text": "Send the change request to the change control board.",
+        "correct": false
+      }
+    ],
+    "id": 1444
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "During a major construction project in a predictive environment, a team member came to the project manager with a change request. The change has a very good idea and will be useful to the project. The project manager asked him to write a report describing the benefits of the change. What is the most appropriate advice for this situation?",
+    "explanation": "The cost-benefit analysis done during project planning is not related to the change. The project sponsor doesn't approve change requests. What is meant by cost-benefit analysis here is the assumptions which the team member should provide when he requires the change. So the team member should do what was asked so that the project manager can make a decision based on the information provided. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "He should remind the project manager that the cost-benefit analysis for the project was done during project planning.",
+        "correct": false
+      },
+      {
+        "text": "The project manager should do this report himself as a part of his job.",
+        "correct": false
+      },
+      {
+        "text": "The team member should do what was asked because this sort of information must be given to the project sponsor to make the change.",
+        "correct": false
+      },
+      {
+        "text": "A project manager must be able to weigh the benefits of the change versus the costs and compare them to other possible changes. The team member should do what was asked.",
+        "correct": true
+      }
+    ],
+    "id": 1445
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "During executing a large construction project, the customer required a change to a major work package. You evaluate the impact of the change on all the project constraints and tell the customer that the change will cost $10,000 and will add three more weeks to the project duration. But the customer says that he doesn’t have the time or budget to allow the change. What’s the best way for you to handle this situation?",
+    "explanation": "You must first know the reasons for the change. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Have the project sponsor meet with the customer to explain the situation.",
+        "correct": false
+      },
+      {
+        "text": "Hold a meeting with the customer to know why he required the change.",
+        "correct": true
+      },
+      {
+        "text": "Do nothing.",
+        "correct": false
+      },
+      {
+        "text": "Tell the customer that the added time and cost are much less than the benefits resulting from the change.",
+        "correct": false
+      }
+    ],
+    "id": 1446
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "You have been assigned as a project manager for a large project to develop an accounting system using a predictive life cycle. The project is expected to be finished in 6 months and is budgeted at $100,000. During project execution, you discover that some requirements have not been included in the project scope. Failure to meet these requirements may result in legal actions from the customer of the project against your company. However, implementing these requirements may increase the project schedule and budget. What should you do?",
+    "explanation": "All requirements must be met, so you can request a change to implement the change first, then as a result of the change, you will get the needed time and funds. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Submit a change request to add the missed requirements to the project scope.",
+        "correct": true
+      },
+      {
+        "text": "Do nothing, these requirements are not a part of the project scope.",
+        "correct": false
+      },
+      {
+        "text": "This is scope creep; these requirements must be ignored.",
+        "correct": false
+      },
+      {
+        "text": "Request additional funds and time to implement these requirements.",
+        "correct": false
+      }
+    ],
+    "id": 1447
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "You have been assigned as a project manager for a large construction project to build a new housing compound. The project is very large and very important to your organization. You are planning the project with the project team when a key stakeholder suggests a different type of tree to be used for landscaping. The suggested type of tree is different from the one specified in the project scope. You and the project team agree that the suggested type is better and cheaper than the previous type as it will not affect the project schedule, but it will save $30,000 from project costs. You decide to use the new type of trees. What should you do first?",
+    "explanation": "You are still planning your project, so the project is still not baselined. Before the baselines are established, changes are not required to be formally controlled by the Perform Integrated Change Control process. Impacts have already been evaluated as the new change will not affect the project schedule but it will decrease project costs. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Create a change request.",
+        "correct": false
+      },
+      {
+        "text": "Evaluate impacts of using the new type.",
+        "correct": false
+      },
+      {
+        "text": "Change the scope baseline and cost baseline to use the new type.",
+        "correct": true
+      },
+      {
+        "text": "Consult the Change Control Board.",
+        "correct": false
+      }
+    ],
+    "id": 1448
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "How should you plan for change management in a predictive environment?",
+    "explanation": "Change is inevitable, so planning for change must be through a change management plan or a group of management plans where change management for each knowledge area can be performed separately. Domain = Process. PMBOK 6th edition, Page 88.",
+    "choices": [
+      {
+        "text": "Changes are generally not predictable, therefore planning for change management cannot be reasonable.",
+        "correct": false
+      },
+      {
+        "text": "Planning for change management should be done while the various change control processes are being applied.",
+        "correct": false
+      },
+      {
+        "text": "Change management can be planned in a set of management plans or a specific change management plan.",
+        "correct": true
+      },
+      {
+        "text": "Changes are a sign of poor planning. One should avoid changes during a project, thus eliminating the need to manage them.",
+        "correct": false
+      }
+    ],
+    "id": 1449
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "Which of the following Agile Manifesto principles is closely related to backlog refinement?",
+    "explanation": "As expressed in Agile Manifesto Principle 2, staying flexible to meet the customer’s changing business needs is fundamental to agile, and the backlog is one of the key ways that agile teams ensure this adaptability. The backlog is always evolving, and it needs to be kept continually updated with the latest requirements and new information. Domain = Process. Agile Practice Guide Page 8 and 52.",
+    "choices": [
+      {
+        "text": "Business people and developers must work together daily throughout the project.",
+        "correct": false
+      },
+      {
+        "text": "Continuous attention to technical excellence and good design enhances agility.",
+        "correct": false
+      },
+      {
+        "text": "Welcome changing requirements, even late in development. Agile processes harness change for the customer’s competitive advantage.",
+        "correct": true
+      },
+      {
+        "text": "Agile processes promote sustainable development. The sponsors, developers, and users should be able to maintain a constant pace indefinitely.",
+        "correct": false
+      }
+    ],
+    "id": 1450
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "An organization has adopted an agile approach recently for a new project. The project sponsor directs their project manager, who has been assigned as a team facilitator, to add a new high-priority feature to the product. How should the project manager handle this scope change?",
+    "explanation": "It is the ultimate responsibility of the product owner to manage and prioritize the product backlog. Domain = Process. Agile Practice Guide Page 52.",
+    "choices": [
+      {
+        "text": "The project manager should add the new feature to the product backlog and make it the top priority.",
+        "correct": false
+      },
+      {
+        "text": "On an agile project, changes are welcomed at any time, so this feature should be assigned to the team for development.",
+        "correct": false
+      },
+      {
+        "text": "Communicate the new feature request to the product owner to be considered in the next backlog session.",
+        "correct": false
+      },
+      {
+        "text": "Tell the sponsor to talk with the product owner about this feature, reminding them that the product owner has authority to prioritize features.",
+        "correct": true
+      }
+    ],
+    "id": 1451
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "After a great deal of effort, finally, the project manager has made a change to the scope baseline. What should he do next?",
+    "explanation": "As the change is already made, this means that the impacts were evaluated, the change was submitted to CCB and approved. The remaining action is to update the project management plan and project documents to reflect the change. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Ask the sponsor to approve the change.",
+        "correct": false
+      },
+      {
+        "text": "Evaluate impacts on other constraints like time, cost, and resources.",
+        "correct": false
+      },
+      {
+        "text": "Revise the project management plan and project documents.",
+        "correct": true
+      },
+      {
+        "text": "Send the change request to the Change Control Board.",
+        "correct": false
+      }
+    ],
+    "id": 1452
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "During project execution which adopts a predictive life cycle, the customer has requested a change to the project scope which may affect other constraints. The project manager called for a meeting for the project team to discuss how to make this change. This is an example of:",
+    "explanation": "This situation indicates a lack of a change management plan which describes the procedures required to make a change. Domain = Process. PMBOK 6th edition, Page 88.",
+    "choices": [
+      {
+        "text": "Lack of a clear project scope statement.",
+        "correct": false
+      },
+      {
+        "text": "Lack of a change management plan.",
+        "correct": true
+      },
+      {
+        "text": "Lack of a communications management plan.",
+        "correct": false
+      },
+      {
+        "text": "Good team relations.",
+        "correct": false
+      }
+    ],
+    "id": 1453
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "You are a project manager on a construction project. When you planned the project, your enterprise environmental factors included a policy that all changes that cost over 2% of the budget need to be approved by the CEO, but smaller changes could be paid for by a management contingency fund. One of your stakeholders submitted a change request that requires a 3% increase in the budget. Your company has an outsourcing effort, and you believe that a small change to the way that the change is requested could allow you to take advantage of it and cut your costs in half. What is the best way to handle this situation?",
+    "explanation": "As the company you work for has policies and procedures, you must follow them. Here the change requires a 3% increase in budget, so as per the company policy, you should request approval from the company CEO. When a stakeholder submitted the change request, this means that the change request is documented. Domain = Process. PMBOK 6th edition, Page 83 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Work with the stakeholder to figure out how to reduce the cost of the change.",
+        "correct": false
+      },
+      {
+        "text": "Request approval from the CEO.",
+        "correct": true
+      },
+      {
+        "text": "Refuse the change because it is over 2% of the budget.",
+        "correct": false
+      },
+      {
+        "text": "Document the change request, since all changes must be documented.",
+        "correct": false
+      }
+    ],
+    "id": 1454
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "Which of the following activities is closely related to Agile Principle 2: \"Welcome changing requirements, even late in development. Agile processes harness change for the customer’s competitive advantage\"?",
+    "explanation": "As expressed in Agile Manifesto Principle 2, staying flexible to meet the customer’s changing business needs is fundamental to agile, and the backlog is one of the key ways that agile teams ensure this adaptability. The backlog is always evolving, and it needs to be kept continually updated with the latest requirements and new information. Domain = Process. Agile Practice Guide Page 8.",
+    "choices": [
+      {
+        "text": "Limiting WIP",
+        "correct": false
+      },
+      {
+        "text": "Grooming the backlog",
+        "correct": true
+      },
+      {
+        "text": "Frequent verification and validation",
+        "correct": false
+      },
+      {
+        "text": "Minimizing waste",
+        "correct": false
+      }
+    ],
+    "id": 1455
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "All of the following are against Agile Principle Number Two \"Welcome changing requirements, even late in development. Agile processes harness change for the customer’s competitive advantage\", except:",
+    "explanation": "As expressed in Agile Manifesto Principle 2, staying flexible to meet the customer’s changing business needs is fundamental to agile, and the backlog is one of the key ways that agile teams ensure this adaptability. The backlog is always evolving, and it needs to be kept continually updated with the latest requirements and new information. Domain = Process. Agile Practice Guide Page 8.",
+    "choices": [
+      {
+        "text": "Change Control Board",
+        "correct": false
+      },
+      {
+        "text": "Scope creep",
+        "correct": false
+      },
+      {
+        "text": "Scope variance",
+        "correct": false
+      },
+      {
+        "text": "Backlog refinement",
+        "correct": true
+      }
+    ],
+    "id": 1456
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "Frank is managing a major mechanical project using a predictive approach. The customer requested a change to the schedule baseline. Frank has determined the effect on the scope and cost, performed integrated change control, and adjusted the project baselines, the project management plan, and project documents. What should he do next?",
+    "explanation": "The change has already been evaluated and approved; the next step is to inform stakeholders affected by the change. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Look for impacts to quality.",
+        "correct": false
+      },
+      {
+        "text": "Submit the change to the Change Control Board for approval.",
+        "correct": false
+      },
+      {
+        "text": "Look for other changes from the stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "Notify stakeholders affected by the change.",
+        "correct": true
+      }
+    ],
+    "id": 1457
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "A key stakeholder has approached the project team who are working on a software project with a concern. He needs to add a new feature to the existing code. This code should be delivered within one week. The same stakeholder keeps chasing the project team with many requests during the past two weeks. Which of the following is the best course of action?",
+    "explanation": "First things first, he should follow the change control process as his requirement might have an impact on any of the project constraints. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "The team should analyze the impact of his new feature.",
+        "correct": false
+      },
+      {
+        "text": "The team should ask the stakeholder to raise a change request.",
+        "correct": true
+      },
+      {
+        "text": "The team should escalate the key stakeholder first to the project sponsor.",
+        "correct": false
+      },
+      {
+        "text": "He is a key stakeholder, so his requirements should be applied.",
+        "correct": false
+      }
+    ],
+    "id": 1458
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "During discussing the project status with some stakeholders in the weekly project status meeting, the project manager realizes that he should add two new risks to the risk register, four new requirements to the requirements documentation and requirements traceability matrix, and three new stakeholders to the stakeholder register. Does he need formal approval from the sponsor or others to change these?",
+    "explanation": "The risk register, requirements documentation, and stakeholder register are all project documents; they are not part of the project management plan. Project documents are created by the project manager for his own needs to help him in managing his project. They don't require a formal change request to update them. Domain = Process. PMBOK 6th edition, Page 89 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Yes. All documents require formal approval of changes by management.",
+        "correct": false
+      },
+      {
+        "text": "It depends on what changes are being made.",
+        "correct": false
+      },
+      {
+        "text": "Yes. The change needs to go through the Change Control Board for approval.",
+        "correct": false
+      },
+      {
+        "text": "No. These are part of project documents, not the project management plan.",
+        "correct": true
+      }
+    ],
+    "id": 1459
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "Martha is a scrum master for a product development project. Midway during a sprint, the customer representative has approached her to add a new, complex, and urgent safety-related requirement to the current sprint. The new requirement can't be postponed to another sprint. What is Martha's best response?",
+    "explanation": "Normally, changes should not happen during a sprint for the current items in the sprint backlog. However, under unusual conditions, scope may be re-negotiated between the product owner and the team even if the sprint may be cancelled. Domain = Process. Agile Practice Guide, Page 55.",
+    "choices": [
+      {
+        "text": "Inform the customer representative that the sprint has already started and we can't add new requirements to the current sprint.",
+        "correct": false
+      },
+      {
+        "text": "Add the new requirement to the product backlog, so that the product owner can give it the highest priority to be added to the next sprint.",
+        "correct": false
+      },
+      {
+        "text": "Add the new requirement to the sprint backlog and if needed, the team can move a low-priority requirement back to the product backlog.",
+        "correct": false
+      },
+      {
+        "text": "Discuss the new requirement with the product owner, who may cancel the current sprint.",
+        "correct": true
+      }
+    ],
+    "id": 1460
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "An organization has adopted an agile approach recently for a new project. The project sponsor directs their project manager, who has been assigned as a team facilitator, to add a new high-priority feature to the product. How should the project manager handle this scope change?",
+    "explanation": "It is the ultimate responsibility of the product owner to manage and prioritize the product backlog. Domain = Process. Agile Practice Guide Page 52.",
+    "choices": [
+      {
+        "text": "The project manager should add the new feature to the product backlog and make it the top priority.",
+        "correct": false
+      },
+      {
+        "text": "On an agile project, changes are welcomed at any time, so this feature should be assigned to the team for development.",
+        "correct": false
+      },
+      {
+        "text": "Communicate the new feature request to the product owner to be considered in the next backlog session.",
+        "correct": false
+      },
+      {
+        "text": "Tell the sponsor to talk with the product owner about this feature, reminding them that the product owner has authority to prioritize features.",
+        "correct": true
+      }
+    ],
+    "id": 1461
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "During a major construction project in a predictive environment, a team member came to the project manager with a change request. The change has a very good idea and will be useful to the project. The project manager asked him to write a report describing the benefits of the change. What is the most appropriate advice for this situation?",
+    "explanation": "The cost-benefit analysis done during project planning is not related to the change. The project sponsor doesn't approve change requests. What is meant by cost-benefit analysis here is the assumptions which the team member should provide when he requires the change. So the team member should do what was asked so that the project manager can make a decision based on the information provided. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "He should remind the project manager that the cost-benefit analysis for the project was done during project planning.",
+        "correct": false
+      },
+      {
+        "text": "The project manager should do this report himself as a part of his job.",
+        "correct": false
+      },
+      {
+        "text": "The team member should do what was asked because this sort of information must be given to the project sponsor to make the change.",
+        "correct": false
+      },
+      {
+        "text": "A project manager must be able to weigh the benefits of the change versus the costs and compare them to other possible changes. The team member should do what was asked.",
+        "correct": true
+      }
+    ],
+    "id": 1462
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "You have been assigned as a project manager for a large project to develop an accounting system using a predictive life cycle. The project is expected to be finished in 6 months and is budgeted at $100,000. During project execution, you discover that some requirements have not been included in the project scope. Failure to meet these requirements may result in legal actions from the customer of the project against your company. However, implementing these requirements may increase the project schedule and budget. What should you do?",
+    "explanation": "All requirements must be met, so you can request a change to implement the change first, then as a result of the change, you will get the needed time and funds. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Submit a change request to add the missed requirements to the project scope.",
+        "correct": true
+      },
+      {
+        "text": "Do nothing, these requirements are not a part of the project scope.",
+        "correct": false
+      },
+      {
+        "text": "This is scope creep; these requirements must be ignored.",
+        "correct": false
+      },
+      {
+        "text": "Request additional funds and time to implement these requirements.",
+        "correct": false
+      }
+    ],
+    "id": 1463
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "You are a project manager for a minor software project which is being developed using a waterfall approach. Your customer is requiring a minor change in project scope and expects you to do this without delays and additional costs. You believe that you have adequate authorization to make the decision by yourself, but you are not quite sure. What should be your next steps?",
+    "explanation": "Whenever a change request may impact any of the project's baselines, a formal integrated change control process is always required. Every documented change needs to be approved or rejected by the Change Control Board (CCB) through the Perform Integrated Change Control process. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "It is a minor change; you can approve it to increase customer satisfaction.",
+        "correct": false
+      },
+      {
+        "text": "You can use the management reserve to accommodate for this minor change.",
+        "correct": false
+      },
+      {
+        "text": "You can use the requested change to increase the profit from the contract.",
+        "correct": false
+      },
+      {
+        "text": "Handle the request according to the integrated change control processes described in your project management plan.",
+        "correct": true
+      }
+    ],
+    "id": 1464
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "After a great deal of effort, finally, the project manager has made a change to the scope baseline. What should he do next?",
+    "explanation": "As the change is already made, this means that the impacts were evaluated, the change was submitted to CCB and approved. The remaining action is to update the project management plan and project documents to reflect the change. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Ask the sponsor to approve the change.",
+        "correct": false
+      },
+      {
+        "text": "Evaluate impacts on other constraints like time, cost, and resources.",
+        "correct": false
+      },
+      {
+        "text": "Revise the project management plan and project documents.",
+        "correct": true
+      },
+      {
+        "text": "Send the change request to the Change Control Board.",
+        "correct": false
+      }
+    ],
+    "id": 1465
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "During executing a major telecommunication project, a hardware seller has released a major upgrade for some of the equipment being installed. The upgrade would provide the customer with functionality they requested at the beginning of the project, which was not available at that time. What should you do?",
+    "explanation": "As a part of professional and social responsibility, you should care about the customer's interests, so you should tell him about the available upgrades, so ignoring the upgrade and continuing as planned is not the best solution. Implementing the change can't be done unless a formal change request is submitted and approved by the CCB. Implementing the change on the remaining installations can't be done unless a formal change request is submitted and approved by the CCB. So the best answer is to inform the customer about the available upgrade and its impacts on schedule and performance. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Implement the change and adjust the schedule as necessary because this supports the customer’s original request.",
+        "correct": false
+      },
+      {
+        "text": "Inform the customer of the available upgrade and the impacts to the project’s timeline and functionality if the upgrade is implemented.",
+        "correct": true
+      },
+      {
+        "text": "Continue as planned. Your customer didn’t request a change.",
+        "correct": false
+      },
+      {
+        "text": "Implement the change on the remaining installations and continue with the schedule.",
+        "correct": false
+      }
+    ],
+    "id": 1466
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "Which of the following activities is closely related to Agile Principle 2: \"Welcome changing requirements, even late in development. Agile processes harness change for the customer’s competitive advantage\"?",
+    "explanation": "As expressed in Agile Manifesto Principle 2, staying flexible to meet the customer’s changing business needs is fundamental to agile, and the backlog is one of the key ways that agile teams ensure this adaptability. The backlog is always evolving, and it needs to be kept continually updated with the latest requirements and new information. Domain = Process. Agile Practice Guide Page 8 and 52.",
+    "choices": [
+      {
+        "text": "Limiting WIP",
+        "correct": false
+      },
+      {
+        "text": "Grooming the backlog",
+        "correct": true
+      },
+      {
+        "text": "Frequent verification and validation",
+        "correct": false
+      },
+      {
+        "text": "Minimizing waste",
+        "correct": false
+      }
+    ],
+    "id": 1467
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "You are managing a project with 34 team members and 7 key stakeholders. One team member identifies a problem with the current approach. To solve that problem you need to make changes to the project plan and its subsidiary plans. The project is time-sensitive and the customer previously indicated that any delays are unacceptable, and your team members tell you that the change may cause the team to miss at least one critical deadline. What is the best way to deal with this situation?",
+    "explanation": "You must first evaluate the impact of change on all constraints. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Analyze the impact that the change will have on the work to be done, the schedule, and the budget.",
+        "correct": true
+      },
+      {
+        "text": "Don’t make the change because any delays are unacceptable.",
+        "correct": false
+      },
+      {
+        "text": "Ask the sponsor for guidance.",
+        "correct": false
+      },
+      {
+        "text": "Make the change as soon as possible to the project plan and subsidiary plans, and ask the team to implement the change.",
+        "correct": false
+      }
+    ],
+    "id": 1468
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "Frank is managing a major mechanical project using a predictive approach. The customer requested a change to the schedule baseline. Frank has determined the effect on the scope and cost, performed integrated change control, and adjusted the project baselines, the project management plan, and project documents. What should he do next?",
+    "explanation": "The change has already been evaluated and approved; the next step is to inform stakeholders affected by the change. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Look for impacts to quality.",
+        "correct": false
+      },
+      {
+        "text": "Submit the change to the Change Control Board for approval.",
+        "correct": false
+      },
+      {
+        "text": "Look for other changes from the stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "Notify stakeholders affected by the change.",
+        "correct": true
+      }
+    ],
+    "id": 1469
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "During executing a mechanical project using waterfall approach, an experienced engineer calls the project manager in private and informs him that there is a simpler design which is more fuel-efficient and it could achieve great cost saving. What should the project manager do?",
+    "explanation": "It is not the responsibility of the engineer to evaluate impacts of the change on project constraints. A change request should be raised with the engineer suggestion for the new design and it will be assessed and approved or rejected by change control board. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66",
+    "choices": [
+      {
+        "text": "Do nothing, the plan has already been approved including the old design.",
+        "correct": false
+      },
+      {
+        "text": "Ask the engineer to submit a change request.",
+        "correct": true
+      },
+      {
+        "text": "Ask the engineer to evaluate the impacts on other project constraints.",
+        "correct": false
+      },
+      {
+        "text": "Hold a meeting with the engineer and the designer of the old system to discover variances.",
+        "correct": false
+      }
+    ],
+    "id": 1470
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "How should you plan for change management in a predictive environment?",
+    "explanation": "Change is inevitable, so planning for change must be through a change management plan or a group of management plans where change management for each knowledge area can be performed separately. Domain = Process. PMBOK 6th edition, Page 88.",
+    "choices": [
+      {
+        "text": "Changes are generally not predictable, therefore planning for change management cannot be reasonable.",
+        "correct": false
+      },
+      {
+        "text": "Planning for change management should be done while the various change control processes are being applied.",
+        "correct": false
+      },
+      {
+        "text": "Change management can be planned in a set of management plans or a specific change management plan.",
+        "correct": true
+      },
+      {
+        "text": "Changes are a sign of poor planning. One should avoid changes during a project, thus eliminating the need to manage them.",
+        "correct": false
+      }
+    ],
+    "id": 1471
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "During product demonstration, the team presents the product increment to the stakeholders. The customer requests some new features to be added. Which of the following is the best course of action? (1) The team should analyze the impact of adding the new features. (2) Add the new features to the next iteration. (3) Submit a change request. (4) Ask the customer about the priority of the new features. (5) The product owner should maintain the product backlog.",
+    "explanation": "As the team completes the features usually in the form of user stories, the team periodically demonstrates the working product. The product owner sees the demonstration and accepts or declines stories. If the stakeholders want to add new features, they should clarify their priorities and accordingly the product owner will add them to the product backlog. Domain = Process. Agile Practice Guide, Page 55.",
+    "choices": [
+      {
+        "text": "(1) and (3)",
+        "correct": false
+      },
+      {
+        "text": "(2) and (5)",
+        "correct": false
+      },
+      {
+        "text": "(4) and (5)",
+        "correct": true
+      },
+      {
+        "text": "All of them.",
+        "correct": false
+      }
+    ],
+    "id": 1472
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "What does the Agile Manifesto value \"responding to change over following a plan\" mean?",
+    "explanation": "Instead of investing effort in trying to bring the project back in line with the original plan, we want to spend more of our effort and energy responding to the changes that will arise. It doesn’t mean we should not do any planning and just react to changes. We still need to plan, but we also need to acknowledge that our initial plans were made when we knew least about the project (at the beginning) and will need to be updated as the work progresses. Domain = Process. Agile Practice Guide Page 8 and 20.",
+    "choices": [
+      {
+        "text": "Agile projects don't need intense planning, so change requests are more important as they represent customer inputs.",
+        "correct": false
+      },
+      {
+        "text": "The project team commits to the initially developed plan, however any change request to the project plan can be approved or rejected.",
+        "correct": false
+      },
+      {
+        "text": "In agile projects, initial planning is done when we know the least about the project and this plan may be updated as the work progresses.",
+        "correct": true
+      },
+      {
+        "text": "In agile projects, the project team spends less time in planning and approves more change requests than traditional projects.",
+        "correct": false
+      }
+    ],
+    "id": 1473
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "Samuel is managing an industrial project in a predictive environment. The project execution is almost complete and the project team prepares for the handover of the final product. The project sponsor informs Samuel that an important feature is missing in the product and the product will not be accepted without this feature. In light of this, what is the first thing that Samuel should do?",
+    "explanation": "It is a scope change but it will happen late in the project life cycle. The project manager needs to assess the impacts first. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Handover the product and start project closure procedures.",
+        "correct": false
+      },
+      {
+        "text": "Assess the impacts of adding the new requirement on the project.",
+        "correct": true
+      },
+      {
+        "text": "Inform the project sponsor that it is not possible to add a new requirement just before handover.",
+        "correct": false
+      },
+      {
+        "text": "Hold a meeting with the team and discuss all available options.",
+        "correct": false
+      }
+    ],
+    "id": 1474
+  },
+  {
+    "type": "multiple-choice",
+    "categoryId": 17,
+    "text": "You are a project manager for a product development project which uses a traditional life cycle. A team member approaches you with a change that could cut your schedule down by one week and the change is easy to make. What is the first thing you should do?",
+    "explanation": "Review change control procedures; you must first evaluate the impacts of the change on all constraints. Domain = Process. PMBOK 6th edition, Page 115 and PMBOK 7th edition, Page 66.",
+    "choices": [
+      {
+        "text": "Write up a change request and submit it to the Change Control Board.",
+        "correct": false
+      },
+      {
+        "text": "Make the change; it’s going to save time and nobody will want the project to take longer than it should.",
+        "correct": false
+      },
+      {
+        "text": "Figure out the impact on the scope of the work and the cost before you write up the change request.",
+        "correct": true
+      },
+      {
+        "text": "Tell the team member that you’ve already communicated the deadline for the project, so you can’t make any changes now.",
+        "correct": false
+      }
+    ],
+    "id": 1475
   }
 ]
