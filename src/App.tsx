@@ -92,7 +92,10 @@ const AppComponent: React.FC = () => {
           if (examType === "revision") {
             // maxTime is in seconds
             const durationInMinutes = newSession.maxTime / 60;
-            newSession = formatSession(newSession, newSession.questions.length, durationInMinutes)
+            newSession = formatSession({
+              ...newSession,
+              examState: 'in-progress',
+            }, newSession.questions.length, durationInMinutes)
           } else {
             // Use ExamFactory to get the corresponding exam strategy (categorized {mini}/non-categorized {full})
             const examStrategy = ExamFactory.create(examType)
@@ -150,7 +153,7 @@ const AppComponent: React.FC = () => {
   )
 
   const handleRevision = React.useCallback(
-    (options: RevisionExamOptions) => loadExam({ ...DEFAULT_SESSION, examState: 'in-progress', questions: options.wrongQuestions, maxTime: options.maxTime, examType: options.type, categoryId: options.categoryId }),
+    (options: RevisionExamOptions) => loadExam({ ...DEFAULT_SESSION, questions: options.wrongQuestions, maxTime: options.maxTime, examType: options.type, categoryId: options.categoryId }),
     [loadExam]
   )
 
