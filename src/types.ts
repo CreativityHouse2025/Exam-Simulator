@@ -57,8 +57,7 @@ export interface Question<QT extends QuestionTypes = QuestionTypes> {
   /** choices of the question */
   choices: Choice[]
   /** index of the correct choice for quick access */
-  // temporarily make it optional
-  answer?: Answer<QT>
+  answer: Answer<QT>
 }
 
 export interface Choice {
