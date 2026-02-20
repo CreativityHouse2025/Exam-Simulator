@@ -18,7 +18,6 @@ import { ExamFactory } from './utils/ExamFactory'
 import useToast from './hooks/useToast'
 
 const AppComponent: React.FC = () => {
-  // TODO: 1. Test email, retake functionality
   const [session, setSession] = useSession();
   const [showForm, setShowForm] = React.useState(false);
   const [pendingAction, setPendingAction] = React.useState<null | (() => void)>(null);
