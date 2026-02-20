@@ -124,7 +124,7 @@ const AppComponent: React.FC = () => {
         } else {
           let message: string;
           // hardcoded to prevent untranslated exams
-          if (newSession.examId === 10) {
+          if (newSession.examId === 10 || newSession.examId === 11) {
             message = "هذا الاختبار متاح حالياً باللغة الإنجليزية فقط"
           } else {
             message = translate("cover.invalid-exam-message")
