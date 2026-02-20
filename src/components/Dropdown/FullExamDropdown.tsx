@@ -1,7 +1,7 @@
 import React from "react";
 import type { DropdownItem, LangCode } from "../../types";
 import Dropdown from "./Dropdown";
-import rawFullExams from '../../data/exam-data/fullExams.json'
+import rawFullExams from '../../data/exam-data/full-exams.json'
 import useSettings from "../../hooks/useSettings";
 import { GENERAL_CATEGORY_ID, RANDOM_EXAM_ID } from "../../constants";
 import useFullExamLabel from "../../hooks/useFullExamLabel";

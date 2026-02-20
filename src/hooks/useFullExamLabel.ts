@@ -1,4 +1,4 @@
-import exams from "../data/exam-data/fullExams.json"
+import exams from "../data/exam-data/full-exams.json"
 import { RANDOM_EXAM_ID } from "../constants";
 import { translate } from "../utils/translation";
 import type { DropdownItem } from "../types";
