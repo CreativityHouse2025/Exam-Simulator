@@ -2,7 +2,7 @@ import React from 'react'
 import { ExamContext, SessionDataContext, SessionExamContext, SessionTimerContext } from '../contexts'
 import useCategoryLabel from './useCategoryLabel'
 import { ExamType, Question, Results } from '../types'
-import examTypes from '../data/exam-data/examTypes.json'
+import examTypes from '../data/exam-data/exam-types.json'
 
 type QuestionStats = {
     correct: Question['id'][]
@@ -64,7 +64,7 @@ export default function useResults(isExamFinished: boolean): Results | null {
 
     const revisionDetails = {
         maxTime,
-        questions: wrongQuestions,
+        wrongQuestions,
         categoryId,
     }
 

@@ -109,7 +109,7 @@ const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: Rev
     revisionDetails
   } = useResults(true) as Results // use true because component will only render when exam is finished
 
-  const canRetake = isRetakeAllowed(examType, revisionDetails.questions.length)
+  const canRetake = isRetakeAllowed(examType, revisionDetails.wrongQuestions.length)
 
   const translated = {
     title: translate('content.summary.title'),
