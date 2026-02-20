@@ -29,10 +29,10 @@ const FullExamDropdown: React.FC<FullExamDropdownProps> = ({
     label: useFullExamLabel(GENERAL_CATEGORY_ID)
   }
 
-  const exams: DropdownItem[] = [randomExam, ...rawFullExams.map(e => ({
+  const exams: DropdownItem[] = [...rawFullExams.map(e => ({
     id: e.id,
     label: e['name'][langCode]
-  }))]
+  })), randomExam]
 
   return (
     <Dropdown
