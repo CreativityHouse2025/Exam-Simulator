@@ -1,12 +1,12 @@
-import type { Category, ThemedStyles } from '../types'
+import type { DropdownItem, ThemedStyles } from '../types'
 import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
-import { StartExamOptions } from '../App'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
-import CategoryDropdown from './Category/CategoryDropdown'
-import { GENERAL_CATEGORY_ID, ReducedMotionWrapper } from '../constants'
+import CategoryDropdown from './Dropdown/CategoryDropdown'
+import FullExamDropdown from './Dropdown/FullExamDropdown'
+import { ReducedMotionWrapper } from '../constants'
 
 const CoverStyles = styled.div<ThemedStyles>`
   width: 100vw;
@@ -78,10 +78,12 @@ const ButtonRow = styled.div`
   gap: 1rem;
 `
 
-const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue }) => {
+const CoverComponent: React.FC<CoverProps> = ({ onMiniExam, onFullExam, canContinue, onContinue }) => {
   const [dropdown, setDropdown] = useState<boolean>(false);
+  const [fullExamDropdown, setFullExamDropdown] = useState<boolean>(false);
 
   // button ref to fix immediate dropdown close on touch event
+  const fullButtonRef = useRef<HTMLButtonElement | null>(null);
   const miniButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const translations = {
@@ -91,7 +93,8 @@ const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue
       new: translate('cover.new'),
       mini: translate('cover.mini'),
       continue: translate('cover.continue'),
-      selectCategory: translate('cover.select-category')
+      selectCategory: translate('cover.select-category'),
+      selectFullExam: translate('cover.select-fullexam')
     }
 
   return (
@@ -105,7 +108,7 @@ const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue
 
         <ButtonContainer id="button-container">
           <ButtonRow id="button-row">
-            <StartButton title='Start a new exam' type='button' id="start-new-button" className="no-select" onClick={() => onStart({type: 'exam', categoryId: GENERAL_CATEGORY_ID})}>
+            <StartButton title='Start a new exam' type='button' id="start-new-button" ref={fullButtonRef} className="no-select" onClick={() => { setFullExamDropdown(true) }}>
               {translations.new}
             </StartButton>
 
@@ -119,7 +122,20 @@ const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue
               {translations.continue}
             </ContinueButton>
           )}
-          <CategoryDropdown open={dropdown} setOpen={setDropdown} buttonRef={miniButtonRef} title={translations.selectCategory} onSelect={(categoryId: Category['id']) => onStart({type: 'miniexam', categoryId})} />
+          <FullExamDropdown
+            open={fullExamDropdown}
+            setOpen={setFullExamDropdown}
+            buttonRef={fullButtonRef}
+            title={translations.selectFullExam}
+            onSelect={(examId: DropdownItem['id']) => onFullExam(examId)}
+          />
+          <CategoryDropdown
+            open={dropdown}
+            setOpen={setDropdown}
+            buttonRef={miniButtonRef}
+            title={translations.selectCategory}
+            onSelect={(categoryId: DropdownItem['id']) => onMiniExam(categoryId)}
+          />
 
         </ButtonContainer>
       </CoverStyles>
@@ -130,7 +146,8 @@ const CoverComponent: React.FC<CoverProps> = ({ onStart, canContinue, onContinue
 export default CoverComponent
 
 export interface CoverProps {
-  onStart: (options: StartExamOptions) => void | Promise<void>
+  onMiniExam: (categoryId: DropdownItem['id']) => void | Promise<void>
+  onFullExam: (examId: DropdownItem['id']) => void | Promise<void>
   canContinue: boolean
   onContinue?: () => void | Promise<void>
 }

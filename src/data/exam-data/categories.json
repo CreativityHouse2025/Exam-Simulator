@@ -103,5 +103,61 @@
       "en": "Closure Transition",
       "ar": "الإغلاق"
     }
+  },
+  {
+    "id": 16,
+    "name": {
+      "en": "Artifacts",
+      "ar": "عناصر العمل"
+    }
+  },
+  {
+    "id": 17,
+    "name": {
+      "en": "Changes",
+      "ar": "التغييرات"
+    }
+  },
+  {
+    "id": 18,
+    "name": {
+      "en": "Collaborating with Stakeholders",
+      "ar": "التعاون مع أصحاب المصلحة"
+    }
+  },
+  {
+    "id": 19,
+    "name": {
+      "en": "Empowering Stakeholders",
+      "ar": "تقوية أصحاب المصلحة"
+    }
+  },
+  {
+    "id": 20,
+    "name": {
+      "en": "Managing Conflicts",
+      "ar": "إدارة النزاعات"
+    }
+  },
+  {
+    "id": 21,
+    "name": {
+      "en": "Methodology",
+      "ar": "المنهجية"
+    }
+  },
+  {
+    "id": 22,
+    "name": {
+      "en": "Planning",
+      "ar": "التخطيط"
+    }
+  },
+  {
+    "id": 23,
+    "name": {
+      "en": "Value",
+      "ar": "القيمة"
+    }
   }
 ]

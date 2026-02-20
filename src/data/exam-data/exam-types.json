@@ -5,8 +5,6 @@
             "en": "New Exam",
             "ar": "امتحان جديد"
         },
-        "minQuestionCount": 180,
-        "maxQuestionCount": 180,
         "durationMinutes": 230,
         "passingRate": 75,
         "allowRetake": true
@@ -17,8 +15,6 @@
             "en": "Mini Exam",
             "ar": "امتحان مصغر"
         },
-        "minQuestionCount": 30,
-        "maxQuestionCount": 50,
         "durationMinutes": 46,
         "passingRate": 85,
         "allowRetake": false
@@ -29,8 +25,6 @@
             "en": "Review Mistakes",
             "ar": "مراجعة الأخطاء"
         },
-        "minQuestionCount": null,
-        "maxQuestionCount": null,
         "durationMinutes": null,
         "passingRate": null,
         "allowRetake": false

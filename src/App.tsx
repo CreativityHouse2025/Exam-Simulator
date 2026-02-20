@@ -1,23 +1,23 @@
-import type { Category, Exam, ExamType, LangCode, Session, RevisionDetails } from './types'
+import type { Exam, ExamType, LangCode, Session, RevisionDetails } from './types'
 
 import React from 'react'
 import Header from './components/Header'
 import Navigation from './components/Navigation'
 import Cover from './components/Cover'
 import Loading from './components/Loading'
-import { hasTranslation, setTranslation } from './utils/translation'
+import { hasTranslation, setTranslation, translate } from './utils/translation'
 import { formatSession, formatExam } from './utils/format'
-import { generateNewExam, getExamByQuestionIds, initQuestionMap } from './utils/exam'
-import { DEFAULT_SESSION, GENERAL_CATEGORY_ID, LANGUAGES } from './constants'
+import { getExamByQuestionIds, initQuestionMap } from './utils/exam'
+import { DEFAULT_SESSION, LANGUAGES } from './constants'
 import { ExamContext } from './contexts'
 import { useSession } from './hooks/useSession'
 import useSettings from './hooks/useSettings'
-import ToastContextProvider from './providers/ToastContextProvider'
 import Toast from './components/Toast'
 import UserInfoForm from './components/UserInfoForm'
+import { ExamFactory } from './utils/ExamFactory'
+import useToast from './hooks/useToast'
 
 const AppComponent: React.FC = () => {
-  // TODO: 1. Test email, retake functionality
   const [session, setSession] = useSession();
   const [showForm, setShowForm] = React.useState(false);
   const [pendingAction, setPendingAction] = React.useState<null | (() => void)>(null);
@@ -27,6 +27,8 @@ const AppComponent: React.FC = () => {
   const [exam, setExam] = React.useState<Exam | null>(null)
   const [loading, setLoading] = React.useState<boolean>(false);
   const [translationReady, setTranslationReady] = React.useState<boolean>(hasTranslation());
+
+  const { showToast } = useToast()
 
   const langCode = settings.language;
 
@@ -71,36 +73,67 @@ const AppComponent: React.FC = () => {
   const loadExam = React.useCallback(
     (newSession: Session) => {
       if (!newSession.examType) {
-        throw new Error("No exam ID found in session")
+        throw new Error("No exam type found in session")
       }
       try {
-        let examData: Exam, questionIds: number[]
+        let examData: Exam | null
 
-        // if the exam is a revision, get the (wrong) questions passed to the options
         /**
-         * revision session required options:
-         * 1. maxTime from previous session
-         * 2. questionIds from previous session
-         * 3. categoryId from previous session
-         * 4. exam type 'revision'
+         * Exam has two cases: 
+         * 1. completed OR paused
+         *      get exam data from questionIds in the session (shared logic)
+         * 2. new exam
+         *      check its type and process accordingly
+         *      then get exam data from questionIds in the new session (shared logic)
          */
-        if (newSession.examType === "revision") {
-          questionIds = newSession.questions;
-          newSession = formatSession(newSession, questionIds.length, newSession.maxTime / 60)
-        } else if (newSession.examState === 'not-started') { // else if a new exam, generate questions 
-          let examDetails = generateNewExam(newSession.examType, newSession.categoryId)
-          questionIds = examDetails.questionIds
-          newSession = formatSession({ ...newSession, examState: 'in-progress', questions: questionIds }, examDetails.questionIds.length, examDetails.durationMinutes)
+
+        const examState = newSession.examState;
+        if (examState === "not-started") {
+          const examType = newSession.examType
+          if (examType === "revision") {
+            // maxTime is in seconds
+            const durationInMinutes = newSession.maxTime / 60;
+            newSession = formatSession({
+              ...newSession,
+              examState: 'in-progress',
+            }, newSession.questions.length, durationInMinutes)
+          } else {
+            // Use ExamFactory to get the corresponding exam strategy (categorized {mini}/non-categorized {full})
+            const examStrategy = ExamFactory.create(examType)
+
+            let examDetails = examStrategy.buildExam(newSession.categoryId, newSession.examId)
+
+            newSession = formatSession({
+              ...newSession, examState: 'in-progress',
+              questions: examDetails.questionIds
+            },
+              examDetails.questionIds.length, examDetails.durationMinutes)
+          }
         }
+
         // always get the exam by the session's question Ids
         /* 
-        Case 1. Revision: questions in the session exist
-        Case 2. Not started: session is formatted and questions are assigned
-        Case 3. Continue: session is ready
+        Case 1. Revision: questions in the session exist (if)
+        Case 2. Not started: session is formatted and questions are assigned (else if)
+        Case 3. Continue: session is ready (shared logic)
         */
+
         examData = getExamByQuestionIds(newSession.questions);
 
-        formatExam(examData)
+        if (examData !== null) {
+          formatExam(examData)
+        } else {
+          let message: string;
+          // hardcoded to prevent untranslated exams
+          if (newSession.examId === 10 || newSession.examId === 11 || newSession.examId === 12 || newSession.examId === 13) {
+            message = "هذا الاختبار متاح حالياً باللغة الإنجليزية فقط"
+          } else {
+            message = translate("cover.invalid-exam-message")
+          }
+          showToast(message, 5000)
+          return
+        }
+
         setExam(examData)
         setSession(newSession)
       } catch (error) {
@@ -108,16 +141,26 @@ const AppComponent: React.FC = () => {
         setExam(null)
       }
     },
-    [setExam, setSession]
+    [setExam, setSession, showToast]
   )
 
-  const handleStart = React.useCallback(
-    (options: StartExamOptions) => loadExam({ ...DEFAULT_SESSION, examType: options.type, categoryId: options.categoryId }),
+  const handleFullExam = React.useCallback(
+    // categoryId will be 0 by DEFAULT_SESSION, indicating it's uncategorized
+    (examId: number) => {
+      loadExam({ ...DEFAULT_SESSION, examType: "exam", examId })
+    },
+    [loadExam]
+  )
+
+  const handleMiniExam = React.useCallback(
+    (categoryId: number) => {
+      loadExam({ ...DEFAULT_SESSION, examType: "miniexam", categoryId })
+    },
     [loadExam]
   )
 
   const handleRevision = React.useCallback(
-    (options: RevisionExamOptions) => loadExam({ ...DEFAULT_SESSION, examState: 'in-progress', questions: options.questions, maxTime: options.maxTime, examType: options.type, categoryId: options.categoryId }),
+    (options: RevisionExamOptions) => loadExam({ ...DEFAULT_SESSION, questions: options.wrongQuestions, maxTime: options.maxTime, examType: options.type, categoryId: options.categoryId }),
     [loadExam]
   )
 
@@ -126,10 +169,9 @@ const AppComponent: React.FC = () => {
       loadExam(session)
     } catch (err) {
       console.error('Failed to load previous exam:', err)
-      // Fallback to starting a new exam if loading fails
-      handleStart({ type: 'exam', categoryId: GENERAL_CATEGORY_ID })
+      // show toast of the error
     }
-  }, [session, loadExam, handleStart])
+  }, [session, loadExam])
 
   const handleFormSubmit = React.useCallback((name: string, email: string) => {
     updateEmail(email);
@@ -146,6 +188,16 @@ const AppComponent: React.FC = () => {
     setPendingAction(() => action);
     setShowForm(true);
   }, []);
+
+  function withUserInfo<T extends unknown[]>(action: (...args: T) => void) {
+    return (...args: T) => {
+      if (!settings.fullName || !settings.email) {
+        requireUserInfo(() => action(...args));
+      } else {
+        action(...args);
+      }
+    };
+  }
 
   // Smooth close handler
   const handleFormClose = React.useCallback(() => {
@@ -182,6 +234,7 @@ const AppComponent: React.FC = () => {
       setLoading(true);
       try {
         await initQuestionMap(langCode);
+        // if an exam session is running load its questions
         if (!cancelled && exam && session.examType) {
           loadExam(session);
         }
@@ -204,8 +257,8 @@ const AppComponent: React.FC = () => {
   }
 
   return (
-    <ToastContextProvider>
-      <Header onLanguage={toggleLanguage} onAccount={handleAccount}/>
+    <>
+      <Header onLanguage={toggleLanguage} onAccount={handleAccount} />
 
       <UserInfoForm
         initialValues={initialAccount}
@@ -220,35 +273,17 @@ const AppComponent: React.FC = () => {
         </ExamContext.Provider>
       ) : (
         <Cover
-          onStart={(options) => {
-            if (!settings.fullName || !settings.email) {
-              // show form first, then start exam after user fills info
-              requireUserInfo(() => handleStart(options));
-            } else {
-              handleStart(options);
-            }
-          }}
+          onMiniExam={withUserInfo(handleMiniExam)}
+          onFullExam={withUserInfo(handleFullExam)}
           canContinue={session.examType ? true : false}
-          onContinue={() => {
-            if (!settings.fullName || !settings.email) {
-              // show form first, then continue exam after user fills info
-              requireUserInfo(handleContinue);
-            } else {
-              handleContinue();
-            }
-          }}
+          onContinue={withUserInfo(handleContinue)}
         />
       )}
 
       <Toast />
-    </ToastContextProvider>
+    </>
   )
 }
-
-export type StartExamOptions = {
-  type: ExamType;
-  categoryId: Category['id'];
-};
 
 export type RevisionExamOptions = RevisionDetails & {
   type: ExamType;

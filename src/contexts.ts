@@ -4,7 +4,7 @@ export const ToastContext = React.createContext<ToastContextType | undefined>(un
 import type { Exam, SessionNavigation, SessionTimer, SessionExam, SessionData, SettingsContextType, ToastContextType } from './types'
 
 import { createContext } from 'react'
-import { GENERAL_CATEGORY_ID } from './constants'
+import { GENERAL_CATEGORY_ID, RANDOM_EXAM_ID } from './constants'
 
 // Exam context
 export const ExamContext = createContext<Exam>({} as Exam)
@@ -26,7 +26,8 @@ export const SessionTimerContext = createContext<SessionTimer>({
 export const SessionExamContext = createContext<SessionExam>({
   examState: 'not-started',
   reviewState: 'summary',
-  categoryId: GENERAL_CATEGORY_ID // add category to the context for metadata during exam
+  categoryId: GENERAL_CATEGORY_ID, // add category to the context for metadata during exam
+  examId: RANDOM_EXAM_ID
 })
 
 export const SessionDataContext = createContext<SessionData>({

@@ -90,6 +90,7 @@ export function formatSession(session: Session, questionCount: number, durationM
   try {
     // Fill missing answers with empty arrays
     const missingAnswers = questionCount - session.answers.length
+    
     if (missingAnswers > 0) {
       session.answers = [...session.answers, ...Array(missingAnswers).fill([])]
     }

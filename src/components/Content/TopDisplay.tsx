@@ -6,6 +6,7 @@ import BookmarkButton from './Bookmark'
 import { translate } from '../../utils/translation'
 import { SessionExamContext, SessionNavigationContext } from '../../contexts'
 import useCategoryLabel from '../../hooks/useCategoryLabel'
+import useFullExamLabel from '../../hooks/useFullExamLabel'
 
 export const TopDisplayStyles = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ const ExamHeader = styled.div`
   margin-bottom: 3rem;
 `
 
-const CategoryLabel = styled.div<ThemedStyles>`
+const CategoryExamChip = styled.div<ThemedStyles>`
   padding: 0.6rem 1rem;
   font-family: ${({ theme }) => theme.fontFamily};
   background-color: ${({ theme }) => theme.grey[1]};
@@ -45,13 +46,26 @@ export const QuestionTextStyles = styled.div<ThemedStyles>`
 
 const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isReview = false }) => {
   const { index } = React.useContext(SessionNavigationContext)
-  const { categoryId } = React.useContext(SessionExamContext)
+  const { categoryId, examId } = React.useContext(SessionExamContext)
 
-  let categoryLabel: string | undefined = useCategoryLabel(categoryId);
+  let categoryExamLabel: string | undefined;
+
+  const isFullExam = (examId !== undefined && examId !== null);
+  
+  if (isFullExam) {
+    categoryExamLabel = useFullExamLabel(examId)
+  } else {
+    categoryExamLabel = useCategoryLabel(categoryId);
+  }
 
   const question = translate('content.top-display.question', [index + 1, questionCount])
 
-  const category = translate('content.summary.category')
+
+  const translations = {
+    category: translate('content.top-display.category'),
+    exam: translate('content.top-display.exam')
+  }
+
 
   return (
     <ExamHeader id="exam-header">
@@ -60,9 +74,9 @@ const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isRevie
 
         {!isReview && <BookmarkButton />}
       </TopDisplayStyles>
-      <CategoryLabel>
-        {category}: {categoryLabel ?? "undefined category"}
-      </CategoryLabel>
+      <CategoryExamChip>
+        {isFullExam ? translations.exam : translations.category}: {categoryExamLabel ?? "undefined exam/category label"}
+      </CategoryExamChip>
     </ExamHeader>
   )
 }

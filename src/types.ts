@@ -57,8 +57,7 @@ export interface Question<QT extends QuestionTypes = QuestionTypes> {
   /** choices of the question */
   choices: Choice[]
   /** index of the correct choice for quick access */
-  // temporarily make it optional
-  answer?: Answer<QT>
+  answer: Answer<QT>
 }
 
 export interface Choice {
@@ -83,7 +82,7 @@ export type ReviewState = 'summary' | 'question'
 
 // Session interface
 export interface Session {
-  /** v1.1: the list of question IDs for this session, in the order they should appear */
+  /** v1.1: Session id */
   id: string
   /** the question number */
   index: number
@@ -107,24 +106,18 @@ export interface Session {
   categoryId: number
   /** the list of bookmarked questions */
   bookmarks: number[]
-  /** the ID of the exam */
+  /** the type of the exam */
   examType?: ExamType
+  /** the ID of the full exam (if it is a full exam) */
+  examId?: number
   /** session update function - will be injected by reducer */
   update?: SessionDispatch
 }
 
-// v1.1: type for exam generator output
-export interface GeneratedExam {
-  /** the list of question ids to perserve question order in local storage */
-  questionIds: number[]
-  /** the duration of the exam in minutes */
-  durationMinutes: number
-}
-
-// v1.1: type for category item
-export type Category = {
-  id: number
-  label: string
+// v2.0: Type for the generic dropdown item (category or fullexam)
+export type DropdownItem<TId = number, TLabel = string> = {
+  id: TId
+  label: TLabel
 }
 
 // Session action types
@@ -165,7 +158,7 @@ export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, Ses
 // Session context slice types
 export type SessionNavigation = Pick<Session, 'index' | 'update'>
 export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused' | 'update'>
-export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'update' | 'categoryId'>
+export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'update' | 'categoryId'| 'examId'>
 export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | 'update' | 'emailSent'>
 
 // Email API arguments type
@@ -236,7 +229,7 @@ export interface ToastContextType {
 
 export type RevisionDetails = {
   maxTime: Session['maxTime']
-  questions: Session['questions']
+  wrongQuestions: Session['questions']
   categoryId: Session['categoryId']
 }
 
