@@ -61,7 +61,8 @@
       "incorrect": "Wrong",
       "incomplete": "Unanswered",
       "home": "Go Home",
-      "retake-wrong": "Retry Mistakes"
+      "retake-wrong": "Retry Mistakes",
+      "category": "Category"
     }
   },
   "confirm": {
