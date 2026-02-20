@@ -61,7 +61,8 @@
       "incorrect": "خطأ",
       "incomplete": "ناقص",
       "home": "العودة للصفحة الرئيسية",
-      "retake-wrong": "إعادة إختبار الأخطاء"
+      "retake-wrong": "إعادة إختبار الأخطاء",
+      "category": "التصنيف"
     }
   },
   "confirm": {
