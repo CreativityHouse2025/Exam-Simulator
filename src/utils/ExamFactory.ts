@@ -1,7 +1,7 @@
 import type { ExamType, Question } from "../types"
 import { GENERAL_CATEGORY_ID, RANDOM_EXAM_ID } from "../constants";
-import examTypes from '../data/exam-data/examTypes.json'
-import exams from '../data/exam-data/fullExams.json'
+import examTypes from '../data/exam-data/exam-types.json'
+import exams from '../data/exam-data/full-exams.json'
 import { getQuestionList } from "./exam";
 import { shuffleArray } from './format'
 

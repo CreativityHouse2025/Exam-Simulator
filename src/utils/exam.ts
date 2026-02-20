@@ -1,5 +1,5 @@
 import { GENERAL_CATEGORY_ID, RETAKE_MIN_MISTAKES } from '../constants'
-import examTypes from '../data/exam-data/examTypes.json'
+import examTypes from '../data/exam-data/exam-types.json'
 import type { Exam, Question, LangCode, ExamType } from '../types'
 
 // Map to retrieve questions in order later
