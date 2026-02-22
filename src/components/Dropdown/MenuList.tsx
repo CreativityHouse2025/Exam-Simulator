@@ -5,7 +5,7 @@ import MenuItem from "./MenuItem";
 
 const MenuListStyles = styled.ul`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 0.7rem;
   list-style: none;
   margin: 0;
