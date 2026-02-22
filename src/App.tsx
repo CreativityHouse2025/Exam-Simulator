@@ -124,14 +124,7 @@ const AppComponent: React.FC = () => {
           formatExam(examData)
         } else {
           let message: string;
-          // hardcoded to prevent untranslated exams
-          if (newSession.examId === 10 || newSession.examId === 11 || newSession.examId === 12 || newSession.examId === 13
-            || newSession.examId === 14 || newSession.examId === 15
-          ) {
-            message = "هذا الاختبار متاح حالياً باللغة الإنجليزية فقط"
-          } else {
-            message = translate("cover.invalid-exam-message")
-          }
+          message = translate("cover.invalid-exam-message")
           showToast(message, 5000)
           return
         }
