@@ -14,7 +14,7 @@ let questionList: Question[] | null = null;
  */
 export async function initQuestionMap(langCode: LangCode) {
     try {
-        const module = await import(`../data/exam-data/questions-${langCode}.json`);
+        const module = await import(`../data/exam-data/questions-${langCode}.json?v=1`);
         const questions: Question[] = module.default;
         questionMap = new Map();
 
