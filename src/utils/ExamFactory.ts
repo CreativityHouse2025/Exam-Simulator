@@ -43,22 +43,15 @@ class MiniExam implements ExamStrategy {
     const examDetails = examTypes["miniexam"]
 
     const { durationMinutes } = examDetails
-    const minQuestionCount = 30; // business ruls
-    const maxQuestionCount = 50; // business ruls
-    const questionCount = getRandomInt(minQuestionCount, maxQuestionCount);
-    if (questionCount <= 0) { // safety for wrong configurations
-      return {
-        questionIds: [],
-        durationMinutes: 0
-      }
-    }
 
     const questionList = getValidatedQuestionList()
+
+    let isGeneral = categoryId === GENERAL_CATEGORY_ID;
 
     let questionPool: Question[] = []
 
     // if the category is general, skip filtering
-    if (categoryId === GENERAL_CATEGORY_ID) {
+    if (isGeneral) {
       questionPool = [...questionList]
     } else {
       questionPool = questionList.filter((q: Question): boolean => q.categoryId === categoryId)
@@ -69,20 +62,23 @@ class MiniExam implements ExamStrategy {
       throw new Error(`category with id ${categoryId} does not have any questions`)
     }
 
-    // warn if there aren’t enough questions
-    if (questionPool.length < questionCount) {
-      console.warn(`Requested ${questionCount} questions, but only ${questionPool.length} available.`);
+    // warn if there are less than 10 questions
+    if (questionPool.length < 10) {
+      console.warn(`Only ${questionPool.length} available in category with id ${categoryId}.`);
     }
-
-    // shuffle the pool only for miniexams or random full exams
-    questionPool = shuffleArray(questionPool)
 
     // choose first questionCount questions
     // note: Array.prototype.slice is safe, even if questionPool < questionCount, it will return an adjusted array
-    const chosenQuestions = questionPool.slice(0, questionCount);
+    let chosenQuestions: Question[];
+    if (isGeneral) {
+      // get first 50 questions of the pool if general
+      chosenQuestions = questionPool.slice(0, 50);
+    } else {
+      // otherwise get all available questions in the category
+      chosenQuestions = questionPool;
+    }
 
-
-    // get questions order
+    // get questions IDs for order
     const questionIds = chosenQuestions.map((q: Question): Question['id'] => q.id)
 
     const BuiltExam: BuiltExam = {

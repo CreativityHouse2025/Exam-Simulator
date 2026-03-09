@@ -21,8 +21,12 @@ export default function useResults(isExamFinished: boolean): Results | null {
     const categoryLabel = useCategoryLabel(categoryId) as string
 
     const questionStats = React.useMemo<QuestionStats>(() => {
-        const arraysEqual = (a: number[] | null, b: number[]): boolean =>
-            a !== null && a.length === b.length && a.every((val, index) => val === b[index])
+        const arraysEqual = (a: number[] | null, b: number[]): boolean => {
+            if (a === null || a.length !== b.length) return false
+            const sortedA = [...a].sort((x, y) => x - y)
+            const sortedB = [...b].sort((x, y) => x - y)
+            return sortedA.every((val, index) => val === sortedB[index])
+        }
 
         return answers.reduce<QuestionStats>(
             (acc, givenAnswer, i) => {

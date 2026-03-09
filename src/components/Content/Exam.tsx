@@ -18,7 +18,7 @@ const ExamComponent: React.FC<ExamProps> = ({ isReview }) => {
   const exam = React.useContext(ExamContext)
 
   const question = exam[index]
-  const answer = answers[index]
+  const answer = answers[index] || []
 
   return (
     <ExamStyles id="exam">

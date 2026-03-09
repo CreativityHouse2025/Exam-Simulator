@@ -38,8 +38,10 @@ const NormalText = styled.span`
 `
 
 const ExplanationComponent: React.FC<ExplanationProps> = ({ question, answer }) => {
+  const sortedCorrect = [...question.answer].sort((a, b) => a - b)
+  const sortedAnswer = [...(answer as number[])].sort((a, b) => a - b)
   const correct: boolean =
-    question.answer.length === answer.length && question.answer.every((ans, index) => ans === answer[index])
+    sortedCorrect.length === sortedAnswer.length && sortedCorrect.every((val, i) => val === sortedAnswer[i])
 
   const { settings } = useSettings();
   const langCode = settings.language;
