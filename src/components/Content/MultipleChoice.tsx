@@ -22,16 +22,24 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
     (idx: number) => {
       if (isReview) return
 
-      const newValues = answer.includes(idx)
-        ? answer.filter((i) => i !== idx)
-        : answer.length < question.answer.length
-          ? [...answer, idx]
-          : answer // Don't add if max answers reached
+      const current = answers[index] || []
+      const isAlreadySelected = current.includes(idx)
+      const maxChoicesReached = current.length >= question.answer.length
 
-      answers[index] = newValues
-      update!([SESSION_ACTION_TYPES.SET_ANSWERS, [...answers]])
+      let newValues: AnswerOfMultipleChoice
+
+      if (isAlreadySelected) {
+        newValues = current.filter((i) => i !== idx)
+      } else if (!maxChoicesReached) {
+        newValues = [...current, idx]
+      } else {
+        return
+      }
+
+      const newAnswers = answers.map((a, i) => (i === index ? newValues : a))
+      update!([SESSION_ACTION_TYPES.SET_ANSWERS, newAnswers])
     },
-    [index, answers, answer, question.answer.length, isReview, update]
+    [index, answers, question.answer.length, isReview, update]
   )
 
   return (
