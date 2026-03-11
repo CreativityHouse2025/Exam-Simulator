@@ -15,7 +15,7 @@
             "en": "Mini Exam",
             "ar": "امتحان مصغر"
         },
-        "durationMinutes": 46,
+        "durationMinutes": 300,
         "passingRate": 85,
         "allowRetake": false
     },
