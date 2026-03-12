@@ -1,6 +1,8 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import nodemailer from "nodemailer";
-import { SendEmailRequest } from '../src/types.js'
+import { SendEmailRequest } from "./_lib/types.js";
+import { withErrorHandler } from "./_lib/middleware/withErrorHandler.js";
+import { AppError } from "./_lib/errors/AppError.js";
 
 const SENDER_EMAIL = process.env.SENDER;
 const APP_PASSWORD = process.env.APP_PASSWORD;
@@ -17,30 +19,26 @@ const transporter = nodemailer.createTransport({
   auth: { user: SENDER_EMAIL, pass: APP_PASSWORD },
 });
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    throw new AppError({ statusCode: 405, code: "METHOD_NOT_ALLOWED", message: "Method not allowed" })
   }
-  try {
-    const emailRequest = req.body as SendEmailRequest;
 
-    const { to, subject, text, html } = emailRequest;
+  const { to, subject, text, html } = req.body as SendEmailRequest
 
-    if (!to || !subject || !text) {
-      return res.status(400).json({ error: "Missing request information" });
-    }
-
-    const info = await transporter.sendMail({
-      from: SENDER_EMAIL,
-      to,
-      subject,
-      text,
-      html
-    });
-
-    return res.status(200).json({ message: "Email sent successfully", id: info.messageId });
-  } catch (error: any) {
-    console.error("Email send error:", error);
-    return res.status(500).json({ error: error.message });
+  if (!to || !subject || !text) {
+    throw new AppError({ statusCode: 400, code: "MISSING_FIELDS", message: "Missing required fields: to, subject, text" })
   }
+
+  const info = await transporter.sendMail({
+    from: SENDER_EMAIL,
+    to,
+    subject,
+    text,
+    html,
+  })
+
+  return res.status(200).json({ message: "Email sent successfully", id: "whatever" })
 }
+
+export default withErrorHandler(handler);
