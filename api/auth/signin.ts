@@ -1,11 +1,8 @@
+import { withErrorHandler } from "../_lib/middleware/withErrorHandler.js";
 import { supabaseClient } from "../_lib/supabaseClient.js";
+import { successResponse } from "../_lib/utils/response.js";
 
-export async function GET(request: Request) {
-  const output = await supabaseClient.from('testing').select()
-  return new Response(
-    JSON.stringify({ message: output }),
-    {
-      headers: { "content-type": "application/json" }
-    }
-  );
-}
+export const GET = withErrorHandler(async (request: Request) => {
+  const data = (await supabaseClient.from('testing').select()).data;
+  return successResponse(data);
+});
