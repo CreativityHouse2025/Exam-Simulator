@@ -10,7 +10,7 @@ export function useEmail() {
         setError(null);
 
         try {
-            const res = await fetch("/api/send-email", {
+            const res = await fetch("/api/report/send-email", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(emailRequest),

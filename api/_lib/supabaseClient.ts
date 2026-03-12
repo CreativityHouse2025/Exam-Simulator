@@ -1,18 +1,23 @@
-import { createClient } from '@supabase/supabase-js'
-import 'dotenv/config'
+import { createClient } from "@supabase/supabase-js"
+import type { Database } from "./database.types.js"
 
-const sb_secret = process.env.SB_SECRET;
-const sb_url = process.env.SB_URL;
-if (!sb_secret || !sb_url)
-  throw new Error("Failure reading Supabase Client secrets")
+function requireEnv(name: string): string {
+  const value = process.env[name]
+  if (!value) throw new Error(`Missing required environment variable: ${name}`)
+  return value
+}
 
-const supabase = createClient(
-  sb_url,
-  sb_secret
-)
+const supabaseUrl = requireEnv("SB_URL")
+const supabasePublicKey = requireEnv("SB_PUBLIC_KEY")
+const supabaseSecretKey = requireEnv("SB_SECRET_KEY")
 
-const { data, error } = await supabase
-  .from('testing')
-  .insert({ name: 'Mordor' })
+/** Public client — authenticated via RLS policies using the publishable key */
+export const supabasePublic = createClient<Database>(supabaseUrl, supabasePublicKey)
 
-console.log({data, error });
+/** Admin client — uses secret_key, bypasses RLS. Never expose to the client. */
+export const supabaseAdmin = createClient<Database>(supabaseUrl, supabaseSecretKey, {
+  auth: {
+    autoRefreshToken: false,
+    persistSession: false,
+  },
+})

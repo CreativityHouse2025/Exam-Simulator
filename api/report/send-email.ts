@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import nodemailer from "nodemailer";
-import { SendEmailRequest } from "./_lib/types.js";
-import { withErrorHandler } from "./_lib/middleware/withErrorHandler.js";
-import { AppError } from "./_lib/errors/AppError.js";
+import { SendEmailRequest } from "../_lib/types.js";
+import { withErrorHandler } from "../_lib/middleware/withErrorHandler.js";
+import { AppError } from "../_lib/errors/AppError.js";
 
 const SENDER_EMAIL = process.env.SENDER;
 const APP_PASSWORD = process.env.APP_PASSWORD;
@@ -38,7 +38,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     html,
   })
 
-  return res.status(200).json({ message: "Email sent successfully", id: "whatever" })
+  return res.status(200).json({ message: "Email sent successfully", id: info.messageId })
 }
 
 export default withErrorHandler(handler);
