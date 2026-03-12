@@ -3,13 +3,10 @@ import nodemailer from "nodemailer";
 import { SendEmailRequest } from "../_lib/types.js";
 import { withErrorHandler } from "../_lib/middleware/withErrorHandler.js";
 import { AppError } from "../_lib/errors/AppError.js";
+import { requireEnv } from "../_lib/utils/env.js";
 
-const SENDER_EMAIL = process.env.SENDER;
-const APP_PASSWORD = process.env.APP_PASSWORD;
-
-if (!SENDER_EMAIL || !APP_PASSWORD) {
-  throw new Error("Missing EMAIL_USER or APP_PASSWORD environment variables");
-}
+const SENDER_EMAIL = requireEnv("SENDER")
+const APP_PASSWORD = requireEnv("APP_PASSWORD")
 
 // Create transporter once
 const transporter = nodemailer.createTransport({
