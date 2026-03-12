@@ -66,7 +66,7 @@ import(`./data/langs/${langCode}.json`)
 - `src/components/Content/` - Question rendering, results summary
 - `src/data/exam-data/` - Question banks, exam definitions, categories
 - `src/data/langs/` - Translation JSON files (ar.json, en.json)
-- `api/send-email.ts` - Vercel serverless function for exam summary email
+- `api/report/send-email.ts` - Vercel serverless function for exam summary email
 - `api/` - Additional serverless functions for v2.0 backend (not yet implemented)
 - `test/` - Mocha tests for exam logic validation
 
