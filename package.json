@@ -10,18 +10,21 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "mocha ./test/**/*.test.js",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "typecheck": "tsc --build && tsc -p tsconfig.vite.json"
   },
   "dependencies": {
     "@mantine/hooks": "^8.3.10",
     "@rollup/plugin-dynamic-import-vars": "^2.1.5",
     "@styled-icons/boxicons-solid": "^10.47.0",
     "@styled-icons/material": "^10.47.0",
+    "@supabase/supabase-js": "^2.99.0",
     "arabic-persian-reshaper": "^1.0.1",
+    "axios": "^1.13.6",
     "bidi-js": "^1.0.3",
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.3",
-    "jspdf": "^3.0.4",
+    "jspdf": "^4.2.0",
     "nodemailer": "^7.0.11",
     "polished": "^4.3.1",
     "react": "^19.1.1",
@@ -35,8 +38,9 @@
     "@types/react-dom": "^19.1.7",
     "@vercel/node": "^2.3.0",
     "@vitejs/plugin-react-swc": "^4.0.0",
-    "mocha": "^11.7.1",
+    "mocha": "^11.3.0",
     "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
     "vite": "^7.1.2"
   }
 }
