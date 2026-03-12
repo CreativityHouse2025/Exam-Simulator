@@ -1,13 +1,20 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node"
-
 export type AppErrorCode = "METHOD_NOT_ALLOWED" | "MISSING_FIELDS" | "INTERNAL_ERROR"
 
-export type ErrorResponseBody = {
+
+export type ApiSuccess<T> = {
+  success: true;
+  data: T;
+};
+
+export type ApiError = {
+  success: false;
   error: {
-    code: AppErrorCode
-    message: string
-  }
-}
+    code: AppErrorCode;
+    message: string;
+  };
+};
+
+export type ApiResponse<T> = ApiSuccess<T> | ApiError;
 
 // Email API arguments type
 export type SendEmailRequest = {
@@ -29,4 +36,4 @@ export type AppErrorParams = {
   message: string
 }
 
-export type VercelHandler = (req: VercelRequest, res: VercelResponse) => Promise<VercelResponse | void>
+export type ApiHandler = (req: Request) => Promise<Response>
