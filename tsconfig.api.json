@@ -8,6 +8,7 @@
     "types": ["node"],
     "strict": true,
     "emitDeclarationOnly": true,
+    "declarationDir": "dist/types/api",
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

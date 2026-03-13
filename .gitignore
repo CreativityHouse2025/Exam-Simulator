@@ -54,6 +54,7 @@ web_modules/
 
 # ذاكرة التخزين المؤقت لـ TypeScript
 *.tsbuildinfo
+api/**/*.d.ts
 
 # دليل ذاكرة التخزين المؤقت لـ npm الاختياري
 .npm
