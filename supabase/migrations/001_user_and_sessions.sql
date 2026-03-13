@@ -1,7 +1,6 @@
 -- users table (public profile, linked to Supabase Auth)
 CREATE TABLE public.users (
   id          UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
-  email       TEXT UNIQUE NOT NULL,
   first_name  TEXT NOT NULL,
   last_name   TEXT NOT NULL,
   highlevel_id TEXT UNIQUE,

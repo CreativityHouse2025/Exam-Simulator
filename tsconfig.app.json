@@ -8,6 +8,7 @@
     "jsx": "react-jsx",
     "strict": true,
     "emitDeclarationOnly": true,
+    "declarationDir": "dist/types/app",
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

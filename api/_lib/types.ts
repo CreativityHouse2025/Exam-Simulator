@@ -1,4 +1,10 @@
-export type AppErrorCode = "METHOD_NOT_ALLOWED" | "MISSING_FIELDS" | "INTERNAL_ERROR"
+export type AppErrorCode =
+  | "METHOD_NOT_ALLOWED"
+  | "MISSING_FIELDS"
+  | "INTERNAL_ERROR"
+  | "VALIDATION_ERROR"
+  | "SUBSCRIPTION_REQUIRED"
+  | "SIGNUP_FAILED"
 
 
 export type ApiSuccess<T> = {
@@ -29,6 +35,13 @@ export type SendEmailRequest = {
   }[]
 }
 
+
+export type SignupRequestBody = {
+  email: string
+  password: string
+  first_name: string
+  last_name: string
+}
 
 export type AppErrorParams = {
   statusCode: number
