@@ -21,7 +21,7 @@ export const POST = withErrorHandler(async (request: Request) => {
     email,
     password,
     options: {
-      data: { first_name: first_name.toUpperCase(), last_name: last_name.toUpperCase(), highlevel_id, expires_at: expiresAt.toISOString() },
+      data: { first_name, last_name, highlevel_id, expires_at: expiresAt.toISOString() },
     },
   })
 
