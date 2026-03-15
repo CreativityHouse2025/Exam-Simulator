@@ -6,9 +6,9 @@ import { ApiSuccess, ApiError, AppErrorCode } from "../types.js";
  * @param status - HTTP status code. Defaults to 200.
  * @returns A `Response` object with `{ success: true, data }`.
  */
-export function successResponse<T>(data: T, status = 200): Response {
+export function successResponse<T>(data: T, status = 200, headers?: [string, string][]): Response {
   const body: ApiSuccess<T> = { success: true, data };
-  return Response.json(body, { status });
+  return Response.json(body, { status, headers });
 }
 
 /**

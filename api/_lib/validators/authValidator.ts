@@ -1,4 +1,4 @@
-import type { SignupRequestBody } from "../types.js"
+import type { SignupRequestBody, SigninRequestBody } from "../types.js"
 import { AppError } from "../errors/AppError.js"
 
 const EMAIL_PATTERN = /.+@.+\..+/
@@ -69,4 +69,32 @@ export function validateSignupBody(body: unknown): SignupRequestBody {
   }
 
   return { email, password, first_name: first_name, last_name }
+}
+
+/**
+ * Validates and returns a typed `SigninRequestBody` from an unknown input.
+ * Throws `AppError` on the first validation failure.
+ */
+export function validateSigninBody(body: unknown): SigninRequestBody {
+  if (typeof body !== "object" || body === null) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Request body must be a JSON object" })
+  }
+
+  const record = body as Record<string, unknown>
+
+  for (const field of ["email", "password"] as const) {
+    const value = record[field]
+    if (typeof value !== "string" || value.trim().length === 0) {
+      throw new AppError({ statusCode: 400, code: "MISSING_FIELDS", message: `Missing required field: ${field}` })
+    }
+  }
+
+  const email = (record.email as string).trim()
+  const password = (record.password as string).trim()
+
+  if (!EMAIL_PATTERN.test(email)) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Invalid email format" })
+  }
+
+  return { email, password }
 }
