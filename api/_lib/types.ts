@@ -5,6 +5,10 @@ export type AppErrorCode =
   | "VALIDATION_ERROR"
   | "SUBSCRIPTION_REQUIRED"
   | "SIGNUP_FAILED"
+  | "INVALID_CREDENTIALS"
+  | "ACCOUNT_EXPIRED"
+  | "SIGNIN_FAILED"
+  | "UNAUTHORIZED"
 
 
 export type ApiSuccess<T> = {
@@ -50,3 +54,24 @@ export type AppErrorParams = {
 }
 
 export type ApiHandler = (req: Request) => Promise<Response>
+
+export type SigninRequestBody = {
+  email: string
+  password: string
+}
+
+export type UserProfile = {
+  id: string
+  email: string
+  first_name: string
+  last_name: string
+  expires_at: string
+}
+
+export type SigninResult = {
+  user: UserProfile
+  access_token: string
+  refresh_token: string
+}
+
+export type AuthenticatedApiHandler = (req: Request, userId: string) => Promise<Response>

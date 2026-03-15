@@ -1,0 +1,82 @@
+Plan the implemenntation for: the signin API endpoint and the withAuth middleware. 
+The signin endpoint will handle user authentication and set the appropriate cookies,
+while the withAuth middleware will protect routes that require authentication by validating tokens
+and refreshing them if necessary.
+
+---
+
+## signin (POST endpoint)
+
+### Request body
+- email (string, valid format)
+- password (string, not empty)
+
+### Flow
+1. Validate input. Reject if invalid → 400.
+2. Call Supabase Auth `signInWithPassword({ email, password })`. If it fails, return a generic "Invalid credentials" error. Do not reveal whether the email exists → 401.
+3. Extract user ID from the auth response.
+4. Query `public.users` by ID to get first_name, last_name, email, expires_at.
+5. Check `expires_at > now()`. If expired:
+   a. Sign the user out of Supabase Auth to clean up the session created in step 2.
+   b. Return an "Account has expired" error → 403.
+6. Set `access_token` and `refresh_token` as httpOnly cookies:
+   - Both: HttpOnly, Secure, SameSite=Strict, Path=/api
+   - access_token Max-Age: 3600
+   - refresh_token Max-Age: match Supabase's refresh token lifespan
+7. Return the user profile in the response body. No tokens in the body.
+
+### Success response
+{
+  "success": true,
+  "data": {
+    "user": {
+      "id": "string",
+      "email": "string",
+      "first_name": "string",
+      "last_name": "string",
+      "expires_at": "ISO timestamp"
+    }
+  }
+}
+
+### Errors
+- Invalid input → 400
+- Wrong credentials → 401, generic message
+- Account expired → 403
+- User not found in public.users → 500
+- Wrong HTTP method → 405
+
+### Constraints
+- Authenticate before authorizing. Never check expiry before verifying credentials.
+- User ID comes from auth response, never from request body.
+- Do not call any external CRM. Subscription check only happens at signup.
+
+---
+
+## withAuth middleware
+
+### Purpose
+Wraps any endpoint that requires authentication. Reads the token from the cookie, validates it in Supabase, and passes the user ID to the handler.
+
+### Flow
+1. Read `access_token` from the Cookie header.
+2. Call Supabase `getUser(access_token)`.
+3. If valid → extract user ID, pass it to the handler.
+4. If expired or invalid:
+   a. Read `refresh_token` from the Cookie header.
+   b. Call Supabase `refreshSession({ refresh_token })`.
+   c. If refresh succeeds:
+      - Set the new `access_token` and `refresh_token` as httpOnly cookies on the response (same flags as login).
+      - Extract user ID from the new session.
+      - Continue with the handler.
+   d. If refresh also fails → return 401.
+5. If no cookies present at all → return 401.
+
+### Key behavior
+- The refresh is transparent to the frontend. The frontend never handles tokens.
+- The new cookies from a refresh must be included in the final response headers alongside whatever the handler returns.
+- withAuth must match the existing middleware pattern.
+- Use the existing success and error response utilities for consistency.
+- Signin should be implemented in the authService, the endpoint is only responsible for HTTP handling and response formatting.
+- Set up appropriate logging for authentication events, without logging sensitive information.
+- Set up appropriate error/request/response types in the types file.
