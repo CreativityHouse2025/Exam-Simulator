@@ -29,10 +29,7 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
       if (!error && data.user) {
         return handler(req, data.user.id)
       }
-    }
-    
-    console.log("Access token expired, trying to refresh...");
-    
+    }    
 
     // Access token missing or invalid -> try refreshing
     if (!refreshToken) {
@@ -46,8 +43,6 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
     if (refreshError || !refreshData.session || !refreshData.user) {
       throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "Authentication required" })
     }
-
-    console.log("Successfully refreshed the token");
 
     const originalResponse = await handler(req, refreshData.user.id)
     const body = (await originalResponse.json()) as { data: unknown }

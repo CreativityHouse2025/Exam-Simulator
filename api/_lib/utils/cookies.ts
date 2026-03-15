@@ -1,3 +1,5 @@
+import { requireEnv } from "./env.js"
+
 /** Parses a Cookie header string into a key-value record. */
 export function parseCookies(cookieHeader: string): Record<string, string> {
   const cookies: Record<string, string> = {}
@@ -11,9 +13,18 @@ export function parseCookies(cookieHeader: string): Record<string, string> {
   return cookies
 }
 
+/** Returns Set-Cookie header strings that expire both auth cookies. */
+export function clearAuthCookies(): string[] {
+  const shared = "HttpOnly; Secure; SameSite=Strict; Path=/api"
+  return [
+    `access_token=; ${shared}; Max-Age=0`,
+    `refresh_token=; ${shared}; Max-Age=0`,
+  ]
+}
+
 /** Returns Set-Cookie header strings for access and refresh tokens. */
 export function serializeAuthCookies(accessToken: string, refreshToken: string): string[] {
-  const accessTokenAge = process.env.SB_ACCESS_TOKEN_AGE ?? "3600"
+  const accessTokenAge = requireEnv("SB_ACCESS_TOKEN_AGE")
   const refreshTokenAge = 604800; // one week
   const shared = "HttpOnly; Secure; SameSite=Strict; Path=/api"
   return [
