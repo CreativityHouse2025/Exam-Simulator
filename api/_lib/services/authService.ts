@@ -1,4 +1,4 @@
-import { supabaseClient } from "../supabaseClient.js"
+import { supabaseAdmin, createUserClient } from "../supabaseClient.js"
 import { AppError } from "../errors/AppError.js"
 import type { SignupRequestBody, SigninRequestBody, SigninResult } from "../types.js"
 import verifySubscription from "./subscriptionVerifier.js"
@@ -28,7 +28,8 @@ export async function signup(input: SignupRequestBody): Promise<SignupResult> {
   const expiresAt = new Date()
   expiresAt.setMonth(expiresAt.getMonth() + offerDurationInMonths)
 
-  const { data, error } = await supabaseClient.auth.signUp({
+  const userClient = createUserClient()
+  const { data, error } = await userClient.auth.signUp({
     email,
     password,
     options: {
@@ -59,7 +60,8 @@ export async function signup(input: SignupRequestBody): Promise<SignupResult> {
 export async function signin(input: SigninRequestBody): Promise<SigninResult> {
   const { email, password } = input
 
-  const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password })
+  const userClient = createUserClient()
+  const { data, error } = await userClient.auth.signInWithPassword({ email, password })
 
   if (error) {
     throw new AppError({ statusCode: 401, code: "INVALID_CREDENTIALS", message: "Invalid email or password" })
@@ -69,7 +71,7 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
     throw new AppError({ statusCode: 500, code: "SIGNIN_FAILED", message: "Signin failed: no session returned" })
   }
 
-  const { data: profile, error: profileError } = await supabaseClient
+  const { data: profile, error: profileError } = await supabaseAdmin
     .from("users")
     .select("id, first_name, last_name, email, expires_at")
     .eq("id", data.user.id)
@@ -83,7 +85,7 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
   const expiresAt = new Date(profile.expires_at)
 
   if (expiresAt <= now) {
-    supabaseClient.auth.admin.signOut(data.session.access_token).catch((err) => {
+    supabaseAdmin.auth.admin.signOut(data.session.access_token).catch((err) => {
       console.error(`[signin] Failed to sign out expired user ${data.user.id}:`, err)
     })
     throw new AppError({ statusCode: 403, code: "ACCOUNT_EXPIRED", message: "Account has expired" })
