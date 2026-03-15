@@ -3,6 +3,19 @@ import { AppError } from "../errors/AppError.js"
 import type { SignupRequestBody, SigninRequestBody, SigninResult } from "../types.js"
 import verifySubscription from "./subscriptionVerifier.js"
 
+/**
+ * Revokes a user session server-side using the access token.
+ *
+ * @throws {AppError} 500 `SIGNOUT_FAILED` — Supabase failed to revoke the session.
+ */
+export async function signout(accessToken: string): Promise<void> {
+  const { error } = await supabaseAdmin.auth.admin.signOut(accessToken)
+
+  if (error) {
+    throw new AppError({ statusCode: 500, code: "SIGNOUT_FAILED", message: error.message })
+  }
+}
+
 export type SignupResult = {
   user_id: string
   email: string

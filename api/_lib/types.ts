@@ -8,6 +8,7 @@ export type AppErrorCode =
   | "INVALID_CREDENTIALS"
   | "ACCOUNT_EXPIRED"
   | "SIGNIN_FAILED"
+  | "SIGNOUT_FAILED"
   | "UNAUTHORIZED"
 
 
