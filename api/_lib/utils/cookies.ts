@@ -14,9 +14,10 @@ export function parseCookies(cookieHeader: string): Record<string, string> {
 /** Returns Set-Cookie header strings for access and refresh tokens. */
 export function serializeAuthCookies(accessToken: string, refreshToken: string): string[] {
   const accessTokenAge = process.env.SB_ACCESS_TOKEN_AGE ?? "3600"
+  const refreshTokenAge = 604800; // one week
   const shared = "HttpOnly; Secure; SameSite=Strict; Path=/api"
   return [
     `access_token=${accessToken}; ${shared}; Max-Age=${accessTokenAge}`,
-    `refresh_token=${refreshToken}; ${shared}`,
+    `refresh_token=${refreshToken}; ${shared}; Max-Age=${refreshTokenAge}`,
   ]
 }

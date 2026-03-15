@@ -1,7 +1,8 @@
 import type { ApiHandler, AuthenticatedApiHandler } from "../types.js"
 import { AppError } from "../errors/AppError.js"
-import { supabaseClient } from "../supabaseClient.js"
+import { createUserClient } from "../supabaseClient.js"
 import { parseCookies, serializeAuthCookies } from "../utils/cookies.js"
+import { successResponse } from "../utils/response.js"
 
 /**
  * Middleware that validates auth tokens from cookies before calling the handler.
@@ -24,18 +25,21 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
 
     // Try the access token first
     if (accessToken) {
-      const { data, error } = await supabaseClient.auth.getUser(accessToken)
+      const { data, error } = await createUserClient().auth.getUser(accessToken)
       if (!error && data.user) {
         return handler(req, data.user.id)
       }
     }
+    
+    console.log("Access token expired, trying to refresh...");
+    
 
     // Access token missing or invalid -> try refreshing
     if (!refreshToken) {
       throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "Authentication required" })
     }
 
-    const { data: refreshData, error: refreshError } = await supabaseClient.auth.refreshSession({
+    const { data: refreshData, error: refreshError } = await createUserClient().auth.refreshSession({
       refresh_token: refreshToken,
     })
 
@@ -43,14 +47,12 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
       throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "Authentication required" })
     }
 
-    // Execute handler to get response and append the new cookies header
-    const response = await handler(req, refreshData.user.id)
-    const newCookies = serializeAuthCookies(refreshData.session.access_token, refreshData.session.refresh_token)
+    console.log("Successfully refreshed the token");
 
-    for (const cookie of newCookies) {
-      response.headers.append("Set-Cookie", cookie)
-    }
+    const originalResponse = await handler(req, refreshData.user.id)
+    const body = (await originalResponse.json()) as { data: unknown }
+    const cookieHeaders = serializeAuthCookies(refreshData.session.access_token, refreshData.session.refresh_token)
 
-    return response
+    return successResponse(body.data, originalResponse.status, cookieHeaders.map((c) => ["Set-Cookie", c]))
   }
 }
