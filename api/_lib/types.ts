@@ -75,4 +75,6 @@ export type SigninResult = {
   refresh_token: string
 }
 
-export type AuthenticatedApiHandler = (req: Request, userId: string) => Promise<Response>
+export type ResponseHeaders = [string, string][]
+
+export type AuthenticatedApiHandler = (req: Request, userId: string, cookieHeaders?: ResponseHeaders) => Promise<Response>

@@ -1,4 +1,4 @@
-import { ApiSuccess, ApiError, AppErrorCode } from "../types.js";
+import { ApiSuccess, ApiError, AppErrorCode, ResponseHeaders } from "../types.js";
 
 /**
  * Creates a successful JSON response with a consistent envelope.
@@ -6,7 +6,7 @@ import { ApiSuccess, ApiError, AppErrorCode } from "../types.js";
  * @param status - HTTP status code. Defaults to 200.
  * @returns A `Response` object with `{ success: true, data }`.
  */
-export function successResponse<T>(data: T, status = 200, headers?: [string, string][]): Response {
+export function successResponse<T>(data: T, status = 200, headers?: ResponseHeaders): Response {
   const body: ApiSuccess<T> = { success: true, data };
   return Response.json(body, { status, headers });
 }
@@ -18,7 +18,7 @@ export function successResponse<T>(data: T, status = 200, headers?: [string, str
  * @param status - HTTP status code (e.g. 400, 401, 404, 500).
  * @returns A `Response` object with `{ success: false, error: { code, message } }`.
  */
-export function errorResponse(code: AppErrorCode, message: string, status: number, headers?: [string, string][]): Response {
+export function errorResponse(code: AppErrorCode, message: string, status: number, headers?: ResponseHeaders): Response {
   const body: ApiError = { success: false, error: { code, message } };
   return Response.json(body, { status, headers });
 }

@@ -22,7 +22,7 @@ export function clearAuthCookies(): string[] {
   ]
 }
 
-/** Returns Set-Cookie header strings for access and refresh tokens. */
+/** Returns Set-Cookie header strings value for access and refresh tokens. */
 export function serializeAuthCookies(accessToken: string, refreshToken: string): string[] {
   const accessTokenAge = requireEnv("SB_ACCESS_TOKEN_AGE")
   const refreshTokenAge = 604800; // one week
