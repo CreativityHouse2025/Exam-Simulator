@@ -29,9 +29,9 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
       if (!error && data.user) {
         return handler(req, data.user.id)
       }
-    }    
+    }
 
-    // Access token missing or invalid -> try refreshing
+    // Access token missing or invalid -> check expiry date and try refreshing (TODO)
     if (!refreshToken) {
       throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "Authentication required" })
     }
