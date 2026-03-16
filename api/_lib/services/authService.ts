@@ -4,6 +4,48 @@ import type { SignupRequestBody, SigninRequestBody, SigninResult } from "../type
 import verifySubscription from "./subscriptionVerifier.js"
 
 /**
+ * Checks that a user's account has not expired.
+ * Queries the `users` table unless `knownExpiresAt` is provided (avoids a redundant DB hit
+ * when the caller already has the value, e.g. after fetching the profile in `signin`).
+ *
+ * If the account is expired and `revokeAccessToken` is provided, a global signout is
+ * awaited before throwing to ensure the session is revoked.
+ *
+ * @throws {AppError} 401 `UNAUTHORIZED` — user not found in the database.
+ * @throws {AppError} 403 `ACCOUNT_EXPIRED` — account past its expiry date.
+ */
+export async function assertAccountNotExpired(
+  userId: string,
+  options?: { revokeAccessToken?: string; knownExpiresAt?: string },
+): Promise<void> {
+  let expiresAtRaw = options?.knownExpiresAt
+
+  if (!expiresAtRaw) {
+    const { data, error } = await supabaseAdmin.from("users").select("expires_at").eq("id", userId).single()
+
+    if (error || !data) {
+      throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "User not found" })
+    }
+
+    expiresAtRaw = data.expires_at
+  }  
+
+  const expiresAt = new Date(expiresAtRaw)
+  if (expiresAt <= new Date()) {
+    if (options?.revokeAccessToken) {
+      const { error: signOutError } = await supabaseAdmin.auth.admin.signOut(options.revokeAccessToken, "global")
+      if (signOutError) {
+        console.error(`[assertAccountNotExpired] Failed to sign out expired user ${userId}:`, signOutError)
+      } else {
+        console.log("[assertAccountNotExpired] Logged user out of all devices")
+      }
+    }
+    console.log(`[assertAccountNotExpired] User ${userId} account has expired`)
+    throw new AppError({ statusCode: 403, code: "ACCOUNT_EXPIRED", message: "Account has expired" })
+  }
+}
+
+/**
  * Best-effort server-side session revocation with two fallback strategies.
  * **Never throws** — the handler always clears cookies regardless of outcome.
  *
@@ -123,16 +165,10 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
     throw new AppError({ statusCode: 500, code: "SIGNIN_FAILED", message: "Failed to retrieve user profile" })
   }
 
-  const now = new Date()
-  const expiresAt = new Date(profile.expires_at)
-
-  if (expiresAt <= now) {
-    supabaseAdmin.auth.admin.signOut(data.session.access_token, "global").catch((err) => {
-      console.error(`[signin] Failed to sign out expired user ${data.user.id}:`, err)
-    })
-    console.log(`[signin] User ${data.user.id} account has expired and was logged out of all devices`)
-    throw new AppError({ statusCode: 403, code: "ACCOUNT_EXPIRED", message: "Account has expired" })
-  }
+  await assertAccountNotExpired(data.user.id, {
+    revokeAccessToken: data.session.access_token,
+    knownExpiresAt: profile.expires_at,
+  })
 
   console.log(`[signin] User ${data.user.id} signed in successfully`)
 
