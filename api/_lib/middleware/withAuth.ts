@@ -1,9 +1,9 @@
-import type { ApiHandler, AuthenticatedApiHandler } from "../types.js"
+import type { ApiHandler, AuthenticatedApiHandler, ResponseHeaders } from "../types.js"
 import { AppError } from "../errors/AppError.js"
 import { createUserClient } from "../supabaseClient.js"
 import { assertAccountNotExpired } from "../services/authService.js"
 import { parseCookies, serializeAuthCookies, clearAuthCookies } from "../utils/cookies.js"
-import { successResponse, errorResponse } from "../utils/response.js"
+import { errorResponse } from "../utils/response.js"
 
 /**
  * Middleware that validates auth tokens from cookies before calling the handler.
@@ -53,25 +53,17 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
     } catch (error) {
       // if it is an account expired error, clear the cookies from client side
       if (error instanceof AppError && error.code === "ACCOUNT_EXPIRED") {
-        const cookieHeaders: [string, string][] = clearAuthCookies().map((c) => ["Set-Cookie", c])
+        const cookieHeaders: ResponseHeaders = clearAuthCookies().map((c) => ["Set-Cookie", c] as [string, string])
         return errorResponse(error.code, error.message, error.statusCode, cookieHeaders)
       }
       throw error
     }
 
-    const originalResponse = await handler(req, refreshData.user.id)
-    const cookieHeaders = serializeAuthCookies(refreshData.session.access_token, refreshData.session.refresh_token)
+    const cookieHeaders: ResponseHeaders = serializeAuthCookies(
+      refreshData.session.access_token,
+      refreshData.session.refresh_token,
+    ).map((c) => ["Set-Cookie", c] as [string, string])
 
-    // Clone the response to preserve original body, status, and headers
-    const clonedHeaders = new Headers(originalResponse.headers)
-    for (const cookie of cookieHeaders) {
-      clonedHeaders.append("Set-Cookie", cookie)
-    }
-
-    return new Response(originalResponse.body, {
-      status: originalResponse.status,
-      statusText: originalResponse.statusText,
-      headers: clonedHeaders,
-    })
+    return handler(req, refreshData.user.id, cookieHeaders)
   }
 }
