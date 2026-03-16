@@ -60,9 +60,18 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
     }
 
     const originalResponse = await handler(req, refreshData.user.id)
-    const body = (await originalResponse.json()) as { data: unknown }
     const cookieHeaders = serializeAuthCookies(refreshData.session.access_token, refreshData.session.refresh_token)
 
-    return successResponse(body.data, originalResponse.status, cookieHeaders.map((c) => ["Set-Cookie", c]))
+    // Clone the response to preserve original body, status, and headers
+    const clonedHeaders = new Headers(originalResponse.headers)
+    for (const cookie of cookieHeaders) {
+      clonedHeaders.append("Set-Cookie", cookie)
+    }
+
+    return new Response(originalResponse.body, {
+      status: originalResponse.status,
+      statusText: originalResponse.statusText,
+      headers: clonedHeaders,
+    })
   }
 }

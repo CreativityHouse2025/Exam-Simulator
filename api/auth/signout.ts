@@ -8,6 +8,7 @@ export const POST = withErrorHandler(async (request: Request) => {
   const cookies = parseCookies(cookieHeader)
 
   await signout({ accessToken: cookies["access_token"], refreshToken: cookies["refresh_token"] })
+  console.warn("[/api/signout/]: User signed out")
 
   const cookieHeaders: [string, string][] = clearAuthCookies().map((c) => ["Set-Cookie", c])
   return successResponse(null, 200, cookieHeaders)
