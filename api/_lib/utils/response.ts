@@ -18,7 +18,7 @@ export function successResponse<T>(data: T, status = 200, headers?: [string, str
  * @param status - HTTP status code (e.g. 400, 401, 404, 500).
  * @returns A `Response` object with `{ success: false, error: { code, message } }`.
  */
-export function errorResponse(code: AppErrorCode, message: string, status: number): Response {
+export function errorResponse(code: AppErrorCode, message: string, status: number, headers?: [string, string][]): Response {
   const body: ApiError = { success: false, error: { code, message } };
-  return Response.json(body, { status });
+  return Response.json(body, { status, headers });
 }
