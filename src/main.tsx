@@ -1,5 +1,6 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { DEFAULT_THEME } from './constants'
 import App from './App'
@@ -43,9 +44,11 @@ createRoot(container).render(
     <SettingsProvider>
       <ThemeProvider theme={DEFAULT_THEME}>
         <GlobalStyle />
-        <ToastContextProvider>
-          <App />
-        </ToastContextProvider>
+        <BrowserRouter>
+          <ToastContextProvider>
+            <App />
+          </ToastContextProvider>
+        </BrowserRouter>
       </ThemeProvider>
     </SettingsProvider>
   </React.StrictMode>

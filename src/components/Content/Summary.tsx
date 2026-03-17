@@ -1,4 +1,4 @@
-import type { ExamType, Results, ThemedStyles } from '../../types'
+import type { ExamType, Results, RevisionExamOptions, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -6,7 +6,6 @@ import SummaryRow from './SummaryRow'
 import { formatDate, formatTimer } from '../../utils/format'
 import { translate } from '../../utils/translation'
 import useResults from '../../hooks/useResults'
-import { RevisionExamOptions } from '../../App'
 import { isRetakeAllowed } from '../../utils/exam'
 
 export const TitleStyles = styled.div<ThemedStyles>`

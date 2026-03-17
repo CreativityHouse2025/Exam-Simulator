@@ -11,9 +11,8 @@ import { SESSION_ACTION_TYPES } from '../../constants'
 import useToast from '../../hooks/useToast'
 import { translate } from '../../utils/translation'
 import { formatTimer, formatDate } from '../../utils/format'
-import type { Results } from '../../types'
+import type { Results, RevisionExamOptions } from '../../types'
 import useResults from '../../hooks/useResults'
-import { RevisionExamOptions } from '../../App'
 
 export const MainStyles = styled.main<MainStylesProps>`
   width: 100%;
