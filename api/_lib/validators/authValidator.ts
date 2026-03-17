@@ -2,9 +2,9 @@ import type { SignupRequestBody, SigninRequestBody } from "../types.js"
 import { AppError } from "../errors/AppError.js"
 
 const EMAIL_PATTERN = /.+@.+\..+/
+const LETTERS_ONLY = /^[\p{L} ]+$/u
 const HAS_LETTER = /[a-zA-Z]/
 const HAS_DIGIT = /\d/
-const ALPHANUMERIC_ONLY = /^[a-zA-Z0-9]+$/
 const MIN_PASSWORD_LENGTH = 8
 
 const REQUIRED_FIELDS = ["email", "password", "first_name", "last_name"] as const
@@ -36,6 +36,14 @@ export function validateSignupBody(body: unknown): SignupRequestBody {
     throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Invalid email format" })
   }
 
+  if (!LETTERS_ONLY.test(first_name)) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "First name must contain letters only" })
+  }
+
+  if (!LETTERS_ONLY.test(last_name)) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Last name must contain letters only" })
+  }
+
   if (password.length < MIN_PASSWORD_LENGTH) {
     throw new AppError({
       statusCode: 400,
@@ -60,15 +68,7 @@ export function validateSignupBody(body: unknown): SignupRequestBody {
     })
   }
 
-  if (!ALPHANUMERIC_ONLY.test(password)) {
-    throw new AppError({
-      statusCode: 400,
-      code: "VALIDATION_ERROR",
-      message: "Password must contain only English letters and digits",
-    })
-  }
-
-  return { email, password, first_name: first_name, last_name }
+  return { email, password, first_name, last_name }
 }
 
 /**

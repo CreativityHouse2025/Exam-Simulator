@@ -6,7 +6,7 @@ import { Visibility } from "@styled-icons/material/Visibility"
 import { VisibilityOff } from "@styled-icons/material/VisibilityOff"
 import useAuth from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
-import { validateEmail, validatePassword, validateConfirmPassword, validateRequired } from "../utils/authValidation"
+import { validateEmail, validatePassword, validateConfirmPassword, validateRequired, validateName } from "../utils/authValidation"
 import { translate } from "../utils/translation"
 // @ts-expect-error
 import Logo from "../assets/logo.png"
@@ -80,8 +80,14 @@ const SignUpPage: React.FC = () => {
     const firstNameError = validateRequired(firstName.value, t.firstName)
     if (firstNameError) { firstName.setError(firstNameError); return }
 
+    const firstNameFormatError = validateName(firstName.value, t.firstName)
+    if (firstNameFormatError) { firstName.setError(firstNameFormatError); return }
+
     const lastNameError = validateRequired(lastName.value, t.lastName)
     if (lastNameError) { lastName.setError(lastNameError); return }
+
+    const lastNameFormatError = validateName(lastName.value, t.lastName)
+    if (lastNameFormatError) { lastName.setError(lastNameFormatError); return }
 
     const emailError = validateEmail(email.value)
     if (emailError) { email.setError(emailError); return }
@@ -98,7 +104,10 @@ const SignUpPage: React.FC = () => {
     await new Promise((resolve) => setTimeout(resolve, 500))
 
     try {
-      signUp(email.value, password.value, firstName.value.trim(), lastName.value.trim())
+      // /\S+/g regex to find finding all occurrences of one or more non-whitespace characters within a string
+      // e.g.: first name: mark DOWN -> [mark, DOWN] -> [Mark, Down]
+      const toTitleCase = (s: string) => s.trim().replace(/\S+/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase())
+      signUp(email.value, password.value, toTitleCase(firstName.value), toTitleCase(lastName.value))
       navigate("/app")
     } catch (err) {
       setServerError(err instanceof Error ? err.message : t.error)
