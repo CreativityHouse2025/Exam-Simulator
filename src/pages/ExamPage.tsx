@@ -183,10 +183,6 @@ const ExamPage: React.FC = () => {
     setPendingAction(null)
   }, [])
 
-  const handleAccount = React.useCallback(() => {
-    setShowForm(true)
-  }, [])
-
   // load translation on render
   React.useEffect(() => {
     let cancelled = false
@@ -238,7 +234,7 @@ const ExamPage: React.FC = () => {
 
   return (
     <>
-      <Header onLanguage={toggleLanguage} onAccount={handleAccount} />
+      <Header onLanguage={toggleLanguage} />
 
       <UserInfoForm
         initialValues={initialAccount}

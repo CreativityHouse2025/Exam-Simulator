@@ -227,6 +227,20 @@ export interface ToastContextType {
   setToast: React.Dispatch<React.SetStateAction<ToastState>>
 }
 
+// Auth types
+export type UserProfile = {
+  id: string
+  email: string
+  first_name: string
+  last_name: string
+  expires_at: string
+}
+
+export type AuthContextType = {
+  user: UserProfile | null
+  setUser: React.Dispatch<React.SetStateAction<UserProfile | null>>
+}
+
 export type RevisionDetails = {
   maxTime: Session['maxTime']
   wrongQuestions: Session['questions']
