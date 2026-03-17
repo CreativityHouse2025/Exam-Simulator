@@ -7,6 +7,7 @@ import { VisibilityOff } from "@styled-icons/material/VisibilityOff"
 import useAuth from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
 import { validateEmail, validatePassword } from "../utils/authValidation"
+import { translate } from "../utils/translation"
 // @ts-expect-error
 import Logo from "../assets/logo.png"
 import {
@@ -41,6 +42,21 @@ const SignInPage: React.FC = () => {
   const [submitting, setSubmitting] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
 
+  const t = {
+    logoAlt: translate('cover.logo-alt'),
+    title: translate('auth.signin.title'),
+    subtitle: translate('auth.signin.subtitle'),
+    email: translate('auth.fields.email'),
+    emailPlaceholder: translate('auth.fields.email-placeholder'),
+    password: translate('auth.fields.password'),
+    passwordPlaceholder: translate('auth.fields.password-placeholder'),
+    submit: translate('auth.signin.submit'),
+    submitting: translate('auth.signin.submitting'),
+    error: translate('auth.signin.error'),
+    noAccount: translate('auth.signin.no-account'),
+    signupLink: translate('auth.signin.signup-link'),
+  }
+
   const emailRef = useRef<HTMLInputElement>(null)
 
   React.useEffect(() => {
@@ -65,7 +81,7 @@ const SignInPage: React.FC = () => {
       signIn(email.value, password.value)
       navigate("/app")
     } catch (err) {
-      setServerError(err instanceof Error ? err.message : "Sign in failed. Please try again.")
+      setServerError(err instanceof Error ? err.message : t.error)
     } finally {
       setSubmitting(false)
     }
@@ -74,15 +90,15 @@ const SignInPage: React.FC = () => {
   return (
     <PageWrapper>
       <Card>
-        <PageLogo src={Logo} alt="Exam Simulator" />
-        <PageTitle>Welcome Back</PageTitle>
-        <PageSubtitle>Sign in to your account</PageSubtitle>
+        <PageLogo src={Logo} alt={t.logoAlt} />
+        <PageTitle>{t.title}</PageTitle>
+        <PageSubtitle>{t.subtitle}</PageSubtitle>
 
         <form onSubmit={handleSubmit} noValidate>
           {serverError && <FormError>{serverError}</FormError>}
 
           <FormGroup>
-            <FormLabel htmlFor="email">Email</FormLabel>
+            <FormLabel htmlFor="email">{t.email}</FormLabel>
             <InputWrapper>
               <InputIcon>
                 <Email size={18} />
@@ -91,7 +107,7 @@ const SignInPage: React.FC = () => {
                 ref={emailRef}
                 id="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder={t.emailPlaceholder}
                 autoComplete="email"
                 value={email.value}
                 onChange={email.onChange}
@@ -103,7 +119,7 @@ const SignInPage: React.FC = () => {
           </FormGroup>
 
           <FormGroup>
-            <FormLabel htmlFor="password">Password</FormLabel>
+            <FormLabel htmlFor="password">{t.password}</FormLabel>
             <PasswordInputWrapper>
               <InputIcon>
                 <Lock size={18} />
@@ -111,7 +127,7 @@ const SignInPage: React.FC = () => {
               <FormInput
                 id="password"
                 type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
+                placeholder={t.passwordPlaceholder}
                 autoComplete="current-password"
                 value={password.value}
                 onChange={password.onChange}
@@ -126,13 +142,13 @@ const SignInPage: React.FC = () => {
           </FormGroup>
 
           <SubmitButton type="submit" disabled={submitting}>
-            {submitting ? "Signing in..." : "Sign In"}
+            {submitting ? t.submitting : t.submit}
           </SubmitButton>
         </form>
 
         <CardFooter>
-          <span>Don't have an account?</span>
-          <NavLink to="/signup">Sign Up</NavLink>
+          <span>{t.noAccount}</span>
+          <NavLink to="/signup">{t.signupLink}</NavLink>
         </CardFooter>
       </Card>
     </PageWrapper>

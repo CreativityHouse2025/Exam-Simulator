@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { ArrowBack } from "@styled-icons/material/ArrowBack"
 import useAuth from "../hooks/useAuth"
 import { formatDate } from "../utils/format"
+import { translate } from "../utils/translation"
 import type { ThemedStyles } from "../types"
 import { PageWrapper, Card, AvatarCircle, PageTitle, PageSubtitle, NavLink, CardFooter } from "../components/SharedStyles"
 
@@ -38,13 +39,13 @@ const InfoGroup = styled.div`
 `
 
 const InfoLabel = styled.p<ThemedStyles>`
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: ${({ theme }) => theme.black};
-  margin: 0 0 0.3rem;
+  margin: 0 0 0.5rem;
 
   @media (min-width: 48rem) {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
   }
 `
 
@@ -58,7 +59,7 @@ const InfoValue = styled.p<ThemedStyles>`
   border: 1px solid ${({ theme }) => theme.grey[2]};
 
   @media (min-width: 48rem) {
-    font-size: 1.35rem;
+    font-size: 1.45rem;
   }
 `
 
@@ -71,7 +72,7 @@ const Divider = styled.hr<ThemedStyles>`
 const ActionButton = styled.button<ThemedStyles & { $variant?: "danger" | "secondary" }>`
   width: 100%;
   padding: 1.1rem;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 600;
   border-radius: 8px;
   cursor: not-allowed;
@@ -90,6 +91,13 @@ const ProfilePage: React.FC = () => {
   const { user } = useAuth()
   const navigate = useNavigate()
 
+  const t = {
+    expires: translate('auth.profile.expires'),
+    resetPassword: translate('auth.profile.reset-password'),
+    signOut: translate('auth.profile.sign-out'),
+    backHome: translate('auth.profile.back-home'),
+  }
+
   if (!user) return null
 
   const initials = `${user.first_name[0]}${user.last_name[0]}`.toUpperCase()
@@ -105,17 +113,17 @@ const ProfilePage: React.FC = () => {
         <PageSubtitle>{user.email}</PageSubtitle>
 
         <InfoGroup>
-          <InfoLabel>Account Expires</InfoLabel>
+          <InfoLabel>{t.expires}</InfoLabel>
           <InfoValue>{formatDate(user.expires_at)}</InfoValue>
         </InfoGroup>
 
         <Divider />
 
-        <ActionButton $variant="secondary">Reset Password</ActionButton>
-        <ActionButton $variant="danger">Sign Out</ActionButton>
+        <ActionButton $variant="secondary">{t.resetPassword}</ActionButton>
+        <ActionButton $variant="danger">{t.signOut}</ActionButton>
 
         <CardFooter>
-          <NavLink to="/app">Back to Homepage</NavLink>
+          <NavLink to="/app">{t.backHome}</NavLink>
         </CardFooter>
       </ProfileCard>
     </PageWrapper>

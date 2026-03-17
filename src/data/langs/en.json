@@ -89,21 +89,55 @@
       "body": "Hello $1,\n\nHere is your exam summary at $2:\n\n$3\n"
     }
   },
-  "form": {
-    "user-info": {
-      "title": "Personal Information",
-      "full-name": {
-        "label": "Full Name",
-        "placeholder": "Enter your full name",
-        "invalid": "Only letters are allowed in the name",
-        "missing": "Full name is required"
-      },
-      "email": {
-        "label": "Email",
-        "placeholder": "Enter your email",
-        "invalid": "Please enter a valid email"
-      },
-      "submit": "Submit"
+  "auth": {
+    "fields": {
+      "email": "Email",
+      "email-placeholder": "you@example.com",
+      "first-name": "First Name",
+      "first-name-placeholder": "John",
+      "last-name": "Last Name",
+      "last-name-placeholder": "Doe",
+      "password": "Password",
+      "password-placeholder": "Enter your password",
+      "password-new-placeholder": "At least 8 characters",
+      "confirm-password": "Confirm Password",
+      "confirm-password-placeholder": "Re-enter your password"
+    },
+    "signin": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to access the exam simulator",
+      "submit": "Sign In",
+      "submitting": "Signing in...",
+      "error": "Sign in failed. Please try again.",
+      "no-account": "Don't have an account?",
+      "signup-link": "Sign Up"
+    },
+    "signup": {
+      "title": "Create Account",
+      "subtitle": "Sign up to get started",
+      "submit": "Sign Up",
+      "submitting": "Creating account...",
+      "error": "Sign up failed. Please try again.",
+      "has-account": "Already have an account?",
+      "signin-link": "Sign In"
+    },
+    "profile": {
+      "expires": "Account Expires",
+      "reset-password": "Reset Password",
+      "sign-out": "Sign Out",
+      "back-home": "Back to Homepage"
+    },
+    "errors": {
+      "required": "$1 is required",
+      "email-required": "Email is required",
+      "email-invalid": "Please enter a valid email address",
+      "password-required": "Password is required",
+      "password-too-short": "Password must be at least 8 characters",
+      "password-no-letter": "Password must contain at least one letter",
+      "password-no-digit": "Password must contain at least one digit",
+      "password-invalid-chars": "Password must contain only English letters and digits",
+      "confirm-required": "Please confirm your password",
+      "confirm-mismatch": "Passwords do not match"
     }
   }
 }
