@@ -72,7 +72,8 @@ const HeaderComponent: React.FC = () => {
   }
 
   function handleHomepage() {
-    navigate("/app")
+    // used "/" intentionally instead of "/app" to allow user to go homepage during an exam (same route won't navigate)
+    navigate("/")
   }
 
   return (
