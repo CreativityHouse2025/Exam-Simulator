@@ -5,6 +5,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { DEFAULT_THEME } from './constants'
 import App from './App'
 import SettingsProvider from './providers/SettingsContextProvider'
+import AuthContextProvider from './providers/AuthContextProvider'
 import ToastContextProvider from './providers/ToastContextProvider'
 
 const GlobalStyle = createGlobalStyle`
@@ -45,9 +46,11 @@ createRoot(container).render(
       <ThemeProvider theme={DEFAULT_THEME}>
         <GlobalStyle />
         <BrowserRouter>
-          <ToastContextProvider>
-            <App />
-          </ToastContextProvider>
+          <AuthContextProvider>
+            <ToastContextProvider>
+              <App />
+            </ToastContextProvider>
+          </AuthContextProvider>
         </BrowserRouter>
       </ThemeProvider>
     </SettingsProvider>

@@ -140,3 +140,5 @@ dist
 .claude/*
 .vscode/
 .vercel/
+
+prompt.txt

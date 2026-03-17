@@ -1,5 +1,5 @@
 import type { ThemedStyles } from '../types'
-
+import { useNavigate } from "react-router-dom";
 import React from 'react'
 import styled from 'styled-components'
 import { Language } from '@styled-icons/material/Language'
@@ -54,9 +54,15 @@ const IconStyles = styled.div<ThemedStyles>`
 `
 
 
-const HeaderComponent: React.FC<HeaderProps> = ({ onLanguage, onAccount }) => {
+const HeaderComponent: React.FC<HeaderProps> = ({ onLanguage }) => {
   const title = translate('about.title')
   const resetApp = React.useCallback(() => window.location.reload(), [])
+
+  const navigate = useNavigate()
+
+  function handleProfile() {
+    navigate("/profile")
+  }
 
   return (
     <HeaderStyles id="header">
@@ -70,7 +76,7 @@ const HeaderComponent: React.FC<HeaderProps> = ({ onLanguage, onAccount }) => {
         <IconStyles title='Change language' aria-label='Language Icon' id="language" className="no-select" onClick={onLanguage}>
           <Language size={40} />
         </IconStyles>
-        <IconStyles title='Update your information' aria-label='Account Icon' id="account" className="no-select" onClick={onAccount}>
+        <IconStyles title='Update your information' aria-label='Account Icon' id="account" className="no-select" onClick={handleProfile}>
           <AccountCircle size={40}/>
         </IconStyles>
       </IconsContainer>
@@ -82,5 +88,4 @@ export default HeaderComponent
 
 export interface HeaderProps {
   onLanguage: () => void
-  onAccount: () => void
 }
