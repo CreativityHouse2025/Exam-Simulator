@@ -1,7 +1,6 @@
 import type { Exam, LangCode, Session, RevisionExamOptions } from "../types"
 
 import React from "react"
-import Header from "../components/Header"
 import Navigation from "../components/Navigation"
 import Cover from "../components/Cover"
 import Loading from "../components/Loading"
@@ -12,17 +11,13 @@ import { DEFAULT_SESSION, LANGUAGES } from "../constants"
 import { ExamContext } from "../contexts"
 import { useSession } from "../hooks/useSession"
 import useSettings from "../hooks/useSettings"
-import UserInfoForm from "../components/UserInfoForm"
 import { ExamFactory } from "../utils/ExamFactory"
 import useToast from "../hooks/useToast"
 
 /** Main exam page — contains all exam state, loading, and rendering logic. */
 const ExamPage: React.FC = () => {
   const [session, setSession] = useSession()
-  const [showForm, setShowForm] = React.useState(false)
-  const [pendingAction, setPendingAction] = React.useState<null | (() => void)>(null)
-
-  const { settings, updateLanguage, updateEmail, updateFullName } = useSettings()
+  const { settings } = useSettings()
   const [exam, setExam] = React.useState<Exam | null>(null)
   const [loading, setLoading] = React.useState<boolean>(false)
   const [translationReady, setTranslationReady] = React.useState<boolean>(hasTranslation())
@@ -30,11 +25,6 @@ const ExamPage: React.FC = () => {
   const { showToast } = useToast()
 
   const langCode = settings.language
-
-  const initialAccount = React.useMemo(
-    () => ({ fullName: settings.fullName ?? "", email: settings.email ?? "" }),
-    [settings]
-  )
 
   // check for old versions (will use appVersion inside settings in next update)
   React.useEffect(() => {
@@ -60,11 +50,6 @@ const ExamPage: React.FC = () => {
     document.documentElement.lang = newLang.code
     document.documentElement.dir = newLang.dir
   }, [])
-
-  const toggleLanguage = React.useCallback(() => {
-    const nextCode = settings.language === "ar" ? "en" : "ar"
-    updateLanguage(nextCode)
-  }, [settings.language, updateLanguage])
 
   const loadExam = React.useCallback(
     (newSession: Session) => {
@@ -150,39 +135,6 @@ const ExamPage: React.FC = () => {
     }
   }, [session, loadExam])
 
-  const handleFormSubmit = React.useCallback(
-    (name: string, email: string) => {
-      updateEmail(email)
-      updateFullName(name)
-      setTimeout(() => setShowForm(false), 250)
-      if (pendingAction) {
-        pendingAction()
-        setPendingAction(null)
-      }
-    },
-    [updateEmail, updateFullName, pendingAction]
-  )
-
-  const requireUserInfo = React.useCallback((action: () => void) => {
-    setPendingAction(() => action)
-    setShowForm(true)
-  }, [])
-
-  function withUserInfo<T extends unknown[]>(action: (...args: T) => void) {
-    return (...args: T) => {
-      if (!settings.fullName || !settings.email) {
-        requireUserInfo(() => action(...args))
-      } else {
-        action(...args)
-      }
-    }
-  }
-
-  const handleFormClose = React.useCallback(() => {
-    setShowForm(false)
-    setPendingAction(null)
-  }, [])
-
   // load translation on render
   React.useEffect(() => {
     let cancelled = false
@@ -234,25 +186,16 @@ const ExamPage: React.FC = () => {
 
   return (
     <>
-      <Header onLanguage={toggleLanguage} />
-
-      <UserInfoForm
-        initialValues={initialAccount}
-        visible={showForm}
-        onSubmit={handleFormSubmit}
-        onClose={handleFormClose}
-      />
-
       {exam ? (
         <ExamContext.Provider value={exam} key={session.id}>
           <Navigation onRevision={handleRevision} startingSession={session} onSessionUpdate={setSession} />
         </ExamContext.Provider>
       ) : (
         <Cover
-          onMiniExam={withUserInfo(handleMiniExam)}
-          onFullExam={withUserInfo(handleFullExam)}
+          onMiniExam={handleMiniExam}
+          onFullExam={handleFullExam}
           canContinue={session.examType ? true : false}
-          onContinue={withUserInfo(handleContinue)}
+          onContinue={handleContinue}
         />
       )}
     </>

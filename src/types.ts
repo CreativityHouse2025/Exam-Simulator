@@ -14,6 +14,7 @@ export interface Theme {
   scrollbar: string
   fontSize: string
   fontFamily: string
+  displayFontFamily: string
 }
 
 export interface ThemedStyles {

@@ -1,5 +1,5 @@
 import type { ThemedStyles } from '../types'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 import React from 'react'
 import styled from 'styled-components'
 import { Language } from '@styled-icons/material/Language'
@@ -7,6 +7,8 @@ import { AccountCircle } from '@styled-icons/material/AccountCircle'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
+import useSettings from '../hooks/useSettings'
+import useAuth from '../hooks/useAuth'
 
 const HeaderStyles = styled.div<ThemedStyles>`
   display: flex;
@@ -53,12 +55,18 @@ const IconStyles = styled.div<ThemedStyles>`
   }
 `
 
-
-const HeaderComponent: React.FC<HeaderProps> = ({ onLanguage }) => {
+/** App header with language toggle and conditional profile icon. */
+const HeaderComponent: React.FC = () => {
   const title = translate('about.title')
   const resetApp = React.useCallback(() => window.location.reload(), [])
-
   const navigate = useNavigate()
+  const { settings, updateLanguage } = useSettings()
+  const { isAuthenticated } = useAuth()
+
+  const toggleLanguage = React.useCallback(() => {
+    const nextCode = settings.language === "ar" ? "en" : "ar"
+    updateLanguage(nextCode)
+  }, [settings.language, updateLanguage])
 
   function handleProfile() {
     navigate("/profile")
@@ -73,19 +81,17 @@ const HeaderComponent: React.FC<HeaderProps> = ({ onLanguage }) => {
       </TitleStyles>
 
       <IconsContainer>
-        <IconStyles title='Change language' aria-label='Language Icon' id="language" className="no-select" onClick={onLanguage}>
+        <IconStyles title='Change language' aria-label='Language Icon' id="language" className="no-select" onClick={toggleLanguage}>
           <Language size={40} />
         </IconStyles>
-        <IconStyles title='Update your information' aria-label='Account Icon' id="account" className="no-select" onClick={handleProfile}>
-          <AccountCircle size={40}/>
-        </IconStyles>
+        {isAuthenticated && (
+          <IconStyles title='Update your information' aria-label='Account Icon' id="account" className="no-select" onClick={handleProfile}>
+            <AccountCircle size={40}/>
+          </IconStyles>
+        )}
       </IconsContainer>
     </HeaderStyles>
   )
 }
 
 export default HeaderComponent
-
-export interface HeaderProps {
-  onLanguage: () => void
-}
