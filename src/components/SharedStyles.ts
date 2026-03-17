@@ -43,9 +43,9 @@ export const Card = styled.div<ThemedStyles>`
   max-width: 440px;
   background: ${({ theme }) => theme.white};
   border-radius: 16px;
+  border: 0.5px solid ${({ theme }) => theme.primary};
   border-top: 3px solid ${({ theme }) => theme.primary};
   padding: 2rem;
-  box-shadow: ${({ theme }) => theme.shadows[8]};
   animation: ${fadeIn} 0.4s ease-out;
   font-family: ${({ theme }) => theme.fontFamily};
 
@@ -73,13 +73,13 @@ export const PageLogo = styled.img`
 export const PageTitle = styled.h1<ThemedStyles>`
   text-align: center;
   font-family: ${({ theme }) => theme.fontFamily};
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 600;
   color: ${({ theme }) => theme.tertiary};
   margin: 0 0 0.4rem;
 
   @media (min-width: 48rem) {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
   }
 `
 
@@ -91,7 +91,7 @@ export const PageSubtitle = styled.p<ThemedStyles>`
   margin: 0 0 2rem;
 
   @media (min-width: 48rem) {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 `
 
@@ -135,7 +135,7 @@ export const InputWrapper = styled.div`
 /** Absolutely positioned icon inside an input field. */
 export const InputIcon = styled.span<ThemedStyles>`
   position: absolute;
-  left: 1.2rem;
+  inset-inline-start: 1.2rem;
   display: flex;
   align-items: center;
   pointer-events: none;
@@ -146,7 +146,7 @@ export const InputIcon = styled.span<ThemedStyles>`
 export const FormInput = styled.input<ThemedStyles & { $hasError?: boolean; $hasIcon?: boolean }>`
   width: 100%;
   padding: 1rem 1.2rem;
-  padding-left: ${({ $hasIcon }) => ($hasIcon ? "3.6rem" : "1.2rem")};
+  padding-inline-start: ${({ $hasIcon }) => ($hasIcon ? "3.6rem" : "1.2rem")};
   font-size: 1.6rem;
   border: 1.5px solid ${({ theme, $hasError }) => ($hasError ? theme.incorrect : theme.grey[3])};
   border-radius: 10px;
@@ -168,7 +168,7 @@ export const FormInput = styled.input<ThemedStyles & { $hasError?: boolean; $has
   @media (min-width: 48rem) {
     font-size: 1.4rem;
     padding: 0.9rem 1.2rem;
-    padding-left: ${({ $hasIcon }) => ($hasIcon ? "3.6rem" : "1.2rem")};
+    padding-inline-start: ${({ $hasIcon }) => ($hasIcon ? "3.6rem" : "1.2rem")};
   }
 `
 
@@ -182,7 +182,7 @@ export const PasswordInputWrapper = styled.div`
 /** Absolute-positioned eye icon toggle button. */
 export const TogglePasswordButton = styled.button<ThemedStyles>`
   position: absolute;
-  right: 0.8rem;
+  inset-inline-end: 0.8rem;
   background: none;
   border: none;
   cursor: pointer;
@@ -249,7 +249,7 @@ export const SubmitButton = styled.button<ThemedStyles>`
 
   @media (min-width: 48rem) {
     padding: 1rem;
-    font-size: 1.35rem;
+    font-size: 1.5rem;
   }
 `
 

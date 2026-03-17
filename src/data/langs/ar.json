@@ -89,6 +89,57 @@
       "body": "مرحبًا $1،\n\nهذا ملخص امتحانك في $2:\n\n$3\n"
     }
   },
+  "auth": {
+    "fields": {
+      "email": "البريد الإلكتروني",
+      "email-placeholder": "you@example.com",
+      "first-name": "الاسم الأول",
+      "first-name-placeholder": "محمد",
+      "last-name": "اسم العائلة",
+      "last-name-placeholder": "أحمد",
+      "password": "كلمة المرور",
+      "password-placeholder": "أدخل كلمة المرور",
+      "password-new-placeholder": "8 أحرف على الأقل",
+      "confirm-password": "تأكيد كلمة المرور",
+      "confirm-password-placeholder": "أعد إدخال كلمة المرور"
+    },
+    "signin": {
+      "title": "مرحبًا بعودتك",
+      "subtitle": "سجّل دخولك للوصول إلى محاكي الامتحانات",
+      "submit": "تسجيل الدخول",
+      "submitting": "جارٍ تسجيل الدخول...",
+      "error": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+      "no-account": "ليس لديك حساب؟",
+      "signup-link": "إنشاء حساب"
+    },
+    "signup": {
+      "title": "إنشاء حساب",
+      "subtitle": "قم بإنشاء حساب لاستخدام التطبيق",
+      "submit": "إنشاء حساب",
+      "submitting": "جارٍ إنشاء الحساب...",
+      "error": "فشل إنشاء الحساب. يرجى المحاولة مرة أخرى.",
+      "has-account": "هل لديك حساب؟",
+      "signin-link": "تسجيل الدخول"
+    },
+    "profile": {
+      "expires": "تاريخ انتهاء الحساب",
+      "reset-password": "تغيير كلمة المرور",
+      "sign-out": "تسجيل الخروج",
+      "back-home": "العودة للصفحة الرئيسية"
+    },
+    "errors": {
+      "required": "$1 مطلوب",
+      "email-required": "البريد الإلكتروني مطلوب",
+      "email-invalid": "يرجى إدخال بريد إلكتروني صالح",
+      "password-required": "كلمة المرور مطلوبة",
+      "password-too-short": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+      "password-no-letter": "يجب أن تحتوي كلمة المرور على حرف واحد على الأقل",
+      "password-no-digit": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+      "password-invalid-chars": "يجب أن تحتوي كلمة المرور على أحرف وأرقام إنجليزية فقط",
+      "confirm-required": "يرجى تأكيد كلمة المرور",
+      "confirm-mismatch": "كلمتا المرور غير متطابقتين"
+    }
+  },
   "form": {
     "user-info": {
       "title": "البيانات الشخصية",

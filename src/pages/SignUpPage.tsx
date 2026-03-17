@@ -7,6 +7,7 @@ import { VisibilityOff } from "@styled-icons/material/VisibilityOff"
 import useAuth from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
 import { validateEmail, validatePassword, validateConfirmPassword, validateRequired } from "../utils/authValidation"
+import { translate } from "../utils/translation"
 // @ts-expect-error
 import Logo from "../assets/logo.png"
 import {
@@ -46,6 +47,27 @@ const SignUpPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
+  const t = {
+    logoAlt: translate('cover.logo-alt'),
+    title: translate('auth.signup.title'),
+    subtitle: translate('auth.signup.subtitle'),
+    firstName: translate('auth.fields.first-name'),
+    firstNamePlaceholder: translate('auth.fields.first-name-placeholder'),
+    lastName: translate('auth.fields.last-name'),
+    lastNamePlaceholder: translate('auth.fields.last-name-placeholder'),
+    email: translate('auth.fields.email'),
+    emailPlaceholder: translate('auth.fields.email-placeholder'),
+    password: translate('auth.fields.password'),
+    passwordNewPlaceholder: translate('auth.fields.password-new-placeholder'),
+    confirmPassword: translate('auth.fields.confirm-password'),
+    confirmPasswordPlaceholder: translate('auth.fields.confirm-password-placeholder'),
+    submit: translate('auth.signup.submit'),
+    submitting: translate('auth.signup.submitting'),
+    error: translate('auth.signup.error'),
+    hasAccount: translate('auth.signup.has-account'),
+    signinLink: translate('auth.signup.signin-link'),
+  }
+
   const firstNameRef = useRef<HTMLInputElement>(null)
 
   React.useEffect(() => {
@@ -55,10 +77,10 @@ const SignUpPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const firstNameError = validateRequired(firstName.value, "First name")
+    const firstNameError = validateRequired(firstName.value, t.firstName)
     if (firstNameError) { firstName.setError(firstNameError); return }
 
-    const lastNameError = validateRequired(lastName.value, "Last name")
+    const lastNameError = validateRequired(lastName.value, t.lastName)
     if (lastNameError) { lastName.setError(lastNameError); return }
 
     const emailError = validateEmail(email.value)
@@ -79,7 +101,7 @@ const SignUpPage: React.FC = () => {
       signUp(email.value, password.value, firstName.value.trim(), lastName.value.trim())
       navigate("/app")
     } catch (err) {
-      setServerError(err instanceof Error ? err.message : "Sign up failed. Please try again.")
+      setServerError(err instanceof Error ? err.message : t.error)
     } finally {
       setSubmitting(false)
     }
@@ -88,21 +110,21 @@ const SignUpPage: React.FC = () => {
   return (
     <PageWrapper>
       <Card>
-        <PageLogo src={Logo} alt="Exam Simulator" />
-        <PageTitle>Create Account</PageTitle>
-        <PageSubtitle>Sign up to get started</PageSubtitle>
+        <PageLogo src={Logo} alt={t.logoAlt} />
+        <PageTitle>{t.title}</PageTitle>
+        <PageSubtitle>{t.subtitle}</PageSubtitle>
 
         <form onSubmit={handleSubmit} noValidate>
           {serverError && <FormError>{serverError}</FormError>}
 
           <FormRow>
             <FormGroup>
-              <FormLabel htmlFor="firstName">First Name</FormLabel>
+              <FormLabel htmlFor="firstName">{t.firstName}</FormLabel>
               <FormInput
                 ref={firstNameRef}
                 id="firstName"
                 type="text"
-                placeholder="John"
+                placeholder={t.firstNamePlaceholder}
                 autoComplete="given-name"
                 value={firstName.value}
                 onChange={firstName.onChange}
@@ -112,11 +134,11 @@ const SignUpPage: React.FC = () => {
             </FormGroup>
 
             <FormGroup>
-              <FormLabel htmlFor="lastName">Last Name</FormLabel>
+              <FormLabel htmlFor="lastName">{t.lastName}</FormLabel>
               <FormInput
                 id="lastName"
                 type="text"
-                placeholder="Doe"
+                placeholder={t.lastNamePlaceholder}
                 autoComplete="family-name"
                 value={lastName.value}
                 onChange={lastName.onChange}
@@ -127,7 +149,7 @@ const SignUpPage: React.FC = () => {
           </FormRow>
 
           <FormGroup>
-            <FormLabel htmlFor="email">Email</FormLabel>
+            <FormLabel htmlFor="email">{t.email}</FormLabel>
             <InputWrapper>
               <InputIcon>
                 <Email size={18} />
@@ -135,7 +157,7 @@ const SignUpPage: React.FC = () => {
               <FormInput
                 id="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder={t.emailPlaceholder}
                 autoComplete="email"
                 value={email.value}
                 onChange={email.onChange}
@@ -147,15 +169,15 @@ const SignUpPage: React.FC = () => {
           </FormGroup>
 
           <FormGroup>
-            <FormLabel htmlFor="password">Password</FormLabel>
+            <FormLabel htmlFor="password">{t.password}</FormLabel>
             <PasswordInputWrapper>
               <InputIcon>
-                <Lock size={18} />
+                <Lock size={20} />
               </InputIcon>
               <FormInput
                 id="password"
                 type={showPassword ? "text" : "password"}
-                placeholder="At least 8 characters"
+                placeholder={t.passwordNewPlaceholder}
                 autoComplete="new-password"
                 value={password.value}
                 onChange={password.onChange}
@@ -170,15 +192,15 @@ const SignUpPage: React.FC = () => {
           </FormGroup>
 
           <FormGroup>
-            <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
+            <FormLabel htmlFor="confirmPassword">{t.confirmPassword}</FormLabel>
             <PasswordInputWrapper>
               <InputIcon>
-                <Lock size={18} />
+                <Lock size={20} />
               </InputIcon>
               <FormInput
                 id="confirmPassword"
                 type={showConfirmPassword ? "text" : "password"}
-                placeholder="Re-enter your password"
+                placeholder={t.confirmPasswordPlaceholder}
                 autoComplete="new-password"
                 value={confirmPassword.value}
                 onChange={confirmPassword.onChange}
@@ -193,13 +215,13 @@ const SignUpPage: React.FC = () => {
           </FormGroup>
 
           <SubmitButton type="submit" disabled={submitting}>
-            {submitting ? "Creating account..." : "Sign Up"}
+            {submitting ? t.submitting : t.submit}
           </SubmitButton>
         </form>
 
         <CardFooter>
-          <span>Already have an account?</span>
-          <NavLink to="/signin">Sign In</NavLink>
+          <span>{t.hasAccount}</span>
+          <NavLink to="/signin">{t.signinLink}</NavLink>
         </CardFooter>
       </Card>
     </PageWrapper>
