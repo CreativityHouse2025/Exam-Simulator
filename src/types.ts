@@ -233,6 +233,10 @@ export type RevisionDetails = {
   categoryId: Session['categoryId']
 }
 
+export type RevisionExamOptions = RevisionDetails & {
+  type: ExamType
+}
+
 export type Results = {
   // status-related
   pass?: boolean
