@@ -129,13 +129,13 @@
     },
     "errors": {
       "required": "$1 is required",
+      "name-invalid": "$1 must contain letters only",
       "email-required": "Email is required",
       "email-invalid": "Please enter a valid email address",
       "password-required": "Password is required",
       "password-too-short": "Password must be at least 8 characters",
       "password-no-letter": "Password must contain at least one letter",
       "password-no-digit": "Password must contain at least one digit",
-      "password-invalid-chars": "Password must contain only English letters and digits",
       "confirm-required": "Please confirm your password",
       "confirm-mismatch": "Passwords do not match"
     }
