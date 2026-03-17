@@ -58,7 +58,6 @@ const IconStyles = styled.div<ThemedStyles>`
 /** App header with language toggle and conditional profile icon. */
 const HeaderComponent: React.FC = () => {
   const title = translate('about.title')
-  const resetApp = React.useCallback(() => window.location.reload(), [])
   const navigate = useNavigate()
   const { settings, updateLanguage } = useSettings()
   const { isAuthenticated } = useAuth()
@@ -72,11 +71,15 @@ const HeaderComponent: React.FC = () => {
     navigate("/profile")
   }
 
+  function handleHomepage() {
+    navigate("/app")
+  }
+
   return (
     <HeaderStyles id="header">
-      <ImageStyles title='Creativity House' alt='Creativity House Logo' id="image" className="no-select" src={Logo} onClick={resetApp} />
+      <ImageStyles title='Creativity House' alt='Creativity House Logo' id="image" className="no-select" src={Logo} onClick={handleHomepage} />
 
-      <TitleStyles id="title" className="no-select" onClick={resetApp}>
+      <TitleStyles id="title" className="no-select" onClick={handleHomepage}>
         {title}
       </TitleStyles>
 

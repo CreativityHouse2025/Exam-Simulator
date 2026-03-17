@@ -2,6 +2,7 @@ import React from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
 import Toast from "./components/Toast"
 import Header from "./components/Header"
+import Loading from "./components/Loading"
 import ProtectedRoute from "./guards/ProtectedRoute"
 import GuestRoute from "./guards/GuestRoute"
 import ExamPage from "./pages/ExamPage"
@@ -9,7 +10,47 @@ import SignInPage from "./pages/SignInPage"
 import SignUpPage from "./pages/SignUpPage"
 import ProfilePage from "./pages/ProfilePage"
 import AuthCallbackPage from "./pages/AuthCallbackPage"
+import { hasTranslation, setTranslation } from "./utils/translation"
+import { LANGUAGES } from "./constants"
+import useSettings from "./hooks/useSettings"
+import type { LangCode } from "./types"
+
 const App: React.FC = () => {
+  const { settings } = useSettings()
+  const langCode = settings.language
+  const [translationReady, setTranslationReady] = React.useState<boolean>(hasTranslation())
+
+  const loadTranslation = React.useCallback(async (code: LangCode) => {
+    const translations = (await import(`./data/langs/${code}.json?v=1`)).default
+    const newLang = LANGUAGES[code]
+
+    setTranslation(newLang, translations)
+    document.documentElement.lang = newLang.code
+    document.documentElement.dir = newLang.dir
+  }, [])
+
+  React.useEffect(() => {
+    let cancelled = false
+    async function initTranslation() {
+      setTranslationReady(false)
+      try {
+        await loadTranslation(langCode)
+      } catch (error) {
+        console.error("Failed to load translation: ", error)
+      } finally {
+        if (!cancelled) setTranslationReady(true)
+      }
+    }
+    initTranslation()
+    return () => {
+      cancelled = true
+    }
+  }, [langCode, loadTranslation])
+
+  if (!translationReady) {
+    return <Loading size={200} />
+  }
+
   return (
     <>
       <Header />

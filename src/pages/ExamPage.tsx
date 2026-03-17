@@ -1,13 +1,13 @@
-import type { Exam, LangCode, Session, RevisionExamOptions } from "../types"
+import type { Exam, Session, RevisionExamOptions } from "../types"
 
 import React from "react"
 import Navigation from "../components/Navigation"
 import Cover from "../components/Cover"
 import Loading from "../components/Loading"
-import { hasTranslation, setTranslation, translate } from "../utils/translation"
+import { translate } from "../utils/translation"
 import { formatSession, formatExam } from "../utils/format"
 import { getExamByQuestionIds, initQuestionMap } from "../utils/exam"
-import { DEFAULT_SESSION, LANGUAGES } from "../constants"
+import { DEFAULT_SESSION } from "../constants"
 import { ExamContext } from "../contexts"
 import { useSession } from "../hooks/useSession"
 import useSettings from "../hooks/useSettings"
@@ -20,7 +20,6 @@ const ExamPage: React.FC = () => {
   const { settings } = useSettings()
   const [exam, setExam] = React.useState<Exam | null>(null)
   const [loading, setLoading] = React.useState<boolean>(false)
-  const [translationReady, setTranslationReady] = React.useState<boolean>(hasTranslation())
 
   const { showToast } = useToast()
 
@@ -40,16 +39,6 @@ const ExamPage: React.FC = () => {
       setSession(DEFAULT_SESSION)
     }
   }, [setSession])
-
-  // TODO: make translation update source of truth unified in useSettings's updateLanguage instead of three different calls
-  const loadTranslation = React.useCallback(async (code: LangCode) => {
-    const translations = (await import(`../data/langs/${code}.json?v=1`)).default
-    const newLang = LANGUAGES[code]
-
-    setTranslation(newLang, translations)
-    document.documentElement.lang = newLang.code
-    document.documentElement.dir = newLang.dir
-  }, [])
 
   const loadExam = React.useCallback(
     (newSession: Session) => {
@@ -135,25 +124,6 @@ const ExamPage: React.FC = () => {
     }
   }, [session, loadExam])
 
-  // load translation on render
-  React.useEffect(() => {
-    let cancelled = false
-    async function initTranslation() {
-      setTranslationReady(false)
-      try {
-        await loadTranslation(langCode)
-      } catch (error) {
-        console.error("Failed to load translation: ", error)
-      } finally {
-        if (!cancelled) setTranslationReady(true)
-      }
-    }
-    initTranslation()
-    return () => {
-      cancelled = true
-    }
-  }, [langCode, loadTranslation])
-
   // Load questions from disk to memory map
   React.useEffect(() => {
     let cancelled = false
@@ -175,10 +145,6 @@ const ExamPage: React.FC = () => {
       cancelled = true
     }
   }, [langCode]) // run only once per language change
-
-  if (!translationReady) {
-    return <Loading size={200} />
-  }
 
   if (loading) {
     return <Loading size={200} />

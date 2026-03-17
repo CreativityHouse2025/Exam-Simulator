@@ -59,10 +59,12 @@ export const PageLogo = styled.img`
   display: block;
   margin: 0 auto 1.2rem;
   width: 60px;
-  height: auto;
+  height: 60px;
+  object-cover: fit;
 
   @media (min-width: 48rem) {
     width: 80px;
+    height: 80px;
     margin-bottom: 1.5rem;
   }
 `
