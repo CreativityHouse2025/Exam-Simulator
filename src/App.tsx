@@ -18,7 +18,7 @@ import type { LangCode } from "./types"
 const App: React.FC = () => {
   const { settings } = useSettings()
   const langCode = settings.language
-  const [translationReady, setTranslationReady] = React.useState<boolean>(hasTranslation())
+  const [translationVersion, setTranslationVersion] = React.useState<number>(hasTranslation() ? 1 : 0)
 
   const loadTranslation = React.useCallback(async (code: LangCode) => {
     const translations = (await import(`./data/langs/${code}.json?v=1`)).default
@@ -32,13 +32,13 @@ const App: React.FC = () => {
   React.useEffect(() => {
     let cancelled = false
     async function initTranslation() {
-      setTranslationReady(false)
+      // Do NOT set loading state, keeps Routes mounted during language switch (UX during examination)
       try {
         await loadTranslation(langCode)
       } catch (error) {
         console.error("Failed to load translation: ", error)
       } finally {
-        if (!cancelled) setTranslationReady(true)
+        if (!cancelled) setTranslationVersion(v => v + 1)
       }
     }
     initTranslation()
@@ -47,7 +47,8 @@ const App: React.FC = () => {
     }
   }, [langCode, loadTranslation])
 
-  if (!translationReady) {
+  // if it is loading for the first time
+  if (translationVersion === 0) {
     return <Loading size={200} />
   }
 

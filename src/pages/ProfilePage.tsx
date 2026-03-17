@@ -1,5 +1,7 @@
 import React from "react"
 import styled from "styled-components"
+import { useNavigate } from "react-router-dom"
+import { ArrowBack } from "@styled-icons/material/ArrowBack"
 import useAuth from "../hooks/useAuth"
 import { formatDate } from "../utils/format"
 import type { ThemedStyles } from "../types"
@@ -7,6 +9,28 @@ import { PageWrapper, Card, AvatarCircle, PageTitle, PageSubtitle, NavLink, Card
 
 const ProfileCard = styled(Card)`
   max-width: 500px;
+  position: relative;
+`
+
+const BackButton = styled.button<ThemedStyles>`
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.grey[7]};
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.grey[1]};
+  }
 `
 
 const InfoGroup = styled.div`
@@ -64,6 +88,7 @@ const ActionButton = styled.button<ThemedStyles & { $variant?: "danger" | "secon
 /** Profile page — displays user account details with initials avatar. */
 const ProfilePage: React.FC = () => {
   const { user } = useAuth()
+  const navigate = useNavigate()
 
   if (!user) return null
 
@@ -72,6 +97,9 @@ const ProfilePage: React.FC = () => {
   return (
     <PageWrapper>
       <ProfileCard>
+        <BackButton onClick={() => navigate("/app")} aria-label="Back to app">
+          <ArrowBack size={30} />
+        </BackButton>
         <AvatarCircle>{initials}</AvatarCircle>
         <PageTitle>{user.first_name} {user.last_name}</PageTitle>
         <PageSubtitle>{user.email}</PageSubtitle>
