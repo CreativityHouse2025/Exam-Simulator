@@ -59,7 +59,7 @@ const App: React.FC = () => {
         <Route path="/signin" element={<GuestRoute><SignInPage /></GuestRoute>} />
         <Route path="/signup" element={<GuestRoute><SignUpPage /></GuestRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-        <Route path="/auth/callback" element={<AuthCallbackPage />} />
+        <Route path="/auth/callback" element={<GuestRoute><AuthCallbackPage /></GuestRoute>} />
         <Route path="/app" element={<ProtectedRoute><ExamPage /></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/app" replace />} />
       </Routes>

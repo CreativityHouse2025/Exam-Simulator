@@ -1,8 +1,6 @@
 # Todo
 
 Backend
-- [ ] Add /me endpoint to get user profile
-- [ ] Modify signup to use dumb page callback
 - [ ] Finish the reset password handler
 Frontend
 - [ ] Populate auth hook with actual endpoints

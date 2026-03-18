@@ -10,6 +10,7 @@ export type AppErrorCode =
   | "SIGNIN_FAILED"
   | "SIGNOUT_FAILED"
   | "UNAUTHORIZED"
+  | "CONFIRMATION_FAILED"
 
 
 export type ApiSuccess<T> = {
@@ -71,6 +72,11 @@ export type UserProfile = {
 
 export type SigninResult = {
   user: UserProfile
+  access_token: string
+  refresh_token: string
+}
+
+export type SignupCallbackRequestBody = {
   access_token: string
   refresh_token: string
 }
