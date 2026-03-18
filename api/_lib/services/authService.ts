@@ -184,3 +184,43 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
     refresh_token: data.session.refresh_token,
   }
 }
+
+/**
+ * Validates confirmation tokens from a signup email link and returns the user profile with tokens.
+ * Uses `supabaseAdmin.auth.getUser()` to verify the access token without needing a session.
+ *
+ * @returns User profile and session tokens (handler is responsible for setting cookies).
+ * @throws {AppError} 401 `CONFIRMATION_FAILED` — invalid or expired confirmation link.
+ * @throws {AppError} 500 `CONFIRMATION_FAILED` — user profile not found in the database.
+ */
+export async function confirmSignup(accessToken: string, refreshToken: string): Promise<SigninResult> {
+  const { data: authUser, error } = await supabaseAdmin.auth.getUser(accessToken)
+
+  if (error || !authUser.user) {
+    throw new AppError({ statusCode: 401, code: "CONFIRMATION_FAILED", message: "Invalid or expired confirmation link" })
+  }
+
+  const { data: profile, error: profileError } = await supabaseAdmin
+    .from("users")
+    .select("id, first_name, last_name, email, expires_at")
+    .eq("id", authUser.user.id)
+    .single()
+
+  if (profileError || !profile) {
+    throw new AppError({ statusCode: 500, code: "CONFIRMATION_FAILED", message: "User profile not found" })
+  }
+
+  console.log(`[confirmSignup] User ${authUser.user.id} confirmed successfully`)
+
+  return {
+    user: {
+      id: profile.id,
+      email: profile.email,
+      first_name: profile.first_name,
+      last_name: profile.last_name,
+      expires_at: profile.expires_at,
+    },
+    access_token: accessToken,
+    refresh_token: refreshToken,
+  }
+}
