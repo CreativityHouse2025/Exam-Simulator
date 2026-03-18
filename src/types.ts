@@ -222,6 +222,27 @@ export interface ToastContextType {
   setToast: React.Dispatch<React.SetStateAction<ToastState>>
 }
 
+// API response types (mirrors backend api/_lib/types.ts for frontend use)
+export type AppErrorCode =
+  | "MISSING_FIELDS"
+  | "VALIDATION_ERROR"
+  | "SUBSCRIPTION_REQUIRED"
+  | "SIGNUP_FAILED"
+  | "INVALID_CREDENTIALS"
+  | "ACCOUNT_EXPIRED"
+  | "SIGNIN_FAILED"
+  | "SIGNOUT_FAILED"
+  | "UNAUTHORIZED"
+  | "CONFIRMATION_FAILED"
+  | "INTERNAL_ERROR"
+  | "METHOD_NOT_ALLOWED"
+
+export type ApiSuccess<T> = { success: true; data: T }
+export type ApiError = { success: false; error: { code: AppErrorCode; message: string } }
+export type ApiResponse<T> = ApiSuccess<T> | ApiError
+
+export type AuthStatus = "pending" | "authenticated" | "unauthenticated"
+
 // Auth types
 export type UserProfile = {
   id: string
@@ -233,7 +254,9 @@ export type UserProfile = {
 
 export type AuthContextType = {
   user: UserProfile | null
+  authStatus: AuthStatus
   setUser: React.Dispatch<React.SetStateAction<UserProfile | null>>
+  setAuthStatus: React.Dispatch<React.SetStateAction<AuthStatus>>
 }
 
 export type RevisionDetails = {

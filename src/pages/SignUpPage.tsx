@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { Email } from "@styled-icons/material/Email"
 import { Lock } from "@styled-icons/material/Lock"
 import { Visibility } from "@styled-icons/material/Visibility"
 import { VisibilityOff } from "@styled-icons/material/VisibilityOff"
+import { MarkEmailRead } from "@styled-icons/material/MarkEmailRead"
 import useAuth from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
 import { validateEmail, validatePassword, validateConfirmPassword, validateRequired, validateName } from "../utils/authValidation"
@@ -34,7 +34,6 @@ import {
 /** Sign up page — registers new users with name, email, and password. */
 const SignUpPage: React.FC = () => {
   const { signUp } = useAuth()
-  const navigate = useNavigate()
 
   const firstName = useFormField()
   const lastName = useFormField()
@@ -46,6 +45,7 @@ const SignUpPage: React.FC = () => {
   const [submitting, setSubmitting] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   const t = {
     logoAlt: translate('cover.logo-alt'),
@@ -66,6 +66,9 @@ const SignUpPage: React.FC = () => {
     error: translate('auth.signup.error'),
     hasAccount: translate('auth.signup.has-account'),
     signinLink: translate('auth.signup.signin-link'),
+    successTitle: translate('auth.signup.success-title'),
+    successMessage: translate('auth.signup.success-message'),
+    goToSignin: translate('auth.signup.go-to-signin'),
   }
 
   const firstNameRef = useRef<HTMLInputElement>(null)
@@ -101,19 +104,30 @@ const SignUpPage: React.FC = () => {
     setSubmitting(true)
     setServerError("")
 
-    await new Promise((resolve) => setTimeout(resolve, 500))
-
     try {
-      // /\S+/g regex to find finding all occurrences of one or more non-whitespace characters within a string
-      // e.g.: first name: mark DOWN -> [mark, DOWN] -> [Mark, Down]
       const toTitleCase = (s: string) => s.trim().replace(/\S+/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase())
-      signUp(email.value, password.value, toTitleCase(firstName.value), toTitleCase(lastName.value))
-      navigate("/app")
+      await signUp(email.value, password.value, toTitleCase(firstName.value), toTitleCase(lastName.value))
+      setSuccess(true)
     } catch (err) {
       setServerError(err instanceof Error ? err.message : t.error)
     } finally {
       setSubmitting(false)
     }
+  }
+
+  if (success) {
+    return (
+      <PageWrapper>
+        <Card>
+          <MarkEmailRead size={64} style={{ color: "#593752", marginBottom: "1rem", display: "block", margin: "0 auto 1rem" }} />
+          <PageTitle>{t.successTitle}</PageTitle>
+          <PageSubtitle>{t.successMessage}</PageSubtitle>
+          <CardFooter>
+            <NavLink to="/signin">{t.goToSignin}</NavLink>
+          </CardFooter>
+        </Card>
+      </PageWrapper>
+    )
   }
 
   return (

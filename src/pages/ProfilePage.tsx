@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
 import { ArrowBack } from "@styled-icons/material/ArrowBack"
 import useAuth from "../hooks/useAuth"
+import useToast from "../hooks/useToast"
 import { formatDate } from "../utils/format"
 import { translate } from "../utils/translation"
 import type { ThemedStyles } from "../types"
@@ -69,36 +70,51 @@ const Divider = styled.hr<ThemedStyles>`
   margin: 2rem 0;
 `
 
-const ActionButton = styled.button<ThemedStyles & { $variant?: "danger" | "secondary" }>`
+const ActionButton = styled.button<ThemedStyles & { $variant?: "danger" | "secondary"; $enabled?: boolean }>`
   width: 100%;
   padding: 1.1rem;
   font-size: 1.4rem;
   font-weight: 600;
   border-radius: 8px;
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.45;
+  cursor: ${({ $enabled }) => ($enabled ? "pointer" : "not-allowed")};
+  pointer-events: ${({ $enabled }) => ($enabled ? "auto" : "none")};
+  opacity: ${({ $enabled }) => ($enabled ? 1 : 0.45)};
   margin-bottom: 0.8rem;
   transition: all 0.3s ease;
   border: ${({ theme, $variant }) =>
     $variant === "danger" ? `1.5px solid ${theme.incorrect}` : "none"};
   background: ${({ theme, $variant }) => ($variant === "danger" ? "#fef2f2" : theme.primary)};
   color: ${({ theme, $variant }) => ($variant === "danger" ? theme.incorrect : "white")};
+
+  &:hover {
+    opacity: ${({ $enabled }) => ($enabled ? 0.85 : 0.45)};
+  }
 `
 
 /** Profile page — displays user account details with initials avatar. */
 const ProfilePage: React.FC = () => {
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
   const navigate = useNavigate()
+  const { showToast } = useToast()
+  const [signingOut, setSigningOut] = useState(false)
 
   const t = {
     expires: translate('auth.profile.expires'),
     resetPassword: translate('auth.profile.reset-password'),
     signOut: translate('auth.profile.sign-out'),
+    signingOut: translate('auth.profile.signing-out'),
+    signOutSuccess: translate('auth.profile.sign-out-success'),
     backHome: translate('auth.profile.back-home'),
   }
 
   if (!user) return null
+
+  const handleSignOut = async () => {
+    setSigningOut(true)
+    await signOut()
+    showToast(t.signOutSuccess)
+    navigate("/signin")
+  }
 
   const initials = `${user.first_name[0]}${user.last_name[0]}`.toUpperCase()
 
@@ -120,7 +136,9 @@ const ProfilePage: React.FC = () => {
         <Divider />
 
         <ActionButton $variant="secondary">{t.resetPassword}</ActionButton>
-        <ActionButton $variant="danger">{t.signOut}</ActionButton>
+        <ActionButton $variant="danger" $enabled disabled={signingOut} onClick={handleSignOut}>
+          {signingOut ? t.signingOut : t.signOut}
+        </ActionButton>
 
         <CardFooter>
           <NavLink to="/app">{t.backHome}</NavLink>

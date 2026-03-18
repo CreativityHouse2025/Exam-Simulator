@@ -75,10 +75,8 @@ const SignInPage: React.FC = () => {
     setSubmitting(true)
     setServerError("")
 
-    await new Promise((resolve) => setTimeout(resolve, 500))
-
     try {
-      signIn(email.value, password.value)
+      await signIn(email.value, password.value)
       navigate("/app")
     } catch (err) {
       setServerError(err instanceof Error ? err.message : t.error)
