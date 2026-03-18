@@ -205,6 +205,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
   const emailInitiatedRef = React.useRef<boolean>(false);
   const emailDataRef = React.useRef<EmailDataRef>(null);
 
+  // TODO: Get user information from current session
   React.useEffect(() => {
     if (!finished) return;
     if (!settings.email || !settings.fullName) return;

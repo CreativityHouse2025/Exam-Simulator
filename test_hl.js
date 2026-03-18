@@ -3,12 +3,12 @@ import 'dotenv/config'
 
 
 const HL_TOKEN = process.env.HIGHLEVEL_TOKEN
-const HIGHLEVEL_AGENCY_LOCATION_ID = process.env.HIGHLEVEL_AGENCY_LOCATION_ID
+const HIGHLEVEL_SUBACCOUNT_LOCATION_ID = process.env.HIGHLEVEL_SUBACCOUNT_LOCATION_ID
 
 let data = JSON.stringify({
-  "locationId": HIGHLEVEL_AGENCY_LOCATION_ID,
-  "pageLimit": 1,
-  "query": "omar"
+  "locationId": HIGHLEVEL_SUBACCOUNT_LOCATION_ID,
+  "pageLimit": 2,
+  "query": "Omar Saeed"
 });
 
 let config = {

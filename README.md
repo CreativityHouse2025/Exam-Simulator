@@ -12,6 +12,8 @@ Try the webapp here 👉 https://exam-simulator-flax.vercel.app
 
 - **Predefined full exam selection:** A dropdown on the home screen lets users select from a list of predefined full exams (180 questions each). All users see the same questions in the same fixed order per exam.
 
+- **Sign up using Creativity House offer email:** A user with an email that has an offer (1st payment of more than 160) can access the system. Otherwise will be unauthorized
+
 ---
 
 ## Features (as of v1.1)
