@@ -10553,7 +10553,7 @@
     "type": "multiple-choice",
     "categoryId": 12,
     "text": "You are trying to decide whether to contract out a construction job or do it within your company. To do it within your company, you will have to hire an engineer for $35,000 and pay a construction team $15,000 per week. A contractor will cost you a price of $19,000 per week, and your expert agrees that you won’t find a lower price than that. The job will take 16 weeks. What’s the best way to proceed?",
-    "explanation": "The goal of agile methods is closer cooperation between the project team and the customer, as expressed in the third Agile Manifesto value, which ranks “Customer collaboration over contract negotiation\". Unlike the traditional triangle of constraints, agile projects attempt to fix time and cost and adjust scope to complete the highest-priority features. From the proposed contracts types time and material will be more suitable for agile projects as the team will be paid according to the completed fetaures within agreed timebox. It might include NTE clause or it can be graduated T&M. However, there are other contract types can be used in agile projects. Domain = Process. Agile Practice Guide, Page 77",
+    "explanation": "Outsourcing Cost = 19000 * 16 = 304000, House Cost = 15000 * 16 + 35000 = 275000. House cost is less.",
     "choices": [
       {
         "text": "Pay the contractor to do the job.",
@@ -10561,11 +10561,11 @@
       },
       {
         "text": "Select a T&M contract.",
-        "correct": true
+        "correct": false
       },
       {
         "text": "Do the work within your company.",
-        "correct": false
+        "correct": true
       },
       {
         "text": "Select a fixed price contract if your scope is not clear.",
