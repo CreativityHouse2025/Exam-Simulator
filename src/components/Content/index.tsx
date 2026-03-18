@@ -1,11 +1,12 @@
-import type { Answers, Exam, ExamType, LangCode, ThemedStyles } from '../../types'
+import type { ExamType, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
 import ExamComponent from './Exam'
 import Summary from './Summary'
-import { ExamContext, SessionDataContext, SessionExamContext } from '../../contexts'
+import { SessionDataContext, SessionExamContext } from '../../contexts'
 import { useEmail } from '../../hooks/useEmail'
+import useAuth from '../../hooks/useAuth'
 import useSettings from '../../hooks/useSettings'
 import { SESSION_ACTION_TYPES } from '../../constants'
 import useToast from '../../hooks/useToast'
@@ -35,9 +36,9 @@ const ContentStyles = styled.div<ThemedStyles>`
 
 const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
   const { examState, reviewState } = React.useContext(SessionExamContext)
-  const { emailSent, answers, examType, update } = React.useContext(SessionDataContext)
-  const exam = React.useContext(ExamContext)
+  const { emailSent, examType, update } = React.useContext(SessionDataContext)
 
+  const { user } = useAuth()
   const { settings } = useSettings();
   const langCode = settings.language;
 
@@ -63,7 +64,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
     if (emailError) {
       showToast(feedback.error, 5000)
     }
-  }, [emailError, reportError, showToast])
+  }, [emailError, showToast])
 
   const results = useResults(finished);
 
@@ -202,41 +203,20 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
     [langCode]
   )
 
-  const emailInitiatedRef = React.useRef<boolean>(false);
-  const emailDataRef = React.useRef<EmailDataRef>(null);
-
-  // TODO: Get user information from current session
-  React.useEffect(() => {
-    if (!finished) return;
-    if (!settings.email || !settings.fullName) return;
-
-    // Capture values when exam finishes
-    if (!emailDataRef.current) {
-      emailDataRef.current = {
-        exam,
-        answers,
-        langCode,
-        fullName: settings.fullName,
-        email: settings.email
-      };
-    }
-  }, [finished, exam, answers, langCode, settings]);
-
   React.useEffect(() => {
     if (!finished) return;
     if (emailSent) return;
-    if (!emailDataRef.current) return;
+    if (!user) return;
+
+    const { first_name, last_name, email: userEmail } = user
+
+    // Mark as sent immediately to survive remounts during the async send
+    update!([SESSION_ACTION_TYPES.SET_EMAIL_SENT, true]);
 
     async function sendEmailToUser() {
-      if (emailInitiatedRef.current) return;
-      emailInitiatedRef.current = true;
-
       try {
-        const userFullName = emailDataRef.current?.fullName as string;
-
-        const userEmail = emailDataRef.current?.email as string;
-
-        const email = writeEmail(userFullName, results as Results)
+        const fullName = `${first_name} ${last_name}`
+        const email = writeEmail(fullName, results as Results)
 
         await sendEmail({
           to: userEmail,
@@ -244,16 +224,15 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
           text: email.textBody,
           html: email.htmlBody
         });
-        update!([SESSION_ACTION_TYPES.SET_EMAIL_SENT, true]);
         showToast(feedback.sent, 5000)
       } catch (error) {
         console.error("Error sending email: ", error);
-        emailInitiatedRef.current = false; // reset on failure to allow retry
+        update!([SESSION_ACTION_TYPES.SET_EMAIL_SENT, false]);
       }
     }
 
     sendEmailToUser();
-  }, [finished, emailSent, writeEmail, sendEmail, update]);
+  }, [finished, emailSent, user, sendEmail, update, showToast]);
 
   return (
     <MainStyles id="main" $open={open}>
@@ -272,11 +251,3 @@ export interface ContentProps {
 export interface MainStylesProps {
   $open: boolean
 }
-
-type EmailDataRef = {
-  exam: Exam;
-  answers: Answers;
-  langCode: LangCode;
-  fullName: string;
-  email: string;
-} | null

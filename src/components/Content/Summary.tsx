@@ -7,6 +7,7 @@ import { formatDate, formatTimer } from '../../utils/format'
 import { translate } from '../../utils/translation'
 import useResults from '../../hooks/useResults'
 import { isRetakeAllowed } from '../../utils/exam'
+import { useNavigate } from 'react-router-dom'
 
 export const TitleStyles = styled.div<ThemedStyles>`
   justify-self: center;
@@ -119,8 +120,8 @@ const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: Rev
     home: translate('content.summary.home'),
     retake: translate('content.summary.retake-wrong'),
   }
-
-  const onRestart = React.useCallback(() => window.location.reload(), [])
+  
+  const navigate = useNavigate()
 
   const handleRevision = React.useCallback(() => {
     onRevision({
@@ -160,7 +161,7 @@ const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: Rev
         {canRetake && <RetakeButton id="retake-button" title='Revise your mistakes' className="no-select" onClick={handleRevision}>
           {translated.retake}
         </RetakeButton>}
-        <RestartButton id="restart-button" title='Homepage' className="no-select" onClick={onRestart}>
+        <RestartButton id="restart-button" title='Homepage' className="no-select" onClick={() => navigate("/")}>
           {translated.home}
         </RestartButton>
       </ButtonsContainer>

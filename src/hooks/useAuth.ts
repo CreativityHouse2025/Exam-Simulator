@@ -1,6 +1,27 @@
 import { useContext, useCallback } from "react"
 import { AuthContext } from "../contexts"
-import { findUser, createUser } from "../mock/users"
+import { translate } from "../utils/translation"
+import type { ApiResponse, AppErrorCode, UserProfile } from "../types"
+
+const errorCodeToTranslationKey: Record<AppErrorCode, string> = {
+  INVALID_CREDENTIALS: "auth.errors.server-invalid-credentials",
+  ACCOUNT_EXPIRED: "auth.errors.server-account-expired",
+  SUBSCRIPTION_REQUIRED: "auth.errors.server-subscription-required",
+  SIGNUP_FAILED: "auth.errors.server-signup-failed",
+  SIGNIN_FAILED: "auth.errors.server-signin-failed",
+  CONFIRMATION_FAILED: "auth.errors.server-confirmation-failed",
+  VALIDATION_ERROR: "auth.errors.server-validation-error",
+  MISSING_FIELDS: "auth.errors.server-missing-fields",
+  SIGNOUT_FAILED: "auth.errors.server-unknown",
+  UNAUTHORIZED: "auth.errors.server-unknown",
+  INTERNAL_ERROR: "auth.errors.server-unknown",
+  METHOD_NOT_ALLOWED: "auth.errors.server-unknown",
+}
+
+function translateErrorCode(code: AppErrorCode): string {
+  const key = errorCodeToTranslationKey[code]
+  return translate(key)
+}
 
 export default function useAuth() {
   const context = useContext(AuthContext)
@@ -9,30 +30,78 @@ export default function useAuth() {
     throw new Error("useAuth must be used within AuthContextProvider")
   }
 
-  const { user, setUser } = context
+  const { user, authStatus, setUser, setAuthStatus } = context
 
-  const isAuthenticated = user !== null
+  const isAuthenticated = authStatus === "authenticated"
+  const isLoading = authStatus === "pending"
 
   const signIn = useCallback(
-    (email: string, password: string) => {
-      const found = findUser(email, password)
-      if (!found) throw new Error("Invalid email or password")
-      setUser(found)
+    async (email: string, password: string) => {
+      const response = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      })
+
+      const result: ApiResponse<{ user: UserProfile }> = await response.json()
+
+      if (!result.success) {
+        throw new Error(translateErrorCode(result.error.code))
+      }
+
+      setUser(result.data.user)
+      setAuthStatus("authenticated")
     },
-    [setUser],
+    [setUser, setAuthStatus],
   )
 
   const signUp = useCallback(
-    (email: string, password: string, firstName: string, lastName: string) => {
-      const created = createUser(email, password, firstName, lastName)
-      setUser(created)
+    async (email: string, password: string, firstName: string, lastName: string) => {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, first_name: firstName, last_name: lastName }),
+      })
+
+      const result: ApiResponse<null> = await response.json()
+
+      if (!result.success) {
+        throw new Error(translateErrorCode(result.error.code))
+      }
+
+      // Do NOT set user — email confirmation is required first
     },
-    [setUser],
+    [],
   )
 
-  const signOut = useCallback(() => {
-    setUser(null)
-  }, [setUser])
+  const confirmSignup = useCallback(
+    async (accessToken: string, refreshToken: string) => {
+      const response = await fetch("/api/auth/signup-callback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ access_token: accessToken, refresh_token: refreshToken }),
+      })
 
-  return { user, isAuthenticated, signIn, signUp, signOut }
+      const result: ApiResponse<{ user: UserProfile }> = await response.json()
+
+      if (!result.success) {
+        throw new Error(translateErrorCode(result.error.code))
+      }
+
+      setUser(result.data.user)
+      setAuthStatus("authenticated")
+    },
+    [setUser, setAuthStatus],
+  )
+
+  const signOut = useCallback(async () => {
+    try {
+      await fetch("/api/auth/signout", { method: "POST" })
+    } finally {
+      setUser(null)
+      setAuthStatus("unauthenticated")
+    }
+  }, [setUser, setAuthStatus])
+
+  return { user, isAuthenticated, isLoading, signIn, signUp, confirmSignup, signOut }
 }

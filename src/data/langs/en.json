@@ -119,12 +119,17 @@
       "submitting": "Creating account...",
       "error": "Sign up failed. Please try again.",
       "has-account": "Already have an account?",
-      "signin-link": "Sign In"
+      "signin-link": "Sign In",
+      "success-title": "Check Your Email",
+      "success-message": "We've sent a confirmation link to your email. Please check your inbox and click the link to activate your account.",
+      "go-to-signin": "Go to Sign In"
     },
     "profile": {
       "expires": "Account Expires",
       "reset-password": "Reset Password",
       "sign-out": "Sign Out",
+      "signing-out": "Signing out...",
+      "sign-out-success": "You have been signed out.",
       "back-home": "Back to Homepage"
     },
     "errors": {
@@ -137,7 +142,20 @@
       "password-no-letter": "Password must contain at least one letter",
       "password-no-digit": "Password must contain at least one digit",
       "confirm-required": "Please confirm your password",
-      "confirm-mismatch": "Passwords do not match"
+      "confirm-mismatch": "Passwords do not match",
+      "server-invalid-credentials": "Invalid email or password.",
+      "server-account-expired": "Your account has expired. Please contact Creativity House.",
+      "server-subscription-required": "An active subscription is required to sign up.",
+      "server-signup-failed": "Sign up failed. Please try again.",
+      "server-signin-failed": "Sign in failed. Please try again.",
+      "server-confirmation-failed": "Email confirmation failed. Please try again.",
+      "server-validation-error": "Please check your input and try again.",
+      "server-missing-fields": "Please fill in all required fields.",
+      "server-unknown": "An unexpected error occurred. Please try again."
+    },
+    "callback": {
+      "error": "Something went wrong. Please try signing in.",
+      "go-to-signin": "Go to sign in"
     }
   }
 }

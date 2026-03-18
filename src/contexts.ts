@@ -7,7 +7,12 @@ import { createContext } from 'react'
 import { GENERAL_CATEGORY_ID, RANDOM_EXAM_ID } from './constants'
 
 // Auth context
-export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
+export const AuthContext = createContext<AuthContextType>({
+  user: null,
+  authStatus: "pending",
+  setUser: () => {},
+  setAuthStatus: () => {},
+})
 
 // Exam context
 export const ExamContext = createContext<Exam>({} as Exam)
