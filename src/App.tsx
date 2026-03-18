@@ -17,11 +17,11 @@ import type { LangCode } from "./types"
 
 const App: React.FC = () => {
   const { settings } = useSettings()
-  const langCode = settings.language
+  const langCode = settings.language  
   const [translationVersion, setTranslationVersion] = React.useState<number>(hasTranslation() ? 1 : 0)
 
   const loadTranslation = React.useCallback(async (code: LangCode) => {
-    const translations = (await import(`./data/langs/${code}.json?v=1`)).default
+    const translations = (await import(`./data/langs/${code}.json`)).default
     const newLang = LANGUAGES[code]
 
     setTranslation(newLang, translations)

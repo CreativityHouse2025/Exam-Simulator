@@ -197,17 +197,11 @@ export type GenerateReportRequest = {
 
 // User settings (initially null until user inserts data)
 export type Settings = {
-  /** the full name of the user for report display */
-  fullName?: string,
-  /** the email of user */
-  email?: string,
   /** last choice of language */
   language: Lang['code']
   /** app version for future updates */
   appVersion: string
 }
-
-export type AccountForm = Required<Pick<Settings, "fullName" | "email">>;
 
 export type SettingsContextType = {
   /** current user settings state */
