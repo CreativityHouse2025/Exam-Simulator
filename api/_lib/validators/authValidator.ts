@@ -1,5 +1,6 @@
 import type { SignupRequestBody, SigninRequestBody, SignupCallbackRequestBody } from "../types.js"
 import { AppError } from "../errors/AppError.js"
+import { assertJsonObject } from "../utils/parseBody.js"
 
 const EMAIL_PATTERN = /.+@.+\..+/
 const LETTERS_ONLY = /^[\p{L} ]+$/u
@@ -14,11 +15,7 @@ const REQUIRED_FIELDS = ["email", "password", "first_name", "last_name"] as cons
  * Throws `AppError` on the first validation failure.
  */
 export function validateSignupBody(body: unknown): SignupRequestBody {
-  if (typeof body !== "object" || body === null) {
-    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Request body must be a JSON object" })
-  }
-
-  const record = body as Record<string, unknown>
+  const record = assertJsonObject(body)
 
   for (const field of REQUIRED_FIELDS) {
     const value = record[field]
@@ -76,11 +73,7 @@ export function validateSignupBody(body: unknown): SignupRequestBody {
  * Throws `AppError` on the first validation failure.
  */
 export function validateSigninBody(body: unknown): SigninRequestBody {
-  if (typeof body !== "object" || body === null) {
-    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Request body must be a JSON object" })
-  }
-
-  const record = body as Record<string, unknown>
+  const record = assertJsonObject(body)
 
   for (const field of ["email", "password"] as const) {
     const value = record[field]
@@ -104,11 +97,7 @@ export function validateSigninBody(body: unknown): SigninRequestBody {
  * Throws `AppError` on the first validation failure.
  */
 export function validateSignupCallbackBody(body: unknown): SignupCallbackRequestBody {
-  if (typeof body !== "object" || body === null) {
-    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Request body must be a JSON object" })
-  }
-
-  const record = body as Record<string, unknown>
+  const record = assertJsonObject(body)
 
   for (const field of ["access_token", "refresh_token"] as const) {
     const value = record[field]

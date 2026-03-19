@@ -208,7 +208,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
     if (emailSent) return;
     if (!user) return;
 
-    const { first_name, last_name, email: userEmail } = user
+    const { first_name, last_name } = user
 
     // Mark as sent immediately to survive remounts during the async send
     update!([SESSION_ACTION_TYPES.SET_EMAIL_SENT, true]);
@@ -219,10 +219,9 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
         const email = writeEmail(fullName, results as Results)
 
         await sendEmail({
-          to: userEmail,
           subject: email.subject,
           text: email.textBody,
-          html: email.htmlBody
+          html: email.htmlBody,
         });
         showToast(feedback.sent, 5000)
       } catch (error) {

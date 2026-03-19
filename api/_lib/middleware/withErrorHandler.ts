@@ -17,6 +17,10 @@ export function withErrorHandler(handler: ApiHandler): ApiHandler {
         return errorResponse(error.code, error.message, error.statusCode)
       }
 
+      if (error instanceof SyntaxError) {
+        return errorResponse("VALIDATION_ERROR", "Malformed JSON in request body", 400)
+      }
+
       console.error("[UnhandledError]", error)
       return errorResponse("INTERNAL_ERROR", "An unexpected error occurred", 500)
     }
