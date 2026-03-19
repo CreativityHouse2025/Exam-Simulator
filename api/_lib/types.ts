@@ -30,7 +30,6 @@ export type ApiResponse<T> = ApiSuccess<T> | ApiError;
 
 // Email API arguments type
 export type SendEmailRequest = {
-  to: string;
   subject: string;
   text: string;
   html?: string;

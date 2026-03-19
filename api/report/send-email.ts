@@ -5,6 +5,8 @@ import { withAuth } from "../_lib/middleware/withAuth.js"
 import { AppError } from "../_lib/errors/AppError.js"
 import { requireEnv } from "../_lib/utils/env.js"
 import { successResponse } from "../_lib/utils/response.js"
+import { assertJsonObject } from "../_lib/utils/parseBody.js"
+import { supabaseAdmin } from "../_lib/supabaseClient.js"
 
 const SENDER_EMAIL = requireEnv("SENDER")
 const APP_PASSWORD = requireEnv("APP_PASSWORD")
@@ -17,16 +19,23 @@ const transporter = nodemailer.createTransport({
 })
 
 export const POST = withErrorHandler(
-  withAuth(async (req, _userId, cookieHeaders) => {
-    const { to, subject, text, html } = (await req.json()) as SendEmailRequest
+  withAuth(async (req, userId, cookieHeaders) => {
+    const body = assertJsonObject(await req.json())
+    const { subject, text, html } = body as SendEmailRequest
 
-    if (!to || !subject || !text) {
-      throw new AppError({ statusCode: 400, code: "MISSING_FIELDS", message: "Missing required fields: to, subject, text" })
+    if (!subject || !text) {
+      throw new AppError({ statusCode: 400, code: "MISSING_FIELDS", message: "Missing required fields: subject, text" })
+    }
+
+    const { data: user, error } = await supabaseAdmin.from("users").select("email").eq("id", userId).single()
+
+    if (error || !user) {
+      throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "User not found" })
     }
 
     const info = await transporter.sendMail({
       from: SENDER_EMAIL,
-      to,
+      to: user.email,
       subject,
       text,
       html,

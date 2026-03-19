@@ -115,7 +115,7 @@ export async function signup(input: SignupRequestBody): Promise<SignupResult> {
     email,
     password,
     options: {
-      data: { first_name, last_name, highlevel_id, expires_at: expiresAt.toISOString() },
+      data: { first_name, last_name, highlevel_id },
     },
   })
   

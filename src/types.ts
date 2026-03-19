@@ -164,7 +164,6 @@ export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | '
 
 // Email API arguments type
 export type SendEmailRequest = {
-  to: string;
   subject: string;
   text: string;
   html?: string;
