@@ -7,11 +7,11 @@ import { AppError } from "../_lib/errors/AppError.js"
 import type { UserProfile } from "../_lib/types.js"
 
 export const GET = withErrorHandler(
-  withAuth(async (_request: Request, userId, cookieHeaders) => {
+  withAuth(async (_request: Request, authUser, cookieHeaders) => {
     const { data: user, error } = await supabaseAdmin
       .from("users")
-      .select("id, first_name, last_name, email, expires_at")
-      .eq("id", userId)
+      .select("id, first_name, last_name, expires_at")
+      .eq("id", authUser.id)
       .single()
 
     if (error || !user) {
@@ -20,7 +20,7 @@ export const GET = withErrorHandler(
 
     const profile: UserProfile = {
       id: user.id,
-      email: user.email,
+      email: authUser.email,
       first_name: user.first_name,
       last_name: user.last_name,
       expires_at: user.expires_at,

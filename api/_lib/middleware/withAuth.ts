@@ -1,4 +1,4 @@
-import type { ApiHandler, AuthenticatedApiHandler, ResponseHeaders } from "../types.js"
+import type { ApiHandler, AuthenticatedApiHandler, AuthUser, ResponseHeaders } from "../types.js"
 import { AppError } from "../errors/AppError.js"
 import { createUserClient } from "../supabaseClient.js"
 import { assertAccountNotExpired } from "../services/authService.js"
@@ -8,8 +8,10 @@ import { errorResponse } from "../utils/response.js"
 /**
  * Middleware that validates auth tokens from cookies before calling the handler.
  * If the access token is expired but a refresh token exists, it refreshes the session
- * and sets updated cookies on the response.
- *
+ * and sets updated cookies on the response. 
+ * 
+ * Passes the user's Id and email to the handler
+ * 
  * Must be wrapped with `withErrorHandler` on the outside:
  * `withErrorHandler(withAuth(handler))`
  */
@@ -28,7 +30,8 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
     if (accessToken) {
       const { data, error } = await createUserClient().auth.getUser(accessToken)
       if (!error && data.user) {
-        return handler(req, data.user.id)
+        const authUser: AuthUser = { id: data.user.id, email: data.user.email! }
+        return handler(req, authUser)
       }
     }
 
@@ -64,6 +67,7 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
       refreshData.session.refresh_token,
     ).map((c) => ["Set-Cookie", c] as [string, string])
 
-    return handler(req, refreshData.user.id, cookieHeaders)
+    const authUser: AuthUser = { id: refreshData.user.id, email: refreshData.user.email! }
+    return handler(req, authUser, cookieHeaders)
   }
 }

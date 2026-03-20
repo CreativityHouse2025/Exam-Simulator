@@ -30,6 +30,7 @@ export async function assertAccountNotExpired(
     expiresAtRaw = data.expires_at
   }  
 
+  // if account is expired, sign the user out of all devices using global scope
   const expiresAt = new Date(expiresAtRaw)
   if (expiresAt <= new Date()) {
     if (options?.revokeAccessToken) {
@@ -82,7 +83,7 @@ export async function signout(params: { accessToken?: string; refreshToken?: str
   }
 
   // No tokens provided at all
-  console.warn("[signout] No tokens provided — cookies will be cleared but no server session revoked")
+  console.warn("[signout] No tokens provided. Cookies will be cleared but no server session revoked")
 }
 
 export type SignupResult = {
@@ -157,7 +158,7 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
 
   const { data: profile, error: profileError } = await supabaseAdmin
     .from("users")
-    .select("id, first_name, last_name, email, expires_at")
+    .select("id, first_name, last_name, expires_at")
     .eq("id", data.user.id)
     .single()
 
@@ -175,7 +176,7 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
   return {
     user: {
       id: profile.id,
-      email: profile.email,
+      email: data.user.email!,
       first_name: profile.first_name,
       last_name: profile.last_name,
       expires_at: profile.expires_at,
@@ -202,7 +203,7 @@ export async function confirmSignup(accessToken: string, refreshToken: string): 
 
   const { data: profile, error: profileError } = await supabaseAdmin
     .from("users")
-    .select("id, first_name, last_name, email, expires_at")
+    .select("id, first_name, last_name, expires_at")
     .eq("id", authUser.user.id)
     .single()
 
@@ -215,7 +216,7 @@ export async function confirmSignup(accessToken: string, refreshToken: string): 
   return {
     user: {
       id: profile.id,
-      email: profile.email,
+      email: authUser.user.email!,
       first_name: profile.first_name,
       last_name: profile.last_name,
       expires_at: profile.expires_at,
