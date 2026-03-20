@@ -1,6 +1,7 @@
 import { useContext, useCallback } from "react"
 import { AuthContext } from "../contexts"
 import { translate } from "../utils/translation"
+import { apiFetch } from "../utils/apiFetch"
 import type { ApiResponse, AppErrorCode, UserProfile } from "../types"
 
 const errorCodeToTranslationKey: Record<AppErrorCode, string> = {
@@ -37,7 +38,7 @@ export default function useAuth() {
 
   const signIn = useCallback(
     async (email: string, password: string) => {
-      const response = await fetch("/api/auth/signin", {
+      const response = await apiFetch("/api/auth/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -57,7 +58,7 @@ export default function useAuth() {
 
   const signUp = useCallback(
     async (email: string, password: string, firstName: string, lastName: string) => {
-      const response = await fetch("/api/auth/signup", {
+      const response = await apiFetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, first_name: firstName, last_name: lastName }),
@@ -76,7 +77,7 @@ export default function useAuth() {
 
   const confirmSignup = useCallback(
     async (accessToken: string, refreshToken: string) => {
-      const response = await fetch("/api/auth/signup-callback", {
+      const response = await apiFetch("/api/auth/signup-callback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ access_token: accessToken, refresh_token: refreshToken }),
@@ -96,7 +97,7 @@ export default function useAuth() {
 
   const signOut = useCallback(async () => {
     try {
-      await fetch("/api/auth/signout", { method: "POST" })
+      await apiFetch("/api/auth/signout", { method: "POST" })
     } finally {
       setUser(null)
       setAuthStatus("unauthenticated")

@@ -12,6 +12,7 @@ import { SESSION_ACTION_TYPES } from '../../constants'
 import useToast from '../../hooks/useToast'
 import { translate } from '../../utils/translation'
 import { formatTimer, formatDate } from '../../utils/format'
+import { isRateLimitError } from '../../utils/apiFetch'
 import type { Results, RevisionExamOptions } from '../../types'
 import useResults from '../../hooks/useResults'
 
@@ -226,7 +227,9 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
         showToast(feedback.sent, 5000)
       } catch (error) {
         console.error("Error sending email: ", error);
-        update!([SESSION_ACTION_TYPES.SET_EMAIL_SENT, false]);
+        if (!isRateLimitError(error)) {
+          update!([SESSION_ACTION_TYPES.SET_EMAIL_SENT, false]);
+        }
       }
     }
 

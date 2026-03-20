@@ -83,7 +83,7 @@
     "timestamp": "Finished at",
     "sending": "Sending the report to your email...",
     "sent": "Report sent successfully",
-    "error": "Failed to send the report",
+    "error": "Cannot send the report at the moment.",
     "email": {
       "subject": "Your Exam Report - $1",
       "body": "Hello $1,\n\nHere is your exam summary at $2:\n\n$3\n"
@@ -157,5 +157,9 @@
       "error": "Something went wrong. Please try signing in.",
       "go-to-signin": "Go to sign in"
     }
+  },
+  "errors": {
+    "rate-limited": "Please try again in $1 minute(s).",
+    "rate-limited-generic": "Please try again later."
   }
 }
