@@ -70,15 +70,13 @@ const Divider = styled.hr<ThemedStyles>`
   margin: 2rem 0;
 `
 
-const ActionButton = styled.button<ThemedStyles & { $variant?: "danger" | "secondary"; $enabled?: boolean }>`
+const ActionButton = styled.button<ThemedStyles & { $variant?: "danger" | "secondary" }>`
   width: 100%;
   padding: 1.1rem;
   font-size: 1.4rem;
   font-weight: 600;
   border-radius: 8px;
-  cursor: ${({ $enabled }) => ($enabled ? "pointer" : "not-allowed")};
-  pointer-events: ${({ $enabled }) => ($enabled ? "auto" : "none")};
-  opacity: ${({ $enabled }) => ($enabled ? 1 : 0.45)};
+  cursor: pointer;
   margin-bottom: 0.8rem;
   transition: all 0.3s ease;
   border: ${({ theme, $variant }) =>
@@ -86,8 +84,20 @@ const ActionButton = styled.button<ThemedStyles & { $variant?: "danger" | "secon
   background: ${({ theme, $variant }) => ($variant === "danger" ? "#fef2f2" : theme.primary)};
   color: ${({ theme, $variant }) => ($variant === "danger" ? theme.incorrect : "white")};
 
-  &:hover {
-    opacity: ${({ $enabled }) => ($enabled ? 0.85 : 0.45)};
+  &:hover:not(:disabled) {
+    background: ${({ $variant }) => ($variant === "danger" ? "#fde8e8" : undefined)};
+    border-color: ${({ theme, $variant }) => ($variant === "danger" ? theme.incorrect : undefined)};
+    opacity: ${({ $variant }) => ($variant === "danger" ? 1 : 0.9)};
+    transform: translateY(-2px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 `
 
@@ -121,7 +131,7 @@ const ProfilePage: React.FC = () => {
   return (
     <PageWrapper>
       <ProfileCard>
-        <BackButton onClick={() => navigate("/app")} aria-label="Back to app">
+        <BackButton title="Back to homepage" onClick={() => navigate("/app")} aria-label="Back to app">
           <ArrowBack size={30} />
         </BackButton>
         <AvatarCircle>{initials}</AvatarCircle>
@@ -135,8 +145,8 @@ const ProfilePage: React.FC = () => {
 
         <Divider />
 
-        <ActionButton $variant="secondary">{t.resetPassword}</ActionButton>
-        <ActionButton $variant="danger" $enabled disabled={signingOut} onClick={handleSignOut}>
+        <ActionButton title="Coming soon" $variant="secondary" disabled={true}>{t.resetPassword}</ActionButton>
+        <ActionButton title="Sign out from this device" $variant="danger" disabled={signingOut} onClick={handleSignOut}>
           {signingOut ? t.signingOut : t.signOut}
         </ActionButton>
 

@@ -82,4 +82,9 @@ export type SignupCallbackRequestBody = {
 
 export type ResponseHeaders = [string, string][]
 
-export type AuthenticatedApiHandler = (req: Request, userId: string, cookieHeaders?: ResponseHeaders) => Promise<Response>
+export type AuthUser = {
+  id: string
+  email: string
+}
+
+export type AuthenticatedApiHandler = (req: Request, authUser: AuthUser, cookieHeaders?: ResponseHeaders) => Promise<Response>
