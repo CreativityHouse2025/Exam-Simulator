@@ -11,6 +11,7 @@ export type AppErrorCode =
   | "SIGNOUT_FAILED"
   | "UNAUTHORIZED"
   | "CONFIRMATION_FAILED"
+  | "SUBSCRIPTION_CHECK_FAILED"
 
 
 export type ApiSuccess<T> = {

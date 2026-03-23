@@ -145,7 +145,7 @@
       "confirm-mismatch": "Passwords do not match",
       "server-invalid-credentials": "Invalid email or password.",
       "server-account-expired": "Your account has expired. Please contact Creativity House.",
-      "server-subscription-required": "An active subscription is required to sign up.",
+      "server-subscription-required": "You are not authorized to sign up.",
       "server-signup-failed": "Sign up failed. Please try again.",
       "server-signin-failed": "Sign in failed. Please try again.",
       "server-confirmation-failed": "Email confirmation failed. Please try again.",

@@ -1,7 +1,7 @@
 import { supabaseAdmin, createUserClient } from "../supabaseClient.js"
 import { AppError } from "../errors/AppError.js"
 import type { SignupRequestBody, SigninRequestBody, SigninResult } from "../types.js"
-import verifySubscription from "./subscriptionVerifier.js"
+import emailHasOffer from "./offerVerifier.js"
 
 /**
  * Checks that a user's account has not expired.
@@ -95,15 +95,22 @@ export type SignupResult = {
  * Registers a new user after verifying an active HighLevel subscription.
  * Creates a Supabase auth user with a 6-month expiry stored in user metadata.
  *
+ * @throws {AppError} 500 `SIGNUP_FAILED` — user already exists.
  * @throws {AppError} 403 `SUBSCRIPTION_REQUIRED` — no active HighLevel subscription found.
  * @throws {AppError} 500 `SIGNUP_FAILED` — Supabase auth creation failed.
  */
 export async function signup(input: SignupRequestBody): Promise<SignupResult> {
   const { email, password, first_name, last_name } = input
 
-  const { verified, highlevel_id } = await verifySubscription(email)
+  const { data: { users } } = await supabaseAdmin.auth.admin.listUsers()
+  if (users.some((user) => user.email === email)) {
+    console.log(`[signup] Duplicate signup attempt for email: ${email}`)
+    throw new AppError({ statusCode: 500, code: "SIGNUP_FAILED", message: "Signup failed" })
+  }
+
+  const { verified, highlevel_id } = await emailHasOffer(email)
   if (!verified) {
-    throw new AppError({ statusCode: 403, code: "SUBSCRIPTION_REQUIRED", message: "Active subscription not found" })
+    throw new AppError({ statusCode: 403, code: "SUBSCRIPTION_REQUIRED", message: "Active subscription not found: " + email })
   }
 
   const offerDurationInMonths = 6;

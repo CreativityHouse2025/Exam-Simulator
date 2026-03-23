@@ -145,7 +145,7 @@
       "confirm-mismatch": "كلمتا المرور غير متطابقتين",
       "server-invalid-credentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
       "server-account-expired": "انتهت صلاحية حسابك. يرجى التواصل مع مركز الإبداع.",
-      "server-subscription-required": "يتطلب التسجيل اشتراكًا فعالًا.",
+      "server-subscription-required": "ليس لديك صلاحية للقيام بإنشاء حساب ",
       "server-signup-failed": "فشل إنشاء الحساب. يرجى المحاولة مرة أخرى.",
       "server-signin-failed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
       "server-confirmation-failed": "فشل تأكيد البريد الإلكتروني. يرجى المحاولة مرة أخرى.",
