@@ -1,29 +1,18 @@
 import React, { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Email } from "@styled-icons/material/Email"
-import { Lock } from "@styled-icons/material/Lock"
-import { Visibility } from "@styled-icons/material/Visibility"
-import { VisibilityOff } from "@styled-icons/material/VisibilityOff"
 import useAuth from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
 import { validateEmail, validatePassword } from "../utils/authValidation"
 import { translate } from "../utils/translation"
 // @ts-expect-error
 import Logo from "../assets/logo.png"
+import { EmailField, PasswordField } from "../components/Auth"
 import {
   PageWrapper,
   Card,
   PageLogo,
   PageTitle,
   PageSubtitle,
-  FormGroup,
-  FormLabel,
-  FormInput,
-  InputWrapper,
-  InputIcon,
-  PasswordInputWrapper,
-  TogglePasswordButton,
-  FieldError,
   FormError,
   SubmitButton,
   NavLink,
@@ -40,7 +29,7 @@ const SignInPage: React.FC = () => {
 
   const [serverError, setServerError] = useState("")
   const [submitting, setSubmitting] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
+
 
   const t = {
     logoAlt: translate('cover.logo-alt'),
@@ -55,6 +44,7 @@ const SignInPage: React.FC = () => {
     error: translate('auth.signin.error'),
     noAccount: translate('auth.signin.no-account'),
     signupLink: translate('auth.signin.signup-link'),
+    forgotPassword: translate('auth.signin.forgot-password'),
   }
 
   const emailRef = useRef<HTMLInputElement>(null)
@@ -95,52 +85,27 @@ const SignInPage: React.FC = () => {
         <form onSubmit={handleSubmit} noValidate>
           {serverError && <FormError>{serverError}</FormError>}
 
-          <FormGroup>
-            <FormLabel htmlFor="email">{t.email}</FormLabel>
-            <InputWrapper>
-              <InputIcon>
-                <Email size={18} />
-              </InputIcon>
-              <FormInput
-                ref={emailRef}
-                id="email"
-                type="email"
-                placeholder={t.emailPlaceholder}
-                autoComplete="email"
-                value={email.value}
-                onChange={email.onChange}
-                $hasError={!!email.error}
-                $hasIcon
-              />
-            </InputWrapper>
-            {email.error && <FieldError>{email.error}</FieldError>}
-          </FormGroup>
+          <EmailField
+            ref={emailRef}
+            label={t.email}
+            placeholder={t.emailPlaceholder}
+            value={email.value}
+            error={email.error}
+            onChange={email.onChange}
+          />
 
-          <FormGroup>
-            <FormLabel htmlFor="password">{t.password}</FormLabel>
-            <PasswordInputWrapper>
-              <InputIcon>
-                <Lock size={18} />
-              </InputIcon>
-              <FormInput
-                id="password"
-                type={showPassword ? "text" : "password"}
-                placeholder={t.passwordPlaceholder}
-                autoComplete="current-password"
-                value={password.value}
-                onChange={password.onChange}
-                $hasError={!!password.error}
-                $hasIcon
-              />
-              <TogglePasswordButton type="button" onClick={() => setShowPassword((s) => !s)} aria-label="Toggle password visibility">
-                {showPassword ? <VisibilityOff size={20} /> : <Visibility size={20} />}
-              </TogglePasswordButton>
-            </PasswordInputWrapper>
-            {password.error && <FieldError>{password.error}</FieldError>}
-          </FormGroup>
+          <PasswordField
+            id="password"
+            label={t.password}
+            placeholder={t.passwordPlaceholder}
+            autoComplete="current-password"
+            value={password.value}
+            error={password.error}
+            onChange={password.onChange}
+          />
 
           <NavLink to="/forgot-password" style={{ display: "block", textAlign: "end", marginBottom: "0.8rem", fontSize: "1.3rem" }}>
-            Forgot your password?
+            {t.forgotPassword}
           </NavLink>
 
           <SubmitButton type="submit" disabled={submitting}>
