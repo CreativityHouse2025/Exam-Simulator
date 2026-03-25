@@ -1,7 +1,6 @@
 import { supabaseAdmin, createUserClient } from "../supabaseClient.js"
 import { AppError } from "../errors/AppError.js"
 import type { SignupRequestBody, SigninRequestBody, SigninResult } from "../types.js"
-import { requireEnv } from "../utils/env.js"
 import emailHasOffer from "./offerVerifier.js"
 
 /**
