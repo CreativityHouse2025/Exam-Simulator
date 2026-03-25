@@ -110,7 +110,8 @@
       "submitting": "Signing in...",
       "error": "Sign in failed. Please try again.",
       "no-account": "Don't have an account?",
-      "signup-link": "Sign Up"
+      "signup-link": "Sign Up",
+      "forgot-password": "Forgot your password?"
     },
     "signup": {
       "title": "Create Account",
@@ -123,6 +124,23 @@
       "success-title": "Check Your Email",
       "success-message": "We've sent a confirmation link to your email. Please check your inbox and click the link to activate your account.",
       "go-to-signin": "Go to Sign In"
+    },
+    "forgot-password": {
+      "title": "Reset Your Password",
+      "subtitle": "Enter your email and we'll send you a reset link",
+      "submit": "Submit",
+      "submitting": "Submitting...",
+      "error": "Something went wrong. Please try again.",
+      "back-to-signin": "Back to Sign In",
+      "sent-title": "Check Your Email",
+      "sent-subtitle": "If an account is associated with that email, a reset link has been sent."
+    },
+    "reset-password": {
+      "subtitle": "Enter your new password",
+      "submit": "Save",
+      "submitting": "Saving...",
+      "new-password": "New Password",
+      "new-password-placeholder": "Enter new password"
     },
     "profile": {
       "expires": "Account Expires",

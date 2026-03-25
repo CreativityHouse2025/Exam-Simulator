@@ -1,8 +1,4 @@
 import React, { useRef, useState } from "react"
-import { Email } from "@styled-icons/material/Email"
-import { Lock } from "@styled-icons/material/Lock"
-import { Visibility } from "@styled-icons/material/Visibility"
-import { VisibilityOff } from "@styled-icons/material/VisibilityOff"
 import { MarkEmailRead } from "@styled-icons/material/MarkEmailRead"
 import useAuth from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
@@ -10,6 +6,7 @@ import { validateEmail, validatePassword, validateConfirmPassword, validateRequi
 import { translate } from "../utils/translation"
 // @ts-expect-error
 import Logo from "../assets/logo.png"
+import { ConfirmationCard, EmailField, PasswordField } from "../components/Auth"
 import {
   PageWrapper,
   Card,
@@ -20,10 +17,6 @@ import {
   FormGroup,
   FormLabel,
   FormInput,
-  InputWrapper,
-  InputIcon,
-  PasswordInputWrapper,
-  TogglePasswordButton,
   FieldError,
   FormError,
   SubmitButton,
@@ -43,8 +36,6 @@ const SignUpPage: React.FC = () => {
 
   const [serverError, setServerError] = useState("")
   const [submitting, setSubmitting] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [success, setSuccess] = useState(false)
 
   const t = {
@@ -117,16 +108,13 @@ const SignUpPage: React.FC = () => {
 
   if (success) {
     return (
-      <PageWrapper>
-        <Card>
-          <MarkEmailRead size={64} style={{ color: "#593752", marginBottom: "1rem", display: "block", margin: "0 auto 1rem" }} />
-          <PageTitle>{t.successTitle}</PageTitle>
-          <PageSubtitle>{t.successMessage}</PageSubtitle>
-          <CardFooter>
-            <NavLink to="/signin">{t.goToSignin}</NavLink>
-          </CardFooter>
-        </Card>
-      </PageWrapper>
+      <ConfirmationCard
+        icon={<MarkEmailRead size={64} style={{ color: "#593752", display: "block", margin: "0 auto 1rem" }} />}
+        title={t.successTitle}
+        subtitle={t.successMessage}
+        linkTo="/signin"
+        linkText={t.goToSignin}
+      />
     )
   }
 
@@ -171,71 +159,33 @@ const SignUpPage: React.FC = () => {
             </FormGroup>
           </FormRow>
 
-          <FormGroup>
-            <FormLabel htmlFor="email">{t.email}</FormLabel>
-            <InputWrapper>
-              <InputIcon>
-                <Email size={18} />
-              </InputIcon>
-              <FormInput
-                id="email"
-                type="email"
-                placeholder={t.emailPlaceholder}
-                autoComplete="email"
-                value={email.value}
-                onChange={email.onChange}
-                $hasError={!!email.error}
-                $hasIcon
-              />
-            </InputWrapper>
-            {email.error && <FieldError>{email.error}</FieldError>}
-          </FormGroup>
+          <EmailField
+            label={t.email}
+            placeholder={t.emailPlaceholder}
+            value={email.value}
+            error={email.error}
+            onChange={email.onChange}
+          />
 
-          <FormGroup>
-            <FormLabel htmlFor="password">{t.password}</FormLabel>
-            <PasswordInputWrapper>
-              <InputIcon>
-                <Lock size={20} />
-              </InputIcon>
-              <FormInput
-                id="password"
-                type={showPassword ? "text" : "password"}
-                placeholder={t.passwordNewPlaceholder}
-                autoComplete="new-password"
-                value={password.value}
-                onChange={password.onChange}
-                $hasError={!!password.error}
-                $hasIcon
-              />
-              <TogglePasswordButton type="button" onClick={() => setShowPassword((s) => !s)} aria-label="Toggle password visibility">
-                {showPassword ? <VisibilityOff size={20} /> : <Visibility size={20} />}
-              </TogglePasswordButton>
-            </PasswordInputWrapper>
-            {password.error && <FieldError>{password.error}</FieldError>}
-          </FormGroup>
+          <PasswordField
+            id="password"
+            label={t.password}
+            placeholder={t.passwordNewPlaceholder}
+            autoComplete="new-password"
+            value={password.value}
+            error={password.error}
+            onChange={password.onChange}
+          />
 
-          <FormGroup>
-            <FormLabel htmlFor="confirmPassword">{t.confirmPassword}</FormLabel>
-            <PasswordInputWrapper>
-              <InputIcon>
-                <Lock size={20} />
-              </InputIcon>
-              <FormInput
-                id="confirmPassword"
-                type={showConfirmPassword ? "text" : "password"}
-                placeholder={t.confirmPasswordPlaceholder}
-                autoComplete="new-password"
-                value={confirmPassword.value}
-                onChange={confirmPassword.onChange}
-                $hasError={!!confirmPassword.error}
-                $hasIcon
-              />
-              <TogglePasswordButton type="button" onClick={() => setShowConfirmPassword((s) => !s)} aria-label="Toggle confirm password visibility">
-                {showConfirmPassword ? <VisibilityOff size={20} /> : <Visibility size={20} />}
-              </TogglePasswordButton>
-            </PasswordInputWrapper>
-            {confirmPassword.error && <FieldError>{confirmPassword.error}</FieldError>}
-          </FormGroup>
+          <PasswordField
+            id="confirmPassword"
+            label={t.confirmPassword}
+            placeholder={t.confirmPasswordPlaceholder}
+            autoComplete="new-password"
+            value={confirmPassword.value}
+            error={confirmPassword.error}
+            onChange={confirmPassword.onChange}
+          />
 
           <SubmitButton type="submit" disabled={submitting}>
             {submitting ? t.submitting : t.submit}

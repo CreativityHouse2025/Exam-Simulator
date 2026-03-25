@@ -7,32 +7,11 @@ import useToast from "../hooks/useToast"
 import { formatDate } from "../utils/format"
 import { translate } from "../utils/translation"
 import type { ThemedStyles } from "../types"
-import { PageWrapper, Card, AvatarCircle, PageTitle, PageSubtitle, NavLink, CardFooter } from "../components/SharedStyles"
+import { PageWrapper, Card, AvatarCircle, BackButton, PageTitle, PageSubtitle, NavLink, CardFooter } from "../components/SharedStyles"
 
 const ProfileCard = styled(Card)`
   max-width: 500px;
   position: relative;
-`
-
-const BackButton = styled.button<ThemedStyles>`
-  position: absolute;
-  top: 1.2rem;
-  left: 1.2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${({ theme }) => theme.grey[7]};
-  border-radius: 6px;
-  transition: color 0.15s ease, background 0.15s ease;
-
-  &:hover {
-    color: ${({ theme }) => theme.primary};
-    background: ${({ theme }) => theme.grey[1]};
-  }
 `
 
 const InfoGroup = styled.div`
@@ -126,12 +105,16 @@ const ProfilePage: React.FC = () => {
     navigate("/signin")
   }
 
+  const handlePasswordReset = () => {
+    navigate("/reset-password")
+  }
+
   const initials = `${user.first_name[0]}${user.last_name[0]}`.toUpperCase()
 
   return (
     <PageWrapper>
       <ProfileCard>
-        <BackButton title="Back to homepage" onClick={() => navigate("/app")} aria-label="Back to app">
+        <BackButton title={t.backHome} onClick={() => navigate("/app")} aria-label={t.backHome}>
           <ArrowBack size={30} />
         </BackButton>
         <AvatarCircle>{initials}</AvatarCircle>
@@ -145,7 +128,7 @@ const ProfilePage: React.FC = () => {
 
         <Divider />
 
-        <ActionButton title="Coming soon" $variant="secondary" disabled={true}>{t.resetPassword}</ActionButton>
+        <ActionButton title="Reset your account's password" $variant="secondary" onClick={handlePasswordReset}>{t.resetPassword}</ActionButton>
         <ActionButton title="Sign out from this device" $variant="danger" disabled={signingOut} onClick={handleSignOut}>
           {signingOut ? t.signingOut : t.signOut}
         </ActionButton>

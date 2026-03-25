@@ -283,6 +283,28 @@ export const CardFooter = styled.div`
   }
 `
 
+/** Absolute-positioned back arrow button for card headers. */
+export const BackButton = styled.button<ThemedStyles>`
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.grey[7]};
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.grey[1]};
+  }
+`
+
 /** Circular avatar showing user initials with gold-to-purple gradient. */
 export const AvatarCircle = styled.div<ThemedStyles>`
   width: 72px;

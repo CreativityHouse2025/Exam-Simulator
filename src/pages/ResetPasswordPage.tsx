@@ -1,42 +1,56 @@
 import React, { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Lock } from "@styled-icons/material/Lock"
-import { Visibility } from "@styled-icons/material/Visibility"
-import { VisibilityOff } from "@styled-icons/material/VisibilityOff"
+import { ArrowBack } from "@styled-icons/material/ArrowBack"
 import useAuth from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
 import { validatePassword, validateConfirmPassword } from "../utils/authValidation"
+import { translate } from "../utils/translation"
+import styled from "styled-components"
 // @ts-expect-error
 import Logo from "../assets/logo.png"
+import PasswordField from "../components/Auth/PasswordField"
 import {
   PageWrapper,
   Card,
+  BackButton,
   PageLogo,
   PageTitle,
   PageSubtitle,
-  FormGroup,
-  FormLabel,
-  FormInput,
-  InputIcon,
-  PasswordInputWrapper,
-  TogglePasswordButton,
-  FieldError,
   FormError,
   SubmitButton,
+  CardFooter,
+  NavLink,
 } from "../components/SharedStyles"
+
+const ResetCard = styled(Card)`
+  position: relative;
+`
 
 /** Reset password page — allows users to set a new password after clicking a reset link. */
 const ResetPasswordPage: React.FC = () => {
   const { updatePassword, signOut } = useAuth()
   const navigate = useNavigate()
 
+  const t = {
+    logoAlt: translate('cover.logo-alt'),
+    title: translate('auth.forgot-password.title'),
+    subtitle: translate('auth.reset-password.subtitle'),
+    newPassword: translate('auth.reset-password.new-password'),
+    newPasswordPlaceholder: translate('auth.reset-password.new-password-placeholder'),
+    confirmPassword: translate('auth.fields.confirm-password'),
+    confirmPasswordPlaceholder: translate('auth.fields.confirm-password-placeholder'),
+    submit: translate('auth.reset-password.submit'),
+    submitting: translate('auth.reset-password.submitting'),
+    error: translate('auth.forgot-password.error'),
+    backHome: translate('auth.profile.back-home'),
+  }
+
   const password = useFormField()
   const confirmPassword = useFormField()
 
   const [serverError, setServerError] = useState("")
   const [submitting, setSubmitting] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
 
   const passwordRef = useRef<HTMLInputElement>(null)
 
@@ -61,7 +75,7 @@ const ResetPasswordPage: React.FC = () => {
       await signOut()
       navigate("/signin", { replace: true })
     } catch (err) {
-      setServerError(err instanceof Error ? err.message : "Something went wrong. Please try again.")
+      setServerError(err instanceof Error ? err.message : t.error)
     } finally {
       setSubmitting(false)
     }
@@ -69,66 +83,47 @@ const ResetPasswordPage: React.FC = () => {
 
   return (
     <PageWrapper>
-      <Card>
-        <PageLogo src={Logo} alt="Logo" />
-        <PageTitle>Reset your password</PageTitle>
-        <PageSubtitle>Enter your new password</PageSubtitle>
+      <ResetCard>
+        <BackButton title={t.backHome} onClick={() => navigate("/app")} aria-label={t.backHome}>
+          <ArrowBack size={30} />
+        </BackButton>
+        <PageLogo src={Logo} alt={t.logoAlt} />
+        <PageTitle>{t.title}</PageTitle>
+        <PageSubtitle>{t.subtitle}</PageSubtitle>
 
         <form onSubmit={handleSubmit} noValidate>
           {serverError && <FormError>{serverError}</FormError>}
 
-          <FormGroup>
-            <FormLabel htmlFor="password">New Password</FormLabel>
-            <PasswordInputWrapper>
-              <InputIcon>
-                <Lock size={20} />
-              </InputIcon>
-              <FormInput
-                ref={passwordRef}
-                id="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter new password"
-                autoComplete="new-password"
-                value={password.value}
-                onChange={password.onChange}
-                $hasError={!!password.error}
-                $hasIcon
-              />
-              <TogglePasswordButton type="button" onClick={() => setShowPassword((s) => !s)} aria-label="Toggle password visibility">
-                {showPassword ? <VisibilityOff size={20} /> : <Visibility size={20} />}
-              </TogglePasswordButton>
-            </PasswordInputWrapper>
-            {password.error && <FieldError>{password.error}</FieldError>}
-          </FormGroup>
+          <PasswordField
+            ref={passwordRef}
+            id="password"
+            label={t.newPassword}
+            placeholder={t.newPasswordPlaceholder}
+            autoComplete="new-password"
+            value={password.value}
+            error={password.error}
+            onChange={password.onChange}
+          />
 
-          <FormGroup>
-            <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
-            <PasswordInputWrapper>
-              <InputIcon>
-                <Lock size={20} />
-              </InputIcon>
-              <FormInput
-                id="confirmPassword"
-                type={showConfirmPassword ? "text" : "password"}
-                placeholder="Confirm new password"
-                autoComplete="new-password"
-                value={confirmPassword.value}
-                onChange={confirmPassword.onChange}
-                $hasError={!!confirmPassword.error}
-                $hasIcon
-              />
-              <TogglePasswordButton type="button" onClick={() => setShowConfirmPassword((s) => !s)} aria-label="Toggle confirm password visibility">
-                {showConfirmPassword ? <VisibilityOff size={20} /> : <Visibility size={20} />}
-              </TogglePasswordButton>
-            </PasswordInputWrapper>
-            {confirmPassword.error && <FieldError>{confirmPassword.error}</FieldError>}
-          </FormGroup>
+          <PasswordField
+            id="confirmPassword"
+            label={t.confirmPassword}
+            placeholder={t.confirmPasswordPlaceholder}
+            autoComplete="new-password"
+            value={confirmPassword.value}
+            error={confirmPassword.error}
+            onChange={confirmPassword.onChange}
+          />
 
           <SubmitButton type="submit" disabled={submitting}>
-            {submitting ? "Resetting..." : "Reset Password"}
+            {submitting ? t.submitting : t.submit}
           </SubmitButton>
         </form>
-      </Card>
+
+        <CardFooter>
+          <NavLink to="/app">{t.backHome}</NavLink>
+        </CardFooter>
+      </ResetCard>
     </PageWrapper>
   )
 }

@@ -1,23 +1,18 @@
 import React, { useRef, useState } from "react"
-import { Email } from "@styled-icons/material/Email"
 import { MarkEmailRead } from "@styled-icons/material/MarkEmailRead"
 import useAuth from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
 import { validateEmail } from "../utils/authValidation"
+import { translate } from "../utils/translation"
 // @ts-expect-error
 import Logo from "../assets/logo.png"
+import { ConfirmationCard, EmailField } from "../components/Auth"
 import {
   PageWrapper,
   Card,
   PageLogo,
   PageTitle,
   PageSubtitle,
-  FormGroup,
-  FormLabel,
-  FormInput,
-  InputWrapper,
-  InputIcon,
-  FieldError,
   FormError,
   SubmitButton,
   NavLink,
@@ -27,6 +22,20 @@ import {
 /** Forgot password page — collects user email and sends a password reset link. */
 const ForgotPasswordPage: React.FC = () => {
   const { requestPasswordReset } = useAuth()
+
+  const t = {
+    logoAlt: translate('cover.logo-alt'),
+    title: translate('auth.forgot-password.title'),
+    subtitle: translate('auth.forgot-password.subtitle'),
+    email: translate('auth.fields.email'),
+    emailPlaceholder: translate('auth.fields.email-placeholder'),
+    submit: translate('auth.forgot-password.submit'),
+    submitting: translate('auth.forgot-password.submitting'),
+    error: translate('auth.forgot-password.error'),
+    backToSignin: translate('auth.forgot-password.back-to-signin'),
+    sentTitle: translate('auth.forgot-password.sent-title'),
+    sentSubtitle: translate('auth.forgot-password.sent-subtitle'),
+  }
 
   const email = useFormField()
 
@@ -53,7 +62,7 @@ const ForgotPasswordPage: React.FC = () => {
       await requestPasswordReset(email.value)
       setSent(true)
     } catch (err) {
-      setServerError(err instanceof Error ? err.message : "Something went wrong. Please try again.")
+      setServerError(err instanceof Error ? err.message : t.error)
     } finally {
       setSubmitting(false)
     }
@@ -61,57 +70,42 @@ const ForgotPasswordPage: React.FC = () => {
 
   if (sent) {
     return (
-      <PageWrapper>
-        <Card>
-          <MarkEmailRead size={64} style={{ color: "#593752", marginBottom: "1rem", display: "block", margin: "0 auto 1rem" }} />
-          <PageTitle>Check your email</PageTitle>
-          <PageSubtitle>If an account is associated with that email, a reset link has been sent.</PageSubtitle>
-          <CardFooter>
-            <NavLink to="/signin">Back to Sign In</NavLink>
-          </CardFooter>
-        </Card>
-      </PageWrapper>
+      <ConfirmationCard
+        icon={<MarkEmailRead size={64} style={{ color: "#593752", display: "block", margin: "0 auto 1rem" }} />}
+        title={t.sentTitle}
+        subtitle={t.sentSubtitle}
+        linkTo="/signin"
+        linkText={t.backToSignin}
+      />
     )
   }
 
   return (
     <PageWrapper>
       <Card>
-        <PageLogo src={Logo} alt="Logo" />
-        <PageTitle>Reset Your Password</PageTitle>
-        <PageSubtitle>Enter your email and we'll send you a reset link</PageSubtitle>
+        <PageLogo src={Logo} alt={t.logoAlt} />
+        <PageTitle>{t.title}</PageTitle>
+        <PageSubtitle>{t.subtitle}</PageSubtitle>
 
         <form onSubmit={handleSubmit} noValidate>
           {serverError && <FormError>{serverError}</FormError>}
 
-          <FormGroup>
-            <FormLabel htmlFor="email">Email</FormLabel>
-            <InputWrapper>
-              <InputIcon>
-                <Email size={18} />
-              </InputIcon>
-              <FormInput
-                ref={emailRef}
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                autoComplete="email"
-                value={email.value}
-                onChange={email.onChange}
-                $hasError={!!email.error}
-                $hasIcon
-              />
-            </InputWrapper>
-            {email.error && <FieldError>{email.error}</FieldError>}
-          </FormGroup>
+          <EmailField
+            ref={emailRef}
+            label={t.email}
+            placeholder={t.emailPlaceholder}
+            value={email.value}
+            error={email.error}
+            onChange={email.onChange}
+          />
 
           <SubmitButton type="submit" disabled={submitting}>
-            {submitting ? "Sending..." : "Submit"}
+            {submitting ? t.submitting : t.submit}
           </SubmitButton>
         </form>
 
         <CardFooter>
-          <NavLink to="/signin">Back to Sign In</NavLink>
+          <NavLink to="/signin">{t.backToSignin}</NavLink>
         </CardFooter>
       </Card>
     </PageWrapper>
