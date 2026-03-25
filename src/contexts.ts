@@ -12,6 +12,7 @@ export const AuthContext = createContext<AuthContextType>({
   authStatus: "pending",
   setUser: () => {},
   setAuthStatus: () => {},
+  cancelSessionCheck: () => {},
 })
 
 // Exam context

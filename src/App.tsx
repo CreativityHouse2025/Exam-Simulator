@@ -10,6 +10,8 @@ import SignInPage from "./pages/SignInPage"
 import SignUpPage from "./pages/SignUpPage"
 import ProfilePage from "./pages/ProfilePage"
 import AuthCallbackPage from "./pages/AuthCallbackPage"
+import ForgotPasswordPage from "./pages/ForgotPasswordPage"
+import ResetPasswordPage from "./pages/ResetPasswordPage"
 import { hasTranslation, setTranslation } from "./utils/translation"
 import { LANGUAGES } from "./constants"
 import useSettings from "./hooks/useSettings"
@@ -59,7 +61,9 @@ const App: React.FC = () => {
         <Route path="/signin" element={<GuestRoute><SignInPage /></GuestRoute>} />
         <Route path="/signup" element={<GuestRoute><SignUpPage /></GuestRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-        <Route path="/auth/callback" element={<GuestRoute><AuthCallbackPage /></GuestRoute>} />
+        <Route path="/forgot-password" element={<GuestRoute><ForgotPasswordPage /></GuestRoute>} />
+        <Route path="/auth/callback" element={<AuthCallbackPage />} />
+        <Route path="/reset-password" element={<ProtectedRoute><ResetPasswordPage /></ProtectedRoute>} />
         <Route path="/app" element={<ProtectedRoute><ExamPage /></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/app" replace />} />
       </Routes>

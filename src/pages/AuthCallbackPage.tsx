@@ -9,9 +9,10 @@ type CallbackState = "loading" | "error"
 
 /** Handles the email confirmation callback by extracting tokens from the URL hash and confirming the signup. */
 const AuthCallbackPage: React.FC = () => {
-  const { confirmSignup } = useAuth()
+  const { exchangeToken, isAuthenticated } = useAuth()
   const navigate = useNavigate()
   const [state, setState] = useState<CallbackState>("loading")
+  const [redirectTo, setRedirectTo] = useState<string | null>(null)
   const hasRun = useRef(false)
 
   useEffect(() => {
@@ -22,6 +23,7 @@ const AuthCallbackPage: React.FC = () => {
     const params = new URLSearchParams(hash.substring(1))
     const accessToken = params.get("access_token")
     const refreshToken = params.get("refresh_token")
+    const type = params.get("type")
 
     window.history.replaceState(null, "", window.location.pathname)
 
@@ -30,17 +32,24 @@ const AuthCallbackPage: React.FC = () => {
       return
     }
 
-    async function confirm(accessToken: string, refreshToken: string) {
+    async function handleCallback(accessToken: string, refreshToken: string) {
       try {
-        await confirmSignup(accessToken, refreshToken)
-        navigate("/app", { replace: true })
+        await exchangeToken(accessToken, refreshToken)
+        setRedirectTo(type === "recovery" ? "/reset-password" : "/app")
       } catch {
         setState("error")
       }
     }
 
-    confirm(accessToken, refreshToken)
-  }, [confirmSignup, navigate])
+    handleCallback(accessToken, refreshToken)
+  }, [exchangeToken])
+
+  // Navigate only after React has committed the auth state update
+  useEffect(() => {
+    if (redirectTo && isAuthenticated) {
+      navigate(redirectTo, { replace: true })
+    }
+  }, [redirectTo, isAuthenticated, navigate])
 
   if (state === "loading") {
     return <Loading size={100} />

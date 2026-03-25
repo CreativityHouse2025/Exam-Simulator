@@ -1,4 +1,4 @@
-import type { SignupRequestBody, SigninRequestBody, SignupCallbackRequestBody } from "../types.js"
+import type { SignupRequestBody, SigninRequestBody, TokenExchangeRequestBody, PasswordResetRequestBody, UpdatePasswordRequestBody } from "../types.js"
 import { AppError } from "../errors/AppError.js"
 import { assertJsonObject } from "../utils/parseBody.js"
 
@@ -9,6 +9,33 @@ const HAS_DIGIT = /\d/
 const MIN_PASSWORD_LENGTH = 8
 
 const REQUIRED_FIELDS = ["email", "password", "first_name", "last_name"] as const
+
+/** Validates a password string against minimum requirements. Throws `AppError` on failure. */
+function validatePasswordString(password: string): void {
+  if (password.length < MIN_PASSWORD_LENGTH) {
+    throw new AppError({
+      statusCode: 400,
+      code: "VALIDATION_ERROR",
+      message: `Password must be at least ${MIN_PASSWORD_LENGTH} characters`,
+    })
+  }
+
+  if (!HAS_LETTER.test(password)) {
+    throw new AppError({
+      statusCode: 400,
+      code: "VALIDATION_ERROR",
+      message: "Password must contain at least one letter",
+    })
+  }
+
+  if (!HAS_DIGIT.test(password)) {
+    throw new AppError({
+      statusCode: 400,
+      code: "VALIDATION_ERROR",
+      message: "Password must contain at least one digit",
+    })
+  }
+}
 
 /**
  * Validates and returns a typed `SignupRequestBody` from an unknown input.
@@ -41,29 +68,7 @@ export function validateSignupBody(body: unknown): SignupRequestBody {
     throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Last name must contain letters only" })
   }
 
-  if (password.length < MIN_PASSWORD_LENGTH) {
-    throw new AppError({
-      statusCode: 400,
-      code: "VALIDATION_ERROR",
-      message: `Password must be at least ${MIN_PASSWORD_LENGTH} characters`,
-    })
-  }
-
-  if (!HAS_LETTER.test(password)) {
-    throw new AppError({
-      statusCode: 400,
-      code: "VALIDATION_ERROR",
-      message: "Password must contain at least one letter",
-    })
-  }
-
-  if (!HAS_DIGIT.test(password)) {
-    throw new AppError({
-      statusCode: 400,
-      code: "VALIDATION_ERROR",
-      message: "Password must contain at least one digit",
-    })
-  }
+  validatePasswordString(password)
 
   return { email, password, first_name, last_name }
 }
@@ -93,10 +98,10 @@ export function validateSigninBody(body: unknown): SigninRequestBody {
 }
 
 /**
- * Validates and returns a typed `SignupCallbackRequestBody` from an unknown input.
+ * Validates and returns a typed `TokenExchangeRequestBody` from an unknown input.
  * Throws `AppError` on the first validation failure.
  */
-export function validateSignupCallbackBody(body: unknown): SignupCallbackRequestBody {
+export function validateTokenExchangeBody(body: unknown): TokenExchangeRequestBody {
   const record = assertJsonObject(body)
 
   for (const field of ["access_token", "refresh_token"] as const) {
@@ -110,4 +115,42 @@ export function validateSignupCallbackBody(body: unknown): SignupCallbackRequest
     access_token: (record.access_token as string).trim(),
     refresh_token: (record.refresh_token as string).trim(),
   }
+}
+
+/**
+ * Validates and returns a typed `PasswordResetRequestBody` from an unknown input.
+ * Throws `AppError` on the first validation failure.
+ */
+export function validatePasswordResetBody(body: unknown): PasswordResetRequestBody {
+  const record = assertJsonObject(body)
+
+  const email = record.email
+  if (typeof email !== "string" || email.trim().length === 0) {
+    throw new AppError({ statusCode: 400, code: "MISSING_FIELDS", message: "Missing required field: email" })
+  }
+
+  const trimmedEmail = email.trim()
+  if (!EMAIL_PATTERN.test(trimmedEmail)) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Invalid email format" })
+  }
+
+  return { email: trimmedEmail }
+}
+
+/**
+ * Validates and returns a typed `UpdatePasswordRequestBody` from an unknown input.
+ * Throws `AppError` on the first validation failure.
+ */
+export function validateUpdatePasswordBody(body: unknown): UpdatePasswordRequestBody {
+  const record = assertJsonObject(body)
+
+  const password = record.password
+  if (typeof password !== "string" || password.trim().length === 0) {
+    throw new AppError({ statusCode: 400, code: "MISSING_FIELDS", message: "Missing required field: password" })
+  }
+
+  const trimmedPassword = password.trim()
+  validatePasswordString(trimmedPassword)
+
+  return { password: trimmedPassword }
 }

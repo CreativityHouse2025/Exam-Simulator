@@ -139,6 +139,10 @@ const SignInPage: React.FC = () => {
             {password.error && <FieldError>{password.error}</FieldError>}
           </FormGroup>
 
+          <NavLink to="/forgot-password" style={{ display: "block", textAlign: "end", marginBottom: "0.8rem", fontSize: "1.3rem" }}>
+            Forgot your password?
+          </NavLink>
+
           <SubmitButton type="submit" disabled={submitting}>
             {submitting ? t.submitting : t.submit}
           </SubmitButton>

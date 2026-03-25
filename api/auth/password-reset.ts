@@ -1,6 +1,11 @@
-import { withAuth } from "../_lib/middleware/withAuth.js"
 import { withErrorHandler } from "../_lib/middleware/withErrorHandler.js"
 import { successResponse } from "../_lib/utils/response.js"
-export const GET = withErrorHandler(withAuth(async (_request: Request, authUser, cookieHeaders) => {
-  return successResponse({ userId: authUser.id }, 200, cookieHeaders)
-}))
+import { validatePasswordResetBody } from "../_lib/validators/authValidator.js"
+import { requestPasswordReset } from "../_lib/services/authService.js"
+
+export const POST = withErrorHandler(async (request: Request) => {
+  const body: unknown = await request.json()
+  const { email } = validatePasswordResetBody(body)
+  await requestPasswordReset(email)
+  return successResponse(null, 200)
+})

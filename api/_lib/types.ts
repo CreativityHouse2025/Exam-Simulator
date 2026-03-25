@@ -12,6 +12,7 @@ export type AppErrorCode =
   | "UNAUTHORIZED"
   | "CONFIRMATION_FAILED"
   | "SUBSCRIPTION_CHECK_FAILED"
+  | "PASSWORD_UPDATE_FAILED"
 
 
 export type ApiSuccess<T> = {
@@ -76,16 +77,21 @@ export type SigninResult = {
   refresh_token: string
 }
 
-export type SignupCallbackRequestBody = {
+export type TokenExchangeRequestBody = {
   access_token: string
   refresh_token: string
 }
+
+export type PasswordResetRequestBody = Pick<SigninRequestBody, "email">
+
+export type UpdatePasswordRequestBody = Pick<SigninRequestBody, "password">
 
 export type ResponseHeaders = [string, string][]
 
 export type AuthUser = {
   id: string
   email: string
+  accessToken: string
 }
 
 export type AuthenticatedApiHandler = (req: Request, authUser: AuthUser, cookieHeaders?: ResponseHeaders) => Promise<Response>
