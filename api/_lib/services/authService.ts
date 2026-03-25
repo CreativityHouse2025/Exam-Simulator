@@ -1,6 +1,7 @@
 import { supabaseAdmin, createUserClient } from "../supabaseClient.js"
 import { AppError } from "../errors/AppError.js"
 import type { SignupRequestBody, SigninRequestBody, SigninResult } from "../types.js"
+import { requireEnv } from "../utils/env.js"
 import emailHasOffer from "./offerVerifier.js"
 
 /**
@@ -194,14 +195,14 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
 }
 
 /**
- * Validates confirmation tokens from a signup email link and returns the user profile with tokens.
+ * Validates confirmation tokens from a signup/recovery magic link and returns the user profile with tokens.
  * Uses `supabaseAdmin.auth.getUser()` to verify the access token without needing a session.
  *
  * @returns User profile and session tokens (handler is responsible for setting cookies).
  * @throws {AppError} 401 `CONFIRMATION_FAILED` — invalid or expired confirmation link.
  * @throws {AppError} 500 `CONFIRMATION_FAILED` — user profile not found in the database.
  */
-export async function confirmSignup(accessToken: string, refreshToken: string): Promise<SigninResult> {
+export async function confirmMagicLinkSignin(accessToken: string, refreshToken: string): Promise<SigninResult> {
   const { data: authUser, error } = await supabaseAdmin.auth.getUser(accessToken)
 
   if (error || !authUser.user) {
@@ -218,7 +219,7 @@ export async function confirmSignup(accessToken: string, refreshToken: string): 
     throw new AppError({ statusCode: 500, code: "CONFIRMATION_FAILED", message: "User profile not found" })
   }
 
-  console.log(`[confirmSignup] User ${authUser.user.id} confirmed successfully`)
+  console.log(`[confirmSignup] User ${authUser.user.id} signed in using magic link`)
 
   return {
     user: {
@@ -231,4 +232,37 @@ export async function confirmSignup(accessToken: string, refreshToken: string): 
     access_token: accessToken,
     refresh_token: refreshToken,
   }
+}
+
+/**
+ * Sends a password reset email via Supabase. Silently swallows errors
+ * to prevent email enumeration — the caller always returns 200.
+ */
+export async function requestPasswordReset(email: string): Promise<void> {
+  try {
+    const { error } = await supabaseAdmin.auth.resetPasswordForEmail(email)
+    if (error) {
+      console.error("[requestPasswordReset] Supabase error:", error.message)
+    } else {
+      console.log(`[requestPasswordReset]: User with email ${email} requested password reset`)
+    }
+  } catch (err) {
+    console.error("[requestPasswordReset] Unexpected error:", err)
+  }
+}
+
+/**
+ * Updates a user's password and signs out the user.
+ * Supabase automatically sings the user out of all sessions
+ *
+ * @throws {AppError} 500 `PASSWORD_UPDATE_FAILED` — Supabase failed to update the password.
+ */
+export async function updatePassword(userId: string, password: string): Promise<void> {
+  const { error } = await supabaseAdmin.auth.admin.updateUserById(userId, { password })
+
+  if (error) {
+    throw new AppError({ statusCode: 500, code: "PASSWORD_UPDATE_FAILED", message: "Failed to update password" })
+  }
+
+  console.log(`[updatePassword] Password updated for user ${userId}`)
 }

@@ -30,7 +30,7 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
     if (accessToken) {
       const { data, error } = await createUserClient().auth.getUser(accessToken)
       if (!error && data.user) {
-        const authUser: AuthUser = { id: data.user.id, email: data.user.email! }
+        const authUser: AuthUser = { id: data.user.id, email: data.user.email!, accessToken }
         return handler(req, authUser)
       }
     }
@@ -67,7 +67,7 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
       refreshData.session.refresh_token,
     ).map((c) => ["Set-Cookie", c] as [string, string])
 
-    const authUser: AuthUser = { id: refreshData.user.id, email: refreshData.user.email! }
+    const authUser: AuthUser = { id: refreshData.user.id, email: refreshData.user.email!, accessToken: refreshData.session.access_token }
     return handler(req, authUser, cookieHeaders)
   }
 }

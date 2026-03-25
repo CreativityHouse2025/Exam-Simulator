@@ -235,6 +235,7 @@ export type AppErrorCode =
   | "CONFIRMATION_FAILED"
   | "INTERNAL_ERROR"
   | "METHOD_NOT_ALLOWED"
+  | "PASSWORD_UPDATE_FAILED"
 
 export type ApiSuccess<T> = { success: true; data: T }
 export type ApiError = { success: false; error: { code: AppErrorCode; message: string } }
@@ -256,6 +257,7 @@ export type AuthContextType = {
   authStatus: AuthStatus
   setUser: React.Dispatch<React.SetStateAction<UserProfile | null>>
   setAuthStatus: React.Dispatch<React.SetStateAction<AuthStatus>>
+  cancelSessionCheck: () => void
 }
 
 export type RevisionDetails = {

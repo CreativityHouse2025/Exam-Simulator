@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import { AuthContext } from "../contexts"
 import type { ApiResponse, AuthStatus, UserProfile } from "../types"
 
@@ -10,16 +10,23 @@ type AuthContextProviderProps = {
 export default function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<UserProfile | null>(null)
   const [authStatus, setAuthStatus] = useState<AuthStatus>("pending")
+  const sessionCheckCancelled = useRef(false)
+
+  const cancelSessionCheck = useCallback(() => {
+    sessionCheckCancelled.current = true
+  }, [])
 
   useEffect(() => {
-    let cancelled = false
+    let unmounted = false
 
     async function checkSession() {
       try {
         const response = await fetch("/api/auth/me")
         const result: ApiResponse<{ user: UserProfile }> = await response.json()
 
-        if (cancelled) return
+        // unmounted: component no longer exists, don't update state
+        // sessionCheckCancelled: an active auth flow (signIn, exchangeToken) took over
+        if (unmounted || sessionCheckCancelled.current) return
 
         if (result.success) {
           setUser(result.data.user)
@@ -28,18 +35,20 @@ export default function AuthContextProvider({ children }: AuthContextProviderPro
           setAuthStatus("unauthenticated")
         }
       } catch {
-        if (!cancelled) setAuthStatus("unauthenticated")
+        if (!unmounted && !sessionCheckCancelled.current) {
+          setAuthStatus("unauthenticated")
+        }
       }
     }
 
     checkSession()
 
     return () => {
-      cancelled = true
+      unmounted = true
     }
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, authStatus, setUser, setAuthStatus }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, authStatus, setUser, setAuthStatus, cancelSessionCheck }}>{children}</AuthContext.Provider>
   )
 }
