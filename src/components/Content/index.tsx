@@ -56,7 +56,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
   }
 
   React.useEffect(() => {
-    if (emailLoading) {
+    if (emailLoading) {      
       showToast(feedback.sending, 5000)
     }
   }, [emailLoading, showToast])
@@ -68,6 +68,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
   }, [emailError, showToast])
 
   const results = useResults(finished);
+  const emailAttempted = React.useRef(false);
 
   const writeEmail = React.useCallback(
     (fullName: string, results: Results) => {
@@ -206,8 +207,10 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
 
   React.useEffect(() => {
     if (!finished) return;
-    if (emailSent) return;
+    if (emailSent || emailAttempted.current) return;
     if (!user) return;
+
+    emailAttempted.current = true;
 
     const { first_name, last_name } = user
 
@@ -230,6 +233,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
         if (!isRateLimitError(error)) {
           update!([SESSION_ACTION_TYPES.SET_EMAIL_SENT, false]);
         }
+        showToast(feedback.error, 5000)
       }
     }
 
