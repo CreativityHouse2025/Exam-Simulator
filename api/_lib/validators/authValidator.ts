@@ -2,21 +2,32 @@ import type { SignupRequestBody, SigninRequestBody, TokenExchangeRequestBody, Pa
 import { AppError } from "../errors/AppError.js"
 import { assertJsonObject } from "../utils/parseBody.js"
 
-const EMAIL_PATTERN = /.+@.+\..+/
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const LETTERS_ONLY = /^[\p{L} ]+$/u
 const HAS_LETTER = /[a-zA-Z]/
 const HAS_DIGIT = /\d/
 const MIN_PASSWORD_LENGTH = 8
+const MAX_PASSWORD_LENGTH = 128
+const MAX_EMAIL_LENGTH = 254
+const MAX_NAME_LENGTH = 100
 
 const REQUIRED_FIELDS = ["email", "password", "first_name", "last_name"] as const
 
-/** Validates a password string against minimum requirements. Throws `AppError` on failure. */
+/** Validates a password string against length and complexity requirements. Throws `AppError` on failure. */
 function validatePasswordString(password: string): void {
   if (password.length < MIN_PASSWORD_LENGTH) {
     throw new AppError({
       statusCode: 400,
       code: "VALIDATION_ERROR",
       message: `Password must be at least ${MIN_PASSWORD_LENGTH} characters`,
+    })
+  }
+
+  if (password.length > MAX_PASSWORD_LENGTH) {
+    throw new AppError({
+      statusCode: 400,
+      code: "VALIDATION_ERROR",
+      message: `Password must be at most ${MAX_PASSWORD_LENGTH} characters`,
     })
   }
 
@@ -52,12 +63,24 @@ export function validateSignupBody(body: unknown): SignupRequestBody {
   }
 
   const email = (record.email as string).trim()
-  const password = (record.password as string).trim()
+  const password = record.password as string
   const first_name = (record.first_name as string).trim()
   const last_name = (record.last_name as string).trim()
 
   if (!EMAIL_PATTERN.test(email)) {
     throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Invalid email format" })
+  }
+
+  if (email.length > MAX_EMAIL_LENGTH) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `Email must be at most ${MAX_EMAIL_LENGTH} characters` })
+  }
+
+  if (first_name.length > MAX_NAME_LENGTH) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `First name must be at most ${MAX_NAME_LENGTH} characters` })
+  }
+
+  if (last_name.length > MAX_NAME_LENGTH) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `Last name must be at most ${MAX_NAME_LENGTH} characters` })
   }
 
   if (!LETTERS_ONLY.test(first_name)) {
@@ -88,10 +111,14 @@ export function validateSigninBody(body: unknown): SigninRequestBody {
   }
 
   const email = (record.email as string).trim()
-  const password = (record.password as string).trim()
+  const password = record.password as string
 
   if (!EMAIL_PATTERN.test(email)) {
     throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Invalid email format" })
+  }
+
+  if (email.length > MAX_EMAIL_LENGTH) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `Email must be at most ${MAX_EMAIL_LENGTH} characters` })
   }
 
   return { email, password }
@@ -134,6 +161,10 @@ export function validatePasswordResetBody(body: unknown): PasswordResetRequestBo
     throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Invalid email format" })
   }
 
+  if (trimmedEmail.length > MAX_EMAIL_LENGTH) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `Email must be at most ${MAX_EMAIL_LENGTH} characters` })
+  }
+
   return { email: trimmedEmail }
 }
 
@@ -145,12 +176,11 @@ export function validateUpdatePasswordBody(body: unknown): UpdatePasswordRequest
   const record = assertJsonObject(body)
 
   const password = record.password
-  if (typeof password !== "string" || password.trim().length === 0) {
+  if (typeof password !== "string" || password.length === 0) {
     throw new AppError({ statusCode: 400, code: "MISSING_FIELDS", message: "Missing required field: password" })
   }
 
-  const trimmedPassword = password.trim()
-  validatePasswordString(trimmedPassword)
+  validatePasswordString(password)
 
-  return { password: trimmedPassword }
+  return { password }
 }

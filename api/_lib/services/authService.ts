@@ -102,15 +102,10 @@ export type SignupResult = {
 export async function signup(input: SignupRequestBody): Promise<SignupResult> {
   const { email, password, first_name, last_name } = input
 
-  const { data: { users } } = await supabaseAdmin.auth.admin.listUsers()
-  if (users.some((user) => user.email === email)) {
-    console.log(`[signup] Duplicate signup attempt for email: ${email}`)
-    throw new AppError({ statusCode: 500, code: "SIGNUP_FAILED", message: "Signup failed" })
-  }
-
   const { verified, highlevel_id } = await emailHasOffer(email)
   if (!verified) {
-    throw new AppError({ statusCode: 403, code: "SUBSCRIPTION_REQUIRED", message: "Active subscription not found: " + email })
+    console.warn("[signup]: User with email " + email + " tried to sign up with no active subscription.");
+    throw new AppError({ statusCode: 403, code: "SUBSCRIPTION_REQUIRED", message: "Active subscription not found" })
   }
 
   const offerDurationInMonths = 6;
@@ -217,6 +212,11 @@ export async function confirmMagicLinkSignin(accessToken: string, refreshToken: 
   if (profileError || !profile) {
     throw new AppError({ statusCode: 500, code: "CONFIRMATION_FAILED", message: "User profile not found" })
   }
+
+  await assertAccountNotExpired(authUser.user.id, {
+    revokeAccessToken: accessToken,
+    knownExpiresAt: profile.expires_at,
+  })
 
   console.log(`[confirmSignup] User ${authUser.user.id} signed in using magic link`)
 
