@@ -70,8 +70,8 @@ Try the webapp here 👉 https://exam-simulator-flax.vercel.app
 | Phase | Description | Status |
 |---|---|---|
 | 1 | Predefined full exam selection dropdown | Complete |
-| 2 | Backend infrastructure (Supabase database setup) | Pending |
-| 3 | Authentication + HighLevel CRM integration | Pending |
+| 2 | Backend infrastructure (Supabase database setup) | Complete |
+| 3 | Authentication + HighLevel CRM integration | Complete |
 | 4 | Single-device session enforcement | Pending |
 | 5 | Persistent exam attempt history | Pending |
 | 6 | Resume unfinished exams | Pending |

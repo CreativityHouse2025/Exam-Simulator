@@ -6,8 +6,8 @@
   "cover": {
     "logo-alt": "Logo",
     "continue": "Continue Last Exam",
-    "new": "Start New Exam",
-    "mini": "Start Mini Exam",
+    "new": "Start a Full Exam",
+    "mini": "Start a Domain Exam",
     "select-category": "Choose a question category",
     "select-fullexam": "Choose an exam to start",
     "general": "General",
