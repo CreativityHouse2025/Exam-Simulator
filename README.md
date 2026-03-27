@@ -1,73 +1,88 @@
 ## About
 
-A PMP exam simulator done for [Creativity House](https://creativity-house.com)
+A bilingual (Arabic/English) PMP exam simulator built for [Creativity House](https://creativity-house.com), a Malaysian company that prepares professionals for the PMP certification exam.
 
 Try the webapp here 👉 https://exam-simulator-flax.vercel.app
 
-### References
+---
 
-The app was built from the source of [Exam Simulator](https://github.com/exam-simulator/simulator) by [Benjamin Brooke](https://github.com/benjaminadk)
+## Current Version: v2.0 (Phase 1)
 
-## Requirements
+### What's New in v2.0 — Phase 1
 
-### Exam Structure
+- **Predefined full exam selection:** A dropdown on the home screen lets users select from a list of predefined full exams (180 questions each). All users see the same questions in the same fixed order per exam.
 
-- [x] Each exam consists of a **maximum of 180 questions** with a **time limit of 230 minutes**.
-- [x] A **minimum of 5 full exams** is required.
-- [x] Each course includes **practice exercises** covering key PMP domains, for example:
-  - Agile
-  - Hybrid
-  - Schedule & Cost
-  - People
-  - Domain
-  - Business environment
+- **Sign up using Creativity House offer email:** A user with an email that has an offer (1st payment of more than 160) can access the system. Otherwise will be unauthorized
 
-### Question Functionality
+---
 
-- [x] **Question numbering (numeration)** should be clear.
-- [x] Users should be able to track:
-  - [x] **The number or percentage of remaining questions.**
-  - [x] **The number of solved questions.**
+## Features (as of v1.1)
 
-### Exam Review & Analysis
+### Exam Types
 
-- [x] Upon completing a test, the result should be displayed as a **percentage**. **No candidate should schedule their PMP exam unless they score at least 85%.**
-- [x] **"Kill Mistakes" Feature:** All incorrect answers should be collected in a dedicated section for final review.
+- **Full Exam:** 180 questions, 230-minute countdown timer, selected from a predefined list.
+- **Category Exam:** A shorter exam filtered by a PMP domain chosen from a dropdown.
 
-### Detailed Review After Exam
+### During the Exam
 
-- [x] When reviewing completed exams, users should see:
-  - [x] **All answer choices provided.**
-  - [x] **Their selected answer.**
-  - [x] **The correct answer.**
-  - [x] **Explanations for each question.**
+- Question numbering and progress tracking (remaining and answered count).
+- Pause the exam at any time.
+- Submit early without completing all questions.
+- Switch language (Arabic / English) at any time — question order and session state are preserved.
 
-### Question & Answer Order:
+### Results & Review
 
-- [x] The **order of questions in the simulator is different** from the order in the file.
+- Score displayed as a percentage on completion.
+  - Pass threshold: **85%** for category exams, **75%** for full exams.
+- Full detailed review after submission showing: all answer choices, your selected answer, the correct answer, and the explanation for each question.
 
-### Exam Timing & Configuration
+### Retry Wrong Answers
 
-- [x] **Countdown Timer:** The exam timer should track time **by minutes** and count **down** to zero.
-- [x] **System Stability:** Resolve any **configuration errors** affecting the exam experience.
+- If more than 10 questions were answered incorrectly or skipped, a **Retry** option appears on the results screen.
+- The retry session contains only the incorrect and unanswered questions, in their original order.
+- Retry results are tracked separately and do not affect the original exam score.
 
-### Exam Submission & Pause Functionality
+### Email Report
 
-- [x] **Pause Feature:** Users should be able to **pause** the exam at any time.
-- [x] **Early Submission:** Users should have the option to **submit the exam** even if they haven't completed all questions.
-
-### User Interaction & Navigation
-
-- [x] **Drag-and-Drop:** Enable **drag-and-drop functionality** where applicable.
-
-### Mini Exam Option
-
-- [x] **Shorter Exam Mode:** Provide a **mini exam feature** that allows users to take a **shorter version** of the exam (e.g., 30-50 questions).
-
-### Exam Result Display
-
-- [x] Percentage Format: Ensure results are displayed in **percentage format (%)**.
+- On exam completion, a report is automatically sent to the user's email.
+- The report includes: exam type and category (if applicable), status, correct percentage, time and date, correct, wrong and unanswered questions.
+- If the email fails to send, the user is notified and offered a direct PDF download instead.
 
 ### Language Support
 
-- [x] **Multi-Language Support:** Ensure the simulator provides an **option to change the language** based on user preference.
+- Full Arabic and English support throughout the simulator.
+- Report and email language matches the language selected before exam completion.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React, TypeScript |
+| Hosting | Vercel |
+| Backend (to be added) | Supabase |
+
+---
+
+## Roadmap — v2.0 Remaining Phases
+
+| Phase | Description | Status |
+|---|---|---|
+| 1 | Predefined full exam selection dropdown | Complete |
+| 2 | Backend infrastructure (Supabase database setup) | Complete |
+| 3 | Authentication + HighLevel CRM integration | Complete |
+| 4 | Single-device session enforcement | Pending |
+| 5 | Persistent exam attempt history | Pending |
+| 6 | Resume unfinished exams | Pending |
+| 7 | Show correct answer during category exams | Pending |
+| 8 | UI refresh (PMP-style interface) + rename category exam | Pending |
+| 9 | Expand predefined full exam list | Pending |
+| 10 | Break system (2 × 10-minute breaks at Q60 and Q120) | Pending |
+| 11 | Full system testing and production deployment | Pending |
+
+---
+
+## References
+
+Originally built from [Exam Simulator](https://github.com/exam-simulator/simulator) by [Benjamin Brooke](https://github.com/benjaminadk).

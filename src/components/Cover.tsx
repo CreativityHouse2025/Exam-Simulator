@@ -15,6 +15,10 @@ const CoverStyles = styled.div<ThemedStyles>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: radial-gradient(ellipse 80% 65% at 50% 115%, rgba(255, 220, 154, 0.87) 0%, transparent 55%),
+      radial-gradient(ellipse 55% 45% at 90% 75%, rgba(181, 150, 93, 0.2) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 40% at 10% 85%, rgba(181, 150, 93, 0.14) 0%, transparent 45%),
+      radial-gradient(ellipse 90% 80% at 50% 50%, #FAFAF8 0%, #F2F0EC 45%, #E9E7E3 100%);
 `
 
 export const Image = styled.img<ThemedStyles>`
