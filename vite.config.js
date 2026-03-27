@@ -12,6 +12,11 @@ export default defineConfig({
     })
   ],
   server: {
-    allowedHosts: ['brashiest-lon-superevangelically.ngrok-free.dev'],
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
+    }
   }
 })

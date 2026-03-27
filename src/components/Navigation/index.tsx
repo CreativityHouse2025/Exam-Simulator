@@ -13,8 +13,7 @@ import {
 } from '../../contexts'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import { SessionReducer } from '../../utils/session'
-import { Session, SessionDispatch } from '../../types'
-import { RevisionExamOptions } from '../../App'
+import { RevisionExamOptions, Session, SessionDispatch } from '../../types'
 
 const ContainerStyles = styled.div`
   display: flex;

@@ -1,10 +1,19 @@
 import React from "react";
 
 export const ToastContext = React.createContext<ToastContextType | undefined>(undefined);
-import type { Exam, SessionNavigation, SessionTimer, SessionExam, SessionData, SettingsContextType, ToastContextType } from './types'
+import type { AuthContextType, Exam, SessionNavigation, SessionTimer, SessionExam, SessionData, SettingsContextType, ToastContextType } from './types'
 
 import { createContext } from 'react'
 import { GENERAL_CATEGORY_ID, RANDOM_EXAM_ID } from './constants'
+
+// Auth context
+export const AuthContext = createContext<AuthContextType>({
+  user: null,
+  authStatus: "pending",
+  setUser: () => {},
+  setAuthStatus: () => {},
+  cancelSessionCheck: () => {},
+})
 
 // Exam context
 export const ExamContext = createContext<Exam>({} as Exam)

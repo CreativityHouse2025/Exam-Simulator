@@ -6,8 +6,8 @@
   "cover": {
     "logo-alt": "Logo",
     "continue": "Continue Last Exam",
-    "new": "Start New Exam",
-    "mini": "Start Mini Exam",
+    "new": "Start a Full Exam",
+    "mini": "Start a Domain Exam",
     "select-category": "Choose a question category",
     "select-fullexam": "Choose an exam to start",
     "general": "General",
@@ -83,27 +83,101 @@
     "timestamp": "Finished at",
     "sending": "Sending the report to your email...",
     "sent": "Report sent successfully",
-    "error": "Failed to send the report",
+    "error": "Cannot send the report at the moment.",
     "email": {
       "subject": "Your Exam Report - $1",
       "body": "Hello $1,\n\nHere is your exam summary at $2:\n\n$3\n"
     }
   },
-  "form": {
-    "user-info": {
-      "title": "Personal Information",
-      "full-name": {
-        "label": "Full Name",
-        "placeholder": "Enter your full name",
-        "invalid": "Only letters are allowed in the name",
-        "missing": "Full name is required"
-      },
-      "email": {
-        "label": "Email",
-        "placeholder": "Enter your email",
-        "invalid": "Please enter a valid email"
-      },
-      "submit": "Submit"
+  "auth": {
+    "fields": {
+      "email": "Email",
+      "email-placeholder": "you@example.com",
+      "first-name": "First Name",
+      "first-name-placeholder": "John",
+      "last-name": "Last Name",
+      "last-name-placeholder": "Doe",
+      "password": "Password",
+      "password-placeholder": "Enter your password",
+      "password-new-placeholder": "At least 8 characters",
+      "confirm-password": "Confirm Password",
+      "confirm-password-placeholder": "Re-enter your password"
+    },
+    "signin": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to access the exam simulator",
+      "submit": "Sign In",
+      "submitting": "Signing in...",
+      "error": "Sign in failed. Please try again.",
+      "no-account": "Don't have an account?",
+      "signup-link": "Sign Up",
+      "forgot-password": "Forgot your password?"
+    },
+    "signup": {
+      "title": "Create Account",
+      "subtitle": "Sign up to get started",
+      "submit": "Sign Up",
+      "submitting": "Creating account...",
+      "error": "Sign up failed. Please try again.",
+      "has-account": "Already have an account?",
+      "signin-link": "Sign In",
+      "success-title": "Check Your Email",
+      "success-message": "We've sent a confirmation link to your email. Please check your inbox and click the link to activate your account.",
+      "go-to-signin": "Go to Sign In"
+    },
+    "forgot-password": {
+      "title": "Reset Your Password",
+      "subtitle": "Enter your email and we'll send you a reset link",
+      "submit": "Submit",
+      "submitting": "Submitting...",
+      "error": "Something went wrong. Please try again.",
+      "back-to-signin": "Back to Sign In",
+      "sent-title": "Check Your Email",
+      "sent-subtitle": "If an account is associated with that email, a reset link has been sent."
+    },
+    "reset-password": {
+      "subtitle": "Enter your new password",
+      "submit": "Save",
+      "submitting": "Saving...",
+      "new-password": "New Password",
+      "new-password-placeholder": "Enter new password"
+    },
+    "profile": {
+      "expires": "Account Expires",
+      "reset-password": "Reset Password",
+      "sign-out": "Sign Out",
+      "signing-out": "Signing out...",
+      "sign-out-success": "You have been signed out.",
+      "back-home": "Back to Homepage"
+    },
+    "errors": {
+      "required": "$1 is required",
+      "name-invalid": "$1 must contain letters only",
+      "email-required": "Email is required",
+      "email-invalid": "Please enter a valid email address",
+      "password-required": "Password is required",
+      "password-too-short": "Password must be at least 8 characters",
+      "password-no-letter": "Password must contain at least one letter",
+      "password-no-digit": "Password must contain at least one digit",
+      "confirm-required": "Please confirm your password",
+      "confirm-mismatch": "Passwords do not match",
+      "server-invalid-credentials": "Invalid email or password.",
+      "server-account-expired": "Your account has expired. Please contact Creativity House.",
+      "server-subscription-required": "You are not authorized to sign up.",
+      "server-signup-failed": "Sign up failed. Please try again.",
+      "server-signin-failed": "Sign in failed. Please try again.",
+      "server-confirmation-failed": "Email confirmation failed. Please try again.",
+      "server-validation-error": "Please check your input and try again.",
+      "server-missing-fields": "Please fill in all required fields.",
+      "server-unknown": "An unexpected error occurred. Please try again."
+    },
+    "callback": {
+      "error": "Something went wrong. Please try signing in.",
+      "go-to-signin": "Go to sign in"
     }
+  },
+  "errors": {
+    "rate-limited": "Please try again in $1 minute(s).",
+    "rate-limited-generic": "Please try again later."
   }
 }

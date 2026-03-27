@@ -141,7 +141,7 @@ export const ReducedMotionWrapper = styled.div`
 // Default user settings
 export const DEFAULT_USER_SETTINGS: Settings = {
   language: 'en',
-  appVersion: '1.1'
+  appVersion: '1.4'
 }
 
 // Minimum required number of mistakes to allow for a retake
