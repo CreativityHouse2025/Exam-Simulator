@@ -9,7 +9,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
   if (isLoading) return <Loading size={100} />
 
-  if (!isAuthenticated) return <Navigate to="/signin" replace />
+  if (!isAuthenticated) return <Navigate to="/signup" replace />
 
   return <>{children}</>
 }
