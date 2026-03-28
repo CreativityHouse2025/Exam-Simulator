@@ -91,7 +91,7 @@
   },
   "auth": {
     "fields": {
-      "email": "Email",
+      "email": "Email (must match your registered email at Creativity House)",
       "email-placeholder": "you@example.com",
       "first-name": "First Name",
       "first-name-placeholder": "John",
@@ -105,7 +105,7 @@
     },
     "signin": {
       "title": "Welcome Back",
-      "subtitle": "Sign in to access the exam simulator",
+      "subtitle": "Sign in if you have created an account to access the exam simulator.",
       "submit": "Sign In",
       "submitting": "Signing in...",
       "error": "Sign in failed. Please try again.",
@@ -115,7 +115,7 @@
     },
     "signup": {
       "title": "Create Account",
-      "subtitle": "Sign up to get started",
+      "subtitle": "Sign up once to get started with the exam simulator",
       "submit": "Sign Up",
       "submitting": "Creating account...",
       "error": "Sign up failed. Please try again.",
