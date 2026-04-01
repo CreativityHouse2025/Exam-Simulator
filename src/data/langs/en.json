@@ -140,7 +140,8 @@
       "submit": "Save",
       "submitting": "Saving...",
       "new-password": "New Password",
-      "new-password-placeholder": "Enter new password"
+      "new-password-placeholder": "Enter new password",
+      "success": "Your password has been updated. Please sign in with your new password."
     },
     "profile": {
       "expires": "Account Expires",

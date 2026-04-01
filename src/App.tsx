@@ -60,10 +60,10 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/signin" element={<GuestRoute><SignInPage /></GuestRoute>} />
         <Route path="/signup" element={<GuestRoute><SignUpPage /></GuestRoute>} />
-        <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute redirectTo="/signin"><ProfilePage /></ProtectedRoute>} />
         <Route path="/forgot-password" element={<GuestRoute><ForgotPasswordPage /></GuestRoute>} />
         <Route path="/auth/callback" element={<AuthCallbackPage />} />
-        <Route path="/reset-password" element={<ProtectedRoute><ResetPasswordPage /></ProtectedRoute>} />
+        <Route path="/reset-password" element={<ProtectedRoute redirectTo="/signin"><ResetPasswordPage /></ProtectedRoute>} />
         <Route path="/app" element={<ProtectedRoute><ExamPage /></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/app" replace />} />
       </Routes>

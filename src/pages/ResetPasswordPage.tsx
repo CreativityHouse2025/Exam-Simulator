@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { ArrowBack } from "@styled-icons/material/ArrowBack"
 import useAuth from "../hooks/useAuth"
+import useToast from "../hooks/useToast"
 import useFormField from "../hooks/useFormField"
 import { validatePassword, validateConfirmPassword } from "../utils/authValidation"
 import { translate } from "../utils/translation"
@@ -30,6 +31,7 @@ const ResetCard = styled(Card)`
 const ResetPasswordPage: React.FC = () => {
   const { updatePassword, signOut } = useAuth()
   const navigate = useNavigate()
+  const { showToast } = useToast()
 
   const t = {
     logoAlt: translate('cover.logo-alt'),
@@ -41,6 +43,7 @@ const ResetPasswordPage: React.FC = () => {
     confirmPasswordPlaceholder: translate('auth.fields.confirm-password-placeholder'),
     submit: translate('auth.reset-password.submit'),
     submitting: translate('auth.reset-password.submitting'),
+    success: translate('auth.reset-password.success'),
     error: translate('auth.forgot-password.error'),
     backHome: translate('auth.profile.back-home'),
   }
@@ -72,11 +75,9 @@ const ResetPasswordPage: React.FC = () => {
 
     try {
       await updatePassword(password.value)
-      await signOut()
-      navigate("/signin", { replace: true })
+      await signOut(() => showToast(t.success, 7000))
     } catch (err) {
       setServerError(err instanceof Error ? err.message : t.error)
-    } finally {
       setSubmitting(false)
     }
   }

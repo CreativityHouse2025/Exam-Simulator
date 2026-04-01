@@ -100,9 +100,7 @@ const ProfilePage: React.FC = () => {
 
   const handleSignOut = async () => {
     setSigningOut(true)
-    await signOut()
-    showToast(t.signOutSuccess)
-    navigate("/signin")
+    await signOut(() => showToast(t.signOutSuccess, 5000))
   }
 
   const handlePasswordReset = () => {

@@ -35,6 +35,7 @@ export default function AuthContextProvider({ children }: AuthContextProviderPro
           setAuthStatus("unauthenticated")
         }
       } catch {
+        //                don't override active auth flows
         if (!unmounted && !sessionCheckCancelled.current) {
           setAuthStatus("unauthenticated")
         }

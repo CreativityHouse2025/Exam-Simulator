@@ -104,7 +104,6 @@ export async function signup(input: SignupRequestBody): Promise<SignupResult> {
 
   const { verified, highlevel_id } = await emailHasOffer(email)
   if (!verified) {
-    console.warn("[signup]: User with email " + email + " tried to sign up with no active subscription.");
     throw new AppError({ statusCode: 403, code: "SUBSCRIPTION_REQUIRED", message: "Active subscription not found" })
   }
 
