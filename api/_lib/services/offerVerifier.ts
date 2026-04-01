@@ -4,7 +4,7 @@ import { requireEnv } from "../utils/env.js"
 
 const HIGHLEVEL_SEARCH_URL = "https://services.leadconnectorhq.com/contacts/search"
 const FIRST_PAYMENT_FIELD_ID = "KRR9RneAdX2BA6kdT60Z"
-const MIN_PAYMENT_AMOUNT = 160
+const MIN_PAYMENT_AMOUNT = 10
 
 type HighLevelCustomField = {
   id: string

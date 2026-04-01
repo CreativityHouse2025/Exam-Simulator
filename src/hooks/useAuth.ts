@@ -126,13 +126,14 @@ export default function useAuth() {
     }
   }, [])
 
-  const signOut = useCallback(async () => {
+  const signOut = useCallback(async (onSuccess?: () => void) => {
     try {
       await apiFetch("/api/auth/signout", { method: "POST" })
     } finally {
       cancelSessionCheck()
       setUser(null)
       setAuthStatus("unauthenticated")
+      onSuccess?.()
     }
   }, [cancelSessionCheck, setUser, setAuthStatus])
 
