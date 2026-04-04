@@ -62,7 +62,8 @@
       "incomplete": "Unanswered",
       "home": "Go Home",
       "retake-wrong": "Retry Mistakes",
-      "category": "Category"
+      "category": "Category",
+      "exam": "Exam"
     }
   },
   "confirm": {
@@ -86,7 +87,7 @@
     "error": "Cannot send the report at the moment.",
     "email": {
       "subject": "Your Exam Report - $1",
-      "body": "Hello $1,\n\nHere is your exam summary at $2:\n\n$3\n"
+      "body": "Hello $1,\n\nThis is an automated notification to inform you that your exam report is now available following the completion of your recent exam at $2. Please find your exam report attached to this email.\n\nHere is your exam summary:"
     }
   },
   "auth": {

@@ -101,7 +101,8 @@ const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: Rev
     score,
     elapsedTime,
     date,
-    categoryLabel,
+    sourceLabel,
+    sourceType,
     correctCount,
     incorrectCount,
     incompleteCount,
@@ -146,7 +147,7 @@ const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: Rev
 
           <SummaryRow type="time" value={formatTimer(elapsedTime)} status={pass} />
           <SummaryRow type="date" value={formatDate(date)} status={pass} />
-          <SummaryRow type="category" value={categoryLabel} status={pass} />
+          <SummaryRow type={sourceType} value={sourceLabel} status={pass} />
         </TopColumnStyles>
 
         <ColumnStyles id="column">

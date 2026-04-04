@@ -1,6 +1,7 @@
 import React from 'react'
 import { ExamContext, SessionDataContext, SessionExamContext, SessionTimerContext } from '../contexts'
 import useCategoryLabel from './useCategoryLabel'
+import useFullExamLabel from './useFullExamLabel'
 import { ExamType, Question, Results } from '../types'
 import examTypes from '../data/exam-data/exam-types.json'
 
@@ -14,11 +15,17 @@ type QuestionStats = {
 export default function useResults(isExamFinished: boolean): Results | null {
     const { answers, examType } = React.useContext(SessionDataContext)
     const { maxTime, time } = React.useContext(SessionTimerContext)
-    const { categoryId } = React.useContext(SessionExamContext)
+    const { categoryId, examId } = React.useContext(SessionExamContext)
     const exam = React.useContext(ExamContext)
 
     const passingScore = examTypes[examType as ExamType].passingRate ?? null
-    const categoryLabel = useCategoryLabel(categoryId) as string
+    let sourceLabel;
+    const isFullExam = examType === 'exam'
+    if (isFullExam) {
+        sourceLabel = useFullExamLabel(examId!)
+    } else {
+        sourceLabel = useCategoryLabel(categoryId)
+    }
 
     const questionStats = React.useMemo<QuestionStats>(() => {
         const arraysEqual = (a: number[] | null, b: number[]): boolean => {
@@ -81,7 +88,8 @@ export default function useResults(isExamFinished: boolean): Results | null {
         // meta
         elapsedTime,
         date: new Date(),
-        categoryLabel,
+        sourceLabel,
+        sourceType: isFullExam ? 'exam' : 'category',
 
         // counts
         correctCount: questionStats.correct.length,

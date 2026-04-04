@@ -163,7 +163,7 @@ export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'update' |
 export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | 'update' | 'emailSent'>
 
 // Email API arguments type
-export type SendEmailRequest = {
+export type SendEmailRequestBody = {
   subject: string;
   text: string;
   html?: string;
@@ -186,7 +186,7 @@ export type Translations = {
 }
 
 // Generate report API arguments type
-export type GenerateReportRequest = {
+export type GenerateReportRequestBody = {
   exam: Exam
   userAnswers: Answers
   langCode: LangCode
@@ -279,7 +279,8 @@ export type Results = {
   // time & meta
   elapsedTime: number
   date: Date
-  categoryLabel: string
+  sourceLabel: string
+  sourceType: 'category' | 'exam'
 
   // question stats
   correctCount: number

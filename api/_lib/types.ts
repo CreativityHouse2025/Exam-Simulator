@@ -30,16 +30,51 @@ export type ApiError = {
 
 export type ApiResponse<T> = ApiSuccess<T> | ApiError;
 
-// Email API arguments type
-export type SendEmailRequest = {
-  subject: string;
-  text: string;
-  html?: string;
+export type SendEmailRequestBody = {
+  subject: string
+  text: string
+  html?: string
   attachments?: {
-    filename: string;
+    filename: string
     /** pdf content in base64 */
-    content: string;
+    content: string
   }[]
+}
+
+// Minimal exam types scoped to the API — not shared with the frontend
+export type LangCode = 'ar' | 'en'
+
+export type ReportChoice = {
+  text: string
+  correct: boolean
+}
+
+export type ReportQuestion = {
+  id: number
+  type: string
+  categoryId: number
+  text: string
+  explanation: string
+  choices: ReportChoice[]
+  answer: number[]
+}
+
+export type ReportTranslations = {
+  companyName: string
+  reportTitle: string
+  missing: string
+  correct: string
+  incorrect: string
+  explanation: string
+  fullName: string
+}
+
+export type GenerateReportRequestBody = {
+  exam: ReportQuestion[]
+  userAnswers: number[][]
+  langCode: LangCode
+  userFullName: string
+  translations: ReportTranslations
 }
 
 
