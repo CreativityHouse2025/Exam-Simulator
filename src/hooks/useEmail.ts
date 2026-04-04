@@ -1,12 +1,12 @@
 import { useState, useCallback } from "react";
-import type { SendEmailRequest } from "../types";
+import type { SendEmailRequestBody } from "../types";
 import { apiFetch } from "../utils/apiFetch";
 
 export function useEmail() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const sendEmail = useCallback(async (emailRequest: SendEmailRequest) => {
+    const sendEmail = useCallback(async (emailRequest: SendEmailRequestBody) => {
         setLoading(true);
         setError(null);
 

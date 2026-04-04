@@ -4,8 +4,9 @@ import React from 'react'
 import styled from 'styled-components'
 import ExamComponent from './Exam'
 import Summary from './Summary'
-import { SessionDataContext, SessionExamContext } from '../../contexts'
+import { ExamContext, SessionDataContext, SessionExamContext } from '../../contexts'
 import { useEmail } from '../../hooks/useEmail'
+import { useReport } from '../../hooks/useReport'
 import useAuth from '../../hooks/useAuth'
 import useSettings from '../../hooks/useSettings'
 import { SESSION_ACTION_TYPES } from '../../constants'
@@ -37,7 +38,8 @@ const ContentStyles = styled.div<ThemedStyles>`
 
 const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
   const { examState, reviewState } = React.useContext(SessionExamContext)
-  const { emailSent, examType, update } = React.useContext(SessionDataContext)
+  const { emailSent, answers, examType, update } = React.useContext(SessionDataContext)
+  const exam = React.useContext(ExamContext)
 
   const { user } = useAuth()
   const { settings } = useSettings();
@@ -46,7 +48,8 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
   const finished = examState === 'completed'
   const summary = reviewState === 'summary'
 
-  const { sendEmail, loading: emailLoading, error: emailError } = useEmail();
+  const { generateReport } = useReport();
+  const { sendEmail } = useEmail();
   const { showToast } = useToast();
 
   const feedback = {
@@ -54,18 +57,6 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
     "sent": translate("report.sent"),
     "error": translate("report.error")
   }
-
-  React.useEffect(() => {
-    if (emailLoading) {      
-      showToast(feedback.sending, 5000)
-    }
-  }, [emailLoading, showToast])
-
-  React.useEffect(() => {
-    if (emailError) {
-      showToast(feedback.error, 5000)
-    }
-  }, [emailError, showToast])
 
   const results = useResults(finished);
   const emailAttempted = React.useRef(false);
@@ -95,7 +86,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
         { type: 'score', value: `${results.score}%` },
         { type: 'time', value: formatTimer(results.elapsedTime) },
         { type: 'date', value: formatDate(results.date) },
-        { type: 'category', value: results.categoryLabel },
+        { type: results.sourceType, value: results.sourceLabel },
         {
           type: 'correct',
           value: `${results.correctCount} / ${results.totalQuestions}`
@@ -125,8 +116,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
         )
         .join('')
 
-      const introText = replacePlaceholders(rawBody, fullName, company, '')
-        .split('\n\n')[0]
+      const introText = replacePlaceholders(rawBody, fullName, company)
 
       const htmlBody = `
       <!DOCTYPE html>
@@ -153,9 +143,13 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
                   <!-- Content -->
                   <tr>
                     <td style="padding: 32px 24px;">
-                      <p style="margin: 0 0 24px; color: #301e2c; font-size: 16px; line-height: 1.6; text-align: ${isRTL ? 'right' : 'left'};">
-                        ${introText}
-                      </p>
+                      ${introText
+                        .split('\n\n')
+                        .map(
+                          (paragraph: string) =>
+                            `<p style="margin: 0 0 16px; color: #301e2c; font-size: 16px; line-height: 1.6; text-align: ${isRTL ? 'right' : 'left'};">${paragraph}</p>`
+                        )
+                        .join('')}
 
                       <!-- Results Summary -->
                       <h2 style="margin: 0 0 16px; color: #593752; font-size: 20px; font-weight: 600; text-align: ${isRTL ? 'right' : 'left'};">
@@ -193,12 +187,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
         .join('\n')
 
       // text body as a fallback if HTML didn't work in nodemailer
-      const textBody = replacePlaceholders(
-        rawBody,
-        fullName,
-        company,
-        summary
-      )
+      const textBody = `${replacePlaceholders(rawBody, fullName, company)}\n\n${summary}`
 
       return { subject, textBody, htmlBody }
     },
@@ -214,22 +203,26 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
 
     const { first_name, last_name } = user
 
-    // Mark as sent immediately to survive remounts during the async send
+    // Mark as sent immediately to survive remounts during the async operations
     update!([SESSION_ACTION_TYPES.SET_EMAIL_SENT, true]);
 
-    async function sendEmailToUser() {
+    async function sendReportToUser() {
+      showToast(feedback.sending, 5000)
       try {
         const fullName = `${first_name} ${last_name}`
         const email = writeEmail(fullName, results as Results)
+
+        const pdfBase64 = await generateReport({ exam, userAnswers: answers, langCode, userFullName: fullName })
 
         await sendEmail({
           subject: email.subject,
           text: email.textBody,
           html: email.htmlBody,
+          attachments: pdfBase64 ? [{ filename: `${examType}-${new Date().toISOString().slice(0, 10)}-report.pdf`, content: pdfBase64 }] : undefined,
         });
         showToast(feedback.sent, 5000)
       } catch (error) {
-        console.error("Error sending email: ", error);
+        console.error("Error sending report: ", error);
         if (!isRateLimitError(error)) {
           update!([SESSION_ACTION_TYPES.SET_EMAIL_SENT, false]);
         }
@@ -237,8 +230,8 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
       }
     }
 
-    sendEmailToUser();
-  }, [finished, emailSent, user, sendEmail, update, showToast]);
+    sendReportToUser();
+  }, [finished, emailSent, user, exam, answers, langCode, generateReport, sendEmail, update, showToast]);
 
   return (
     <MainStyles id="main" $open={open}>

@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer"
 import sanitizeHtml from "sanitize-html"
-import type { SendEmailRequest } from "../_lib/types.js"
+import type { SendEmailRequestBody } from "../_lib/types.js"
 import { withErrorHandler } from "../_lib/middleware/withErrorHandler.js"
 import { withAuth } from "../_lib/middleware/withAuth.js"
 import { AppError } from "../_lib/errors/AppError.js"
@@ -18,14 +18,31 @@ const transporter = nodemailer.createTransport({
   auth: { user: SENDER_EMAIL, pass: APP_PASSWORD },
 })
 
+const MAX_EMAIL_BODY_BYTES = 2.5 * 1024 * 1024 // 2.5 MB — accommodates base64-encoded PDF attachments
+
 export const POST = withErrorHandler(
   withAuth(async (req, authUser, cookieHeaders) => {
-    // use 100KB for email requests paylaods
-    const body = assertJsonObject(await parseJsonBody(req, 100 * 1024))
-    const { subject, text, html } = body as SendEmailRequest
+    const body = assertJsonObject(await parseJsonBody(req, MAX_EMAIL_BODY_BYTES))
+    const { subject, text, html, attachments } = body as SendEmailRequestBody
 
     if (!subject || !text) {
       throw new AppError({ statusCode: 400, code: "MISSING_FIELDS", message: "Missing required fields: subject, text" })
+    }
+
+    if (attachments !== undefined) {
+      if (!Array.isArray(attachments)) {
+        throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "attachments must be an array" })
+      }
+
+      for (let i = 0; i < attachments.length; i++) {
+        const a = attachments[i]
+        if (typeof a?.filename !== "string" || a.filename.trim().length === 0) {
+          throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `attachments[${i}].filename must be a non-empty string` })
+        }
+        if (typeof a?.content !== "string" || a.content.trim().length === 0) {
+          throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `attachments[${i}].content must be a non-empty base64 string` })
+        }
+      }
     }
 
     // Sanitize input to prevent XSS on client's side
@@ -86,6 +103,10 @@ export const POST = withErrorHandler(
       subject: sanitizedSubject,
       text,
       html: sanitizedHtml,
+      attachments: attachments?.map((a) => ({
+        filename: a.filename,
+        content: Buffer.from(a.content, "base64"),
+      })),
     })
 
     return successResponse({ message: "Email sent successfully", id: info.messageId }, 200, cookieHeaders)
