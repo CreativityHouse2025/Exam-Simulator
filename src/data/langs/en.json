@@ -110,8 +110,8 @@
       "submit": "Sign In",
       "submitting": "Signing in...",
       "error": "Sign in failed. Please try again.",
-      "no-account": "Don't have an account?",
-      "signup-link": "Sign Up",
+      "no-account": "New here? You'll need to",
+      "signup-link": "create an account first.",
       "forgot-password": "Forgot your password?"
     },
     "signup": {
@@ -121,10 +121,12 @@
       "submitting": "Creating account...",
       "error": "Sign up failed. Please try again.",
       "has-account": "Already have an account?",
-      "signin-link": "Sign In",
+      "signin-link": "Sign In instead.",
       "success-title": "Check Your Email",
       "success-message": "We've sent a confirmation link to your email. Please check your inbox and click the link to activate your account.",
-      "go-to-signin": "Go to Sign In"
+      "go-to-signin": "Go to Sign In",
+      "no-email-hint": "Didn't receive an email? You may already have an account.",
+      "reset-password-link": "Reset your password"
     },
     "forgot-password": {
       "title": "Reset Your Password",
