@@ -305,6 +305,31 @@ export const BackButton = styled.button<ThemedStyles>`
   }
 `
 
+/**
+ * Prominent banner for switching between sign-in and sign-up.
+ * Replaces the easy-to-miss CardFooter footnote with a visually distinct callout.
+ * Used consistently on both SignInPage and SignUpPage.
+ */
+export const AuthSwitchBanner = styled.div<ThemedStyles>`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 2rem;
+  padding: 1.2rem 1.4rem;
+  background: rgba(181, 150, 93, 0.08);
+  border: 1px solid ${({ theme }) => theme.primary};
+  border-radius: 10px;
+  font-size: 1.35rem;
+  text-align: center;
+  color: ${({ theme }) => theme.grey[9]};
+
+  @media (min-width: 48rem) {
+    font-size: 1.4rem;
+  }
+`
+
 /** Circular avatar showing user initials with gold-to-purple gradient. */
 export const AvatarCircle = styled.div<ThemedStyles>`
   width: 72px;

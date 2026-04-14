@@ -21,7 +21,7 @@ import {
   FormError,
   SubmitButton,
   NavLink,
-  CardFooter,
+  AuthSwitchBanner,
 } from "../components/SharedStyles"
 
 /** Sign up page — registers new users with name, email, and password. */
@@ -60,6 +60,8 @@ const SignUpPage: React.FC = () => {
     successTitle: translate('auth.signup.success-title'),
     successMessage: translate('auth.signup.success-message'),
     goToSignin: translate('auth.signup.go-to-signin'),
+    noEmailHint: translate('auth.signup.no-email-hint'),
+    resetPasswordLink: translate('auth.signup.reset-password-link'),
   }
 
   const firstNameRef = useRef<HTMLInputElement>(null)
@@ -114,6 +116,7 @@ const SignUpPage: React.FC = () => {
         subtitle={t.successMessage}
         linkTo="/signin"
         linkText={t.goToSignin}
+        hint={{ text: t.noEmailHint, linkTo: "/forgot-password", linkText: t.resetPasswordLink }}
       />
     )
   }
@@ -192,10 +195,10 @@ const SignUpPage: React.FC = () => {
           </SubmitButton>
         </form>
 
-        <CardFooter>
+        <AuthSwitchBanner>
           <span>{t.hasAccount}</span>
           <NavLink to="/signin">{t.signinLink}</NavLink>
-        </CardFooter>
+        </AuthSwitchBanner>
       </Card>
     </PageWrapper>
   )

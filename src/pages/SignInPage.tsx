@@ -16,7 +16,7 @@ import {
   FormError,
   SubmitButton,
   NavLink,
-  CardFooter,
+  AuthSwitchBanner,
 } from "../components/SharedStyles"
 
 /** Sign in page — authenticates existing users with email and password. */
@@ -29,7 +29,6 @@ const SignInPage: React.FC = () => {
 
   const [serverError, setServerError] = useState("")
   const [submitting, setSubmitting] = useState(false)
-
 
   const t = {
     logoAlt: translate('cover.logo-alt'),
@@ -113,10 +112,10 @@ const SignInPage: React.FC = () => {
           </SubmitButton>
         </form>
 
-        <CardFooter>
+        <AuthSwitchBanner>
           <span>{t.noAccount}</span>
           <NavLink to="/signup">{t.signupLink}</NavLink>
-        </CardFooter>
+        </AuthSwitchBanner>
       </Card>
     </PageWrapper>
   )
