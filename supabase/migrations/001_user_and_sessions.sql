@@ -22,17 +22,3 @@ CREATE TRIGGER set_users_updated_at
   BEFORE UPDATE ON public.users
   FOR EACH ROW
   EXECUTE FUNCTION public.handle_updated_at();
-
--- user_sessions table
-CREATE TABLE public.user_sessions (
-  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id         UUID NOT NULL REFERENCES public.users(id) ON DELETE CASCADE,
-  token           TEXT UNIQUE NOT NULL,
-  user_agent      TEXT,
-  last_active_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
-  expires_at      TIMESTAMPTZ NOT NULL,
-  created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
-);
-
--- Index for looking up sessions by user
-CREATE INDEX idx_user_sessions_user_id ON public.user_sessions(user_id);

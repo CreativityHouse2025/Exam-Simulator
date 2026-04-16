@@ -8,8 +8,8 @@ import { SigninResult } from "../_lib/types.js"
 
 export const POST = withErrorHandler(async (request: Request) => {
   const body = await parseJsonBody(request)
-  const { email, password } = validateSigninBody(body)
-  const result: SigninResult = await signin({ email, password })
+  const { email, password, force } = validateSigninBody(body)
+  const result: SigninResult = await signin({ email, password, force })
   const cookieHeaders = serializeAuthCookies(result.access_token, result.refresh_token)
 
   return successResponse({ user: result.user }, 200, cookieHeaders.map((c) => ["Set-Cookie", c]))

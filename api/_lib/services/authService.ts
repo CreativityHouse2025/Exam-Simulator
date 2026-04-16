@@ -135,16 +135,22 @@ export async function signup(input: SignupRequestBody): Promise<SignupResult> {
 }
 
 /**
- * Authenticates a user with email/password, fetches their profile, and checks account expiry.
- * If the account is expired, the session is revoked (fire-and-forget) before throwing.
+ * Authenticates a user with email/password and enforces a one-active-session limit.
+ *
+ * Three cases:
+ * - No conflict (force: false, count === 1): proceed normally.
+ * - Conflict (force: false, count >= 2): kill the new session and throw SESSION_CONFLICT.
+ * - Force (force: true): kill all other sessions and proceed.
  *
  * @returns User profile and session tokens (handler is responsible for setting cookies).
  * @throws {AppError} 401 `INVALID_CREDENTIALS` — wrong email or password.
  * @throws {AppError} 500 `SIGNIN_FAILED` — no session returned or profile not found.
+ * @throws {AppError} 500 `INTERNAL_ERROR` — RPC failure or missing user id (fail-closed).
+ * @throws {AppError} 409 `SESSION_CONFLICT` — active session exists and force is false.
  * @throws {AppError} 403 `ACCOUNT_EXPIRED` — account past its expiry date.
  */
 export async function signin(input: SigninRequestBody): Promise<SigninResult> {
-  const { email, password } = input
+  const { email, password, force } = input
 
   const userClient = createUserClient()
   const { data, error } = await userClient.auth.signInWithPassword({ email, password })
@@ -157,22 +163,48 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
     throw new AppError({ statusCode: 500, code: "SIGNIN_FAILED", message: "Signin failed: no session returned" })
   }
 
+  if (!data.user?.id) {
+    await supabaseAdmin.auth.admin.signOut(data.session.access_token, "local")
+    throw new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: "Signin failed: no user id returned" })
+  }
+
+  const userId = data.user.id
+  const accessToken = data.session.access_token
+
+  if (!force) {
+    const { data: sessionCount, error: rpcError } = await supabaseAdmin.rpc("count_user_sessions", {
+      p_user_id: userId,
+    })
+
+    if (rpcError) {
+      await supabaseAdmin.auth.admin.signOut(accessToken, "local")
+      throw new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: "Failed to check active sessions" })
+    }
+
+    if (sessionCount >= 2) {
+      await supabaseAdmin.auth.admin.signOut(accessToken, "local")
+      throw new AppError({ statusCode: 409, code: "SESSION_CONFLICT", message: "Another active session exists" })
+    }
+  } else {
+    await supabaseAdmin.auth.admin.signOut(accessToken, "others")
+  }
+
   const { data: profile, error: profileError } = await supabaseAdmin
     .from("users")
     .select("id, first_name, last_name, expires_at")
-    .eq("id", data.user.id)
+    .eq("id", userId)
     .single()
 
   if (profileError || !profile) {
     throw new AppError({ statusCode: 500, code: "SIGNIN_FAILED", message: "Failed to retrieve user profile" })
   }
 
-  await assertAccountNotExpired(data.user.id, {
-    revokeAccessToken: data.session.access_token,
+  await assertAccountNotExpired(userId, {
+    revokeAccessToken: accessToken,
     knownExpiresAt: profile.expires_at,
   })
 
-  console.log(`[signin] User ${data.user.id} signed in successfully`)
+  console.log(`[signin] User ${userId} signed in successfully`)
 
   return {
     user: {
@@ -182,7 +214,7 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
       last_name: profile.last_name,
       expires_at: profile.expires_at,
     },
-    access_token: data.session.access_token,
+    access_token: accessToken,
     refresh_token: data.session.refresh_token,
   }
 }
