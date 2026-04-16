@@ -103,6 +103,7 @@ export function validateSignupBody(body: unknown): SignupRequestBody {
 export function validateSigninBody(body: unknown): SigninRequestBody {
   const record = assertJsonObject(body)
 
+  // validate email and password
   for (const field of ["email", "password"] as const) {
     const value = record[field]
     if (typeof value !== "string" || value.trim().length === 0) {
@@ -121,7 +122,12 @@ export function validateSigninBody(body: unknown): SigninRequestBody {
     throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `Email must be at most ${MAX_EMAIL_LENGTH} characters` })
   }
 
-  return { email, password }
+  // validate force flag
+  if (typeof record.force !== "boolean") {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Missing required field: force" })
+  }
+
+  return { email, password, force: record.force }
 }
 
 /**

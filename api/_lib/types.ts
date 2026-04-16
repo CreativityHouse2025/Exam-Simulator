@@ -13,6 +13,7 @@ export type AppErrorCode =
   | "CONFIRMATION_FAILED"
   | "SUBSCRIPTION_CHECK_FAILED"
   | "PASSWORD_UPDATE_FAILED"
+  | "SESSION_CONFLICT"
 
 
 export type ApiSuccess<T> = {
@@ -96,6 +97,13 @@ export type ApiHandler = (req: Request) => Promise<Response>
 export type SigninRequestBody = {
   email: string
   password: string
+  /**
+   * When `false`, signin is rejected with `SESSION_CONFLICT` if the user already has an active session.
+   * When `true`, all other active sessions are terminated and the new session proceeds.
+   *
+   * Must always be sent explicitly — there is no default.
+   */
+  force: boolean
 }
 
 export type UserProfile = {
