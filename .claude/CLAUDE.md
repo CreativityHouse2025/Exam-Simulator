@@ -63,6 +63,30 @@ Language files and questions are dynamically imported per language for code-spli
 import(`./data/langs/${langCode}.json`)
 ```
 
+## Single Session Enforcement
+
+Each user account is limited to one active session at a time. This prevents account sharing across devices.
+
+### Sign-in flow (force flag pattern)
+
+The sign-in handler accepts a `force` boolean alongside email and password. Three cases:
+
+1. **`force: false`, no conflict:** `signInWithPassword` → assert `user.id` non-null → RPC returns 1 → fetch profile → check expiry → return profile + cookies
+2. **`force: false`, conflict:** `signInWithPassword` → assert `user.id` non-null → RPC returns ≥ 2 → `admin.signOut(newJWT, 'local')` → throw `SESSION_CONFLICT`
+3. **`force: true`:** `signInWithPassword` → assert `user.id` non-null → `admin.signOut(newJWT, 'others')` (no RPC needed) → fetch profile → check expiry → return profile + cookies
+
+The `user.id` null assertion guards against the RPC silently returning 0 on `WHERE user_id = NULL`, which would bypass enforcement entirely.
+
+On RPC failure: fail-closed — signOut local, throw internal error. Never silently proceed as "no conflict."
+
+### Session entry points
+
+All paths that create a row in `auth.sessions`:
+- **Sign In** — covered by force flag + RPC
+- **Password Reset (token-exchange, type=recovery)** — covered by unconditional `signOut("others")` in `confirmMagicLinkSignin`
+- **Email Confirmation (token-exchange, type=signup)** — covered by the same unconditional `signOut("others")` (no-op when no other sessions exist; kept unconditional to prevent type-spoofing bypass)
+
+
 ## Key Directories
 
 - `src/components/Navigation/` - Main exam interface with drawer, footer, timer

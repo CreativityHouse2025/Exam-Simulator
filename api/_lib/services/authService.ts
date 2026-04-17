@@ -186,6 +186,8 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
       throw new AppError({ statusCode: 409, code: "SESSION_CONFLICT", message: "Another active session exists" })
     }
   } else {
+    // if force log in, sign the user out of all other sessions and continue
+    console.log(`[signin]: User with email ${email} force-signed-in`)
     await supabaseAdmin.auth.admin.signOut(accessToken, "others")
   }
 
@@ -248,6 +250,11 @@ export async function confirmMagicLinkSignin(accessToken: string, refreshToken: 
     revokeAccessToken: accessToken,
     knownExpiresAt: profile.expires_at,
   })
+
+  // sign the user out of all other devices to enforce single active session
+  // 1. Sign up: no other sessions, fine
+  // 2. Forgot password: must kill all other sessions
+  await supabaseAdmin.auth.admin.signOut(accessToken, "others")
 
   console.log(`[confirmSignup] User ${authUser.user.id} signed in using magic link`)
 
