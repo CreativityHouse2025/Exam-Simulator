@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth from "../hooks/useAuth"
+import useAuth, { AppApiError } from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
 import { validateEmail, validatePassword } from "../utils/authValidation"
 import { translate } from "../utils/translation"
@@ -14,6 +14,7 @@ import {
   PageTitle,
   PageSubtitle,
   FormError,
+  WarningBanner,
   SubmitButton,
   NavLink,
   AuthSwitchBanner,
@@ -29,6 +30,7 @@ const SignInPage: React.FC = () => {
 
   const [serverError, setServerError] = useState("")
   const [submitting, setSubmitting] = useState(false)
+  const [sessionConflict, setSessionConflict] = useState(false)
 
   const t = {
     logoAlt: translate('cover.logo-alt'),
@@ -40,6 +42,7 @@ const SignInPage: React.FC = () => {
     passwordPlaceholder: translate('auth.fields.password-placeholder'),
     submit: translate('auth.signin.submit'),
     submitting: translate('auth.signin.submitting'),
+    forceSubmit: translate('auth.signin.force-submit'),
     error: translate('auth.signin.error'),
     noAccount: translate('auth.signin.no-account'),
     signupLink: translate('auth.signin.signup-link'),
@@ -65,9 +68,15 @@ const SignInPage: React.FC = () => {
     setServerError("")
 
     try {
-      await signIn(email.value, password.value)
+      // if session conflict is true and user still wants to sign in, then force will be true
+      await signIn(email.value, password.value, sessionConflict)
       navigate("/app")
     } catch (err) {
+      if (err instanceof AppApiError && err.code === "SESSION_CONFLICT") {
+        setSessionConflict(true)
+      } else {
+        setSessionConflict(false)
+      }
       setServerError(err instanceof Error ? err.message : t.error)
     } finally {
       setSubmitting(false)
@@ -82,7 +91,11 @@ const SignInPage: React.FC = () => {
         <PageSubtitle>{t.subtitle}</PageSubtitle>
 
         <form onSubmit={handleSubmit} noValidate>
-          {serverError && <FormError>{serverError}</FormError>}
+          {serverError && (
+            sessionConflict
+              ? <WarningBanner role="alert">{serverError}</WarningBanner>
+              : <FormError role="alert">{serverError}</FormError>
+          )}
 
           <EmailField
             ref={emailRef}
@@ -108,7 +121,7 @@ const SignInPage: React.FC = () => {
           </NavLink>
 
           <SubmitButton type="submit" disabled={submitting}>
-            {submitting ? t.submitting : t.submit}
+            {submitting ? t.submitting : sessionConflict ? t.forceSubmit : t.submit}
           </SubmitButton>
         </form>
 
