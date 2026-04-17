@@ -4,6 +4,17 @@ import { translate } from "../utils/translation"
 import { apiFetch } from "../utils/apiFetch"
 import type { ApiResponse, AppErrorCode, UserProfile } from "../types"
 
+/** An API error that preserves the error code for callers that need to branch on it (e.g. SESSION_CONFLICT). */
+export class AppApiError extends Error {
+  constructor(
+    message: string,
+    public readonly code: AppErrorCode,
+  ) {
+    super(message)
+    this.name = "AppApiError"
+  }
+}
+
 const errorCodeToTranslationKey: Record<AppErrorCode, string> = {
   INVALID_CREDENTIALS: "auth.errors.server-invalid-credentials",
   ACCOUNT_EXPIRED: "auth.errors.server-account-expired",
@@ -13,6 +24,7 @@ const errorCodeToTranslationKey: Record<AppErrorCode, string> = {
   CONFIRMATION_FAILED: "auth.errors.server-confirmation-failed",
   VALIDATION_ERROR: "auth.errors.server-validation-error",
   MISSING_FIELDS: "auth.errors.server-missing-fields",
+  SESSION_CONFLICT: "auth.errors.server-session-conflict",
   SIGNOUT_FAILED: "auth.errors.server-unknown",
   UNAUTHORIZED: "auth.errors.server-unknown",
   INTERNAL_ERROR: "auth.errors.server-unknown",
@@ -38,17 +50,17 @@ export default function useAuth() {
   const isLoading = authStatus === "pending"
 
   const signIn = useCallback(
-    async (email: string, password: string) => {
+    async (email: string, password: string, force: boolean) => {
       const response = await apiFetch("/api/auth/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, force }),
       })
 
       const result: ApiResponse<{ user: UserProfile }> = await response.json()
 
       if (!result.success) {
-        throw new Error(translateErrorCode(result.error.code))
+        throw new AppApiError(translateErrorCode(result.error.code), result.error.code)
       }
 
       cancelSessionCheck()

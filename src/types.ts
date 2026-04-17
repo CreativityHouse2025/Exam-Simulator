@@ -236,6 +236,7 @@ export type AppErrorCode =
   | "INTERNAL_ERROR"
   | "METHOD_NOT_ALLOWED"
   | "PASSWORD_UPDATE_FAILED"
+  | "SESSION_CONFLICT"
 
 export type ApiSuccess<T> = { success: true; data: T }
 export type ApiError = { success: false; error: { code: AppErrorCode; message: string } }

@@ -222,6 +222,21 @@ export const FormError = styled.div<ThemedStyles>`
   animation: ${fadeInError} 0.25s ease-out;
 `
 
+/**
+ * Amber warning banner for non-error decision states (e.g. session conflict).
+ * Visually distinct from FormError — signals a choice, not a failure.
+ */
+export const WarningBanner = styled.div`
+  background: #fffbeb;
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.4rem;
+  font-size: 1.25rem;
+  color: #92400e;
+  animation: ${fadeInError} 0.25s ease-out;
+`
+
 /** Primary submit button matching Cover.tsx button style. */
 export const SubmitButton = styled.button<ThemedStyles>`
   width: 100%;
