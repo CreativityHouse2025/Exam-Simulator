@@ -1,4 +1,4 @@
-import { isEmail } from "./format"
+import { validate as isEmail } from "email-validator"
 import { translate } from "./translation"
 
 const LETTERS_ONLY = /^[\p{L} ]+$/u
