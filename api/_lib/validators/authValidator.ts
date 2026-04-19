@@ -1,8 +1,7 @@
+import { validate as isValidEmail } from "email-validator"
 import type { SignupRequestBody, SigninRequestBody, TokenExchangeRequestBody, PasswordResetRequestBody, UpdatePasswordRequestBody } from "../types.js"
 import { AppError } from "../errors/AppError.js"
 import { assertJsonObject } from "../utils/parseBody.js"
-
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const LETTERS_ONLY = /^[\p{L} ]+$/u
 const HAS_LETTER = /[a-zA-Z]/
 const HAS_DIGIT = /\d/
@@ -67,7 +66,7 @@ export function validateSignupBody(body: unknown): SignupRequestBody {
   const first_name = (record.first_name as string).trim()
   const last_name = (record.last_name as string).trim()
 
-  if (!EMAIL_PATTERN.test(email)) {
+  if (!isValidEmail(email)) {
     throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Invalid email format" })
   }
 
@@ -114,7 +113,7 @@ export function validateSigninBody(body: unknown): SigninRequestBody {
   const email = (record.email as string).trim()
   const password = record.password as string
 
-  if (!EMAIL_PATTERN.test(email)) {
+  if (!isValidEmail(email)) {
     throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Invalid email format" })
   }
 
@@ -163,7 +162,7 @@ export function validatePasswordResetBody(body: unknown): PasswordResetRequestBo
   }
 
   const trimmedEmail = email.trim()
-  if (!EMAIL_PATTERN.test(trimmedEmail)) {
+  if (!isValidEmail(trimmedEmail)) {
     throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "Invalid email format" })
   }
 
