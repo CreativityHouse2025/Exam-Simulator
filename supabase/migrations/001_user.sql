@@ -18,7 +18,14 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- Auto-update updated_at on profile row change
 CREATE TRIGGER set_users_updated_at
   BEFORE UPDATE ON public.users
+  FOR EACH ROW
+  EXECUTE FUNCTION public.handle_updated_at();
+
+-- Auto-update updated_at on attempt row change
+CREATE TRIGGER set_exam_attempts_updated_at
+  BEFORE UPDATE ON public.exam_attempts
   FOR EACH ROW
   EXECUTE FUNCTION public.handle_updated_at();

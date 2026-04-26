@@ -33,7 +33,7 @@ interface ExamStrategy {
 
 class MiniExam implements ExamStrategy {
   buildExam(categoryId: number, _examId?: number) {
-    const examDetails = examTypes["miniexam"]
+    const examDetails = examTypes["domain"]
 
     const { durationMinutes } = examDetails
 
@@ -84,7 +84,7 @@ class MiniExam implements ExamStrategy {
 
 class FullExam implements ExamStrategy {
   buildExam(_categoryId: number, examId?: number) {
-    const examDetails = examTypes["exam"]
+    const examDetails = examTypes["full"]
 
     const { durationMinutes } = examDetails
     let questionCount = 180; // business rule
@@ -140,9 +140,9 @@ class FullExam implements ExamStrategy {
 export class ExamFactory {
   static create(type: ExamType): ExamStrategy {
     switch (type) {
-      case "miniexam":
+      case "domain":
         return new MiniExam();
-      case "exam":
+      case "full":
         return new FullExam();
       default:
         throw new Error("Invalid exam type");

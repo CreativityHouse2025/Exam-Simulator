@@ -109,7 +109,7 @@ export const DEFAULT_SESSION: Session = {
   maxTime: 0 as const,
   time: 0 as const,
   paused: false as const,
-  examState: 'not-started' as const,
+  examState: 'in-progress' as const,
   reviewState: 'summary' as const,
   questions: [] as const,
   answers: [] as const,

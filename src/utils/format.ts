@@ -60,51 +60,45 @@ export function formatTimer(sec: number): string {
 }
 
 /**
- * Format exam by setting correct answer indices
+ * Format exam by setting correct answer indices.
+ * Pure — returns new Question objects without mutating the input.
  * @param {Exam} exam - The exam object to format.
  * @returns {Exam} - The formatted exam object.
  */
 export function formatExam(exam: Exam): Exam {
   return exam.map((q) => {
-    switch (q.type) {
-      case 'multiple-choice':
-        q.answer = q.choices.map((c, i) => (c.correct ? i : null)).filter((i): i is number => i !== null)
-        break
-
-      default:
-        throw new Error(`Unsupported question type: ${q.type}`)
+    if (q.type !== 'multiple-choice') {
+      throw new Error(`Unsupported question type: ${q.type}`)
     }
-
-    return q
+    const answer = q.choices.map((c, i) => (c.correct ? i : null)).filter((i): i is number => i !== null)
+    return { ...q, answer }
   })
 }
 
 /**
- * Format a new session with default values
+ * Format a new session with default values.
+ * Pure — returns a new Session object without mutating the input.
  * @param {Session} session - The session object to format.
  * @param {number} questionCount - The number of questions
  * @param {number} durationMinutes - The duration of the exam in minutes
  * @returns {Session} - The formatted session object.
  */
 export function formatSession(session: Session, questionCount: number, durationMinutes: number): Session {
-  try {
-    // Fill missing answers with empty arrays
-    const missingAnswers = questionCount - session.answers.length
-    
-    if (missingAnswers > 0) {
-      session.answers = [...session.answers, ...Array(missingAnswers).fill([])]
-    }
+  // Fill missing answers with empty arrays
+  const missingAnswers = questionCount - session.answers.length
+  const answers = missingAnswers > 0
+    ? [...session.answers, ...Array(missingAnswers).fill([])]
+    : session.answers
 
-    const maxTime = durationMinutes * 60;
+  const maxTime = durationMinutes * 60
 
-    session.maxTime = maxTime
-    session.time = maxTime
-    session.id = createSessionId(session.examType as ExamType)
-  } catch (err) {
-    console.error('Error formatting session:', err)
+  return {
+    ...session,
+    answers,
+    maxTime,
+    time: maxTime,
+    id: createSessionId(session.examType as ExamType),
   }
-
-  return session
 }
 
 /**

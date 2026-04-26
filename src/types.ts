@@ -38,7 +38,8 @@ export type QuestionFilter = 'all' | GridTagTypes
 export type GridTagTypes = 'marked' | 'incomplete' | 'complete' | 'incorrect' | 'correct'
 
 // v1.1: Add new type 'revision' for mistake revision exam and remove ExamID type
-export type ExamType = 'exam' | 'miniexam' | 'revision'
+// v2.0 pre-phase 5: renamed 'exam' → 'full' and 'miniexam' → 'domain' to match the DB schema
+export type ExamType = 'full' | 'domain' | 'revision'
 export type Exam = Question[]
 
 export type QuestionTypes = 'multiple-choice'
@@ -78,7 +79,7 @@ export type AnswerOfMultipleChoice = AnswerOf['multiple-choice']
 export type Answers = AnswerOfMultipleChoice[]
 
 // Session state types
-export type ExamState = 'not-started' | 'in-progress' | 'completed'
+export type ExamState = 'in-progress' | 'completed'
 export type ReviewState = 'summary' | 'question'
 
 // Session interface
@@ -111,8 +112,6 @@ export interface Session {
   examType?: ExamType
   /** the ID of the full exam (if it is a full exam) */
   examId?: number
-  /** session update function - will be injected by reducer */
-  update?: SessionDispatch
 }
 
 // v2.0: Type for the generic dropdown item (category or fullexam)
@@ -156,11 +155,12 @@ export type SessionActions = SessionAction | SessionAction[]
 export type SessionReducerFunc = (state: Session, actions: SessionActions) => Session
 export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, SessionActionsMap[T]['payload']][]) => void
 
-// Session context slice types
-export type SessionNavigation = Pick<Session, 'index' | 'update'>
-export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused' | 'update'>
-export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'update' | 'categoryId'| 'examId'>
-export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | 'update' | 'emailSent'>
+// Session context slice types.
+// `update` is carried separately (not on Session) so Session stays JSON-serializable for Phase 5.
+export type SessionNavigation = Pick<Session, 'index'> & { update: SessionDispatch }
+export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused'> & { update: SessionDispatch }
+export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'categoryId' | 'examId'> & { update: SessionDispatch }
+export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | 'emailSent'> & { update: SessionDispatch }
 
 // Email API arguments type
 export type SendEmailRequestBody = {
