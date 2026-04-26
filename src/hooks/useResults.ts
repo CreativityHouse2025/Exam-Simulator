@@ -20,7 +20,7 @@ export default function useResults(isExamFinished: boolean): Results | null {
 
     const passingScore = examTypes[examType as ExamType].passingRate ?? null
     let sourceLabel;
-    const isFullExam = examType === 'exam'
+    const isFullExam = examType === 'full'
     if (isFullExam) {
         sourceLabel = useFullExamLabel(examId!)
     } else {

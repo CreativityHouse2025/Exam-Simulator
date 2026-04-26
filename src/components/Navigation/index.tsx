@@ -53,10 +53,6 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
     [session, onSessionUpdate]
   )
 
-  React.useEffect(() => {
-    session.update = sessionUpdate
-  }, [sessionUpdate])
-
   const toggleOpen = React.useCallback(() => setOpen((prev) => !prev), [])
 
   const contextValues = {
@@ -80,7 +76,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
 
               <Footer open={open} questionCount={exam.length} />
 
-              <Confirms session={session} />
+              <Confirms session={session} update={sessionUpdate} />
             </>
           </SessionDataContext.Provider>
         </SessionExamContext.Provider>

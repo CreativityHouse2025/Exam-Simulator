@@ -1,6 +1,6 @@
 {
-    "exam": {
-        "id": "exam",
+    "full": {
+        "id": "full",
         "name": {
             "en": "New Exam",
             "ar": "امتحان جديد"
@@ -9,8 +9,8 @@
         "passingRate": 75,
         "allowRetake": true
     },
-    "miniexam": {
-        "id": "miniexam",
+    "domain": {
+        "id": "domain",
         "name": {
             "en": "Mini Exam",
             "ar": "امتحان مصغر"

@@ -32,97 +32,103 @@ const ExamPage: React.FC = () => {
       return
     }
 
-    const parsed: Partial<Session> = JSON.parse(raw)
+    // Parse as unknown — localStorage data is untyped at runtime
+    const parsed = JSON.parse(raw) as Record<string, unknown>
 
-    if (!("categoryId" in parsed)) {
+    // Also reset if examType uses the pre-phase-5 names ('exam'/'miniexam'), renamed to 'full'/'domain'.
+    if (!("categoryId" in parsed) || parsed.examType === "exam" || parsed.examType === "miniexam") {
       console.warn("Old session detected, resetting to default...")
       setSession(DEFAULT_SESSION)
     }
   }, [setSession])
 
-  const loadExam = React.useCallback(
-    (newSession: Session) => {
-      if (!newSession.examType) {
-        throw new Error("No exam type found in session")
+  // Shared tail: resolve question data, format, and commit to state.
+  const hydrateAndSet = React.useCallback(
+    (prepared: Session) => {
+      const examData = getExamByQuestionIds(prepared.questions)
+      if (examData === null) {
+        showToast(translate("cover.invalid-exam-message"), 5000)
+        return
       }
-      try {
-        let examData: Exam | null
-
-        const examState = newSession.examState
-        if (examState === "not-started") {
-          const examType = newSession.examType
-          if (examType === "revision") {
-            const durationInMinutes = newSession.maxTime / 60
-            newSession = formatSession(
-              { ...newSession, examState: "in-progress" },
-              newSession.questions.length,
-              durationInMinutes
-            )
-          } else {
-            const examStrategy = ExamFactory.create(examType)
-            const examDetails = examStrategy.buildExam(newSession.categoryId, newSession.examId)
-
-            newSession = formatSession(
-              { ...newSession, examState: "in-progress", questions: examDetails.questionIds },
-              examDetails.questionIds.length,
-              examDetails.durationMinutes
-            )
-          }
-        }
-
-        examData = getExamByQuestionIds(newSession.questions)
-
-        if (examData !== null) {
-          formatExam(examData)
-        } else {
-          const message = translate("cover.invalid-exam-message")
-          showToast(message, 5000)
-          return
-        }
-
-        setExam(examData)
-        setSession(newSession)
-      } catch (error) {
-        console.error("Failed to load exam:", error)
-        setExam(null)
-      }
+      setExam(formatExam(examData))
+      setSession(prepared)
     },
     [setExam, setSession, showToast]
   )
 
+  /** Build a brand-new session from a seed and load the exam. */
+  const startNewExam = React.useCallback(
+    (seed: Session) => {
+      if (!seed.examType) {
+        throw new Error("No exam type found in session")
+      }
+      try {
+        let prepared: Session
+        if (seed.examType === "revision") {
+          const durationInMinutes = seed.maxTime / 60
+          prepared = formatSession({ ...seed, examState: "in-progress" }, seed.questions.length, durationInMinutes)
+        } else {
+          const built = ExamFactory.create(seed.examType).buildExam(seed.categoryId, seed.examId)
+          prepared = formatSession(
+            { ...seed, examState: "in-progress", questions: built.questionIds },
+            built.questionIds.length,
+            built.durationMinutes
+          )
+        }
+        hydrateAndSet(prepared)
+      } catch (error) {
+        console.error("Failed to start exam:", error)
+        setExam(null)
+      }
+    },
+    [hydrateAndSet, setExam]
+  )
+
+  /** Resume an existing in-progress session — no rebuild, just reload questions from the stored IDs. */
+  const resumeExam = React.useCallback(
+    (existing: Session) => {
+      if (!existing.examType) {
+        throw new Error("No exam type found in session")
+      }
+      try {
+        hydrateAndSet(existing)
+      } catch (error) {
+        console.error("Failed to resume exam:", error)
+        setExam(null)
+      }
+    },
+    [hydrateAndSet, setExam]
+  )
+
   const handleFullExam = React.useCallback(
     (examId: number) => {
-      loadExam({ ...DEFAULT_SESSION, examType: "exam", examId })
+      startNewExam({ ...DEFAULT_SESSION, examType: "full", examId })
     },
-    [loadExam]
+    [startNewExam]
   )
 
   const handleMiniExam = React.useCallback(
     (categoryId: number) => {
-      loadExam({ ...DEFAULT_SESSION, examType: "miniexam", categoryId })
+      startNewExam({ ...DEFAULT_SESSION, examType: "domain", categoryId })
     },
-    [loadExam]
+    [startNewExam]
   )
 
   const handleRevision = React.useCallback(
     (options: RevisionExamOptions) =>
-      loadExam({
+      startNewExam({
         ...DEFAULT_SESSION,
         questions: options.wrongQuestions,
         maxTime: options.maxTime,
         examType: options.type,
         categoryId: options.categoryId,
       }),
-    [loadExam]
+    [startNewExam]
   )
 
   const handleContinue = React.useCallback(() => {
-    try {
-      loadExam(session)
-    } catch (err) {
-      console.error("Failed to load previous exam:", err)
-    }
-  }, [session, loadExam])
+    resumeExam(session)
+  }, [session, resumeExam])
 
   // Load questions from disk to memory map
   React.useEffect(() => {
@@ -132,7 +138,7 @@ const ExamPage: React.FC = () => {
       try {
         await initQuestionMap(langCode)
         if (!cancelled && exam && session.examType) {
-          loadExam(session)
+          resumeExam(session)
         }
       } catch (error) {
         console.error("Failed to load questions: ", error)
