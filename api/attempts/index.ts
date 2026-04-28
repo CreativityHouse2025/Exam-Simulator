@@ -6,6 +6,7 @@ import { validateInsertAttempt } from "../_lib/validators/attemptValidators.js"
 import { insertAttempt, listAttempts } from "../_lib/services/attemptService.js"
 import type { InsertAttemptRequestBody, ListAttemptsResult } from "../_lib/types.js"
 
+// Maps to POST /api/attempts
 export const POST = withErrorHandler(withAuth(async (request, authUser) => {
   const parsedBody = await parseJsonBody(request)
   /* full exam input example: {
@@ -22,6 +23,7 @@ export const POST = withErrorHandler(withAuth(async (request, authUser) => {
   return successResponse(result, 201)
 }))
 
+// Maps to GET /api/attempts
 export const GET = withErrorHandler(withAuth(async (_request, authUser) => {
   const result: ListAttemptsResult = await listAttempts(authUser.id)
   return successResponse(result)

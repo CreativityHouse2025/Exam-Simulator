@@ -15,6 +15,8 @@ export type AppErrorCode =
   | "PASSWORD_UPDATE_FAILED"
   | "SESSION_CONFLICT"
   | "ATTEMPT_CREATE_FAILED"
+  | "NOT_FOUND"
+  | "FORBIDDEN"
 
 
 export type ApiSuccess<T> = {
@@ -173,4 +175,17 @@ export type AttemptSummary = {
 
 export type ListAttemptsResult = {
   attempts: AttemptSummary[]
+}
+
+export type AttemptQuestion = {
+  question_index: number
+  question_id: number
+  choices_order: number[]
+  selected_choices: number[]
+  is_bookmarked: boolean
+}
+
+export type GetAttemptResult = {
+  attempt: AttemptSummary
+  questions: AttemptQuestion[]
 }
