@@ -14,6 +14,7 @@ export type AppErrorCode =
   | "SUBSCRIPTION_CHECK_FAILED"
   | "PASSWORD_UPDATE_FAILED"
   | "SESSION_CONFLICT"
+  | "ATTEMPT_CREATE_FAILED"
 
 
 export type ApiSuccess<T> = {
@@ -138,3 +139,23 @@ export type AuthUser = {
 }
 
 export type AuthenticatedApiHandler = (req: Request, authUser: AuthUser, cookieHeaders?: ResponseHeaders) => Promise<Response>
+
+type InsertAttemptFull = {
+  exam_type: "full"
+  exam_id: number
+  category_id: null
+  question_ids: number[]
+  choices_orders: number[][]
+  duration_minutes: number
+}
+
+type InsertAttemptDomain = {
+  exam_type: "domain"
+  category_id: number
+  exam_id: null
+  question_ids: number[]
+  choices_orders: number[][]
+  duration_minutes: number
+}
+
+export type InsertAttemptRequestBody = InsertAttemptFull | InsertAttemptDomain
