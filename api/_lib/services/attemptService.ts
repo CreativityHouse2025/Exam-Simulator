@@ -1,6 +1,6 @@
 import { supabaseAdmin } from "../supabaseClient.js"
 import { AppError } from "../errors/AppError.js"
-import type { InsertAttemptRequestBody } from "../types.js"
+import type { InsertAttemptRequestBody, ListAttemptsResult } from "../types.js"
 
 /**
  * Persists a new exam attempt and its question rows.
@@ -41,4 +41,24 @@ export async function insertAttempt(userId: string, input: InsertAttemptRequestB
   }
 
   return { attempt_id: attempt.id }
+}
+
+/**
+ * Returns the authenticated user's last 10 attempts, newest first.
+ *
+ * @throws {AppError} 500 `INTERNAL_ERROR` — DB query failed.
+ */
+export async function listAttempts(userId: string): Promise<ListAttemptsResult> {
+  const { data, error } = await supabaseAdmin
+    .from("exam_attempts")
+    .select("id, exam_type, exam_id, category_id, exam_state, score, status, created_at")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false })
+    .limit(10)
+
+  if (error) {
+    throw new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: "Failed to fetch attempts" })
+  }
+
+  return { attempts: data ?? [] }
 }
