@@ -1,6 +1,6 @@
 import { supabaseAdmin } from "../supabaseClient.js"
 import { AppError } from "../errors/AppError.js"
-import type { InsertAttemptRequestBody, ListAttemptsResult } from "../types.js"
+import type { InsertAttemptRequestBody, ListAttemptsResult, GetAttemptResult } from "../types.js"
 
 /**
  * Persists a new exam attempt and its question rows.
@@ -61,4 +61,41 @@ export async function listAttempts(userId: string): Promise<ListAttemptsResult> 
   }
 
   return { attempts: data ?? [] }
+}
+
+/**
+ * Returns a single attempt with all its question rows.
+ *
+ * @throws {AppError} 404 `NOT_FOUND` — attempt does not exist.
+ * @throws {AppError} 403 `FORBIDDEN` — attempt belongs to a different user.
+ * @throws {AppError} 500 `INTERNAL_ERROR` — DB query failed.
+ */
+export async function getAttempt(userId: string, attemptId: string): Promise<GetAttemptResult> {
+  const { data: attempt, error: attemptError } = await supabaseAdmin
+    .from("exam_attempts")
+    .select("id, user_id, exam_type, exam_id, category_id, exam_state, score, status, created_at")
+    .eq("id", attemptId)
+    .single()
+
+  if (attemptError || !attempt) {
+    throw new AppError({ statusCode: 404, code: "NOT_FOUND", message: "Attempt not found" })
+  }
+
+  if (attempt.user_id !== userId) {
+    throw new AppError({ statusCode: 403, code: "FORBIDDEN", message: "Access denied" })
+  }
+
+  const { user_id: _user_id, ...attemptRow } = attempt
+
+  const { data: questions, error: questionsError } = await supabaseAdmin
+    .from("exam_attempt_questions")
+    .select("question_index, question_id, choices_order, selected_choices, is_bookmarked")
+    .eq("attempt_id", attemptId)
+    .order("question_index", { ascending: true })
+
+  if (questionsError) {
+    throw new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: "Failed to fetch attempt questions" })
+  }
+
+  return { attempt: attemptRow, questions: questions ?? [] }
 }
