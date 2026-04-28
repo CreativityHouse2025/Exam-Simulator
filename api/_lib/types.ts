@@ -159,3 +159,18 @@ type InsertAttemptDomain = {
 }
 
 export type InsertAttemptRequestBody = InsertAttemptFull | InsertAttemptDomain
+
+export type AttemptSummary = {
+  id: string
+  exam_type: string
+  exam_id: number | null
+  category_id: number | null
+  exam_state: string
+  score: number
+  status: string | null
+  created_at: string
+}
+
+export type ListAttemptsResult = {
+  attempts: AttemptSummary[]
+}
