@@ -1,12 +1,18 @@
 import type { DropdownItem, ThemedStyles } from '../types'
 import React, { useRef, useState } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
 import CategoryDropdown from './Dropdown/CategoryDropdown'
 import FullExamDropdown from './Dropdown/FullExamDropdown'
 import { ReducedMotionWrapper } from '../constants'
+import { Assignment, ViewModule, PlayArrow } from '@styled-icons/material'
+
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to   { opacity: 1; }
+`
 
 const CoverStyles = styled.div<ThemedStyles>`
   width: 100vw;
@@ -15,10 +21,6 @@ const CoverStyles = styled.div<ThemedStyles>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(ellipse 80% 65% at 50% 115%, rgba(255, 220, 154, 0.87) 0%, transparent 55%),
-      radial-gradient(ellipse 55% 45% at 90% 75%, rgba(181, 150, 93, 0.2) 0%, transparent 50%),
-      radial-gradient(ellipse 50% 40% at 10% 85%, rgba(181, 150, 93, 0.14) 0%, transparent 45%),
-      radial-gradient(ellipse 90% 80% at 50% 50%, #FAFAF8 0%, #F2F0EC 45%, #E9E7E3 100%);
 `
 
 export const Image = styled.img<ThemedStyles>`
@@ -27,6 +29,7 @@ export const Image = styled.img<ThemedStyles>`
   border: 1px solid ${({ theme }) => theme.grey[2]};
   padding: 1rem;
   margin: 1rem;
+  animation: ${fadeIn} 0.5s ease-out 0s both;
 `
 
 export const Title = styled.div<ThemedStyles>`
@@ -34,12 +37,14 @@ export const Title = styled.div<ThemedStyles>`
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: ${({ theme }) => theme.black};
+  animation: ${fadeIn} 0.5s ease-out 0.1s both;
 `
 
 export const Description = styled.div`
   font: 2.25rem 'Open Sans';
   padding: 1rem;
   margin-bottom: 3rem;
+  animation: ${fadeIn} 0.5s ease-out 0.2s both;
 `
 
 const StartButton = styled.button<ThemedStyles>`
@@ -52,8 +57,13 @@ const StartButton = styled.button<ThemedStyles>`
   border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
-  min-width: 100px;
-  margin: 0.8rem;
+  flex: 1;
+  min-width: 22rem;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
   &:hover {
     opacity: 0.9;
     transform: translateY(-2px);
@@ -63,16 +73,18 @@ const StartButton = styled.button<ThemedStyles>`
   }
 `
 
-const ContinueButton = styled(StartButton) <ThemedStyles>`
-  min-width: 300px;
+const ContinueButton = styled(StartButton)<ThemedStyles>`
+  flex: unset;
+  width: 100%;
   background: ${({ theme }) => theme.secondary || theme.grey[6]};
 `
 
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 0.5rem;
+  animation: ${fadeIn} 0.5s ease-out 0.3s both;
 `
 
 const ButtonRow = styled.div`
@@ -80,6 +92,17 @@ const ButtonRow = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+`
+
+const ButtonIcon = styled.span`
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  svg {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
 `
 
 const CoverComponent: React.FC<CoverProps> = ({ onMiniExam, onFullExam, canContinue, onContinue }) => {
@@ -113,16 +136,19 @@ const CoverComponent: React.FC<CoverProps> = ({ onMiniExam, onFullExam, canConti
         <ButtonContainer id="button-container">
           <ButtonRow id="button-row">
             <StartButton title='Start a new exam' type='button' id="start-new-button" ref={fullButtonRef} className="no-select" onClick={() => { setFullExamDropdown(true) }}>
+              <ButtonIcon><Assignment /></ButtonIcon>
               {translations.new}
             </StartButton>
 
             <StartButton title='Start a mini-exam' type='button' id="start-mini-button" ref={miniButtonRef} className="no-select" onClick={() => { setDropdown(true) }}>
+              <ButtonIcon><ViewModule /></ButtonIcon>
               {translations.mini}
             </StartButton>
           </ButtonRow>
 
           {canContinue && onContinue && (
             <ContinueButton title='Continue last exam' type='button' id="continue-button" className="no-select" onClick={onContinue}>
+              <ButtonIcon><PlayArrow /></ButtonIcon>
               {translations.continue}
             </ContinueButton>
           )}

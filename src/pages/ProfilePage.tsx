@@ -125,7 +125,7 @@ const ProfilePage: React.FC = () => {
         </InfoGroup>
 
         <Divider />
-
+        
         <ActionButton title="Reset your account's password" $variant="secondary" onClick={handlePasswordReset}>{t.resetPassword}</ActionButton>
         <ActionButton title="Sign out from this device" $variant="danger" disabled={signingOut} onClick={handleSignOut}>
           {signingOut ? t.signingOut : t.signOut}

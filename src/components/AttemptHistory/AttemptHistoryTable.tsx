@@ -1,0 +1,102 @@
+import React from "react"
+import styled from "styled-components"
+import AttemptHistoryRow from "./AttemptHistoryRow"
+import type { AttemptSummary } from "./mockAttempts"
+import type { ThemedStyles } from "../../types"
+
+type Props = {
+  attempts: AttemptSummary[]
+}
+
+/** Provides the visible border, border-radius, and overflow clipping (prevents animation scrollbar). */
+const TableBorder = styled.div<ThemedStyles>`
+  border: 1px solid ${({ theme }) => theme.grey[3]};
+  border-radius: 12px;
+  overflow: hidden;
+`
+
+const TableWrapper = styled.div`
+  width: 100%;
+  overflow-x: auto;
+`
+
+const Table = styled.table<ThemedStyles>`
+  display: block;
+  width: 100%;
+  border-collapse: collapse;
+  font-family: ${({ theme }) => theme.fontFamily};
+
+  @media (min-width: 48rem) {
+    display: table;
+  }
+`
+
+const Thead = styled.thead`
+  display: none;
+
+  @media (min-width: 48rem) {
+    display: table-header-group;
+  }
+`
+
+const Tbody = styled.tbody`
+  display: block;
+
+  @media (min-width: 48rem) {
+    display: table-row-group;
+  }
+`
+
+const Th = styled.th<ThemedStyles>`
+  padding: 1.4rem 1.4rem 1.3rem;
+  text-align: start;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.grey[9]};
+  border-bottom: 2px solid ${({ theme }) => theme.primary};
+  white-space: nowrap;
+
+`
+
+const EmptyCell = styled.td<ThemedStyles>`
+  padding: 5rem;
+  text-align: center;
+  font-size: 1.4rem;
+  color: ${({ theme }) => theme.grey[8]};
+`
+
+const COLUMN_HEADERS = ["Type", "Exam / Domain", "State", "Score", "Status", "Date", "Action"]
+
+/** Renders the full attempts table with a desktop header and responsive rows. */
+const AttemptHistoryTable: React.FC<Props> = ({ attempts }) => {
+  return (
+    <TableBorder>
+    <TableWrapper>
+      <Table>
+        <Thead>
+          <tr>
+            {COLUMN_HEADERS.map((col) => (
+              <Th key={col}>{col}</Th>
+            ))}
+          </tr>
+        </Thead>
+        <Tbody>
+          {attempts.length === 0 ? (
+            <tr>
+              <EmptyCell colSpan={7}>No attempts yet.</EmptyCell>
+            </tr>
+          ) : (
+            attempts.map((attempt, index) => (
+              <AttemptHistoryRow key={attempt.id} attempt={attempt} index={index} />
+            ))
+          )}
+        </Tbody>
+      </Table>
+    </TableWrapper>
+    </TableBorder>
+  )
+}
+
+export default AttemptHistoryTable
