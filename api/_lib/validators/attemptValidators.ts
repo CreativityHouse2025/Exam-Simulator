@@ -1,6 +1,15 @@
 import { AppError } from "../errors/AppError.js"
 import { assertJsonObject } from "../utils/parseBody.js"
-import type { InsertAttemptRequestBody } from "../types.js"
+import type { InsertAttemptRequestBody, SaveAttemptRequestBody, SaveAttemptAnswer } from "../types.js"
+
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+export function validateAttemptId(id: string): string {
+  if (!UUID_REGEX.test(id)) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "id must be a valid UUID" })
+  }
+  return id
+}
 
 function isPositiveInteger(value: unknown): value is number {
   return typeof value === "number" && Number.isInteger(value) && value > 0
@@ -68,4 +77,72 @@ export function validateInsertAttempt(body: unknown): InsertAttemptRequestBody {
   } else {
     return { exam_type, category_id: category_id as number, exam_id: null, question_ids, choices_orders, duration_minutes }
   }
+}
+
+/**
+ * Validates and returns a typed `SaveAttemptRequestBody` from an unknown input.
+ * Throws `AppError` on the first validation failure.
+ */
+export function validateSaveAttempt(body: unknown): SaveAttemptRequestBody {
+  const record = assertJsonObject(body)
+
+  const { current_index, time_remaining, exam_state, review_state, answers, score, status } = record
+
+  if (!isNonNegativeInteger(current_index)) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "current_index must be a non-negative integer" })
+  }
+
+  if (!isNonNegativeInteger(time_remaining)) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "time_remaining must be a non-negative integer" })
+  }
+
+  if (exam_state !== "in-progress" && exam_state !== "completed") {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "exam_state must be 'in-progress' or 'completed'" })
+  }
+
+  if (review_state !== "summary" && review_state !== "question") {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "review_state must be 'summary' or 'question'" })
+  }
+
+  if (!Array.isArray(answers)) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "answers must be an array" })
+  }
+
+  const parsedAnswers: SaveAttemptAnswer[] = answers.map((entry, i) => {
+    if (entry === null || typeof entry !== "object" || Array.isArray(entry)) {
+      throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `answers[${i}] must be an object` })
+    }
+    const { question_index, selected_choices, is_bookmarked } = entry as Record<string, unknown>
+
+    if (!isNonNegativeInteger(question_index)) {
+      throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `answers[${i}].question_index must be a non-negative integer` })
+    }
+    if (!Array.isArray(selected_choices) || !selected_choices.every(isNonNegativeInteger)) {
+      throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `answers[${i}].selected_choices must be an array of non-negative integers` })
+    }
+    if (typeof is_bookmarked !== "boolean") {
+      throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `answers[${i}].is_bookmarked must be a boolean` })
+    }
+
+    return { question_index, selected_choices, is_bookmarked }
+  })
+
+  if (exam_state === "completed") {
+    if (typeof score !== "number" || !isFinite(score) || score < 0 || score > 100) {
+      throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "score must be a number between 0 and 100" })
+    }
+    if (status !== "pass" && status !== "fail") {
+      throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "status must be 'pass' or 'fail'" })
+    }
+    return { exam_state, current_index, time_remaining, review_state, answers: parsedAnswers, score, status }
+  }
+
+  if (score !== undefined) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "score must be absent when exam_state is 'in-progress'" })
+  }
+  if (status !== undefined) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "status must be absent when exam_state is 'in-progress'" })
+  }
+
+  return { exam_state, current_index, time_remaining, review_state, answers: parsedAnswers }
 }
