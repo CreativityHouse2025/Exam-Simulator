@@ -15,8 +15,10 @@ export type AppErrorCode =
   | "PASSWORD_UPDATE_FAILED"
   | "SESSION_CONFLICT"
   | "ATTEMPT_CREATE_FAILED"
+  | "ATTEMPT_SAVE_FAILED"
   | "NOT_FOUND"
   | "FORBIDDEN"
+  | "CONFLICT"
 
 
 export type ApiSuccess<T> = {
@@ -189,3 +191,29 @@ export type GetAttemptResult = {
   attempt: AttemptSummary
   questions: AttemptQuestion[]
 }
+
+export type SaveAttemptAnswer = {
+  question_index: number
+  selected_choices: number[]
+  is_bookmarked: boolean
+}
+
+type SaveAttemptInProgress = {
+  exam_state: "in-progress"
+  current_index: number
+  time_remaining: number
+  review_state: "summary" | "question"
+  answers: SaveAttemptAnswer[]
+}
+
+type SaveAttemptCompleted = {
+  exam_state: "completed"
+  current_index: number
+  time_remaining: number
+  review_state: "summary" | "question"
+  answers: SaveAttemptAnswer[]
+  score: number
+  status: "pass" | "fail"
+}
+
+export type SaveAttemptRequestBody = SaveAttemptInProgress | SaveAttemptCompleted
