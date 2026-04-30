@@ -1,7 +1,7 @@
 import type { ThemedStyles } from '../types'
 import { useNavigate } from "react-router-dom"
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Language } from '@styled-icons/material/Language'
 import { AccountCircle } from '@styled-icons/material/AccountCircle'
 import { History } from '@styled-icons/material/History'
@@ -17,14 +17,15 @@ const HeaderStyles = styled.div<ThemedStyles>`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
+  position: sticky;
+  top: 0;
   width: 100%;
   background: ${({ theme }) => theme.primary};
   padding: 0 1.2rem;
   box-sizing: border-box;
   z-index: 100;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     padding: 0 3rem;
   }
 `
@@ -39,7 +40,7 @@ const TitleStyles = styled.div<ThemedStyles>`
   cursor: pointer;
   white-space: nowrap;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 2rem;
   }
 `
@@ -50,8 +51,16 @@ const IconsContainer = styled.div`
   align-items: center;
   gap: 1rem;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     display: flex;
+  }
+`
+
+const MenuWrapper = styled.div`
+  position: relative;
+
+  @media (min-width: 768px) {
+    display: none;
   }
 `
 
@@ -64,10 +73,66 @@ const MenuButton = styled.button<ThemedStyles>`
   cursor: pointer;
   padding: 0.4rem;
   color: ${({ theme }) => theme.black};
+`
 
-  @media (min-width: 48rem) {
-    display: none;
+const DropdownMenu = styled.div<ThemedStyles & { $open: boolean }>`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  inset-inline-end: 0;
+  background: ${({ theme }) => theme.tertiary};
+  border-radius: 6px;
+  box-shadow: ${({ theme }) => theme.shadows[8]};
+  min-width: 18rem;
+  overflow: hidden;
+  z-index: 200;
+  transform-origin: top center;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+
+  ${({ $open }) =>
+    $open
+      ? css`
+          opacity: 1;
+          transform: scaleY(1);
+          pointer-events: all;
+        `
+      : css`
+          opacity: 0;
+          transform: scaleY(0.85);
+          pointer-events: none;
+        `}
+`
+
+const DropdownItem = styled.button<ThemedStyles>`
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.85rem 1.1rem;
+  color: ${({ theme }) => theme.quatro};
+  font: 1.25rem 'Open Sans';
+  font-weight: 600;
+  text-align: start;
+  width: 100%;
+  transition: background 0.15s ease;
+
+  svg {
+    color: ${({ theme }) => theme.primary};
+    flex-shrink: 0;
   }
+
+  &:hover {
+    background: ${({ theme }) => theme.secondary};
+  }
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      display: none;
+    `}
 `
 
 const ImageStyles = styled.img`
@@ -75,7 +140,7 @@ const ImageStyles = styled.img`
   width: 4.5rem;
   justify-self: center;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     width: 6rem;
   }
 `
@@ -95,6 +160,8 @@ const HeaderComponent: React.FC = () => {
   const navigate = useNavigate()
   const { settings, updateLanguage } = useSettings()
   const { isAuthenticated } = useAuth()
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const menuRef = React.useRef<HTMLDivElement>(null)
 
   const toggleLanguage = React.useCallback(() => {
     const nextCode = settings.language === "ar" ? "en" : "ar"
@@ -109,6 +176,21 @@ const HeaderComponent: React.FC = () => {
     // used "/" intentionally instead of "/app" to allow user to go homepage during an exam (same route won't navigate)
     navigate("/")
   }
+
+  function handleMenuAction(action: () => void) {
+    setIsMenuOpen(false)
+    action()
+  }
+
+  React.useEffect(() => {
+    function handlePointerOutside(e: PointerEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsMenuOpen(false)
+      }
+    }
+    document.addEventListener('pointerdown', handlePointerOutside)
+    return () => document.removeEventListener('pointerdown', handlePointerOutside)
+  }, [])
 
   return (
     <HeaderStyles id="header">
@@ -129,14 +211,30 @@ const HeaderComponent: React.FC = () => {
         )}
         {isAuthenticated && (
           <IconStyles title='Update your information' aria-label='Account Icon' id="account" className="no-select" onClick={handleProfile}>
-            <AccountCircle size={40}/>
+            <AccountCircle size={40} />
           </IconStyles>
         )}
       </IconsContainer>
 
-      <MenuButton aria-label='Open menu'>
-        <Menu size={32} />
-      </MenuButton>
+      <MenuWrapper ref={menuRef}>
+        <MenuButton aria-label='Open menu' onClick={() => setIsMenuOpen(prev => !prev)}>
+          <Menu size={32} />
+        </MenuButton>
+        <DropdownMenu $open={isMenuOpen}>
+          <DropdownItem onClick={() => handleMenuAction(toggleLanguage)}>
+            <Language size={22} />
+            {translate('header.changeLanguage')}
+          </DropdownItem>
+          <DropdownItem disabled={!isAuthenticated} onClick={() => handleMenuAction(() => navigate("/history"))}>
+            <History size={22} />
+            {translate('header.history')}
+          </DropdownItem>
+          <DropdownItem disabled={!isAuthenticated} onClick={() => handleMenuAction(handleProfile)}>
+            <AccountCircle size={22} />
+            {translate('header.profile')}
+          </DropdownItem>
+        </DropdownMenu>
+      </MenuWrapper>
     </HeaderStyles>
   )
 }

@@ -6,7 +6,6 @@ import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
 import CategoryDropdown from './Dropdown/CategoryDropdown'
 import FullExamDropdown from './Dropdown/FullExamDropdown'
-import { ReducedMotionWrapper } from '../constants'
 import { Assignment, ViewModule, PlayArrow } from '@styled-icons/material'
 
 const fadeIn = keyframes`
@@ -15,50 +14,70 @@ const fadeIn = keyframes`
 `
 
 const CoverStyles = styled.div<ThemedStyles>`
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  flex: 1;
+  justify-self: center;
 `
 
 export const Image = styled.img<ThemedStyles>`
-  max-height: 40vh;
-  margin-bottom: 0.5rem;
+  max-height: 25vh;
   border: 1px solid ${({ theme }) => theme.grey[2]};
-  padding: 1rem;
-  margin: 1rem;
+  padding: 0.75rem;
+  margin: 0.5rem;
   animation: ${fadeIn} 0.5s ease-out 0s both;
+
+  @media (min-width: 768px) {
+    max-height: 40vh;
+    padding: 1rem;
+    margin: 1rem;
+  }
 `
 
 export const Title = styled.div<ThemedStyles>`
-  font: 3rem 'Open Sans';
+  font-size: 2.5rem;
+  font-family: 'Open Sans';
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: ${({ theme }) => theme.black};
   animation: ${fadeIn} 0.5s ease-out 0.1s both;
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
 `
 
 export const Description = styled.div`
-  font: 2.25rem 'Open Sans';
-  padding: 1rem;
-  margin-bottom: 3rem;
+  font-size: 1.6rem;
+  font-family: 'Open Sans';
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
   animation: ${fadeIn} 0.5s ease-out 0.2s both;
+
+  @media (min-width: 768px) {
+    font-size: 2.25rem;
+    padding: 1rem;
+    margin-bottom: 3rem;
+  }
 `
 
 const StartButton = styled.button<ThemedStyles>`
   background: ${({ theme }) => theme.primary};
   color: white;
   border: none;
-  padding: 2rem;
-  font-size: 1.8rem;
+  padding: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 600;
   border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
   flex: 1;
-  min-width: 22rem;
+  width: 100%;
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -70,6 +89,13 @@ const StartButton = styled.button<ThemedStyles>`
   }
   &:active {
     transform: translateY(0);
+  }
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+    font-size: 1.8rem;
+    min-width: 22rem;
+    width: auto;
   }
 `
 
@@ -84,14 +110,25 @@ const ButtonContainer = styled.div`
   flex-direction: column;
   align-items: stretch;
   gap: 0.5rem;
+  width: 100%;
   animation: ${fadeIn} 0.5s ease-out 0.3s both;
+
+  @media (min-width: 768px) {
+    width: auto;
+  }
 `
 
 const ButtonRow = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
 `
 
 const ButtonIcon = styled.span`
@@ -125,7 +162,6 @@ const CoverComponent: React.FC<CoverProps> = ({ onMiniExam, onFullExam, canConti
     }
 
   return (
-    <ReducedMotionWrapper>
       <CoverStyles id="cover">
         <Image id="image" src={Logo} alt={translations.logoAlt} />
 
@@ -169,7 +205,6 @@ const CoverComponent: React.FC<CoverProps> = ({ onMiniExam, onFullExam, canConti
 
         </ButtonContainer>
       </CoverStyles>
-    </ReducedMotionWrapper>
   )
 }
 

@@ -124,20 +124,6 @@ export const LANGUAGES: Record<LangCode, Lang> = {
   en: { code: 'en', name: 'English', dir: 'ltr' } as const
 } as const
 
-// Wrapper component to query for reduced animations in user's device
-export const ReducedMotionWrapper = styled.div`
-  @media (prefers-reduced-motion: reduce) {
-    & *,
-    & *::before,
-    & *::after {
-      animation: none !important;
-      transition: none !important;
-      transform: none !important;
-      scroll-behavior: auto !important;
-    }
-  }
-`;
-
 // Default user settings
 export const DEFAULT_USER_SETTINGS: Settings = {
   language: 'en',

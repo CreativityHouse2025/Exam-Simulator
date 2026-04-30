@@ -199,6 +199,11 @@
       "submit": "حسناً"
     }
   },
+  "header": {
+    "changeLanguage": "تغيير اللغة",
+    "history": "السجل",
+    "profile": "الملف الشخصي"
+  },
   "errors": {
     "rate-limited": "يرجى المحاولة بعد $1 دقائق.",
     "rate-limited-generic": "يرجى المحاولة لاحقًا."

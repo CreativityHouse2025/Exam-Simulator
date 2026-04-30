@@ -24,15 +24,15 @@ export const Tr = styled.tr<ThemedStyles & { $index: number }>`
   /* mobile: translucent card */
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px solid ${({ theme }) => theme.grey[2]};
+  background: transparent;
+  border: 1px solid ${({ theme }) => theme.grey[4]};
   border-radius: 12px;
   padding: 1.4rem 1.6rem;
   margin-bottom: 1rem;
   animation: ${rowEnter} 0.45s ease-out both;
   animation-delay: ${({ $index }) => $index * 0.06}s;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     display: table-row;
     background: transparent;
     border: none;
@@ -70,7 +70,7 @@ export const Td = styled.td<ThemedStyles>`
     flex-shrink: 0;
   }
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     display: table-cell;
     padding: 1.65rem 1.4rem;
     border-bottom: 1px solid ${({ theme }) => theme.grey[2]};
