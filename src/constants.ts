@@ -1,5 +1,4 @@
 import type { Lang, LangCode, Session, Settings } from './types'
-import styled from "styled-components";
 
 // Theme constants
 const colors = ['#b5965d', '#593752', '#301e2c', '#f8e3e0', '#000000', '#ffffff']

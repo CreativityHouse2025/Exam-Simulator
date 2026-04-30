@@ -4,8 +4,8 @@ import styled, { keyframes } from 'styled-components'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
-import CategoryDropdown from './Dropdown/CategoryDropdown'
-import FullExamDropdown from './Dropdown/FullExamDropdown'
+import CategoryDropdown from './ExamsDropdown/CategoryDropdown'
+import FullExamDropdown from './ExamsDropdown/FullExamDropdown'
 import { Assignment, ViewModule, PlayArrow } from '@styled-icons/material'
 
 const fadeIn = keyframes`
