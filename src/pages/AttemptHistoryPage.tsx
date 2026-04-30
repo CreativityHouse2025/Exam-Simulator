@@ -95,11 +95,7 @@ const AttemptHistoryPage: React.FC = () => {
           <PageSubtitle>{translate("history.subtitle")}</PageSubtitle>
         </HeaderSection>
 
-        {loading ? (
-          <PageSubtitle>{translate("history.loading")}</PageSubtitle>
-        ) : (
-          <AttemptHistoryTable attempts={attempts} />
-        )}
+        <AttemptHistoryTable attempts={attempts} loading={loading} />
       </Inner>
     </HistoryPageWrapper>
   )

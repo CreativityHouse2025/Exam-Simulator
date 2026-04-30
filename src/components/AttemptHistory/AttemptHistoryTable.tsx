@@ -1,12 +1,14 @@
 import React from "react"
 import styled from "styled-components"
 import AttemptHistoryRow from "./AttemptHistoryRow"
+import AttemptHistorySkeleton from "./AttemptHistorySkeleton"
 import { translate } from "../../utils/translation"
 import type { AttemptSummary } from "../../types"
 import type { ThemedStyles } from "../../types"
 
 type Props = {
   attempts: AttemptSummary[]
+  loading?: boolean
 }
 
 /** Provides the visible border, border-radius, and overflow clipping (prevents animation scrollbar). */
@@ -82,7 +84,7 @@ const COLUMN_HEADER_KEYS = [
 ]
 
 /** Renders the full attempts table with a desktop header and responsive rows. */
-const AttemptHistoryTable: React.FC<Props> = ({ attempts }) => {
+const AttemptHistoryTable: React.FC<Props> = ({ attempts, loading }) => {
   return (
     <TableBorder>
       <TableWrapper>
@@ -95,7 +97,9 @@ const AttemptHistoryTable: React.FC<Props> = ({ attempts }) => {
             </tr>
           </Thead>
           <Tbody>
-            {attempts.length === 0 ? (
+            {loading ? (
+              <AttemptHistorySkeleton />
+            ) : attempts.length === 0 ? (
               <tr>
                 <EmptyCell colSpan={7}>{translate("history.table.empty")}</EmptyCell>
               </tr>
