@@ -19,7 +19,6 @@ import useResults from '../../hooks/useResults'
 
 export const MainStyles = styled.main<MainStylesProps>`
   width: 100%;
-  height: 100%;
   overflow: hidden;
   background: white;
 `

@@ -1,6 +1,5 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
-import { PageWrapper } from "../components/SharedStyles"
 import AttemptHistoryTable from "../components/AttemptHistory/AttemptHistoryTable"
 import mockAttempts from "../components/AttemptHistory/mockAttempts"
 import type { ThemedStyles } from "../types"

@@ -32,7 +32,7 @@ const AppBackground = styled.div`
 const AppLayout = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
+  height: 100dvh;
 `
 
 const RoutesArea = styled.div`
