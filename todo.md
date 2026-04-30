@@ -1,7 +1,9 @@
 # Todo
 
 Backend
-- [ ] Set up testing mode using env variables
-- [ ] Create a withLogger middleware to be used in critical endpoints
-Frontend
-- [ ] Add field limit checks similar to the backend and give clear messages.
+- [ ] Update README.md
+- [ ] Integrate the rest of APIs into the application
+  - [ ] GET ATTEMPT (REVIEW, CONTINUE)
+  - [ ] POST ATTEMPT
+  - [ ] SAVE PROGRESS
+  - [ ] FINISH ATTEMPT
