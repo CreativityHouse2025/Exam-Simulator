@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { translate } from "../../utils/translation"
 import type { ThemedStyles } from "../../types"
 
 type Props = {
@@ -35,7 +36,11 @@ const Badge = styled.span<ThemedStyles & { $status: "pass" | "fail" }>`
 /** Renders a coloured pass/fail pill. Renders a dash when status is null (in-progress). */
 const AttemptStatusBadge: React.FC<Props> = ({ status }) => {
   if (!status) return <span style={{ color: "#B3B2B2" }}>—</span>
-  return <Badge $status={status as "pass" | "fail"}>{status}</Badge>
+  return (
+    <Badge $status={status as "pass" | "fail"}>
+      {translate(`history.status.${status}`)}
+    </Badge>
+  )
 }
 
 export default AttemptStatusBadge

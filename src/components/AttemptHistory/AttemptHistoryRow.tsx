@@ -5,9 +5,10 @@ import exams from "../../data/exam-data/full-exams.json"
 import categories from "../../data/exam-data/categories.json"
 import useSettings from "../../hooks/useSettings"
 import { formatDate } from "../../utils/format"
+import { translate } from "../../utils/translation"
 import AttemptStateIcon from "./AttemptStateIcon"
 import AttemptStatusBadge from "./AttemptStatusBadge"
-import type { AttemptSummary } from "./mockAttempts"
+import type { AttemptSummary } from "../../types"
 import type { ThemedStyles } from "../../types"
 
 type Props = {
@@ -169,29 +170,29 @@ const AttemptHistoryRow: React.FC<Props> = ({ attempt, index }) => {
 
   return (
     <Tr $index={index}>
-      <Td data-label="Type">
+      <Td data-label={translate("history.table.type")}>
         <TypeBadge $type={attempt.exam_type}>
-          {attempt.exam_type === "full" ? "Full" : "Domain"}
+          {translate(attempt.exam_type === "full" ? "history.type.full" : "history.type.domain")}
         </TypeBadge>
       </Td>
-      <Td data-label="Exam / Domain">
+      <Td data-label={translate("history.table.exam-domain")}>
         <ExamName>{examLabel}</ExamName>
       </Td>
-      <Td data-label="State">
+      <Td data-label={translate("history.table.state")}>
         <AttemptStateIcon state={attempt.exam_state} />
       </Td>
-      <Td data-label="Score">
+      <Td data-label={translate("history.table.score")}>
         <ScoreText $status={attempt.status}>{scoreDisplay}</ScoreText>
       </Td>
-      <Td data-label="Status">
+      <Td data-label={translate("history.table.status")}>
         <AttemptStatusBadge status={attempt.status} />
       </Td>
-      <Td data-label="Date">{formatDate(attempt.created_at)}</Td>
-      <Td data-label="Action">
+      <Td data-label={translate("history.table.date")}>{formatDate(attempt.created_at)}</Td>
+      <Td data-label={translate("history.table.action")}>
         {isInProgress ? (
-          <ContinueButton onClick={() => navigate("/app")}>Continue</ContinueButton>
+          <ContinueButton onClick={() => navigate("/app")}>{translate("history.actions.continue")}</ContinueButton>
         ) : (
-          <ReviewButton onClick={() => navigate("/app")}>Review</ReviewButton>
+          <ReviewButton onClick={() => navigate("/app")}>{translate("history.actions.review")}</ReviewButton>
         )}
       </Td>
     </Tr>

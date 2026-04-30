@@ -237,6 +237,12 @@ export type AppErrorCode =
   | "METHOD_NOT_ALLOWED"
   | "PASSWORD_UPDATE_FAILED"
   | "SESSION_CONFLICT"
+  | "SUBSCRIPTION_CHECK_FAILED"
+  | "ATTEMPT_CREATE_FAILED"
+  | "ATTEMPT_SAVE_FAILED"
+  | "NOT_FOUND"
+  | "FORBIDDEN"
+  | "CONFLICT"
 
 export type ApiSuccess<T> = { success: true; data: T }
 export type ApiError = { success: false; error: { code: AppErrorCode; message: string } }
@@ -292,3 +298,78 @@ export type Results = {
   // for review
   revisionDetails: RevisionDetails
 }
+
+// Attempt types (mirror api/_lib/types.ts shapes for frontend use)
+export type AttemptSummary = {
+  id: string
+  exam_type: string
+  exam_id: number | null
+  category_id: number | null
+  exam_state: string
+  score: number
+  status: string | null
+  created_at: string
+}
+
+export type AttemptQuestion = {
+  question_index: number
+  question_id: number
+  choices_order: number[]
+  selected_choices: number[]
+  is_bookmarked: boolean
+}
+
+export type ListAttemptsResult = {
+  attempts: AttemptSummary[]
+}
+
+export type GetAttemptResult = {
+  attempt: AttemptSummary
+  questions: AttemptQuestion[]
+}
+
+type InsertAttemptFull = {
+  exam_type: "full"
+  exam_id: number
+  category_id: null
+  question_ids: number[]
+  choices_orders: number[][]
+  duration_minutes: number
+}
+
+type InsertAttemptDomain = {
+  exam_type: "domain"
+  category_id: number
+  exam_id: null
+  question_ids: number[]
+  choices_orders: number[][]
+  duration_minutes: number
+}
+
+export type InsertAttemptRequestBody = InsertAttemptFull | InsertAttemptDomain
+
+export type SaveAttemptAnswer = {
+  question_index: number
+  selected_choices: number[]
+  is_bookmarked: boolean
+}
+
+export type SaveAttemptInProgress = {
+  exam_state: "in-progress"
+  current_index: number
+  time_remaining: number
+  review_state: "summary" | "question"
+  answers: SaveAttemptAnswer[]
+}
+
+export type SaveAttemptCompleted = {
+  exam_state: "completed"
+  current_index: number
+  time_remaining: number
+  review_state: "summary" | "question"
+  answers: SaveAttemptAnswer[]
+  score: number
+  status: "pass" | "fail"
+}
+
+export type SaveAttemptRequestBody = SaveAttemptInProgress | SaveAttemptCompleted

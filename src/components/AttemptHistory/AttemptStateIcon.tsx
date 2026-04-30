@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { HourglassEmpty } from "@styled-icons/material/HourglassEmpty"
 import { CheckCircle } from "@styled-icons/material/CheckCircle"
+import { translate } from "../../utils/translation"
 import type { ThemedStyles } from "../../types"
 
 type Props = {
@@ -25,7 +26,7 @@ const AttemptStateIcon: React.FC<Props> = ({ state }) => {
   return (
     <IconWrapper $state={state}>
       {isCompleted ? <CheckCircle size={16} /> : <HourglassEmpty size={16} />}
-      {isCompleted ? "Completed" : "In Progress"}
+      {translate(isCompleted ? "history.state.completed" : "history.state.in-progress")}
     </IconWrapper>
   )
 }

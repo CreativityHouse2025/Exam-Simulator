@@ -190,5 +190,46 @@
   "errors": {
     "rate-limited": "Please try again in $1 minute(s).",
     "rate-limited-generic": "Please try again later."
+  },
+  "history": {
+    "title": "Attempt History",
+    "subtitle": "An overview of your exam attempts and results.",
+    "loading": "Loading...",
+    "table": {
+      "type": "Type",
+      "exam-domain": "Exam / Domain",
+      "state": "State",
+      "score": "Score",
+      "status": "Status",
+      "date": "Date",
+      "action": "Action",
+      "empty": "No attempts yet."
+    },
+    "type": {
+      "full": "Full",
+      "domain": "Domain"
+    },
+    "state": {
+      "completed": "Completed",
+      "in-progress": "In Progress"
+    },
+    "status": {
+      "pass": "Pass",
+      "fail": "Fail"
+    },
+    "actions": {
+      "continue": "Continue",
+      "review": "Review"
+    }
+  },
+  "attempts": {
+    "errors": {
+      "server-not-found": "The attempt could not be found.",
+      "server-forbidden": "You do not have access to this attempt.",
+      "server-conflict": "This attempt has already been submitted.",
+      "server-create-failed": "Failed to start the attempt. Please try again.",
+      "server-save-failed": "Failed to save the attempt. Please try again.",
+      "server-unknown": "An unexpected error occurred. Please try again."
+    }
   }
 }
