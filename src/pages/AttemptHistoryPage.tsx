@@ -16,10 +16,13 @@ const subEnter = keyframes`
 `
 
 /** Extends PageWrapper — same gradient background, content starts top-left. */
-const HistoryPageWrapper = styled(PageWrapper)`
+const HistoryPageWrapper = styled.div`
+  display: flex;
+  box-sizing: border-box;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 7rem 2rem 6rem;
+  justify-self: flex-start;
+  padding: 0rem 2rem 4rem;
 `
 
 const Inner = styled.div`
@@ -42,7 +45,7 @@ const PageTitle = styled.h1<ThemedStyles>`
   letter-spacing: -0.02em;
   animation: ${titleEnter} 0.5s ease-out both;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 3rem;
   }
 `

@@ -182,6 +182,11 @@
       "go-to-signin": "Go to sign in"
     }
   },
+  "header": {
+    "changeLanguage": "Change Language",
+    "history": "History",
+    "profile": "Profile"
+  },
   "errors": {
     "rate-limited": "Please try again in $1 minute(s).",
     "rate-limited-generic": "Please try again later."

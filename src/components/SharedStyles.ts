@@ -34,11 +34,12 @@ export const fadeInError = keyframes`
 
 /** Full-viewport wrapper shared across pages — background is provided by AppBackground in App.tsx. */
 export const PageWrapper = styled.div<ThemedStyles>`
-  min-height: 100dvh;
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
-  padding: 7rem 1.6rem 1.6rem;
+  justify-self: center;
+  padding: 0rem 1.6rem 1.6rem;
   box-sizing: border-box;
 `
 
@@ -53,7 +54,7 @@ export const Card = styled.div<ThemedStyles>`
   animation: ${fadeIn} 0.4s ease-out;
   font-family: ${({ theme }) => theme.fontFamily};
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     padding: 2.5rem 3rem;
   }
 `
@@ -66,7 +67,7 @@ export const PageLogo = styled.img`
   height: 60px;
   object-cover: fit;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     width: 80px;
     height: 80px;
     margin-bottom: 1.5rem;
@@ -82,7 +83,7 @@ export const PageTitle = styled.h1<ThemedStyles>`
   color: ${({ theme }) => theme.tertiary};
   margin: 0 0 0.4rem;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 2.5rem;
   }
 `
@@ -94,7 +95,7 @@ export const PageSubtitle = styled.p<ThemedStyles>`
   color: ${({ theme }) => theme.grey[9]};
   margin: 0 0 2rem;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 1.5rem;
   }
 `
@@ -124,7 +125,7 @@ export const FormLabel = styled.label<ThemedStyles>`
   font-weight: 600;
   color: ${({ theme }) => theme.black};
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 1.5rem;
   }
 `
@@ -169,7 +170,7 @@ export const FormInput = styled.input<ThemedStyles & { $hasError?: boolean; $has
     color: ${({ theme }) => theme.grey[7]};
   }
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 1.4rem;
     padding: 0.9rem 1.2rem;
     padding-inline-start: ${({ $hasIcon }) => ($hasIcon ? "3.6rem" : "1.2rem")};
@@ -266,14 +267,14 @@ export const SubmitButton = styled.button<ThemedStyles>`
     cursor: not-allowed;
   }
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     padding: 1rem;
     font-size: 1.5rem;
   }
 `
 
 /** Styled react-router Link for page navigation (uses secondary for WCAG contrast). */
-export const NavLink = styled(Link)<ThemedStyles>`
+export const NavLink = styled(Link) <ThemedStyles>`
   color: ${({ theme }) => theme.secondary};
   font-weight: 600;
   text-decoration: none;
@@ -294,7 +295,7 @@ export const CardFooter = styled.div`
   font-size: 1.35rem;
   text-align: center;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 1.4rem;
   }
 `
@@ -341,7 +342,7 @@ export const AuthSwitchBanner = styled.div<ThemedStyles>`
   text-align: center;
   color: ${({ theme }) => theme.grey[9]};
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 1.4rem;
   }
 `

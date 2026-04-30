@@ -10,9 +10,12 @@ type Props = {
 
 /** Provides the visible border, border-radius, and overflow clipping (prevents animation scrollbar). */
 const TableBorder = styled.div<ThemedStyles>`
-  border: 1px solid ${({ theme }) => theme.grey[3]};
-  border-radius: 12px;
+  border: 0px;
   overflow: hidden;
+  @media (min-width: 768px) {
+    border-radius: 12px;
+    border: 1px solid ${({ theme }) => theme.grey[3]};
+  }
 `
 
 const TableWrapper = styled.div`
@@ -26,7 +29,7 @@ const Table = styled.table<ThemedStyles>`
   border-collapse: collapse;
   font-family: ${({ theme }) => theme.fontFamily};
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     display: table;
   }
 `
@@ -34,7 +37,7 @@ const Table = styled.table<ThemedStyles>`
 const Thead = styled.thead`
   display: none;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     display: table-header-group;
   }
 `
@@ -42,7 +45,7 @@ const Thead = styled.thead`
 const Tbody = styled.tbody`
   display: block;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     display: table-row-group;
   }
 `
@@ -73,28 +76,28 @@ const COLUMN_HEADERS = ["Type", "Exam / Domain", "State", "Score", "Status", "Da
 const AttemptHistoryTable: React.FC<Props> = ({ attempts }) => {
   return (
     <TableBorder>
-    <TableWrapper>
-      <Table>
-        <Thead>
-          <tr>
-            {COLUMN_HEADERS.map((col) => (
-              <Th key={col}>{col}</Th>
-            ))}
-          </tr>
-        </Thead>
-        <Tbody>
-          {attempts.length === 0 ? (
+      <TableWrapper>
+        <Table>
+          <Thead>
             <tr>
-              <EmptyCell colSpan={7}>No attempts yet.</EmptyCell>
+              {COLUMN_HEADERS.map((col) => (
+                <Th key={col}>{col}</Th>
+              ))}
             </tr>
-          ) : (
-            attempts.map((attempt, index) => (
-              <AttemptHistoryRow key={attempt.id} attempt={attempt} index={index} />
-            ))
-          )}
-        </Tbody>
-      </Table>
-    </TableWrapper>
+          </Thead>
+          <Tbody>
+            {attempts.length === 0 ? (
+              <tr>
+                <EmptyCell colSpan={7}>No attempts yet.</EmptyCell>
+              </tr>
+            ) : (
+              attempts.map((attempt, index) => (
+                <AttemptHistoryRow key={attempt.id} attempt={attempt} index={index} />
+              ))
+            )}
+          </Tbody>
+        </Table>
+      </TableWrapper>
     </TableBorder>
   )
 }

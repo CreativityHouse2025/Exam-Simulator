@@ -15,11 +15,16 @@ import useMediaQuery from '../../hooks/useMediaQuery'
 import { SessionReducer } from '../../utils/session'
 import { RevisionExamOptions, Session, SessionDispatch } from '../../types'
 
+const NavigationLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+`
+
 const ContainerStyles = styled.div`
   display: flex;
-  height: calc(100vh - 10rem);
-  padding-top: 6rem;
-  padding-bottom: 4rem;
+  flex: 1;
   overflow: hidden;
 `
 
@@ -68,13 +73,15 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
         <SessionExamContext.Provider value={contextValues.exam}>
           <SessionDataContext.Provider value={contextValues.data}>
             <>
-              <ContainerStyles id="middle-container">
-                <Drawer open={open} toggleOpen={toggleOpen} />
+              <NavigationLayout>
+                <ContainerStyles id="middle-container">
+                  <Drawer open={open} toggleOpen={toggleOpen} />
 
-                <Content onRevision={onRevision} open={open} />
-              </ContainerStyles>
+                  <Content onRevision={onRevision} open={open} />
+                </ContainerStyles>
 
-              <Footer open={open} questionCount={exam.length} />
+                <Footer open={open} questionCount={exam.length} />
+              </NavigationLayout>
 
               <Confirms session={session} update={sessionUpdate} />
             </>

@@ -29,9 +29,22 @@ const AppBackground = styled.div`
     radial-gradient(ellipse 90% 80% at 50% 50%, #fafaf8 0%, #f2f0ec 45%, #e9e7e3 100%);
 `
 
+const AppLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+`
+
+const RoutesArea = styled.div`
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+`
+
 const App: React.FC = () => {
   const { settings } = useSettings()
-  const langCode = settings.language  
+  const langCode = settings.language
   const [translationVersion, setTranslationVersion] = React.useState<number>(hasTranslation() ? 1 : 0)
 
   const loadTranslation = React.useCallback(async (code: LangCode) => {
@@ -69,18 +82,22 @@ const App: React.FC = () => {
   return (
     <>
       <AppBackground />
-      <Header />
-      <Routes>
-        <Route path="/signin" element={<GuestRoute><SignInPage /></GuestRoute>} />
-        <Route path="/signup" element={<GuestRoute><SignUpPage /></GuestRoute>} />
-        <Route path="/profile" element={<ProtectedRoute redirectTo="/signin"><ProfilePage /></ProtectedRoute>} />
-        <Route path="/forgot-password" element={<GuestRoute><ForgotPasswordPage /></GuestRoute>} />
-        <Route path="/auth/callback" element={<AuthCallbackPage />} />
-        <Route path="/reset-password" element={<ProtectedRoute redirectTo="/signin"><ResetPasswordPage /></ProtectedRoute>} />
-        <Route path="/history" element={<ProtectedRoute redirectTo="/signin"><AttemptHistoryPage /></ProtectedRoute>} />
-        <Route path="/app" element={<ProtectedRoute><ExamPage /></ProtectedRoute>} />
-        <Route path="*" element={<Navigate to="/app" replace />} />
-      </Routes>
+      <AppLayout>
+        <Header />
+        <RoutesArea>
+          <Routes>
+            <Route path="/signin" element={<GuestRoute><SignInPage /></GuestRoute>} />
+            <Route path="/signup" element={<GuestRoute><SignUpPage /></GuestRoute>} />
+            <Route path="/profile" element={<ProtectedRoute redirectTo="/signin"><ProfilePage /></ProtectedRoute>} />
+            <Route path="/forgot-password" element={<GuestRoute><ForgotPasswordPage /></GuestRoute>} />
+            <Route path="/auth/callback" element={<AuthCallbackPage />} />
+            <Route path="/reset-password" element={<ProtectedRoute redirectTo="/signin"><ResetPasswordPage /></ProtectedRoute>} />
+            <Route path="/history" element={<ProtectedRoute redirectTo="/signin"><AttemptHistoryPage /></ProtectedRoute>} />
+            <Route path="/app" element={<ProtectedRoute><ExamPage /></ProtectedRoute>} />
+            <Route path="*" element={<Navigate to="/app" replace />} />
+          </Routes>
+        </RoutesArea>
+      </AppLayout>
       <Toast />
     </>
   )
