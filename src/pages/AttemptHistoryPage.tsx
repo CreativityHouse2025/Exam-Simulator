@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled, { keyframes } from "styled-components"
 import AttemptHistoryTable from "../components/AttemptHistory/AttemptHistoryTable"
-import mockAttempts from "../components/AttemptHistory/mockAttempts"
-import type { ThemedStyles } from "../types"
+import useAttempts from "../hooks/useAttempts"
+import useToast from "../hooks/useToast"
+import { translate } from "../utils/translation"
+import type { AttemptSummary, ThemedStyles } from "../types"
 
 const titleEnter = keyframes`
   from { opacity: 0; transform: translateY(-10px); }
@@ -61,15 +63,43 @@ const PageSubtitle = styled.p<ThemedStyles>`
 
 /** Displays the user's last exam attempts in a full-page editorial table. */
 const AttemptHistoryPage: React.FC = () => {
+  const { listAttempts } = useAttempts()
+  const { showToast } = useToast()
+  const [attempts, setAttempts] = useState<AttemptSummary[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    let cancelled = false
+
+    const fetchAttempts = async () => {
+      try {
+        const data = await listAttempts()
+        if (!cancelled) setAttempts(data)
+      } catch (err) {
+        if (!cancelled) showToast((err as Error).message)
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    }
+
+    fetchAttempts()
+
+    return () => { cancelled = true }
+  }, [listAttempts, showToast])
+
   return (
     <HistoryPageWrapper>
       <Inner>
         <HeaderSection>
-          <PageTitle>Attempt History</PageTitle>
-          <PageSubtitle>An overview of your practice exam attempts and results.</PageSubtitle>
+          <PageTitle>{translate("history.title")}</PageTitle>
+          <PageSubtitle>{translate("history.subtitle")}</PageSubtitle>
         </HeaderSection>
 
-        <AttemptHistoryTable attempts={mockAttempts} />
+        {loading ? (
+          <PageSubtitle>{translate("history.loading")}</PageSubtitle>
+        ) : (
+          <AttemptHistoryTable attempts={attempts} />
+        )}
       </Inner>
     </HistoryPageWrapper>
   )

@@ -1,7 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 import AttemptHistoryRow from "./AttemptHistoryRow"
-import type { AttemptSummary } from "./mockAttempts"
+import { translate } from "../../utils/translation"
+import type { AttemptSummary } from "../../types"
 import type { ThemedStyles } from "../../types"
 
 type Props = {
@@ -70,7 +71,15 @@ const EmptyCell = styled.td<ThemedStyles>`
   color: ${({ theme }) => theme.grey[8]};
 `
 
-const COLUMN_HEADERS = ["Type", "Exam / Domain", "State", "Score", "Status", "Date", "Action"]
+const COLUMN_HEADER_KEYS = [
+  "history.table.type",
+  "history.table.exam-domain",
+  "history.table.state",
+  "history.table.score",
+  "history.table.status",
+  "history.table.date",
+  "history.table.action",
+]
 
 /** Renders the full attempts table with a desktop header and responsive rows. */
 const AttemptHistoryTable: React.FC<Props> = ({ attempts }) => {
@@ -80,15 +89,15 @@ const AttemptHistoryTable: React.FC<Props> = ({ attempts }) => {
         <Table>
           <Thead>
             <tr>
-              {COLUMN_HEADERS.map((col) => (
-                <Th key={col}>{col}</Th>
+              {COLUMN_HEADER_KEYS.map((key) => (
+                <Th key={key}>{translate(key)}</Th>
               ))}
             </tr>
           </Thead>
           <Tbody>
             {attempts.length === 0 ? (
               <tr>
-                <EmptyCell colSpan={7}>No attempts yet.</EmptyCell>
+                <EmptyCell colSpan={7}>{translate("history.table.empty")}</EmptyCell>
               </tr>
             ) : (
               attempts.map((attempt, index) => (
