@@ -190,9 +190,13 @@ const AttemptHistoryRow: React.FC<Props> = ({ attempt, index }) => {
       <Td data-label={translate("history.table.date")}>{formatDate(attempt.created_at)}</Td>
       <Td data-label={translate("history.table.action")}>
         {isInProgress ? (
-          <ContinueButton onClick={() => navigate("/app")}>{translate("history.actions.continue")}</ContinueButton>
+          <ContinueButton onClick={() => navigate(`/app?attemptId=${attempt.id}`)}>
+            {translate("history.actions.continue")}
+          </ContinueButton>
         ) : (
-          <ReviewButton onClick={() => navigate("/app")}>{translate("history.actions.review")}</ReviewButton>
+          <ReviewButton onClick={() => navigate(`/app?attemptId=${attempt.id}`)}>
+            {translate("history.actions.review")}
+          </ReviewButton>
         )}
       </Td>
     </Tr>

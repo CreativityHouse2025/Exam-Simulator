@@ -17,7 +17,7 @@ const TableBorder = styled.div<ThemedStyles>`
   overflow: hidden;
   @media (min-width: 768px) {
     border-radius: 12px;
-    border: 1px solid ${({ theme }) => theme.grey[3]};
+    border: 1px solid ${({ theme }) => theme.grey[4]};
   }
 `
 

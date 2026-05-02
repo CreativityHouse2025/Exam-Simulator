@@ -175,6 +175,14 @@ export type AttemptSummary = {
   created_at: string
 }
 
+/** Full attempt row returned by GET /api/attempts/:id — includes all mutable resume fields. */
+export type AttemptDetail = AttemptSummary & {
+  current_index: number
+  time_remaining: number
+  review_state: "summary" | "question"
+  email_report_state: string | null
+}
+
 export type ListAttemptsResult = {
   attempts: AttemptSummary[]
 }
@@ -188,7 +196,7 @@ export type AttemptQuestion = {
 }
 
 export type GetAttemptResult = {
-  attempt: AttemptSummary
+  attempt: AttemptDetail
   questions: AttemptQuestion[]
 }
 
