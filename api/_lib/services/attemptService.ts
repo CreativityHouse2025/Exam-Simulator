@@ -170,7 +170,7 @@ export async function listAttempts(userId: string): Promise<ListAttemptsResult> 
 export async function getAttempt(userId: string, attemptId: string): Promise<GetAttemptResult> {
   const { data: attempt, error: attemptError } = await supabaseAdmin
     .from("exam_attempts")
-    .select("id, user_id, exam_type, exam_id, category_id, exam_state, score, status, created_at")
+    .select("id, user_id, exam_type, exam_id, category_id, exam_state, score, status, created_at, current_index, time_remaining, review_state, email_report_state")
     .eq("id", attemptId)
     .single()
 
@@ -195,5 +195,5 @@ export async function getAttempt(userId: string, attemptId: string): Promise<Get
     throw new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: "Failed to fetch attempt questions" })
   }
 
-  return { attempt: attemptRow, questions: questions ?? [] }
+  return { attempt: attemptRow as GetAttemptResult["attempt"], questions: questions ?? [] }
 }

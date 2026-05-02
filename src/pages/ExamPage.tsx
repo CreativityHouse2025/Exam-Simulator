@@ -1,6 +1,7 @@
 import type { Exam, Session, RevisionExamOptions } from "../types"
 
 import React from "react"
+import { useSearchParams } from "react-router-dom"
 import Navigation from "../components/Navigation"
 import Cover from "../components/Cover"
 import Loading from "../components/Loading"
@@ -13,6 +14,8 @@ import { useSession } from "../hooks/useSession"
 import useSettings from "../hooks/useSettings"
 import { ExamFactory } from "../utils/ExamFactory"
 import useToast from "../hooks/useToast"
+import useAttempts from "../hooks/useAttempts"
+import { adaptAttemptToSession } from "../utils/attemptAdapter"
 
 /** Main exam page — contains all exam state, loading, and rendering logic. */
 const ExamPage: React.FC = () => {
@@ -20,13 +23,19 @@ const ExamPage: React.FC = () => {
   const { settings } = useSettings()
   const [exam, setExam] = React.useState<Exam | null>(null)
   const [loading, setLoading] = React.useState<boolean>(false)
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const { showToast } = useToast()
+  const { getAttempt } = useAttempts()
 
   const langCode = settings.language
+  const attemptId = searchParams.get("attemptId")
 
   // check for old versions (will use appVersion inside settings in next update)
+  // Skip when loading from a server attempt — the server payload always wins.
   React.useEffect(() => {
+    if (attemptId) return
+
     const raw = localStorage.getItem("session")
     if (!raw) {
       return
@@ -40,7 +49,44 @@ const ExamPage: React.FC = () => {
       console.warn("Old session detected, resetting to default...")
       setSession(DEFAULT_SESSION)
     }
-  }, [setSession])
+  }, [attemptId, setSession])
+
+  // Fetch an attempt from the server and hydrate the exam UI when attemptId is in the URL.
+  // Runs whenever attemptId changes; skips if the session is already loaded for that id.
+  React.useEffect(() => {
+    if (!attemptId || session.id === attemptId) return
+
+    let cancelled = false
+    const load = async () => {
+      setLoading(true)
+      try {
+        await initQuestionMap(langCode)
+        const payload = await getAttempt(attemptId)
+        if (cancelled) return
+        const result = adaptAttemptToSession(payload)
+        if (!result) {
+          showToast(translate("cover.invalid-exam-message"), 5000)
+          setSearchParams({}, { replace: true })
+          return
+        }
+        setExam(result.exam)
+        setSession(result.session)
+        // Clear the param so a subsequent refresh doesn't re-fetch.
+        setSearchParams({}, { replace: true })
+      } catch {
+        if (!cancelled) {
+          showToast(translate("cover.invalid-exam-message"), 5000)
+          setSearchParams({}, { replace: true })
+        }
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    }
+    load()
+    return () => {
+      cancelled = true
+    }
+  }, [attemptId]) // intentionally limited — only re-run when the id changes
 
   // Shared tail: resolve question data, format, and commit to state.
   const hydrateAndSet = React.useCallback(

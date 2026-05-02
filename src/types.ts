@@ -311,6 +311,13 @@ export type AttemptSummary = {
   created_at: string
 }
 
+export type AttemptDetail = AttemptSummary & {
+  current_index: number
+  time_remaining: number
+  review_state: "summary" | "question"
+  email_report_state: string | null
+}
+
 export type AttemptQuestion = {
   question_index: number
   question_id: number
@@ -324,7 +331,7 @@ export type ListAttemptsResult = {
 }
 
 export type GetAttemptResult = {
-  attempt: AttemptSummary
+  attempt: AttemptDetail
   questions: AttemptQuestion[]
 }
 

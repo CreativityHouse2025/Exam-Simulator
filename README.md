@@ -1,27 +1,49 @@
+## Table of Contents
+
+- [About](#about)
+- [Features](#features)
+  - [Account Management](#account-management)
+  - [Exam Types](#exam-types)
+  - [During the Exam](#during-the-exam)
+  - [Results & Review](#results--review)
+  - [Retry Wrong Answers](#retry-wrong-answers)
+  - [Exam Attempt History](#exam-attempt-history)
+  - [Email Report](#email-report)
+  - [Language Support](#language-support)
+- [Screenshots](#screenshots)
+- [Tech Stack](#tech-stack)
+- [Roadmap](#roadmap)
+
+---
+
 ## About
 
 A bilingual (Arabic/English) PMP exam simulator built for [Creativity House](https://creativity-house.com), a Malaysian company that prepares professionals for the PMP certification exam.
 
-Try the webapp here 👉 https://exam-simulator-flax.vercel.app
+Web app (Private Users): https://exam-simulator-flax.vercel.app
 
 ---
 
-## Current Version: v2.0 (Phase 1)
+## Current Version: v2.0
 
-### What's New in v2.0 — Phase 1
-
-- **Predefined full exam selection:** A dropdown on the home screen lets users select from a list of predefined full exams (180 questions each). All users see the same questions in the same fixed order per exam.
-
-- **Sign up using Creativity House offer email:** A user with an email that has an offer (1st payment of more than 160) can access the system. Otherwise will be unauthorized
+v2.0 introduced a full backend layer, user authentication, and subscription-gated access. The app moved from a frontend-only tool to a multi-user platform with accounts, access control, and persistent exam history.
 
 ---
 
-## Features (as of v1.1)
+## Features
+
+### Account Management
+
+- **Sign up** using a Creativity House offer email. Registration is gated — only users with an active subscription can create an account.
+- **Sign in / Sign out** with email and password.
+- **Forgot password** and **reset password** flows via email.
+- **Single-device session enforcement** — each account can only be active on one device at a time. Signing in on a new device prompts the user to force sign out of the previous session.
+- **Subscription expiry** — access is automatically revoked when a user's subscription period ends.
 
 ### Exam Types
 
 - **Full Exam:** 180 questions, 230-minute countdown timer, selected from a predefined list.
-- **Category Exam:** A shorter exam filtered by a PMP domain chosen from a dropdown.
+- **Categorized Exam:** A shorter exam filtered by a PMP domain.
 
 ### During the Exam
 
@@ -33,20 +55,24 @@ Try the webapp here 👉 https://exam-simulator-flax.vercel.app
 ### Results & Review
 
 - Score displayed as a percentage on completion.
-  - Pass threshold: **85%** for category exams, **75%** for full exams.
 - Full detailed review after submission showing: all answer choices, your selected answer, the correct answer, and the explanation for each question.
 
 ### Retry Wrong Answers
 
-- If more than 10 questions were answered incorrectly or skipped, a **Retry** option appears on the results screen.
+- A **Retry** option appears on the results screen.
 - The retry session contains only the incorrect and unanswered questions, in their original order.
 - Retry results are tracked separately and do not affect the original exam score.
+
+### Exam Attempt History
+
+- A dedicated **History page** shows the last 10 attempts for the signed-in user, including in-progress and completed sessions.
+- Each row display the attempt details
+- Clicking a completed attempt opens a full **Attempt Review page** showing the answers, correct choices, and explanations — read-only, no timer.
+- Clicking an in-progress attempt resumes the exam.
 
 ### Email Report
 
 - On exam completion, a report is automatically sent to the user's email.
-- The report includes: exam type and category (if applicable), status, correct percentage, time and date, correct, wrong and unanswered questions.
-- If the email fails to send, the user is notified and offered a direct PDF download instead.
 
 ### Language Support
 
@@ -55,26 +81,70 @@ Try the webapp here 👉 https://exam-simulator-flax.vercel.app
 
 ---
 
+## Screenshots
+
+### Sign In / Sign Up
+
+Authentication screens with subscription gating.
+
+![alt text](docs/signup.png)
+![alt text](docs/signin.png)
+
+### Home / Exam Selection
+
+Full and categorized exam type selection with dropdowns.
+
+![alt text](docs/cover-page.png)
+
+### Exam Session
+
+Active exam with timer, progress bar, and question navigation.
+
+![alt text](docs/exam.png)
+
+### Results Summary
+
+Score, pass/fail badge, and breakdown by correct/incorrect/unanswered.
+
+![alt text](docs/summary.png)
+
+### Attempt History
+
+Table of past attempts with state and score at a glance.
+
+![alt text](docs/attempt-history.png)
+
+### Email Report
+
+HTML email report sent to the user's inbox.
+
+![alt text](docs/report.png)
+---
+
 ## Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Frontend | React, TypeScript |
+| Frontend | React 19, TypeScript, Styled Components |
+| State Management | React Context API (5 split contexts) |
+| Backend | Vercel Serverless Functions (`/api`) |
+| Database | Supabase (PostgreSQL) |
+| Auth | Supabase Auth |
+| CRM Integration | HighLevel (subscription verification) |
 | Hosting | Vercel |
-| Backend (to be added) | Supabase |
 
 ---
 
-## Roadmap — v2.0 Remaining Phases
+## Roadmap
 
 | Phase | Description | Status |
 |---|---|---|
 | 1 | Predefined full exam selection dropdown | Complete |
 | 2 | Backend infrastructure (Supabase database setup) | Complete |
 | 3 | Authentication + HighLevel CRM integration | Complete |
-| 4 | Single-device session enforcement | Pending |
-| 5 | Persistent exam attempt history | Pending |
-| 6 | Resume unfinished exams | Pending |
+| 4 | Single-device session enforcement | Complete |
+| 5 | Persistent exam attempt history | Complete |
+| 6 | Resume unfinished exams | Complete |
 | 7 | Show correct answer during category exams | Pending |
 | 8 | UI refresh (PMP-style interface) + rename category exam | Pending |
 | 9 | Expand predefined full exam list | Pending |
