@@ -20,7 +20,6 @@ export default function ExamContextProvider({ children }: { children: React.Reac
   const [mapReady, setMapReady] = React.useState(false)
   // Stays true until the first map load completes — used to show <Loading> on initial mount only.
   // Language-change re-inits are transparent per the existing UX convention.
-  const [firstLoad, setFirstLoad] = React.useState(true)
 
   // Keep a ref so the async init closure can read the latest session without adding it as a dep
   // (which would re-trigger initQuestionMap on every answer/navigation change).
@@ -36,23 +35,18 @@ export default function ExamContextProvider({ children }: { children: React.Reac
         await initQuestionMap(langCode)
         if (cancelled) return
 
-        setMapReady(true)
-
-        console.log("Loaded map");
-        
+        setMapReady(true)        
 
         // Re-resolve exam in the freshly loaded language. Handles two cases:
         //   1. Page reload on /app/exam — exam is null, session has persisted question IDs.
         //   2. Language switch while in an exam — exam holds old-language Question objects.
         const s = sessionRef.current
-        if (s.examType && s.examState === "in-progress" && s.questions.length > 0) {
+        if (s.examType && s.questions.length > 0) {
           const examData = getExamByQuestionIds(s.questions)
-          if (examData !== null) setExam(formatExam(examData))
+          if (examData !== null) setExam(formatExam(examData))          
         }
       } catch (error) {
         console.error("Failed to load questions:", error)
-      } finally {
-        if (!cancelled) setFirstLoad(false)
       }
     }
     init()
@@ -61,7 +55,7 @@ export default function ExamContextProvider({ children }: { children: React.Reac
     }
   }, [langCode])
 
-  if (firstLoad && !mapReady) return <Loading size={200} />
+  if (!mapReady) return <Loading size={200} />
 
   return (
     <ExamContext.Provider value={{ exam, setExam }}>
