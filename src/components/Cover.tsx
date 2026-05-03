@@ -142,7 +142,7 @@ const ButtonIcon = styled.span`
   }
 `
 
-const CoverComponent: React.FC<CoverProps> = ({ onMiniExam, onFullExam, canContinue, onContinue }) => {
+const CoverComponent: React.FC<CoverProps> = ({ onDomainExam, onFullExam, canContinue, onContinue }) => {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const [fullExamDropdown, setFullExamDropdown] = useState<boolean>(false);
 
@@ -200,7 +200,7 @@ const CoverComponent: React.FC<CoverProps> = ({ onMiniExam, onFullExam, canConti
             setOpen={setDropdown}
             buttonRef={miniButtonRef}
             title={translations.selectCategory}
-            onSelect={(categoryId: DropdownItem['id']) => onMiniExam(categoryId)}
+          onSelect={(categoryId: DropdownItem['id']) => onDomainExam(categoryId)}
           />
 
         </ButtonContainer>
@@ -211,7 +211,7 @@ const CoverComponent: React.FC<CoverProps> = ({ onMiniExam, onFullExam, canConti
 export default CoverComponent
 
 export interface CoverProps {
-  onMiniExam: (categoryId: DropdownItem['id']) => void | Promise<void>
+  onDomainExam: (categoryId: DropdownItem['id']) => void | Promise<void>
   onFullExam: (examId: DropdownItem['id']) => void | Promise<void>
   canContinue: boolean
   onContinue?: () => void | Promise<void>

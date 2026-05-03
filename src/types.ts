@@ -209,6 +209,11 @@ export type SettingsContextType = {
   setSettings: React.Dispatch<React.SetStateAction<Settings>>
 }
 
+export type ExamContextType = {
+  exam: Exam | null
+  setExam: React.Dispatch<React.SetStateAction<Exam | null>>
+}
+
 // Type for the toast component state
 export type ToastState = {
   message: string;

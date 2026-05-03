@@ -4,7 +4,8 @@ import React from 'react'
 import styled from 'styled-components'
 import ExamComponent from './Exam'
 import Summary from './Summary'
-import { ExamContext, SessionDataContext, SessionExamContext } from '../../contexts'
+import { SessionDataContext, SessionExamContext } from '../../contexts'
+import useExam from '../../hooks/useExam'
 import { useEmail } from '../../hooks/useEmail'
 import { useReport } from '../../hooks/useReport'
 import useAuth from '../../hooks/useAuth'
@@ -38,7 +39,8 @@ const ContentStyles = styled.div<ThemedStyles>`
 const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
   const { examState, reviewState } = React.useContext(SessionExamContext)
   const { emailSent, answers, examType, update } = React.useContext(SessionDataContext)
-  const exam = React.useContext(ExamContext)
+  const { exam } = useExam()
+  const questions = exam!
 
   const { user } = useAuth()
   const { settings } = useSettings();
@@ -211,7 +213,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
         const fullName = `${first_name} ${last_name}`
         const email = writeEmail(fullName, results as Results)
 
-        const pdfBase64 = await generateReport({ exam, userAnswers: answers, langCode, userFullName: fullName })
+        const pdfBase64 = await generateReport({ exam: questions, userAnswers: answers, langCode, userFullName: fullName })
 
         await sendEmail({
           subject: email.subject,
@@ -230,7 +232,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
     }
 
     sendReportToUser();
-  }, [finished, emailSent, user, exam, answers, langCode, generateReport, sendEmail, update, showToast]);
+  }, [finished, emailSent, user, questions, answers, langCode, generateReport, sendEmail, update, showToast]);
 
   return (
     <MainStyles id="main" $open={open}>
