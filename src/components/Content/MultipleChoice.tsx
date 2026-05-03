@@ -4,18 +4,20 @@ import React from 'react'
 import Choice from './Choice'
 import { formatChoiceLabel } from '../../utils/format'
 import { SESSION_ACTION_TYPES } from '../../constants'
-import { ExamContext, SessionDataContext, SessionNavigationContext } from '../../contexts'
+import { SessionDataContext, SessionNavigationContext } from '../../contexts'
 import useSettings from '../../hooks/useSettings'
+import useExam from '../../hooks/useExam'
 
 const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) => {
   const { index, update } = React.useContext(SessionNavigationContext)
   const { answers } = React.useContext(SessionDataContext)
-  const exam = React.useContext(ExamContext)
+  const { exam } = useExam()
+  const questions = exam!
 
   const { settings } = useSettings();
   const langCode = settings.language;
 
-  const question = exam[index]
+  const question = questions[index]
   const answer: AnswerOfMultipleChoice = answers[index] || []
 
   const onChoose = React.useCallback(

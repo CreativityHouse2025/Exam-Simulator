@@ -5,7 +5,6 @@ import Footer from './Footer'
 import Content from '../Content'
 import Confirms from './Confirms'
 import {
-  ExamContext,
   SessionDataContext,
   SessionExamContext,
   SessionNavigationContext,
@@ -14,6 +13,7 @@ import {
 import useMediaQuery from '../../hooks/useMediaQuery'
 import { SessionReducer } from '../../utils/session'
 import { RevisionExamOptions, Session, SessionDispatch } from '../../types'
+import useExam from '../../hooks/useExam'
 
 const NavigationLayout = styled.div`
   display: flex;
@@ -35,7 +35,9 @@ export interface NavigationProps {
 }
 
 const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate, onRevision }) => {
-  const exam = React.useContext(ExamContext)
+  // exam can't be null, component is inside ExamGuard
+  const { exam: examOrNull } = useExam()
+  const exam = examOrNull!
   const [session, updateSession] = React.useReducer(SessionReducer, startingSession)  
 
   const isMobile = useMediaQuery('(max-width: 48rem)'); // 768px, hook is called at each render  

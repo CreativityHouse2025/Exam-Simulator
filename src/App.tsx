@@ -1,12 +1,13 @@
 import React from "react"
-import { Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route, Navigate, Outlet } from "react-router-dom"
 import styled from "styled-components"
 import Toast from "./components/Toast"
 import Header from "./components/Header"
 import Loading from "./components/Loading"
 import ProtectedRoute from "./guards/ProtectedRoute"
 import GuestRoute from "./guards/GuestRoute"
-import ExamPage from "./pages/ExamPage"
+import ExamGuard from "./guards/ExamGuard"
+import CoverPage from "./pages/CoverPage"
 import SignInPage from "./pages/SignInPage"
 import SignUpPage from "./pages/SignUpPage"
 import ProfilePage from "./pages/ProfilePage"
@@ -18,6 +19,8 @@ import { hasTranslation, setTranslation } from "./utils/translation"
 import { LANGUAGES } from "./constants"
 import useSettings from "./hooks/useSettings"
 import type { LangCode } from "./types"
+import ExamPage from "./pages/ExamPage"
+import ExamContextProvider from "./providers/ExamContextProvider"
 
 const AppBackground = styled.div`
   position: fixed;
@@ -93,7 +96,16 @@ const App: React.FC = () => {
             <Route path="/auth/callback" element={<AuthCallbackPage />} />
             <Route path="/reset-password" element={<ProtectedRoute redirectTo="/signin"><ResetPasswordPage /></ProtectedRoute>} />
             <Route path="/history" element={<ProtectedRoute redirectTo="/signin"><AttemptHistoryPage /></ProtectedRoute>} />
-            <Route path="/app" element={<ProtectedRoute><ExamPage /></ProtectedRoute>} />
+            <Route path="/app" element={
+              <ProtectedRoute>
+                <ExamContextProvider>
+                  <Outlet />
+                </ExamContextProvider>
+              </ProtectedRoute>
+            }>
+              <Route index element={<CoverPage />} />
+              <Route path="exam" element={<ExamGuard><ExamPage /></ExamGuard>} />
+            </Route>
             <Route path="*" element={<Navigate to="/app" replace />} />
           </Routes>
         </RoutesArea>

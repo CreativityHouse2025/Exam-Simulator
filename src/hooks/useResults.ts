@@ -1,5 +1,6 @@
 import React from 'react'
-import { ExamContext, SessionDataContext, SessionExamContext, SessionTimerContext } from '../contexts'
+import { SessionDataContext, SessionExamContext, SessionTimerContext } from '../contexts'
+import useExam from './useExam'
 import useCategoryLabel from './useCategoryLabel'
 import useFullExamLabel from './useFullExamLabel'
 import { ExamType, Question, Results } from '../types'
@@ -16,7 +17,8 @@ export default function useResults(isExamFinished: boolean): Results | null {
     const { answers, examType } = React.useContext(SessionDataContext)
     const { maxTime, time } = React.useContext(SessionTimerContext)
     const { categoryId, examId } = React.useContext(SessionExamContext)
-    const exam = React.useContext(ExamContext)
+    const { exam: examOrNull } = useExam()
+    const exam = examOrNull!
 
     const passingScore = examTypes[examType as ExamType].passingRate ?? null
     let sourceLabel;
