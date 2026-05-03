@@ -213,14 +213,14 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
         const fullName = `${first_name} ${last_name}`
         const email = writeEmail(fullName, results as Results)
 
-        const pdfBase64 = await generateReport({ exam: questions, userAnswers: answers, langCode, userFullName: fullName })
+        // const pdfBase64 = await generateReport({ exam: questions, userAnswers: answers, langCode, userFullName: fullName })
 
-        await sendEmail({
-          subject: email.subject,
-          text: email.textBody,
-          html: email.htmlBody,
-          attachments: pdfBase64 ? [{ filename: `${examType}-${new Date().toISOString().slice(0, 10)}-report.pdf`, content: pdfBase64 }] : undefined,
-        });
+        // await sendEmail({
+        //   subject: email.subject,
+        //   text: email.textBody,
+        //   html: email.htmlBody,
+        //   attachments: pdfBase64 ? [{ filename: `${examType}-${new Date().toISOString().slice(0, 10)}-report.pdf`, content: pdfBase64 }] : undefined,
+        // });
         showToast(feedback.sent, 5000)
       } catch (error) {
         console.error("Error sending report: ", error);
