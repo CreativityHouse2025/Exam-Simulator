@@ -6,7 +6,6 @@ import Header from "./components/Header"
 import Loading from "./components/Loading"
 import ProtectedRoute from "./guards/ProtectedRoute"
 import GuestRoute from "./guards/GuestRoute"
-import ExamGuard from "./guards/ExamGuard"
 import CoverPage from "./pages/CoverPage"
 import SignInPage from "./pages/SignInPage"
 import SignUpPage from "./pages/SignUpPage"
@@ -104,7 +103,7 @@ const App: React.FC = () => {
               </ProtectedRoute>
             }>
               <Route index element={<CoverPage />} />
-              <Route path="exam" element={<ExamGuard><ExamPage /></ExamGuard>} />
+              <Route path="exam" element={<ExamPage />} />
             </Route>
             <Route path="*" element={<Navigate to="/app" replace />} />
           </Routes>

@@ -1,12 +1,14 @@
 import React from "react"
-import type { Session } from "../types"
+import type { BackendExamType, Session } from "../types"
 import { ExamContext } from "../contexts"
 import { translate } from "../utils/translation"
 import { formatSession, formatExam } from "../utils/format"
 import { getExamByQuestionIds } from "../utils/exam"
 import { ExamFactory } from "../utils/ExamFactory"
-import { useSession } from "./useSession"
+import useAttemptId from "./useAttemptId"
+import useAttempts from "./useAttempts"
 import useToast from "./useToast"
+import { AppApiError } from "./useAuth"
 
 export default function useExam() {
   const context = React.useContext(ExamContext)
@@ -16,7 +18,8 @@ export default function useExam() {
   }
 
   const { exam, setExam } = context
-  const [session, setSession] = useSession()
+  const [, setAttemptId] = useAttemptId()
+  const { startAttempt } = useAttempts()
   const { showToast } = useToast()
 
   const hydrateAndSet = React.useCallback(
@@ -27,53 +30,84 @@ export default function useExam() {
         return false
       }
       setExam(formatExam(examData))
-      setSession(prepared)
       return true
     },
-    [setExam, setSession, showToast]
+    [setExam, showToast]
   )
 
-  /** Build and load a new exam from a seed session. Returns true on success. */
+  /**
+   * Build and load a new exam from a seed session.
+   * Returns the new attempt_id on success, null on failure, or 'revision' for revision sessions.
+   */
   const startNewExam = React.useCallback(
-    (seed: Session): boolean => {
+    async (seed: Session): Promise<string | null> => {
       if (!seed.examType) throw new Error("No exam type found in session")
+
+      // Revision is out of scope for backend persistence — run locally only
+      if (seed.examType === "revision") {
+        const durationInMinutes = seed.maxTime / 60
+        const prepared = formatSession({ ...seed, examState: "in-progress" }, seed.questions.length, durationInMinutes)
+        const ok = hydrateAndSet(prepared)
+        return ok ? "revision" : null
+      }
+
       try {
-        let prepared: Session
-        if (seed.examType === "revision") {
-          const durationInMinutes = seed.maxTime / 60
-          prepared = formatSession({ ...seed, examState: "in-progress" }, seed.questions.length, durationInMinutes)
-        } else {
-          const built = ExamFactory.create(seed.examType).buildExam(seed.categoryId, seed.examId)
-          prepared = formatSession(
-            { ...seed, examState: "in-progress", questions: built.questionIds },
-            built.questionIds.length,
-            built.durationMinutes
-          )
+        const built = seed.examType === "full"
+          ? ExamFactory.buildFullExam(seed.examId!)
+          : ExamFactory.buildDomainExam(seed.categoryId!)
+        const resolvedQuestions = getExamByQuestionIds(built.questionIds)
+        if (resolvedQuestions === null) {
+          showToast(translate("cover.invalid-exam-message"), 5000)
+          return null
         }
-        return hydrateAndSet(prepared)
+
+        const choicesOrders = resolvedQuestions.map((q) => q.choices.map((_, i) => i))
+
+        const examType = seed.examType as BackendExamType
+        const body =
+          examType === "full"
+            ? {
+                exam_type: "full" as const,
+                exam_id: seed.examId!,
+                category_id: null,
+                question_ids: built.questionIds,
+                choices_orders: choicesOrders,
+                duration_minutes: built.durationMinutes,
+              }
+            : {
+                exam_type: "domain" as const,
+                category_id: seed.categoryId!,
+                exam_id: null,
+                question_ids: built.questionIds,
+                choices_orders: choicesOrders,
+                duration_minutes: built.durationMinutes,
+              }
+
+        const { attempt_id } = await startAttempt(body)
+
+        const prepared = formatSession(
+          { ...seed, examState: "in-progress", questions: built.questionIds, id: attempt_id },
+          built.questionIds.length,
+          built.durationMinutes
+        )
+
+        const ok = hydrateAndSet(prepared)
+        if (!ok) return null
+
+        setAttemptId(attempt_id)
+        return attempt_id
       } catch (error) {
-        console.error("Failed to start exam:", error)
+        if (error instanceof AppApiError) {
+          showToast(error.message, 5000)
+        } else {
+          showToast(translate("attempts.errors.server-unknown"), 5000)
+        }
         setExam(null)
-        return false
+        return null
       }
     },
-    [hydrateAndSet, setExam]
+    [hydrateAndSet, setExam, startAttempt, setAttemptId, showToast]
   )
 
-  /** Reload an existing in-progress session from its stored question IDs. Returns true on success. */
-  const resumeExam = React.useCallback(
-    (existing: Session): boolean => {
-      if (!existing.examType) throw new Error("No exam type found in session")
-      try {
-        return hydrateAndSet(existing)
-      } catch (error) {
-        console.error("Failed to resume exam:", error)
-        setExam(null)
-        return false
-      }
-    },
-    [hydrateAndSet, setExam]
-  )
-
-  return { exam, setExam, session, startNewExam, resumeExam }
+  return { exam, setExam, startNewExam }
 }

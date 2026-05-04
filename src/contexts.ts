@@ -1,6 +1,5 @@
 import React from "react"
 import type { AuthContextType, SessionDispatch, SessionNavigation, SessionTimer, SessionExam, SessionData, SettingsContextType, ToastContextType, ExamContextType } from './types'
-import { GENERAL_CATEGORY_ID, RANDOM_EXAM_ID } from './constants'
 
 // Auth context
 export const AuthContext = React.createContext<AuthContextType>({
@@ -40,8 +39,8 @@ export const SessionTimerContext = React.createContext<SessionTimer>({
 export const SessionExamContext = React.createContext<SessionExam>({
   examState: 'in-progress',
   reviewState: 'summary',
-  categoryId: GENERAL_CATEGORY_ID, // add category to the context for metadata during exam
-  examId: RANDOM_EXAM_ID,
+  categoryId: null,
+  examId: null,
   update: noopUpdate
 })
 
@@ -49,5 +48,6 @@ export const SessionDataContext = React.createContext<SessionData>({
   bookmarks: [],
   answers: [],
   emailSent: false,
+  isSyncing: false,
   update: noopUpdate
 })

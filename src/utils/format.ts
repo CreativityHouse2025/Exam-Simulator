@@ -1,4 +1,4 @@
-import type { Exam, ExamType, LangCode, Question, Session } from '../types.js'
+import type { Exam, LangCode, Question, Session } from '../types.js'
 
 import { formatDistance, format } from 'date-fns'
 
@@ -97,7 +97,6 @@ export function formatSession(session: Session, questionCount: number, durationM
     answers,
     maxTime,
     time: maxTime,
-    id: createSessionId(session.examType as ExamType),
   }
 }
 
@@ -145,7 +144,3 @@ export function hasInvalidNameChars(name: string): boolean {
   const invalidPattern = /[^\p{L}\s]/u;
   return invalidPattern.test(name);
 }
-
-// generates a unique id for the session
-export const createSessionId = (examType: ExamType) =>
-  `${examType}-attempt-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;

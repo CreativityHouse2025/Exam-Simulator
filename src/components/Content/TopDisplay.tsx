@@ -1,10 +1,10 @@
 import type { ThemedStyles } from '../../types'
 
 import React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import BookmarkButton from './Bookmark'
 import { translate } from '../../utils/translation'
-import { SessionExamContext, SessionNavigationContext } from '../../contexts'
+import { SessionDataContext, SessionExamContext, SessionNavigationContext } from '../../contexts'
 import useCategoryLabel from '../../hooks/useCategoryLabel'
 import useFullExamLabel from '../../hooks/useFullExamLabel'
 
@@ -34,7 +34,39 @@ const CategoryExamChip = styled.div<ThemedStyles>`
   border-radius: 20px;
   border: 1px solid ${({ theme }) => theme.grey[2]};
   width: auto;
-`;
+`
+
+const ChipRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+`
+
+const spin = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+`
+
+const SyncingBadge = styled.span<ThemedStyles>`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.4rem;
+  font-family: ${({ theme }) => theme.fontFamily};
+  color: ${({ theme }) => theme.grey[9]};
+  font-weight: 500;
+`
+
+const Spinner = styled.span<ThemedStyles>`
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid ${({ theme }) => theme.grey[4]};
+  border-top-color: ${({ theme }) => theme.secondary};
+  border-radius: 50%;
+  animation: ${spin} 0.7s linear infinite;
+  flex-shrink: 0;
+`
 
 export const QuestionTextStyles = styled.div<ThemedStyles>`
   display: flex;
@@ -47,10 +79,11 @@ export const QuestionTextStyles = styled.div<ThemedStyles>`
 const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isReview = false }) => {
   const { index } = React.useContext(SessionNavigationContext)
   const { categoryId, examId } = React.useContext(SessionExamContext)
+  const { isSyncing } = React.useContext(SessionDataContext)
 
   let categoryExamLabel: string | undefined;
 
-  const isFullExam = (examId !== undefined && examId !== null);
+  const isFullExam = examId !== null;
   
   if (isFullExam) {
     categoryExamLabel = useFullExamLabel(examId)
@@ -74,9 +107,18 @@ const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isRevie
 
         {!isReview && <BookmarkButton />}
       </TopDisplayStyles>
-      <CategoryExamChip>
-        {isFullExam ? translations.exam : translations.category}: {categoryExamLabel ?? "undefined exam/category label"}
-      </CategoryExamChip>
+      <ChipRow>
+        <CategoryExamChip>
+          {isFullExam ? translations.exam : translations.category}: {categoryExamLabel ?? "undefined exam/category label"}
+        </CategoryExamChip>
+
+        {isSyncing && (
+          <SyncingBadge>
+            <Spinner />
+            {translate('content.syncing')}
+          </SyncingBadge>
+        )}
+      </ChipRow>
     </ExamHeader>
   )
 }

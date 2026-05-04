@@ -157,7 +157,7 @@ export async function listAttempts(userId: string): Promise<ListAttemptsResult> 
     throw new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: "Failed to fetch attempts" })
   }
 
-  return { attempts: data ?? [] }
+  return { attempts: (data ?? []) as ListAttemptsResult["attempts"] }
 }
 
 /**

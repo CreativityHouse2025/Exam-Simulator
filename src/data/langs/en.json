@@ -35,6 +35,7 @@
     }
   },
   "content": {
+    "syncing": "Saving...",
     "top-display": {
       "question": "Question $1 of $2",
       "category": "Category",
@@ -228,8 +229,10 @@
       "server-forbidden": "You do not have access to this attempt.",
       "server-conflict": "This attempt has already been submitted.",
       "server-create-failed": "Failed to start the attempt. Please try again.",
-      "server-save-failed": "Failed to save the attempt. Please try again.",
-      "server-unknown": "An unexpected error occurred. Please try again."
+      "server-save-failed": "Failed to save your progress. Please try again.",
+      "server-submit-failed": "Failed to submit the exam. Please try again.",
+      "server-unknown": "An unexpected error occurred. Please try again.",
+      "no-attempt-id": "No exam session found. Please start a new exam from the home page."
     }
   }
 }

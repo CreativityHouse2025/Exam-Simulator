@@ -147,7 +147,7 @@ const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: Rev
 
           <SummaryRow type="time" value={formatTimer(elapsedTime)} status={pass} />
           <SummaryRow type="date" value={formatDate(date)} status={pass} />
-          <SummaryRow type={sourceType} value={sourceLabel} status={pass} />
+          {sourceLabel && <SummaryRow type={sourceType} value={sourceLabel} status={pass} />}
         </TopColumnStyles>
 
         <ColumnStyles id="column">

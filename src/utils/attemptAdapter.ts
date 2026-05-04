@@ -1,8 +1,6 @@
 import type { Exam, Session, ExamType } from "../types"
 import type { GetAttemptResult } from "../types"
 import { getExamByQuestionIds } from "./exam"
-import { formatExam } from "./format"
-import { DEFAULT_SESSION } from "../constants"
 import examTypes from "../data/exam-data/exam-types.json"
 
 /**
@@ -26,7 +24,7 @@ export function adaptAttemptToSession(payload: GetAttemptResult): { session: Ses
     return { ...question, choices: reorderedChoices }
   })
 
-  const exam = formatExam(reorderedQuestions)
+  const exam = reorderedQuestions
 
   const answers = payload.questions.map((q) => q.selected_choices)
   const bookmarks = payload.questions.filter((q) => q.is_bookmarked).map((q) => q.question_index)
@@ -37,6 +35,7 @@ export function adaptAttemptToSession(payload: GetAttemptResult): { session: Ses
   const durationMinutes = examTypes[examTypeKey]?.durationMinutes ?? null
   const maxTime = durationMinutes !== null ? durationMinutes * 60 : attempt.time_remaining
 
+  // build the frontend session from backend payload with some default values
   const session: Session = {
     id: attempt.id,
     index: attempt.current_index,
@@ -48,10 +47,10 @@ export function adaptAttemptToSession(payload: GetAttemptResult): { session: Ses
     questions: questionIds,
     answers,
     emailSent: attempt.email_report_state === "sent",
-    categoryId: attempt.category_id ?? DEFAULT_SESSION.categoryId,
+    categoryId: attempt.category_id,
     bookmarks,
     examType: attempt.exam_type as ExamType,
-    examId: attempt.exam_id ?? undefined,
+    examId: attempt.exam_id,
   }
 
   return { session, exam }
