@@ -2,10 +2,9 @@ import React from "react"
 import type { BackendExamType, Session } from "../types"
 import { ExamContext } from "../contexts"
 import { translate } from "../utils/translation"
-import { formatSession, formatExam } from "../utils/format"
+import { formatSession, formatExam, shuffleArray } from "../utils/format"
 import { getExamByQuestionIds } from "../utils/exam"
-import { ExamFactory } from "../utils/ExamFactory"
-import useAttemptId from "./useAttemptId"
+import { BuiltExam, ExamFactory } from "../utils/ExamFactory"
 import useAttempts from "./useAttempts"
 import useToast from "./useToast"
 import { AppApiError } from "./useAuth"
@@ -18,7 +17,6 @@ export default function useExam() {
   }
 
   const { exam, setExam } = context
-  const [, setAttemptId] = useAttemptId()
   const { startAttempt } = useAttempts()
   const { showToast } = useToast()
 
@@ -52,7 +50,7 @@ export default function useExam() {
       }
 
       try {
-        const built = seed.examType === "full"
+        const built: BuiltExam = seed.examType === "full"
           ? ExamFactory.buildFullExam(seed.examId!)
           : ExamFactory.buildDomainExam(seed.categoryId!)
         const resolvedQuestions = getExamByQuestionIds(built.questionIds)
@@ -61,7 +59,10 @@ export default function useExam() {
           return null
         }
 
-        const choicesOrders = resolvedQuestions.map((q) => q.choices.map((_, i) => i))
+        const choicesOrders = resolvedQuestions.map((q) => {
+          const indices = q.choices.map((_, i) => i)
+          return shuffleArray(indices)
+        })
 
         const examType = seed.examType as BackendExamType
         const body =
@@ -84,17 +85,6 @@ export default function useExam() {
               }
 
         const { attempt_id } = await startAttempt(body)
-
-        const prepared = formatSession(
-          { ...seed, examState: "in-progress", questions: built.questionIds, id: attempt_id },
-          built.questionIds.length,
-          built.durationMinutes
-        )
-
-        const ok = hydrateAndSet(prepared)
-        if (!ok) return null
-
-        setAttemptId(attempt_id)
         return attempt_id
       } catch (error) {
         if (error instanceof AppApiError) {
@@ -102,11 +92,10 @@ export default function useExam() {
         } else {
           showToast(translate("attempts.errors.server-unknown"), 5000)
         }
-        setExam(null)
         return null
       }
     },
-    [hydrateAndSet, setExam, startAttempt, setAttemptId, showToast]
+    [hydrateAndSet, startAttempt, showToast]
   )
 
   return { exam, setExam, startNewExam }

@@ -24,6 +24,6 @@ function examStarted(session: Pick<SessionExam, 'examState'> & Pick<SessionTimer
   return session.examState === 'in-progress' && timerHasRan(session)
 }
 
-function timerHasRan({ time, maxTime }: Pick<SessionTimer, 'time' | 'maxTime'>): boolean {
-  return time < maxTime && time > 0
+function timerHasRan({ time }: Pick<SessionTimer, 'time' | 'maxTime'>): boolean {
+  return time > 0
 }

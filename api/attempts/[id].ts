@@ -18,7 +18,8 @@ export const GET = withErrorHandler(withAuth(async (request, authUser) => {
 export const PATCH = withErrorHandler(withAuth(async (request, authUser) => {
   const id = new URL(request.url).pathname.split("/").pop() ?? ""
   const validatedId = validateAttemptId(id)
-  const parsedBody = await parseJsonBody(request)
+  // extend request size to 50kb to expect full exam payloads
+  const parsedBody = await parseJsonBody(request, 50 * 1024)
   const validatedInput = validateSaveAttempt(parsedBody)
   await saveAttempt(authUser.id, validatedId, validatedInput)
   return successResponse({})

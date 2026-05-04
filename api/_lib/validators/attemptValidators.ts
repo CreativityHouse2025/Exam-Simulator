@@ -51,8 +51,8 @@ export function validateInsertAttempt(body: unknown): InsertAttemptRequestBody {
   if (!Array.isArray(question_ids) || question_ids.length === 0) {
     throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "question_ids must be a non-empty array" })
   }
-  if (!question_ids.every(isPositiveInteger)) {
-    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "question_ids must contain only positive integers" })
+  if (!question_ids.every(isNonNegativeInteger)) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "question_ids must contain only non-negative integers" })
   }
 
   if (!Array.isArray(choices_orders) || choices_orders.length !== question_ids.length) {

@@ -47,7 +47,6 @@ export const SessionExamContext = React.createContext<SessionExam>({
 export const SessionDataContext = React.createContext<SessionData>({
   bookmarks: [],
   answers: [],
-  emailSent: false,
   isSyncing: false,
   update: noopUpdate
 })

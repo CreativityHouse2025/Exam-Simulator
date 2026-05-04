@@ -13,7 +13,7 @@ import {
 import useMediaQuery from '../../hooks/useMediaQuery'
 import { SessionReducer } from '../../utils/session'
 import { computeResults } from '../../utils/results'
-import { RevisionExamOptions, Session, SessionDispatch, SessionActionTypes, Answers } from '../../types'
+import { RevisionExamOptions, Session, SessionDispatch, SessionActionTypes, Answers, Exam } from '../../types'
 import useExam from '../../hooks/useExam'
 import useAttempts from '../../hooks/useAttempts'
 import useToast from '../../hooks/useToast'
@@ -36,6 +36,14 @@ const ContainerStyles = styled.div`
 export interface NavigationProps {
   startingSession: Session
   onRevision: (options: RevisionExamOptions) => void
+}
+
+/**
+ * Converts display-space answer indices back to original (pre-shuffle) indices before persisting to DB.
+ * Falls back to the display index for unshuffled questions (e.g. revision) where originalIndex is absent.
+ */
+function toOriginalIndices(displayIndices: number[], questionChoices: Exam[number]['choices']): number[] {
+  return displayIndices.map((displayIdx) => questionChoices[displayIdx]?.originalIndex ?? displayIdx)
 }
 
 const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onRevision }) => {
@@ -87,7 +95,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onRev
       if (isCompletion && nextSession.id !== '') {
         const allAnswers = nextSession.answers.map((selected, i) => ({
           question_index: i,
-          selected_choices: selected ?? [],
+          selected_choices: toOriginalIndices(selected ?? [], exam[i].choices),
           is_bookmarked: nextSession.bookmarks.includes(i),
         }))
 
@@ -126,7 +134,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onRev
             if (answerChanged || bookmarkChanged) {
               acc.push({
                 question_index: i,
-                selected_choices: selected ?? [],
+                selected_choices: toOriginalIndices(selected ?? [], exam[i].choices),
                 is_bookmarked: nextSession.bookmarks.includes(i),
               })
             }
@@ -165,8 +173,8 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onRev
     navigation: { index: session.index, update: sessionUpdate },
     timer: { time: session.time, maxTime: session.maxTime, paused: session.paused, update: sessionUpdate },
     exam: { examState: session.examState, reviewState: session.reviewState, update: sessionUpdate, categoryId: session.categoryId, examId: session.examId },
-    data: { bookmarks: session.bookmarks, answers: session.answers, examType: session.examType, emailSent: session.emailSent, isSyncing, update: sessionUpdate }
-  }
+    data: { bookmarks: session.bookmarks, answers: session.answers, examType: session.examType, isSyncing, update: sessionUpdate }
+  }  
 
   return (
     <SessionNavigationContext.Provider value={contextValues.navigation}>

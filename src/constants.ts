@@ -77,7 +77,6 @@ export const SESSION_ACTION_TYPES = {
   SET_TIMER_PAUSED: 'SET_TIMER_PAUSED' as const,
   SET_EXAM_STATE: 'SET_EXAM_STATE' as const,
   SET_REVIEW_STATE: 'SET_REVIEW_STATE' as const,
-  SET_EMAIL_SENT: 'SET_EMAIL_SENT' as const
 } as const
 
 // Property mapping for session actions
@@ -89,7 +88,6 @@ export const SESSION_ACTION_PROPS = {
   SET_TIMER_PAUSED: 'paused' as const,
   SET_EXAM_STATE: 'examState' as const,
   SET_REVIEW_STATE: 'reviewState' as const,
-  SET_EMAIL_SENT: 'emailSent' as const
 } as const
 
 // Constant for category menu padding (shared variable)
@@ -106,7 +104,6 @@ export const DEFAULT_SESSION: Session = {
   reviewState: 'summary' as const,
   questions: [] as const,
   answers: [] as const,
-  emailSent: false,
   categoryId: null,
   examId: null,
   bookmarks: [] as const,
