@@ -67,6 +67,8 @@ export interface Choice {
   text: string
   /** is the choice correct */
   correct: boolean
+  /** original index in the question bank before any shuffle; present only on shuffled exams */
+  originalIndex?: number
 }
 
 // Answer types
@@ -102,8 +104,6 @@ export interface Session {
   questions: Question['id'][]
   /** the list of answers */
   answers: Answers
-  /** v1.1: flag to ensure that email is sent only once per session completion */
-  emailSent: boolean
   /** null for full exams */
   categoryId: number | null
   /** null for domain exams */
@@ -129,7 +129,6 @@ export type SessionActionTypes =
   | 'SET_TIMER_PAUSED'
   | 'SET_EXAM_STATE'
   | 'SET_REVIEW_STATE'
-  | 'SET_EMAIL_SENT'
 
 // Session actions mapping
 type SessionActionsMap = {
@@ -140,7 +139,6 @@ type SessionActionsMap = {
   SET_TIMER_PAUSED: { payload: boolean; prop: 'paused' }
   SET_EXAM_STATE: { payload: ExamState; prop: 'examState' }
   SET_REVIEW_STATE: { payload: ReviewState; prop: 'reviewState' }
-  SET_EMAIL_SENT: { payload: Session['emailSent']; prop: 'emailSent' }
 }
 
 export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {
@@ -160,39 +158,7 @@ export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, Ses
 export type SessionNavigation = Pick<Session, 'index'> & { update: SessionDispatch }
 export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused'> & { update: SessionDispatch }
 export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'categoryId' | 'examId'> & { update: SessionDispatch }
-export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | 'emailSent'> & { isSyncing: boolean; update: SessionDispatch }
-
-// Email API arguments type
-export type SendEmailRequestBody = {
-  subject: string;
-  text: string;
-  html?: string;
-  attachments?: {
-    filename: string;
-    /** pdf content in base64 */
-    content: string;
-  }[]
-}
-
-// Translations to pass in the API (serverless doesn't share app runtime state)
-export type Translations = {
-  companyName: string
-  reportTitle: string
-  missing: string
-  correct: string
-  incorrect: string
-  explanation: string
-  fullName: string
-}
-
-// Generate report API arguments type
-export type GenerateReportRequestBody = {
-  exam: Exam
-  userAnswers: Answers
-  langCode: LangCode
-  userFullName: string
-  translations: Translations
-}
+export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType'> & { isSyncing: boolean; update: SessionDispatch }
 
 // User settings (initially null until user inserts data)
 export type Settings = {

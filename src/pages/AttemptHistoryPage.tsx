@@ -23,7 +23,7 @@ const HistoryPageWrapper = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   justify-self: flex-start;
-  padding: 0rem 2rem 4rem;
+  padding: 0rem 2rem 8rem;
 `
 
 const Inner = styled.div`

@@ -18,15 +18,31 @@ export function adaptAttemptToSession(payload: GetAttemptResult): { session: Ses
   if (rawQuestions === null) return null
 
   // Re-apply the stored choices_order to each question so the exam replay is exact.
+  // Each reordered choice carries originalIndex so Navigation can map back to original indices on save.
   const reorderedQuestions = rawQuestions.map((question, i) => {
     const { choices_order } = payload.questions[i]
-    const reorderedChoices = choices_order.map((originalIndex) => question.choices[originalIndex])
+    const reorderedChoices = choices_order.map((originalIndex) => ({
+      ...question.choices[originalIndex],
+      originalIndex,
+    }))
     return { ...question, choices: reorderedChoices }
   })
 
   const exam = reorderedQuestions
 
-  const answers = payload.questions.map((q) => q.selected_choices)
+  // selected_choices in the DB are original indices — convert to display indices for the UI.
+  const answers = payload.questions.map((question) => {
+    const { selected_choices, choices_order } = question;
+    // e.g.
+    // [1] original selected_choices
+    // [2, 0, 1, 3] shuffled order
+    // [2] answers
+    return selected_choices.map((originalIndex) => {
+      const displayIndex = choices_order.indexOf(originalIndex);
+      return displayIndex;
+    });
+  });
+  
   const bookmarks = payload.questions.filter((q) => q.is_bookmarked).map((q) => q.question_index)
 
   const { attempt } = payload
@@ -41,12 +57,11 @@ export function adaptAttemptToSession(payload: GetAttemptResult): { session: Ses
     index: attempt.current_index,
     maxTime,
     time: attempt.time_remaining,
-    paused: true,
+    paused: attempt.time_remaining < maxTime, // true when the attempt is a continue
     examState: attempt.exam_state as Session["examState"],
     reviewState: attempt.review_state,
     questions: questionIds,
     answers,
-    emailSent: attempt.email_report_state === "sent",
     categoryId: attempt.category_id,
     bookmarks,
     examType: attempt.exam_type as ExamType,

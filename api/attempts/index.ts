@@ -8,7 +8,7 @@ import type { InsertAttemptRequestBody, ListAttemptsResult } from "../_lib/types
 
 // Maps to POST /api/attempts
 export const POST = withErrorHandler(withAuth(async (request, authUser) => {
-  const parsedBody = await parseJsonBody(request)
+  const parsedBody = await parseJsonBody(request, 50 * 1024)
   /* full exam input example: {
     exam_type: "full"
     exam_id: 1
