@@ -87,7 +87,9 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
         { type: 'score', value: `${results.score}%` },
         { type: 'time', value: formatTimer(results.elapsedTime) },
         { type: 'date', value: formatDate(results.date) },
-        { type: results.sourceType, value: results.sourceLabel },
+        ...(results.sourceLabel !== undefined
+          ? [{ type: results.sourceType, value: results.sourceLabel }]
+          : []),
         {
           type: 'correct',
           value: `${results.correctCount} / ${results.totalQuestions}`
@@ -211,7 +213,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
       showToast(feedback.sending, 5000)
       try {
         const fullName = `${first_name} ${last_name}`
-        const email = writeEmail(fullName, results as Results)
+        void writeEmail(fullName, results as Results)
 
         // const pdfBase64 = await generateReport({ exam: questions, userAnswers: answers, langCode, userFullName: fullName })
 

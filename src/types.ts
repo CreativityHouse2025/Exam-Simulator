@@ -50,8 +50,8 @@ export interface Question<QT extends QuestionTypes = QuestionTypes> {
   id: number
   /** question type */
   type: QT
-  /** question type */
-  categoryId: number
+  /** null means the question is not assigned to any domain category */
+  categoryId: number | null
   /** question content */
   text: string
   /** explanation of why the correct answer is correct */
@@ -104,14 +104,14 @@ export interface Session {
   answers: Answers
   /** v1.1: flag to ensure that email is sent only once per session completion */
   emailSent: boolean
-  /** v1.1: the category of the exam */
-  categoryId: number
+  /** null for full exams */
+  categoryId: number | null
+  /** null for domain exams */
+  examId: number | null
   /** the list of bookmarked questions */
   bookmarks: number[]
   /** the type of the exam */
   examType?: ExamType
-  /** the ID of the full exam (if it is a full exam) */
-  examId?: number
 }
 
 // v2.0: Type for the generic dropdown item (category or fullexam)
@@ -160,7 +160,7 @@ export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, Ses
 export type SessionNavigation = Pick<Session, 'index'> & { update: SessionDispatch }
 export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused'> & { update: SessionDispatch }
 export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'categoryId' | 'examId'> & { update: SessionDispatch }
-export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | 'emailSent'> & { update: SessionDispatch }
+export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | 'emailSent'> & { isSyncing: boolean; update: SessionDispatch }
 
 // Email API arguments type
 export type SendEmailRequestBody = {
@@ -291,7 +291,7 @@ export type Results = {
   // time & meta
   elapsedTime: number
   date: Date
-  sourceLabel: string
+  sourceLabel: string | undefined
   sourceType: 'category' | 'exam'
 
   // question stats
@@ -305,14 +305,16 @@ export type Results = {
 }
 
 // Attempt types (mirror api/_lib/types.ts shapes for frontend use)
+export type BackendExamType = "full" | "domain"
+
 export type AttemptSummary = {
   id: string
-  exam_type: string
+  exam_type: BackendExamType
   exam_id: number | null
   category_id: number | null
-  exam_state: string
+  exam_state: "in-progress" | "completed"
   score: number
-  status: string | null
+  status: "pass" | "fail" | null
   created_at: string
 }
 
@@ -320,7 +322,7 @@ export type AttemptDetail = AttemptSummary & {
   current_index: number
   time_remaining: number
   review_state: "summary" | "question"
-  email_report_state: string | null
+  email_report_state: "unsent" | "pending" | "sent" | "failed"
 }
 
 export type AttemptQuestion = {

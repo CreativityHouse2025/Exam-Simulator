@@ -92,12 +92,6 @@ export const SESSION_ACTION_PROPS = {
   SET_EMAIL_SENT: 'emailSent' as const
 } as const
 
-// Constant for the general category (mix of all categories)
-export const GENERAL_CATEGORY_ID = 0
-
-// Random exam id (get 180 random questions)
-export const RANDOM_EXAM_ID = 0;
-
 // Constant for category menu padding (shared variable)
 export const MENU_PADDING = "1.6rem 1.4rem"
 
@@ -113,7 +107,8 @@ export const DEFAULT_SESSION: Session = {
   questions: [] as const,
   answers: [] as const,
   emailSent: false,
-  categoryId: GENERAL_CATEGORY_ID,
+  categoryId: null,
+  examId: null,
   bookmarks: [] as const,
 } as const
 

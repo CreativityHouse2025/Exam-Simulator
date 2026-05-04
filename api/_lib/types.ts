@@ -164,14 +164,16 @@ type InsertAttemptDomain = {
 
 export type InsertAttemptRequestBody = InsertAttemptFull | InsertAttemptDomain
 
+export type BackendExamType = "full" | "domain"
+
 export type AttemptSummary = {
   id: string
-  exam_type: string
+  exam_type: BackendExamType
   exam_id: number | null
   category_id: number | null
-  exam_state: string
+  exam_state: "in-progress" | "completed"
   score: number
-  status: string | null
+  status: "pass" | "fail" | null
   created_at: string
 }
 
@@ -180,7 +182,7 @@ export type AttemptDetail = AttemptSummary & {
   current_index: number
   time_remaining: number
   review_state: "summary" | "question"
-  email_report_state: string | null
+  email_report_state: "unsent" | "pending" | "sent" | "failed"
 }
 
 export type ListAttemptsResult = {
@@ -206,7 +208,7 @@ export type SaveAttemptAnswer = {
   is_bookmarked: boolean
 }
 
-type SaveAttemptInProgress = {
+export type SaveAttemptInProgress = {
   exam_state: "in-progress"
   current_index: number
   time_remaining: number
@@ -214,7 +216,7 @@ type SaveAttemptInProgress = {
   answers: SaveAttemptAnswer[]
 }
 
-type SaveAttemptCompleted = {
+export type SaveAttemptCompleted = {
   exam_state: "completed"
   current_index: number
   time_remaining: number

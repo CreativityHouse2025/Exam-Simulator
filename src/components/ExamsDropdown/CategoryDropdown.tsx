@@ -1,9 +1,7 @@
 import React from "react";
 import type { DropdownItem, LangCode } from "../../types";
-import { GENERAL_CATEGORY_ID } from "../../constants";
 import Dropdown from "./Dropdown";
 import rawCategories from '../../data/exam-data/categories.json'
-import useCategoryLabel from "../../hooks/useCategoryLabel";
 import useSettings from "../../hooks/useSettings";
 
 type CategoryDropdownProps = {
@@ -17,14 +15,10 @@ const CategoryDropdown: React.FC<CategoryDropdownProps> = ({ buttonRef, open, se
   const { settings } = useSettings();
   const langCode: LangCode = settings.language;
 
-  const generalCategory: DropdownItem = {
-    id: GENERAL_CATEGORY_ID,
-    label: useCategoryLabel(GENERAL_CATEGORY_ID) as string
-  }
-  const categories: DropdownItem[] = [generalCategory, ...rawCategories.map(c => ({
+  const categories: DropdownItem[] = rawCategories.map(c => ({
     id: c.id,
     label: c['name'][langCode]
-  }))]
+  }))
 
   return (
     <Dropdown
