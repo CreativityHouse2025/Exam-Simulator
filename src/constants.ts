@@ -120,6 +120,3 @@ export const DEFAULT_USER_SETTINGS: Settings = {
   language: 'en',
   appVersion: '1.4'
 }
-
-// Minimum required number of mistakes to allow for a retake
-export const RETAKE_MIN_MISTAKES = 10

@@ -1,10 +1,7 @@
-import type { RevisionExamOptions } from "../types"
-
 import React from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import Navigation from "../components/Navigation"
 import Loading from "../components/Loading"
-import { DEFAULT_SESSION } from "../constants"
 import { adaptAttemptToSession } from "../utils/attemptAdapter"
 import { formatExam } from "../utils/format"
 import { translate } from "../utils/translation"
@@ -18,16 +15,18 @@ import type { Session } from "../types"
 const ExamPage: React.FC = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const { setExam, startNewExam } = useExam()
+  const { setExam } = useExam()
   const { getAttempt } = useAttempts()
   const [, setAttemptId] = useAttemptId()
   const { showToast } = useToast()
 
   const id = searchParams.get("id")
+  const revision = searchParams.get("revision") === "1"
   const [startingSession, setStartingSession] = React.useState<Session | null>(null)
 
   React.useEffect(() => {
     let cancelled = false
+    setStartingSession(null)
 
     async function load() {
       if (!id) {
@@ -40,7 +39,7 @@ const ExamPage: React.FC = () => {
         const result = await getAttempt(id)
         if (cancelled) return
 
-        const adapted = adaptAttemptToSession(result)
+        const adapted = adaptAttemptToSession(result, { revision })
         if (!adapted) {
           showToast(translate("cover.invalid-exam-message"), 5000)
           navigate("/app", { replace: true })
@@ -49,7 +48,7 @@ const ExamPage: React.FC = () => {
 
         setExam(formatExam(adapted.exam))
         setStartingSession(adapted.session)
-        setAttemptId(id)
+        if (!revision) setAttemptId(id)
       } catch (error) {
         if (cancelled) return
         showToast((error as Error).message, 5000)
@@ -60,22 +59,11 @@ const ExamPage: React.FC = () => {
 
     load()
     return () => { cancelled = true }
-  }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Revision is deferred — not wired to backend persistence yet.
-  const handleRevision = async (options: RevisionExamOptions) => {
-    await startNewExam({
-      ...DEFAULT_SESSION,
-      questions: options.wrongQuestions,
-      maxTime: options.maxTime,
-      examType: options.type,
-      categoryId: options.categoryId,
-    })
-  }
+  }, [id, revision]) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!startingSession) return <Loading size={200} />
 
-  return <Navigation onRevision={handleRevision} startingSession={startingSession} />
+  return <Navigation key={`${id}:${revision ? "rev" : "att"}`} startingSession={startingSession} />
 }
 
 export default ExamPage

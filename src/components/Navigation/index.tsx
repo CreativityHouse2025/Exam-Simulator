@@ -13,7 +13,7 @@ import {
 import useMediaQuery from '../../hooks/useMediaQuery'
 import { SessionReducer } from '../../utils/session'
 import { computeResults } from '../../utils/results'
-import { RevisionExamOptions, Session, SessionDispatch, SessionActionTypes, Answers, Exam } from '../../types'
+import { Session, SessionDispatch, SessionActionTypes, Answers, Exam } from '../../types'
 import useExam from '../../hooks/useExam'
 import useAttempts from '../../hooks/useAttempts'
 import useToast from '../../hooks/useToast'
@@ -35,7 +35,6 @@ const ContainerStyles = styled.div`
 
 export interface NavigationProps {
   startingSession: Session
-  onRevision: (options: RevisionExamOptions) => void
 }
 
 /**
@@ -46,7 +45,7 @@ function toOriginalIndices(displayIndices: number[], questionChoices: Exam[numbe
   return displayIndices.map((displayIdx) => questionChoices[displayIdx]?.originalIndex ?? displayIdx)
 }
 
-const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onRevision }) => {
+const NavigationComponent: React.FC<NavigationProps> = ({ startingSession }) => {
   const { exam: examOrNull } = useExam()
   const exam = examOrNull!
   const [session, updateSession] = React.useReducer(SessionReducer, startingSession)
@@ -87,6 +86,9 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onRev
       updateSession(actionArray)
 
       const nextSession = SessionReducer(session, actionArray)
+
+      // Revision sessions have no backend attempt — skip all persistence.
+      if (nextSession.examType === 'revision') return
 
       const isCompletion =
         session.examState === 'in-progress' &&
@@ -174,7 +176,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onRev
     timer: { time: session.time, maxTime: session.maxTime, paused: session.paused, update: sessionUpdate },
     exam: { examState: session.examState, reviewState: session.reviewState, update: sessionUpdate, categoryId: session.categoryId, examId: session.examId },
     data: { bookmarks: session.bookmarks, answers: session.answers, examType: session.examType, isSyncing, update: sessionUpdate }
-  }  
+  }
 
   return (
     <SessionNavigationContext.Provider value={contextValues.navigation}>
@@ -186,7 +188,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onRev
                 <ContainerStyles id="middle-container">
                   <Drawer open={open} toggleOpen={toggleOpen} />
 
-                  <Content onRevision={onRevision} open={open} />
+                  <Content open={open} />
                 </ContainerStyles>
 
                 <Footer open={open} questionCount={exam.length} />

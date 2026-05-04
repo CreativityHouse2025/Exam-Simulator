@@ -18,21 +18,33 @@ const SkeletonRect = styled.span<{ $width: string; $height?: string; $radius?: s
   animation: ${wave} 1.5s infinite linear;
 `
 
+const SkeletonRects = styled.div`
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+`
+
+type Rect = { width: string; height?: string; radius?: string }
+
 type CellDef = {
   labelKey: string
-  width: string
-  height?: string
-  radius?: string
+  rects: Rect[]
 }
 
 const CELLS: CellDef[] = [
-  { labelKey: "history.table.type",        width: "50px",  height: "22px", radius: "4px"  },
-  { labelKey: "history.table.exam-domain", width: "150px"                                  },
-  { labelKey: "history.table.state",       width: "90px"                                   },
-  { labelKey: "history.table.score",       width: "38px"                                   },
-  { labelKey: "history.table.status",      width: "56px",  height: "22px", radius: "20px" },
-  { labelKey: "history.table.date",        width: "84px"                                   },
-  { labelKey: "history.table.action",      width: "74px",  height: "30px", radius: "6px"  },
+  { labelKey: "history.table.type",        rects: [{ width: "50px",  height: "22px", radius: "4px"  }] },
+  { labelKey: "history.table.exam-domain", rects: [{ width: "150px"                                  }] },
+  { labelKey: "history.table.state",       rects: [{ width: "90px"                                   }] },
+  { labelKey: "history.table.score",       rects: [{ width: "38px"                                   }] },
+  { labelKey: "history.table.status",      rects: [{ width: "56px",  height: "22px", radius: "20px" }] },
+  { labelKey: "history.table.date",        rects: [{ width: "84px"                                   }] },
+  {
+    labelKey: "history.table.action",
+    rects: [
+      { width: "74px", height: "30px", radius: "6px" },
+      { width: "74px", height: "30px", radius: "6px" },
+    ],
+  },
 ]
 
 const ROWS = 5
@@ -42,9 +54,13 @@ const AttemptHistorySkeleton: React.FC = () => (
   <>
     {Array.from({ length: ROWS }, (_, i) => (
       <Tr key={i} $index={i}>
-        {CELLS.map(({ labelKey, width, height, radius }) => (
+        {CELLS.map(({ labelKey, rects }) => (
           <Td key={labelKey} data-label={translate(labelKey)}>
-            <SkeletonRect $width={width} $height={height} $radius={radius} />
+            <SkeletonRects>
+              {rects.map((rect, j) => (
+                <SkeletonRect key={j} $width={rect.width} $height={rect.height} $radius={rect.radius} />
+              ))}
+            </SkeletonRects>
           </Td>
         ))}
       </Tr>

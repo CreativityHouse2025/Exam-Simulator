@@ -2,7 +2,7 @@ import React from "react"
 import type { BackendExamType, Session } from "../types"
 import { ExamContext } from "../contexts"
 import { translate } from "../utils/translation"
-import { formatSession, formatExam, shuffleArray } from "../utils/format"
+import { shuffleArray } from "../utils/format"
 import { getExamByQuestionIds } from "../utils/exam"
 import { BuiltExam, ExamFactory } from "../utils/ExamFactory"
 import useAttempts from "./useAttempts"
@@ -20,34 +20,10 @@ export default function useExam() {
   const { startAttempt } = useAttempts()
   const { showToast } = useToast()
 
-  const hydrateAndSet = React.useCallback(
-    (prepared: Session): boolean => {
-      const examData = getExamByQuestionIds(prepared.questions)
-      if (examData === null) {
-        showToast(translate("cover.invalid-exam-message"), 5000)
-        return false
-      }
-      setExam(formatExam(examData))
-      return true
-    },
-    [setExam, showToast]
-  )
-
-  /**
-   * Build and load a new exam from a seed session.
-   * Returns the new attempt_id on success, null on failure, or 'revision' for revision sessions.
-   */
+  /** Build and persist a new full or domain exam attempt. Returns the attempt_id or null on failure. */
   const startNewExam = React.useCallback(
     async (seed: Session): Promise<string | null> => {
       if (!seed.examType) throw new Error("No exam type found in session")
-
-      // Revision is out of scope for backend persistence — run locally only
-      if (seed.examType === "revision") {
-        const durationInMinutes = seed.maxTime / 60
-        const prepared = formatSession({ ...seed, examState: "in-progress" }, seed.questions.length, durationInMinutes)
-        const ok = hydrateAndSet(prepared)
-        return ok ? "revision" : null
-      }
 
       try {
         const built: BuiltExam = seed.examType === "full"
@@ -95,7 +71,7 @@ export default function useExam() {
         return null
       }
     },
-    [hydrateAndSet, startAttempt, showToast]
+    [startAttempt, showToast]
   )
 
   return { exam, setExam, startNewExam }

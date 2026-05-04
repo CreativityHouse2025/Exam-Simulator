@@ -1,10 +1,11 @@
-import type { ExamType, ThemedStyles, RevisionExamOptions } from '../../types'
+import type { ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
 import ExamComponent from './Exam'
 import Summary from './Summary'
 import { SessionDataContext, SessionExamContext } from '../../contexts'
+import { ExamType } from '../../types'
 
 export const MainStyles = styled.main<MainStylesProps>`
   width: 100%;
@@ -24,7 +25,7 @@ const ContentStyles = styled.div<ThemedStyles>`
   transition: 0.3s;
 `
 
-const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
+const ContentComponent: React.FC<ContentProps> = ({ open }) => {
   const { examState, reviewState } = React.useContext(SessionExamContext)
   const { examType } = React.useContext(SessionDataContext)
 
@@ -33,7 +34,7 @@ const ContentComponent: React.FC<ContentProps> = ({ open, onRevision }) => {
 
   return (
     <MainStyles id="main" $open={open}>
-      <ContentStyles id="content">{finished && summary ? <Summary onRevision={onRevision} examType={examType as ExamType} /> : <ExamComponent isReview={finished} />}</ContentStyles>
+      <ContentStyles id="content">{finished && summary ? <Summary examType={examType as ExamType} /> : <ExamComponent isReview={finished} />}</ContentStyles>
     </MainStyles>
   )
 }
@@ -42,7 +43,6 @@ export default ContentComponent
 
 export interface ContentProps {
   open: boolean
-  onRevision: (options: RevisionExamOptions) => void
 }
 
 export interface MainStylesProps {
