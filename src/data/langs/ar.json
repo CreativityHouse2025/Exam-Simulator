@@ -237,7 +237,8 @@
     },
     "actions": {
       "continue": "متابعة",
-      "review": "مراجعة"
+      "review": "مراجعة",
+      "retry": "إعادة الأخطاء"
     }
   },
   "attempts": {

@@ -6,6 +6,7 @@ import categories from "../../data/exam-data/categories.json"
 import useSettings from "../../hooks/useSettings"
 import { formatDate } from "../../utils/format"
 import { translate } from "../../utils/translation"
+import { canRetryAttempt } from "../../utils/exam"
 import AttemptStateIcon from "./AttemptStateIcon"
 import AttemptStatusBadge from "./AttemptStatusBadge"
 import type { AttemptSummary } from "../../types"
@@ -115,12 +116,18 @@ const ScoreText = styled.span<ThemedStyles & { $status: string | null }>`
     $status === "pass" ? theme.correct : $status === "fail" ? theme.incorrect : theme.grey[7]};
 `
 
+const ActionButtons = styled.div`
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+`
+
 const ReviewButton = styled.button<ThemedStyles>`
   background: none;
   border: 1.5px solid ${({ theme }) => theme.primary};
   border-radius: 6px;
   padding: 0.55rem;
-  min-width: 8rem;
+  width: 11rem;
   font-size: 1.2rem;
   font-weight: 600;
   color: ${({ theme }) => theme.primary};
@@ -134,13 +141,32 @@ const ReviewButton = styled.button<ThemedStyles>`
   }
 `
 
-/** Solid filled button for in-progress rows, matching the reference's dark Continue style. */
-const ContinueButton = styled.button<ThemedStyles>`
-  background: ${({ theme }) => theme.tertiary};
+const RetryButton = styled.button<ThemedStyles & { $disabled: boolean }>`
+  background: ${({ theme, $disabled }) => $disabled ? theme.grey[4] : theme.tertiary};
   border: none;
   border-radius: 6px;
-    padding: 0.55rem;
-  min-width: 8rem;
+  padding: 0.55rem;
+  width: 11rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: ${({ $disabled }) => $disabled ? "not-allowed" : "pointer"};
+  white-space: nowrap;
+  font-family: ${({ theme }) => theme.fontFamily};
+  transition: opacity 0.2s ease;
+  opacity: ${({ $disabled }) => $disabled ? 0.5 : 1};
+
+  &:hover {
+    opacity: ${({ $disabled }) => $disabled ? 0.5 : 0.82};
+  }
+`
+
+const ContinueButton = styled.button<ThemedStyles>`
+  background: ${({ theme }) => theme.primary};
+  border: none;
+  border-radius: 6px;
+  padding: 0.55rem;
+  width: 11rem;
   font-size: 1.2rem;
   font-weight: 600;
   color: #fff;
@@ -167,6 +193,7 @@ const AttemptHistoryRow: React.FC<Props> = ({ attempt, index }) => {
 
   const scoreDisplay = attempt.exam_state === "completed" ? `${attempt.score}%` : "—"
   const isInProgress = attempt.exam_state === "in-progress"
+  const retryEnabled = canRetryAttempt(attempt.exam_type, attempt.score < 100)
 
   return (
     <Tr $index={index}>
@@ -189,15 +216,25 @@ const AttemptHistoryRow: React.FC<Props> = ({ attempt, index }) => {
       </Td>
       <Td data-label={translate("history.table.date")}>{formatDate(attempt.created_at)}</Td>
       <Td data-label={translate("history.table.action")}>
-        {isInProgress ? (
-          <ContinueButton onClick={() => navigate(`/app/exam?id=${attempt.id}`)}>
-            {translate("history.actions.continue")}
-          </ContinueButton>
-        ) : (
-          <ReviewButton onClick={() => navigate(`/app/exam?id=${attempt.id}`)}>
-            {translate("history.actions.review")}
-          </ReviewButton>
-        )}
+        <ActionButtons>
+          {isInProgress ? (
+            <ContinueButton onClick={() => navigate(`/app/exam?id=${attempt.id}`)}>
+              {translate("history.actions.continue")}
+            </ContinueButton>
+          ) : (
+            <ReviewButton onClick={() => navigate(`/app/exam?id=${attempt.id}`)}>
+              {translate("history.actions.review")}
+            </ReviewButton>
+          )}
+          {attempt.exam_type === "full" && (
+            <RetryButton
+              $disabled={!retryEnabled}
+              onClick={retryEnabled ? () => navigate(`/app/exam?id=${attempt.id}&revision=1`) : undefined}
+            >
+              {translate("history.actions.retry")}
+            </RetryButton>
+          )}
+        </ActionButtons>
       </Td>
     </Tr>
   )

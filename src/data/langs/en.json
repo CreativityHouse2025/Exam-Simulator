@@ -220,7 +220,8 @@
     },
     "actions": {
       "continue": "Continue",
-      "review": "Review"
+      "review": "Review",
+      "retry": "Retry Mistakes"
     }
   },
   "attempts": {

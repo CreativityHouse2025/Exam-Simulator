@@ -238,16 +238,6 @@ export type AuthContextType = {
   cancelSessionCheck: () => void
 }
 
-export type RevisionDetails = {
-  maxTime: Session['maxTime']
-  wrongQuestions: Session['questions']
-  categoryId: Session['categoryId']
-}
-
-export type RevisionExamOptions = RevisionDetails & {
-  type: ExamType
-}
-
 export type Results = {
   // status-related
   pass?: boolean
@@ -266,8 +256,6 @@ export type Results = {
   incompleteCount: number
   totalQuestions: number
 
-  // for review
-  revisionDetails: RevisionDetails
 }
 
 // Attempt types (mirror api/_lib/types.ts shapes for frontend use)

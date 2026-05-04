@@ -1,4 +1,4 @@
-import type { ExamType, Results, RevisionExamOptions, ThemedStyles } from '../../types'
+import type { ExamType, Results, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -6,7 +6,8 @@ import SummaryRow from './SummaryRow'
 import { formatDate, formatTimer } from '../../utils/format'
 import { translate } from '../../utils/translation'
 import useResults from '../../hooks/useResults'
-import { isRetakeAllowed } from '../../utils/exam'
+import useAttemptId from '../../hooks/useAttemptId'
+import { canRetryAttempt } from '../../utils/exam'
 import { useNavigate } from 'react-router-dom'
 
 export const TitleStyles = styled.div<ThemedStyles>`
@@ -94,7 +95,7 @@ const ButtonsContainer = styled.div`
   gap: 1rem;
 `
 
-const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: RevisionExamOptions) => void }> = ({ examType, onRevision }) => {
+const SummaryComponent: React.FC<{ examType: ExamType }> = ({ examType }) => {
   const {
     pass,
     passPercent,
@@ -107,10 +108,10 @@ const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: Rev
     incorrectCount,
     incompleteCount,
     totalQuestions,
-    revisionDetails
-  } = useResults(true) as Results // use true because component will only render when exam is finished
+  } = useResults(true) as Results
 
-  const canRetake = isRetakeAllowed(examType, revisionDetails.wrongQuestions.length)
+  const [attemptId] = useAttemptId()
+  const canRetake = canRetryAttempt(examType, incorrectCount + incompleteCount > 0)
 
   const translated = {
     title: translate('content.summary.title'),
@@ -121,15 +122,8 @@ const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: Rev
     home: translate('content.summary.home'),
     retake: translate('content.summary.retake-wrong'),
   }
-  
-  const navigate = useNavigate()
 
-  const handleRevision = React.useCallback(() => {
-    onRevision({
-      ...revisionDetails,
-      type: 'revision'
-    });
-  }, [])
+  const navigate = useNavigate()
 
   return (
     <SummaryContainer id="summary">
@@ -159,9 +153,16 @@ const SummaryComponent: React.FC<{ examType: ExamType, onRevision: (options: Rev
       </div>
 
       <ButtonsContainer>
-        {canRetake && <RetakeButton id="retake-button" title='Revise your mistakes' className="no-select" onClick={handleRevision}>
-          {translated.retake}
-        </RetakeButton>}
+        {canRetake && (
+          <RetakeButton
+            id="retake-button"
+            title='Revise your mistakes'
+            className="no-select"
+            onClick={() => navigate(`/app/exam?id=${attemptId}&revision=1`)}
+          >
+            {translated.retake}
+          </RetakeButton>
+        )}
         <RestartButton id="restart-button" title='Homepage' className="no-select" onClick={() => navigate("/")}>
           {translated.home}
         </RestartButton>
