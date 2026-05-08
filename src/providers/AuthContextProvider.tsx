@@ -2,12 +2,8 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import { AuthContext } from "../contexts"
 import type { ApiResponse, AuthStatus, UserProfile } from "../types"
 
-type AuthContextProviderProps = {
-  children: React.ReactNode
-}
-
 /** Provides auth state to the app. Restores session from cookies via /me on mount. */
-export default function AuthContextProvider({ children }: AuthContextProviderProps) {
+export default function AuthContextProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserProfile | null>(null)
   const [authStatus, setAuthStatus] = useState<AuthStatus>("pending")
   const sessionCheckCancelled = useRef(false)

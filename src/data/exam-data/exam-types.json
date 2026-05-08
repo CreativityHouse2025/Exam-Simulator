@@ -1,32 +1,20 @@
 {
-    "exam": {
-        "id": "exam",
+    "full": {
+        "id": "full",
         "name": {
             "en": "New Exam",
             "ar": "امتحان جديد"
         },
         "durationMinutes": 230,
-        "passingRate": 75,
-        "allowRetake": true
-    },
-    "miniexam": {
-        "id": "miniexam",
+        "passingRate": 75
+        },
+    "domain": {
+        "id": "domain",
         "name": {
             "en": "Mini Exam",
             "ar": "امتحان مصغر"
         },
         "durationMinutes": 300,
-        "passingRate": 85,
-        "allowRetake": false
-    },
-    "revision": {
-        "id": "revision",
-        "name": {
-            "en": "Review Mistakes",
-            "ar": "مراجعة الأخطاء"
-        },
-        "durationMinutes": null,
-        "passingRate": null,
-        "allowRetake": false
+        "passingRate": 85
     }
 }

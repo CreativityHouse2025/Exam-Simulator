@@ -14,6 +14,110 @@ export type Database = {
   }
   public: {
     Tables: {
+      exam_attempt_questions: {
+        Row: {
+          attempt_id: string
+          choices_order: number[]
+          is_bookmarked: boolean
+          question_id: number
+          question_index: number
+          selected_choices: number[]
+        }
+        Insert: {
+          attempt_id: string
+          choices_order: number[]
+          is_bookmarked?: boolean
+          question_id: number
+          question_index: number
+          selected_choices?: number[]
+        }
+        Update: {
+          attempt_id?: string
+          choices_order?: number[]
+          is_bookmarked?: boolean
+          question_id?: number
+          question_index?: number
+          selected_choices?: number[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_attempt_questions_attempt_id_fkey"
+            columns: ["attempt_id"]
+            isOneToOne: false
+            referencedRelation: "exam_attempts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exam_attempts: {
+        Row: {
+          category_id: number | null
+          created_at: string
+          current_index: number
+          email_report_state: string
+          exam_id: number | null
+          exam_state: string
+          exam_type: string
+          id: string
+          parent_attempt_id: string | null
+          review_state: string
+          score: number
+          status: string | null
+          time_remaining: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category_id?: number | null
+          created_at?: string
+          current_index?: number
+          email_report_state?: string
+          exam_id?: number | null
+          exam_state?: string
+          exam_type: string
+          id?: string
+          parent_attempt_id?: string | null
+          review_state?: string
+          score?: number
+          status?: string | null
+          time_remaining?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category_id?: number | null
+          created_at?: string
+          current_index?: number
+          email_report_state?: string
+          exam_id?: number | null
+          exam_state?: string
+          exam_type?: string
+          id?: string
+          parent_attempt_id?: string | null
+          review_state?: string
+          score?: number
+          status?: string | null
+          time_remaining?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_attempts_parent_attempt_id_fkey"
+            columns: ["parent_attempt_id"]
+            isOneToOne: false
+            referencedRelation: "exam_attempts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exam_attempts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       users: {
         Row: {
           created_at: string

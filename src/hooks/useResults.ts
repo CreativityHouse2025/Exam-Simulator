@@ -1,8 +1,9 @@
 import React from 'react'
-import { ExamContext, SessionDataContext, SessionExamContext, SessionTimerContext } from '../contexts'
+import { SessionDataContext, SessionExamContext, SessionTimerContext } from '../contexts'
+import useExam from './useExam'
 import useCategoryLabel from './useCategoryLabel'
 import useFullExamLabel from './useFullExamLabel'
-import { ExamType, Question, Results } from '../types'
+import { Question, Results } from '../types'
 import examTypes from '../data/exam-data/exam-types.json'
 
 type QuestionStats = {
@@ -16,11 +17,12 @@ export default function useResults(isExamFinished: boolean): Results | null {
     const { answers, examType } = React.useContext(SessionDataContext)
     const { maxTime, time } = React.useContext(SessionTimerContext)
     const { categoryId, examId } = React.useContext(SessionExamContext)
-    const exam = React.useContext(ExamContext)
+    const { exam: examOrNull } = useExam()
+    const exam = examOrNull!
 
-    const passingScore = examTypes[examType as ExamType].passingRate ?? null
+    const passingScore = examTypes[examType as keyof typeof examTypes]?.passingRate ?? null
     let sourceLabel;
-    const isFullExam = examType === 'exam'
+    const isFullExam = examType === 'full'
     if (isFullExam) {
         sourceLabel = useFullExamLabel(examId!)
     } else {
@@ -69,16 +71,6 @@ export default function useResults(isExamFinished: boolean): Results | null {
             ? undefined
             : score >= passingScore
 
-    const wrongQuestions = React.useMemo<Question['id'][]>(() => {
-        return [...questionStats.incorrect, ...questionStats.incomplete]
-    }, [questionStats.incorrect, questionStats.incomplete])
-
-    const revisionDetails = {
-        maxTime,
-        wrongQuestions,
-        categoryId,
-    }
-
     return isExamFinished ? {
         // status
         pass,
@@ -96,8 +88,5 @@ export default function useResults(isExamFinished: boolean): Results | null {
         incorrectCount: questionStats.incorrect.length,
         incompleteCount: questionStats.incomplete.length,
         totalQuestions: exam.length,
-
-        // review
-        revisionDetails
     } : null
 }

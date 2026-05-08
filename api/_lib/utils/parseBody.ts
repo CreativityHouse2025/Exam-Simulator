@@ -18,10 +18,12 @@ export function assertJsonObject(body: unknown): Record<string, unknown> {
  */
 export async function parseJsonBody(request: Request, maxBytes = DEFAULT_MAX_BODY_BYTES): Promise<unknown> {
   const contentLength = request.headers.get("Content-Length")
+  // use content-length header first if available
   if (contentLength && Number(contentLength) > maxBytes) {
     throw new AppError({ statusCode: 413, code: "VALIDATION_ERROR", message: "Request body too large" })
   }
 
+  // fallback to manual encoding
   const text = await request.text()
   if (new TextEncoder().encode(text).byteLength > maxBytes) {
     throw new AppError({ statusCode: 413, code: "VALIDATION_ERROR", message: "Request body too large" })

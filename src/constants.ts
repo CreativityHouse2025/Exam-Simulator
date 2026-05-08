@@ -1,5 +1,4 @@
 import type { Lang, LangCode, Session, Settings } from './types'
-import styled from "styled-components";
 
 // Theme constants
 const colors = ['#b5965d', '#593752', '#301e2c', '#f8e3e0', '#000000', '#ffffff']
@@ -78,7 +77,6 @@ export const SESSION_ACTION_TYPES = {
   SET_TIMER_PAUSED: 'SET_TIMER_PAUSED' as const,
   SET_EXAM_STATE: 'SET_EXAM_STATE' as const,
   SET_REVIEW_STATE: 'SET_REVIEW_STATE' as const,
-  SET_EMAIL_SENT: 'SET_EMAIL_SENT' as const
 } as const
 
 // Property mapping for session actions
@@ -90,14 +88,7 @@ export const SESSION_ACTION_PROPS = {
   SET_TIMER_PAUSED: 'paused' as const,
   SET_EXAM_STATE: 'examState' as const,
   SET_REVIEW_STATE: 'reviewState' as const,
-  SET_EMAIL_SENT: 'emailSent' as const
 } as const
-
-// Constant for the general category (mix of all categories)
-export const GENERAL_CATEGORY_ID = 0
-
-// Random exam id (get 180 random questions)
-export const RANDOM_EXAM_ID = 0;
 
 // Constant for category menu padding (shared variable)
 export const MENU_PADDING = "1.6rem 1.4rem"
@@ -109,12 +100,13 @@ export const DEFAULT_SESSION: Session = {
   maxTime: 0 as const,
   time: 0 as const,
   paused: false as const,
-  examState: 'not-started' as const,
+  examState: 'in-progress' as const,
   reviewState: 'summary' as const,
   questions: [] as const,
   answers: [] as const,
-  emailSent: false,
-  categoryId: GENERAL_CATEGORY_ID,
+  categoryId: null,
+  examId: null,
+  examType: 'full' as const,
   bookmarks: [] as const,
 } as const
 
@@ -124,25 +116,8 @@ export const LANGUAGES: Record<LangCode, Lang> = {
   en: { code: 'en', name: 'English', dir: 'ltr' } as const
 } as const
 
-// Wrapper component to query for reduced animations in user's device
-export const ReducedMotionWrapper = styled.div`
-  @media (prefers-reduced-motion: reduce) {
-    & *,
-    & *::before,
-    & *::after {
-      animation: none !important;
-      transition: none !important;
-      transform: none !important;
-      scroll-behavior: auto !important;
-    }
-  }
-`;
-
 // Default user settings
 export const DEFAULT_USER_SETTINGS: Settings = {
   language: 'en',
   appVersion: '1.4'
 }
-
-// Minimum required number of mistakes to allow for a retake
-export const RETAKE_MIN_MISTAKES = 10

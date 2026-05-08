@@ -38,7 +38,8 @@ export type QuestionFilter = 'all' | GridTagTypes
 export type GridTagTypes = 'marked' | 'incomplete' | 'complete' | 'incorrect' | 'correct'
 
 // v1.1: Add new type 'revision' for mistake revision exam and remove ExamID type
-export type ExamType = 'exam' | 'miniexam' | 'revision'
+// v2.0 pre-phase 5: renamed 'exam' → 'full' and 'miniexam' → 'domain' to match the DB schema
+export type ExamType = 'full' | 'domain' | 'revision'
 export type Exam = Question[]
 
 export type QuestionTypes = 'multiple-choice'
@@ -49,8 +50,8 @@ export interface Question<QT extends QuestionTypes = QuestionTypes> {
   id: number
   /** question type */
   type: QT
-  /** question type */
-  categoryId: number
+  /** null means the question is not assigned to any domain category */
+  categoryId: number | null
   /** question content */
   text: string
   /** explanation of why the correct answer is correct */
@@ -66,6 +67,8 @@ export interface Choice {
   text: string
   /** is the choice correct */
   correct: boolean
+  /** original index in the question bank before any shuffle; present only on shuffled exams */
+  originalIndex?: number
 }
 
 // Answer types
@@ -78,7 +81,7 @@ export type AnswerOfMultipleChoice = AnswerOf['multiple-choice']
 export type Answers = AnswerOfMultipleChoice[]
 
 // Session state types
-export type ExamState = 'not-started' | 'in-progress' | 'completed'
+export type ExamState = 'in-progress' | 'completed'
 export type ReviewState = 'summary' | 'question'
 
 // Session interface
@@ -101,18 +104,14 @@ export interface Session {
   questions: Question['id'][]
   /** the list of answers */
   answers: Answers
-  /** v1.1: flag to ensure that email is sent only once per session completion */
-  emailSent: boolean
-  /** v1.1: the category of the exam */
-  categoryId: number
+  /** null for full exams */
+  categoryId: number | null
+  /** null for domain exams */
+  examId: number | null
   /** the list of bookmarked questions */
   bookmarks: number[]
   /** the type of the exam */
-  examType?: ExamType
-  /** the ID of the full exam (if it is a full exam) */
-  examId?: number
-  /** session update function - will be injected by reducer */
-  update?: SessionDispatch
+  examType: ExamType
 }
 
 // v2.0: Type for the generic dropdown item (category or fullexam)
@@ -130,7 +129,6 @@ export type SessionActionTypes =
   | 'SET_TIMER_PAUSED'
   | 'SET_EXAM_STATE'
   | 'SET_REVIEW_STATE'
-  | 'SET_EMAIL_SENT'
 
 // Session actions mapping
 type SessionActionsMap = {
@@ -141,7 +139,6 @@ type SessionActionsMap = {
   SET_TIMER_PAUSED: { payload: boolean; prop: 'paused' }
   SET_EXAM_STATE: { payload: ExamState; prop: 'examState' }
   SET_REVIEW_STATE: { payload: ReviewState; prop: 'reviewState' }
-  SET_EMAIL_SENT: { payload: Session['emailSent']; prop: 'emailSent' }
 }
 
 export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {
@@ -156,43 +153,12 @@ export type SessionActions = SessionAction | SessionAction[]
 export type SessionReducerFunc = (state: Session, actions: SessionActions) => Session
 export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, SessionActionsMap[T]['payload']][]) => void
 
-// Session context slice types
-export type SessionNavigation = Pick<Session, 'index' | 'update'>
-export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused' | 'update'>
-export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'update' | 'categoryId'| 'examId'>
-export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType' | 'update' | 'emailSent'>
-
-// Email API arguments type
-export type SendEmailRequestBody = {
-  subject: string;
-  text: string;
-  html?: string;
-  attachments?: {
-    filename: string;
-    /** pdf content in base64 */
-    content: string;
-  }[]
-}
-
-// Translations to pass in the API (serverless doesn't share app runtime state)
-export type Translations = {
-  companyName: string
-  reportTitle: string
-  missing: string
-  correct: string
-  incorrect: string
-  explanation: string
-  fullName: string
-}
-
-// Generate report API arguments type
-export type GenerateReportRequestBody = {
-  exam: Exam
-  userAnswers: Answers
-  langCode: LangCode
-  userFullName: string
-  translations: Translations
-}
+// Session context slice types.
+// `update` is carried separately (not on Session) so Session stays JSON-serializable for Phase 5.
+export type SessionNavigation = Pick<Session, 'index'> & { update: SessionDispatch }
+export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused'> & { update: SessionDispatch }
+export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'categoryId' | 'examId'> & { update: SessionDispatch }
+export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType'> & { isSyncing: boolean; update: SessionDispatch }
 
 // User settings (initially null until user inserts data)
 export type Settings = {
@@ -207,6 +173,11 @@ export type SettingsContextType = {
   settings: Settings
   /** state setter */
   setSettings: React.Dispatch<React.SetStateAction<Settings>>
+}
+
+export type ExamContextType = {
+  exam: Exam | null
+  setExam: React.Dispatch<React.SetStateAction<Exam | null>>
 }
 
 // Type for the toast component state
@@ -237,6 +208,12 @@ export type AppErrorCode =
   | "METHOD_NOT_ALLOWED"
   | "PASSWORD_UPDATE_FAILED"
   | "SESSION_CONFLICT"
+  | "SUBSCRIPTION_CHECK_FAILED"
+  | "ATTEMPT_CREATE_FAILED"
+  | "ATTEMPT_SAVE_FAILED"
+  | "NOT_FOUND"
+  | "FORBIDDEN"
+  | "CONFLICT"
 
 export type ApiSuccess<T> = { success: true; data: T }
 export type ApiError = { success: false; error: { code: AppErrorCode; message: string } }
@@ -261,16 +238,6 @@ export type AuthContextType = {
   cancelSessionCheck: () => void
 }
 
-export type RevisionDetails = {
-  maxTime: Session['maxTime']
-  wrongQuestions: Session['questions']
-  categoryId: Session['categoryId']
-}
-
-export type RevisionExamOptions = RevisionDetails & {
-  type: ExamType
-}
-
 export type Results = {
   // status-related
   pass?: boolean
@@ -280,7 +247,7 @@ export type Results = {
   // time & meta
   elapsedTime: number
   date: Date
-  sourceLabel: string
+  sourceLabel: string | undefined
   sourceType: 'category' | 'exam'
 
   // question stats
@@ -289,6 +256,88 @@ export type Results = {
   incompleteCount: number
   totalQuestions: number
 
-  // for review
-  revisionDetails: RevisionDetails
 }
+
+// Attempt types (mirror api/_lib/types.ts shapes for frontend use)
+export type BackendExamType = "full" | "domain"
+
+export type AttemptSummary = {
+  id: string
+  exam_type: BackendExamType
+  exam_id: number | null
+  category_id: number | null
+  exam_state: "in-progress" | "completed"
+  score: number
+  status: "pass" | "fail" | null
+  created_at: string
+}
+
+export type AttemptDetail = AttemptSummary & {
+  current_index: number
+  time_remaining: number
+  review_state: "summary" | "question"
+  email_report_state: "unsent" | "pending" | "sent" | "failed"
+}
+
+export type AttemptQuestion = {
+  question_index: number
+  question_id: number
+  choices_order: number[]
+  selected_choices: number[]
+  is_bookmarked: boolean
+}
+
+export type ListAttemptsResult = {
+  attempts: AttemptSummary[]
+}
+
+export type GetAttemptResult = {
+  attempt: AttemptDetail
+  questions: AttemptQuestion[]
+}
+
+type InsertAttemptFull = {
+  exam_type: "full"
+  exam_id: number
+  category_id: null
+  question_ids: number[]
+  choices_orders: number[][]
+  duration_minutes: number
+}
+
+type InsertAttemptDomain = {
+  exam_type: "domain"
+  category_id: number
+  exam_id: null
+  question_ids: number[]
+  choices_orders: number[][]
+  duration_minutes: number
+}
+
+export type InsertAttemptRequestBody = InsertAttemptFull | InsertAttemptDomain
+
+export type SaveAttemptAnswer = {
+  question_index: number
+  selected_choices: number[]
+  is_bookmarked: boolean
+}
+
+export type SaveAttemptInProgress = {
+  exam_state: "in-progress"
+  current_index: number
+  time_remaining: number
+  review_state: "summary" | "question"
+  answers: SaveAttemptAnswer[]
+}
+
+export type SaveAttemptCompleted = {
+  exam_state: "completed"
+  current_index: number
+  time_remaining: number
+  review_state: "summary" | "question"
+  answers: SaveAttemptAnswer[]
+  score: number
+  status: "pass" | "fail"
+}
+
+export type SaveAttemptRequestBody = SaveAttemptInProgress | SaveAttemptCompleted

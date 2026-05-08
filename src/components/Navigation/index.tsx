@@ -5,7 +5,6 @@ import Footer from './Footer'
 import Content from '../Content'
 import Confirms from './Confirms'
 import {
-  ExamContext,
   SessionDataContext,
   SessionExamContext,
   SessionNavigationContext,
@@ -13,49 +12,162 @@ import {
 } from '../../contexts'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import { SessionReducer } from '../../utils/session'
-import { RevisionExamOptions, Session, SessionDispatch } from '../../types'
+import { computeResults } from '../../utils/results'
+import { Session, SessionDispatch, SessionActionTypes, Answers, Exam } from '../../types'
+import useExam from '../../hooks/useExam'
+import useAttempts from '../../hooks/useAttempts'
+import useToast from '../../hooks/useToast'
+import { translate } from '../../utils/translation'
+import { SESSION_ACTION_TYPES } from '../../constants'
+
+const NavigationLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+`
 
 const ContainerStyles = styled.div`
   display: flex;
-  height: calc(100vh - 10rem);
-  padding-top: 6rem;
-  padding-bottom: 4rem;
+  flex: 1;
   overflow: hidden;
 `
 
 export interface NavigationProps {
   startingSession: Session
-  onSessionUpdate: (session: Session) => void
-  onRevision: (options: RevisionExamOptions) => void
 }
 
-const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate, onRevision }) => {
-  const exam = React.useContext(ExamContext)
-  const [session, updateSession] = React.useReducer(SessionReducer, startingSession)  
+/**
+ * Converts display-space answer indices back to original (pre-shuffle) indices before persisting to DB.
+ * Falls back to the display index for unshuffled questions (e.g. revision) where originalIndex is absent.
+ */
+function toOriginalIndices(displayIndices: number[], questionChoices: Exam[number]['choices']): number[] {
+  return displayIndices.map((displayIdx) => questionChoices[displayIdx]?.originalIndex ?? displayIdx)
+}
 
-  const isMobile = useMediaQuery('(max-width: 48rem)'); // 768px, hook is called at each render  
+const NavigationComponent: React.FC<NavigationProps> = ({ startingSession }) => {
+  const { exam: examOrNull } = useExam()
+  const exam = examOrNull!
+  const [session, updateSession] = React.useReducer(SessionReducer, startingSession)
+  const { saveAttempt, submitAttempt } = useAttempts()
+  const { showToast } = useToast()
+
+  const isMobile = useMediaQuery('(max-width: 48rem)')
   const [open, setOpen] = React.useState<boolean>(() => !isMobile)
-  
+
   React.useEffect(() => {
     if (isMobile) {
-      setOpen(false); // close navigation on mobile
+      setOpen(false)
     } else {
-      setOpen(true); // open navigation on larger screens
+      setOpen(true)
     }
-  }, [isMobile]);
+  }, [isMobile])
+
+  // Tracks the last successfully persisted answers and bookmarks so only diffs are sent on save.
+  const lastSavedRef = React.useRef<{ answers: Answers; bookmarks: number[] }>({
+    answers: startingSession.answers,
+    bookmarks: startingSession.bookmarks,
+  })
+
+  // True while a save or submit request is in-flight. Prevents concurrent requests and blocks
+  // navigation dispatches until the current request settles.
+  const isSyncingRef = React.useRef(false)
+  const [isSyncing, setIsSyncing] = React.useState(false)
 
   const sessionUpdate = React.useCallback<SessionDispatch>(
     (...actions) => {
       const actionArray = actions.map(([type, payload]) => ({ type, payload }))
-      updateSession(actionArray)
-      onSessionUpdate(SessionReducer(session, actionArray))
-    },
-    [session, onSessionUpdate]
-  )
 
-  React.useEffect(() => {
-    session.update = sessionUpdate
-  }, [sessionUpdate])
+      const isNavigation = actionArray.some((a) => a.type === (SESSION_ACTION_TYPES.SET_INDEX as SessionActionTypes))
+
+      // Block navigation while a save is in-flight so requests stay one at a time.
+      if (isNavigation && isSyncingRef.current) return
+
+      updateSession(actionArray)
+
+      const nextSession = SessionReducer(session, actionArray)
+
+      // Revision sessions have no backend attempt — skip all persistence.
+      if (nextSession.examType === 'revision') return
+
+      const isCompletion =
+        session.examState === 'in-progress' &&
+        nextSession.examState === 'completed'
+
+      if (isCompletion && nextSession.id !== '') {
+        const allAnswers = nextSession.answers.map((selected, i) => ({
+          question_index: i,
+          selected_choices: toOriginalIndices(selected ?? [], exam[i].choices),
+          is_bookmarked: nextSession.bookmarks.includes(i),
+        }))
+
+        const { score, status } = computeResults(nextSession.answers, exam, nextSession.examType)
+
+        async function doSubmit() {
+          isSyncingRef.current = true
+          setIsSyncing(true)
+          try {
+            await submitAttempt(nextSession.id, {
+              current_index: nextSession.index,
+              time_remaining: nextSession.time,
+              review_state: nextSession.reviewState,
+              answers: allAnswers,
+              score,
+              status,
+            })
+          } catch {
+            showToast(translate("attempts.errors.server-submit-failed"), 5000)
+          } finally {
+            isSyncingRef.current = false
+            setIsSyncing(false)
+          }
+        }
+        doSubmit()
+
+      } else if (isNavigation && nextSession.examState === 'in-progress' && nextSession.id !== '') {
+        const { answers: lastAnswers, bookmarks: lastBookmarks } = lastSavedRef.current
+        const diffed = nextSession.answers.reduce<{ question_index: number; selected_choices: number[]; is_bookmarked: boolean }[]>(
+          (acc, selected, i) => {
+            const answerChanged =
+              (selected?.length ?? 0) !== (lastAnswers[i]?.length ?? 0) ||
+              (selected ?? []).some((v, j) => v !== (lastAnswers[i] ?? [])[j])
+            const bookmarkChanged = nextSession.bookmarks.includes(i) !== lastBookmarks.includes(i)
+
+            if (answerChanged || bookmarkChanged) {
+              acc.push({
+                question_index: i,
+                selected_choices: toOriginalIndices(selected ?? [], exam[i].choices),
+                is_bookmarked: nextSession.bookmarks.includes(i),
+              })
+            }
+            return acc
+          },
+          []
+        )
+
+        async function doSave() {
+          isSyncingRef.current = true
+          setIsSyncing(true)
+          try {
+            await saveAttempt(nextSession.id, {
+              current_index: nextSession.index,
+              time_remaining: nextSession.time,
+              review_state: nextSession.reviewState,
+              answers: diffed,
+            })
+            lastSavedRef.current = { answers: nextSession.answers, bookmarks: nextSession.bookmarks }
+          } catch {
+            showToast(translate("attempts.errors.server-save-failed"), 5000)
+          } finally {
+            isSyncingRef.current = false
+            setIsSyncing(false)
+          }
+        }
+        doSave()
+      }
+    },
+    [session, exam, saveAttempt, submitAttempt, showToast]
+  )
 
   const toggleOpen = React.useCallback(() => setOpen((prev) => !prev), [])
 
@@ -63,7 +175,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
     navigation: { index: session.index, update: sessionUpdate },
     timer: { time: session.time, maxTime: session.maxTime, paused: session.paused, update: sessionUpdate },
     exam: { examState: session.examState, reviewState: session.reviewState, update: sessionUpdate, categoryId: session.categoryId, examId: session.examId },
-    data: { bookmarks: session.bookmarks, answers: session.answers, examType: session.examType, emailSent: session.emailSent, update: sessionUpdate }
+    data: { bookmarks: session.bookmarks, answers: session.answers, examType: session.examType, isSyncing, update: sessionUpdate }
   }
 
   return (
@@ -72,15 +184,17 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSes
         <SessionExamContext.Provider value={contextValues.exam}>
           <SessionDataContext.Provider value={contextValues.data}>
             <>
-              <ContainerStyles id="middle-container">
-                <Drawer open={open} toggleOpen={toggleOpen} />
+              <NavigationLayout>
+                <ContainerStyles id="middle-container">
+                  <Drawer open={open} toggleOpen={toggleOpen} />
 
-                <Content onRevision={onRevision} open={open} />
-              </ContainerStyles>
+                  <Content open={open} />
+                </ContainerStyles>
 
-              <Footer open={open} questionCount={exam.length} />
+                <Footer open={open} questionCount={exam.length} />
+              </NavigationLayout>
 
-              <Confirms session={session} />
+              <Confirms session={session} update={sessionUpdate} />
             </>
           </SessionDataContext.Provider>
         </SessionExamContext.Provider>

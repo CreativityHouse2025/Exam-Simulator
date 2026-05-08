@@ -6,9 +6,7 @@ import Timer from './Timer'
 import Arrows from './Arrows'
 
 const FooterStyles = styled.div<FooterStylesProps>`
-  position: fixed;
   width: 100%;
-  bottom: 0;
   background: ${({ theme }) => theme.grey[0]};
   border-top: 1px solid ${({ theme }) => theme.grey[1]};
   display: grid;

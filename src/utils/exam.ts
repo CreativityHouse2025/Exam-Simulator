@@ -1,6 +1,4 @@
-import { RETAKE_MIN_MISTAKES } from '../constants'
-import examTypes from '../data/exam-data/exam-types.json'
-import type { Exam, Question, LangCode, ExamType } from '../types'
+import type { Exam, Question, LangCode } from '../types'
 
 // Map to retrieve questions in order later
 // M is size of questions in exam, N is size of question bank
@@ -14,7 +12,7 @@ let questionList: Question[] | null = null;
  */
 export async function initQuestionMap(langCode: LangCode) {
     try {
-        const module = await import(`../data/exam-data/questions-${langCode}.json?v=1`);
+        const module = await import(`../data/exam-data/questions-${langCode}.json`);
         const questions: Question[] = module.default;
         questionMap = new Map();
 
@@ -75,20 +73,9 @@ export function getExamByQuestionIds(questionIds: number[]): Exam | null {
 }
 
 /**
- * Checks whether the user is allowed to retake the exam based on type
- * @param {ExamType} examType - The order of the questions
- * @returns {boolean}
+ * Returns true when an attempt can be retried (full exam only, with at least one wrong answer).
+ * Single source of truth for the retry gate — no callers should read examTypes config directly.
  */
-export function isRetakeAllowed(examType: ExamType, mistakeCount: number): boolean {
-    const exam = examTypes[examType];
-
-    if (!exam) {
-        throw new Error(`Unknown exam type: ${examType}`);
-    }
-
-    if (mistakeCount < RETAKE_MIN_MISTAKES) {
-        return false;
-    }
-
-    return exam.allowRetake;
+export function canRetryAttempt(examType: string, hasWrongAnswers: boolean): boolean {
+    return examType === 'full' && hasWrongAnswers
 }

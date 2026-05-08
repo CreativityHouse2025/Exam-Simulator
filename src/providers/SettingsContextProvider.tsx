@@ -4,11 +4,7 @@ import type { Settings } from "../types"
 import { useLocalStorage } from "@mantine/hooks"
 import React from "react"
 
-type SettingsProviderProps = {
-    children: React.ReactNode
-}
-
-export default function SettingsProvider({ children }: SettingsProviderProps) {    
+export default function SettingsProvider({ children }: { children: React.ReactNode }) {    
     const [settings, setSettings] = useLocalStorage<Settings>({
         key: "settings",
         defaultValue: DEFAULT_USER_SETTINGS,
