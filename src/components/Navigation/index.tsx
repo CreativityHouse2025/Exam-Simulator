@@ -101,7 +101,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession }) => 
           is_bookmarked: nextSession.bookmarks.includes(i),
         }))
 
-        const { score, status } = computeResults(nextSession.answers, exam, nextSession.examType ?? 'domain')
+        const { score, status } = computeResults(nextSession.answers, exam, nextSession.examType)
 
         async function doSubmit() {
           isSyncingRef.current = true
