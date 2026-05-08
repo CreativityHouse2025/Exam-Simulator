@@ -13,6 +13,9 @@ export const AuthContext = React.createContext<AuthContextType>({
 // Exam context
 export const ExamContext = React.createContext<ExamContextType>({} as ExamContextType)
 
+// Attempts context (used for caching)
+export const AttemptsContext = React.createContext<AttemptContextType>({} as AttemptContextType)
+
 // Settings context
 export const SettingsContext = React.createContext<SettingsContextType>({} as SettingsContextType)
 
