@@ -7,7 +7,7 @@ import Menu from './Menu'
 
 const DrawerStyles = styled.div<DrawerStylesProps>`
   width: ${({ $open }) => ($open ? '24rem' : '5rem')};
-  height: 100%;
+  height: auto;
   background: ${({ theme }) => theme.grey[0]};
   transition: 0.3s;
 `

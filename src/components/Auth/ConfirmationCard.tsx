@@ -28,7 +28,7 @@ const HintSection = styled.div<ThemedStyles>`
   color: ${({ theme }) => theme.grey[8]};
   line-height: 1.6;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 1.35rem;
   }
 `

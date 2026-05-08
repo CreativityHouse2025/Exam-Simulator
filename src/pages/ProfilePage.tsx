@@ -24,7 +24,7 @@ const InfoLabel = styled.p<ThemedStyles>`
   color: ${({ theme }) => theme.black};
   margin: 0 0 0.5rem;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 1.4rem;
   }
 `
@@ -38,7 +38,7 @@ const InfoValue = styled.p<ThemedStyles>`
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.grey[2]};
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 1.45rem;
   }
 `

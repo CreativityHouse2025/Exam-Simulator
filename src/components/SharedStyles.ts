@@ -1,6 +1,12 @@
-import styled, { keyframes } from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 import { Link } from "react-router-dom"
 import type { ThemedStyles } from "../types"
+
+/** Reusable card border: thin primary border on all sides, thick accent on top. */
+export const cardBorderMixin = css<ThemedStyles>`
+  border: 0.5px solid ${({ theme }) => theme.primary};
+  border-top: 3px solid ${({ theme }) => theme.primary};
+`
 
 /** Fade-in animation for page entrance. */
 export const fadeIn = keyframes`
@@ -26,17 +32,14 @@ export const fadeInError = keyframes`
   }
 `
 
-/** Full-viewport wrapper with radial gradient background. */
+/** Full-viewport wrapper shared across pages — background is provided by AppBackground in App.tsx. */
 export const PageWrapper = styled.div<ThemedStyles>`
-  min-height: 100dvh;
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(ellipse 80% 65% at 50% 115%, rgba(255, 220, 154, 0.87) 0%, transparent 55%),
-      radial-gradient(ellipse 55% 45% at 90% 75%, rgba(181, 150, 93, 0.2) 0%, transparent 50%),
-      radial-gradient(ellipse 50% 40% at 10% 85%, rgba(181, 150, 93, 0.14) 0%, transparent 45%),
-      radial-gradient(ellipse 90% 80% at 50% 50%, #FAFAF8 0%, #F2F0EC 45%, #E9E7E3 100%);
-  padding: 7rem 1.6rem 1.6rem;
+  justify-self: center;
+  padding: 0rem 1.6rem 1.6rem;
   box-sizing: border-box;
 `
 
@@ -46,13 +49,12 @@ export const Card = styled.div<ThemedStyles>`
   max-width: 440px;
   background: ${({ theme }) => theme.white};
   border-radius: 16px;
-  border: 0.5px solid ${({ theme }) => theme.primary};
-  border-top: 3px solid ${({ theme }) => theme.primary};
+  ${cardBorderMixin}
   padding: 2rem;
   animation: ${fadeIn} 0.4s ease-out;
   font-family: ${({ theme }) => theme.fontFamily};
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     padding: 2.5rem 3rem;
   }
 `
@@ -65,7 +67,7 @@ export const PageLogo = styled.img`
   height: 60px;
   object-cover: fit;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     width: 80px;
     height: 80px;
     margin-bottom: 1.5rem;
@@ -81,7 +83,7 @@ export const PageTitle = styled.h1<ThemedStyles>`
   color: ${({ theme }) => theme.tertiary};
   margin: 0 0 0.4rem;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 2.5rem;
   }
 `
@@ -93,7 +95,7 @@ export const PageSubtitle = styled.p<ThemedStyles>`
   color: ${({ theme }) => theme.grey[9]};
   margin: 0 0 2rem;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 1.5rem;
   }
 `
@@ -123,7 +125,7 @@ export const FormLabel = styled.label<ThemedStyles>`
   font-weight: 600;
   color: ${({ theme }) => theme.black};
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 1.5rem;
   }
 `
@@ -168,7 +170,7 @@ export const FormInput = styled.input<ThemedStyles & { $hasError?: boolean; $has
     color: ${({ theme }) => theme.grey[7]};
   }
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 1.4rem;
     padding: 0.9rem 1.2rem;
     padding-inline-start: ${({ $hasIcon }) => ($hasIcon ? "3.6rem" : "1.2rem")};
@@ -265,14 +267,14 @@ export const SubmitButton = styled.button<ThemedStyles>`
     cursor: not-allowed;
   }
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     padding: 1rem;
     font-size: 1.5rem;
   }
 `
 
 /** Styled react-router Link for page navigation (uses secondary for WCAG contrast). */
-export const NavLink = styled(Link)<ThemedStyles>`
+export const NavLink = styled(Link) <ThemedStyles>`
   color: ${({ theme }) => theme.secondary};
   font-weight: 600;
   text-decoration: none;
@@ -293,7 +295,7 @@ export const CardFooter = styled.div`
   font-size: 1.35rem;
   text-align: center;
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 1.4rem;
   }
 `
@@ -340,7 +342,7 @@ export const AuthSwitchBanner = styled.div<ThemedStyles>`
   text-align: center;
   color: ${({ theme }) => theme.grey[9]};
 
-  @media (min-width: 48rem) {
+  @media (min-width: 768px) {
     font-size: 1.4rem;
   }
 `

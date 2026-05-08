@@ -15,7 +15,25 @@ export class AppApiError extends Error {
   }
 }
 
-const errorCodeToTranslationKey: Record<AppErrorCode, string> = {
+type AuthErrorCode = Extract<
+  AppErrorCode,
+  | "INVALID_CREDENTIALS"
+  | "ACCOUNT_EXPIRED"
+  | "SUBSCRIPTION_REQUIRED"
+  | "SIGNUP_FAILED"
+  | "SIGNIN_FAILED"
+  | "CONFIRMATION_FAILED"
+  | "VALIDATION_ERROR"
+  | "MISSING_FIELDS"
+  | "SESSION_CONFLICT"
+  | "SIGNOUT_FAILED"
+  | "UNAUTHORIZED"
+  | "INTERNAL_ERROR"
+  | "METHOD_NOT_ALLOWED"
+  | "PASSWORD_UPDATE_FAILED"
+>
+
+const errorCodeToTranslationKey: Record<AuthErrorCode, string> = {
   INVALID_CREDENTIALS: "auth.errors.server-invalid-credentials",
   ACCOUNT_EXPIRED: "auth.errors.server-account-expired",
   SUBSCRIPTION_REQUIRED: "auth.errors.server-subscription-required",
@@ -33,8 +51,8 @@ const errorCodeToTranslationKey: Record<AppErrorCode, string> = {
 }
 
 function translateErrorCode(code: AppErrorCode): string {
-  const key = errorCodeToTranslationKey[code]
-  return translate(key)
+  const key = errorCodeToTranslationKey[code as AuthErrorCode]
+  return key ? translate(key) : translate("auth.errors.server-unknown")
 }
 
 export default function useAuth() {

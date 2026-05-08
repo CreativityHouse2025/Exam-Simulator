@@ -4,17 +4,17 @@ import React from 'react'
 import Modal from '../Modal'
 import { timerHaveExpired, timerIsPaused } from '../../utils/state'
 import { translate } from '../../utils/translation'
-import { Session } from '../../types'
+import { Session, SessionDispatch } from '../../types'
 import { SESSION_ACTION_TYPES } from '../../constants'
 
-const Confirms: React.FC<ConfirmsProps> = ({ session }) => {
+const Confirms: React.FC<ConfirmsProps> = ({ session, update }) => {
   const confirms: Omit<MyModalProps, 'title' | 'message' | 'buttons'>[] = React.useMemo(
     () => [
       {
         id: 'expired',
         show: timerHaveExpired(session),
         onConfirm: () =>
-          session.update!(
+          update(
             [SESSION_ACTION_TYPES.SET_TIME, 0],
             [SESSION_ACTION_TYPES.SET_TIMER_PAUSED, true],
             [SESSION_ACTION_TYPES.SET_EXAM_STATE, 'completed']
@@ -23,10 +23,10 @@ const Confirms: React.FC<ConfirmsProps> = ({ session }) => {
       {
         id: 'pause',
         show: timerIsPaused(session),
-        onConfirm: () => session.update!([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, false])
+        onConfirm: () => update([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, false])
       }
     ],
-    [session]
+    [session, update]
   )
 
   const activeConfirms: MyModalProps[] = 
@@ -49,6 +49,7 @@ export default Confirms
 
 export interface ConfirmsProps {
   session: Session
+  update: SessionDispatch
 }
 
 export interface MyModalProps extends ModalProps {
