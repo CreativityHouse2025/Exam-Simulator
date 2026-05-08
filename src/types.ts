@@ -111,7 +111,7 @@ export interface Session {
   /** the list of bookmarked questions */
   bookmarks: number[]
   /** the type of the exam */
-  examType?: ExamType
+  examType: ExamType
 }
 
 // v2.0: Type for the generic dropdown item (category or fullexam)

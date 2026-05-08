@@ -106,6 +106,7 @@ export const DEFAULT_SESSION: Session = {
   answers: [] as const,
   categoryId: null,
   examId: null,
+  examType: 'full' as const,
   bookmarks: [] as const,
 } as const
 
