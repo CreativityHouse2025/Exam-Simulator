@@ -4,7 +4,8 @@
       "mcp__claude_ai_Atlassian_Rovo__getConfluencePage",
       "mcp__claude_ai_Atlassian_Rovo__getAccessibleAtlassianResources",
       "mcp__claude_ai_Atlassian_Rovo__searchConfluenceUsingCql",
-      "mcp__claude_ai_Atlassian_Rovo__getConfluencePageDescendants"
+      "mcp__claude_ai_Atlassian_Rovo__getConfluencePageDescendants",
+      "Bash(xargs grep -l \"useEffect\\\\|useCallback\")"
     ]
   }
 }
