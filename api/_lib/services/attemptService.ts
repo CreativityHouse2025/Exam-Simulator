@@ -1,9 +1,6 @@
 import { supabaseAdmin } from "../supabaseClient.js"
 import { AppError } from "../errors/AppError.js"
 import type { InsertAttemptRequestBody, ListAttemptsResult, GetAttemptResult, SaveAttemptRequestBody } from "../types.js"
-import type { Database } from "../database.types.js"
-
-type ExamAttemptQuestionInsert = Database["public"]["Tables"]["exam_attempt_questions"]["Insert"]
 
 /**
  * Persists a new exam attempt and its question rows.
@@ -108,16 +105,15 @@ export async function saveAttempt(userId: string, attemptId: string, input: Save
     const rows = input.answers.map((a) => ({
       attempt_id: attemptId,
       question_index: a.question_index,
+      question_id: a.question_id,
+      choices_order: a.choices_order,
       selected_choices: a.selected_choices,
       is_bookmarked: a.is_bookmarked,
     }))
 
-    // Single upsert replaces N individual UPDATEs. Rows always pre-exist (inserted on POST),
-    // so the INSERT path never runs. The cast omits question_id and choices_order intentionally
-    // — they are immutable and must not appear in the payload so PostgREST never overwrites them.
     const { error: upsertError } = await supabaseAdmin
       .from("exam_attempt_questions")
-      .upsert(rows as unknown as ExamAttemptQuestionInsert[], { onConflict: "attempt_id,question_index" })
+      .upsert(rows, { onConflict: "attempt_id,question_index" })
 
     if (upsertError) {
       throw new AppError({ statusCode: 500, code: "ATTEMPT_SAVE_FAILED", message: "Failed to save answers" })

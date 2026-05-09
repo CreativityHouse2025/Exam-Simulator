@@ -86,7 +86,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession }) => 
 
     const { answers: lastAnswers, bookmarks: lastBookmarks } = lastSavedRef.current
     const currentExam = examRef.current
-    const diffed = currentSession.answers.reduce<{ question_index: number; selected_choices: number[]; is_bookmarked: boolean }[]>(
+    const diffed = currentSession.answers.reduce<{ question_index: number; question_id: number; choices_order: number[]; selected_choices: number[]; is_bookmarked: boolean }[]>(
       (acc, selected, i) => {
         const answerChanged =
           (selected?.length ?? 0) !== (lastAnswers[i]?.length ?? 0) ||
@@ -95,6 +95,8 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession }) => 
         if (answerChanged || bookmarkChanged) {
           acc.push({
             question_index: i,
+            question_id: currentExam[i].id,
+            choices_order: currentExam[i].choices.map((c) => c.originalIndex ?? i),
             selected_choices: toOriginalIndices(selected ?? [], currentExam[i].choices),
             is_bookmarked: currentSession.bookmarks.includes(i),
           })
@@ -154,6 +156,8 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession }) => 
       const currentExam = examRef.current
       const allAnswers = s.answers.map((selected, i) => ({
         question_index: i,
+        question_id: currentExam[i].id,
+        choices_order: currentExam[i].choices.map((c) => c.originalIndex ?? i),
         selected_choices: toOriginalIndices(selected ?? [], currentExam[i].choices),
         is_bookmarked: s.bookmarks.includes(i),
       }))
@@ -192,6 +196,8 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession }) => 
       if (isCompletion && nextSession.id !== '') {
         const allAnswers = nextSession.answers.map((selected, i) => ({
           question_index: i,
+          question_id: exam[i].id,
+          choices_order: exam[i].choices.map((c) => c.originalIndex ?? i),
           selected_choices: toOriginalIndices(selected ?? [], exam[i].choices),
           is_bookmarked: nextSession.bookmarks.includes(i),
         }))
