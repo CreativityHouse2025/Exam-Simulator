@@ -318,6 +318,8 @@ export type InsertAttemptRequestBody = InsertAttemptFull | InsertAttemptDomain
 
 export type SaveAttemptAnswer = {
   question_index: number
+  question_id: number
+  choices_order: number[]
   selected_choices: number[]
   is_bookmarked: boolean
 }
