@@ -113,12 +113,13 @@ export function validateSaveAttempt(body: unknown): SaveAttemptRequestBody {
       throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `answers[${i}] must be an object` })
     }
     const { question_index, question_id, choices_order, selected_choices, is_bookmarked } = entry as Record<string, unknown>
+    
 
     if (!isNonNegativeInteger(question_index)) {
-      throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `answers[${i}].question_index must be a non-negative integer` })
+      throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `answers[${i}].question_index must be a non-negative integer, got ${question_index}` })
     }
     if (!isNonNegativeInteger(question_id)) {
-      throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `answers[${i}].question_id must be a non-negative integer` })
+      throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `answers[${i}].question_id must be a non-negative integer, got ${question_id}` })
     }
     if (!Array.isArray(choices_order) || !choices_order.every(isNonNegativeInteger)) {
       throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `answers[${i}].choices_order must be an array of non-negative integers` })
