@@ -1,6 +1,9 @@
 import { supabaseAdmin } from "../supabaseClient.js"
 import { AppError } from "../errors/AppError.js"
 import type { InsertAttemptRequestBody, ListAttemptsResult, GetAttemptResult, SaveAttemptRequestBody } from "../types.js"
+import type { Database } from "../database.types.js"
+
+type ExamAttemptQuestionInsert = Database["public"]["Tables"]["exam_attempt_questions"]["Insert"]
 
 /**
  * Persists a new exam attempt and its question rows.
@@ -70,26 +73,6 @@ export async function saveAttempt(userId: string, attemptId: string, input: Save
     throw new AppError({ statusCode: 409, code: "CONFLICT", message: "Attempt is already completed" })
   }
 
-  if (input.answers.length > 0) {
-    const { count, error: countError } = await supabaseAdmin
-      .from("exam_attempt_questions")
-      .select("*", { head: true, count: "exact" })
-      .eq("attempt_id", attemptId)
-
-    if (countError || count === null) {
-      throw new AppError({ statusCode: 500, code: "ATTEMPT_SAVE_FAILED", message: "Failed to validate answer indices" })
-    }
-
-    const outOfBounds = input.answers.find((a) => a.question_index >= count)
-    if (outOfBounds !== undefined) {
-      throw new AppError({
-        statusCode: 400,
-        code: "VALIDATION_ERROR",
-        message: `answers[].question_index ${outOfBounds.question_index} is out of range for this attempt`,
-      })
-    }
-  }
-
   const baseUpdate = {
     current_index: input.current_index,
     time_remaining: input.time_remaining,
@@ -122,19 +105,21 @@ export async function saveAttempt(userId: string, attemptId: string, input: Save
   }
 
   if (input.answers.length > 0) {
-    // Rows already exist (inserted on POST) — update only the mutable columns.
-    // question_id and choices_order are immutable and must not be overwritten.
-    const updateResults = await Promise.all(
-      input.answers.map((a) =>
-        supabaseAdmin
-          .from("exam_attempt_questions")
-          .update({ selected_choices: a.selected_choices, is_bookmarked: a.is_bookmarked })
-          .eq("attempt_id", attemptId)
-          .eq("question_index", a.question_index)
-      )
-    )
+    const rows = input.answers.map((a) => ({
+      attempt_id: attemptId,
+      question_index: a.question_index,
+      selected_choices: a.selected_choices,
+      is_bookmarked: a.is_bookmarked,
+    }))
 
-    if (updateResults.some((r) => r.error)) {
+    // Single upsert replaces N individual UPDATEs. Rows always pre-exist (inserted on POST),
+    // so the INSERT path never runs. The cast omits question_id and choices_order intentionally
+    // — they are immutable and must not appear in the payload so PostgREST never overwrites them.
+    const { error: upsertError } = await supabaseAdmin
+      .from("exam_attempt_questions")
+      .upsert(rows as unknown as ExamAttemptQuestionInsert[], { onConflict: "attempt_id,question_index" })
+
+    if (upsertError) {
       throw new AppError({ statusCode: 500, code: "ATTEMPT_SAVE_FAILED", message: "Failed to save answers" })
     }
   }
