@@ -20,7 +20,7 @@ import { SESSION_ACTION_TYPES } from '../../../constants'
 import { SessionExamContext, SessionTimerContext } from '../../../contexts'
 
 const MainMenu = styled.div<ThemedStyles>`
-  height: calc(100vh - 5rem);
+  flex: 1;
   display: flex;
   flex-direction: column;
   border-right: 1px solid ${({ theme }) => theme.grey[1]};

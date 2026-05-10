@@ -7,7 +7,7 @@ import { SessionDataContext } from '../../../contexts'
 import useExam from '../../../hooks/useExam'
 
 const GridStyles = styled.div<ThemedStyles>`
-  height: calc(100vh - 50rem);
+  max-height: 20rem;
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
