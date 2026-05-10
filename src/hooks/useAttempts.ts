@@ -46,9 +46,9 @@ function translateErrorCode(code: AppErrorCode): string {
 }
 
 export default function useAttempts() {
-  const listAttempts = useCallback(async (): Promise<AttemptSummary[]> => {
+  const getAttempts = useCallback(async (): Promise<AttemptSummary[]> => {
     const response = await apiFetch("/api/attempts")
-    const result: ApiResponse<ListAttemptsResult> = await response.json()
+    const result: ApiResponse<{ attempts: AttemptSummary[] }> = await response.json()
 
     if (!result.success) {
       throw new AppApiError(translateErrorCode(result.error.code), result.error.code)
@@ -118,5 +118,5 @@ export default function useAttempts() {
     [],
   )
 
-  return { listAttempts, getAttempt, startAttempt, saveAttempt, submitAttempt }
+  return { getAttempts, getAttempt, startAttempt, saveAttempt, submitAttempt }
 }

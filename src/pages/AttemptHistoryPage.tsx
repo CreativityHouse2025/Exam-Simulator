@@ -63,7 +63,7 @@ const PageSubtitle = styled.p<ThemedStyles>`
 
 /** Displays the user's last exam attempts in a full-page editorial table. */
 const AttemptHistoryPage: React.FC = () => {
-  const { listAttempts } = useAttempts()
+  const { getAttempts } = useAttempts()
   const { showToast } = useToast()
   const [attempts, setAttempts] = useState<AttemptSummary[]>([])
   const [loading, setLoading] = useState(true)
@@ -73,7 +73,7 @@ const AttemptHistoryPage: React.FC = () => {
 
     const fetchAttempts = async () => {
       try {
-        const data = await listAttempts()
+        const data = await getAttempts()
         if (!cancelled) setAttempts(data)
       } catch (err) {
         if (!cancelled) showToast((err as Error).message)
@@ -85,7 +85,7 @@ const AttemptHistoryPage: React.FC = () => {
     fetchAttempts()
 
     return () => { cancelled = true }
-  }, [listAttempts, showToast])
+  }, [getAttempts, showToast])
 
   return (
     <HistoryPageWrapper>
