@@ -4,13 +4,12 @@ import React from 'react'
 import Choice from './Choice'
 import { formatChoiceLabel } from '../../utils/format'
 import { SESSION_ACTION_TYPES } from '../../constants'
-import { SessionDataContext, SessionNavigationContext } from '../../contexts'
+import { useSessionNavigation, useSessionData, useExam } from '../../contexts'
 import useSettings from '../../hooks/useSettings'
-import useExam from '../../hooks/useExam'
 
 const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) => {
-  const { index, update } = React.useContext(SessionNavigationContext)
-  const { answers } = React.useContext(SessionDataContext)
+  const { index, update } = useSessionNavigation()
+  const { answers } = useSessionData()
   const { exam } = useExam()
   const questions = exam!
 

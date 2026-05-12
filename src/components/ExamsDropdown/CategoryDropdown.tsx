@@ -1,7 +1,7 @@
 import React from "react";
 import type { DropdownItem, LangCode } from "../../types";
 import Dropdown from "./Dropdown";
-import rawCategories from '../../data/exam-data/categories.json'
+import rawCategories from '../../data/exam/categories.json'
 import useSettings from "../../hooks/useSettings";
 
 type CategoryDropdownProps = {

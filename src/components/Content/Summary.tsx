@@ -2,15 +2,15 @@ import type { ExamType, Results, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import SummaryRow from './SummaryRow'
 import { formatDate, formatTimer } from '../../utils/format'
 import { translate } from '../../utils/translation'
 import useResults from '../../hooks/useResults'
-import useAttemptId from '../../hooks/useAttemptId'
 import { canRetryAttempt } from '../../utils/exam'
-import { useNavigate } from 'react-router-dom'
+import { useSessionControl } from '../../contexts'
 
-export const TitleStyles = styled.div<ThemedStyles>`
+const TitleStyles = styled.div<ThemedStyles>`
   justify-self: center;
   font: 4rem 'Open Sans';
   font-weight: 700;
@@ -18,13 +18,13 @@ export const TitleStyles = styled.div<ThemedStyles>`
   color: ${({ theme }) => theme.black};
 `
 
-export const TopColumnStyles = styled.div`
+const TopColumnStyles = styled.div`
   display: grid;
   grid-template-rows: repeat(5, auto);
   width: 100%;
 `
 
-export const ColumnStyles = styled.div`
+const ColumnStyles = styled.div`
   padding-top: 5rem;
   display: grid;
   grid-template-rows: repeat(4, auto);
@@ -110,8 +110,11 @@ const SummaryComponent: React.FC<{ examType: ExamType }> = ({ examType }) => {
     totalQuestions,
   } = useResults(true) as Results
 
-  const [attemptId] = useAttemptId()
   const canRetake = canRetryAttempt(examType, incorrectCount + incompleteCount > 0)
+
+  const { session, startRevision } = useSessionControl()
+  // session is guaranteed non-null here — Summary only renders inside an active exam session
+  const attemptId = session!.id
 
   const translated = {
     title: translate('content.summary.title'),
@@ -158,7 +161,10 @@ const SummaryComponent: React.FC<{ examType: ExamType }> = ({ examType }) => {
             id="retake-button"
             title='Revise your mistakes'
             className="no-select"
-            onClick={() => navigate(`/app/exam?id=${attemptId}&revision=1`)}
+            onClick={async () => {
+              const id = await startRevision(attemptId)
+              if (id) navigate(`/app/exam?id=${id}&revision=1`)
+            }}
           >
             {translated.retake}
           </RetakeButton>

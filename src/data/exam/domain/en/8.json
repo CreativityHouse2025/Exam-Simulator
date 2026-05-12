@@ -1,0 +1,2258 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "During developing the risk management plan for your project, you need to determine the acceptable level of the overall project risk exposure for your project. What should you do first?",
+    "explanation": "Stakeholder risk appetite should be expressed as measurable risk thresholds around each project objective. These thresholds will determine the acceptable level of overall project risk exposure. Domain = Process. PMBOK 6th edition, Page 398 and PMBOK 7th edition, Page 122",
+    "choices": [
+      {
+        "text": "It can be determined from the historical information for a similar project.",
+        "correct": false
+      },
+      {
+        "text": "It can be determined after performing quantitative analysis for the identified project risks.",
+        "correct": false
+      },
+      {
+        "text": "It can be determined after planning for risk responses.",
+        "correct": false
+      },
+      {
+        "text": "Determine the risk appetite for key stakeholders.",
+        "correct": true
+      }
+    ],
+    "id": 228
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Alberto is managing a large industrial project that is budgeted at 9,000,000$ and scheduled to be completed in 9 months. After 5 months during project executing, he reviews a weekly work performance report from his team. He planned with his team a contingency plan with a predetermined risk trigger for a cost performance index CPI of 0.9. He finds that the earned value measurements are PV = 5,500,000$, EV = 4,850,000$ and AC = 5,250,000$. What should he do first?",
+    "explanation": "The risk trigger here is when CPI reaches value of 0.9. and here CPI = EV/AC = 0.92 which means that the trigger is not reached. So the risk didn't occur to implement the contingency plan. Domain = Process. PMBOK 6th edition, Page 450",
+    "choices": [
+      {
+        "text": "Look for ways to bring the project back on track.",
+        "correct": false
+      },
+      {
+        "text": "Determine the root cause of low cost performance index.",
+        "correct": false
+      },
+      {
+        "text": "Implement the contingency plan.",
+        "correct": false
+      },
+      {
+        "text": "Nothing, because the CPI indicates that the trigger is not reached.",
+        "correct": true
+      }
+    ],
+    "id": 229
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The project manager is holding a risk reassessment meeting with the project team and the project sponsor, the sponsor is looking at the latest list of top risks in the project report. A new risk has been identified and assessed. That risk ranking was lower than all of the previously identified risks. Three fallback plans have been adjusted based on the severity of previous risk impacts. Which of the following has the project manager forgotten to do?",
+    "explanation": "It is not the responsibility of the project sponsor to review a full list of non-critical risks but he may review residual risks. There is nothing called contingency risks. Quantitative risk analysis is not performed to risks which rank lower than all of the previously identified risks. Quantitative risk analysis is performed for top risks only. The best answer here is to look at the impact of the new risk to the project as a whole as a part of the Identify Risks process. Domain = Process. PMBOK 6th edition, Page 411 and PMBOK 7th edition Page 123",
+    "choices": [
+      {
+        "text": "Look at the impact of the new risk to the project as a whole.",
+        "correct": true
+      },
+      {
+        "text": "Provide the sponsor with the full list of non-critical risks.",
+        "correct": false
+      },
+      {
+        "text": "Look for contingency risks from the fallback plan.",
+        "correct": false
+      },
+      {
+        "text": "Perform quantitative risk analysis for the new risk.",
+        "correct": false
+      }
+    ],
+    "id": 230
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Alexander is a project manager for a major software project. He is interviewing the members of a project team to test their understanding of the assigned risk responses as risk owners. He is working with the risk management department in the organization to evaluate the risk responses to determine their effectiveness in the project. What project management technique is he performing?",
+    "explanation": "Risk audits examine and document the effectiveness of risk responses in dealing with identified risks and their root causes, as well as the effectiveness of the risk management process. Domain = Process. PMBOK 6th edition, Page 456",
+    "choices": [
+      {
+        "text": "Risk responses implementation",
+        "correct": false
+      },
+      {
+        "text": "Risk response planning",
+        "correct": false
+      },
+      {
+        "text": "Risk audit",
+        "correct": true
+      },
+      {
+        "text": "Risk reassessment",
+        "correct": false
+      }
+    ],
+    "id": 231
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Mark is a project manager for a tele-communications project in his organization. Tom is his sponsor and he is working with David, the risk manager in the organization to determine the effectiveness of the risk responses. Tom and David are concerned that some of the risks assigned to Frederick, a project team member to implement the planned risk responses may not be addressed to the depth they would like. In this scenario, what are they doing?",
+    "explanation": "Risk audits examine and document the effectiveness of risk responses in dealing with identified risks and their root causes, as well as the effectiveness of the risk management process. Domain = Process. PMBOK 6th edition, Page 456",
+    "choices": [
+      {
+        "text": "Risk Audit",
+        "correct": true
+      },
+      {
+        "text": "Risk Reassessment",
+        "correct": false
+      },
+      {
+        "text": "Risk Review",
+        "correct": false
+      },
+      {
+        "text": "Variance Analysis",
+        "correct": false
+      }
+    ],
+    "id": 232
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager on an industrial project decided to insure against fire. This is an example of:",
+    "explanation": "Insurance means transference of risk. Domain = Process. PMBOK 7th edition, Page 123",
+    "choices": [
+      {
+        "text": "Transference",
+        "correct": true
+      },
+      {
+        "text": "Mitigation",
+        "correct": false
+      },
+      {
+        "text": "Avoidance",
+        "correct": false
+      },
+      {
+        "text": "Escalation",
+        "correct": false
+      }
+    ],
+    "id": 233
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a project to design a high-efficiency solar cell using a predictive development approach. Midway through the project, several issues have occurred and now the project schedule and budget are in jeopardy. What is the best course of action to address these issues?",
+    "explanation": "Management reserves are withheld for unforeseen risks that affect the project. According to the scenario, the issues developed during the project were unexpected. All other actions can be performed later in the project. Adding an entry in the issue log will not address those issues. Domain = Process. PMBOK 6th edition, Page 254 and PMBOK 7th edition, Page 62",
+    "choices": [
+      {
+        "text": "Add an entry in the issue log.",
+        "correct": false
+      },
+      {
+        "text": "Use management reserve.",
+        "correct": true
+      },
+      {
+        "text": "Re-evaluate the identify risks process.",
+        "correct": false
+      },
+      {
+        "text": "Repeat the identify risks process.",
+        "correct": false
+      }
+    ],
+    "id": 234
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following charts can be used to represent risks by their impact, probability and proximity?",
+    "explanation": "Where risks have been categorized using more than two parameters, the probability and impact matrix cannot be used and other graphical representations are required. For example, a bubble chart displays three dimensions of data, where each risk is plotted as a disk (bubble), and the three parameters are represented by the x-axis value, the y-axis value, and the bubble size. Domain = Process. PMBOK 6th edition, Page 425",
+    "choices": [
+      {
+        "text": "Probability and impact matrix",
+        "correct": false
+      },
+      {
+        "text": "Risk Breakdown Structure",
+        "correct": false
+      },
+      {
+        "text": "Bubble Chart",
+        "correct": true
+      },
+      {
+        "text": "Cause and effect diagram",
+        "correct": false
+      }
+    ],
+    "id": 235
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following indicates what is meant by risk propinquity?",
+    "explanation": "Propinquity is the degree to which a risk is perceived to matter by one or more stakeholders. Where a risk is perceived as very significant, propinquity is high. Domain = Process. PMBOK 6th edition, Page 424",
+    "choices": [
+      {
+        "text": "The degree to which a risk is perceived to matter by one or more stakeholders.",
+        "correct": true
+      },
+      {
+        "text": "The extent to which the risk is related to other individual project risks.",
+        "correct": false
+      },
+      {
+        "text": "The period of time that may elapse after a risk has occurred before its impact is discovered.",
+        "correct": false
+      },
+      {
+        "text": "The period of time before the risk might have an impact on one or more project objectives.",
+        "correct": false
+      }
+    ],
+    "id": 236
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a project which is facing the following risks: 20% chance a supplier will not deliver the needed spare parts on time, creating an additional cost of $30,000; 10% chance product may need rework adding a cost of $12,000; 25% chance the project will finish earlier than planned, so saving lease cost of $8,000. What is the expected monetary value of these risks?",
+    "explanation": "EMV = 0.2*30,000+0.1*12,000-0.25*8,000 Domain = Process. PMBOK 6th edition, Page 435 and PMBOK 7th edition, Page 176*",
+    "choices": [
+      {
+        "text": "$50,000",
+        "correct": false
+      },
+      {
+        "text": "$7,200",
+        "correct": false
+      },
+      {
+        "text": "$5,200",
+        "correct": true
+      },
+      {
+        "text": "$42,000",
+        "correct": false
+      }
+    ],
+    "id": 237
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During planning a construction project, you asked project team members to pay attention to secondary risks. A new team member who has never worked on project before asked you what is meant by secondary risks, you answered him that secondary risks are:",
+    "explanation": "The secondary risks are risks that arise as a direct result of implementing a risk response. Domain = Process. PMBOK 6th edition, Page 439 and PMBOK 7th edition, Page 125",
+    "choices": [
+      {
+        "text": "Discovered during the Identify Risks process.",
+        "correct": false
+      },
+      {
+        "text": "New risks created by the risk response strategies selected.",
+        "correct": true
+      },
+      {
+        "text": "Risks that remain after the Plan Risk Responses process.",
+        "correct": false
+      },
+      {
+        "text": "Lower priority or low impact risks not requiring mitigation efforts.",
+        "correct": false
+      }
+    ],
+    "id": 238
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are the project manager of the new electro-mechanical project for your company. You identified risks with project stakeholders and performed qualitative and quantitative risk analysis. You planned risk responses for all top risks. The sponsor asked you to document how and when risk audits will be performed in the project. Where should you document the risk audits policy?",
+    "explanation": "The project manager is responsible for ensuring that risk audits are performed at an appropriate frequency, as defined in the project’s risk management plan. Domain = Process. PMBOK 6th edition, Page 456",
+    "choices": [
+      {
+        "text": "In the Risk Management Plan",
+        "correct": true
+      },
+      {
+        "text": "In the Risk Register",
+        "correct": false
+      },
+      {
+        "text": "In the Risk Response Plan",
+        "correct": false
+      },
+      {
+        "text": "In the Risk Report",
+        "correct": false
+      }
+    ],
+    "id": 239
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Andrew is a project manager for a construction project. He is identifying risks for a new construction project with his team members and stakeholders. They discovered that the wall painting material they are using on the building cannot be used in rainy conditions. They will use these paints during the time when most of the rainfall happens in this part of the country. The project can’t be delayed after the rainy season and he needs to make sure the building is painted. He decides that his team will just have to allow enough time in the schedule for non-worked rain days. This is an example of which risk response strategy?",
+    "explanation": "The team can’t do anything about the weather, so the project manager has accepted the fact that they could end up being delayed by it. Domain = Process. PMBOK 6th edition, Page 443 and PMBOK 7th edition, Page 123",
+    "choices": [
+      {
+        "text": "Mitigate",
+        "correct": false
+      },
+      {
+        "text": "Escalate",
+        "correct": false
+      },
+      {
+        "text": "Accept",
+        "correct": true
+      },
+      {
+        "text": "Transfer",
+        "correct": false
+      }
+    ],
+    "id": 240
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements best describes risk audits?",
+    "explanation": "In risk audits an external auditor reviews risk response strategies to ensure that risk management process are taken seriously and are used to collect lessons learned for future projects. Domain = Process. PMBOK 6th edition, Page 456",
+    "choices": [
+      {
+        "text": "The project manager reviews each risk on the risk register with the team.",
+        "correct": false
+      },
+      {
+        "text": "The project sponsor audits your work and decides whether you’re doing a good job.",
+        "correct": false
+      },
+      {
+        "text": "An external auditor reviews the risk response strategies for each risk.",
+        "correct": true
+      },
+      {
+        "text": "An external auditor reviews the watch-listed risks.",
+        "correct": false
+      }
+    ],
+    "id": 241
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Risk owners for individual project risks may be nominated as part of the ________ process, and will be confirmed during the _________ process.",
+    "explanation": "Risk owners for individual project risks may be nominated as part of the Identify Risks process, and will be confirmed during the Perform Qualitative Risk Analysis process. Domain = Process. PMBOK 6th edition, Page 411",
+    "choices": [
+      {
+        "text": "Perform Qualitative Risk Analysis and Plan Risk Responses",
+        "correct": false
+      },
+      {
+        "text": "Identify Risks and Perform Qualitative Risk Analysis",
+        "correct": true
+      },
+      {
+        "text": "Plan Risk Management and Implement Risk Responses",
+        "correct": false
+      },
+      {
+        "text": "Identify Risks and Implement Risk Responses",
+        "correct": false
+      }
+    ],
+    "id": 242
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements regarding risk is correct?",
+    "explanation": "Positive and negative risks are commonly referred to as opportunities and threats. Domain = Process. PMBOK 6th edition, Page 397 and PMBOK 7th edition, Page 53",
+    "choices": [
+      {
+        "text": "Risks may have positive or negative impact on project objectives, but all opportunities are risks.",
+        "correct": true
+      },
+      {
+        "text": "Risks may have positive or negative impact on project objectives, but all risks are issues.",
+        "correct": false
+      },
+      {
+        "text": "Risks may have positive or negative impact on project objectives, but all risks are threats.",
+        "correct": false
+      },
+      {
+        "text": "Risks may have positive or negative impact on project objectives, but all risks are opportunities.",
+        "correct": false
+      }
+    ],
+    "id": 243
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Sandra is a project manager for a software project. During project executing a problem has occurred. The problem was not discussed at all during project planning and it was not added to the risk register. The problem will cause one week delay to the project schedule. Which of the following statements is the best response?",
+    "explanation": "Management reserves are a specified amount of the project duration withheld for management control purposes and are reserved for unforeseen work that is within scope of the project. Management reserves are intended to address the “unknown-unknowns” that can affect a project. In this situation an unknown unknown has occurred, so you should use management reserve to accommodate it. Domain = Process. PMBOK 6th edition, Page 202 and PMBOK 7th edition, Page 127",
+    "choices": [
+      {
+        "text": "Accept the risk and accept the delay because you can not create a response after the problem has occurred.",
+        "correct": false
+      },
+      {
+        "text": "Add the problem to the risk register and perform qualitative and quantitative risk analysis and create a response if needed.",
+        "correct": false
+      },
+      {
+        "text": "Ask management to use the management reserve to accommodate for the delay.",
+        "correct": true
+      },
+      {
+        "text": "Ask for support from your management.",
+        "correct": false
+      }
+    ],
+    "id": 244
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Sergio is the project manager for an IT project. He receives a phone call from Harold, a risk owner, who informed him that an identified threat has occurred. Harold implemented the contingency plan but it was inadequate. Which of the following is the best response for Sergio?",
+    "explanation": "A fallback plan can be developed for implementation if the selected strategy turns out not to be fully effective. Domain = Process. PMBOK 6th edition, Page 448",
+    "choices": [
+      {
+        "text": "Inform Harold to simply accept the risk.",
+        "correct": false
+      },
+      {
+        "text": "Inform Harold to implement the fallback plan.",
+        "correct": true
+      },
+      {
+        "text": "Inform Harold to implement a workaround.",
+        "correct": false
+      },
+      {
+        "text": "Inform Harold to assess the impact of the risk.",
+        "correct": false
+      }
+    ],
+    "id": 245
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Kevin is managing his first project in the organization. The project is a risky one. Kevin is reporting to Charles who is the project sponsor. He consulted Charles because he is certified PMI-RMP risk consultant in the organization to help him in risk planning for the project. How would you categorize Kevin's request?",
+    "explanation": "Kevin requested support from his manager because of his experience in risk management, so it is considered expert judgement. Domain = Process. PMBOK 6th edition, Page 404",
+    "choices": [
+      {
+        "text": "Expert Judgement",
+        "correct": true
+      },
+      {
+        "text": "Performance Reporting",
+        "correct": false
+      },
+      {
+        "text": "Risk Planning",
+        "correct": false
+      },
+      {
+        "text": "Formal Reporting",
+        "correct": false
+      }
+    ],
+    "id": 246
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Seller A and Seller B believe that their chance of winning work from a buyer will be enhanced if they join forces for one procurement, so, they sign a teaming agreement with each other to address the legal and business aspects of the agreement. Which risk response strategy best describes a teaming agreement?",
+    "explanation": "Seller A and seller B formed a teaming agreement or joint venture which is an example of sharing an opportunity. Domain = Process. PMBOK 6th edition, Page 444 and PMBOK 7th edition, Page 125",
+    "choices": [
+      {
+        "text": "Share",
+        "correct": true
+      },
+      {
+        "text": "Exploit",
+        "correct": false
+      },
+      {
+        "text": "Enhance",
+        "correct": false
+      },
+      {
+        "text": "Transfer",
+        "correct": false
+      }
+    ],
+    "id": 247
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Bill is the project manager for a software project. He and his team have identified risks, performed qualitative risk analysis and planned responses for top risks. During project executing, an identified risk occured, they have implemented the contingency plan, but it was not effective. What type of plans should they create for implementation, if the selected risk response strategy fails to be effective?",
+    "explanation": "A fallback plan can be developed for implementation if the selected strategy turns out not to be fully effective or if an accepted risk occurs. Domain = Process. PMBOK 6th edition, Page 448",
+    "choices": [
+      {
+        "text": "Mitigation Plan",
+        "correct": false
+      },
+      {
+        "text": "Contingency Plan",
+        "correct": false
+      },
+      {
+        "text": "Risk Response Plan",
+        "correct": false
+      },
+      {
+        "text": "Fallback Plan",
+        "correct": true
+      }
+    ],
+    "id": 248
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Peter is the project manager for a large project to build a bridge that links two cities crossing a river. The project has a high risk score. He is working with his team to plan the risk responses for the project to decrease the project risks. He feels that the team successfully completed the risk response planning. Which of the following risk processes is repeated after the plan risk responses to determine if the overall project risk has been satisfactorily decreased?",
+    "explanation": "Perform Quantitative Risk Analysis should be repeated as needed, to determine if the overall project risk has been satisfactorily decreased. Domain = Process. PMBOK 6th edition, Page 429",
+    "choices": [
+      {
+        "text": "Identify Risks",
+        "correct": false
+      },
+      {
+        "text": "Perform Qualitative Risk Analysis",
+        "correct": false
+      },
+      {
+        "text": "Perform Quantitative Risk Analysis",
+        "correct": true
+      },
+      {
+        "text": "Plan Risk Responses",
+        "correct": false
+      }
+    ],
+    "id": 249
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The project team has identified a top risk that ranked higher than the previously identified risks. They cannot identify a suitable response to the new identified risk, which risk response strategy would they apply?",
+    "explanation": "No risk response strategy was selected, this means that the risk is accepted. Domain = Process. PMBOK 6th edition, Page 443 and PMBOK 7th edition, Page 123",
+    "choices": [
+      {
+        "text": "Mitigation",
+        "correct": false
+      },
+      {
+        "text": "Escalation",
+        "correct": false
+      },
+      {
+        "text": "Acceptance",
+        "correct": true
+      },
+      {
+        "text": "Transference",
+        "correct": false
+      }
+    ],
+    "id": 250
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are working in the Project Management Office (PMO) for a multinational organization. You were coaching new project managers on risk management. You stated that all agreements should be included during project risk identification with team members and stakeholders. One of the attendees asks why agreements need to be included during project risk identification, what would be your answer?",
+    "explanation": "If the project requires external procurement of resources, the agreements may have information such as milestone dates, contract type, acceptance criteria, and awards and penalties that can present threats or opportunities. Domain = Process. PMBOK 6th edition, Page 413",
+    "choices": [
+      {
+        "text": "Because agreements contain the project risks that are already transferred to seller.",
+        "correct": false
+      },
+      {
+        "text": "Because agreements are made to transfer project risks to the seller.",
+        "correct": false
+      },
+      {
+        "text": "Because agreements may have information such as milestone dates, contract type, acceptance criteria, and awards and penalties that can present threats or opportunities.",
+        "correct": true
+      },
+      {
+        "text": "Not all agreements are included but contracts should be included because they are formal agreements.",
+        "correct": false
+      }
+    ],
+    "id": 251
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Jim is managing a large industrial project. His project is halfway done, when he held a meeting with the project team and other stakeholders to identify new risks and reevaluate the current risks. This practice is known as:",
+    "explanation": "Risk review is a meeting to analyze the status of existing risks and identify new risks. This includes determining if the risk is still active and if there have been changes to the risk attributes (such as probability, impact, urgency, etc.). Risk responses are evaluated to determine if they are effective or should be updated. New risks may be identified and analyzed and risks that are no longer active may be closed. Risk reassessment is an example of a risk-review meeting. Domain = Process. PMBOK 7th edition, Page 180",
+    "choices": [
+      {
+        "text": "Risk audits",
+        "correct": false
+      },
+      {
+        "text": "Risk reassessment",
+        "correct": true
+      },
+      {
+        "text": "Risk identification",
+        "correct": false
+      },
+      {
+        "text": "Developing risk responses",
+        "correct": false
+      }
+    ],
+    "id": 252
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a software project in an agile development environment. After the first round of risk identification, a team member who has never worked in agile environment asks you when the qualitative risk analysis is performed. What would be your answer?",
+    "explanation": "In an agile development environment, the Perform Qualitative Risk Analysis process is conducted before the start of each iteration. Domain = Process. PMBOK 6th edition, Page 421",
+    "choices": [
+      {
+        "text": "During project planning.",
+        "correct": false
+      },
+      {
+        "text": "Only before the Perform Quantitative Risk Analysis process.",
+        "correct": false
+      },
+      {
+        "text": "After the first round of risk identification.",
+        "correct": false
+      },
+      {
+        "text": "Before the start of each iteration.",
+        "correct": true
+      }
+    ],
+    "id": 253
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Linda is a project manager for a large tele-communication project. She is planning for risk management with her team. She holds a brainstorming session to discover and evaluate potential project risks. Which of the following methods can they use in prioritizing these risks?",
+    "explanation": "Probability and impact matrix helps the team to focus on the top risks with high probability and impact. Domain = Process. PMBOK 7th edition, Page 176",
+    "choices": [
+      {
+        "text": "Tornado Diagram",
+        "correct": false
+      },
+      {
+        "text": "Watchlist",
+        "correct": false
+      },
+      {
+        "text": "Simulation",
+        "correct": false
+      },
+      {
+        "text": "Probability and impact matrix",
+        "correct": true
+      }
+    ],
+    "id": 254
+  },
+  {
+    "type": "multiple-choice",
+    "text": "An advantage and a disadvantage of using checklists in risk identification:",
+    "explanation": "While a checklist may be quick and simple to use, it is impossible to build an exhaustive one, and care should be taken to ensure the checklist is not used to avoid the effort of proper risk identification. The project team should also explore items that do not appear on the checklist. Domain = Process. PMBOK 6th edition, Page 414",
+    "choices": [
+      {
+        "text": "Simple to use and can't be used alone.",
+        "correct": true
+      },
+      {
+        "text": "Easy to calculate probability and impact and quiet people may not contribute.",
+        "correct": false
+      },
+      {
+        "text": "Thinking outside the box and hard to use.",
+        "correct": false
+      },
+      {
+        "text": "Helps understand unfamiliar parts of the project and takes too much time.",
+        "correct": false
+      }
+    ],
+    "id": 255
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a construction project. You are in the process of Monitor Risks. You are searching for new risks and making sure that implemented risk responses are effective. You find that a lower-priority risk has suddenly become more likely. Where do you record low-priority risks?",
+    "explanation": "Low priority risks are recorded in watchlist. Domain = Process. PMBOK 6th edition, Page 423",
+    "choices": [
+      {
+        "text": "Risk Register",
+        "correct": false
+      },
+      {
+        "text": "The watchlist",
+        "correct": true
+      },
+      {
+        "text": "Risk Management Plan",
+        "correct": false
+      },
+      {
+        "text": "Risk Report",
+        "correct": false
+      }
+    ],
+    "id": 256
+  },
+  {
+    "type": "multiple-choice",
+    "text": "If a risk event has a 80% chance of occurring, and the consequences will be a $100,000 loss, what does $80,000 represent?",
+    "explanation": "Expected monetary value is calculated by multiplying the probability and impact of a risk event. EMV = P * I = 100000 * 0.8 = 80000 Domain = Process. PMBOK 6th edition, Page 435 and PMBOK 7th edition, Page 176",
+    "choices": [
+      {
+        "text": "Present value",
+        "correct": false
+      },
+      {
+        "text": "Contingency budget",
+        "correct": false
+      },
+      {
+        "text": "Risk value",
+        "correct": false
+      },
+      {
+        "text": "Expected monetary value",
+        "correct": true
+      }
+    ],
+    "id": 257
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Adam is a project manager for an electronic board design project. The project has a 50% chance of making cost saving for the company $215,000 over the next year. It has a 30% chance of costing the company $120,000. What's the project’s expected monetary value?",
+    "explanation": "$215,000 x 0.5 = $ 107,500 savings, and $120,000 x 0.30 = - $36,000 expenses. Add them together and you get $71,500 Domain = Process. PMBOK 6th edition, Page 435 and PMBOK 7th edition, Page 176",
+    "choices": [
+      {
+        "text": "$143,500",
+        "correct": false
+      },
+      {
+        "text": "$107,500",
+        "correct": false
+      },
+      {
+        "text": "$71,500",
+        "correct": true
+      },
+      {
+        "text": "$36,000",
+        "correct": false
+      }
+    ],
+    "id": 258
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements best describes when risk identification is performed during the project?",
+    "explanation": "Risk identification process is performed throughout the project. Domain = Process. PMBOK 6th edition, Page 409 and PMBOK 7th edition, Page 122",
+    "choices": [
+      {
+        "text": "During project planning and project monitoring and controlling.",
+        "correct": false
+      },
+      {
+        "text": "Whenever there is a change to the project.",
+        "correct": false
+      },
+      {
+        "text": "During project planning.",
+        "correct": false
+      },
+      {
+        "text": "Throughout the project.",
+        "correct": true
+      }
+    ],
+    "id": 259
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During the Plan Risk Responses process, the project team is analyzing ways to deal with a top risk. A team member suggests to assign the activity to a more experienced team members. Another one suggests to do the risky activities at the beginning of the project or to ignore the risk. The project manager suggests to insure against the risky activity. A functional manager suggests to wait to see if the risk happens. Which of the following is a risk response strategy that the team has forgotten to do?",
+    "explanation": "Risk avoidance is the only strategy which is not mentioned here. Removing the activity which causes the risk is risk avoidance. Domain = Process. PMBOK 6th edition, Page 443 and PMBOK 7th edition, Page 123",
+    "choices": [
+      {
+        "text": "Remove the activity which causes the risk from the project.",
+        "correct": true
+      },
+      {
+        "text": "Provide more training to team members.",
+        "correct": false
+      },
+      {
+        "text": "Outsource the activity.",
+        "correct": false
+      },
+      {
+        "text": "Decrease probability or impact of the risk.",
+        "correct": false
+      }
+    ],
+    "id": 260
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager of a software project when a previously unidentified risk is discovered. Your project is near completion and this risk may delay project completion date. What should you do next?",
+    "explanation": "The risk here has been discovered, but hasn't occurred yet. So the best choice is to identify the risk and its impacts and add the risk to the risk register. Domain = Process. PMBOK 6th edition, Page 411",
+    "choices": [
+      {
+        "text": "Assign a risk response owner to the discovered risk.",
+        "correct": false
+      },
+      {
+        "text": "Reevaluate the Identify Risks process.",
+        "correct": false
+      },
+      {
+        "text": "Create a workaround.",
+        "correct": false
+      },
+      {
+        "text": "Qualify the risk.",
+        "correct": true
+      }
+    ],
+    "id": 261
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a large IT project. Midway through the project, you learn that new equipment is needed to support project delivery. The procurement specialist has informed you that there will be a delay in the delivery of the needed equipment due to custom clearance and shipping lead time which will negatively impact your project timeline. What should you do next?",
+    "explanation": "First things first. There is a delay risk which will have a negative impact on the project. So, a risk should be identified and added to the risk register and inform stakeholders about the probable delay. . Domain = Process. PMBOK 6th edition, Page 411 and PMBOK 7th edition, Page 122",
+    "choices": [
+      {
+        "text": "Communicate this risk to the project stakeholders and add an entry in the risk register.",
+        "correct": true
+      },
+      {
+        "text": "Search for local suppliers to provide the needed equipment.",
+        "correct": false
+      },
+      {
+        "text": "Escalate to senior management and ask for support.",
+        "correct": false
+      },
+      {
+        "text": "Raise a change request to extend the project timeline.",
+        "correct": false
+      }
+    ],
+    "id": 262
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for electronic boards manufacturing project. Your team has identified a risk with some of the electronic components you are using on your project. Some of these electronic components may be defected, based on past projects, you've figured out that there's a high probability that about 18% of the electronic components may be faulty. You decide to buy an extra 20% of the electronic components so that you will be prepared for those defects and your project won't be delayed. Which response strategy are you using?",
+    "explanation": "By purchasing extra components, you mitigate the risk. Domain = Process. PMBOK 6th edition, Page 443 and PMBOK 7th edition, Page 123",
+    "choices": [
+      {
+        "text": "Avoid",
+        "correct": false
+      },
+      {
+        "text": "Accept",
+        "correct": false
+      },
+      {
+        "text": "Mitigate",
+        "correct": true
+      },
+      {
+        "text": "Transfer",
+        "correct": false
+      }
+    ],
+    "id": 263
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the purpose of a risk workshop?",
+    "explanation": "To undertake risk identification, the project team may conduct a specialized meeting (often called a risk workshop). Most risk workshops include some form of brainstorming, but other risk identification techniques may be included. Domain = Process. PMBOK 6th edition, Page 416",
+    "choices": [
+      {
+        "text": "The project team may conduct risk workshops for reassessment of current risks, the closing of risks that are outdated.",
+        "correct": false
+      },
+      {
+        "text": "The project team may conduct risk workshops to develop risk responses for identified project risks.",
+        "correct": false
+      },
+      {
+        "text": "The project team may conduct risk workshops for risk identification.",
+        "correct": true
+      },
+      {
+        "text": "The project team may conduct risk workshops to clarify the assessment of each risk’s importance to the project.",
+        "correct": false
+      }
+    ],
+    "id": 264
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Midway through the project, three team members have resigned from the organization. This may delay the activities assigned to them. This risk was already addressed during project planning. No action has been taken after their resignation. What should the project manager do?",
+    "explanation": "The project manager should review the risk register as the risk was already addressed, so there should be a risk response. Domain = Process. PMBOK 6th edition, Page 417 and PMBOK 7th edition, Page 185",
+    "choices": [
+      {
+        "text": "Schedule a meeting with the project team to plan for risk response.",
+        "correct": false
+      },
+      {
+        "text": "Visit the risk register.",
+        "correct": true
+      },
+      {
+        "text": "Contact the HR department and ask for support.",
+        "correct": false
+      },
+      {
+        "text": "Calculate the duration of activities assigned to them and submit a change request to extend the schedule by this duration.",
+        "correct": false
+      }
+    ],
+    "id": 265
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a product design project. You are identifying risks with your team. You identified a risk that a supplier may not deliver material on time. You consult the lessons learned from previous projects and discover that the supplier has a history of providing material later than the due date. You evaluate the probability and impact of the risk, and find that if it occurs, it will cost the project $5,000 and two weeks delay. You decide to contract another supplier to get the needed material. What type of risks resulting from using the other supplier?",
+    "explanation": "Secondary risks result from the selected risk response strategies. Domain = Process. PMBOK 6th edition, Page 448 and PMBOK 7th edition, Page 125",
+    "choices": [
+      {
+        "text": "Secondary risks",
+        "correct": true
+      },
+      {
+        "text": "Residual risks",
+        "correct": false
+      },
+      {
+        "text": "Accepted risks",
+        "correct": false
+      },
+      {
+        "text": "Low priority risks",
+        "correct": false
+      }
+    ],
+    "id": 266
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Where should you document positive risks?",
+    "explanation": "All risks are recorded in the risk register, there is nothing called positive risk register. Domain = Process. PMBOK 6th edition, Page 417 and PMBOK 7th edition, Page 185",
+    "choices": [
+      {
+        "text": "In the positive risk register",
+        "correct": false
+      },
+      {
+        "text": "In the risk register",
+        "correct": true
+      },
+      {
+        "text": "In the watchlist",
+        "correct": false
+      },
+      {
+        "text": "In the Risk Management Plan",
+        "correct": false
+      }
+    ],
+    "id": 267
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following documents are the main risk management document where most of the risk information is kept, which are developed along the risk management processes from identify risks through perform qualitative and quantitative risk analysis to plan risk responses, implement risk responses and monitor risks?",
+    "explanation": "The risk register and risk report are the main risk documents that contain most of risk information. Domain = Process. PMBOK 6th edition, Page 396 and PMBOK 7th edition, Page 185 and 190",
+    "choices": [
+      {
+        "text": "Watchlist and Risk Breakdown Structure",
+        "correct": false
+      },
+      {
+        "text": "Risk Register and Risk Report",
+        "correct": true
+      },
+      {
+        "text": "Risk Response Plan and Risk Report",
+        "correct": false
+      },
+      {
+        "text": "Risk Management Plan and Risk Response Plan",
+        "correct": false
+      }
+    ],
+    "id": 268
+  },
+  {
+    "type": "multiple-choice",
+    "text": "To determine how accurate and well understood the risk information on the project is, it must be analyzed. And also you need to determine whether more research is needed before a qualitative assessment can be done. It is most important to complete which of the following?",
+    "explanation": "Risk data quality assessment evaluates the degree to which the data about individual project risks is accurate and reliable as a basis for qualitative risk analysis. The use of low-quality risk data may lead to a qualitative risk analysis that is of little use to the project. Monte Carlo analysis, sensitivity analysis and decision tree analysis are from the tools and techniques of the Perform Quantitative Risk Analysis process. Domain = Process. PMBOK 6th edition, Page 423",
+    "choices": [
+      {
+        "text": "Decision tree analysis",
+        "correct": false
+      },
+      {
+        "text": "Sensitivity analysis",
+        "correct": false
+      },
+      {
+        "text": "Monte Carlo analysis",
+        "correct": false
+      },
+      {
+        "text": "Data quality assessment",
+        "correct": true
+      }
+    ],
+    "id": 269
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A risk owner is allocated to each individual project risk as part of which risk management process?",
+    "explanation": "A risk owner, who will be responsible for planning an appropriate risk response and for reporting progress on managing the risk, will be allocated to each individual project risk as part of the Perform Qualitative Risk Analysis process. Domain = Process. PMBOK 6th edition, Page 426",
+    "choices": [
+      {
+        "text": "Identify Risks",
+        "correct": false
+      },
+      {
+        "text": "Plan Risk Responses",
+        "correct": false
+      },
+      {
+        "text": "Perform Qualitative Risk Analysis",
+        "correct": true
+      },
+      {
+        "text": "Perform Quantitative Risk Analysis",
+        "correct": false
+      }
+    ],
+    "id": 270
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A risk with high detectability means that:",
+    "explanation": "Detectability is the ease with which the results of the risk occurring, or being about to occur, can be detected and recognized. Where the risk occurrence can be detected easily, detectability is high. Domain = Process. PMBOK 6th edition, Page 424",
+    "choices": [
+      {
+        "text": "Risk urgency can be detected easily.",
+        "correct": false
+      },
+      {
+        "text": "Risk manageability can be detected easily.",
+        "correct": false
+      },
+      {
+        "text": "Risk probability can be detected easily.",
+        "correct": false
+      },
+      {
+        "text": "Risk occurrence can be detected easily.",
+        "correct": true
+      }
+    ],
+    "id": 271
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Mark is a project manager for a tele-communications project in his organization. Tom is his sponsor and he is working with David, the risk manager in the organization to determine the effectiveness of the risk responses. Tom and David are concerned that some of the risks assigned to Frederick, a project team member to implement the planned risk responses may not be addresses to the depth they would like. In this scenario, who is responsible for ensuring that this process is performed at an appropriate frequency?",
+    "explanation": "The project manager is responsible for ensuring that risk audits are performed at an appropriate frequency, as defined in the project’s risk management plan. Domain = Process. PMBOK 6th edition, Page 456",
+    "choices": [
+      {
+        "text": "Mark",
+        "correct": true
+      },
+      {
+        "text": "David",
+        "correct": false
+      },
+      {
+        "text": "Tom",
+        "correct": false
+      },
+      {
+        "text": "Frederick",
+        "correct": false
+      }
+    ],
+    "id": 272
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Patrick is a project manager for a construction project. He is using root cause analysis to figure out what could cause potential risks on his project. Which process is he involved in?",
+    "explanation": "In Identify Risks process you must find root cause of risks. Domain = Process. PMBOK 6th edition, Page 415",
+    "choices": [
+      {
+        "text": "Identify Risks",
+        "correct": true
+      },
+      {
+        "text": "Plan Quality Management",
+        "correct": false
+      },
+      {
+        "text": "Manage Quality",
+        "correct": false
+      },
+      {
+        "text": "Plan Risk Responses",
+        "correct": false
+      }
+    ],
+    "id": 273
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Midway through a sprint, a functional manager has withdrawn a developer form the agile team to complete some previously uncompleted tasks from another project. So, the team will not be able to meet their sprint goal. What should have been done to avoid this issue?",
+    "explanation": "The team should consider the risks related to the team availability at the beginning of the sprint. Domain = Process.",
+    "choices": [
+      {
+        "text": "Always work fast to finish the work early and don't wait till the end of the sprint.",
+        "correct": false
+      },
+      {
+        "text": "Reject to add any team member to the team who might have any previously uncompleted tasks.",
+        "correct": false
+      },
+      {
+        "text": "Add buffers to estimates to account for such unknown risks.",
+        "correct": false
+      },
+      {
+        "text": "Consider human resources availability during sprint planning.",
+        "correct": true
+      }
+    ],
+    "id": 274
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements best describes a risk owner?",
+    "explanation": "A risk owner is a person who takes responsibility for each agreed-to and funded risk response. Domain = Process. PMBOK 6th edition, Page 426",
+    "choices": [
+      {
+        "text": "The person who is responsible for the response plan for the risk.",
+        "correct": true
+      },
+      {
+        "text": "The person who monitors the watchlist that contains the risk.",
+        "correct": false
+      },
+      {
+        "text": "The person who identifies the risk.",
+        "correct": false
+      },
+      {
+        "text": "The person who evaluates the probability and impact of a risk.",
+        "correct": false
+      }
+    ],
+    "id": 275
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What’s the difference between management reserves and contingency reserves?",
+    "explanation": "Management reserves are evaluated by the top management to accommodate for the unforeseen risks. Contingency reserves are calculated during the Perform Quantitative Risk Analysis process to account for the residual risks. Domain = Process. PMBOK 6th edition, Page 202 and 439 and PMBOK 7th edition, Page 62",
+    "choices": [
+      {
+        "text": "Management reserves are used to handle residual risks, while contingency reserves are used to handle unforeseen risks.",
+        "correct": false
+      },
+      {
+        "text": "Management reserves are used to handle unforeseen risks, while contingency reserves are used to handle residual risks.",
+        "correct": true
+      },
+      {
+        "text": "Management reserves are used to handle secondary risks, while contingency reserves are used to handle residual risks.",
+        "correct": false
+      },
+      {
+        "text": "Management reserves are used to handle low-priority risks, while contingency reserves are used to handle high-priority risks.",
+        "correct": false
+      }
+    ],
+    "id": 276
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Alex is managing a construction project when two team members come to him with a conflict. A civil engineer has identified an important project risk: there is a subcontractor that may not deliver work on time. The designer believes that the risk has a low probability of occurring; however, he consults the lessons learned from previous projects and discovers that the subcontractor failed to deliver work on three previous projects. The civil engineer suggests that two team members take one week to evaluate the possibility of doing this work in-house and come up with some initial work that they can do in case the subcontractor does not deliver. Alex decides to follow the civil engineer’s suggestion over the objections of the designer. Which risk response strategy did he use?",
+    "explanation": "Mitigation means reducing probability or impact. Domain = Process. PMBOK 6th edition, Page 443 and PMBOK 7th edition, Page 123.",
+    "choices": [
+      {
+        "text": "Transference",
+        "correct": false
+      },
+      {
+        "text": "Mitigation",
+        "correct": true
+      },
+      {
+        "text": "Avoidance",
+        "correct": false
+      },
+      {
+        "text": "Acceptance",
+        "correct": false
+      }
+    ],
+    "id": 277
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a construction project. Two team members come to you with a conflict. One of them has identified an important project risk: that the cement supplier may not deliver the needed quantity of cement on time. The other team member doesn’t believe that the risk is likely to happen; however, you consult the lessons learned from previous projects and discover that the supplier failed to deliver the needed quantity of cement on three previous projects. You decide that the risk is a major one; you terminate the contract with the supplier, and instead, you agree with other suppliers to deliver the needed quantity. Both team members agree that this has eliminated the risk. Which of the following best describes your risk response strategy?",
+    "explanation": "Avoidance means removing the risk by removing the cause, and here you removed the supplier who causes the risk. Domain = Process. PMBOK 6th edition, Page 443 and PMBOK 7th edition, Page 123.",
+    "choices": [
+      {
+        "text": "Transference",
+        "correct": false
+      },
+      {
+        "text": "Mitigation",
+        "correct": false
+      },
+      {
+        "text": "Avoidance",
+        "correct": true
+      },
+      {
+        "text": "Acceptance",
+        "correct": false
+      }
+    ],
+    "id": 278
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Midway through the project, the project manager discovers that he has missed some risks during project planning. The project is now being executed, and the project management plan has been approved. Which of the following actions should the project manager do regarding the new risks?",
+    "explanation": "As new risks are identified, they should be assessed, and risk responses should be planned. If they need extra budget or time to address them, they should be requested through integrated change control. Risk identification is an ongoing process. Domain = Process. PMBOK 6th edition, Page 215 and PMBOK 7th edition, Page 59.",
+    "choices": [
+      {
+        "text": "Re-evaluate the risk identification process.",
+        "correct": false
+      },
+      {
+        "text": "The new risks might happen or not; identify them and don't request additional budget or time until they actually occur.",
+        "correct": false
+      },
+      {
+        "text": "Address them through management reserve as they were unforeseen during risk identification.",
+        "correct": false
+      },
+      {
+        "text": "Evaluate the risks, follow the change control process, and re-baseline.",
+        "correct": true
+      }
+    ],
+    "id": 279
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A prompt list is a predetermined list of:",
+    "explanation": "A prompt list is a predetermined list of risk categories that might give rise to individual project risks and that could also act as sources of overall project risk. Domain = Process. PMBOK 6th edition, Page 416.",
+    "choices": [
+      {
+        "text": "Risks",
+        "correct": false
+      },
+      {
+        "text": "Threats",
+        "correct": false
+      },
+      {
+        "text": "Risk categories",
+        "correct": true
+      },
+      {
+        "text": "Opportunities",
+        "correct": false
+      }
+    ],
+    "id": 280
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Julian is managing a construction project. He has determined that an activity is too risky to be completed internally. So, he hires a contractor to complete the activity. However, the contractor may not complete the work within budget, which may cause an increase in the project budget. What is the type of this risk?",
+    "explanation": "Secondary risks are risks that arise as a direct result of implementing a risk response. In this situation, the response was work transference to a contractor, which resulted in a secondary risk: an increase in the project budget. Domain = Process. PMBOK 6th edition, Page 439 and PMBOK 7th edition, Page 125.",
+    "choices": [
+      {
+        "text": "Residual risk",
+        "correct": false
+      },
+      {
+        "text": "Secondary risk",
+        "correct": true
+      },
+      {
+        "text": "Transference",
+        "correct": false
+      },
+      {
+        "text": "Accepted risk",
+        "correct": false
+      }
+    ],
+    "id": 281
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Midway through the project, the project manager discovers that he has missed some risks during project planning. The project is now being executed, and the project management plan has been approved. Which of the following actions should the project manager do regarding the new risks?",
+    "explanation": "As new risks are identified, they should be assessed, and risk responses should be planned. If they need extra budget or time to address them, they should be requested through integrated change control. Risk identification is an ongoing process. Domain = Process. PMBOK 6th edition, Page 215 and PMBOK 7th edition, Page 59.",
+    "choices": [
+      {
+        "text": "Re-evaluate the risk identification process.",
+        "correct": false
+      },
+      {
+        "text": "The new risks might happen or not; identify them and don't request additional budget or time until they actually occur.",
+        "correct": false
+      },
+      {
+        "text": "Address them through management reserve as they were unforeseen during risk identification.",
+        "correct": false
+      },
+      {
+        "text": "Evaluate the risks, follow the change control process, and re-baseline.",
+        "correct": true
+      }
+    ],
+    "id": 282
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A major software project with five sub-projects is being performed in your organization. Each of the sub-project managers has developed a risk management plan, identified many risks, analyzed them, and planned for risk responses. It is now three months later. What should you not do?",
+    "explanation": "Risks in the watch list are non-critical risks; they should only be monitored. There is no need to have risk response plans for them. Domain = Process. PMBOK 6th edition, Page 423.",
+    "choices": [
+      {
+        "text": "Make sure that the sub-project managers have risk response plans for all risks in the watch list.",
+        "correct": true
+      },
+      {
+        "text": "Make sure that the sub-project managers monitor their project work for new and changing risks.",
+        "correct": false
+      },
+      {
+        "text": "Make sure that the sub-project managers monitor the identified risks and those on the watch list.",
+        "correct": false
+      },
+      {
+        "text": "Make sure that the sub-project managers monitor risk triggers.",
+        "correct": false
+      }
+    ],
+    "id": 283
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a construction project when you discover that the local city council is about to install sewage systems. The project manager of the neighboring building adjacent to you also needs to install sewage system for his project. He discusses with you the possibility to build a sewage system for both projects together and combine the sewage system to save time and cost for both projects because you can use the same resources. Which risk response strategy will he use?",
+    "explanation": "Sharing a positive risk involves allocating some or all of the ownership of the opportunity to a third party who is best able to capture the opportunity for the benefit of the two projects. Domain = Process. PMBOK 6th edition, Page 444 and PMBOK 7th edition, Page 125",
+    "choices": [
+      {
+        "text": "Transfer",
+        "correct": false
+      },
+      {
+        "text": "Share",
+        "correct": true
+      },
+      {
+        "text": "Accept",
+        "correct": false
+      },
+      {
+        "text": "Exploit",
+        "correct": false
+      }
+    ],
+    "id": 284
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Richard is managing an online shopping website development project. He and the project team have finished the website design and got it approved from the customer and the project board. Later, they have noticed that there is a technical bug in the website design which may impact the website performance in the future. To fix this bug, a new design is needed which might delay the project by one month. What should Richard do?",
+    "explanation": "As a part of the professional and social responsibility of the project manager, he can’t continue working on a defective design. The project manager should first identify a risk of a design delay, then he can raise a change request with the new design. Domain = Process. PMBOK 6th edition, Page 411 and PMBOK 7th edition, Page 122",
+    "choices": [
+      {
+        "text": "As the design has been approved, he should continue the project execution with the approved design.",
+        "correct": false
+      },
+      {
+        "text": "Add a design delay risk in the project risk register.",
+        "correct": true
+      },
+      {
+        "text": "Raise a change request for the new design and assess the impacts.",
+        "correct": false
+      },
+      {
+        "text": "Escalate this topic to the project sponsor and let him take the decision.",
+        "correct": false
+      }
+    ],
+    "id": 285
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A risk has remained even after you implement all of your risk response strategies. What kind of risk is this and what should you do about it?",
+    "explanation": "Residual risks don’t need any further analysis. Domain = Process. PMBOK 7th edition, Page 125",
+    "choices": [
+      {
+        "text": "It’s a secondary risk; you should add it to the watchlist and revisit it periodically.",
+        "correct": false
+      },
+      {
+        "text": "It’s a residual risk; you need to eliminate it by eliminating its root cause.",
+        "correct": false
+      },
+      {
+        "text": "It’s a residual risk; you need to add a contingency reserve for it.",
+        "correct": true
+      },
+      {
+        "text": "It’s a top risk, you should try to reduce its probability or impact.",
+        "correct": false
+      }
+    ],
+    "id": 286
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You work as a project manager for a risky construction project. You and your team have identified risks, then performed the qualitative and quantitative risk analysis with the help of experts. During planning risk responses, a new team member asked you about the meaning of a residual risk. What would you tell him?",
+    "explanation": "Residual risks that are expected to remain after planned responses have been taken. Domain = Process. PMBOK 6th edition, Page 448 and PMBOK 7th edition, Page 125",
+    "choices": [
+      {
+        "text": "It is a risk that can not be addressed by a risk response.",
+        "correct": false
+      },
+      {
+        "text": "It is a risk that will remain no matter what type of risk response is offered.",
+        "correct": false
+      },
+      {
+        "text": "It is a risk that remains because no risk response is taken.",
+        "correct": false
+      },
+      {
+        "text": "It is a risk that remains after planned risk responses are taken.",
+        "correct": true
+      }
+    ],
+    "id": 287
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Ben is the project manager of the new construction project in his organization. He is currently performing the Quantitative Risk Analysis process. He is using a software where the project schedule is computed many times with the input values chosen at random for each iteration to create a probability distribution from the iterations. What technique is Ben using?",
+    "explanation": "The mentioned technique is the definition of simulation using Monte Carlo analysis. Domain = Process. PMBOK 6th edition, Page 433 and PMBOK 7th edition, Page 177",
+    "choices": [
+      {
+        "text": "Bubble Chart",
+        "correct": false
+      },
+      {
+        "text": "Sensitivity analysis",
+        "correct": false
+      },
+      {
+        "text": "Decision tree",
+        "correct": false
+      },
+      {
+        "text": "Monte Carlo analysis",
+        "correct": true
+      }
+    ],
+    "id": 288
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Frank is managing a pipeline installation project. He and his team have finished the design of the pipeline system. The design was the first deliverable in the project. He is holding a weekly status meeting. One of the team members indicated that they need to get a permit from the city council before they start digging. The team member feels that there is a risk that a city council representative will ask them for a permit for digging. And they will need to request a change for the project management plan to add the extra time and cost needed for that permit. And if they request that change, there is a high probability that the change control board would approve the change. What is the best action to take next?",
+    "explanation": "The first thing you should do is document it in the risk register, then you analyze the impact and probability of the risk. Domain = Process. PMBOK 6th edition, Page 411",
+    "choices": [
+      {
+        "text": "Use the contingency reserve to account for that risk.",
+        "correct": false
+      },
+      {
+        "text": "Schedule a meeting with the city council representative to discuss the risk.",
+        "correct": false
+      },
+      {
+        "text": "Add the risk to the risk register and gather information about its probability and impact.",
+        "correct": true
+      },
+      {
+        "text": "Add the risk to the watchlist and revisit it periodically.",
+        "correct": false
+      }
+    ],
+    "id": 289
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the difference between risk audit and risk reviews?",
+    "explanation": "Risk audits are a type of audit that may be used to consider the effectiveness of the risk management process. The project manager is responsible for ensuring that risk audits are performed at an appropriate frequency, as defined in the project’s risk management plan. Risk reviews are scheduled regularly and should examine and document the effectiveness of risk responses in dealing with overall project risk and with identified individual project risks. Risk reviews may also result in identification of new individual project risks, reassessment of current risks and the closing of risks that are outdated. Domain = Process. PMBOK 6th edition, Page 456 and 457",
+    "choices": [
+      {
+        "text": "They are the same.",
+        "correct": false
+      },
+      {
+        "text": "Risk audits are used to consider the effectiveness of the risk management process, while risk reviews should examine and document the effectiveness of risk responses in dealing with overall project risk and with identified individual project risks.",
+        "correct": true
+      },
+      {
+        "text": "Risk audits result in identification of new individual project risks, reassessment of current risks, and the closing of risks that are outdated, while risk reviews are used to consider the effectiveness of the risk management process.",
+        "correct": false
+      },
+      {
+        "text": "The risk manager is responsible for ensuring that risk audits are performed at an appropriate frequency, as defined in the project’s risk management plan. While, the project manager is responsible for conducting risk reviews meetings.",
+        "correct": false
+      }
+    ],
+    "id": 290
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following risk response strategies indicate that the project management plan will not be changed?",
+    "explanation": "Risk acceptance is a risk response strategy whereby the project team decides to acknowledge the risk and not taking any action unless the risk occurs. Domain = Process. PMBOK 6th edition, Page 443 and PMBOK 7th edition, Page 123",
+    "choices": [
+      {
+        "text": "Exploitation",
+        "correct": false
+      },
+      {
+        "text": "Transference",
+        "correct": false
+      },
+      {
+        "text": "Mitigation",
+        "correct": false
+      },
+      {
+        "text": "Acceptance",
+        "correct": true
+      }
+    ],
+    "id": 291
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements is an example of enhancing an opportunity?",
+    "explanation": "Enhance means increase probability or impact. Domain = Process. PMBOK 6th edition, Page 444 and PMBOK 7th edition, Page 125",
+    "choices": [
+      {
+        "text": "By forming a partnership with another company, the project’s value will increase for both companies.",
+        "correct": false
+      },
+      {
+        "text": "By taking additional actions, you increase the probability of potential profit.",
+        "correct": true
+      },
+      {
+        "text": "By taking out insurance, you can reduce potential costs to the project.",
+        "correct": false
+      },
+      {
+        "text": "By documenting the opportunity in the watchlist, you can keep track of it and ensure it gets exploited.",
+        "correct": false
+      }
+    ],
+    "id": 292
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a data center upgrade project. The data center uses old systems and your project was to upgrade to a new system. The project was planned to be in winter were heavy rains are likely to happen. The heavy rains caused power outages just when the project was near completion. When the power was restored, all of the project customer’s data were lost with no way of retrieving them. What should have been done to prevent this problem?",
+    "explanation": "The risk here is data loss due to power outage. So insurance against this risk will not solve the problem (will not restore lost data). Planning for a reserve fund is a risk acceptance and it will not restore lost data. Scheduling the installation during summer is a risk avoidance and may solve the problem, but it may have a negative impact on project schedule, so it is not the best solution. The best solution is to monitor the weather and have a contingency plan. Domain = Process. PMBOK 6th edition, Page 443 and PMBOK 7th edition, Page 123",
+    "choices": [
+      {
+        "text": "Schedule the installation in summer.",
+        "correct": false
+      },
+      {
+        "text": "Plan for a reserve fund.",
+        "correct": false
+      },
+      {
+        "text": "Insure against this risk.",
+        "correct": false
+      },
+      {
+        "text": "Monitor the weather and have a contingency plan.",
+        "correct": true
+      }
+    ],
+    "id": 293
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Carlos is the project manager of a system automation project that was scheduled to be completed within six months. During the early stages of the project, he and the stakeholders operated with the belief that the software that the project team is developing will be compatible with the existing hardware. Now after the project team has started developing the software it has become apparent that the software will not work with part of the existing hardware. The incorrect belief of Carlos and the stakeholders about software compatibility is considered as a/an:",
+    "explanation": "An assumption is a factor in the planning process that is considered to be true, real, or certain, without proof or demonstration. Domain = Process. PMBOK 6th edition, Page 415 and PMBOK 7th edition, Page 174",
+    "choices": [
+      {
+        "text": "Assumption",
+        "correct": true
+      },
+      {
+        "text": "Issue",
+        "correct": false
+      },
+      {
+        "text": "Risk",
+        "correct": false
+      },
+      {
+        "text": "Constraint",
+        "correct": false
+      }
+    ],
+    "id": 294
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager for a construction project is meeting with the project team when they informed him that the political climate in their country is not stable and a curfew may be applied which will shorten the working hours by 2 hours daily. This may delay the project by one month. They hold a brainstorming session to try to minimize the impact of the curfew but they found no useful way. Which risk response strategy did they use?",
+    "explanation": "No specific risk response strategy was selected, so the risk was accepted. Domain = Process. PMBOK 6th edition, Page 443 and PMBOK 7th edition, Page 123",
+    "choices": [
+      {
+        "text": "Mitigate",
+        "correct": false
+      },
+      {
+        "text": "Escalate",
+        "correct": false
+      },
+      {
+        "text": "Transfer",
+        "correct": false
+      },
+      {
+        "text": "Accept",
+        "correct": true
+      }
+    ],
+    "id": 295
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following is a risk response strategy that can be used for both opportunities and threats?",
+    "explanation": "Only Acceptance and Escalation are valid risk response strategy for both opportunities and threats. Domain = Process. PMBOK 6th edition, Page 442-444 and PMBOK 7th, Page 123-125",
+    "choices": [
+      {
+        "text": "Mitigation and Transference",
+        "correct": false
+      },
+      {
+        "text": "Transference and Escalation",
+        "correct": false
+      },
+      {
+        "text": "Sharing and Acceptance",
+        "correct": false
+      },
+      {
+        "text": "Acceptance and Escalation",
+        "correct": true
+      }
+    ],
+    "id": 296
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Steve is managing a large construction project which is budgeted at $20,000,000 and will be completed in 2 years. The project is on track with no major issues. Recently, the city council has announced for some new regulations related to the construction projects in the city that will take effect within two years. The new regulations will have an effect on the project budget, however there is low probability that the new regulations will take effect before the project delivery date. What should Steve do?",
+    "explanation": "First things first, he together with the team should identify a risk, add it to the risk register, make needed analysis and plan a response. Domain = Process. PMBOK 6th edition, Page 215 and PMBOK 7th edition, Page 59",
+    "choices": [
+      {
+        "text": "Hold a meeting with the project team to discuss this topic.",
+        "correct": false
+      },
+      {
+        "text": "It is an unknown-unknown, he can address it through management reserve.",
+        "correct": false
+      },
+      {
+        "text": "Calculate the effect on the project budget and submit a change request to add it as contingency reserve.",
+        "correct": false
+      },
+      {
+        "text": "Add a risk to the risk register.",
+        "correct": true
+      }
+    ],
+    "id": 297
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Preliminary risk responses may be identified and recorded as part of the ______ process and will be reviewed and confirmed as part of the ______ process.",
+    "explanation": "Preliminary risk responses may be identified and recorded as part of the Identify Risks process and will be reviewed and confirmed as part of the Plan Risk Responses process. Domain = Process. PMBOK 6th edition, Page 411",
+    "choices": [
+      {
+        "text": "Identify Risks and Plan Risk Responses",
+        "correct": true
+      },
+      {
+        "text": "Perform Qualitative Risk Analysis and Plan Risk Responses",
+        "correct": false
+      },
+      {
+        "text": "Identify Risks and Implement Risk Responses",
+        "correct": false
+      },
+      {
+        "text": "Plan Risk Management and Plan Risk Responses",
+        "correct": false
+      }
+    ],
+    "id": 298
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Dennis is managing a large and complex product development project. The project is very risky, however he could use the best practices in risk identification and has succesfully identified most of the project risks with the project team. The project has overall intensive planning. However, during project executing, the project has experienced several risks, which were already identified. Unfortunately, the project failed to achieve its objectives due to these realized risks. What has gone wrong?",
+    "explanation": "As the project had intensive planning, this means that risks were properly defined, analyzed and responses were planned. The team spend effort in identifying and analyzing risks and developing risk responses, but no action is taken to manage the risk.",
+    "choices": [
+      {
+        "text": "The qualitative and quantitative risk analysis were inadequate.",
+        "correct": false
+      },
+      {
+        "text": "There was not enough management reserve to accommodate the unknown risks.",
+        "correct": false
+      },
+      {
+        "text": "No action has been taken to manage the identified risks.",
+        "correct": true
+      },
+      {
+        "text": "There was not enough contingency reserve to accommodate the identified risks.",
+        "correct": false
+      }
+    ],
+    "id": 299
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a product development project. You have a tight budget and the project is behind schedule. One of your team members presents a new software that will help automate some of the project work. By using the new software, the project work will be done faster than planned. The new software will cost 10,000$ and it will help you save 45,000$ in total costs, it will also save 45 days from the total project duration. You decide to purchase the new software and change the project management plan accordingly after the approval of CCB. Which risk response strategy is used in this situation?",
+    "explanation": "In this situation the project manager changed the project management plan to make sure that the opportunity happens. Domain = Process. PMBOK 6th edition, Page 444 and PMBOK 7th, Page 125",
+    "choices": [
+      {
+        "text": "Enhancing",
+        "correct": false
+      },
+      {
+        "text": "Exploiting",
+        "correct": true
+      },
+      {
+        "text": "Acceptance",
+        "correct": false
+      },
+      {
+        "text": "Sharing",
+        "correct": false
+      }
+    ],
+    "id": 300
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a construction project that will cost 2,000,000$ and will last for 14 months. Before finalizing the project management plan, the project sponsor asks you why you scheduled many risk identification meetings throughout the project. He said that risk identification meeting should be scheduled only during project planning and there is no need for all these risk identification meetings throughout the project. How should you answer him?",
+    "explanation": "Identify risks is an iterative process, because new risks may evolve or become known as the project progresses through its life cycle. The frequency of iteration and participation in each cycle will vary by situation. Domain = Process. PMBOK 6th edition, Page 411 and PMBOK 7th edition, Page 122",
+    "choices": [
+      {
+        "text": "The sponsor is your boss. You should follow his advice and schedule risk identification meetings during project planning only.",
+        "correct": false
+      },
+      {
+        "text": "The iterative meetings allow the risk identification participants to identify newly discovered risks throughout the project.",
+        "correct": true
+      },
+      {
+        "text": "The Identify Risks process occurs during planning process group, so the risk identification meetings should be also scheduled during planning.",
+        "correct": false
+      },
+      {
+        "text": "The iterative meetings allow the project manager to discuss the risk events which have passed the project and which did not happen.",
+        "correct": false
+      }
+    ],
+    "id": 301
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following events is least likely to be used as a source for identifying threats?",
+    "explanation": "Daily standup meetings can be used in any project and are a source for identifying potential threats and opportunities. Frequent demonstrations of increments of the product or service, interim designs, or proof of concepts can surface threats and opportunities. Retrospectives and lessons learned meetings can be used to identify threats to performance, project team cohesion, etc., and to seek improvements. Product backlog refinement is mainly used to prioritize items in product backlog. Domain = Process. PMBOK 7th edition, Page 127",
+    "choices": [
+      {
+        "text": "Daily Standups",
+        "correct": false
+      },
+      {
+        "text": "Demonstrations",
+        "correct": false
+      },
+      {
+        "text": "Retrospectives",
+        "correct": false
+      },
+      {
+        "text": "Backlog Refinement",
+        "correct": true
+      }
+    ],
+    "id": 302
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Michael is managing a software project which is a part of a program. During risk identification, a team member has identified an opportunity that he will learn a different programming language to perform a part of this project which may be useful for other parts. Michael noticed that this opportunity will be useful for other projects in the program, but it will not be useful in his project. So, he informed the program manager about this opportunity. Which risk response strategy did Michael use in this situation?",
+    "explanation": "In this situation, Escalate is the correct answer because the project manager agrees that the proposed response would exceed the project manager’s authority. He escalated the opportunity to be managed at the program level. Domain = Process. PMBOK 6th edition, Page 444 and PMBOK 7th, Page 125",
+    "choices": [
+      {
+        "text": "Transfer, because he transferred it to the program manager.",
+        "correct": false
+      },
+      {
+        "text": "Escalate, because it needs to be managed at the program level.",
+        "correct": true
+      },
+      {
+        "text": "Accept, because he did nothing towards this opportunity.",
+        "correct": false
+      },
+      {
+        "text": "Enhance, because by informing program manager probability will increase.",
+        "correct": false
+      }
+    ],
+    "id": 303
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Mark is a project manager for a tele-communications project in his organization. Tom is his sponsor and he is working with David, the risk manager in the organization to determine the effectiveness of the risk responses. Tom and David are concerned that some of the risks assigned to Frederick, a project team member to plan for risk responses may not be addresses to the depth they would like. In this scenario, what is the role of Frederick regarding risk management?",
+    "explanation": "Frederick here is a risk response owner who is responsible to plan a risk response. He is also a team member, but the question asks what is his role regarding risk management. Domain = Process. PMBOK 6th edition, Page 426",
+    "choices": [
+      {
+        "text": "Risk auditor",
+        "correct": false
+      },
+      {
+        "text": "Risk response owner",
+        "correct": true
+      },
+      {
+        "text": "Risk team member",
+        "correct": false
+      },
+      {
+        "text": "Project team member",
+        "correct": false
+      }
+    ],
+    "id": 304
+  },
+  {
+    "type": "multiple-choice",
+    "text": "When you add more risks to the risk register, all of the following will happen except:",
+    "explanation": "As more risks are identified, the more you need for contingency reserve, the less you need to develop workarounds, your project will proceed with few surprises and you will need to develop more risk responses. Domain = Process. PMBOK 6th edition, Page 443 and PMBOK 7th edition, Page 123",
+    "choices": [
+      {
+        "text": "More risk responses will need to be developed.",
+        "correct": false
+      },
+      {
+        "text": "The need for contingency reserves is minimized.",
+        "correct": true
+      },
+      {
+        "text": "The need for workarounds is minimized.",
+        "correct": false
+      },
+      {
+        "text": "Your project will progress with few surprises.",
+        "correct": false
+      }
+    ],
+    "id": 305
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A risk owner will be responsible for:",
+    "explanation": "A risk owner will be responsible for planning an appropriate risk response and for reporting progress on managing the risk, will be allocated to each individual project risk as part of the Perform Qualitative Risk Analysis process. Domain = Process. PMBOK 6th edition, Page 426",
+    "choices": [
+      {
+        "text": "Determining the actual probability and impact for individual project risks.",
+        "correct": false
+      },
+      {
+        "text": "Planning an appropriate risk response and for reporting progress on managing the risk.",
+        "correct": true
+      },
+      {
+        "text": "Determining the needed contingency reserve for cost or schedule.",
+        "correct": false
+      },
+      {
+        "text": "Reassessment of current risks and closing of outdated risks.",
+        "correct": false
+      }
+    ],
+    "id": 306
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The lowest level of the risk breakdown structure can be used as a/an:",
+    "explanation": "The risk categories in the lowest level of the risk breakdown structure can be used as a prompt list for individual project risks. Domain = Process. PMBOK 6th edition, Page 416",
+    "choices": [
+      {
+        "text": "Prioritized list of project risks",
+        "correct": false
+      },
+      {
+        "text": "Individual project risks",
+        "correct": false
+      },
+      {
+        "text": "Checklist",
+        "correct": false
+      },
+      {
+        "text": "Prompt list",
+        "correct": true
+      }
+    ],
+    "id": 307
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Antony is managing a large product development project. He and his team have finalized the first round of risk identification with project key stakeholders. They identified hundreds of individual project risks, recommended potential risk owners and risk responses. They also identified sources of overall project risk. Where should sources of overall project risk be documented?",
+    "explanation": "On completion of the Identify Risks process, information in the risk report may include sources of overall project risk, indicating which are the most important drivers of overall project risk exposure. Domain = Process. PMBOK 6th edition, Page 418 and PMBOK 7th edition, Page 190",
+    "choices": [
+      {
+        "text": "Risk Report",
+        "correct": true
+      },
+      {
+        "text": "Risk Register",
+        "correct": false
+      },
+      {
+        "text": "Risk Management Plan",
+        "correct": false
+      },
+      {
+        "text": "Risk Breakdown Structure",
+        "correct": false
+      }
+    ],
+    "id": 308
+  },
+  {
+    "type": "multiple-choice",
+    "text": "At the beginning of the project a team member asks you, the project manager, when we should identify risks. Which of the following statements best describes your answer?",
+    "explanation": "When there is any change to any project constraint, you must evaluate the impacts of this change to all project constraints. This means you must know all risks associated with the change. Domain = Process. PMBOK 6th edition, Page 411 and PMBOK 7th edition, Page 122",
+    "choices": [
+      {
+        "text": "Whenever there is a change to the project.",
+        "correct": true
+      },
+      {
+        "text": "After the project charter is received and before the WBS is created.",
+        "correct": false
+      },
+      {
+        "text": "Before the project charter is created.",
+        "correct": false
+      },
+      {
+        "text": "During the Validate Scope process.",
+        "correct": false
+      }
+    ],
+    "id": 309
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Why will you need to update the WBS after you complete the risk response planning with your team?",
+    "explanation": "Plan Risk Responses process may result in updates to the project management plan components like WBS because of new, modified or omitted work generated by the risk responses, the scope baseline may be updated to reflect those changes. Domain = Process. PMBOK 6th edition, Page 447",
+    "choices": [
+      {
+        "text": "Because of work that was removed during the WBS creation.",
+        "correct": false
+      },
+      {
+        "text": "Because of new work added by the risk responses.",
+        "correct": true
+      },
+      {
+        "text": "Because of risks associated with work packages.",
+        "correct": false
+      },
+      {
+        "text": "Because of risks generated from decomposing work packages to activities.",
+        "correct": false
+      }
+    ],
+    "id": 310
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following best describes an opportunity on a project?",
+    "explanation": "The quality requirements are hard to achieve, the requirements might need updating later, and an increase in USD consumer price all have negative impacts on the project. They are all threats not opportunities. While a team member will learn more about something, it will be useful in future projects, so it is considered an opportunity. Domain = Process. PMBOK 6th edition, Page 397 and PMBOK 7th edition, Page 125",
+    "choices": [
+      {
+        "text": "The quality requirements are hard to achieve.",
+        "correct": false
+      },
+      {
+        "text": "The requirements might need updating later.",
+        "correct": false
+      },
+      {
+        "text": "An increase in USD consumer price may occur, which will need $5,000 contingency reserve.",
+        "correct": false
+      },
+      {
+        "text": "A team member will learn more about microwaves and can use this information on future projects.",
+        "correct": true
+      }
+    ],
+    "id": 311
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are the project manager for an electronic boards manufacturing project. This project is implemented in a country where both temperature and humidity are high. The boards you manufacture have some components that are sensitive to humidity. If the humidity exceeds 70% , it may damage some humidity sensitive components, which may delay the project by two weeks till you purchase other components, and also will cost the project about 2,000$. So, the humidity degree inside the lab which you use to manufacture electronic boards should not exceed 70%. You work with your project team to develop a response to deal with the humidity problem. What is called the 70% humidity degree?",
+    "explanation": "Triggers are the warning signs that a risk has occurred or about to occur. Domain = Process. PMBOK 6th edition, Page 417",
+    "choices": [
+      {
+        "text": "Risk Event",
+        "correct": false
+      },
+      {
+        "text": "Threat",
+        "correct": false
+      },
+      {
+        "text": "Risk Trigger",
+        "correct": true
+      },
+      {
+        "text": "Issue",
+        "correct": false
+      }
+    ],
+    "id": 312
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following best describes the output of the Identify Risks process?",
+    "explanation": "A list of prioritized risks is an output of the Perform Qualitative Risk Analysis process. The outputs of the Identify Risks process is a risk report and a risk register containing a list of risks, root causes of risks, a list of potential responses and a list of potential risk owners. So the best answer is an understanding of project risks not just a list of risks or a list of potential risk owners. Domain = Process. PMBOK 6th edition, Page 417",
+    "choices": [
+      {
+        "text": "A list of potential risk owners",
+        "correct": false
+      },
+      {
+        "text": "A list of risks",
+        "correct": false
+      },
+      {
+        "text": "An understanding of the project risks",
+        "correct": true
+      },
+      {
+        "text": "A list of prioritized risks",
+        "correct": false
+      }
+    ],
+    "id": 313
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During the Identify Risks process, a project manager and stakeholders used many methods to identify risks and they identified more than 1000 risks. Then they made sure that all the risks were understood and they identified triggers. Later, in the Plan Risk Responses process, the project manager avoided some identified risks and mitigated others. What has he done wrong?",
+    "explanation": "More people should be involved in the Plan Risk Responses process, those people may have more experience in dealing with risks. Domain = Process. PMBOK 6th edition, Page 441",
+    "choices": [
+      {
+        "text": "The project manager should have involved more people in the Plan Risk Responses process.",
+        "correct": true
+      },
+      {
+        "text": "He should identify triggers in the Plan Risk Responses process not in the Identify Risks process.",
+        "correct": false
+      },
+      {
+        "text": "The project manager should have performed a risk audit.",
+        "correct": false
+      },
+      {
+        "text": "The project manager should have created workarounds.",
+        "correct": false
+      }
+    ],
+    "id": 314
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager of a high-risk electronics project which has a lot of new technologies. You created a risk management plan, identified 225 risks, and documented them in a risk register and documented sources of overall project risk, together with summary information on identified individual project risks in a risk report. Then, the risks were analyzed and responses were planned. During risk control meetings. It gets obvious to everyone that the documents you created are not helpful. What have you probably done wrong?",
+    "explanation": "You should involve everyone in identifying risks. Domain = Process. PMBOK 6th edition, Page 411",
+    "choices": [
+      {
+        "text": "You didn't perform quantitative risk analysis for the identified risks.",
+        "correct": false
+      },
+      {
+        "text": "You did the first processes alone.",
+        "correct": true
+      },
+      {
+        "text": "You did not identify Triggers.",
+        "correct": false
+      },
+      {
+        "text": "Risk response owners didn't implement the planned responses.",
+        "correct": false
+      }
+    ],
+    "id": 315
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During which risk management processes are most of the project risks identified?",
+    "explanation": "New risks are identified in the Monitor Risks process and Identify Risks process. Domain = Process. PMBOK 6th edition, Page 411 and 454",
+    "choices": [
+      {
+        "text": "Perform Qualitative Risk Analysis and Monitor Risks",
+        "correct": false
+      },
+      {
+        "text": "Identify Risks and Monitor Risks",
+        "correct": true
+      },
+      {
+        "text": "Implement Risk Responses and Perform Qualitative Risk Analysis",
+        "correct": false
+      },
+      {
+        "text": "Plan risk responses and Identify Risks",
+        "correct": false
+      }
+    ],
+    "id": 316
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You have been promoted to a project manager position in an organization which has a history of handling risks badly. The previous projects didn’t follow the risk management procedures in your organization. Your new project is very important and highly visible in your organization. You have been asked by top management to analyze the project risks and prepare response strategies for them as soon as possible. The project’s first milestone is in three weeks. In preparing the risk response plan, input from which of the following is generally least important?",
+    "explanation": "Team members know the project deliverables, so their inputs are important. Risk management experts in your organization are responsible for preparing templates and historical information from previous projects, so their inputs are important. Key stakeholders have knowledge about technical work in the project, so their inputs are important in determining risk responses. The project sponsor inputs are least important because he doesn't know the detailed work of the project to solve the project problems. Domain = Process. PMBOK 6th edition, Page 441",
+    "choices": [
+      {
+        "text": "Project team members",
+        "correct": false
+      },
+      {
+        "text": "Risk management experts in your organization",
+        "correct": false
+      },
+      {
+        "text": "Project sponsor",
+        "correct": true
+      },
+      {
+        "text": "Key stakeholders",
+        "correct": false
+      }
+    ],
+    "id": 317
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Carol is managing an industrial project. She, her team and the project sponsor find that the level of overall project risk is significantly negative and outside the agreed-upon risk thresholds for the project. They tried to reduce the negative effect of uncertainty on the project as a whole and bring the project back within the thresholds, but they couldn't. So they decided to cancel the project. Which risk response strategy did they use?",
+    "explanation": "Where it is not possible to bring the project back within the thresholds, the project may be canceled. This represents the most extreme degree of risk avoidance and it should be used only if the overall level of threat is, and will remain, unacceptable. Domain = Process. PMBOK 6th edition, Page 445 and PMBOK 7th edition, Page 123",
+    "choices": [
+      {
+        "text": "Escalate",
+        "correct": false
+      },
+      {
+        "text": "Accept",
+        "correct": false
+      },
+      {
+        "text": "Avoid",
+        "correct": true
+      },
+      {
+        "text": "They didn't use any risk response strategy.",
+        "correct": false
+      }
+    ],
+    "id": 318
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing an industrial project which had a lower priority in your organization than other running projects. During risk identification sessions, you and your team identified more than 180 risks for your project. You are afraid that evaluating each of these risks quantitatively will cost you a huge amount of time and money, while most of them are not important enough . What should you do next?",
+    "explanation": "You must evaluate both probability and impact. Domain = Process. PMBOK 6th edition, Page 423",
+    "choices": [
+      {
+        "text": "Identify risk triggers where possible. Analyze only those risks quantitatively for which no trigger could be found.",
+        "correct": false
+      },
+      {
+        "text": "Use qualitative risk analysis in order to prioritize risks for further action.",
+        "correct": true
+      },
+      {
+        "text": "Assess the probability of each risk qualitatively and then analyze only those risks with high probability.",
+        "correct": false
+      },
+      {
+        "text": "Assess the potential impact of each risk qualitatively and then analyze only those risks with high impact.",
+        "correct": false
+      }
+    ],
+    "id": 319
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Laura is the project manager of a new construction project. The project is to build a new hospital in a city during the hurricane season. A stakeholder identified a risk that the hurricane might damage the project deliverables and it may have consequences on project schedule and cost. Laura and her team go on planning as if the risk is not likely to occur. What is the risk response strategy used in this situation?",
+    "explanation": "They did nothing for the risk and even they didn't plan for a contingency reserve, so the risk is passively accepted. Domain = Process. PMBOK 6th edition, Page 443 and PMBOK 7th edition, Page 123",
+    "choices": [
+      {
+        "text": "Active Acceptance",
+        "correct": false
+      },
+      {
+        "text": "Passive Acceptance",
+        "correct": true
+      },
+      {
+        "text": "Mitigation",
+        "correct": false
+      },
+      {
+        "text": "Avoidance",
+        "correct": false
+      }
+    ],
+    "id": 320
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Sarah is managing a construction project. During risk identification, a team member identified a risk that previous projects were exposed to thefts, some thieves have stolen cement and building material from the work location. The team agrees that it’s unlikely that theives can steal material from working location. Even if thefts occur,the project will not lose a significant amount of material, because they depend on material delivery as per the daily needs. She decides to monitor the risk from time to time to be sure that it continues to have a low probability and consequences. Where does she record the risk so that she doesn’t lose track of it?",
+    "explanation": "You record low probability and impact risks in watchlist. Domain = Process. PMBOK 6th edition, Page 423",
+    "choices": [
+      {
+        "text": "In a trigger",
+        "correct": false
+      },
+      {
+        "text": "In the Risk Report",
+        "correct": false
+      },
+      {
+        "text": "In the Risk Management Plan",
+        "correct": false
+      },
+      {
+        "text": "On a watchlist",
+        "correct": true
+      }
+    ],
+    "id": 321
+  }
+]

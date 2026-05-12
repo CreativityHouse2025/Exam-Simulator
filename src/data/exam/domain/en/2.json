@@ -1,0 +1,506 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "Mathew is managing a software project to develop a website for a new press agency. The project is very large and involves 350 stakeholders located in 9 countries speaking 5 different languages. Recently, he noticed that misunderstanding occurred between many stakeholders when using the instant messenger software available in the organization's intranet. He asked the IT department to add emotional faces to the instant messenger software. How can these emotional faces help the sender?",
+    "explanation": "Encoding means that the message is coded into symbols, such as text, sound or some other medium for transmission. Domain = People. PMBOK 6th edition, Page 371",
+    "choices": [
+      {
+        "text": "Decode the message correctly.",
+        "correct": false
+      },
+      {
+        "text": "Encode the message correctly.",
+        "correct": true
+      },
+      {
+        "text": "Send correct feedback.",
+        "correct": false
+      },
+      {
+        "text": "Send correct acknowledge.",
+        "correct": false
+      }
+    ],
+    "id": 46
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Matt is an agile practitioner working on a software project. Midway through the project, the team tells him that they need feedback from some key subject matter experts who aren't assigned to the project. How should Matt respond?",
+    "explanation": "During product demonstration, the team demonstrates all completed work items at the end of the iteration. SME's can be invited to provide their feedback. Domain = People. Agile Practice Guide Page 55",
+    "choices": [
+      {
+        "text": "Ask the sponsor to assign more full-time subject matter experts to the project.",
+        "correct": false
+      },
+      {
+        "text": "Remind the team that they can get all the feedback they need from the product owner, instead of going outside the project.",
+        "correct": false
+      },
+      {
+        "text": "Invite those subject matter experts to participate in the team's product demo meetings and provide their feedback.",
+        "correct": true
+      },
+      {
+        "text": "Ask the team to proceed, since they have all the expertise needed to complete the project.",
+        "correct": false
+      }
+    ],
+    "id": 47
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A software organization is moving towards agile approach in managing its projects. This approach is new to the organization, and the project manager's role with these new teams hasn't been clearly defined. Ann is a project manager in this organization. She decides to attend her team's user story writing workshops. Why does she think these sessions are a good use of her limited time?",
+    "explanation": "Attending the user story writing workshop will build good relationships with team members and will help her understand the features of the product as they will be broken down into user stories. Domain = People. Agile Practice Guide Page 58",
+    "choices": [
+      {
+        "text": "She wants to build strong relationships with the development team members and make sure there is a shared understanding of the product features.",
+        "correct": true
+      },
+      {
+        "text": "She wants to build strong relationships with the business stakeholders, while the agile coach manages the development team.",
+        "correct": false
+      },
+      {
+        "text": "She wants to make sure the requirements will deliver the planned scope and be released on time, by the project deadline.",
+        "correct": false
+      },
+      {
+        "text": "She plans to document the requirements in a requirements traceability matrix to make sure all the work contributes to achieving the project objectives.",
+        "correct": false
+      }
+    ],
+    "id": 48
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Alfrid is attending a project management training session. He is watching the speaker to pick up physical gestures and facial expressions. He confirms he is listening, expresses agreement or disagreement and summarizing what he says. Which communication skill does he have?",
+    "explanation": "Listening actively means staying engaged with the speaker and summarizing conversations to ensure effective information exchange. Domain = People. PMBOK 6th edition, Page 363 and PMBOK 7th edition, Page 12 and 21",
+    "choices": [
+      {
+        "text": "Active listening",
+        "correct": true
+      },
+      {
+        "text": "Clarity and Concision",
+        "correct": false
+      },
+      {
+        "text": "Open-Mindedness",
+        "correct": false
+      },
+      {
+        "text": "Picking the Right Medium",
+        "correct": false
+      }
+    ],
+    "id": 49
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a software development project. You have completed project planning and started project executing. You discover that a stakeholder always comes to the project team office and asks the team members many questions about the project. What should you do with him?",
+    "explanation": "The best method is to follow communication management plan. Domain = People. PMBOK 6th edition, Page 389",
+    "choices": [
+      {
+        "text": "Meet with the stakeholder to understand why he feels the need to communicate with your team members.",
+        "correct": false
+      },
+      {
+        "text": "Ask the stakeholder to formally address his questions to you.",
+        "correct": false
+      },
+      {
+        "text": "Tell your team members not to waste their time talking this stakeholder.",
+        "correct": false
+      },
+      {
+        "text": "Ask the stakeholder to formally address project issues as per the communications management plan.",
+        "correct": true
+      }
+    ],
+    "id": 50
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During a project weekly meeting, the project manager displays the project status to the team members. The project SPI = 0.83 and CPI = 0.98. The project team are in a very critical situation, because the project is running behind schedule and there is only two months remaining for the project to be completed as per the contract with the customer. If the project is not delivered on time, they may be subjected to a penalty. He wants to clarify the critical situation, so he raised his voice and spoke loudly with an angry look on his face. What did he do?",
+    "explanation": "Encoding means that the message is coded into symbols, such as text, sound or some other medium for transmission. Domain = People. PMBOK 6th edition, Page 371",
+    "choices": [
+      {
+        "text": "Decoding",
+        "correct": false
+      },
+      {
+        "text": "Encoding",
+        "correct": true
+      },
+      {
+        "text": "Feedback",
+        "correct": false
+      },
+      {
+        "text": "Acknowledge",
+        "correct": false
+      }
+    ],
+    "id": 51
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are the project manager of an industrial design project that has teams distributed in four countries Spain, India, France and Germany. You want all team members get the right message, so you translate the project plan into Spanish, Hindi, French, and German. Which of the following best describes what you do when you have your communications translated?",
+    "explanation": "Encoding means that thoughts or ideas are translated (encoded) into language by the sender. Domain = People. PMBOK 6th edition, Page 371",
+    "choices": [
+      {
+        "text": "Encoding",
+        "correct": true
+      },
+      {
+        "text": "Decoding",
+        "correct": false
+      },
+      {
+        "text": "Feedback",
+        "correct": false
+      },
+      {
+        "text": "Effective listening",
+        "correct": false
+      }
+    ],
+    "id": 52
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Vicky through an instant messenger software. Michael is worried that Vicky might misunderstand him and think that he is angry. So, he added a smiley emotion to clarify that he is not angry. What did Michael do?",
+    "explanation": "Encoding means that the message is coded into symbols, such as text, sound or some other medium for transmission. Domain = People. PMBOK 6th edition, Page 371",
+    "choices": [
+      {
+        "text": "Decoding",
+        "correct": false
+      },
+      {
+        "text": "Encoding",
+        "correct": true
+      },
+      {
+        "text": "Feedback",
+        "correct": false
+      },
+      {
+        "text": "Acknowledge",
+        "correct": false
+      }
+    ],
+    "id": 53
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Karim has been hired as a team member in a large construction project. His native language is Arabic and the organization's language is English. He is having trouble understanding the emails received every day. To overcome this problem, he installed an instant translation software on his phone to translate any received email to Arabic to be able to understand these emails. What did he do?",
+    "explanation": "Decoding means that the data received is translated by the receiver back into a form useful to the receiver. Domain = People. PMBOK 6th edition, Page 371",
+    "choices": [
+      {
+        "text": "Decoding",
+        "correct": true
+      },
+      {
+        "text": "Encoding",
+        "correct": false
+      },
+      {
+        "text": "Feedback",
+        "correct": false
+      },
+      {
+        "text": "Acknowledge",
+        "correct": false
+      }
+    ],
+    "id": 54
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a large tele-communication project. The project has 1250 stakeholders. You feel that misunderstandings can occur in your project because the project is a large one and contains a large number of stakeholders. You need to avoid these misunderstandings. What can you use to reduce the number of such misunderstandings?",
+    "explanation": "Influence and delegating are leadership tools. Collaboration and compromise are conflict resolution techniques. Weekly meeting with 1250 stakeholders will not be effective. But common understanding and communications management can reduce misunderstanding. Domain = People. PMBOK 6th edition, Page 362",
+    "choices": [
+      {
+        "text": "Common understanding and communications management",
+        "correct": true
+      },
+      {
+        "text": "A weekly meeting for all stakeholders",
+        "correct": false
+      },
+      {
+        "text": "Collaboration and compromise",
+        "correct": false
+      },
+      {
+        "text": "Influence and delegating",
+        "correct": false
+      }
+    ],
+    "id": 55
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The project manager assigned Mark to send a weekly email to the project key stakeholders to explain the status of the project. Some stakeholders informed the project manager that they don't receive this email. The project manager wants to know if this email is delivered to these stakeholders or not. He asked Mark to use the option of requesting a delivery receipt from the email software which they use. Mark did what was requested from him and received notifications with who received this email. What did Mark receive?",
+    "explanation": "Acknowledge means upon receipt of a message, the receiver may signal (acknowledge) receipt of the message, but this does not necessarily mean agreement with or comprehension of the message—merely that it has been received. Domain = People. PMBOK 6th edition, Page 373",
+    "choices": [
+      {
+        "text": "Feedback",
+        "correct": false
+      },
+      {
+        "text": "Acknowledge",
+        "correct": true
+      },
+      {
+        "text": "Noise",
+        "correct": false
+      },
+      {
+        "text": "Response",
+        "correct": false
+      }
+    ],
+    "id": 56
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Mary, the project manager, sent a text message to Tom, a project stakeholder, using the company's instant messaging system. When he received it, Tom called her back. Which of the following is true about this situation?",
+    "explanation": "Encoding mean that thoughts or ideas are translated (encoded) into language by the sender. Decoding means that the message is translated by the receiver back into meaningful thoughts or ideas. Domain = People. PMBOK 6th edition, Page 371",
+    "choices": [
+      {
+        "text": "Mary encoded the text message; Tom decoded it, and then encoded his feedback message.",
+        "correct": true
+      },
+      {
+        "text": "Mary decoded her text message; Tom encoded his phone call and decoded the feedback.",
+        "correct": false
+      },
+      {
+        "text": "Tom sent feedback to Mary, who encoded it.",
+        "correct": false
+      },
+      {
+        "text": "Mary decoded her text message and Tom encoded his feedback.",
+        "correct": false
+      }
+    ],
+    "id": 57
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a four phases mechanical project. You finally produced the deliverable of the first phase and have just delivered it to your customer for acceptance. The customer called you to inform you that some features they were expecting are missing. What's the first thing you should do?",
+    "explanation": "You must first understand what's the problem. Domain = People. PMBOK 6th edition, Page 164 and PMBOK 7th edition, Page 83",
+    "choices": [
+      {
+        "text": "Submit a change request to the project management plan to add the missing features.",
+        "correct": false
+      },
+      {
+        "text": "Inform the customer that the deliverable has been verified in the Control Quality process.",
+        "correct": false
+      },
+      {
+        "text": "Apologize to the customer and tell your team to start building missing features.",
+        "correct": false
+      },
+      {
+        "text": "Meet with the customer to understand the missing features.",
+        "correct": true
+      }
+    ],
+    "id": 58
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Catherine is managing a project to author a book about using earned value management in construction projects. She asked Maria, a technical writer, to help her in this project. Maria advised her to pay attentions to the following points: using correct grammar and spelling, using concise expressions and eliminating excess words, having clear purpose, using markers such as introduction and summaries of the ideas, and controlling flow of words and ideas using graphics. Which techniques did Maria advised Catherine to use?",
+    "explanation": "The 5Cs of written communications involves using correct grammar and spelling, concise expression and elimination of excess words, clear purpose and expression directed to the needs of the reader, coherent logical flow of ideas and controlling flow of words and ideas. Domain = People. PMBOK 6th edition, Page 363",
+    "choices": [
+      {
+        "text": "Interactive Communication",
+        "correct": false
+      },
+      {
+        "text": "Cultural Awareness",
+        "correct": false
+      },
+      {
+        "text": "5C's",
+        "correct": true
+      },
+      {
+        "text": "Data Representation",
+        "correct": false
+      }
+    ],
+    "id": 59
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a software project. One of your team members informed you that he has added an extra functionality in the work package assigned to him which will help make the usage of the product easier for the customer. The customer didn't require to add this functionality, but it seems that it will make the usage of the product easier. The team member added this functionality to exceed customer expectation. What should you do first in this situation?",
+    "explanation": "You must first understand the added functionality before taking any decision. Domain = People. PMBOK 6th edition, Page 164 and PMBOK 7th edition, Page 87",
+    "choices": [
+      {
+        "text": "Understand what is the added functionality.",
+        "correct": true
+      },
+      {
+        "text": "Instruct the team member to remove the added functionality.",
+        "correct": false
+      },
+      {
+        "text": "Submit a change request to add the new functionality to the scope baseline and calculate the time and cost needed for it.",
+        "correct": false
+      },
+      {
+        "text": "Reprimand the team member for adding extra functionality.",
+        "correct": false
+      }
+    ],
+    "id": 60
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Fredric is a project manager in a multinational company. He is having a phone call with Fernando, a team member working on his project. The English accent of Fernando is very difficult to be understood by Fredric. Fernando's accent is considered as:",
+    "explanation": "Language barrier is considered to be a noise, which includes any interference or barriers that might compromise the delivery of the message. Domain = People. PMBOK 6th edition, Page 373",
+    "choices": [
+      {
+        "text": "Noise",
+        "correct": true
+      },
+      {
+        "text": "Medium",
+        "correct": false
+      },
+      {
+        "text": "Feedback",
+        "correct": false
+      },
+      {
+        "text": "Encoding",
+        "correct": false
+      }
+    ],
+    "id": 61
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a product development project. During the project, the customer told you that there are three work packages, he thinks that they are not necessary. The customer doesn't have technical understanding of the project work and he wants to remove these work packages from the project scope. You can't remove these work packages, because if they are removed, the project scope will be negatively impacted. You requested a meeting with the customer and made a presentation about the importance of these work packages. Which process did you undergo?",
+    "explanation": "A presentation is the formal delivery of information and/or documentation. It can include specific information aimed at increasing understanding and support of the work and objectives of the project. Presentation is a communication skill which can be used in the Manage Communications process. Domain = People. PMBOK 6th edition, Page 384",
+    "choices": [
+      {
+        "text": "Control Scope",
+        "correct": false
+      },
+      {
+        "text": "Validate Scope",
+        "correct": false
+      },
+      {
+        "text": "Perform Integrated Change Control",
+        "correct": false
+      },
+      {
+        "text": "Manage Communications",
+        "correct": true
+      }
+    ],
+    "id": 62
+  },
+  {
+    "type": "multiple-choice",
+    "text": "James is a project team member. He is attending a project weekly status meeting. The project manager is explaining the project status to all the attendees in the meeting. James is moving his head to express his understanding to what the project manager said. What did James do?",
+    "explanation": "Acknowledge means upon receipt of a message, the receiver may signal (acknowledge) receipt of the message, but this does not necessarily mean agreement with or comprehension of the message—merely that it has been received. Domain = People. PMBOK 6th edition, Page 373",
+    "choices": [
+      {
+        "text": "Decoding",
+        "correct": false
+      },
+      {
+        "text": "Encoding",
+        "correct": false
+      },
+      {
+        "text": "Feedback",
+        "correct": false
+      },
+      {
+        "text": "Acknowledge",
+        "correct": true
+      }
+    ],
+    "id": 63
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The fourth principle of the Agile Manifesto states that: \"Business people and developers must work together daily throughout the project\". Which of the following agile practices and techniques is closely related to this principle?",
+    "explanation": "Information radiators help keep everyone informed and foster collaboration between business people and developers. Domain = People. Agile Practice Guide Page 50",
+    "choices": [
+      {
+        "text": "Minimum viable product (MVP)",
+        "correct": false
+      },
+      {
+        "text": "Definition of ready",
+        "correct": false
+      },
+      {
+        "text": "Backlog preparation",
+        "correct": false
+      },
+      {
+        "text": "Information radiators",
+        "correct": true
+      }
+    ],
+    "id": 64
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following is an example of noise?",
+    "explanation": "Noise includes any interference or barriers that might compromise the delivery of the message. Domain = People. PMBOK 6th edition, Page 373",
+    "choices": [
+      {
+        "text": "An email that's sent to the wrong person.",
+        "correct": false
+      },
+      {
+        "text": "A project manager who doesn't notice an important clause in a contract.",
+        "correct": false
+      },
+      {
+        "text": "Garbled text and smudges that make a fax of a photocopy hard to read.",
+        "correct": true
+      },
+      {
+        "text": "When the team is not paying attention during a phone call.",
+        "correct": false
+      }
+    ],
+    "id": 65
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project team member sent a confidential information to a third party by mistake. The project manager is very angry and he insists on punishing the team member. What could have prevented this situation?",
+    "explanation": "The communications management plan contains which information should be sent to which stakeholder. If the communications management plan is not proper, it may lead to miscommunications. Monitoring project communications would not prevent the problem, it would discover the problem. Domain = People. PMBOK 6th edition, Page 377",
+    "choices": [
+      {
+        "text": "Reviewing the stakeholder engagement plan",
+        "correct": false
+      },
+      {
+        "text": "Reviewing the communications management plan",
+        "correct": true
+      },
+      {
+        "text": "Monitoring project communications",
+        "correct": false
+      },
+      {
+        "text": "Reviewing the resources management plan",
+        "correct": false
+      }
+    ],
+    "id": 66
+  }
+]

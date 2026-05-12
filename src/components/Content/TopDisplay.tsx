@@ -4,7 +4,7 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import BookmarkButton from './Bookmark'
 import { translate } from '../../utils/translation'
-import { SessionDataContext, SessionExamContext, SessionNavigationContext } from '../../contexts'
+import { useSessionNavigation, useSessionExam, useSessionData } from '../../contexts'
 import useCategoryLabel from '../../hooks/useCategoryLabel'
 import useFullExamLabel from '../../hooks/useFullExamLabel'
 
@@ -77,9 +77,9 @@ export const QuestionTextStyles = styled.div<ThemedStyles>`
 `
 
 const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isReview = false }) => {
-  const { index } = React.useContext(SessionNavigationContext)
-  const { categoryId, examId } = React.useContext(SessionExamContext)
-  const { isSyncing } = React.useContext(SessionDataContext)
+  const { index } = useSessionNavigation()
+  const { categoryId, examId } = useSessionExam()
+  const { isSyncing } = useSessionData()
 
   let categoryExamLabel: string | undefined;
 

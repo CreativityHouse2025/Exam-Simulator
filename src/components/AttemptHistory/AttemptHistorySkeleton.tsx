@@ -1,7 +1,7 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
 import { translate } from "../../utils/translation"
-import { Tr, Td } from "./AttemptHistoryRow"
+import { Tr, Td } from "./AttemptHistoryStyles"
 
 const wave = keyframes`
   0%   { background-position: -600px 0; }

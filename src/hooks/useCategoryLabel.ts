@@ -1,4 +1,4 @@
-import categories from "../data/exam-data/categories.json"
+import categories from "../data/exam/categories.json"
 import useSettings from "./useSettings";
 
 /**

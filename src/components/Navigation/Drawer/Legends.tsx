@@ -3,7 +3,7 @@ import type { ThemedStyles } from '../../../types'
 import React from 'react'
 import styled from 'styled-components'
 import Legend from './Legend'
-import { SessionExamContext } from '../../../contexts'
+import { useSessionExam } from '../../../contexts'
 
 const LegendStyles = styled.div<ThemedStyles>`
   height: 3rem;
@@ -15,7 +15,7 @@ const LegendStyles = styled.div<ThemedStyles>`
 `
 
 const LegendsComponent: React.FC = () => {
-  const { examState } = React.useContext(SessionExamContext)
+  const { examState } = useSessionExam()
 
   const inProgress = examState === 'in-progress'
   const completed = examState === 'completed'

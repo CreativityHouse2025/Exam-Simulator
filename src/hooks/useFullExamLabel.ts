@@ -1,4 +1,4 @@
-import exams from "../data/exam-data/full-exams.json"
+import exams from "../data/exam/full-exams.json"
 import useSettings from "./useSettings";
 
 /**

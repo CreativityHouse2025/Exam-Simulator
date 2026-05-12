@@ -8,7 +8,7 @@ import { SkipPrevious } from '@styled-icons/material/SkipPrevious'
 import { KeyboardArrowRight } from '@styled-icons/material/KeyboardArrowRight'
 import { KeyboardArrowLeft } from '@styled-icons/material/KeyboardArrowLeft'
 import { SkipNext } from '@styled-icons/material/SkipNext'
-import { SessionNavigationContext } from '../../../contexts'
+import { useSessionNavigation } from '../../../contexts'
 import { SESSION_ACTION_TYPES } from '../../../constants'
 
 const ArrowsStyles = styled.div<ThemedStyles>`
@@ -29,7 +29,7 @@ const ArrowStyles = styled.div<ThemedStyles>`
 `
 
 const ArrowsComponent: React.FC<ArrowsProps> = ({ questionCount }) => {
-  const { index, update } = React.useContext(SessionNavigationContext)
+  const { index, update } = useSessionNavigation()
   const isLTR = document.documentElement.dir === 'ltr'
 
   const navigate = React.useCallback(

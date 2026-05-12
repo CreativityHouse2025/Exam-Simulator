@@ -1,81 +1,37 @@
-import type { Exam, Question, LangCode } from '../types'
+import examTypes from '../data/exam/exam-types.json'
+import { Exam, LangCode } from '../types'
 
-// Map to retrieve questions in order later
-// M is size of questions in exam, N is size of question bank
-let questionMap: Map<Question["id"], Question> | null = null;
-// question list for easy access
-let questionList: Question[] | null = null;
+export async function loadDomainExam(categoryId: number, langCode: LangCode): Promise<{
+  questionList: Exam
+  durationMinutes: number
+}> {
+  const { durationMinutes } = examTypes["domain"]
 
-/**
- * Loads questions from disk to memory based on language 
- * @param {LangCode} langCode - The code of the language
- */
-export async function initQuestionMap(langCode: LangCode) {
-    try {
-        const module = await import(`../data/exam-data/questions-${langCode}.json`);
-        const questions: Question[] = module.default;
-        questionMap = new Map();
+  const questionList = (await import(`../data/exam/domain/${langCode}/${categoryId}.json`)).default
 
-        questionList = questions;
+  if (questionList.length === 0) {
+    throw new Error(`category with id ${categoryId} does not have any questions`)
+  }
 
-        for (const q of questions) {
-            questionMap.set(q.id, q);
-        }
-    } catch (error) {
-        questionList = []
-        questionMap = new Map();
-        throw new Error(`Couldn't open file: 'questions-${langCode}.json'`)
-    }
+  return { questionList, durationMinutes }
 }
 
-export function getQuestionList() {
-    // validate list
-    if (questionList === null) {
-        throw new Error("question list is null")
-    }
-    return questionList;
+
+export async function loadFullExam(examId: number, langCode: LangCode): Promise<{
+  questionList: Exam
+  durationMinutes: number
+}> {
+  const { durationMinutes } = examTypes["full"]
+
+  const questionList = (await import(`../data/exam/full/${langCode}/${examId}.json`)).default
+
+  if (questionList.length === 0) {
+    throw new Error(`full exam with id ${examId} does not have any questions`)
+  }
+
+  return { questionList, durationMinutes }
 }
 
-/**
- * Get a started exam from a list of questions, returns null if there are missing questions in the files
- * @param {number} questionIds - The order of the questions
- * @returns {Exam} - The started exam (in order)
- * and corresponding question IDs list for local storage
- */
-export function getExamByQuestionIds(questionIds: number[]): Exam | null {
-    if (!questionMap) {
-        throw new Error("question map is null")
-    }
-    // reference it to get rid of TypeScript error
-    const map = questionMap;
-
-    if (map.size === 0) {
-        throw new Error("question map is empty")
-    }
-
-    // for safety, missing IDs count
-    let missingIdCount = 0;
-
-    // get questions in order
-    const exam = (questionIds.map(id => map.get(id)))
-        .filter((q): q is Question => {
-            const isValid = Boolean(q);
-            if (!isValid) missingIdCount++
-            return isValid
-        }); // remove undefined (missing IDs)
-
-    // if there are missing questions
-    if (missingIdCount !== 0) {
-        console.warn(`${missingIdCount} question IDs are missing`)
-        return null
-    }
-    return exam
-}
-
-/**
- * Returns true when an attempt can be retried (full exam only, with at least one wrong answer).
- * Single source of truth for the retry gate — no callers should read examTypes config directly.
- */
 export function canRetryAttempt(examType: string, hasWrongAnswers: boolean): boolean {
-    return examType === 'full' && hasWrongAnswers
+  return examType === 'full' && hasWrongAnswers
 }
