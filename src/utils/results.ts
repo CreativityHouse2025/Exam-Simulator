@@ -1,5 +1,5 @@
 import type { Answers, Exam, ExamType } from "../types"
-import examTypes from "../data/exam-data/exam-types.json"
+import examTypes from "../data/exam/exam-types.json"
 
 export type ComputedResults = {
   score: number

@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Timer } from '@styled-icons/material/Timer'
 import { formatTimer } from '../../../utils/format'
-import { SessionTimerContext } from '../../../contexts'
+import { useSessionTimer } from '../../../contexts'
 import { SESSION_ACTION_TYPES } from '../../../constants'
 
 const TimerStyles = styled.div<TimerStylesProps>`
@@ -25,7 +25,7 @@ const TextStyles = styled.div`
 `
 
 const TimerComponent: React.FC = () => {
-  const { time, paused, update } = React.useContext(SessionTimerContext)
+  const { time, paused, update } = useSessionTimer()
   const intervalRef = React.useRef<NodeJS.Timeout | null>(null)
 
   React.useEffect(() => {

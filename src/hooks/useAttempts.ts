@@ -8,7 +8,6 @@ import type {
   AttemptSummary,
   GetAttemptResult,
   InsertAttemptRequestBody,
-  ListAttemptsResult,
   SaveAttemptInProgress,
   SaveAttemptCompleted,
 } from "../types"
@@ -69,19 +68,19 @@ export default function useAttempts() {
   }, [])
 
   const startAttempt = useCallback(async (body: InsertAttemptRequestBody): Promise<{ attempt_id: string }> => {
-    const response = await apiFetch("/api/attempts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    })
+    // const response = await apiFetch("/api/attempts", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(body),
+    // })
 
-    const result: ApiResponse<{ attempt_id: string }> = await response.json()
+    // const result: ApiResponse<{ attempt_id: string }> = await response.json()
 
-    if (!result.success) {
-      throw new AppApiError(translateErrorCode(result.error.code), result.error.code)
-    }
+    // if (!result.success) {
+    //   throw new AppApiError(translateErrorCode(result.error.code), result.error.code)
+    // }
 
-    return result.data
+    return { attempt_id: "attempt1"}
   }, [])
 
   const saveAttempt = useCallback(

@@ -68,6 +68,16 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
     ).map((c) => ["Set-Cookie", c] as [string, string])
 
     const authUser: AuthUser = { id: refreshData.user.id, email: refreshData.user.email!, accessToken: refreshData.session.access_token }
-    return handler(req, authUser, cookieHeaders)
+    // don't propagate error to the error handler
+    // edge case: session refreshed but an error occured in the handler, withErrorHandler doesn't send cookies
+    // sends cookies no matter what happens
+    try {
+      return await handler(req, authUser, cookieHeaders)
+    } catch (error) {
+      if (error instanceof AppError) {
+        return errorResponse(error.code, error.message, error.statusCode, cookieHeaders)
+      }
+      return errorResponse("INTERNAL_ERROR", "An unexpected error occurred", 500, cookieHeaders)
+    }
   }
 }

@@ -6,8 +6,7 @@ import Control from './Control'
 import Menu from './Menu'
 
 const DrawerStyles = styled.div<DrawerStylesProps>`
-  width: ${({ $open }) => ($open ? 'auto' : '5rem')};
-  max-width: 25rem;
+  width: ${({ $open }) => ($open ? '30rem' : '5rem')};
   height: auto;
   overflow: hidden; 
   overflow-y: auto;

@@ -1,7 +1,6 @@
 import type { Exam, Session, ExamType } from "../types"
 import type { GetAttemptResult } from "../types"
-import { getExamByQuestionIds } from "./exam"
-import examTypes from "../data/exam-data/exam-types.json"
+import examTypes from "../data/exam/exam-types.json"
 
 function setsEqual(a: number[], b: number[]): boolean {
   if (a.length !== b.length) return false
@@ -82,7 +81,6 @@ export function adaptAttemptToSession(
       paused: false,
       examState: "in-progress",
       reviewState: "summary",
-      questions: wrongIndices.map((i) => questionIds[i]),
       answers: wrongIndices.map(() => []),
       categoryId: null,
       bookmarks: [],
@@ -109,7 +107,6 @@ export function adaptAttemptToSession(
     paused: attempt.time_remaining < maxTime,
     examState: attempt.exam_state as Session["examState"],
     reviewState: attempt.review_state,
-    questions: questionIds,
     answers,
     categoryId: attempt.category_id,
     bookmarks,

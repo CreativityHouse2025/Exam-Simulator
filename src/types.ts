@@ -100,8 +100,6 @@ export interface Session {
   examState: ExamState
   /** the state of the review */
   reviewState: ReviewState
-  /** v1.1: the list of question IDs for this session, in the order they should appear */
-  questions: Question['id'][]
   /** the list of answers */
   answers: Answers
   /** null for full exams */
@@ -110,7 +108,7 @@ export interface Session {
   examId: number | null
   /** the list of bookmarked questions */
   bookmarks: number[]
-  /** the type of the exam */
+  /** the type of the exam, domain or full */
   examType: ExamType
 }
 
@@ -160,6 +158,22 @@ export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused'> & { upda
 export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'categoryId' | 'examId'> & { update: SessionDispatch }
 export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType'> & { isSyncing: boolean; update: SessionDispatch }
 
+export type SessionControlContextType = {
+  session: Session | null
+  update: SessionDispatch
+  /** Loads exam data, saves the attempt to the DB, builds the full Session state, and mounts the active session.
+   * Returns the new attemptId on success, or null on failure. */
+  startNewExam: (type: ExamType, examOrCategoryId: number) => Promise<string | null>
+  /** Fetches an in-progress attempt snapshot from the DB, hydrates the full Session state, mounts the active
+   * session, and persists the attemptId to localStorage.
+   * Returns the attemptId on success, or null on failure so callers can reset their loading state. */
+  resumeAttempt: (attemptId: string) => Promise<string | null>
+  /** Fetches a completed full-exam attempt snapshot from the DB, filters to wrong/unanswered questions only,
+   * and mounts an ephemeral revision session (not persisted to localStorage).
+   * Returns the attemptId on success, or null on failure so callers can reset their loading state. */
+  startRevision: (attemptId: string) => Promise<string | null>
+}
+
 // User settings (initially null until user inserts data)
 export type Settings = {
   /** last choice of language */
@@ -177,7 +191,6 @@ export type SettingsContextType = {
 
 export type ExamContextType = {
   exam: Exam | null
-  setExam: React.Dispatch<React.SetStateAction<Exam | null>>
 }
 
 // Type for the toast component state
@@ -285,10 +298,6 @@ export type AttemptQuestion = {
   choices_order: number[]
   selected_choices: number[]
   is_bookmarked: boolean
-}
-
-export type ListAttemptsResult = {
-  attempts: AttemptSummary[]
 }
 
 export type GetAttemptResult = {

@@ -1,0 +1,1394 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "If the project is facing chaos, which of the following leadership styles is most appropriate in this case?",
+    "explanation": "In moments of chaos, directive action creates more clarity and momentum than collaborative problem solving. Domain = People. The Standard for Project Management, Page 41",
+    "choices": [
+      {
+        "text": "Directive",
+        "correct": true
+      },
+      {
+        "text": "Participative",
+        "correct": false
+      },
+      {
+        "text": "Assertive",
+        "correct": false
+      },
+      {
+        "text": "Supportive",
+        "correct": false
+      }
+    ],
+    "id": 83
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A Scrum Master is working on a critical task when a team member approached him for help. What should the Scrum Master do?",
+    "explanation": "Scrum Master's main duties are coaching and guiding the team as he is a servant leader. Scrum master duties always come first - before any other task he is working on. Domain = People. Agile Practice Guide Page 41",
+    "choices": [
+      {
+        "text": "First complete the critical task then help the team member.",
+        "correct": false
+      },
+      {
+        "text": "First help the team member then complete the critical task.",
+        "correct": true
+      },
+      {
+        "text": "Complete the critical task and ask another senior team member to help the team member.",
+        "correct": false
+      },
+      {
+        "text": "Ask the team member to refer to the product owner.",
+        "correct": false
+      }
+    ],
+    "id": 84
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project team has just been formed to work on a new software project. Which of the following is the most appropriate leadership style for the project manager at this stage in the project?",
+    "explanation": "Early in a team's formation, the role of the team leader is to directly help with project activities and present a clear, tactical picture of what needs to be done. So the directing leadership style is more directive than supportive. Domain = People. PMBOK 7th edition, Page 30",
+    "choices": [
+      {
+        "text": "Directing",
+        "correct": true
+      },
+      {
+        "text": "Supporting",
+        "correct": false
+      },
+      {
+        "text": "Coaching",
+        "correct": false
+      },
+      {
+        "text": "Delegating",
+        "correct": false
+      }
+    ],
+    "id": 85
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Carolyne is managing a large project to design a high-efficiency solar cell. The project is very complex and has been running for 18 months. Dan is a team member who has been working very hard and has consistently shown great performance during the project. Carolyne wants to recognize Dan's performance. What should she do?",
+    "explanation": "People are motivated when they feel they are valued in the organization and this value is demonstrated by the rewards given to them. Generally, money is viewed as a tangible aspect of any reward system, but intangible rewards could be equally or even more effective.",
+    "choices": [
+      {
+        "text": "Provide a reward that aligns with his personal goals.",
+        "correct": true
+      },
+      {
+        "text": "Provide a certificate of appreciation in the next team meeting.",
+        "correct": false
+      },
+      {
+        "text": "Send him a thanks email and keep his functional manager in copy.",
+        "correct": false
+      },
+      {
+        "text": "Ask his functional manager to approve a bonus for him.",
+        "correct": false
+      }
+    ],
+    "id": 86
+  },
+  {
+    "type": "multiple-choice",
+    "text": "James is the project manager of a software project. Midway through his project, he realizes that there’s a problem with a part of the software code and his team members are going to redo this part of the code. One of his team members suggests that the problem is not severe enough to cause all of that re-work. James says that he’s worked on a project that made the same mistake before and they ended up having to redo the work when inspectors discovered it. He convinces the team member that it’s probably better to fix it now than later. What kind of power is he using to make the decision in this situation?",
+    "explanation": "James is using expert power. Since he’s been through this problem before. Domain = People. PMBOK 6th edition, Page 63",
+    "choices": [
+      {
+        "text": "Formal",
+        "correct": false
+      },
+      {
+        "text": "Expert",
+        "correct": true
+      },
+      {
+        "text": "Referent",
+        "correct": false
+      },
+      {
+        "text": "Reward",
+        "correct": false
+      }
+    ],
+    "id": 87
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A new project has started in an organization using adaptive approach. Few weeks later, It has been noticed that team performance has decreased because team energy is put into unproductive activities like unnecessary conflicts, many disagreements, clashes and harsh dialogues between team members. Which of the following is the best leadership style for the team coach at this stage?",
+    "explanation": "As the team passes into the storming phase, there will generally be plenty of disagreement, open conflict, and harsh dialogue. During this stage, the leader needs to assume the coaching style to help team members resolve conflicts without damaging relationships. So the coaching leadership style should provide high levels of both directive and supportive leadership. Domain = People. PMBOK 7th edition.",
+    "choices": [
+      {
+        "text": "Directing",
+        "correct": false
+      },
+      {
+        "text": "Supporting",
+        "correct": false
+      },
+      {
+        "text": "Coaching",
+        "correct": true
+      },
+      {
+        "text": "Delegating",
+        "correct": false
+      }
+    ],
+    "id": 88
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Midway during a sprint, the customer representative keeps calling the development team asking them to add a key feature to the current sprint. Which of the following is the best course of action?",
+    "explanation": "The scrum master/agile coach is a servant leader who has the skills of facilitation, coaching, and impediment removal. He is also responsible for ensuring that scrum methodology is being followed and applied effectively and he keeps the team and stakeholders focused on learning and using agile processes. Domain = People. Agile Practice Guide Page 41",
+    "choices": [
+      {
+        "text": "The development team should escalate this issue to the product owner.",
+        "correct": false
+      },
+      {
+        "text": "The agile coach should talk to the customer representative and explain how agile projects work.",
+        "correct": true
+      },
+      {
+        "text": "The team should ask the customer representative not to disturb them anymore during the sprint.",
+        "correct": false
+      },
+      {
+        "text": "The team should reject the customer request for adding any new features during the sprint.",
+        "correct": false
+      }
+    ],
+    "id": 89
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager is leading a large project for electrical system implementation. The project has a large team consisting of people from many functional areas of the company. What is the best power to get cooperation of the team?",
+    "explanation": "Rewards bring the team's objectives in line with project. Domain = People. PMBOK 6th edition, Page 63",
+    "choices": [
+      {
+        "text": "Referent",
+        "correct": false
+      },
+      {
+        "text": "Penalty",
+        "correct": false
+      },
+      {
+        "text": "Reward",
+        "correct": true
+      },
+      {
+        "text": "Formal",
+        "correct": false
+      }
+    ],
+    "id": 90
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project team has been formed to work on a software project which has just been initiated. It is the first time for this team to work together. Which of the following is the best way to lead this team in this stage of the project?",
+    "explanation": "Early in a team's formation, the role of the team leader is to directly help with project activities and present a clear, tactical picture of what needs to be done. So the directing leadership style is more directive than supportive. Domain = People. PMBOK 7th edition, Page 30",
+    "choices": [
+      {
+        "text": "Provide a more directive than supportive leadership.",
+        "correct": true
+      },
+      {
+        "text": "Provide a more supportive than directive leadership.",
+        "correct": false
+      },
+      {
+        "text": "Provide high levels of both directive and supportive leadership.",
+        "correct": false
+      },
+      {
+        "text": "Provide low levels of both directive and supportive leadership.",
+        "correct": false
+      }
+    ],
+    "id": 91
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Everybody in the company does what Paul says, because they all know that he is a close friend to the CEO of the company. What kind of power does he hold over the team?",
+    "explanation": "Everybody in the company does what Paul says not because his power or his authority but because of his relationship with the CEO. The power used here is referent power. Domain = People. PMBOK 6th edition, Page 63",
+    "choices": [
+      {
+        "text": "Legitimate",
+        "correct": false
+      },
+      {
+        "text": "Reward",
+        "correct": false
+      },
+      {
+        "text": "Punishment",
+        "correct": false
+      },
+      {
+        "text": "Referent",
+        "correct": true
+      }
+    ],
+    "id": 92
+  },
+  {
+    "type": "multiple-choice",
+    "text": "An agile team has committed to deliver 50 story points during the running iteration. Midway through the iteration one team member becomes sick and must have rest for the remaining time of the iteration. A team member suggests that the team can work overtime to complete the committed story points in the iteration. The team leader should inform him that his suggestion contradicts with which agile principle?",
+    "explanation": "Agile methods recognize the value of a sustainable pace that allows team members to maintain a work-life balance. A sustainable pace is not only better for the team; it benefits the organization as well. Domain = People. Agile Practice Guide Page 8",
+    "choices": [
+      {
+        "text": "At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.",
+        "correct": false
+      },
+      {
+        "text": "The best architectures, requirements, and designs emerge from self-organizing teams.",
+        "correct": false
+      },
+      {
+        "text": "Agile processes promote sustainable development. The sponsors, developers, and users should be able to maintain a constant pace indefinitely.",
+        "correct": true
+      },
+      {
+        "text": "Simplicity—the art of maximizing the amount of work not done—is essential.",
+        "correct": false
+      }
+    ],
+    "id": 93
+  },
+  {
+    "type": "multiple-choice",
+    "text": "In high-performing projects, who should exhibit effective leadership skills?",
+    "explanation": "Leadership is not exclusive to any specific role. High-performing projects may feature multiple people exhibiting effective leadership skills, for example, the project manager, sponsors, stakeholders, senior management, or even project team members. Anyone working on a project can demonstrate effective leadership traits, styles, and skills to help the project team perform and deliver.",
+    "choices": [
+      {
+        "text": "Project Manager",
+        "correct": false
+      },
+      {
+        "text": "Project Sponsor",
+        "correct": false
+      },
+      {
+        "text": "Senior Management",
+        "correct": false
+      },
+      {
+        "text": "Anyone",
+        "correct": true
+      }
+    ],
+    "id": 94
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Peter is currently managing a large software project. His project is currently facing chaos. He decides to use directive leadership. What would be the reason behind using this leadership style?",
+    "explanation": "In moments of chaos, directive action creates more clarity and momentum than collaborative problem solving. Domain = People. The Standard for Project Management, Page 41",
+    "choices": [
+      {
+        "text": "Because in moments of chaos, directive action creates more participation than any other leadership style.",
+        "correct": false
+      },
+      {
+        "text": "Because this leadership style elicits more productivity than any other leadership style.",
+        "correct": false
+      },
+      {
+        "text": "Because this might be the only leadership style he has experience with.",
+        "correct": false
+      },
+      {
+        "text": "Because in moments of chaos, directive action creates more clarity and momentum than collaborative problem solving.",
+        "correct": true
+      }
+    ],
+    "id": 95
+  },
+  {
+    "type": "multiple-choice",
+    "text": "XYZ organization executives have assigned Harry to form a project team to deliver a software to a client. Harry has formed the project team and motivated them towards achieving the project goal and influenced them to align their individual interests in favor of collective effort, and achieve success as a project team rather than as individuals. The organization used ______ while Harry used ______.",
+    "explanation": "The organization exercised authority by assigning Harry to form the team, while Harry demonstrated leadership by motivating and influencing the team to align their interests toward collective success. Domain = People.",
+    "choices": [
+      {
+        "text": "Stewardship, responsibility",
+        "correct": false
+      },
+      {
+        "text": "Responsibility, stewardship",
+        "correct": false
+      },
+      {
+        "text": "Authority, leadership",
+        "correct": true
+      },
+      {
+        "text": "Leadership, authority",
+        "correct": false
+      }
+    ],
+    "id": 96
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Rebecca is a scrum master working on a large software project. The product owner assigned to the project is always very busy, as he has some other work assigned to him within the organization. As a result, the product owner spends very little time with the team which causes a lot of troubles. What should Rebecca do?",
+    "explanation": "The product owner needs to participate in scrum events as he is a customer representative. He must be involved to ensure the project success. Domain = People. Agile Practice Guide Page 41",
+    "choices": [
+      {
+        "text": "Coach the product owner on the importance of participating in scrum events.",
+        "correct": true
+      },
+      {
+        "text": "Request another product owner and distribute the work between them.",
+        "correct": false
+      },
+      {
+        "text": "Escalate the product owner to the project sponsor.",
+        "correct": false
+      },
+      {
+        "text": "Take the product owner responsibilities during his absence.",
+        "correct": false
+      }
+    ],
+    "id": 97
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Helena is a team member who has recently joined a running construction project. She noticed that there is a difference between leadership styles of Kevin, the project manager of the current project and Andrea the project manager of her previous project. Kevin always focuses on goals and achievements, while Andrea focuses on team members learning, development and relationships. What leadership styles do they adopt?",
+    "explanation": "Transactional style focuses on goals, feedback, and accomplishment, while servant leader style focuses on other people’s growth, learning, development, autonomy, and well-being; concentrates on relationships, community and collaboration. Domain = People. PMBOK 6th edition, Page 65 and The Standard for Project Management, Page 41",
+    "choices": [
+      {
+        "text": "Kevin adopts transactional style, while Andrea adopts charismatic style.",
+        "correct": false
+      },
+      {
+        "text": "Kevin adopts transformational style, while Andrea adopts servant leader style.",
+        "correct": false
+      },
+      {
+        "text": "Kevin adopts transactional style, while Andrea adopts servant leader style.",
+        "correct": true
+      },
+      {
+        "text": "Kevin adopts laissez-faire style, while Andrea adopts interactive style.",
+        "correct": false
+      }
+    ],
+    "id": 98
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project team has been formed to work on a product development project. It is the first time for this team to work together. After few weeks, while the team members figure out how to work together, some conflict and struggle happened between the team members. Which of the following is the best leadership style to lead a team in this stage of the project?",
+    "explanation": "As the team passes into the storming phase, there will generally be plenty of disagreement, open conflict, and harsh dialogue. During this stage, the leader needs to assume the coaching style to help team members resolve conflicts without damaging relationships. So the coaching leadership style should provide high levels of both directive and supportive leadership. Domain = People. PMBOK 7th edition.",
+    "choices": [
+      {
+        "text": "Provide a more directive than supportive leadership.",
+        "correct": false
+      },
+      {
+        "text": "Provide a more supportive than directive leadership.",
+        "correct": false
+      },
+      {
+        "text": "Provide high levels of both directive and supportive leadership.",
+        "correct": true
+      },
+      {
+        "text": "Provide low levels of both directive and supportive leadership.",
+        "correct": false
+      }
+    ],
+    "id": 99
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Phil has been assigned to manage a new network installation project. The project team is formed from highly competent and engaged staff within the organization. Which of the following is the best leadership style to use in this situation?",
+    "explanation": "For environments with highly competent and engaged staff, empowered delegation elicits more productivity than centralized coordination. Domain = People. The Standard for Project Management, Page 41",
+    "choices": [
+      {
+        "text": "Laissez-faire",
+        "correct": false
+      },
+      {
+        "text": "Directive",
+        "correct": false
+      },
+      {
+        "text": "Empowered delegation",
+        "correct": true
+      },
+      {
+        "text": "Autocratic",
+        "correct": false
+      }
+    ],
+    "id": 100
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager wants to follow Herzberg's theory of motivation, all of the following are motivating agents that she should follow except:",
+    "explanation": "Salary is a hygiene factor. Poor hygiene factors may destroy motivation, however improving hygiene factors may not improve motivation. Domain = People. PMBOK 7th edition, Page 158",
+    "choices": [
+      {
+        "text": "Recognition",
+        "correct": false
+      },
+      {
+        "text": "Responsibility",
+        "correct": false
+      },
+      {
+        "text": "Self-actualization",
+        "correct": false
+      },
+      {
+        "text": "Salary",
+        "correct": true
+      }
+    ],
+    "id": 101
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Fatima is a scrum master for a software project. During the first sprint, she notices that some developers are not engaged during the daily scrum. The developers usually don't participate and sometimes they check their cell phones during the daily scrum. How can she address this issue?",
+    "explanation": "The role of the scrum master is to help everyone understand scrum theory and practice. She should coach the team about the importance of the daily scrum and the importance of their participation. Domain = People. Agile Practice Guide Page 41",
+    "choices": [
+      {
+        "text": "Instruct the team about the importance of the daily scrum.",
+        "correct": true
+      },
+      {
+        "text": "Decrease the frequency of the daily scrum to be twice per week instead of once per day.",
+        "correct": false
+      },
+      {
+        "text": "Bring this issue as an impediment during the next daily scrum.",
+        "correct": false
+      },
+      {
+        "text": "Discuss the issue in the next retrospective.",
+        "correct": false
+      }
+    ],
+    "id": 102
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Mark is a project manager on a software project. He is always watching his team members during their work, during their breaks, and when they leave. He always walks around the office to make sure that everyone is doing his work. He always makes all the project decisions. What kind of manager is he?",
+    "explanation": "According to Mc Gregor theory, X manager is always watching his team members, doesn't trust them and believes that they may avoid work whenever possible. Domain = People. PMBOK 7th edition, Page 160",
+    "choices": [
+      {
+        "text": "Theory X",
+        "correct": true
+      },
+      {
+        "text": "Theory Y",
+        "correct": false
+      },
+      {
+        "text": "Motivating",
+        "correct": false
+      },
+      {
+        "text": "Effective",
+        "correct": false
+      }
+    ],
+    "id": 103
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What should the scrum master do in the daily standups?",
+    "explanation": "In a daily standup, the scrum master's role is to listen and record any obstacles to the team's progress for immediate follow up. The team is self organized and the discussion is run by the team for the team, so there is no need for facilitator or someone to resolve their conflicts. Domain = People. Agile Practice Guide Page 53 and 54",
+    "choices": [
+      {
+        "text": "Facilitate and control the meeting.",
+        "correct": false
+      },
+      {
+        "text": "Ask the team about the root cause of their problems.",
+        "correct": false
+      },
+      {
+        "text": "Resolve team conflict.",
+        "correct": false
+      },
+      {
+        "text": "Listen and note any problems for follow-up.",
+        "correct": true
+      }
+    ],
+    "id": 104
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The project manager says to the team member: \"You need to listen to me because I have been put in charge. Perform the work assigned to you\". Which power is the project manager using?",
+    "explanation": "The project manager here is using the power derived from his position (formal or legitimate). Domain = People. PMBOK 6th edition, Page 63",
+    "choices": [
+      {
+        "text": "Legitimate",
+        "correct": true
+      },
+      {
+        "text": "Situational",
+        "correct": false
+      },
+      {
+        "text": "Charismatic",
+        "correct": false
+      },
+      {
+        "text": "Punitive",
+        "correct": false
+      }
+    ],
+    "id": 105
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Midway through the project and after many clashes between the team members, it has been noticed that the team members started to adjust their work habits and behaviors and a sense of cohesion and unity has started to emerge between team members. At this stage, what is the most appropriate leadership style?",
+    "explanation": "When the team reaches the norming phase, the members have successfully created rules (team norms) to help govern themselves. This doesn’t mean the team leader can simply go into cruise control mode, however. Instead, the leader needs to play a supporting role. The team will still need help with conflict resolution, as well as reminders to enforce the norms they have created.",
+    "choices": [
+      {
+        "text": "Directing",
+        "correct": false
+      },
+      {
+        "text": "Supporting",
+        "correct": true
+      },
+      {
+        "text": "Coaching",
+        "correct": false
+      },
+      {
+        "text": "Delegating",
+        "correct": false
+      }
+    ],
+    "id": 106
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are leading a project team for the fourth project they work on together. As the team members have worked together before on many projects, consensus and cooperation have been well-established and the team is mature, organized, and well-functioning. What is the most appropriate leadership style you can use?",
+    "explanation": "Performing teams are autonomous, empowered, self-managing, and self-policing. They require little more than to be pointed in the right direction and given regular recognition and appreciation for their high performance. Domain = People. PMBOK 7th edition, Page 30",
+    "choices": [
+      {
+        "text": "Directing",
+        "correct": false
+      },
+      {
+        "text": "Supporting",
+        "correct": false
+      },
+      {
+        "text": "Coaching",
+        "correct": false
+      },
+      {
+        "text": "Delegating",
+        "correct": true
+      }
+    ],
+    "id": 107
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Adam has been assigned as a project manager for a software project as a replacement for another project manager. The project team consists of 12 members with different skills and experience and each has an action plan for personal development. He wants to adapt his leadership style to support team members according to their action plans for personal development. Which of the following models can help him in this situation?",
+    "explanation": "The OSCAR coaching and mentoring model helps individuals adapt their coaching or leadership styles to support individuals who have an action plan for personal development. The model refers to five contributing factors outcome, situation, choices/consequences, actions and review. Domain = People. PMBOK 7th edition, Page 156",
+    "choices": [
+      {
+        "text": "ADKAR",
+        "correct": false
+      },
+      {
+        "text": "OSCAR",
+        "correct": true
+      },
+      {
+        "text": "Virginia Satir",
+        "correct": false
+      },
+      {
+        "text": "Cynefin Framework",
+        "correct": false
+      }
+    ],
+    "id": 108
+  },
+  {
+    "type": "multiple-choice",
+    "text": "In the middle of a sprint, a team member is out on a sick leave. The sprint is very critical and any delay in the product increment delivery would endanger the sprint goal. The scrum team are working on their full capacity. In light of this, what should the scrum master do?",
+    "explanation": "It is true that the sprint can not be extended, but doing nothing is not an appropriate solution. Working overtime is against agile manifesto eighth principle which states that the team should maintain sustainable pace. The best solution is to share the team challenge with the stakeholders and the project sponsor. Domain = People. Agile Practice Guide",
+    "choices": [
+      {
+        "text": "Ask the scrum team to work overtime till the team member is back from his sick leave.",
+        "correct": false
+      },
+      {
+        "text": "Discuss this topic with the sponsor and stakeholders in order to share the team challenge.",
+        "correct": true
+      },
+      {
+        "text": "Ask the team to redistribute the tasks between them and focus only on the most important features.",
+        "correct": false
+      },
+      {
+        "text": "Do nothing, the sprint can not be extended.",
+        "correct": false
+      }
+    ],
+    "id": 109
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The project manager for the new project notices that the meeting room seats and air conditioner are not good. She turns her attention to influencing the organization to improve the team’s working conditions. Which motivational theory is she following?",
+    "explanation": "Herzber theory deals with motivating agents and hygiene factors like working conditions, salary and work relationships. Domain = People. PMBOK 7th edition, Page 158",
+    "choices": [
+      {
+        "text": "Maslow’s hierarchy",
+        "correct": false
+      },
+      {
+        "text": "Expectancy theory",
+        "correct": false
+      },
+      {
+        "text": "Herzberg",
+        "correct": true
+      },
+      {
+        "text": "McGregor",
+        "correct": false
+      }
+    ],
+    "id": 110
+  },
+  {
+    "type": "multiple-choice",
+    "text": "An organization adopts agile transformation. Some project managers roles will be switched to team facilitators according to the new structure. They will need to enhance servant leadership skills. Which of the following is an example of servant leadership?",
+    "explanation": "Servant leadership focuses on removing impediments and supporting the team to perform at its best. Doing administrative work for the team is an example of servant leadership. Domain = People. Agile Practice Guide",
+    "choices": [
+      {
+        "text": "Creating the project plan on weekend so as not to disturb the team.",
+        "correct": false
+      },
+      {
+        "text": "Doing the administrative work for the team.",
+        "correct": true
+      },
+      {
+        "text": "Posting the project Gantt chart on the office wall.",
+        "correct": false
+      },
+      {
+        "text": "Handing out detailed task lists to the team.",
+        "correct": false
+      }
+    ],
+    "id": 111
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the personality trait of a person who has the ability to perceive the information presented by others and to manage them?",
+    "explanation": "Emotional character has the ability to perceive emotions and the information they present and to manage them; measure of interpersonal skills. Domain = People. PMBOK 6th edition, Page 66",
+    "choices": [
+      {
+        "text": "Managerial",
+        "correct": false
+      },
+      {
+        "text": "Political",
+        "correct": false
+      },
+      {
+        "text": "Emotional",
+        "correct": true
+      },
+      {
+        "text": "Social",
+        "correct": false
+      }
+    ],
+    "id": 112
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a new project in a weak matrix organization. The project team formally don’t report to you and you don’t have authority to reward them for their performance. The project is very difficult and has aggressive schedule and tight date constraints. The project requires a high quality standard. Based on these circumstances, what is the most effective power for the project manager will be likely to use?",
+    "explanation": "The project manager works in a weak matrix organization, so all the powers derived from his position will not be effective like reward, penalty or formal powers. The only power he can use here is the expert power. Domain = People. PMBOK 6th edition, Page 63",
+    "choices": [
+      {
+        "text": "Reward",
+        "correct": false
+      },
+      {
+        "text": "Penalty",
+        "correct": false
+      },
+      {
+        "text": "Formal",
+        "correct": false
+      },
+      {
+        "text": "Expert",
+        "correct": true
+      }
+    ],
+    "id": 113
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A three phases project adopts a hybrid development approach. The first phase is hardware development adopts a traditional approach. The second phase is software development adopts an adaptive approach. The third phase is systems integration adopts an adaptive approach. The first phase has come to an end. The project manager and the project team are ready to start the second phase. Accordingly some roles and responsibilities will change. Which of the following responsibilities will be changed for the project manager?",
+    "explanation": "The project manager's role with a predictive phase is more directive and controlling, whereas agile leadership requires servant leadership. Agile teams are considered self-organizing. The team will plan and control the project work. Domain = People. Agile Practice Guide, Page 41",
+    "choices": [
+      {
+        "text": "Detailed work planning, product delivery and team management will be delegated to the project team.",
+        "correct": true
+      },
+      {
+        "text": "Planning the project work through Kanban board instead of Gantt chart.",
+        "correct": false
+      },
+      {
+        "text": "Act as a servant leader helping the team sizing the user stories and calculating the team's velocity.",
+        "correct": false
+      },
+      {
+        "text": "Act as a team facilitator by helping the team to assign user stories according to the team members' skills.",
+        "correct": false
+      }
+    ],
+    "id": 114
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project team is working on a mechanical project. It is the fifth project that this team is working on. The team members have developed a synergy due to working together on many projects, the best leadership style to lead this team is to:",
+    "explanation": "Performing teams are autonomous, empowered, self-managing, and self-policing. They require little more than to be pointed in the right direction and given regular recognition and appreciation for their high performance. Domain = People. PMBOK 7th edition, Page 30",
+    "choices": [
+      {
+        "text": "Provide a more directive than supportive leadership.",
+        "correct": false
+      },
+      {
+        "text": "Provide a more supportive than directive leadership.",
+        "correct": false
+      },
+      {
+        "text": "Provide high levels of both directive and supportive leadership.",
+        "correct": false
+      },
+      {
+        "text": "Provide low levels of both directive and supportive leadership.",
+        "correct": true
+      }
+    ],
+    "id": 115
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following is among the scrum master's roles during the daily scrum?",
+    "explanation": "The daily scrum is conducted by the team for the team. The scrum master is a coach, he teaches the developers to keep the daily scrum within the 15 minutes timebox. Domain = People. Agile Practice Guide Page 41",
+    "choices": [
+      {
+        "text": "Teach the developers to keep the daily scrum within the 15 minutes timebox.",
+        "correct": true
+      },
+      {
+        "text": "Facilitate the discussion to ensure that each team member has a chance to speak.",
+        "correct": false
+      },
+      {
+        "text": "Ensure that each developer has answered the three questions.",
+        "correct": false
+      },
+      {
+        "text": "Lead the discussion and intervene when needed.",
+        "correct": false
+      }
+    ],
+    "id": 116
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements represents guilt-based power?",
+    "explanation": "Imposition of obligation or sense of duty are examples of using guilt-based. Domain = People. PMBOK 6th edition, Page 63",
+    "choices": [
+      {
+        "text": "You must do what I say because I'm the project manager and I'm accountable on project success.",
+        "correct": false
+      },
+      {
+        "text": "If you don't achieve your target, you will not get the annual bonus.",
+        "correct": false
+      },
+      {
+        "text": "You must comply with HR rules and come to work on time.",
+        "correct": true
+      },
+      {
+        "text": "If you face this type of problems in your work, solve it like this, I have been solving this type of problems the same way over the last three years and never failed.",
+        "correct": false
+      }
+    ],
+    "id": 117
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project is being implemented using adaptive approach. Midway through the project, a quality issue has been discovered that prevents releasing a key deliverable to the customer. The product owner wants to analyze the root cause of the issue. In light of this, what should the team facilitator do?",
+    "explanation": "The team facilitator is a servant leader. He needs to guide the team members and help them implement the agreed solution. Domain = People. Agile Practice Guide, Page 41",
+    "choices": [
+      {
+        "text": "Coach the team members on how to reach consensus on proposed solutions.",
+        "correct": false
+      },
+      {
+        "text": "Let the team members decide what to do as they are self organized.",
+        "correct": false
+      },
+      {
+        "text": "Facilitate a meeting with relevant stakeholders to collect more ideas.",
+        "correct": false
+      },
+      {
+        "text": "Discuss analyzing the root cause with the team and implement the agreed solution.",
+        "correct": true
+      }
+    ],
+    "id": 118
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is meant by self-organizing teams?",
+    "explanation": "The self-organizing team, where the team functions with an absence of centralized control. Domain = People. PMBOK 6th edition, Page 310 and PMBOK 7th edition, Page 249",
+    "choices": [
+      {
+        "text": "The team consists of subject matter experts.",
+        "correct": false
+      },
+      {
+        "text": "The team functions without a team leader.",
+        "correct": false
+      },
+      {
+        "text": "The team functions without conflicts between team members.",
+        "correct": false
+      },
+      {
+        "text": "The team functions with an absence of centralized control.",
+        "correct": true
+      }
+    ],
+    "id": 119
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Midway during an iteration, one of the project team members informs the project leader that his computer is not connected to the company intranet. What should the project leader do?",
+    "explanation": "The project leader is a team facilitator and a servant leader. Servant leaders work to fulfill the needs of the teams, projects, and organization. Servant leader focuses on paving the way for the team to do its best work. Domain = People. Agile Practice Guide, Page 36",
+    "choices": [
+      {
+        "text": "The team is cross functional, ask another team member who may have IT experience to step in and fix the issue.",
+        "correct": false
+      },
+      {
+        "text": "Facilitate a resolution with IT department.",
+        "correct": true
+      },
+      {
+        "text": "The team is self organized, the team member should try to resolve the issue by himself or contact IT department.",
+        "correct": false
+      },
+      {
+        "text": "Update the issue log and develop a resolution plan.",
+        "correct": false
+      }
+    ],
+    "id": 120
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Victor is a project manager working on a project to create a mobile application for a customer. The project team consists of 10 experienced developers who thrive on autonomy. The team has low morale and feel demotivated. What can Victor do to tackle this issue?",
+    "explanation": "Project team members who thrive on autonomy will perform better if they can establish their own ways of working and even their own work hours and cadence. Domain = People. PMBOK 7th edition, Page 25",
+    "choices": [
+      {
+        "text": "Request a salary increase for the team.",
+        "correct": false
+      },
+      {
+        "text": "Stretch the team goals.",
+        "correct": false
+      },
+      {
+        "text": "Form dynamic working group for demotivated team members.",
+        "correct": false
+      },
+      {
+        "text": "Let the team establish their own ways of working.",
+        "correct": true
+      }
+    ],
+    "id": 121
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Those who act responsibly to carry out activities with integrity, care, and trustworthiness while maintaining compliance with internal and external guidelines are known as:",
+    "explanation": "Stewards act responsibly to carry out activities with integrity, care, and trustworthiness while maintaining compliance with internal and external guidelines. They demonstrate a broad commitment to financial, social, and environmental impacts of the projects they support. Domain = People. The Standard for Project Management, Page 24",
+    "choices": [
+      {
+        "text": "Stewards",
+        "correct": true
+      },
+      {
+        "text": "Servant Leaders",
+        "correct": false
+      },
+      {
+        "text": "Project Managers",
+        "correct": false
+      },
+      {
+        "text": "Scrum Masters",
+        "correct": false
+      }
+    ],
+    "id": 122
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The daily standup usually takes more than 15 minutes because the product owner takes some time distributing tasks to the team members. Which of the following is the best course of action?",
+    "explanation": "The team is self-managed and self-organized. So, tasks are self-assigned by the team. The daily standup is for the team and by the team. There is no need for the product owner to attend the daily standup. Domain = People. Agile Practice Guide Page 53",
+    "choices": [
+      {
+        "text": "The scrum master should distribute tasks to team member after the daily standup.",
+        "correct": false
+      },
+      {
+        "text": "Extend the daily standup to 30 minutes.",
+        "correct": false
+      },
+      {
+        "text": "The scrum master should distribute tasks to team member before the daily standup.",
+        "correct": false
+      },
+      {
+        "text": "The scrum master should ask the product owner not to attend the daily standup and not to distribute tasks to team members.",
+        "correct": true
+      }
+    ],
+    "id": 123
+  },
+  {
+    "type": "multiple-choice",
+    "text": "XYZ organization has initiated a new software project. The new project will adopt an adaptive development approach. Resources are being carefully selected for this project because this project is for a new customer and expected to be in a long-term partnership with this customer. Which of the following types of resources will be suitable for this project?",
+    "explanation": "Successful agile teams are made up of generalizing specialists, or “T-shaped” people. Domain = People. Agile Practice Guide Page 42",
+    "choices": [
+      {
+        "text": "People with deep specialization in one area.",
+        "correct": false
+      },
+      {
+        "text": "Distributed work teams.",
+        "correct": false
+      },
+      {
+        "text": "I-shaped",
+        "correct": false
+      },
+      {
+        "text": "T-shaped",
+        "correct": true
+      }
+    ],
+    "id": 124
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Bruce is a project manager for an industrial project. This is the first project he manages. He expects to face some difficulties with team members and stakeholders because he usually accepts others for what and who they are and always shows open concern. He is worried that his personality characteristics may affect managing the team members and achieving project objectives. What is his personality trait?",
+    "explanation": "Authentic personality accepts others for what and who they are, show open concern. Domain = People. PMBOK 6th edition, Page 66",
+    "choices": [
+      {
+        "text": "Authentic",
+        "correct": true
+      },
+      {
+        "text": "Courteous",
+        "correct": false
+      },
+      {
+        "text": "Emotional",
+        "correct": false
+      },
+      {
+        "text": "Social",
+        "correct": false
+      }
+    ],
+    "id": 125
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following is the correct pairing of leadership styles and team phases in Tuckman model of team formation and development progress?",
+    "explanation": "When the team is in the forming stage, the role of the team leader is to directly help with project activities and present a clear, tactical picture of what needs to be done. So the directing leadership style is more directive than supportive. As the team passes into the storming phase, there will generally be plenty of disagreement, open conflict, and harsh dialogue. During this stage, the leader needs to assume the coaching style to help team members resolve conflicts without damaging relationships. When the team reaches the norming phase, the members have successfully created rules (team norms) to help govern themselves. Performing teams are autonomous, empowered, self-managing, and self-policing.",
+    "choices": [
+      {
+        "text": "Directing and Forming, Coaching and Storming, Supporting and Norming, Delegating and Performing",
+        "correct": true
+      },
+      {
+        "text": "Directing and Forming, Supporting and Storming, Coaching and Norming, Delegating and Performing",
+        "correct": false
+      },
+      {
+        "text": "Directing and Forming, Coaching and Storming, Delegating and Norming, Supporting and Performing",
+        "correct": false
+      },
+      {
+        "text": "Supporting and Forming, Coaching and Storming, Directing and Norming, Delegating and Performing",
+        "correct": false
+      }
+    ],
+    "id": 126
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Michael is managing an accounting software project. He finds that bringing all of his team members together into a single room to work increases their communication, and decreases misunderstandings. This is referred to as a:",
+    "explanation": "Colocation involves placing many or all of the most active project team members in the same physical location to enhance their ability to perform as a team. Domain = People. PMBOK 6th edition, Page 340",
+    "choices": [
+      {
+        "text": "Colocation",
+        "correct": true
+      },
+      {
+        "text": "Virtual team",
+        "correct": false
+      },
+      {
+        "text": "Team building activities",
+        "correct": false
+      },
+      {
+        "text": "Conflict resolution techniques",
+        "correct": false
+      }
+    ],
+    "id": 127
+  },
+  {
+    "type": "multiple-choice",
+    "text": "After the newly formed project team has gone through many conflicts between the team members, the project team starts to function as a collective body. Team members know their places on the team and how they relate to and interface with all the other members. They are starting to work together. What is the best leadership style to lead a team at this stage?",
+    "explanation": "When the team reaches the norming phase, the members have successfully created rules (team norms) to help govern themselves. This doesn’t mean the team leader can simply go into cruise control mode, however. Instead, the leader needs to play a supporting role. The team will still need help with conflict resolution, as well as reminders to enforce the norms they have created. Domain = People. PMBOK 7th edition, Page 166",
+    "choices": [
+      {
+        "text": "Provide a more directive than supportive leadership.",
+        "correct": false
+      },
+      {
+        "text": "Provide a more supportive than directive leadership.",
+        "correct": true
+      },
+      {
+        "text": "Provide high levels of both directive and supportive leadership.",
+        "correct": false
+      },
+      {
+        "text": "Provide low levels of both directive and supportive leadership.",
+        "correct": false
+      }
+    ],
+    "id": 128
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A product development project has been initiated in XYZ organization, where organization's senior management, project sponsor and project manager attempt to exert project influence in multiple, misaligned directions. Which of the following is most likely to happen?",
+    "explanation": "More conflict and confusion can emerge when too many participants attempt to exert project influence in multiple, misaligned directions. Domain = People. The Standard for Project Management, Page 41",
+    "choices": [
+      {
+        "text": "More motivation for project team and stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "More conflict and confusion can emerge.",
+        "correct": true
+      },
+      {
+        "text": "More alignment toward project goal.",
+        "correct": false
+      },
+      {
+        "text": "More commitment to senior management, sponsor and project manager directions.",
+        "correct": false
+      }
+    ],
+    "id": 129
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During daily standup, a project team member A has mentioned an impediment that the product owner and a lead developer will leave the organization this month. Team member B has mentioned an impediment of delay in required components which will affect product increment delivery. Team member C has mentioned an impediment that the logistics provider contract will expire this week. Team member D has mentioned an impediment that the number of defects found till now is higher than expected. Which impediment should the scrum master focus on first?",
+    "explanation": "Finding a product owner is the most important impediment for the scrum master to work on. The product owner is responsible for prioritizing the product backlog items and helps the teams see how to deliver the highest value without creating waste. Domain = People. Agile Practice Guide, Page 41",
+    "choices": [
+      {
+        "text": "Finding a product owner.",
+        "correct": true
+      },
+      {
+        "text": "Asking procurement department to renew the contract with the logistics supplier.",
+        "correct": false
+      },
+      {
+        "text": "Finding the root cause of the defects.",
+        "correct": false
+      },
+      {
+        "text": "Finding a replacement for the delayed component.",
+        "correct": false
+      }
+    ],
+    "id": 130
+  },
+  {
+    "type": "multiple-choice",
+    "text": "All of the following are not “hygiene factors” under Herzberg’s Motivation-Hygiene Theory except:",
+    "explanation": "Motivational factors include matters that relate to the content of the work, such as achievement, growth, and advancement. Herzberg also identified hygiene factors related to the work, such as company policies, salary, and the physical environment. Domain = People. PMBOK 7th edition, Page 158",
+    "choices": [
+      {
+        "text": "Recognition for excellent work",
+        "correct": false
+      },
+      {
+        "text": "Self-actualization",
+        "correct": false
+      },
+      {
+        "text": "Company policy",
+        "correct": true
+      },
+      {
+        "text": "Achievements",
+        "correct": false
+      }
+    ],
+    "id": 131
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following is an example of a reward system?",
+    "explanation": "Reward must be achievable and motivating. Domain = People. PMBOK 6th edition, Page 341 and PMBOK 7th edition, Page 158",
+    "choices": [
+      {
+        "text": "The team member who works hardest will receive $1,000.",
+        "correct": false
+      },
+      {
+        "text": "Everyone will get a bonus of $300 if the project finishes in on time.",
+        "correct": true
+      },
+      {
+        "text": "All the team members will have a salary raise if the company achieved good revenue.",
+        "correct": false
+      },
+      {
+        "text": "All the project team members will get 500$ if the product of the project was state-of-the-art.",
+        "correct": false
+      }
+    ],
+    "id": 132
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Mike is a project manager for a software project. He is managing a project team which consists of twelve team members. He has noticed that two of his team members are demotivated, Dave who likes relatedness and Noel who likes new challenges. Which of the following is the best course of action?",
+    "explanation": "A project team member who is motivated by challenge will respond well to stretch goals and problems to solve. A project team member who is motivated by relatedness will respond to being part of a dynamic working group. Tailoring motivation methods based on individual preferences helps to elicit the best individual and project team performance. Domain = People. PMBOK 7th edition, Page 25",
+    "choices": [
+      {
+        "text": "Mike should let both of them establish their own ways of working.",
+        "correct": false
+      },
+      {
+        "text": "Mike should apply a motivation method for the team as a whole not per individual.",
+        "correct": false
+      },
+      {
+        "text": "Mike should assign Dave to be a part of a dynamic group and stretch goals for Noel.",
+        "correct": true
+      },
+      {
+        "text": "Mike should ask for a motivational bonus for both of them.",
+        "correct": false
+      }
+    ],
+    "id": 133
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During iteration planning for an agile project, the team has committed to 50 story points for the coming iteration. However, the product owner wants the team to deliver five more story points which will deliver more value to the customer. The team is uncomfortable committing more as it hasn't understood the stories well. The agile coach is trying to solve the problem, what should she do?",
+    "explanation": "Adding more details and acceptance criteria will help the team understand the stories better and make an informed decision about their commitment. Domain = People. Agile Practice Guide",
+    "choices": [
+      {
+        "text": "She should inform the product owner that the five more story points will be added to the next iteration.",
+        "correct": false
+      },
+      {
+        "text": "She should explain to the product owner that the team determines their commitment and he needs to accept what they have identified.",
+        "correct": false
+      },
+      {
+        "text": "She should ask the product owner to review the stories and add more details and acceptance criteria to help the team better determine if they can deliver more stories.",
+        "correct": true
+      },
+      {
+        "text": "She should ask the team to increase their velocity and if needed she can ask for more resources.",
+        "correct": false
+      }
+    ],
+    "id": 134
+  },
+  {
+    "type": "multiple-choice",
+    "text": "All the project team trust John and do what he says because he showed great performance during the financial crisis which his organization faced last year. Which power does John have on the project team?",
+    "explanation": "Situational power is gained due to unique situation such as a specific crisis. Domain = People. PMBOK 6th edition, Page 63",
+    "choices": [
+      {
+        "text": "Legitimate",
+        "correct": false
+      },
+      {
+        "text": "Situational",
+        "correct": true
+      },
+      {
+        "text": "Charismatic",
+        "correct": false
+      },
+      {
+        "text": "Ingratiating",
+        "correct": false
+      }
+    ],
+    "id": 135
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following leadership styles has proven to be the universally best or recommended approach?",
+    "explanation": "Documented leadership styles range from autocratic, democratic, laissez-faire, directive, participative, assertive, supportive, and autocratic to consensus. Of all these, no single leadership style has proven to be the universally best or recommended approach. Instead, effective leadership is shown when it best fits a given situation. Domain = People. The Standard for Project Management, Page 41",
+    "choices": [
+      {
+        "text": "Autocratic",
+        "correct": false
+      },
+      {
+        "text": "Democratic",
+        "correct": false
+      },
+      {
+        "text": "Laissez-faire",
+        "correct": false
+      },
+      {
+        "text": "None of them",
+        "correct": true
+      }
+    ],
+    "id": 136
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Midway during a sprint, a team member who is working on a critical item informs the team and the scrum master in a daily scrum that he will be on leave due to a family issue for three days. The backlog item which he is working on is very critical as there is a mandatory dependency for this item to be completed in order to start working on some other backlog items. In light of this, what should the scrum master do?",
+    "explanation": "Reprioritizing the sprint backlog is not a solution as there is a mandatory dependency. The scrum master should ask the team member's functional manager to provide a replacement during his leave. Domain = People. Agile Practice Guide, Page 39",
+    "choices": [
+      {
+        "text": "Ask the team member to complete the critical backlog items before going on leave.",
+        "correct": false
+      },
+      {
+        "text": "Ask the team to reprioritize the sprint backlog.",
+        "correct": false
+      },
+      {
+        "text": "Request from the team member's functional manager to provide a replacement for the team member during his leave.",
+        "correct": true
+      },
+      {
+        "text": "Ask the product owner to reprioritize the sprint backlog.",
+        "correct": false
+      }
+    ],
+    "id": 137
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The fifth principle of the Agile Manifesto states that: \"Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done\". Which of the following agile practices and techniques is closely related to this principle?",
+    "explanation": "Having the best people is significantly more important for a project than having the best processes. Agile methods promote empowered teams. People work better when they are given the autonomy to organize and plan their own work. Allowing the team to create their own team charter with team norms and values will help create an agile environment in which team members can perform at their best. Domain = People. Agile Practice Guide, Page 41",
+    "choices": [
+      {
+        "text": "Burndown chart",
+        "correct": false
+      },
+      {
+        "text": "Release planning",
+        "correct": false
+      },
+      {
+        "text": "Backlog preparation",
+        "correct": false
+      },
+      {
+        "text": "Team charter",
+        "correct": true
+      }
+    ],
+    "id": 138
+  },
+  {
+    "type": "multiple-choice",
+    "text": "An agile practitioner has been assigned to be a scrum master for a scrum team, what should he do next?",
+    "explanation": "Each element of the scrum framework serves a specific purpose that is essential to the overall value and results realized with scrum. Changing the core design or ideas of scrum, leaving out elements, or not following the rules of scrum, covers up problems and limits the benefits of scrum, potentially even rendering it useless. Domain = People. Agile Practice Guide, Page 39",
+    "choices": [
+      {
+        "text": "Check the latest retrospective findings.",
+        "correct": false
+      },
+      {
+        "text": "Check the information radiators to know the status of the project.",
+        "correct": false
+      },
+      {
+        "text": "Start to inspect the team processes to confirm they are aligned with scrum accepted practices.",
+        "correct": true
+      },
+      {
+        "text": "Start identifying team issues and work with the team to solve them.",
+        "correct": false
+      }
+    ],
+    "id": 139
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are an agile practitioner to be assigned to a new project. There are two teams in the organization who can work on this project. Team A has John a business analyst, Mark a UI designer, Steve a coder and Smith a system tester. They are all experts in their fields. Team B has Mathew and Ann who can both work as business analyst and UI designer as well and Chris and Sandra who can both work as coder and system tester as well. Which team will you prefer to work with and why?",
+    "explanation": "Generalizing specialists are individuals who have cross-functional skills and can readily move between roles. Domain = People. Agile Practice Guide, Page 42",
+    "choices": [
+      {
+        "text": "Team A because team members are generalizing specialists.",
+        "correct": false
+      },
+      {
+        "text": "Team B because team members are generalizing specialists.",
+        "correct": true
+      },
+      {
+        "text": "Team A because team members are traditional specialists.",
+        "correct": false
+      },
+      {
+        "text": "Team B because team members are traditional specialists.",
+        "correct": false
+      }
+    ],
+    "id": 140
+  }
+]

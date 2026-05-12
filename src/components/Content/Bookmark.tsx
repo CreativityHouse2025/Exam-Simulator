@@ -1,5 +1,5 @@
 import type { ThemedStyles } from '../../types'
-import { SessionDataContext, SessionNavigationContext } from '../../contexts'
+import { useSessionNavigation, useSessionData } from '../../contexts'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -18,8 +18,8 @@ const BookmarkStyles = styled.div<BookmarkStylesProps>`
 `
 
 const BookmarkButton: React.FC = () => {
-  const { index, update } = React.useContext(SessionNavigationContext)
-  const { bookmarks } = React.useContext(SessionDataContext)
+  const { index, update } = useSessionNavigation()
+  const { bookmarks } = useSessionData()
 
   const bookmarked = bookmarks.includes(index)
 

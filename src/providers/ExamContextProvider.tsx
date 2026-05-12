@@ -1,56 +1,75 @@
 import React from "react"
-import { ExamContext } from "../contexts"
+import { ExamContext, useSessionControl } from "../contexts"
 import Loading from "../components/Loading"
 import type { Exam } from "../types"
-import { initQuestionMap, getExamByQuestionIds } from "../utils/exam"
 import { formatExam } from "../utils/format"
+import { loadDomainExam, loadFullExam } from "../utils/exam"
+import useToast from "../hooks/useToast"
+import { translate } from "../utils/translation"
 import useSettings from "../hooks/useSettings"
 
 /**
- * Holds the current exam in memory and owns the question-map lifecycle:
- * loads questions when mounted and reloads on language change.
- * Exam state is managed by ExamPage after fetching from the backend.
+ * Read-only context, exam data never modified
+ *
+ *  Holds the current exam in memory and is solely responsible for loading exam data from disk.
+ * 
+ * On mount it reads `examType` + `examId`/`categoryId` from SessionControlContext (the session
+ * must already be populated by SessionProvider before this provider is mounted on /app/exam),
+ * then fetches the corresponding exam JSON file via loadFullExam / loadDomainExam.
+ *
+ * Re-loads on language change so questions re-render in the new language without a full reload.
+ *
+ * Shows a loading spinner while the file is being fetched, but only when exam is null —
+ * if an exam is already in memory (e.g. language hot-swap) the current exam stays rendered.
  */
 export default function ExamContextProvider({ children }: { children: React.ReactNode }) {
   const [exam, setExam] = React.useState<Exam | null>(null)
+  const { showToast } = useToast()
   const { settings } = useSettings()
   const langCode = settings.language
-  const [mapReady, setMapReady] = React.useState(false)
 
-  const examRef = React.useRef<Exam | null>(exam)
-  examRef.current = exam
+  // consume the session from the provider after it fully sets it
+  const { session } = useSessionControl()
 
   React.useEffect(() => {
+    // This guard handles the brief window between navigation and session mount.
+    if (!session) return
+
     let cancelled = false
-    setMapReady(false)
 
-    async function init() {
-      try {
-        await initQuestionMap(langCode)
-        if (cancelled) return
+    async function loadExamData() {
+      const examDetails =
+        session!.examType === "full" || session!.examType === "revision"
+          ? await loadFullExam(session!.examId!, langCode)
+          : await loadDomainExam(session!.categoryId!, langCode)
 
-        const current = examRef.current
-        if (current !== null) {
-          const rebuilt = getExamByQuestionIds(current.map(q => q.id))
-          if (rebuilt) setExam(formatExam(rebuilt))
-        }
+      if (cancelled) return
 
-        setMapReady(true)
-      } catch (error) {
-        console.error("Failed to load questions:", error)
+      if (examDetails.questionList === null) {
+        showToast(translate("cover.invalid-exam-message"), 5000)
+        return
       }
+
+      setExam(formatExam(examDetails.questionList))
     }
-    init()
+
+    loadExamData().catch(() => {
+      if (!cancelled) showToast(translate("attempts.errors.server-unknown"), 5000)
+    })
+
     return () => {
       cancelled = true
     }
-  }, [langCode])
+    // Re-load when language changes so questions re-render in the new language.
+  }, [session?.examType, session?.examId, session?.categoryId, langCode])
 
-  // only show loading when there isn't ongoing exam, otherwise keep ExamPage rendered
-  if (!mapReady && exam === null) return <Loading size={200} />
+  // Only block rendering while the very first load is in progress.
+  // If exam is already in memory (e.g. mid-session language switch), keep the current exam
+  // rendered rather than flashing a spinner.
+  if (exam === null) return <Loading size={200} />
 
   return (
-    <ExamContext.Provider value={{ exam, setExam }}>
+    <ExamContext.Provider value={{ exam }}>
       {children}
     </ExamContext.Provider>
   )

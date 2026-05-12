@@ -91,7 +91,7 @@ All paths that create a row in `auth.sessions`:
 
 - `src/components/Navigation/` - Main exam interface with drawer, footer, timer
 - `src/components/Content/` - Question rendering, results summary
-- `src/data/exam-data/` - Question banks, exam definitions, categories
+- `src/data/exam/` - Question banks, exam definitions, categories
 - `src/data/langs/` - Translation JSON files (ar.json, en.json)
 - `api/_lib/types.ts` - Shared backend types
 - `api/_lib/utils/responses.ts` - Used to return a failure and success structure response for APIs

@@ -7,7 +7,7 @@ import { insertAttempt, listAttempts } from "../_lib/services/attemptService.js"
 import type { InsertAttemptRequestBody, ListAttemptsResult } from "../_lib/types.js"
 
 // Maps to POST /api/attempts
-export const POST = withErrorHandler(withAuth(async (request, authUser) => {
+export const POST = withErrorHandler(withAuth(async (request, authUser, cookieHeaders) => {
   const parsedBody = await parseJsonBody(request, 50 * 1024)
   /* full exam input example: {
     exam_type: "full"
@@ -20,11 +20,11 @@ export const POST = withErrorHandler(withAuth(async (request, authUser) => {
    */
   const validatedInput: InsertAttemptRequestBody = validateInsertAttempt(parsedBody)
   const result = await insertAttempt(authUser.id, validatedInput)
-  return successResponse(result, 201)
+  return successResponse(result, 201, cookieHeaders)
 }))
 
 // Maps to GET /api/attempts
-export const GET = withErrorHandler(withAuth(async (_request, authUser) => {
+export const GET = withErrorHandler(withAuth(async (_request, authUser, cookieHeaders) => {
   const result: ListAttemptsResult = await listAttempts(authUser.id)
-  return successResponse(result)
+  return successResponse(result, 200, cookieHeaders)
 }))

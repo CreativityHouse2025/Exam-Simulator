@@ -17,7 +17,7 @@ import Grid from './Grid'
 import { timerIsRunning } from '../../../utils/state'
 import { translate } from '../../../utils/translation'
 import { SESSION_ACTION_TYPES } from '../../../constants'
-import { SessionExamContext, SessionTimerContext } from '../../../contexts'
+import { useSessionExam, useSessionTimer } from '../../../contexts'
 
 const MainMenu = styled.div<ThemedStyles>`
   flex: 1;
@@ -48,8 +48,8 @@ const MenuItemTextStyles = styled.div`
 `
 
 const MenuComponent: React.FC<MenuProps> = ({ open }) => {
-  const { examState, update } = React.useContext(SessionExamContext)
-  const timerSession = React.useContext(SessionTimerContext)
+  const { examState, update } = useSessionExam()
+  const timerSession = useSessionTimer()
   const [filter, setFilter] = React.useState<QuestionFilter>('all')
 
   const actions = React.useMemo(

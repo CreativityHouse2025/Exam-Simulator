@@ -5,8 +5,7 @@ import Question from './Question'
 import MultipleChoice from './MultipleChoice'
 import Progress from './Progress'
 import Explanation from './Explanation'
-import { SessionDataContext, SessionNavigationContext } from '../../contexts'
-import useExam from '../../hooks/useExam'
+import { useSessionNavigation, useSessionData, useExam } from '../../contexts'
 
 const ExamStyles = styled.div`
   width: 100%;
@@ -14,8 +13,8 @@ const ExamStyles = styled.div`
 `
 
 const ExamComponent: React.FC<ExamProps> = ({ isReview }) => {
-  const { index } = React.useContext(SessionNavigationContext)
-  const { answers } = React.useContext(SessionDataContext)
+  const { index } = useSessionNavigation()
+  const { answers } = useSessionData()
   const { exam } = useExam()
   const questions = exam!
 

@@ -11,6 +11,7 @@ import type { InsertAttemptRequestBody, ListAttemptsResult, GetAttemptResult, Sa
 export async function insertAttempt(userId: string, input: InsertAttemptRequestBody): Promise<{ attempt_id: string }> {
   const { exam_type, exam_id, category_id, question_ids, choices_orders, duration_minutes } = input
 
+  // insert the attempt in the attempts column
   const { data: attempt, error: attemptError } = await supabaseAdmin
     .from("exam_attempts")
     .insert({
@@ -27,6 +28,7 @@ export async function insertAttempt(userId: string, input: InsertAttemptRequestB
     throw new AppError({ statusCode: 500, code: "ATTEMPT_CREATE_FAILED", message: "Failed to create exam attempt" })
   }
 
+  // construct question rows, the index of each question is STRICTLY its position in the payload questions array
   const questionRows = question_ids.map((question_id, i) => ({
     attempt_id: attempt.id,
     question_index: i,
@@ -34,6 +36,7 @@ export async function insertAttempt(userId: string, input: InsertAttemptRequestB
     choices_order: choices_orders[i],
   }))
 
+  // insert the attempt's questions
   const { error: questionsError } = await supabaseAdmin.from("exam_attempt_questions").insert(questionRows)
 
   if (questionsError) {

@@ -102,7 +102,6 @@ export const DEFAULT_SESSION: Session = {
   paused: false as const,
   examState: 'in-progress' as const,
   reviewState: 'summary' as const,
-  questions: [] as const,
   answers: [] as const,
   categoryId: null,
   examId: null,

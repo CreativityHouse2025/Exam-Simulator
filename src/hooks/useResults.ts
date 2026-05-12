@@ -1,10 +1,9 @@
 import React from 'react'
-import { SessionDataContext, SessionExamContext, SessionTimerContext } from '../contexts'
-import useExam from './useExam'
+import { useSessionData, useSessionTimer, useSessionExam, useExam } from '../contexts'
 import useCategoryLabel from './useCategoryLabel'
 import useFullExamLabel from './useFullExamLabel'
 import { Question, Results } from '../types'
-import examTypes from '../data/exam-data/exam-types.json'
+import examTypes from '../data/exam/exam-types.json'
 
 type QuestionStats = {
     correct: Question['id'][]
@@ -14,9 +13,9 @@ type QuestionStats = {
 }
 
 export default function useResults(isExamFinished: boolean): Results | null {
-    const { answers, examType } = React.useContext(SessionDataContext)
-    const { maxTime, time } = React.useContext(SessionTimerContext)
-    const { categoryId, examId } = React.useContext(SessionExamContext)
+    const { answers, examType } = useSessionData()
+    const { maxTime, time } = useSessionTimer()
+    const { categoryId, examId } = useSessionExam()
     const { exam: examOrNull } = useExam()
     const exam = examOrNull!
 

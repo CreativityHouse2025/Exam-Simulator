@@ -1,0 +1,602 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "A cyber security project is being implemented to protect ABC company's data. During project execution, a new law is being discussed which requires additional protection for the user's information. This will require additional security features to be added which were not part of the original scope. What should the project manager do in this situation?",
+    "explanation": "The law has not yet been applied, but there is a risk that new requirements will be added to the project scope to comply with the new law. So, the best answer is to add a risk for the new requirements that might emerge as a result of the new law and develop a response plan. Domain = Business Environment. The Standard for Project Management, Page 27",
+    "choices": [
+      {
+        "text": "Hold a meeting with the legal department to learn about the new requirements.",
+        "correct": false
+      },
+      {
+        "text": "Raise a change request to include the new needed features for additional data protection.",
+        "correct": false
+      },
+      {
+        "text": "Do nothing until the law is applied.",
+        "correct": false
+      },
+      {
+        "text": "Add a risk to the risk log and develop a response plan.",
+        "correct": true
+      }
+    ],
+    "id": 472
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a construction project which contains a procurement work. The air conditioning system of the project will be outsourced to a contractor. You prepare the RFP to be sent to contractors when your cousin knows that you will need a contractor. He owns a company working in air conditioning system and he wants to bid on your project. The reputation of his company is very good and your company worked with him before and he's done good work. What should you do?",
+    "explanation": "When bidders are competing for a contract, you must make sure that no bidders receive preferential treatment. Domain = Business Environment. PMBOK 6th edition, Page 487",
+    "choices": [
+      {
+        "text": "You disclose the conflict of interest to your company, and disqualify your cousin’s company.",
+        "correct": false
+      },
+      {
+        "text": "You disclose the conflict of interest to your company, and remove yourself from the selection committee.",
+        "correct": true
+      },
+      {
+        "text": "You disclose the conflict of interest to your company, and provide your cousin with information that the other bidders don’t have so that he has a better chance of winning the contract.",
+        "correct": false
+      },
+      {
+        "text": "You do not disclose the conflict of interest, and give your cousin the bid.",
+        "correct": false
+      }
+    ],
+    "id": 473
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Sam is a project manager for a product development project. He is managing his first project. He has finalized the schedule of his project and added all working and non-working days and team vacations on it. He realized that there will be overlapping vacations between his team and the quality control team who will test the product of the project. There will be no one to test the product. Which type of constraints that causes the problem here?",
+    "explanation": "The constraint here is a resource constraint because the resources will not be available when the project manager needs them. Domain = Business Environment. PMBOK 6th edition, Page 10 and 28 and PMBOK 7th edition, Page 174",
+    "choices": [
+      {
+        "text": "Quality constraint",
+        "correct": false
+      },
+      {
+        "text": "Time constraint",
+        "correct": false
+      },
+      {
+        "text": "Resource constraint",
+        "correct": true
+      },
+      {
+        "text": "Risk constraint",
+        "correct": false
+      }
+    ],
+    "id": 474
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Peter is the project manager for an industrial project. The design work of his project is outsourced to another company under a contract. When can he use formal written correspondence with this company?",
+    "explanation": "The procurement management process is a formal process. All communications must be formal written when there is a change to document the change and sign it from both parties. Domain = Business Environment. PMBOK 6th edition, Page 496 and PMBOK 7th edition, Page 13",
+    "choices": [
+      {
+        "text": "When he needs information from the company.",
+        "correct": false
+      },
+      {
+        "text": "When there is conversation with the company.",
+        "correct": false
+      },
+      {
+        "text": "When there is a meeting with the company's management.",
+        "correct": false
+      },
+      {
+        "text": "When there is a change to the procurement statement of work.",
+        "correct": true
+      }
+    ],
+    "id": 475
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Gary is managing a large tele-communications project. The installation work will be outsources to another company. After the prospective sellers have been identified and received the procurement documents, Gary invites the sellers to attend a bidder conference. What should he do?",
+    "explanation": "The procurement management process requires formality. Ensuring that all prospective sellers got the same information in writing ensures that there is no bias from the project manager to any of them. Domain = Business Environment. PMBOK 6th edition, Page 489 and PMBOK 7th edition, Page 70",
+    "choices": [
+      {
+        "text": "To hold separate meetings with each bidder.",
+        "correct": false
+      },
+      {
+        "text": "All questions and answers are put in writing and sent to all sellers.",
+        "correct": true
+      },
+      {
+        "text": "All sellers get answers to their questions only.",
+        "correct": false
+      },
+      {
+        "text": "Negotiate with the potential sellers to get the least possible price.",
+        "correct": false
+      }
+    ],
+    "id": 476
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A sub-contractor in your project went out of business and you need to start construction tomorrow to meet the next milestone date. Which type of contract would you sign with the new sub-contractor?",
+    "explanation": "Time and material contracts are the fastest and easiest in negotiation. As you don't have time to negotiate a new contract, it is better to select a time and material contract. Domain = Business Environment. PMBOK 6th edition, Page 472 and PMBOK 7th edition, Page 191",
+    "choices": [
+      {
+        "text": "Time and Material (T & M)",
+        "correct": true
+      },
+      {
+        "text": "Cost plus fixed fee (CPFF)",
+        "correct": false
+      },
+      {
+        "text": "Cost plus incentive fee (CPIF)",
+        "correct": false
+      },
+      {
+        "text": "Firm Fixed Price (FFP)",
+        "correct": false
+      }
+    ],
+    "id": 477
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Mark is managing a project to prepare a chemical compound. During project executing, a senior manager has requested from Mark the data sheet of one of the chemical components used to prepare the chemical compound. The senior manager is not authorized to see this data but he insists to see it. What should Mark do in this situation?",
+    "explanation": "As the senior manager is not authorized to see this data, so the project manager must ensure compliance. He should meet the senior manager as soon as possible to discuss the matter further with him and know the exact reason for getting this data. Domain = Business Environment. The Standard for Project Management, Page 27",
+    "choices": [
+      {
+        "text": "Provide the needed data sheet to the senior manager.",
+        "correct": false
+      },
+      {
+        "text": "Have a meeting with the senior manager to discuss this topic.",
+        "correct": true
+      },
+      {
+        "text": "Escalate this topic to the project steering committee.",
+        "correct": false
+      },
+      {
+        "text": "Ask the project sponsor to take the responsibility of senior management engagement.",
+        "correct": false
+      }
+    ],
+    "id": 478
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Monica is leading a project to develop a new electronic device in predictive environment. She discusses with the project team using a new component suggested by a team member to have better performance. The project team needs to test the viability of using the new component. They have a tight schedule and there is a risk if they decide to use the new component and it turns out later that it affects the product performance, the project will face delays and financial penalties. Which of the following is the best course of action?",
+    "explanation": "Incorporating agile methods with traditional methods would make the overall project management approach hybrid. In this situation, the project team could use the agile technique of a spike. Spikes are useful for learning and may be used in circumstances such as: estimation, acceptance criteria definition, addressing a risk, and understanding the flow of a user’s action through the product. Domain = Business Environment. Agile Practice Guide, Page 56",
+    "choices": [
+      {
+        "text": "Discuss this issue with the sponsor.",
+        "correct": false
+      },
+      {
+        "text": "Hold a spike.",
+        "correct": true
+      },
+      {
+        "text": "Plan for a contingency reserve.",
+        "correct": false
+      },
+      {
+        "text": "Use the new component.",
+        "correct": false
+      }
+    ],
+    "id": 479
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Who is responsible to ensure that organizational procurement policies are followed?",
+    "explanation": "It is the project management team’s responsibility to make certain that all procurements meet the specific needs of the project while working with the procurement office to ensure organizational procurement policies are followed. Domain = Business Environment. PMBOK 6th edition, Page 461",
+    "choices": [
+      {
+        "text": "Project manager",
+        "correct": false
+      },
+      {
+        "text": "Procurement office",
+        "correct": false
+      },
+      {
+        "text": "Project management team",
+        "correct": false
+      },
+      {
+        "text": "Both project management team and procurement office",
+        "correct": true
+      }
+    ],
+    "id": 480
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The project manager has just communicated the responsibility assignment matrix to the project team. A team member who has just been assigned to the project finds that he is involved with three team members in a procurement audit. He asks the project manager about the purpose of the procurement audit. The project manager told him that the purpose of the procurement audit is to:",
+    "explanation": "Audits are a structured review of the procurement process. Domain = Business Environment. PMBOK 6th edition, Page 498 and PMBOK 7th edition, Page 79",
+    "choices": [
+      {
+        "text": "Review the work being performed by the contractor.",
+        "correct": false
+      },
+      {
+        "text": "Review the type of the selected contract.",
+        "correct": false
+      },
+      {
+        "text": "Review the contract cost.",
+        "correct": false
+      },
+      {
+        "text": "Review the procurement process.",
+        "correct": true
+      }
+    ],
+    "id": 481
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Documenting the questions and answers in a bidder conference and sending them to all bidders is an example of which kind of communication?",
+    "explanation": "Anytime you have any communication having to do with bidding, it’s always formal written. Domain = Business Environment. PMBOK 6th edition, Page 485-487 and PMBOK 7th edition, Page 70",
+    "choices": [
+      {
+        "text": "Informal verbal",
+        "correct": false
+      },
+      {
+        "text": "Formal written",
+        "correct": true
+      },
+      {
+        "text": "Formal verbal",
+        "correct": false
+      },
+      {
+        "text": "Informal written",
+        "correct": false
+      }
+    ],
+    "id": 482
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for an industrial project. You are analyzing with the sponsor and project team members whether to do part of the project by your company or outsource this part to another company. Finally you all agree to do the work by your company because:",
+    "explanation": "This is an example of make or buy analysis. You can decide to buy to transfer risks to the seller. And you can decide to make if the project contains proprietary data. Domain = Business Environment. PMBOK 6th edition, Page 473 and PMBOK 7th edition, Page 65",
+    "choices": [
+      {
+        "text": "Your company has limited resources.",
+        "correct": false
+      },
+      {
+        "text": "Your company doesn't want to have control over the work.",
+        "correct": false
+      },
+      {
+        "text": "There is a lot of proprietary data.",
+        "correct": true
+      },
+      {
+        "text": "Your company doesn't have experienced manpower.",
+        "correct": false
+      }
+    ],
+    "id": 483
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Prior to the iteration review, after the team has completed all the story points in the iteration backlog, a new industry standard has been released and the performing organization must comply with it. Accordingly, the product increment launch will not be done as planned. Which of the following is the best course of action to realize benefits?",
+    "explanation": "They should review the target benefits first which will be impacted by the new standard. Understanding the organization and the industry requirements that an organization needs to satisfy allows for choosing the right conversations, the right tradeoffs, and, especially, the right techniques. Domain = Business Environment. Agile Practice Guide, Page 76",
+    "choices": [
+      {
+        "text": "Extend current iteration to add the new standard requirements.",
+        "correct": false
+      },
+      {
+        "text": "Review target benefits.",
+        "correct": true
+      },
+      {
+        "text": "Release the current product increment without adding the standard requirements and add it after product demo.",
+        "correct": false
+      },
+      {
+        "text": "Increase the team velocity to add the new requirement to the current iteration.",
+        "correct": false
+      }
+    ],
+    "id": 484
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project has been initiated several months ago to build a new factory. The project has been postponed several times due to non-compliance with environmental codes required by local laws in the country where the project is being performed. A new project manager has been assigned to this project. What should the new project manager do to move forward and have this project completed?",
+    "explanation": "Projects must comply with laws, rules, regulations, and requirements that are properly authorized within or outside of their organization. However, high-performing projects seek ways to integrate compliance more fully into the project culture, creating more alignment with diverse and potentially conflicting guidelines. So, the best approach is to include environmental compliance requirements in the project scope. Domain = Business Environment. The Standard for Project Management, Page 27",
+    "choices": [
+      {
+        "text": "Meet with the city council representatives, explain to them the project objectives and the benefits of building this factory to the city.",
+        "correct": false
+      },
+      {
+        "text": "Include environmental compliance requirements in the project scope, identify risks to achieving these requirements and develop responses.",
+        "correct": true
+      },
+      {
+        "text": "Consult lessons learned collected by previous project managers, include enough cost and schedule reserves to accommodate for any further delays or penalties.",
+        "correct": false
+      },
+      {
+        "text": "Descope the non-compliant requirements to move forward.",
+        "correct": false
+      }
+    ],
+    "id": 485
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A small project has been initiated in ABC organization which is known to be working on mega projects. The organization adopts waterfall approach for all projects and has strict project management processes. The new project team consists of four colocated team members. The project manager decides not to create some artifacts like communication management plan, meeting minutes, stakeholders engagement plan and quality management plan. Which of the following best describes what the project manager is doing?",
+    "explanation": "Tailoring is the deliberate adaptation of the project management approach, governance, and processes to make them more suitable for the given environment and the work at hand. Domain = Business Environment. PMBOK 7th edition, Page 131",
+    "choices": [
+      {
+        "text": "Violating the PMI processes",
+        "correct": false
+      },
+      {
+        "text": "Tailoring",
+        "correct": true
+      },
+      {
+        "text": "Noncompliance",
+        "correct": false
+      },
+      {
+        "text": "Creating new approach",
+        "correct": false
+      }
+    ],
+    "id": 486
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A Value Delivery Office (VDO) most probably exists in which of the following organizations?",
+    "explanation": "A VDO may be found in organizations that use more adaptive delivery approaches. Only Scrum is adaptive approach all others are predictive approaches. Domain = Business Environment. PMBOK 7th edition, Page 141",
+    "choices": [
+      {
+        "text": "DEF organization which is specialized in large mechanical projects which require much up front planning.",
+        "correct": false
+      },
+      {
+        "text": "UVW organization which adopts Scrum methodology in all its projects.",
+        "correct": true
+      },
+      {
+        "text": "ABC construction firm which adheres to waterfall approach in all its projects.",
+        "correct": false
+      },
+      {
+        "text": "XYZ organization which is specialized in safety critical projects.",
+        "correct": false
+      }
+    ],
+    "id": 487
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project team is working on a project to build a part of a nuclear reactor using waterfall development approach. The project team wants to tailor some processes related to reporting and communication by removing some activities which seem to be not necessary. The performing organization senior management object to this tailoring approach and added additional approval layer for the project team before changing any process. Which of the following is the best course of action?",
+    "explanation": "Additional constraints for tailoring for the organization include large, safety-critical projects. Large, safety-critical project tailoring suggestions may require additional oversight and approval to help prevent errors, loss, or subsequent issues. Domain = Business Environment. PMBOK 7th edition, Page 139",
+    "choices": [
+      {
+        "text": "Tailoring the project documents or processes should be the project team decision not the senior management decision.",
+        "correct": false
+      },
+      {
+        "text": "The project senior management are overstepping their role.",
+        "correct": false
+      },
+      {
+        "text": "Tailoring any project documents or processes should be agreed with the senior management in advance.",
+        "correct": false
+      },
+      {
+        "text": "This project has tailoring constraints.",
+        "correct": true
+      }
+    ],
+    "id": 488
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project is being implemented in an organization to prepare a chemical compound and it is required to follow strict regulatory compliance guidelines. The project manager wants to ensure adherence to these guidelines as they are mandatory requirements for the project. What should the project manager do?",
+    "explanation": "Adherence to regulatory compliance is a requirement, it must be managed as part of the project scope and not as best effort. The best answer is to assign this requirement to team member. Domain = Business Environment. The Standard for Project Management, Page 27",
+    "choices": [
+      {
+        "text": "Assign a team member as responsible to ensure regulatory compliance and update RACI matrix accordingly.",
+        "correct": true
+      },
+      {
+        "text": "Check regulatory compliance adherence during project closure.",
+        "correct": false
+      },
+      {
+        "text": "Submit a change request to allocate enough time, cost and resources to accommodate regulatory compliance.",
+        "correct": false
+      },
+      {
+        "text": "Manage adherence to regulatory compliance as best effort according to available time, budget and resources.",
+        "correct": false
+      }
+    ],
+    "id": 489
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A new project has been initiated in XYZ organization. The organization has its internal governance system which states that each project must pass through five approval gates from initiation to closure. In order to have gate 2 approved, the project team must provide a project management plan including scope, schedule and cost baselines. The project team objects to this approach and decides that they will use adaptive approach which is more suitable and tailored to the project needs. Which of the following is the best course of action?",
+    "explanation": "Organizations that have established process governance need to ensure tailoring is aligned to policy. To demonstrate that the project team’s tailoring decisions do not threaten the organization’s larger strategic or stewardship goals, project teams may need to justify using a tailored approach. Domain = Business Environment. PMBOK 7th edition, Page 139",
+    "choices": [
+      {
+        "text": "The organization should follow the project team's tailored approach.",
+        "correct": false
+      },
+      {
+        "text": "The project team should follow the organization's governance system.",
+        "correct": true
+      },
+      {
+        "text": "The organization should exclude this project from internal governance system.",
+        "correct": false
+      },
+      {
+        "text": "Let the customer decide which development approach to adopt.",
+        "correct": false
+      }
+    ],
+    "id": 490
+  },
+  {
+    "type": "multiple-choice",
+    "text": "An organization has signed a contract with the customer to develop a new mobile application. The customer has stated in the contract that there are milestones to be approved by the customer like creating the project charter, approving the project management plan, approving the demo version,..etc. The project team assigned from the performing organization need to use iterative approach because it is more tailored to the project needs, which may lead to missing some of these milestones. Which of the following is the best course of action?",
+    "explanation": "Additional constraints for tailoring for the organization include projects performed under contract. Projects that are performed under contract may have contract terms that specify the use of a particular life cycle, delivery approach, or methodology. Domain = Business Environment. PMBOK 7th edition, Page 139",
+    "choices": [
+      {
+        "text": "Follow the contract.",
+        "correct": true
+      },
+      {
+        "text": "Use hybrid approach as a compromise.",
+        "correct": false
+      },
+      {
+        "text": "Use iterative approach.",
+        "correct": false
+      },
+      {
+        "text": "Reject the project assignment.",
+        "correct": false
+      }
+    ],
+    "id": 491
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During executing a project to produce a new pharmaceutical compound, an industry standard has been issued by the government which takes an immediate effect. The new standard may require audits on the project to ensure project compliance. The audit may be performed at any time throught the project. The audit might have a negative impact on the project like re-work, auditors might find inconsistencies and disrupting the project management plan. What is the best way to handle these audits?",
+    "explanation": "Incorporating agile methods with traditional methods would make the overall project management approach hybrid. In this situation, the project team could use the agile technique of a spike. Spikes are useful for learning and may be used in circumstances such as: estimation, acceptance criteria definition, addressing a risk, and understanding the flow of a user’s action through the product. Domain = Business Environment. Agile Practice Guide, Page 56",
+    "choices": [
+      {
+        "text": "As unplanned spike.",
+        "correct": true
+      },
+      {
+        "text": "Ask the sponsor to postpone these audits.",
+        "correct": false
+      },
+      {
+        "text": "Inform stakeholders that the project may not achieve its objectives.",
+        "correct": false
+      },
+      {
+        "text": "Accommodate audit impacts from management reserve.",
+        "correct": false
+      }
+    ],
+    "id": 492
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a product development project. You have recently received a shipment for your project containing barcode scanners. The shipment contains twenty pieces of barcode scanners, while the contract states that the seller should provide twenty five pieces. You find that twenty pieces can satisfy the needs of your project. What is the best course of action?",
+    "explanation": "Contracts must be formal. If there is a clause in the contract, it is binding for both parties. If there is a shipment which does not meet the requirements of the contract, it should not be received. Domain = Business Environment. PMBOK 6th edition, Page 461 and PMBOK 7th edition, Page 75",
+    "choices": [
+      {
+        "text": "Send the shipment back to the seller.",
+        "correct": true
+      },
+      {
+        "text": "Accept the shipment.",
+        "correct": false
+      },
+      {
+        "text": "Issue a change order to change the contract specifications.",
+        "correct": false
+      },
+      {
+        "text": "Deduct the cost difference from the next payment to the seller.",
+        "correct": false
+      }
+    ],
+    "id": 493
+  },
+  {
+    "type": "multiple-choice",
+    "text": "All of the following statements describe the focus of the contract review and approval process, except:",
+    "explanation": "The primary focus of the review and approval process is to ensure that the contract adequately describes the products, services, or results that the seller is agreeing to provide, while being in compliance with the laws and regulations regarding procurements. Domain = Business Environment. PMBOK 6th edition, Page 461",
+    "choices": [
+      {
+        "text": "To ensure that the contract adequately describes the products, services, or results that the seller will provide.",
+        "correct": false
+      },
+      {
+        "text": "To ensure that the procurement office got the least possible price from the prospective sellers.",
+        "correct": true
+      },
+      {
+        "text": "To ensure that the contract is in compliance with the laws in the country where the project is being performed.",
+        "correct": false
+      },
+      {
+        "text": "To ensure that the contract is in compliance with the organization's procurements regulations and policies.",
+        "correct": false
+      }
+    ],
+    "id": 494
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Bill is the project manager for a construction project that is building a new branch for his company. When the project first started, he met with the stakeholders to define the scope. The CEO of the company will attend the ceremony to open the new branch. Bill was informed by his manager that he has a deadline to finish the new branch in ten months. This deadline is considered as a:",
+    "explanation": "Deadline is a project constraint. Domain = Business Environment. PMBOK 6th edition, Page 28",
+    "choices": [
+      {
+        "text": "Project Schedule",
+        "correct": false
+      },
+      {
+        "text": "Project Objective",
+        "correct": false
+      },
+      {
+        "text": "Project Constraint",
+        "correct": true
+      },
+      {
+        "text": "Project Assumption",
+        "correct": false
+      }
+    ],
+    "id": 495
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Kim is assigned to manage a new project to build a new electric substation that is part of an electric utility program to serve a new industrial park. The program management plan states that all changes to any project within the program exceeding 2% of the project budget should be approved by the program manager and other changes less than 2% of the project budget to be approved by change control board. Kim is developing the project management plan with this team, he thinks that most of the change requests affecting the budget may exceed 2% of the project budget. So, most of the changes will need the program manager approval. So, he wants to make the changes exceeding 5% of the project budget to be approved by the program manager, and other changes less than 5% to be approved by change control board. Which of the following statements is correct regarding Kim's opinion?",
+    "explanation": "Projects that exist in the context of a program or portofolio should develop a project management plan that is consistent with the program or portfolio management plan. Domain = Business Environment. PMBOK 6th edition, Page 83 and PMBOK 7th edition, Page 66",
+    "choices": [
+      {
+        "text": "Kim's opinion is not correct. Projects that exist in the context of a program should develop a project management plan that is consistent with the program management plan.",
+        "correct": true
+      },
+      {
+        "text": "Kim is right, he is the project manager and he is accountable for project success.",
+        "correct": false
+      },
+      {
+        "text": "Kim can discuss with the program manager and find a compromise that satisfy both parties.",
+        "correct": false
+      },
+      {
+        "text": "Kim should escalate this issue to the project sponsor.",
+        "correct": false
+      }
+    ],
+    "id": 496
+  }
+]
