@@ -36,32 +36,102 @@ All API endpoints follow a three-layer pattern:
 Keep handlers thin. If logic can be unit tested without mocking an HTTP request, it belongs in the service.
 
 ### Split Context Architecture (React)
-Contexts are separated to minimize re-renders:
-- `ExamContext` - Current exam questions (read-only)
-- `SessionNavigationContext` - Current question index
-- `SessionTimerContext` - Time tracking
-- `SessionExamContext` - Exam state (in-progress, completed, review)
-- `SessionDataContext` - Answers, bookmarks, email sent flag
+Contexts are separated to minimize re-renders. All context creation and typed hooks are co-located in `src/contexts.ts` for Vite fast refresh compliance:
+
+**Contexts:**
+- `ExamContext` - Current exam questions (read-only). Loaded by `ExamContextProvider` on `/app/exam` mount based on session config.
+- `SessionNavigationContext` - Current question index and updater
+- `SessionTimerContext` - Time tracking (time, maxTime, paused) and updater
+- `SessionExamContext` - Exam state (in-progress, completed, review) and updater
+- `SessionDataContext` - Answers, bookmarks, examType, isSyncing state and updater
+- `SessionControlContext` - Lifecycle methods: startNewExam, resumeAttempt, startRevision, current session, updater
 - `SettingsContext` - Language, user info (localStorage-backed)
 
+**Typed Hooks (all in `src/contexts.ts`):**
+- `useExam()` - Read exam data from ExamContext; throws if undefined
+- `useSessionControl()` - Access Session lifecycle and current session
+- `useSessionNavigation()` - Read/update question index
+- `useSessionTimer()` - Read/update timer state
+- `useSessionExam()` - Read/update exam state (in-progress, completed, review)
+- `useSessionData()` - Read/update answers, bookmarks, examType, isSyncing
+- Use these hooks instead of raw `React.useContext()` calls for better type safety and error checking.
+
+### Provider Hierarchy
+```
+ProtectedRoute
+  └── SessionProvider                    ← wraps /history AND /app/*
+        ├── /history    AttemptHistoryPage    (calls resumeAttempt)
+        └── /app
+              ├── index    CoverPage           (calls startNewExam)
+              └── /exam    ExamContextProvider ← loads exam JSON
+                              └── ExamPage
+```
+
+**SessionProvider** owns the full Session lifecycle. On mount it provides `startNewExam`, `resumeAttempt`, and `startRevision` to child routes without requiring an active session. When any of these succeed, SessionProvider mounts the `ActiveSession` component which wires up the 5 split contexts.
+
+**ExamContextProvider** wraps only `/app/exam`. On mount it reads `session.examType`, `session.examId`, and `session.categoryId` from `SessionControlContext`, then loads the corresponding exam JSON via `loadFullExam` or `loadDomainExam`. It re-loads on language change.
+
+### Session Lifecycle and Methods
+
+**`startNewExam(type, examOrCategoryId): Promise<string | null>`**
+- Loads exam JSON file (full exam or domain category) via `loadFullExam`/`loadDomainExam`
+- Creates initial attempt snapshot in DB via `startAttempt`
+- Builds full `Session` from `DEFAULT_SESSION` + attempt config (id, examType, examId/categoryId, maxTime, time)
+- Stores attemptId in localStorage for "Continue latest" on CoverPage
+- Returns attemptId on success, null on failure
+- Navigation to `/app/exam` is caller's responsibility
+
+**`resumeAttempt(attemptId): Promise<string | null>`**
+- Fetches in-progress attempt snapshot from DB via `getAttempt`
+- Hydrates full `Session` state via `adaptAttemptToSession` with `revision: false`
+- Stores attemptId in localStorage for "Continue latest"
+- Navigation to `/app/exam?id=${attemptId}` is caller's responsibility
+- Returns attemptId on success, null on failure
+
+**`startRevision(attemptId): Promise<string | null>`**
+- Fetches completed full-exam attempt snapshot from DB
+- Filters to wrong/unanswered questions only via `adaptAttemptToSession` with `revision: true`
+- Creates ephemeral session (not persisted to localStorage) with `examType: 'revision'`
+- Navigation to `/app/exam?id=${attemptId}&revision=1` is caller's responsibility
+- Returns attemptId on success, null on failure
+
 ### Session Reducer (React)
-`src/utils/session.ts` handles immutable state updates with typed actions (SET_INDEX, SET_ANSWERS, SET_TIME, SET_TIMER_PAUSED, etc.).
+`src/utils/session.ts` handles immutable state updates with typed actions (SET_INDEX, SET_ANSWERS, SET_TIME, SET_TIMER_PAUSED, etc.). Note: `Session.questions` field was removed — it was written at init but never read during a session; `useExamSession` always reads question data from the exam context instead.
+
+### Vite Fast Refresh Compliance (Critical)
+Provider files (`src/providers/*.tsx`) must have **only a default export** — the React component. All additional exports (hooks, styled components, types) break Vite's fast refresh and cause HMR violations.
+
+Pattern for context creation:
+1. Create contexts and hooks in a single file (`src/contexts.ts`) — this file is not a provider, so it can export multiple items
+2. Each provider file (`ExamContextProvider.tsx`, `SessionProvider.tsx`) is **only** the component, default-exported
+3. Styled components specific to a provider live in their own `*Styles.ts` file (e.g., `AttemptHistoryStyles.ts`) if shared with other components
+
+This ensures each provider component can be fast-refreshed independently when edited.
 
 ### Custom Hooks (React)
-- `useSession()` - localStorage persistence with cleanup
 - `useSettings()` - Gets/updates the user settings in the local storage.
-- `useResults()` - Score calculation and statistics
+- `useResults()` - Score calculation and statistics (correct, incorrect, incomplete counts; pass/fail)
 - `useEmail()` - Sends exam summary report email (no attachment) via Vercel serverless function
 - `useMediaQuery()` - Responsive breakpoints (768px mobile threshold)
 - `useFullExamLabel()` - Gets the full exam label from the `full-exams.json` file during the runtime.
 - `useCategoryLabel()` - Gets the category label from the `categories.json` file during the runtime.
 - `useToast()` - Hook to show/close a toast from the top of the app, toast component is defined in the main.tsx.
+- `useAttempts()` - API calls for exam attempts: `startAttempt` (new full-exam), `getAttempt` (fetch snapshot), `saveAttempt` (persist in-progress), `submitAttempt` (finalize)
+- `useExamSession()` - Internal hook for `ActiveSession`; builds session-to-context bridge via reducer and handles persistence (auto-save on pause/tab-hide/unload)
 
-### Dynamic Imports (React)
-Language files and questions are dynamically imported per language for code-splitting:
+**Note:** Context-related hooks (`useExam`, `useSessionControl`, `useSessionNavigation`, `useSessionTimer`, `useSessionExam`, `useSessionData`) are defined in `src/contexts.ts` and must be imported from there (not from provider files).
+
+### Dynamic Imports and Exam Loading (React)
+Language files are dynamically imported per language for code-splitting:
 ```typescript
 import(`./data/langs/${langCode}.json`)
 ```
+
+**Exam data:** Each full exam and each category has its own JSON file. Exams are loaded on demand via `loadFullExam(examId, langCode)` or `loadDomainExam(categoryId, langCode)`. This happens in two places:
+1. `startNewExam` — loads the file to extract question count for the DB insert, then discards it
+2. `ExamContextProvider` — re-loads the same file on `/app/exam` mount to populate exam data in memory
+
+This duplication is intentional: it keeps the responsibility boundary clean (SessionProvider owns Session state, ExamProvider owns exam data). If duplicate reads become a perf concern, a small cache in `loadFullExam`/`loadDomainExam` is a follow-up.
 
 ## Single Session Enforcement
 

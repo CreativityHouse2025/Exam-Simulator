@@ -4,6 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Cell from './Cell'
 import { useSessionData, useExam } from '../../../contexts'
+import { isAnswerCorrect } from '../../../utils/results'
 
 const GridStyles = styled.div<ThemedStyles>`
   max-height: 20rem;
@@ -18,7 +19,7 @@ const GridStyles = styled.div<ThemedStyles>`
 
 const GridComponent: React.FC<GridProps> = ({ filter }) => {
   const { exam } = useExam()
-  const { bookmarks, answers } = useSessionData()
+  const { bookmarks, selectedOriginalIndices } = useSessionData()
 
   if (!exam || exam.length === 0) return null
 
@@ -27,15 +28,13 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
     const correct: number[] = []
     const incorrect: number[] = []
 
-    answers.forEach((answer, i) => {
-      const hasAnswer = answer.length > 0
+    selectedOriginalIndices.forEach((userAnswer, i) => {
+      const hasAnswer = userAnswer.length > 0
 
       if (hasAnswer) {
         answered.push(i)
 
-        // Check if answer is correct
-        const examAnswer = exam[i].answer
-        const isCorrect = answer.length === examAnswer.length && answer.every((val) => examAnswer.includes(val))
+        const isCorrect = isAnswerCorrect(userAnswer, exam[i].answer)
 
         if (isCorrect) {
           correct.push(i)
@@ -48,7 +47,7 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
     const incomplete = Array.from({ length: exam.length }, (_, i) => i).filter((i) => !answered.includes(i))
 
     return { answered, correct, incorrect, incomplete }
-  }, [exam, answers])
+  }, [exam, selectedOriginalIndices])
 
   const visibleQuestions = React.useMemo(() => {
     switch (filter) {

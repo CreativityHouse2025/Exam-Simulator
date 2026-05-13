@@ -37,11 +37,11 @@ const StatNumber = styled.span<ThemedStyles>`
 `
 
 const ProgressComponent: React.FC<ProgressProps> = ({ questionCount }) => {
-  const { answers } = useSessionData()
+  const { selectedOriginalIndices } = useSessionData()
 
   const { answeredCount, percentage } = React.useMemo(() => {
-    return calculateProgressStats(questionCount, answers)
-  }, [questionCount, answers])
+    return calculateProgressStats(questionCount, selectedOriginalIndices)
+  }, [questionCount, selectedOriginalIndices])
 
   return (
     <ProgressContainer id="progress" className="no-select">

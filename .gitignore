@@ -140,3 +140,5 @@ dist
 .vercel/
 
 api/_lib/services/sessionManager.js
+
+script.js

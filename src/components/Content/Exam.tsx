@@ -13,13 +13,13 @@ const ExamStyles = styled.div`
 `
 
 const ExamComponent: React.FC<ExamProps> = ({ isReview }) => {
-  const { index } = useSessionNavigation()
-  const { answers } = useSessionData()
+  const { index: questionIndex } = useSessionNavigation()
+  const { selectedOriginalIndices } = useSessionData()
   const { exam } = useExam()
   const questions = exam!
 
-  const question = questions[index]
-  const answer = answers[index] || []
+  const question = questions[questionIndex]
+  const userAnswer = selectedOriginalIndices[questionIndex] || []
 
   return (
     <ExamStyles id="exam">
@@ -31,7 +31,7 @@ const ExamComponent: React.FC<ExamProps> = ({ isReview }) => {
 
       <MultipleChoice isReview={isReview} />
 
-      {isReview && <Explanation question={question} answer={answer} />}
+      {isReview && <Explanation question={question} userAnswer={userAnswer} />}
     </ExamStyles>
   )
 }

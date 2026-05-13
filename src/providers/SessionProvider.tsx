@@ -34,7 +34,7 @@ interface ActiveSessionProps {
 // component resets useExamSession's reducer to the new startingSession, giving each
 // exam attempt a clean slate without needing to reset individual state slices manually.
 const ActiveSession: React.FC<ActiveSessionProps> = ({ startingSession, startNewExam, resumeAttempt, startRevision, children }) => {
-  const { session, sessionUpdate, contextValues } = useExamSession(startingSession)
+  const { session, sessionUpdate, contextValues } = useExamSession(startingSession)  
 
   return (
     <SessionControlContext.Provider value={{ session, update: sessionUpdate, startNewExam, resumeAttempt, startRevision }}>
@@ -96,11 +96,18 @@ export default function SessionProvider({ children }: { children: React.ReactNod
           return null
         }
 
-        // store choice order for future shuffling compatibility
-        const choicesOrders = resolvedQuestions.map((q) => {
-          const indices = q.choices.map((_, i) => i)
-          return indices
-        })
+        // TODO: replace with real shuffle — reversed as a temporary smoke-test for order mapping
+        const choiceOrders = resolvedQuestions.map(
+          (q) => q.choices.map((_, i) => i).reverse()
+        )
+
+        const questionChoiceOrders: Record<number, number[]> = Object.fromEntries(
+          resolvedQuestions.map(
+            (q, i) => [q.id, choiceOrders[i]]
+          )
+        )
+
+        const questionIds = resolvedQuestions.map((q) => q.id)
 
         // attempt body, if full exam then category must be null and vice versa
         const startAttemptRequestBody =
@@ -109,38 +116,39 @@ export default function SessionProvider({ children }: { children: React.ReactNod
               exam_type: 'full' as const,
               exam_id: examOrCategoryId,
               category_id: null,
-              question_ids: resolvedQuestions.map((question) => question.id),
-              choices_orders: choicesOrders,
+              question_ids: questionIds,
+              choices_orders: choiceOrders,
               duration_minutes: examDetails.durationMinutes,
             }
             : {
               exam_type: 'domain' as const,
               category_id: examOrCategoryId,
               exam_id: null,
-              question_ids: resolvedQuestions.map((question) => question.id),
-              choices_orders: choicesOrders,
+              question_ids: questionIds,
+              choices_orders: choiceOrders,
               duration_minutes: examDetails.durationMinutes,
             }
 
-        const { attempt_id } = await startAttempt(startAttemptRequestBody)
-        // maxTime in seconds
+        // const { attempt_id } = await startAttempt(startAttemptRequestBody)
         const maxTime = examDetails.durationMinutes * 60
 
         const nextSession: Session = {
           ...DEFAULT_SESSION,
-          id: attempt_id,
+          id: "attempt1",
           examType: type,
           examId: type === 'full' ? examOrCategoryId : null,
           categoryId: type === 'domain' ? examOrCategoryId : null,
+          questionChoiceOrders,
+          selectedOriginalIndices: Array.from({ length: resolvedQuestions.length }, () => []),
           maxTime,
           time: maxTime,
         }
 
         // `att` indicates new attempt, need to have it because revisions have same attemptId
-        setSessionMountKey(`${attempt_id}:att`)
+        setSessionMountKey(`${"attempt1"}:att`)
         setStartingSession(nextSession)
-        setLatestAttemptId(attempt_id)
-        return attempt_id
+        setLatestAttemptId("attempt1")
+        return "attempt1"
       } catch (error) {
         if (error instanceof AppApiError) {
           showToast(error.message, 5000)
@@ -164,15 +172,15 @@ export default function SessionProvider({ children }: { children: React.ReactNod
     async (attemptId: string): Promise<string | null> => {
       try {
         const attemptSnapshot = await getAttempt(attemptId)
-        const adaptedAttempt = adaptAttemptToSession(attemptSnapshot, { revision: false })
+        const nextSession = adaptAttemptToSession(attemptSnapshot, { revision: false })
 
-        if (!adaptedAttempt) {
+        if (!nextSession) {
           showToast(translate('cover.invalid-exam-message'), 5000)
           return null
         }
 
         setSessionMountKey(`${attemptId}:att`)
-        setStartingSession(adaptedAttempt.session)
+        setStartingSession(nextSession)
         setLatestAttemptId(attemptId)
         return attemptId
       } catch (error) {
@@ -200,9 +208,9 @@ export default function SessionProvider({ children }: { children: React.ReactNod
       try {
         const attemptSnapshot = await getAttempt(attemptId)
         // revision: true filters to wrong/unanswered questions and stamps examType as 'revision'
-        const adaptedAttempt = adaptAttemptToSession(attemptSnapshot, { revision: true })
+        const nextSession = adaptAttemptToSession(attemptSnapshot, { revision: true })
 
-        if (!adaptedAttempt) {
+        if (!nextSession) {
           showToast(translate('cover.invalid-exam-message'), 5000)
           return null
         }
@@ -210,7 +218,7 @@ export default function SessionProvider({ children }: { children: React.ReactNod
         // `rev` suffix distinguishes this mount key from a regular attempt with the same id,
         // ensuring the reducer resets cleanly even if the user retries the same exam twice.
         setSessionMountKey(`${attemptId}:rev`)
-        setStartingSession(adaptedAttempt.session)
+        setStartingSession(nextSession)
         return attemptId
       } catch (error) {
         if (error instanceof AppApiError) {

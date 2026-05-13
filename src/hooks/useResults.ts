@@ -13,7 +13,7 @@ type QuestionStats = {
 }
 
 export default function useResults(isExamFinished: boolean): Results | null {
-    const { answers, examType } = useSessionData()
+    const { selectedOriginalIndices, examType } = useSessionData()
     const { maxTime, time } = useSessionTimer()
     const { categoryId, examId } = useSessionExam()
     const { exam: examOrNull } = useExam()
@@ -36,7 +36,7 @@ export default function useResults(isExamFinished: boolean): Results | null {
             return sortedA.every((val, index) => val === sortedB[index])
         }
 
-        return answers.reduce<QuestionStats>(
+        return selectedOriginalIndices.reduce<QuestionStats>(
             (acc, givenAnswer, i) => {
                 const questionId = exam[i].id
                 const correctAnswer = exam[i].answer as number[]
@@ -56,7 +56,7 @@ export default function useResults(isExamFinished: boolean): Results | null {
             },
             { correct: [], incorrect: [], incomplete: [], completed: [] }
         )
-    }, [answers, exam])
+    }, [selectedOriginalIndices, exam])
 
     const score = React.useMemo(() => {
         if (exam.length === 0) return 0

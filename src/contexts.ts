@@ -16,7 +16,7 @@ export const ExamContext = React.createContext<ExamContextType>({} as ExamContex
 /** Access the current exam in memory. Must be used within ExamContextProvider. */
 export function useExam() {
   const context = React.useContext(ExamContext)
-  if (!context) throw new Error("useExam must be used within ExamContextProvider")
+  // if (context.exam === undefined) throw new Error("useExam must be used within ExamContextProvider")
   return context
 }
 
@@ -87,13 +87,13 @@ export function useSessionExam() {
 
 export const SessionDataContext = React.createContext<SessionData>({
   bookmarks: [],
-  answers: [],
+  selectedOriginalIndices: [],
   examType: 'full',
   isSyncing: false,
   update: noopUpdate
 })
 
-/** Access the session data (bookmarks, answers, examType, isSyncing) and its updater. Must be used within SessionProvider. */
+/** Access the session data (bookmarks, selectedOriginalIndices, examType, isSyncing) and its updater. Must be used within SessionProvider. */
 export function useSessionData() {
   return React.useContext(SessionDataContext)
 }

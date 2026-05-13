@@ -25,7 +25,7 @@
   },
   {
     "type": "multiple-choice",
-    "text": "A start-up company needs to quickly expand its product portfolio to meet market demand. Recently, staff members are working on two or three agile teams, each dedicated to a different product line. Output is dropping and defect rates are rising in all teams. \n \nIn which two ways can the project manager help the agile teams improve their work? (Choose TWO).",
+    "text": "A start-up company needs to quickly expand its product portfolio to meet market demand. Recently, staff members are working on two or three agile teams, each dedicated to a different product line. Output is dropping and defect rates are rising in all teams. \n \nIn which two ways can the project manager help the agile teams improve their work? (Choose THREE).",
     "explanation": "The main problem is high context-switching when working on multiple teams, which is resolved by 100% dedicated teams. Root-cause analysis would pinpoint this and other problems to address.",
     "choices": [
       {

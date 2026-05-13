@@ -10,16 +10,21 @@ export type ComputedResults = {
 }
 
 /**
+ * Returns true when userAnswer contains exactly the same set of original indices as correctAnswer.
+ * Order-independent: [1, 0] and [0, 1] are equal.
+ */
+export function isAnswerCorrect(userAnswer: number[], correctAnswer: number[]): boolean {
+  if (userAnswer.length !== correctAnswer.length) return false
+  const sortedUser = [...userAnswer].sort((a, b) => a - b)
+  const sortedCorrect = [...correctAnswer].sort((a, b) => a - b)
+  return sortedUser.every((val, i) => val === sortedCorrect[i])
+}
+
+/**
  * Computes score and pass/fail status from answers and exam data.
  * Falls back to "fail" when no passing rate is configured for the exam type.
  */
 export function computeResults(answers: Answers, exam: Exam, examType: ExamType): ComputedResults {
-  const arraysEqual = (a: number[] | null, b: number[]): boolean => {
-    if (a === null || a.length !== b.length) return false
-    const sortedA = [...a].sort((x, y) => x - y)
-    const sortedB = [...b].sort((x, y) => x - y)
-    return sortedA.every((val, i) => val === sortedB[i])
-  }
 
   let correctCount = 0
   let incorrectCount = 0
@@ -31,7 +36,7 @@ export function computeResults(answers: Answers, exam: Exam, examType: ExamType)
 
     if (!given || given.length === 0) {
       incompleteCount++
-    } else if (arraysEqual(given, correct)) {
+    } else if (isAnswerCorrect(given, correct)) {
       correctCount++
     } else {
       incorrectCount++
