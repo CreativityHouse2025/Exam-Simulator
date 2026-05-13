@@ -67,7 +67,7 @@ export interface Choice {
   text: string
   /** is the choice correct */
   correct: boolean
-  /** original index in the question bank before any shuffle; present only on shuffled exams */
+  /** original index in the question bank before any shuffle; present only after reconstructing the snapshot from DB */
   originalIndex?: number
 }
 
@@ -100,8 +100,10 @@ export interface Session {
   examState: ExamState
   /** the state of the review */
   reviewState: ReviewState
-  /** the list of answers */
-  answers: Answers
+  /** per-question shuffled display order: key = question id, value = original choice indices in display order */
+  questionChoiceOrders: Record<number, number[]>
+  /** array of original indices (choice IDs) of the selected choices for each question */
+  selectedOriginalIndices: Answers
   /** null for full exams */
   categoryId: number | null
   /** null for domain exams */
@@ -132,7 +134,7 @@ export type SessionActionTypes =
 type SessionActionsMap = {
   SET_INDEX: { payload: number; prop: 'index' }
   SET_BOOKMARKS: { payload: number[]; prop: 'bookmarks' }
-  SET_ANSWERS: { payload: Answers; prop: 'answers' }
+  SET_ANSWERS: { payload: Answers; prop: 'selectedOriginalIndices' }
   SET_TIME: { payload: number; prop: 'time' }
   SET_TIMER_PAUSED: { payload: boolean; prop: 'paused' }
   SET_EXAM_STATE: { payload: ExamState; prop: 'examState' }
@@ -156,7 +158,7 @@ export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, Ses
 export type SessionNavigation = Pick<Session, 'index'> & { update: SessionDispatch }
 export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused'> & { update: SessionDispatch }
 export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'categoryId' | 'examId'> & { update: SessionDispatch }
-export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType'> & { isSyncing: boolean; update: SessionDispatch }
+export type SessionData = Pick<Session, 'bookmarks' | 'selectedOriginalIndices' | 'examType'> & { isSyncing: boolean; update: SessionDispatch }
 
 export type SessionControlContextType = {
   session: Session | null

@@ -2,7 +2,7 @@ import React from "react"
 import { ExamContext, useSessionControl } from "../contexts"
 import Loading from "../components/Loading"
 import type { Exam } from "../types"
-import { formatExam } from "../utils/format"
+import { applyQuestionChoiceOrders } from "../utils/format"
 import { loadDomainExam, loadFullExam } from "../utils/exam"
 import useToast from "../hooks/useToast"
 import { translate } from "../utils/translation"
@@ -50,7 +50,10 @@ export default function ExamContextProvider({ children }: { children: React.Reac
         return
       }
 
-      setExam(formatExam(examDetails.questionList))
+      // null assertion on session because we already did the guard on top
+      const nextExam = applyQuestionChoiceOrders(examDetails.questionList, session!.questionChoiceOrders)
+
+      setExam(nextExam)
     }
 
     loadExamData().catch(() => {

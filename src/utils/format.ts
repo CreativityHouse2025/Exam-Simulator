@@ -1,4 +1,4 @@
-import type { Exam, LangCode, Question, Session } from '../types.js'
+import type { Choice, Exam, LangCode, Question } from '../types.js'
 
 import { formatDistance, format } from 'date-fns'
 
@@ -8,12 +8,12 @@ import { formatDistance, format } from 'date-fns'
    * @returns {T[]} - The shuffled array
    */
 export function shuffleArray<T>(array: T[]): T[] {
-    const shuffled = [...array]
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1))
-            ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-    }
-    return shuffled
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
 }
 
 /**
@@ -76,43 +76,60 @@ export function formatExam(exam: Exam): Exam {
 }
 
 /**
- * Format a new session with default values.
- * Pure — returns a new Session object without mutating the input.
- * @param {Session} session - The session object to format.
- * @param {number} questionCount - The number of questions
- * @param {number} durationMinutes - The duration of the exam in minutes
- * @returns {Session} - The formatted session object.
+ * Applies a per-question choice order to an exam, reordering each question's choices
+ * and stamping each with its originalIndex. Sets question.answer as the original indices
+ * of correct choices (choice IDs), which are stable across any display order.
+ * Pure — returns new Question/Choice objects without mutating the input.
  */
-export function formatSession(session: Session, questionCount: number, durationMinutes: number): Session {
-  // Fill missing answers with empty arrays
-  const missingAnswers = questionCount - session.answers.length
-  const answers = missingAnswers > 0
-    ? [...session.answers, ...Array(missingAnswers).fill([])]
-    : session.answers
+export function applyQuestionChoiceOrders(exam: Exam, questionChoiceOrders: Record<number, number[]>): Exam {
+  return exam.map((question) => {
+    if (question.type !== 'multiple-choice') throw new Error(`Unsupported question type: ${question.type}`)
 
-  const maxTime = durationMinutes * 60
+    // displayOrder[i] = the original index of the choice to show at display position i
+    // e.g. [3, 0, 2, 1] means: show choice[3] first, then choice[0], choice[2], choice[1]
+    const displayOrder = questionChoiceOrders[question.id]
+    if (!displayOrder) throw new Error(`Missing choice order for question id ${question.id}`)
 
-  return {
-    ...session,
-    answers,
-    maxTime,
-    time: maxTime,
-  }
+    // Step 1: index the raw choices by their original index (position in the exam file)
+    const choicesById: Record<number, Choice> = Object.fromEntries(
+      question.choices.map((choice, originalIndex) => [originalIndex, choice])
+    )
+
+    // Step 2: walk the display order and place each choice at its display position,
+    // stamping its original index as its ID
+    const orderedChoices = displayOrder.map((choiceId) => ({
+      ...choicesById[choiceId],
+      originalIndex: choiceId,
+    }))
+
+    // get the correct choice objects of the question 
+    const correctChoices = orderedChoices.filter((choice) => choice.correct)
+
+    // map the correct choices to their ids
+    const correctChoiceIds = correctChoices.map((choice) => choice.originalIndex)
+
+    // returns the question content, with choices in the shuffled order, and the answer array by choice ID
+    return { ...question, choices: orderedChoices, answer: correctChoiceIds }
+  })
 }
 
 /**
- * Format answer label for display
+ * Format answer label for display in the explanation section of the question
  * @param {Question} question - The question object.
  * @param {LangCode} lang - The language code.
  * @returns {string} - The formatted answer label.
  */
-export function formatAnswerLabel({ type, answer }: Question, lang: LangCode): string {
+export function formatCorrectAnswerLabel(question: Question, lang: LangCode): string {
   try {
-    if (type === 'multiple-choice' && Array.isArray(answer)) {
-      return answer.map((i) => formatChoiceLabel(i, lang)).join(', ')
+    if (question.type === 'multiple-choice' && Array.isArray(question.answer)) {
+      // question.answer holds original indices (choice IDs); find each one's display position
+      // to correctly display the choice's character
+      const displayIndices = question.answer.map((origIdx) =>
+        question.choices.findIndex((c) => c.originalIndex === origIdx)
+      )
+      return displayIndices.filter((i) => i >= 0).map((i) => formatChoiceLabel(i, lang)).join(', ')
     }
-
-    return answer?.toString() || '....'
+    return question.answer?.toString() || '....'
   } catch {
     return '....'
   }

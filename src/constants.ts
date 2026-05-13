@@ -83,7 +83,7 @@ export const SESSION_ACTION_TYPES = {
 export const SESSION_ACTION_PROPS = {
   SET_INDEX: 'index' as const,
   SET_BOOKMARKS: 'bookmarks' as const,
-  SET_ANSWERS: 'answers' as const,
+  SET_ANSWERS: 'selectedOriginalIndices' as const,
   SET_TIME: 'time' as const,
   SET_TIMER_PAUSED: 'paused' as const,
   SET_EXAM_STATE: 'examState' as const,
@@ -102,7 +102,8 @@ export const DEFAULT_SESSION: Session = {
   paused: false as const,
   examState: 'in-progress' as const,
   reviewState: 'summary' as const,
-  answers: [] as const,
+  questionChoiceOrders: {} as const,
+  selectedOriginalIndices: [] as const,
   categoryId: null,
   examId: null,
   examType: 'full' as const,

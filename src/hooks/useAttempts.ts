@@ -67,6 +67,8 @@ export default function useAttempts() {
     return result.data
   }, [])
 
+  // TODO: replace stub
+
   const startAttempt = useCallback(async (body: InsertAttemptRequestBody): Promise<{ attempt_id: string }> => {
     // const response = await apiFetch("/api/attempts", {
     //   method: "POST",
