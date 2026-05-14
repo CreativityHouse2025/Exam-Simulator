@@ -27,6 +27,7 @@ const TypeBadge = styled.span<ThemedStyles & { $type: string }>`
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  text-align: center;
   background: ${({ $type }) =>
     $type === "full" ? "rgba(181, 150, 93, 0.14)" : "rgba(89, 55, 82, 0.1)"};
   color: ${({ theme, $type }) => ($type === "full" ? theme.primary : theme.secondary)};
@@ -50,6 +51,10 @@ const ActionButtons = styled.div`
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
+  justify-content: flex-end;
+  @media (min-width: 768px) {
+    justify-content: flex-start;
+  }
 `
 
 const ReviewButton = styled.button<ThemedStyles>`

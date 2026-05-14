@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@jest/globals'
 import * as fc from 'fast-check'
 import { adaptAttemptToSession, adaptAttemptToRevision } from '../src/utils/attemptAdapter.js'
+import { applyQuestionChoiceOrders, getCorrectOriginalIndices } from '../src/utils/format.js'
 import type { AttemptDetail, AttemptQuestion, GetAttemptResult, Exam, Question } from '../src/types.js'
 
 // ── helpers ───────────────────────────────────────────────────────────────────
@@ -317,6 +318,140 @@ describe('adaptAttemptToRevision', () => {
           // n >= 2 so at least 1 odd index always exists → mistakeCount >= 1
           expect(result).not.toBeNull()
           expect((result!.questionIds as number[]).length).toBe(mistakeCount)
+        }
+      )
+    )
+  })
+})
+
+// ── choice order + answer fidelity (adapter ↔ applyQuestionChoiceOrders) ──────
+//
+// These tests verify the contract between the adapter (producer of questionChoiceOrders)
+// and applyQuestionChoiceOrders (consumer). The adapter must pass through the attempt's
+// choices_order unchanged, and when that order is applied to the raw exam the resulting
+// question.answer must equal the raw question's correct original indices.
+
+describe('adaptAttemptToSession — choice order and answer fidelity', () => {
+  it('applies a non-identity order: choices appear in attempt order with correct originalIndex stamps', () => {
+    // Raw: [A(correct), B, C]  Attempt order: [2, 0, 1] → displayed as [C, A, B]
+    const rawQuestion = makeRawQuestion([{ correct: true }, { correct: false }, { correct: false }], 1)
+    const q = makeAttemptQuestion({ question_id: 1, choices_order: [2, 0, 1] })
+    const session = adaptAttemptToSession(makeGetAttemptResult([q]))!
+
+    const [ordered] = applyQuestionChoiceOrders([rawQuestion], session.questionChoiceOrders)
+
+    expect(ordered.choices.map((c) => c.originalIndex)).toEqual([2, 0, 1])
+    expect(ordered.choices[0].text).toBe('C2') // C was at index 2 in raw
+    expect(ordered.choices[1].text).toBe('C0') // A was at index 0 in raw
+  })
+
+  it('answer equals getCorrectOriginalIndices of the raw question under any display order', () => {
+    // Correct choices at raw indices 0 and 2. Stored in a reversed display order.
+    const rawQuestion = makeRawQuestion(
+      [{ correct: true }, { correct: false }, { correct: true }, { correct: false }], 1
+    )
+    const q = makeAttemptQuestion({ question_id: 1, choices_order: [3, 2, 1, 0] })
+    const session = adaptAttemptToSession(makeGetAttemptResult([q]))!
+
+    const [ordered] = applyQuestionChoiceOrders([rawQuestion], session.questionChoiceOrders)
+    const expectedAnswer = getCorrectOriginalIndices(rawQuestion).sort((a, b) => a - b)
+
+    expect([...ordered.answer].sort((a, b) => a - b)).toEqual(expectedAnswer)
+  })
+
+  it('property: for any shuffled choices_order, answer always equals raw correct indices', () => {
+    fc.assert(
+      fc.property(
+        // Generate n choices where at least index 0 is correct, then a permutation of [0..n-1]
+        fc.integer({ min: 2, max: 6 }).chain((n) =>
+          fc.tuple(
+            fc.array(fc.boolean(), { minLength: n, maxLength: n }).map((flags) =>
+              flags.map((v, i) => ({ correct: i === 0 ? true : v }))
+            ),
+            fc.shuffledSubarray(Array.from({ length: n }, (_, i) => i), { minLength: n, maxLength: n })
+          )
+        ),
+        ([choiceDefs, order]) => {
+          const rawQuestion = makeRawQuestion(choiceDefs, 1)
+          const q = makeAttemptQuestion({ question_id: 1, choices_order: order })
+          const session = adaptAttemptToSession(makeGetAttemptResult([q]))!
+
+          const [ordered] = applyQuestionChoiceOrders([rawQuestion], session.questionChoiceOrders)
+          const expected = getCorrectOriginalIndices(rawQuestion).sort((a, b) => a - b)
+
+          expect([...ordered.answer].sort((a, b) => a - b)).toEqual(expected)
+        }
+      )
+    )
+  })
+})
+
+describe('adaptAttemptToRevision — choice order and answer fidelity', () => {
+  it('applies the attempt choices_order unchanged for mistake questions', () => {
+    // Raw: [A, B(correct), C]  Attempt order: [2, 0, 1] → displayed as [C, A, B]
+    const rawQuestion = makeRawQuestion([{ correct: false }, { correct: true }, { correct: false }], 1)
+    const q = makeAttemptQuestion({ question_id: 1, selected_choices: [], choices_order: [2, 0, 1] })
+    const session = adaptAttemptToRevision(makeGetAttemptResult([q], { exam_type: 'full' }), [rawQuestion])!
+
+    const [ordered] = applyQuestionChoiceOrders([rawQuestion], session.questionChoiceOrders)
+
+    expect(ordered.choices.map((c) => c.originalIndex)).toEqual([2, 0, 1])
+  })
+
+  it('answer equals getCorrectOriginalIndices of the raw question under any display order', () => {
+    const rawQuestion = makeRawQuestion(
+      [{ correct: false }, { correct: true }, { correct: false }, { correct: true }], 1
+    )
+    const q = makeAttemptQuestion({ question_id: 1, selected_choices: [], choices_order: [3, 0, 2, 1] })
+    const session = adaptAttemptToRevision(makeGetAttemptResult([q], { exam_type: 'full' }), [rawQuestion])!
+
+    const [ordered] = applyQuestionChoiceOrders([rawQuestion], session.questionChoiceOrders)
+    const expectedAnswer = getCorrectOriginalIndices(rawQuestion).sort((a, b) => a - b)
+
+    expect([...ordered.answer].sort((a, b) => a - b)).toEqual(expectedAnswer)
+  })
+
+  it('correct questions are excluded; their choice orders do not appear in the session', () => {
+    const correct = makeRawQuestion([{ correct: true }, { correct: false }], 1)
+    const wrong = makeRawQuestion([{ correct: false }, { correct: true }], 2)
+    const rawExam: Exam = [correct, wrong]
+    const payload = makeGetAttemptResult(
+      [
+        makeAttemptQuestion({ question_id: 1, selected_choices: [0], choices_order: [0, 1] }), // correct
+        makeAttemptQuestion({ question_id: 2, selected_choices: [0], choices_order: [1, 0] }), // wrong
+      ],
+      { exam_type: 'full' }
+    )
+    const session = adaptAttemptToRevision(payload, rawExam)!
+
+    expect(session.questionChoiceOrders[1]).toBeUndefined()
+    expect(session.questionChoiceOrders[2]).toEqual([1, 0])
+  })
+
+  it('property: for any shuffled choices_order on a mistake question, answer always equals raw correct indices', () => {
+    fc.assert(
+      fc.property(
+        fc.integer({ min: 2, max: 6 }).chain((n) =>
+          fc.tuple(
+            fc.array(fc.boolean(), { minLength: n, maxLength: n }).map((flags) =>
+              flags.map((v, i) => ({ correct: i === 0 ? true : v }))
+            ),
+            fc.shuffledSubarray(Array.from({ length: n }, (_, i) => i), { minLength: n, maxLength: n })
+          )
+        ),
+        ([choiceDefs, order]) => {
+          const rawQuestion = makeRawQuestion(choiceDefs, 1)
+          // Unanswered = always a mistake regardless of correct answer
+          const q = makeAttemptQuestion({ question_id: 1, selected_choices: [], choices_order: order })
+          const session = adaptAttemptToRevision(
+            makeGetAttemptResult([q], { exam_type: 'full' }),
+            [rawQuestion]
+          )!
+
+          const [ordered] = applyQuestionChoiceOrders([rawQuestion], session.questionChoiceOrders)
+          const expected = getCorrectOriginalIndices(rawQuestion).sort((a, b) => a - b)
+
+          expect([...ordered.answer].sort((a, b) => a - b)).toEqual(expected)
         }
       )
     )

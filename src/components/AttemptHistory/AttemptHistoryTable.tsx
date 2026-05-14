@@ -1,5 +1,6 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
+import { Refresh } from "@styled-icons/material/Refresh"
 import AttemptHistoryRow from "./AttemptHistoryRow"
 import AttemptHistorySkeleton from "./AttemptHistorySkeleton"
 import { translate } from "../../utils/translation"
@@ -9,6 +10,8 @@ import type { ThemedStyles } from "../../types"
 type Props = {
   attempts: AttemptSummary[]
   loading?: boolean
+  isFetching?: boolean
+  onRefresh?: () => void
 }
 
 /** Provides the visible border, border-radius, and overflow clipping (prevents animation scrollbar). */
@@ -63,7 +66,35 @@ const Th = styled.th<ThemedStyles>`
   color: ${({ theme }) => theme.grey[9]};
   border-bottom: 2px solid ${({ theme }) => theme.primary};
   white-space: nowrap;
+`
 
+const ActionTh = styled(Th)``
+
+const ActionThInner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+`
+
+const spin = keyframes`
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+`
+
+const RefreshIcon = styled(Refresh)<{ $spinning: boolean } & ThemedStyles>`
+  width: 2.5rem;
+  height: 2.5rem;
+  color: ${({ theme }) => theme.grey[9]};
+  cursor: pointer;
+  flex-shrink: 0;
+  animation: ${({ $spinning }) => ($spinning ? spin : "none")} 0.8s linear infinite;
+  opacity: ${({ $spinning }) => ($spinning ? 0.5 : 1)};
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.65;
+  }
 `
 
 const EmptyCell = styled.td<ThemedStyles>`
@@ -80,11 +111,10 @@ const COLUMN_HEADER_KEYS = [
   "history.table.score",
   "history.table.status",
   "history.table.date",
-  "history.table.action",
 ]
 
 /** Renders the full attempts table with a desktop header and responsive rows. */
-const AttemptHistoryTable: React.FC<Props> = ({ attempts, loading }) => {
+const AttemptHistoryTable: React.FC<Props> = ({ attempts, loading, isFetching = false, onRefresh }) => {
   return (
     <TableBorder>
       <TableWrapper>
@@ -94,6 +124,12 @@ const AttemptHistoryTable: React.FC<Props> = ({ attempts, loading }) => {
               {COLUMN_HEADER_KEYS.map((key) => (
                 <Th key={key}>{translate(key)}</Th>
               ))}
+              <ActionTh>
+                <ActionThInner>
+                  {translate("history.table.action")}
+                  <RefreshIcon $spinning={isFetching} onClick={onRefresh} />
+                </ActionThInner>
+              </ActionTh>
             </tr>
           </Thead>
           <Tbody>
