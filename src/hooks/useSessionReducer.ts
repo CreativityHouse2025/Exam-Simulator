@@ -1,5 +1,6 @@
 import React from 'react'
 import { SessionReducer } from '../utils/session'
+import { DEFAULT_SESSION, SESSION_ACTION_TYPES } from '../constants'
 import type { Session, SessionDispatch } from '../types'
 
 // Kept here for when persistence is re-enabled.
@@ -7,8 +8,16 @@ import type { Session, SessionDispatch } from '../types'
 //   return displayIndices.map((displayIdx) => questionChoices[displayIdx]?.originalIndex ?? displayIdx)
 // }
 
-export default function useExamSession(startingSession: Session) {
-  const [session, updateSession] = React.useReducer(SessionReducer, startingSession)
+export default function useSessionReducer(startingSession: Session | null) {
+  // give the reducer a default value 
+  const [session, updateSession] = React.useReducer(SessionReducer, DEFAULT_SESSION)
+
+  // When startingSession changes (new exam, resume, or revision), reset the reducer to that
+  // session
+  React.useEffect(() => {
+    if (!startingSession) return
+    updateSession({ type: SESSION_ACTION_TYPES.RESET_SESSION, payload: startingSession })
+  }, [startingSession])
 
   // Always-current ref used by save handlers to avoid stale closures.
   // const sessionRef = React.useRef(session)

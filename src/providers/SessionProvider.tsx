@@ -10,62 +10,29 @@ import {
 import useAttempts from '../hooks/useAttempts'
 import useLatestAttemptId from '../hooks/useLatestAttempt'
 import useToast from '../hooks/useToast'
-import useExamSession from '../hooks/useExamSession'
+import useSessionReducer from '../hooks/useSessionReducer'
 import { translate } from '../utils/translation'
 import { loadDomainExam, loadFullExam } from '../utils/exam'
 import { adaptAttemptToSession } from '../utils/attemptAdapter'
 import { AppApiError } from '../hooks/useAuth'
 import { DEFAULT_SESSION } from '../constants'
-import type { Session, SessionDispatch, SessionControlContextType } from '../types'
+import type { Session } from '../types'
 import useSettings from '../hooks/useSettings'
 
-const noopDispatch = (() => { }) as SessionDispatch
-
-interface ActiveSessionProps {
-  startingSession: Session
-  startNewExam: SessionControlContextType['startNewExam']
-  resumeAttempt: SessionControlContextType['resumeAttempt']
-  startRevision: SessionControlContextType['startRevision']
-  children: React.ReactNode
-}
-
-// Thin component that wires the exam session into the 4 split context providers.
-// Keyed by sessionMountKey (attemptId + mode) in the parent so that remounting this
-// component resets useExamSession's reducer to the new startingSession, giving each
-// exam attempt a clean slate without needing to reset individual state slices manually.
-const ActiveSession: React.FC<ActiveSessionProps> = ({ startingSession, startNewExam, resumeAttempt, startRevision, children }) => {
-  const { session, sessionUpdate, contextValues } = useExamSession(startingSession)  
-
-  return (
-    <SessionControlContext.Provider value={{ session, update: sessionUpdate, startNewExam, resumeAttempt, startRevision }}>
-      <SessionNavigationContext.Provider value={contextValues.navigation}>
-        <SessionTimerContext.Provider value={contextValues.timer}>
-          <SessionExamContext.Provider value={contextValues.exam}>
-            <SessionDataContext.Provider value={contextValues.data}>
-              <>
-                {children}
-                <Confirms session={session} update={sessionUpdate} />
-              </>
-            </SessionDataContext.Provider>
-          </SessionExamContext.Provider>
-        </SessionTimerContext.Provider>
-      </SessionNavigationContext.Provider>
-    </SessionControlContext.Provider>
-  )
-}
-
 /**
- * Outer shell: manages the full Session lifecycle.
+ * Manages the full Session lifecycle and wires the session reducer into the 5 split context providers.
  *
- * When no session is active, provides a minimal context that exposes
- * `startNewExam` and `resumeAttempt` to child routes (e.g. CoverPage, AttemptHistoryPage).
+ * All 5 context providers are always rendered so {children} stays in a stable tree position —
+ * this prevents sibling routes (e.g. AttemptHistoryPage) from unmounting when a session starts.
+ * The reducer is reset via RESET_SESSION when startingSession changes, replacing the old key-based
+ * remount on ActiveSession.
  *
- * When either method succeeds it sets `sessionMountKey` + `startingSession`, which
- * causes `ActiveSession` to mount (keyed so future calls reset the reducer cleanly).
+ * When no session is active, SessionControlContext exposes session: null so CoverPage and
+ * AttemptHistoryPage can call startNewExam / resumeAttempt / startRevision before any session is mounted.
  */
 export default function SessionProvider({ children }: { children: React.ReactNode }) {
-  const [sessionMountKey, setSessionMountKey] = React.useState<string | null>(null)
   const [startingSession, setStartingSession] = React.useState<Session | null>(null)
+  const { session, sessionUpdate, contextValues } = useSessionReducer(startingSession)
   const { showToast } = useToast()
   const { startAttempt, getAttempt } = useAttempts()
   const [, setLatestAttemptId] = useLatestAttemptId()
@@ -96,9 +63,9 @@ export default function SessionProvider({ children }: { children: React.ReactNod
           return null
         }
 
-        // TODO: replace with real shuffle — reversed as a temporary smoke-test for order mapping
+        // TODO: replace with real shuffle
         const choiceOrders = resolvedQuestions.map(
-          (q) => q.choices.map((_, i) => i).reverse()
+          (q) => q.choices.map((_, i) => i)
         )
 
         const questionChoiceOrders: Record<number, number[]> = Object.fromEntries(
@@ -129,12 +96,12 @@ export default function SessionProvider({ children }: { children: React.ReactNod
               duration_minutes: examDetails.durationMinutes,
             }
 
-        // const { attempt_id } = await startAttempt(startAttemptRequestBody)
+        const { attempt_id } = await startAttempt(startAttemptRequestBody)
         const maxTime = examDetails.durationMinutes * 60
 
         const nextSession: Session = {
           ...DEFAULT_SESSION,
-          id: "attempt1",
+          id: attempt_id,
           examType: type,
           examId: type === 'full' ? examOrCategoryId : null,
           categoryId: type === 'domain' ? examOrCategoryId : null,
@@ -144,11 +111,9 @@ export default function SessionProvider({ children }: { children: React.ReactNod
           time: maxTime,
         }
 
-        // `att` indicates new attempt, need to have it because revisions have same attemptId
-        setSessionMountKey(`${"attempt1"}:att`)
         setStartingSession(nextSession)
-        setLatestAttemptId("attempt1")
-        return "attempt1"
+        setLatestAttemptId(attempt_id)
+        return attempt_id
       } catch (error) {
         if (error instanceof AppApiError) {
           showToast(error.message, 5000)
@@ -179,7 +144,6 @@ export default function SessionProvider({ children }: { children: React.ReactNod
           return null
         }
 
-        setSessionMountKey(`${attemptId}:att`)
         setStartingSession(nextSession)
         setLatestAttemptId(attemptId)
         return attemptId
@@ -215,9 +179,6 @@ export default function SessionProvider({ children }: { children: React.ReactNod
           return null
         }
 
-        // `rev` suffix distinguishes this mount key from a regular attempt with the same id,
-        // ensuring the reducer resets cleanly even if the user retries the same exam twice.
-        setSessionMountKey(`${attemptId}:rev`)
         setStartingSession(nextSession)
         return attemptId
       } catch (error) {
@@ -232,19 +193,18 @@ export default function SessionProvider({ children }: { children: React.ReactNod
     [getAttempt, showToast]
   )
 
-  if (startingSession !== null && sessionMountKey !== null) {
-    return (
-      <ActiveSession key={sessionMountKey} startingSession={startingSession} startNewExam={startNewExam} resumeAttempt={resumeAttempt} startRevision={startRevision}>
-        {children}
-      </ActiveSession>
-    )
-  }
-
-  // No active session — expose a minimal context so CoverPage and AttemptHistoryPage
-  // can still call startNewExam / resumeAttempt / startRevision before any session is mounted.
   return (
-    <SessionControlContext.Provider value={{ session: null, update: noopDispatch, startNewExam, resumeAttempt, startRevision }}>
-      {children}
+    <SessionControlContext.Provider value={{ session: startingSession !== null ? session : null, update: sessionUpdate, startNewExam, resumeAttempt, startRevision }}>
+      <SessionNavigationContext.Provider value={contextValues.navigation}>
+        <SessionTimerContext.Provider value={contextValues.timer}>
+          <SessionExamContext.Provider value={contextValues.exam}>
+            <SessionDataContext.Provider value={contextValues.data}>
+              {children}
+              {startingSession !== null && <Confirms session={session} update={sessionUpdate} />}
+            </SessionDataContext.Provider>
+          </SessionExamContext.Provider>
+        </SessionTimerContext.Provider>
+      </SessionNavigationContext.Provider>
     </SessionControlContext.Provider>
   )
 }

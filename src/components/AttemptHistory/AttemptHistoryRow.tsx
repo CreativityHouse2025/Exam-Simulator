@@ -124,7 +124,7 @@ const AttemptHistoryRow: React.FC<Props> = ({ attempt, index }) => {
 
   const scoreDisplay = attempt.exam_state === "completed" ? `${attempt.score}%` : "—"
   const isInProgress = attempt.exam_state === "in-progress"
-  const retryEnabled = canRetryAttempt(attempt.exam_type, attempt.score < 100)
+  const retryEnabled = attempt.exam_state === "completed" && canRetryAttempt(attempt.exam_type, attempt.score < 100)
 
   return (
     <Tr $index={index}>
