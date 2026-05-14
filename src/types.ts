@@ -58,7 +58,7 @@ export interface Question<QT extends QuestionTypes = QuestionTypes> {
   explanation: string
   /** choices of the question */
   choices: Choice[]
-  /** index of the correct choice for quick access */
+  /** id of the correct choice for quick access */
   answer: Answer<QT>
 }
 
@@ -129,6 +129,7 @@ export type SessionActionTypes =
   | 'SET_TIMER_PAUSED'
   | 'SET_EXAM_STATE'
   | 'SET_REVIEW_STATE'
+  | 'RESET_SESSION'
 
 // Session actions mapping
 type SessionActionsMap = {
@@ -139,6 +140,8 @@ type SessionActionsMap = {
   SET_TIMER_PAUSED: { payload: boolean; prop: 'paused' }
   SET_EXAM_STATE: { payload: ExamState; prop: 'examState' }
   SET_REVIEW_STATE: { payload: ReviewState; prop: 'reviewState' }
+  // Internal-only: replaces the entire session state. Not intended for component use.
+  RESET_SESSION: { payload: Session; prop: 'id' }
 }
 
 export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {

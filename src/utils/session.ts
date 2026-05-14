@@ -5,6 +5,7 @@ export const SessionReducer: SessionReducerFunc = (state: Session, actions: Sess
   // Handle single action
   if (!Array.isArray(actions)) {
     const { type, payload } = actions
+    if (type === 'RESET_SESSION') return payload as Session
     const key = SESSION_ACTION_PROPS[type]
 
     if (payload !== state[key]) {
@@ -19,6 +20,7 @@ export const SessionReducer: SessionReducerFunc = (state: Session, actions: Sess
 
   for (const action of actions) {
     const { type, payload } = action
+    if (type === 'RESET_SESSION') { newState = payload as Session; hasChanges = true; continue }
     const key = SESSION_ACTION_PROPS[type]
 
     if (payload !== newState[key]) {

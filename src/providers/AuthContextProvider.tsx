@@ -17,21 +17,15 @@ export default function AuthContextProvider({ children }: { children: React.Reac
 
     async function checkSession() {
       try {
-        // const response = await fetch("/api/auth/me")
-        // const result: ApiResponse<{ user: UserProfile }> = await response.json()
+        const response = await fetch("/api/auth/me")
+        const result: ApiResponse<{ user: UserProfile }> = await response.json()
 
         // unmounted: component no longer exists, don't update state
         // sessionCheckCancelled: an active auth flow (signIn, exchangeToken) took over
         if (unmounted || sessionCheckCancelled.current) return
 
-        if (true) {
-          setUser({
-            id: '1',
-            email: 'mohammed.alsadawi.dev@gmail.com',
-            first_name: 'Mohammed',
-            last_name: 'Alsadawi',
-            expires_at: ''
-          })
+        if (result.success) {
+          setUser(result.data.user)
           setAuthStatus("authenticated")
         } else {
           setAuthStatus("unauthenticated")

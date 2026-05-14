@@ -2,12 +2,6 @@ import type { Session, ExamType } from "../types"
 import type { GetAttemptResult } from "../types"
 import examTypes from "../data/exam/exam-types.json"
 
-function setsEqual(a: number[], b: number[]): boolean {
-  if (a.length !== b.length) return false
-  const sa = [...a].sort((x, y) => x - y)
-  const sb = [...b].sort((x, y) => x - y)
-  return sa.every((v, i) => v === sb[i])
-}
 
 /**
  * Converts a server-fetched attempt into the Session shape the exam UI expects.
@@ -32,11 +26,11 @@ export function adaptAttemptToSession(
 
   if (!payload.questions || payload.questions.length === 0) return null
 
-  // TODO: selected_choices are original indices; still converting to display indices until resume flow is updated.
-  const selectedOriginalIndices = payload.questions.map((question) => {
-    const { selected_choices, choices_order } = question
-    return selected_choices.map((originalIndex) => choices_order.indexOf(originalIndex))
-  })
+  const selectedOriginalIndices = payload.questions.map((q) => q.selected_choices)
+
+  const questionChoiceOrders: Record<number, number[]> = Object.fromEntries(
+    payload.questions.map((q) => [q.question_id, q.choices_order])
+  )
 
   // if (revision) {
   //   // Keep only questions the user got wrong or left unanswered.
@@ -98,7 +92,7 @@ export function adaptAttemptToSession(
     paused: false,
     examState: attempt.exam_state as Session["examState"],
     reviewState: attempt.review_state,
-    questionChoiceOrders: {},
+    questionChoiceOrders,
     selectedOriginalIndices,
     categoryId: attempt.category_id,
     bookmarks: bookmaredQuestionsIndices,

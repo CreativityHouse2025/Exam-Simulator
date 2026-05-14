@@ -77,6 +77,7 @@ export const SESSION_ACTION_TYPES = {
   SET_TIMER_PAUSED: 'SET_TIMER_PAUSED' as const,
   SET_EXAM_STATE: 'SET_EXAM_STATE' as const,
   SET_REVIEW_STATE: 'SET_REVIEW_STATE' as const,
+  RESET_SESSION: 'RESET_SESSION' as const,
 } as const
 
 // Property mapping for session actions
@@ -88,6 +89,8 @@ export const SESSION_ACTION_PROPS = {
   SET_TIMER_PAUSED: 'paused' as const,
   SET_EXAM_STATE: 'examState' as const,
   SET_REVIEW_STATE: 'reviewState' as const,
+  // Dummy prop — reducer handles RESET_SESSION via early return before this is read.
+  RESET_SESSION: 'id' as const,
 } as const
 
 // Constant for category menu padding (shared variable)

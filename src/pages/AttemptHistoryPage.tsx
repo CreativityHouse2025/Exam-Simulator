@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import styled, { keyframes } from "styled-components"
 import AttemptHistoryTable from "../components/AttemptHistory/AttemptHistoryTable"
 import useAttempts from "../hooks/useAttempts"
@@ -65,10 +65,10 @@ const PageSubtitle = styled.p<ThemedStyles>`
 const AttemptHistoryPage: React.FC = () => {
   const { getAttempts } = useAttempts()
   const { showToast } = useToast()
-  const [attempts, setAttempts] = useState<AttemptSummary[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
+  const [attempts, setAttempts] = React.useState<AttemptSummary[]>([])
+  const [loading, setLoading] = React.useState(true)
+  
+  React.useEffect(() => {
     let cancelled = false
 
     const fetchAttempts = async () => {
