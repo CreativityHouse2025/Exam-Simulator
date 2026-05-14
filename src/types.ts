@@ -112,6 +112,11 @@ export interface Session {
   bookmarks: number[]
   /** the type of the exam, domain or full */
   examType: ExamType
+  /**
+   * 'ALL' = render the loaded exam file as-is (every new exam).
+   * number[] = render exactly these question ids, in this order (resume + revision).
+   */
+  questionIds: number[] | 'ALL'
 }
 
 // v2.0: Type for the generic dropdown item (category or fullexam)

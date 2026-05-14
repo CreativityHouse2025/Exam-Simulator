@@ -233,7 +233,8 @@
       "server-save-failed": "Failed to save your progress. Please try again.",
       "server-submit-failed": "Failed to submit the exam. Please try again.",
       "server-unknown": "An unexpected error occurred. Please try again.",
-      "no-attempt-id": "No exam session found. Please start a new exam from the home page."
+      "no-attempt-id": "No exam session found. Please start a new exam from the home page.",
+      "no-mistakes": "You have no mistakes to revise."
     }
   }
 }

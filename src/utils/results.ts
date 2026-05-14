@@ -21,6 +21,17 @@ export function isAnswerCorrect(userAnswer: number[], correctAnswer: number[]): 
 }
 
 /**
+ * Returns true when a user left it unanswered or answered it incorrectly.
+ */
+export function isQuestionMistake(
+  userAnswer: number[] | null | undefined,
+  correctAnswer: number[]
+): boolean {
+  if (!userAnswer || userAnswer.length === 0) return true
+  return !isAnswerCorrect(userAnswer, correctAnswer)
+}
+
+/**
  * Computes score and pass/fail status from answers and exam data.
  * Falls back to "fail" when no passing rate is configured for the exam type.
  */

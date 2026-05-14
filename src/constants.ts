@@ -111,6 +111,7 @@ export const DEFAULT_SESSION: Session = {
   examId: null,
   examType: 'full' as const,
   bookmarks: [] as const,
+  questionIds: 'ALL' as const,
 } as const
 
 // Language configuration
