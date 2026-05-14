@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Timer } from '@styled-icons/material/Timer'
 import { formatTimer } from '../../../utils/format'
-import { useSessionTimer } from '../../../contexts'
+import { useSessionExam, useSessionTimer } from '../../../contexts'
 import { SESSION_ACTION_TYPES } from '../../../constants'
 
 const TimerStyles = styled.div<TimerStylesProps>`
@@ -26,6 +26,7 @@ const TextStyles = styled.div`
 
 const TimerComponent: React.FC = () => {
   const { time, paused, update } = useSessionTimer()
+  const { examState } = useSessionExam()
   const intervalRef = React.useRef<NodeJS.Timeout | null>(null)
 
   React.useEffect(() => {
@@ -36,7 +37,7 @@ const TimerComponent: React.FC = () => {
     }
 
     // Start new interval if timer is active
-    if (!paused && time > 0) {
+    if (!paused && time > 0 && examState !== 'completed') {
       intervalRef.current = setInterval(() => {
         update!([SESSION_ACTION_TYPES.SET_TIME, Math.max(0, time - 1)])
       }, 1000)
