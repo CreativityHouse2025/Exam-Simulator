@@ -76,6 +76,22 @@ export function formatExam(exam: Exam): Exam {
 }
 
 /**
+ * Returns the original-index positions of every correct choice in a raw question.
+ * "Original index" = the choice's position in the question file, before any display ordering.
+ * This is the canonical answer representation used by the results computer, the revision
+ * adapter, and applyQuestionChoiceOrders — keep this as the single definition of that rule.
+ */
+export function getCorrectOriginalIndices(question: Question): number[] {
+  if (question.type !== 'multiple-choice') {
+    throw new Error(`Unsupported question type: ${question.type}`)
+  }
+  return question.choices.reduce<number[]>((accumulator, choice, originalIndex) => {
+    if (choice.correct) accumulator.push(originalIndex)
+    return accumulator
+  }, [])
+}
+
+/**
  * Applies a per-question choice order to an exam, reordering each question's choices
  * and stamping each with its originalIndex. Sets question.answer as the original indices
  * of correct choices (choice IDs), which are stable across any display order.
@@ -102,14 +118,8 @@ export function applyQuestionChoiceOrders(exam: Exam, questionChoiceOrders: Reco
       originalIndex: choiceId,
     }))
 
-    // get the correct choice objects of the question 
-    const correctChoices = orderedChoices.filter((choice) => choice.correct)
-
-    // map the correct choices to their ids
-    const correctChoiceIds = correctChoices.map((choice) => choice.originalIndex)
-
     // returns the question content, with choices in the shuffled order, and the answer array by choice ID
-    return { ...question, choices: orderedChoices, answer: correctChoiceIds }
+    return { ...question, choices: orderedChoices, answer: getCorrectOriginalIndices(question) }
   })
 }
 

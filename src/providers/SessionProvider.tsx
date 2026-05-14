@@ -13,7 +13,7 @@ import useToast from '../hooks/useToast'
 import useSessionReducer from '../hooks/useSessionReducer'
 import { translate } from '../utils/translation'
 import { loadDomainExam, loadFullExam } from '../utils/exam'
-import { adaptAttemptToSession } from '../utils/attemptAdapter'
+import { adaptAttemptToSession, adaptAttemptToRevision } from '../utils/attemptAdapter'
 import { AppApiError } from '../hooks/useAuth'
 import { DEFAULT_SESSION } from '../constants'
 import type { Session } from '../types'
@@ -41,11 +41,11 @@ export default function SessionProvider({ children }: { children: React.ReactNod
   /**
    * Loads the exam file, persists the initial attempt snapshot to the DB, builds the
    * full Session from DEFAULT_SESSION + attempt config, and mounts the active session.
-   * Sets the attemptId in the localStorage for "continue latest exam" on cover page
+   * Sets the attemptId in the localStorage for "continue latest exam" on cover page.
    *
-   * ExamProvider reads the session config and re-fetches the same file on mount.
-   * SessionProvider owns Session state, ExamProvider owns exam data in memory.
-   * TODO: need to add a cache inside the examBuilder or localStorage for better performance (single read)
+   * ExamContextProvider reads the session config and re-fetches the same file on mount
+   * (Vite's module cache makes the second read effectively free).
+   * SessionProvider owns Session state, ExamContextProvider owns exam data in memory.
    *
    * Returns the new attemptId on success, or null on failure.
    */
@@ -64,37 +64,33 @@ export default function SessionProvider({ children }: { children: React.ReactNod
         }
 
         // TODO: replace with real shuffle
-        const choiceOrders = resolvedQuestions.map(
-          (q) => q.choices.map((_, i) => i)
-        )
+        const choiceOrders = resolvedQuestions.map((q) => q.choices.map((_, i) => i))
 
         const questionChoiceOrders: Record<number, number[]> = Object.fromEntries(
-          resolvedQuestions.map(
-            (q, i) => [q.id, choiceOrders[i]]
-          )
+          resolvedQuestions.map((q, i) => [q.id, choiceOrders[i]])
         )
 
         const questionIds = resolvedQuestions.map((q) => q.id)
 
-        // attempt body, if full exam then category must be null and vice versa
+        // attempt body — full exam: category must be null, domain exam: examId must be null
         const startAttemptRequestBody =
           type === 'full'
             ? {
-              exam_type: 'full' as const,
-              exam_id: examOrCategoryId,
-              category_id: null,
-              question_ids: questionIds,
-              choices_orders: choiceOrders,
-              duration_minutes: examDetails.durationMinutes,
-            }
+                exam_type: 'full' as const,
+                exam_id: examOrCategoryId,
+                category_id: null,
+                question_ids: questionIds,
+                choices_orders: choiceOrders,
+                duration_minutes: examDetails.durationMinutes,
+              }
             : {
-              exam_type: 'domain' as const,
-              category_id: examOrCategoryId,
-              exam_id: null,
-              question_ids: questionIds,
-              choices_orders: choiceOrders,
-              duration_minutes: examDetails.durationMinutes,
-            }
+                exam_type: 'domain' as const,
+                category_id: examOrCategoryId,
+                exam_id: null,
+                question_ids: questionIds,
+                choices_orders: choiceOrders,
+                duration_minutes: examDetails.durationMinutes,
+              }
 
         const { attempt_id } = await startAttempt(startAttemptRequestBody)
         const maxTime = examDetails.durationMinutes * 60
@@ -106,9 +102,11 @@ export default function SessionProvider({ children }: { children: React.ReactNod
           examId: type === 'full' ? examOrCategoryId : null,
           categoryId: type === 'domain' ? examOrCategoryId : null,
           questionChoiceOrders,
-          selectedOriginalIndices: Array.from({ length: resolvedQuestions.length }, () => []),
+          selectedOriginalIndices: resolvedQuestions.map(() => []),
           maxTime,
           time: maxTime,
+          // New exams render the file as-is — no subset needed.
+          questionIds: 'ALL',
         }
 
         setStartingSession(nextSession)
@@ -128,7 +126,7 @@ export default function SessionProvider({ children }: { children: React.ReactNod
 
   /**
    * Fetches an in-progress attempt snapshot from the DB, hydrates the full Session state,
-   * mounts the active session, and sets the attemptId in the localStorage for "continue latest exam" on cover page
+   * mounts the active session, and sets the attemptId in the localStorage for "continue latest exam" on cover page.
    * Navigation to /app/exam is the caller's responsibility.
    *
    * Returns the attemptId on success, or null on failure so callers can reset their loading/disabled state.
@@ -137,7 +135,7 @@ export default function SessionProvider({ children }: { children: React.ReactNod
     async (attemptId: string): Promise<string | null> => {
       try {
         const attemptSnapshot = await getAttempt(attemptId)
-        const nextSession = adaptAttemptToSession(attemptSnapshot, { revision: false })
+        const nextSession = adaptAttemptToSession(attemptSnapshot)
 
         if (!nextSession) {
           showToast(translate('cover.invalid-exam-message'), 5000)
@@ -160,9 +158,9 @@ export default function SessionProvider({ children }: { children: React.ReactNod
   )
 
   /**
-   * Fetches a completed full-exam attempt snapshot from the DB, filters to wrong/unanswered
-   * questions only (via adaptAttemptToSession with revision: true), and mounts an ephemeral
-   * revision session (not persisted to localStorage).
+   * Fetches a completed full-exam attempt snapshot from the DB, loads the corresponding
+   * exam file to resolve correct answers, then filters to wrong/unanswered questions only
+   * via adaptAttemptToRevision. Mounts an ephemeral revision session (not persisted to localStorage).
    * Navigation to /app/exam is the caller's responsibility.
    *
    * Returns the attemptId on success, or null on failure so callers can reset their loading/disabled state.
@@ -171,15 +169,33 @@ export default function SessionProvider({ children }: { children: React.ReactNod
     async (attemptId: string): Promise<string | null> => {
       try {
         const attemptSnapshot = await getAttempt(attemptId)
-        // revision: true filters to wrong/unanswered questions and stamps examType as 'revision'
-        const nextSession = adaptAttemptToSession(attemptSnapshot, { revision: true })
 
-        if (!nextSession) {
+        // Revision is full-exam only — guard defensively even though the UI disables the
+        // Revise button for non-full attempts, so a bad call surfaces a clear message.
+        if (attemptSnapshot.attempt.exam_type !== 'full' || attemptSnapshot.attempt.exam_id == null) {
           showToast(translate('cover.invalid-exam-message'), 5000)
           return null
         }
 
-        setStartingSession(nextSession)
+        // Load the exam file to resolve correct answers for each question.
+        // adaptAttemptToRevision needs the raw exam (before applyQuestionChoiceOrders)
+        // so it can call getCorrectOriginalIndices on each question.
+        const { questionList } = await loadFullExam(attemptSnapshot.attempt.exam_id, langCode)
+
+        if (!questionList || questionList.length === 0) {
+          showToast(translate('cover.invalid-exam-message'), 5000)
+          return null
+        }
+
+        const revisionSession = adaptAttemptToRevision(attemptSnapshot, questionList)
+
+        if (!revisionSession) {
+          // null means the user made no mistakes — nothing to revise.
+          showToast(translate('attempts.errors.no-mistakes'), 5000)
+          return null
+        }
+
+        setStartingSession(revisionSession)
         return attemptId
       } catch (error) {
         if (error instanceof AppApiError) {
@@ -190,7 +206,7 @@ export default function SessionProvider({ children }: { children: React.ReactNod
         return null
       }
     },
-    [getAttempt, showToast]
+    [getAttempt, showToast, langCode]
   )
 
   return (

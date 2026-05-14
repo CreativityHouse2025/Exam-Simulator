@@ -2,6 +2,7 @@ import React from 'react'
 import { useSessionData, useSessionTimer, useSessionExam, useExam } from '../contexts'
 import useCategoryLabel from './useCategoryLabel'
 import useFullExamLabel from './useFullExamLabel'
+import { isAnswerCorrect } from '../utils/results'
 import { Question, Results } from '../types'
 import examTypes from '../data/exam/exam-types.json'
 
@@ -29,13 +30,6 @@ export default function useResults(isExamFinished: boolean): Results | null {
     }
 
     const questionStats = React.useMemo<QuestionStats>(() => {
-        const arraysEqual = (a: number[] | null, b: number[]): boolean => {
-            if (a === null || a.length !== b.length) return false
-            const sortedA = [...a].sort((x, y) => x - y)
-            const sortedB = [...b].sort((x, y) => x - y)
-            return sortedA.every((val, index) => val === sortedB[index])
-        }
-
         return selectedOriginalIndices.reduce<QuestionStats>(
             (acc, givenAnswer, i) => {
                 const questionId = exam[i].id
@@ -45,7 +39,7 @@ export default function useResults(isExamFinished: boolean): Results | null {
                     acc.incomplete.push(questionId)
                 } else {
                     acc.completed.push(questionId)
-                    if (arraysEqual(givenAnswer, correctAnswer)) {
+                    if (isAnswerCorrect(givenAnswer, correctAnswer)) {
                         acc.correct.push(questionId)
                     } else {
                         acc.incorrect.push(questionId)
