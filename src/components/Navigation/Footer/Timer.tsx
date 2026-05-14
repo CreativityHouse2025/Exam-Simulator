@@ -27,7 +27,7 @@ const TextStyles = styled.div`
 const TimerComponent: React.FC = () => {
   const { time, paused, update } = useSessionTimer()
   const { examState } = useSessionExam()
-  const intervalRef = React.useRef<NodeJS.Timeout | null>(null)
+  const intervalRef = React.useRef<ReturnType<typeof setInterval> | null>(null)
 
   React.useEffect(() => {
     // Clear existing interval

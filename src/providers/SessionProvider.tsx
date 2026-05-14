@@ -7,7 +7,7 @@ import {
   SessionNavigationContext,
   SessionTimerContext,
 } from '../contexts'
-import useAttempts from '../hooks/useAttempts'
+import { startAttempt, getAttempt } from '../services/attempt.service'
 import useLatestAttemptId from '../hooks/useLatestAttempt'
 import useToast from '../hooks/useToast'
 import useSessionReducer from '../hooks/useSessionReducer'
@@ -34,7 +34,7 @@ export default function SessionProvider({ children }: { children: React.ReactNod
   const [startingSession, setStartingSession] = React.useState<Session | null>(null)
   const { session, sessionUpdate, contextValues } = useSessionReducer(startingSession)
   const { showToast } = useToast()
-  const { startAttempt, getAttempt } = useAttempts()
+
   const [, setLatestAttemptId] = useLatestAttemptId()
   const langCode = useSettings().settings.language
 
@@ -142,9 +142,10 @@ export default function SessionProvider({ children }: { children: React.ReactNod
           return null
         }
 
+        // return the attempt's id from DB
         setStartingSession(nextSession)
-        setLatestAttemptId(attemptId)
-        return attemptId
+        setLatestAttemptId(attemptSnapshot.attempt.id)
+        return attemptSnapshot.attempt.id
       } catch (error) {
         if (error instanceof AppApiError) {
           showToast(error.message, 5000)

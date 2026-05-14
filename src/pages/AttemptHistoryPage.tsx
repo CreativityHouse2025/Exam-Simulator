@@ -1,10 +1,11 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
+import { Refresh } from "@styled-icons/material/Refresh"
 import AttemptHistoryTable from "../components/AttemptHistory/AttemptHistoryTable"
-import useAttempts from "../hooks/useAttempts"
-import useToast from "../hooks/useToast"
 import { translate } from "../utils/translation"
-import type { AttemptSummary, ThemedStyles } from "../types"
+import type { ThemedStyles } from "../types"
+import { useQuery } from "@tanstack/react-query"
+import { createAttemptsQueryOptions } from "../utils/queryOptions"
 
 const titleEnter = keyframes`
   from { opacity: 0; transform: translateY(-10px); }
@@ -14,6 +15,11 @@ const titleEnter = keyframes`
 const subEnter = keyframes`
   from { opacity: 0; }
   to   { opacity: 1; }
+`
+
+const spin = keyframes`
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 `
 
 /** Extends PageWrapper — same gradient background, content starts top-left. */
@@ -33,9 +39,14 @@ const Inner = styled.div`
 `
 
 const HeaderSection = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   margin-top: 2rem;
   margin-bottom: 3rem;
 `
+
+const HeaderText = styled.div``
 
 const PageTitle = styled.h1<ThemedStyles>`
   font-family: ${({ theme }) => theme.fontFamily};
@@ -61,41 +72,38 @@ const PageSubtitle = styled.p<ThemedStyles>`
   animation: ${subEnter} 0.5s ease-out 0.15s both;
 `
 
+const MobileRefreshIcon = styled(Refresh)<{ $spinning: boolean } & ThemedStyles>`
+  width: 2.5rem;
+  height: 2.5rem;
+  color: ${({ theme }) => theme.grey[9]};
+  cursor: pointer;
+  flex-shrink: 0;
+  align-self: center;
+  animation: ${({ $spinning }) => ($spinning ? spin : "none")} 0.8s linear infinite;
+  opacity: ${({ $spinning }) => ($spinning ? 0.5 : 1)};
+  transition: opacity 0.15s ease;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
+
 /** Displays the user's last exam attempts in a full-page editorial table. */
 const AttemptHistoryPage: React.FC = () => {
-  const { getAttempts } = useAttempts()
-  const { showToast } = useToast()
-  const [attempts, setAttempts] = React.useState<AttemptSummary[]>([])
-  const [loading, setLoading] = React.useState(true)
-  
-  React.useEffect(() => {
-    let cancelled = false
-
-    const fetchAttempts = async () => {
-      try {
-        const data = await getAttempts()
-        if (!cancelled) setAttempts(data)
-      } catch (err) {
-        if (!cancelled) showToast((err as Error).message)
-      } finally {
-        if (!cancelled) setLoading(false)
-      }
-    }
-
-    fetchAttempts()
-
-    return () => { cancelled = true }
-  }, [getAttempts, showToast])
+  const { data: attempts = [], isPending, isFetching, refetch } = useQuery(createAttemptsQueryOptions())
 
   return (
     <HistoryPageWrapper>
       <Inner>
         <HeaderSection>
-          <PageTitle>{translate("history.title")}</PageTitle>
-          <PageSubtitle>{translate("history.subtitle")}</PageSubtitle>
+          <HeaderText>
+            <PageTitle>{translate("history.title")}</PageTitle>
+            <PageSubtitle>{translate("history.subtitle")}</PageSubtitle>
+          </HeaderText>
+          <MobileRefreshIcon $spinning={isFetching} onClick={() => refetch()} />
         </HeaderSection>
 
-        <AttemptHistoryTable attempts={attempts} loading={loading} />
+        <AttemptHistoryTable attempts={attempts} loading={isPending} isFetching={isFetching} onRefresh={refetch} />
       </Inner>
     </HistoryPageWrapper>
   )

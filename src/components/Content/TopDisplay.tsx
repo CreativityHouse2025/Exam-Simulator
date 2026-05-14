@@ -88,7 +88,7 @@ const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isRevie
   if (isFullExam) {
     categoryExamLabel = useFullExamLabel(examId)
   } else {
-    categoryExamLabel = useCategoryLabel(categoryId);
+    categoryExamLabel = useCategoryLabel(categoryId!);
   }
 
   const question = translate('content.top-display.question', [index + 1, questionCount])

@@ -20,9 +20,10 @@ export default function useResults(): Results | null {
     const { exam: examOrNull } = useExam()
     const exam = examOrNull!
 
-    const passingScore = examTypes[examType as keyof typeof examTypes].passingRate ?? null
+    const passingScore = examTypes[examType as keyof typeof examTypes]?.passingRate ?? null
     let sourceLabel: string | undefined;
-    const isFullExam = examType === 'full'
+    // label should be Exam if exam is full or revision
+    const isFullExamLabel = examType === 'revision' || examType === 'full'
     if (examId) {
         sourceLabel = useFullExamLabel(examId)
     } else if (categoryId) {
@@ -77,7 +78,7 @@ export default function useResults(): Results | null {
         elapsedTime,
         date: new Date(),
         sourceLabel,
-        sourceType: isFullExam ? 'exam' : 'category',
+        sourceType: isFullExamLabel ? 'exam' : 'category',
 
         // counts
         correctCount: questionStats.correct.length,

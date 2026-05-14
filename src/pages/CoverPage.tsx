@@ -8,7 +8,7 @@ import { useSessionControl } from "../contexts"
 /** Cover page — lets the user start a new exam or continue an existing one. */
 const CoverPage: React.FC = () => {
   const navigate = useNavigate()
-  const { startNewExam } = useSessionControl()
+  const { startNewExam, resumeAttempt } = useSessionControl()
   const [latestAttemptId] = useLatestAttemptId()
   const [isStarting, setIsStarting] = React.useState(false)
 
@@ -26,8 +26,13 @@ const CoverPage: React.FC = () => {
     else setIsStarting(false)
   }
 
-  const handleContinue = () => {
-    if (latestAttemptId) navigate(`/app/exam?id=${latestAttemptId}`)
+  const handleContinue = async () => {
+    if (latestAttemptId) {
+      setIsStarting(true)
+      const attemptId = await resumeAttempt(latestAttemptId)
+      if (attemptId) navigate(`/app/exam?id=${attemptId}`)
+      else setIsStarting(false)
+    }
   }
 
   if (isStarting) return <Loading size={200} />
