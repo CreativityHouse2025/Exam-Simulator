@@ -13,19 +13,19 @@ type QuestionStats = {
     completed: Question['id'][]
 }
 
-export default function useResults(isExamFinished: boolean): Results | null {
+export default function useResults(): Results | null {
     const { selectedOriginalIndices, examType } = useSessionData()
     const { maxTime, time } = useSessionTimer()
     const { categoryId, examId } = useSessionExam()
     const { exam: examOrNull } = useExam()
     const exam = examOrNull!
 
-    const passingScore = examTypes[examType as keyof typeof examTypes]?.passingRate ?? null
-    let sourceLabel;
+    const passingScore = examTypes[examType as keyof typeof examTypes].passingRate ?? null
+    let sourceLabel: string | undefined;
     const isFullExam = examType === 'full'
-    if (isFullExam) {
-        sourceLabel = useFullExamLabel(examId!)
-    } else {
+    if (examId) {
+        sourceLabel = useFullExamLabel(examId)
+    } else if (categoryId) {
         sourceLabel = useCategoryLabel(categoryId)
     }
 
@@ -64,9 +64,12 @@ export default function useResults(isExamFinished: boolean): Results | null {
             ? undefined
             : score >= passingScore
 
-    return isExamFinished ? {
+    const status: "pass" | "fail" = passingScore !== null && score >= passingScore ? "pass" : "fail"
+
+    return {
         // status
         pass,
+        status,
         passPercent: passingScore ?? undefined,
         score,
 
@@ -81,5 +84,5 @@ export default function useResults(isExamFinished: boolean): Results | null {
         incorrectCount: questionStats.incorrect.length,
         incompleteCount: questionStats.incomplete.length,
         totalQuestions: exam.length,
-    } : null
+    }
 }

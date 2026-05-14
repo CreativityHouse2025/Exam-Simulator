@@ -108,7 +108,7 @@ const SummaryComponent: React.FC<{ examType: ExamType }> = ({ examType }) => {
     incorrectCount,
     incompleteCount,
     totalQuestions,
-  } = useResults(true) as Results
+  } = useResults() as Results
 
   const canRetake = canRetryAttempt(examType, incorrectCount + incompleteCount > 0)
 

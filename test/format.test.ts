@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals'
 import * as fc from 'fast-check'
-import { applyQuestionChoiceOrders, formatCorrectAnswerLabel } from '../src/utils/format.js'
+import { applyQuestionChoiceOrders, formatCorrectAnswerLabel, getCorrectOriginalIndices } from '../src/utils/format.js'
 import type { Question } from '../src/types.js'
 
 // ── helpers ───────────────────────────────────────────────────────────────────
@@ -222,6 +222,95 @@ describe('formatCorrectAnswerLabel', () => {
           const label = formatCorrectAnswerLabel(ordered, 'en')
           const labelCount = label.split(',').filter((s) => s.trim() !== '').length
           expect(labelCount).toBe(ordered.answer.length)
+        }
+      )
+    )
+  })
+})
+
+// ── getCorrectOriginalIndices ─────────────────────────────────────────────────
+
+describe('getCorrectOriginalIndices', () => {
+  it('single correct at index 0 → [0]', () => {
+    const q = makeQuestion([{ text: 'A', correct: true }, { text: 'B', correct: false }])
+    expect(getCorrectOriginalIndices(q)).toEqual([0])
+  })
+
+  it('single correct at last index → [n-1]', () => {
+    const q = makeQuestion([
+      { text: 'A', correct: false },
+      { text: 'B', correct: false },
+      { text: 'C', correct: true },
+    ])
+    expect(getCorrectOriginalIndices(q)).toEqual([2])
+  })
+
+  it('multiple correct → all their indices', () => {
+    const q = makeQuestion([
+      { text: 'A', correct: true },
+      { text: 'B', correct: false },
+      { text: 'C', correct: true },
+    ])
+    expect(getCorrectOriginalIndices(q)).toEqual([0, 2])
+  })
+
+  it('all choices correct → [0, 1, ..., n-1]', () => {
+    const q = makeQuestion([
+      { text: 'A', correct: true },
+      { text: 'B', correct: true },
+      { text: 'C', correct: true },
+    ])
+    expect(getCorrectOriginalIndices(q)).toEqual([0, 1, 2])
+  })
+
+  it('no correct choices → empty array', () => {
+    const q = makeQuestion([{ text: 'A', correct: false }, { text: 'B', correct: false }])
+    expect(getCorrectOriginalIndices(q)).toEqual([])
+  })
+
+  it('throws for unsupported question type', () => {
+    const q = { ...makeQuestion([{ text: 'A', correct: true }]), type: 'fill-in' as never }
+    expect(() => getCorrectOriginalIndices(q)).toThrow()
+  })
+
+  it('property: output indices are a subset of [0..choices.length-1]', () => {
+    fc.assert(
+      fc.property(
+        fc.integer({ min: 2, max: 6 }).chain((n) => arbQuestion(n)),
+        (q) => {
+          const indices = getCorrectOriginalIndices(q)
+          for (const idx of indices) {
+            expect(idx).toBeGreaterThanOrEqual(0)
+            expect(idx).toBeLessThan(q.choices.length)
+          }
+        }
+      )
+    )
+  })
+
+  it('property: every returned index has choice.correct === true', () => {
+    fc.assert(
+      fc.property(
+        fc.integer({ min: 2, max: 6 }).chain((n) => arbQuestion(n)),
+        (q) => {
+          const indices = getCorrectOriginalIndices(q)
+          for (const idx of indices) {
+            expect(q.choices[idx].correct).toBe(true)
+          }
+        }
+      )
+    )
+  })
+
+  it('property: result equals the answer produced by applyQuestionChoiceOrders under any permutation', () => {
+    fc.assert(
+      fc.property(
+        fc.integer({ min: 2, max: 6 }).chain((n) => fc.tuple(arbQuestion(n), arbPermutation(n))),
+        ([q, order]) => {
+          const [ordered] = applyQuestionChoiceOrders([q], { [q.id]: order })
+          const direct = getCorrectOriginalIndices(q).sort((a, b) => a - b)
+          const fromOrdered = [...ordered.answer].sort((a, b) => a - b)
+          expect(direct).toEqual(fromOrdered)
         }
       )
     )

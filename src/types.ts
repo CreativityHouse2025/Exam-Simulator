@@ -264,6 +264,8 @@ export type AuthContextType = {
 export type Results = {
   // status-related
   pass?: boolean
+  /** "fail" when no passing rate is configured for the exam type */
+  status: "pass" | "fail"
   score: number
   passPercent?: number
 
@@ -278,7 +280,6 @@ export type Results = {
   incorrectCount: number
   incompleteCount: number
   totalQuestions: number
-
 }
 
 // Attempt types (mirror api/_lib/types.ts shapes for frontend use)

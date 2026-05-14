@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals'
 import * as fc from 'fast-check'
-import { isAnswerCorrect } from '../src/utils/results.js'
+import { isAnswerCorrect, isQuestionMistake } from '../src/utils/results.js'
 
 describe('isAnswerCorrect', () => {
   // ── example tests ───────────────────────────────────────────────────────────
@@ -72,6 +72,49 @@ describe('isAnswerCorrect', () => {
           if (shorter.length === longer.length) return
           const extra = [...longer, 999]
           expect(isAnswerCorrect(swap ? shorter : extra, swap ? extra : shorter)).toBe(false)
+        }
+      )
+    )
+  })
+})
+
+// ── isQuestionMistake ─────────────────────────────────────────────────────────
+
+describe('isQuestionMistake', () => {
+  it('null → true (unanswered)', () => {
+    expect(isQuestionMistake(null, [0])).toBe(true)
+  })
+
+  it('undefined → true (unanswered)', () => {
+    expect(isQuestionMistake(undefined, [0])).toBe(true)
+  })
+
+  it('empty array → true (unanswered)', () => {
+    expect(isQuestionMistake([], [0])).toBe(true)
+  })
+
+  it('wrong single answer → true', () => {
+    expect(isQuestionMistake([1], [0])).toBe(true)
+  })
+
+  it('correct single answer → false', () => {
+    expect(isQuestionMistake([0], [0])).toBe(false)
+  })
+
+  it('correct multi-answer in different order → false', () => {
+    expect(isQuestionMistake([1, 0], [0, 1])).toBe(false)
+  })
+
+  it('partially correct multi-answer → true', () => {
+    expect(isQuestionMistake([0], [0, 1])).toBe(true)
+  })
+
+  it('property: any non-empty correct answer is not a mistake', () => {
+    fc.assert(
+      fc.property(
+        fc.array(fc.integer({ min: 0, max: 9 }), { minLength: 1, maxLength: 5 }),
+        (answer) => {
+          expect(isQuestionMistake(answer, answer)).toBe(false)
         }
       )
     )
