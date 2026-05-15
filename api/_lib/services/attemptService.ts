@@ -11,39 +11,23 @@ import type { InsertAttemptRequestBody, ListAttemptsResult, GetAttemptResult, Sa
 export async function insertAttempt(userId: string, input: InsertAttemptRequestBody): Promise<{ attempt_id: string }> {
   const { exam_type, exam_id, category_id, question_ids, choices_orders, duration_minutes } = input
 
-  // insert the attempt in the attempts column
-  const { data: attempt, error: attemptError } = await supabaseAdmin
-    .from("exam_attempts")
-    .insert({
-      user_id: userId,
-      exam_type,
-      exam_id: exam_id ?? null,
-      category_id: category_id ?? null,
-      time_remaining: duration_minutes * 60, // DB stores time in seconds
-    })
-    .select("id")
-    .single()
+  const questions = question_ids.map((question_id, i) => ({ question_id, choices_order: choices_orders[i] }))
 
-  if (attemptError || !attempt) {
+  // Single atomic statement: inserts exam_attempts + all exam_attempt_questions in one RPC call.
+  const { data: attemptId, error } = await supabaseAdmin.rpc("insert_attempt", {
+    p_user_id: userId,
+    p_exam_type: exam_type,
+    p_exam_id: exam_id ?? null,
+    p_category_id: category_id ?? null,
+    p_time_remaining: duration_minutes * 60,
+    p_questions: questions,
+  })
+
+  if (error || !attemptId) {
     throw new AppError({ statusCode: 500, code: "ATTEMPT_CREATE_FAILED", message: "Failed to create exam attempt" })
   }
 
-  // construct question rows, the index of each question is STRICTLY its position in the payload questions array
-  const questionRows = question_ids.map((question_id, i) => ({
-    attempt_id: attempt.id,
-    question_index: i,
-    question_id,
-    choices_order: choices_orders[i],
-  }))
-
-  // insert the attempt's questions
-  const { error: questionsError } = await supabaseAdmin.from("exam_attempt_questions").insert(questionRows)
-
-  if (questionsError) {
-    throw new AppError({ statusCode: 500, code: "ATTEMPT_CREATE_FAILED", message: "Failed to insert attempt questions" })
-  }
-
-  return { attempt_id: attempt.id }
+  return { attempt_id: attemptId }
 }
 
 /**
