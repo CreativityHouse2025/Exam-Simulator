@@ -8,15 +8,23 @@ import { errorResponse } from "../utils/response.js"
 /**
  * Middleware that validates auth tokens from cookies before calling the handler.
  * If the access token is expired but a refresh token exists, it refreshes the session
- * and sets updated cookies on the response. 
- * 
- * Passes the user's Id and email to the handler
- * 
+ * and sets updated cookies on the response.
+ *
+ * Bypass mode: set BYPASS_AUTH=true in your .env.local to skip token validation entirely.
+ * When bypassed, BYPASS_AUTH_USER_ID must also be set to a valid user UUID.
+ * NEVER set BYPASS_AUTH in a production environment.
+ *
  * Must be wrapped with `withErrorHandler` on the outside:
  * `withErrorHandler(withAuth(handler))`
  */
 export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
   return async (req: Request) => {
+    if (process.env.BYPASS_AUTH === "true") {
+      const userId = process.env.BYPASS_AUTH_USER_ID
+      if (!userId) throw new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: "BYPASS_AUTH is enabled but BYPASS_AUTH_USER_ID is not set" })
+      return handler(req, { id: userId, email: "bypass@local.dev", accessToken: "bypass" })
+    }
+
     const cookieHeader = req.headers.get("Cookie") ?? ""
     const cookies = parseCookies(cookieHeader)
     const accessToken = cookies["access_token"]
@@ -27,6 +35,7 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
     }
 
     // Try the access token first
+    // TODO: verify the access token locally without getUser call to GoTrue
     if (accessToken) {
       const { data, error } = await createUserClient().auth.getUser(accessToken)
       if (!error && data.user) {
