@@ -136,32 +136,24 @@ export async function listAttempts(userId: string): Promise<ListAttemptsResult> 
  * @throws {AppError} 500 `INTERNAL_ERROR` — DB query failed.
  */
 export async function getAttempt(userId: string, attemptId: string): Promise<GetAttemptResult> {
-  const { data: attempt, error: attemptError } = await supabaseAdmin
+  const { data, error } = await supabaseAdmin
     .from("exam_attempts")
-    .select("id, user_id, exam_type, exam_id, category_id, exam_state, score, status, created_at, current_index, time_remaining, review_state, email_report_state")
+    .select(
+      "id, user_id, exam_type, exam_id, category_id, exam_state, score, status, created_at, current_index, time_remaining, review_state, email_report_state, exam_attempt_questions(question_index, question_id, choices_order, selected_choices, is_bookmarked)"
+    )
     .eq("id", attemptId)
+    .order("question_index", { referencedTable: "exam_attempt_questions", ascending: true })
     .single()
 
-  if (attemptError || !attempt) {
+  if (error || !data) {
     throw new AppError({ statusCode: 404, code: "NOT_FOUND", message: "Attempt not found" })
   }
 
-  // Ensure the user doesn't access another user's attempts
-  if (attempt.user_id !== userId) {
+  if (data.user_id !== userId) {
     throw new AppError({ statusCode: 403, code: "FORBIDDEN", message: "Access denied" })
   }
 
-  const { user_id: _user_id, ...attemptRow } = attempt
-
-  const { data: questions, error: questionsError } = await supabaseAdmin
-    .from("exam_attempt_questions")
-    .select("question_index, question_id, choices_order, selected_choices, is_bookmarked")
-    .eq("attempt_id", attemptId)
-    .order("question_index", { ascending: true })
-
-  if (questionsError) {
-    throw new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: "Failed to fetch attempt questions" })
-  }
+  const { user_id: _user_id, exam_attempt_questions: questions, ...attemptRow } = data
 
   return { attempt: attemptRow as GetAttemptResult["attempt"], questions: questions ?? [] }
 }
