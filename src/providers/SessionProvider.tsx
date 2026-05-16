@@ -1,5 +1,6 @@
 import React from 'react'
 import Confirms from '../components/Navigation/Confirms'
+import SyncOverlay from '../components/SyncOverlay'
 import {
   SessionControlContext,
   SessionDataContext,
@@ -32,7 +33,7 @@ import useSettings from '../hooks/useSettings'
  */
 export default function SessionProvider({ children }: { children: React.ReactNode }) {
   const [startingSession, setStartingSession] = React.useState<Session | null>(null)
-  const { session, sessionUpdate, contextValues } = useSessionReducer(startingSession)
+  const { session, sessionUpdate, contextValues, syncProgress } = useSessionReducer(startingSession)
   const { showToast } = useToast()
 
   const [, setLatestAttemptId] = useLatestAttemptId()
@@ -212,13 +213,14 @@ export default function SessionProvider({ children }: { children: React.ReactNod
   )
 
   return (
-    <SessionControlContext.Provider value={{ session: startingSession !== null ? session : null, update: sessionUpdate, startNewExam, resumeAttempt, startRevision }}>
+    <SessionControlContext.Provider value={{ session: startingSession !== null ? session : null, update: sessionUpdate, startNewExam, resumeAttempt, startRevision, syncProgress }}>
       <SessionNavigationContext.Provider value={contextValues.navigation}>
         <SessionTimerContext.Provider value={contextValues.timer}>
           <SessionExamContext.Provider value={contextValues.exam}>
             <SessionDataContext.Provider value={contextValues.data}>
               {children}
               {startingSession !== null && <Confirms session={session} update={sessionUpdate} />}
+              {startingSession !== null && <SyncOverlay visible={contextValues.data.isSyncing} />}
             </SessionDataContext.Provider>
           </SessionExamContext.Provider>
         </SessionTimerContext.Provider>

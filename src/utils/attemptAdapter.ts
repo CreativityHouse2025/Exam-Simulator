@@ -74,6 +74,7 @@ export function adaptAttemptToSession(payload: GetAttemptResult): Session | null
     // Preserves attempt question order so ExamContextProvider doesn't depend on
     // the exam file's order matching the attempt's order.
     questionIds: payload.questions.map((attemptQuestion) => attemptQuestion.question_id),
+    dirtyQuestions: {},
   }
 }
 
@@ -143,5 +144,6 @@ export function adaptAttemptToRevision(payload: GetAttemptResult, rawExam: Exam)
     paused: false,
     examState: "in-progress",
     reviewState: "summary",
+    dirtyQuestions: {},
   }
 }

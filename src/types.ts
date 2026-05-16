@@ -117,6 +117,10 @@ export interface Session {
    * number[] = render exactly these question ids, in this order (resume + revision).
    */
   questionIds: number[] | 'ALL'
+  /** Set of question indices that have unsaved changes since the last successful syncProgress call.
+   *  key = question index (positional, not question id), value is always true (used as a set).
+   *  Cleared after each successful sync; reset to {} on RESET_SESSION. */
+  dirtyQuestions: Record<number, true>
 }
 
 // v2.0: Type for the generic dropdown item (category or fullexam)
@@ -135,6 +139,8 @@ export type SessionActionTypes =
   | 'SET_EXAM_STATE'
   | 'SET_REVIEW_STATE'
   | 'RESET_SESSION'
+  | 'MARK_DIRTY'
+  | 'CLEAR_DIRTY'
 
 // Session actions mapping
 type SessionActionsMap = {
@@ -147,6 +153,9 @@ type SessionActionsMap = {
   SET_REVIEW_STATE: { payload: ReviewState; prop: 'reviewState' }
   // Internal-only: replaces the entire session state. Not intended for component use.
   RESET_SESSION: { payload: Session; prop: 'id' }
+  // Internal-only: both handled via early return in the reducer before the generic prop-lookup runs.
+  MARK_DIRTY: { payload: number; prop: 'dirtyQuestions' }
+  CLEAR_DIRTY: { payload: null; prop: 'dirtyQuestions' }
 }
 
 export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {
@@ -166,7 +175,7 @@ export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, Ses
 export type SessionNavigation = Pick<Session, 'index'> & { update: SessionDispatch }
 export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused'> & { update: SessionDispatch }
 export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'categoryId' | 'examId'> & { update: SessionDispatch }
-export type SessionData = Pick<Session, 'bookmarks' | 'selectedOriginalIndices' | 'examType'> & { isSyncing: boolean; update: SessionDispatch }
+export type SessionData = Pick<Session, 'bookmarks' | 'selectedOriginalIndices' | 'examType' | 'dirtyQuestions'> & { isSyncing: boolean; update: SessionDispatch }
 
 export type SessionControlContextType = {
   session: Session | null
@@ -182,6 +191,9 @@ export type SessionControlContextType = {
    * and mounts an ephemeral revision session (not persisted to localStorage).
    * Returns the attemptId on success, or null on failure so callers can reset their loading state. */
   startRevision: (attemptId: string) => Promise<string | null>
+  /** Sends only the dirty questions (answers + bookmark state) to the DB and clears the dirty set on success.
+   * No-op when nothing is dirty or a sync is already in flight. */
+  syncProgress: () => Promise<void>
 }
 
 // User settings (initially null until user inserts data)

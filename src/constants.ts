@@ -78,6 +78,8 @@ export const SESSION_ACTION_TYPES = {
   SET_EXAM_STATE: 'SET_EXAM_STATE' as const,
   SET_REVIEW_STATE: 'SET_REVIEW_STATE' as const,
   RESET_SESSION: 'RESET_SESSION' as const,
+  MARK_DIRTY: 'MARK_DIRTY' as const,
+  CLEAR_DIRTY: 'CLEAR_DIRTY' as const,
 } as const
 
 // Property mapping for session actions
@@ -89,8 +91,10 @@ export const SESSION_ACTION_PROPS = {
   SET_TIMER_PAUSED: 'paused' as const,
   SET_EXAM_STATE: 'examState' as const,
   SET_REVIEW_STATE: 'reviewState' as const,
-  // Dummy prop — reducer handles RESET_SESSION via early return before this is read.
+  // Dummy props — reducer handles these via early return before this mapping is read.
   RESET_SESSION: 'id' as const,
+  MARK_DIRTY: 'dirtyQuestions' as const,
+  CLEAR_DIRTY: 'dirtyQuestions' as const,
 } as const
 
 // Constant for category menu padding (shared variable)
@@ -112,6 +116,7 @@ export const DEFAULT_SESSION: Session = {
   examType: 'full' as const,
   bookmarks: [] as const,
   questionIds: 'ALL' as const,
+  dirtyQuestions: {} as const,
 } as const
 
 // Language configuration
