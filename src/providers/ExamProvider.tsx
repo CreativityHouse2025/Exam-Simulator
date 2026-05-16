@@ -1,6 +1,7 @@
 import React from "react"
 import { ExamContext, useSessionControl } from "../contexts"
 import Loading from "../components/Loading"
+import Confirms from "../components/Navigation/Confirms"
 import type { Exam, Question } from "../types"
 import { applyQuestionChoiceOrders } from "../utils/format"
 import { loadDomainExam, loadFullExam } from "../utils/exam"
@@ -103,6 +104,7 @@ export default function ExamContextProvider({ children }: { children: React.Reac
   return (
     <ExamContext.Provider value={{ exam }}>
       {children}
+      <Confirms />
     </ExamContext.Provider>
   )
 }

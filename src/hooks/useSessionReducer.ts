@@ -1,7 +1,7 @@
 import React from 'react'
 import { SessionReducer } from '../utils/session'
 import { DEFAULT_SESSION, SESSION_ACTION_TYPES } from '../constants'
-import { saveAttempt } from '../services/attempt.service'
+import { saveAttempt, submitAttempt } from '../services/attempt.service'
 import { AppApiError } from '../hooks/useAuth'
 import { translate } from '../utils/translation'
 import useToast from '../hooks/useToast'
@@ -76,6 +76,65 @@ export default function useSessionReducer(startingSession: Session | null) {
     }
   }, [session, showToast])
 
+  /**
+   * Flushes dirty answers and marks the attempt as completed in the DB.
+   * Dispatches SET_EXAM_STATE 'completed' only on success so the session
+   * stays in-progress if the network call fails (allowing the user to retry).
+   */
+  const submitExam = React.useCallback(async (score: number, status: 'pass' | 'fail') => {
+    if (isSyncingRef.current) return
+
+    // Revision sessions transition state locally with no DB write.
+    if (session.examType === 'revision') {
+      updateSession([
+        { type: SESSION_ACTION_TYPES.SET_TIMER_PAUSED, payload: true },
+        { type: SESSION_ACTION_TYPES.SET_EXAM_STATE, payload: 'completed' },
+      ])
+      return
+    }
+
+    isSyncingRef.current = true
+    setIsSyncing(true)
+
+    try {
+      const dirtyIndices = Object.keys(session.dirtyQuestions).map(Number)
+      const answers = dirtyIndices.map((questionIndex) => ({
+        question_index: questionIndex,
+        selected_choices: session.selectedOriginalIndices[questionIndex] ?? [],
+        is_bookmarked: session.bookmarks.includes(questionIndex),
+      }))
+
+      await submitAttempt(session.id, {
+        current_index: session.index,
+        time_remaining: session.time,
+        review_state: session.reviewState,
+        answers,
+        score,
+        status,
+      })
+
+      updateSession([
+        { type: SESSION_ACTION_TYPES.CLEAR_DIRTY, payload: null },
+        { type: SESSION_ACTION_TYPES.SET_TIMER_PAUSED, payload: true },
+        { type: SESSION_ACTION_TYPES.SET_EXAM_STATE, payload: 'completed' },
+      ])
+    } catch (error) {
+      if (error instanceof AppApiError) {
+        // ATTEMPT_SAVE_FAILED is the backend code for RPC failures on this endpoint;
+        // surface a submit-specific message so the user knows to retry the submit, not a mid-exam save.
+        const msg = error.code === 'ATTEMPT_SAVE_FAILED'
+          ? translate('attempts.errors.server-submit-failed')
+          : error.message
+        showToast(msg, 5000)
+      } else {
+        showToast(translate('attempts.errors.server-unknown'), 5000)
+      }
+    } finally {
+      isSyncingRef.current = false
+      setIsSyncing(false)
+    }
+  }, [session, showToast])
+
   const contextValues = {
     navigation: { index: session.index, update: sessionUpdate },
     timer: { time: session.time, maxTime: session.maxTime, paused: session.paused, update: sessionUpdate },
@@ -90,5 +149,5 @@ export default function useSessionReducer(startingSession: Session | null) {
     },
   }
 
-  return { session, sessionUpdate, contextValues, syncProgress }
+  return { session, sessionUpdate, contextValues, syncProgress, submitExam }
 }
