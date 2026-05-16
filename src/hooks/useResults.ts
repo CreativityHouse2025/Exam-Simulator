@@ -13,11 +13,12 @@ type QuestionStats = {
     completed: Question['id'][]
 }
 
-export default function useResults(): Results | null {
+export default function useResults(): Results {
     const { selectedOriginalIndices, examType } = useSessionData()
     const { maxTime, time } = useSessionTimer()
     const { categoryId, examId } = useSessionExam()
     const { exam: examOrNull } = useExam()
+    // assertion because useResults is only used inside the exam context
     const exam = examOrNull!
 
     const passingScore = examTypes[examType as keyof typeof examTypes]?.passingRate ?? null

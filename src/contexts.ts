@@ -40,6 +40,7 @@ export const SessionControlContext = React.createContext<SessionControlContextTy
   resumeAttempt: async () => null,
   startRevision: async () => null,
   syncProgress: async () => {},
+  submitExam: async () => {},
 })
 
 /** Access the session lifecycle controls (startNewExam, resumeAttempt, startRevision, session, update).

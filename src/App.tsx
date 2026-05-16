@@ -19,7 +19,7 @@ import { LANGUAGES } from "./constants"
 import useSettings from "./hooks/useSettings"
 import type { LangCode } from "./types"
 import ExamPage from "./pages/ExamPage"
-import ExamContextProvider from "./providers/ExamContextProvider"
+import ExamContextProvider from "./providers/ExamProvider"
 import SessionProvider from "./providers/SessionProvider"
 
 const AppBackground = styled.div`

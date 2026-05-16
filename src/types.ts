@@ -194,6 +194,10 @@ export type SessionControlContextType = {
   /** Sends only the dirty questions (answers + bookmark state) to the DB and clears the dirty set on success.
    * No-op when nothing is dirty or a sync is already in flight. */
   syncProgress: () => Promise<void>
+  /** Flushes dirty answers and marks the attempt completed in the DB.
+   * Dispatches SET_EXAM_STATE 'completed' only on success.
+   * No-op for revision sessions or while a sync is in flight. */
+  submitExam: (score: number, status: 'pass' | 'fail') => Promise<void>
 }
 
 // User settings (initially null until user inserts data)
