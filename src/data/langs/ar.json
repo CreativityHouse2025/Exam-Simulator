@@ -39,7 +39,8 @@
     "top-display": {
       "question": "السؤال $1 من $2",
       "category": "التصنيف",
-      "exam": "الامتحان"
+      "exam": "الامتحان",
+      "save": "حفظ التقدم"
     },
     "explain": {
       "explain": "التفسير",

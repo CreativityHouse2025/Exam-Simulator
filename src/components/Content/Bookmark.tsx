@@ -8,7 +8,6 @@ import { BookmarkBorder } from '@styled-icons/material/BookmarkBorder'
 import { SESSION_ACTION_TYPES } from '../../constants'
 
 const BookmarkStyles = styled.div<BookmarkStylesProps>`
-  margin-right: 5rem;
   color: ${({ $bookmarked, theme }) => ($bookmarked ? theme.tertiary : theme.grey[10])};
   transition: 0.3s;
   cursor: pointer;
@@ -26,7 +25,7 @@ const BookmarkButton: React.FC = () => {
   const toggleBookmark = React.useCallback(() => {
     const newBookmarks = bookmarked ? bookmarks.filter((i) => i !== index) : [...bookmarks, index]
 
-    update!([SESSION_ACTION_TYPES.SET_BOOKMARKS, newBookmarks])
+    update!([SESSION_ACTION_TYPES.SET_BOOKMARKS, newBookmarks], [SESSION_ACTION_TYPES.MARK_DIRTY, index])
   }, [bookmarked, bookmarks, index, update])
 
   const IconComponent = bookmarked ? Bookmark : BookmarkBorder

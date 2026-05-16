@@ -39,6 +39,7 @@ export const SessionControlContext = React.createContext<SessionControlContextTy
   startNewExam: async () => null,
   resumeAttempt: async () => null,
   startRevision: async () => null,
+  syncProgress: async () => {},
 })
 
 /** Access the session lifecycle controls (startNewExam, resumeAttempt, startRevision, session, update).
@@ -89,6 +90,7 @@ export const SessionDataContext = React.createContext<SessionData>({
   bookmarks: [],
   selectedOriginalIndices: [],
   examType: 'full',
+  dirtyQuestions: {},
   isSyncing: false,
   update: noopUpdate
 })
