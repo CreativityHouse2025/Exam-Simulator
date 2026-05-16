@@ -165,6 +165,20 @@ export type Database = {
         }
         Returns: string
       }
+      save_attempt: {
+        Args: {
+          p_answers: Json
+          p_attempt_id: string
+          p_current_index: number
+          p_exam_state: string
+          p_review_state: string
+          p_score: number | null
+          p_status: string | null
+          p_time_remaining: number
+          p_user_id: string
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never

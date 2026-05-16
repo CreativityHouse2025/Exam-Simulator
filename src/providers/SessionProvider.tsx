@@ -66,8 +66,9 @@ export default function SessionProvider({ children }: { children: React.ReactNod
         // TODO: replace with real shuffle
         const choiceOrders = resolvedQuestions.map((q) => q.choices.map((_, i) => i))
 
+        // TODO: remove testing reverse shuffle
         const questionChoiceOrders: Record<number, number[]> = Object.fromEntries(
-          resolvedQuestions.map((q, i) => [q.id, choiceOrders[i]])
+          resolvedQuestions.map((q, i) => [q.id, choiceOrders[i].reverse()])
         )
 
         const questionIds = resolvedQuestions.map((q) => q.id)
