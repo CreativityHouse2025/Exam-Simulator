@@ -10,6 +10,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:integration": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.integration.cjs",
     "format": "prettier . --write",
     "typecheck": "tsc --build && tsc -p tsconfig.vite.json"
   },

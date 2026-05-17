@@ -7,7 +7,7 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["ES2022"],
-    "types": ["node"]
+    "types": ["node", "jest"]
   },
-  "include": ["test/**/*", "src/**/*"]
+  "include": ["test/**/*", "src/**/*", "api/**/*"]
 }

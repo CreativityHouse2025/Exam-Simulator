@@ -97,7 +97,7 @@ export default function useSessionReducer(startingSession: Session | null) {
     setIsSyncing(true)
 
     try {
-      const dirtyIndices = Object.keys(session.dirtyQuestions).map(Number)
+      const dirtyIndices = (Object.keys(session.dirtyQuestions)).map(Number)
       const answers = dirtyIndices.map((questionIndex) => ({
         question_index: questionIndex,
         selected_choices: session.selectedOriginalIndices[questionIndex] ?? [],

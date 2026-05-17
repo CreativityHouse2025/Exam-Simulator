@@ -34,12 +34,12 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
       throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "Authentication required" })
     }
 
-    // Try the access token first
-    // TODO: verify the access token locally without getUser call to GoTrue
+    // Try the access token first — getClaims verifies the JWT signature locally
+    // using a cached JWKS (asymmetric keys), with no GoTrue network call after cold start.
     if (accessToken) {
-      const { data, error } = await createUserClient().auth.getUser(accessToken)
-      if (!error && data.user) {
-        const authUser: AuthUser = { id: data.user.id, email: data.user.email!, accessToken }
+      const { data, error } = await createUserClient().auth.getClaims(accessToken)
+      if (!error && data) {
+        const authUser: AuthUser = { id: data.claims.sub!, email: data.claims.email!, accessToken }
         return handler(req, authUser)
       }
     }
