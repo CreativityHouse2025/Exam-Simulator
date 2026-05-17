@@ -1,11 +1,14 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
+import { useNavigate } from "react-router-dom"
 import { Refresh } from "@styled-icons/material/Refresh"
 import AttemptHistoryTable from "../components/AttemptHistory/AttemptHistoryTable"
+import Loading from "../components/Loading"
 import { translate } from "../utils/translation"
 import type { ThemedStyles } from "../types"
 import { useQuery } from "@tanstack/react-query"
 import { createAttemptsQueryOptions } from "../utils/queryOptions"
+import { useSessionControl } from "../contexts"
 
 const titleEnter = keyframes`
   from { opacity: 0; transform: translateY(-10px); }
@@ -90,7 +93,33 @@ const MobileRefreshIcon = styled(Refresh)<{ $spinning: boolean } & ThemedStyles>
 
 /** Displays the user's last exam attempts in a full-page editorial table. */
 const AttemptHistoryPage: React.FC = () => {
+  const navigate = useNavigate()
+  const { resumeAttempt, startRevision } = useSessionControl()
   const { data: attempts = [], isPending, isFetching, refetch } = useQuery(createAttemptsQueryOptions())
+  const [isStarting, setIsStarting] = React.useState(false)
+
+  const handleContinue = async (id: string) => {
+    setIsStarting(true)
+    const attemptId = await resumeAttempt(id)
+    if (attemptId) navigate(`/app/exam?id=${attemptId}`)
+    else setIsStarting(false)
+  }
+
+  const handleReview = async (id: string) => {
+    setIsStarting(true)
+    const attemptId = await resumeAttempt(id)
+    if (attemptId) navigate(`/app/exam?id=${attemptId}`)
+    else setIsStarting(false)
+  }
+
+  const handleRetry = async (id: string) => {
+    setIsStarting(true)
+    const attemptId = await startRevision(id)
+    if (attemptId) navigate(`/app/exam?id=${attemptId}&revision=1`)
+    else setIsStarting(false)
+  }
+
+  if (isStarting) return <Loading size={100} />
 
   return (
     <HistoryPageWrapper>
@@ -103,7 +132,15 @@ const AttemptHistoryPage: React.FC = () => {
           <MobileRefreshIcon $spinning={isFetching} onClick={() => refetch()} />
         </HeaderSection>
 
-        <AttemptHistoryTable attempts={attempts} loading={isPending} isFetching={isFetching} onRefresh={refetch} />
+        <AttemptHistoryTable
+          attempts={attempts}
+          loading={isPending}
+          isFetching={isFetching}
+          onRefresh={refetch}
+          onContinue={handleContinue}
+          onReview={handleReview}
+          onRetry={handleRetry}
+        />
       </Inner>
     </HistoryPageWrapper>
   )

@@ -15,7 +15,7 @@ const ExamPage: React.FC = () => {
   const { session } = useSessionControl()
 
   // Both contexts must be ready before the exam UI is safe to render.
-  if (!session || !exam) return <Loading size={200} />
+  if (!session || !exam) return <Loading size={100} />
 
   return <Navigation />
 }

@@ -152,7 +152,7 @@ export async function signup(input: SignupRequestBody): Promise<SignupResult> {
 export async function signin(input: SigninRequestBody): Promise<SigninResult> {
   const { email, password, force } = input
 
-  const ACTIVE_CONCURRENT_SESSION_LIMIT = 21;
+  const ACTIVE_CONCURRENT_SESSION_LIMIT = 1;
 
   const userClient = createUserClient()
   const { data, error } = await userClient.auth.signInWithPassword({ email, password })

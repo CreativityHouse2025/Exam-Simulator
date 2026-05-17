@@ -13,16 +13,6 @@ export async function insertAttempt(userId: string, input: InsertAttemptRequestB
 
   const questions = question_ids.map((question_id, i) => ({ question_id, choices_order: choices_orders[i] }))
 
-
-  // TODO: remove validated body logging
-  console.log("[insertAttempt]", JSON.stringify({
-    exam_type,
-    exam_id,
-    category_id,
-    duration_minutes,
-    question_count: questions.length,
-    questions,
-  }, null, 2))
   
   // Single atomic statement: inserts exam_attempts + all exam_attempt_questions in one RPC call.
   const { data: attemptId, error } = await supabaseAdmin.rpc("insert_attempt", {
@@ -50,18 +40,6 @@ export async function insertAttempt(userId: string, input: InsertAttemptRequestB
  * @throws {AppError} 500 `ATTEMPT_SAVE_FAILED` — DB update failed.
  */
 export async function saveAttempt(userId: string, attemptId: string, input: SaveAttemptRequestBody): Promise<void> {
-  // TODO: remove validated body logging
-  console.log("[saveAttempt]", JSON.stringify({
-    attemptId,
-    userId,
-    exam_state: input.exam_state,
-    current_index: input.current_index,
-    time_remaining: input.time_remaining,
-    review_state: input.review_state,
-    ...(input.exam_state === "completed" && { score: input.score, status: input.status }),
-    answer_count: input.answers.length,
-    answers: input.answers,
-  }, null, 2))
 
   const { data: result, error } = await supabaseAdmin.rpc("save_attempt", {
     p_user_id: userId,
