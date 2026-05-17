@@ -46,16 +46,23 @@ const ChipRow = styled.div`
 const RightControls = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 3rem;
-  gap: 1rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-inline-end: 0.5rem;
+
+  @media (min-width: 768px) {
+    gap: 1rem;
+    margin-inline-end: 2rem;
+  }
 `
 
 const SaveButton = styled.button<ThemedStyles>`
   display: inline-flex;
   align-items: center;
-  padding: 0.7rem 1.6rem;
+  padding: 0.4rem 0.8rem;
   font-family: ${({ theme }) => theme.fontFamily};
-  font-size: calc(${({ theme }) => theme.fontSize} + 0.5rem);
+  font-size: calc(${({ theme }) => theme.fontSize} + 0.2rem);
   font-weight: 600;
   border-radius: ${({ theme }) => theme.borderRadius};
   border: none;
@@ -63,6 +70,11 @@ const SaveButton = styled.button<ThemedStyles>`
   color: white;
   cursor: pointer;
   transition: background 0.2s;
+
+  @media (min-width: 48rem) {
+    padding: 0.7rem 1.6rem;
+    font-size: calc(${({ theme }) => theme.fontSize} + 0.5rem);
+  }
 
   &:hover:not(:disabled) {
     background: ${({ theme }) => lighten(0.05, theme.primary)};
