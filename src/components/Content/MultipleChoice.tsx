@@ -46,9 +46,6 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
         (a, i) => (i === questionIndex ? newValues : a)
       )
 
-      // TODO: remove log
-      console.log(`[Q${questionIndex}] id=${question.id} | correct=${question.answer.join(',')} | selected=${newSelected[questionIndex]?.join(',') ?? '—'}`)
-
       update!([SESSION_ACTION_TYPES.SET_ANSWERS, newSelected], [SESSION_ACTION_TYPES.MARK_DIRTY, questionIndex])
     },
     [questionIndex, selectedOriginalIndices, question.choices, question.answer.length, isReview, update]

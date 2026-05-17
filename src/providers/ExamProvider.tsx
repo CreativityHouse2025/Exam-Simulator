@@ -99,7 +99,7 @@ export default function ExamContextProvider({ children }: { children: React.Reac
   // Only block rendering while the very first load is in progress.
   // If exam is already in memory (e.g. mid-session language switch), keep the current exam
   // rendered rather than flashing a spinner.
-  if (exam === null) return <Loading size={200} />
+  if (exam === null) return <Loading size={100} />
 
   return (
     <ExamContext.Provider value={{ exam }}>

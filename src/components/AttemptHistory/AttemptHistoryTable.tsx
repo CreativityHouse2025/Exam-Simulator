@@ -12,6 +12,9 @@ type Props = {
   loading?: boolean
   isFetching?: boolean
   onRefresh?: () => void
+  onContinue: (id: string) => void
+  onReview: (id: string) => void
+  onRetry: (id: string) => void
 }
 
 /** Provides the visible border, border-radius, and overflow clipping (prevents animation scrollbar). */
@@ -114,7 +117,7 @@ const COLUMN_HEADER_KEYS = [
 ]
 
 /** Renders the full attempts table with a desktop header and responsive rows. */
-const AttemptHistoryTable: React.FC<Props> = ({ attempts, loading, isFetching = false, onRefresh }) => {
+const AttemptHistoryTable: React.FC<Props> = ({ attempts, loading, isFetching = false, onRefresh, onContinue, onReview, onRetry }) => {
   return (
     <TableBorder>
       <TableWrapper>
@@ -141,7 +144,14 @@ const AttemptHistoryTable: React.FC<Props> = ({ attempts, loading, isFetching = 
               </tr>
             ) : (
               attempts.map((attempt, index) => (
-                <AttemptHistoryRow key={attempt.id} attempt={attempt} index={index} />
+                <AttemptHistoryRow
+                  key={attempt.id}
+                  attempt={attempt}
+                  index={index}
+                  onContinue={onContinue}
+                  onReview={onReview}
+                  onRetry={onRetry}
+                />
               ))
             )}
           </Tbody>

@@ -35,7 +35,7 @@ const CoverPage: React.FC = () => {
     }
   }
 
-  if (isStarting) return <Loading size={200} />
+  if (isStarting) return <Loading size={100} />
 
   return (
     <Cover

@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import { useNavigate } from "react-router-dom"
 import exams from "../../data/exam/full-exams.json"
 import categories from "../../data/exam/categories.json"
 import useSettings from "../../hooks/useSettings"
@@ -10,13 +9,15 @@ import { canRetryAttempt } from "../../utils/exam"
 import AttemptStateIcon from "./AttemptStateIcon"
 import AttemptStatusBadge from "./AttemptStatusBadge"
 import { Tr, Td } from "./AttemptHistoryStyles"
-import { useSessionControl } from "../../contexts"
 import type { AttemptSummary } from "../../types"
 import type { ThemedStyles } from "../../types"
 
 type Props = {
   attempt: AttemptSummary
   index: number
+  onContinue: (id: string) => void
+  onReview: (id: string) => void
+  onRetry: (id: string) => void
 }
 
 const TypeBadge = styled.span<ThemedStyles & { $type: string }>`
@@ -116,10 +117,8 @@ const ContinueButton = styled.button<ThemedStyles>`
 `
 
 /** Renders one exam attempt as a responsive row (card on mobile, table row on desktop). */
-const AttemptHistoryRow: React.FC<Props> = ({ attempt, index }) => {
+const AttemptHistoryRow: React.FC<Props> = ({ attempt, index, onContinue, onReview, onRetry }) => {
   const { settings } = useSettings()
-  const { resumeAttempt, startRevision } = useSessionControl()
-  const navigate = useNavigate()
   const langCode = settings.language
 
   const examLabel =
@@ -154,27 +153,18 @@ const AttemptHistoryRow: React.FC<Props> = ({ attempt, index }) => {
       <Td data-label={translate("history.table.action")}>
         <ActionButtons>
           {isInProgress ? (
-            <ContinueButton onClick={async () => {
-              const id = await resumeAttempt(attempt.id)
-              if (id) navigate(`/app/exam?id=${id}`)
-            }}>
+            <ContinueButton onClick={() => onContinue(attempt.id)}>
               {translate("history.actions.continue")}
             </ContinueButton>
           ) : (
-            <ReviewButton onClick={async () => {
-              const id = await resumeAttempt(attempt.id)
-              if (id) navigate(`/app/exam?id=${id}`)
-            }}>
+            <ReviewButton onClick={() => onReview(attempt.id)}>
               {translate("history.actions.review")}
             </ReviewButton>
           )}
           {attempt.exam_type === "full" && (
             <RetryButton
               $disabled={!retryEnabled}
-              onClick={retryEnabled ? async () => {
-                const id = await startRevision(attempt.id)
-                if (id) navigate(`/app/exam?id=${id}&revision=1`)
-              } : undefined}
+              onClick={retryEnabled ? () => onRetry(attempt.id) : undefined}
             >
               {translate("history.actions.retry")}
             </RetryButton>
