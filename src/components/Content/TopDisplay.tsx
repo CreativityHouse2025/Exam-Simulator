@@ -2,10 +2,10 @@ import type { ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
-import { lighten } from 'polished'
 import BookmarkButton from './Bookmark'
+import SaveButtonWithReminder from './SaveButtonWithReminder'
 import { translate } from '../../utils/translation'
-import { useSessionNavigation, useSessionExam, useSessionData, useSessionControl } from '../../contexts'
+import { useSessionNavigation, useSessionExam, useSessionData } from '../../contexts'
 import useCategoryLabel from '../../hooks/useCategoryLabel'
 import useFullExamLabel from '../../hooks/useFullExamLabel'
 
@@ -57,36 +57,6 @@ const RightControls = styled.div`
   }
 `
 
-const SaveButton = styled.button<ThemedStyles>`
-  display: inline-flex;
-  align-items: center;
-  padding: 0.4rem 0.8rem;
-  font-family: ${({ theme }) => theme.fontFamily};
-  font-size: calc(${({ theme }) => theme.fontSize} + 0.2rem);
-  font-weight: 600;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  border: none;
-  background: ${({ theme }) => theme.primary};
-  color: white;
-  cursor: pointer;
-  transition: background 0.2s;
-
-  @media (min-width: 48rem) {
-    padding: 0.7rem 1.6rem;
-    font-size: calc(${({ theme }) => theme.fontSize} + 0.5rem);
-  }
-
-  &:hover:not(:disabled) {
-    background: ${({ theme }) => lighten(0.05, theme.primary)};
-  }
-
-  &:disabled {
-    background: ${({ theme }) => theme.grey[3]};
-    color: ${({ theme }) => theme.grey[7]};
-    cursor: not-allowed;
-  }
-`
-
 export const QuestionTextStyles = styled.div<ThemedStyles>`
   display: flex;
   align-items: center;
@@ -98,8 +68,7 @@ export const QuestionTextStyles = styled.div<ThemedStyles>`
 const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isReview = false }) => {
   const { index } = useSessionNavigation()
   const { categoryId, examId } = useSessionExam()
-  const { isSyncing, dirtyQuestions, examType } = useSessionData()
-  const { syncProgress } = useSessionControl()
+  const { examType } = useSessionData()
 
   let categoryExamLabel: string | undefined;
 
@@ -116,10 +85,8 @@ const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isRevie
   const translations = {
     category: translate('content.top-display.category'),
     exam: translate('content.top-display.exam'),
-    save: translate('content.top-display.save'),
   }
 
-  const hasDirtyQuestions = Object.keys(dirtyQuestions).length > 0
   // Save button is only meaningful during an active in-progress exam —
   // not in review mode (post-completion) and not in revision sessions (ephemeral, not persisted).
   const showSaveButton = !isReview && examType !== 'revision'
@@ -131,15 +98,7 @@ const TopDisplayComponent: React.FC<TopDisplayProps> = ({ questionCount, isRevie
 
         {!isReview && (
           <RightControls>
-            {showSaveButton && (
-              <SaveButton
-                onClick={syncProgress}
-                disabled={isSyncing || !hasDirtyQuestions}
-                aria-label={translations.save}
-              >
-                {translations.save}
-              </SaveButton>
-            )}
+            {showSaveButton && <SaveButtonWithReminder />}
             <BookmarkButton />
           </RightControls>
         )}

@@ -42,6 +42,11 @@
       "exam": "Exam",
       "save": "Save Progress"
     },
+    "save-reminder": {
+      "initial-message": "Your answers are not saved automatically. Use Save Progress to protect your work.",
+      "unsaved-message": "You have unsaved answers. Click Save Progress to avoid losing your work.",
+      "silence-label": "Don't remind me again"
+    },
     "explain": {
       "explain": "Explanation",
       "yours": "Your answer is ",

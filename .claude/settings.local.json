@@ -5,7 +5,8 @@
       "mcp__claude_ai_Atlassian_Rovo__getAccessibleAtlassianResources",
       "mcp__claude_ai_Atlassian_Rovo__searchConfluenceUsingCql",
       "mcp__claude_ai_Atlassian_Rovo__getConfluencePageDescendants",
-      "Bash(xargs grep -l \"useEffect\\\\|useCallback\")"
+      "Bash(xargs grep -l \"useEffect\\\\|useCallback\")",
+      "Skill(ui-ux-pro-max:ui-ux-pro-max)"
     ]
   }
 }
