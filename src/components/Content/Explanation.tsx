@@ -3,7 +3,8 @@ import type { Answer, LangCode, Question, QuestionTypes, ThemedStyles } from '..
 import React from 'react'
 import styled from 'styled-components'
 import { lighten, darken } from 'polished'
-import { formatAnswerLabel } from '../../utils/format'
+import { formatCorrectAnswerLabel } from '../../utils/format'
+import { isAnswerCorrect } from '../../utils/results'
 import { translate } from '../../utils/translation'
 import useSettings from '../../hooks/useSettings'
 
@@ -37,11 +38,8 @@ const NormalText = styled.span`
   margin-bottom: 0.5rem;
 `
 
-const ExplanationComponent: React.FC<ExplanationProps> = ({ question, answer }) => {
-  const sortedCorrect = [...question.answer].sort((a, b) => a - b)
-  const sortedAnswer = [...(answer as number[])].sort((a, b) => a - b)
-  const correct: boolean =
-    sortedCorrect.length === sortedAnswer.length && sortedCorrect.every((val, i) => val === sortedAnswer[i])
+const ExplanationComponent: React.FC<ExplanationProps> = ({ question, userAnswer }) => {
+  const correct = isAnswerCorrect(userAnswer, question.answer)
 
   const { settings } = useSettings();
   const langCode = settings.language;
@@ -63,7 +61,7 @@ const ExplanationComponent: React.FC<ExplanationProps> = ({ question, answer }) 
 
       <p>
         {translated.answer}
-        <CorrectStyles>{formatAnswerLabel(question, langCode as LangCode)}</CorrectStyles>
+        <CorrectStyles>{formatCorrectAnswerLabel(question, langCode as LangCode)}</CorrectStyles>
       </p>
 
       {question.explanation && (
@@ -81,7 +79,7 @@ export default ExplanationComponent
 
 export interface ExplanationProps {
   question: Question
-  answer: Answer<QuestionTypes>
+  userAnswer: Answer<QuestionTypes>
 }
 
 export interface ExplanationStylesProps extends ThemedStyles {

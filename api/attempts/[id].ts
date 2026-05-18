@@ -7,20 +7,20 @@ import { validateAttemptId, validateSaveAttempt } from "../_lib/validators/attem
 import type { GetAttemptResult } from "../_lib/types.js"
 
 // Maps to GET /api/attempts/<attempt_id>
-export const GET = withErrorHandler(withAuth(async (request, authUser) => {
+export const GET = withErrorHandler(withAuth(async (request, authUser, cookieHeaders) => {
   const id = new URL(request.url).pathname.split("/").pop() ?? ""
   const validatedId = validateAttemptId(id)
   const result: GetAttemptResult = await getAttempt(authUser.id, validatedId)
-  return successResponse(result)
+  return successResponse(result, 200, cookieHeaders)
 }))
 
 // Maps to PATCH /api/attempts/<attempt_id>
-export const PATCH = withErrorHandler(withAuth(async (request, authUser) => {
+export const PATCH = withErrorHandler(withAuth(async (request, authUser, cookieHeaders) => {
   const id = new URL(request.url).pathname.split("/").pop() ?? ""
   const validatedId = validateAttemptId(id)
   // extend request size to 50kb to expect full exam payloads
   const parsedBody = await parseJsonBody(request, 50 * 1024)
   const validatedInput = validateSaveAttempt(parsedBody)
   await saveAttempt(authUser.id, validatedId, validatedInput)
-  return successResponse({})
+  return successResponse(null, 200, cookieHeaders)
 }))

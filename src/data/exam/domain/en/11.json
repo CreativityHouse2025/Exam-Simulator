@@ -1,0 +1,434 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "You are identifying stakeholders at the beginning of your project. You need to classify them in order to perform stakeholder analysis. You grouped the stakeholders based on their active involvement in the project and their ability to effect changes to the project’s planning or execution. Which classification model did you use?",
+    "explanation": "Impact/influence grid involves grouping the stakeholders based on their active involvement (“influence”) in the project and their ability to effect changes to the project’s planning or execution (“impact”). Domain = Process. PMBOK 6th edition, Page 512",
+    "choices": [
+      {
+        "text": "Power/interest grid",
+        "correct": false
+      },
+      {
+        "text": "Power/influence grid",
+        "correct": false
+      },
+      {
+        "text": "Impact/influence grid",
+        "correct": true
+      },
+      {
+        "text": "Salience model",
+        "correct": false
+      }
+    ],
+    "id": 404
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Caroline is a project manager for a multi-national project which involves 350 stakeholders from 6 countries. She believs that stakeholder engagement is a key factor for successful projects, so she pays more attention to stakeholder engagement. She is creating a document to help her and her team find the communication gaps with project stakeholders. This document is known as:",
+    "explanation": "A stakeholder engagement assessment matrix supports comparison between the current engagement levels of stakeholders and the desired engagement levels required for successful project delivery. Domain = Process. PMBOK 6th edition, Page 522 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "Stakeholder Management Plan",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder Register",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder Engagement Plan",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder Engagement Assessment Matrix",
+        "correct": true
+      }
+    ],
+    "id": 405
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Dave is assigned to manage a large and complex project under a contract with the government. The project is to replace existing copper cables by optical fiber cables. The project is very important and critical to the organization. The project charter has been approved. Dave and his team start to identify project stakeholders. It is clear that the project involves a large and complex community of stakeholders with different power and influence levels. Dave needs to determine the relative importance of each identified stakeholder. Which of the following categorization methods is the most appropriate to use?",
+    "explanation": "The salience model is useful for large complex communities of stakeholders or where there are complex networks of relationships within the community. It is also useful in determining the relative importance of the identified stakeholders. Domain = Process. PMBOK 6th edition, Page 513 and PMBOK 7th edition, Page 171",
+    "choices": [
+      {
+        "text": "Salience model",
+        "correct": true
+      },
+      {
+        "text": "Stakeholder cube",
+        "correct": false
+      },
+      {
+        "text": "Power/influence grid",
+        "correct": false
+      },
+      {
+        "text": "Impact/influence grid",
+        "correct": false
+      }
+    ],
+    "id": 406
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a construction project to build a new factory. You are partway through the project, and your team has just delivered the design of the factory . Your team makes a presentation to the project sponsor and key stakeholders. Later, the sponsor informs you that there is an important representative from the government who must approve the design to give you the license to the new factory, and whose requirements are not being met. As a result, you must now make a large and expensive change to accommodate that representative's requirements. What is the best explanation for this?",
+    "explanation": "Stakeholder analysis means talking to the stakeholders and figuring out their needs. If there is an important client who has needs that your project is supposed to fulfill, that client is always a stakeholder. Domain = Process. PMBOK 7th edition, Page 11-12",
+    "choices": [
+      {
+        "text": "The government representative should have informed with all his requirements at the beginning of the project.",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder analysis was not performed adequately.",
+        "correct": true
+      },
+      {
+        "text": "The team made a serious mistake and you need to use penalty power to correct it.",
+        "correct": false
+      },
+      {
+        "text": "You do not have enough budget to perform the project.",
+        "correct": false
+      }
+    ],
+    "id": 407
+  },
+  {
+    "type": "multiple-choice",
+    "text": "All of the following are stakeholders except:",
+    "explanation": "A stakeholder may affect or be affected by project. Domain = Process. PMBOK 7th edition, Page 9",
+    "choices": [
+      {
+        "text": "The bank from which you get a loan to fund your project",
+        "correct": false
+      },
+      {
+        "text": "A financial expert at your company’s competitor",
+        "correct": true
+      },
+      {
+        "text": "A risk management expert in your organization who will help you in evaluating risks on your project",
+        "correct": false
+      },
+      {
+        "text": "The user of the product of the project",
+        "correct": false
+      }
+    ],
+    "id": 408
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements best describes when stakeholders identification is performed during the project?",
+    "explanation": "Detailed stakeholder identification is a continuous activity throughout the project. Domain = Process. PMBOK 7th edition, Page 11",
+    "choices": [
+      {
+        "text": "At the beginning of the project",
+        "correct": false
+      },
+      {
+        "text": "Throughout the project",
+        "correct": true
+      },
+      {
+        "text": "Only when a new stakeholder is discovered",
+        "correct": false
+      },
+      {
+        "text": "Before starting to prepare the project management plan",
+        "correct": false
+      }
+    ],
+    "id": 409
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You have been promoted to a project manager position and assigned to manage a project that involves multiple stakeholders from five countries. You are being mentored by a senior project manager who has a great experience of managing large scale and multinational projects within your organization. He advised you to pay more attention to evaluating the engagement levels of the identified stakeholders. Which of the following documents contains specific strategies for engaging stakeholders in your project?",
+    "explanation": "The stakeholder engagement plan may include specific strategies or approaches for engaging with individuals or groups of stakeholders. Domain = Process. PMBOK 6th edition, Page 522 and PMBOK 7th edition, Page 187",
+    "choices": [
+      {
+        "text": "Stakeholder Management Plan",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder Register",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder Engagement Plan",
+        "correct": true
+      },
+      {
+        "text": "Communication Management Plan",
+        "correct": false
+      }
+    ],
+    "id": 410
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Smith is a project manager for a large software implementation project. The project includes a large number of stakeholders. He is an experienced project manager and knows that stakeholder engagement is a key factor to project success. After identifying all stakeholders, he needs to categorize them according to their power, interest and influence. Which of the following categorization models is the most appropriate to use?",
+    "explanation": "Stakeholder cube combines power, interest and influence which already exist in power/ interest and power/influence grids into a three-dimensional model that can be useful to project managers and teams in identifying and engaging their stakeholder community. Domain = Process. PMBOK 6th edition, Page 513",
+    "choices": [
+      {
+        "text": "Power/interest grid",
+        "correct": false
+      },
+      {
+        "text": "Power/influence grid",
+        "correct": false
+      },
+      {
+        "text": "Power/interest and power/ influence grids",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder cube",
+        "correct": true
+      }
+    ],
+    "id": 411
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Stakeholder register can include all of the following, except:",
+    "explanation": "Current and desired engagement levels of each stakeholder are included in the stakeholder engagement assessment matrix. Domain = Process. PMBOK 6th edition, Page 514 and 521 and PMBOK 7th edition, Page 185",
+    "choices": [
+      {
+        "text": "Name, organizational position, location and role on the project of each stakeholder.",
+        "correct": false
+      },
+      {
+        "text": "Major requirements, expectations and potential for influencing project outcomes.",
+        "correct": false
+      },
+      {
+        "text": "Current and desired engagement levels of each stakeholder.",
+        "correct": true
+      },
+      {
+        "text": "Stakeholder classification whether each stakeholder is Internal/external, impact/influence/ power/interest, upward/downward/ outward/sideward.",
+        "correct": false
+      }
+    ],
+    "id": 412
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a large software project that’s been broken down into sub-projects (or phases). Each of these sub-projects is scheduled to take between four and seven months to complete. At the end of each sub-project, you plan to go through the closing processes and document lessons learned. Which of the following best describes what you must do at the beginning of each sub-project or phase?",
+    "explanation": "You should identify stakeholders at the beginning of each phase. Domain = Process. PMBOK 7th edition, Page 11",
+    "choices": [
+      {
+        "text": "Make sure that each team member knows the activities assigned to him.",
+        "correct": false
+      },
+      {
+        "text": "Identify the stakeholders.",
+        "correct": true
+      },
+      {
+        "text": "Make sure that performance measurement baselines are ready for the next phase.",
+        "correct": false
+      },
+      {
+        "text": "Release all resources from the project and contact sellers to renegotiate all contracts.",
+        "correct": false
+      }
+    ],
+    "id": 413
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The main difference between stakeholders and key stakeholders is that the key stakeholders are:",
+    "explanation": "All other choices are valid for stakeholders, while key stakeholders are decision makers. Domain = Process. PMBOK 7th edition, Page 12",
+    "choices": [
+      {
+        "text": "A person, group, or organization that is affected by the project.",
+        "correct": false
+      },
+      {
+        "text": "A person, group, or organization that is in a decision making position.",
+        "correct": true
+      },
+      {
+        "text": "A person, group, or organization that affects the project.",
+        "correct": false
+      },
+      {
+        "text": "A person, group, or organization that executes the project work.",
+        "correct": false
+      }
+    ],
+    "id": 414
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You have been assigned as a project manager for a new construction project. The sponsor has issued the charter and you have compiled a list of potential stakeholders. You are classifying them with regard to the direction of their influence. The project sponsor is classified as:",
+    "explanation": "Senior management of the performing organization or customer organization, sponsor, and steering committee are classified as upward stakeholders. Domain = Process. PMBOK 6th edition, Page 513",
+    "choices": [
+      {
+        "text": "Upward",
+        "correct": true
+      },
+      {
+        "text": "Downward",
+        "correct": false
+      },
+      {
+        "text": "Outward",
+        "correct": false
+      },
+      {
+        "text": "Sideward",
+        "correct": false
+      }
+    ],
+    "id": 415
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Stakeholders are any people or organizations whose interests may be positively or negatively impacted by the project or product. When do they have the most influence on a project?",
+    "explanation": "Stakeholders have influence throughout the project, but they must be identified and involved at the beginning of the project to determine their requirements and expectations at the beginning. If this effort was not done, you will discover their requirements later which will be more costly than if they are included at the beginning of the project. Domain = Process. PMBOK 6th edition, Page 549",
+    "choices": [
+      {
+        "text": "Throughout the project",
+        "correct": false
+      },
+      {
+        "text": "During the executing process group",
+        "correct": false
+      },
+      {
+        "text": "At the beginning of the project",
+        "correct": true
+      },
+      {
+        "text": "During the monitoring and controlling process group",
+        "correct": false
+      }
+    ],
+    "id": 416
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You have just been authorized to manage a new software project for your company. Which of the following statements best describes your first action?",
+    "explanation": "As you have just been authorized, so the project charter is issued, the project charter gives the project manager authority. Domain = Process. PMBOK 6th edition, Page 563 and PMBOK 7th edition, Page 11",
+    "choices": [
+      {
+        "text": "Create the project scope statement.",
+        "correct": false
+      },
+      {
+        "text": "Develop the project management plan.",
+        "correct": false
+      },
+      {
+        "text": "Begin creating the project charter.",
+        "correct": false
+      },
+      {
+        "text": "Figure out who has a stake in the project.",
+        "correct": true
+      }
+    ],
+    "id": 417
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Dan is managing a large engineering project containing 450 stakeholders located in 3 countries. He is classifying project stakeholders according to their level of authority, need for immediate attention and whether their involvement is appropriate. Which stakeholder classification model is he using?",
+    "explanation": "Salience model describes classes of stakeholders based on assessments of their power (level of authority or ability to influence the outcomes of the project), urgency (need for immediate attention, either time-constrained or relating to the stakeholders’ high stake in the outcome), and legitimacy (their involvement is appropriate). Domain = Process. PMBOK 6th edition, Page 513 and PMBOK 7th edition, Page 171",
+    "choices": [
+      {
+        "text": "Power/interest grid",
+        "correct": false
+      },
+      {
+        "text": "Power/influence grid",
+        "correct": false
+      },
+      {
+        "text": "Impact/influence grid",
+        "correct": false
+      },
+      {
+        "text": "Salience model",
+        "correct": true
+      }
+    ],
+    "id": 418
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Laurence has been assigned to manage his first project using a waterfall approach. The project charter has been issued. Laurence and his team are identifying the project stakeholders. A team member asks Laurence why he is checking the agreements documents while they are identifying project stakeholders. Which of the following represents the best answer to the team member's question?",
+    "explanation": "The parties of an agreement are project stakeholders. The agreement can contain references to additional stakeholders. Domain = Process. PMBOK 6th edition, Page 510 and PMBOK 7th edition, Page 11",
+    "choices": [
+      {
+        "text": "The agreement includes a complete list of project stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "The agreement includes the results of market research to identify additional stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "Because some of project stakeholders may be involved in the agreement.",
+        "correct": false
+      },
+      {
+        "text": "Because all parties of the agreement are stakeholders.",
+        "correct": true
+      }
+    ],
+    "id": 419
+  },
+  {
+    "type": "multiple-choice",
+    "text": "For which of the following can a stakeholder engagement assessment matrix be used?",
+    "explanation": "Stakeholders engagement assessment matrix contains the current and desired engagement levels of stakeholders. When there is a variance between the current and desired engagement levels this means that you need to do more communication with those persons to increase their engagement. Domain = Process. PMBOK 6th edition, Page 521 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "It can be used to identify communication gaps with stakeholders.",
+        "correct": true
+      },
+      {
+        "text": "It can be used to identify relationships between stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "It can be used to identify required skill levels of stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "It can be used to identify roles of stakeholders.",
+        "correct": false
+      }
+    ],
+    "id": 420
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project has been initiated in an organization to automate the reporting process within the organization. A stakeholder who did this task manually feels that he might lose his job as a result of the project because, all the manual work he is doing, will be done automatically. He always tries to delay the project activities as much as he can which lead the project to be three months behind schedule. What might have been done differently during project planning to avoid this situation?",
+    "explanation": "The stakeholder engagement assessment matrix is used to identify stakeholders with their current and desired engagement level. In this case, identifying the current and desired engagement levels of the stakeholder might have allowed the project manager to take action to address the undesirable engagement levels and prevent the stakeholder's resistance from negatively impact the project’s performance. Domain = Process. PMBOK 6th edition, Page 521",
+    "choices": [
+      {
+        "text": "Promising the stakeholder that he will have another job in the organization.",
+        "correct": false
+      },
+      {
+        "text": "Assigning the activities to another stakeholder.",
+        "correct": false
+      },
+      {
+        "text": "Creating stakeholders engagement assessment matrix.",
+        "correct": true
+      },
+      {
+        "text": "Reporting the stakeholder's behavior to his functional manager.",
+        "correct": false
+      }
+    ],
+    "id": 421
+  }
+]

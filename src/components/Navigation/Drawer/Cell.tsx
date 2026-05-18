@@ -3,7 +3,7 @@ import type { ThemedStyles } from '../../../types'
 import React from 'react'
 import styled from 'styled-components'
 import { gridItemBackgroundColor } from '../../../utils/color'
-import { SessionExamContext, SessionNavigationContext } from '../../../contexts'
+import { useSessionNavigation, useSessionExam } from '../../../contexts'
 import { SESSION_ACTION_TYPES } from '../../../constants'
 
 const CellStyles = styled.div<CellStylesProps>`
@@ -24,8 +24,8 @@ const CellStyles = styled.div<CellStylesProps>`
 `
 
 const CellComponent: React.FC<CellProps> = ({ index: myIndex, bookmarks, answered }) => {
-  const { index, update } = React.useContext(SessionNavigationContext)
-  const { examState, reviewState } = React.useContext(SessionExamContext)
+  const { index, update } = useSessionNavigation()
+  const { examState, reviewState } = useSessionExam()
 
   const isSelected = React.useCallback(() => {
     return myIndex === index && (examState !== 'completed' || reviewState === 'question')

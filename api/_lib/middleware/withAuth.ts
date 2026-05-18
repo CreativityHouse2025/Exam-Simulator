@@ -8,15 +8,23 @@ import { errorResponse } from "../utils/response.js"
 /**
  * Middleware that validates auth tokens from cookies before calling the handler.
  * If the access token is expired but a refresh token exists, it refreshes the session
- * and sets updated cookies on the response. 
- * 
- * Passes the user's Id and email to the handler
- * 
+ * and sets updated cookies on the response.
+ *
+ * Bypass mode: set BYPASS_AUTH=true in your .env.local to skip token validation entirely.
+ * When bypassed, BYPASS_AUTH_USER_ID must also be set to a valid user UUID.
+ * NEVER set BYPASS_AUTH in a production environment.
+ *
  * Must be wrapped with `withErrorHandler` on the outside:
  * `withErrorHandler(withAuth(handler))`
  */
 export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
   return async (req: Request) => {
+    if (process.env.BYPASS_AUTH === "true") {
+      const userId = process.env.BYPASS_AUTH_USER_ID
+      if (!userId) throw new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: "BYPASS_AUTH is enabled but BYPASS_AUTH_USER_ID is not set" })
+      return handler(req, { id: userId, email: "bypass@local.dev", accessToken: "bypass" })
+    }
+
     const cookieHeader = req.headers.get("Cookie") ?? ""
     const cookies = parseCookies(cookieHeader)
     const accessToken = cookies["access_token"]
@@ -26,11 +34,12 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
       throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "Authentication required" })
     }
 
-    // Try the access token first
+    // Try the access token first — getClaims verifies the JWT signature locally
+    // using a cached JWKS (asymmetric keys), with no GoTrue network call after cold start.
     if (accessToken) {
-      const { data, error } = await createUserClient().auth.getUser(accessToken)
-      if (!error && data.user) {
-        const authUser: AuthUser = { id: data.user.id, email: data.user.email!, accessToken }
+      const { data, error } = await createUserClient().auth.getClaims(accessToken)
+      if (!error && data) {
+        const authUser: AuthUser = { id: data.claims.sub!, email: data.claims.email!, accessToken }
         return handler(req, authUser)
       }
     }
@@ -68,6 +77,16 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
     ).map((c) => ["Set-Cookie", c] as [string, string])
 
     const authUser: AuthUser = { id: refreshData.user.id, email: refreshData.user.email!, accessToken: refreshData.session.access_token }
-    return handler(req, authUser, cookieHeaders)
+    // don't propagate error to the error handler
+    // edge case: session refreshed but an error occured in the handler, withErrorHandler doesn't send cookies
+    // sends cookies no matter what happens
+    try {
+      return await handler(req, authUser, cookieHeaders)
+    } catch (error) {
+      if (error instanceof AppError) {
+        return errorResponse(error.code, error.message, error.statusCode, cookieHeaders)
+      }
+      return errorResponse("INTERNAL_ERROR", "An unexpected error occurred", 500, cookieHeaders)
+    }
   }
 }

@@ -7,7 +7,7 @@ import { ChevronRight } from '@styled-icons/material/ChevronRight'
 import { ChevronLeft } from '@styled-icons/material/ChevronLeft'
 
 const Control = styled.div<ControlStylesProps>`
-  width: ${({ $open }) => ($open ? '24em' : '5rem')};
+  width: 100%;
   height: 5rem;
   display: flex;
   justify-content: ${({ $open }) => ($open ? 'flex-end' : 'center')};

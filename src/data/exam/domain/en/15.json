@@ -1,0 +1,434 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "Albert is managing an IT project for a multi-national organization. The project involves replacing the old intra-network with a new one. The project is now near completion. The project sponsor wants to ensure smooth transition to operations and ensure good support to the customer after project delivery. What should Albert do?",
+    "explanation": "Project closure/transition involves knowledge sharing and transfer from project to operation to ensure proper support. Domain = Process. PMBOK 6th edition, Page 123 and PMBOK 7th edition, Page 47",
+    "choices": [
+      {
+        "text": "Ensure that knowledge is properly transferred to the operations team.",
+        "correct": true
+      },
+      {
+        "text": "Assign one of the project team members to the operations team.",
+        "correct": false
+      },
+      {
+        "text": "Ensure that all needed information exist in the customer operations manual.",
+        "correct": false
+      },
+      {
+        "text": "Assign one of the operations team to join the project during project closure.",
+        "correct": false
+      }
+    ],
+    "id": 514
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The twelvth principle of the Agile Manifesto states that: \"At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly\". Which of the following agile practices and techniques is closely related to this principle?",
+    "explanation": "Agile methods employ frequent lookbacks, called “retrospectives,” to reflect on how things are working on the project and identify opportunities for improvements. These retrospectives are typically done at the end of each iteration. Teams can apply those improvements in the upcoming iterations. Domain = Process. Agile Practice Guide, Page 80",
+    "choices": [
+      {
+        "text": "User story",
+        "correct": false
+      },
+      {
+        "text": "Servant Leadership",
+        "correct": false
+      },
+      {
+        "text": "Test-Driven Development (TDD)",
+        "correct": false
+      },
+      {
+        "text": "Retrospectives",
+        "correct": true
+      }
+    ],
+    "id": 515
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The construction manager complains that the project didn’t increase his team’s knowledge of AutoCAD and So, the project is not complete. The customer has formally accepted the project. All stated requirements have been met and there is no evidence that learning AutoCAD was a requirement. The project manager should:",
+    "explanation": "Formal acceptance of the product and satisfying all documented requirements means end of project work and beginning of project closure. Domain = Process. PMBOK 6th edition, Page 123 and PMBOK 7th edition, Page 47",
+    "choices": [
+      {
+        "text": "Close the project.",
+        "correct": true
+      },
+      {
+        "text": "Re-plan the project to include the new requirement.",
+        "correct": false
+      },
+      {
+        "text": "Meet with the construction manager to help resolve the issue.",
+        "correct": false
+      },
+      {
+        "text": "Meet with the team to discuss the issue and find a solution.",
+        "correct": false
+      }
+    ],
+    "id": 516
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are the project manager for a construction project. The project is ahead of schedule and over budget and there are 45 human resources working in the project. The sponsor pulls the plug and cancels the project. What should you do?",
+    "explanation": "Even if the project is terminated, it must be closed. Domain = Process. PMBOK 6th edition, Page 123 and PMBOK 7th edition, Page 47",
+    "choices": [
+      {
+        "text": "Give the team the day off till you discuss with the sponsor.",
+        "correct": false
+      },
+      {
+        "text": "Create a budget summary for the remaining unspent budget.",
+        "correct": false
+      },
+      {
+        "text": "Follow project closure procedures to close the project.",
+        "correct": true
+      },
+      {
+        "text": "Find new assignments for any people previously assigned to your project.",
+        "correct": false
+      }
+    ],
+    "id": 517
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During project closure, a project manager performs activities related to satisfy completion of project or phase and activities related to the completion of contract or agreement. Which of the following are involved in both activities?",
+    "explanation": "Confirmation that the product is accepted is involved in both activities which are related to satisfy completion of project or phase and activities related to the completion of contract or agreement. Domain = Process. PMBOK 6th edition, Page 123 and PMBOK 7th edition, Page 47",
+    "choices": [
+      {
+        "text": "Confirmation that the product is accepted",
+        "correct": true
+      },
+      {
+        "text": "Finalizing open claims",
+        "correct": false
+      },
+      {
+        "text": "Reassigning personnel",
+        "correct": false
+      },
+      {
+        "text": "Dealing with excess project material",
+        "correct": false
+      }
+    ],
+    "id": 518
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The finance manager has contacted the project manager asking him that the billing process of the project has not been triggered yet. As per the organization policy, once the customer accepts the deliverables, the project should be closed on the organization internal tools and billing process starts. The project manager has responded that this project has been completed and he is now assigned to another project. Which of the following might be the root cause for this situation?",
+    "explanation": "The activities necessary for the administrative closure of the project or phase include making certain that all documents and deliverables are up-to-date and that all issues are resolved; Confirming the delivery and formal acceptance of deliverables by the customer; Ensuring that all costs are charged to the project; Closing project accounts;..etc. Domain = Process. PMBOK 6th edition, Page 123 and PMBOK 7th edition, Page 47",
+    "choices": [
+      {
+        "text": "It was an agile project, so there is no project closure process.",
+        "correct": false
+      },
+      {
+        "text": "The project is still in transition phase.",
+        "correct": false
+      },
+      {
+        "text": "The project manager did not perform administrative project closure.",
+        "correct": true
+      },
+      {
+        "text": "Triggering billing is a financial task, the financial manager should do it himself.",
+        "correct": false
+      }
+    ],
+    "id": 519
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Dennis is a project manager for a four phases sequential industrial project. He has scheduled a meeting with concerned stakeholders to hand-off phase product and to evaluate the project performance compared to the project and business documents. This activity can be referred to all the following terms except:",
+    "explanation": "Phase gates may be referred to by other terms such as, phase review, stage gate, kill point, and phase entrance or phase exit. Domain = Process. PMBOK 6th edition, Page 21",
+    "choices": [
+      {
+        "text": "Stage gate",
+        "correct": false
+      },
+      {
+        "text": "Phase review",
+        "correct": false
+      },
+      {
+        "text": "Kill point",
+        "correct": false
+      },
+      {
+        "text": "Transition phase",
+        "correct": true
+      }
+    ],
+    "id": 520
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a project to install a new intra-network for a customer. The project work has been completed and the deliverables were handed over to the customer. You have closed all open claims, shared the final project report, updated the lessons learned repository, closed all procurements and obtained a final acceptance from the customer for the project deliverables. What should you do next?",
+    "explanation": "Activities needed to transfer the project's products, services, or results to the next phase or production and/or operations is one aspect of project closure. Domain = Process. PMBOK 6th edition, Page 123 and PMBOK 7th edition, Page 47",
+    "choices": [
+      {
+        "text": "Transfer the intra-network to operations.",
+        "correct": true
+      },
+      {
+        "text": "Celebrate with the team.",
+        "correct": false
+      },
+      {
+        "text": "Inform the suppliers officially that the project has been completed.",
+        "correct": false
+      },
+      {
+        "text": "Inform functional managers that the resources assigned to the project are now available to be assigned to any other project.",
+        "correct": false
+      }
+    ],
+    "id": 521
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a four-phase construction project. The customer has formally accepted the deliverable of the first phase and the first phase gate has been reached. You and the key stakeholders want to make sure that the phase has met its success criteria and whether you can proceed to the next phase or not. What are the required documents in this situation?",
+    "explanation": "When closing the project or phase , the project manager reviews the project management plan to ensure that all project work is completed and that the project has met its objectives. A phase gate is also a review point at the end of a phase to determine if the project will continue to the next phase, end the project, repeat the phase, or continue with some modifications. The documents required to make this determination are the project charter, the project management plan, the business case, and the benefits management plan. Domain = Process. PMBOK 6th edition, Page 123 and PMBOK 7th edition, Page 47",
+    "choices": [
+      {
+        "text": "Lessons learned register",
+        "correct": false
+      },
+      {
+        "text": "Risk register and risk report",
+        "correct": false
+      },
+      {
+        "text": "Contracts, procurement documents and project status report",
+        "correct": false
+      },
+      {
+        "text": "Project charter, business documents and project management plan.",
+        "correct": true
+      }
+    ],
+    "id": 522
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A new team member asks the project manager about the correct order of actions that will be taken during the Close Project or Phase process. What would be his answer?",
+    "explanation": "You will need your team members help during documenting lessons learned, so you can't release them before documenting lessons learned. the last thing you do on the project is close the contract. The reason for this is that you don’t want to have to wait for payment before releasing the team, because most contracts have payment terms that allow for some period of time before full payment is required. Domain = Process. PMBOK 6th edition, Page 123 and PMBOK 7th edition, Page 47",
+    "choices": [
+      {
+        "text": "Obtain formal acceptance, release the team members, document lessons learned, close the contract",
+        "correct": false
+      },
+      {
+        "text": "Document lessons learned, release the team members, obtain formal acceptance, close the contract",
+        "correct": false
+      },
+      {
+        "text": "Obtain formal acceptance, document lessons learned, release the team members, close the contract",
+        "correct": true
+      },
+      {
+        "text": "Obtain formal acceptance, close the contract, document lessons learned, release the team members",
+        "correct": false
+      }
+    ],
+    "id": 523
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During executing your first project, your customer has terminated your project before it is complete. Which of the following statements is true?",
+    "explanation": "Even if a project is terminated before the work is completed, you still need to document the lessons learned and update the OPA. Domain = Process. PMBOK 6th edition, Page 123 and PMBOK 7th edition, Page 47",
+    "choices": [
+      {
+        "text": "You must stop all work and release the team immediately.",
+        "correct": false
+      },
+      {
+        "text": "You must work with the team to document the lessons learned.",
+        "correct": true
+      },
+      {
+        "text": "You must keep the team working on the project to give your senior management time to talk to the customer.",
+        "correct": false
+      },
+      {
+        "text": "You should give your team a vacation till you discuss with the customer.",
+        "correct": false
+      }
+    ],
+    "id": 524
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager facilitates a discussion with the team about experimenting with some agile practices in their plan-driven project. The team has been working on traditional projects for years and have never used any agile practices before. The project manager suggests using product reviews. One of the team members asks him about iteration reviews \"is it similar to any traditional process?\". Which process should the project manager mention in his answer?",
+    "explanation": "Product review is similar to the Validate Scope process as the team obtains a stakeholder's acceptance for a project deliverable. However product reviews occur more frequently as it is done for each iteration in the project. Domain = Process. PMBOK 6th edition, Page 163 and Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "Validate Scope",
+        "correct": true
+      },
+      {
+        "text": "Control Quality",
+        "correct": false
+      },
+      {
+        "text": "Close Project or Phase",
+        "correct": false
+      },
+      {
+        "text": "No, it is not similar to any traditional process.",
+        "correct": false
+      }
+    ],
+    "id": 525
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During a sprint retrospective, the project team discuss the issues they faced during the sprint. One of these issues is that the team has committed to complete 50 story points, however they completed only 30 story points. What might be the most likely root cause of this issue?",
+    "explanation": "As the team has committed to complete a certain number of story points in a sprint, so the team members know their capacity and capabilities. So, there should not be any need for additional resources. Agile teams normally estimate their tasks in real time, so meetings should not have an effect on their estimates. The best answer is that the team might have underestimated their work. It was more complex than what they estimated, that is why it was not completed during the sprint. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "The complexity of the work was underestimated.",
+        "correct": true
+      },
+      {
+        "text": "There were many meetings and interruptions during the sprint.",
+        "correct": false
+      },
+      {
+        "text": "More resources were needed to complete the committed work.",
+        "correct": false
+      },
+      {
+        "text": "Some team members were assigned later after the sprint has started.",
+        "correct": false
+      }
+    ],
+    "id": 526
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The hardware design phase has reached its end. This phase is a part of a three-phase sequential project. All of the following actions should be performed before announcing that the design phase has been formally closed except:",
+    "explanation": "Making sure that resources are available for the next phase is a part of the next phase work not the current phase. All other choices must be done before formally closing the phase. Domain = Process. PMBOK 6th edition, Page 123 and PMBOK 7th edition, Page 47",
+    "choices": [
+      {
+        "text": "Making sure that project knowledge has been shared and transferred for using in future projects.",
+        "correct": false
+      },
+      {
+        "text": "Measuring project success or failure according to the success criteria.",
+        "correct": false
+      },
+      {
+        "text": "Making sure that resources are available for the next phase.",
+        "correct": true
+      },
+      {
+        "text": "Finalizing all open claims with the contracted sellers in this phase.",
+        "correct": false
+      }
+    ],
+    "id": 527
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following events is most related to agile principle \"At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly\"?",
+    "explanation": "Agile methods employ “retrospectives” which are frequent lookbacks to reflect on how things are working on the project and identify opportunities for improvements. These retrospectives are typically done at the end of each iteration, ensuring that the team has regular opportunities to review their process. Domain = Process. Agile Practice Guide Page 8 and 50",
+    "choices": [
+      {
+        "text": "Retrospective",
+        "correct": true
+      },
+      {
+        "text": "Sprint review",
+        "correct": false
+      },
+      {
+        "text": "Sprint planning meeting",
+        "correct": false
+      },
+      {
+        "text": "Backlog refinement",
+        "correct": false
+      }
+    ],
+    "id": 528
+  },
+  {
+    "type": "multiple-choice",
+    "text": "One of the important activities to be done in project closing is archiving project documents. Why should the project documents be archived?",
+    "explanation": "The main goal of archiving project documents is to be used in future similar projects. Domain = Process. PMBOK 7th edition, Page 149 and PMBOK 7th edition, Page 47",
+    "choices": [
+      {
+        "text": "To obtain the final acceptance from the customer.",
+        "correct": false
+      },
+      {
+        "text": "To be used in future similar projects by the organization.",
+        "correct": true
+      },
+      {
+        "text": "To update the organizational process assets.",
+        "correct": false
+      },
+      {
+        "text": "To deliver to project sponsor.",
+        "correct": false
+      }
+    ],
+    "id": 529
+  },
+  {
+    "type": "multiple-choice",
+    "text": "All of a sudden, the inflation rate in the country where the project is performed went very high within few days. So the sponsor decided to terminate the ongoing project in this country. What should the project manager do first?",
+    "explanation": "For terminated or completed projects, project closure procedures must be followed. Project closure procedures include more than releasing resources and reallocating facilities.",
+    "choices": [
+      {
+        "text": "Release resources, reallocate project facilities and return back to his organization.",
+        "correct": false
+      },
+      {
+        "text": "Meet with the sponsor and try to convince him to find ways to complete the project.",
+        "correct": false
+      },
+      {
+        "text": "Try to deal with a different currency than the currency of the country where you implement the project to mitigate the risk.",
+        "correct": false
+      },
+      {
+        "text": "Follow the project closure procedures.",
+        "correct": true
+      }
+    ],
+    "id": 530
+  },
+  {
+    "type": "multiple-choice",
+    "text": "George is managing a three-phase sequential project to clean up a hazardous waste site. The three phases are facility decommissioning, waste removal, and landscaping. The transition from waste removal to landscaping is typically marked by:",
+    "explanation": "A phase gate or kill point is held at the end of a phase. The project’s performance and progress are compared to project and business documents. Domain = Process. PMBOK 6th edition, Page 21",
+    "choices": [
+      {
+        "text": "Kill Point",
+        "correct": true
+      },
+      {
+        "text": "Constraint",
+        "correct": false
+      },
+      {
+        "text": "Decision tree",
+        "correct": false
+      },
+      {
+        "text": "Transition phase",
+        "correct": false
+      }
+    ],
+    "id": 531
+  }
+]

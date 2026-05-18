@@ -1,0 +1,1058 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a project to develop a new pharmaceutical compound. The project is very difficult and has a tight schedule. A quality auditor came to you to perform a quality audit on your project. Your team is already under pressure to complete the project. They object to the audit due to the work pressure. You should explain to the team that the purpose of a quality audit is:",
+    "explanation": "The project manager is not authorized to check if the customer is following the quality process. Inspecting the deliverables and prevent defect ones to go to the customer is the focus of Control Quality process. The quality audits are tools of the Perform Quality Assurance process which focus on following processes and procedures. Although ISO 9000 is a quality standard, but it is not the main focus of quality audits. So the best answer is to identify inefficient and ineffective policies. Domain = Process. PMBOK 6th edition, Page 294",
+    "choices": [
+      {
+        "text": "To check if the customer is following the quality process.",
+        "correct": false
+      },
+      {
+        "text": "To inspect deliverables and prevent defective ones to go to the customer.",
+        "correct": false
+      },
+      {
+        "text": "To satisfy part of an ISO 9000 investigation.",
+        "correct": false
+      },
+      {
+        "text": "To identify inefficient and ineffective policies.",
+        "correct": true
+      }
+    ],
+    "id": 162
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During the execution of your new product development project, a new quality standard is issued and your project team is holding a meeting with the quality department to determine how the standard will apply to the running project. This is part of which quality management process?",
+    "explanation": "Team is defining how to meet the new standard, it is part of the Plan Quality Management process. Domain = Process. PMBOK 6th edition, Page 277",
+    "choices": [
+      {
+        "text": "Plan Quality Management",
+        "correct": true
+      },
+      {
+        "text": "Manage Quality",
+        "correct": false
+      },
+      {
+        "text": "Total Quality Management",
+        "correct": false
+      },
+      {
+        "text": "Control Quality",
+        "correct": false
+      }
+    ],
+    "id": 163
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Catherine is closing her first project, she is collecting lessons learned with project team members and stakeholders. Many stakeholders were not satisfied about the project and they complained that their needs were not fully met. Her boss asks her about the steps she took on her project to improve customer satisfaction. Which subsidiary plan would she consult to determine this information?",
+    "explanation": "The quality management plan is a component of the project management plan that describes how applicable policies, procedures, and guidelines will be implemented to achieve the quality objectives. It describes the activities and resources necessary for the project management team to achieve the quality objectives set for the project. Domain = Process. PMBOK 6th edition, Page 286 and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Quality Management Plan",
+        "correct": true
+      },
+      {
+        "text": "Scope Management Plan",
+        "correct": false
+      },
+      {
+        "text": "Stakeholders Management Plan",
+        "correct": false
+      },
+      {
+        "text": "Risk Management Plan",
+        "correct": false
+      }
+    ],
+    "id": 164
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager of a manufacturing project is analyzing activities that doesn’t add value to the project and wastes company resources and time. A team member informed him that a process is not understood and another one informed him that two processes he works on, he thinks they are not needed. The project manager must be leading which of the following?",
+    "explanation": "Manage Quality process is concerned with following and improving processes and increasing its efficiency. Domain = Process. PMBOK 6th edition, Page 290",
+    "choices": [
+      {
+        "text": "Manage Quality",
+        "correct": true
+      },
+      {
+        "text": "Control Quality",
+        "correct": false
+      },
+      {
+        "text": "A process rather than a project",
+        "correct": false
+      },
+      {
+        "text": "Plan Quality Management",
+        "correct": false
+      }
+    ],
+    "id": 165
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Samuel is managing a project to develop a new pharmaceutical compound. He noticed that the packing process has many problems, so he held a meeting with his team to examine problems and non-value-added activities that occur during packing process. They also identified many opportunities to improve the process. Which process are they involved in and which tool are they using?",
+    "explanation": "Process analysis identifies opportunities for process improvements. This analysis also examines problems, constraints, and non-value-added activities that occur during a process.",
+    "choices": [
+      {
+        "text": "Plan Quality Management, mind mapping",
+        "correct": false
+      },
+      {
+        "text": "Control Quality, performance reviews",
+        "correct": false
+      },
+      {
+        "text": "Control Quality, product evaluation",
+        "correct": false
+      },
+      {
+        "text": "Manage Quality, process analysis",
+        "correct": true
+      }
+    ],
+    "id": 166
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Luke is a project manager in a construction company. He was assigned to manage a construction project to build a new shopping center. During performing the strength tests, he found severe failure in the strength tests. He assigned Steve to investigate this problem. Steve started tracking the problem to determine and solve the main reasons behind it. Which tool should Steve use to track the problem?",
+    "explanation": "Cause-and-effect (Fishbone) diagrams are used to trace the problem's source back to its root cause. Domain = Process. PMBOK 6th edition, Page 293",
+    "choices": [
+      {
+        "text": "Fishbone diagram",
+        "correct": true
+      },
+      {
+        "text": "Histogram",
+        "correct": false
+      },
+      {
+        "text": "Design of experiments",
+        "correct": false
+      },
+      {
+        "text": "Design for X",
+        "correct": false
+      }
+    ],
+    "id": 167
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A new medicine has been released in market by a large pharmaceutical company. A serious side effect has been discovered which may cause a sudden decrease in blood pressure. The company has recalled all products from the market. The incurred cost for recalling the medicine is known as:",
+    "explanation": "Cost of failures found by the customer is considered a cost of non conformance. Domain = Process. PMBOK 6th edition, Page 283 and PMBOK 7th edition, Page 88",
+    "choices": [
+      {
+        "text": "Cost of conformance",
+        "correct": false
+      },
+      {
+        "text": "Cost of non conformance",
+        "correct": true
+      },
+      {
+        "text": "Cost of prevention",
+        "correct": false
+      },
+      {
+        "text": "Cost of inspection",
+        "correct": false
+      }
+    ],
+    "id": 168
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Catherine is a project manager for a new product development project. After the product of the project has been released, it was found to have numerous features more than any other similar product in the market, but obvious defects have been found by the users of the product. The product is categorized as:",
+    "explanation": "The high-grade product has numerous features and the low quality product has many defects. Domain = Process. PMBOK 6th edition, Page 274",
+    "choices": [
+      {
+        "text": "High grade, low quality",
+        "correct": true
+      },
+      {
+        "text": "Low grade, low quality",
+        "correct": false
+      },
+      {
+        "text": "Low grade, high quality",
+        "correct": false
+      },
+      {
+        "text": "High grade, high quality",
+        "correct": false
+      }
+    ],
+    "id": 169
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Smith is managing a large product development project. The customer of the project has very tight quality tolerance and will not accept any defected product. He has set strict quality control measures and feedback verification loops from a similar previous project. However during scope validation, the customer has rejected a high percentage of the products due to defects found. Which of the following is the best course of action?",
+    "explanation": "It is clear that in this situation the quality control procedures including verification and feedback loops were taken from a similar project without tailoring. Quality control procedures and quality assurance steps need to be tailored for the specific needs for this project. Domain = Process. PMBOK 7th edition, Page 151",
+    "choices": [
+      {
+        "text": "Escalate this topic to the steering committee.",
+        "correct": false
+      },
+      {
+        "text": "More tailoring for quality control procedures and quality assurance steps.",
+        "correct": true
+      },
+      {
+        "text": "Demonstrate the quality control measures and feedback verification loops to the customer.",
+        "correct": false
+      },
+      {
+        "text": "Review the customer's inspection process.",
+        "correct": false
+      }
+    ],
+    "id": 170
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The project team is in the design phase of a new car prototype. The team is analyzing which type of motors and wheels would provide a high speed with more safety. Which of the following is the most likely technique would they use to determine these variables?",
+    "explanation": "Design of experiments helps to determine a group of variables to improve quality. Domain = Process. PMBOK 6th edition, Page 290",
+    "choices": [
+      {
+        "text": "Matrix diagrams",
+        "correct": false
+      },
+      {
+        "text": "Cost-benefit analysis",
+        "correct": false
+      },
+      {
+        "text": "Design for X",
+        "correct": false
+      },
+      {
+        "text": "Design of experiments",
+        "correct": true
+      }
+    ],
+    "id": 171
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a new construction project. Your project is to build a new housing compound which contains 10,000 houses. The houses are substantially similar. What must you do?",
+    "explanation": "If the project has some repeated activities, the lessons learned of the first few installations can be used to improve the process on the remaining installations. Domain = Process. PMBOK 6th edition, Page 289",
+    "choices": [
+      {
+        "text": "Plan in continuous improvement activities.",
+        "correct": true
+      },
+      {
+        "text": "Make sure the first and last of these work packages is scheduled close in time to each other.",
+        "correct": false
+      },
+      {
+        "text": "See what can be done to remove the similarity.",
+        "correct": false
+      },
+      {
+        "text": "Make sure the same resource completes all the similar work packages.",
+        "correct": false
+      }
+    ],
+    "id": 172
+  },
+  {
+    "type": "multiple-choice",
+    "text": "While testing the stability of the electronic board used in your project, you discover that it becomes unstable when it works in high temperature which doesn’t meet your company’s quality standards. You are sure that it will function as it is with the customer, and you don’t think the board needs to meet the quality level specified. What should you do?",
+    "explanation": "Stating in your reports that the board simply “meets our quality needs” or changing the quality standards to meet the achieved level are against the professional and social responsibility of the project manager. Documenting the problem in lessons learned register maybe done later because it doesn't solve the current problem. So the best solution is to report the lesser quality and try to find a solution. Domain = Process. PMBOK 6th edition, Page 299",
+    "choices": [
+      {
+        "text": "State in your reports that the board simply “meets our quality needs”.",
+        "correct": false
+      },
+      {
+        "text": "Change the quality standards to meet the achieved level.",
+        "correct": false
+      },
+      {
+        "text": "Document this problem in lessons learned register and send this board to customer.",
+        "correct": false
+      },
+      {
+        "text": "Report the lesser quality and try to find a solution.",
+        "correct": true
+      }
+    ],
+    "id": 173
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are in the middle of executing a major new construction project. The project is very important and highly visible in your organization. The sponsor informed you that he is worried that the project will not meet the quality standards it was intended to. If the project doesn't meet the quality standard, the customer will not be satisfied. What should you do in this situation?",
+    "explanation": "Assuring the sponsor that the project would meet the quality standards is not a solution. Historical information of your past projects don't indicate the status of the current project. The Quality Management Plan doesn't indicate the current situation. Forming a quality assurance team will indicate if the team is following the correct processes and procedures which meets the quality standards and metrics. Domain = Process. PMBOK 6th edition, Page 294",
+    "choices": [
+      {
+        "text": "Assure the sponsor that during the Plan Quality Management process, it was determined that the project would meet the quality standards.",
+        "correct": false
+      },
+      {
+        "text": "Form a quality assurance team.",
+        "correct": true
+      },
+      {
+        "text": "Show him the historical information of your past projects that they all met the quality standards.",
+        "correct": false
+      },
+      {
+        "text": "Check the results from the last quality management plan.",
+        "correct": false
+      }
+    ],
+    "id": 174
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Adam is managing an industrial project when one of the project team members informed him that the dimensions of one of the project deliverables are different than the planned dimensions and thus it will be unable to operate with the machine. Adam asked the team member to determine the basic underlying reasons that cause this variance and also to determine whether these reasons might cause other variances in other project deliverables. Which tool should the team member use in this situation?",
+    "explanation": "Root cause analysis is an analytical technique used to determine the basic underlying reason that causes a variance, defect, or risk. A root cause may underlie more than one variance, defect, or risk. Domain = Process. PMBOK 6th edition, Page 292 and PMBOK 7th edition, Page 177",
+    "choices": [
+      {
+        "text": "Audits",
+        "correct": false
+      },
+      {
+        "text": "Alternatives analysis",
+        "correct": false
+      },
+      {
+        "text": "Root cause analysis (RCA)",
+        "correct": true
+      },
+      {
+        "text": "Process analysis",
+        "correct": false
+      }
+    ],
+    "id": 175
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Project changes are approved during the _____  process and verified during the______ process.",
+    "explanation": "Project changes are approved during the Perform Integrated Change Control process and verified during the Control Quality process. Domain = Process PMBOK 6th edition, Page 301",
+    "choices": [
+      {
+        "text": "Perform Integrated Change Control, Control Quality.",
+        "correct": true
+      },
+      {
+        "text": "Perform Integrated Change Control, Validate Scope.",
+        "correct": false
+      },
+      {
+        "text": "Perform Integrated Change Control, Control Scope.",
+        "correct": false
+      },
+      {
+        "text": "Monitor and Control Project Work, Validate Scope..",
+        "correct": false
+      }
+    ],
+    "id": 176
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During planning your project, you are balancing project constraints scope, time, cost, quality,..The customer required that quality of this project must be as high as possible. This type of projects is relatively new to your organization. What is the best thing to do in this situation?",
+    "explanation": "Benchmarking is not effective here because this type of projects is new. Using Ishikawa diagram or control charts are not proactive solutions. So the best answer is to audit work as it is being completed to look for any needed improvements. Domain = Process. PMBOK 6th edition, Page 294",
+    "choices": [
+      {
+        "text": "Audit work as it is being completed to look for any needed improvements.",
+        "correct": true
+      },
+      {
+        "text": "Use Ishikawa diagram when there is a defect.",
+        "correct": false
+      },
+      {
+        "text": "Benchmark the current project quality standards to identify best practices.",
+        "correct": false
+      },
+      {
+        "text": "Use control charts to make sure that the process is in control.",
+        "correct": false
+      }
+    ],
+    "id": 177
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Alex is a project manager working for automobile manufacturer for a project to build more fuel-efficient, high stability small cars. He and his team determine how to inspect the product of the project to meet the stakeholders’ needs and expectations, as well as to meet the goal for the product’s performance and reliability. In which process are they involved and which tool are they using?",
+    "explanation": "During the planning phase in the Plan Quality Management process, the project manager and the project team determine how to test or inspect the product, deliverable, or service to meet the stakeholders’ needs and expectations, as well as how to meet the goal for the product’s performance and reliability. Domain = Process. PMBOK 6th edition, Page 285",
+    "choices": [
+      {
+        "text": "Manage Quality, Process Analysis",
+        "correct": false
+      },
+      {
+        "text": "Manage Quality, Audits",
+        "correct": false
+      },
+      {
+        "text": "Control Quality, Inspection",
+        "correct": false
+      },
+      {
+        "text": "Plan Quality Management, Test and inspection planning",
+        "correct": true
+      }
+    ],
+    "id": 178
+  },
+  {
+    "type": "multiple-choice",
+    "text": "While analyzing the last year performance of the company, it was found that the company has lost many customers especially who used the products of the company during last year. The CEO informed all the project managers to pay more attention to quality management. He focused not just on giving customers products without any defects by keeping the defective ones out of the customer hands, but keeping errors out of the process of producing deliverables. Keeping errors out of the process is known as:",
+    "explanation": "Prevention means keeping errors out of the process and inspection means keeping errors out of the hands of the customer. Domain = Process. PMBOK 6th edition, Page 274",
+    "choices": [
+      {
+        "text": "Variable sampling",
+        "correct": false
+      },
+      {
+        "text": "Attribute sampling",
+        "correct": false
+      },
+      {
+        "text": "Prevention",
+        "correct": true
+      },
+      {
+        "text": "Inspection",
+        "correct": false
+      }
+    ],
+    "id": 179
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Thomas is managing a large project to produce a new pharmaceutical drug. The project is very important for his company and quality has a top priority. Strict quality standards have been put in place and they must be followed. In order to achieve the required quality standard, Thomas approved on a business trip for two team members to have training on the new quality standards. The cost of team members training is an example of:",
+    "explanation": "Prevention costs are costs related to the prevention of poor quality in the products, deliverables, or services of the specific project. Examples on prevention costs are training and equipment. Domain = Process. PMBOK 6th edition, Page 282 and PMBOK 7th edition, Page 88",
+    "choices": [
+      {
+        "text": "Failure costs",
+        "correct": false
+      },
+      {
+        "text": "Cost of nonconformance",
+        "correct": false
+      },
+      {
+        "text": "Appraisal cost",
+        "correct": false
+      },
+      {
+        "text": "Prevention cost",
+        "correct": true
+      }
+    ],
+    "id": 180
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project team adopts extreme programming method (XP) is working on a software project. XP applies the concept of pair programming where the team members are writing software code together as a pair and reviewing each other's work to determine if the code conforms to the requirements documentation or not. What will be a result of these reviews?",
+    "explanation": "A goal of the Control Quality process is to determine the correctness of deliverables. The results of performing the Control Quality process are verified deliverables that become an input to the Validate Scope process for formalized acceptance. As the two developers inspect each other completed work, so they are doing the same as Control Quality process. Domain = Process. Agile Practice Guide, Page 102 and PMBOK 6th edition, Page 305",
+    "choices": [
+      {
+        "text": "Product Increment",
+        "correct": false
+      },
+      {
+        "text": "Minimum Viable Product",
+        "correct": false
+      },
+      {
+        "text": "Accepted Deliverables",
+        "correct": false
+      },
+      {
+        "text": "Verified deliverable",
+        "correct": true
+      }
+    ],
+    "id": 181
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A new cell phone has been released in markets as a product of a project in a multi-national organization. It seems that some defects have been noticed by customers in the new cell phone. The organization decided to make a survey in all shops to collect data about the defects. The cost regarding defects identified in the surveys may be considered as:",
+    "explanation": "The cost regarding defects identified in the surveys may be considered external failure costs in the COQ model and can have extensive cost implications for the organization. Domain = Process. PMBOK 6th edition, Page 303 and PMBOK 7th edition, Page 88",
+    "choices": [
+      {
+        "text": "Prevention costs",
+        "correct": false
+      },
+      {
+        "text": "Appraisal costs",
+        "correct": false
+      },
+      {
+        "text": "Internal failure costs",
+        "correct": false
+      },
+      {
+        "text": "External failure costs",
+        "correct": true
+      }
+    ],
+    "id": 182
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements indicates the optimal cost of quality?",
+    "explanation": "The optimal COQ is one that reflects the appropriate balance for investing in the cost of prevention and appraisal to avoid failure costs. So costs of conformance should be less than costs of nonconformance. Domain = Process. PMBOK 6th edition, Page 282 and PMBOK 7th edition, Page 88",
+    "choices": [
+      {
+        "text": "Appraisal costs should be less than prevention costs.",
+        "correct": false
+      },
+      {
+        "text": "Costs of conformance should be less than costs of nonconformance.",
+        "correct": true
+      },
+      {
+        "text": "Prevention costs should be more than external failure costs.",
+        "correct": false
+      },
+      {
+        "text": "Internal failure costs should be less than prevention costs.",
+        "correct": false
+      }
+    ],
+    "id": 183
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Carol is an experienced project manager in her organization. She is managing an IT project using agile approach. A team member asks Carol about the quality control activities when and by whom they will be performed. Which of the following would be her answer?",
+    "explanation": "In agile projects, the Control Quality activities may be performed by all team members throughout the project life cycle. Domain = Process. PMBOK 6th edition, Page 75",
+    "choices": [
+      {
+        "text": "The Control Quality activities may be performed by all team members towards the end of the project or phase.",
+        "correct": false
+      },
+      {
+        "text": "The Control Quality activities may be performed by Quality Control team throughout the project life cycle.",
+        "correct": false
+      },
+      {
+        "text": "The Control Quality activities may be performed by all team members throughout the project life cycle.",
+        "correct": true
+      },
+      {
+        "text": "The Control Quality activities may be performed by Quality Control team towards the end of the project or phase.",
+        "correct": false
+      }
+    ],
+    "id": 184
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Costs of testing and inspections are examples of:",
+    "explanation": "Appraisal costs are costs related to evaluating, measuring, auditing, and testing the products, deliverables, or services of the specific project like testing and inspection. Domain = Process. PMBOK 6th edition, Page 283 and PMBOK 7th edition, Page 88",
+    "choices": [
+      {
+        "text": "Failure costs",
+        "correct": false
+      },
+      {
+        "text": "Cost of nonconformance",
+        "correct": false
+      },
+      {
+        "text": "Appraisal cost",
+        "correct": true
+      },
+      {
+        "text": "Prevention cost",
+        "correct": false
+      }
+    ],
+    "id": 185
+  },
+  {
+    "type": "multiple-choice",
+    "text": "William is a project manager in a chemicals industrial company. The PMO in this company has authorized William to manage a project to lessen environmental impacts of one of its products. He found that replacing one type of material used in the product with another new environment friendly material, will decrease environmental impacts. He and his team are studying the consequences of removing the material and using the new material on the product technical properties like quality and price. Which technique should help the team in this situation?",
+    "explanation": "A scatter diagram is a graph that shows the relationship between two variables. Scatter diagrams can demonstrate a relationship between any element of a process, environment, or activity on one axis and a quality defect on the other axis. Domain = Process. PMBOK 6th edition, Page 293 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "Matrix diagrams",
+        "correct": false
+      },
+      {
+        "text": "Cause- and- effect diagram",
+        "correct": false
+      },
+      {
+        "text": "Scatter diagram",
+        "correct": true
+      },
+      {
+        "text": "Histogram",
+        "correct": false
+      }
+    ],
+    "id": 186
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager for a new electronic chips manufacturing project needs to make sure that the deliverables meet the quality standards. The project team produces about 100,000 chips per day, so testing all the deliverables would take much time and cost. The chips are so small that inspection would destroy them. Under these circumstances, what should the project manager do?",
+    "explanation": "You need to take a valid sample of the products of the project if inspecting the entire population would take much time, or if inspecting the products would be destructive. Domain = Process. PMBOK 6th edition, Page 303",
+    "choices": [
+      {
+        "text": "Inspect a sample of the deliverables.",
+        "correct": true
+      },
+      {
+        "text": "Outsource the inspection to another company with more expertise.",
+        "correct": false
+      },
+      {
+        "text": "Test all the deliverables to meet the quality standard.",
+        "correct": false
+      },
+      {
+        "text": "Form a quality assurance team to audit the manufacturing process.",
+        "correct": false
+      }
+    ],
+    "id": 187
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Testing the stability of one of the electronic chips manufactured by your company to determine if it meets your quality standards is an example of:",
+    "explanation": "Statistical sampling involves choosing part of a population of interest for inspection. Domain = Process. PMBOK 6th edition, Page 303",
+    "choices": [
+      {
+        "text": "Benchmarking",
+        "correct": false
+      },
+      {
+        "text": "Design of experiments",
+        "correct": false
+      },
+      {
+        "text": "Statistical sampling",
+        "correct": true
+      },
+      {
+        "text": "Design for X",
+        "correct": false
+      }
+    ],
+    "id": 188
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Andrew is a project manager in an industrial firm. He is taking over a manufacturing project from another project manager who resigned two weeks ago. Previously the company has faced criticism for the project deliverables from the customer. The previous project manager didn't pay much attention to quality of deliverables. Andrew hired inspectors to inspect the product of the project and prevent the defective ones from reaching the customer. He required from the extra inspectors to record the inspection results of the products as either conform or do not conform to quality requirements. This technique is known as:",
+    "explanation": "Attribute sampling means that the result either conforms or does not conform and variable sampling means that the result is rated on a continuous scale that measures the degree of conformity. Domain = Process. PMBOK 6th edition, Page 274",
+    "choices": [
+      {
+        "text": "Variable sampling",
+        "correct": false
+      },
+      {
+        "text": "Attribute sampling",
+        "correct": true
+      },
+      {
+        "text": "Prevention",
+        "correct": false
+      },
+      {
+        "text": "Statistical sampling",
+        "correct": false
+      }
+    ],
+    "id": 189
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Luis is a project manager in an electronics firm. He has been assigned to manage a new project to develop a faster, cheaper, and smaller laptop. He is analyzing the defects found in the product by graphical representation of this numerical data. The graph shows the ranking of the cause of defects and the number of defects found per deliverable. Which data representation technique is he using?",
+    "explanation": "Histograms show a graphical representation of numerical data. Histograms can show the number of defects per deliverable, a ranking of the cause of defects, the number of times each process is noncompliant, or other representations of project or product defects. Domain = Process. PMBOK 6th edition, Page 293",
+    "choices": [
+      {
+        "text": "Histogram",
+        "correct": true
+      },
+      {
+        "text": "Scatter Diagram",
+        "correct": false
+      },
+      {
+        "text": "Matrix diagram",
+        "correct": false
+      },
+      {
+        "text": "Cause-and-effect diagram",
+        "correct": false
+      }
+    ],
+    "id": 190
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager is executing a construction project. He is working with the quality assurance team to ensure that the project will satisfy the quality standards and metrics. Which of the following must they have before they start this process?",
+    "explanation": "Quality control measurements are used to analyze and evaluate the quality of the processes and deliverables of the project against the standards of the performing organization or the requirements specified. Quality control measurements can also compare the processes used to create the measurements and validate actual measurements to determine their level of correctness. Domain = Process. PMBOK 6th edition, Page 288",
+    "choices": [
+      {
+        "text": "Quality control measurements",
+        "correct": true
+      },
+      {
+        "text": "Quality assurance plan",
+        "correct": false
+      },
+      {
+        "text": "Verified deliverables",
+        "correct": false
+      },
+      {
+        "text": "Quality reports",
+        "correct": false
+      }
+    ],
+    "id": 191
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager for a product development project was informed by a team member that a defect was found in a deliverable that must be delivered to customer tomorrow according to the project schedule. The project manager knows that the customer doesn’t have the technical understanding to notice the defect. The deliverable meets the contract requirements, but it doesn’t meet the project manager’s quality standard. What is the best course of action for the project manager?",
+    "explanation": "Issuing the deliverable although it doesn't meet quality requirements is against the professional and social responsibility of a project manager. Documenting the problem in lessons learned register is a good solution for future projects, but it doesn't solve the current situation. Informing the customer that the deliverable will be late may breach the contract and harm the relationship, so the best option is to discuss the issue with the customer. Domain = Process. PMBOK 6th edition, Page 299",
+    "choices": [
+      {
+        "text": "Issue the deliverable and get formal acceptance from the customer, as the deliverable meets his quality standard.",
+        "correct": false
+      },
+      {
+        "text": "Inform the customer that the deliverable will be late and fix the fault.",
+        "correct": false
+      },
+      {
+        "text": "Discuss the issue with the customer.",
+        "correct": true
+      },
+      {
+        "text": "Note the problem in the lessons learned register so future projects do not face the same problem.",
+        "correct": false
+      }
+    ],
+    "id": 192
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Chris is managing a product development project. He receives a call from a team member informing him that they have found the same defect which has been identified before during a previous inspection. Chris is confused how this could have happened. He has raised a change request before to repair this defect and the change was approved. After investigation, he learns that the team did not implement the approved change. This situation indicates a gap in which process?",
+    "explanation": "A part of the Control Quality process is to review approved changes. Approved change requests may include modifications such as defect repairs, revised work methods, and revised schedules. The implementation of approved changes should be verified, confirmed for completeness, retested, and certified as correct. Domain = Process. PMBOK 6th edition, Page 301",
+    "choices": [
+      {
+        "text": "Plan Quality Management",
+        "correct": false
+      },
+      {
+        "text": "Control Scope",
+        "correct": false
+      },
+      {
+        "text": "Control Quality",
+        "correct": true
+      },
+      {
+        "text": "Perform Integrated Change Control",
+        "correct": false
+      }
+    ],
+    "id": 193
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements best describes the difference between Validate Scope and Control Quality?",
+    "explanation": "Validate Scope is concerned with the acceptance of deliverables while the Control Quality is concerned with correctness of the deliverables. Verified deliverables is an output of the Control Quality process and input to the Validate Scope process. Generally Control Quality is performed before the Validate Scope process. Domain = Process. PMBOK 6th edition, Page 164",
+    "choices": [
+      {
+        "text": "Validate Scope is generally performed before Control Quality.",
+        "correct": false
+      },
+      {
+        "text": "Validate Scope is concerned with the acceptance of deliverables while the Control Quality is concerned with correctness of the deliverables.",
+        "correct": true
+      },
+      {
+        "text": "Verified deliverables are outputs of the Validate Scope process and input to the Control Quality process.",
+        "correct": false
+      },
+      {
+        "text": "Accepted deliverables are outputs of the Control Quality process and input to the Validate Scope process.",
+        "correct": false
+      }
+    ],
+    "id": 194
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During a retrospective, a stakeholder expressed his concerns about the quality of the product increments delivered so far. The stakeholder has mentioned that the team is not able to deliver high-quality product increment. Which of the following is the best course of action?",
+    "explanation": "The best answer is that the project leader and the team need to further discuss the quality related topics first and review the quality processes. If further assistance is needed they can involve the functional manager. Domain = Process. PMBOK 6th edition, Page 299 and PMBOK 7th edition, Page 87",
+    "choices": [
+      {
+        "text": "Involve the quality manager to investigate the project quality processes.",
+        "correct": false
+      },
+      {
+        "text": "Arrange training sessions for the team members to improve the quality of the product increments.",
+        "correct": false
+      },
+      {
+        "text": "Assign more quality subject matter experts to the project to improve quality processes.",
+        "correct": false
+      },
+      {
+        "text": "The project leader should discuss this topic with the team and review the quality processes.",
+        "correct": true
+      }
+    ],
+    "id": 195
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The project team has found that the team velocity has dropped significantly and they have a critical deliverable due in two weeks. The team members decide to skip final test in order to bring the project back on track and don't miss the deliverable due date. Which of the following is a likely result of the team decision?",
+    "explanation": "Removing a test will lead to technical debt which means degraded deliverables quality. Domain = Process. Agile Practice Guide, Page 58",
+    "choices": [
+      {
+        "text": "Increased technical debt",
+        "correct": true
+      },
+      {
+        "text": "Increased customer satisfaction",
+        "correct": false
+      },
+      {
+        "text": "Increased return on investment",
+        "correct": false
+      },
+      {
+        "text": "Increased resources cost",
+        "correct": false
+      }
+    ],
+    "id": 196
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a new construction project that is budgeted at $3,000,000. Too many activities are being executed underway on your project. You are getting worried about the accuracy of the progress reporting your team members are doing. How could you verify whether there is a problem or not?",
+    "explanation": "Perform a quality audit as part of the Manage Quality process to verify that there is a problem or not. Domain = Process. PMBOK 6th edition, Page 294 and PMBOK 7th edition, Page 87",
+    "choices": [
+      {
+        "text": "Feasibility studies",
+        "correct": false
+      },
+      {
+        "text": "Quality audits",
+        "correct": true
+      },
+      {
+        "text": "Sensitivity analysis",
+        "correct": false
+      },
+      {
+        "text": "Monte Carlo Analysis",
+        "correct": false
+      }
+    ],
+    "id": 197
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Barbara is managing a large industrial project. Recently, her company received many complaints due to defects found by the customer in the first deliverable. The customer is not satisfied at all with the first project deliverable. The project sponsor is very angry and told her that the company may lose the contract with the customer if they find defects in the next deliverables. In order to reduce sponsor's stress, she told him that they will compare the product’s quality standards to those of another comparable successful products to identify best practices and increase the probability of customer acceptance. Which tool is she using?",
+    "explanation": "Benchmarking is the comparison of actual or planned practices of your project to those of other projects to identify best practices and improve performance. Domain = Process. PMBOK 6th edition, Page 284",
+    "choices": [
+      {
+        "text": "Matrix diagrams",
+        "correct": false
+      },
+      {
+        "text": "Logical data model",
+        "correct": false
+      },
+      {
+        "text": "Benchmarking",
+        "correct": true
+      },
+      {
+        "text": "Mind mapping",
+        "correct": false
+      }
+    ],
+    "id": 198
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Bill is managing an industrial project. He requested from his team to organize potential causes of quality problems into groups to know which causes they should focus on. Which tool should the team use in this situation?",
+    "explanation": "Affinity diagrams can organize potential causes of defects into groups showing areas that should be focused on the most. Domain = Process. PMBOK 6th edition, Page 293 and PMBOK 7th edition, Page 178",
+    "choices": [
+      {
+        "text": "Control Charts",
+        "correct": false
+      },
+      {
+        "text": "Scatter diagrams",
+        "correct": false
+      },
+      {
+        "text": "Affinity diagrams",
+        "correct": true
+      },
+      {
+        "text": "Why-why diagram",
+        "correct": false
+      }
+    ],
+    "id": 199
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager for a hardware design project and his team are using cause and effect diagram, trying to determine how various factors might have contributed to project problems. The project manager is involved in which part of the quality management process?",
+    "explanation": "The key word here is (might have contributed) this means that the problem already happened, so they are involved in the Control Quality process. Domain = Process. PMBOK 6th edition, Page 304",
+    "choices": [
+      {
+        "text": "Total Quality Management",
+        "correct": false
+      },
+      {
+        "text": "Control Quality",
+        "correct": true
+      },
+      {
+        "text": "Manage Quality",
+        "correct": false
+      },
+      {
+        "text": "Plan Quality Management",
+        "correct": false
+      }
+    ],
+    "id": 200
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for an industrial project. Your project is being audited by the company’s quality assurance department. They have found that your team has implemented the process inefficiently, which lead to defects in your product. What’s the next thing that should happen on your project?",
+    "explanation": "They are now involved in the Manage Quality process. One of the outputs of this process is Change Request. Domain = Process. PMBOK 6th edition, Page 296",
+    "choices": [
+      {
+        "text": "Add the problem to the risk register and develop a response plan.",
+        "correct": false
+      },
+      {
+        "text": "Suggest corrective actions and submit them to the change control board.",
+        "correct": true
+      },
+      {
+        "text": "Add the results of the audit to the lessons learned.",
+        "correct": false
+      },
+      {
+        "text": "You meet with the manager of the quality assurance department to find a solution of the problem.",
+        "correct": false
+      }
+    ],
+    "id": 201
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Project deliverables are produced during the ______ process, verified during the ______ process and formally accepted during the ______ process.",
+    "explanation": "Project deliverables are produced during the Direct and manage project work process, verified during the Control Quality process and formally accepted during the Validate Scope process. Domain = Process. PMBOK 6th edition, Page 299 and 305",
+    "choices": [
+      {
+        "text": "Perform Integrated Change Control, Control Quality, Validate Scope",
+        "correct": false
+      },
+      {
+        "text": "Direct and manage project work, Validate Scope, Control Quality",
+        "correct": false
+      },
+      {
+        "text": "Direct and Manage Project Work, Control Quality, Control Scope",
+        "correct": false
+      },
+      {
+        "text": "Direct and manage project work, Control Quality, Validate Scope",
+        "correct": true
+      }
+    ],
+    "id": 202
+  },
+  {
+    "type": "multiple-choice",
+    "text": "All of the following are examples of cost of quality except:",
+    "explanation": "The cost of quality is the cost incurred to prevent, discover or repair a defect. Domain = Process. PMBOK 6th edition, Page 283 and PMBOK 7th edition, Page 88",
+    "choices": [
+      {
+        "text": "Having team members spend extra time reviewing requirements with the stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "Paying extra labor to help meet a deadline.",
+        "correct": true
+      },
+      {
+        "text": "Hiring extra inspectors to look for defects.",
+        "correct": false
+      },
+      {
+        "text": "Sending a technician to repair a defective product that was delivered to the client.",
+        "correct": false
+      }
+    ],
+    "id": 203
+  },
+  {
+    "type": "multiple-choice",
+    "text": "David is managing a software project. He wants to find the strength of relationships among different factors. He asked John a more experienced project manager, John told him there is a tool that can give him information about the relationship, such as its strength, the roles played by various individuals or measurements. What is the tool which John refers to?",
+    "explanation": "Matrix diagrams help find the strength of relationships among different factors, causes, and objectives that exist between the rows and columns that form the matrix. Domain = Process. PMBOK 6th edition, Page 284",
+    "choices": [
+      {
+        "text": "Matrix diagrams",
+        "correct": true
+      },
+      {
+        "text": "Logical data model",
+        "correct": false
+      },
+      {
+        "text": "Flowcharts",
+        "correct": false
+      },
+      {
+        "text": "Mind mapping",
+        "correct": false
+      }
+    ],
+    "id": 204
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Quality audits should be",
+    "explanation": "Quality audits may be scheduled or random, and may be conducted by internal or external auditors Domain = Process. PMBOK 6th edition, Page 295",
+    "choices": [
+      {
+        "text": "Scheduled with external auditors",
+        "correct": false
+      },
+      {
+        "text": "Random with internal auditors",
+        "correct": false
+      },
+      {
+        "text": "Scheduled or random with internal or external auditors",
+        "correct": true
+      },
+      {
+        "text": "Scheduled with internal auditors",
+        "correct": false
+      }
+    ],
+    "id": 205
+  }
+]

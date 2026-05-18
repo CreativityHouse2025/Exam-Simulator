@@ -1,10 +1,10 @@
 import React from 'react'
-import { SessionDataContext, SessionExamContext, SessionTimerContext } from '../contexts'
-import useExam from './useExam'
+import { useSessionData, useSessionTimer, useSessionExam, useExam } from '../contexts'
 import useCategoryLabel from './useCategoryLabel'
 import useFullExamLabel from './useFullExamLabel'
+import { isAnswerCorrect } from '../utils/results'
 import { Question, Results } from '../types'
-import examTypes from '../data/exam-data/exam-types.json'
+import examTypes from '../data/exam/exam-types.json'
 
 type QuestionStats = {
     correct: Question['id'][]
@@ -13,31 +13,26 @@ type QuestionStats = {
     completed: Question['id'][]
 }
 
-export default function useResults(isExamFinished: boolean): Results | null {
-    const { answers, examType } = React.useContext(SessionDataContext)
-    const { maxTime, time } = React.useContext(SessionTimerContext)
-    const { categoryId, examId } = React.useContext(SessionExamContext)
+export default function useResults(): Results {
+    const { selectedOriginalIndices, examType } = useSessionData()
+    const { maxTime, time } = useSessionTimer()
+    const { categoryId, examId } = useSessionExam()
     const { exam: examOrNull } = useExam()
+    // assertion because useResults is only used inside the exam context
     const exam = examOrNull!
 
     const passingScore = examTypes[examType as keyof typeof examTypes]?.passingRate ?? null
-    let sourceLabel;
-    const isFullExam = examType === 'full'
-    if (isFullExam) {
-        sourceLabel = useFullExamLabel(examId!)
-    } else {
+    let sourceLabel: string | undefined;
+    // label should be Exam if exam is full or revision
+    const isFullExamLabel = examType === 'revision' || examType === 'full'
+    if (examId) {
+        sourceLabel = useFullExamLabel(examId)
+    } else if (categoryId) {
         sourceLabel = useCategoryLabel(categoryId)
     }
 
     const questionStats = React.useMemo<QuestionStats>(() => {
-        const arraysEqual = (a: number[] | null, b: number[]): boolean => {
-            if (a === null || a.length !== b.length) return false
-            const sortedA = [...a].sort((x, y) => x - y)
-            const sortedB = [...b].sort((x, y) => x - y)
-            return sortedA.every((val, index) => val === sortedB[index])
-        }
-
-        return answers.reduce<QuestionStats>(
+        return selectedOriginalIndices.reduce<QuestionStats>(
             (acc, givenAnswer, i) => {
                 const questionId = exam[i].id
                 const correctAnswer = exam[i].answer as number[]
@@ -46,7 +41,7 @@ export default function useResults(isExamFinished: boolean): Results | null {
                     acc.incomplete.push(questionId)
                 } else {
                     acc.completed.push(questionId)
-                    if (arraysEqual(givenAnswer, correctAnswer)) {
+                    if (isAnswerCorrect(givenAnswer, correctAnswer)) {
                         acc.correct.push(questionId)
                     } else {
                         acc.incorrect.push(questionId)
@@ -57,7 +52,7 @@ export default function useResults(isExamFinished: boolean): Results | null {
             },
             { correct: [], incorrect: [], incomplete: [], completed: [] }
         )
-    }, [answers, exam])
+    }, [selectedOriginalIndices, exam])
 
     const score = React.useMemo(() => {
         if (exam.length === 0) return 0
@@ -71,9 +66,12 @@ export default function useResults(isExamFinished: boolean): Results | null {
             ? undefined
             : score >= passingScore
 
-    return isExamFinished ? {
+    const status: "pass" | "fail" = passingScore !== null && score >= passingScore ? "pass" : "fail"
+
+    return {
         // status
         pass,
+        status,
         passPercent: passingScore ?? undefined,
         score,
 
@@ -81,12 +79,12 @@ export default function useResults(isExamFinished: boolean): Results | null {
         elapsedTime,
         date: new Date(),
         sourceLabel,
-        sourceType: isFullExam ? 'exam' : 'category',
+        sourceType: isFullExamLabel ? 'exam' : 'category',
 
         // counts
         correctCount: questionStats.correct.length,
         incorrectCount: questionStats.incorrect.length,
         incompleteCount: questionStats.incomplete.length,
         totalQuestions: exam.length,
-    } : null
+    }
 }

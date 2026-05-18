@@ -1,0 +1,386 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "A key stakeholder has expressed his concerns about the status reports sent from the project team. He said that he is struggling to obtain the needed information about the project status as the report is overstuffed with unnecessary information. Which of the following is the best course of action for the project manager?",
+    "explanation": "Reports communicate relevant (usually summary level) information to stakeholders. Often reports are given to stakeholders who are interested in the project status, such as sponsors, business owners, or PMOs. They should be tailored to meet the stakeholders needs. Domain = Process. PMBOK 6th edition, Page 385 and PMBOK 7th edition, Page 190",
+    "choices": [
+      {
+        "text": "Inform the stakeholder that the format of the status report has been agreed upon in the communication management plan. If he wants to change it, he can raise a change request.",
+        "correct": false
+      },
+      {
+        "text": "Ask the stakeholder about his information needs and include them in the status report.",
+        "correct": true
+      },
+      {
+        "text": "Inform the stakeholder that the status report addresses different stakeholders' needs. It is not tailored according to this particular stakeholder's needs only.",
+        "correct": false
+      },
+      {
+        "text": "Send a separate report to this particular stakeholder tailored according to his needs.",
+        "correct": false
+      }
+    ],
+    "id": 67
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Martin is a project manager for a large construction project. He is having difficulties in keeping the project schedule on track. The project is budgeted at $3,000,000, and has 310 human resources. The project duration is three months and has 380 activities. There are 90 activities on the critical path. The project SPI is 0.78 and CPI is 1.09. Under these circumstances. What should the monthly status report contain?",
+    "explanation": "Status report contains the status of the project in accordance to the project management plan and possible options. Domain = Process. PMBOK 6th edition, Page 385 and PMBOK 7th edition, Page 190",
+    "choices": [
+      {
+        "text": "That the project will need more resources.",
+        "correct": false
+      },
+      {
+        "text": "The issues and options.",
+        "correct": true
+      },
+      {
+        "text": "That the project is doing well.",
+        "correct": false
+      },
+      {
+        "text": "That the project will finish after the required completion date.",
+        "correct": false
+      }
+    ],
+    "id": 68
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Nathalie is managing a product development project. During the last project status meeting, she displayed the earned value measurements to the project team and project sponsor. SPI = 1.09 and CPI = 0.79. It is clear that the project is running over budget. The project sponsor is very angry and requested from her to share with him the cost incurred on a weekly basis. Which process should she undergo to provide the needed information to the project sponsor?",
+    "explanation": "Project communications artifacts may include cost incurred. Domain = Process. PMBOK 6th edition, Page 387",
+    "choices": [
+      {
+        "text": "Control Costs",
+        "correct": false
+      },
+      {
+        "text": "Determine Budget",
+        "correct": false
+      },
+      {
+        "text": "Estimate Costs",
+        "correct": false
+      },
+      {
+        "text": "Manage Communications",
+        "correct": true
+      }
+    ],
+    "id": 69
+  },
+  {
+    "type": "multiple-choice",
+    "text": "After the weekly project status meeting with the project team members, you asked a project team member to send minutes of meeting to all the attendees. Meeting minutes is classified as:",
+    "explanation": "Formal Communication includes reports, formal meetings (both regular and ad hoc), meeting agendas and minutes, stakeholder briefings, and presentations. Domain = Process. PMBOK 7th edition, Page 13",
+    "choices": [
+      {
+        "text": "Formal Communication",
+        "correct": true
+      },
+      {
+        "text": "Informal Communication",
+        "correct": false
+      },
+      {
+        "text": "External Communication",
+        "correct": false
+      },
+      {
+        "text": "Oral Communication",
+        "correct": false
+      }
+    ],
+    "id": 70
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following projects needs to communicate evolving and emerging details more frequently and quickly than other projects?",
+    "explanation": "Generally projects that subject to various elements of ambiguity and change like projects that adopt agile life cycles have an inherent need to communicate evolving and emerging details more frequently and quickly. In this question the IT project with not clear scope where the detailed scope is defined and approved before the start of each iteration adopts adaptive or agile life cycle. Other mentioned projects are all examples of projects with predictive life cycles. Domain = Process. PMBOK 6th edition, Page 365",
+    "choices": [
+      {
+        "text": "An IT project with not clear scope, as the detailed scope is defined and approved before the start of each iteration.",
+        "correct": true
+      },
+      {
+        "text": "A construction project where scope, time, and cost are determined in the early phases of the project life cycle.",
+        "correct": false
+      },
+      {
+        "text": "A tele-communications project with predictive life cycle and has 550 stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "An industrial project where changes to the scope are carefully managed.",
+        "correct": false
+      }
+    ],
+    "id": 71
+  },
+  {
+    "type": "multiple-choice",
+    "text": "All of the following are examples of non-verbal communication except:",
+    "explanation": "Examples of nonverbal communication include appropriate body language to transmit meaning through gestures, tone of voice, and facial expressions. Mirroring and eye contact are also important techniques. Domain = Process. PMBOK 6th edition, Page 384 and PMBOK 7th edition, Page 13",
+    "choices": [
+      {
+        "text": "A project manager is waving his hands to a team member to welcome him.",
+        "correct": false
+      },
+      {
+        "text": "A trainer is looking at the eyes of his trainees to know if they understand what he said or not.",
+        "correct": false
+      },
+      {
+        "text": "A team leader advising a team member about how to use non-verbal communication.",
+        "correct": true
+      },
+      {
+        "text": "A team leader is using an angry look to a team member who came to work late.",
+        "correct": false
+      }
+    ],
+    "id": 72
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Due to external factors, a project has been terminated early. The project manager sends the final project report to project stakeholders when a functional manager requests a copy of the report. What should the project manager do in this situation?",
+    "explanation": "The communications management plan contains which information should be sent to which stakeholder. Domain = Process. PMBOK 6th edition, Page 377 and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Ask the functional manager why he needs the report.",
+        "correct": false
+      },
+      {
+        "text": "Don't send the report and inform his manager.",
+        "correct": false
+      },
+      {
+        "text": "Send the report.",
+        "correct": false
+      },
+      {
+        "text": "Consult the communication management plan.",
+        "correct": true
+      }
+    ],
+    "id": 73
+  },
+  {
+    "type": "multiple-choice",
+    "text": "All of the following are included in the project communications management plan, except:",
+    "explanation": "Contact details of each stakeholder are included in the stakeholder register. Domain = Process. PMBOK 6th edition, Page 377 and 514 and and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Guidelines and templates for project status meetings",
+        "correct": false
+      },
+      {
+        "text": "The use of a project website and project management software",
+        "correct": false
+      },
+      {
+        "text": "Contact details of each stakeholder",
+        "correct": true
+      },
+      {
+        "text": "Resources allocated for communication activities, including time and budget",
+        "correct": false
+      }
+    ],
+    "id": 74
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the purpose of the communications management plan?",
+    "explanation": "The communications management plan is a component of the project management plan that describes how project communications will be planned, structured, implemented, and monitored for effectiveness. Domain = Process. PMBOK 6th edition, Page 377 and PMBOK 7th edition, Page 79 and 186",
+    "choices": [
+      {
+        "text": "The project management plan is a subsidiary plan of the overall communications management plan.",
+        "correct": false
+      },
+      {
+        "text": "The communications management plan describes why you need to communicate with each stakeholders.",
+        "correct": false
+      },
+      {
+        "text": "The communications management plan describes the information delivery needs including format and level of detail.",
+        "correct": true
+      },
+      {
+        "text": "The communications management plan focuses on the use of communications technologies by the project management team.",
+        "correct": false
+      }
+    ],
+    "id": 75
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The project sponsor has asked the project team to increase the frequency of sending the project status report instead of weekly to be daily. Moreover, he has asked also to send a daily report for the progress of outstanding tasks. The team objects to the sponsor's request because preparing such report takes much time. Which of the following is the best course of action for the project manager?",
+    "explanation": "The project manager should review the communication management plan which describes the type, frequency and responsible person for sending each report. If it needs to be changed, it must be done through a change request as it is a part of the project management plan. Domain = Process. PMBOK 6th edition, Page 377 and PMBOK 7th edition, Page 79 and 186",
+    "choices": [
+      {
+        "text": "Ask the sponsor to hire additional resources.",
+        "correct": false
+      },
+      {
+        "text": "Try to convince both sides to accept sending the report twice a week.",
+        "correct": false
+      },
+      {
+        "text": "Review the communication management plan and submit a change request if needed.",
+        "correct": true
+      },
+      {
+        "text": "Meet with the project sponsor and convince him that this is too much work for the team members to do.",
+        "correct": false
+      }
+    ],
+    "id": 76
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following is the purpose of project status meetings?",
+    "explanation": "The project status meeting is the best method to discuss the status of the project and exchange information about the project. Other choices can be done outside project status meeting. Domain = Process. PMBOK 6th edition, Page 376 and PMBOK 7th edition, Page 180",
+    "choices": [
+      {
+        "text": "Exchange information about the project.",
+        "correct": true
+      },
+      {
+        "text": "Approving project changes.",
+        "correct": false
+      },
+      {
+        "text": "Have team members report on what they are doing.",
+        "correct": false
+      },
+      {
+        "text": "Issue project status reports.",
+        "correct": false
+      }
+    ],
+    "id": 77
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Frank is managing a major construction project valued at $ 30,000,000. The project SPI is 1.01and CPI is 0.99. The sponsor called him to express concern about the project. He is worried because the project end date is after two weeks. He doesn’t know the status of the project. Frank informed him that his team sends a weekly status report by email. He told him that he doesn't prefer emails because he receives more than 500 emails per day. He doesn't check all emails and he prefers verbal updates. This situation indicates a problem in which project management process?",
+    "explanation": "The Plan Communication Management process includes determining the stakeholders communication requirements which includes the preferred communication method for each stakeholder. When he informed the project sponsor that his team sends weekly project status report via email, so they are following the communication management plan. So the communication management plan doesn't reflect stakeholders communication requirements. Domain = Process. PMBOK 6th edition, Page 377",
+    "choices": [
+      {
+        "text": "Monitor Communications",
+        "correct": false
+      },
+      {
+        "text": "Plan Communications Management",
+        "correct": true
+      },
+      {
+        "text": "Manage Stakeholder Engagement",
+        "correct": false
+      },
+      {
+        "text": "Manage Communications",
+        "correct": false
+      }
+    ],
+    "id": 78
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements is true regarding project communications in projects with adaptive life cycle?",
+    "explanation": "Project environments subject to various elements of ambiguity and change have an inherent need to communicate evolving and emerging details more frequently and quickly. Domain = Process. PMBOK 6th edition, Page 365",
+    "choices": [
+      {
+        "text": "Projects with predictive life cycle have an inherent need to communicate evolving and emerging details more frequently and quickly than projects with iterative or incremental life cycle.",
+        "correct": false
+      },
+      {
+        "text": "Projects with predictive life cycle have an inherent need to communicate evolving and emerging details more frequently and quickly than projects with adaptive life cycle.",
+        "correct": false
+      },
+      {
+        "text": "There is no difference between communication in projects with adaptive life cycle and communication in projects with predictive life cycle.",
+        "correct": false
+      },
+      {
+        "text": "Projects with adaptive life cycle have an inherent need to communicate evolving and emerging details more frequently and quickly than projects with predictive life cycle.",
+        "correct": true
+      }
+    ],
+    "id": 79
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During developing the communication management plan for your software project, a team member asks you whether social media can be included as a communication tool to the project communication strategy. What would be your answer?",
+    "explanation": "The standard communication strategy for project stakeholder communications embraces and selects from all technologies and respects cultural, practical, and personal preferences for language, media, content, and delivery. When appropriate, social media and other advanced computing technologies may be included. Domain = Process. PMBOK 6th edition, Page 364",
+    "choices": [
+      {
+        "text": "Yes, social media can be included in the communication strategy because everyone is using social media in communication.",
+        "correct": false
+      },
+      {
+        "text": "Yes, social media can be included in the communication strategy with respect to cultural, practical, and personal preferences for language, media, content, and delivery.",
+        "correct": true
+      },
+      {
+        "text": "No, social media can't be included in the communication strategy because it is informal communication. You must select a formal communication tool.",
+        "correct": false
+      },
+      {
+        "text": "No, social media can't be included in the communication strategy because it is not available in some countries.",
+        "correct": false
+      }
+    ],
+    "id": 80
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project is being implemented as part of a large program. During project executing, the program manager informs the project manager that due to an organizational change, his project will be terminated. The project manager wants to inform the project stakeholders and project team about project closure. Which document should he refer to?",
+    "explanation": "An effective communications management plan recognizes the diverse information needs of the project’s stakeholders. It includes stakeholder communication requirements, information to be communicated, including language, format, content, and level of detail..etc. Domain = Process. PMBOK 6th edition, Page 377 and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Communication Management Plan",
+        "correct": true
+      },
+      {
+        "text": "Stakeholder Engagement Plan",
+        "correct": false
+      },
+      {
+        "text": "Project Closure Guidelines",
+        "correct": false
+      },
+      {
+        "text": "Change Management Plan",
+        "correct": false
+      }
+    ],
+    "id": 81
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Communication barriers can cause miscommunications, it may influence communication when sending or receiving information. Which of the following is not a barrier?",
+    "explanation": "Feedback is a tool for improving communication not a barrier. Domain = Process. PMBOK 6th edition, Page 373",
+    "choices": [
+      {
+        "text": "Prejudices and Hostility",
+        "correct": false
+      },
+      {
+        "text": "Distance",
+        "correct": false
+      },
+      {
+        "text": "Culture and Language",
+        "correct": false
+      },
+      {
+        "text": "Feedback",
+        "correct": true
+      }
+    ],
+    "id": 82
+  }
+]

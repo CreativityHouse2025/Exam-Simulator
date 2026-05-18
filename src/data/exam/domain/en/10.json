@@ -1,0 +1,1130 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager in a large organization. Recently, your organization is facing a financial crisis, and there was a mass layoff for many employees in the organization. Many projects were affected because of this layoff. Your project is one of the affected projects, because almost 30% of the project resources were released due to the layoff. To deal with the limited number of resources, you adjust the start and finish dates to balance between the demand and available supply of resources. What is the technique you used?",
+    "explanation": "Resource leveling is a technique in which start and finish dates are adjusted based on resource constraints with the goal of balancing the demand for resources with the available supply. Domain = Process. PMBOK 6th edition, Page 211",
+    "choices": [
+      {
+        "text": "Fast Tracking",
+        "correct": false
+      },
+      {
+        "text": "Crashing",
+        "correct": false
+      },
+      {
+        "text": "Resource Smoothing",
+        "correct": false
+      },
+      {
+        "text": "Resource Leveling",
+        "correct": true
+      }
+    ],
+    "id": 357
+  },
+  {
+    "type": "multiple-choice",
+    "text": "In the previous iterations, the team velocity was 30, 35, 36, 40 and 39 respectively. There are 260 story points remaining in the product backlog. How many more iterations will be needed to complete the product backlog?",
+    "explanation": "You first need to calculate the average number of points per iteration (velocity) = (30+35+36+40+39) / 5= 180 / 5 = 36. You then divide the remaining work by the average points per iteration (velocity) = 260 / 36 = 7.2. So 8 iterations are needed. Domain = Process. Agile Practice Guide, Page 61",
+    "choices": [
+      {
+        "text": "6",
+        "correct": false
+      },
+      {
+        "text": "7",
+        "correct": false
+      },
+      {
+        "text": "8",
+        "correct": true
+      },
+      {
+        "text": "9",
+        "correct": false
+      }
+    ],
+    "id": 358
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Susan is a project manager for a new software project. This type of projects has not been previously done before by her company and she has never managed a similar project to this one. What is the best method of estimating the time for activities that have not previously been done by her company?",
+    "explanation": "Parametric and analogous estimating techniques depend on historical information, so they won’t be used because it is the first project for her company, Monte Carlo analysis is not used for estimating activity durations. Three point estimation will be the best choice in this case. Domain = Process. PMBOK 7th edition, Page 178",
+    "choices": [
+      {
+        "text": "Parametric estimating",
+        "correct": false
+      },
+      {
+        "text": "Monte Carlo analysis",
+        "correct": false
+      },
+      {
+        "text": "Three-point estimating",
+        "correct": true
+      },
+      {
+        "text": "Analogous estimating",
+        "correct": false
+      }
+    ],
+    "id": 359
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During measuring the project performance against the project management plan, you discover that the project is running behind schedule and the final deliverable will be delayed by one month after the required date by the customer. What should the project manager do?",
+    "explanation": "Working overtime or requesting to change the project end dates are reactive solutions, even evaluating the impacts of completing the project later is not a good solution. The project manager must be proactive, so evaluating the impacts for crashing or fast tracking is the best solution. Domain = Process. PMBOK 6th edition, Page 223 and PMBOK 7th edition, Page 58-60",
+    "choices": [
+      {
+        "text": "Look for options with project team members like adding more resources or performing critical path activities in parallel.",
+        "correct": true
+      },
+      {
+        "text": "Let the team members work overtime to finish the project on time.",
+        "correct": false
+      },
+      {
+        "text": "Evaluate the impact of completing the project later than the required date.",
+        "correct": false
+      },
+      {
+        "text": "Make a change request to extend the project and schedule and submit it to the change control board.",
+        "correct": false
+      }
+    ],
+    "id": 360
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project team are working on an product development project in an industrial environment using Kanban system. They are developing the project schedule. The project activities are relatively similar in size and scope and can be bundled by size and scope. The project manager needs to limit a team’s work in progress in order to balance demand against the team’s delivery throughput. Which scheduling method is the most appropriate to use?",
+    "explanation": "On-demand scheduling. This approach, typically used in a Kanban system, is based on the theory-of-constraints and pull-based scheduling concepts from lean manufacturing to limit a team’s work in progress in order to balance demand against the team’s delivery throughput. It is often used for projects that evolve the product incrementally in operational or sustainment environments, and where tasks may be made relatively similar in size and scope or can be bundled by size and scope. Domain = Process. PMBOK 6th edition, Page 177",
+    "choices": [
+      {
+        "text": "On-demand scheduling",
+        "correct": true
+      },
+      {
+        "text": "Iterative scheduling with a backlog",
+        "correct": false
+      },
+      {
+        "text": "Critical Chain Method",
+        "correct": false
+      },
+      {
+        "text": "Critical Path Method (CPM)",
+        "correct": false
+      }
+    ],
+    "id": 361
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Phillip is leading a large software project using adaptive approach. He has been approached by the project sponsor to know the expected project completion date. Phillip has informed him that the likely completion date is after 6 months, because:",
+    "explanation": "Each two weeks the team completes 50 story points. The remaining story points are 560, so they need 560/50 = 11.2 iterations = 12 iterations (6 months). Domain = Process. Agile Practice Guide, Page 61",
+    "choices": [
+      {
+        "text": "The team average velocity is 50 story points per two-weeks iteration and there are 560 story points remaining.",
+        "correct": true
+      },
+      {
+        "text": "The team average velocity is 60 story points per two-weeks iteration and there are 600 story points remaining.",
+        "correct": false
+      },
+      {
+        "text": "The team average velocity is 30 story points per one-week iteration and there are 600 story points remaining.",
+        "correct": false
+      },
+      {
+        "text": "The team average velocity is 25 story points per one-week iteration and there are 500 story points remaining.",
+        "correct": false
+      }
+    ],
+    "id": 362
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a project for a customer. The customer has stated in the contracted that there will be a 5% of the project budget as a bonus if the project team delivers the project one month earlier than the planned project completion date. Which of the following can you do to exploit this opportunity?",
+    "explanation": "Crashing is a technique used to shorten the schedule duration for the least incremental cost by adding resources to critical path activities. This will increase the probability of completing the project earlier than planned. Domain = Process. PMBOK 6th edition, Page 215 and PMBOK 7th edition, Page 59",
+    "choices": [
+      {
+        "text": "Resource Smoothing",
+        "correct": false
+      },
+      {
+        "text": "Crashing",
+        "correct": true
+      },
+      {
+        "text": "Resource Leveling",
+        "correct": false
+      },
+      {
+        "text": "Outsourcing",
+        "correct": false
+      }
+    ],
+    "id": 363
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Bill has just been promoted to a project manager position. It is the first time he manages a project. He is being mentored by Helena, an experienced project manager. Helena advised him that his team members should be involved in developing project schedule and they should approve the final project schedule. Which of the following best describes why he needs the team to approve the final project schedule?",
+    "explanation": "Team approval to ensure activities can be completed as scheduled. Team approval doesn’t relate to enhancing team buy in or loyalty. Domain = Process. PMBOK 6th edition, Page 207",
+    "choices": [
+      {
+        "text": "To enhance team buy-in and loyalty.",
+        "correct": false
+      },
+      {
+        "text": "To improve communications.",
+        "correct": false
+      },
+      {
+        "text": "To ensure activities can be completed as scheduled.",
+        "correct": true
+      },
+      {
+        "text": "To improve accuracy of estimates.",
+        "correct": false
+      }
+    ],
+    "id": 364
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Chris is a project manager for a construction project. He and his team have finished defining project activities and they need to determine the relationships between project activities to create the network diagram. They decided that the first task is \"digging work\", it must be completed before the second task \"pour foundation\" begins. The third task \"level concrete\" cannot begin until \"pour foundation\" begins. What is the relationship between the \"digging work\", \"pour foundation\" and \"level concrete\"?",
+    "explanation": "As digging work must finish before pour foundation can start, so the relationship between digging work and pour foundation is Finish to Start FS. As the level concrete can't start until pour foundation starts, so the relationship between pour foundation and level concrete is Start to Start SS. Domain = Process. PMBOK 6th edition, Page 190 and PMBOK 7th edition, Page 59",
+    "choices": [
+      {
+        "text": "Digging work and pour foundation is Finish to Start FS and pour foundation and level concrete is Finish to Start FS.",
+        "correct": false
+      },
+      {
+        "text": "Digging work and pour foundation is Finish to Start FS and pour foundation and level concrete is Start to Start SS.",
+        "correct": true
+      },
+      {
+        "text": "Digging work and pour foundation is Finish to Finish FF and pour foundation and level concrete is Start to Start SS.",
+        "correct": false
+      },
+      {
+        "text": "Digging work and pour foundation is Start to Start SS and pour foundation and level concrete is Finish to Start FS.",
+        "correct": false
+      }
+    ],
+    "id": 365
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You have a project with the following activities: Activity A takes 5 days and should happen after the project starts. Activity B takes 8 days and should happen after Activity A. Activity C must happen after the project starts and takes 4 days. Activity D must happen after activities C and takes 6 days. Activity E must take place after activities B and D and takes 6 days. Activity F takes place after activity D and takes 3 days. Activity G takes place after activity E and takes 10 days. Activities F and G are the last activities of the project. Which of the following is true if activity F actually takes 6 days?",
+    "explanation": "There are three paths are Start-A-B-E-G-End = 29 days, Start-C-D-E-G-End = 26 days, and Start-C-D-F-End = 13 days. If F = 6 days so path Start-C-D-F-End only changes to 16 days. Domain = Process. PMBOK 6th edition, Page 210 and PMBOK 7th edition, Page 58-60",
+    "choices": [
+      {
+        "text": "The critical path will be the same.",
+        "correct": true
+      },
+      {
+        "text": "The project duration increases by 3 days.",
+        "correct": false
+      },
+      {
+        "text": "The critical path is 32 days.",
+        "correct": false
+      },
+      {
+        "text": "The critical path changes to start, C, D, F, end.",
+        "correct": false
+      }
+    ],
+    "id": 366
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following relationships is the least used in Precedence Diagramming Method?",
+    "explanation": "Start to Finish relationships means that the next task can't be completed until the preceding task starts, which is not commonly used. Domain = Process. PMBOK 6th edition, Page 190 and PMBOK 7th edition, Page 59",
+    "choices": [
+      {
+        "text": "Finish to Start",
+        "correct": false
+      },
+      {
+        "text": "Finish to Finish",
+        "correct": false
+      },
+      {
+        "text": "Start to Start",
+        "correct": false
+      },
+      {
+        "text": "Start to Finish",
+        "correct": true
+      }
+    ],
+    "id": 367
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Nicole is a project manager for a major software project. The project is very important for the customer. She and her team have finalized the project management plan which resulted in a schedule that is too long. She needs to compress the schedule when she analyzed the network diagram, she found that it can't change. She has extra personnel resources. What is the best thing to do?",
+    "explanation": "Resource leveling will increase the project duration, Monte Carlo analysis doesn’t relate to increasing or decreasing project durations, fast tracking can’t be applied in this case as she can’t change the network diagram, thus the activities that were originally planned sequentially can’t be changed to be in parallel, crashing the project is the best answer because she has extra available human resources. Domain = Process. PMBOK 6th edition, Page 215 and PMBOK 7th edition, Page 58-60",
+    "choices": [
+      {
+        "text": "Perform Monte Carlo analysis",
+        "correct": false
+      },
+      {
+        "text": "Level the resources",
+        "correct": false
+      },
+      {
+        "text": "Crash the project",
+        "correct": true
+      },
+      {
+        "text": "Fast track the project",
+        "correct": false
+      }
+    ],
+    "id": 368
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a product development project. Your customer tells you that you need to plan to have an audit team start auditing so that it finishes just before documentation begins. But other than that, she says it can start as late in the project as necessary. What’s the relationship between the auditing activity and the documentation activity?",
+    "explanation": "The first activity (auditing) should be finished totally before the next activity (documentation) begins, so the relationship is finish-to-start (FS). Domain = Process. PMBOK 6th edition, Page 190 and PMBOK 7th edition, Page 59",
+    "choices": [
+      {
+        "text": "Start-to-Start (SS)",
+        "correct": false
+      },
+      {
+        "text": "Start-to-Finish (SF)",
+        "correct": false
+      },
+      {
+        "text": "Finish-to-Start (FS)",
+        "correct": true
+      },
+      {
+        "text": "Finish-to-Finish (FF)",
+        "correct": false
+      }
+    ],
+    "id": 369
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You have just been promoted to a project manager position. You are assigned to manage your first project. You want to report your project schedule. You asked a more experienced project manager about the best method to report your schedule. He told you there are several methods to report your schedule like network diagrams, milestone chart and Gantt chart. Under which circumstances is it best to use a network diagram rather than a Gantt chart?",
+    "explanation": "In this question you can read only the last sentence without reading the rest of question. A network diagram is used to show interdependencies between activities. Domain = Process. PMBOK 6th edition, Page 218 and PMBOK 7th edition, Pages 58–60",
+    "choices": [
+      {
+        "text": "Gantt chart is always the best way to report project schedule.",
+        "correct": false
+      },
+      {
+        "text": "To show interdependencies between activities.",
+        "correct": true
+      },
+      {
+        "text": "To track progress or to report to the team.",
+        "correct": false
+      },
+      {
+        "text": "To report to the sponsor.",
+        "correct": false
+      }
+    ],
+    "id": 370
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Both teams A and B after the first few iterations have determined their velocity to be 50 story points per iteration. Team A has committed to the planned velocity for the remaining iterations of the project. Team B has constantly exceeded the planned velocity. Which team has higher efficiency?",
+    "explanation": "The team who commits to the planned velocity has higher efficiency. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "Team A",
+        "correct": true
+      },
+      {
+        "text": "Team B",
+        "correct": false
+      },
+      {
+        "text": "Both have the same efficiency",
+        "correct": false
+      },
+      {
+        "text": "Not enough information",
+        "correct": false
+      }
+    ],
+    "id": 371
+  },
+  {
+    "type": "multiple-choice",
+    "text": "An activity has an early start (ES) of day 2, and a late finish (LF) of day 18. The activity duration is 5 days. Which of the following statements is true regarding this activity?",
+    "explanation": "Activity duration = Early finish – Early start = Late finish – Late start. Activity float = Late finish – Early finish = Late start – Early start. Activity Float = LF – EF = LS – ES. Activity Duration = LF – LS = EF – ES. 5 = EF – 2. EF = 2 + 5 = 7. Activity Float = LF – EF = 18 – 7 = 11. This means that activity has float, so activity is not on the critical path. The project float doesn't equal the activity float. Domain = Process. PMBOK 6th edition, Page 210 and PMBOK 7th edition, Page 58-60",
+    "choices": [
+      {
+        "text": "The activity is on the critical path.",
+        "correct": false
+      },
+      {
+        "text": "The project float is 11 days.",
+        "correct": false
+      },
+      {
+        "text": "The project will be delayed.",
+        "correct": false
+      },
+      {
+        "text": "The activity is not on the critical path.",
+        "correct": true
+      }
+    ],
+    "id": 372
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The organization's CEO is highly concerned about one of the agile projects being implemented in his organization. He wants to know the progress of the project. What is the best demonstration of progress that the team can come up with?",
+    "explanation": "The second value of Agile Manifesto states that we value working software over comprehensive documentation. The seventh principle also states that Working software is the primary measure of progress. Domain = Process. Agile Practice Guide Page 8",
+    "choices": [
+      {
+        "text": "Burndown Chart",
+        "correct": false
+      },
+      {
+        "text": "Working product",
+        "correct": true
+      },
+      {
+        "text": "Information Radiators",
+        "correct": false
+      },
+      {
+        "text": "Project Status Report",
+        "correct": false
+      }
+    ],
+    "id": 373
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During a hardware design project, a critical path activity was delayed because the predecessor activity was completed later than planned. After investigating the cause of the problem, it was found that the team member responsible for executing the predecessor activity was late in completing the activity, because the estimated time for completing the activity was shorter than the actual needed time. This most probably happened because:",
+    "explanation": "The team member didn't participate in estimation of durations, thus the estimate is not accurate. The inputs for the estimates of duration originate from the person or group on the project team who is most familiar with the nature of the work in the specific activity. Domain = Process. PMBOK 6th edition, Page 196 and PMBOK 7th edition, Page 55-58",
+    "choices": [
+      {
+        "text": "The team member was not involved in estimating the activity duration.",
+        "correct": true
+      },
+      {
+        "text": "The resources assigned to perform the activities were less than the actual needed resources.",
+        "correct": false
+      },
+      {
+        "text": "The project manager was not involved in estimating the activity duration.",
+        "correct": false
+      },
+      {
+        "text": "Historical information was not used properly in estimating activity duration.",
+        "correct": false
+      }
+    ],
+    "id": 374
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You’re managing a construction project when your customer required to finish the project earlier than planned due to external circumstances. A team member heard that in a situation like this, you can use schedule compression by either crashing or fast-tracking the schedule, but he’s not sure which one to use. What do you tell him?",
+    "explanation": "Schedule compression will shorten the project time either by crashing which will increase the cost or by fast tracking that will increase project risk because critical path activities that were originally planned sequentially will be implemented in parallel. Domain = Process. PMBOK 6th edition, Page 215 and PMBOK 7th edition, Page 59",
+    "choices": [
+      {
+        "text": "Crashing the project adds risk, while fast-tracking adds cost.",
+        "correct": false
+      },
+      {
+        "text": "When you crash a project, it always shortens the total duration of the project.",
+        "correct": false
+      },
+      {
+        "text": "Crashing the project adds cost, while fast-tracking adds risk.",
+        "correct": true
+      },
+      {
+        "text": "When you fast-track a project, it always shortens the total duration of the project.",
+        "correct": false
+      }
+    ],
+    "id": 375
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Lisa is managing a construction project. The project is to build a new office building and it is very important to the customer. The project team has just calculated the critical path duration and informed the customer that the project will take one year. The customer informed Lisa that the project duration is too long and the building should be opened with an official ceremony after ten months. What should she do?",
+    "explanation": "Adding resources to some critical path activities will shorten the project schedule, this practice is known as crashing. Fast tracking the project can't be done if the project risk is high, because fast tracking increases project risk. Escalating the issue to the project sponsor is not a proactive solution. Domain = Process. PMBOK 6th edition, Page 215 and PMBOK 7th edition, Page 59",
+    "choices": [
+      {
+        "text": "Fast track the critical path activities if overall project risk is high.",
+        "correct": false
+      },
+      {
+        "text": "Add resources to some critical path activities to adjust the project end date to meet the imposed date by the customer.",
+        "correct": true
+      },
+      {
+        "text": "Inform the customer that the critical path is the minimum project duration and it has no flexibility.",
+        "correct": false
+      },
+      {
+        "text": "Escalate the issue and ask for guidance from the project sponsor.",
+        "correct": false
+      }
+    ],
+    "id": 376
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Michael is a project manager for a product development project. He and his team members are holding a weekly project status meeting. A team member asked the project manager that they will need additional resources to perform a critical path activity which has been delayed. The project manager told him that he forgot to do something before adding resources. What might the team member forget to do?",
+    "explanation": "They should first try to look for options to compress the schedule before asking for additional resources. Domain = Process. PMBOK 6th edition, Page 215 and PMBOK 7th edition, Page 59",
+    "choices": [
+      {
+        "text": "Look for options with the customer before meeting with the project manager.",
+        "correct": false
+      },
+      {
+        "text": "Level the resources.",
+        "correct": false
+      },
+      {
+        "text": "Remove float in near critical path.",
+        "correct": false
+      },
+      {
+        "text": "To try to compress the project schedule before asking for additional resources.",
+        "correct": true
+      }
+    ],
+    "id": 377
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Mark compares his team velocity which is 40 story points per iteration to another team's velocity in the same organization with the same size working on similar project and found their velocity to be 55 story points per iteration. What should Mark do?",
+    "explanation": "There is no meaningful comparison of velocity “between” different teams, since such teams may have different approaches to estimation. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "Acquire more resources to his team.",
+        "correct": false
+      },
+      {
+        "text": "Do nothing.",
+        "correct": true
+      },
+      {
+        "text": "Bring this issue for discussion in the retrospective.",
+        "correct": false
+      },
+      {
+        "text": "Discuss the issue in the next standup meeting.",
+        "correct": false
+      }
+    ],
+    "id": 378
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a construction project to build a new school. You are working with your team to develop the network diagram. A team member suggests that the quality of work could be improved if you start the electricity work before starting the plumbing work. But if it leads to increasing the schedule duration, they both can be done in parallel. What type of dependency is he referring to?",
+    "explanation": "As the two activities can both be performed in parallel, so it is a discretionary dependency. Domain = Process. PMBOK 6th edition, Page 191 and PMBOK 7th edition, Page 60",
+    "choices": [
+      {
+        "text": "External dependency",
+        "correct": false
+      },
+      {
+        "text": "Mandatory dependency",
+        "correct": false
+      },
+      {
+        "text": "Discretionary dependency",
+        "correct": true
+      },
+      {
+        "text": "Internal dependency",
+        "correct": false
+      }
+    ],
+    "id": 379
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The same project may be assigned to two different teams, Team A has estimated 420 story points and 30 points velocity per two weeks iteration. Team B estimated 280 story points and 20 points velocity per two weeks iteration. Which of the following statements is correct?",
+    "explanation": "There is no meaningful comparison of velocity “between” different teams, since such teams may have different approaches to estimation. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "Team B has underestimated project scope.",
+        "correct": false
+      },
+      {
+        "text": "Team A is more efficient than team B.",
+        "correct": false
+      },
+      {
+        "text": "Team A didn't account for disruptions in their estimate.",
+        "correct": false
+      },
+      {
+        "text": "None of the above",
+        "correct": true
+      }
+    ],
+    "id": 380
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a new software project to develop a website for a customer. The customer wants the project to be completed in 40 days. The project is going well and the cost performance index CPI = 1.07 and the project is being performed with four team members, the project critical path duration is 38 days with a standard deviation of two days. What is the maximum project float?",
+    "explanation": "Mean= 38, the project will take 38+/- 2, range 36 to 40. Domain = Process. PMBOK 6th edition, Page 210 and PMBOK 7th edition, Page 58-60",
+    "choices": [
+      {
+        "text": "Four days",
+        "correct": true
+      },
+      {
+        "text": "Zero days",
+        "correct": false
+      },
+      {
+        "text": "Two days",
+        "correct": false
+      },
+      {
+        "text": "One day",
+        "correct": false
+      }
+    ],
+    "id": 381
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following is the most beneficial use of the critical path?",
+    "explanation": "The critical path is the sequence of activities that represents the longest path through a project, so any delay in the activities on the critical path will delay the project. So the activities on the critical path need immediate attention. Domain = Process. PMBOK 6th edition, Page 210 and PMBOK 7th edition, Page 58-60",
+    "choices": [
+      {
+        "text": "To know where you have a spike in the use of resources.",
+        "correct": false
+      },
+      {
+        "text": "To know where there is float on the project.",
+        "correct": false
+      },
+      {
+        "text": "To know where to assign extra resources.",
+        "correct": false
+      },
+      {
+        "text": "To know which activities need immediate attention.",
+        "correct": true
+      }
+    ],
+    "id": 382
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a large software project. The project team has just calculated the critical path, you received a call from the PMO manager telling you that one of the web developers will be taken from your project to join another more important project, that of course will cause a resource limitation problem. In light of this, which technique should you use to recalculate project schedule?",
+    "explanation": "Fast tracking is not applicable as resources are limited, resource optimization techniques like resource leveling or resource smoothing should be used to adjust schedule with resource limitations. Domain = Process. PMBOK 6th edition, Page 211",
+    "choices": [
+      {
+        "text": "Critical Path Method (CPM)",
+        "correct": false
+      },
+      {
+        "text": "Resource optimization techniques",
+        "correct": true
+      },
+      {
+        "text": "Monte Carlo",
+        "correct": false
+      },
+      {
+        "text": "Fast Tracking",
+        "correct": false
+      }
+    ],
+    "id": 383
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A timeboxed event means that:",
+    "explanation": "Timeboxed events have a maximum duration. Domain = Process. Agile Practice Guide Page 154",
+    "choices": [
+      {
+        "text": "The event must happen at a given time.",
+        "correct": false
+      },
+      {
+        "text": "The event must take a minimum amount of time.",
+        "correct": false
+      },
+      {
+        "text": "The event can't take more than a maximum amount of time.",
+        "correct": true
+      },
+      {
+        "text": "The event should take average time plus or minus 10%.",
+        "correct": false
+      }
+    ],
+    "id": 384
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Rayan is a junior developer who has just joined an agile team. He has never worked before in agile environment. He asks the agile coach about how to calculate the project schedule in agile projects. Which of the following represents the best agile coach answer?",
+    "explanation": "In agile projects, schedule is calculated by estimating story points and applying team velocity. Domain = Process. Agile Practice Guide Page 23",
+    "choices": [
+      {
+        "text": "Calculating the critical path duration.",
+        "correct": false
+      },
+      {
+        "text": "Estimating story points and applying team velocity.",
+        "correct": true
+      },
+      {
+        "text": "Timeboxing the iterations.",
+        "correct": false
+      },
+      {
+        "text": "Analyzing activities and determining dependencies.",
+        "correct": false
+      }
+    ],
+    "id": 385
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Thomas is a project manager for a large software project. He and his team are creating the project schedule. The project sponsor requested from Thomas to create a chart to use in reporting the project schedule to him. This chart should identify the scheduled start or completion of major deliverables and key external interfaces. What should he create?",
+    "explanation": "Milestone charts are similar to bar charts, but only identify the scheduled start or completion of major deliverables and key external interfaces. Domain = Process. PMBOK 6th edition, Page 218",
+    "choices": [
+      {
+        "text": "Work breakdown structure",
+        "correct": false
+      },
+      {
+        "text": "Project schedule network diagram",
+        "correct": false
+      },
+      {
+        "text": "Gantt chart",
+        "correct": false
+      },
+      {
+        "text": "Milestone chart",
+        "correct": true
+      }
+    ],
+    "id": 386
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Robert has been promoted to a project manager position in his organization. He will be assigned to manage the next project. The human resources policy in the organization states that the maximum number of human resources to work on any project should not exceed ten human resources. He must comply with this policy while developing the project schedule. This is an example of:",
+    "explanation": "Resource smoothing is a technique that adjusts the activities of a schedule model such that the requirements for resources on the project do not exceed certain predefined resource limits. Domain = Process. PMBOK 6th edition, Page 211",
+    "choices": [
+      {
+        "text": "Resource Smoothing",
+        "correct": true
+      },
+      {
+        "text": "Resource Leveling",
+        "correct": false
+      },
+      {
+        "text": "Pre-assignment",
+        "correct": false
+      },
+      {
+        "text": "Organizational Theory",
+        "correct": false
+      }
+    ],
+    "id": 387
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a complex construction project that resulted in a schedule that is too long and has too many activities. Alex is a scheduling professional expert in your organization, he is auditing your project schedule network diagram. The expert tells you to focus more on nodes with \"path convergence\". What does he mean?",
+    "explanation": "When there are multiple predecessor activities, dependency increases and risk increases. Domain = Process. PMBOK 6th edition, Page 190 and PMBOK 7th edition, Page 60",
+    "choices": [
+      {
+        "text": "Nodes in a WBS, where several work packages are brought together.",
+        "correct": false
+      },
+      {
+        "text": "Nodes in a network diagram which have multiple successors.",
+        "correct": false
+      },
+      {
+        "text": "Nodes in a decision tree, showing various branches with the same chance.",
+        "correct": false
+      },
+      {
+        "text": "Nodes in a network diagram which have multiple predecessors.",
+        "correct": true
+      }
+    ],
+    "id": 388
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Junior is the project manager for a large construction project. The project is scheduled to be performed in two years and budgeted at 20,000,000 $. He and his team have divided the project into four phases. They planned the first phase in details and defined the needed activities to be performed during this phase, while there is not enough information to define activities to be performed in the later phases. So, they planned the later phases at a higher level until more information becomes available. Which technique are they using?",
+    "explanation": "Rolling wave planning is an iterative planning technique in which the work to be accomplished in the near term is planned in detail, while work further in the future is planned at a higher level. Domain = Process. PMBOK 6th edition, Page 185",
+    "choices": [
+      {
+        "text": "Decomposition",
+        "correct": false
+      },
+      {
+        "text": "Dependency Determination",
+        "correct": false
+      },
+      {
+        "text": "Rolling Wave Planning",
+        "correct": true
+      },
+      {
+        "text": "Precedence Diagramming Method",
+        "correct": false
+      }
+    ],
+    "id": 389
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Alan is managing a hardware design project. The project SPI = 0.83 and CPI = 1. The customer is not happy with the project progress. He requested from Alan to return the project back on track. Alan suggested that they can remove a test from the project management plan. Removing this test will ensure that the project will be back again on track. The customer requested to perform all the work in the project management plan without adding any extra cost or cutting scope. Which of the following should Alan do?",
+    "explanation": "As he can't cut scope and can't add extra cost, so the only possible method to shorten the project duration is to fast track the project. Monte Carlo and resource leveling are not schedule compression techniques. Domain = Process. PMBOK 6th edition, Page 215 and PMBOK 7th edition, Page 59",
+    "choices": [
+      {
+        "text": "Crash the project",
+        "correct": false
+      },
+      {
+        "text": "Fast track the project",
+        "correct": true
+      },
+      {
+        "text": "Level project resources",
+        "correct": false
+      },
+      {
+        "text": "Perform Monte Carlo analysis",
+        "correct": false
+      }
+    ],
+    "id": 390
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The organization's CEO is highly concerned about one of the agile projects being implemented in his organization. He wants to know the progress of the project. What is the best demonstration of progress that the team can come up with?",
+    "explanation": "The second value of Agile Manifesto states that we value working software over comprehensive documentation. The seventh principle also states that Working software is the primary measure of progress. Domain = Process. Agile Practice Guide Page 8",
+    "choices": [
+      {
+        "text": "Burndown Chart",
+        "correct": false
+      },
+      {
+        "text": "Working product",
+        "correct": true
+      },
+      {
+        "text": "Information Radiators",
+        "correct": false
+      },
+      {
+        "text": "Project Status Report",
+        "correct": false
+      }
+    ],
+    "id": 391
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A timeboxed event means that:",
+    "explanation": "Timeboxed events have a maximum duration. Domain = Process. Agile Practice Guide Page 154",
+    "choices": [
+      {
+        "text": "The event must happen at a given time.",
+        "correct": false
+      },
+      {
+        "text": "The event must take a minimum amount of time.",
+        "correct": false
+      },
+      {
+        "text": "The event can't take more than a maximum amount of time.",
+        "correct": true
+      },
+      {
+        "text": "The event should take average time plus or minus 10%.",
+        "correct": false
+      }
+    ],
+    "id": 392
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Nicole is a project manager for a major software project. The project is very important for the customer. She and her team have finalized the project management plan which resulted in a schedule that is too long. She needs to compress the schedule when she analyzed the network diagram, she found that it can’t change. She has extra personnel resources. What is the best thing to do?",
+    "explanation": "Resource leveling will increase the project duration, Monte Carlo analysis doesn’t relate to increasing or decreasing project durations, fast tracking can’t be applied in this case as she can’t change the network diagram, thus the activities that were originally planned sequentially can’t be changed to be in parallel, crashing the project is the best answer because she has extra available human resources. Domain = Process. PMBOK 6th edition, Page 215 and PMBOK 7th edition, Page 58-60",
+    "choices": [
+      {
+        "text": "Perform Monte Carlo analysis",
+        "correct": false
+      },
+      {
+        "text": "Level the resources",
+        "correct": false
+      },
+      {
+        "text": "Crash the project",
+        "correct": true
+      },
+      {
+        "text": "Fast track the project",
+        "correct": false
+      }
+    ],
+    "id": 393
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The product owner wants to know when a user story can be completed. The development team informed him that this user story has been assigned 5 story points. The product owner asks the team if there is any time estimate or there is any relation between the sizing and the time required to complete the user story. Which of the following statements represents the team’s best answer?",
+    "explanation": "To estimate more efficiently and accurately, agile teams rely on relative sizing. They do most of their estimating not in hours or days, but in a relative unit called “story points.” Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "There is no direct relation between sizing and time. You can refer to the team velocity, it will specify how many story points can be completed within an iteration.",
+        "correct": true
+      },
+      {
+        "text": "We can give this user story high priority to be completed as soon as possible.",
+        "correct": false
+      },
+      {
+        "text": "A story point can be completed by 1 person within 1 business day.",
+        "correct": false
+      },
+      {
+        "text": "A story point can be completed by 1 person within 1 business hour.",
+        "correct": false
+      }
+    ],
+    "id": 394
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During measuring the project performance against the project management plan, you discover that the project is running behind schedule and the final deliverable will be delayed by one month after the required date by the customer. What should the project manager do?",
+    "explanation": "Working overtime or requesting to change the project end dates are reactive solutions, even evaluating the impacts of completing the project later is not a good solution. The project manager must be proactive, so evaluating the impacts for crashing or fast tracking is the best solution. Domain = Process. PMBOK 6th edition, Page 223 and PMBOK 7th edition, Page 58-60",
+    "choices": [
+      {
+        "text": "Look for options with project team members like adding more resources or performing critical path activities in parallel.",
+        "correct": true
+      },
+      {
+        "text": "Let the team members work overtime to finish the project on time.",
+        "correct": false
+      },
+      {
+        "text": "Evaluate the impact of completing the project later than the required date.",
+        "correct": false
+      },
+      {
+        "text": "Make a change request to extend the project and schedule and submit it to the change control board.",
+        "correct": false
+      }
+    ],
+    "id": 395
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Sam is a functional manager in the organization, he called Henry, the project manager three times today requiring to release one of his resources from his project to assign some functional work to him. He called Henry ten times this week for the same purpose. A team member informed Henry that the hardware needed to perform an activity may be delayed. This activity has early start of 5 and late start of 35. The project float is zero. The project is going well and its risk rating is low. The project has SPI of 0.89 and CPI of 1.12. What is the best thing to do?",
+    "explanation": "It is necessary to identify the most critical problem that needs to be addressed. Is it the impact of phone calls? Of course not, as the project manager spends 90% of their time communicating with others, so meeting with Sam to address the effects of phone calls is not the best solution. Activity crashing that requires the equipment is an incorrect answer because this activity has different early start and late start dates, meaning it has float and is therefore not on the critical path. Looking for opportunities to reduce costs is also not the best choice because the Cost Performance Index (CPI) is greater than 1, indicating the project is under budget. The best choice here is project schedule compression because the Schedule Performance Index (SPI) is less than 1.",
+    "choices": [
+      {
+        "text": "Crash the activity which needs the hardware.",
+        "correct": false
+      },
+      {
+        "text": "Henry should meet Sam to solve the problem.",
+        "correct": false
+      },
+      {
+        "text": "Look for areas to cut costs.",
+        "correct": false
+      },
+      {
+        "text": "Crash the project.",
+        "correct": true
+      }
+    ],
+    "id": 396
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a new software project to develop a website for a customer. The customer wants the project to be completed in 40 days. The project is going well and the cost performance index CPI = 1.07 and the project is being performed with four team members, the project critical path duration is 38 days with a standard deviation of two days. What is the maximum project float?",
+    "explanation": "Mean= 38, the project will take 38+/- 2, range 36 to 40. Domain = Process. PMBOK 6th edition, Page 210 and PMBOK 7th edition, Page 58-60",
+    "choices": [
+      {
+        "text": "Four days",
+        "correct": true
+      },
+      {
+        "text": "Zero days",
+        "correct": false
+      },
+      {
+        "text": "Two days",
+        "correct": false
+      },
+      {
+        "text": "One day",
+        "correct": false
+      }
+    ],
+    "id": 397
+  },
+  {
+    "type": "multiple-choice",
+    "text": "An activity has an early start (ES) of day 2, and a late finish (LF) of day 18. The activity duration is 5 days. What is the activity’s float?",
+    "explanation": "Activity duration = Early finish – Early start = Late finish – Late start. Activity float = Late finish – Early finish = Late start – Early start. Activity Float = LF – EF = LS – ES. Activity Duration = LF – LS = EF – ES. 5 = EF – 2. EF = 2 + 5 = 7. Activity Float = LF – EF = 18 – 7 = 11. Domain = Process. PMBOK 6th edition, Page 210",
+    "choices": [
+      {
+        "text": "7",
+        "correct": false
+      },
+      {
+        "text": "16",
+        "correct": false
+      },
+      {
+        "text": "13",
+        "correct": false
+      },
+      {
+        "text": "11",
+        "correct": true
+      }
+    ],
+    "id": 398
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Lisa is managing a construction project. The project is to build a new office building and it is very important to the customer. The project team has just calculated the critical path duration and informed the customer that the project will take one year. The customer informed Lisa that the project duration is too long and the building should be opened with an official ceremony after ten months. What should she do?",
+    "explanation": "Adding resources to some critical path activities will shorten the project schedule, this practice is known as crashing. Fast tracking the project can't be done if the project risk is high, because fast tracking increases project risk. Escalating the issue to the project sponsor is not a proactive solution. Domain = Process. PMBOK 6th edition, Page 215 and PMBOK 7th edition, Page 59",
+    "choices": [
+      {
+        "text": "Fast track the critical path activities if overall project risk is high.",
+        "correct": false
+      },
+      {
+        "text": "Add resources to some critical path activities to adjust the project end date to meet the imposed date by the customer.",
+        "correct": true
+      },
+      {
+        "text": "Inform the customer that the critical path is the minimum project duration and it has no flexibility.",
+        "correct": false
+      },
+      {
+        "text": "Escalate the issue and ask for guidance from the project sponsor.",
+        "correct": false
+      }
+    ],
+    "id": 399
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You have just been promoted to a project manager position. You are assigned to manage your first project. You want to report your project schedule. You asked a more experienced project manager about the best method to report your schedule. He told you there are several methods to report your schedule like network diagrams, milestone chart and Gantt chart. Under which circumstances is it best to use a network diagram rather than a Gantt chart?",
+    "explanation": "In this question you can read only the last sentence without reading the rest of question. A network diagram is used to show interdependencies between activities. Domain = Process. PMBOK 6th edition, Page 218 and PMBOK 7th edition, Page 58-60",
+    "choices": [
+      {
+        "text": "Gantt chart is always the best way to report project schedule.",
+        "correct": false
+      },
+      {
+        "text": "To show interdependencies between activities.",
+        "correct": true
+      },
+      {
+        "text": "To track progress or to report to the team.",
+        "correct": false
+      },
+      {
+        "text": "To report to the sponsor.",
+        "correct": false
+      }
+    ],
+    "id": 400
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are assigned as a project manager for a risky construction project. You are asked to provide a time estimate for your manager and consider uncertainties in your estimate. Which of the following techniques is most suitable in this situation?",
+    "explanation": "The accuracy of single-point duration estimates may be improved by considering estimation uncertainty and risk. Using three-point estimates helps define an approximate range for an activity’s duration. Domain = Process. PMBOK 6th edition, Page 201",
+    "choices": [
+      {
+        "text": "Parametric Estimating",
+        "correct": false
+      },
+      {
+        "text": "Analogous Estimating",
+        "correct": false
+      },
+      {
+        "text": "Three-point Estimating",
+        "correct": true
+      },
+      {
+        "text": "Critical Path Method (CPM)",
+        "correct": false
+      }
+    ],
+    "id": 401
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During a hardware design project, a critical path activity was delayed because the predecessor activity was completed later than planned. After investigating the cause of the problem, it was found that the team member responsible for executing the predecessor activity was late in completing the activity, because the estimated time for completing the activity was shorter than the actual needed time. This most probably happened because:",
+    "explanation": "The team member didn't participate in estimation of durations, thus the estimate is not accurate. The inputs for the estimates of duration originate from the person or group on the project team who is most familiar with the nature of the work in the specific activity. Domain = Process. PMBOK 6th edition, Page 196 and PMBOK 7th edition, Page 55-58",
+    "choices": [
+      {
+        "text": "The team member was not involved in estimating the activity duration.",
+        "correct": true
+      },
+      {
+        "text": "The resources assigned to perform the activities were less than the actual needed resources.",
+        "correct": false
+      },
+      {
+        "text": "The project manager was not involved in estimating the activity duration.",
+        "correct": false
+      },
+      {
+        "text": "Historical information was not used properly in estimating activity duration.",
+        "correct": false
+      }
+    ],
+    "id": 402
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following relationships is the least used in Precedence Diagramming Method?",
+    "explanation": "Start to Finish relationships means that the next task can't be completed until the preceding task starts, which is not commonly used. Domain = Process. PMBOK 6th edition, Page 190 and PMBOK 7th edition, Page 59",
+    "choices": [
+      {
+        "text": "Finish to Start",
+        "correct": false
+      },
+      {
+        "text": "Finish to Finish",
+        "correct": false
+      },
+      {
+        "text": "Start to Start",
+        "correct": false
+      },
+      {
+        "text": "Start to Finish",
+        "correct": true
+      }
+    ],
+    "id": 403
+  }
+]

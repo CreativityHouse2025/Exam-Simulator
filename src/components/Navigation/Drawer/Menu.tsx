@@ -17,10 +17,11 @@ import Grid from './Grid'
 import { timerIsRunning } from '../../../utils/state'
 import { translate } from '../../../utils/translation'
 import { SESSION_ACTION_TYPES } from '../../../constants'
-import { SessionExamContext, SessionTimerContext } from '../../../contexts'
+import { useSessionExam, useSessionTimer, useSessionControl } from '../../../contexts'
+import useResults from '../../../hooks/useResults'
 
 const MainMenu = styled.div<ThemedStyles>`
-  height: calc(100vh - 5rem);
+  flex: 1;
   display: flex;
   flex-direction: column;
   border-right: 1px solid ${({ theme }) => theme.grey[1]};
@@ -48,19 +49,20 @@ const MenuItemTextStyles = styled.div`
 `
 
 const MenuComponent: React.FC<MenuProps> = ({ open }) => {
-  const { examState, update } = React.useContext(SessionExamContext)
-  const timerSession = React.useContext(SessionTimerContext)
+  const { examState, update } = useSessionExam()
+  const timerSession = useSessionTimer()
+  const { submitExam } = useSessionControl()
+  const results = useResults()
   const [filter, setFilter] = React.useState<QuestionFilter>('all')
 
   const actions = React.useMemo(
     () => ({
       pause: () =>
         timerIsRunning({ ...timerSession, examState }) && update!([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, true]),
-      stop: () =>
-        update!([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, true], [SESSION_ACTION_TYPES.SET_EXAM_STATE, 'completed']),
+      stop: () => submitExam(results?.score ?? 0, results?.status ?? 'fail'),
       summary: () => update!([SESSION_ACTION_TYPES.SET_REVIEW_STATE, 'summary'])
     }),
-    [timerSession, examState, update]
+    [timerSession, examState, update, submitExam, results]
   )
 
   const menuItems = React.useMemo(() => {

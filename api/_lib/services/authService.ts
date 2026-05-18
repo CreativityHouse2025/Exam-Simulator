@@ -152,6 +152,8 @@ export async function signup(input: SignupRequestBody): Promise<SignupResult> {
 export async function signin(input: SigninRequestBody): Promise<SigninResult> {
   const { email, password, force } = input
 
+  const ACTIVE_CONCURRENT_SESSION_LIMIT = 1;
+
   const userClient = createUserClient()
   const { data, error } = await userClient.auth.signInWithPassword({ email, password })
 
@@ -181,8 +183,8 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
       throw new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: "Failed to check active sessions" })
     }
 
-    // TODO: remove the false flag
-    if (false) {
+    // + 1 to count the already-made session before signing it out
+    if (sessionCount >= ACTIVE_CONCURRENT_SESSION_LIMIT + 1) {
       await supabaseAdmin.auth.admin.signOut(accessToken, "local")
       throw new AppError({ statusCode: 409, code: "SESSION_CONFLICT", message: "Another active session exists" })
     }
