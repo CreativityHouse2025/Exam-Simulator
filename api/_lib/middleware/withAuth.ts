@@ -37,10 +37,24 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
     // Try the access token first — getClaims verifies the JWT signature locally
     // using a cached JWKS (asymmetric keys), with no GoTrue network call after cold start.
     if (accessToken) {
-      const { data, error } = await createUserClient().auth.getClaims(accessToken)
-      if (!error && data) {
-        const authUser: AuthUser = { id: data.claims.sub!, email: data.claims.email!, accessToken }
-        return handler(req, authUser)
+      // note: getClaims throws instead of returning an error if JWT is invalid, should handle internally
+      try {
+        const { data, error } = await createUserClient().auth.getClaims(accessToken)
+        if (!error && data) {
+          const authUser: AuthUser = { id: data.claims.sub!, email: data.claims.email!, accessToken }
+          return handler(req, authUser)
+        }
+      } catch (error: any) {
+        // might need to update in upcoming supabase versions (hardcoded string value)
+        // TODO: switch to manual JWT verification for better compatability 
+        const errorMessage: string = error.message.toLowerCase()
+        if (errorMessage !== 'jwt has expired') {
+          throw new AppError({
+            statusCode: 401,
+            code: "UNAUTHORIZED",
+            message: "Authentication required",
+          })
+        }
       }
     }
 

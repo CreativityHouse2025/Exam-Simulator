@@ -1,11 +1,12 @@
 import React from "react"
-import { ExamContext, useSessionControl } from "../contexts"
+import { ExamContext, useSessionControl, useSessionData, useSessionExam } from "../contexts"
 import Loading from "../components/Loading"
 import Confirms from "../components/Navigation/Confirms"
 import type { Exam, Question } from "../types"
 import { applyQuestionChoiceOrders } from "../utils/format"
 import { loadDomainExam, loadFullExam } from "../utils/exam"
 import useToast from "../hooks/useToast"
+import useUnsavedChangesWarning from "../hooks/useUnsavedChangesWarning"
 import { translate } from "../utils/translation"
 import useSettings from "../hooks/useSettings"
 import { useNavigate, useSearchParams } from "react-router-dom"
@@ -15,10 +16,6 @@ import { useNavigate, useSearchParams } from "react-router-dom"
  *
  * Holds the current exam in memory and is solely responsible for loading exam data from disk.
  *
- * On mount it reads examType + examId/categoryId from SessionControlContext (the session
- * must already be populated by SessionProvider before this provider is mounted on /app/exam),
- * then fetches the corresponding exam JSON file via loadFullExam / loadDomainExam.
- *
  * session.questionIds is the contract for which questions to render and in what order:
  * - 'ALL': render the loaded file as-is (every new exam).
  * - number[]: render exactly these question ids, in this order (resume + revision).
@@ -26,9 +23,6 @@ import { useNavigate, useSearchParams } from "react-router-dom"
  * across all three session lifecycle paths.
  *
  * Re-loads on language change so questions re-render in the new language without a full reload.
- *
- * Shows a loading spinner while the file is being fetched, but only when exam is null —
- * if an exam is already in memory (e.g. language hot-swap) the current exam stays rendered.
  */
 export default function ExamContextProvider({ children }: { children: React.ReactNode }) {
   const [exam, setExam] = React.useState<Exam | null>(null)
@@ -47,6 +41,18 @@ export default function ExamContextProvider({ children }: { children: React.Reac
 
   // consume the session from the provider after it fully sets it
   const { session } = useSessionControl()
+  const { dirtyQuestions, examType } = useSessionData()
+  const { examState } = useSessionExam()
+
+  // Guard the tab-close warning here, not in SessionProvider, because SessionProvider
+  // also wraps the cover and history pages — dirty questions from a prior session would
+  // trigger the popup confusingly on those unrelated pages.
+  const hasUnsavedChanges =
+    examType !== 'revision' &&
+    examState === 'in-progress' &&
+    Object.keys(dirtyQuestions).length > 0
+
+  useUnsavedChangesWarning(hasUnsavedChanges)
 
   React.useEffect(() => {
     // This guard handles the brief window between navigation and session mount.

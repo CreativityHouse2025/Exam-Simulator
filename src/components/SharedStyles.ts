@@ -5,7 +5,19 @@ import type { ThemedStyles } from "../types"
 /** Reusable card border: thin primary border on all sides, thick accent on top. */
 export const cardBorderMixin = css<ThemedStyles>`
   border: 0.5px solid ${({ theme }) => theme.primary};
-  border-top: 3px solid ${({ theme }) => theme.primary};
+  border-block-start: 3px solid ${({ theme }) => theme.primary};
+`
+
+/** Drop-in animation for tooltips and popovers that appear below a trigger element. */
+export const dropIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `
 
 /** Fade-in animation for page entrance. */
