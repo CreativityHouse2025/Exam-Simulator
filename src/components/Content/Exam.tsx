@@ -23,7 +23,7 @@ const ExamComponent: React.FC<ExamProps> = ({ isReview }) => {
 
   return (
     <ExamStyles id="exam">
-      <TopDisplay questionCount={questions.length} />
+      <TopDisplay questionCount={questions.length} isReview={isReview} />
 
       {!isReview && <Progress questionCount={questions.length} />}
 

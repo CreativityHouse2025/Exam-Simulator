@@ -8,6 +8,7 @@ import { loadDomainExam, loadFullExam } from "../utils/exam"
 import useToast from "../hooks/useToast"
 import { translate } from "../utils/translation"
 import useSettings from "../hooks/useSettings"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 /**
  * Read-only context, exam data never modified.
@@ -34,6 +35,15 @@ export default function ExamContextProvider({ children }: { children: React.Reac
   const { showToast } = useToast()
   const { settings } = useSettings()
   const langCode = settings.language
+
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const attemptId = searchParams.get("id");
+
+  React.useEffect(() => {
+    if (!attemptId) navigate("/app")
+  }, [])
 
   // consume the session from the provider after it fully sets it
   const { session } = useSessionControl()

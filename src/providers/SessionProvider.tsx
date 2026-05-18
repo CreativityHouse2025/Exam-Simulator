@@ -11,6 +11,7 @@ import { startAttempt, getAttempt } from '../services/attempt.service'
 import useLatestAttemptId from '../hooks/useLatestAttempt'
 import useToast from '../hooks/useToast'
 import useSessionReducer from '../hooks/useSessionReducer'
+import useUnsavedChangesWarning from '../hooks/useUnsavedChangesWarning'
 import { translate } from '../utils/translation'
 import { loadDomainExam, loadFullExam } from '../utils/exam'
 import { adaptAttemptToSession, adaptAttemptToRevision } from '../utils/attemptAdapter'
@@ -34,6 +35,14 @@ export default function SessionProvider({ children }: { children: React.ReactNod
   const [startingSession, setStartingSession] = React.useState<Session | null>(null)
   const { session, sessionUpdate, contextValues, syncProgress, submitExam } = useSessionReducer(startingSession)
   const { showToast } = useToast()
+
+  const hasUnsavedChanges =
+    startingSession !== null &&
+    session.examType !== 'revision' &&
+    session.examState === 'in-progress' &&
+    Object.keys(session.dirtyQuestions).length > 0
+
+  useUnsavedChangesWarning(hasUnsavedChanges)
 
   const [, setLatestAttemptId] = useLatestAttemptId()
   const langCode = useSettings().settings.language
