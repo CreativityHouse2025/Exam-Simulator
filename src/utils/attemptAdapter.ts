@@ -1,121 +1,149 @@
-import type { Exam, Session, ExamType } from "../types"
-import type { GetAttemptResult } from "../types"
-import { getExamByQuestionIds } from "./exam"
-import examTypes from "../data/exam-data/exam-types.json"
+import type { Session, ExamType, Exam, Question } from "../types"
+import type { GetAttemptResult, AttemptQuestion } from "../types"
+import { getCorrectOriginalIndices } from "./format"
+import { isQuestionMistake } from "./results"
+import examTypes from "../data/exam/exam-types.json"
 
-function setsEqual(a: number[], b: number[]): boolean {
-  if (a.length !== b.length) return false
-  const sa = [...a].sort((x, y) => x - y)
-  const sb = [...b].sort((x, y) => x - y)
-  return sa.every((v, i) => v === sb[i])
+type SharedAttemptFields = {
+  questionChoiceOrders: Record<number, number[]>
+  selectedOriginalIndices: number[][]
+  bookmarkedQuestionIndices: number[]
+  maxTime: number
 }
 
 /**
- * Converts a server-fetched attempt into the Session and Exam shapes the exam UI expects.
- *
- * Re-applies each question's stored `choices_order` so the user sees the identical
- * option ordering they had when they originally took the exam.
- *
- * When `options.revision` is true, filters to wrong/unanswered questions only and
- * returns a fresh in-progress session stamped with examType 'revision'. Returns null
- * when the attempt is not a full exam or has no wrong answers.
- *
- * Returns null when any question id is missing from the in-memory question map
- * (initQuestionMap must be called before this function).
+ * Extracts the fields that both adaptAttemptToSession and adaptAttemptToRevision
+ * need to compute from the same attempt payload — centralizing the derivation so
+ * the two adapters can't drift on these mechanics.
  */
-export function adaptAttemptToSession(
-  payload: GetAttemptResult,
-  options?: { revision?: boolean }
-): { session: Session; exam: Exam } | null {
-  const revision = options?.revision ?? false
+function deriveSharedAttemptFields(payload: GetAttemptResult): SharedAttemptFields {
+  const questionChoiceOrders: Record<number, number[]> = Object.fromEntries(
+    payload.questions.map((attemptQuestion) => [attemptQuestion.question_id, attemptQuestion.choices_order])
+  )
 
-  if (revision && payload.attempt.exam_type !== "full") return null
+  const selectedOriginalIndices = payload.questions.map(
+    (attemptQuestion) => attemptQuestion.selected_choices
+  )
 
-  const questionIds = payload.questions.map((q) => q.question_id)
-  const rawQuestions = getExamByQuestionIds(questionIds)
-  if (rawQuestions === null) return null
+  const bookmarkedQuestionIndices = payload.questions
+    .filter((attemptQuestion) => attemptQuestion.is_bookmarked)
+    .map((attemptQuestion) => attemptQuestion.question_index)
 
-  // Re-apply the stored choices_order to each question so the exam replay is exact.
-  // Each reordered choice carries originalIndex so Navigation can map back to original indices on save.
-  const reorderedQuestions = rawQuestions.map((question, i) => {
-    const { choices_order } = payload.questions[i]
-    const reorderedChoices = choices_order.map((originalIndex) => ({
-      ...question.choices[originalIndex],
-      originalIndex,
-    }))
-    return { ...question, choices: reorderedChoices }
-  })
+  const { attempt } = payload
+  const examTypeKey = attempt.exam_type as keyof typeof examTypes
+  const durationMinutes = examTypes[examTypeKey]?.durationMinutes ?? null
+  // Fall back to time_remaining when exam-types.json has no duration configured for this type.
+  const maxTime = durationMinutes !== null ? durationMinutes * 60 : attempt.time_remaining
 
-  const exam = reorderedQuestions
+  return { questionChoiceOrders, selectedOriginalIndices, bookmarkedQuestionIndices, maxTime }
+}
 
-  // selected_choices in the DB are original indices — convert to display indices for the UI.
-  const answers = payload.questions.map((question) => {
-    const { selected_choices, choices_order } = question
-    return selected_choices.map((originalIndex) => choices_order.indexOf(originalIndex))
-  })
+/**
+ * Converts an in-progress attempt snapshot into a Session the exam UI can resume.
+ *
+ * Populates questionIds from the attempt's stored question list so ExamContextProvider
+ * renders questions in attempt order rather than relying on the exam file's order.
+ *
+ * Returns null when the attempt has no questions.
+ */
+export function adaptAttemptToSession(payload: GetAttemptResult): Session | null {
+  if (!payload.questions || payload.questions.length === 0) return null
 
-  if (revision) {
-    // Keep only questions the user got wrong or left unanswered.
-    const wrongIndices = reorderedQuestions.reduce<number[]>((acc, q, i) => {
-      const userAnswer = answers[i]
-      if (userAnswer.length === 0) { acc.push(i); return acc }
-      const correctDisplayIndices = q.choices.reduce<number[]>((a, c, j) => {
-        if (c.correct) a.push(j)
-        return a
-      }, [])
-      if (!setsEqual(userAnswer, correctDisplayIndices)) acc.push(i)
-      return acc
-    }, [])
-
-    if (wrongIndices.length === 0) return null
-
-    const { attempt } = payload
-    const examTypeKey = attempt.exam_type as keyof typeof examTypes
-    const durationMinutes = examTypes[examTypeKey]?.durationMinutes ?? null
-    const maxTime = durationMinutes !== null ? durationMinutes * 60 : attempt.time_remaining
-
-    const session: Session = {
-      id: "",
-      index: 0,
-      maxTime,
-      time: maxTime,
-      paused: false,
-      examState: "in-progress",
-      reviewState: "summary",
-      questions: wrongIndices.map((i) => questionIds[i]),
-      answers: wrongIndices.map(() => []),
-      categoryId: null,
-      bookmarks: [],
-      examType: "revision" as ExamType,
-      examId: attempt.exam_id,
-    }
-
-    return { session, exam: wrongIndices.map((i) => reorderedQuestions[i]) }
-  }
-
-  const bookmarks = payload.questions.filter((q) => q.is_bookmarked).map((q) => q.question_index)
+  const { questionChoiceOrders, selectedOriginalIndices, bookmarkedQuestionIndices, maxTime } =
+    deriveSharedAttemptFields(payload)
 
   const { attempt } = payload
 
-  const examTypeKey = attempt.exam_type as keyof typeof examTypes
-  const durationMinutes = examTypes[examTypeKey]?.durationMinutes ?? null
-  const maxTime = durationMinutes !== null ? durationMinutes * 60 : attempt.time_remaining
-
-  const session: Session = {
+  return {
     id: attempt.id,
     index: attempt.current_index,
     maxTime,
     time: attempt.time_remaining,
-    paused: attempt.time_remaining < maxTime,
+    // Completed sessions always have paused: true — the submission paths (manual submit
+    // and timer expiry) both dispatch SET_TIMER_PAUSED true alongside SET_EXAM_STATE completed.
+    // The DB doesn't store paused, so we reconstruct that invariant here.
+    paused: attempt.exam_state === 'completed',
     examState: attempt.exam_state as Session["examState"],
     reviewState: attempt.review_state,
-    questions: questionIds,
-    answers,
+    questionChoiceOrders,
+    selectedOriginalIndices,
     categoryId: attempt.category_id,
-    bookmarks,
+    bookmarks: bookmarkedQuestionIndices,
     examType: attempt.exam_type as ExamType,
     examId: attempt.exam_id,
+    // Preserves attempt question order so ExamContextProvider doesn't depend on
+    // the exam file's order matching the attempt's order.
+    questionIds: payload.questions.map((attemptQuestion) => attemptQuestion.question_id),
+    dirtyQuestions: {},
   }
+}
 
-  return { session, exam }
+/**
+ * Converts a completed full-exam attempt snapshot into a revision Session containing
+ * only the questions the user got wrong or left unanswered.
+ *
+ * Requires the raw exam (before applyQuestionChoiceOrders) to look up correct answers
+ * via getCorrectOriginalIndices
+ *
+ * Returns null when:
+ * - The attempt is not a full exam (revision is full-only).
+ * - The attempt has no questions.
+ * - The user made no mistakes (nothing to revise).
+ */
+export function adaptAttemptToRevision(payload: GetAttemptResult, rawExam: Exam): Session | null {
+  if (payload.attempt.exam_type !== "full") return null
+  if (!payload.questions || payload.questions.length === 0) return null
+
+  // Build a lookup of correct original indices per question id so we can evaluate
+  // each attempt answer without walking rawExam repeatedly.
+  const correctIndicesByQuestionId: Record<Question['id'], number[]> = Object.fromEntries(
+    rawExam.map((question) => [question.id, getCorrectOriginalIndices(question)])
+  )
+
+  const mistakeAttemptQuestions: AttemptQuestion[] = payload.questions.filter(
+    (attemptQuestion) =>
+      isQuestionMistake(
+        attemptQuestion.selected_choices,
+        correctIndicesByQuestionId[attemptQuestion.question_id]
+      )
+  )
+
+  // return null if user has no mistakes
+  if (mistakeAttemptQuestions.length === 0) return null
+
+  // filter the choice orders of the parent attempt to choices of the wrong questions only
+  // to keep them aligned
+  const filteredQuestionChoiceOrders: Record<number, number[]> = Object.fromEntries(
+    mistakeAttemptQuestions.map((attemptQuestion) => [
+      attemptQuestion.question_id,
+      attemptQuestion.choices_order,
+    ])
+  )
+
+  const { attempt } = payload
+  const examTypeKey = attempt.exam_type as keyof typeof examTypes
+  const durationMinutes = examTypes[examTypeKey]?.durationMinutes ?? null
+  const maxTime = durationMinutes !== null ? durationMinutes * 60 : attempt.time_remaining
+
+  return {
+    // Revision sessions are ephemeral — not persisted to the DB.
+    id: "",
+    examType: "revision",
+    // Preserved so ExamContextProvider knows which full exam file to load.
+    examId: attempt.exam_id,
+    categoryId: null,
+    questionIds: mistakeAttemptQuestions.map((attemptQuestion) => attemptQuestion.question_id),
+    // passed to the ExamContextProvider so it applyQuestionChoiceOrders
+    questionChoiceOrders: filteredQuestionChoiceOrders,
+    // Fresh empty answers — the user redoes each mistake from scratch.
+    selectedOriginalIndices: mistakeAttemptQuestions.map(() => []),
+    bookmarks: [],
+    index: 0,
+    maxTime,
+    time: maxTime,
+    paused: false,
+    examState: "in-progress",
+    reviewState: "summary",
+    dirtyQuestions: {},
+  }
 }

@@ -3,7 +3,7 @@ import type { ThemedStyles } from '../../types'
 import React from 'react'
 import styled from 'styled-components'
 import { calculateProgressStats } from '../../utils/progress'
-import { SessionDataContext } from '../../contexts'
+import { useSessionData } from '../../contexts'
 
 const ProgressContainer = styled.div`
   display: flex;
@@ -37,11 +37,11 @@ const StatNumber = styled.span<ThemedStyles>`
 `
 
 const ProgressComponent: React.FC<ProgressProps> = ({ questionCount }) => {
-  const { answers } = React.useContext(SessionDataContext)
+  const { selectedOriginalIndices } = useSessionData()
 
   const { answeredCount, percentage } = React.useMemo(() => {
-    return calculateProgressStats(questionCount, answers)
-  }, [questionCount, answers])
+    return calculateProgressStats(questionCount, selectedOriginalIndices)
+  }, [questionCount, selectedOriginalIndices])
 
   return (
     <ProgressContainer id="progress" className="no-select">

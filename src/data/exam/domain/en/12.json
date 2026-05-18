@@ -1,0 +1,1202 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "You are trying to decide whether to contract out a construction job or do it within your company. To do it within your company, you will have to hire an engineer for $35,000 and pay a construction team $15,000 per week. A contractor will cost you a price of $19,000 per week, and your expert agrees that you won’t find a lower price than that. The job will take 16 weeks. What’s the best way to proceed?",
+    "explanation": "Outsourcing Cost = 19000 * 16 = 304000, House Cost = 15000 * 16 + 35000 = 275000. House cost is less.",
+    "choices": [
+      {
+        "text": "Pay the contractor to do the job.",
+        "correct": false
+      },
+      {
+        "text": "Select a T&M contract.",
+        "correct": false
+      },
+      {
+        "text": "Do the work within your company.",
+        "correct": true
+      },
+      {
+        "text": "Select a fixed price contract if your scope is not clear.",
+        "correct": false
+      }
+    ],
+    "id": 422
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following is considered an advantage of fixed price contracts?",
+    "explanation": "Cost risk is low for the buyer in FP contracts. Domain = Process. PMBOK 6th edition, Page 471 and PMBOK 7th edition, Page 191",
+    "choices": [
+      {
+        "text": "Cost risk is lower.",
+        "correct": true
+      },
+      {
+        "text": "Risk is shared between buyer and seller.",
+        "correct": false
+      },
+      {
+        "text": "It is suitable when the scope is not clear.",
+        "correct": false
+      },
+      {
+        "text": "The buyer can retain control over project resources.",
+        "correct": false
+      }
+    ],
+    "id": 423
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The buyer's and the seller's project managers are meeting together to discuss the seller's performance to date on this important product development project. There have been three changes to the project caused by a change in laws in the country were the project is being performed and four errors by the seller that are being discussed. What is the best output of such a meeting?",
+    "explanation": "This is example of a performance review during the Control Procurement process Domain = Process. PMBOK 6th edition, Page 489 and 499 and PMBOK 7th edition, Page 77",
+    "choices": [
+      {
+        "text": "Scheduling a procurement performance review",
+        "correct": false
+      },
+      {
+        "text": "A letter of default",
+        "correct": false
+      },
+      {
+        "text": "Change requests",
+        "correct": true
+      },
+      {
+        "text": "Bidder conference",
+        "correct": false
+      }
+    ],
+    "id": 424
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following contract types is more suitable for agile projects?",
+    "explanation": "The goal of agile methods is closer cooperation between the project team and the customer, as expressed in the third Agile Manifesto value, which ranks “Customer collaboration over contract negotiation”. Unlike the traditional triangle of constraints, agile projects attempt to fix time and cost and adjust scope to complete the highest-priority features. From the proposed contracts types time and material will be more suitable for agile projects as the team will be paid according to the completed features within agreed timebox. It might include NTE clause or it can be graduated T&M. However, there are other contract types can be used in agile projects. Domain = Process. Agile Practice Guide, Page 77",
+    "choices": [
+      {
+        "text": "Fixed Price Contracts",
+        "correct": false
+      },
+      {
+        "text": "Time and Material Contracts",
+        "correct": true
+      },
+      {
+        "text": "Cost Reimbursable Contracts",
+        "correct": false
+      },
+      {
+        "text": "Memorandum of Understanding (MOU)",
+        "correct": false
+      }
+    ],
+    "id": 425
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Rights and obligations related to procurement audits should be described in:",
+    "explanation": "Rights and obligations related to procurement audits should be described in the procurement contract. Domain = Process. PMBOK 6th edition, Page 498 and PMBOK 7th edition, Page 75",
+    "choices": [
+      {
+        "text": "Procurement management plan",
+        "correct": false
+      },
+      {
+        "text": "Procurement documents",
+        "correct": false
+      },
+      {
+        "text": "Contract",
+        "correct": true
+      },
+      {
+        "text": "Statement of work",
+        "correct": false
+      }
+    ],
+    "id": 426
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following is the primary objective of incentive clauses in a contract?",
+    "explanation": "Incentives and awards may be used to align the objectives of buyer and seller. Domain = Process. PMBOK 6th edition, Page 476",
+    "choices": [
+      {
+        "text": "Reduce costs for the buyer.",
+        "correct": false
+      },
+      {
+        "text": "Reduce risk for the seller by shifting risk to the buyer.",
+        "correct": false
+      },
+      {
+        "text": "Synchronize objectives.",
+        "correct": true
+      },
+      {
+        "text": "Reduce costs for the seller.",
+        "correct": false
+      }
+    ],
+    "id": 427
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During a construction project, the project manager asked the contractor for a walkthrough of the work site by both of them to ensure a mutual understanding of the work in progress. They are involved in:",
+    "explanation": "An inspection is a structured review of the work being performed by the contractor. This may involve a simple review of the deliverables or an actual physical review of the work itself. On a construction/engineering/infrastructure project, inspections involve walkthroughs of the site by both the buyer and the contractor to ensure a mutual understanding of the work in progress. Domain = Process. PMBOK 6th edition, Page 498",
+    "choices": [
+      {
+        "text": "Audit",
+        "correct": false
+      },
+      {
+        "text": "Inspection",
+        "correct": true
+      },
+      {
+        "text": "Performance review",
+        "correct": false
+      },
+      {
+        "text": "Bidder conference",
+        "correct": false
+      }
+    ],
+    "id": 428
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project has been initiated using a waterfall approach. The project manager decides to outsource a part of the project work. He is now creating the procurement SOW. The engineering manager wants to describe only the functional characteristics, while the technical support manager wants to add some other items to the procurement SOW. Which of the following best represents what the project manager should do?",
+    "explanation": "The project adopts waterfall approach. The SOW describes the procurement items in sufficient detail to allow prospective sellers to determine if they are capable of providing the products, services, or results. Sufficient detail can vary based on the nature of the item, the needs of the buyer, or the expected contract form. Domain = Process. PMBOK 6th edition, Page 477",
+    "choices": [
+      {
+        "text": "The procurement SOW should be broad enough, so it doesn’t need to change as the project progresses.",
+        "correct": false
+      },
+      {
+        "text": "The procurement SOW should be general to allow the seller to make their own decisions.",
+        "correct": false
+      },
+      {
+        "text": "The procurement SOW should be detailed to allow for clarification later.",
+        "correct": false
+      },
+      {
+        "text": "The procurement SOW should be as detailed as necessary for the type of project.",
+        "correct": true
+      }
+    ],
+    "id": 429
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a risky construction project. Your organization has a bad history of dealing with risky projects and none of your team members has experience in working with this type of projects. You decide to acquire a risk management expert to help you reduce the overall project risk to be below the acceptable risk threshold. Which type of contract is most appropriate for your organization to sign with the expert?",
+    "explanation": "Time and material contracts are often used for staff augmentation, acquisition of experts, and any outside support when a precise statement of work cannot be quickly prescribed. Domain = Process. PMBOK 6th edition, Page 472 and PMBOK 7th edition, Page 191",
+    "choices": [
+      {
+        "text": "FFP",
+        "correct": false
+      },
+      {
+        "text": "CPIF",
+        "correct": false
+      },
+      {
+        "text": "FPEPA",
+        "correct": false
+      },
+      {
+        "text": "T&M",
+        "correct": true
+      }
+    ],
+    "id": 430
+  },
+  {
+    "type": "multiple-choice",
+    "text": "In which procurement management process is the source selection criteria created for your project?",
+    "explanation": "Source selection criteria is created during the Plan Procurement Management process. Domain = Process. PMBOK 6th edition, Page 478",
+    "choices": [
+      {
+        "text": "Conduct Procurements",
+        "correct": false
+      },
+      {
+        "text": "Control Procurements",
+        "correct": false
+      },
+      {
+        "text": "Close Project or Phase",
+        "correct": false
+      },
+      {
+        "text": "Plan Procurement Management",
+        "correct": true
+      }
+    ],
+    "id": 431
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Who is responsible to ensure that all procurements meet the needs of the project?",
+    "explanation": "It is the project management team’s responsibility to make certain that all procurements meet the specific needs of the project. Domain = Process. PMBOK 6th edition, Page 461",
+    "choices": [
+      {
+        "text": "Project manager",
+        "correct": false
+      },
+      {
+        "text": "Procurement manager",
+        "correct": false
+      },
+      {
+        "text": "Project team",
+        "correct": true
+      },
+      {
+        "text": "Both the project manager and the procurement manager",
+        "correct": false
+      }
+    ],
+    "id": 432
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a construction project. Four sellers have sent proposals as a response to the RFP that the procurement department in your organization sent. You need to gain a more objective understanding of sellers’ capabilities in order to rank their proposals and select the best one. Which technique may best help avoid bias and subjective decisions?",
+    "explanation": "Weighting system allows the evaluation committee to select the seller by weighting the source according to the selection criteria. The buyer may compare sellers to select the seller who best meets the selection criteria. Domain = Process. PMBOK 6th edition, Page 479",
+    "choices": [
+      {
+        "text": "Independent estimates",
+        "correct": false
+      },
+      {
+        "text": "Negotiation",
+        "correct": false
+      },
+      {
+        "text": "Bidder conference",
+        "correct": false
+      },
+      {
+        "text": "Weighting system",
+        "correct": true
+      }
+    ],
+    "id": 433
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Phillip is managing a research and development project. The scope of the project is not clear, he decided to outsource the project work to another company. He agreed with the procurement manager to use the cost plus incentive fee (CPIF) contract. All of the following are true about this type of contract except:",
+    "explanation": "In cost reimbursable contracts the total cost of the contractual work is unknown at the beginning of the work, as the scope of work is not precisely defined at the beginning. Domain = Process. PMBOK 6th edition, Page 472 and PMBOK 7th edition, Page 191",
+    "choices": [
+      {
+        "text": "The seller receives all costs of the performed contractual work, in addition to a predetermined incentive fee based upon achieving certain performance objectives.",
+        "correct": false
+      },
+      {
+        "text": "If the final costs are less or greater than the original estimated costs, then both the buyer and seller share costs from the departures based upon a prengotiated cost-sharing formula.",
+        "correct": false
+      },
+      {
+        "text": "This type of contracts should be used if the scope of work is expected to change significantly during the execution of the contract.",
+        "correct": false
+      },
+      {
+        "text": "The total cost of the contract is known and agreed upon before starting the work.",
+        "correct": true
+      }
+    ],
+    "id": 434
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a product development project. You are now evaluating whether to buy or lease an equipment. The daily lease cost is $120, while the cost of purchasing is $7200 investment cost with $30 daily cost. How long will it take the lease cost to equal the purchase cost?",
+    "explanation": "*All Lease Costs = 120 * D D is number of days All Buy Costs = 7200 + 30 * D 7200 + 30 *D = 120 D 7200 = 120 D – 30 D 7200 = 90 D D = 7200/90 D = 80 Domain = Process. PMBOK 6th edition, Page 473 and PMBOK 7th edition, Page 65",
+    "choices": [
+      {
+        "text": "60 days",
+        "correct": false
+      },
+      {
+        "text": "80 days",
+        "correct": true
+      },
+      {
+        "text": "240 days",
+        "correct": false
+      },
+      {
+        "text": "48 days",
+        "correct": false
+      }
+    ],
+    "id": 435
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project has been initiated in the organization to build new substation. During project planning, the project manager has a meeting with the procurement manager to discuss what are the goods and services that the project might need from outside the organization. In this meeting what should the project manager provide?",
+    "explanation": "The main goal for any procurement in a project is to transfer risks from buyer to seller. So the project manager must provide an understanding for project risks to ensure that contract terms and conditions transfer all risks from buyer to seller. Domain = Process. PMBOK 6th edition, Page 463 and PMBOK 7th edition, Page 74–76",
+    "choices": [
+      {
+        "text": "A procurement management plan and a list of recommended contract types.",
+        "correct": false
+      },
+      {
+        "text": "Nothing, make-or-buy decision will be done during project executing.",
+        "correct": false
+      },
+      {
+        "text": "An understanding of the project risks.",
+        "correct": true
+      },
+      {
+        "text": "A list of recommended potential sellers.",
+        "correct": false
+      }
+    ],
+    "id": 436
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Amit is managing a large telecommunication project to install a new mobile network in four cities. Part of the project work is outsourced to a contractor. Midway through the project, the contractor has submitted an invoice for additional work. Amit reviewed the invoice and found that the work billed is already involved in the contracted scope. What should Amit do?",
+    "explanation": "The project manager needs first to understand the reason behind the extra billed amount. Domain = Process. PMBOK 6th edition, Page 494",
+    "choices": [
+      {
+        "text": "Ask the procurement department to deal with this issue.",
+        "correct": false
+      },
+      {
+        "text": "Submit a change request to include the extra billed amount.",
+        "correct": false
+      },
+      {
+        "text": "Meet with the contractor to clarify the reason behind the additional work and review the project scope.",
+        "correct": true
+      },
+      {
+        "text": "He should reject the invoice.",
+        "correct": false
+      }
+    ],
+    "id": 437
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a large construction project to build a large shopping mall. All the design work will be outsourced to other companies. Your team developed the procurement statement of work (SOW). The procurement team send request for proposal to potential sellers, but the prices they offered are very high. You and the procurement manager agreed that there must be some negotiation with the potential sellers to get fair and reasonable price. Typically, who leads procurement negotiation?",
+    "explanation": "The negotiation should be led by a member of the procurement team that has the authority to sign contracts. Domain = Process. PMBOK 6th edition, Page 488",
+    "choices": [
+      {
+        "text": "Project manager",
+        "correct": false
+      },
+      {
+        "text": "Procurement manager",
+        "correct": true
+      },
+      {
+        "text": "Project sponsor",
+        "correct": false
+      },
+      {
+        "text": "Both project manager and procurement manager",
+        "correct": false
+      }
+    ],
+    "id": 438
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You work for a construction firm which has a long history in construction projects. Your company is bidding on a contract with the government to build a new bridge. Which of the following contract types has the most risk for your company?",
+    "explanation": "Here you work for the seller not for the buyer. The highest risks for the seller are in FP contracts. Domain = Process. PMBOK 6th edition, Page 462 and 471 and PMBOK 7th edition, Page 191",
+    "choices": [
+      {
+        "text": "CPIF",
+        "correct": false
+      },
+      {
+        "text": "T&M",
+        "correct": false
+      },
+      {
+        "text": "FFP",
+        "correct": true
+      },
+      {
+        "text": "CPAF",
+        "correct": false
+      }
+    ],
+    "id": 439
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Joseph is managing a large industrial project. He and his team decide to outsource the installation work to a more experienced company, because the installation work is very risky. Only one company has submitted a proposal. They organizational policies for selecting a seller states that there must be at least two potential sellers to start bidding process. Which technique should the project manager use to help him expand the potential sellers list?",
+    "explanation": "Placing advertisements in publications like newspapers or specialty publications, can help in expanding list of potential sellers and it is a tool used during conducting procurement process. Domain = Process. PMBOK 6th edition, Page 487",
+    "choices": [
+      {
+        "text": "Bidder conference",
+        "correct": false
+      },
+      {
+        "text": "Procurement negotiations",
+        "correct": false
+      },
+      {
+        "text": "Expert judgment",
+        "correct": false
+      },
+      {
+        "text": "Advertising",
+        "correct": true
+      }
+    ],
+    "id": 440
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are the project manager of an industrial project. Your organization signed a contract with a supplier to provide your project with 15 computers as per your requirements. After one month the procurement manager called you to inform you that the shipment you requested has arrived containing 18 computers. What should you do?",
+    "explanation": "A contract should clearly state the deliverables and results expected, including any knowledge transfer from the seller to the buyer. Anything not in the contract cannot be legally enforced. Domain = Process. PMBOK 6th edition, Page 461",
+    "choices": [
+      {
+        "text": "Issue a change order to change the contract specifications.",
+        "correct": false
+      },
+      {
+        "text": "Accept the shipment.",
+        "correct": false
+      },
+      {
+        "text": "Expect to receive a claim from the seller.",
+        "correct": false
+      },
+      {
+        "text": "Send the shipment back.",
+        "correct": true
+      }
+    ],
+    "id": 441
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Antony is managing an industrial project. He has received a poor quality deliverable from one of the suppliers. He requested the supplier to fix the defects he found. Antony wants to ensure that no defects are found in the future deliveries from the supplier. What should he do?",
+    "explanation": "Contracts require formality, as there is a contract with the supplier, the project manager must ensure first that the quality requirements exist in the contract and then he should ask for an evidence that the requirements are being followed through quality assurance. Domain = Process. PMBOK 6th edition, Page 468",
+    "choices": [
+      {
+        "text": "Review the contract requirements with the supplier and request quality assurance evidence.",
+        "correct": true
+      },
+      {
+        "text": "Don’t pay for the defective deliverables and pay only for the accepted ones.",
+        "correct": false
+      },
+      {
+        "text": "Ask the procurement department to address this issue with the supplier.",
+        "correct": false
+      },
+      {
+        "text": "Hire a team of inspectors to inspect the deliverables from this supplier.",
+        "correct": false
+      }
+    ],
+    "id": 442
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Sam is managing a large IT project. Some work of this project will be outsourced to other companies. To solicit proposals from prospective sellers, all of the following documents should be shared with the potential sellers, except:",
+    "explanation": "For large procurements, the procuring organization may elect to either prepare its own independent estimate or have a cost estimate prepared by an outside professional estimator to serve as a benchmark on proposed responses. It is used internally in the organization and can't be shared with the potential sellers. Domain = Process. PMBOK 6th edition, Page 479",
+    "choices": [
+      {
+        "text": "Procurement statement of work",
+        "correct": false
+      },
+      {
+        "text": "Request for Proposal (RFP)",
+        "correct": false
+      },
+      {
+        "text": "Policies of the buyer's organization that may affect the presented sellers' proposals",
+        "correct": false
+      },
+      {
+        "text": "Independent cost estimates",
+        "correct": true
+      }
+    ],
+    "id": 443
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What do you expect when you are submitting an invitation for bid to sellers?",
+    "explanation": "A bid is a response for invitation for bid. Terms such as bid, tender, or quotation are generally used when the seller selection decision is based on price (as when buying commercial or standard items). Domain = Process. PMBOK 6th edition, Page 477 and PMBOK 7th edition, Page 74–75",
+    "choices": [
+      {
+        "text": "Offers which will differ significantly in solution approach and price.",
+        "correct": false
+      },
+      {
+        "text": "Offers which are similar enough to allow a selection based on price.",
+        "correct": true
+      },
+      {
+        "text": "Offers which are not primarily written to win against competition.",
+        "correct": false
+      },
+      {
+        "text": "General information on a seller’s ability to provide the goods or services.",
+        "correct": false
+      }
+    ],
+    "id": 444
+  },
+  {
+    "type": "multiple-choice",
+    "text": "All of the following statements about bidder conference are true except:",
+    "explanation": "In bidder conference you must meet all prospective sellers together at once, not each one alone. Domain = Process. PMBOK 6th edition, Page 487 and PMBOK 7th edition, Page 70",
+    "choices": [
+      {
+        "text": "The buyer should meet each potential seller separately.",
+        "correct": true
+      },
+      {
+        "text": "Bidder conferences are held prior to proposal submittal.",
+        "correct": false
+      },
+      {
+        "text": "Bidder conferences are also called contractor conferences, vendor conferences, and pre-bid conferences.",
+        "correct": false
+      },
+      {
+        "text": "All sellers receive the same procurement documents.",
+        "correct": false
+      }
+    ],
+    "id": 445
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Mike is a procurement specialist who has worked before for a construction firm performing plan-driven projects. He has recently joined ABC organization which has a long history of performing change-driven projects. He asks an agile practitioner about the main differences between change-driven and plan-driven contracts. How should the agile practitioner answer his question?",
+    "explanation": "On agile projects, procurement is challenging since scope details can't be defined in details prior to contract writing. Also the intangible nature of knowledge work products can make it difficult to evaluate and get acceptance. So agile contracts should be designed to accommodate changes as scope may need to be re-prioritized during the project for business purpose. Domain = Process. Agile Practice Guide, Page 77",
+    "choices": [
+      {
+        "text": "Change-driven contracts should allow scope early completion for business purpose.",
+        "correct": false
+      },
+      {
+        "text": "Change-driven contracts should be time and material as scope may change, while plan-driven contracts should be fixed price as scope is fixed.",
+        "correct": false
+      },
+      {
+        "text": "Change-driven contracts should allow scope reprioritization for business purpose.",
+        "correct": true
+      },
+      {
+        "text": "Agile values customer collaboration over contract negotiation.",
+        "correct": false
+      }
+    ],
+    "id": 446
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements is correct regarding inspection and audit during the Control Procurement process?",
+    "explanation": "An inspection is a structured review of the work being performed by the contractor. This may involve a simple review of the deliverables or an actual physical review of the work itself. While audits are a structured review of the procurement process. Domain = Process. PMBOK 6th edition, Page 498",
+    "choices": [
+      {
+        "text": "An inspection is a structured review of the work being performed by the contractor, while audits are a structured review of the procurement process.",
+        "correct": true
+      },
+      {
+        "text": "An inspection is a structured review of the payments done by the buyer, while audits are a structured review of the procurement process.",
+        "correct": false
+      },
+      {
+        "text": "An inspection is performed by the seller, while audits are performed by the buyer.",
+        "correct": false
+      },
+      {
+        "text": "An inspection is a structured review of the procurement process, while audits are a structured review of the work being performed by the buyer.",
+        "correct": false
+      }
+    ],
+    "id": 447
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements represents a fixed price incentive fee (FPIF) contract?",
+    "explanation": "To pay only $1,500,000, it is a FFP contract not FPIP. To pay all the costs plus something, it is a CR contract. The only correct answer is to pay a fixed amount plus bonus if a certain criteria is achieved. Domain = Process. PMBOK 6th edition, Page 471 and PMBOK 7th edition, Page 191",
+    "choices": [
+      {
+        "text": "Pay the costs plus $15,000 for every month the project is finished earlier than July 15.",
+        "correct": false
+      },
+      {
+        "text": "Pay $1,500,000 plus $15,000 for every designated incremental quality level reached.",
+        "correct": true
+      },
+      {
+        "text": "Pay all the costs plus a $15,000 fee.",
+        "correct": false
+      },
+      {
+        "text": "Pay $1,500,000.",
+        "correct": false
+      }
+    ],
+    "id": 448
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a large construction project. Part of the project work will be outsourced to a subcontractor. A team member asks about your role as a project manager regarding any procurement in your project. What should you tell him?",
+    "explanation": "The main goal for any procurement in a project is to transfer risks from buyer to seller. So the project manager must provide an understanding for project risks to ensure that contract terms and conditions transfer all risks from buyer to seller. Domain = Process. PMBOK 6th edition, Page 463 and PMBOK 7th edition, Page 74–76",
+    "choices": [
+      {
+        "text": "The project manager should tell the procurement manager how the procurement process should be handled.",
+        "correct": false
+      },
+      {
+        "text": "The project manager should negotiate with the prospective sellers.",
+        "correct": false
+      },
+      {
+        "text": "The project manager should provide an understanding of the risks of the project.",
+        "correct": true
+      },
+      {
+        "text": "The project manager should evaluate seller proposals and select the best one.",
+        "correct": false
+      }
+    ],
+    "id": 449
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a large industrial project. To test your product you need a special equipment. You need to decide whether to buy or lease the equipment. The daily lease cost is $150. The cost of purchasing the item is $2,000 investment cost & $50 daily cost. You need to use the item for about 12 days. What should you do?",
+    "explanation": "lease 12*150 = 1800 < 2000+(12*50). Domain = Process. PMBOK 6th edition, Page 473 and PMBOK 7th edition, Page 65",
+    "choices": [
+      {
+        "text": "Lease it",
+        "correct": true
+      },
+      {
+        "text": "Consult the sponsor",
+        "correct": false
+      },
+      {
+        "text": "Buy it",
+        "correct": false
+      },
+      {
+        "text": "Ask the customer to pay for $2,000 change order",
+        "correct": false
+      }
+    ],
+    "id": 450
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Andy is a project manager for a large construction project. All the project work will be outsourced to other subcontractors. Andy is just starting the procurement process. Which of the following should be done last?",
+    "explanation": "Performing make-or-buy analysis is done firstly during planning process group in the Plan Procurement Management process, then seeking experts judgement and then selecting the contract type. But contract terms and conditions is done later in the Conduct Procurement process. Domain = Process. PMBOK 6th edition, Page 489 and PMBOK 7th edition, Page 74–77",
+    "choices": [
+      {
+        "text": "Seek expert judgment from a variety of resources.",
+        "correct": false
+      },
+      {
+        "text": "Select contract type whether FP, T and M or CR.",
+        "correct": false
+      },
+      {
+        "text": "Perform make-or-buy analysis.",
+        "correct": false
+      },
+      {
+        "text": "Finalize the terms and conditions of the contract.",
+        "correct": true
+      }
+    ],
+    "id": 451
+  },
+  {
+    "type": "multiple-choice",
+    "text": "In which procurement management process is the source selection criteria used in your project?",
+    "explanation": "Source selection criteria is created during the Plan Procurement Management process and used to select the seller in the Conduct Procurement process. Domain = Process. PMBOK 6th edition, Page 486",
+    "choices": [
+      {
+        "text": "Conduct Procurements",
+        "correct": true
+      },
+      {
+        "text": "Control Procurements",
+        "correct": false
+      },
+      {
+        "text": "Close Project or Phase",
+        "correct": false
+      },
+      {
+        "text": "Plan Procurement Management",
+        "correct": false
+      }
+    ],
+    "id": 452
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a $10,000,000 construction project. A part of the project work will be outsourced to subcontractors. The procurement department is now contacting subcontractors to obtain bids and proposals. Which of the following techniques would help you save time because you know that it is a time-consuming procedure to ensure that the sellers get a clear and common understanding of the procurement process and of the needs of your project?",
+    "explanation": "Bidder conferences are used to ensure that all prospective sellers have a clear and common understanding of the procurement requirements. Also you answer all sellers' questions. Domain = Process. PMBOK 6th edition, Page 487 and PMBOK 7th edition, Page 70",
+    "choices": [
+      {
+        "text": "Bidder conferences",
+        "correct": true
+      },
+      {
+        "text": "Advertising",
+        "correct": false
+      },
+      {
+        "text": "Qualified sellers list",
+        "correct": false
+      },
+      {
+        "text": "Proposal evaluation",
+        "correct": false
+      }
+    ],
+    "id": 453
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a large infrastructure project. Your project includes civil, electric and mechanical work. Your organization doesn't have the adequate experience in all these fields, so you will need to outsource some work to more experienced companies. So you need to start with your team planning for procurement management. When during the project life cycle of the project you perform the Plan Procurement Management process?",
+    "explanation": "This Plan Procurement Management process is performed once or at predefined points in the project. Domain = Process. PMBOK 6th edition, Page 466",
+    "choices": [
+      {
+        "text": "At the beginning of the project",
+        "correct": false
+      },
+      {
+        "text": "Throughout the project life cycle",
+        "correct": false
+      },
+      {
+        "text": "Once or at pre-defined points in the project",
+        "correct": true
+      },
+      {
+        "text": "At the beginning of each phase of the project",
+        "correct": false
+      }
+    ],
+    "id": 454
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the correct name of the seller in the following procurements management processes respectively: Plan Procurement Management, Conduct Procurements and Control Procurements?",
+    "explanation": "The seller can be viewed during the contract life cycle first as a bidder during the Plan Procurement Management process, then as the selected source during the Conduct Procurements process, and then as the contracted supplier or vendor during the Control Procurements process. Domain = Process. PMBOK 6th edition, Page 461",
+    "choices": [
+      {
+        "text": "Potential seller, contracted supplier and selected source",
+        "correct": false
+      },
+      {
+        "text": "Selected bidder, potential vendor and contracted supplier",
+        "correct": false
+      },
+      {
+        "text": "Selected seller, potential seller and contracted vendor",
+        "correct": false
+      },
+      {
+        "text": "Bidder, selected source and contracted supplier",
+        "correct": true
+      }
+    ],
+    "id": 455
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Frank is a project manager for a large construction project. During project execution, he faces shortage in some raw material which is urgently needed, as the project might face delays if these material are not available within one week. This might lead to missing important milestones and the project will be subjected to financial penalties. Following the internal procurement process will take more time. A supplier has submitted an offer to provide the needed raw material and reimburse the cost later, however the cost is very high. Which of the following should Frank do? (1) Submit change request with extra budget. (2) Update the procurement strategy. (3) Negotiate with the supplier. (4) Reject the offer and escalate to procurement department. (5) Update the procurement management plan.",
+    "explanation": "The objective of the procurement strategy is to determine the project delivery method, the type of legally binding agreement(s), and how the procurement will advance through the procurement phases. The project manager should negotiate with the supplier to get less price and update the procurement strategy to allow faster delivery methods. Domain = Process. PMBOK 6th edition, Page 476",
+    "choices": [
+      {
+        "text": "(2) and (3)",
+        "correct": true
+      },
+      {
+        "text": "(1) and (5)",
+        "correct": false
+      },
+      {
+        "text": "(3) and (4)",
+        "correct": false
+      },
+      {
+        "text": "(1) and (3)",
+        "correct": false
+      }
+    ],
+    "id": 456
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following is the best thing to do at bidder conference?",
+    "explanation": "If sellers' questions aren't asked, it adds risks. These conferences are used to ensure that all prospective bidders have a clear and common understanding of the procurement. Domain = Process. PMBOK 6th edition, Page 487 and PMBOK 7th edition, Page 70",
+    "choices": [
+      {
+        "text": "Make sure the sellers have all the procurement documents.",
+        "correct": false
+      },
+      {
+        "text": "Meet with each seller separately.",
+        "correct": false
+      },
+      {
+        "text": "Answer sellers' questions.",
+        "correct": false
+      },
+      {
+        "text": "Make sure the sellers ask all their questions.",
+        "correct": true
+      }
+    ],
+    "id": 457
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Your organization is a bidder in a new office building project and you are assigned to prepare the bidding documents for this project. Your organization will provide furniture for the buyer. You need to know more details about the specifications of the needed furniture because the statement of work which the buyer sent is not detailed enough. Which document will you send to the buyer in this situation?",
+    "explanation": "An RFI is used when more information on the goods and services to be acquired is needed from the sellers. Domain = Process. PMBOK 6th edition, Page 477 and PMBOK 7th edition, Page 192",
+    "choices": [
+      {
+        "text": "Procurement statement of work (SOW)",
+        "correct": false
+      },
+      {
+        "text": "Request for proposal (RFP)",
+        "correct": false
+      },
+      {
+        "text": "Request for quotation (RFQ)",
+        "correct": false
+      },
+      {
+        "text": "Request for information (RFI)",
+        "correct": true
+      }
+    ],
+    "id": 458
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a large construction project. You are searching for a supplier to provide some raw material for your project. You asked your team to prepare all the needed information on the types, quantities and specifications of the needed raw material. When will you send him a RFQ?",
+    "explanation": "The procurement management process must be performed with the correct sequence. You must first plan for procurement management and perform make or buy analysis to know if you will buy or make what you need, then create procurement SOW and procurement documents and send them to all prospective sellers. Then you can select a seller. So you will send an RFQ to seller after creating the procurement documents but before selecting a seller. Domain = Process. PMBOK 6th edition, Page 477 and PMBOK 7th edition, Page 192",
+    "choices": [
+      {
+        "text": "After you create the procurement documents, but before you select the seller.",
+        "correct": true
+      },
+      {
+        "text": "Before signing the contract, but after selecting the seller.",
+        "correct": false
+      },
+      {
+        "text": "After the bidder conference, but before you select the seller.",
+        "correct": false
+      },
+      {
+        "text": "After making make-or-buy analysis and before taking make-or-buy decision.",
+        "correct": false
+      }
+    ],
+    "id": 459
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Carol is the project manager for a new engineering project. Some of the project work will be contracted to another company. She is discussing with the procurement manager about the appropriate contract type for the contracted work. Which of the following is the most important aspect to consider in determining the contract type?",
+    "explanation": "What best determines contract type is the completeness of procurement statement of work. If SOW is detailed enough you can select FP contracts which has least risks for the buyer. But if the procurement SOW is incomplete, you can select CR or T&M contracts and accept higher risks for the buyer. Domain = Process. PMBOK 6th edition, Page 471–472 and PMBOK 7th edition, Page 191",
+    "choices": [
+      {
+        "text": "The completeness of the procurement statement of work.",
+        "correct": true
+      },
+      {
+        "text": "The cost of the contracted work.",
+        "correct": false
+      },
+      {
+        "text": "The team experience of dealing with which types of contracts.",
+        "correct": false
+      },
+      {
+        "text": "The available lessons learned in the organization about working with different contract types.",
+        "correct": false
+      }
+    ],
+    "id": 460
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Sam is a project manager for a project to design a car parking sensor. He has a limited scope definition and he wants to protect his company from financial risk. The design work will be outsourced to another company. Which type of contract should he choose for his project?",
+    "explanation": "Here you can't choose FFP as you have limited scope. You should select CR contract as you have limited scope and of course CPFF is better than CPAF because in CPAF the buyer has higher risk than CPFF, because the buyer will pay more to the seller. Domain = Process. PMBOK 6th edition, Page 472 and PMBOK 7th edition, Page 191",
+    "choices": [
+      {
+        "text": "Cost plus award fee (CPAF)",
+        "correct": false
+      },
+      {
+        "text": "Time and Material (T&M)",
+        "correct": false
+      },
+      {
+        "text": "Cost plus fixed fee (CPFF)",
+        "correct": true
+      },
+      {
+        "text": "Firm Fixed price (FFP)",
+        "correct": false
+      }
+    ],
+    "id": 461
+  },
+  {
+    "type": "multiple-choice",
+    "text": "All of the following statements describe the focus of the Plan Procurement Management process, except:",
+    "explanation": "The focus of procurement management is to acquire goods and services from outside the project only. Domain = Process. PMBOK 6th edition, Page 466",
+    "choices": [
+      {
+        "text": "Whether to acquire goods and services from outside the project.",
+        "correct": false
+      },
+      {
+        "text": "What goods and services will be acquired from outside the project.",
+        "correct": false
+      },
+      {
+        "text": "How and when to acquire goods and services from outside the project.",
+        "correct": false
+      },
+      {
+        "text": "Whether to acquire goods and services from inside and outside the project, what to acquire, as well as how and when to acquire them.",
+        "correct": true
+      }
+    ],
+    "id": 462
+  },
+  {
+    "type": "multiple-choice",
+    "text": "All of the following statements are true about procurement inspection, except:",
+    "explanation": "An inspection is a structured review of the work being performed by the contractor. This may involve a simple review of the deliverables or an actual physical review of the work itself. On a construction/engineering/infrastructure project, inspections involve walkthroughs of the site by both the buyer and the contractor to ensure a mutual understanding of the work in progress. An audit is a structured review of the procurement process. Domain = Process. PMBOK 6th edition, Page 498",
+    "choices": [
+      {
+        "text": "An inspection is a structured review of the work being performed by the contractor.",
+        "correct": false
+      },
+      {
+        "text": "An inspection may involve a walkthroughs of the site by both the buyer and the contractor.",
+        "correct": false
+      },
+      {
+        "text": "An inspection may involve a simple review of the deliverables or an actual physical review of the work itself.",
+        "correct": false
+      },
+      {
+        "text": "An inspection is a structured review of the procurement process.",
+        "correct": true
+      }
+    ],
+    "id": 463
+  },
+  {
+    "type": "multiple-choice",
+    "text": "John is managing a product development project. He and his team decide to outsource part of the project work to another company. They have completed the procurement statement of work. Technical details of the outsourced work are set precisely in addition to the required quality levels. The procurement team want to select the contract type. Which contract type is the most appropriate in this situation?",
+    "explanation": "Since the procurement statement of work is precisely defined and future cost risks should be avoided, then the most suitable contract type is FFP Domain = Process. PMBOK 6th edition, Page 471 and PMBOK 7th edition, Page 191",
+    "choices": [
+      {
+        "text": "Time and material (T & M)",
+        "correct": false
+      },
+      {
+        "text": "Fixed price- economic price adjustment (FP-EPA)",
+        "correct": false
+      },
+      {
+        "text": "Firm fixed price (FFP)",
+        "correct": true
+      },
+      {
+        "text": "Cost plus fixed fee (CPFF)",
+        "correct": false
+      }
+    ],
+    "id": 464
+  },
+  {
+    "type": "multiple-choice",
+    "text": "After the prospective sellers have submitted proposals, the engineering manager is arguing with the finance manager about which seller should award the contract. The engineering manager wants the contract to be awarded to seller A because this seller has great experience with the work to be performed. While the finance manager says that the contract should be awarded to seller B, because he will provide the required work with low cost. The project manager should tell them to best focus on which document to make the selection:",
+    "explanation": "Source selection criteria is the document which determines how to select a seller. Domain = Process. PMBOK 6th edition, Page 478 and PMBOK 7th edition, Page 75",
+    "choices": [
+      {
+        "text": "Procurement strategy",
+        "correct": false
+      },
+      {
+        "text": "Source selection criteria",
+        "correct": true
+      },
+      {
+        "text": "Procurement statement of work",
+        "correct": false
+      },
+      {
+        "text": "Procurement management plan",
+        "correct": false
+      }
+    ],
+    "id": 465
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Jenny is the project manager for an electronic boards design project in a multi-national organization. She needs a supplier to provide the electronic components needed for her project. A contract should be signed with the supplier to provide the needed components on time with the required specifications. Typically, who should sign the contract with the supplier?",
+    "explanation": "The project manager is typically not authorized to sign legal agreements binding the organization; this is reserved for those who have the authority to do so (the procurement manager). Domain = Process. PMBOK 6th edition, Page 460",
+    "choices": [
+      {
+        "text": "Project manager",
+        "correct": false
+      },
+      {
+        "text": "Procurement manager",
+        "correct": true
+      },
+      {
+        "text": "Project sponsor",
+        "correct": false
+      },
+      {
+        "text": "Both the project manager and the procurement manager",
+        "correct": false
+      }
+    ],
+    "id": 466
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements is true?",
+    "explanation": "A complex project may involve managing multiple contracts simultaneously or in sequence. In such cases, each contract life cycle may begin and end during any phase of the project life cycle. Domain = Process. PMBOK 6th edition, Page 461 and PMBOK 7th edition, Page 75",
+    "choices": [
+      {
+        "text": "A. A complex project may involve managing multiple contracts.",
+        "correct": true
+      },
+      {
+        "text": "B. A complex contract may involve managing multiple projects.",
+        "correct": false
+      },
+      {
+        "text": "C. A project can involve only one contract.",
+        "correct": false
+      },
+      {
+        "text": "D. A contract can involve only one project.",
+        "correct": false
+      }
+    ],
+    "id": 467
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Mark is a project manager for an industrial project. He is involved in a fixed-price (FP) contract with a supplier, which of the following might not be an output of the Control Procurement process?",
+    "explanation": "Resource change approvals are not needed in fixed price contracts. Domain = Process. PMBOK 6th edition, Page 471 and PMBOK 7th edition, Page 191",
+    "choices": [
+      {
+        "text": "A. Resource change approvals",
+        "correct": true
+      },
+      {
+        "text": "B. Payment requests",
+        "correct": false
+      },
+      {
+        "text": "C. Change requests",
+        "correct": false
+      },
+      {
+        "text": "D. Lessons learned register updates",
+        "correct": false
+      }
+    ],
+    "id": 468
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The procurement claims are monitored and managed throughout the contract life cycle in accordance with:",
+    "explanation": "Procurement claims (or disputes or appeals) are documented, processed, monitored, and managed throughout the contract life cycle, usually in accordance with the terms of the contract. Domain = Process. PMBOK 6th edition, Page 498",
+    "choices": [
+      {
+        "text": "A. The procurement management plan",
+        "correct": false
+      },
+      {
+        "text": "B. The procurement statement of work",
+        "correct": false
+      },
+      {
+        "text": "C. The contracts terms and conditions",
+        "correct": true
+      },
+      {
+        "text": "D. The bid documents",
+        "correct": false
+      }
+    ],
+    "id": 469
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Your software project is halfway done, when one of the key stakeholders submitted a change request to add a major work package. You evaluated the impacts of the change and found that the change will need to add 10,000$ to the cost baseline and two more weeks to the critical path, or you can crash the extra two weeks by hiring two web developers to perform the added work with extra cost of 5,000$. The change is submitted to the change control board and finally approved to add the extra work without increasing the project duration. You need to hire the two web developers immediately, which type of contracts is most appropriate in this situation?",
+    "explanation": "Time and material contracts are often used for staff augmentation, acquisition of experts, and any outside support when a precise statement of work cannot be quickly prescribed. Domain = Process. PMBOK 6th edition, Page 472 and PMBOK 7th edition, Page 191",
+    "choices": [
+      {
+        "text": "A. Cost plus fixed fee (CPFF)",
+        "correct": false
+      },
+      {
+        "text": "B. Time and material (T & M)",
+        "correct": true
+      },
+      {
+        "text": "C. Firm fixed price (FFP)",
+        "correct": false
+      },
+      {
+        "text": "D. Cost plus incentive fee (CPIF)",
+        "correct": false
+      }
+    ],
+    "id": 470
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During which process the request for quotation (RFQ) is sent to potential sellers?",
+    "explanation": "The request of quotation (RFQ) is part of the procurement documents that are created during the procurement planning process and sent to potential sellers during the Conduct Procurement process. Domain = Process. PMBOK 6th edition, Page 485",
+    "choices": [
+      {
+        "text": "A. Plan Procurements Management",
+        "correct": false
+      },
+      {
+        "text": "B. Conduct Procurements",
+        "correct": true
+      },
+      {
+        "text": "C. Control Procurements",
+        "correct": false
+      },
+      {
+        "text": "D. Direct and Manage Project Work",
+        "correct": false
+      }
+    ],
+    "id": 471
+  }
+]

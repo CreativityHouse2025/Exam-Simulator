@@ -58,7 +58,7 @@ export interface Question<QT extends QuestionTypes = QuestionTypes> {
   explanation: string
   /** choices of the question */
   choices: Choice[]
-  /** index of the correct choice for quick access */
+  /** id of the correct choice for quick access */
   answer: Answer<QT>
 }
 
@@ -67,7 +67,7 @@ export interface Choice {
   text: string
   /** is the choice correct */
   correct: boolean
-  /** original index in the question bank before any shuffle; present only on shuffled exams */
+  /** original index in the question bank before any shuffle; present only after reconstructing the snapshot from DB */
   originalIndex?: number
 }
 
@@ -100,18 +100,27 @@ export interface Session {
   examState: ExamState
   /** the state of the review */
   reviewState: ReviewState
-  /** v1.1: the list of question IDs for this session, in the order they should appear */
-  questions: Question['id'][]
-  /** the list of answers */
-  answers: Answers
+  /** per-question shuffled display order: key = question id, value = original choice indices in display order */
+  questionChoiceOrders: Record<number, number[]>
+  /** array of original indices (choice IDs) of the selected choices for each question */
+  selectedOriginalIndices: Answers
   /** null for full exams */
   categoryId: number | null
   /** null for domain exams */
   examId: number | null
   /** the list of bookmarked questions */
   bookmarks: number[]
-  /** the type of the exam */
+  /** the type of the exam, domain or full */
   examType: ExamType
+  /**
+   * 'ALL' = render the loaded exam file as-is (every new exam).
+   * number[] = render exactly these question ids, in this order (resume + revision).
+   */
+  questionIds: number[] | 'ALL'
+  /** Set of question indices that have unsaved changes since the last successful syncProgress call.
+   *  key = question index (positional, not question id), value is always true (used as a set).
+   *  Cleared after each successful sync; reset to {} on RESET_SESSION. */
+  dirtyQuestions: Record<number, true>
 }
 
 // v2.0: Type for the generic dropdown item (category or fullexam)
@@ -129,16 +138,24 @@ export type SessionActionTypes =
   | 'SET_TIMER_PAUSED'
   | 'SET_EXAM_STATE'
   | 'SET_REVIEW_STATE'
+  | 'RESET_SESSION'
+  | 'MARK_DIRTY'
+  | 'CLEAR_DIRTY'
 
 // Session actions mapping
 type SessionActionsMap = {
   SET_INDEX: { payload: number; prop: 'index' }
   SET_BOOKMARKS: { payload: number[]; prop: 'bookmarks' }
-  SET_ANSWERS: { payload: Answers; prop: 'answers' }
+  SET_ANSWERS: { payload: Answers; prop: 'selectedOriginalIndices' }
   SET_TIME: { payload: number; prop: 'time' }
   SET_TIMER_PAUSED: { payload: boolean; prop: 'paused' }
   SET_EXAM_STATE: { payload: ExamState; prop: 'examState' }
   SET_REVIEW_STATE: { payload: ReviewState; prop: 'reviewState' }
+  // Internal-only: replaces the entire session state. Not intended for component use.
+  RESET_SESSION: { payload: Session; prop: 'id' }
+  // Internal-only: both handled via early return in the reducer before the generic prop-lookup runs.
+  MARK_DIRTY: { payload: number; prop: 'dirtyQuestions' }
+  CLEAR_DIRTY: { payload: null; prop: 'dirtyQuestions' }
 }
 
 export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {
@@ -158,7 +175,30 @@ export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, Ses
 export type SessionNavigation = Pick<Session, 'index'> & { update: SessionDispatch }
 export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused'> & { update: SessionDispatch }
 export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'categoryId' | 'examId'> & { update: SessionDispatch }
-export type SessionData = Pick<Session, 'bookmarks' | 'answers' | 'examType'> & { isSyncing: boolean; update: SessionDispatch }
+export type SessionData = Pick<Session, 'bookmarks' | 'selectedOriginalIndices' | 'examType' | 'dirtyQuestions'> & { isSyncing: boolean; update: SessionDispatch }
+
+export type SessionControlContextType = {
+  session: Session | null
+  update: SessionDispatch
+  /** Loads exam data, saves the attempt to the DB, builds the full Session state, and mounts the active session.
+   * Returns the new attemptId on success, or null on failure. */
+  startNewExam: (type: ExamType, examOrCategoryId: number) => Promise<string | null>
+  /** Fetches an in-progress attempt snapshot from the DB, hydrates the full Session state, mounts the active
+   * session, and persists the attemptId to localStorage.
+   * Returns the attemptId on success, or null on failure so callers can reset their loading state. */
+  resumeAttempt: (attemptId: string) => Promise<string | null>
+  /** Fetches a completed full-exam attempt snapshot from the DB, filters to wrong/unanswered questions only,
+   * and mounts an ephemeral revision session (not persisted to localStorage).
+   * Returns the attemptId on success, or null on failure so callers can reset their loading state. */
+  startRevision: (attemptId: string) => Promise<string | null>
+  /** Sends only the dirty questions (answers + bookmark state) to the DB and clears the dirty set on success.
+   * No-op when nothing is dirty or a sync is already in flight. */
+  syncProgress: () => Promise<void>
+  /** Flushes dirty answers and marks the attempt completed in the DB.
+   * Dispatches SET_EXAM_STATE 'completed' only on success.
+   * No-op for revision sessions or while a sync is in flight. */
+  submitExam: (score: number, status: 'pass' | 'fail') => Promise<void>
+}
 
 // User settings (initially null until user inserts data)
 export type Settings = {
@@ -177,7 +217,6 @@ export type SettingsContextType = {
 
 export type ExamContextType = {
   exam: Exam | null
-  setExam: React.Dispatch<React.SetStateAction<Exam | null>>
 }
 
 // Type for the toast component state
@@ -241,6 +280,8 @@ export type AuthContextType = {
 export type Results = {
   // status-related
   pass?: boolean
+  /** "fail" when no passing rate is configured for the exam type */
+  status: "pass" | "fail"
   score: number
   passPercent?: number
 
@@ -255,7 +296,6 @@ export type Results = {
   incorrectCount: number
   incompleteCount: number
   totalQuestions: number
-
 }
 
 // Attempt types (mirror api/_lib/types.ts shapes for frontend use)
@@ -287,10 +327,6 @@ export type AttemptQuestion = {
   is_bookmarked: boolean
 }
 
-export type ListAttemptsResult = {
-  attempts: AttemptSummary[]
-}
-
 export type GetAttemptResult = {
   attempt: AttemptDetail
   questions: AttemptQuestion[]
@@ -318,8 +354,6 @@ export type InsertAttemptRequestBody = InsertAttemptFull | InsertAttemptDomain
 
 export type SaveAttemptAnswer = {
   question_index: number
-  question_id: number
-  choices_order: number[]
   selected_choices: number[]
   is_bookmarked: boolean
 }

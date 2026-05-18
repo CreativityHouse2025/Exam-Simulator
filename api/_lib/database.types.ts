@@ -154,6 +154,31 @@ export type Database = {
     }
     Functions: {
       count_user_sessions: { Args: { p_user_id: string }; Returns: number }
+      insert_attempt: {
+        Args: {
+          p_category_id: number | null
+          p_exam_id: number | null
+          p_exam_type: string
+          p_questions: Json
+          p_time_remaining: number
+          p_user_id: string
+        }
+        Returns: string
+      }
+      save_attempt: {
+        Args: {
+          p_answers: Json
+          p_attempt_id: string
+          p_current_index: number
+          p_exam_state: string
+          p_review_state: string
+          p_score: number | null
+          p_status: string | null
+          p_time_remaining: number
+          p_user_id: string
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never

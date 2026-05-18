@@ -1,0 +1,1106 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "While analyzing the status of the project, the project manager calculated the ratio between earned value EV and planned value PV and found that the ratio is 1.13. He was not satisfied and decided to crash some critical path activities by adding more resources to these activities as a corrective action. Is his decision correct?",
+    "explanation": "The schedule performance index (SPI) is a measure of schedule efficiency expressed as the ratio of earned value to planned value. An SPI value less than 1.0 indicates less work was completed than was planned. An SPI greater than 1.0 indicates that more work was completed than was planned. The SPI is equal to the ratio of the EV to the PV. Equation: SPI = EV/PV. Domain = Process. PMBOK 6th edition, Page 263 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "Yes, his decision is correct. The ratio between EV and PV is called Schedule Performance Index SPI, and if it is more than one, it means that the project is behind schedule. He should compress the schedule.",
+        "correct": false
+      },
+      {
+        "text": "No, his decision is not correct. The ratio between EV and PV is called Schedule Performance Index SPI, and if it is more than one, it means that the project is behind schedule. He should use fast tracking not crashing.",
+        "correct": false
+      },
+      {
+        "text": "No, his decision is not correct. The ratio between EV and PV is called Schedule Performance Index SPI, and if it is more than one, it means that the project is ahead of schedule. No need to take corrective action.",
+        "correct": true
+      },
+      {
+        "text": "Yes, his decision is correct. The ratio between EV and PV is called Schedule Variance SV, and if it is more than one, it means that the project is behind schedule. He should compress the schedule.",
+        "correct": false
+      }
+    ],
+    "id": 0
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During measuring project performance for a product development project against project baselines, you found that the schedule performance index (SPI) of 0.93 and the cost performance index (CPI) of 0.82. Generally, What is the reason behind this?",
+    "explanation": "The project is behind schedule and over budget. Changes in scope may not result in increasing time and cost. When a supplier go out of business this doesn’t necessarily mean that affected activities are on the critical path. When additional equipments are needed this will increase cost and might not increase time. So the correct choice is that equipment is needed for a critical path activity that was delayed and the team purchased a more expensive one instead. Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "A supplier went out of business and a new one needed to be found.",
+        "correct": false
+      },
+      {
+        "text": "An equipment needed for a critical path activity was delayed and project team purchased a more expensive one instead.",
+        "correct": true
+      },
+      {
+        "text": "Additional equipment needed to be purchased.",
+        "correct": false
+      },
+      {
+        "text": "The scope was changed.",
+        "correct": false
+      }
+    ],
+    "id": 1
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a construction project that will install glass walls for a new company. The contract between your company and the customer is a time and material contract which stated that your company will get $11 per meter, and your company is doing all the work. The new company has 4 equal sides of 125 meter, and requires the installation of a six-meter diameter banner on one side. Glass walls should be installed at a rate of 100 meter per day. The banner installation will cost $500 and take one day to complete. The banner must be installed before work can begin on that side of the wall. After three days of work, one side is completed, another has 75 meter installed, and the banner is completely installed. So far, $2,700 of the total project budget has been used. What is the current status of the project?",
+    "explanation": "EV=(125ft+75ft)11+500 = 2700, AC=2700 Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "It is over budget with a cost variance of +$125.",
+        "correct": false
+      },
+      {
+        "text": "The budget is neutral with cost variance of $0.",
+        "correct": true
+      },
+      {
+        "text": "It is under budget, with a cost variance of +$500 due to the completion of the banner installation.",
+        "correct": false
+      },
+      {
+        "text": "It is over budget, with a cost variance of -$1,100",
+        "correct": false
+      }
+    ],
+    "id": 2
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are the project manager for a large manufacturing project. During estimating activity costs for your project using three-point estimates, a team member asks you that he needs to add 5% to each activity cost to account for unidentified risks. What should you tell him?",
+    "explanation": "During estimating activity costs, the project team should estimate the activity costs and the contingency reserve, while management reserves are estimated by management as part of the Determine Budget process. Domain = Process. PMBOK 6th edition, Page 245 and 252",
+    "choices": [
+      {
+        "text": "He is right, management reserve must be added to account for unidentified risks.",
+        "correct": false
+      },
+      {
+        "text": "You should instruct him not increase the estimate.",
+        "correct": true
+      },
+      {
+        "text": "He is right, contingency reserve must be added to account for known-unknowns.",
+        "correct": false
+      },
+      {
+        "text": "Tell him that you must get sponsor approval before increasing the estimates.",
+        "correct": false
+      }
+    ],
+    "id": 3
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a software project. The project budget seems to be inaccurate. The SPI is 1.15. Two project team members resigned last week and The team has had negative deviation from the activity attributes. What is the best thing for the project manager to do?",
+    "explanation": "Re-estimating activity attributes is not necessary. The first thing is to calculate SPI and CPI for the project to gain full understanding of the project status. Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "Re-compute the project schedule and budget.",
+        "correct": false
+      },
+      {
+        "text": "Re-estimate the activity attributes.",
+        "correct": false
+      },
+      {
+        "text": "Calculate the cost performance index.",
+        "correct": true
+      },
+      {
+        "text": "Try to deal with the high turn-over rate in your project.",
+        "correct": false
+      }
+    ],
+    "id": 4
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The project manager is analyzing project performance using earned value management tool. He determines that the cost variance is – 10,000 $. What is the best thing to do?",
+    "explanation": "Schedule variance should be determined firstly to complete the data needed to analyze project status and then take the required corrective action. Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "Determine the schedule variance.",
+        "correct": true
+      },
+      {
+        "text": "Make activities in parallel that are planned in series.",
+        "correct": false
+      },
+      {
+        "text": "Ask for guidance from PMO.",
+        "correct": false
+      },
+      {
+        "text": "Move resources from the project to one that is not failing.",
+        "correct": false
+      }
+    ],
+    "id": 5
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Samuel has been assigned an industrial project to manage. This is his first project to manage. The project is $100,000 over budget. The project team has completed $500,000 worth of work. The project sponsor is worried about the status of the project, he asks Samuel to provide a quick report about the status of the project. Which of the following statements would he mention in his report?",
+    "explanation": "EV=500,000 and CV=-100,000, AC=600,000. CPI = EV/AC Domain = Process. PMBOK 6th edition, Page 262-263 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "The SPI is 1.2",
+        "correct": false
+      },
+      {
+        "text": "The CPI is 0.83",
+        "correct": true
+      },
+      {
+        "text": "The CPI is 1.2",
+        "correct": false
+      },
+      {
+        "text": "The SPI is 0.83",
+        "correct": false
+      }
+    ],
+    "id": 6
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Management reserves are often viewed as the part of the budget intended to address:",
+    "explanation": "Management reserves are an amount of the project budget withheld for management control purposes and are reserved for unforeseen work that is within scope of the project. Domain = Process. PMBOK 6th edition, Page 252 and PMBOK 7th edition, Page 62",
+    "choices": [
+      {
+        "text": "Anticipated and certain events",
+        "correct": false
+      },
+      {
+        "text": "Anticipated and uncertain events",
+        "correct": false
+      },
+      {
+        "text": "Unanticipated events that are within scope of the project",
+        "correct": true
+      },
+      {
+        "text": "Unanticipated events that are not within scope of the project",
+        "correct": false
+      }
+    ],
+    "id": 7
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A software project has been initiated in an adaptive environment. The team decided to build the demo first and add features to the initial product. This is known as:",
+    "explanation": "Continuous Delivery is the practice of delivering feature increments immediately to customers, often through the use of small batches of work and automation technology. Domain = Process. Agile Practice Guide, Page 151",
+    "choices": [
+      {
+        "text": "Conduct a spike",
+        "correct": false
+      },
+      {
+        "text": "Test-Driven Development (TDD)",
+        "correct": false
+      },
+      {
+        "text": "Behavior-Driven Development",
+        "correct": false
+      },
+      {
+        "text": "Continuous Delivery",
+        "correct": true
+      }
+    ],
+    "id": 8
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Sam has just been promoted to a project manager position and he is managing his first major network rollout project. His sponsor is worried about the status of the project . In order to reduce the boss's stress he calculated the earned value management calculations and offered to the sponsor. The project has a total budget of $80,000 and CPI of 0.95. The project has spent $25,000 of its budget so far. The sponsor needs to know how much more money does Sam plan to spend on the project?",
+    "explanation": "EAC = BAC / CPI=84,210, ETC = EAC -AC=59210 Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 104",
+    "choices": [
+      {
+        "text": "$59,210",
+        "correct": true
+      },
+      {
+        "text": "$80,000",
+        "correct": false
+      },
+      {
+        "text": "$84,210",
+        "correct": false
+      },
+      {
+        "text": "$109,210",
+        "correct": false
+      }
+    ],
+    "id": 9
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Samuel is managing a product development project that is bugeted at 1,550,000$. The project is supposed to be completed by today, but it is now 76% complete only. The incurred cost to reach this point is 1,315,000$. What is the cost performance index (CPI) at this point?",
+    "explanation": "AC=1,315,000$, as the project should be finished at this point, so PV = 1,550,000$, EV =0.761,550,000 = 1,178,000. CPI = EV/AC = 1,178,000/1,315,000 = 0.9. SPI = EV/PV = 1,178,000/1,550,000 = 0.76. Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100*",
+    "choices": [
+      {
+        "text": "0.76",
+        "correct": false
+      },
+      {
+        "text": "0.9",
+        "correct": true
+      },
+      {
+        "text": "0.88",
+        "correct": false
+      },
+      {
+        "text": "0.85",
+        "correct": false
+      }
+    ],
+    "id": 10
+  },
+  {
+    "type": "multiple-choice",
+    "text": "While monitoring the cost performance in a small project which was budgeted for $85,000 over a 9 weeks period. As of today, you’ve spent $42,000 of your budget to complete work that you originally expected would cost $44,000. According to your schedule, you should have spent $50,000 by this point. Based on this situation, what is the status of the project?",
+    "explanation": "AC = 42000, EV= 44000, PV = 50000 SPI = EV/PV = 44000/50000 <1 behind schedule CPI = EV/AC = 44000/42000 >1 under budget Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "Under budget and ahead of schedule.",
+        "correct": false
+      },
+      {
+        "text": "Over budget and ahead of schedule.",
+        "correct": false
+      },
+      {
+        "text": "Under budget and behind schedule.",
+        "correct": true
+      },
+      {
+        "text": "Over budget and behind schedule.",
+        "correct": false
+      }
+    ],
+    "id": 11
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Julian is managing a large construction project with a total budget of $450,000. According to the schedule, his team should have completed 45% of the work by now. But at the latest status report, the team only reported that 40% of the work has actually been completed. The team has spent $165,000 till now on the project. How would he best describe the status of the project?",
+    "explanation": "EV=180000, PV=202500, AC=165000 EV < PV, EV > AC Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "The project is ahead of schedule and within its budget.",
+        "correct": false
+      },
+      {
+        "text": "The project is behind schedule and within its budget.",
+        "correct": true
+      },
+      {
+        "text": "The project is ahead of schedule and over its budget.",
+        "correct": false
+      },
+      {
+        "text": "The project is behind schedule and over its budget.",
+        "correct": false
+      }
+    ],
+    "id": 12
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You have just been authorized as a project manager for a small project, identified project stakeholders and are moving into project planning. A project stakeholder asks you for the project’s budget and cost baseline. What should you tell him?",
+    "explanation": "The project budget can be found in the project charter but it is not a detailed one. It is possible to complete the estimate before creating the project management plan because the ROM (Rough Order of Magnitude) estimate is created during the Initiation process. Even small projects must have a budget, so the best choice is that the project budget and baseline will not be finalized and accepted until the planning processes are completed. Domain: Process. Refer to PMBOK 6th edition, page 254 and PMBOK 7th edition, page 62.",
+    "choices": [
+      {
+        "text": "The project budget and baseline will not be finalized and accepted until the planning processes are completed.",
+        "correct": true
+      },
+      {
+        "text": "It is impossible to complete an estimate before the project management plan is created.",
+        "correct": false
+      },
+      {
+        "text": "The project budget can be found in the project charter, which has just been completed.",
+        "correct": false
+      },
+      {
+        "text": "The project management plan will not contain the project’s budget and baseline; it is a small project.",
+        "correct": false
+      }
+    ],
+    "id": 13
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Your sponsor wants to know the Estimate at Completion for your project. The project was budgeted at $30,000, and to date you have spent $20,000 but only completed $10,000 worth of work. You are sure that the future work will be accomplished at the planned rate.",
+    "explanation": "As the work will be accomplished at the planned rate EAC=AC+BAC-EV= 20000 + 30000 - 10000 = 40000. Domain = Process. PMBOK 6th edition, Page 265 and PMBOK 7th edition, Page 104",
+    "choices": [
+      {
+        "text": "$40,000",
+        "correct": true
+      },
+      {
+        "text": "$30,000",
+        "correct": false
+      },
+      {
+        "text": "$60,000",
+        "correct": false
+      },
+      {
+        "text": "$10,000",
+        "correct": false
+      }
+    ],
+    "id": 14
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a large tele-communication project that was initially budgeted at $9,600,000. While preparing for your weekly status report you find that you have spent till now $4,000,000, the cost variance for your project is $-500,000, the schedule performance index is 1.12. In light of this, what is the earned value of the project?",
+    "explanation": "CV=EV-AC, EV=AC+CV Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "$3,000,000",
+        "correct": false
+      },
+      {
+        "text": "$3,500,000",
+        "correct": true
+      },
+      {
+        "text": "$4,480,000",
+        "correct": false
+      },
+      {
+        "text": "$5,650,000",
+        "correct": false
+      }
+    ],
+    "id": 15
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Robert is managing a large manufacturing project. Dave is the project sponsor and at the same time he is the direct manager of Robert. Dave wants to know about the earned value calculations. Robert provided him with this data the project total budget is 120,000$, the total amount spent till now is 70,000$ and the team has actually completed 50% worth of work. If the future project work will be accomplished at the planned rate, what should the Estimate at Completion (EAC) be?",
+    "explanation": "As the future work will be accomplished at the planned rate, so EAC = AC + BAC - EV. EV = 0.5 * 120,000, EV = 60,000$. BAC = 120,000$ and AC = 70,000$. EAC = 70,000+120,000-60,000 = 130,000$. Domain = Process. PMBOK 6th edition, Page 265 and PMBOK 7th edition, Page 104",
+    "choices": [
+      {
+        "text": "130,000$",
+        "correct": true
+      },
+      {
+        "text": "140,000$",
+        "correct": false
+      },
+      {
+        "text": "102,857$",
+        "correct": false
+      },
+      {
+        "text": "60,000$",
+        "correct": false
+      }
+    ],
+    "id": 16
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a mechanical project. The sponsor is worried about the status of the project. You provided him with the earned value calculations AC = $24,100, ETC = $44,600, VAC = -$1,600, BAC =$89,000, and EAC = $91,100. Your sponsor asks you to forecast how much money you expect to spend on the remainder of the project. Which is the best estimate to use for this forecast?",
+    "explanation": "No need for calculations it asks about ETC. Domain = Process. PMBOK 6th edition, Page 265 and PMBOK 7th edition, Page 104",
+    "choices": [
+      {
+        "text": "$44,600",
+        "correct": true
+      },
+      {
+        "text": "$86,400",
+        "correct": false
+      },
+      {
+        "text": "$89,000",
+        "correct": false
+      },
+      {
+        "text": "$91,100",
+        "correct": false
+      }
+    ],
+    "id": 17
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a project with a schedule performance index (SPI) of 1.03 and a cost performance index (CPI) of 0.96. How would you best describe this project?",
+    "explanation": "SPI>1 means ahead of schedule, CPI<1 over budget Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "The project is ahead of schedule and within its budget.",
+        "correct": false
+      },
+      {
+        "text": "The project is behind schedule and within its budget.",
+        "correct": false
+      },
+      {
+        "text": "The project is ahead of schedule and over its budget.",
+        "correct": true
+      },
+      {
+        "text": "The project is behind schedule and over its budget.",
+        "correct": false
+      }
+    ],
+    "id": 18
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Andrew is an accountant who has recently joined XYZ organization which has a long agile approach. Andrew has a good experience in traditional projects, but he has never worked on agile projects before. He asks an agile coach how costs and returns are monitored and tracked on agile projects. Which of the following is a correct answer to Andrew's question?",
+    "explanation": "Agile approach follows the principle of incremental delivery which means that each release will deliver value. So, ROI can be generated early as soon as value is delivered. Domain = Process. Agile Practice Guide, Page 16",
+    "choices": [
+      {
+        "text": "It is the same as traditional projects as both use S-curve.",
+        "correct": false
+      },
+      {
+        "text": "It is the same as traditional projects as both use earned value management.",
+        "correct": false
+      },
+      {
+        "text": "Cost is not a concern as it is fixed. In agile projects scope is variable.",
+        "correct": false
+      },
+      {
+        "text": "ROI can be generated while executing the project.",
+        "correct": true
+      }
+    ],
+    "id": 19
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a project which was budgeted at 1,250,000$ and scheduled to be completed within six months. During project executing, the sponsor asked you about the status of the project. You collected the needed data to calculate earned value measurements. You found that the project is 35% complete although it should be 40% complete. You have already spent 550,000 $ to reach this point in the project. What would you tell the sponsor?",
+    "explanation": "EV is the value of work accomplished. EV = 0.35 * 1,250,000 = 437,500. PV is the value of the planned work = 0.4 * 1,250,000 = 500,000. and AC is the actual incurred cost AC= 550,000. SPI = EV/PV= 0.875. CPI = EV/AC = 0.8. So the project is behind schedule and over budget Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "The project is ahead of schedule and over budget.",
+        "correct": false
+      },
+      {
+        "text": "The project is ahead of schedule and under budget.",
+        "correct": false
+      },
+      {
+        "text": "The project is behind schedule and over budget.",
+        "correct": true
+      },
+      {
+        "text": "The project is behind schedule and under budget.",
+        "correct": false
+      }
+    ],
+    "id": 20
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are working for a major pipeline project. The project is very important and highly visible for your organization. It is performed using 32 human resources. As you review the project results, you notice that the value of the work accomplished is $1,200,000 at the last reporting point. You know the schedule performance is good, since your SPI is 1.2 while you have spent $1,050,000 to this point, what are the CPI, and the schedule and cost variances?",
+    "explanation": "EV = 1200000, SPI = 1.2, AC = 1050000, SPI = EV/PV, PV = EV/SPI = 1200000/1.2, PV = 1000000 CPI = EV/AC = 1200000/1050000 = 1.14 SV = EV-PV = 1200000 – 1000000 = 200000 CV = EV-AC = 1200000 – 1050000 = 150000 Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "1.14, ($200,000), & $150,000",
+        "correct": false
+      },
+      {
+        "text": "1.2, $200,000, & ($150,000)",
+        "correct": false
+      },
+      {
+        "text": "1.14, $200,000, & $150,000",
+        "correct": true
+      },
+      {
+        "text": "1.2, $200,000, & ($150,000)",
+        "correct": false
+      }
+    ],
+    "id": 21
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The cost baseline is the approved version of the time-phased project budget, excluding any management reserves. It is used as a basis for comparison to actual results. It is displayed in the form of:",
+    "explanation": "The cost baseline is displayed in the form of S-Curve. Domain = Process. PMBOK 6th edition, Page 254 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "S-Curve",
+        "correct": true
+      },
+      {
+        "text": "Inverted S-Curve",
+        "correct": false
+      },
+      {
+        "text": "Bubble Chart",
+        "correct": false
+      },
+      {
+        "text": "Hierarchical Chart",
+        "correct": false
+      }
+    ],
+    "id": 22
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a tele-communication project, the project is to swap the old network for 2 cities with a new network. You have been asked by top management to cut the project costs by 10% after you submitted them. The top management expect 25% improvement in drop calls as a result of the project. There are 35 stakeholders in the project and the scope of the project is unclear. What is your best course of action?",
+    "explanation": "If your estimates are accurate then you are ethically and professionally responsible for supporting them. If there is a need to cut project costs then the top management should help the project manager in finding another solution and to evaluate its impacts on project scope, schedule,..etc Domain = Process. PMBOK 6th edition, Page 241 and PMBOK 7th edition, Page 55",
+    "choices": [
+      {
+        "text": "Re-plan to achieve a 35% improvement in drop calls.",
+        "correct": false
+      },
+      {
+        "text": "Provide an accurate estimate of the actual costs and be able to support your estimates.",
+        "correct": true
+      },
+      {
+        "text": "Reduce the estimate by 10% as required and note the change in the risk management plan.",
+        "correct": false
+      },
+      {
+        "text": "Meet with the team to identify where you can find 10% savings.",
+        "correct": false
+      }
+    ],
+    "id": 23
+  },
+  {
+    "type": "multiple-choice",
+    "text": "George is the project manager for a construction project. He is currently reviewing the latest work performance report from his team. The report contains the earned value measurements to this point, forecasts and variances. Which of the following values contribute to the greatest risk in the project?",
+    "explanation": "TCPI is the ratio between work remaining and budget remaining, if it is greater than one, this means that work remaining is greater than budget remaining, which means high risk. Domain = Process. PMBOK 7th edition, Page 105",
+    "choices": [
+      {
+        "text": "CPI = 1.15",
+        "correct": false
+      },
+      {
+        "text": "SPI = 1.01",
+        "correct": false
+      },
+      {
+        "text": "TCPI = 1.05",
+        "correct": true
+      },
+      {
+        "text": "Schedule Variance SV = 1,500$",
+        "correct": false
+      }
+    ],
+    "id": 24
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the status of the project when the earned value of the project is higher than both the actual costs and planned value?",
+    "explanation": "When the EV is greater than both PV and AC then this means that the value of all the work completed EV to this point in time is greater than the value of the work planned to be completed PV and the actual costs spent AC. Domain = Process. PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "The project is performing good as it is running faster than planned and under the planned cost.",
+        "correct": true
+      },
+      {
+        "text": "The project is not performing good as it is running slower than planned and under the planned cost.",
+        "correct": false
+      },
+      {
+        "text": "The project is not performing good as it is running slower than planned and over the planned cost.",
+        "correct": false
+      },
+      {
+        "text": "The project is not performing good as it is running faster than planned and over the planned cost.",
+        "correct": false
+      }
+    ],
+    "id": 25
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Contingency reserves are often viewed as the part of the budget intended to address:",
+    "explanation": "Contingency reserves are often viewed as the part of the budget intended to address the known unknowns that can affect a project. The certain events are facts not risks. Domain = Process. PMBOK 6th edition, Page 245 and PMBOK 7th edition, Page 62",
+    "choices": [
+      {
+        "text": "Anticipated and certain events",
+        "correct": false
+      },
+      {
+        "text": "Anticipated and uncertain events",
+        "correct": true
+      },
+      {
+        "text": "Unanticipated events",
+        "correct": false
+      },
+      {
+        "text": "Scope Creep",
+        "correct": false
+      }
+    ],
+    "id": 26
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Project team members are estimating the costs of the activities that will be performed during the project. They are using three point estimating. The expected cost of the activity based on weighted average distribution equals 500$. The cost of the activity, based on realistic effort assessment for the required work and any predicted expenses equals 480$. The cost based on analysis of the best-case scenario for the activity equals 420$. What is The cost based on analysis of the worst-case scenario for the activity?",
+    "explanation": "Beta distribution. cE = (cO + 4cM + cP) / 6. cM = 480, cO = 420 , cE = 500. cP = 6cE - cO - 4cM = 6*500 - 420 - 4*480 = 660$ Domain = Process. PMBOK 6th edition, Page 245*",
+    "choices": [
+      {
+        "text": "466.7$",
+        "correct": false
+      },
+      {
+        "text": "473.3$",
+        "correct": false
+      },
+      {
+        "text": "600$",
+        "correct": false
+      },
+      {
+        "text": "660$",
+        "correct": true
+      }
+    ],
+    "id": 27
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Jerry is managing a software project. He calls for a meeting with the project team to discuss the current variances. He receives a weekly report from the project team which includes earned value measurements for the project at this point. Which of the following variances contributes to the least risk in the project?",
+    "explanation": "BAC is how much did we BUDGET for the TOTAL project effort. EAC is what do we currently expect the TOTAL project to cost. If BAC is greater than EAC this means that the planned budget is greater than the estimated budget, so there is enough funds for the project, which means risk is less. Domain = Process. PMBOK 7th edition, Page 104",
+    "choices": [
+      {
+        "text": "EAC is greater than BAC",
+        "correct": false
+      },
+      {
+        "text": "BAC is greater than EAC",
+        "correct": true
+      },
+      {
+        "text": "TCPI = 1.08",
+        "correct": false
+      },
+      {
+        "text": "ETC is greater than BAC",
+        "correct": false
+      }
+    ],
+    "id": 28
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing a construction project in your organization budgeted at 4,000,000$ and scheduled to be completed in 10 months. During project executing, the customer complains that the project is running behind schedule. The sponsor is holding a meeting with you and the customer. The sponsor asked you about the reason of this delay, you answered him that you send a weekly report which contains the earned value measurements of the project. The last report shows that SPI = 1.05 which means that the project is running ahead of schedule not behind schedule. The customer insists that a critical deliverable due date is missed. What is the main problem in this situation?",
+    "explanation": "The true answer is that you performed some activities not on the critical path earlier than planned, and some on the critical path later than planned. The values of the activities not on the critical path are higher than those on the critical path, which makes EV>PV and so SPI>1 Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "Your team is not following the communication management plan.",
+        "correct": false
+      },
+      {
+        "text": "The customer is not following the communication management plan.",
+        "correct": false
+      },
+      {
+        "text": "You performed some activities not on the critical path earlier than planned and some activities on the critical path later than planned.",
+        "correct": true
+      },
+      {
+        "text": "You performed some activities on the critical path earlier than planned and some activities not on the critical path later than planned.",
+        "correct": false
+      }
+    ],
+    "id": 29
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A cost performance index (CPI) of 0.98 means:",
+    "explanation": "A cost performance index means how much dollars you get from each dollar invested. Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "At this time, we expect the total project to cost 98 percent of the planned cost.",
+        "correct": false
+      },
+      {
+        "text": "The project is progressing at 98 percent of the rate planned.",
+        "correct": false
+      },
+      {
+        "text": "When the project is completed, we will have spent 98 percent of the planned cost.",
+        "correct": false
+      },
+      {
+        "text": "The project is getting 98 cents out of every dollar invested.",
+        "correct": true
+      }
+    ],
+    "id": 30
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a construction project. You are in planning process group and estimating with team members the costs needed to perform the project. The cost of the material pessimistically $120,000, most likely $110,000, and optimistically $100,000. The cost of labor is pessimistically $100,000, most likely $90,000, and optimistically $85,000. The cost of equipment is pessimistically $60,000, optimistically $40,000 and most likely $50,000. The cost for management fees is pessimistically $50,000, most likely $40,000, and optimistically $30,000. What is the probability of the project coming in under $280,000?",
+    "explanation": "Average Expected Cost = (P+4M+O)/6. Average cost of material = 110,000, labor = 90,833, Equipments = 50,000, Management fees = 40,000. Average Total Cost = 110000+ 90833+50000+40000 = 290833. Average Total Cost = 110000+ 90833+50000+40000 = 290,833. Mean is at 290833 which means that the probability of total cost to be > 290833 = 50% and the probability of total cost to be < 290833 = 50%. So the probability of total cost to be < 280000$ is less than 50%. Domain = Process. PMBOK 6th edition, Page 245",
+    "choices": [
+      {
+        "text": "Exact 50 %.",
+        "correct": false
+      },
+      {
+        "text": "Less than 50%.",
+        "correct": true
+      },
+      {
+        "text": "Over 50%.",
+        "correct": false
+      },
+      {
+        "text": "There is not enough information.",
+        "correct": false
+      }
+    ],
+    "id": 31
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a major construction project. The customer is very angry because there is a deliverable due date within two weeks and he believes that your team will not complete the deliverable before the due date. You meet with the customer to reduce his stress and you show him the earned value calculations. They show your cost performance index (CPI) is 1.25, your actual cost (AC) is $400 million, and your planned value (PV) is $490 million. Should your customer be comfortable?",
+    "explanation": "Since CPI = EV/ AC, then EV= 1.25 400 M= 500 M, so SV= EV-PV = 500-490= 10M, SPI= EV/PV =500/490= 1.02, therefore the project is ahead of schedule, but this doesn’t mean that the activities needed to deliver project deliverables are on schedule, these deliverables might not be on the critical path. So he needs to prove to him that the activities leading to this deliverable are on schedule. Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100*",
+    "choices": [
+      {
+        "text": "Yes, your SPI is 1.05.",
+        "correct": false
+      },
+      {
+        "text": "Yes, your SV is $10 million.",
+        "correct": false
+      },
+      {
+        "text": "No, your CPI is too high.",
+        "correct": false
+      },
+      {
+        "text": "He needs more data.",
+        "correct": true
+      }
+    ],
+    "id": 32
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing an industrial project. You performed till now work valued at $15,000, which was planned to cost $12,000. You actually paid $11,000. What is the status of this project?",
+    "explanation": "SPI = EV / PV = $15,000 / $12,000 = 1.25—so your project is ahead of schedule. CPI = EV / AC = $15,000 / $11,000 = 1.36—so your project is within its budget. Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "The project is ahead of schedule and within its budget.",
+        "correct": true
+      },
+      {
+        "text": "The project is behind schedule and within its budget.",
+        "correct": false
+      },
+      {
+        "text": "The project is ahead of schedule and over its budget.",
+        "correct": false
+      },
+      {
+        "text": "The project is behind schedule and over its budget.",
+        "correct": false
+      }
+    ],
+    "id": 33
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Eric is a project manager of a construction project to install new glass windows in an office building. He planned to spend $21,300 on the project, but his costs are going higher than planned, and now he is afraid that his project is spending too much money. Which of the following parameters can he use to determine whether his project is over or under budget?",
+    "explanation": "Cost variance (CV) is the amount of budget deficit or surplus at a given point in time, expressed as the difference between earned value and the actual cost. It is a measure of cost performance on a project. Domain = Process. PMBOK 6th edition, Page 262 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "AC",
+        "correct": false
+      },
+      {
+        "text": "EV",
+        "correct": false
+      },
+      {
+        "text": "CV",
+        "correct": true
+      },
+      {
+        "text": "VAC",
+        "correct": false
+      }
+    ],
+    "id": 34
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Steven is a project manager for a large scale integration project, which has a tight schedule. He is reporting to Derek, a senior manager who is also the sponsor of the project. Derek called Steven in the middle of the project and asked him about the status of the project, as he doesn't know whether the project is ahead or behind schedule at this moment. Derek wants to know the earned value numbers. Which report should Steven send to him?",
+    "explanation": "S-Curve is used to display EV, PV and AC data of a certain project. Other mentioned types of reports don't contain earned value numbers. Domain = Process. PMBOK 6th edition, Page 263 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "Project Progress Report",
+        "correct": false
+      },
+      {
+        "text": "S-Curve",
+        "correct": true
+      },
+      {
+        "text": "Project Status Report",
+        "correct": false
+      },
+      {
+        "text": "Milestone Chart",
+        "correct": false
+      }
+    ],
+    "id": 35
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is meant by cost risk?",
+    "explanation": "The first thing to think of is: cost risks are risks or costs? Of course they are risks, so all answers saying it is cost should be eliminated. It is true that some risks cost the project money but this is not the right definition of cost risks. The right definition is that there is a risk that project costs could go higher than planned. Domain = Process. PMBOK 6th edition",
+    "choices": [
+      {
+        "text": "The cost of all the identified risks if they happen.",
+        "correct": false
+      },
+      {
+        "text": "There is a risk that project costs could go higher than planned.",
+        "correct": true
+      },
+      {
+        "text": "There are risks that will cost the project money.",
+        "correct": false
+      },
+      {
+        "text": "The cost of contingency reserve assigned for residual risks.",
+        "correct": false
+      }
+    ],
+    "id": 36
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The project manager in an industrial firm is reporting the project performance during the bi-weekly progress evaluation meeting with the key stakeholders. The planned budget for completing the project to date is 10000000$, the project mangers' calculations shows that the actual work done by the project is 1.2 the planned cost, while the work done is 0.89 the planned work to be done to date, in light of these info the project is considered:",
+    "explanation": "The CPI = 1.2 and SPI= 0.89 which means the project is under budget but behind schedule. Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "On schedule and under budget",
+        "correct": false
+      },
+      {
+        "text": "On schedule and over budget",
+        "correct": false
+      },
+      {
+        "text": "Ahead of schedule and under budget",
+        "correct": false
+      },
+      {
+        "text": "Behind schedule and under budget",
+        "correct": true
+      }
+    ],
+    "id": 37
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Robert is managing a large manufacturing project. Dave is the project sponsor and at the same time he is the direct manager of Robert. Dave wants to know about the earned value calculations. Robert provided him with this data the project total budget is 120,000$, the total amount spent till now is 70,000$ and the team has actually completed 50% worth of work. If the CPI is expected to be the same for the remainder of the project, what should the Estimate at Completion (EAC) be?",
+    "explanation": "If the CPI is expected to be the same for the remainder of the project, so EAC = BAC/CPI. EV = 0.5 * 120,000, EV = 60,000$. BAC = 120,000$ and AC = 70,000$. CPI = EV/AC = 60,000/70,000 = 0.857. EAC = 120,000/0.857 = 140,000$ Domain = Process. PMBOK 6th edition, Page 265 and PMBOK 7th edition, Page 104",
+    "choices": [
+      {
+        "text": "130,000$",
+        "correct": false
+      },
+      {
+        "text": "140,000$",
+        "correct": true
+      },
+      {
+        "text": "102,857$",
+        "correct": false
+      },
+      {
+        "text": "60,000$",
+        "correct": false
+      }
+    ],
+    "id": 38
+  },
+  {
+    "type": "multiple-choice",
+    "text": "After analyzing the status of your project, you determine the earned value (EV) = 500,000 $ and the planned value (PV) = 550,000 $. What should you expect at the end of the project as a result if this trend continues?",
+    "explanation": "Since EV is less than PV, therefore the amount of work performed is less than what was planned, so the project is behind schedule and will finish later than the planned date. Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "The project will finish below the original cost estimate.",
+        "correct": false
+      },
+      {
+        "text": "The actual cost will be lower than planned.",
+        "correct": false
+      },
+      {
+        "text": "The estimate at completion will be lower than planned.",
+        "correct": false
+      },
+      {
+        "text": "The project will finish behind schedule.",
+        "correct": true
+      }
+    ],
+    "id": 39
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You have been assigned as a project manager for a new network roll-out project. You are in the process of creating the project charter. You meet with the key stakeholders to solicit their inputs. You meet with the IT manager to know the cost of the IT activities in your project. He informs you that it is impossible to provide a cost estimate without knowing the specific resources who will be assigned to the project. You explain that:",
+    "explanation": "In project charter you only need ROM estimate. Domain = Process. PMBOK 6th edition, Page 241 and PMBOK 7th edition, Page 46",
+    "choices": [
+      {
+        "text": "For now only you need a ROM estimate to be validated later, when you know what resources will be available.",
+        "correct": true
+      },
+      {
+        "text": "Try first to estimate the needed resources for the IT manager to get accurate estimates.",
+        "correct": false
+      },
+      {
+        "text": "It is not a problem because stakeholder identification during project initiating will uncover key resources.",
+        "correct": false
+      },
+      {
+        "text": "Resource cost is not an issue at this point. You will have a realistic budget at the end of project planning.",
+        "correct": false
+      }
+    ],
+    "id": 40
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Edwin is managing a large construction project. He and his team are in the planning phase. He is estimating the cost of each activity with the project team. The project sponsor has requested from him to take uncertainty into consideration. Which of the following techniques is the best to use?",
+    "explanation": "The accuracy of single-point cost estimates may be improved by considering estimation uncertainty and risk and using three estimates to define an approximate range for an activity’s cost. Domain = Process. PMBOK 6th edition, Page 244",
+    "choices": [
+      {
+        "text": "Parametric Estimating",
+        "correct": false
+      },
+      {
+        "text": "Analogous Estimating",
+        "correct": false
+      },
+      {
+        "text": "Triangular distribution",
+        "correct": true
+      },
+      {
+        "text": "Bottom-up Estimating",
+        "correct": false
+      }
+    ],
+    "id": 41
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During project executing, a project manager realizes that he needs to decrease project costs. After analyzing all options, he decides to select one of the following options to decrease project costs. Which one of the following will decrease project costs?",
+    "explanation": "Choosing the component A will not reduce the project cost. Choosing a more experienced resource of course will increase the cost. Performing activities on parallel will increase risks that will increase the costs. So the best choice is to remove a test from the project management plan although it seems not to be the best solution, this will affect quality negatively but will reduce cost. Domain = Process. PMBOK 6th edition, Page 241",
+    "choices": [
+      {
+        "text": "Remove a test from the project management plan.",
+        "correct": true
+      },
+      {
+        "text": "Change to component A from component B. Component A costs more to purchase, but has a lower life cycle cost than B.",
+        "correct": false
+      },
+      {
+        "text": "Change activity A to be completed by resource B instead of resource C. Resource B is a more experienced worker.",
+        "correct": false
+      },
+      {
+        "text": "Move activities B and H to occur concurrently, and accept a 30% increase in the risk that 5 more resources will be needed later.",
+        "correct": false
+      }
+    ],
+    "id": 42
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a tele-communication project. Your project is to extend cables for a landline phone network. The total cost of the project is $52/ meter to lay 4 km of cable under ground. It’s scheduled to take 8 weeks to complete, with an equal amount of cable laid in each week. It’s currently week 5, and your team has laid 1,800 meters of cable so far. What is the SPI of your project?",
+    "explanation": "EV = 1800 * 52 = 93600 PV = 5/8 * 52 * 4000 = 130000 SPI = EV/PV = 93600/130000 = 0.72 Domain = Process. PMBOK 6th edition, Page 261 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "1.16",
+        "correct": false
+      },
+      {
+        "text": "1.08",
+        "correct": false
+      },
+      {
+        "text": "0.92",
+        "correct": false
+      },
+      {
+        "text": "0.72",
+        "correct": true
+      }
+    ],
+    "id": 43
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a new project and you need to estimate the cost of activities. You asked another more experienced project manager about the most suitable cost estimating technique for your project. The experienced project manager recommended analogous estimating as it is most suitable for your project. What is the benefit of analogous estimating?",
+    "explanation": "Analogous estimation uses historical data and expert judgment to estimate activity or project duration. It is quick but less accurate than bottom up estimating. Domain = Process. PMBOK 6th edition, Page 244",
+    "choices": [
+      {
+        "text": "It is quick.",
+        "correct": true
+      },
+      {
+        "text": "It provides a basis for monitoring and controlling and performance measurement.",
+        "correct": false
+      },
+      {
+        "text": "It gains buy-in from the team because the team creates estimates.",
+        "correct": false
+      },
+      {
+        "text": "It is more accurate than bottom-up estimating.",
+        "correct": false
+      }
+    ],
+    "id": 44
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are invited to give a training session for the new project team members in your organization on how to use earned value management. You teach them how to calculate schedule performance index and cost performance index and how to use them to assess project performance to project baselines. A new team members asks you at the end of the project what should be the value of SPI. What should you answer him?",
+    "explanation": "At the end of the project SPI = 1, the actual work should equal to the planned work. Domain = Process. PMBOK 6th edition, Page 263 and PMBOK 7th edition, Page 100",
+    "choices": [
+      {
+        "text": "Equal to SV",
+        "correct": false
+      },
+      {
+        "text": "Zero",
+        "correct": false
+      },
+      {
+        "text": "1",
+        "correct": true
+      },
+      {
+        "text": "Equal to PV",
+        "correct": false
+      }
+    ],
+    "id": 45
+  }
+]

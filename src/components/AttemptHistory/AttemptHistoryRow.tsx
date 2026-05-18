@@ -1,93 +1,24 @@
 import React from "react"
-import styled, { keyframes } from "styled-components"
-import { useNavigate } from "react-router-dom"
-import exams from "../../data/exam-data/full-exams.json"
-import categories from "../../data/exam-data/categories.json"
+import styled from "styled-components"
+import exams from "../../data/exam/full-exams.json"
+import categories from "../../data/exam/categories.json"
 import useSettings from "../../hooks/useSettings"
 import { formatDate } from "../../utils/format"
 import { translate } from "../../utils/translation"
 import { canRetryAttempt } from "../../utils/exam"
 import AttemptStateIcon from "./AttemptStateIcon"
 import AttemptStatusBadge from "./AttemptStatusBadge"
+import { Tr, Td } from "./AttemptHistoryStyles"
 import type { AttemptSummary } from "../../types"
 import type { ThemedStyles } from "../../types"
 
 type Props = {
   attempt: AttemptSummary
   index: number
+  onContinue: (id: string) => void
+  onReview: (id: string) => void
+  onRetry: (id: string) => void
 }
-
-const rowEnter = keyframes`
-  from { opacity: 0; }
-  to   { opacity: 1; }
-`
-
-export const Tr = styled.tr<ThemedStyles & { $index: number }>`
-  /* mobile: translucent card */
-  display: flex;
-  flex-direction: column;
-  background: transparent;
-  border: 1px solid ${({ theme }) => theme.grey[4]};
-  border-radius: 12px;
-  padding: 1.4rem 1.6rem;
-  margin-bottom: 1rem;
-  animation: ${rowEnter} 0.45s ease-out both;
-  animation-delay: ${({ $index }) => $index * 0.06}s;
-
-  @media (min-width: 768px) {
-    display: table-row;
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    padding: 0;
-    margin-bottom: 0;
-
-    &:hover td {
-      background: rgba(181, 150, 93, 0.04);
-    }
-  }
-`
-
-export const Td = styled.td<ThemedStyles>`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.6rem 0;
-  font-size: 1.35rem;
-  color: ${({ theme }) => theme.black};
-  border-bottom: 1px solid ${({ theme }) => theme.grey[1]};
-
-  &:last-child {
-    border-bottom: none;
-  }
-
-  &::before {
-    content: attr(data-label);
-    font-weight: 700;
-    font-size: 1.1rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.grey[9]};
-    margin-inline-end: 1rem;
-    flex-shrink: 0;
-  }
-
-  @media (min-width: 768px) {
-    display: table-cell;
-    padding: 1.65rem 1.4rem;
-    border-bottom: 1px solid ${({ theme }) => theme.grey[2]};
-    vertical-align: middle;
-    transition: background 0.15s ease;
-
-    &::before {
-      display: none;
-    }
-
-    &:last-child {
-      border-bottom: 1px solid ${({ theme }) => theme.grey[2]};
-    }
-  }
-`
 
 const TypeBadge = styled.span<ThemedStyles & { $type: string }>`
   display: inline-block;
@@ -97,6 +28,7 @@ const TypeBadge = styled.span<ThemedStyles & { $type: string }>`
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  text-align: center;
   background: ${({ $type }) =>
     $type === "full" ? "rgba(181, 150, 93, 0.14)" : "rgba(89, 55, 82, 0.1)"};
   color: ${({ theme, $type }) => ($type === "full" ? theme.primary : theme.secondary)};
@@ -120,6 +52,10 @@ const ActionButtons = styled.div`
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
+  justify-content: flex-end;
+  @media (min-width: 768px) {
+    justify-content: flex-start;
+  }
 `
 
 const ReviewButton = styled.button<ThemedStyles>`
@@ -181,9 +117,8 @@ const ContinueButton = styled.button<ThemedStyles>`
 `
 
 /** Renders one exam attempt as a responsive row (card on mobile, table row on desktop). */
-const AttemptHistoryRow: React.FC<Props> = ({ attempt, index }) => {
+const AttemptHistoryRow: React.FC<Props> = ({ attempt, index, onContinue, onReview, onRetry }) => {
   const { settings } = useSettings()
-  const navigate = useNavigate()
   const langCode = settings.language
 
   const examLabel =
@@ -193,7 +128,7 @@ const AttemptHistoryRow: React.FC<Props> = ({ attempt, index }) => {
 
   const scoreDisplay = attempt.exam_state === "completed" ? `${attempt.score}%` : "—"
   const isInProgress = attempt.exam_state === "in-progress"
-  const retryEnabled = canRetryAttempt(attempt.exam_type, attempt.score < 100)
+  const retryEnabled = attempt.exam_state === "completed" && canRetryAttempt(attempt.exam_type, attempt.score < 100)
 
   return (
     <Tr $index={index}>
@@ -218,18 +153,18 @@ const AttemptHistoryRow: React.FC<Props> = ({ attempt, index }) => {
       <Td data-label={translate("history.table.action")}>
         <ActionButtons>
           {isInProgress ? (
-            <ContinueButton onClick={() => navigate(`/app/exam?id=${attempt.id}`)}>
+            <ContinueButton onClick={() => onContinue(attempt.id)}>
               {translate("history.actions.continue")}
             </ContinueButton>
           ) : (
-            <ReviewButton onClick={() => navigate(`/app/exam?id=${attempt.id}`)}>
+            <ReviewButton onClick={() => onReview(attempt.id)}>
               {translate("history.actions.review")}
             </ReviewButton>
           )}
           {attempt.exam_type === "full" && (
             <RetryButton
               $disabled={!retryEnabled}
-              onClick={retryEnabled ? () => navigate(`/app/exam?id=${attempt.id}&revision=1`) : undefined}
+              onClick={retryEnabled ? () => onRetry(attempt.id) : undefined}
             >
               {translate("history.actions.retry")}
             </RetryButton>

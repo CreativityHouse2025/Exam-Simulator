@@ -1,5 +1,5 @@
 import type { ThemedStyles } from '../../types'
-import { SessionDataContext, SessionNavigationContext } from '../../contexts'
+import { useSessionNavigation, useSessionData } from '../../contexts'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -8,7 +8,6 @@ import { BookmarkBorder } from '@styled-icons/material/BookmarkBorder'
 import { SESSION_ACTION_TYPES } from '../../constants'
 
 const BookmarkStyles = styled.div<BookmarkStylesProps>`
-  margin-right: 5rem;
   color: ${({ $bookmarked, theme }) => ($bookmarked ? theme.tertiary : theme.grey[10])};
   transition: 0.3s;
   cursor: pointer;
@@ -18,15 +17,15 @@ const BookmarkStyles = styled.div<BookmarkStylesProps>`
 `
 
 const BookmarkButton: React.FC = () => {
-  const { index, update } = React.useContext(SessionNavigationContext)
-  const { bookmarks } = React.useContext(SessionDataContext)
+  const { index, update } = useSessionNavigation()
+  const { bookmarks } = useSessionData()
 
   const bookmarked = bookmarks.includes(index)
 
   const toggleBookmark = React.useCallback(() => {
     const newBookmarks = bookmarked ? bookmarks.filter((i) => i !== index) : [...bookmarks, index]
 
-    update!([SESSION_ACTION_TYPES.SET_BOOKMARKS, newBookmarks])
+    update!([SESSION_ACTION_TYPES.SET_BOOKMARKS, newBookmarks], [SESSION_ACTION_TYPES.MARK_DIRTY, index])
   }, [bookmarked, bookmarks, index, update])
 
   const IconComponent = bookmarked ? Bookmark : BookmarkBorder

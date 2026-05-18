@@ -1,0 +1,530 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "Physical resource management is concentrated in all of the following except:",
+    "explanation": "Identifying roles and responsibilities of team members clearly without ambiguity is parts of managing human resources not physical resources. Domain = Process. PMBOK 6th edition, Page 310 and PMBOK 7th edition, Page 65",
+    "choices": [
+      {
+        "text": "Keeping enough inventory.",
+        "correct": false
+      },
+      {
+        "text": "Allocating and using equipments.",
+        "correct": false
+      },
+      {
+        "text": "Identifying roles and responsibilities of team members clearly without ambiguity.",
+        "correct": true
+      },
+      {
+        "text": "Securing critical equipment and material on time.",
+        "correct": false
+      }
+    ],
+    "id": 206
+  },
+  {
+    "type": "multiple-choice",
+    "text": "If your organization is using Kaizen and and Just-In-Time (JIT) methods, you must take them into consideration when you manage your projects because they will mostly affect on:",
+    "explanation": "Due to the scarce nature of critical resources, in some industries, several trends have become popular in the past several years. There is extensive literature about lean management, just-in-time (JIT) manufacturing, Kaizen, total productive maintenance (TPM), Theory of constraints (TOC), and other methods. A Project Manager should determine if the performing organisation has adopted one or more resource management tools and adapt to the project accordingly. Domain = process. PMBOK 6th edition, page 310.",
+    "choices": [
+      {
+        "text": "Resource Management",
+        "correct": true
+      },
+      {
+        "text": "Procurement Management",
+        "correct": false
+      },
+      {
+        "text": "Communication Management",
+        "correct": false
+      },
+      {
+        "text": "Scope Management",
+        "correct": false
+      }
+    ],
+    "id": 207
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are the project manager for a software project. The project sponsor has asked you for a forecast for the cost of project completion. Which of the following is the best metric to use for forecasting?",
+    "explanation": "Only ETC & VAC look forward (forecast), while CPI, SPI, SV, CV, EV & AC look backward. Domain = Process. PMBOK 6th edition, Page 265 and PMBOK 7th edition, Page 104",
+    "choices": [
+      {
+        "text": "EV and AC",
+        "correct": false
+      },
+      {
+        "text": "SV and CV",
+        "correct": false
+      },
+      {
+        "text": "ETC and VAC",
+        "correct": true
+      },
+      {
+        "text": "SPI and CPI",
+        "correct": false
+      }
+    ],
+    "id": 208
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements is true regarding project resources management?",
+    "explanation": "Project resources management is concerned with managing physical and human resources. There is some overlap between Project Resource Management and Project Stakeholder Management. Domain = Process. PMBOK 6th edition, Page 309 and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Project resources management is concerned with managing physical resources, while project stakeholders management is concerned with managing human resources.",
+        "correct": false
+      },
+      {
+        "text": "Project resources management is concerned with managing human resources, while project scope management is concerned with managing physical resources.",
+        "correct": false
+      },
+      {
+        "text": "Project resource management is concerned with managing human resources only.",
+        "correct": false
+      },
+      {
+        "text": "Project resources management is concerned with managing physical and human resources.",
+        "correct": true
+      }
+    ],
+    "id": 209
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project is being implemented using an adaptive approach. During a meeting with the customer, he requested to add a new requirement to the next iteration which might need other resources outside the project team. The needed resources are available within the organization. The project team wants to ensure resources availability to perform the new requirement, however there is a risk that the customer may cancel or postpone the new requirement before the next iteration starts. What should the project team do?",
+    "explanation": "Soft booking is the term for the process of scheduling resources in a project that haven't been confirmed yet. If the resource or service hasn't yet been confirmed, you have to make assumptions about when they'll be available and what their costs will be. Domain = Process.",
+    "choices": [
+      {
+        "text": "Inform the customer that they will assign the needed resources and he will pay their fees in case of cancellation.",
+        "correct": false
+      },
+      {
+        "text": "Use soft booking for the needed resources.",
+        "correct": true
+      },
+      {
+        "text": "Don't hire the needed resources unless there is a written confirmation from the customer for the new requirement.",
+        "correct": false
+      },
+      {
+        "text": "Assign two team members to learn the needed skills to perform the new requirements.",
+        "correct": false
+      }
+    ],
+    "id": 210
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A RACI chart is an example of:",
+    "explanation": "A RACI is a detailed responsibility assignment matrix. Domain = Process. PMBOK 6th edition, Page 317 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "Hierarchical-type organization chart",
+        "correct": false
+      },
+      {
+        "text": "Text-oriented position description",
+        "correct": false
+      },
+      {
+        "text": "Responsibility assignment matrix",
+        "correct": true
+      },
+      {
+        "text": "Control Charts",
+        "correct": false
+      }
+    ],
+    "id": 211
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Mark is managing a large software project. The project is very large, it consists of 75 team members and is planned to take two years. At the end of each quarter, he performs an assessment for each team member to know the areas of strengths and weaknesses for each one. Which process is he involved in?",
+    "explanation": "Individual and team assessment tools give the project manager and the project team insight into areas of strengths and weaknesses. Domain = Process. PMBOK 6th edition, Page 342",
+    "choices": [
+      {
+        "text": "Manage Team",
+        "correct": false
+      },
+      {
+        "text": "Acquire Resources",
+        "correct": false
+      },
+      {
+        "text": "Develop Team",
+        "correct": true
+      },
+      {
+        "text": "Control Resources",
+        "correct": false
+      }
+    ],
+    "id": 212
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements best describes the team charter?",
+    "explanation": "The team charter is a document that establishes the team values, agreements, and operating guidelines for the team. Domain = Process. PMBOK 7th edition, Page 192",
+    "choices": [
+      {
+        "text": "The team charter is a document that contains the project objectives, high level project plan and success criteria.",
+        "correct": false
+      },
+      {
+        "text": "The team charter is a document that contains the KPI's and appraisals of the project team members.",
+        "correct": false
+      },
+      {
+        "text": "The team charter is a document that establishes the team values, agreements, and operating guidelines for the team.",
+        "correct": true
+      },
+      {
+        "text": "The team charter is a document that contains the roles and responsibilities of the project team members.",
+        "correct": false
+      }
+    ],
+    "id": 213
+  },
+  {
+    "type": "multiple-choice",
+    "text": "An agile team is involved in a network installation project using scrum methodology. A network migration activity must be done during downtime and a team member must be assigned to this task. None of the team members wants to sign up for this task. How should this situation be addressed?",
+    "explanation": "Task assignments are done by the team as the team is self-managed and self-organized. Domain = Process. Agile Practice Guide Page 44",
+    "choices": [
+      {
+        "text": "The senior most team member should be assigned to this task.",
+        "correct": false
+      },
+      {
+        "text": "The scrum master should try first to reschedule the activity to daytime.",
+        "correct": false
+      },
+      {
+        "text": "The scrum master should decide who will pick up this task.",
+        "correct": false
+      },
+      {
+        "text": "The team should decide who will pick up this task.",
+        "correct": true
+      }
+    ],
+    "id": 214
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following describes the contents of a resources management plan?",
+    "explanation": "Conflict resolution techniques, personnel performance appraisal and team performance assessment are not included in the resources management plan. Domain = Process. PMBOK 6th edition, Page 318",
+    "choices": [
+      {
+        "text": "Guidance on how to acquire team and physical resources, project organization charts, conflict resolution techniques and release plan.",
+        "correct": false
+      },
+      {
+        "text": "Competence, roles, personnel performance appraisal and recognition and rewards.",
+        "correct": false
+      },
+      {
+        "text": "Identification of resources, release plan, staff training needs, and team performance assessment.",
+        "correct": false
+      },
+      {
+        "text": "Authority, Training Needs, Recognition and Rewards, and Release Plan.",
+        "correct": true
+      }
+    ],
+    "id": 215
+  },
+  {
+    "type": "multiple-choice",
+    "text": "George is responsible for managing the spare parts in a large tele-communication project. He monitors the spare parts usage in a timely manner. He always informs the project manager if any spare part has shortage or surplus and takes the needed actions to adjust spare parts usage. Which process is he involved in?",
+    "explanation": "Control Resources is concerned with identifying and dealing with resource shortage/surplus in a timely manner. Domain = Process. PMBOK 6th edition, Page 354",
+    "choices": [
+      {
+        "text": "Monitor Risks",
+        "correct": false
+      },
+      {
+        "text": "Acquire Resources",
+        "correct": false
+      },
+      {
+        "text": "Control Resources",
+        "correct": true
+      },
+      {
+        "text": "Control Scope",
+        "correct": false
+      }
+    ],
+    "id": 216
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the focus of the Control Resources process?",
+    "explanation": "Control Resources is the process of ensuring that the physical resources assigned and allocated to the project are available as planned, as well as monitoring the planned versus actual utilization of resources and taking corrective action as necessary. Domain = Process. PMBOK 6th edition, Page 352",
+    "choices": [
+      {
+        "text": "Ensuring that the physical resources assigned and allocated to the project are available as planned.",
+        "correct": true
+      },
+      {
+        "text": "Ensuring that the physical and human resources assigned and allocated to the project are available as planned.",
+        "correct": false
+      },
+      {
+        "text": "Ensuring that the physical, human and monetary resources assigned and allocated to the project are available as planned.",
+        "correct": false
+      },
+      {
+        "text": "Ensuring that the human resources assigned and allocated to the project are available as planned.",
+        "correct": false
+      }
+    ],
+    "id": 217
+  },
+  {
+    "type": "multiple-choice",
+    "text": "All of the following statements about Control Resources process is true, except:",
+    "explanation": "The resources needed for the project should be assigned and released at the right time not as early as possible, right place, and right amount for the project to continue without delays. Domain = Process. PMBOK 6th edition, Page 353",
+    "choices": [
+      {
+        "text": "Control Resources process should be performed continuously in all project phases and throughout the project life cycle.",
+        "correct": false
+      },
+      {
+        "text": "The resources needed for the project should be assigned and released as early as possible, at the right place, and right amount for the project to continue without delays.",
+        "correct": true
+      },
+      {
+        "text": "The Control Resources process is concerned with physical resources only.",
+        "correct": false
+      },
+      {
+        "text": "The Control Resources process is not concerned with project human resources.",
+        "correct": false
+      }
+    ],
+    "id": 218
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a complex software project. You need to assign a web developer to your project to perform some complex activities. The needed developer should have great experience to perform the needed activities. You asked the resource manager to assign Steve, who is known that he is an excellent web developer in the organization and he has great experience. The resource manager rejected because Steve is assigned full time to another higher priority project in the organization. You have a conflict with the resource manager because assigning any other developer to perform these activities has great risk to your project, because all other developers within the organization have little experience. Which process are you involved in?",
+    "explanation": "You are involved in the Acquire Resources process, because the project manager here negotiates with the resource manager to provide the required resources for the project. Domain = Process. PMBOK 6th edition, Page 330",
+    "choices": [
+      {
+        "text": "Manage Team",
+        "correct": false
+      },
+      {
+        "text": "Acquire Resources",
+        "correct": true
+      },
+      {
+        "text": "Estimate Activity Resources",
+        "correct": false
+      },
+      {
+        "text": "Control Resources",
+        "correct": false
+      }
+    ],
+    "id": 219
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Your team has made great achievements during your project, and you want to reward them for their great performance. Which of the following contains the bonus plan for your project?",
+    "explanation": "The Resources Management plan includes a “Reward and Recognition” section that describes how you’ll reward your team for good performance Domain = Process. PMBOK 6th edition, Page 319 and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Resource Breakdown Structure",
+        "correct": false
+      },
+      {
+        "text": "The resources management plan",
+        "correct": true
+      },
+      {
+        "text": "The resource histogram",
+        "correct": false
+      },
+      {
+        "text": "The resource calendars",
+        "correct": false
+      }
+    ],
+    "id": 220
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Matt is a project manager for a large tele-communication project. He and his team are now determining the types, quantities and skills of the needed resources for each project activity. They will need to store their spare parts in a warehouse as it will be needed for all the project duration. They are now evaluating whether to buy a warehouse and hire employees to manage it or to outsource the warehousing activities to another company. Which process are they involved in and which tool are they using?",
+    "explanation": "As they are determining the types, quantities and skills of the needed resources, so they are involved in the Estimate Activity Resources. As they are evaluating identified options in order to select the options or approaches to use to execute and perform the work of the project, so they are using alternatives analysis which is an example of data analysis. Domain = Process. PMBOK 6th edition Page 325",
+    "choices": [
+      {
+        "text": "Estimate Activity Resources and Data Analysis",
+        "correct": true
+      },
+      {
+        "text": "Plan Resources Management and Data Representation",
+        "correct": false
+      },
+      {
+        "text": "Acquire Resources and Decision Making",
+        "correct": false
+      },
+      {
+        "text": "Estimate Activity Resources and Analogous Estimating",
+        "correct": false
+      }
+    ],
+    "id": 221
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following are included in the responsibility assignment matrix (RAM)?",
+    "explanation": "A responsibility assignment matrix (RAM) is a grid that shows the project resources assigned to each activity or work package. Domain = Process. PMBOK 6th edition, Page 317 and PMBOK 7th edition, Page 189",
+    "choices": [
+      {
+        "text": "Activity and resource",
+        "correct": true
+      },
+      {
+        "text": "Resource and time estimate",
+        "correct": false
+      },
+      {
+        "text": "Activity and attributes",
+        "correct": false
+      },
+      {
+        "text": "Activity and calendar date",
+        "correct": false
+      }
+    ],
+    "id": 222
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Resource management plan is concerned with planning for all the following resources except:",
+    "explanation": "Monetary resources is addressed through the Estimate Costs process. Domain = Process. PMBOK 6th edition, Page 313 and 240",
+    "choices": [
+      {
+        "text": "Facilities",
+        "correct": false
+      },
+      {
+        "text": "Monetary resources",
+        "correct": true
+      },
+      {
+        "text": "Team members",
+        "correct": false
+      },
+      {
+        "text": "Supplies",
+        "correct": false
+      }
+    ],
+    "id": 223
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Paul is managing an industrial project. In the middle of the project, a project team member noticed that there is a sudden increase in the usage of fuel in a machine. The machine normally consumes 3 litres per day, and its consumption became 5 litres per day with the same level of effort. The team member informed Paul about the problem. In order to control the usage of fuel, Paul asked the team member to cooperate with the technical support team to investigate the problem. They found a defect in a component in the machine which caused the abnormal usage when it is fixed the machine worked normally with the original consumption rate. Which process are they involved in?",
+    "explanation": "Control Resources is concerned with influencing the factors that can create resources utilization change. Domain = Process. PMBOK 6th edition, Page 354",
+    "choices": [
+      {
+        "text": "Control Resources",
+        "correct": true
+      },
+      {
+        "text": "Control Quality",
+        "correct": false
+      },
+      {
+        "text": "Manage Quality",
+        "correct": false
+      },
+      {
+        "text": "Control Scope",
+        "correct": false
+      }
+    ],
+    "id": 224
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Gary is a project manager for a large mechanical project. He is documenting the roles, responsibilities, required skills and reporting relationships for the needed resources. Where should he document this information?",
+    "explanation": "Roles, responsibilities, required skills and reporting relationships for the needed resources are documented in the resources management plan. Domain = Process. PMBOK 6th edition, Page 318 and PMBOK 7th edition, Page 186",
+    "choices": [
+      {
+        "text": "Resource Requirements",
+        "correct": false
+      },
+      {
+        "text": "RACI chart",
+        "correct": false
+      },
+      {
+        "text": "Responsibility Assignment Matrix",
+        "correct": false
+      },
+      {
+        "text": "Resources Management Plan",
+        "correct": true
+      }
+    ],
+    "id": 225
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements is true regarding acquiring project resources?",
+    "explanation": "The resources needed for the project can be internal or external to the project-performing organization. Internal resources are acquired (assigned) from functional or resource managers. External resources are acquired through the procurement processes. Domain = Process. PMBOK 6th edition, Page 329 and PMBOK Guide 7th edition, Page 65",
+    "choices": [
+      {
+        "text": "Internal resources are acquired from functional or resource managers. External resources are acquired through the procurement processes.",
+        "correct": false
+      },
+      {
+        "text": "Internal resources are acquired through procurement processes. External resources are acquired from functional or resource managers.",
+        "correct": false
+      },
+      {
+        "text": "Internal resources are acquired from functional or resource managers. External resources are acquired through the procurement processes.",
+        "correct": true
+      },
+      {
+        "text": "Internal and external resources are acquired from functional or resource managers.",
+        "correct": false
+      }
+    ],
+    "id": 226
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following statements is true?",
+    "explanation": "The Control Resources process is concerned with physical resources such as equipment, materials, facilities, and infrastructure. Team members are addressed in the Manage Team process. Domain = Process. PMBOK 6th edition, Page 353",
+    "choices": [
+      {
+        "text": "The Control Resources process is concerned with controlling physical resources only, while Manage Team is concerned with managing all resources.",
+        "correct": false
+      },
+      {
+        "text": "The Control Resources process is concerned with controlling all resources, while Manage Team is concerned with managing all resources.",
+        "correct": false
+      },
+      {
+        "text": "The Control Resources process is concerned with controlling physical resources only, while Manage Team is concerned with managing team members.",
+        "correct": true
+      },
+      {
+        "text": "The Control Resources process is concerned with controlling all resources, while Manage Team is concerned with managing team members.",
+        "correct": false
+      }
+    ],
+    "id": 227
+  }
+]

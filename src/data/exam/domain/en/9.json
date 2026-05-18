@@ -1,0 +1,842 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "Andy is a project manager for a software project. The scope of the project was approved by the customer and key stakeholders at the beginning of the project, but whenever the customer validates deliverables, he comes up with new requirements that he would like to add into the product. Andy is working with the customer to find what requirements were missed in the planning stages of the project and how to plan better in the future. What is the best description of his project’s current situation?",
+    "explanation": "Scope creep means the uncontrolled expansion to product or project scope without adjustments to time, cost, and resources. Domain = Process. PMBOK 6th edition, Page 168 and PMBOK 7th edition, Page 87",
+    "choices": [
+      {
+        "text": "Rolling wave planning",
+        "correct": false
+      },
+      {
+        "text": "Scope creep",
+        "correct": true
+      },
+      {
+        "text": "Alternatives analysis",
+        "correct": false
+      },
+      {
+        "text": "Product analysis",
+        "correct": false
+      }
+    ],
+    "id": 322
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager for a large construction project. The project is to build a new hotel. The project is divided into five phases and it is highly visible in your organization. To ensure formalizing acceptance of the completed project deliverables, you decided to validate scope with the customer to ensure that the project is on track from the customer point of view. When should the Validate Scope process be performed?",
+    "explanation": "The scope is validated at the end of each phase to ensure that the phase deliverables are accepted by the customer before moving forward to the next phase. Domain = Process. PMBOK 6th edition, Page 164",
+    "choices": [
+      {
+        "text": "At the end of each phase of the project",
+        "correct": true
+      },
+      {
+        "text": "At the beginning of the project",
+        "correct": false
+      },
+      {
+        "text": "At the end of the project",
+        "correct": false
+      },
+      {
+        "text": "During the planning process",
+        "correct": false
+      }
+    ],
+    "id": 323
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Peter is a product owner for a software project that is being implemented using agile methodology. During an iteration review, the team demonstrates theA software project that is being implemented using agile methodology. During an iteration review, the team demonstrates the completed product increment during the last iteration. He rejects one of the product features that the development team demonstrated. What should happen next?",
+    "explanation": "As the feature is rejected, so it means that it does not meet the definition of done or there is a difference between what was done and what was expected. So, it is needed to close this gap by re-writing the related user stories. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "The team should try to convince the product owner to accept the feature.",
+        "correct": false
+      },
+      {
+        "text": "The related user stories should be added to the next iteration backlog.",
+        "correct": false
+      },
+      {
+        "text": "The team should re-write the related user stories to address the rejection reason.",
+        "correct": true
+      },
+      {
+        "text": "The related user stories are returned back to the product backlog for re-prioritization.",
+        "correct": false
+      }
+    ],
+    "id": 324
+  },
+  {
+    "type": "multiple-choice",
+    "text": "An automobile manufacturer has started a project to build more fuel-efficient cars using a hybrid development approach. The project consists of five sequential phases and each phase has multiple deliverables. The project manager mainly use predictive life cycle with some agile practices. Which agile practices can the project manager recommend to the team to make certain that the deliverables are completed and delivered as expected?",
+    "explanation": "The definition of done is a checklist of all the criteria required to be met so that a deliverable can be considered ready for customer use. This approach helps ensure that stakeholders agree at the start of the project that the work is not only completed, but a shared understanding of done and the criteria to accept the work are exactly defined. Domain = Process. PMBOK 7th edition, Page 85",
+    "choices": [
+      {
+        "text": "Retrospective",
+        "correct": false
+      },
+      {
+        "text": "Iteration planning",
+        "correct": false
+      },
+      {
+        "text": "Definition of done",
+        "correct": true
+      },
+      {
+        "text": "Backlog refinement",
+        "correct": false
+      }
+    ],
+    "id": 325
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following is a basic rule for creating a work breakdown structure?",
+    "explanation": "The WBS is a hierarchical decomposition of the total scope of work. Each descending level of the WBS represents an increasingly detailed definition of the project work. Domain = Process. PMBOK 6th edition, Page 161 and PMBOK 7th edition, Page 84",
+    "choices": [
+      {
+        "text": "Each level of a work breakdown structure is a smaller segment of the level above.",
+        "correct": true
+      },
+      {
+        "text": "It should list the relationships between different activities.",
+        "correct": false
+      },
+      {
+        "text": "Each level of a work breakdown structure is a larger segment of the level above.",
+        "correct": false
+      },
+      {
+        "text": "The planned work is contained within the highest level of WBS components.",
+        "correct": false
+      }
+    ],
+    "id": 326
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Sam is managing a project to develop a new billing system for an organization. He has finished collecting project requirements when it was discovered that the finance manager requirements were not collected. Which of the following documents is outdated and caused this issue?",
+    "explanation": "It is clear that the finance manager was not added to the stakeholder register that is why his requirements were missed. Domain = Process. PMBOK 6th edition, Page 41 and PMBOK 7th edition, Page 12",
+    "choices": [
+      {
+        "text": "Requirements documentation",
+        "correct": false
+      },
+      {
+        "text": "Project charter",
+        "correct": false
+      },
+      {
+        "text": "Stakeholder register",
+        "correct": true
+      },
+      {
+        "text": "Requirements traceability matrix",
+        "correct": false
+      }
+    ],
+    "id": 327
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A large electronics organization has initiated a project to develop a new gaming device. The initial schedule to develop the new device with a set of pre-defined features is 6 months. Another competitor has launched a similar product with the same features. The project team has increased the number of features to stay relevant with the market. This pushes the launch date two more months. This is known as:",
+    "explanation": "In this situation, the definition of the project goal being delivered or \"done\" is constantly moving. Project teams track the planned rate of project goal achievement relative to the rate of progress toward completion. The longer the project takes to complete, the further the project goal of \"done\" is likely to move. This is sometimes referred to as \"done drift.\" Domain = Process. PMBOK 7th edition, Page 85",
+    "choices": [
+      {
+        "text": "Gold plating",
+        "correct": false
+      },
+      {
+        "text": "Scope decomposition",
+        "correct": false
+      },
+      {
+        "text": "Done drift",
+        "correct": true
+      },
+      {
+        "text": "Scope creep",
+        "correct": false
+      }
+    ],
+    "id": 328
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You have been assigned to manage a software project that should be completed within three months. A project charter has been created. You met with the customer, sponsor and key stakeholders to collect requirements and developed a project scope statement. A project management plan has been developed and approved by key stakeholders. You met with the actual user who will use the product of the project to demonstrate how the product of the project will work and discovered that the user's requirements are different from the ones you were initially given and approved by key stakeholders. What should you do?",
+    "explanation": "You must collect new requirements of the user which will lead to changing parts of the project management plan through change request. Domain = Process. PMBOK 6th edition, Page 168 and PMBOK 7th edition, Page 83",
+    "choices": [
+      {
+        "text": "Complete the work as originally planned.",
+        "correct": false
+      },
+      {
+        "text": "Re-plan the project to include the new requirements.",
+        "correct": false
+      },
+      {
+        "text": "Try to meet other users to collect other requirements.",
+        "correct": false
+      },
+      {
+        "text": "Create a change request for the user's requirements.",
+        "correct": true
+      }
+    ],
+    "id": 329
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project team is working on his first project using adaptive approach. The team facilitator is coaching them about using Kanban board and the importance of limiting work in progress (WIP). All of the following are advantages of limiting WIP on agile projects, except:",
+    "explanation": "Work in progress (WIP) is the term given to work that has been started but has not yet been completed. Excessive levels of WIP are associated with a number of problems like hiding bottlenecks, representing risk in the form of potential rework, and consuming investment capital and delivering no return. It is not related to managing project resources and their utilization. Domain = Process. Agile Practice Guide Page 66",
+    "choices": [
+      {
+        "text": "Limiting WIP helps agile teams to avoid the risk of potential rework.",
+        "correct": false
+      },
+      {
+        "text": "Limiting WIP helps agile teams to easily identify and remove bottlenecks.",
+        "correct": false
+      },
+      {
+        "text": "Limiting WIP allows agile teams to optimize throughput.",
+        "correct": false
+      },
+      {
+        "text": "Limiting WIP allows agile teams to properly manage project resources and manage their utilization to work more efficiently.",
+        "correct": true
+      }
+    ],
+    "id": 330
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A team member informs the project manager that he has added an extra functionality to the work package assigned to him which was not included in the design. The new functionality did not add any extra cost and he created it during his weekend. The team member believes that it will satisfy the customer and he will appreciate it. What should the project manager do?",
+    "explanation": "Adding unplanned functionality is referred to as gold plating and it is not recommended. The team should build what was designed only. Domain = Process.",
+    "choices": [
+      {
+        "text": "Reward the team member for meeting and exceeding customer expectations.",
+        "correct": false
+      },
+      {
+        "text": "Remove the new functionality and instruct the team member to build only what is included in the design.",
+        "correct": true
+      },
+      {
+        "text": "Thanks the team member for his effort and invite the customer for a meeting to inform him about the new added functionality.",
+        "correct": false
+      },
+      {
+        "text": "Submit a change request to add the new functionality to design.",
+        "correct": false
+      }
+    ],
+    "id": 331
+  },
+  {
+    "type": "multiple-choice",
+    "text": "An advantage of the burnup chart is that:",
+    "explanation": "The burnup chart is useful because it can show changes in scope, making the impact of those changes visible. Domain = Process. Agile Practice Guide, Page 63",
+    "choices": [
+      {
+        "text": "It can show the remaining work to be done.",
+        "correct": false
+      },
+      {
+        "text": "It can show changes in project costs.",
+        "correct": false
+      },
+      {
+        "text": "It can show changes in scope.",
+        "correct": true
+      },
+      {
+        "text": "It can show the individual team members performance.",
+        "correct": false
+      }
+    ],
+    "id": 332
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are managing an industrial project. The project team has successfully produced the first release of the project deliverables. The deliverables are being inspected by the quality control department in the organization. What should be done next?",
+    "explanation": "Project deliverables are reviewed with the customer to gain formal acceptance of the product through the Validate Scope process. Domain = Process. PMBOK 6th edition, Page 164",
+    "choices": [
+      {
+        "text": "Verified deliverables should be reviewed with the customer to gain formal acceptance of the product.",
+        "correct": true
+      },
+      {
+        "text": "Verified deliverables should be delivered to the customer and begin project closure procedures.",
+        "correct": false
+      },
+      {
+        "text": "Document lessons learned and begin project closure procedures.",
+        "correct": false
+      },
+      {
+        "text": "Continue producing the remaining project deliverables.",
+        "correct": false
+      }
+    ],
+    "id": 333
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are the project manager performing intranet project for your company. During planning the project with your team, you divide up all of the work into work packages and create a WBS. For each one of the work packages, you write down details such as initial estimates, assumptions, predecessor and successor work packages. Where do you store all of that information?",
+    "explanation": "WBS dictionary gives all the details that you know about each work package in the WBS, including estimates and billing information. Domain = Process. PMBOK 6th edition, Page 162 and PMBOK 7th edition, Page 85",
+    "choices": [
+      {
+        "text": "Scope Management Plan",
+        "correct": false
+      },
+      {
+        "text": "WBS",
+        "correct": false
+      },
+      {
+        "text": "WBS Dictionary",
+        "correct": true
+      },
+      {
+        "text": "Project Scope Statement",
+        "correct": false
+      }
+    ],
+    "id": 334
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Tony is a project manager for a complex software project. The project is very large and is very important to the customer. He has finished the software system, and obtained acceptance from customer, but few days later, the software system was found to give unexpected results. The customer is very angry and he needs a solution for this problem. Which of the following best describes what should he do first?",
+    "explanation": "Reviewing the customer’s inspection process is not the responsibility of the project manager. He may apologize to the customer later when he knows the root cause of the problem. Doing nothing is against the professional and social responsibility of the project manager. So, the best choice is to review the validate scope process during which the product was accepted. Domain = Process. PMBOK 6th edition, Page 164",
+    "choices": [
+      {
+        "text": "He should do nothing, the customer has accepted the project.",
+        "correct": false
+      },
+      {
+        "text": "He should apologize to the customer.",
+        "correct": false
+      },
+      {
+        "text": "He should review the validate scope process.",
+        "correct": true
+      },
+      {
+        "text": "He should review the customer’s inspection process.",
+        "correct": false
+      }
+    ],
+    "id": 335
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are leading an agile team working on a software project to develop a mobile application. You and the team have completed the last iteration and are going to demonstrate the completed product increment to the stakeholders during the sprint review. What is the most valuable feedback of the product demo?",
+    "explanation": "\"All the required features exist in the increment\" means that the objectives are met and product increment is accepted. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "All the required features exist in the increment.",
+        "correct": true
+      },
+      {
+        "text": "The customer representative wants to thanks the team for their efforts.",
+        "correct": false
+      },
+      {
+        "text": "The customer may assign future projects to your team.",
+        "correct": false
+      },
+      {
+        "text": "The marketing manager liked the product increment and wants to show it to the customer.",
+        "correct": false
+      }
+    ],
+    "id": 336
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Chris has been assigned to manage a large construction project which involves a large number of stakeholders. Chris has started with the project team to collect project requirements from stakeholders. It seems that many stakeholders have contradicting requirements and some stakeholders have unclear requirements. What should Chris and his team do in this situation?",
+    "explanation": "Requirements should be collected from all stakeholders. Filling a survey will neither uncover all requirements nor clear conflicts between contradicting requirements. The best option is to hold face-to-face meetings with all stakeholders to understand their requirements and expectations. Domain = Process. PMBOK 6th edition, Page 140 and PMBOK 7th edition, Page 82",
+    "choices": [
+      {
+        "text": "To effectively collect the exact needed requirements, the project team needs to collect requirements from key stakeholders only.",
+        "correct": false
+      },
+      {
+        "text": "To remove the conflict between contradicting requirements, the project team needs to use Delphi technique as a form of expert judgment.",
+        "correct": false
+      },
+      {
+        "text": "To build consensus regarding the project requirements, the project team needs to hold face-to-face meetings with all stakeholders to understand their requirements and expectations.",
+        "correct": true
+      },
+      {
+        "text": "To collect requirements from a large number of stakeholders, the project team needs to send a survey template to be filled out by all stakeholders.",
+        "correct": false
+      }
+    ],
+    "id": 337
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Brian has just joined a large construction company as a project manager. He has been assigned to manage his first project in the company. Midway through the project, he noticed that the customer is getting frequent change requests implemented by informally approaching the team members. This has resulted in work disruption and discontent among team members. What should be his first priority to remedy the situation?",
+    "explanation": "Controlling the project scope ensures all requested changes and recommended corrective or preventive actions are processed through the Perform Integrated Change Control process. Domain = Process. PMBOK 6th edition, Page 168 and PMBOK 7th edition, Page 87.",
+    "choices": [
+      {
+        "text": "Begin creating a detailed project scope statement.",
+        "correct": false
+      },
+      {
+        "text": "Call for a meeting with the customer and team members to solve the problem.",
+        "correct": false
+      },
+      {
+        "text": "Modify the project management plan so that all change requests must be approved by you.",
+        "correct": false
+      },
+      {
+        "text": "Ensure proper project scope control.",
+        "correct": true
+      }
+    ],
+    "id": 338
+  },
+  {
+    "type": "multiple-choice",
+    "text": "For which of the following can a work breakdown structure be used?",
+    "explanation": "WBS doesn't show durations, relationships, or reasons to initiate a project. It is a component of scope baseline which is used as a basis of comparison between actual performance and what was planned. Domain = Process. PMBOK 6th edition, Page 161 and PMBOK 7th edition, Page 84",
+    "choices": [
+      {
+        "text": "Showing the relationships between activities",
+        "correct": false
+      },
+      {
+        "text": "Communicating with the customer",
+        "correct": true
+      },
+      {
+        "text": "Showing durations for each work package",
+        "correct": false
+      },
+      {
+        "text": "Showing the reasons to initiate the project",
+        "correct": false
+      }
+    ],
+    "id": 339
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Sergio is the sponsor of a large software project. The project includes 1250 stakeholders located in three different countries. He assigned Michael as a project manager for this project. Mario, a business analyst with a good experience, is assigned to this project to conduct business analysis. Who is responsible for ensuring that requirements-related work is accounted for in the project management plan and that requirements-related activities are performed on time and within budget?",
+    "explanation": "The project manager is responsible for ensuring that requirements-related work is accounted for in the project management plan and that requirements-related activities are performed on time and within budget and deliver value. Domain = Process. PMBOK 6th edition, Page 132",
+    "choices": [
+      {
+        "text": "Sergio",
+        "correct": false
+      },
+      {
+        "text": "Michael",
+        "correct": true
+      },
+      {
+        "text": "Mario",
+        "correct": false
+      },
+      {
+        "text": "Project team members",
+        "correct": false
+      }
+    ],
+    "id": 340
+  },
+  {
+    "type": "multiple-choice",
+    "text": "You are a project manager of a seven-month construction project. The project is very important to the customer and your organization. You have held weekly meetings with your project customer and key stakeholders. After six months of work, the project is on schedule and budget, but the customer is not satisfied with the project deliverables. This situation may delay the project completion date by two months. Which of the following is the most important process that could have prevented this situation?",
+    "explanation": "The question here is asking about the process that could have prevented this situation. If the project scope, product scope and project deliverables were defined in details during the Define Scope process, it would prevent this situation to happen. Domain = Process. PMBOK 6th edition, Page 154 and PMBOK 7th edition, Page 84",
+    "choices": [
+      {
+        "text": "Define Scope",
+        "correct": true
+      },
+      {
+        "text": "Control Risks",
+        "correct": false
+      },
+      {
+        "text": "Control Schedule",
+        "correct": false
+      },
+      {
+        "text": "Control Scope",
+        "correct": false
+      }
+    ],
+    "id": 341
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Sergio is the sponsor of a large software project. The project includes 1250 stakeholders located in three different countries. He assigned Michael as a project manager for this project. Mario, a business analyst with a good experience, is assigned to this project to conduct business analysis. Who is responsible for requirements related activities in this project?",
+    "explanation": "If a business analyst is assigned to a project, requirement-related activities are the responsibility of that role. Domain = Process. PMBOK 6th edition, Page 132",
+    "choices": [
+      {
+        "text": "Sergio",
+        "correct": false
+      },
+      {
+        "text": "Michael",
+        "correct": false
+      },
+      {
+        "text": "Mario",
+        "correct": true
+      },
+      {
+        "text": "Project team members",
+        "correct": false
+      }
+    ],
+    "id": 342
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The development team of an agile project has not completed any new features during the last iteration. They are going to hold a product demonstration with the customer representative and stakeholders. What should they do?",
+    "explanation": "Lessons learned and why no new features were completed can be discussed during the retrospective. During product demonstration (iteration review), the team and stakeholders review what was accomplished in the iteration and collaborate on what to do next. The Product Backlog may also be adjusted to meet new opportunities. Domain = Process. Agile Practice Guide.",
+    "choices": [
+      {
+        "text": "They should discuss the user stories to be added to the next iteration.",
+        "correct": true
+      },
+      {
+        "text": "The product demonstration should be cancelled.",
+        "correct": false
+      },
+      {
+        "text": "They should discuss the root cause of having no new completed features during this iteration.",
+        "correct": false
+      },
+      {
+        "text": "They should discuss the lessons learned during the last iteration.",
+        "correct": false
+      }
+    ],
+    "id": 343
+  },
+  {
+    "type": "multiple-choice",
+    "text": "An agile team has completed 10 story points in the current iteration, although the team has committed to complete 15 story points per iteration. What should the team do?",
+    "explanation": "The project team should complete the 10 user stories and add the remaining 5 user stories to the product backlog. Domain = Process. Agile Practice Guide Page 64",
+    "choices": [
+      {
+        "text": "Add more resources to the current iteration.",
+        "correct": false
+      },
+      {
+        "text": "Re-estimate the team velocity.",
+        "correct": false
+      },
+      {
+        "text": "Complete 10 story points and add remaining 5 story points to the product backlog.",
+        "correct": true
+      },
+      {
+        "text": "Extend the current iteration.",
+        "correct": false
+      }
+    ],
+    "id": 344
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Joseph is a project manager for a hardware design project. The project is about to be completed when the customer refused to sign one of the last invoices saying that a user manual for the hardware must be delivered. Joseph is surprised because the user manual shouldn't be completed by his company, this happened most likely because:",
+    "explanation": "The scope statement should state clearly what is as is not included in project work. Domain = Process. PMBOK 6th edition, Page 154",
+    "choices": [
+      {
+        "text": "The work packages were not decomposed to project activities.",
+        "correct": false
+      },
+      {
+        "text": "Project exclusions were not clearly identified in the project scope statement.",
+        "correct": true
+      },
+      {
+        "text": "This requirement is not related to achieving any of the project objectives, so it was removed from the requirements traceability matrix.",
+        "correct": false
+      },
+      {
+        "text": "This requirement was not included in the requirements management plan.",
+        "correct": false
+      }
+    ],
+    "id": 345
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project is on its third iteration review. One of the stakeholders has raised a concern about the product increment of this iteration. Which of the following is the best course of action?",
+    "explanation": "It is needed to know the stakeholder's concern in more details. So, arranging a meeting with the stakeholder and the product owner to know his concern in details and then the product owner can add the stakeholder's requirement in the product backlog. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "Add an entry in the issue log and reassess requirements collection process.",
+        "correct": false
+      },
+      {
+        "text": "Hold a meeting with the team and the product owner to address the stakeholder concern.",
+        "correct": false
+      },
+      {
+        "text": "Ask the product owner to add the stakeholder concern to the next iteration.",
+        "correct": false
+      },
+      {
+        "text": "The agile coach should facilitate a meeting with the stakeholder and the product owner to discuss his concern.",
+        "correct": true
+      }
+    ],
+    "id": 346
+  },
+  {
+    "type": "multiple-choice",
+    "text": "WBS is a good way that helps you to manage a project effectively. In WBS you should breakdown your work into smaller and more manageable pieces. Which of the following doesn’t describe how far to decompose the project work?",
+    "explanation": "The lowest level of WBS components, which are called work packages can be done by more than one person. Other choices are all true about work packages. Domain = Process. PMBOK 6th edition, Page 158 and PMBOK 7th edition, Page 84",
+    "choices": [
+      {
+        "text": "Until it can’t be logically subdivided further.",
+        "correct": false
+      },
+      {
+        "text": "Until it can be realistically estimated.",
+        "correct": false
+      },
+      {
+        "text": "Until it can be done by one person.",
+        "correct": true
+      },
+      {
+        "text": "Until it has a meaningful conclusion.",
+        "correct": false
+      }
+    ],
+    "id": 347
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A new project has been initiated in ABC organization using an adaptive approach. The initial project requirements have been determined in the initial planning stages and prioritized by customer and product owner. What should be done to these requirements over the course of the project?",
+    "explanation": "Agile project requirements should be revisited and reprioritized by customer and product owner over the course of the project. Domain = Process. Agile Practice Guide Page 52.",
+    "choices": [
+      {
+        "text": "The requirements should be kept fixed unless a formal change request is raised and approved.",
+        "correct": false
+      },
+      {
+        "text": "The requirements should be revisited and reprioritized over the course of the project.",
+        "correct": true
+      },
+      {
+        "text": "The requirements should be kept unchanged to avoid scope creep.",
+        "correct": false
+      },
+      {
+        "text": "The requirements should be prioritized by the project team as needed over the course of the project.",
+        "correct": false
+      }
+    ],
+    "id": 348
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During the iteration planning meeting, the development team has selected 50 story points to be implemented in the next iteration according to the team's velocity. The product owner has requested from them to add two more story points to the next iteration. What should the development team do?",
+    "explanation": "During iteration planning, the development team has the final say on the amount of work that can be accomplished in the iteration. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "Reject the product owner request.",
+        "correct": true
+      },
+      {
+        "text": "Add the two story points to the next iteration.",
+        "correct": false
+      },
+      {
+        "text": "Replace them by another two story points.",
+        "correct": false
+      },
+      {
+        "text": "Increase the team velocity to be 52 story points per iteration.",
+        "correct": false
+      }
+    ],
+    "id": 349
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The project team has created the first project deliverable. It has been inspected and passed all the quality control tests. The project team needs to have this deliverable accepted by the customer. To obtain the deliverable acceptance, the project team might need all of the following, except:",
+    "explanation": "The project team can get the deliverable acceptance through the Validate Scope process. The responsibility assignment matrix is not needed in the Validate Scope process. Domain = Process. PMBOK 6th edition, Page 165",
+    "choices": [
+      {
+        "text": "The project management plan, containing the scope baseline and the scope management plan.",
+        "correct": false
+      },
+      {
+        "text": "The verified deliverables completed and checked for correctness by the Control Quality process.",
+        "correct": false
+      },
+      {
+        "text": "The requirements traceability matrix, linking requirements to the project objectives",
+        "correct": false
+      },
+      {
+        "text": "The responsibility assignment matrix describing the roles and responsibilities of the project team members",
+        "correct": true
+      }
+    ],
+    "id": 350
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Two team members of your project team are discussing together about the correct order of the Monitoring and Controlling processes for Scope Management. One of them said that the Validate Scope process should be performed first, while the other member said that the Control Scope process should be performed first. Which of the following is the correct order of Monitoring and Controlling processes for Scope Management?",
+    "explanation": "Validate Scope occurs with each deliverable or phase review and Control Scope is an ongoing process. Domain = Process. PMBOK 6th edition, Page 131",
+    "choices": [
+      {
+        "text": "First Validate Scope, then Control Scope.",
+        "correct": false
+      },
+      {
+        "text": "First Control Scope, then Validate Scope.",
+        "correct": false
+      },
+      {
+        "text": "Both happen simultaneously.",
+        "correct": false
+      },
+      {
+        "text": "There is not enough information to decide.",
+        "correct": true
+      }
+    ],
+    "id": 351
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project team is working on a software project in an adaptive environment. The team has completed the features of the first iteration and the team demonstrates the working product. The product owner sees the demonstration and rejects some stories. Which of the following is the best course of action?",
+    "explanation": "As the team completes the features usually in the form of user stories, the team periodically demonstrates the working product. The product owner sees the demonstration and accepts or declines stories. The declined stories should be added to the product backlog and reprioritized accordingly. Domain = Process. Agile Practice Guide, Page 55",
+    "choices": [
+      {
+        "text": "The declined stories should be addressed through backlog grooming and may be incorporated into the next iteration.",
+        "correct": true
+      },
+      {
+        "text": "The team should work immediately on the declined stories and hold another demonstration.",
+        "correct": false
+      },
+      {
+        "text": "The product owner should follow the change control process.",
+        "correct": false
+      },
+      {
+        "text": "The team should refer the product owner to the definition of done.",
+        "correct": false
+      }
+    ],
+    "id": 352
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Product scope management involves the requirements that relate to the product of the project. Project scope management involves:",
+    "explanation": "Project scope is the work performed to deliver a product, service, or result with the specified features and functions. The term “project scope” is sometimes viewed as including product scope. Domain = Process. PMBOK 6th edition, Page 131",
+    "choices": [
+      {
+        "text": "The work the project manager will do to manage the project.",
+        "correct": false
+      },
+      {
+        "text": "The project management efforts done by the project manager.",
+        "correct": false
+      },
+      {
+        "text": "All work included in the scope management plan.",
+        "correct": false
+      },
+      {
+        "text": "The work the project will do to deliver the product scope.",
+        "correct": true
+      }
+    ],
+    "id": 353
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Kevin is working on a large software project using adaptive approach. He wants to find the changes in project scope and their impact on the project progress. Which of the following tools is the most appropriate to use?",
+    "explanation": "The big advantage of using a burnup chart is that it can show changes in scope, making the impact of those changes visible. Domain = Process. Agile Practice Guide, Page 63",
+    "choices": [
+      {
+        "text": "Burndown chart",
+        "correct": false
+      },
+      {
+        "text": "Burnup chart",
+        "correct": true
+      },
+      {
+        "text": "Kanban board",
+        "correct": false
+      },
+      {
+        "text": "Product backlog",
+        "correct": false
+      }
+    ],
+    "id": 354
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Lucas is an agile practitioner leading an agile project. Midway through the project, he and the team discover that they have committed to deliver 50 story points during the current iteration, but actually they will be able to deliver 40 story points only. Which of the following is the best course of action?",
+    "explanation": "Extending the iteration is not a good solution as it violates the timeboxing concept. Working overtime and modifying the iteration plan are not proactive solutions. The best answer is to complete 40 story points and add the uncompleted stories to the backlog. Domain = Process. Agile Practice Guide Page 64",
+    "choices": [
+      {
+        "text": "Extend the current iteration till the team completes the committed story points.",
+        "correct": false
+      },
+      {
+        "text": "Adjust the iteration plan to have 40 points instead of 50.",
+        "correct": false
+      },
+      {
+        "text": "Complete 40 story points and add 10 story points to the product backlog.",
+        "correct": true
+      },
+      {
+        "text": "Work overtime to complete the committed story points during the current iteration.",
+        "correct": false
+      }
+    ],
+    "id": 355
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following is not an example of the definition of \"done\" in an agile project?",
+    "explanation": "Creating a shared definition of done is crucial for satisfying our stakeholders’ expectations. Therefore, a shared definition of done is necessary at every level of an agile project (user story – release – product). An objective (quantified) criteria should be used for the definition of done, subjective criteria should not be used. Agile Practice Guide Page 50",
+    "choices": [
+      {
+        "text": "The product is considered to be (done), when development work is complete, code is documented and refactored.",
+        "correct": true
+      },
+      {
+        "text": "The release will be considered as (done) when mobile application version is accepted and there are no Priority 1 defects or change requests.",
+        "correct": false
+      },
+      {
+        "text": "The website is considered to be (done) when the high priority features are complete and beta version gets at least 80% score in user satisfaction survey.",
+        "correct": false
+      },
+      {
+        "text": "The user story is considered to be (done) when the code development is complete, documented and user acceptance tested.",
+        "correct": false
+      }
+    ],
+    "id": 356
+  }
+]

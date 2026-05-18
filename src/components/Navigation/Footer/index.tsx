@@ -9,6 +9,7 @@ const FooterStyles = styled.div<FooterStylesProps>`
   width: 100%;
   background: ${({ theme }) => theme.grey[0]};
   border-top: 1px solid ${({ theme }) => theme.grey[1]};
+  max-height: 50px;
   display: grid;
   grid-template-columns: 0.5fr 0.5fr;
   transition: 0.3s;

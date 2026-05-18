@@ -19,7 +19,8 @@ import { LANGUAGES } from "./constants"
 import useSettings from "./hooks/useSettings"
 import type { LangCode } from "./types"
 import ExamPage from "./pages/ExamPage"
-import ExamContextProvider from "./providers/ExamContextProvider"
+import ExamContextProvider from "./providers/ExamProvider"
+import SessionProvider from "./providers/SessionProvider"
 
 const AppBackground = styled.div`
   position: fixed;
@@ -94,16 +95,15 @@ const App: React.FC = () => {
             <Route path="/forgot-password" element={<GuestRoute><ForgotPasswordPage /></GuestRoute>} />
             <Route path="/auth/callback" element={<AuthCallbackPage />} />
             <Route path="/reset-password" element={<ProtectedRoute redirectTo="/signin"><ResetPasswordPage /></ProtectedRoute>} />
-            <Route path="/history" element={<ProtectedRoute redirectTo="/signin"><AttemptHistoryPage /></ProtectedRoute>} />
-            <Route path="/app" element={
-              <ProtectedRoute>
-                <ExamContextProvider>
-                  <Outlet />
-                </ExamContextProvider>
-              </ProtectedRoute>
-            }>
-              <Route index element={<CoverPage />} />
-              <Route path="exam" element={<ExamPage />} />
+            {/* SessionProvider wraps both /history and /app/* so AttemptHistoryPage
+                can call resumeAttempt, and CoverPage can call startNewExam / resumeAttempt. */}
+            <Route element={<ProtectedRoute redirectTo="/signin"><SessionProvider><Outlet /></SessionProvider></ProtectedRoute>}>
+              <Route path="/history" element={<AttemptHistoryPage />} />
+              <Route path="/app" element={<Outlet />}>
+                <Route index element={<CoverPage />} />
+                {/* ExamContextProvider is scoped to /app/exam only — CoverPage has no need for exam data. */}
+                <Route path="exam" element={<ExamContextProvider><ExamPage /></ExamContextProvider>} />
+              </Route>
             </Route>
             <Route path="*" element={<Navigate to="/app" replace />} />
           </Routes>

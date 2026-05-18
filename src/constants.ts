@@ -77,17 +77,24 @@ export const SESSION_ACTION_TYPES = {
   SET_TIMER_PAUSED: 'SET_TIMER_PAUSED' as const,
   SET_EXAM_STATE: 'SET_EXAM_STATE' as const,
   SET_REVIEW_STATE: 'SET_REVIEW_STATE' as const,
+  RESET_SESSION: 'RESET_SESSION' as const,
+  MARK_DIRTY: 'MARK_DIRTY' as const,
+  CLEAR_DIRTY: 'CLEAR_DIRTY' as const,
 } as const
 
 // Property mapping for session actions
 export const SESSION_ACTION_PROPS = {
   SET_INDEX: 'index' as const,
   SET_BOOKMARKS: 'bookmarks' as const,
-  SET_ANSWERS: 'answers' as const,
+  SET_ANSWERS: 'selectedOriginalIndices' as const,
   SET_TIME: 'time' as const,
   SET_TIMER_PAUSED: 'paused' as const,
   SET_EXAM_STATE: 'examState' as const,
   SET_REVIEW_STATE: 'reviewState' as const,
+  // Dummy props — reducer handles these via early return before this mapping is read.
+  RESET_SESSION: 'id' as const,
+  MARK_DIRTY: 'dirtyQuestions' as const,
+  CLEAR_DIRTY: 'dirtyQuestions' as const,
 } as const
 
 // Constant for category menu padding (shared variable)
@@ -102,12 +109,14 @@ export const DEFAULT_SESSION: Session = {
   paused: false as const,
   examState: 'in-progress' as const,
   reviewState: 'summary' as const,
-  questions: [] as const,
-  answers: [] as const,
+  questionChoiceOrders: {} as const,
+  selectedOriginalIndices: [] as const,
   categoryId: null,
   examId: null,
   examType: 'full' as const,
   bookmarks: [] as const,
+  questionIds: 'ALL' as const,
+  dirtyQuestions: {} as const,
 } as const
 
 // Language configuration

@@ -2,11 +2,14 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { DEFAULT_THEME } from './constants'
 import App from './App'
 import SettingsProvider from './providers/SettingsContextProvider'
 import AuthContextProvider from './providers/AuthContextProvider'
 import ToastContextProvider from './providers/ToastContextProvider'
+
+const queryClient = new QueryClient()
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -46,11 +49,13 @@ createRoot(container).render(
       <ThemeProvider theme={DEFAULT_THEME}>
         <GlobalStyle />
         <BrowserRouter>
-          <AuthContextProvider>
-            <ToastContextProvider>
-              <App />
-            </ToastContextProvider>
-          </AuthContextProvider>
+          <QueryClientProvider client={queryClient}>
+            <AuthContextProvider>
+              <ToastContextProvider>
+                <App />
+              </ToastContextProvider>
+            </AuthContextProvider>
+          </QueryClientProvider>
         </BrowserRouter>
       </ThemeProvider>
     </SettingsProvider>

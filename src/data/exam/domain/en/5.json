@@ -1,0 +1,506 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "Philip is the managing director of a famous fast food restaurants chain. He is facing troubles with delaying customer orders. During the last three months, his company received more than 200 complains from customers due to delayed orders. In order to improve the customers' orders management, he decided to treat each order as a project. The project manager will be responsible for handling customers' orders, ensuring order delivery within pre- determined time, resolving customer issues. The project manager is not required to prepare a plan for each order rather than preparing a daily report for all orders. How would you describe this situation?",
+    "explanation": "The mentioned work here is operational work not project work. An ongoing work effort is generally a repetitive process that follows an organization’s existing procedures. Domain = Business Environment. PMBOK 6th edition, Page 16",
+    "choices": [
+      {
+        "text": "This is a group of related projects, so these orders are considered as a program.",
+        "correct": false
+      },
+      {
+        "text": "Each order is a project, so there should be a charter for each project.",
+        "correct": false
+      },
+      {
+        "text": "This is a portfolio, because all these orders help to achieve the same strategic objective.",
+        "correct": false
+      },
+      {
+        "text": "This is operational work.",
+        "correct": true
+      }
+    ],
+    "id": 141
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project team has created a software as a project deliverable for a customer. The customer has initiated the project and requested a software solution because they think that the solution resolves the business need for higher productivity. The software which is the output of the project does not enable the productivity outcome that is intended. The project stakeholders feel that the project has failed. Which of the following best represents the root cause of this issue?",
+    "explanation": "The main issue here is the focus on deliverables not on the intended outcomes. To support value realization from projects, project teams shift focus from deliverables to the intended outcomes. Doing so allows project teams to deliver on the vision or purpose of the project, rather than simply creating a specific deliverable. Domain = Business Environment. The Standard for Project Management, Page 36",
+    "choices": [
+      {
+        "text": "The project team did not understand the intended outcome from the deliverable.",
+        "correct": true
+      },
+      {
+        "text": "The project requirements were not collected in details at the beginning of the project.",
+        "correct": false
+      },
+      {
+        "text": "The project team were not involved from the beginning of the project.",
+        "correct": false
+      },
+      {
+        "text": "There was a communication gap between the customer and the project team.",
+        "correct": false
+      }
+    ],
+    "id": 142
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Sergio is a newly assigned project manager in a construction firm. He has been assigned to establish a PMO in the organization, to provide the projects' team members with required templates, training, access to information and lessons learned. According the mentioned degree of control, the PMO is considered to be:",
+    "explanation": "Supportive PMOs provide a consultative role to projects by supplying templates, best practices, training, access to information and lessons learned from other projects. Domain = Business Environment. PMBOK 6th edition, Page 48",
+    "choices": [
+      {
+        "text": "Adaptive",
+        "correct": false
+      },
+      {
+        "text": "Supportive",
+        "correct": true
+      },
+      {
+        "text": "Controlling",
+        "correct": false
+      },
+      {
+        "text": "Directive",
+        "correct": false
+      }
+    ],
+    "id": 143
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The organization has recently signed a contract with the government of two countries to build a very large bridge linking the two countries crossing a sea. The required work is very large and complex, it is budgeted at 2 billions $ and scheduled to be completed within 3 years. The required work can be best described as:",
+    "explanation": "Programs are not large projects. A very large project may be referred to as a megaproject. As a guideline, megaprojects cost US$1billion or more, affect 1 million or more people, and run for years. Domain = Business Environment. PMBOK 6th edition, Page 10",
+    "choices": [
+      {
+        "text": "Operational work",
+        "correct": false
+      },
+      {
+        "text": "Megaproject",
+        "correct": true
+      },
+      {
+        "text": "Program",
+        "correct": false
+      },
+      {
+        "text": "Portfolio",
+        "correct": false
+      }
+    ],
+    "id": 144
+  },
+  {
+    "type": "multiple-choice",
+    "text": "An organization wants to adopt agile transformation. The organization management board need to include more agile methodologies in the organization's projects. What should be done prior to including agile methodologies in the organization's projects?",
+    "explanation": "The organization should first assess the organizational culture and readiness to undertake this initiative. This organization change usually takes time and is recommended to be gradually and incrementally not an abrupt change. Domain = Business Environment. PMBOK 7th edition, Page 160",
+    "choices": [
+      {
+        "text": "Assess the organization's culture and readiness for transformation.",
+        "correct": true
+      },
+      {
+        "text": "Hire a group of agile coaches.",
+        "correct": false
+      },
+      {
+        "text": "Provide training for the current employees on agile methodologies.",
+        "correct": false
+      },
+      {
+        "text": "Pause all current projects because they adopt traditional approach.",
+        "correct": false
+      }
+    ],
+    "id": 145
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of the following is the top priority for an agile project?",
+    "explanation": "As per the agile manifesto \"Our highest priority is to satisfy the customer through early and continuous delivery of valuable software\". So the top priority is satisfying the customer through delivery of valuable product. Domain = Business Environment. Agile Practice Guide Page 8",
+    "choices": [
+      {
+        "text": "Working collaboratively with customer and having a lightweight contract.",
+        "correct": false
+      },
+      {
+        "text": "Satisfying the customer through delivery of valuable product.",
+        "correct": true
+      },
+      {
+        "text": "Providing working software and accurate documentation.",
+        "correct": false
+      },
+      {
+        "text": "Responding to change and following adaptive plan.",
+        "correct": false
+      }
+    ],
+    "id": 146
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project team in a maintenance center is working on repairing computers, but they are having difficulty creating a project charter. What is the best description of the problem?",
+    "explanation": "The work mentioned here is not a project at all. Maintenance work is operational, ongoing and repetitive work, there is no need to create a project charter. Domain = Business Environment. PMBOK 6th edition, Page 16",
+    "choices": [
+      {
+        "text": "They haven’t identified project objectives.",
+        "correct": false
+      },
+      {
+        "text": "They haven’t identified the product of the project.",
+        "correct": false
+      },
+      {
+        "text": "The end date has not been set.",
+        "correct": false
+      },
+      {
+        "text": "They are working on a process and not on a project.",
+        "correct": true
+      }
+    ],
+    "id": 147
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A new project manager has just been assigned a construction project that is ongoing and is three weeks behind schedule. The team members are about to be distributed to another new project based on the original time estimates by the functional manager. What type of organization is the new project manager in?",
+    "explanation": "There is a little authority for a project manager in a centralized (functional) organization. Domain = Business Environment. PMBOK 6th edition, Page 47",
+    "choices": [
+      {
+        "text": "Hybrid",
+        "correct": false
+      },
+      {
+        "text": "Balanced matrix",
+        "correct": false
+      },
+      {
+        "text": "Centralized",
+        "correct": true
+      },
+      {
+        "text": "Project-oriented",
+        "correct": false
+      }
+    ],
+    "id": 148
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project is being implemented using a predictive approach. There is a high turnover rate for the project team members. More then 50% of the project team members who were assigned at the beginning of the project have left the project and new team members replaced them. The project manager wants to adopt an adaptive approach to accommodate these changes. If his trial is successful, it can be applied on all projects within the organization. What should the project manager do first?",
+    "explanation": "Before making any change, the project manager needs to evaluate the benefits and the risks for making this change and take the decision accordingly. Domain = Business Environment. PMBOK 7th edition, Page 160",
+    "choices": [
+      {
+        "text": "Ask the team members about their knowledge about agile methodologies.",
+        "correct": false
+      },
+      {
+        "text": "Evaluate the impacts of moving to adaptive approach.",
+        "correct": true
+      },
+      {
+        "text": "Schedule a training session for the team members about agile methodologies.",
+        "correct": false
+      },
+      {
+        "text": "Ensure there is a sufficient budget to make this change.",
+        "correct": false
+      }
+    ],
+    "id": 149
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Tom is a project manager at training and consulting company. The company regularly builds teams to create products for clients and train them on those products. When the product is delivered, the team is dissolved and assigned to other projects. What kind of organization is he working for?",
+    "explanation": "In project-oriented organizations, staff are released after project end and achieving project objectives. Domain = Business Environment. PMBOK 6th edition, Page 47",
+    "choices": [
+      {
+        "text": "Multi-divisional",
+        "correct": false
+      },
+      {
+        "text": "Project-oriented",
+        "correct": true
+      },
+      {
+        "text": "Functional",
+        "correct": false
+      },
+      {
+        "text": "Strong matrix",
+        "correct": false
+      }
+    ],
+    "id": 150
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A large project is being initiated in an organization. The project will be associated with large changes which will impact many departments within the organization. All of the following models can be used by the project manager to transition from the current to the future desired state, except:",
+    "explanation": "Change models include ADKAR, Virginia Satir, transition model and the 8-step process for leading a change. Cynefin model is a complexity model. Domain = Business Environment. PMBOK 7th edition, Page 161-164",
+    "choices": [
+      {
+        "text": "ADKAR",
+        "correct": false
+      },
+      {
+        "text": "Virginia Satir",
+        "correct": false
+      },
+      {
+        "text": "Transition Model",
+        "correct": false
+      },
+      {
+        "text": "Cynefin",
+        "correct": true
+      }
+    ],
+    "id": 151
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Tony and Maxim are two project managers in two different organizations. Tony is usually involved in evaluation and analysis activities prior to project initiation which includes consulting with executive and business unit leaders on ideas for advancing strategic objectives and improving organizational performance. While Maxim is always assigned to manage projects in his organization after the project charter is signed. Which of the following statements best describes this situation?",
+    "explanation": "The role of a project manager may vary from organization to organization. The project management role is tailored to fit the organization. Domain = Business Environment. PMBOK 6th edition, Page 51",
+    "choices": [
+      {
+        "text": "Tony is more experienced than Maxim, so he is included in evaluation and analysis activities prior to project initiation.",
+        "correct": false
+      },
+      {
+        "text": "Tony's organization is always looking for advancing their strategic objectives and improving their organizational performance, while Maxim's organization don't.",
+        "correct": false
+      },
+      {
+        "text": "Both Tony and Maxim perform their roles as project manager each one as specified in his organization.",
+        "correct": true
+      },
+      {
+        "text": "Tony is performing the role of a portfolio manager, while Maxim is performing his role as a project manager.",
+        "correct": false
+      }
+    ],
+    "id": 152
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What could be a PMO role in agile transformation?",
+    "explanation": "The PMO can help the organization stay on the right side of required compliance needs. Domain = Business Environment. Agile Practice Guide Page 81",
+    "choices": [
+      {
+        "text": "Providing guidelines to ensure compliance with agile frameworks.",
+        "correct": true
+      },
+      {
+        "text": "Providing agile tools like Kanban boards and burn charts.",
+        "correct": false
+      },
+      {
+        "text": "Providing project managers to new agile projects.",
+        "correct": false
+      },
+      {
+        "text": "Ensuring compliance with standard team velocity.",
+        "correct": false
+      }
+    ],
+    "id": 153
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Sam is leading a large project within the organization to switch the manual way of handling customer requests to an automated way. The project is associated with huge changes to organizations systems, employees behaviors and the organization culture as a whole, so it is expected to face a huge resistance from many stakeholders. Which of the following models can he use to transition from the current to the future desired state?",
+    "explanation": "Many projects contain an aspect of changing systems, behaviors, activities, and sometimes, cultures. Managing this type of change requires thinking about how to transition from the current to the future desired state. There are many models that describe the activities necessary for successful change management like ADKAR model which focuses on five sequential steps that individuals undergo when adapting to change awareness, desire, knowledge, ability and reinforcement.",
+    "choices": [
+      {
+        "text": "ADKAR",
+        "correct": true
+      },
+      {
+        "text": "OSCAR",
+        "correct": false
+      },
+      {
+        "text": "McGregor",
+        "correct": false
+      },
+      {
+        "text": "Cynefin Framework",
+        "correct": false
+      }
+    ],
+    "id": 154
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Due to recent changes in the organization structure, three persons from your project team are going to leave the organization because their positions have become redundant. This has negatively impacted the team members' morale, as the project is progressing well. What should you do as a project manager in this situation?",
+    "explanation": "The process for leading change for transforming organizations is a top-down approach where the need for and approach to change originates at the top levels of the organization, and then is promoted down through the organization's layers of management to the change recipients. Domain = Business Environment. PMBOK 7th edition, Page 162",
+    "choices": [
+      {
+        "text": "Inform the team members that this is the organization's board decision.",
+        "correct": false
+      },
+      {
+        "text": "Meet with the project team members to discuss the changes and the reasons why it has been undertaken.",
+        "correct": true
+      },
+      {
+        "text": "Escalate to the project sponsor and let him know how the organization's decision has negatively impacted your project.",
+        "correct": false
+      },
+      {
+        "text": "Arrange a farewell party for the released team members.",
+        "correct": false
+      }
+    ],
+    "id": 155
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Adam recently joined a leading software organization to initiate a project management office. The PMO should have control on all the projects running in the organization and the project managers should report directly to the PMO because the new PMO will be accountable for project success in the organization. Which type of PMO is being initiated here?",
+    "explanation": "Directive PMOs take control of the projects by directly managing the projects. Project managers are assigned by and report to the PMO. Domain = Business Environment. PMBOK 6th edition, Page 48",
+    "choices": [
+      {
+        "text": "Supportive",
+        "correct": false
+      },
+      {
+        "text": "Controlling",
+        "correct": false
+      },
+      {
+        "text": "Directive",
+        "correct": true
+      },
+      {
+        "text": "Proactive",
+        "correct": false
+      }
+    ],
+    "id": 156
+  },
+  {
+    "type": "multiple-choice",
+    "text": "There was a meeting between IT manager and spare parts manager to discuss a major scope change. Your boss is the IT manager. After the meeting your manager contacts you to complete the paper work needed to make the change. This is an example of:",
+    "explanation": "Here you are a project expediter, because simply you implement what others decided. You didn't evaluate the change or its impacts. Domain = Business Environment. PMBOK 6th edition, Page 47",
+    "choices": [
+      {
+        "text": "Management attention to scope management",
+        "correct": false
+      },
+      {
+        "text": "A project expediter position",
+        "correct": true
+      },
+      {
+        "text": "A change control system",
+        "correct": false
+      },
+      {
+        "text": "A configuration management system",
+        "correct": false
+      }
+    ],
+    "id": 157
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project has been initiated within an organization to merge two large departments into one department. There are many side talks between the employees in the two departments affected by the change. Most of them feel anxiety because there will be changes to their usual way of working, working on new systems which they are not familiar with and changing their work locations. Which of the following models can help them understand what they are feeling and enable them to move through change more efficiently?",
+    "explanation": "Virginia Satir developed a model of how people experience and cope with change. Its purpose is to help project team members understand what they are feeling and enable them to move through change more efficiently. Domain = Business Environment. PMBOK 7th edition, Page 163",
+    "choices": [
+      {
+        "text": "OSCAR",
+        "correct": false
+      },
+      {
+        "text": "Virginia Satir",
+        "correct": true
+      },
+      {
+        "text": "Cynefin Framework",
+        "correct": false
+      },
+      {
+        "text": "Herzberg",
+        "correct": false
+      }
+    ],
+    "id": 158
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The project team is undergoing an agile transformation. This requires the team members to maintain their original project plans and project documents in the current management tool, but also enter performance data in the new tool built around agile practices. Which of the following documents the project team members will not map into the new agile tool?",
+    "explanation": "Requirements documentation will be added and maintained by the product owner to the product backlog. It is the product owner's responsibility not the team. Domain = Business Environment. Agile Practice Guide, Page 52",
+    "choices": [
+      {
+        "text": "Project charter",
+        "correct": false
+      },
+      {
+        "text": "Team charter",
+        "correct": false
+      },
+      {
+        "text": "Risk register",
+        "correct": false
+      },
+      {
+        "text": "Requirements documentation",
+        "correct": true
+      }
+    ],
+    "id": 159
+  },
+  {
+    "type": "multiple-choice",
+    "text": "All of the following are among the value delivery office (VDO) roles, except:",
+    "explanation": "The VDO serves an enabling role, rather than a management or oversight function. It focuses on coaching project teams; building adaptive skills and capabilities throughout the organization; and mentoring sponsors and product owners to be more effective in those roles. Domain = Business Environment. PMBOK 7th edition, Page 141",
+    "choices": [
+      {
+        "text": "Providing policies, templates and lessons learned for managing projects within the organization.",
+        "correct": true
+      },
+      {
+        "text": "Mentoring sponsors and product owners to be more effective in those roles.",
+        "correct": false
+      },
+      {
+        "text": "Coaching project teams.",
+        "correct": false
+      },
+      {
+        "text": "Building adaptive skills and capabilities throughout the organization.",
+        "correct": false
+      }
+    ],
+    "id": 160
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A large project is being implemented within an organization which entails large organizations changes. Employees in the organization feel confusion, anxiety and frustration. Which of the following models can be used to deal with them psychologically?",
+    "explanation": "Transition Model provides an understanding of what occurs to individuals psychologically when an organizational change takes place. This model differentiates between change and transition. Change is situational and happens whether or not people transition through it. Transition is a psychological process where people gradually accept the details of the new situation and the changes that come with it. Domain = Business Environment. PMBOK 7th edition, Page 164",
+    "choices": [
+      {
+        "text": "ADKAR",
+        "correct": false
+      },
+      {
+        "text": "Virginia Satir",
+        "correct": false
+      },
+      {
+        "text": "The 8-Step Process for Leading Change",
+        "correct": false
+      },
+      {
+        "text": "Transition Model",
+        "correct": true
+      }
+    ],
+    "id": 161
+  }
+]

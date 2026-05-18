@@ -89,7 +89,7 @@ BEGIN
     FROM public.exam_attempts
    WHERE user_id = NEW.user_id;
 
-  IF v_attempt_count >= 10 THEN
+  IF v_attempt_count > 10 THEN
     SELECT id
       INTO v_oldest_id
       FROM public.exam_attempts
