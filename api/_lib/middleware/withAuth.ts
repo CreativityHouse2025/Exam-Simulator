@@ -31,7 +31,7 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
     const refreshToken = cookies["refresh_token"]
 
     if (!accessToken && !refreshToken) {
-      throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "Authentication required" })
+      throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "Authentication required (no tokens)" })
     }
 
     // Try the access token first — getClaims verifies the JWT signature locally
@@ -44,23 +44,17 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
           const authUser: AuthUser = { id: data.claims.sub!, email: data.claims.email!, accessToken }
           return handler(req, authUser)
         }
-      } catch (error: any) {
-        // might need to update in upcoming supabase versions (hardcoded string value)
-        // TODO: switch to manual JWT verification for better compatability 
-        const errorMessage: string = error.message.toLowerCase()
-        if (errorMessage !== 'jwt has expired') {
-          throw new AppError({
-            statusCode: 401,
-            code: "UNAUTHORIZED",
-            message: "Authentication required",
-          })
-        }
+      } catch {
+        // Fall through to the refresh path for all getClaims failures.
+        // Throwing early here would reject users whose access token expired with a non-standard
+        // error message, or whose getClaims call failed transiently (e.g. JWKS fetch on cold start).
+        // If the refresh token is also invalid, refreshSession below will fail and clear the cookies.
       }
     }
 
-    // Access token missing or invalid -> try refreshing
+    // Access token missing (expired or cleared in browser)
     if (!refreshToken) {
-      throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "Authentication required" })
+      throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "Authentication required (no refresh token)" })
     }
 
     const { data: refreshData, error: refreshError } = await createUserClient().auth.refreshSession({
@@ -68,7 +62,11 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
     })
 
     if (refreshError || !refreshData.session || !refreshData.user) {
-      throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "Authentication required" })
+      // The refresh token is dead — likely revoked by a force-signin, password update, or account expiry
+      // from another session. Clear the cookies so the browser stops retrying with the same dead token,
+      // which would produce a refresh_token_not_found loop in Supabase on every subsequent request.
+      const expiredCookieHeaders: ResponseHeaders = clearAuthCookies().map((c) => ["Set-Cookie", c] as [string, string])
+      return errorResponse("UNAUTHORIZED", "Authentication required (refresh token invalid)", 401, expiredCookieHeaders)
     }
 
     // if the refresh succeeds, ensure account expiry date is valid
@@ -77,12 +75,13 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
         revokeAccessToken: refreshData.session.access_token,
       })
     } catch (error) {
-      // if it is an account expired error, clear the cookies from client side
-      if (error instanceof AppError && error.code === "ACCOUNT_EXPIRED") {
-        const cookieHeaders: ResponseHeaders = clearAuthCookies().map((c) => ["Set-Cookie", c] as [string, string])
-        return errorResponse(error.code, error.message, error.statusCode, cookieHeaders)
+      // Clear cookies for any failure here — the refresh token was already consumed by refreshSession
+      // above, so the client has no valid credentials regardless of the error type.
+      const expiredCookieHeaders: ResponseHeaders = clearAuthCookies().map((c) => ["Set-Cookie", c] as [string, string])
+      if (error instanceof AppError) {
+        return errorResponse(error.code, error.message, error.statusCode, expiredCookieHeaders)
       }
-      throw error
+      return errorResponse("INTERNAL_ERROR", "An unexpected error occurred", 500, expiredCookieHeaders)
     }
 
     const cookieHeaders: ResponseHeaders = serializeAuthCookies(
