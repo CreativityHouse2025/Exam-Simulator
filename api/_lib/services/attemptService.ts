@@ -51,6 +51,8 @@ export async function saveAttempt(userId: string, attemptId: string, input: Save
     p_score: input.exam_state === "completed" ? input.score : null,
     p_status: input.exam_state === "completed" ? input.status : null,
     p_answers: input.answers,
+    p_break_1_offered_at: input.exam_state === "in-progress" ? input.break_1_offered_at : null,
+    p_break_2_offered_at: input.exam_state === "in-progress" ? input.break_2_offered_at : null,
   })
 
   if (error) throw new AppError({ statusCode: 500, code: "ATTEMPT_SAVE_FAILED", message: "Failed to save attempt" })
@@ -90,7 +92,7 @@ export async function getAttempt(userId: string, attemptId: string): Promise<Get
   const { data, error } = await supabaseAdmin
     .from("exam_attempts")
     .select(
-      "id, user_id, exam_type, exam_id, category_id, exam_state, score, status, created_at, current_index, time_remaining, review_state, email_report_state, exam_attempt_questions(question_index, question_id, choices_order, selected_choices, is_bookmarked)"
+      "id, user_id, exam_type, exam_id, category_id, exam_state, score, status, created_at, current_index, time_remaining, review_state, email_report_state, break_1_offered_at, break_2_offered_at, exam_attempt_questions(question_index, question_id, choices_order, selected_choices, is_bookmarked)"
     )
     .eq("id", attemptId)
     .order("question_index", { referencedTable: "exam_attempt_questions", ascending: true })

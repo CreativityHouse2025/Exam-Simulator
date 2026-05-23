@@ -54,6 +54,51 @@ export default function useSessionReducer(startingSession: Session | null) {
         question_index: questionIndex,
         selected_choices: session.selectedOriginalIndices[questionIndex] ?? [],
         is_bookmarked: session.bookmarks.includes(questionIndex),
+      }))      
+
+      await saveAttempt(session.id, {
+        current_index: session.index,
+        time_remaining: session.time,
+        review_state: session.reviewState,
+        answers,
+        break_1_offered_at: session.break1OfferedAt,
+        break_2_offered_at: session.break2OfferedAt,
+      })
+
+      updateSession({ type: SESSION_ACTION_TYPES.CLEAR_DIRTY, payload: null })
+    } catch (error) {
+      if (error instanceof AppApiError) {
+        showToast(error.message, 5000)
+      } else {
+        showToast(translate('attempts.errors.server-unknown'), 5000)
+      }
+    } finally {
+      isSyncingRef.current = false
+      setIsSyncing(false)
+    }
+  }, [session, showToast])
+
+  /**
+ * Saves the break offer timestamp to the DB immediately, regardless of dirty questions.
+ * Takes the fresh `offeredAt` value as a parameter to avoid reading from a stale closure —
+ * the React state update for SET_BREAK1/2_OFFERED_AT hasn't propagated yet when this is called.
+ */
+  const saveBreakOffer = React.useCallback(async (breakNumber: 1 | 2, offeredAt: string) => {
+    if (isSyncingRef.current) return
+
+    isSyncingRef.current = true
+    setIsSyncing(true)
+
+    const breakField = breakNumber === 1
+      ? ({ break_1_offered_at: offeredAt, break_2_offered_at: session.break2OfferedAt })
+      : ({ break_1_offered_at: session.break1OfferedAt, break_2_offered_at: offeredAt })
+
+    try {
+      const dirtyIndices = Object.keys(session.dirtyQuestions).map(Number)
+      const answers = dirtyIndices.map((questionIndex) => ({
+        question_index: questionIndex,
+        selected_choices: session.selectedOriginalIndices[questionIndex] ?? [],
+        is_bookmarked: session.bookmarks.includes(questionIndex),
       }))
 
       await saveAttempt(session.id, {
@@ -61,6 +106,7 @@ export default function useSessionReducer(startingSession: Session | null) {
         time_remaining: session.time,
         review_state: session.reviewState,
         answers,
+        ...breakField,
       })
 
       updateSession({ type: SESSION_ACTION_TYPES.CLEAR_DIRTY, payload: null })
@@ -145,9 +191,11 @@ export default function useSessionReducer(startingSession: Session | null) {
       examType: session.examType,
       dirtyQuestions: session.dirtyQuestions,
       isSyncing,
+      break1OfferedAt: session.break1OfferedAt,
+      break2OfferedAt: session.break2OfferedAt,
       update: sessionUpdate,
     },
   }
 
-  return { session, sessionUpdate, contextValues, syncProgress, submitExam }
+  return { session, sessionUpdate, contextValues, syncProgress, submitExam, saveBreakOffer }
 }

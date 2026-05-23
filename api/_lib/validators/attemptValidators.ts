@@ -19,6 +19,14 @@ function isNonNegativeInteger(value: unknown): value is number {
   return typeof value === "number" && Number.isInteger(value) && value >= 0
 }
 
+function parseBreakTimestamp(value: unknown, field: string): string | null {
+  if (value === undefined || value === null) return null
+  if (typeof value !== "string" || isNaN(Date.parse(value))) {
+    throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: `${field} must be a valid ISO timestamp or null` })
+  }
+  return value
+}
+
 /**
  * Validates and returns a typed `InsertAttemptRequestBody` from an unknown input.
  * Throws `AppError` on the first validation failure.
@@ -86,7 +94,7 @@ export function validateInsertAttempt(body: unknown): InsertAttemptRequestBody {
 export function validateSaveAttempt(body: unknown): SaveAttemptRequestBody {
   const record = assertJsonObject(body)
 
-  const { current_index, time_remaining, exam_state, review_state, answers, score, status } = record
+  const { current_index, time_remaining, exam_state, review_state, answers, score, status, break_1_offered_at, break_2_offered_at } = record
 
   if (!isNonNegativeInteger(current_index)) {
     throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "current_index must be a non-negative integer" })
@@ -127,6 +135,9 @@ export function validateSaveAttempt(body: unknown): SaveAttemptRequestBody {
     return { question_index, selected_choices, is_bookmarked }
   })
 
+  const parsedBreak1 = parseBreakTimestamp(break_1_offered_at, "break_1_offered_at")
+  const parsedBreak2 = parseBreakTimestamp(break_2_offered_at, "break_2_offered_at")
+
   if (exam_state === "completed") {
     if (typeof score !== "number" || !isFinite(score) || score < 0 || score > 100) {
       throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "score must be a number between 0 and 100" })
@@ -144,5 +155,5 @@ export function validateSaveAttempt(body: unknown): SaveAttemptRequestBody {
     throw new AppError({ statusCode: 400, code: "VALIDATION_ERROR", message: "status must be absent when exam_state is 'in-progress'" })
   }
 
-  return { exam_state, current_index, time_remaining, review_state, answers: parsedAnswers }
+  return { exam_state, current_index, time_remaining, review_state, answers: parsedAnswers, break_1_offered_at: parsedBreak1, break_2_offered_at: parsedBreak2 }
 }

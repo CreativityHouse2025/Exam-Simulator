@@ -89,6 +89,18 @@
       "message": "This action can't be undone. Your current answers will be submitted as your final result.",
       "button0": "Submit",
       "button1": "Cancel"
+    },
+    "break-offer": {
+      "title": "Optional Break",
+      "message": "You have reached a scheduled break point. You may take a 10-minute break now or continue the exam.",
+      "button0": "Take Break",
+      "button1": "Continue Exam"
+    },
+    "break-timer": {
+      "title": "Break in Progress",
+      "subtitle": "Your exam is paused. Resume when you are ready to continue.",
+      "remaining": "remaining",
+      "button0": "Return to Exam"
     }
   },
   "report": {
@@ -208,6 +220,7 @@
     "title": "Attempt History",
     "subtitle": "An overview of your exam attempts and results.",
     "loading": "Loading...",
+    "fetchError": "Failed to load attempt history. Please try again.",
     "table": {
       "type": "Type",
       "exam-domain": "Exam / Domain",

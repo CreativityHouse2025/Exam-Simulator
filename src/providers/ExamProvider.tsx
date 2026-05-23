@@ -2,6 +2,7 @@ import React from "react"
 import { ExamContext, useSessionControl, useSessionData, useSessionExam } from "../contexts"
 import Loading from "../components/Loading"
 import Confirms from "../components/Navigation/Confirms"
+import BreakModals from "../components/Navigation/BreakModals"
 import type { Exam, Question } from "../types"
 import { applyQuestionChoiceOrders } from "../utils/format"
 import { loadDomainExam, loadFullExam } from "../utils/exam"
@@ -121,6 +122,7 @@ export default function ExamContextProvider({ children }: { children: React.Reac
     <ExamContext.Provider value={{ exam }}>
       {children}
       <Confirms />
+      <BreakModals />
     </ExamContext.Provider>
   )
 }

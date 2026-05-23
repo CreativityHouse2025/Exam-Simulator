@@ -75,6 +75,8 @@ export function adaptAttemptToSession(payload: GetAttemptResult): Session | null
     // the exam file's order matching the attempt's order.
     questionIds: payload.questions.map((attemptQuestion) => attemptQuestion.question_id),
     dirtyQuestions: {},
+    break1OfferedAt: attempt.break_1_offered_at,
+    break2OfferedAt: attempt.break_2_offered_at,
   }
 }
 
@@ -145,5 +147,7 @@ export function adaptAttemptToRevision(payload: GetAttemptResult, rawExam: Exam)
     examState: "in-progress",
     reviewState: "summary",
     dirtyQuestions: {},
+    break1OfferedAt: null,
+    break2OfferedAt: null,
   }
 }

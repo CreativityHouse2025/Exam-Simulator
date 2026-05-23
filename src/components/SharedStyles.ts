@@ -44,6 +44,17 @@ export const fadeInError = keyframes`
   }
 `
 
+/** Full-screen semi-transparent overlay for modals. Uses flex to center its child card. */
+export const ModalOverlay = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.5);
+`
+
 /** Full-viewport wrapper shared across pages — background is provided by AppBackground in App.tsx. */
 export const PageWrapper = styled.div<ThemedStyles>`
   display: flex;
