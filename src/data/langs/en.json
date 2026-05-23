@@ -24,7 +24,7 @@
       "correct": "Correct Questions",
       "summary": "Report Summary",
       "pause": "Pause Exam",
-      "stop": "Stop Exam"
+      "stop": "Submit Exam"
     },
     "grid": {
       "marked": "Marked",
@@ -83,6 +83,12 @@
       "title": "Time Expired",
       "message": "Time has expired. Your exam has ended.",
       "button0": "Okay"
+    },
+    "submit": {
+      "title": "Submit Exam?",
+      "message": "This action can't be undone. Your current answers will be submitted as your final result.",
+      "button0": "Submit",
+      "button1": "Cancel"
     }
   },
   "report": {
