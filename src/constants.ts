@@ -80,6 +80,8 @@ export const SESSION_ACTION_TYPES = {
   RESET_SESSION: 'RESET_SESSION' as const,
   MARK_DIRTY: 'MARK_DIRTY' as const,
   CLEAR_DIRTY: 'CLEAR_DIRTY' as const,
+  SET_BREAK1_OFFERED_AT: 'SET_BREAK1_OFFERED_AT' as const,
+  SET_BREAK2_OFFERED_AT: 'SET_BREAK2_OFFERED_AT' as const,
 } as const
 
 // Property mapping for session actions
@@ -95,6 +97,8 @@ export const SESSION_ACTION_PROPS = {
   RESET_SESSION: 'id' as const,
   MARK_DIRTY: 'dirtyQuestions' as const,
   CLEAR_DIRTY: 'dirtyQuestions' as const,
+  SET_BREAK1_OFFERED_AT: 'break1OfferedAt' as const,
+  SET_BREAK2_OFFERED_AT: 'break2OfferedAt' as const,
 } as const
 
 // Constant for category menu padding (shared variable)
@@ -117,6 +121,8 @@ export const DEFAULT_SESSION: Session = {
   bookmarks: [] as const,
   questionIds: 'ALL' as const,
   dirtyQuestions: {} as const,
+  break1OfferedAt: null,
+  break2OfferedAt: null,
 } as const
 
 // Language configuration

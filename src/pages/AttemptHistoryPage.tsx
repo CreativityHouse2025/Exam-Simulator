@@ -9,6 +9,7 @@ import type { ThemedStyles } from "../types"
 import { useQuery } from "@tanstack/react-query"
 import { createAttemptsQueryOptions } from "../utils/queryOptions"
 import { useSessionControl } from "../contexts"
+import useToast from "../hooks/useToast"
 
 const titleEnter = keyframes`
   from { opacity: 0; transform: translateY(-10px); }
@@ -95,8 +96,13 @@ const MobileRefreshIcon = styled(Refresh)<{ $spinning: boolean } & ThemedStyles>
 const AttemptHistoryPage: React.FC = () => {
   const navigate = useNavigate()
   const { resumeAttempt, startRevision } = useSessionControl()
-  const { data: attempts = [], isPending, isFetching, refetch } = useQuery(createAttemptsQueryOptions())
+  const { showToast } = useToast()
+  const { data: attempts = [], isPending, isFetching, refetch, error } = useQuery(createAttemptsQueryOptions())
   const [isStarting, setIsStarting] = React.useState(false)
+
+  React.useEffect(() => {
+    if (error) showToast(translate("history.fetchError"))
+  }, [error])
 
   const handleContinue = async (id: string) => {
     setIsStarting(true)

@@ -32,7 +32,7 @@ import useSettings from '../hooks/useSettings'
  */
 export default function SessionProvider({ children }: { children: React.ReactNode }) {
   const [startingSession, setStartingSession] = React.useState<Session | null>(null)
-  const { session, sessionUpdate, contextValues, syncProgress, submitExam } = useSessionReducer(startingSession)
+  const { session, sessionUpdate, contextValues, syncProgress, submitExam, saveBreakOffer } = useSessionReducer(startingSession)
   const { showToast } = useToast()
 
   const [, setLatestAttemptId] = useLatestAttemptId()
@@ -209,7 +209,7 @@ export default function SessionProvider({ children }: { children: React.ReactNod
   )
 
   return (
-    <SessionControlContext.Provider value={{ session: startingSession !== null ? session : null, update: sessionUpdate, startNewExam, resumeAttempt, startRevision, syncProgress, submitExam }}>
+    <SessionControlContext.Provider value={{ session: startingSession !== null ? session : null, update: sessionUpdate, startNewExam, resumeAttempt, startRevision, syncProgress, submitExam, saveBreakOffer }}>
       <SessionNavigationContext.Provider value={contextValues.navigation}>
         <SessionTimerContext.Provider value={contextValues.timer}>
           <SessionExamContext.Provider value={contextValues.exam}>

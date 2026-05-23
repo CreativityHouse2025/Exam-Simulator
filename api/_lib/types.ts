@@ -183,6 +183,8 @@ export type AttemptDetail = AttemptSummary & {
   time_remaining: number
   review_state: "summary" | "question"
   email_report_state: "unsent" | "pending" | "sent" | "failed"
+  break_1_offered_at: string | null
+  break_2_offered_at: string | null
 }
 
 export type ListAttemptsResult = {
@@ -214,6 +216,8 @@ export type SaveAttemptInProgress = {
   time_remaining: number
   review_state: "summary" | "question"
   answers: SaveAttemptAnswer[]
+  break_1_offered_at: string | null
+  break_2_offered_at: string | null
 }
 
 export type SaveAttemptCompleted = {

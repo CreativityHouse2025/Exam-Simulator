@@ -121,6 +121,10 @@ export interface Session {
    *  key = question index (positional, not question id), value is always true (used as a set).
    *  Cleared after each successful sync; reset to {} on RESET_SESSION. */
   dirtyQuestions: Record<number, true>
+  /** ISO timestamp of when break 1 was offered (after Q60). null = not yet offered. Full exams only. */
+  break1OfferedAt: string | null
+  /** ISO timestamp of when break 2 was offered (after Q120). null = not yet offered. Full exams only. */
+  break2OfferedAt: string | null
 }
 
 // v2.0: Type for the generic dropdown item (category or fullexam)
@@ -141,6 +145,8 @@ export type SessionActionTypes =
   | 'RESET_SESSION'
   | 'MARK_DIRTY'
   | 'CLEAR_DIRTY'
+  | 'SET_BREAK1_OFFERED_AT'
+  | 'SET_BREAK2_OFFERED_AT'
 
 // Session actions mapping
 type SessionActionsMap = {
@@ -156,6 +162,8 @@ type SessionActionsMap = {
   // Internal-only: both handled via early return in the reducer before the generic prop-lookup runs.
   MARK_DIRTY: { payload: number; prop: 'dirtyQuestions' }
   CLEAR_DIRTY: { payload: null; prop: 'dirtyQuestions' }
+  SET_BREAK1_OFFERED_AT: { payload: string | null; prop: 'break1OfferedAt' }
+  SET_BREAK2_OFFERED_AT: { payload: string | null; prop: 'break2OfferedAt' }
 }
 
 export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {
@@ -175,7 +183,7 @@ export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, Ses
 export type SessionNavigation = Pick<Session, 'index'> & { update: SessionDispatch }
 export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused'> & { update: SessionDispatch }
 export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'categoryId' | 'examId'> & { update: SessionDispatch }
-export type SessionData = Pick<Session, 'bookmarks' | 'selectedOriginalIndices' | 'examType' | 'dirtyQuestions'> & { isSyncing: boolean; update: SessionDispatch }
+export type SessionData = Pick<Session, 'bookmarks' | 'selectedOriginalIndices' | 'examType' | 'dirtyQuestions' | 'break1OfferedAt' | 'break2OfferedAt'> & { isSyncing: boolean; update: SessionDispatch }
 
 export type SessionControlContextType = {
   session: Session | null
@@ -194,6 +202,9 @@ export type SessionControlContextType = {
   /** Sends only the dirty questions (answers + bookmark state) to the DB and clears the dirty set on success.
    * No-op when nothing is dirty or a sync is already in flight. */
   syncProgress: () => Promise<void>
+  /** Saves the break offer timestamp to the DB immediately, bypassing the dirty-questions guard.
+   * Takes the fresh timestamp so it is not affected by stale closure state. */
+  saveBreakOffer: (breakNumber: 1 | 2, offeredAt: string) => Promise<void>
   /** Flushes dirty answers and marks the attempt completed in the DB.
    * Dispatches SET_EXAM_STATE 'completed' only on success.
    * No-op for revision sessions or while a sync is in flight. */
@@ -317,6 +328,8 @@ export type AttemptDetail = AttemptSummary & {
   time_remaining: number
   review_state: "summary" | "question"
   email_report_state: "unsent" | "pending" | "sent" | "failed"
+  break_1_offered_at: string | null
+  break_2_offered_at: string | null
 }
 
 export type AttemptQuestion = {
@@ -364,6 +377,8 @@ export type SaveAttemptInProgress = {
   time_remaining: number
   review_state: "summary" | "question"
   answers: SaveAttemptAnswer[]
+  break_1_offered_at: string | null
+  break_2_offered_at: string | null
 }
 
 export type SaveAttemptCompleted = {

@@ -1,5 +1,16 @@
 import type { Answers, Answer } from '../types'
 
+// Break 1 triggers at index 60 (Q61), break 2 at index 120 (Q121). Full exams only.
+export const BREAK_THRESHOLDS = { 1: 60, 2: 120 } as const
+
+export function shouldOfferBreak(
+  breakNumber: 1 | 2,
+  currentIndex: number,
+  offeredAt: string | null
+): boolean {
+  return currentIndex === BREAK_THRESHOLDS[breakNumber] && offeredAt === null
+}
+
 export interface ProgressStats {
   answeredCount: number
   percentage: number

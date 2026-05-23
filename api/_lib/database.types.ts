@@ -51,6 +51,8 @@ export type Database = {
       }
       exam_attempts: {
         Row: {
+          break_1_offered_at: string | null
+          break_2_offered_at: string | null
           category_id: number | null
           created_at: string
           current_index: number
@@ -68,6 +70,8 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          break_1_offered_at?: string | null
+          break_2_offered_at?: string | null
           category_id?: number | null
           created_at?: string
           current_index?: number
@@ -85,6 +89,8 @@ export type Database = {
           user_id: string
         }
         Update: {
+          break_1_offered_at?: string | null
+          break_2_offered_at?: string | null
           category_id?: number | null
           created_at?: string
           current_index?: number
@@ -169,6 +175,8 @@ export type Database = {
         Args: {
           p_answers: Json
           p_attempt_id: string
+          p_break_1_offered_at?: string | null
+          p_break_2_offered_at?: string | null
           p_current_index: number
           p_exam_state: string
           p_review_state: string
