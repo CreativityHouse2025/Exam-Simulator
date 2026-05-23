@@ -10,10 +10,11 @@ import { CheckBox } from '@styled-icons/material/CheckBox'
 import { DoneAll } from '@styled-icons/material/DoneAll'
 import { Cancel } from '@styled-icons/material/Cancel'
 import { Pause } from '@styled-icons/material/Pause'
-import { Stop } from '@styled-icons/material/Stop'
+import { AssignmentTurnedIn } from '@styled-icons/material/AssignmentTurnedIn'
 import { Report } from '@styled-icons/boxicons-solid/Report'
 import Legends from './Legends'
 import Grid from './Grid'
+import Modal from '../../Modal'
 import { timerIsRunning } from '../../../utils/state'
 import { translate } from '../../../utils/translation'
 import { SESSION_ACTION_TYPES } from '../../../constants'
@@ -54,12 +55,14 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
   const { submitExam } = useSessionControl()
   const results = useResults()
   const [filter, setFilter] = React.useState<QuestionFilter>('all')
+  const [showSubmitConfirm, setShowSubmitConfirm] = React.useState(false)
 
   const actions = React.useMemo(
     () => ({
       pause: () =>
         timerIsRunning({ ...timerSession, examState }) && update!([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, true]),
-      stop: () => submitExam(results?.score ?? 0, results?.status ?? 'fail'),
+      stop: () => setShowSubmitConfirm(true),
+      confirmStop: () => submitExam(results?.score ?? 0, results?.status ?? 'fail'),
       summary: () => update!([SESSION_ACTION_TYPES.SET_REVIEW_STATE, 'summary'])
     }),
     [timerSession, examState, update, submitExam, results]
@@ -77,7 +80,7 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
         { type: 'filter', filter: 'complete', icon: <CheckBox size={20} /> },
         { type: 'exam-grid' },
         { type: 'action', key: 'pause', icon: <Pause size={20} />, onClick: actions.pause },
-        { type: 'action', key: 'stop', icon: <Stop size={20} />, onClick: actions.stop }
+        { type: 'action', key: 'stop', icon: <AssignmentTurnedIn size={20} />, onClick: actions.stop }
       )
     } else if (examState === 'completed') {
       baseItems.push(
@@ -124,7 +127,24 @@ const MenuComponent: React.FC<MenuProps> = ({ open }) => {
       return null
     }
 
-  return <MainMenu>{menuItems.map(renderMenuItem)}</MainMenu>
+  return (
+    <MainMenu>
+      {menuItems.map(renderMenuItem)}
+      {showSubmitConfirm && (
+        <Modal
+          variant="danger"
+          title={translate('confirm.submit.title')}
+          message={translate('confirm.submit.message')}
+          buttons={[translate('confirm.submit.button0'), translate('confirm.submit.button1')]}
+          onConfirm={() => {
+            setShowSubmitConfirm(false)
+            actions.confirmStop()
+          }}
+          onClose={() => setShowSubmitConfirm(false)}
+        />
+      )}
+    </MainMenu>
+  )
 }
 
 export default MenuComponent

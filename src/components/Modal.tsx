@@ -83,23 +83,25 @@ const Button = styled.div<ThemedStyles>`
   cursor: pointer;
 `
 
-const ButtonConfirm = styled(Button)`
+const DANGER_COLOR = '#dc2626'
+
+const ButtonConfirm = styled(Button)<{ $danger?: boolean }>`
   color: white;
-  background: ${({ theme }) => theme.secondary};
+  background: ${({ $danger, theme }) => ($danger ? DANGER_COLOR : theme.secondary)};
   &:hover {
-    background: ${({ theme }) => darken(0.1, theme.secondary)};
+    background: ${({ $danger, theme }) => ($danger ? darken(0.1, DANGER_COLOR) : darken(0.1, theme.secondary))};
   }
 `
 
 const ButtonCancel = styled(Button)`
   color: ${({ theme }) => theme.grey[10]};
-  background: ${({ theme }) => theme.grey[1]};
+  background: ${({ theme }) => theme.grey[2]};
   &:hover {
-    background: ${({ theme }) => theme.grey[2]};
+    background: ${({ theme }) => theme.grey[3]};
   }
 `
 
-const ModalComponent: React.FC<ModalProps> = ({ title, message, buttons, onConfirm, onClose }) => {
+const ModalComponent: React.FC<ModalProps> = ({ title, message, buttons, onConfirm, onClose, variant }) => {
   const handleBackdropClick = React.useCallback(
     (e: React.MouseEvent) => {
       if (e.target === e.currentTarget) {
@@ -118,7 +120,7 @@ const ModalComponent: React.FC<ModalProps> = ({ title, message, buttons, onConfi
           <Message id="message">{message}</Message>
 
           <Buttons id="buttons">
-            <ButtonConfirm id="button-confirm" className="no-select" onClick={onConfirm}>
+            <ButtonConfirm id="button-confirm" className="no-select" $danger={variant === 'danger'} onClick={onConfirm}>
               {buttons[0]}
             </ButtonConfirm>
 
@@ -142,4 +144,5 @@ export interface ModalProps {
   buttons: [string] | [string, string] // ['Okay', 'Cancel']
   onConfirm?: () => void
   onClose?: () => void
+  variant?: 'danger'
 }

@@ -22,7 +22,7 @@ npm run typecheck # Type-check the entire project (tsc --build + vite config)
 - React 19 + TypeScript 5.9 with Vite (SWC)
 - Styled Components for CSS-in-JS
 - React Context API for state (split into 5 contexts for performance)
-- Vercel serverless functions (`/api`) for email sending and v2.0 backend features
+- Vercel serverless functions (`/api`) for backend features
 - Mantine hooks for localStorage persistence
 
 ## Backend and Frontend Architecture
@@ -71,30 +71,6 @@ ProtectedRoute
 
 **ExamContextProvider** wraps only `/app/exam`. On mount it reads `session.examType`, `session.examId`, and `session.categoryId` from `SessionControlContext`, then loads the corresponding exam JSON via `loadFullExam` or `loadDomainExam`. It re-loads on language change.
 
-### Session Lifecycle and Methods
-
-**`startNewExam(type, examOrCategoryId): Promise<string | null>`**
-- Loads exam JSON file (full exam or domain category) via `loadFullExam`/`loadDomainExam`
-- Creates initial attempt snapshot in DB via `startAttempt`
-- Builds full `Session` from `DEFAULT_SESSION` + attempt config (id, examType, examId/categoryId, maxTime, time)
-- Stores attemptId in localStorage for "Continue latest" on CoverPage
-- Returns attemptId on success, null on failure
-- Navigation to `/app/exam` is caller's responsibility
-
-**`resumeAttempt(attemptId): Promise<string | null>`**
-- Fetches in-progress attempt snapshot from DB via `getAttempt`
-- Hydrates full `Session` state via `adaptAttemptToSession` with `revision: false`
-- Stores attemptId in localStorage for "Continue latest"
-- Navigation to `/app/exam?id=${attemptId}` is caller's responsibility
-- Returns attemptId on success, null on failure
-
-**`startRevision(attemptId): Promise<string | null>`**
-- Fetches completed full-exam attempt snapshot from DB
-- Filters to wrong/unanswered questions only via `adaptAttemptToSession` with `revision: true`
-- Creates ephemeral session (not persisted to localStorage) with `examType: 'revision'`
-- Navigation to `/app/exam?id=${attemptId}&revision=1` is caller's responsibility
-- Returns attemptId on success, null on failure
-
 ### Session Reducer (React)
 `src/utils/session.ts` handles immutable state updates with typed actions (SET_INDEX, SET_ANSWERS, SET_TIME, SET_TIMER_PAUSED, etc.). Note: `Session.questions` field was removed — it was written at init but never read during a session; `useExamSession` always reads question data from the exam context instead.
 
@@ -107,19 +83,6 @@ Pattern for context creation:
 3. Styled components specific to a provider live in their own `*Styles.ts` file (e.g., `AttemptHistoryStyles.ts`) if shared with other components
 
 This ensures each provider component can be fast-refreshed independently when edited.
-
-### Custom Hooks (React)
-- `useSettings()` - Gets/updates the user settings in the local storage.
-- `useResults()` - Score calculation and statistics (correct, incorrect, incomplete counts; pass/fail)
-- `useEmail()` - Sends exam summary report email (no attachment) via Vercel serverless function
-- `useMediaQuery()` - Responsive breakpoints (768px mobile threshold)
-- `useFullExamLabel()` - Gets the full exam label from the `full-exams.json` file during the runtime.
-- `useCategoryLabel()` - Gets the category label from the `categories.json` file during the runtime.
-- `useToast()` - Hook to show/close a toast from the top of the app, toast component is defined in the main.tsx.
-- `useAttempts()` - API calls for exam attempts: `startAttempt` (new full-exam), `getAttempt` (fetch snapshot), `saveAttempt` (persist in-progress), `submitAttempt` (finalize)
-- `useExamSession()` - Internal hook for `ActiveSession`; builds session-to-context bridge via reducer and handles persistence (auto-save on pause/tab-hide/unload)
-
-**Note:** Context-related hooks (`useExam`, `useSessionControl`, `useSessionNavigation`, `useSessionTimer`, `useSessionExam`, `useSessionData`) are defined in `src/contexts.ts` and must be imported from there (not from provider files).
 
 ### Dynamic Imports and Exam Loading (React)
 Language files are dynamically imported per language for code-splitting:
@@ -170,12 +133,6 @@ All paths that create a row in `auth.sessions`:
 - `api/_lib/validators/authValidator.ts` - Input validation for auth endpoints (throws `AppError` on failure)
 - `api/_lib/services/subscriptionVerifier.ts` - Verifies user has an active HighLevel subscription before signup
 
-## Internationalization
-
-- Languages: Arabic (RTL) and English (LTR)
-- HTML `dir` attribute set per language
-- Uses a map in memory and functions to populate UI values
-
 ## TypeScript Configuration
 
 Project uses split tsconfig with project references to separate frontend and backend environments:
@@ -200,3 +157,61 @@ Project uses split tsconfig with project references to separate frontend and bac
 - After completing any coding task, update `todo.md` in the project root with the next steps if applicable. Keep entries concise and actionable.
 - After completing major changes in the app's architecture/components, update this `CLAUDE.md` file to match it.
 - If you notice there are repeatable work that needs context to start with
+
+## Guidelines and Constraints (CRITICAL, SHOULD NEVER OVERLOOK)
+
+### 1. Think Before Coding
+Don't assume. Don't hide confusion. Surface tradeoffs.
+
+Before implementing:
+
+State your assumptions explicitly. If uncertain, ask.
+If multiple interpretations exist, present them - don't pick silently.
+If a simpler approach exists, say so. Push back when warranted.
+If something is unclear, stop. Name what's confusing. Ask.
+### 2. Simplicity First
+Minimum code that solves the problem. Nothing speculative.
+
+No features beyond what was asked.
+No abstractions for single-use code.
+No "flexibility" or "configurability" that wasn't requested.
+No error handling for impossible scenarios.
+If you write 200 lines and it could be 50, rewrite it.
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+
+### 3. Surgical Changes
+Touch only what you must. Clean up only your own mess.
+
+When editing existing code:
+
+Don't "improve" adjacent code, comments, or formatting.
+Don't refactor things that aren't broken.
+Match existing style, even if you'd do it differently.
+If you notice unrelated dead code, mention it - don't delete it.
+When your changes create orphans:
+
+Remove imports/variables/functions that YOUR changes made unused.
+Don't remove pre-existing dead code unless asked.
+The test: Every changed line should trace directly to the user's request.
+
+### 4. Goal-Driven Execution
+Define success criteria. Loop until verified.
+
+Transform tasks into verifiable goals:
+
+"Add validation" → "Write tests for invalid inputs, then make them pass"
+"Fix the bug" → "Write a test that reproduces it, then make it pass"
+"Refactor X" → "Ensure tests pass before and after"
+For multi-step tasks, state a brief plan:
+
+``` text
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+3. [Step] → verify: [check]
+```
+
+Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+
+### 5. Reusability and code extraction
+
+Prefer reusing existing logic, components, or styling over starting from scratch, even if needed to refactor the existing code to be more flexible.
