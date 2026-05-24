@@ -7,7 +7,7 @@ import useSettings from '../../hooks/useSettings'
 import BreakOfferModal from './BreakOfferModal'
 import BreakTimerModal from './BreakTimerModal'
 
-const BREAK_DURATION = 600 // seconds
+const BREAK_DURATION = 10 * 60 // seconds
 
 function formatTime(s: number) {
   const m = Math.floor(s / 60).toString().padStart(2, '0')
@@ -73,6 +73,7 @@ export default function BreakModals() {
 
   const handleTakeBreak = () => {
     setOfferVisible(false)
+    setSecondsLeft(BREAK_DURATION)
     timerUpdate([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, true])
     setTimerVisible(true)
   }
