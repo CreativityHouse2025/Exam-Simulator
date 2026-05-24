@@ -1,16 +1,14 @@
 import React from "react"
-import { Routes, Route, Navigate, Outlet } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import styled from "styled-components"
 import Toast from "./components/Toast"
 import Header from "./components/Header"
 import Loading from "./components/Loading"
 import ProtectedRoute from "./guards/ProtectedRoute"
 import GuestRoute from "./guards/GuestRoute"
-import CoverPage from "./pages/CoverPage"
 import SignInPage from "./pages/SignInPage"
 import SignUpPage from "./pages/SignUpPage"
 import ProfilePage from "./pages/ProfilePage"
-import AttemptHistoryPage from "./pages/AttemptHistoryPage"
 import AuthCallbackPage from "./pages/AuthCallbackPage"
 import ForgotPasswordPage from "./pages/ForgotPasswordPage"
 import ResetPasswordPage from "./pages/ResetPasswordPage"
@@ -18,9 +16,7 @@ import { hasTranslation, setTranslation } from "./utils/translation"
 import { LANGUAGES } from "./constants"
 import useSettings from "./hooks/useSettings"
 import type { LangCode } from "./types"
-import ExamPage from "./pages/ExamPage"
-import ExamContextProvider from "./providers/ExamProvider"
-import SessionProvider from "./providers/SessionProvider"
+import ExamRoot from "./components/exam/ExamRoot"
 
 const AppBackground = styled.div`
   position: fixed;
@@ -97,14 +93,7 @@ const App: React.FC = () => {
             <Route path="/reset-password" element={<ProtectedRoute redirectTo="/signin"><ResetPasswordPage /></ProtectedRoute>} />
             {/* SessionProvider wraps both /history and /app/* so AttemptHistoryPage
                 can call resumeAttempt, and CoverPage can call startNewExam / resumeAttempt. */}
-            <Route element={<ProtectedRoute redirectTo="/signin"><SessionProvider><Outlet /></SessionProvider></ProtectedRoute>}>
-              <Route path="/history" element={<AttemptHistoryPage />} />
-              <Route path="/app" element={<Outlet />}>
-                <Route index element={<CoverPage />} />
-                {/* ExamContextProvider is scoped to /app/exam only — CoverPage has no need for exam data. */}
-                <Route path="exam" element={<ExamContextProvider><ExamPage /></ExamContextProvider>} />
-              </Route>
-            </Route>
+            <Route path="/*" element={<ProtectedRoute redirectTo="/signin"><ExamRoot /></ProtectedRoute>} />
             <Route path="*" element={<Navigate to="/app" replace />} />
           </Routes>
         </RoutesArea>

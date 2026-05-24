@@ -1,6 +1,6 @@
 import React from 'react'
 import { SessionReducer } from '../utils/session'
-import { DEFAULT_SESSION, SESSION_ACTION_TYPES } from '../constants'
+import { DEFAULT_FULL_SESSION, SESSION_ACTION_TYPES } from '../constants'
 import { saveAttempt, submitAttempt } from '../services/attempt.service'
 import { AppApiError } from '../hooks/useAuth'
 import { translate } from '../utils/translation'
@@ -8,7 +8,7 @@ import useToast from '../hooks/useToast'
 import type { Session, SessionDispatch } from '../types'
 
 export default function useSessionReducer(startingSession: Session | null) {
-  const [session, updateSession] = React.useReducer(SessionReducer, DEFAULT_SESSION)
+  const [session, updateSession] = React.useReducer(SessionReducer, DEFAULT_FULL_SESSION)
   const [isSyncing, setIsSyncing] = React.useState(false)
   // Ref guards against a second click landing while the first request is in flight
   const isSyncingRef = React.useRef(false)
@@ -56,13 +56,16 @@ export default function useSessionReducer(startingSession: Session | null) {
         is_bookmarked: session.bookmarks.includes(questionIndex),
       }))      
 
+      const b1 = session.examType === 'full' ? session.break1OfferedAt : null
+      const b2 = session.examType === 'full' ? session.break2OfferedAt : null
+
       await saveAttempt(session.id, {
         current_index: session.index,
         time_remaining: session.time,
         review_state: session.reviewState,
         answers,
-        break_1_offered_at: session.break1OfferedAt,
-        break_2_offered_at: session.break2OfferedAt,
+        break_1_offered_at: b1,
+        break_2_offered_at: b2,
       })
 
       updateSession({ type: SESSION_ACTION_TYPES.CLEAR_DIRTY, payload: null })
@@ -89,9 +92,11 @@ export default function useSessionReducer(startingSession: Session | null) {
     isSyncingRef.current = true
     setIsSyncing(true)
 
+    const b1 = session.examType === 'full' ? session.break1OfferedAt : null
+    const b2 = session.examType === 'full' ? session.break2OfferedAt : null
     const breakField = breakNumber === 1
-      ? ({ break_1_offered_at: offeredAt, break_2_offered_at: session.break2OfferedAt })
-      : ({ break_1_offered_at: session.break1OfferedAt, break_2_offered_at: offeredAt })
+      ? ({ break_1_offered_at: offeredAt, break_2_offered_at: b2 })
+      : ({ break_1_offered_at: b1, break_2_offered_at: offeredAt })
 
     try {
       const dirtyIndices = Object.keys(session.dirtyQuestions).map(Number)
@@ -181,6 +186,9 @@ export default function useSessionReducer(startingSession: Session | null) {
     }
   }, [session, showToast])
 
+  const break1OfferedAt = session.examType === 'full' ? session.break1OfferedAt : null
+  const break2OfferedAt = session.examType === 'full' ? session.break2OfferedAt : null
+
   const contextValues = {
     navigation: { index: session.index, update: sessionUpdate },
     timer: { time: session.time, maxTime: session.maxTime, paused: session.paused, update: sessionUpdate },
@@ -191,8 +199,8 @@ export default function useSessionReducer(startingSession: Session | null) {
       examType: session.examType,
       dirtyQuestions: session.dirtyQuestions,
       isSyncing,
-      break1OfferedAt: session.break1OfferedAt,
-      break2OfferedAt: session.break2OfferedAt,
+      break1OfferedAt,
+      break2OfferedAt,
       update: sessionUpdate,
     },
   }

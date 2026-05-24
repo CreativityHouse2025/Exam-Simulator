@@ -1,4 +1,4 @@
-import type { Lang, LangCode, Session, Settings } from './types'
+import type { Lang, LangCode, Settings, FullExamSession, DomainExamSession, RevisionSession } from './types'
 
 // Theme constants
 const colors = ['#b5965d', '#593752', '#301e2c', '#f8e3e0', '#000000', '#ffffff']
@@ -104,26 +104,61 @@ export const SESSION_ACTION_PROPS = {
 // Constant for category menu padding (shared variable)
 export const MENU_PADDING = "1.6rem 1.4rem"
 
-// Default session
-export const DEFAULT_SESSION: Session = {
-  id: '' as const,
-  index: 0 as const,
-  maxTime: 0 as const,
-  time: 0 as const,
-  paused: false as const,
-  examState: 'in-progress' as const,
-  reviewState: 'summary' as const,
-  questionChoiceOrders: {} as const,
-  selectedOriginalIndices: [] as const,
+export const DEFAULT_FULL_SESSION: FullExamSession = {
+  id: '',
+  index: 0,
+  maxTime: 0,
+  time: 0,
+  paused: false,
+  examState: 'in-progress',
+  reviewState: 'summary',
+  questionChoiceOrders: {},
+  selectedOriginalIndices: [],
   categoryId: null,
-  examId: null,
-  examType: 'full' as const,
-  bookmarks: [] as const,
-  questionIds: 'ALL' as const,
-  dirtyQuestions: {} as const,
+  examId: 0,
+  examType: 'full',
+  bookmarks: [],
+  questionIds: 'ALL',
+  dirtyQuestions: {},
   break1OfferedAt: null,
   break2OfferedAt: null,
-} as const
+}
+
+export const DEFAULT_DOMAIN_SESSION: DomainExamSession = {
+  id: '',
+  index: 0,
+  maxTime: 0,
+  time: 0,
+  paused: false,
+  examState: 'in-progress',
+  reviewState: 'summary',
+  questionChoiceOrders: {},
+  selectedOriginalIndices: [],
+  categoryId: 0,
+  examId: null,
+  examType: 'domain',
+  bookmarks: [],
+  questionIds: 'ALL',
+  dirtyQuestions: {},
+}
+
+export const DEFAULT_REVISION_SESSION: RevisionSession = {
+  id: '',
+  index: 0,
+  maxTime: 0,
+  time: 0,
+  paused: false,
+  examState: 'in-progress',
+  reviewState: 'summary',
+  questionChoiceOrders: {},
+  selectedOriginalIndices: [],
+  categoryId: null,
+  examId: 0,
+  examType: 'revision',
+  bookmarks: [],
+  questionIds: 'ALL',
+  dirtyQuestions: {},
+}
 
 // Language configuration
 export const LANGUAGES: Record<LangCode, Lang> = {
