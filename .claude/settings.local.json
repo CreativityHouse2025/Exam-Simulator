@@ -7,7 +7,10 @@
       "mcp__claude_ai_Atlassian_Rovo__getConfluencePageDescendants",
       "Bash(xargs grep -l \"useEffect\\\\|useCallback\")",
       "Skill(ui-ux-pro-max:ui-ux-pro-max)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Moham\\\\Documents\\\\Career\\\\work-projects\\\\exam-simulator\\\\exam-sim-v2\\\\Exam-Simulator\\\\src\" -Recurse -Directory)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)"
     ]
   }
 }
