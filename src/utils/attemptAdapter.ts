@@ -1,4 +1,4 @@
-import type { Session, ExamType, Exam, Question } from "../types"
+import type { FullExamSession, DomainExamSession, RevisionSession, Exam, Question } from "../types"
 import type { GetAttemptResult, AttemptQuestion } from "../types"
 import { getCorrectOriginalIndices } from "./format"
 import { isQuestionMistake } from "./results"
@@ -46,7 +46,7 @@ function deriveSharedAttemptFields(payload: GetAttemptResult): SharedAttemptFiel
  *
  * Returns null when the attempt has no questions.
  */
-export function adaptAttemptToSession(payload: GetAttemptResult): Session | null {
+export function adaptAttemptToSession(payload: GetAttemptResult): FullExamSession | DomainExamSession | null {
   if (!payload.questions || payload.questions.length === 0) return null
 
   const { questionChoiceOrders, selectedOriginalIndices, bookmarkedQuestionIndices, maxTime } =
@@ -54,7 +54,7 @@ export function adaptAttemptToSession(payload: GetAttemptResult): Session | null
 
   const { attempt } = payload
 
-  return {
+  const shared = {
     id: attempt.id,
     index: attempt.current_index,
     maxTime,
@@ -63,21 +63,34 @@ export function adaptAttemptToSession(payload: GetAttemptResult): Session | null
     // and timer expiry) both dispatch SET_TIMER_PAUSED true alongside SET_EXAM_STATE completed.
     // The DB doesn't store paused, so we reconstruct that invariant here.
     paused: attempt.exam_state === 'completed',
-    examState: attempt.exam_state as Session["examState"],
+    examState: attempt.exam_state as FullExamSession['examState'],
     reviewState: attempt.review_state,
     questionChoiceOrders,
     selectedOriginalIndices,
-    categoryId: attempt.category_id,
     bookmarks: bookmarkedQuestionIndices,
-    examType: attempt.exam_type as ExamType,
-    examId: attempt.exam_id,
     // Preserves attempt question order so ExamContextProvider doesn't depend on
     // the exam file's order matching the attempt's order.
     questionIds: payload.questions.map((attemptQuestion) => attemptQuestion.question_id),
     dirtyQuestions: {},
-    break1OfferedAt: attempt.break_1_offered_at,
-    break2OfferedAt: attempt.break_2_offered_at,
   }
+
+  if (attempt.exam_type === 'full') {
+    return {
+      ...shared,
+      examType: 'full',
+      examId: attempt.exam_id as number,
+      categoryId: null,
+      break1OfferedAt: attempt.break_1_offered_at,
+      break2OfferedAt: attempt.break_2_offered_at,
+    } satisfies FullExamSession
+  }
+
+  return {
+    ...shared,
+    examType: 'domain',
+    categoryId: attempt.category_id as number,
+    examId: null,
+  } satisfies DomainExamSession
 }
 
 /**
@@ -92,7 +105,7 @@ export function adaptAttemptToSession(payload: GetAttemptResult): Session | null
  * - The attempt has no questions.
  * - The user made no mistakes (nothing to revise).
  */
-export function adaptAttemptToRevision(payload: GetAttemptResult, rawExam: Exam): Session | null {
+export function adaptAttemptToRevision(payload: GetAttemptResult, rawExam: Exam): RevisionSession | null {
   if (payload.attempt.exam_type !== "full") return null
   if (!payload.questions || payload.questions.length === 0) return null
 
@@ -132,7 +145,7 @@ export function adaptAttemptToRevision(payload: GetAttemptResult, rawExam: Exam)
     id: "",
     examType: "revision",
     // Preserved so ExamContextProvider knows which full exam file to load.
-    examId: attempt.exam_id,
+    examId: attempt.exam_id as number,
     categoryId: null,
     questionIds: mistakeAttemptQuestions.map((attemptQuestion) => attemptQuestion.question_id),
     // passed to the ExamContextProvider so it applyQuestionChoiceOrders
@@ -147,7 +160,5 @@ export function adaptAttemptToRevision(payload: GetAttemptResult, rawExam: Exam)
     examState: "in-progress",
     reviewState: "summary",
     dirtyQuestions: {},
-    break1OfferedAt: null,
-    break2OfferedAt: null,
-  }
+  } satisfies RevisionSession
 }

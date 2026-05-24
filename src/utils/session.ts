@@ -19,10 +19,15 @@ export const SessionReducer: SessionReducerFunc = (state: Session, actions: Sess
       return { ...state, dirtyQuestions: {} }
     }
 
+    if (type === 'SET_BREAK1_OFFERED_AT' || type === 'SET_BREAK2_OFFERED_AT') {
+      if (state.examType !== 'full') return state
+      // fall through to generic prop lookup
+    }
+
     const key = SESSION_ACTION_PROPS[type]
 
-    if (payload !== state[key]) {
-      return { ...state, [key]: payload }
+    if (payload !== state[key as keyof typeof state]) {
+      return { ...state, [key]: payload } as Session
     }
     return state
   }
@@ -53,9 +58,14 @@ export const SessionReducer: SessionReducerFunc = (state: Session, actions: Sess
       continue
     }
 
+    if (type === 'SET_BREAK1_OFFERED_AT' || type === 'SET_BREAK2_OFFERED_AT') {
+      if (newState.examType !== 'full') continue
+      // fall through to generic prop lookup
+    }
+
     const key = SESSION_ACTION_PROPS[type]
 
-    if (payload !== newState[key]) {
+    if (payload !== newState[key as keyof typeof newState]) {
       if (!hasChanges) {
         // Only create a new object on first change
         newState = { ...newState }

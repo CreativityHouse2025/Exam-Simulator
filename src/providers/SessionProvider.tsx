@@ -15,7 +15,6 @@ import { translate } from '../utils/translation'
 import { loadDomainExam, loadFullExam } from '../utils/exam'
 import { adaptAttemptToSession, adaptAttemptToRevision } from '../utils/attemptAdapter'
 import { AppApiError } from '../hooks/useAuth'
-import { DEFAULT_SESSION } from '../constants'
 import type { Session } from '../types'
 import useSettings from '../hooks/useSettings'
 
@@ -93,19 +92,25 @@ export default function SessionProvider({ children }: { children: React.ReactNod
         const { attempt_id } = await startAttempt(startAttemptRequestBody)
         const maxTime = examDetails.durationMinutes * 60
 
-        const nextSession: Session = {
-          ...DEFAULT_SESSION,
+        const sharedSessionFields = {
           id: attempt_id,
-          examType: type,
-          examId: type === 'full' ? examOrCategoryId : null,
-          categoryId: type === 'domain' ? examOrCategoryId : null,
           questionChoiceOrders,
           selectedOriginalIndices: resolvedQuestions.map(() => []),
           maxTime,
           time: maxTime,
           // New exams render the file as-is — no subset needed.
-          questionIds: 'ALL',
+          questionIds: 'ALL' as const,
+          index: 0,
+          paused: false,
+          examState: 'in-progress' as const,
+          reviewState: 'summary' as const,
+          bookmarks: [],
+          dirtyQuestions: {},
         }
+
+        const nextSession: Session = type === 'full'
+          ? { ...sharedSessionFields, examType: 'full', examId: examOrCategoryId, categoryId: null, break1OfferedAt: null, break2OfferedAt: null }
+          : { ...sharedSessionFields, examType: 'domain', categoryId: examOrCategoryId, examId: null }
 
         setStartingSession(nextSession)
         setLatestAttemptId(attempt_id)

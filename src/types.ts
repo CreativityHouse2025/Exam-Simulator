@@ -84,48 +84,45 @@ export type Answers = AnswerOfMultipleChoice[]
 export type ExamState = 'in-progress' | 'completed'
 export type ReviewState = 'summary' | 'question'
 
-// Session interface
-export interface Session {
-  /** v1.1: Session id */
+// Base session — fields shared by all three exam types
+interface BaseSession {
   id: string
-  /** the question number */
   index: number
-  /** the maximum time allowed for the exam */
-  maxTime: number
-  /** v1.1: the remaining time */
-  time: number
-  /** the state of the timer */
-  paused: boolean
-  /** the state of the exam */
   examState: ExamState
-  /** the state of the review */
   reviewState: ReviewState
-  /** per-question shuffled display order: key = question id, value = original choice indices in display order */
   questionChoiceOrders: Record<number, number[]>
-  /** array of original indices (choice IDs) of the selected choices for each question */
   selectedOriginalIndices: Answers
-  /** null for full exams */
-  categoryId: number | null
-  /** null for domain exams */
-  examId: number | null
-  /** the list of bookmarked questions */
   bookmarks: number[]
-  /** the type of the exam, domain or full */
-  examType: ExamType
-  /**
-   * 'ALL' = render the loaded exam file as-is (every new exam).
-   * number[] = render exactly these question ids, in this order (resume + revision).
-   */
   questionIds: number[] | 'ALL'
-  /** Set of question indices that have unsaved changes since the last successful syncProgress call.
-   *  key = question index (positional, not question id), value is always true (used as a set).
-   *  Cleared after each successful sync; reset to {} on RESET_SESSION. */
   dirtyQuestions: Record<number, true>
-  /** ISO timestamp of when break 1 was offered (after Q60). null = not yet offered. Full exams only. */
+  maxTime: number
+  time: number
+  paused: boolean
+}
+
+export interface FullExamSession extends BaseSession {
+  examType: 'full'
+  examId: number
+  categoryId: null
   break1OfferedAt: string | null
-  /** ISO timestamp of when break 2 was offered (after Q120). null = not yet offered. Full exams only. */
   break2OfferedAt: string | null
 }
+
+export interface DomainExamSession extends BaseSession {
+  examType: 'domain'
+  categoryId: number
+  examId: null
+}
+
+export interface RevisionSession extends BaseSession {
+  examType: 'revision'
+  examId: number
+  categoryId: null
+}
+
+export type Session = FullExamSession | DomainExamSession | RevisionSession
+
+export type { BaseSession }
 
 // v2.0: Type for the generic dropdown item (category or fullexam)
 export type DropdownItem<TId = number, TLabel = string> = {
@@ -183,7 +180,14 @@ export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, Ses
 export type SessionNavigation = Pick<Session, 'index'> & { update: SessionDispatch }
 export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused'> & { update: SessionDispatch }
 export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'categoryId' | 'examId'> & { update: SessionDispatch }
-export type SessionData = Pick<Session, 'bookmarks' | 'selectedOriginalIndices' | 'examType' | 'dirtyQuestions' | 'break1OfferedAt' | 'break2OfferedAt'> & { isSyncing: boolean; update: SessionDispatch }
+export type SessionData = Pick<Session, 'bookmarks' | 'selectedOriginalIndices' | 'examType' | 'dirtyQuestions'> & {
+  /** null for domain and revision sessions (break fields only exist on FullExamSession) */
+  break1OfferedAt: string | null
+  /** null for domain and revision sessions (break fields only exist on FullExamSession) */
+  break2OfferedAt: string | null
+  isSyncing: boolean
+  update: SessionDispatch
+}
 
 export type SessionControlContextType = {
   session: Session | null
