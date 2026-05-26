@@ -1,5 +1,5 @@
 import React from "react"
-import { Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route, Navigate, Outlet } from "react-router-dom"
 import styled from "styled-components"
 import Toast from "./components/Toast"
 import Header from "./components/Header"
@@ -12,11 +12,14 @@ import ProfilePage from "./pages/ProfilePage"
 import AuthCallbackPage from "./pages/AuthCallbackPage"
 import ForgotPasswordPage from "./pages/ForgotPasswordPage"
 import ResetPasswordPage from "./pages/ResetPasswordPage"
+import AttemptHistoryPage from "./pages/AttemptHistoryPage"
+import CoverPage from "./pages/CoverPage"
 import { hasTranslation, setTranslation } from "./utils/translation"
 import { LANGUAGES } from "./constants"
 import useSettings from "./hooks/useSettings"
 import type { LangCode } from "./types"
-import ExamRoot from "./components/exam/ExamRoot"
+import SessionProvider from "./providers/SessionProvider"
+import ExamSessionRouter from "./components/exam/ExamSessionRouter"
 
 const AppBackground = styled.div`
   position: fixed;
@@ -91,10 +94,13 @@ const App: React.FC = () => {
             <Route path="/forgot-password" element={<GuestRoute><ForgotPasswordPage /></GuestRoute>} />
             <Route path="/auth/callback" element={<AuthCallbackPage />} />
             <Route path="/reset-password" element={<ProtectedRoute redirectTo="/signin"><ResetPasswordPage /></ProtectedRoute>} />
-            {/* SessionProvider wraps both /history and /app/* so AttemptHistoryPage
-                can call resumeAttempt, and CoverPage can call startNewExam / resumeAttempt. */}
-            <Route path="/*" element={<ProtectedRoute redirectTo="/signin"><ExamRoot /></ProtectedRoute>} />
-            <Route path="*" element={<Navigate to="/app" replace />} />
+            {/* SessionProvider wraps /history and /app/* — both need session lifecycle methods */}
+            <Route element={<ProtectedRoute redirectTo="/signin"><SessionProvider><Outlet /></SessionProvider></ProtectedRoute>}>
+              <Route path="/history" element={<AttemptHistoryPage />} />
+              <Route path="/app" element={<CoverPage />} />
+              <Route path="/app/exam" element={<ExamSessionRouter />} />
+              <Route path="*" element={<Navigate to="/app" replace />} />
+            </Route>
           </Routes>
         </RoutesArea>
       </AppLayout>

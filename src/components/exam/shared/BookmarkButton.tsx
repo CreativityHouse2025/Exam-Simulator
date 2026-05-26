@@ -21,7 +21,7 @@ const BookmarkButton: React.FC = () => {
 
   return (
     <BookmarkStyles $bookmarked={bookmarked} className="no-select">
-      <IconComponent size={40} onClick={toggleBookmark} />
+      <IconComponent size={35} onClick={toggleBookmark} />
     </BookmarkStyles>
   )
 }

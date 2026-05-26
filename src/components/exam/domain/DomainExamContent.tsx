@@ -17,17 +17,51 @@ const DomainExamContent: React.FC<DomainExamContentProps> = ({ isReview }) => {
   const question = exam[questionIndex]
   const userAnswer = selectedOriginalIndices[questionIndex] || []
 
+  const [isAnswerRevealed, setIsAnswerRevealed] = React.useState(false)
+  const explanationRef = React.useRef<HTMLDivElement | null>(null)
+
+  // Reset reveal whenever the user navigates to a different question.
+  React.useEffect(() => {
+    setIsAnswerRevealed(false)
+  }, [questionIndex])
+
+  // Auto-scroll the explanation into view after the user reveals it,
+  // so they don't have to manually scroll down to see it.
+  React.useEffect(() => {
+    if (isAnswerRevealed && explanationRef.current) {
+      explanationRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [isAnswerRevealed])
+
+  const toggleAnswerReveal = React.useCallback(() => {
+    setIsAnswerRevealed((previousValue) => !previousValue)
+  }, [])
+
+  const shouldShowExplanation = isReview || (!isReview && isAnswerRevealed)
+
   return (
     <ExamStyles id="exam">
-      <DomainExamTopDisplay questionCount={exam.length} isReview={isReview} />
+      <DomainExamTopDisplay
+        questionCount={exam.length}
+        isReview={isReview}
+        isAnswerRevealed={isAnswerRevealed}
+        onToggleAnswerReveal={toggleAnswerReveal}
+      />
 
       {!isReview && <Progress questionCount={exam.length} />}
 
       <Question {...question} />
 
-      <MultipleChoice isReview={isReview} />
+      <MultipleChoice isReview={isReview} isAnswerRevealed={isAnswerRevealed} />
 
-      {isReview && <Explanation question={question} userAnswer={userAnswer} />}
+      {shouldShowExplanation && (
+        <Explanation
+          ref={explanationRef}
+          question={question}
+          userAnswer={userAnswer}
+          onHide={!isReview ? toggleAnswerReveal : undefined}
+        />
+      )}
     </ExamStyles>
   )
 }
