@@ -4,6 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import BookmarkButton from '../shared/BookmarkButton'
 import SaveButtonWithReminder from '../shared/SaveButtonWithReminder'
+import RevealAnswerButton from './RevealAnswerButton'
 import { translate } from '../../../utils/translation'
 import { useExamSessionCore } from '../../../hooks/examSession/useExamSessionCore'
 import { useDomainExamSession } from '../../../hooks/examSession/useDomainExamSession'
@@ -65,7 +66,12 @@ const QuestionTextStyles = styled.div<ThemedStyles>`
   color: ${({ theme }) => theme.grey[10]};
 `
 
-const DomainExamTopDisplay: React.FC<TopDisplayProps> = ({ questionCount, isReview = false }) => {
+const DomainExamTopDisplay: React.FC<TopDisplayProps> = ({
+  questionCount,
+  isReview = false,
+  isAnswerRevealed,
+  onToggleAnswerReveal,
+}) => {
   const { index, dirtyQuestions } = useExamSessionCore()
   const { categoryId, isSyncing, syncProgress } = useDomainExamSession()
   const categoryLabel = useCategoryLabel(categoryId)
@@ -85,6 +91,10 @@ const DomainExamTopDisplay: React.FC<TopDisplayProps> = ({ questionCount, isRevi
               dirtyCount={Object.keys(dirtyQuestions).length}
               syncProgress={syncProgress}
             />
+            <RevealAnswerButton
+              isAnswerRevealed={isAnswerRevealed}
+              onToggleAnswerReveal={onToggleAnswerReveal}
+            />
             <BookmarkButton />
           </RightControls>
         )}
@@ -103,4 +113,6 @@ export default DomainExamTopDisplay
 export interface TopDisplayProps {
   questionCount: number
   isReview?: boolean
+  isAnswerRevealed: boolean
+  onToggleAnswerReveal: () => void
 }

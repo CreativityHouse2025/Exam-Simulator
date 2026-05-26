@@ -6,7 +6,7 @@ import { formatChoiceLabel } from '../../../utils/format'
 import { useExamSessionCore } from '../../../hooks/examSession/useExamSessionCore'
 import useSettings from '../../../hooks/useSettings'
 
-const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) => {
+const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview, isAnswerRevealed = false }) => {
   const { index: questionIndex, selectedOriginalIndices, exam, setAnswer } = useExamSessionCore()
   const { settings } = useSettings()
   const langCode = settings.language
@@ -14,9 +14,12 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
   const question = exam[questionIndex]
   const selectedIds: AnswerOfMultipleChoice = selectedOriginalIndices[questionIndex] || []
 
+  const shouldShowCorrectness = isReview || isAnswerRevealed
+  const isChoiceInteractionLocked = isReview
+
   const onChoose = React.useCallback(
     (displayIdx: number) => {
-      if (isReview) return
+      if (isChoiceInteractionLocked) return
 
       const choiceId = question.choices[displayIdx].originalIndex ?? displayIdx
       const current = selectedOriginalIndices[questionIndex] || []
@@ -35,7 +38,7 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
 
       setAnswer(questionIndex, newValues)
     },
-    [questionIndex, selectedOriginalIndices, question.choices, question.answer.length, isReview, setAnswer]
+    [questionIndex, selectedOriginalIndices, question.choices, question.answer.length, isChoiceInteractionLocked, setAnswer]
   )
 
   return (
@@ -48,9 +51,9 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview }) =>
             key={i}
             singleAnswer={question.answer.length === 1}
             selected={isSelected}
-            review={isReview}
+            review={shouldShowCorrectness}
             correct={correct}
-            disabled={isReview || (!isSelected && selectedIds.length >= question.answer.length)}
+            disabled={isChoiceInteractionLocked || (!isSelected && selectedIds.length >= question.answer.length)}
             label={formatChoiceLabel(i, langCode as LangCode)}
             text={text}
             onClick={() => onChoose(i)}
@@ -65,4 +68,5 @@ export default MultipleChoiceComponent
 
 export interface MultipleChoiceProps {
   isReview: boolean
+  isAnswerRevealed?: boolean
 }
