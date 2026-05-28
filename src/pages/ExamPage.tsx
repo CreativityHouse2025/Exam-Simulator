@@ -1,7 +1,7 @@
-import { useSessionControl } from '../../contexts'
-import FullExamProvider from './full/FullExamProvider'
-import DomainExamProvider from './domain/DomainExamProvider'
-import RevisionProvider from './revision/RevisionProvider'
+import { useSessionControl } from '../contexts'
+import FullExamProvider from '../components/exam/full/FullExamProvider'
+import DomainExamProvider from '../components/exam/domain/DomainExamProvider'
+import RevisionProvider from '../components/exam/revision/RevisionProvider'
 
 /**
  * Reads the session type and delegates to the correct specialized exam provider tree.

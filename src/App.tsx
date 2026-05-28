@@ -19,7 +19,7 @@ import { LANGUAGES } from "./constants"
 import useSettings from "./hooks/useSettings"
 import type { LangCode } from "./types"
 import SessionProvider from "./providers/SessionProvider"
-import ExamSessionRouter from "./components/exam/ExamSessionRouter"
+import ExamPage from "./pages/ExamPage"
 
 const AppBackground = styled.div`
   position: fixed;
@@ -98,7 +98,7 @@ const App: React.FC = () => {
             <Route element={<ProtectedRoute redirectTo="/signin"><SessionProvider><Outlet /></SessionProvider></ProtectedRoute>}>
               <Route path="/history" element={<AttemptHistoryPage />} />
               <Route path="/app" element={<CoverPage />} />
-              <Route path="/app/exam" element={<ExamSessionRouter />} />
+              <Route path="/app/exam" element={<ExamPage />} />
               <Route path="*" element={<Navigate to="/app" replace />} />
             </Route>
           </Routes>
