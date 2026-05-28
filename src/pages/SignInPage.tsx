@@ -6,7 +6,7 @@ import { validateEmail, validatePassword } from "../utils/authValidation"
 import { translate } from "../utils/translation"
 // @ts-expect-error
 import Logo from "../assets/logo.png"
-import { EmailField, PasswordField } from "../components/auth"
+import { EmailField, PasswordField } from "../components/Auth"
 import {
   PageWrapper,
   Card,
