@@ -9,7 +9,7 @@ import { translate } from "../utils/translation"
 import styled from "styled-components"
 // @ts-expect-error
 import Logo from "../assets/logo.png"
-import PasswordField from "../components/auth/PasswordField"
+import PasswordField from "../components/Auth/PasswordField"
 import {
   PageWrapper,
   Card,
