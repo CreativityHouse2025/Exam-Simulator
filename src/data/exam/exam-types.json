@@ -2,8 +2,8 @@
     "full": {
         "id": "full",
         "name": {
-            "en": "New Exam",
-            "ar": "امتحان جديد"
+            "en": "Full Exam",
+            "ar": "امتحان كامل"
         },
         "durationMinutes": 230,
         "passingRate": 75
@@ -11,8 +11,8 @@
     "domain": {
         "id": "domain",
         "name": {
-            "en": "Mini Exam",
-            "ar": "امتحان مصغر"
+            "en": "Domain Exam",
+            "ar": "امتحان مجال (مصنف)"
         },
         "durationMinutes": 300,
         "passingRate": 85
