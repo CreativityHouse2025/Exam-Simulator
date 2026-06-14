@@ -6,10 +6,11 @@ import type { RevisionSession } from '../../types'
  * Revision is ephemeral and read-only — no timer, no sync, no break.
  */
 export function useRevisionExamSession() {
-  const { session } = useSessionControl()
+  const { session, submitExam } = useSessionControl()
   const revision = session as RevisionSession
 
   return {
     examId: revision?.examId ?? 0,
+    submitExam,
   }
 }
