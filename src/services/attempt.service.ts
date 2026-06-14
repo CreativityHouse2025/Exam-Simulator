@@ -1,4 +1,4 @@
-import { AppApiError } from "../hooks/useAuth"
+import { AppApiError } from "../errors"
 import { translate } from "../utils/translation"
 import { apiFetch } from "../utils/apiFetch"
 import type {
@@ -44,7 +44,7 @@ function translateErrorCode(code: AppErrorCode): string {
 }
 
 export async function getAttempts(): Promise<AttemptSummary[]> {
-  const response = await apiFetch("/api/attempts")
+  const response = await apiFetch("/api/attempts", { handleUnauthorized: true })
   const result: ApiResponse<{ attempts: AttemptSummary[] }> = await response.json()  
 
   if (!result.success) {
@@ -55,7 +55,7 @@ export async function getAttempts(): Promise<AttemptSummary[]> {
 }
 
 export async function getAttempt(id: string): Promise<GetAttemptResult> {
-  const response = await apiFetch(`/api/attempts/${id}`)
+  const response = await apiFetch(`/api/attempts/${id}`, { handleUnauthorized: true })
   const result: ApiResponse<GetAttemptResult> = await response.json()
 
   if (!result.success) {
@@ -70,6 +70,7 @@ export async function startAttempt(body: InsertAttemptRequestBody): Promise<{ at
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
+    handleUnauthorized: true
   })
 
   const result: ApiResponse<{ attempt_id: string }> = await response.json()
@@ -86,6 +87,7 @@ export async function saveAttempt(id: string, args: Omit<SaveAttemptInProgress, 
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...args, exam_state: "in-progress" }),
+    handleUnauthorized: true
   })
 
   const result: ApiResponse<object> = await response.json()
@@ -100,6 +102,7 @@ export async function submitAttempt(id: string, args: Omit<SaveAttemptCompleted,
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...args, exam_state: "completed" }),
+    handleUnauthorized: true
   })
 
   const result: ApiResponse<object> = await response.json()

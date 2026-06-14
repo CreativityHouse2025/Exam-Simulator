@@ -4,10 +4,14 @@ import type { AuthContextType, SessionDispatch, SessionNavigation, SessionTimer,
 // Auth context
 export const AuthContext = React.createContext<AuthContextType>({
   user: null,
-  authStatus: "pending",
-  setUser: () => {},
-  setAuthStatus: () => {},
-  cancelSessionCheck: () => {},
+  isAuthenticated: false,
+  isLoading: true,
+  signIn: async () => {},
+  signUp: async () => {},
+  exchangeToken: async () => {},
+  requestPasswordReset: async () => {},
+  updatePassword: async () => {},
+  signOut: async () => {},
 })
 
 // Exam context
