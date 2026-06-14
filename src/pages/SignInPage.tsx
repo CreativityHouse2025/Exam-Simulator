@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth, { AppApiError } from "../hooks/useAuth"
+import useAuth from "../hooks/useAuth"
+import { AppApiError } from "../errors"
 import useFormField from "../hooks/useFormField"
 import { validateEmail, validatePassword } from "../utils/authValidation"
 import { translate } from "../utils/translation"

@@ -214,7 +214,8 @@
   },
   "errors": {
     "rate-limited": "Please try again in $1 minute(s).",
-    "rate-limited-generic": "Please try again later."
+    "rate-limited-generic": "Please try again later.",
+    "session-expired": "Your session has expired. Please sign in again."
   },
   "history": {
     "title": "Attempt History",

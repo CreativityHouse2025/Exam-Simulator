@@ -46,6 +46,7 @@ const RoutesArea = styled.div`
 
 const App: React.FC = () => {
   const { settings } = useSettings()
+
   const langCode = settings.language
   const [translationVersion, setTranslationVersion] = React.useState<number>(hasTranslation() ? 1 : 0)
 
@@ -90,12 +91,12 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/signin" element={<GuestRoute><SignInPage /></GuestRoute>} />
             <Route path="/signup" element={<GuestRoute><SignUpPage /></GuestRoute>} />
-            <Route path="/profile" element={<ProtectedRoute redirectTo="/signin"><ProfilePage /></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
             <Route path="/forgot-password" element={<GuestRoute><ForgotPasswordPage /></GuestRoute>} />
             <Route path="/auth/callback" element={<AuthCallbackPage />} />
-            <Route path="/reset-password" element={<ProtectedRoute redirectTo="/signin"><ResetPasswordPage /></ProtectedRoute>} />
+            <Route path="/reset-password" element={<ProtectedRoute><ResetPasswordPage /></ProtectedRoute>} />
             {/* SessionProvider wraps /history and /app/* — both need session lifecycle methods */}
-            <Route element={<ProtectedRoute redirectTo="/signin"><SessionProvider><Outlet /></SessionProvider></ProtectedRoute>}>
+            <Route element={<ProtectedRoute><SessionProvider><Outlet /></SessionProvider></ProtectedRoute>}>
               <Route path="/history" element={<AttemptHistoryPage />} />
               <Route path="/app" element={<CoverPage />} />
               <Route path="/app/exam" element={<ExamPage />} />

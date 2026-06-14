@@ -286,10 +286,14 @@ export type UserProfile = {
 
 export type AuthContextType = {
   user: UserProfile | null
-  authStatus: AuthStatus
-  setUser: React.Dispatch<React.SetStateAction<UserProfile | null>>
-  setAuthStatus: React.Dispatch<React.SetStateAction<AuthStatus>>
-  cancelSessionCheck: () => void
+  isAuthenticated: boolean
+  isLoading: boolean
+  signIn: (email: string, password: string, force: boolean) => Promise<void>
+  signUp: (email: string, password: string, firstName: string, lastName: string) => Promise<void>
+  exchangeToken: (accessToken: string, refreshToken: string) => Promise<void>
+  requestPasswordReset: (email: string) => Promise<void>
+  updatePassword: (password: string) => Promise<void>
+  signOut: (onSuccess?: () => void) => Promise<void>
 }
 
 export type Results = {

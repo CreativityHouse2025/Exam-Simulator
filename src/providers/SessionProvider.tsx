@@ -14,7 +14,7 @@ import useSessionReducer from '../hooks/useSessionReducer'
 import { translate } from '../utils/translation'
 import { loadDomainExam, loadFullExam } from '../utils/exam'
 import { adaptAttemptToSession, adaptAttemptToRevision } from '../utils/attemptAdapter'
-import { AppApiError } from '../hooks/useAuth'
+import { AppApiError } from '../errors'
 import type { Session } from '../types'
 import useSettings from '../hooks/useSettings'
 
