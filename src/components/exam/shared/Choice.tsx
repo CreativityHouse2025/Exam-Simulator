@@ -13,7 +13,7 @@ export const ChoiceStyles = styled.div<ChoiceTextStylesProps>`
   align-items: center;
   margin-bottom: 0.5rem;
   font: 2rem 'Open Sans';
-  ${({ $disabled }) => !$disabled && 'cursor: pointer;'}
+  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
   color: ${({ $review, $correct, theme }) => ($review ? ($correct ? theme.correct : theme.grey[5]) : theme.grey[10])};
   svg {
     margin-right: 0.5rem;

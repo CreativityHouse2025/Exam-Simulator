@@ -16,6 +16,8 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview, isAn
 
   const shouldShowCorrectness = isReview || isAnswerRevealed
   const isChoiceInteractionLocked = isReview
+  const isSingleAnswer = question.answer.length === 1
+  const maxAnswersReached = selectedIds.length >= question.answer.length
 
   const onChoose = React.useCallback(
     (displayIdx: number) => {
@@ -23,22 +25,25 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview, isAn
 
       const choiceId = question.choices[displayIdx].originalIndex ?? displayIdx
       const current = selectedOriginalIndices[questionIndex] || []
-      const isAlreadySelected = current.includes(choiceId)
-      const maxChoicesReached = current.length >= question.answer.length
 
       let newValues: AnswerOfMultipleChoice
 
-      if (isAlreadySelected) {
-        newValues = current.filter((id) => id !== choiceId)
-      } else if (!maxChoicesReached) {
-        newValues = [...current, choiceId]
+      if (isSingleAnswer) {
+        newValues = [choiceId]
       } else {
-        return
+        const isAlreadySelected = current.includes(choiceId)
+        if (isAlreadySelected) {
+          newValues = current.filter((id) => id !== choiceId)
+        } else if (!maxAnswersReached) {
+          newValues = [...current, choiceId]
+        } else {
+          return
+        }
       }
 
       setAnswer(questionIndex, newValues)
     },
-    [questionIndex, selectedOriginalIndices, question.choices, question.answer.length, isChoiceInteractionLocked, setAnswer]
+    [questionIndex, selectedOriginalIndices, question.choices, question.answer.length, isChoiceInteractionLocked, setAnswer, isSingleAnswer, maxAnswersReached]
   )
 
   return (
@@ -49,11 +54,11 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({ isReview, isAn
         return (
           <Choice
             key={i}
-            singleAnswer={question.answer.length === 1}
+            singleAnswer={isSingleAnswer}
             selected={isSelected}
             review={shouldShowCorrectness}
             correct={correct}
-            disabled={isChoiceInteractionLocked || (!isSelected && selectedIds.length >= question.answer.length)}
+            disabled={isChoiceInteractionLocked || (!isSingleAnswer && !isSelected && maxAnswersReached)}
             label={formatChoiceLabel(i, langCode as LangCode)}
             text={text}
             onClick={() => onChoose(i)}
