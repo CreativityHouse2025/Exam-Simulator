@@ -26,7 +26,7 @@ import useSettings from '../hooks/useSettings'
  * The reducer is reset via RESET_SESSION when startingSession changes, replacing the old key-based
  * remount on ActiveSession.
  *
- * When no session is active, SessionControlContext exposes session: null so CoverPage and
+ * When no session is active, SessionControlContext exposes session: null so StudentDashboardPage and
  * AttemptHistoryPage can call startNewExam / resumeAttempt / startRevision before any session is mounted.
  */
 export default function SessionProvider({ children }: { children: React.ReactNode }) {

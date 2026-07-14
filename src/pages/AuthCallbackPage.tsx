@@ -35,7 +35,7 @@ const AuthCallbackPage: React.FC = () => {
     async function handleCallback(accessToken: string, refreshToken: string) {
       try {
         await exchangeToken(accessToken, refreshToken)
-        setRedirectTo(type === "recovery" ? "/reset-password" : "/app")
+        setRedirectTo(type === "recovery" ? "/reset-password" : "/")
       } catch {
         setState("error")
       }

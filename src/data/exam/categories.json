@@ -4,167 +4,191 @@
     "name": {
       "en": "Budget",
       "ar": "الميزانية"
-    }
+    },
+    "questionCount": 46
   },
   {
     "id": 2,
     "name": {
       "en": "Building Shared",
       "ar": "بناء مشترك"
-    }
+    },
+    "questionCount": 21
   },
   {
     "id": 3,
     "name": {
       "en": "Communication",
       "ar": "التواصل"
-    }
+    },
+    "questionCount": 16
   },
   {
     "id": 4,
     "name": {
       "en": "Leading A Team",
       "ar": "قيادة فريق"
-    }
+    },
+    "questionCount": 58
   },
   {
     "id": 5,
     "name": {
       "en": "Organizational Changes",
       "ar": "التغييرات التنظيمية"
-    }
+    },
+    "questionCount": 21
   },
   {
     "id": 6,
     "name": {
       "en": "Quality",
       "ar": "الجودة"
-    }
+    },
+    "questionCount": 44
   },
   {
     "id": 7,
     "name": {
       "en": "Resources",
       "ar": "الموارد"
-    }
+    },
+    "questionCount": 22
   },
   {
     "id": 8,
     "name": {
       "en": "Risk",
       "ar": "المخاطر"
-    }
+    },
+    "questionCount": 94
   },
   {
     "id": 9,
     "name": {
       "en": "Scope",
       "ar": "النطاق"
-    }
+    },
+    "questionCount": 35
   },
   {
     "id": 10,
     "name": {
       "en": "Schedule",
       "ar": "الجدول الزمني"
-    }
+    },
+    "questionCount": 47
   },
   {
     "id": 11,
     "name": {
       "en": "Stakeholders",
       "ar": "أصحاب المصلحة (المعنيين)"
-    }
+    },
+    "questionCount": 18
   },
   {
     "id": 12,
     "name": {
       "en": "Procurement",
       "ar": "المشتريات"
-    }
+    },
+    "questionCount": 50
   },
   {
     "id": 13,
     "name": {
       "en": "Compliance",
       "ar": "الامتثال"
-    }
+    },
+    "questionCount": 25
   },
   {
     "id": 14,
     "name": {
       "en": "External Changes",
       "ar": "التغييرات الخارجية"
-    }
+    },
+    "questionCount": 17
   },
   {
     "id": 15,
     "name": {
       "en": "Closure Transition",
       "ar": "الإغلاق"
-    }
+    },
+    "questionCount": 18
   },
   {
     "id": 16,
     "name": {
       "en": "Artifacts",
       "ar": "عناصر العمل"
-    }
+    },
+    "questionCount": 27
   },
   {
     "id": 17,
     "name": {
       "en": "Changes",
       "ar": "التغييرات"
-    }
+    },
+    "questionCount": 42
   },
   {
     "id": 18,
     "name": {
       "en": "Collaborating with Stakeholders",
       "ar": "التعاون مع أصحاب المصلحة"
-    }
+    },
+    "questionCount": 52
   },
   {
     "id": 19,
     "name": {
       "en": "Empowering Stakeholders",
       "ar": "تقوية أصحاب المصلحة"
-    }
+    },
+    "questionCount": 15
   },
   {
     "id": 20,
     "name": {
       "en": "Managing Conflicts",
       "ar": "إدارة النزاعات"
-    }
+    },
+    "questionCount": 17
   },
   {
     "id": 21,
     "name": {
       "en": "Methodology",
       "ar": "المنهجية"
-    }
+    },
+    "questionCount": 48
   },
   {
     "id": 22,
     "name": {
       "en": "Planning",
       "ar": "التخطيط"
-    }
+    },
+    "questionCount": 10
   },
   {
     "id": 23,
     "name": {
       "en": "Value",
       "ar": "القيمة"
-    }
+    },
+    "questionCount": 37
   },
   {
     "id": 24,
     "name": {
       "en": "Agile",
       "ar": "المنهجية المرنة (أجايل)"
-    }
+    },
+    "questionCount": 200
   }
 ]

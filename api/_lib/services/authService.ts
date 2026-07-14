@@ -196,7 +196,7 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
 
   const { data: profile, error: profileError } = await supabaseAdmin
     .from("users")
-    .select("id, first_name, last_name, expires_at")
+    .select("id, first_name, last_name, expires_at, role")
     .eq("id", userId)
     .single()
 
@@ -218,6 +218,7 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
       first_name: profile.first_name,
       last_name: profile.last_name,
       expires_at: profile.expires_at,
+      role: profile.role,
     },
     access_token: accessToken,
     refresh_token: data.session.refresh_token,
@@ -241,7 +242,7 @@ export async function confirmMagicLinkSignin(accessToken: string, refreshToken: 
 
   const { data: profile, error: profileError } = await supabaseAdmin
     .from("users")
-    .select("id, first_name, last_name, expires_at")
+    .select("id, first_name, last_name, expires_at, role")
     .eq("id", authUser.user.id)
     .single()
 
@@ -268,6 +269,7 @@ export async function confirmMagicLinkSignin(accessToken: string, refreshToken: 
       first_name: profile.first_name,
       last_name: profile.last_name,
       expires_at: profile.expires_at,
+      role: profile.role,
     },
     access_token: accessToken,
     refresh_token: refreshToken,

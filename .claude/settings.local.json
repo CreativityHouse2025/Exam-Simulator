@@ -10,7 +10,8 @@
       "WebSearch",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Moham\\\\Documents\\\\Career\\\\work-projects\\\\exam-simulator\\\\exam-sim-v2\\\\Exam-Simulator\\\\src\" -Recurse -Directory)",
       "Bash(Select-Object -ExpandProperty FullName)",
-      "Bash(Sort-Object)"
+      "Bash(Sort-Object)",
+      "mcp__plugin_figma_figma__get_design_context"
     ]
   }
 }

@@ -139,8 +139,6 @@ dist
 .vscode/
 .vercel/
 
-api/_lib/services/sessionManager.js
-
 script.js
 
 .claude/*

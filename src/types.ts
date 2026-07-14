@@ -276,12 +276,15 @@ export type ApiResponse<T> = ApiSuccess<T> | ApiError
 export type AuthStatus = "pending" | "authenticated" | "unauthenticated"
 
 // Auth types
+export type Role = "student" | "supervisor"
+
 export type UserProfile = {
   id: string
   email: string
   first_name: string
   last_name: string
   expires_at: string
+  role: Role
 }
 
 export type AuthContextType = {

@@ -1,0 +1,199 @@
+/* Tailwind without Preflight (base reset) — existing styled-components pages rely on
+   the browser's default styles, so the global reset layer is intentionally omitted.
+   The base layer below hand-picks only the Preflight rules the Tailwind pages need.
+   Each one is either overridden by an existing styled-component (which emits unlayered
+   CSS, and unlayered always beats a cascade layer) or a no-op for the old pages.
+   Do not swap this for the full Preflight import: it also sets box-sizing, img display
+   and list/table defaults that nothing in the app overrides, which would reflow every
+   existing page. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* The app is light-only, but the shadcn primitives ship `dark:` variants throughout.
+   Tailwind's default dark variant is `prefers-color-scheme: dark`, so on a machine set to
+   dark mode those variants activate and override the intended light styling. Bind the
+   variant to an explicit `.dark` class instead — nothing sets it, so `dark:` never fires. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  /* A button with no explicit background/border otherwise falls back to the UA's
+     `buttonface` fill and `outset` border, which reads as raw OS button chrome. */
+  button {
+    background-color: transparent;
+    border: 0 solid;
+  }
+
+  /* Root class for every Tailwind-built page. Tailwind's utilities assume border-box
+     sizing and a 16px font baseline, both of which Preflight would normally establish
+     globally — but a global reset would reflow the styled-components pages, which
+     default to content-box and inherit the 10px html root. Scoping it to this class
+     gives the Tailwind pages the environment they expect without touching the rest. */
+  .tailwind-page,
+  .tailwind-page *,
+  .tailwind-page ::before,
+  .tailwind-page ::after {
+    box-sizing: border-box;
+  }
+
+  .tailwind-page {
+    font-size: var(--text-base);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+:root {
+  --primary: #b5965d;
+  --primary-foreground: #ffffff;
+  --secondary: #593752;
+  --secondary-foreground: #ffffff;
+  --tertiary: #301e2c;
+  --quatro: #f8e3e0;
+  --black: #333333;
+  --white: #ffffff;
+  --destructive: #f44336;
+
+  --background: #ffffff;
+  --foreground: #333333;
+  --accent: #f2f2f2;
+  --accent-foreground: #333333;
+  --border: #d9d8d8;
+  --input: #d9d8d8;
+  --ring: #b5965d;
+  --card: #ffffff;
+  --card-foreground: #333333;
+  --muted: #e6e5e5;
+  --muted-foreground: #817e7e;
+
+  --grey-50: #fafafa;
+  --grey-100: #f2f2f2;
+  --grey-200: #e6e5e5;
+  --grey-300: #d9d8d8;
+  --grey-400: #cdcccb;
+  --grey-500: #c0bfbf;
+  --grey-600: #b3b2b2;
+  --grey-700: #a7a5a5;
+  --grey-800: #9a9898;
+  --grey-900: #817e7e;
+}
+
+/* Tailwind's default scale is authored in rem, but GlobalStyle sets html to a 10px root
+   font-size (theme.fontSize in src/constants.ts), which silently renders every Tailwind
+   utility at 62.5% of its intended size. The 10px root cannot be changed — ~320 rem values
+   across the existing styled-components are authored against it. Restating the scale in px
+   makes the Tailwind utilities root-agnostic instead.
+   Breakpoints are intentionally left in rem: rem inside a media query resolves against the
+   browser's initial 16px, not the html font-size, so they were never affected. */
+@theme {
+  --spacing: 4px;
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 36px;
+  --text-5xl: 48px;
+  --text-6xl: 60px;
+  --text-7xl: 72px;
+  --text-8xl: 96px;
+  --text-9xl: 128px;
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --radius-4xl: 32px;
+
+  --container-3xs: 256px;
+  --container-2xs: 288px;
+  --container-xs: 320px;
+  --container-sm: 384px;
+  --container-md: 448px;
+  --container-lg: 512px;
+  --container-xl: 576px;
+  --container-2xl: 672px;
+  --container-3xl: 768px;
+  --container-4xl: 896px;
+  --container-5xl: 1024px;
+  --container-6xl: 1152px;
+  --container-7xl: 1280px;
+}
+
+@theme inline {
+  /* App font — keep in sync with theme.fontFamily in src/constants.ts */
+  --font-sans: "Open Sans", sans-serif;
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-tertiary: var(--tertiary);
+  --color-quatro: var(--quatro);
+  --color-black: var(--black);
+  --color-white: var(--white);
+  --color-destructive: var(--destructive);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-grey-50: var(--grey-50);
+  --color-grey-100: var(--grey-100);
+  --color-grey-200: var(--grey-200);
+  --color-grey-300: var(--grey-300);
+  --color-grey-400: var(--grey-400);
+  --color-grey-500: var(--grey-500);
+  --color-grey-600: var(--grey-600);
+  --color-grey-700: var(--grey-700);
+  --color-grey-800: var(--grey-800);
+  --color-grey-900: var(--grey-900);
+}

@@ -111,12 +111,15 @@ export type SigninRequestBody = {
   force: boolean
 }
 
+export type Role = "student" | "supervisor"
+
 export type UserProfile = {
   id: string
   email: string
   first_name: string
   last_name: string
   expires_at: string
+  role: Role
 }
 
 export type SigninResult = {

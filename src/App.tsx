@@ -13,12 +13,16 @@ import AuthCallbackPage from "./pages/AuthCallbackPage"
 import ForgotPasswordPage from "./pages/ForgotPasswordPage"
 import ResetPasswordPage from "./pages/ResetPasswordPage"
 import AttemptHistoryPage from "./pages/AttemptHistoryPage"
-import CoverPage from "./pages/CoverPage"
+import StudentDashboardPage from "./pages/StudentDashboardPage"
+import SupervisorDashboardPage from "./pages/SupervisorDashboardPage"
+import ExamsListPage from "./pages/exams-list"
 import { hasTranslation, setTranslation } from "./utils/translation"
 import { LANGUAGES } from "./constants"
 import useSettings from "./hooks/useSettings"
+import useAuth from "./hooks/useAuth"
 import type { LangCode } from "./types"
 import SessionProvider from "./providers/SessionProvider"
+import RoleGuard from "./guards/RoleGuard"
 import ExamPage from "./pages/ExamPage"
 
 const AppBackground = styled.div`
@@ -46,6 +50,7 @@ const RoutesArea = styled.div`
 
 const App: React.FC = () => {
   const { settings } = useSettings()
+  const { user } = useAuth()
 
   const langCode = settings.language
   const [translationVersion, setTranslationVersion] = React.useState<number>(hasTranslation() ? 1 : 0)
@@ -89,18 +94,40 @@ const App: React.FC = () => {
         <Header />
         <RoutesArea>
           <Routes>
+            {/* Public */}
             <Route path="/signin" element={<GuestRoute><SignInPage /></GuestRoute>} />
             <Route path="/signup" element={<GuestRoute><SignUpPage /></GuestRoute>} />
-            <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
             <Route path="/forgot-password" element={<GuestRoute><ForgotPasswordPage /></GuestRoute>} />
             <Route path="/auth/callback" element={<AuthCallbackPage />} />
-            <Route path="/reset-password" element={<ProtectedRoute><ResetPasswordPage /></ProtectedRoute>} />
-            {/* SessionProvider wraps /history and /app/* — both need session lifecycle methods */}
-            <Route element={<ProtectedRoute><SessionProvider><Outlet /></SessionProvider></ProtectedRoute>}>
-              <Route path="/history" element={<AttemptHistoryPage />} />
-              <Route path="/app" element={<CoverPage />} />
-              <Route path="/app/exam" element={<ExamPage />} />
-              <Route path="*" element={<Navigate to="/app" replace />} />
+
+            {/* Protected */}
+            <Route element={<ProtectedRoute><Outlet /></ProtectedRoute>}>
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="reset-password" element={<ResetPasswordPage />} />
+
+              {user?.role === "supervisor" ? (
+                <>
+                  <Route index element={<SupervisorDashboardPage />} />
+                  <Route
+                    path="exams"
+                    element={
+                      <RoleGuard allowedRoles={["supervisor"]}>
+                        <ExamsListPage />
+                      </RoleGuard>
+                    }
+                  />
+                </>
+              ) : (
+                // SessionProvider is student-only, and must stay a single stable instance across
+                // "/", "/history", and "/exam" so a started session survives navigating to "/exam".
+                <Route element={<SessionProvider><Outlet /></SessionProvider>}>
+                  <Route index element={<StudentDashboardPage />} />
+                  <Route path="history" element={<AttemptHistoryPage />} />
+                  <Route path="exam" element={<ExamPage />} />
+                </Route>
+              )}
+
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
           </Routes>
         </RoutesArea>

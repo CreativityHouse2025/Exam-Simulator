@@ -71,7 +71,7 @@ const SignInPage: React.FC = () => {
     try {
       // if session conflict is true and user still wants to sign in, then force will be true
       await signIn(email.value, password.value, sessionConflict)
-      navigate("/app")
+      navigate("/")
     } catch (err) {
       if (err instanceof AppApiError && err.code === "SESSION_CONFLICT") {
         setSessionConflict(true)

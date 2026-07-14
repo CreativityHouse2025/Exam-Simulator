@@ -29,7 +29,7 @@ export default function FullExamProvider() {
   const attemptId = searchParams.get('id')
 
   React.useEffect(() => {
-    if (!attemptId) navigate('/app')
+    if (!attemptId) navigate('/')
   }, [])
 
   const { session } = useSessionControl()
