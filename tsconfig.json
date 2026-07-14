@@ -1,16 +1,12 @@
 {
+  "files": [],
   "compilerOptions": {
-    "strict": true,
-    "noEmit": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.api.json" }
-  ],
-  "files": []
+  ]
 }

@@ -85,7 +85,7 @@ const ResetPasswordPage: React.FC = () => {
   return (
     <PageWrapper>
       <ResetCard>
-        <BackButton title={t.backHome} onClick={() => navigate("/app")} aria-label={t.backHome}>
+        <BackButton title={t.backHome} onClick={() => navigate("/")} aria-label={t.backHome}>
           <ArrowBack size={30} />
         </BackButton>
         <PageLogo src={Logo} alt={t.logoAlt} />
@@ -122,7 +122,7 @@ const ResetPasswordPage: React.FC = () => {
         </form>
 
         <CardFooter>
-          <NavLink to="/app">{t.backHome}</NavLink>
+          <NavLink to="/">{t.backHome}</NavLink>
         </CardFooter>
       </ResetCard>
     </PageWrapper>

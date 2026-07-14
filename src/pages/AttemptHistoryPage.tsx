@@ -107,21 +107,21 @@ const AttemptHistoryPage: React.FC = () => {
   const handleContinue = async (id: string) => {
     setIsStarting(true)
     const attemptId = await resumeAttempt(id)
-    if (attemptId) navigate(`/app/exam?id=${attemptId}`)
+    if (attemptId) navigate(`/exam?id=${attemptId}`)
     else setIsStarting(false)
   }
 
   const handleReview = async (id: string) => {
     setIsStarting(true)
     const attemptId = await resumeAttempt(id)
-    if (attemptId) navigate(`/app/exam?id=${attemptId}`)
+    if (attemptId) navigate(`/exam?id=${attemptId}`)
     else setIsStarting(false)
   }
 
   const handleRetry = async (id: string) => {
     setIsStarting(true)
     const attemptId = await startRevision(id)
-    if (attemptId) navigate(`/app/exam?id=${attemptId}&revision=1`)
+    if (attemptId) navigate(`/exam?id=${attemptId}&revision=1`)
     else setIsStarting(false)
   }
 

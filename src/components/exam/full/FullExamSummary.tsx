@@ -163,7 +163,7 @@ const FullExamSummary: React.FC = () => {
             className="no-select"
             onClick={async () => {
               const id = await startRevision(sessionId)
-              if (id) navigate(`/app/exam?id=${id}&revision=1`)
+              if (id) navigate(`/exam?id=${id}&revision=1`)
             }}
           >
             {translated.retake}

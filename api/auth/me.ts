@@ -10,7 +10,7 @@ export const GET = withErrorHandler(
   withAuth(async (_request: Request, authUser, cookieHeaders) => {
     const { data: user, error } = await supabaseAdmin
       .from("users")
-      .select("id, first_name, last_name, expires_at")
+      .select("id, first_name, last_name, expires_at, role")
       .eq("id", authUser.id)
       .single()
 
@@ -24,6 +24,7 @@ export const GET = withErrorHandler(
       first_name: user.first_name,
       last_name: user.last_name,
       expires_at: user.expires_at,
+      role: user.role,
     }
 
     return successResponse({ user: profile }, 200, cookieHeaders)

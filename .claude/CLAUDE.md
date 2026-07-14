@@ -137,10 +137,12 @@ All paths that create a row in `auth.sessions`:
 
 Project uses split tsconfig with project references to separate frontend and backend environments:
 
-- `tsconfig.json` - Root config with shared options, references `app` and `api`
+- `tsconfig.json` - Solution file only (`files: []`), references `app` and `api`. No compiler options — referenced projects don't inherit them
 - `tsconfig.app.json` - Frontend (`src/`): `bundler` module resolution, DOM types, JSX, `noUnusedLocals`/`noUnusedParameters` enabled
-- `tsconfig.api.json` - Vercel serverless (`api/`): `Node16` module resolution, no DOM types. Relative imports must use `.js` extensions (Node ESM requirement)
-- `tsconfig.vite.json` - Vite config only: `bundler` resolution, `allowJs`, `noEmit`. Not a project reference (checked separately via `tsc -p`)
+- `tsconfig.api.json` - Vercel serverless (`api/`): `NodeNext` module resolution, no DOM types. Relative imports must use `.js` extensions (Node ESM requirement)
+- `tsconfig.node.json` - `vite.config.ts` only: `bundler` resolution, `noEmit`. Not a project reference (checked separately via `tsc -p`)
+
+All projects are type-check only (`noEmit: true`, no `composite`); `tsc --build` writes only `.tsbuildinfo` files to `node_modules/.tmp/`. Nothing is emitted to `dist/` — that directory belongs to `vite build` alone.
 
 ## Code Style
 
@@ -152,6 +154,67 @@ Project uses split tsconfig with project references to separate frontend and bac
 - Should use the theme defined in the constants.ts file for creating components
 - Always document newly created major components with JSDoc comments
 - Errors throwed from backend are parsed in the frontend using the error code
+
+## Tailwind + styled-components Coexistence (read before touching any Tailwind UI)
+
+New UI (supervisor pages, shadcn primitives) is Tailwind v4. Old UI is styled-components. Both are live
+in the same app, which forces two non-obvious constraints. Nearly every "Tailwind looks broken" bug in
+this codebase traces back to one of them.
+
+### 1. Preflight is OFF, and always stays off
+
+`src/index.css` imports only `tailwindcss/theme.css` and `tailwindcss/utilities.css` — never
+`tailwindcss/preflight.css`. Preflight sets `box-sizing`, `img { display: block }`, and list/table/border
+defaults that **nothing in the styled-components pages overrides**, so enabling it globally reflows the
+entire existing app.
+
+The cost: browser UA defaults leak into Tailwind markup. `src/index.css` has a hand-written `@layer base`
+replacing only the Preflight rules the Tailwind pages actually need. Each rule there is safe because it is
+either overridden by an existing styled-component or a no-op for the old pages.
+
+**Cascade layers are what makes this safe, and the rule is per-declaration, not per-file:** styled-components
+emit *unlayered* CSS, which beats *any* cascade layer regardless of specificity. So a layered `base` rule can
+only ever affect a property that no styled-component declares. Before adding anything to `@layer base`, confirm
+the property is already declared by the old components (or is inert for them). That is exactly why full
+Preflight is unsafe and the hand-picked subset is not.
+
+Symptoms already hit and fixed — recognise these rather than re-diagnosing them:
+- **Serif text / underlined links** → no `body { font-family }`, no `a { text-decoration: inherit }`.
+- **Buttons look like raw OS chrome** → UA `background-color: buttonface` + `outset` border.
+- **An `outline` button has a heavy near-black border** → Tailwind defaults an uncoloured border to
+  `currentColor`. Always pair `border` with an explicit colour (e.g. `border-border`).
+- **Content overflows its container** → elements default to `content-box`, but every Tailwind utility
+  assumes `border-box`.
+
+### 2. Every Tailwind page root needs `.tailwind-page`
+
+`GlobalStyle` (`src/main.tsx`) sets `html { font-size: 10px }` (`theme.fontSize`), and ~320 `rem` values
+across the styled-components are authored against that root. It cannot be changed to 16px.
+
+Two consequences, both already handled — do not "fix" them again:
+- Tailwind's default scale is `rem`-based and would render at 62.5%. `src/index.css` restates
+  `--spacing`, `--text-*`, `--radius-*` and `--container-*` in **px** so the utilities are root-agnostic.
+  `--breakpoint-*` is deliberately left in `rem`: inside a media query, `rem` resolves against the browser's
+  initial 16px, not `html`, so breakpoints were never affected.
+- The `.tailwind-page` class (defined in `@layer base`) applies `box-sizing: border-box` to a subtree and
+  sets a 16px font baseline. **Put it on the root element of every Tailwind-built page.** Without it, unsized
+  text inherits 10px and padded elements overflow.
+
+New sizing should use the standard scale (`p-4`, `text-sm`). Do not hand-write `rem` values
+(`p-[1.2rem]`) — those bypass the px scale and silently resolve against the 10px root.
+
+### 3. `dark:` variants never fire
+
+The app is light-only, but the shadcn primitives ship `dark:` classes throughout. Tailwind binds `dark:` to
+`prefers-color-scheme: dark` by default, so on a dark-mode machine those variants activate and override the
+intended light styling — a bug invisible to anyone developing in light mode. `src/index.css` rebinds it:
+`@custom-variant dark (&:where(.dark, .dark *))`. Nothing sets `.dark`, so `dark:` is inert. Leave it that way.
+
+### 4. shadcn primitives
+
+Pull them with the real CLI (`npx shadcn add <name>`), never hand-author them. Prefer fixing a shared defect
+in the primitive itself (as with `outline`'s missing `border-border`) over patching each call site. Icons in
+new UI use `lucide-react`; the existing `@styled-icons/material` usage in old UI stays as-is.
 
 ## Workflow
 - After completing any coding task, update `todo.md` in the project root with the next steps if applicable. Keep entries concise and actionable.
@@ -174,7 +237,6 @@ Minimum code that solves the problem. Nothing speculative.
 
 No features beyond what was asked.
 No abstractions for single-use code.
-No "flexibility" or "configurability" that wasn't requested.
 No error handling for impossible scenarios.
 If you write 200 lines and it could be 50, rewrite it.
 Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.

@@ -112,7 +112,7 @@ const ProfilePage: React.FC = () => {
   return (
     <PageWrapper>
       <ProfileCard>
-        <BackButton title={t.backHome} onClick={() => navigate("/app")} aria-label={t.backHome}>
+        <BackButton title={t.backHome} onClick={() => navigate("/")} aria-label={t.backHome}>
           <ArrowBack size={30} />
         </BackButton>
         <AvatarCircle>{initials}</AvatarCircle>
@@ -132,7 +132,7 @@ const ProfilePage: React.FC = () => {
         </ActionButton>
 
         <CardFooter>
-          <NavLink to="/app">{t.backHome}</NavLink>
+          <NavLink to="/">{t.backHome}</NavLink>
         </CardFooter>
       </ProfileCard>
     </PageWrapper>
