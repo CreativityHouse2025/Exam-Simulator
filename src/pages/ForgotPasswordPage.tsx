@@ -24,7 +24,7 @@ const ForgotPasswordPage: React.FC = () => {
   const { requestPasswordReset } = useAuth()
 
   const t = {
-    logoAlt: translate('cover.logo-alt'),
+    logoAlt: translate('common.logo-alt'),
     title: translate('auth.forgot-password.title'),
     subtitle: translate('auth.forgot-password.subtitle'),
     email: translate('auth.fields.email'),

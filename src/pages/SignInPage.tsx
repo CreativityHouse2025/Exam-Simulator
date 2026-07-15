@@ -34,7 +34,7 @@ const SignInPage: React.FC = () => {
   const [sessionConflict, setSessionConflict] = useState(false)
 
   const t = {
-    logoAlt: translate('cover.logo-alt'),
+    logoAlt: translate('common.logo-alt'),
     title: translate('auth.signin.title'),
     subtitle: translate('auth.signin.subtitle'),
     email: translate('auth.fields.email'),

@@ -18,7 +18,7 @@ const Dashboard = ({ subtitle, children }: DashboardProps) => {
       <img
         id="image"
         src={Logo}
-        alt={translate("cover.logo-alt")}
+        alt={translate("common.logo-alt")}
         className="m-1 max-h-[25vh] animate-[fadeIn_0.5s_ease-out_0s_both] border border-grey-200 p-2 md:m-2.5 md:max-h-[40vh] md:p-2.5"
       />
 

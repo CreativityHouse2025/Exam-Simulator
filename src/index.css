@@ -87,6 +87,7 @@
   --black: #333333;
   --white: #ffffff;
   --destructive: #f44336;
+  --correct: #4caf50;
 
   --background: #ffffff;
   --foreground: #333333;
@@ -173,6 +174,7 @@
   --color-black: var(--black);
   --color-white: var(--white);
   --color-destructive: var(--destructive);
+  --color-correct: var(--correct);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);

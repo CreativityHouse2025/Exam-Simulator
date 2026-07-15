@@ -15,7 +15,8 @@ import ResetPasswordPage from "./pages/ResetPasswordPage"
 import AttemptHistoryPage from "./pages/AttemptHistoryPage"
 import StudentDashboardPage from "./pages/StudentDashboardPage"
 import SupervisorDashboardPage from "./pages/SupervisorDashboardPage"
-import ExamsListPage from "./pages/exams-list"
+import ExamLibraryPage from "./pages/exam-library"
+import ExamDetailPage from "./pages/exam-detail"
 import { hasTranslation, setTranslation } from "./utils/translation"
 import { LANGUAGES } from "./constants"
 import useSettings from "./hooks/useSettings"
@@ -112,7 +113,15 @@ const App: React.FC = () => {
                     path="exams"
                     element={
                       <RoleGuard allowedRoles={["supervisor"]}>
-                        <ExamsListPage />
+                        <ExamLibraryPage />
+                      </RoleGuard>
+                    }
+                  />
+                  <Route
+                    path="exams/:type/:id"
+                    element={
+                      <RoleGuard allowedRoles={["supervisor"]}>
+                        <ExamDetailPage />
                       </RoleGuard>
                     }
                   />

@@ -4,19 +4,26 @@ import { BookOpen, Users } from "lucide-react"
 import Dashboard from "@/components/dashboard/Dashboard"
 import DashboardButton from "@/components/dashboard/DashboardButton"
 import DashboardButtonRow from "@/components/dashboard/DashboardButtonRow"
+import { translate } from "@/utils/translation"
 
 /** Supervisor dashboard — view exams in the system, or search for a student (search is a future spec, stub for now). */
 const SupervisorDashboardPage: React.FC = () => {
   const navigate = useNavigate()
 
+  const t = {
+    subtitle: translate("dashboard.supervisor.subtitle"),
+    searchStudents: translate("dashboard.supervisor.search-students"),
+    viewExams: translate("dashboard.supervisor.view-exams")
+  }
+
   return (
-    <Dashboard subtitle="Supervisor Portal — Student Management">
+    <Dashboard subtitle={t.subtitle}>
       <DashboardButtonRow>
         <DashboardButton
           className="no-select"
           title="Search Students"
           icon={<Users size={22} />}
-          label="Search Students"
+          label={t.searchStudents}
         />
 
         <DashboardButton
@@ -24,7 +31,7 @@ const SupervisorDashboardPage: React.FC = () => {
           className="no-select"
           title="View Exams"
           icon={<BookOpen size={22} />}
-          label="View Exams"
+          label={t.viewExams}
           onClick={() => navigate("/exams")}
         />
       </DashboardButtonRow>
