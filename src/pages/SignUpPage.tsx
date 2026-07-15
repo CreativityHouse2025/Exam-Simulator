@@ -39,7 +39,7 @@ const SignUpPage: React.FC = () => {
   const [success, setSuccess] = useState(false)
 
   const t = {
-    logoAlt: translate('cover.logo-alt'),
+    logoAlt: translate('common.logo-alt'),
     title: translate('auth.signup.title'),
     subtitle: translate('auth.signup.subtitle'),
     firstName: translate('auth.fields.first-name'),

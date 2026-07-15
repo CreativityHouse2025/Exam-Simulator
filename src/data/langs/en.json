@@ -3,13 +3,10 @@
     "title": "Creativity House",
     "description": "Situational Questions in Professional Project Management"
   },
+  "common": {
+    "logo-alt": "Logo"
+  },
   "cover": {
-    "logo-alt": "Logo",
-    "continue": "Continue Last Exam",
-    "new": "Start a Full Exam",
-    "mini": "Start a Domain Exam",
-    "select-category": "Choose a question category",
-    "select-fullexam": "Choose an exam to start",
     "general": "General",
     "random": "Random Exam",
     "invalid-exam-message": "Cannot start the exam due to missing questions. Please choose another one."
@@ -261,6 +258,61 @@
       "server-unknown": "An unexpected error occurred. Please try again.",
       "no-attempt-id": "No exam session found. Please start a new exam from the home page.",
       "no-mistakes": "You have no mistakes to revise."
+    }
+  },
+  "dashboard": {
+    "student": {
+      "continue": "Continue Last Exam",
+      "new": "Start a Full Exam",
+      "mini": "Start a Domain Exam",
+      "select-category": "Choose a question category",
+      "select-fullexam": "Choose an exam to start"
+    },
+    "supervisor": {
+      "subtitle": "Supervisor Portal - Exam Simulator",
+      "search-students": "Search Students",
+      "view-exams": "View Exams"
+    }
+  },
+  "exam": {
+    "export": "Export CSV",
+    "type": {
+      "full": "Full Exam",
+      "domain": "Domain"
+    },
+    "stats": {
+      "duration": "$1m",
+      "questions": "$1 questions",
+      "pass": "Pass: $1%"
+    },
+    "library": {
+      "back": "Back to Home",
+      "title": "PMP Exam Library",
+      "subtitle": "Browse all available exams. Select an exam to view its questions",
+      "search": "Search exams by title…",
+      "empty": "No exams match your search",
+      "view-questions": "View Questions",
+      "tabs": {
+        "all": "All Exams",
+        "full": "Full",
+        "domain": "Domain"
+      }
+    },
+    "details": {
+      "back": "Back to Exam Library",
+      "not-found": "This exam could not be found.",
+      "no-questions": "This exam has no available questions.",
+      "search": "Search question text…",
+      "expand-all": "Expand all",
+      "collapse-all": "Collapse all",
+      "empty-search": "No questions match your search",
+      "choices": "Choices",
+      "pager": {
+        "previous": "Previous",
+        "next": "Next",
+        "page": "Page",
+        "section": "Section"
+      }
     }
   }
 }

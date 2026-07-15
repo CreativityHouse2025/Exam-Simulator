@@ -22,7 +22,7 @@ ACCEPTANCE CRITERIA:
    - Data source is the existing static JSON only (`full-exams.json`, `categories.json`, `exam-types.json` for pass rates/duration, and the per-exam question files under `src/data/exam/full|domain/<lang>/<id>.json`). No backend/API involvement, consistent with OUT OF SCOPE.
    - The exams-list page only ever loads the 3 light config files (`categories.json`, `full-exams.json`, `exam-types.json`) — it never touches per-exam question data. Opening a specific exam (ExamDetailPage) is the only place a question-data file is loaded, matching AC8.
 3. Both pages should include the functionality to export list of exams/questions as a CSV.
-   - Stub only for this iteration: render the export button, no export logic wired up yet.
+   - Stub only for this iteration: the export button is present in the markup but kept hidden (`hidden` class) with no export logic wired up yet — unhidden once CSV export is implemented.
 4. Questions page must show 10 questions at a time.
 5. Both pages should have a search bar on top, can search for an exam title or a question's text
    - Exams-list search bar: matches exam title only (it only has the 3 light files loaded — no question text available to search there).
@@ -37,7 +37,7 @@ ACCEPTANCE CRITERIA:
    - Exam/category/question content already exists bilingually in the JSON data (e.g. `categories.json` has `en`/`ar` names). Display that content in whatever language `settings.language` is currently set to — no reason to withhold data that's already there.
    - Page layout/direction follows `settings.language` (`dir="ltr"`/`dir="rtl"`) like the rest of the app — only the copy stays hardcoded English for now, per general constraint 2 below.
 8. Should optimize for best performance since we are loading a file each time a supervisor opens a new exam.
-   - Cache loaded exam question data in memory for the session using `@tanstack/react-query` (already a project dependency), keyed by `type`+`id`. Re-opening the same exam within the same supervisor session should not re-trigger the dynamic import. Cache does not need to persist across page refresh/logout.
+   - Static JSON bundles are already cached by the JS module system once dynamically imported (`import(...)`). Load via `loadFullExam`/`loadDomainExam`, keyed by `type`+`id`. Re-opening the same exam within the same supervisor session should not re-trigger the dynamic import for that module.
 
 GENERAL CONSTRAINTS:
 1. All new components should use shadcn + tailwind, this is a new package introduce to this system, new components should build using it (while still customizing to match the existing theme).

@@ -59,7 +59,7 @@ const StudentDashboardPage: React.FC = () => {
           className="no-select"
           title="Start a new exam"
           icon={<Assignment size={22} />}
-          label={translate("cover.new")}
+          label={translate("dashboard.student.new")}
           onClick={() => setFullExamDropdown(true)}
         />
 
@@ -68,7 +68,7 @@ const StudentDashboardPage: React.FC = () => {
           className="no-select"
           title="Start a mini-exam"
           icon={<ViewModule size={22} />}
-          label={translate("cover.mini")}
+          label={translate("dashboard.student.mini")}
           onClick={() => setCategoryDropdown(true)}
         />
       </DashboardButtonRow>
@@ -79,7 +79,7 @@ const StudentDashboardPage: React.FC = () => {
           className="no-select"
           title="Continue last exam"
           icon={<PlayArrow size={22} />}
-          label={translate("cover.continue")}
+          label={translate("dashboard.student.continue")}
           onClick={handleContinue}
         />
       )}
@@ -88,14 +88,14 @@ const StudentDashboardPage: React.FC = () => {
         open={fullExamDropdown}
         setOpen={setFullExamDropdown}
         buttonRef={fullButtonRef}
-        title={translate("cover.select-fullexam")}
+        title={translate("dashboard.student.select-fullexam")}
         onSelect={handleFullExam}
       />
       <CategoryDropdown
         open={categoryDropdown}
         setOpen={setCategoryDropdown}
         buttonRef={miniButtonRef}
-        title={translate("cover.select-category")}
+        title={translate("dashboard.student.select-category")}
         onSelect={handleDomainExam}
       />
     </Dashboard>

@@ -9,7 +9,7 @@ type SearchBarProps = {
   className?: string
 }
 
-/** Shared search input — exams-list filters by title, exam-detail filters by question text. */
+/** Shared search input — exam-library filters by title, exam-detail filters by question text. */
 const SearchBar = ({ value, onChange, placeholder, className }: SearchBarProps) => {
   return (
     <div className={cn("relative", className)}>
@@ -28,7 +28,7 @@ const SearchBar = ({ value, onChange, placeholder, className }: SearchBarProps) 
           type="button"
           onClick={() => onChange("")}
           aria-label="Clear search"
-          className="absolute end-3 top-1/2 -translate-y-1/2 text-grey-800 hover:text-black"
+          className="absolute inset-e-3 top-1/2 -translate-y-1/2 text-grey-800 hover:text-black"
         >
           <X className="size-4" />
         </button>

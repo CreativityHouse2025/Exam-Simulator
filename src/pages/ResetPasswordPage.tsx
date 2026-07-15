@@ -34,7 +34,7 @@ const ResetPasswordPage: React.FC = () => {
   const { showToast } = useToast()
 
   const t = {
-    logoAlt: translate('cover.logo-alt'),
+    logoAlt: translate('common.logo-alt'),
     title: translate('auth.forgot-password.title'),
     subtitle: translate('auth.reset-password.subtitle'),
     newPassword: translate('auth.reset-password.new-password'),
