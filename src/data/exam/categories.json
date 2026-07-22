@@ -1,5 +1,13 @@
 [
   {
+    "id": 25,
+    "name": {
+      "en": "Case Studies",
+      "ar": "دراسات حالة"
+    },
+    "questionCount": 18
+  },
+  {
     "id": 1,
     "name": {
       "en": "Budget",
