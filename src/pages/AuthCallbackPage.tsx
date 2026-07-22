@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import { translate } from "../utils/translation"
+import { ROUTES } from "../config/routes"
 import Loading from "../components/Loading"
 import { PageWrapper, Card, FormError, NavLink, CardFooter } from "../components/SharedStyles"
 
@@ -60,7 +61,7 @@ const AuthCallbackPage: React.FC = () => {
       <Card>
         <FormError>{translate("auth.callback.error")}</FormError>
         <CardFooter>
-          <NavLink to="/signin">{translate("auth.callback.go-to-signin")}</NavLink>
+          <NavLink to={ROUTES.signIn}>{translate("auth.callback.go-to-signin")}</NavLink>
         </CardFooter>
       </Card>
     </PageWrapper>

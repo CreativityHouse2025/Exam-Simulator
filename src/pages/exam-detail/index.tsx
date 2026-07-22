@@ -14,6 +14,7 @@ import Pager from "./Pager"
 import BackButton from "@/components/BackButton"
 import { loadFullExam, loadDomainExam } from "@/utils/exam"
 import { translate } from "@/utils/translation"
+import { ROUTES } from "@/config/routes"
 import useSettings from "@/hooks/useSettings"
 import type { Question } from "@/types"
 import type { OpenState, QuestionSection, SectionOpen } from "./types"
@@ -131,7 +132,7 @@ const ExamDetailPage: React.FC = () => {
     pagerPage: translate("exam.details.pager.page")
   }
 
-  const backButton = <BackButton to="/exams" text={t.back} />
+  const backButton = <BackButton to={ROUTES.exams} text={t.back} />
 
   if (!validId) {
     return (

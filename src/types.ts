@@ -276,19 +276,19 @@ export type ApiResponse<T> = ApiSuccess<T> | ApiError
 export type AuthStatus = "pending" | "authenticated" | "unauthenticated"
 
 // Auth types
-export type Role = "student" | "supervisor"
+export type Role = "student" | "supervisor" | "guest"
 
-export type UserProfile = {
+export type User = {
   id: string
   email: string
   first_name: string
   last_name: string
   expires_at: string
-  role: Role
+  role: Exclude<Role, "guest">
 }
 
 export type AuthContextType = {
-  user: UserProfile | null
+  user: User | null
   isAuthenticated: boolean
   isLoading: boolean
   signIn: (email: string, password: string, force: boolean) => Promise<void>

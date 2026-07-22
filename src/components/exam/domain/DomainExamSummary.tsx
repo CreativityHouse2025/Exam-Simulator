@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import SummaryRow from '../shared/SummaryRow'
 import { formatDate, formatTimer } from '../../../utils/format'
 import { translate } from '../../../utils/translation'
+import { ROUTES } from '../../../config/routes'
 import useResults from '../../../hooks/useResults'
 
 const TitleStyles = styled.div<ThemedStyles>`
@@ -122,7 +123,7 @@ const DomainExamSummary: React.FC = () => {
       </div>
 
       <ButtonsContainer>
-        <RestartButton id="restart-button" title="Homepage" className="no-select" onClick={() => navigate('/')}>
+        <RestartButton id="restart-button" title="Homepage" className="no-select" onClick={() => navigate(ROUTES.home)}>
           {translated.home}
         </RestartButton>
       </ButtonsContainer>

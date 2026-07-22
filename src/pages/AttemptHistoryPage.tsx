@@ -5,6 +5,7 @@ import { Refresh } from "@styled-icons/material/Refresh"
 import AttemptHistoryTable from "../components/attempt-history/AttemptHistoryTable"
 import Loading from "../components/Loading"
 import { translate } from "../utils/translation"
+import { ROUTES } from "../config/routes"
 import type { ThemedStyles } from "../types"
 import { useQuery } from "@tanstack/react-query"
 import { createAttemptsQueryOptions } from "../utils/queryOptions"
@@ -107,21 +108,21 @@ const AttemptHistoryPage: React.FC = () => {
   const handleContinue = async (id: string) => {
     setIsStarting(true)
     const attemptId = await resumeAttempt(id)
-    if (attemptId) navigate(`/exam?id=${attemptId}`)
+    if (attemptId) navigate(ROUTES.exam.to(attemptId))
     else setIsStarting(false)
   }
 
   const handleReview = async (id: string) => {
     setIsStarting(true)
     const attemptId = await resumeAttempt(id)
-    if (attemptId) navigate(`/exam?id=${attemptId}`)
+    if (attemptId) navigate(ROUTES.exam.to(attemptId))
     else setIsStarting(false)
   }
 
   const handleRetry = async (id: string) => {
     setIsStarting(true)
     const attemptId = await startRevision(id)
-    if (attemptId) navigate(`/exam?id=${attemptId}&revision=1`)
+    if (attemptId) navigate(ROUTES.exam.to(attemptId, true))
     else setIsStarting(false)
   }
 

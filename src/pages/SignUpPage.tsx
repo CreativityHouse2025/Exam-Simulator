@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
 import { validateEmail, validatePassword, validateConfirmPassword, validateRequired, validateName } from "../utils/authValidation"
 import { translate } from "../utils/translation"
+import { ROUTES } from "../config/routes"
 // @ts-expect-error
 import Logo from "../assets/logo.png"
 import { ConfirmationCard, EmailField, PasswordField } from "../components/Auth"
@@ -197,7 +198,7 @@ const SignUpPage: React.FC = () => {
 
         <AuthSwitchBanner>
           <span>{t.hasAccount}</span>
-          <NavLink to="/signin">{t.signinLink}</NavLink>
+          <NavLink to={ROUTES.signIn}>{t.signinLink}</NavLink>
         </AuthSwitchBanner>
       </Card>
     </PageWrapper>

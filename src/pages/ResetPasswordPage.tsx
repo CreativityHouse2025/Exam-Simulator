@@ -6,6 +6,7 @@ import useToast from "../hooks/useToast"
 import useFormField from "../hooks/useFormField"
 import { validatePassword, validateConfirmPassword } from "../utils/authValidation"
 import { translate } from "../utils/translation"
+import { ROUTES } from "../config/routes"
 import styled from "styled-components"
 // @ts-expect-error
 import Logo from "../assets/logo.png"
@@ -85,7 +86,7 @@ const ResetPasswordPage: React.FC = () => {
   return (
     <PageWrapper>
       <ResetCard>
-        <BackButton title={t.backHome} onClick={() => navigate("/")} aria-label={t.backHome}>
+        <BackButton title="Back to Profile" onClick={() => navigate(ROUTES.profile)} aria-label="Back to Profile">
           <ArrowBack size={30} />
         </BackButton>
         <PageLogo src={Logo} alt={t.logoAlt} />
@@ -122,7 +123,7 @@ const ResetPasswordPage: React.FC = () => {
         </form>
 
         <CardFooter>
-          <NavLink to="/">{t.backHome}</NavLink>
+          <NavLink to={ROUTES.home}>{t.backHome}</NavLink>
         </CardFooter>
       </ResetCard>
     </PageWrapper>

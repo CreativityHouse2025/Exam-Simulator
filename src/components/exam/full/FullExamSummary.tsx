@@ -8,6 +8,7 @@ import { formatDate, formatTimer } from '../../../utils/format'
 import { translate } from '../../../utils/translation'
 import useResults from '../../../hooks/useResults'
 import { canRetryAttempt } from '../../../utils/exam'
+import { ROUTES } from '../../../config/routes'
 import { useExamSessionCore } from '../../../hooks/examSession/useExamSessionCore'
 import { useFullExamSession } from '../../../hooks/examSession/useFullExamSession'
 
@@ -163,13 +164,13 @@ const FullExamSummary: React.FC = () => {
             className="no-select"
             onClick={async () => {
               const id = await startRevision(sessionId)
-              if (id) navigate(`/exam?id=${id}&revision=1`)
+              if (id) navigate(ROUTES.exam.to(id, true))
             }}
           >
             {translated.retake}
           </RetakeButton>
         )}
-        <RestartButton id="restart-button" title="Homepage" className="no-select" onClick={() => navigate('/')}>
+        <RestartButton id="restart-button" title="Homepage" className="no-select" onClick={() => navigate(ROUTES.home)}>
           {translated.home}
         </RestartButton>
       </ButtonsContainer>

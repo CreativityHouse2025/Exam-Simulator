@@ -3,14 +3,15 @@ import { useNavigate } from "react-router-dom"
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Language } from '@styled-icons/material/Language'
-import { AccountCircle } from '@styled-icons/material/AccountCircle'
-import { History } from '@styled-icons/material/History'
 import { Menu } from '@styled-icons/material/Menu'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
 import useSettings from '../hooks/useSettings'
 import useAuth from '../hooks/useAuth'
+import { roleOf } from '../config/roles'
+import { ROUTES } from '../config/routes'
+import { getNavItems } from '../config/nav'
 
 const HeaderStyles = styled.div<ThemedStyles>`
   display: flex;
@@ -154,12 +155,13 @@ const IconStyles = styled.div<ThemedStyles>`
   }
 `
 
-/** App header with language toggle and conditional profile icon. */
+/** App header with language toggle and role-driven navigation icons. */
 const HeaderComponent: React.FC = () => {
   const title = translate('about.title')
   const navigate = useNavigate()
   const { settings, updateLanguage } = useSettings()
-  const { isAuthenticated } = useAuth()
+  const { user } = useAuth()
+  const navItems = getNavItems(roleOf(user))
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
   const menuRef = React.useRef<HTMLDivElement>(null)
 
@@ -168,12 +170,8 @@ const HeaderComponent: React.FC = () => {
     updateLanguage(nextCode)
   }, [settings.language, updateLanguage])
 
-  function handleProfile() {
-    navigate("/profile")
-  }
-
   function handleHomepage() {
-    navigate("/")
+    navigate(ROUTES.home)
   }
 
   function handleMenuAction(action: () => void) {
@@ -201,18 +199,13 @@ const HeaderComponent: React.FC = () => {
 
       <IconsContainer>
         <IconStyles title='Change language' aria-label='Language Icon' id="language" className="no-select" onClick={toggleLanguage}>
-          <Language size={40} />
+          <Language size={38} />
         </IconStyles>
-        {isAuthenticated && (
-          <IconStyles title='View attempt history' aria-label='History Icon' id="history" className="no-select" onClick={() => navigate("/history")}>
-            <History size={40} />
+        {navItems.map(({ icon: Icon, path, labelKey }) => (
+          <IconStyles key={path} title={translate(labelKey)} aria-label={translate(labelKey)} className="no-select" onClick={() => navigate(path)}>
+            <Icon size={35} />
           </IconStyles>
-        )}
-        {isAuthenticated && (
-          <IconStyles title='Update your information' aria-label='Account Icon' id="account" className="no-select" onClick={handleProfile}>
-            <AccountCircle size={40} />
-          </IconStyles>
-        )}
+        ))}
       </IconsContainer>
 
       <MenuWrapper ref={menuRef}>
@@ -224,14 +217,12 @@ const HeaderComponent: React.FC = () => {
             <Language size={22} />
             {translate('header.changeLanguage')}
           </DropdownItem>
-          <DropdownItem disabled={!isAuthenticated} onClick={() => handleMenuAction(() => navigate("/history"))}>
-            <History size={22} />
-            {translate('header.history')}
-          </DropdownItem>
-          <DropdownItem disabled={!isAuthenticated} onClick={() => handleMenuAction(handleProfile)}>
-            <AccountCircle size={22} />
-            {translate('header.profile')}
-          </DropdownItem>
+          {navItems.map(({ icon: Icon, path, labelKey }) => (
+            <DropdownItem key={path} onClick={() => handleMenuAction(() => navigate(path))}>
+              <Icon size={22} />
+              {translate(labelKey)}
+            </DropdownItem>
+          ))}
         </DropdownMenu>
       </MenuWrapper>
     </HeaderStyles>

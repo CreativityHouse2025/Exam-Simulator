@@ -4,7 +4,7 @@ import { withErrorHandler } from "../_lib/middleware/withErrorHandler.js"
 import { successResponse } from "../_lib/utils/response.js"
 import { supabaseAdmin } from "../_lib/supabaseClient.js"
 import { AppError } from "../_lib/errors/AppError.js"
-import type { UserProfile } from "../_lib/types.js"
+import type { User } from "../_lib/types.js"
 
 export const GET = withErrorHandler(
   withAuth(async (_request: Request, authUser, cookieHeaders) => {
@@ -18,7 +18,7 @@ export const GET = withErrorHandler(
       throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "User not found" })
     }
 
-    const profile: UserProfile = {
+    const profile: User = {
       id: user.id,
       email: authUser.email,
       first_name: user.first_name,

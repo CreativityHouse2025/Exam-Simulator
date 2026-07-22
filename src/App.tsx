@@ -4,8 +4,7 @@ import styled from "styled-components"
 import Toast from "./components/Toast"
 import Header from "./components/Header"
 import Loading from "./components/Loading"
-import ProtectedRoute from "./guards/ProtectedRoute"
-import GuestRoute from "./guards/GuestRoute"
+import RouteGuard from "./guards/RouteGuard"
 import SignInPage from "./pages/SignInPage"
 import SignUpPage from "./pages/SignUpPage"
 import ProfilePage from "./pages/ProfilePage"
@@ -13,17 +12,15 @@ import AuthCallbackPage from "./pages/AuthCallbackPage"
 import ForgotPasswordPage from "./pages/ForgotPasswordPage"
 import ResetPasswordPage from "./pages/ResetPasswordPage"
 import AttemptHistoryPage from "./pages/AttemptHistoryPage"
-import StudentDashboardPage from "./pages/StudentDashboardPage"
-import SupervisorDashboardPage from "./pages/SupervisorDashboardPage"
+import HomePage from "./pages/HomePage"
 import ExamLibraryPage from "./pages/exam-library"
 import ExamDetailPage from "./pages/exam-detail"
 import { hasTranslation, setTranslation } from "./utils/translation"
 import { LANGUAGES } from "./constants"
+import { ROUTES } from "./config/routes"
 import useSettings from "./hooks/useSettings"
-import useAuth from "./hooks/useAuth"
 import type { LangCode } from "./types"
 import SessionProvider from "./providers/SessionProvider"
-import RoleGuard from "./guards/RoleGuard"
 import ExamPage from "./pages/ExamPage"
 
 const AppBackground = styled.div`
@@ -51,7 +48,6 @@ const RoutesArea = styled.div`
 
 const App: React.FC = () => {
   const { settings } = useSettings()
-  const { user } = useAuth()
 
   const langCode = settings.language
   const [translationVersion, setTranslationVersion] = React.useState<number>(hasTranslation() ? 1 : 0)
@@ -96,48 +92,37 @@ const App: React.FC = () => {
         <RoutesArea>
           <Routes>
             {/* Public */}
-            <Route path="/signin" element={<GuestRoute><SignInPage /></GuestRoute>} />
-            <Route path="/signup" element={<GuestRoute><SignUpPage /></GuestRoute>} />
-            <Route path="/forgot-password" element={<GuestRoute><ForgotPasswordPage /></GuestRoute>} />
-            <Route path="/auth/callback" element={<AuthCallbackPage />} />
+            <Route path={ROUTES.signIn} element={<RouteGuard roles={["guest"]}><SignInPage /></RouteGuard>} />
+            <Route path={ROUTES.signUp} element={<RouteGuard roles={["guest"]}><SignUpPage /></RouteGuard>} />
+            <Route path={ROUTES.forgotPassword} element={<RouteGuard roles={["guest"]}><ForgotPasswordPage /></RouteGuard>} />
+            <Route path={ROUTES.authCallback} element={<AuthCallbackPage />} />
 
-            {/* Protected */}
-            <Route element={<ProtectedRoute><Outlet /></ProtectedRoute>}>
-              <Route path="profile" element={<ProfilePage />} />
-              <Route path="reset-password" element={<ResetPasswordPage />} />
+            {/* Authenticated routes 
+            SessionProvider sits at the root of this branch so it stays a single
+            stable instance across "/", "/history" and "/exam" — a started session survives the
+            navigation to "/exam". Mounting it for supervisors too is inert: it fetches nothing. */}
+            <Route element={<RouteGuard roles={["student", "supervisor"]}><SessionProvider><Outlet /></SessionProvider></RouteGuard>}>
+              {/* Shared routes */}
+              <Route index element={<HomePage />} />
+              <Route path={ROUTES.profile} element={<ProfilePage />} />
+              <Route path={ROUTES.resetPassword} element={<ResetPasswordPage />} />
 
-              {user?.role === "supervisor" ? (
-                <>
-                  <Route index element={<SupervisorDashboardPage />} />
-                  <Route
-                    path="exams"
-                    element={
-                      <RoleGuard allowedRoles={["supervisor"]}>
-                        <ExamLibraryPage />
-                      </RoleGuard>
-                    }
-                  />
-                  <Route
-                    path="exams/:type/:id"
-                    element={
-                      <RoleGuard allowedRoles={["supervisor"]}>
-                        <ExamDetailPage />
-                      </RoleGuard>
-                    }
-                  />
-                </>
-              ) : (
-                // SessionProvider is student-only, and must stay a single stable instance across
-                // "/", "/history", and "/exam" so a started session survives navigating to "/exam".
-                <Route element={<SessionProvider><Outlet /></SessionProvider>}>
-                  <Route index element={<StudentDashboardPage />} />
-                  <Route path="history" element={<AttemptHistoryPage />} />
-                  <Route path="exam" element={<ExamPage />} />
-                </Route>
-              )}
+              {/* Supervisor routes */}
+              <Route element={<RouteGuard roles={["supervisor"]}><Outlet /></RouteGuard>}>
+                <Route path={ROUTES.exams} element={<ExamLibraryPage />} />
+                <Route path={ROUTES.examDetail.pattern} element={<ExamDetailPage />} />
+              </Route>
 
-              <Route path="*" element={<Navigate to="/" replace />} />
+              {/* Student routes */}
+              <Route element={<RouteGuard roles={["student"]}><Outlet /></RouteGuard>}>
+                <Route path={ROUTES.history} element={<AttemptHistoryPage />} />
+                <Route path={ROUTES.exam.pattern} element={<ExamPage />} />
+              </Route>
             </Route>
+
+              {/* Catch all undefined routes and redirect to homepage */}
+            <Route path="*" element={<Navigate to={ROUTES.home} replace />} />
+
           </Routes>
         </RoutesArea>
       </AppLayout>

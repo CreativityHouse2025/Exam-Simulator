@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
 import { validateEmail } from "../utils/authValidation"
 import { translate } from "../utils/translation"
+import { ROUTES } from "../config/routes"
 // @ts-expect-error
 import Logo from "../assets/logo.png"
 import { ConfirmationCard, EmailField } from "../components/Auth"
@@ -105,7 +106,7 @@ const ForgotPasswordPage: React.FC = () => {
         </form>
 
         <CardFooter>
-          <NavLink to="/signin">{t.backToSignin}</NavLink>
+          <NavLink to={ROUTES.signIn}>{t.backToSignin}</NavLink>
         </CardFooter>
       </Card>
     </PageWrapper>

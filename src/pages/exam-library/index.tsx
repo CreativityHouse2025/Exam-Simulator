@@ -11,6 +11,7 @@ import ExamCard from "./ExamCard"
 import useSettings from "@/hooks/useSettings"
 import { translate } from "@/utils/translation"
 import { LANGUAGES } from "@/constants"
+import { ROUTES } from "@/config/routes"
 import type { ExamListItem } from "./types"
 
 type Tab = "all" | "full" | "domain"
@@ -72,7 +73,7 @@ const ExamLibraryPage: React.FC = () => {
 
   return (
     <div className="tailwind-page mx-auto w-full max-w-4xl px-4 py-8">
-      <BackButton to="/" text={t.back} />
+      <BackButton to={ROUTES.home} text={t.back} />
 
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>

@@ -6,6 +6,7 @@ import useAuth from "../hooks/useAuth"
 import useToast from "../hooks/useToast"
 import { formatDate } from "../utils/format"
 import { translate } from "../utils/translation"
+import { ROUTES } from "../config/routes"
 import type { ThemedStyles } from "../types"
 import { PageWrapper, Card, AvatarCircle, BackButton, PageTitle, PageSubtitle, NavLink, CardFooter } from "../components/SharedStyles"
 
@@ -104,7 +105,7 @@ const ProfilePage: React.FC = () => {
   }
 
   const handlePasswordReset = () => {
-    navigate("/reset-password")
+    navigate(ROUTES.resetPassword)
   }
 
   const initials = `${user.first_name[0]}${user.last_name[0]}`.toUpperCase()
@@ -112,7 +113,7 @@ const ProfilePage: React.FC = () => {
   return (
     <PageWrapper>
       <ProfileCard>
-        <BackButton title={t.backHome} onClick={() => navigate("/")} aria-label={t.backHome}>
+        <BackButton title={t.backHome} onClick={() => navigate(ROUTES.home)} aria-label={t.backHome}>
           <ArrowBack size={30} />
         </BackButton>
         <AvatarCircle>{initials}</AvatarCircle>
@@ -132,7 +133,7 @@ const ProfilePage: React.FC = () => {
         </ActionButton>
 
         <CardFooter>
-          <NavLink to="/">{t.backHome}</NavLink>
+          <NavLink to={ROUTES.home}>{t.backHome}</NavLink>
         </CardFooter>
       </ProfileCard>
     </PageWrapper>

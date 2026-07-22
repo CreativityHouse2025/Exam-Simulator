@@ -3,7 +3,7 @@ import { AuthContext } from "../contexts"
 import { translate } from "../utils/translation"
 import { apiFetch, registerUnauthorizedHandler } from "../utils/apiFetch"
 import { AppApiError } from "../errors"
-import type { ApiResponse, AppErrorCode, AuthStatus, UserProfile } from "../types"
+import type { ApiResponse, AppErrorCode, AuthStatus, User } from "../types"
 
 type AuthErrorCode = Extract<
   AppErrorCode,
@@ -47,7 +47,7 @@ function translateErrorCode(code: AppErrorCode): string {
 
 /** Provides auth state and lifecycle methods to the app. Restores session from cookies via /me on mount. */
 export default function AuthContextProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<UserProfile | null>(null)
+  const [user, setUser] = useState<User | null>(null)
   const [authStatus, setAuthStatus] = useState<AuthStatus>("pending")
   const sessionCheckCancelled = useRef(false)
 
@@ -64,7 +64,7 @@ export default function AuthContextProvider({ children }: { children: React.Reac
         handleUnauthorized: false,
       })
 
-      const result: ApiResponse<{ user: UserProfile }> = await response.json()
+      const result: ApiResponse<{ user: User }> = await response.json()
 
       if (!result.success) {
         throw new AppApiError(translateErrorCode(result.error.code), result.error.code)
@@ -106,7 +106,7 @@ export default function AuthContextProvider({ children }: { children: React.Reac
         handleUnauthorized: false,
       })
 
-      const result: ApiResponse<{ user: UserProfile }> = await response.json()
+      const result: ApiResponse<{ user: User }> = await response.json()
 
       if (!result.success) {
         throw new Error(translateErrorCode(result.error.code))
@@ -174,7 +174,7 @@ export default function AuthContextProvider({ children }: { children: React.Reac
     async function checkSession() {
       try {
         const response = await apiFetch("/api/auth/me", { handleUnauthorized: false })
-        const result: ApiResponse<{ user: UserProfile }> = await response.json()
+        const result: ApiResponse<{ user: User }> = await response.json()
 
         // unmounted: component no longer exists, don't update state
         // sessionCheckCancelled: an active auth flow (signIn, exchangeToken) took over

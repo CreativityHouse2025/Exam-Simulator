@@ -1,14 +1,17 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import { BookOpen, Users } from "lucide-react"
 import Dashboard from "@/components/dashboard/Dashboard"
 import DashboardButton from "@/components/dashboard/DashboardButton"
 import DashboardButtonRow from "@/components/dashboard/DashboardButtonRow"
 import { translate } from "@/utils/translation"
+import { ICONS } from "@/config/icons"
+import { ROUTES } from "@/config/routes"
 
 /** Supervisor dashboard — view exams in the system, or search for a student (search is a future spec, stub for now). */
 const SupervisorDashboardPage: React.FC = () => {
   const navigate = useNavigate()
+  const SearchStudentsIcon = ICONS.searchStudents
+  const ExamsIcon = ICONS.exams
 
   const t = {
     subtitle: translate("dashboard.supervisor.subtitle"),
@@ -22,7 +25,7 @@ const SupervisorDashboardPage: React.FC = () => {
         <DashboardButton
           className="no-select"
           title="Search Students"
-          icon={<Users size={22} />}
+          icon={<SearchStudentsIcon size={25} />}
           label={t.searchStudents}
         />
 
@@ -30,9 +33,9 @@ const SupervisorDashboardPage: React.FC = () => {
           variant="secondary"
           className="no-select"
           title="View Exams"
-          icon={<BookOpen size={22} />}
+          icon={<ExamsIcon size={22} />}
           label={t.viewExams}
-          onClick={() => navigate("/exams")}
+          onClick={() => navigate(ROUTES.exams)}
         />
       </DashboardButtonRow>
     </Dashboard>

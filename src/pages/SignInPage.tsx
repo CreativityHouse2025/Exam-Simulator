@@ -5,6 +5,7 @@ import { AppApiError } from "../errors"
 import useFormField from "../hooks/useFormField"
 import { validateEmail, validatePassword } from "../utils/authValidation"
 import { translate } from "../utils/translation"
+import { ROUTES } from "../config/routes"
 // @ts-expect-error
 import Logo from "../assets/logo.png"
 import { EmailField, PasswordField } from "../components/Auth"
@@ -71,7 +72,7 @@ const SignInPage: React.FC = () => {
     try {
       // if session conflict is true and user still wants to sign in, then force will be true
       await signIn(email.value, password.value, sessionConflict)
-      navigate("/")
+      navigate(ROUTES.home)
     } catch (err) {
       if (err instanceof AppApiError && err.code === "SESSION_CONFLICT") {
         setSessionConflict(true)
@@ -117,7 +118,7 @@ const SignInPage: React.FC = () => {
             onChange={password.onChange}
           />
 
-          <NavLink to="/forgot-password" style={{ display: "block", textAlign: "end", marginBottom: "0.8rem", fontSize: "1.3rem" }}>
+          <NavLink to={ROUTES.forgotPassword} style={{ display: "block", textAlign: "end", marginBottom: "0.8rem", fontSize: "1.3rem" }}>
             {t.forgotPassword}
           </NavLink>
 
@@ -128,7 +129,7 @@ const SignInPage: React.FC = () => {
 
         <AuthSwitchBanner>
           <span>{t.noAccount}</span>
-          <NavLink to="/signup">{t.signupLink}</NavLink>
+          <NavLink to={ROUTES.signUp}>{t.signupLink}</NavLink>
         </AuthSwitchBanner>
       </Card>
     </PageWrapper>
