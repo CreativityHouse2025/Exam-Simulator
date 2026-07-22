@@ -7,6 +7,7 @@ import FullExamSession from './FullExamSession'
 import type { Exam, Question } from '../../../types'
 import { applyQuestionChoiceOrders } from '../../../utils/format'
 import { loadFullExam } from '../../../utils/exam'
+import { ROUTES } from '../../../config/routes'
 import useToast from '../../../hooks/useToast'
 import useUnsavedChangesWarning from '../../../hooks/useUnsavedChangesWarning'
 import { translate } from '../../../utils/translation'
@@ -29,7 +30,7 @@ export default function FullExamProvider() {
   const attemptId = searchParams.get('id')
 
   React.useEffect(() => {
-    if (!attemptId) navigate('/')
+    if (!attemptId) navigate(ROUTES.home)
   }, [])
 
   const { session } = useSessionControl()

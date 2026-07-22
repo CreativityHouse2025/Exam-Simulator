@@ -10,6 +10,7 @@ import Loading from "@/components/Loading"
 import useLatestAttemptId from "@/hooks/useLatestAttempt"
 import { useSessionControl } from "@/contexts"
 import { translate } from "@/utils/translation"
+import { ROUTES } from "@/config/routes"
 import type { DropdownItem } from "@/types"
 
 /** Student dashboard — lets the user start a new exam or continue an existing one. */
@@ -29,14 +30,14 @@ const StudentDashboardPage: React.FC = () => {
   const handleFullExam = async (examId: DropdownItem["id"]) => {
     setIsStarting(true)
     const id = await startNewExam("full", examId)
-    if (id) navigate(`/exam?id=${id}`)
+    if (id) navigate(ROUTES.exam.to(id))
     else setIsStarting(false)
   }
 
   const handleDomainExam = async (categoryId: DropdownItem["id"]) => {
     setIsStarting(true)
     const id = await startNewExam("domain", categoryId)
-    if (id) navigate(`/exam?id=${id}`)
+    if (id) navigate(ROUTES.exam.to(id))
     else setIsStarting(false)
   }
 
@@ -44,7 +45,7 @@ const StudentDashboardPage: React.FC = () => {
     if (latestAttemptId) {
       setIsStarting(true)
       const attemptId = await resumeAttempt(latestAttemptId)
-      if (attemptId) navigate(`/exam?id=${attemptId}`)
+      if (attemptId) navigate(ROUTES.exam.to(attemptId))
       else setIsStarting(false)
     }
   }

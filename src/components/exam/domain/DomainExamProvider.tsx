@@ -6,6 +6,7 @@ import DomainExamSession from './DomainExamSession'
 import type { Exam, Question } from '../../../types'
 import { applyQuestionChoiceOrders } from '../../../utils/format'
 import { loadDomainExam } from '../../../utils/exam'
+import { ROUTES } from '../../../config/routes'
 import useToast from '../../../hooks/useToast'
 import useUnsavedChangesWarning from '../../../hooks/useUnsavedChangesWarning'
 import { translate } from '../../../utils/translation'
@@ -28,7 +29,7 @@ export default function DomainExamProvider() {
   const attemptId = searchParams.get('id')
 
   React.useEffect(() => {
-    if (!attemptId) navigate('/')
+    if (!attemptId) navigate(ROUTES.home)
   }, [])
 
   const { session } = useSessionControl()

@@ -5,6 +5,7 @@ import RevisionSession from './RevisionSession'
 import type { Exam, Question } from '../../../types'
 import { applyQuestionChoiceOrders } from '../../../utils/format'
 import { loadFullExam } from '../../../utils/exam'
+import { ROUTES } from '../../../config/routes'
 import useToast from '../../../hooks/useToast'
 import { translate } from '../../../utils/translation'
 import useSettings from '../../../hooks/useSettings'
@@ -26,7 +27,7 @@ export default function RevisionProvider() {
   const attemptId = searchParams.get('id')
 
   React.useEffect(() => {
-    if (!attemptId) navigate('/')
+    if (!attemptId) navigate(ROUTES.home)
   }, [])
 
   const { session } = useSessionControl()

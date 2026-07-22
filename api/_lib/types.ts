@@ -113,7 +113,7 @@ export type SigninRequestBody = {
 
 export type Role = "student" | "supervisor"
 
-export type UserProfile = {
+export type User = {
   id: string
   email: string
   first_name: string
@@ -123,7 +123,7 @@ export type UserProfile = {
 }
 
 export type SigninResult = {
-  user: UserProfile
+  user: User
   access_token: string
   refresh_token: string
 }

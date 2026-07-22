@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import ExamTypeBadge from "@/components/ExamTypeBadge"
 import ExamStats from "@/components/ExamStats"
 import { translate } from "@/utils/translation"
+import { ROUTES } from "@/config/routes"
 import type { ExamListItem } from "./types"
 
 type ExamCardProps = {
@@ -34,7 +35,7 @@ const ExamCard = ({ exam }: ExamCardProps) => {
 
   return (
     <Link
-      to={`/exams/${exam.type}/${exam.id}`}
+      to={ROUTES.examDetail.to(exam.type, exam.id)}
       className="flex gap-4 rounded-xl border border-border bg-card p-4 text-card-foreground shadow-sm transition-shadow hover:shadow-md"
     >
       <div className={`w-1 shrink-0 self-stretch rounded ${accent.bar}`} />
