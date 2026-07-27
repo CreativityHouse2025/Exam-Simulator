@@ -1,11 +1,12 @@
-import type { ExamListItem } from "../pages/exam-library/types"
+import type { ExamListItem } from "../pages/exam-library/types";
 
-const EXAMS = "/exams"
-const EXAM = "/exam"
+const EXAMS = "/exams";
+const EXAM = "/exam";
+const STUDENTS = "/students";
 
 /**
  * Single source of every app URL.
- * 
+ *
  * Dynamic routes expose `pattern` for `<Route path>` and `to()` for links.
  */
 export const ROUTES = {
@@ -19,11 +20,18 @@ export const ROUTES = {
   history: "/history",
   exam: {
     pattern: EXAM,
-    to: (attemptId: string, revision = false) => `${EXAM}?id=${attemptId}${revision ? "&revision=1" : ""}`
+    to: (attemptId: string, revision = false) =>
+      `${EXAM}?id=${attemptId}${revision ? "&revision=1" : ""}`,
   },
   exams: EXAMS,
   examDetail: {
     pattern: `${EXAMS}/:type/:id`,
-    to: (type: ExamListItem["type"], id: ExamListItem["id"]) => `${EXAMS}/${type}/${id}`
-  }
-} as const
+    to: (type: ExamListItem["type"], id: ExamListItem["id"]) =>
+      `${EXAMS}/${type}/${id}`,
+  },
+  students: STUDENTS,
+  studentAttempts: {
+    pattern: `${STUDENTS}/:id/attempts`,
+    to: (id: string) => `${STUDENTS}/${id}/attempts`,
+  },
+} as const;

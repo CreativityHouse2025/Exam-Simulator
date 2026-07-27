@@ -8,7 +8,8 @@ import { formatDate } from "../utils/format"
 import { translate } from "../utils/translation"
 import { ROUTES } from "../config/routes"
 import type { ThemedStyles } from "../types"
-import { PageWrapper, Card, AvatarCircle, BackButton, PageTitle, PageSubtitle, NavLink, CardFooter } from "../components/SharedStyles"
+import { PageWrapper, Card, BackButton, PageTitle, PageSubtitle, NavLink, CardFooter } from "../components/SharedStyles"
+import InitialsAvatar from "../components/InitialsAvatar"
 
 const ProfileCard = styled(Card)`
   max-width: 500px;
@@ -108,15 +109,17 @@ const ProfilePage: React.FC = () => {
     navigate(ROUTES.resetPassword)
   }
 
-  const initials = `${user.first_name[0]}${user.last_name[0]}`.toUpperCase()
-
   return (
     <PageWrapper>
       <ProfileCard>
         <BackButton title={t.backHome} onClick={() => navigate(ROUTES.home)} aria-label={t.backHome}>
           <ArrowBack size={30} />
         </BackButton>
-        <AvatarCircle>{initials}</AvatarCircle>
+        <InitialsAvatar
+          firstName={user.first_name}
+          lastName={user.last_name}
+          className="mx-auto mb-3 size-[72px] text-2xl"
+        />
         <PageTitle>{user.first_name} {user.last_name}</PageTitle>
         <PageSubtitle>{user.email}</PageSubtitle>
 

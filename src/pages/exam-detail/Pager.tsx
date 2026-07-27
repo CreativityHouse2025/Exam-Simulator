@@ -1,8 +1,6 @@
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import useSettings from "@/hooks/useSettings"
+import useDirectionalChevron from "@/hooks/useDirectionalChevron"
 import { translate } from "@/utils/translation"
-import { LANGUAGES } from "@/constants"
 
 type PagerProps = {
   /** 0-based current page. */
@@ -20,16 +18,13 @@ type PagerProps = {
 
 /** Previous/next pagination control with a "<label> X / Y" indicator. Chevrons flip and Previous/Next translate under RTL. */
 const Pager = ({ page, pageCount, onChange, showText = false, centered = false, label, className }: PagerProps) => {
-  const { settings } = useSettings()
-  const isRtl = LANGUAGES[settings.language].dir === "rtl"
+  const { PrevIcon, NextIcon } = useDirectionalChevron()
 
   const t = {
     previous: translate("exam.details.pager.previous"),
     next: translate("exam.details.pager.next")
   }
 
-  const PrevIcon = isRtl ? ChevronRight : ChevronLeft
-  const NextIcon = isRtl ? ChevronLeft : ChevronRight
   const size = showText ? "sm" : "icon-sm"
 
   return (

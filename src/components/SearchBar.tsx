@@ -13,14 +13,14 @@ type SearchBarProps = {
 const SearchBar = ({ value, onChange, placeholder, className }: SearchBarProps) => {
   return (
     <div className={cn("relative", className)}>
-      <Search className="pointer-events-none absolute inset-s-3 top-1/2 size-4 -translate-y-1/2 text-grey-800" />
+      <Search className="pointer-events-none absolute inset-s-2.5 top-1/2 size-4 -translate-y-1/2 text-grey-800" />
 
       <Input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className={cn("bg-card ps-9", value && "pe-9")}
+        className={cn("bg-card ps-8", value && "pe-9")}
       />
 
       {value && (

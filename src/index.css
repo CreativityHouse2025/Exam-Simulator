@@ -9,6 +9,7 @@
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
+@import "tw-animate-css";
 
 /* The app is light-only, but the shadcn primitives ship `dark:` variants throughout.
    Tailwind's default dark variant is `prefers-color-scheme: dark`, so on a machine set to
@@ -61,10 +62,20 @@
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  p {
     font-size: inherit;
     font-weight: inherit;
     margin: 0;
+  }
+
+  /* UA default numbers/bullets ol/ul markers (e.g. shadcn's Breadcrumb, an <ol>). Existing
+     styled-components ul/li already set their own `list-style: none`, so this is a no-op there. */
+  ol,
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 }
 

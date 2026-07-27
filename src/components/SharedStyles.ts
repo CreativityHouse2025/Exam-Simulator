@@ -370,18 +370,3 @@ export const AuthSwitchBanner = styled.div<ThemedStyles>`
   }
 `
 
-/** Circular avatar showing user initials with gold-to-purple gradient. */
-export const AvatarCircle = styled.div<ThemedStyles>`
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, ${({ theme }) => theme.primary}, ${({ theme }) => theme.secondary});
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.2rem;
-  font-family: ${({ theme }) => theme.displayFontFamily};
-  font-size: 2.4rem;
-  color: ${({ theme }) => theme.white};
-  user-select: none;
-`

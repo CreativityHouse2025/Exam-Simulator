@@ -1,11 +1,10 @@
 import React from "react"
 import styled from "styled-components"
-import exams from "../../data/exam/full-exams.json"
-import categories from "../../data/exam/categories.json"
 import useSettings from "../../hooks/useSettings"
 import { formatDate } from "../../utils/format"
 import { translate } from "../../utils/translation"
 import { canRetryAttempt } from "../../utils/exam"
+import { resolveExamLabel } from "../../utils/resolveExamLabel"
 import AttemptStateIcon from "./AttemptStateIcon"
 import AttemptStatusBadge from "./AttemptStatusBadge"
 import { Tr, Td } from "./AttemptHistoryStyles"
@@ -121,10 +120,7 @@ const AttemptHistoryRow: React.FC<Props> = ({ attempt, index, onContinue, onRevi
   const { settings } = useSettings()
   const langCode = settings.language
 
-  const examLabel =
-    attempt.exam_type === "full"
-      ? (exams.find((e) => e.id === attempt.exam_id)?.name[langCode] ?? String(attempt.exam_id))
-      : (categories.find((c) => c.id === attempt.category_id)?.name[langCode] ?? String(attempt.category_id))
+  const examLabel = resolveExamLabel(attempt, langCode)
 
   const scoreDisplay = attempt.exam_state === "completed" ? `${attempt.score}%` : "—"
   const isInProgress = attempt.exam_state === "in-progress"
