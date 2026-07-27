@@ -314,5 +314,47 @@
         "section": "Section"
       }
     }
+  },
+  "students": {
+    "search": {
+      "title": "Find a Student",
+      "subtitle": "Search students and view their exam attempts",
+      "placeholder": "Search by name or email",
+      "idle": "Start typing a name or email to search",
+      "empty": "No students found for '$1'",
+      "error": "Failed to search students. Please try again.",
+      "retry": "Retry",
+      "count": "$1 students found"
+    },
+    "card": {
+      "joined": "Joined"
+    },
+    "attempts": {
+      "breadcrumb-root": "Students",
+      "joined": "Joined",
+      "title": "Exam History",
+      "summary": "$1 passed, $2 failed",
+      "stats": {
+        "total": "Total Attempts",
+        "average": "Average Score",
+        "pass-rate": "Pass Rate"
+      },
+      "empty": "This student hasn't made any attempts yet.",
+      "error": "Failed to load this student's attempts. Please try again."
+    },
+    "detail": {
+      "score": "Score",
+      "correct": "Correct",
+      "incorrect": "Incorrect",
+      "time-taken": "Time Taken",
+      "date-taken": "Date Taken",
+      "exam-name": "Exam",
+      "in-progress-message": "This attempt hasn't been submitted yet."
+    },
+    "errors": {
+      "server-not-found": "Student not found.",
+      "server-forbidden": "You don't have permission to view this student.",
+      "server-unknown": "Something went wrong. Please try again."
+    }
   }
 }

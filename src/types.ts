@@ -1,238 +1,263 @@
 // Theme types
 export interface Theme {
-  grey: string[]
-  white: string
-  black: string
-  primary: string
-  secondary: string
-  tertiary: string
-  quatro: string
-  correct: string
-  incorrect: string
-  borderRadius: string
-  shadows: string[]
-  scrollbar: string
-  fontSize: string
-  fontFamily: string
-  displayFontFamily: string
+  grey: string[];
+  white: string;
+  black: string;
+  primary: string;
+  secondary: string;
+  tertiary: string;
+  quatro: string;
+  correct: string;
+  incorrect: string;
+  borderRadius: string;
+  shadows: string[];
+  scrollbar: string;
+  fontSize: string;
+  fontFamily: string;
+  displayFontFamily: string;
 }
 
 export interface ThemedStyles {
   /**  */
-  theme: Theme
+  theme: Theme;
 }
 
 // Language types
-export type LangDir = 'rtl' | 'ltr'
-export type LangCode = 'ar' | 'en'
-export type LangName = 'العربية' | 'English'
+export type LangDir = "rtl" | "ltr";
+export type LangCode = "ar" | "en";
+export type LangName = "العربية" | "English";
 
 export interface Lang {
-  code: LangCode
-  name: LangName
-  dir: LangDir
+  code: LangCode;
+  name: LangName;
+  dir: LangDir;
 }
 
 // Question and exam types
-export type QuestionFilter = 'all' | GridTagTypes
-export type GridTagTypes = 'marked' | 'incomplete' | 'complete' | 'incorrect' | 'correct'
+export type QuestionFilter = "all" | GridTagTypes;
+export type GridTagTypes =
+  | "marked"
+  | "incomplete"
+  | "complete"
+  | "incorrect"
+  | "correct";
 
 // v1.1: Add new type 'revision' for mistake revision exam and remove ExamID type
 // v2.0 pre-phase 5: renamed 'exam' → 'full' and 'miniexam' → 'domain' to match the DB schema
-export type ExamType = 'full' | 'domain' | 'revision'
-export type Exam = Question[]
+export type ExamType = "full" | "domain" | "revision";
+export type Exam = Question[];
 
-export type QuestionTypes = 'multiple-choice'
+export type QuestionTypes = "multiple-choice";
 
 // v1.1: Add id and categoryId
 export interface Question<QT extends QuestionTypes = QuestionTypes> {
   /** question id */
-  id: number
+  id: number;
   /** question type */
-  type: QT
+  type: QT;
   /** null means the question is not assigned to any domain category */
-  categoryId: number | null
+  categoryId: number | null;
   /** question content */
-  text: string
+  text: string;
   /** explanation of why the correct answer is correct */
-  explanation: string
+  explanation: string;
   /** choices of the question */
-  choices: Choice[]
+  choices: Choice[];
   /** id of the correct choice for quick access */
-  answer: Answer<QT>
+  answer: Answer<QT>;
 }
 
 export interface Choice {
   /** content of choice */
-  text: string
+  text: string;
   /** is the choice correct */
-  correct: boolean
+  correct: boolean;
   /** original index in the question bank before any shuffle; present only after reconstructing the snapshot from DB */
-  originalIndex?: number
+  originalIndex?: number;
 }
 
 // Answer types
 export type AnswerOf = {
-  'multiple-choice': number[]
-}
+  "multiple-choice": number[];
+};
 
-export type Answer<QT extends QuestionTypes> = AnswerOf[QT]
-export type AnswerOfMultipleChoice = AnswerOf['multiple-choice']
-export type Answers = AnswerOfMultipleChoice[]
+export type Answer<QT extends QuestionTypes> = AnswerOf[QT];
+export type AnswerOfMultipleChoice = AnswerOf["multiple-choice"];
+export type Answers = AnswerOfMultipleChoice[];
 
 // Session state types
-export type ExamState = 'in-progress' | 'completed'
-export type ReviewState = 'summary' | 'question'
+export type ExamState = "in-progress" | "completed";
+export type ReviewState = "summary" | "question";
 
 // Base session — fields shared by all three exam types
 interface BaseSession {
-  id: string
-  index: number
-  examState: ExamState
-  reviewState: ReviewState
-  questionChoiceOrders: Record<number, number[]>
-  selectedOriginalIndices: Answers
-  bookmarks: number[]
-  questionIds: number[] | 'ALL'
-  dirtyQuestions: Record<number, true>
-  maxTime: number
-  time: number
-  paused: boolean
+  id: string;
+  index: number;
+  examState: ExamState;
+  reviewState: ReviewState;
+  questionChoiceOrders: Record<number, number[]>;
+  selectedOriginalIndices: Answers;
+  bookmarks: number[];
+  questionIds: number[] | "ALL";
+  dirtyQuestions: Record<number, true>;
+  maxTime: number;
+  time: number;
+  paused: boolean;
 }
 
 export interface FullExamSession extends BaseSession {
-  examType: 'full'
-  examId: number
-  categoryId: null
-  break1OfferedAt: string | null
-  break2OfferedAt: string | null
+  examType: "full";
+  examId: number;
+  categoryId: null;
+  break1OfferedAt: string | null;
+  break2OfferedAt: string | null;
 }
 
 export interface DomainExamSession extends BaseSession {
-  examType: 'domain'
-  categoryId: number
-  examId: null
+  examType: "domain";
+  categoryId: number;
+  examId: null;
 }
 
 export interface RevisionSession extends BaseSession {
-  examType: 'revision'
-  examId: number
-  categoryId: null
+  examType: "revision";
+  examId: number;
+  categoryId: null;
 }
 
-export type Session = FullExamSession | DomainExamSession | RevisionSession
+export type Session = FullExamSession | DomainExamSession | RevisionSession;
 
-export type { BaseSession }
+export type { BaseSession };
 
 // v2.0: Type for the generic dropdown item (category or fullexam)
 export type DropdownItem<TId = number, TLabel = string> = {
-  id: TId
-  label: TLabel
-}
+  id: TId;
+  label: TLabel;
+};
 
 // Session action types
 export type SessionActionTypes =
-  | 'SET_INDEX'
-  | 'SET_BOOKMARKS'
-  | 'SET_ANSWERS'
-  | 'SET_TIME'
-  | 'SET_TIMER_PAUSED'
-  | 'SET_EXAM_STATE'
-  | 'SET_REVIEW_STATE'
-  | 'RESET_SESSION'
-  | 'MARK_DIRTY'
-  | 'CLEAR_DIRTY'
-  | 'SET_BREAK1_OFFERED_AT'
-  | 'SET_BREAK2_OFFERED_AT'
+  | "SET_INDEX"
+  | "SET_BOOKMARKS"
+  | "SET_ANSWERS"
+  | "SET_TIME"
+  | "SET_TIMER_PAUSED"
+  | "SET_EXAM_STATE"
+  | "SET_REVIEW_STATE"
+  | "RESET_SESSION"
+  | "MARK_DIRTY"
+  | "CLEAR_DIRTY"
+  | "SET_BREAK1_OFFERED_AT"
+  | "SET_BREAK2_OFFERED_AT";
 
 // Session actions mapping
 type SessionActionsMap = {
-  SET_INDEX: { payload: number; prop: 'index' }
-  SET_BOOKMARKS: { payload: number[]; prop: 'bookmarks' }
-  SET_ANSWERS: { payload: Answers; prop: 'selectedOriginalIndices' }
-  SET_TIME: { payload: number; prop: 'time' }
-  SET_TIMER_PAUSED: { payload: boolean; prop: 'paused' }
-  SET_EXAM_STATE: { payload: ExamState; prop: 'examState' }
-  SET_REVIEW_STATE: { payload: ReviewState; prop: 'reviewState' }
+  SET_INDEX: { payload: number; prop: "index" };
+  SET_BOOKMARKS: { payload: number[]; prop: "bookmarks" };
+  SET_ANSWERS: { payload: Answers; prop: "selectedOriginalIndices" };
+  SET_TIME: { payload: number; prop: "time" };
+  SET_TIMER_PAUSED: { payload: boolean; prop: "paused" };
+  SET_EXAM_STATE: { payload: ExamState; prop: "examState" };
+  SET_REVIEW_STATE: { payload: ReviewState; prop: "reviewState" };
   // Internal-only: replaces the entire session state. Not intended for component use.
-  RESET_SESSION: { payload: Session; prop: 'id' }
+  RESET_SESSION: { payload: Session; prop: "id" };
   // Internal-only: both handled via early return in the reducer before the generic prop-lookup runs.
-  MARK_DIRTY: { payload: number; prop: 'dirtyQuestions' }
-  CLEAR_DIRTY: { payload: null; prop: 'dirtyQuestions' }
-  SET_BREAK1_OFFERED_AT: { payload: string | null; prop: 'break1OfferedAt' }
-  SET_BREAK2_OFFERED_AT: { payload: string | null; prop: 'break2OfferedAt' }
-}
+  MARK_DIRTY: { payload: number; prop: "dirtyQuestions" };
+  CLEAR_DIRTY: { payload: null; prop: "dirtyQuestions" };
+  SET_BREAK1_OFFERED_AT: { payload: string | null; prop: "break1OfferedAt" };
+  SET_BREAK2_OFFERED_AT: { payload: string | null; prop: "break2OfferedAt" };
+};
 
-export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {
-  type: T
-  payload: SessionActionsMap[T]['payload']
+export interface SessionAction<
+  T extends SessionActionTypes = SessionActionTypes,
+> {
+  type: T;
+  payload: SessionActionsMap[T]["payload"];
 }
 
 // Add support for multiple actions
-export type SessionActions = SessionAction | SessionAction[]
+export type SessionActions = SessionAction | SessionAction[];
 
 // Function types
-export type SessionReducerFunc = (state: Session, actions: SessionActions) => Session
-export type SessionDispatch = <T extends SessionActionTypes>(...actions: [T, SessionActionsMap[T]['payload']][]) => void
+export type SessionReducerFunc = (
+  state: Session,
+  actions: SessionActions,
+) => Session;
+export type SessionDispatch = <T extends SessionActionTypes>(
+  ...actions: [T, SessionActionsMap[T]["payload"]][]
+) => void;
 
 // Session context slice types.
 // `update` is carried separately (not on Session) so Session stays JSON-serializable for Phase 5.
-export type SessionNavigation = Pick<Session, 'index'> & { update: SessionDispatch }
-export type SessionTimer = Pick<Session, 'time' | 'maxTime' | 'paused'> & { update: SessionDispatch }
-export type SessionExam = Pick<Session, 'examState' | 'reviewState' | 'categoryId' | 'examId'> & { update: SessionDispatch }
-export type SessionData = Pick<Session, 'bookmarks' | 'selectedOriginalIndices' | 'examType' | 'dirtyQuestions'> & {
+export type SessionNavigation = Pick<Session, "index"> & {
+  update: SessionDispatch;
+};
+export type SessionTimer = Pick<Session, "time" | "maxTime" | "paused"> & {
+  update: SessionDispatch;
+};
+export type SessionExam = Pick<
+  Session,
+  "examState" | "reviewState" | "categoryId" | "examId"
+> & { update: SessionDispatch };
+export type SessionData = Pick<
+  Session,
+  "bookmarks" | "selectedOriginalIndices" | "examType" | "dirtyQuestions"
+> & {
   /** null for domain and revision sessions (break fields only exist on FullExamSession) */
-  break1OfferedAt: string | null
+  break1OfferedAt: string | null;
   /** null for domain and revision sessions (break fields only exist on FullExamSession) */
-  break2OfferedAt: string | null
-  isSyncing: boolean
-  update: SessionDispatch
-}
+  break2OfferedAt: string | null;
+  isSyncing: boolean;
+  update: SessionDispatch;
+};
 
 export type SessionControlContextType = {
-  session: Session | null
-  update: SessionDispatch
+  session: Session | null;
+  update: SessionDispatch;
   /** Loads exam data, saves the attempt to the DB, builds the full Session state, and mounts the active session.
    * Returns the new attemptId on success, or null on failure. */
-  startNewExam: (type: ExamType, examOrCategoryId: number) => Promise<string | null>
+  startNewExam: (
+    type: ExamType,
+    examOrCategoryId: number,
+  ) => Promise<string | null>;
   /** Fetches an in-progress attempt snapshot from the DB, hydrates the full Session state, mounts the active
    * session, and persists the attemptId to localStorage.
    * Returns the attemptId on success, or null on failure so callers can reset their loading state. */
-  resumeAttempt: (attemptId: string) => Promise<string | null>
+  resumeAttempt: (attemptId: string) => Promise<string | null>;
   /** Fetches a completed full-exam attempt snapshot from the DB, filters to wrong/unanswered questions only,
    * and mounts an ephemeral revision session (not persisted to localStorage).
    * Returns the attemptId on success, or null on failure so callers can reset their loading state. */
-  startRevision: (attemptId: string) => Promise<string | null>
+  startRevision: (attemptId: string) => Promise<string | null>;
   /** Sends only the dirty questions (answers + bookmark state) to the DB and clears the dirty set on success.
    * No-op when nothing is dirty or a sync is already in flight. */
-  syncProgress: () => Promise<void>
+  syncProgress: () => Promise<void>;
   /** Saves the break offer timestamp to the DB immediately, bypassing the dirty-questions guard.
    * Takes the fresh timestamp so it is not affected by stale closure state. */
-  saveBreakOffer: (breakNumber: 1 | 2, offeredAt: string) => Promise<void>
+  saveBreakOffer: (breakNumber: 1 | 2, offeredAt: string) => Promise<void>;
   /** Flushes dirty answers and marks the attempt completed in the DB.
    * Dispatches SET_EXAM_STATE 'completed' only on success.
    * No-op for revision sessions or while a sync is in flight. */
-  submitExam: (score: number, status: 'pass' | 'fail') => Promise<void>
-}
+  submitExam: (score: number, status: "pass" | "fail") => Promise<void>;
+};
 
 // User settings (initially null until user inserts data)
 export type Settings = {
   /** last choice of language */
-  language: Lang['code']
+  language: Lang["code"];
   /** app version for future updates */
-  appVersion: string
-}
+  appVersion: string;
+};
 
 export type SettingsContextType = {
   /** current user settings state */
-  settings: Settings
+  settings: Settings;
   /** state setter */
-  setSettings: React.Dispatch<React.SetStateAction<Settings>>
-}
+  setSettings: React.Dispatch<React.SetStateAction<Settings>>;
+};
 
 export type ExamContextType = {
-  exam: Exam | null
-}
+  exam: Exam | null;
+};
 
 // Type for the toast component state
 export type ToastState = {
@@ -243,7 +268,7 @@ export type ToastState = {
 export interface ToastContextType {
   message: string;
   visible: boolean;
-  setToast: React.Dispatch<React.SetStateAction<ToastState>>
+  setToast: React.Dispatch<React.SetStateAction<ToastState>>;
 }
 
 // API response types (mirrors backend api/_lib/types.ts for frontend use)
@@ -267,139 +292,167 @@ export type AppErrorCode =
   | "ATTEMPT_SAVE_FAILED"
   | "NOT_FOUND"
   | "FORBIDDEN"
-  | "CONFLICT"
+  | "CONFLICT";
 
-export type ApiSuccess<T> = { success: true; data: T }
-export type ApiError = { success: false; error: { code: AppErrorCode; message: string } }
-export type ApiResponse<T> = ApiSuccess<T> | ApiError
+export type ApiSuccess<T> = { success: true; data: T };
+export type ApiError = {
+  success: false;
+  error: { code: AppErrorCode; message: string };
+};
+export type ApiResponse<T> = ApiSuccess<T> | ApiError;
 
-export type AuthStatus = "pending" | "authenticated" | "unauthenticated"
+export type AuthStatus = "pending" | "authenticated" | "unauthenticated";
 
 // Auth types
-export type Role = "student" | "supervisor" | "guest"
+export type Role = "student" | "supervisor" | "guest";
 
 export type User = {
-  id: string
-  email: string
-  first_name: string
-  last_name: string
-  expires_at: string
-  role: Exclude<Role, "guest">
-}
+  id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  expires_at: string;
+  role: Exclude<Role, "guest">;
+};
 
 export type AuthContextType = {
-  user: User | null
-  isAuthenticated: boolean
-  isLoading: boolean
-  signIn: (email: string, password: string, force: boolean) => Promise<void>
-  signUp: (email: string, password: string, firstName: string, lastName: string) => Promise<void>
-  exchangeToken: (accessToken: string, refreshToken: string) => Promise<void>
-  requestPasswordReset: (email: string) => Promise<void>
-  updatePassword: (password: string) => Promise<void>
-  signOut: (onSuccess?: () => void) => Promise<void>
-}
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  signIn: (email: string, password: string, force: boolean) => Promise<void>;
+  signUp: (
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+  ) => Promise<void>;
+  exchangeToken: (accessToken: string, refreshToken: string) => Promise<void>;
+  requestPasswordReset: (email: string) => Promise<void>;
+  updatePassword: (password: string) => Promise<void>;
+  signOut: (onSuccess?: () => void) => Promise<void>;
+};
 
 export type Results = {
   // status-related
-  pass?: boolean
+  pass?: boolean;
   /** "fail" when no passing rate is configured for the exam type */
-  status: "pass" | "fail"
-  score: number
-  passPercent?: number
+  status: "pass" | "fail";
+  score: number;
+  passPercent?: number;
 
   // time & meta
-  elapsedTime: number
-  date: Date
-  sourceLabel: string | undefined
-  sourceType: 'category' | 'exam'
+  elapsedTime: number;
+  date: Date;
+  sourceLabel: string | undefined;
+  sourceType: "category" | "exam";
 
   // question stats
-  correctCount: number
-  incorrectCount: number
-  incompleteCount: number
-  totalQuestions: number
-}
+  correctCount: number;
+  incorrectCount: number;
+  incompleteCount: number;
+  totalQuestions: number;
+};
 
 // Attempt types (mirror api/_lib/types.ts shapes for frontend use)
-export type BackendExamType = "full" | "domain"
+export type BackendExamType = "full" | "domain";
 
 export type AttemptSummary = {
-  id: string
-  exam_type: BackendExamType
-  exam_id: number | null
-  category_id: number | null
-  exam_state: "in-progress" | "completed"
-  score: number
-  status: "pass" | "fail" | null
-  created_at: string
-}
+  id: string;
+  exam_type: BackendExamType;
+  exam_id: number | null;
+  category_id: number | null;
+  exam_state: "in-progress" | "completed";
+  score: number;
+  status: "pass" | "fail" | null;
+  created_at: string;
+  time_remaining: number;
+  total_questions: number;
+};
 
 export type AttemptDetail = AttemptSummary & {
-  current_index: number
-  time_remaining: number
-  review_state: "summary" | "question"
-  email_report_state: "unsent" | "pending" | "sent" | "failed"
-  break_1_offered_at: string | null
-  break_2_offered_at: string | null
-}
+  current_index: number;
+  review_state: "summary" | "question";
+  email_report_state: "unsent" | "pending" | "sent" | "failed";
+  break_1_offered_at: string | null;
+  break_2_offered_at: string | null;
+};
 
 export type AttemptQuestion = {
-  question_index: number
-  question_id: number
-  choices_order: number[]
-  selected_choices: number[]
-  is_bookmarked: boolean
-}
+  question_index: number;
+  question_id: number;
+  choices_order: number[];
+  selected_choices: number[];
+  is_bookmarked: boolean;
+};
 
 export type GetAttemptResult = {
-  attempt: AttemptDetail
-  questions: AttemptQuestion[]
-}
+  attempt: AttemptDetail;
+  questions: AttemptQuestion[];
+};
+
+export type StudentSearchResult = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  created_at: string;
+};
+
+export type SearchStudentsResult = {
+  students: StudentSearchResult[];
+};
+
+export type StudentAttemptsResult = {
+  student: StudentSearchResult;
+  attempts: AttemptSummary[];
+};
 
 type InsertAttemptFull = {
-  exam_type: "full"
-  exam_id: number
-  category_id: null
-  question_ids: number[]
-  choices_orders: number[][]
-  duration_minutes: number
-}
+  exam_type: "full";
+  exam_id: number;
+  category_id: null;
+  question_ids: number[];
+  choices_orders: number[][];
+  duration_minutes: number;
+};
 
 type InsertAttemptDomain = {
-  exam_type: "domain"
-  category_id: number
-  exam_id: null
-  question_ids: number[]
-  choices_orders: number[][]
-  duration_minutes: number
-}
+  exam_type: "domain";
+  category_id: number;
+  exam_id: null;
+  question_ids: number[];
+  choices_orders: number[][];
+  duration_minutes: number;
+};
 
-export type InsertAttemptRequestBody = InsertAttemptFull | InsertAttemptDomain
+export type InsertAttemptRequestBody = InsertAttemptFull | InsertAttemptDomain;
 
 export type SaveAttemptAnswer = {
-  question_index: number
-  selected_choices: number[]
-  is_bookmarked: boolean
-}
+  question_index: number;
+  selected_choices: number[];
+  is_bookmarked: boolean;
+};
 
 export type SaveAttemptInProgress = {
-  exam_state: "in-progress"
-  current_index: number
-  time_remaining: number
-  review_state: "summary" | "question"
-  answers: SaveAttemptAnswer[]
-  break_1_offered_at: string | null
-  break_2_offered_at: string | null
-}
+  exam_state: "in-progress";
+  current_index: number;
+  time_remaining: number;
+  review_state: "summary" | "question";
+  answers: SaveAttemptAnswer[];
+  break_1_offered_at: string | null;
+  break_2_offered_at: string | null;
+};
 
 export type SaveAttemptCompleted = {
-  exam_state: "completed"
-  current_index: number
-  time_remaining: number
-  review_state: "summary" | "question"
-  answers: SaveAttemptAnswer[]
-  score: number
-  status: "pass" | "fail"
-}
+  exam_state: "completed";
+  current_index: number;
+  time_remaining: number;
+  review_state: "summary" | "question";
+  answers: SaveAttemptAnswer[];
+  score: number;
+  status: "pass" | "fail";
+};
 
-export type SaveAttemptRequestBody = SaveAttemptInProgress | SaveAttemptCompleted
+export type SaveAttemptRequestBody =
+  | SaveAttemptInProgress
+  | SaveAttemptCompleted;

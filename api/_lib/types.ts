@@ -18,8 +18,7 @@ export type AppErrorCode =
   | "ATTEMPT_SAVE_FAILED"
   | "NOT_FOUND"
   | "FORBIDDEN"
-  | "CONFLICT"
-
+  | "CONFLICT";
 
 export type ApiSuccess<T> = {
   success: true;
@@ -37,200 +36,223 @@ export type ApiError = {
 export type ApiResponse<T> = ApiSuccess<T> | ApiError;
 
 export type SendEmailRequestBody = {
-  subject: string
-  text: string
-  html?: string
+  subject: string;
+  text: string;
+  html?: string;
   attachments?: {
-    filename: string
+    filename: string;
     /** pdf content in base64 */
-    content: string
-  }[]
-}
+    content: string;
+  }[];
+};
 
 // Minimal exam types scoped to the API — not shared with the frontend
-export type LangCode = 'ar' | 'en'
+export type LangCode = "ar" | "en";
 
 export type ReportChoice = {
-  text: string
-  correct: boolean
-}
+  text: string;
+  correct: boolean;
+};
 
 export type ReportQuestion = {
-  id: number
-  type: string
-  categoryId: number
-  text: string
-  explanation: string
-  choices: ReportChoice[]
-  answer: number[]
-}
+  id: number;
+  type: string;
+  categoryId: number;
+  text: string;
+  explanation: string;
+  choices: ReportChoice[];
+  answer: number[];
+};
 
 export type ReportTranslations = {
-  companyName: string
-  reportTitle: string
-  missing: string
-  correct: string
-  incorrect: string
-  explanation: string
-  fullName: string
-}
+  companyName: string;
+  reportTitle: string;
+  missing: string;
+  correct: string;
+  incorrect: string;
+  explanation: string;
+  fullName: string;
+};
 
 export type GenerateReportRequestBody = {
-  exam: ReportQuestion[]
-  userAnswers: number[][]
-  langCode: LangCode
-  userFullName: string
-  translations: ReportTranslations
-}
-
+  exam: ReportQuestion[];
+  userAnswers: number[][];
+  langCode: LangCode;
+  userFullName: string;
+  translations: ReportTranslations;
+};
 
 export type SignupRequestBody = {
-  email: string
-  password: string
-  first_name: string
-  last_name: string
-}
+  email: string;
+  password: string;
+  first_name: string;
+  last_name: string;
+};
 
 export type AppErrorParams = {
-  statusCode: number
-  code: AppErrorCode
-  message: string
-}
+  statusCode: number;
+  code: AppErrorCode;
+  message: string;
+};
 
-export type ApiHandler = (req: Request) => Promise<Response>
+export type ApiHandler = (req: Request) => Promise<Response>;
 
 export type SigninRequestBody = {
-  email: string
-  password: string
+  email: string;
+  password: string;
   /**
    * When `false`, signin is rejected with `SESSION_CONFLICT` if the user already has an active session.
    * When `true`, all other active sessions are terminated and the new session proceeds.
    *
    * Must always be sent explicitly — there is no default.
    */
-  force: boolean
-}
+  force: boolean;
+};
 
-export type Role = "student" | "supervisor"
+export type Role = "student" | "supervisor";
 
 export type User = {
-  id: string
-  email: string
-  first_name: string
-  last_name: string
-  expires_at: string
-  role: Role
-}
+  id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  expires_at: string;
+  role: Role;
+};
 
 export type SigninResult = {
-  user: User
-  access_token: string
-  refresh_token: string
-}
+  user: User;
+  access_token: string;
+  refresh_token: string;
+};
 
 export type TokenExchangeRequestBody = {
-  access_token: string
-  refresh_token: string
-}
+  access_token: string;
+  refresh_token: string;
+};
 
-export type PasswordResetRequestBody = Pick<SigninRequestBody, "email">
+export type PasswordResetRequestBody = Pick<SigninRequestBody, "email">;
 
-export type UpdatePasswordRequestBody = Pick<SigninRequestBody, "password">
+export type UpdatePasswordRequestBody = Pick<SigninRequestBody, "password">;
 
-export type ResponseHeaders = [string, string][]
+export type ResponseHeaders = [string, string][];
 
 export type AuthUser = {
-  id: string
-  email: string
-  accessToken: string
-}
+  id: string;
+  email: string;
+  accessToken: string;
+};
 
-export type AuthenticatedApiHandler = (req: Request, authUser: AuthUser, cookieHeaders?: ResponseHeaders) => Promise<Response>
+export type AuthenticatedApiHandler = (
+  req: Request,
+  authUser: AuthUser,
+  cookieHeaders?: ResponseHeaders,
+) => Promise<Response>;
 
 type InsertAttemptFull = {
-  exam_type: "full"
-  exam_id: number
-  category_id: null
-  question_ids: number[]
-  choices_orders: number[][]
-  duration_minutes: number
-}
+  exam_type: "full";
+  exam_id: number;
+  category_id: null;
+  question_ids: number[];
+  choices_orders: number[][];
+  duration_minutes: number;
+};
 
 type InsertAttemptDomain = {
-  exam_type: "domain"
-  category_id: number
-  exam_id: null
-  question_ids: number[]
-  choices_orders: number[][]
-  duration_minutes: number
-}
+  exam_type: "domain";
+  category_id: number;
+  exam_id: null;
+  question_ids: number[];
+  choices_orders: number[][];
+  duration_minutes: number;
+};
 
-export type InsertAttemptRequestBody = InsertAttemptFull | InsertAttemptDomain
+export type InsertAttemptRequestBody = InsertAttemptFull | InsertAttemptDomain;
 
-export type BackendExamType = "full" | "domain"
+export type BackendExamType = "full" | "domain";
 
 export type AttemptSummary = {
-  id: string
-  exam_type: BackendExamType
-  exam_id: number | null
-  category_id: number | null
-  exam_state: "in-progress" | "completed"
-  score: number
-  status: "pass" | "fail" | null
-  created_at: string
-}
+  id: string;
+  exam_type: BackendExamType;
+  exam_id: number | null;
+  category_id: number | null;
+  exam_state: "in-progress" | "completed";
+  score: number;
+  status: "pass" | "fail" | null;
+  created_at: string;
+  time_remaining: number;
+  total_questions: number;
+};
 
 /** Full attempt row returned by GET /api/attempts/:id — includes all mutable resume fields. */
 export type AttemptDetail = AttemptSummary & {
-  current_index: number
-  time_remaining: number
-  review_state: "summary" | "question"
-  email_report_state: "unsent" | "pending" | "sent" | "failed"
-  break_1_offered_at: string | null
-  break_2_offered_at: string | null
-}
+  current_index: number;
+  review_state: "summary" | "question";
+  email_report_state: "unsent" | "pending" | "sent" | "failed";
+  break_1_offered_at: string | null;
+  break_2_offered_at: string | null;
+};
 
 export type ListAttemptsResult = {
-  attempts: AttemptSummary[]
-}
+  attempts: AttemptSummary[];
+};
 
 export type AttemptQuestion = {
-  question_index: number
-  question_id: number
-  choices_order: number[]
-  selected_choices: number[]
-  is_bookmarked: boolean
-}
+  question_index: number;
+  question_id: number;
+  choices_order: number[];
+  selected_choices: number[];
+  is_bookmarked: boolean;
+};
 
 export type GetAttemptResult = {
-  attempt: AttemptDetail
-  questions: AttemptQuestion[]
-}
+  attempt: AttemptDetail;
+  questions: AttemptQuestion[];
+};
 
 export type SaveAttemptAnswer = {
-  question_index: number
-  selected_choices: number[]
-  is_bookmarked: boolean
-}
+  question_index: number;
+  selected_choices: number[];
+  is_bookmarked: boolean;
+};
 
 export type SaveAttemptInProgress = {
-  exam_state: "in-progress"
-  current_index: number
-  time_remaining: number
-  review_state: "summary" | "question"
-  answers: SaveAttemptAnswer[]
-  break_1_offered_at: string | null
-  break_2_offered_at: string | null
-}
+  exam_state: "in-progress";
+  current_index: number;
+  time_remaining: number;
+  review_state: "summary" | "question";
+  answers: SaveAttemptAnswer[];
+  break_1_offered_at: string | null;
+  break_2_offered_at: string | null;
+};
 
 export type SaveAttemptCompleted = {
-  exam_state: "completed"
-  current_index: number
-  time_remaining: number
-  review_state: "summary" | "question"
-  answers: SaveAttemptAnswer[]
-  score: number
-  status: "pass" | "fail"
-}
+  exam_state: "completed";
+  current_index: number;
+  time_remaining: number;
+  review_state: "summary" | "question";
+  answers: SaveAttemptAnswer[];
+  score: number;
+  status: "pass" | "fail";
+};
 
-export type SaveAttemptRequestBody = SaveAttemptInProgress | SaveAttemptCompleted
+export type SaveAttemptRequestBody =
+  | SaveAttemptInProgress
+  | SaveAttemptCompleted;
+
+export type StudentSearchResult = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  created_at: string;
+};
+
+export type SearchStudentsResult = {
+  students: StudentSearchResult[];
+};
+
+export type StudentAttemptsResult = {
+  student: StudentSearchResult;
+  attempts: AttemptSummary[];
+};

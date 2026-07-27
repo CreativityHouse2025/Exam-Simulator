@@ -190,6 +190,16 @@ export type Database = {
         }
         Returns: string
       }
+      search_students: {
+        Args: { p_limit: number; p_query: string }
+        Returns: {
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+        }[]
+      }
     }
     Enums: {
       user_role: "student" | "supervisor"

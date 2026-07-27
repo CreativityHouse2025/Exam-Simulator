@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef, useCallback } from "react"
-import { AuthContext } from "../contexts"
-import { translate } from "../utils/translation"
-import { apiFetch, registerUnauthorizedHandler } from "../utils/apiFetch"
-import { AppApiError } from "../errors"
-import type { ApiResponse, AppErrorCode, AuthStatus, User } from "../types"
+import { useState, useEffect, useRef, useCallback } from "react";
+import { AuthContext } from "../contexts";
+import { apiFetch, registerUnauthorizedHandler } from "../utils/apiFetch";
+import { createErrorCodeTranslator } from "../utils/errorTranslation";
+import { AppApiError } from "../errors";
+import type { ApiResponse, AppErrorCode, AuthStatus, User } from "../types";
 
 type AuthErrorCode = Extract<
   AppErrorCode,
@@ -21,7 +21,7 @@ type AuthErrorCode = Extract<
   | "INTERNAL_ERROR"
   | "METHOD_NOT_ALLOWED"
   | "PASSWORD_UPDATE_FAILED"
->
+>;
 
 const errorCodeToTranslationKey: Record<AuthErrorCode, string> = {
   INVALID_CREDENTIALS: "auth.errors.server-invalid-credentials",
@@ -38,22 +38,26 @@ const errorCodeToTranslationKey: Record<AuthErrorCode, string> = {
   INTERNAL_ERROR: "auth.errors.server-unknown",
   METHOD_NOT_ALLOWED: "auth.errors.server-unknown",
   PASSWORD_UPDATE_FAILED: "auth.errors.server-unknown",
-}
+};
 
-function translateErrorCode(code: AppErrorCode): string {
-  const key = errorCodeToTranslationKey[code as AuthErrorCode]
-  return key ? translate(key) : translate("auth.errors.server-unknown")
-}
+const translateErrorCode = createErrorCodeTranslator<AuthErrorCode>(
+  errorCodeToTranslationKey,
+  "auth.errors.server-unknown",
+);
 
 /** Provides auth state and lifecycle methods to the app. Restores session from cookies via /me on mount. */
-export default function AuthContextProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
-  const [authStatus, setAuthStatus] = useState<AuthStatus>("pending")
-  const sessionCheckCancelled = useRef(false)
+export default function AuthContextProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [user, setUser] = useState<User | null>(null);
+  const [authStatus, setAuthStatus] = useState<AuthStatus>("pending");
+  const sessionCheckCancelled = useRef(false);
 
   const cancelSessionCheck = useCallback(() => {
-    sessionCheckCancelled.current = true
-  }, [])
+    sessionCheckCancelled.current = true;
+  }, []);
 
   const signIn = useCallback(
     async (email: string, password: string, force: boolean) => {
@@ -62,62 +66,78 @@ export default function AuthContextProvider({ children }: { children: React.Reac
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, force }),
         handleUnauthorized: false,
-      })
+      });
 
-      const result: ApiResponse<{ user: User }> = await response.json()
+      const result: ApiResponse<{ user: User }> = await response.json();
 
       if (!result.success) {
-        throw new AppApiError(translateErrorCode(result.error.code), result.error.code)
+        throw new AppApiError(
+          translateErrorCode(result.error.code),
+          result.error.code,
+        );
       }
 
-      cancelSessionCheck()
-      setUser(result.data.user)
-      setAuthStatus("authenticated")
+      cancelSessionCheck();
+      setUser(result.data.user);
+      setAuthStatus("authenticated");
     },
     [cancelSessionCheck],
-  )
+  );
 
   const signUp = useCallback(
-    async (email: string, password: string, firstName: string, lastName: string) => {
+    async (
+      email: string,
+      password: string,
+      firstName: string,
+      lastName: string,
+    ) => {
       const response = await apiFetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, first_name: firstName, last_name: lastName }),
+        body: JSON.stringify({
+          email,
+          password,
+          first_name: firstName,
+          last_name: lastName,
+        }),
         handleUnauthorized: false,
-      })
+      });
 
-      const result: ApiResponse<null> = await response.json()
+      const result: ApiResponse<null> = await response.json();
 
       if (!result.success) {
-        throw new Error(translateErrorCode(result.error.code))
+        throw new Error(translateErrorCode(result.error.code));
       }
 
       // Do NOT set user — email confirmation is required first
     },
     [],
-  )
+  );
 
   const exchangeToken = useCallback(
     async (accessToken: string, refreshToken: string) => {
       const response = await apiFetch("/api/auth/token-exchange", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ access_token: accessToken, refresh_token: refreshToken }),
+        body: JSON.stringify({
+          access_token: accessToken,
+          refresh_token: refreshToken,
+        }),
         handleUnauthorized: false,
-      })
+      });
 
-      const result: ApiResponse<{ user: User }> = await response.json()
+      const result: ApiResponse<{ user: User }> = await response.json();
 
       if (!result.success) {
-        throw new Error(translateErrorCode(result.error.code))
+        throw new Error(translateErrorCode(result.error.code));
       }
 
-      cancelSessionCheck()
-      setUser(result.data.user)
-      setAuthStatus("authenticated")
+      cancelSessionCheck();
+      setUser(result.data.user);
+      setAuthStatus("authenticated");
     },
     [cancelSessionCheck],
-  )
+  );
 
   const requestPasswordReset = useCallback(async (email: string) => {
     const response = await apiFetch("/api/auth/password-reset", {
@@ -125,14 +145,14 @@ export default function AuthContextProvider({ children }: { children: React.Reac
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
       handleUnauthorized: false,
-    })
+    });
 
-    const result: ApiResponse<null> = await response.json()
+    const result: ApiResponse<null> = await response.json();
 
     if (!result.success) {
-      throw new Error(translateErrorCode(result.error.code))
+      throw new Error(translateErrorCode(result.error.code));
     }
-  }, [])
+  }, []);
 
   const updatePassword = useCallback(async (password: string) => {
     const response = await apiFetch("/api/auth/update-password", {
@@ -140,66 +160,71 @@ export default function AuthContextProvider({ children }: { children: React.Reac
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password }),
       handleUnauthorized: true,
-    })
+    });
 
-    const result: ApiResponse<null> = await response.json()
+    const result: ApiResponse<null> = await response.json();
 
     if (!result.success) {
-      throw new Error(translateErrorCode(result.error.code))
+      throw new Error(translateErrorCode(result.error.code));
     }
-  }, [])
+  }, []);
 
   const signOut = useCallback(
     async (onSuccess?: () => void) => {
       try {
-        await apiFetch("/api/auth/signout", { method: "POST", handleUnauthorized: false })
+        await apiFetch("/api/auth/signout", {
+          method: "POST",
+          handleUnauthorized: false,
+        });
       } finally {
-        cancelSessionCheck()
-        setUser(null)
-        setAuthStatus("unauthenticated")
-        onSuccess?.()
+        cancelSessionCheck();
+        setUser(null);
+        setAuthStatus("unauthenticated");
+        onSuccess?.();
       }
     },
     [cancelSessionCheck],
-  )
+  );
 
   // Let apiFetch sign the user out when the backend returns 401 (session revoked/expired).
   useEffect(() => {
-    registerUnauthorizedHandler(() => signOut())
-  }, [signOut])
+    registerUnauthorizedHandler(() => signOut());
+  }, [signOut]);
 
   useEffect(() => {
-    let unmounted = false
+    let unmounted = false;
 
     async function checkSession() {
       try {
-        const response = await apiFetch("/api/auth/me", { handleUnauthorized: false })
-        const result: ApiResponse<{ user: User }> = await response.json()
+        const response = await apiFetch("/api/auth/me", {
+          handleUnauthorized: false,
+        });
+        const result: ApiResponse<{ user: User }> = await response.json();
 
         // unmounted: component no longer exists, don't update state
         // sessionCheckCancelled: an active auth flow (signIn, exchangeToken) took over
-        if (unmounted || sessionCheckCancelled.current) return
+        if (unmounted || sessionCheckCancelled.current) return;
 
         if (result.success) {
-          setUser(result.data.user)
-          setAuthStatus("authenticated")
+          setUser(result.data.user);
+          setAuthStatus("authenticated");
         } else {
-          setAuthStatus("unauthenticated")
+          setAuthStatus("unauthenticated");
         }
       } catch {
         //                don't override active auth flows
         if (!unmounted && !sessionCheckCancelled.current) {
-          setAuthStatus("unauthenticated")
+          setAuthStatus("unauthenticated");
         }
       }
     }
 
-    checkSession()
+    checkSession();
 
     return () => {
-      unmounted = true
-    }
-  }, [])
+      unmounted = true;
+    };
+  }, []);
 
   const value = {
     user,
@@ -211,7 +236,7 @@ export default function AuthContextProvider({ children }: { children: React.Reac
     requestPasswordReset,
     updatePassword,
     signOut,
-  }
+  };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
