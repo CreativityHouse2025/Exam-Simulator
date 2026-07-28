@@ -4,7 +4,7 @@ import { withRole } from "../_lib/middleware/withRole.js"
 import { successResponse } from "../_lib/utils/response.js"
 import { parseJsonBody } from "../_lib/utils/parseBody.js"
 import { validateInsertAttempt } from "../_lib/validators/attemptValidators.js"
-import { insertAttempt, listAttempts } from "../_lib/services/attemptService.js"
+import { insertAttempt, getRecentAttemptsByUserId } from "../_lib/services/attemptService.js"
 import type { InsertAttemptRequestBody, ListAttemptsResult } from "../_lib/types.js"
 
 // Maps to POST /api/attempts
@@ -17,6 +17,6 @@ export const POST = withErrorHandler(withAuth(withRole(["student"], async (reque
 
 // Maps to GET /api/attempts
 export const GET = withErrorHandler(withAuth(withRole(["student"], async (_request, authUser, cookieHeaders) => {
-  const result: ListAttemptsResult = await listAttempts(authUser.id)
+  const result: ListAttemptsResult = await getRecentAttemptsByUserId(authUser.id, 15)
   return successResponse(result, 200, cookieHeaders)
 })))
