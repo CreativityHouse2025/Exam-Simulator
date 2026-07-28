@@ -1,6 +1,6 @@
 import { supabaseAdmin } from "../supabaseClient.js";
 import { AppError } from "../errors/AppError.js";
-import { listAttempts } from "./attemptService.js";
+import { getRecentAttemptsByUserId } from "./attemptService.js";
 import type { SearchStudentsResult, StudentAttemptsResult } from "../types.js";
 
 /**
@@ -10,8 +10,9 @@ import type { SearchStudentsResult, StudentAttemptsResult } from "../types.js";
  *
  * @throws {AppError} 500 `INTERNAL_ERROR` — DB query failed.
  */
-export async function searchStudents(
+export async function searchStudentsByEmailOrName(
   query: string | null,
+  rowLimit: number = 30
 ): Promise<SearchStudentsResult> {
   if (query === null) {
     return { students: [] };
@@ -19,7 +20,7 @@ export async function searchStudents(
 
   const { data, error } = await supabaseAdmin.rpc("search_students", {
     p_query: query,
-    p_limit: 30,
+    p_limit: rowLimit,
   });  
   
 
@@ -35,7 +36,7 @@ export async function searchStudents(
 }
 
 /**
- * Returns a student's profile and their last 10 attempts, newest first.
+ * Returns a student's profile and their attempts, newest first.
  *
  * @throws {AppError} 404 `NOT_FOUND` — no such student, or the target user isn't a student.
  * @throws {AppError} 500 `INTERNAL_ERROR` — DB query failed.
@@ -68,7 +69,7 @@ export async function getStudentAttempts(
     });
   }
 
-  const { attempts } = await listAttempts(studentId);
+  const { attempts } = await getRecentAttemptsByUserId(studentId, 15);
 
   return {
     student: {

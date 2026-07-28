@@ -108,13 +108,16 @@ export async function saveAttempt(
 }
 
 /**
- * Returns a user's last 10 attempts, newest first. Used both for a student's own history
+ * Returns a user's recent attempts, newest first. Used both for a student's own history
  * and, for a supervisor, an arbitrary student's history.
+ * 
+ * Number of returned attempts is 50 by default
  *
  * @throws {AppError} 500 `INTERNAL_ERROR` — DB query failed.
  */
-export async function listAttempts(
+export async function getRecentAttemptsByUserId(
   userId: string,
+  numOfAttempts: number = 50
 ): Promise<ListAttemptsResult> {
   const { data, error } = await supabaseAdmin
     .from("exam_attempts")
@@ -123,7 +126,7 @@ export async function listAttempts(
     )
     .eq("user_id", userId)
     .order("created_at", { ascending: false })
-    .limit(10);
+    .limit(numOfAttempts);
 
   if (error) {
     throw new AppError({
