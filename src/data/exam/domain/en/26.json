@@ -1,0 +1,242 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "A project manager configures an AI tool to automatically generate the project's weekly status report and distribute it to stakeholders. After two weeks, a stakeholder points out that one report contained an incorrect milestone date that was never corrected before it was sent.\nWhat should the project manager have done?",
+    "explanation": "Even for routine automation, the project manager remains responsible for reviewing outputs and making final decisions. A quick validation step would have caught the wrong milestone date before it reached stakeholders.",
+    "choices": [
+      {
+        "text": "Allowed the AI tool to send reports automatically since automation is meant to remove manual effort",
+        "correct": false
+      },
+      {
+        "text": "Reviewed and validated the AI-generated report before it was distributed to stakeholders",
+        "correct": true
+      },
+      {
+        "text": "Asked a team member to rewrite every report manually to avoid relying on the AI tool",
+        "correct": false
+      },
+      {
+        "text": "Removed the milestone dates from the report template to prevent future errors",
+        "correct": false
+      }
+    ],
+    "id": 2950
+  },
+  {
+    "type": "multiple-choice",
+    "text": "During vendor selection, a project manager uses an AI tool to compare three suppliers on cost, risk, and delivery time. The AI ranks one supplier highest. A team member suggests simply awarding the contract to the top-ranked supplier to save time.\nWhat should the project manager do?",
+    "explanation": "AI here is acting as decision support. The project manager must review the recommendation, apply judgment, and own the final decision.",
+    "choices": [
+      {
+        "text": "Award the contract to the AI's top-ranked supplier because the analysis was data-driven",
+        "correct": false
+      },
+      {
+        "text": "Ask the AI tool to re-run the analysis until it produces a clearer winner",
+        "correct": false
+      },
+      {
+        "text": "Review the AI analysis, apply human judgment, and make the final selection decision",
+        "correct": true
+      },
+      {
+        "text": "Transfer responsibility for the vendor decision to the AI tool to remove personal bias",
+        "correct": false
+      }
+    ],
+    "id": 2951
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager uses an AI tool to assign upcoming tasks based on skills and availability. Over several iterations, the project manager notices the tool consistently routes the most visible, high-value work to the same few team members and rarely to others with comparable skills.\nWhat should the project manager do?",
+    "explanation": "The project manager must review AI outputs for fairness and accuracy and ensure AI is not used in ways that produce unfair results for individuals or groups.",
+    "choices": [
+      {
+        "text": "Continue using the assignments because the AI is optimizing for skills and availability",
+        "correct": false
+      },
+      {
+        "text": "Review the AI outputs for fairness and accuracy before applying the task assignments",
+        "correct": true
+      },
+      {
+        "text": "Stop using AI for any project task to eliminate the possibility of unfair outcomes",
+        "correct": false
+      },
+      {
+        "text": "Inform the overlooked team members that the AI tool determines all assignments",
+        "correct": false
+      }
+    ],
+    "id": 2952
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager wants to use a public AI tool to summarize stakeholder feedback. The feedback file contains customers' personal contact details and some confidential commercial terms.\nWhat should the project manager do first?",
+    "explanation": "Sensitive information should only be used with proper authorization and safeguards, and the project manager is responsible for protecting stakeholder and customer data.",
+    "choices": [
+      {
+        "text": "Upload the full file to the public tool so the summary captures every detail",
+        "correct": false
+      },
+      {
+        "text": "Check privacy and data protection requirements and obtain proper authorization before using the data",
+        "correct": true
+      },
+      {
+        "text": "Ask a team member to upload the file from their own account to avoid responsibility",
+        "correct": false
+      },
+      {
+        "text": "Skip the summary entirely because AI can never be used with stakeholder data",
+        "correct": false
+      }
+    ],
+    "id": 2953
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project faces a complex, uncertain strategic decision with several possible directions, each with different long-term trade-offs. The project manager uses an AI tool to compare the options, model scenarios, and forecast outcomes.\nHow should the project manager use the AI in this situation?",
+    "explanation": "For complex, strategic, or uncertain decisions, AI acts as a thought partner to compare options and explore scenarios, while the project manager stays accountable for the final call.",
+    "choices": [
+      {
+        "text": "Let the AI select the strategic direction since it can forecast outcomes more quickly",
+        "correct": false
+      },
+      {
+        "text": "Avoid using AI because complex decisions should never involve AI support",
+        "correct": false
+      },
+      {
+        "text": "Forward the AI's forecast directly to the sponsor as the project's recommended direction",
+        "correct": false
+      },
+      {
+        "text": "Use the AI as a thought partner to explore options while the project manager remains accountable for the final decision",
+        "correct": true
+      }
+    ],
+    "id": 2954
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager uses an AI tool to generate images and copy for a product launch. A team member wants to publish the AI-generated material immediately to meet the launch deadline.\nWhat should the project manager do?",
+    "explanation": "The project manager must verify that content can legally be used and that copyright, licensing, and intellectual property rules are followed before the team relies on AI-generated work.",
+    "choices": [
+      {
+        "text": "Verify that the AI-generated content can legally be used before publishing it",
+        "correct": true
+      },
+      {
+        "text": "Publish the material right away to keep the launch on schedule",
+        "correct": false
+      },
+      {
+        "text": "Replace all AI content with stock material without checking its source either",
+        "correct": false
+      },
+      {
+        "text": "Ask the AI tool to confirm in writing that the content is free of any restrictions",
+        "correct": false
+      }
+    ],
+    "id": 2955
+  },
+  {
+    "type": "multiple-choice",
+    "text": "After a project decision is announced, a stakeholder is surprised to learn that an AI tool was heavily involved in producing the analysis behind it. The stakeholder says they would have asked different questions had they known.\nWhat should the project manager have done?",
+    "explanation": "Project teams should be clear about how AI is used, and stakeholders should understand when AI supports project work or decisions. Openness preserves trust.",
+    "choices": [
+      {
+        "text": "Kept the use of AI private to avoid raising doubts about the analysis",
+        "correct": false
+      },
+      {
+        "text": "Told the stakeholder the analysis was fully manual to preserve their confidence",
+        "correct": false
+      },
+      {
+        "text": "Been clear with stakeholders about how AI was being used to support the work and decisions",
+        "correct": true
+      },
+      {
+        "text": "Removed AI from the project so transparency would no longer be a concern",
+        "correct": false
+      }
+    ],
+    "id": 2956
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project is behind schedule. An AI tool suggests that skipping a planned safety test would let the team deliver on time with little apparent downside. A team member supports following the AI's suggestion.\nWhat should the project manager do?",
+    "explanation": "The project manager must make sure AI does not create unsafe outcomes, must not let it bypass safety requirements, and must escalate and address safety concerns.",
+    "choices": [
+      {
+        "text": "Follow the AI's suggestion to skip the test so the deadline can be met",
+        "correct": false
+      },
+      {
+        "text": "Ensure AI is not used to bypass safety requirements and escalate the safety concern",
+        "correct": true
+      },
+      {
+        "text": "Reduce the scope of the safety test by half as a compromise on the AI's advice",
+        "correct": false
+      },
+      {
+        "text": "Let the team vote on whether the AI's suggestion to skip the test should be followed",
+        "correct": false
+      }
+    ],
+    "id": 2957
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project manager uses an AI tool to produce a first draft of the project schedule. The draft looks reasonable and the team is eager to start work based on it.\nWhat should the project manager do next?",
+    "explanation": "When AI assists by creating a draft, the project manager must review, refine, and adjust the output. The slides use a draft schedule as the example of assistance that the project manager validates.",
+    "choices": [
+      {
+        "text": "Lock in the AI-generated schedule and begin work, since the draft looks reasonable",
+        "correct": false
+      },
+      {
+        "text": "Hand the schedule to the team and let the AI tool resolve any future conflicts on its own",
+        "correct": false
+      },
+      {
+        "text": "Ask the sponsor to approve the AI draft schedule without team review to save time",
+        "correct": false
+      },
+      {
+        "text": "Validate and adjust the AI-generated draft schedule before the team commits to it",
+        "correct": true
+      }
+    ],
+    "id": 2958
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A project team has fallen into a habit of routing nearly every small task, including simple ones, through an AI tool. The project manager is asked to confirm that AI is being used appropriately on the project.\nWhat should the project manager do?",
+    "explanation": "Responsible AI use includes using AI where it adds real value and considering efficiency and sustainability, since not every task requires AI.",
+    "choices": [
+      {
+        "text": "Confirm that AI is used where it adds real value and consider its efficiency and environmental impact",
+        "correct": true
+      },
+      {
+        "text": "Encourage even more AI use so the team gets maximum value from the tool",
+        "correct": false
+      },
+      {
+        "text": "Ban AI entirely so the team returns to manual work for every task",
+        "correct": false
+      },
+      {
+        "text": "Let the team continue using AI for everything since it is faster than deciding case by case",
+        "correct": false
+      }
+    ],
+    "id": 2959
+  }
+]
