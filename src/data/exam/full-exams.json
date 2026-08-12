@@ -1,5 +1,13 @@
 [
   {
+    "id": 17,
+    "name": {
+      "en": "PMP Aug 2026",
+      "ar": "اختبار PMP Aug 2026"
+    },
+    "questionCount": 178
+  },
+  {
     "id": 16,
     "name": {
       "en": "PMP Core 2026",
