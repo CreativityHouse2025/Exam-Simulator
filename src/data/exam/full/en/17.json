@@ -2346,11 +2346,11 @@
       },
       {
         "text": "Submit the recommendation to the sponsor for immediate approval.",
-        "correct": true
+        "correct": false
       },
       {
         "text": "Review the recommendation to ensure quality and safety requirements continue to be satisfied before changing the schedule.",
-        "correct": false
+        "correct": true
       },
       {
         "text": "Ask the quality manager to determine whether the inspections are still necessary.",
@@ -2374,11 +2374,11 @@
       },
       {
         "text": "Create a risk matrix that maps current migration requirements to deliverables to identify potential failure points.",
-        "correct": true
+        "correct": false
       },
       {
         "text": "Review records and documentation from the previous migration to identify the patterns and root causes that led to the data integrity issues.",
-        "correct": false
+        "correct": true
       }
     ],
     "id": 3058
