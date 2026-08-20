@@ -902,11 +902,11 @@
       },
       {
         "text": "Notify the project sponsor of the variances and request permission to modify the project management plan.",
-        "correct": true
+        "correct": false
       },
       {
         "text": "Analyze the root causes of the variances and submit formal change requests for any updates that require baseline modifications.",
-        "correct": false
+        "correct": true
       },
       {
         "text": "Issue corrective action directives to bring performance back within thresholds before making any plan updates.",
