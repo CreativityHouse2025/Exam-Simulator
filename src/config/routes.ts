@@ -2,6 +2,7 @@ import type { ExamListItem } from "../pages/exam-library/types";
 
 const EXAMS = "/exams";
 const EXAM = "/exam";
+const EXAM_PREVIEW = "/exam-preview";
 const STUDENTS = "/students";
 
 /**
@@ -22,6 +23,10 @@ export const ROUTES = {
     pattern: EXAM,
     to: (attemptId: string, revision = false) =>
       `${EXAM}?id=${attemptId}${revision ? "&revision=1" : ""}`,
+  },
+  examPreview: {
+    pattern: EXAM_PREVIEW,
+    to: (attemptId: string) => `${EXAM_PREVIEW}?id=${attemptId}`,
   },
   exams: EXAMS,
   examDetail: {

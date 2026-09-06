@@ -174,6 +174,10 @@ const App: React.FC = () => {
                   path={ROUTES.examDetail.pattern}
                   element={<ExamDetailPage />}
                 />
+                <Route
+                  path={ROUTES.examPreview.pattern}
+                  element={<ExamPage />}
+                />
                 <Route path={ROUTES.students} element={<StudentSearchPage />} />
                 <Route
                   path={ROUTES.studentAttempts.pattern}

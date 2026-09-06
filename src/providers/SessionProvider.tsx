@@ -1,22 +1,26 @@
-import React from 'react'
-import SyncOverlay from '../components/SyncOverlay'
+import React from "react";
+import SyncOverlay from "../components/SyncOverlay";
 import {
   SessionControlContext,
   SessionDataContext,
   SessionExamContext,
   SessionNavigationContext,
   SessionTimerContext,
-} from '../contexts'
-import { startAttempt, getAttempt } from '../services/attempt.service'
-import useLatestAttemptId from '../hooks/useLatestAttempt'
-import useToast from '../hooks/useToast'
-import useSessionReducer from '../hooks/useSessionReducer'
-import { translate } from '../utils/translation'
-import { loadDomainExam, loadFullExam } from '../utils/exam'
-import { adaptAttemptToSession, adaptAttemptToRevision } from '../utils/attemptAdapter'
-import { AppApiError } from '../errors'
-import type { Session } from '../types'
-import useSettings from '../hooks/useSettings'
+} from "../contexts";
+import { startAttempt, getAttempt } from "../services/attempt.service";
+import useLatestAttemptId from "../hooks/useLatestAttempt";
+import useToast from "../hooks/useToast";
+import useSessionReducer from "../hooks/useSessionReducer";
+import { translate } from "../utils/translation";
+import { loadDomainExam, loadFullExam } from "../utils/exam";
+import {
+  adaptAttemptToSession,
+  adaptAttemptToRevision,
+} from "../utils/attemptAdapter";
+import { AppApiError } from "../errors";
+import { PREVIEW_ATTEMPT_ID, PREVIEW_TIME_SECONDS } from "../constants";
+import type { Session, StartNewExamParams } from "../types";
+import useSettings from "../hooks/useSettings";
 
 /**
  * Manages the full Session lifecycle and wires the session reducer into the 5 split context providers.
@@ -29,13 +33,26 @@ import useSettings from '../hooks/useSettings'
  * When no session is active, SessionControlContext exposes session: null so StudentDashboardPage and
  * AttemptHistoryPage can call startNewExam / resumeAttempt / startRevision before any session is mounted.
  */
-export default function SessionProvider({ children }: { children: React.ReactNode }) {
-  const [startingSession, setStartingSession] = React.useState<Session | null>(null)
-  const { session, sessionUpdate, contextValues, syncProgress, submitExam, saveBreakOffer } = useSessionReducer(startingSession)
-  const { showToast } = useToast()
+export default function SessionProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [startingSession, setStartingSession] = React.useState<Session | null>(
+    null,
+  );
+  const {
+    session,
+    sessionUpdate,
+    contextValues,
+    syncProgress,
+    submitExam,
+    saveBreakOffer,
+  } = useSessionReducer(startingSession);
+  const { showToast } = useToast();
 
-  const [, setLatestAttemptId] = useLatestAttemptId()
-  const langCode = useSettings().settings.language
+  const [, setLatestAttemptId] = useLatestAttemptId();
+  const langCode = useSettings().settings.language;
 
   /**
    * Loads the exam file, persists the initial attempt snapshot to the DB, builds the
@@ -49,48 +66,61 @@ export default function SessionProvider({ children }: { children: React.ReactNod
    * Returns the new attemptId on success, or null on failure.
    */
   const startNewExam = React.useCallback(
-    async (type: Session['examType'], examOrCategoryId: number): Promise<string | null> => {
+    async ({
+      type,
+      examOrCategoryId,
+      preview = false,
+    }: StartNewExamParams): Promise<string | null> => {
       try {
         const examDetails =
-          type === 'full'
+          type === "full"
             ? await loadFullExam(examOrCategoryId, langCode)
-            : await loadDomainExam(examOrCategoryId, langCode)
+            : await loadDomainExam(examOrCategoryId, langCode);
 
-        const resolvedQuestions = examDetails.questionList
+        const resolvedQuestions = examDetails.questionList;
         if (resolvedQuestions === null) {
-          showToast(translate('cover.invalid-exam-message'), 5000)
-          return null
+          showToast(translate("cover.invalid-exam-message"), 5000);
+          return null;
         }
 
-        const choiceOrders = resolvedQuestions.map((q) => q.choices.map((_, i) => i))
-        const questionChoiceOrders: Record<number, number[]> = Object.fromEntries(
-          resolvedQuestions.map((q, i) => [q.id, choiceOrders[i]])
-        )
+        const choiceOrders = resolvedQuestions.map((q) =>
+          q.choices.map((_, i) => i),
+        );
+        const questionChoiceOrders: Record<number, number[]> =
+          Object.fromEntries(
+            resolvedQuestions.map((q, i) => [q.id, choiceOrders[i]]),
+          );
 
-        const questionIds = resolvedQuestions.map((q) => q.id)
+        const questionIds = resolvedQuestions.map((q) => q.id);
 
-        // attempt body — full exam: category must be null, domain exam: examId must be null
-        const startAttemptRequestBody =
-          type === 'full'
-            ? {
-                exam_type: 'full' as const,
-                exam_id: examOrCategoryId,
-                category_id: null,
-                question_ids: questionIds,
-                choices_orders: choiceOrders,
-                duration_minutes: examDetails.durationMinutes,
-              }
-            : {
-                exam_type: 'domain' as const,
-                category_id: examOrCategoryId,
-                exam_id: null,
-                question_ids: questionIds,
-                choices_orders: choiceOrders,
-                duration_minutes: examDetails.durationMinutes,
-              }
+        // Preview sessions are supervisor-only demos — never written to the DB or localStorage.
+        let attempt_id: string;
+        if (preview) {
+          attempt_id = PREVIEW_ATTEMPT_ID;
+        } else {
+          // attempt body — full exam: category must be null, domain exam: examId must be null
+          const startAttemptRequestBody =
+            type === "full"
+              ? {
+                  exam_type: "full" as const,
+                  exam_id: examOrCategoryId,
+                  category_id: null,
+                  question_ids: questionIds,
+                  choices_orders: choiceOrders,
+                  duration_minutes: examDetails.durationMinutes,
+                }
+              : {
+                  exam_type: "domain" as const,
+                  category_id: examOrCategoryId,
+                  exam_id: null,
+                  question_ids: questionIds,
+                  choices_orders: choiceOrders,
+                  duration_minutes: examDetails.durationMinutes,
+                };
+          ({ attempt_id } = await startAttempt(startAttemptRequestBody));
+        }
 
-        const { attempt_id } = await startAttempt(startAttemptRequestBody)
-        const maxTime = examDetails.durationMinutes * 60
+        const maxTime = preview ? PREVIEW_TIME_SECONDS : examDetails.durationMinutes * 60;
 
         const sharedSessionFields = {
           id: attempt_id,
@@ -99,33 +129,47 @@ export default function SessionProvider({ children }: { children: React.ReactNod
           maxTime,
           time: maxTime,
           // New exams render the file as-is — no subset needed.
-          questionIds: 'ALL' as const,
+          questionIds: "ALL" as const,
           index: 0,
           paused: false,
-          examState: 'in-progress' as const,
-          reviewState: 'summary' as const,
+          examState: "in-progress" as const,
+          reviewState: "summary" as const,
           bookmarks: [],
           dirtyQuestions: {},
-        }
+          preview,
+        };
 
-        const nextSession: Session = type === 'full'
-          ? { ...sharedSessionFields, examType: 'full', examId: examOrCategoryId, categoryId: null, break1OfferedAt: null, break2OfferedAt: null }
-          : { ...sharedSessionFields, examType: 'domain', categoryId: examOrCategoryId, examId: null }
+        const nextSession: Session =
+          type === "full"
+            ? {
+                ...sharedSessionFields,
+                examType: "full",
+                examId: examOrCategoryId,
+                categoryId: null,
+                break1OfferedAt: null,
+                break2OfferedAt: null,
+              }
+            : {
+                ...sharedSessionFields,
+                examType: "domain",
+                categoryId: examOrCategoryId,
+                examId: null,
+              };
 
-        setStartingSession(nextSession)
-        setLatestAttemptId(attempt_id)
-        return attempt_id
+        setStartingSession(nextSession);
+        if (!preview) setLatestAttemptId(attempt_id);
+        return attempt_id;
       } catch (error) {
         if (error instanceof AppApiError) {
-          showToast(error.message, 5000)
+          showToast(error.message, 5000);
         } else {
-          showToast(translate('attempts.errors.server-unknown'), 5000)
+          showToast(translate("attempts.errors.server-unknown"), 5000);
         }
-        return null
+        return null;
       }
     },
-    [startAttempt, showToast, setLatestAttemptId, langCode]
-  )
+    [startAttempt, showToast, setLatestAttemptId, langCode],
+  );
 
   /**
    * Fetches an in-progress attempt snapshot from the DB, hydrates the full Session state,
@@ -137,29 +181,29 @@ export default function SessionProvider({ children }: { children: React.ReactNod
   const resumeAttempt = React.useCallback(
     async (attemptId: string): Promise<string | null> => {
       try {
-        const attemptSnapshot = await getAttempt(attemptId)
-        const nextSession = adaptAttemptToSession(attemptSnapshot)
+        const attemptSnapshot = await getAttempt(attemptId);
+        const nextSession = adaptAttemptToSession(attemptSnapshot);
 
         if (!nextSession) {
-          showToast(translate('cover.invalid-exam-message'), 5000)
-          return null
+          showToast(translate("cover.invalid-exam-message"), 5000);
+          return null;
         }
 
         // return the attempt's id from DB
-        setStartingSession(nextSession)
-        setLatestAttemptId(attemptSnapshot.attempt.id)
-        return attemptSnapshot.attempt.id
+        setStartingSession(nextSession);
+        setLatestAttemptId(attemptSnapshot.attempt.id);
+        return attemptSnapshot.attempt.id;
       } catch (error) {
         if (error instanceof AppApiError) {
-          showToast(error.message, 5000)
+          showToast(error.message, 5000);
         } else {
-          showToast(translate('attempts.errors.server-unknown'), 5000)
+          showToast(translate("attempts.errors.server-unknown"), 5000);
         }
-        return null
+        return null;
       }
     },
-    [getAttempt, showToast, setLatestAttemptId]
-  )
+    [getAttempt, showToast, setLatestAttemptId],
+  );
 
   /**
    * Fetches a completed full-exam attempt snapshot from the DB, loads the corresponding
@@ -171,60 +215,85 @@ export default function SessionProvider({ children }: { children: React.ReactNod
    */
   const startRevision = React.useCallback(
     async (attemptId: string): Promise<string | null> => {
+      // Preview sessions are client-only — no attempt was ever saved, so there's nothing to fetch.
+      if (session.preview) return null;
+
       try {
-        const attemptSnapshot = await getAttempt(attemptId)
+        const attemptSnapshot = await getAttempt(attemptId);
 
         // Revision is full-exam only — guard defensively even though the UI disables the
         // Revise button for non-full attempts, so a bad call surfaces a clear message.
-        if (attemptSnapshot.attempt.exam_type !== 'full' || attemptSnapshot.attempt.exam_id == null) {
-          showToast(translate('cover.invalid-exam-message'), 5000)
-          return null
+        if (
+          attemptSnapshot.attempt.exam_type !== "full" ||
+          attemptSnapshot.attempt.exam_id == null
+        ) {
+          showToast(translate("cover.invalid-exam-message"), 5000);
+          return null;
         }
 
         // Load the exam file to resolve correct answers for each question.
         // adaptAttemptToRevision needs the raw exam (before applyQuestionChoiceOrders)
         // so it can call getCorrectOriginalIndices on each question.
-        const { questionList } = await loadFullExam(attemptSnapshot.attempt.exam_id, langCode)
+        const { questionList } = await loadFullExam(
+          attemptSnapshot.attempt.exam_id,
+          langCode,
+        );
 
         if (!questionList || questionList.length === 0) {
-          showToast(translate('cover.invalid-exam-message'), 5000)
-          return null
+          showToast(translate("cover.invalid-exam-message"), 5000);
+          return null;
         }
 
-        const revisionSession = adaptAttemptToRevision(attemptSnapshot, questionList)
+        const revisionSession = adaptAttemptToRevision(
+          attemptSnapshot,
+          questionList,
+        );
 
         if (!revisionSession) {
           // null means the user made no mistakes — nothing to revise.
-          showToast(translate('attempts.errors.no-mistakes'), 5000)
-          return null
+          showToast(translate("attempts.errors.no-mistakes"), 5000);
+          return null;
         }
 
-        setStartingSession(revisionSession)
-        return attemptId
+        setStartingSession(revisionSession);
+        return attemptId;
       } catch (error) {
         if (error instanceof AppApiError) {
-          showToast(error.message, 5000)
+          showToast(error.message, 5000);
         } else {
-          showToast(translate('attempts.errors.server-unknown'), 5000)
+          showToast(translate("attempts.errors.server-unknown"), 5000);
         }
-        return null
+        return null;
       }
     },
-    [getAttempt, showToast, langCode]
-  )
+    [getAttempt, showToast, langCode, session.preview],
+  );
 
   return (
-    <SessionControlContext.Provider value={{ session: startingSession !== null ? session : null, update: sessionUpdate, startNewExam, resumeAttempt, startRevision, syncProgress, submitExam, saveBreakOffer }}>
+    <SessionControlContext.Provider
+      value={{
+        session: startingSession !== null ? session : null,
+        update: sessionUpdate,
+        startNewExam,
+        resumeAttempt,
+        startRevision,
+        syncProgress,
+        submitExam,
+        saveBreakOffer,
+      }}
+    >
       <SessionNavigationContext.Provider value={contextValues.navigation}>
         <SessionTimerContext.Provider value={contextValues.timer}>
           <SessionExamContext.Provider value={contextValues.exam}>
             <SessionDataContext.Provider value={contextValues.data}>
               {children}
-              {startingSession !== null && <SyncOverlay visible={contextValues.data.isSyncing} />}
+              {startingSession !== null && (
+                <SyncOverlay visible={contextValues.data.isSyncing} />
+              )}
             </SessionDataContext.Provider>
           </SessionExamContext.Provider>
         </SessionTimerContext.Provider>
       </SessionNavigationContext.Provider>
     </SessionControlContext.Provider>
-  )
+  );
 }

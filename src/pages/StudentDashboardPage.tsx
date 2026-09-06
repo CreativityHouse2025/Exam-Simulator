@@ -29,14 +29,14 @@ const StudentDashboardPage: React.FC = () => {
 
   const handleFullExam = async (examId: DropdownItem["id"]) => {
     setIsStarting(true)
-    const id = await startNewExam("full", examId)
+    const id = await startNewExam({ type: "full", examOrCategoryId: examId })
     if (id) navigate(ROUTES.exam.to(id))
     else setIsStarting(false)
   }
 
   const handleDomainExam = async (categoryId: DropdownItem["id"]) => {
     setIsStarting(true)
-    const id = await startNewExam("domain", categoryId)
+    const id = await startNewExam({ type: "domain", examOrCategoryId: categoryId })
     if (id) navigate(ROUTES.exam.to(id))
     else setIsStarting(false)
   }

@@ -1,19 +1,19 @@
-import type { Choice, Exam, LangCode, Question } from '../types.js'
+import type { Choice, Exam, LangCode, Question } from "../types.js";
 
-import { formatDistance, format } from 'date-fns'
+import { formatDistance, format } from "date-fns";
 
 /**
-   * Shuffle array using Fisher-Yates algorithm
-   * @param {T[]} array - The array to shuffle
-   * @returns {T[]} - The shuffled array
-   */
+ * Shuffle array using Fisher-Yates algorithm
+ * @param {T[]} array - The array to shuffle
+ * @returns {T[]} - The shuffled array
+ */
 export function shuffleArray<T>(array: T[]): T[] {
-  const shuffled = [...array]
+  const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
-  return shuffled
+  return shuffled;
 }
 
 /**
@@ -23,9 +23,12 @@ export function shuffleArray<T>(array: T[]): T[] {
  */
 export function formatCreatedAt(date: string): string {
   try {
-    return formatDistance(new Date(date), new Date()).replace(/about|over|almost|less/, '')
+    return formatDistance(new Date(date), new Date()).replace(
+      /about|over|almost|less/,
+      "",
+    );
   } catch {
-    return 'Unknown time'
+    return "Unknown time";
   }
 }
 
@@ -36,26 +39,32 @@ export function formatCreatedAt(date: string): string {
  */
 export function formatDate(date: number | string | Date): string {
   try {
-    return format(new Date(date), 'dd/MM/yyyy')
+    return format(new Date(date), "dd/MM/yyyy");
   } catch {
-    return '00/00/0000'
+    return "00/00/0000";
   }
 }
 
 /**
- * Format seconds into HH:MM:SS
+ * Format seconds into HH:MM:SS. Supervisor preview sessions never run a real countdown —
+ * pass preview: true to render the literal placeholder instead.
  * @param {number} sec - The time in seconds to format.
+ * @param {boolean} preview - Renders '--:--:--' instead of the formatted time.
  * @returns {string}
  */
-export function formatTimer(sec: number): string {
-  try {
-    const hours = Math.floor(sec / 3600)
-    const minutes = Math.floor((sec % 3600) / 60)
-    const seconds = sec % 60
+export function formatTimer(sec: number, preview = false): string {
+  if (preview) return "--:--:--";
 
-    return [hours, minutes, seconds].map((unit) => unit.toString().padStart(2, '0')).join(':')
+  try {
+    const hours = Math.floor(sec / 3600);
+    const minutes = Math.floor((sec % 3600) / 60);
+    const seconds = sec % 60;
+
+    return [hours, minutes, seconds]
+      .map((unit) => unit.toString().padStart(2, "0"))
+      .join(":");
   } catch {
-    return '00:00:00'
+    return "00:00:00";
   }
 }
 
@@ -67,12 +76,14 @@ export function formatTimer(sec: number): string {
  */
 export function formatExam(exam: Exam): Exam {
   return exam.map((q) => {
-    if (q.type !== 'multiple-choice') {
-      throw new Error(`Unsupported question type: ${q.type}`)
+    if (q.type !== "multiple-choice") {
+      throw new Error(`Unsupported question type: ${q.type}`);
     }
-    const answer = q.choices.map((c, i) => (c.correct ? i : null)).filter((i): i is number => i !== null)
-    return { ...q, answer }
-  })
+    const answer = q.choices
+      .map((c, i) => (c.correct ? i : null))
+      .filter((i): i is number => i !== null);
+    return { ...q, answer };
+  });
 }
 
 /**
@@ -82,13 +93,16 @@ export function formatExam(exam: Exam): Exam {
  * adapter, and applyQuestionChoiceOrders — keep this as the single definition of that rule.
  */
 export function getCorrectOriginalIndices(question: Question): number[] {
-  if (question.type !== 'multiple-choice') {
-    throw new Error(`Unsupported question type: ${question.type}`)
+  if (question.type !== "multiple-choice") {
+    throw new Error(`Unsupported question type: ${question.type}`);
   }
-  return question.choices.reduce<number[]>((accumulator, choice, originalIndex) => {
-    if (choice.correct) accumulator.push(originalIndex)
-    return accumulator
-  }, [])
+  return question.choices.reduce<number[]>(
+    (accumulator, choice, originalIndex) => {
+      if (choice.correct) accumulator.push(originalIndex);
+      return accumulator;
+    },
+    [],
+  );
 }
 
 /**
@@ -97,30 +111,39 @@ export function getCorrectOriginalIndices(question: Question): number[] {
  * of correct choices (choice IDs), which are stable across any display order.
  * Pure — returns new Question/Choice objects without mutating the input.
  */
-export function applyQuestionChoiceOrders(exam: Exam, questionChoiceOrders: Record<number, number[]>): Exam {
+export function applyQuestionChoiceOrders(
+  exam: Exam,
+  questionChoiceOrders: Record<number, number[]>,
+): Exam {
   return exam.map((question) => {
-    if (question.type !== 'multiple-choice') throw new Error(`Unsupported question type: ${question.type}`)
+    if (question.type !== "multiple-choice")
+      throw new Error(`Unsupported question type: ${question.type}`);
 
     // displayOrder[i] = the original index of the choice to show at display position i
     // e.g. [3, 0, 2, 1] means: show choice[3] first, then choice[0], choice[2], choice[1]
-    const displayOrder = questionChoiceOrders[question.id]
-    if (!displayOrder) throw new Error(`Missing choice order for question id ${question.id}`)
+    const displayOrder = questionChoiceOrders[question.id];
+    if (!displayOrder)
+      throw new Error(`Missing choice order for question id ${question.id}`);
 
     // Step 1: index the raw choices by their original index (position in the exam file)
     const choicesById: Record<number, Choice> = Object.fromEntries(
-      question.choices.map((choice, originalIndex) => [originalIndex, choice])
-    )
+      question.choices.map((choice, originalIndex) => [originalIndex, choice]),
+    );
 
     // Step 2: walk the display order and place each choice at its display position,
     // stamping its original index as its ID
     const orderedChoices = displayOrder.map((choiceId) => ({
       ...choicesById[choiceId],
       originalIndex: choiceId,
-    }))
+    }));
 
     // returns the question content, with choices in the shuffled order, and the answer array by choice ID
-    return { ...question, choices: orderedChoices, answer: getCorrectOriginalIndices(question) }
-  })
+    return {
+      ...question,
+      choices: orderedChoices,
+      answer: getCorrectOriginalIndices(question),
+    };
+  });
 }
 
 /**
@@ -129,27 +152,33 @@ export function applyQuestionChoiceOrders(exam: Exam, questionChoiceOrders: Reco
  * @param {LangCode} lang - The language code.
  * @returns {string} - The formatted answer label.
  */
-export function formatCorrectAnswerLabel(question: Question, lang: LangCode): string {
+export function formatCorrectAnswerLabel(
+  question: Question,
+  lang: LangCode,
+): string {
   try {
-    if (question.type === 'multiple-choice' && Array.isArray(question.answer)) {
+    if (question.type === "multiple-choice" && Array.isArray(question.answer)) {
       // question.answer holds original indices (choice IDs); find each one's display position
       // to correctly display the choice's character
       const displayIndices = question.answer.map((origIdx) =>
-        question.choices.findIndex((c) => c.originalIndex === origIdx)
-      )
-      return displayIndices.filter((i) => i >= 0).map((i) => formatChoiceLabel(i, lang)).join(', ')
+        question.choices.findIndex((c) => c.originalIndex === origIdx),
+      );
+      return displayIndices
+        .filter((i) => i >= 0)
+        .map((i) => formatChoiceLabel(i, lang))
+        .join(", ");
     }
-    return question.answer?.toString() || '....'
+    return question.answer?.toString() || "....";
   } catch {
-    return '....'
+    return "....";
   }
 }
 
 // Choice labels for different languages
 const CHOICE_LABELS = {
-  en: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
-  ar: 'أبجدهوزحطيكلمنسعفصقرشتثخذضظغ'.split('')
-} as const
+  en: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),
+  ar: "أبجدهوزحطيكلمنسعفصقرشتثخذضظغ".split(""),
+} as const;
 
 /**
  * Convert index to choice label (A, B, C... or أ, ب, ج...)
@@ -159,9 +188,9 @@ const CHOICE_LABELS = {
  */
 export function formatChoiceLabel(index: number, lang: LangCode): string {
   try {
-    return CHOICE_LABELS[lang][index] || 'A'
+    return CHOICE_LABELS[lang][index] || "A";
   } catch {
-    return 'A'
+    return "A";
   }
 }
 

@@ -25,6 +25,7 @@ export function useDomainExamSession() {
     time,
     maxTime,
     paused,
+    preview: domain?.preview ?? false,
     setPaused,
     setTime,
     isSyncing,

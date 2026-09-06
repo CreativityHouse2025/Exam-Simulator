@@ -72,6 +72,7 @@ export function adaptAttemptToSession(payload: GetAttemptResult): FullExamSessio
     // the exam file's order matching the attempt's order.
     questionIds: payload.questions.map((attemptQuestion) => attemptQuestion.question_id),
     dirtyQuestions: {},
+    preview: false,
   }
 
   if (attempt.exam_type === 'full') {
@@ -160,5 +161,6 @@ export function adaptAttemptToRevision(payload: GetAttemptResult, rawExam: Exam)
     examState: "in-progress",
     reviewState: "summary",
     dirtyQuestions: {},
+    preview: false,
   } satisfies RevisionSession
 }

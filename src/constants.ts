@@ -104,6 +104,12 @@ export const SESSION_ACTION_PROPS = {
 // Constant for category menu padding (shared variable)
 export const MENU_PADDING = "1.6rem 1.4rem"
 
+// Fixed session id for supervisor preview sessions — never a real attempt, never sent to the backend.
+export const PREVIEW_ATTEMPT_ID = 'preview'
+
+// Long duration for preview sessions — timer ticks normally but never runs out.
+export const PREVIEW_TIME_SECONDS = 60 * 60 * 24 * 365
+
 export const DEFAULT_FULL_SESSION: FullExamSession = {
   id: '',
   index: 0,
@@ -122,6 +128,7 @@ export const DEFAULT_FULL_SESSION: FullExamSession = {
   dirtyQuestions: {},
   break1OfferedAt: null,
   break2OfferedAt: null,
+  preview: false,
 }
 
 export const DEFAULT_DOMAIN_SESSION: DomainExamSession = {
@@ -140,6 +147,7 @@ export const DEFAULT_DOMAIN_SESSION: DomainExamSession = {
   bookmarks: [],
   questionIds: 'ALL',
   dirtyQuestions: {},
+  preview: false,
 }
 
 export const DEFAULT_REVISION_SESSION: RevisionSession = {
@@ -158,6 +166,7 @@ export const DEFAULT_REVISION_SESSION: RevisionSession = {
   bookmarks: [],
   questionIds: 'ALL',
   dirtyQuestions: {},
+  preview: false,
 }
 
 // Language configuration

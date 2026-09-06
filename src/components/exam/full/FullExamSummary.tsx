@@ -43,13 +43,13 @@ const RestartButton = styled.button<ThemedStyles>`
   background: ${({ theme }) => theme.primary};
   color: white;
   border: none;
-  padding: 2rem;
+  padding: 1.2rem 1.6rem;
   font-size: 1.8rem;
   font-weight: 600;
   border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
-  min-width: 200px;
+  min-width: 260px;
   width: 100%;
   max-width: 300px;
   display: inline-block;
@@ -67,13 +67,13 @@ const RetakeButton = styled.button<ThemedStyles>`
   background: ${({ theme }) => theme.secondary};
   color: white;
   border: none;
-  padding: 2rem;
+  padding: 1.2rem 1.6rem;
   font-size: 1.8rem;
   font-weight: 600;
   border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
-  min-width: 200px;
+  min-width: 260px;
   width: 100%;
   max-width: 300px;
   display: inline-block;
@@ -95,6 +95,10 @@ const ButtonsContainer = styled.div`
   justify-content: center;
   margin-top: 2rem;
   gap: 1rem;
+
+  @media (max-width: 48rem) {
+    flex-direction: column;
+  }
 `
 
 const FullExamSummary: React.FC = () => {
