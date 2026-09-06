@@ -26,7 +26,7 @@ const TextStyles = styled.div`
 
 const DomainTimerComponent: React.FC = () => {
   const { examState } = useExamSessionCore()
-  const { time, paused, setTime } = useDomainExamSession()
+  const { time, paused, preview, setTime } = useDomainExamSession()
   const intervalRef = React.useRef<ReturnType<typeof setInterval> | null>(null)
 
   React.useEffect(() => {
@@ -58,7 +58,7 @@ const DomainTimerComponent: React.FC = () => {
 
   return (
     <TimerStyles id="timer" $warning={time < 120}>
-      <TextStyles data-test="Timer">{formatTimer(time)}</TextStyles>
+      <TextStyles data-test="Timer">{formatTimer(time, preview)}</TextStyles>
 
       <Timer size={30} />
     </TimerStyles>

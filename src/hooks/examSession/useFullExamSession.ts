@@ -32,6 +32,7 @@ export function useFullExamSession() {
     time,
     maxTime,
     paused,
+    preview: full?.preview ?? false,
     setPaused,
     setTime,
     break1OfferedAt,

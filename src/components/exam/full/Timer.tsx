@@ -26,7 +26,7 @@ const TextStyles = styled.div`
 
 const TimerComponent: React.FC = () => {
   const { examState } = useExamSessionCore()
-  const { time, paused, setTime } = useFullExamSession()
+  const { time, paused, preview, setTime } = useFullExamSession()
   const intervalRef = React.useRef<ReturnType<typeof setInterval> | null>(null)
 
   React.useEffect(() => {
@@ -62,7 +62,7 @@ const TimerComponent: React.FC = () => {
 
   return (
     <TimerStyles id="timer" $warning={time < 120}>
-      <TextStyles data-test="Timer">{formatTimer(time)}</TextStyles>
+      <TextStyles data-test="Timer">{formatTimer(time, preview)}</TextStyles>
 
       <Timer size={30} />
     </TimerStyles>

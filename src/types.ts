@@ -103,6 +103,8 @@ interface BaseSession {
   maxTime: number;
   time: number;
   paused: boolean;
+  /** Supervisor "preview" session — client-only, never persisted to the DB. */
+  preview: boolean;
 }
 
 export interface FullExamSession extends BaseSession {
@@ -211,15 +213,19 @@ export type SessionData = Pick<
   update: SessionDispatch;
 };
 
+export type StartNewExamParams = {
+  type: ExamType;
+  examOrCategoryId: number;
+  /** Supervisor preview: skips startAttempt and localStorage persistence, builds a client-only session. Defaults to false. */
+  preview?: boolean;
+};
+
 export type SessionControlContextType = {
   session: Session | null;
   update: SessionDispatch;
   /** Loads exam data, saves the attempt to the DB, builds the full Session state, and mounts the active session.
    * Returns the new attemptId on success, or null on failure. */
-  startNewExam: (
-    type: ExamType,
-    examOrCategoryId: number,
-  ) => Promise<string | null>;
+  startNewExam: (params: StartNewExamParams) => Promise<string | null>;
   /** Fetches an in-progress attempt snapshot from the DB, hydrates the full Session state, mounts the active
    * session, and persists the attemptId to localStorage.
    * Returns the attemptId on success, or null on failure so callers can reset their loading state. */
