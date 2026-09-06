@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import SearchBar from "@/components/SearchBar"
 import ExamTypeBadge from "@/components/ExamTypeBadge"
 import ExamStats from "@/components/ExamStats"
+import PreviewExamButton from "@/components/PreviewExamButton"
 import QuestionCard from "./QuestionCard"
 import QuestionNavigator from "./QuestionNavigator"
 import Pager from "./Pager"
@@ -177,11 +178,15 @@ const ExamDetailPage: React.FC = () => {
           <ExamStats duration={stats.duration} questions={stats.questions} pass={stats.pass} />
         </div>
 
-        {/* TODO(export-csv): unhide once CSV export is implemented (spec AC3). Kept rendered-but-hidden for now. */}
-        <Button variant="outline" size="sm" className="hidden gap-2 text-grey-900 hover:text-tertiary">
-          <Download className="size-4 text-primary" />
-          {t.export}
-        </Button>
+        <div className="flex shrink-0 items-center gap-2">
+          {/* TODO(export-csv): unhide once CSV export is implemented (spec AC3). Kept rendered-but-hidden for now. */}
+          <Button variant="outline" size="sm" className="hidden gap-2 text-grey-900 hover:text-tertiary">
+            <Download className="size-4 text-primary" />
+            {t.export}
+          </Button>
+
+          <PreviewExamButton type={examType} id={numericId} />
+        </div>
       </div>
 
       <SearchBar value={search} onChange={setSearch} placeholder={t.search} className="mb-4" />
