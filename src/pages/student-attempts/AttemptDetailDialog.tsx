@@ -10,7 +10,7 @@ import { formatDate } from "@/utils/format";
 import { translate } from "@/utils/translation";
 import examTypes from "@/data/exam/exam-types.json";
 import { resolveExamLabel } from "@/utils/resolveExamLabel";
-import type { AttemptSummary } from "@/types";
+import type { AttemptSummary } from "@shared/attempt.schema";
 
 type AttemptDetailDialogProps = {
   /** The caller only mounts this component when a selection exists — Dialog stays `open` for its whole lifetime. */

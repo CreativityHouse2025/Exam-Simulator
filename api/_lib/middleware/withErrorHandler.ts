@@ -1,4 +1,4 @@
-import type { ApiHandler } from "../types.js"
+import type { ApiHandler } from "./types.js"
 import { AppError } from "../errors/AppError.js"
 import { errorResponse } from "../utils/response.js"
 

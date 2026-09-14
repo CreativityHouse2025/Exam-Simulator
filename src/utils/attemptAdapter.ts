@@ -1,5 +1,5 @@
 import type { FullExamSession, DomainExamSession, RevisionSession, Exam, Question } from "../types"
-import type { GetAttemptResult, AttemptQuestion } from "../types"
+import type { GetAttemptResult, AttemptQuestion } from "@shared/attempt.schema"
 import { getCorrectOriginalIndices } from "./format"
 import { isQuestionMistake } from "./results"
 import examTypes from "../data/exam/exam-types.json"

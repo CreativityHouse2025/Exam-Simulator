@@ -4,7 +4,7 @@ import { Refresh } from "@styled-icons/material/Refresh"
 import AttemptHistoryRow from "./AttemptHistoryRow"
 import AttemptHistorySkeleton from "./AttemptHistorySkeleton"
 import { translate } from "../../utils/translation"
-import type { AttemptSummary } from "../../types"
+import type { AttemptSummary } from "@shared/attempt.schema"
 import type { ThemedStyles } from "../../types"
 
 type Props = {

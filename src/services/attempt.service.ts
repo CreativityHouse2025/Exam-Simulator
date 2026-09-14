@@ -1,15 +1,14 @@
 import { AppApiError } from "../errors";
 import { apiFetch } from "../utils/apiFetch";
 import { createErrorCodeTranslator } from "../utils/errorTranslation";
+import type { ApiResponse, AppErrorCode } from "@shared/api.schema";
 import type {
-  ApiResponse,
-  AppErrorCode,
   AttemptSummary,
   GetAttemptResult,
   InsertAttemptRequestBody,
   SaveAttemptInProgress,
   SaveAttemptCompleted,
-} from "../types";
+} from "@shared/attempt.schema";
 
 type AttemptErrorCode = Extract<
   AppErrorCode,

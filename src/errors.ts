@@ -1,4 +1,4 @@
-import type { AppErrorCode } from "./types"
+import type { AppErrorCode } from "@shared/api.schema"
 
 /** An API error that preserves the error code for callers that need to branch on it (e.g. SESSION_CONFLICT). */
 export class AppApiError extends Error {

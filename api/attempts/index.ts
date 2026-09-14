@@ -3,14 +3,14 @@ import { withAuth } from "../_lib/middleware/withAuth.js"
 import { withRole } from "../_lib/middleware/withRole.js"
 import { successResponse } from "../_lib/utils/response.js"
 import { parseJsonBody } from "../_lib/utils/parseBody.js"
-import { validateInsertAttempt } from "../_lib/validators/attemptValidators.js"
+import { parseOrThrow } from "../_lib/utils/parse.js"
+import { InsertAttemptRequestSchema, type ListAttemptsResult } from "../../shared/schemas/attempt.schema.js"
 import { insertAttempt, getRecentAttemptsByUserId } from "../_lib/services/attemptService.js"
-import type { InsertAttemptRequestBody, ListAttemptsResult } from "../_lib/types.js"
 
 // Maps to POST /api/attempts
 export const POST = withErrorHandler(withAuth(withRole(["student"], async (request, authUser, cookieHeaders) => {
   const parsedBody = await parseJsonBody(request, 50 * 1024)
-  const validatedInput: InsertAttemptRequestBody = validateInsertAttempt(parsedBody)
+  const validatedInput = parseOrThrow(InsertAttemptRequestSchema, parsedBody)
   const result = await insertAttempt(authUser.id, validatedInput)
   return successResponse(result, 201, cookieHeaders)
 })))

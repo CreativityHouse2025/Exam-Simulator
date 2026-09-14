@@ -5,7 +5,7 @@ import type {
   ListAttemptsResult,
   GetAttemptResult,
   SaveAttemptRequestBody,
-} from "../types.js";
+} from "../../../shared/schemas/attempt.schema.js";
 
 /**
  * Persists a new exam attempt and its question rows.

@@ -1,4 +1,5 @@
-import type { AuthenticatedApiHandler, Role } from "../types.js"
+import type { AuthenticatedApiHandler } from "./withAuth.js"
+import type { Role } from "../../../shared/schemas/user.schema.js"
 import { AppError } from "../errors/AppError.js"
 import { supabaseAdmin } from "../supabaseClient.js"
 

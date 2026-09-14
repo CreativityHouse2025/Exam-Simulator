@@ -8,7 +8,7 @@ import { resolveExamLabel } from "../../utils/resolveExamLabel"
 import AttemptStateIcon from "./AttemptStateIcon"
 import AttemptStatusBadge from "./AttemptStatusBadge"
 import { Tr, Td } from "./AttemptHistoryStyles"
-import type { AttemptSummary } from "../../types"
+import type { AttemptSummary } from "@shared/attempt.schema"
 import type { ThemedStyles } from "../../types"
 
 type Props = {

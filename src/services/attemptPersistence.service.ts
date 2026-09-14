@@ -1,5 +1,5 @@
 import { saveAttempt, submitAttempt } from "./attempt.service";
-import type { SaveAttemptInProgress, SaveAttemptCompleted } from "../types";
+import type { SaveAttemptInProgress, SaveAttemptCompleted } from "@shared/attempt.schema";
 
 /**
  * Abstraction over persisting attempt progress to the backend. useSessionReducer depends on

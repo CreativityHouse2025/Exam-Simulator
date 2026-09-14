@@ -1,4 +1,7 @@
-import { ApiSuccess, ApiError, AppErrorCode, ResponseHeaders } from "../types.js";
+import type { ApiSuccess, ApiError, AppErrorCode } from "../../../shared/schemas/api.schema.js";
+
+/** Extra headers to attach to a response, most often refreshed auth cookies. */
+export type ResponseHeaders = [string, string][];
 
 /**
  * Creates a successful JSON response with a consistent envelope.

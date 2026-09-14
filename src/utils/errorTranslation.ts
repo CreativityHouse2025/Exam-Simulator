@@ -1,5 +1,5 @@
 import { translate } from "./translation";
-import type { AppErrorCode } from "../types";
+import type { AppErrorCode } from "@shared/api.schema";
 
 /**
  * Builds a `translateErrorCode` function from a domain-specific error-code → translation-key

@@ -1,8 +1,7 @@
 import { withErrorHandler } from "../_lib/middleware/withErrorHandler.js"
-import { successResponse } from "../_lib/utils/response.js"
+import { successResponse, type ResponseHeaders } from "../_lib/utils/response.js"
 import { parseCookies, clearAuthCookies } from "../_lib/utils/cookies.js"
 import { signout } from "../_lib/services/authService.js"
-import { ResponseHeaders } from "../_lib/types.js"
 
 export const POST = withErrorHandler(async (request: Request) => {
   const cookieHeader = request.headers.get("Cookie") ?? ""

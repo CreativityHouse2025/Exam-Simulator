@@ -1,7 +1,7 @@
 import { supabaseAdmin } from "../supabaseClient.js";
 import { AppError } from "../errors/AppError.js";
 import { getRecentAttemptsByUserId } from "./attemptService.js";
-import type { SearchStudentsResult, StudentAttemptsResult } from "../types.js";
+import type { SearchStudentsResult, StudentAttemptsResult } from "../../../shared/schemas/student.schema.js";
 
 /**
  * Searches students by name/email prefix via the `search_students` RPC.

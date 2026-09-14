@@ -5,7 +5,7 @@ import { ROUTES } from "@/config/routes";
 import useDirectionalChevron from "@/hooks/useDirectionalChevron";
 import InitialsAvatar from "@/components/InitialsAvatar";
 import { Skeleton } from "@/components/ui/skeleton";
-import type { StudentSearchResult } from "@/types";
+import type { StudentSearchResult } from "@shared/student.schema";
 
 /** Mirrors StudentCard's layout part-by-part (avatar, name, email, date) instead of one solid block. */
 export const StudentCardSkeleton = () => (

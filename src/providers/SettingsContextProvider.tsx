@@ -8,27 +8,8 @@ export default function SettingsProvider({ children }: { children: React.ReactNo
     const [settings, setSettings] = useLocalStorage<Settings>({
         key: "settings",
         defaultValue: DEFAULT_USER_SETTINGS,
-        getInitialValueInEffect: false, // disable, no SSR is used
+        getInitialValueInEffect: false,
     })   
-
-    React.useEffect(() => {
-        const raw = localStorage.getItem("settings")
-        if (!raw) {
-          return
-        }
-    
-        const parsed: Settings = JSON.parse(raw)
-    
-        if ("appVersion" in parsed) {
-            // if the local stroage's version doesn't match the new version, override it
-            if (parsed.appVersion !== DEFAULT_USER_SETTINGS.appVersion) {
-                setSettings({
-                    ...parsed,
-                    "appVersion": DEFAULT_USER_SETTINGS.appVersion
-            })
-            }
-        }
-      }, [setSettings])
 
     return (
         <SettingsContext.Provider

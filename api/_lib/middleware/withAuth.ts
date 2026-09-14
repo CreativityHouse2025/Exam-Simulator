@@ -1,9 +1,23 @@
-import type { ApiHandler, AuthenticatedApiHandler, AuthUser, ResponseHeaders } from "../types.js"
+import type { ApiHandler } from "./types.js"
 import { AppError } from "../errors/AppError.js"
 import { createUserClient } from "../supabaseClient.js"
 import { assertAccountNotExpired } from "../services/authService.js"
 import { parseCookies, serializeAuthCookies, clearAuthCookies } from "../utils/cookies.js"
-import { errorResponse } from "../utils/response.js"
+import { errorResponse, type ResponseHeaders } from "../utils/response.js"
+
+/** The caller identity `withAuth` resolves from cookies and hands to the wrapped handler. */
+export type AuthUser = {
+  id: string
+  email: string
+  accessToken: string
+}
+
+/** A handler that may only run once `withAuth` has established who is calling. */
+export type AuthenticatedApiHandler = (
+  req: Request,
+  authUser: AuthUser,
+  cookieHeaders?: ResponseHeaders,
+) => Promise<Response>
 
 /**
  * Middleware that validates auth tokens from cookies before calling the handler.

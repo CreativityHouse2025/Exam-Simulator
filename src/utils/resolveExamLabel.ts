@@ -1,6 +1,7 @@
 import fullExams from "@/data/exam/full-exams.json";
 import categories from "@/data/exam/categories.json";
-import type { AttemptSummary, LangCode } from "@/types";
+import type { LangCode } from "@/types";
+import type { AttemptSummary } from "@shared/attempt.schema";
 
 /** Resolves an attempt's exam/category display name from the static exam data. */
 export function resolveExamLabel(

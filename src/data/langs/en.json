@@ -180,10 +180,13 @@
     "errors": {
       "required": "$1 is required",
       "name-invalid": "$1 must contain letters only",
+      "name-too-long": "$1 must be at most 100 characters",
       "email-required": "Email is required",
       "email-invalid": "Please enter a valid email address",
+      "email-too-long": "Email must be at most 254 characters",
       "password-required": "Password is required",
       "password-too-short": "Password must be at least 8 characters",
+      "password-too-long": "Password must be at most 128 characters",
       "password-no-letter": "Password must contain at least one letter",
       "password-no-digit": "Password must contain at least one digit",
       "confirm-required": "Please confirm your password",

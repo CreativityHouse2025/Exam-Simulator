@@ -4,7 +4,7 @@ import { withErrorHandler } from "../_lib/middleware/withErrorHandler.js"
 import { successResponse } from "../_lib/utils/response.js"
 import { supabaseAdmin } from "../_lib/supabaseClient.js"
 import { AppError } from "../_lib/errors/AppError.js"
-import type { User } from "../_lib/types.js"
+import type { User } from "../../shared/schemas/user.schema.js"
 
 export const GET = withErrorHandler(
   withAuth(async (_request: Request, authUser, cookieHeaders) => {

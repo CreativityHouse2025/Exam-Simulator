@@ -1,4 +1,4 @@
-import type { Role } from "../types";
+import type { ViewerRole } from "../types";
 import { ICONS, type IconComponent } from "./icons";
 import { ROUTES } from "./routes";
 
@@ -30,10 +30,10 @@ const search: NavItem = {
 };
 
 // Navigation items for each role
-const ACCESS: Record<Role, { nav: NavItem[] }> = {
+const ACCESS: Record<ViewerRole, { nav: NavItem[] }> = {
   guest: { nav: [] },
   student: { nav: [history, profile] },
   supervisor: { nav: [search, exams, profile] },
 };
 
-export const getNavItems = (role: Role): NavItem[] => ACCESS[role].nav;
+export const getNavItems = (role: ViewerRole): NavItem[] => ACCESS[role].nav;

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import { AppApiError } from "../errors"
 import useFormField from "../hooks/useFormField"
-import { validateEmail, validatePassword } from "../utils/authValidation"
+import { validateEmail, validateExistingPassword } from "../utils/authValidation"
 import { translate } from "../utils/translation"
 import { ROUTES } from "../config/routes"
 // @ts-expect-error
@@ -63,7 +63,7 @@ const SignInPage: React.FC = () => {
     const emailError = validateEmail(email.value)
     if (emailError) { email.setError(emailError); return }
 
-    const passwordError = validatePassword(password.value)
+    const passwordError = validateExistingPassword(password.value)
     if (passwordError) { password.setError(passwordError); return }
 
     setSubmitting(true)

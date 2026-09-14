@@ -1,5 +1,5 @@
 import { AppApiError } from "../errors"
-import { ApiError, AppErrorCode } from "../types"
+import type { ApiError, AppErrorCode } from "@shared/api.schema"
 import { translate } from "./translation"
 
 let onUnauthorized: (() => Promise<void>) | null = null

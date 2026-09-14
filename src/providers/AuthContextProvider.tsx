@@ -3,7 +3,9 @@ import { AuthContext } from "../contexts";
 import { apiFetch, registerUnauthorizedHandler } from "../utils/apiFetch";
 import { createErrorCodeTranslator } from "../utils/errorTranslation";
 import { AppApiError } from "../errors";
-import type { ApiResponse, AppErrorCode, AuthStatus, User } from "../types";
+import type { AuthStatus } from "../types";
+import type { ApiResponse, AppErrorCode } from "@shared/api.schema";
+import type { User } from "@shared/user.schema";
 
 type AuthErrorCode = Extract<
   AppErrorCode,
@@ -14,7 +16,6 @@ type AuthErrorCode = Extract<
   | "SIGNIN_FAILED"
   | "CONFIRMATION_FAILED"
   | "VALIDATION_ERROR"
-  | "MISSING_FIELDS"
   | "SESSION_CONFLICT"
   | "SIGNOUT_FAILED"
   | "UNAUTHORIZED"
@@ -31,7 +32,6 @@ const errorCodeToTranslationKey: Record<AuthErrorCode, string> = {
   SIGNIN_FAILED: "auth.errors.server-signin-failed",
   CONFIRMATION_FAILED: "auth.errors.server-confirmation-failed",
   VALIDATION_ERROR: "auth.errors.server-validation-error",
-  MISSING_FIELDS: "auth.errors.server-missing-fields",
   SESSION_CONFLICT: "auth.errors.server-session-conflict",
   SIGNOUT_FAILED: "auth.errors.server-unknown",
   UNAUTHORIZED: "auth.errors.server-unknown",

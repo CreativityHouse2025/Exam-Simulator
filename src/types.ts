@@ -1,3 +1,6 @@
+import type { ExamState, ReviewState } from "@shared/attempt.schema";
+import type { Role, User } from "@shared/user.schema";
+
 // Theme types
 export interface Theme {
   grey: string[];
@@ -84,10 +87,6 @@ export type AnswerOf = {
 export type Answer<QT extends QuestionTypes> = AnswerOf[QT];
 export type AnswerOfMultipleChoice = AnswerOf["multiple-choice"];
 export type Answers = AnswerOfMultipleChoice[];
-
-// Session state types
-export type ExamState = "in-progress" | "completed";
-export type ReviewState = "summary" | "question";
 
 // Base session — fields shared by all three exam types
 interface BaseSession {
@@ -277,49 +276,13 @@ export interface ToastContextType {
   setToast: React.Dispatch<React.SetStateAction<ToastState>>;
 }
 
-// API response types (mirrors backend api/_lib/types.ts for frontend use)
-export type AppErrorCode =
-  | "MISSING_FIELDS"
-  | "VALIDATION_ERROR"
-  | "SUBSCRIPTION_REQUIRED"
-  | "SIGNUP_FAILED"
-  | "INVALID_CREDENTIALS"
-  | "ACCOUNT_EXPIRED"
-  | "SIGNIN_FAILED"
-  | "SIGNOUT_FAILED"
-  | "UNAUTHORIZED"
-  | "CONFIRMATION_FAILED"
-  | "INTERNAL_ERROR"
-  | "METHOD_NOT_ALLOWED"
-  | "PASSWORD_UPDATE_FAILED"
-  | "SESSION_CONFLICT"
-  | "SUBSCRIPTION_CHECK_FAILED"
-  | "ATTEMPT_CREATE_FAILED"
-  | "ATTEMPT_SAVE_FAILED"
-  | "NOT_FOUND"
-  | "FORBIDDEN"
-  | "CONFLICT";
-
-export type ApiSuccess<T> = { success: true; data: T };
-export type ApiError = {
-  success: false;
-  error: { code: AppErrorCode; message: string };
-};
-export type ApiResponse<T> = ApiSuccess<T> | ApiError;
-
 export type AuthStatus = "pending" | "authenticated" | "unauthenticated";
 
-// Auth types
-export type Role = "student" | "supervisor" | "guest";
-
-export type User = {
-  id: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  expires_at: string;
-  role: Exclude<Role, "guest">;
-};
+/**
+ * The role the UI renders for. Extends the database roles with `guest`, which is not a stored role
+ * but the absence of a user — see `roleOf` in config/roles.ts.
+ */
+export type ViewerRole = Role | "guest";
 
 export type AuthContextType = {
   user: User | null;
@@ -358,107 +321,3 @@ export type Results = {
   incompleteCount: number;
   totalQuestions: number;
 };
-
-// Attempt types (mirror api/_lib/types.ts shapes for frontend use)
-export type BackendExamType = "full" | "domain";
-
-export type AttemptSummary = {
-  id: string;
-  exam_type: BackendExamType;
-  exam_id: number | null;
-  category_id: number | null;
-  exam_state: "in-progress" | "completed";
-  score: number;
-  status: "pass" | "fail" | null;
-  created_at: string;
-  time_remaining: number;
-  total_questions: number;
-};
-
-export type AttemptDetail = AttemptSummary & {
-  current_index: number;
-  review_state: "summary" | "question";
-  email_report_state: "unsent" | "pending" | "sent" | "failed";
-  break_1_offered_at: string | null;
-  break_2_offered_at: string | null;
-};
-
-export type AttemptQuestion = {
-  question_index: number;
-  question_id: number;
-  choices_order: number[];
-  selected_choices: number[];
-  is_bookmarked: boolean;
-};
-
-export type GetAttemptResult = {
-  attempt: AttemptDetail;
-  questions: AttemptQuestion[];
-};
-
-export type StudentSearchResult = {
-  id: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  created_at: string;
-};
-
-export type SearchStudentsResult = {
-  students: StudentSearchResult[];
-};
-
-export type StudentAttemptsResult = {
-  student: StudentSearchResult;
-  attempts: AttemptSummary[];
-};
-
-type InsertAttemptFull = {
-  exam_type: "full";
-  exam_id: number;
-  category_id: null;
-  question_ids: number[];
-  choices_orders: number[][];
-  duration_minutes: number;
-};
-
-type InsertAttemptDomain = {
-  exam_type: "domain";
-  category_id: number;
-  exam_id: null;
-  question_ids: number[];
-  choices_orders: number[][];
-  duration_minutes: number;
-};
-
-export type InsertAttemptRequestBody = InsertAttemptFull | InsertAttemptDomain;
-
-export type SaveAttemptAnswer = {
-  question_index: number;
-  selected_choices: number[];
-  is_bookmarked: boolean;
-};
-
-export type SaveAttemptInProgress = {
-  exam_state: "in-progress";
-  current_index: number;
-  time_remaining: number;
-  review_state: "summary" | "question";
-  answers: SaveAttemptAnswer[];
-  break_1_offered_at: string | null;
-  break_2_offered_at: string | null;
-};
-
-export type SaveAttemptCompleted = {
-  exam_state: "completed";
-  current_index: number;
-  time_remaining: number;
-  review_state: "summary" | "question";
-  answers: SaveAttemptAnswer[];
-  score: number;
-  status: "pass" | "fail";
-};
-
-export type SaveAttemptRequestBody =
-  | SaveAttemptInProgress
-  | SaveAttemptCompleted;

@@ -1,13 +1,12 @@
 import { AppApiError } from "../errors";
 import { apiFetch } from "../utils/apiFetch";
 import { createErrorCodeTranslator } from "../utils/errorTranslation";
+import type { ApiResponse, AppErrorCode } from "@shared/api.schema";
 import type {
-  ApiResponse,
-  AppErrorCode,
   SearchStudentsResult,
   StudentAttemptsResult,
   StudentSearchResult,
-} from "../types";
+} from "@shared/student.schema";
 
 type StudentErrorCode = Extract<
   AppErrorCode,

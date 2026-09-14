@@ -4,7 +4,7 @@ import { formatDate } from "@/utils/format";
 import { translate } from "@/utils/translation";
 import AttemptStateBadge from "./AttemptStateBadge";
 import { resolveExamLabel } from "@/utils/resolveExamLabel";
-import type { AttemptSummary } from "@/types";
+import type { AttemptSummary } from "@shared/attempt.schema";
 
 type AttemptCardProps = {
   attempt: AttemptSummary;

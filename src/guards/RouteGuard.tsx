@@ -4,10 +4,10 @@ import useAuth from "../hooks/useAuth"
 import Loading from "../components/Loading"
 import { roleOf } from "../config/roles"
 import { ROUTES } from "../config/routes"
-import type { Role } from "../types"
+import type { ViewerRole } from "../types"
 
 interface RouteGuardProps {
-  roles: Role[]
+  roles: ViewerRole[]
   children: React.ReactNode
 }
 
