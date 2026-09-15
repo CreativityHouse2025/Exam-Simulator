@@ -37,7 +37,7 @@ v2.0 introduced a full backend layer, user authentication, and subscription-gate
 - **Sign up** using a Creativity House offer email. Registration is gated — only users with an active subscription can create an account.
 - **Sign in / Sign out** with email and password.
 - **Forgot password** and **reset password** flows via email.
-- **Single-device session enforcement** — each account can only be active on one device at a time. Signing in on a new device prompts the user to force sign out of the previous session.
+- **Single-device session enforcement** — each account can only be active on one device at a time. Signing in on a new device ends the previous session. Enforced by Supabase Auth's *Single session per user* setting, not by application code.
 - **Subscription expiry** — access is automatically revoked when a user's subscription period ends.
 
 ### Exam Types

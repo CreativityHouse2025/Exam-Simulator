@@ -28,8 +28,8 @@ async function postAuth<T>(endpoint: string, body: object, handleUnauthorized = 
   return parseAuthResponse<T>(response);
 }
 
-export async function signIn(email: string, password: string, force: boolean): Promise<User> {
-  const { user } = await postAuth<{ user: User }>("/api/auth/signin", { email, password, force });
+export async function signIn(email: string, password: string): Promise<User> {
+  const { user } = await postAuth<{ user: User }>("/api/auth/signin", { email, password });
   return user;
 }
 

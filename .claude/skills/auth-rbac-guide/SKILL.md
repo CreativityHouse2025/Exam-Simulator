@@ -1,6 +1,6 @@
 ---
 name: auth-rbac-guide
-description: "Authentication, roles, and access control for the Exam Simulator — the student/supervisor/guest role model, RouteGuard and nav gating on the frontend, withAuth/withRole enforcement on the backend, account expiry, and the single-session-per-account enforcement with its force-flag sign-in flow and every auth.sessions entry point it must cover. Use this skill before touching sign-in, sign-up, sign-out, password reset, token exchange, session cookies, users.role or users.expires_at, RouteGuard, src/config/roles.ts or nav.ts, or any check of who is allowed to see or do something. Also use when debugging an unexpected 403, a user logged out for no reason, or a suspected account-sharing bypass. These rules fail open when improvised — read them before writing the check."
+description: "Authentication, roles, and access control for the Exam Simulator — the student/supervisor/guest role model, RouteGuard and nav gating on the frontend, withAuth/withRole enforcement on the backend, account expiry, and the single-session-per-account limit now enforced by Supabase Auth itself rather than by this codebase. Use this skill before touching sign-in, sign-up, sign-out, password reset, token exchange, session cookies, users.role or users.expires_at, RouteGuard, src/config/roles.ts or nav.ts, or any check of who is allowed to see or do something. Also use when debugging an unexpected 403, a user logged out for no reason, or a suspected account-sharing bypass. These rules fail open when improvised — read them before writing the check."
 ---
 
 # Auth & RBAC Guide
@@ -65,34 +65,43 @@ Each account is limited to one active session at a time. This prevents account s
 devices, which is the commercial reason the feature exists — a weakened check has revenue
 consequences, not just security ones.
 
-### Sign-in flow (force flag pattern)
+**Enforcement lives in Supabase Auth, not in this repo.** It is the *Single session per user*
+option under the project's Auth → Sessions settings (Pro plan and up). There is no code path you
+can read to confirm it is on, and no test that fails when it is off — if account sharing is
+reported, check that toggle before reading any of this code. Every Supabase project used by the
+app (production and any staging project) needs it set independently.
 
-The sign-in handler accepts a `force` boolean alongside email and password. Three cases:
+Two consequences follow from how Supabase implements it:
 
-1. **`force: false`, no conflict** — `signInWithPassword` → assert `user.id` non-null → RPC returns 1
-   → fetch profile → check expiry → return profile + cookies
-2. **`force: false`, conflict** — `signInWithPassword` → assert `user.id` non-null → RPC returns ≥ 2
-   → `admin.signOut(newJWT, 'local')` → throw `SESSION_CONFLICT`
-3. **`force: true`** — `signInWithPassword` → assert `user.id` non-null →
-   `admin.signOut(newJWT, 'others')` (no RPC needed) → fetch profile → check expiry → return
-   profile + cookies
-
-The `user.id` null assertion guards against the RPC silently returning 0 on `WHERE user_id = NULL`,
-which would bypass enforcement entirely. Keep it.
-
-On RPC failure: **fail closed** — signOut local, throw internal error. Never silently proceed as
-"no conflict."
+- **Newest sign-in wins, silently.** Signing in on a second device terminates the first device's
+  session. There is no conflict prompt and no `SESSION_CONFLICT` error — the `force` flag and that
+  error code were removed when enforcement moved to Supabase. Don't reintroduce a "force" concept;
+  every sign-in is effectively a force sign-in now.
+- **Revocation is not immediate.** Supabase checks the limit when a session is *refreshed*, and
+  `withAuth` verifies access tokens locally via `getClaims` with no `auth.sessions` lookup. So a
+  terminated session keeps working until its access token expires — bounded by the project's JWT
+  expiry setting, not by the sign-in that killed it. Shortening JWT expiry shortens that overlap
+  window and nothing in the code does.
 
 ### Session entry points
 
-Every path that creates a row in `auth.sessions` must be covered. Adding a new sign-in path without
-covering it here reopens the hole:
+Every path below creates a row in `auth.sessions`. Supabase's own enforcement covers all of them,
+including the two where the session is created by GoTrue before any of our code runs:
 
-| Entry point | Coverage |
+| Entry point | Where the session is created |
 | --- | --- |
-| Sign In | force flag + `count_user_sessions` RPC |
-| Password reset (token-exchange, `type=recovery`) | unconditional `signOut("others")` in `confirmMagicLinkSignin` |
-| Email confirmation (token-exchange, `type=signup`) | the same unconditional `signOut("others")` — a no-op when no other sessions exist, but kept unconditional so the `type` field cannot be spoofed to bypass it |
+| Sign In (`POST /api/auth/signin`) | `signInWithPassword` in `authService.signin` |
+| Sign Up (`POST /api/auth/signup`) | `auth.signUp` — only returns a session if email confirmation is disabled |
+| Password reset (`type=recovery`) | GoTrue `/auth/v1/verify` when the emailed link is clicked, before `token-exchange` is called |
+| Email confirmation (`type=signup`) | the same GoTrue verify step |
+
+`confirmMagicLinkSignin` still calls `admin.signOut(accessToken, "others")` unconditionally. That
+is **not** redundant with the Supabase setting: it is kept for password reset, where the point is
+to revoke a compromised device *now* rather than whenever its access token happens to expire. It
+stays unconditional so the `type` field cannot be spoofed to skip it.
+
+The `user.id` null assertion in `signin` predates this change and still guards against a malformed
+sign-in response reaching the profile query. Keep it.
 
 ## Related skills
 

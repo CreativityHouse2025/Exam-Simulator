@@ -131,7 +131,6 @@
       "subtitle": "Sign in if you have created an account to access the exam simulator.",
       "submit": "Sign In",
       "submitting": "Signing in...",
-      "force-submit": "Sign In Anyway",
       "error": "Sign in failed. Please try again.",
       "no-account": "New here? You'll need to",
       "signup-link": "create an account first.",
@@ -199,7 +198,6 @@
       "server-confirmation-failed": "Email confirmation failed. Please try again.",
       "server-validation-error": "Please check your input and try again.",
       "server-missing-fields": "Please fill in all required fields.",
-      "server-session-conflict": "You're already signed in on another device. Click 'Sign In Anyway' to sign out of all other devices and continue here.",
       "server-unknown": "An unexpected error occurred. Please try again."
     },
     "callback": {

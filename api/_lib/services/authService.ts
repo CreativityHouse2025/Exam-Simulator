@@ -135,24 +135,19 @@ export async function signup(input: SignupRequestBody): Promise<SignupResult> {
 }
 
 /**
- * Authenticates a user with email/password and enforces a one-active-session limit.
+ * Authenticates a user with email/password.
  *
- * Three cases:
- * - No conflict (force: false, count === 1): proceed normally.
- * - Conflict (force: false, count >= 2): kill the new session and throw SESSION_CONFLICT.
- * - Force (force: true): kill all other sessions and proceed.
+ * The one-active-session limit is enforced by Supabase Auth itself
+ * ("Single session per user" in the project's auth settings), not here.
  *
  * @returns User profile and session tokens (handler is responsible for setting cookies).
  * @throws {AppError} 401 `INVALID_CREDENTIALS` — wrong email or password.
  * @throws {AppError} 500 `SIGNIN_FAILED` — no session returned or profile not found.
- * @throws {AppError} 500 `INTERNAL_ERROR` — RPC failure or missing user id (fail-closed).
- * @throws {AppError} 409 `SESSION_CONFLICT` — active session exists and force is false.
+ * @throws {AppError} 500 `INTERNAL_ERROR` — missing user id (fail-closed).
  * @throws {AppError} 403 `ACCOUNT_EXPIRED` — account past its expiry date.
  */
 export async function signin(input: SigninRequestBody): Promise<SigninResult> {
-  const { email, password, force } = input
-
-  const ACTIVE_CONCURRENT_SESSION_LIMIT = 1;
+  const { email, password } = input
 
   const userClient = createUserClient()
   const { data, error } = await userClient.auth.signInWithPassword({ email, password })
@@ -172,27 +167,6 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
 
   const userId = data.user.id
   const accessToken = data.session.access_token
-
-  if (!force) {
-    const { data: sessionCount, error: rpcError } = await supabaseAdmin.rpc("count_user_sessions", {
-      p_user_id: userId,
-    })
-
-    if (rpcError) {
-      await supabaseAdmin.auth.admin.signOut(accessToken, "local")
-      throw new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: "Failed to check active sessions" })
-    }
-
-    // + 1 to count the already-made session before signing it out
-    if (sessionCount >= ACTIVE_CONCURRENT_SESSION_LIMIT + 1) {
-      await supabaseAdmin.auth.admin.signOut(accessToken, "local")
-      throw new AppError({ statusCode: 409, code: "SESSION_CONFLICT", message: "Another active session exists" })
-    }
-  } else {
-    // if force log in, sign the user out of all other sessions and continue
-    console.log(`[signin]: User with email ${email} force-signed-in`)
-    await supabaseAdmin.auth.admin.signOut(accessToken, "others")
-  }
 
   const { data: profile, error: profileError } = await supabaseAdmin
     .from("users")
@@ -255,9 +229,10 @@ export async function confirmMagicLinkSignin(accessToken: string, refreshToken: 
     knownExpiresAt: profile.expires_at,
   })
 
-  // sign the user out of all other devices to enforce single active session
-  // 1. Sign up: no other sessions, fine
-  // 2. Forgot password: must kill all other sessions
+  // Sign the user out of all other devices immediately. Supabase's own single-session setting only
+  // takes effect when the other session next refreshes, which is too late for a password reset:
+  // 1. Sign up: no other sessions, no-op
+  // 2. Forgot password: a compromised device must lose access now, not at its next token refresh
   await supabaseAdmin.auth.admin.signOut(accessToken, "others")
 
   console.log(`[confirmSignup] User ${authUser.user.id} signed in using magic link`)

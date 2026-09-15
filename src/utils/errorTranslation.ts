@@ -21,7 +21,6 @@ const ERROR_DOMAINS: { [D in ErrorDomain]: ErrorDomainEntry<D> } = {
       SIGNIN_FAILED: "auth.errors.server-signin-failed",
       CONFIRMATION_FAILED: "auth.errors.server-confirmation-failed",
       VALIDATION_ERROR: "auth.errors.server-validation-error",
-      SESSION_CONFLICT: "auth.errors.server-session-conflict",
     },
     fallback: "auth.errors.server-unknown",
   },

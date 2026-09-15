@@ -2,7 +2,7 @@ import React from 'react'
 import { cn } from './ui/utils'
 
 const BUTTON_BASE =
-  "flex items-center justify-center text-base font-bold uppercase py-2 px-2.5 mr-2.5 rounded-xs transition-all duration-300 cursor-pointer"
+  "flex items-center justify-center text-sm sm:text-base font-bold uppercase py-2 px-2 sm:px-2.5 rounded-xs transition-all duration-300 cursor-pointer"
 
 const ModalComponent: React.FC<ModalProps> = ({ title, message, buttons, onConfirm, onClose, variant }) => {
   const handleBackdropClick = React.useCallback(
@@ -20,16 +20,25 @@ const ModalComponent: React.FC<ModalProps> = ({ title, message, buttons, onConfi
         id="modal-window"
         className="fixed top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 animate-grow"
       >
-        <div id="modal-inner" className="modal-inner-grid grid bg-white shadow-1">
-          <div id="title" className="h-12.5 flex justify-center items-center text-xl font-semibold bg-primary">
+        <div id="modal-inner" className="break-card modal-inner-grid grid bg-white shadow-1">
+          <div
+            id="title"
+            className="h-10 sm:h-12.5 flex justify-center items-center px-4 text-lg sm:text-xl font-semibold bg-primary"
+          >
             {title}
           </div>
 
-          <div id="message" className="h-auto flex items-center justify-center text-3xl font-semibold py-7.5 px-5">
+          <div
+            id="message"
+            className="h-auto flex items-center justify-center py-5 px-4 sm:py-7.5 sm:px-5 text-xl sm:text-3xl font-semibold"
+          >
             {message}
           </div>
 
-          <div id="buttons" className="h-12.5 flex items-center justify-center border-t border-grey-200 bg-grey-50">
+          <div
+            id="buttons"
+            className="h-12.5 flex items-center justify-center gap-2.5 border-t border-grey-200 bg-grey-50"
+          >
             <button
               id="button-confirm"
               className={cn(

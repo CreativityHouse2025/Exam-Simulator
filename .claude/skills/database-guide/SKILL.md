@@ -25,6 +25,7 @@ the schema and for deciding what belongs in SQL rather than TypeScript.
 007_save_attempt_rpc_breaks.sql
 008_add_user_role.sql
 009_search_students_rpc.sql
+010_drop_count_user_sessions_rpc.sql
 ```
 
 Rules that follow from that layout:
@@ -45,8 +46,8 @@ control, and assuming a conventional shape will produce code that compiles and f
 
 Most reads belong in a service (`api/_lib/services/`). Reach for a Postgres function when the
 operation needs to be atomic, needs to touch `auth.*` schemas the API client cannot query
-directly, or would otherwise be several round trips — session counting, attempt insert/save, and
-student search are all RPCs for one of those reasons.
+directly, or would otherwise be several round trips — attempt insert/save and student search are
+RPCs for one of those reasons.
 
 Existing RPCs follow a consistent shape worth copying:
 

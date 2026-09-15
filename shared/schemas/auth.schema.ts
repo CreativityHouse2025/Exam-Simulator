@@ -58,12 +58,6 @@ export type SignupRequestBody = z.infer<typeof SignupRequestSchema>
 export const SigninRequestSchema = z.strictObject({
   email,
   password: existingPassword,
-  /**
-   * When `false`, signin is rejected with `SESSION_CONFLICT` if the user already has an active
-   * session. When `true`, all other active sessions are terminated and the new session proceeds.
-   * Must always be sent explicitly — there is no default.
-   */
-  force: z.boolean({ error: "force must be sent explicitly as a boolean" }),
 })
 
 export type SigninRequestBody = z.infer<typeof SigninRequestSchema>

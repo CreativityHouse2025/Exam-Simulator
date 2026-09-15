@@ -15,7 +15,6 @@ export type DomainErrorCodes = {
     | "SIGNIN_FAILED"
     | "CONFIRMATION_FAILED"
     | "VALIDATION_ERROR"
-    | "SESSION_CONFLICT"
   >
   attempts: Extract<AppErrorCode, "NOT_FOUND" | "FORBIDDEN" | "CONFLICT" | "ATTEMPT_CREATE_FAILED" | "ATTEMPT_SAVE_FAILED">
   students: Extract<AppErrorCode, "NOT_FOUND" | "FORBIDDEN">

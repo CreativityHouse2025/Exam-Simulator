@@ -76,7 +76,7 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
     })
 
     if (refreshError || !refreshData.session || !refreshData.user) {
-      // The refresh token is dead — likely revoked by a force-signin, password update, or account expiry
+      // The refresh token is dead — likely revoked by a sign-in on another device, password update, or account expiry
       // from another session. Clear the cookies so the browser stops retrying with the same dead token,
       // which would produce a refresh_token_not_found loop in Supabase on every subsequent request.
       const expiredCookieHeaders: ResponseHeaders = clearAuthCookies().map((c) => ["Set-Cookie", c] as [string, string])

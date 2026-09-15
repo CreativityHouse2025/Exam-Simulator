@@ -20,8 +20,8 @@ export default function AuthContextProvider({
   }, []);
 
   const signIn = useCallback(
-    async (email: string, password: string, force: boolean) => {
-      const signedInUser = await authService.signIn(email, password, force);
+    async (email: string, password: string) => {
+      const signedInUser = await authService.signIn(email, password);
 
       cancelSessionCheck();
       setUser(signedInUser);

@@ -8,8 +8,8 @@ import { parseJsonBody } from "../_lib/utils/parseBody.js"
 
 export const POST = withErrorHandler(async (request: Request) => {
   const body = await parseJsonBody(request)
-  const { email, password, force } = parseOrThrow(SigninRequestSchema, body)
-  const result: SigninResult = await signin({ email, password, force })  
+  const { email, password } = parseOrThrow(SigninRequestSchema, body)
+  const result: SigninResult = await signin({ email, password })
   const cookieHeaders = serializeAuthCookies(result.access_token, result.refresh_token)
 
   return successResponse({ user: result.user }, 200, cookieHeaders.map((c) => ["Set-Cookie", c]))
