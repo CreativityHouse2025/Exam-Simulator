@@ -1,7 +1,5 @@
 import React, { useState } from "react"
-import { Lock } from "@styled-icons/material/Lock"
-import { Visibility } from "@styled-icons/material/Visibility"
-import { VisibilityOff } from "@styled-icons/material/VisibilityOff"
+import { Lock, Eye, EyeOff } from "lucide-react"
 import {
   FormGroup,
   FormLabel,
@@ -50,7 +48,7 @@ const PasswordField = React.forwardRef<HTMLInputElement, PasswordFieldProps>(
             onClick={() => setVisible((s) => !s)}
             aria-label={`Toggle ${label.toLowerCase()} visibility`}
           >
-            {visible ? <VisibilityOff size={20} /> : <Visibility size={20} />}
+            {visible ? <EyeOff size={20} /> : <Eye size={20} />}
           </TogglePasswordButton>
         </PasswordInputWrapper>
         {error && <FieldError>{error}</FieldError>}

@@ -1,16 +1,6 @@
-import type { ThemedStyles } from '../../../../types'
 import React from 'react'
-import styled from 'styled-components'
 import Control from './Control'
-
-const DrawerStyles = styled.div<DrawerStylesProps>`
-  width: ${({ $open }) => ($open ? '30rem' : '5rem')};
-  height: auto;
-  overflow: hidden;
-  overflow-y: auto;
-  background: ${({ theme }) => theme.grey[0]};
-  transition: 0.3s;
-`
+import { cn } from '../../../ui/utils'
 
 interface DrawerShellProps {
   open: boolean
@@ -21,15 +11,17 @@ interface DrawerShellProps {
 /** Drawer container with animated width — renders Control (toggle) and the menu content. */
 const DrawerShell: React.FC<DrawerShellProps> = ({ open, toggleOpen, menu }) => {
   return (
-    <DrawerStyles id="drawer" $open={open}>
+    <div
+      id="drawer"
+      className={cn(
+        "h-auto overflow-hidden overflow-y-auto bg-grey-50 transition-all duration-300",
+        open ? "w-75" : "w-12.5",
+      )}
+    >
       <Control open={open} toggleOpen={toggleOpen} />
       {menu}
-    </DrawerStyles>
+    </div>
   )
 }
 
 export default DrawerShell
-
-interface DrawerStylesProps extends ThemedStyles {
-  $open: boolean
-}

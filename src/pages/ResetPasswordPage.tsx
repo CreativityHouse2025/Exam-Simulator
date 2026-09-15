@@ -1,14 +1,13 @@
 import React, { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { ArrowBack } from "@styled-icons/material/ArrowBack"
+import { ArrowLeft } from "lucide-react"
 import useAuth from "../hooks/useAuth"
 import useToast from "../hooks/useToast"
 import useFormField from "../hooks/useFormField"
 import { validatePassword, validateConfirmPassword } from "../utils/authValidation"
 import { translate } from "../utils/translation"
 import { ROUTES } from "../config/routes"
-import styled from "styled-components"
-// @ts-expect-error
+// @ts-expect-error -- pre-existing, unrelated to this change
 import Logo from "../assets/logo.png"
 import PasswordField from "../components/Auth/PasswordField"
 import {
@@ -23,10 +22,6 @@ import {
   CardFooter,
   NavLink,
 } from "../components/SharedStyles"
-
-const ResetCard = styled(Card)`
-  position: relative;
-`
 
 /** Reset password page — allows users to set a new password after clicking a reset link. */
 const ResetPasswordPage: React.FC = () => {
@@ -85,9 +80,9 @@ const ResetPasswordPage: React.FC = () => {
 
   return (
     <PageWrapper>
-      <ResetCard>
+      <Card className="relative">
         <BackButton title="Back to Profile" onClick={() => navigate(ROUTES.profile)} aria-label="Back to Profile">
-          <ArrowBack size={30} />
+          <ArrowLeft size={30} />
         </BackButton>
         <PageLogo src={Logo} alt={t.logoAlt} />
         <PageTitle>{t.title}</PageTitle>
@@ -125,7 +120,7 @@ const ResetPasswordPage: React.FC = () => {
         <CardFooter>
           <NavLink to={ROUTES.home}>{t.backHome}</NavLink>
         </CardFooter>
-      </ResetCard>
+      </Card>
     </PageWrapper>
   )
 }

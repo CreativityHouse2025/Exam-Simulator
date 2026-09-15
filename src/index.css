@@ -1,13 +1,6 @@
-/* Tailwind without Preflight (base reset) — existing styled-components pages rely on
-   the browser's default styles, so the global reset layer is intentionally omitted.
-   The base layer below hand-picks only the Preflight rules the Tailwind pages need.
-   Each one is either overridden by an existing styled-component (which emits unlayered
-   CSS, and unlayered always beats a cascade layer) or a no-op for the old pages.
-   Do not swap this for the full Preflight import: it also sets box-sizing, img display
-   and list/table defaults that nothing in the app overrides, which would reflow every
-   existing page. */
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
 @import "tw-animate-css";
 
@@ -20,41 +13,9 @@
 @layer base {
   body {
     font-family: var(--font-sans);
-  }
-
-  a {
-    color: inherit;
-    text-decoration: inherit;
-  }
-
-  button,
-  input,
-  select,
-  textarea {
-    font: inherit;
-  }
-
-  /* A button with no explicit background/border otherwise falls back to the UA's
-     `buttonface` fill and `outset` border, which reads as raw OS button chrome. */
-  button {
-    background-color: transparent;
-    border: 0 solid;
-  }
-
-  /* Root class for every Tailwind-built page. Tailwind's utilities assume border-box
-     sizing and a 16px font baseline, both of which Preflight would normally establish
-     globally — but a global reset would reflow the styled-components pages, which
-     default to content-box and inherit the 10px html root. Scoping it to this class
-     gives the Tailwind pages the environment they expect without touching the rest. */
-  .tailwind-page,
-  .tailwind-page *,
-  .tailwind-page ::before,
-  .tailwind-page ::after {
-    box-sizing: border-box;
-  }
-
-  .tailwind-page {
-    font-size: var(--text-base);
+    /* Preserved from the pre-migration global style: form/exam content sets `dir` per-language
+       and every nested element inherits it from here rather than the document default. */
+    direction: inherit;
   }
 
   h1,
@@ -69,14 +30,46 @@
     margin: 0;
   }
 
-  /* UA default numbers/bullets ol/ul markers (e.g. shadcn's Breadcrumb, an <ol>). Existing
-     styled-components ul/li already set their own `list-style: none`, so this is a no-op there. */
+  /* UA default numbers/bullets ol/ul markers (e.g. shadcn's Breadcrumb, an <ol>). */
   ol,
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--grey-500);
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+}
+
+/* App.tsx's AppBackground — a bespoke multi-stop radial-gradient decoration, not expressible via
+   Tailwind utilities without banned arbitrary values. Kept as plain CSS, same precedent as a
+   keyframe with no tw-animate-css equivalent. z-index snapped -1 -> -10 (nearest scale step;
+   -z-0 would put it at the same stacking level as default content instead of reliably behind it). */
+.app-background {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  background:
+    radial-gradient(ellipse 80% 65% at 50% 115%, rgba(255, 220, 154, 0.87) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at 90% 75%, rgba(181, 150, 93, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 10% 85%, rgba(181, 150, 93, 0.14) 0%, transparent 45%),
+    radial-gradient(ellipse 90% 80% at 50% 50%, #fafaf8 0%, #f2f0ec 45%, #e9e7e3 100%);
 }
 
 @keyframes fadeIn {
@@ -88,11 +81,78 @@
   }
 }
 
+/* Loading.tsx's spinner. Ported as a real @theme animation token (not Tailwind's built-in
+   `animate-spin`, which uses `linear` timing) to keep the original's default `ease` timing exact. */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Toast.tsx's entrance. Kept as a real keyframe (not tw-animate-css's slide-in-from-top) because
+   the toast also needs a constant, non-animated translateX(-50%) for horizontal centering that
+   has to live in the same `transform` property this keyframe drives — simplest to keep both X and
+   Y in one custom animation exactly as authored, including its non-default cubic-bezier. */
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -32px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* SyncOverlay.tsx's spinner — same shape as Tailwind's built-in `animate-spin` (also
+   `spin 1s linear infinite`) but at the original's 0.8s. */
+@keyframes spin-fast {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Modal.tsx's entrance — same "constant transform + animated transform, same property" reason as
+   Toast's slide-down above: Window needs a permanent translate(-50%,-50%) centering baked into
+   the same keyframe that animates the scale. */
+@keyframes grow {
+  from {
+    transform: scale(0.25) translate(-50%, -50%);
+  }
+  to {
+    transform: scale(1) translate(-50%, -50%);
+  }
+}
+
 :root {
   --primary: #b5965d;
   --primary-foreground: #ffffff;
   --secondary: #593752;
   --secondary-foreground: #ffffff;
+  /* Precomputed via polished's darken(0.1, ...) — Modal.tsx's confirm-button hover states.
+     `polished` itself is not imported here; see the goal's polished conversion rule. */
+  --secondary-hover: #392435;
+  --danger: #dc2626;
+  --danger-hover: #b21d1d;
+  /* ProfilePage.tsx's danger-variant ActionButton hover background — a distinct raw hex from
+     Modal.tsx's --danger-hover above (that one darkens a solid button; this lightens a pale one). */
+  --danger-bg-hover: #fde8e8;
+  /* Precomputed via polished's lighten(0.2, ...) — reused across Arrows.tsx hover, Cell.tsx's
+     "answered" swatch, and MenuItem.tsx hover; all three use the identical value. */
+  --primary-light: #d5c3a3;
+  /* Precomputed via polished's lighten(0.2, ...) — Legend.tsx's "incorrect" swatch only. */
+  --secondary-light: #985e8c;
+  /* Precomputed via polished's lighten(0.4, ...) / darken(0.1, ...) — Explanation.tsx. */
+  --correct-bg: #d9eeda;
+  --destructive-bg: #fff8f7;
+  --correct-strong: #3d8b40;
+  --destructive-strong: #ea1c0d;
   --tertiary: #301e2c;
   --quatro: #f8e3e0;
   --black: #333333;
@@ -122,54 +182,251 @@
   --grey-700: #a7a5a5;
   --grey-800: #9a9898;
   --grey-900: #817e7e;
+  /* theme.grey[10]/[11] from the styled-components DEFAULT_THEME — only these two greys past
+     grey-900 are ever referenced. grey[12..14] are unused and intentionally not ported. */
+  --grey-950: #747272;
+  --grey-1000: #676565;
 }
 
-/* Tailwind's default scale is authored in rem, but GlobalStyle sets html to a 10px root
-   font-size (theme.fontSize in src/constants.ts), which silently renders every Tailwind
-   utility at 62.5% of its intended size. The 10px root cannot be changed — ~320 rem values
-   across the existing styled-components are authored against it. Restating the scale in px
-   makes the Tailwind utilities root-agnostic instead.
-   Breakpoints are intentionally left in rem: rem inside a media query resolves against the
-   browser's initial 16px, not the html font-size, so they were never affected. */
 @theme {
-  --spacing: 4px;
+  /* theme.shadows[N] from the old styled-components DEFAULT_THEME — only indices 1, 4 and 8
+     (of 25) were ever referenced;
+     named after their original index for traceability, the rest are intentionally not ported.
+     Must live in this @theme block (not :root) — that's what Tailwind's utility generator scans
+     to emit shadow-1/shadow-4/shadow-8; a :root custom property alone generates no utility. */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-4: 0px 1px 8px 0px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 3px 3px -2px rgba(0, 0, 0, 0.12);
+  --shadow-8: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12);
 
-  --text-xs: 12px;
-  --text-sm: 14px;
-  --text-base: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 30px;
-  --text-4xl: 36px;
-  --text-5xl: 48px;
-  --text-6xl: 60px;
-  --text-7xl: 72px;
-  --text-8xl: 96px;
-  --text-9xl: 128px;
+  /* Custom keyframe animations with no tw-animate-css equivalent — see their @keyframes above. */
+  --animate-rotate: rotate 1s infinite;
+  --animate-slide-down: slide-down 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  --animate-spin-fast: spin-fast 0.8s linear infinite;
+  --animate-grow: grow 200ms ease;
+}
 
-  --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
-  --radius-2xl: 16px;
-  --radius-3xl: 24px;
-  --radius-4xl: 32px;
+/* Modal.tsx's Inner grid — a fixed/fr/fixed row template with no equivalent named Tailwind
+   grid-rows-* scale (that utility only generates N-equal-row grids). Plain CSS, same precedent
+   as .app-background above. Values are the 3rem/1fr/5rem original converted at the 10px root. */
+.modal-inner-grid {
+  grid-template-rows: 30px 1fr 50px;
+}
 
-  --container-3xs: 256px;
-  --container-2xs: 288px;
-  --container-xs: 320px;
-  --container-sm: 384px;
-  --container-md: 448px;
-  --container-lg: 512px;
-  --container-xl: 576px;
-  --container-2xl: 672px;
-  --container-3xl: 768px;
-  --container-4xl: 896px;
-  --container-5xl: 1024px;
-  --container-6xl: 1152px;
-  --container-7xl: 1280px;
+/* Choice.tsx (exam/shared) — one fixed radio/checkbox column, one fixed label column, one
+   flexible text column. Same "no Tailwind grid-cols-* expresses a mixed fixed/fr template"
+   reason as .modal-inner-grid above. */
+.choice-grid {
+  grid-template-columns: 20px 40px 1fr;
+}
+
+/* MenuItem.tsx (exam/shared/Drawer) — one fixed icon column, one flexible label column. */
+.menu-item-grid {
+  grid-template-columns: 50px 1fr;
+}
+
+/* SaveButtonWithReminder.tsx — hover/active states combine a primary-tinted custom box-shadow
+   with a lighten/darken background and a transform, none of which map to named Tailwind tokens;
+   extracting each into its own reusable @theme token would be speculative for styling used in
+   exactly one place. Colors precomputed via the actual `polished` package (lighten/darken 0.04
+   on --primary), not guessed. */
+.save-button {
+  box-shadow: 0 1px 4px rgba(181, 150, 93, 0.35);
+  /* Three different durations on three different properties — not a single Tailwind
+     transition-* utility's shape, so this stays plain CSS too. */
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+.save-button:hover:not(:disabled) {
+  background: #bb9f6b;
+  box-shadow: 0 2px 10px rgba(181, 150, 93, 0.45);
+  transform: translateY(-1px);
+}
+.save-button:active:not(:disabled) {
+  background: #ae8d50;
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(181, 150, 93, 0.3);
+}
+
+/* SaveButtonWithReminder.tsx's reminder tooltip — width uses min(), which has no Tailwind utility
+   equivalent; the ::before is a pure-CSS border triangle pointing at the save button. Both are
+   plain CSS for the same "no named-token equivalent" reason as .save-button above. */
+.reminder-tooltip {
+  width: min(170px, 82vw);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.1),
+    0 2px 6px rgba(0, 0, 0, 0.07);
+}
+.reminder-tooltip::before {
+  content: '';
+  position: absolute;
+  inset-block-start: -8px;
+  inset-inline-end: 16px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--primary);
+}
+@media (min-width: 48rem) {
+  .reminder-tooltip {
+    width: 200px;
+  }
+}
+
+/* SaveButtonWithReminder.tsx's custom checkbox tick — a checkmark hand-drawn from two borders,
+   rotated. Sub-pixel offset (-0.5px, -1px) has no meaningful Tailwind spacing-scale equivalent
+   (it's a glyph nudge, not a design-scale value), so this whole pseudo-element stays plain CSS. */
+/* BreakModalsStyles.ts's shared card — `min()` has no Tailwind utility, same reason as
+   SaveButtonWithReminder's .reminder-tooltip above. */
+.break-card {
+  width: min(90vw, 500px);
+}
+
+/* BreakTimerModal.tsx's progress ring — no Tailwind utility transitions an SVG `stroke-dashoffset`. */
+.ring-progress {
+  transition: stroke-dashoffset 1s linear;
+}
+
+/* AttemptHistorySkeleton.tsx's shimmer placeholder. Colors and animation are the same for every
+   instance; only width/height/radius vary per skeleton rect, which stay inline style (they come
+   from a data table of arbitrary placeholder sizes, not a design-scale value). */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #ebebeb 25%, #d6d6d6 50%, #ebebeb 75%);
+  background-size: 1200px 100%;
+  animation: skeleton-wave 1.5s infinite linear;
+}
+@keyframes skeleton-wave {
+  0% {
+    background-position: -600px 0;
+  }
+  100% {
+    background-position: 600px 0;
+  }
+}
+
+/* exam-dropdown/Dropdown.tsx — the overlay and menu-wrapper each transition `visibility` with a
+   delay that depends on open/closed state (no delay appearing, delayed disappearing so the
+   opacity/blur fade finishes first). Multiple properties with different individual delays isn't
+   one Tailwind transition utility's shape. */
+.exam-dropdown-overlay {
+  transition:
+    backdrop-filter 0.25s ease,
+    background 0.25s ease,
+    visibility 0s 0.25s;
+}
+.exam-dropdown-overlay[data-open="true"] {
+  transition:
+    backdrop-filter 0.25s ease,
+    background 0.25s ease,
+    visibility 0s 0s;
+}
+.exam-dropdown-wrapper {
+  transition: visibility 0s 0.2s;
+}
+.exam-dropdown-wrapper[data-open="true"] {
+  transition: visibility 0s 0s;
+}
+
+/* exam-dropdown/Dropdown.tsx's menu box — `min()` (no Tailwind utility) and a custom box-shadow
+   that doesn't match any of the app's 3 ported shadow tokens. */
+.exam-dropdown-menu {
+  width: min(92vw, 1200px);
+  max-height: 85vh;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* exam-dropdown/MenuItem.tsx's hover shadow — same "no matching token" reason. */
+.exam-dropdown-menu-item:hover {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* AttemptHistoryStyles.tsx's Tr/Td — a responsive table that's a translucent card on mobile and
+   a real <table> row on desktop. Kept as one cohesive plain-CSS pair (not split between Tailwind
+   utilities and a plain ::before) because: (1) the mobile ::before's `content: attr(data-label)`
+   reads a live DOM attribute — attr() has no Tailwind representation at all, static or dynamic;
+   (2) the desktop-only "row hover recolors every cell" rule is cross-element, cleaner as a plain
+   descendant selector than wiring up Tailwind's `group`/`group-hover` here. Only the per-row
+   `animation-delay` (position in the list) stays as inline style in the component — Tailwind's
+   `delay-*` is dynamic but only for literal class names its scanner can see in source, not a
+   runtime-computed one. */
+.attempt-tr {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: 1px solid var(--grey-400);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  animation: fade-in-only 0.45s ease-out both;
+}
+@keyframes fade-in-only {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (min-width: 768px) {
+  .attempt-tr {
+    display: table-row;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 0;
+  }
+  .attempt-tr:hover .attempt-td {
+    background: rgba(181, 150, 93, 0.04);
+  }
+}
+
+.attempt-td {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 13.5px;
+  color: var(--black);
+  border-bottom: 1px solid var(--grey-100);
+}
+.attempt-td:last-child {
+  border-bottom: none;
+}
+.attempt-td::before {
+  content: attr(data-label);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey-900);
+  margin-inline-end: 10px;
+  flex-shrink: 0;
+}
+@media (min-width: 768px) {
+  .attempt-td {
+    display: table-cell;
+    padding: 16.5px 14px;
+    border-bottom: 1px solid var(--grey-200);
+    vertical-align: middle;
+    transition: background 0.15s ease;
+  }
+  .attempt-td::before {
+    display: none;
+  }
+  .attempt-td:last-child {
+    border-bottom: 1px solid var(--grey-200);
+  }
+}
+
+.custom-checkbox::after {
+  content: '';
+  display: none;
+  position: absolute;
+  width: 3px;
+  height: 5px;
+  border-inline-end: 2px solid white;
+  border-block-end: 2px solid white;
+  transform: rotate(45deg) translate(-0.5px, -1px);
 }
 
 @theme inline {
@@ -180,6 +437,16 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-danger-bg-hover: var(--danger-bg-hover);
+  --color-primary-light: var(--primary-light);
+  --color-secondary-light: var(--secondary-light);
+  --color-correct-bg: var(--correct-bg);
+  --color-destructive-bg: var(--destructive-bg);
+  --color-correct-strong: var(--correct-strong);
+  --color-destructive-strong: var(--destructive-strong);
   --color-tertiary: var(--tertiary);
   --color-quatro: var(--quatro);
   --color-black: var(--black);
@@ -209,4 +476,6 @@
   --color-grey-700: var(--grey-700);
   --color-grey-800: var(--grey-800);
   --color-grey-900: var(--grey-900);
+  --color-grey-950: var(--grey-950);
+  --color-grey-1000: var(--grey-1000);
 }

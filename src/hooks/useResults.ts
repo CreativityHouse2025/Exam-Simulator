@@ -22,14 +22,16 @@ export default function useResults(): Results {
     const exam = examOrNull!
 
     const passingScore = examTypes[examType as keyof typeof examTypes]?.passingRate ?? null
-    let sourceLabel: string | undefined;
     // label should be Exam if exam is full or revision
     const isFullExamLabel = examType === 'revision' || examType === 'full'
-    if (examId) {
-        sourceLabel = useFullExamLabel(examId)
-    } else if (categoryId) {
-        sourceLabel = useCategoryLabel(categoryId)
-    }
+    // Pre-existing bug fix (unrelated to this migration): both label hooks must run
+    // unconditionally — calling one or the other behind an `if` violates rules-of-hooks and
+    // can crash React if examId/categoryId ever differ across renders of the same mount.
+    // `?? 0` is a safe no-match id for whichever branch doesn't apply; the ternary below
+    // picks the same label the old conditional would have.
+    const fullExamLabel = useFullExamLabel(examId ?? 0)
+    const categoryLabel = useCategoryLabel(categoryId ?? 0)
+    const sourceLabel: string | undefined = examId ? fullExamLabel : categoryId ? categoryLabel : undefined
 
     const questionStats = React.useMemo<QuestionStats>(() => {
         return selectedOriginalIndices.reduce<QuestionStats>(

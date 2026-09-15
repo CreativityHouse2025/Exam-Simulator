@@ -1,123 +1,10 @@
-import type { ThemedStyles } from '../../../types'
-import styled from 'styled-components'
-import darken from 'polished/lib/color/darken'
-import transparentize from 'polished/lib/color/transparentize'
+import type { CSSProperties } from 'react'
 import { ModalOverlay } from '../../SharedStyles'
-import { BreakCard } from './BreakModalsStyles'
+import { BREAK_CARD_CLASSES } from './BreakModalsStyles'
 
 const RING_RADIUS = 66
 const RING_SIZE = 160
 const CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS
-
-const Title = styled.div<ThemedStyles>`
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font: 600 2rem 'Open Sans';
-  background: ${({ theme }) => theme.primary};
-`
-
-const Body = styled.div<{ $dir: string }>`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2.4rem 2rem;
-  text-align: center;
-  direction: ${({ $dir }) => $dir};
-`
-
-const RingWrap = styled.div`
-  position: relative;
-  width: ${RING_SIZE}px;
-  height: ${RING_SIZE}px;
-  margin-bottom: 1.6rem;
-`
-
-const RingSvg = styled.svg`
-  display: block;
-  width: 100%;
-  height: 100%;
-  /* Rotate so the arc starts at 12 o'clock; pixel origin keeps the center fixed when the container scales. */
-  transform: rotate(-90deg);
-  transform-origin: ${RING_SIZE / 2}px ${RING_SIZE / 2}px;
-`
-
-const RingTrack = styled.circle<ThemedStyles>`
-  fill: none;
-  stroke: ${({ theme }) => theme.grey[2]};
-  stroke-width: 6;
-`
-
-const RingProgress = styled.circle<ThemedStyles & { $offset: number }>`
-  fill: none;
-  stroke: ${({ theme }) => theme.primary};
-  stroke-width: 6;
-  stroke-linecap: round;
-  stroke-dasharray: ${CIRCUMFERENCE};
-  stroke-dashoffset: ${({ $offset }) => $offset};
-  transition: stroke-dashoffset 1s linear;
-`
-
-const RingCenter = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-`
-
-const Digits = styled.span<ThemedStyles>`
-  font-family: 'Open Sans';
-  font-size: 3.3rem;
-  font-weight: 650;
-  color: ${({ theme }) => theme.secondary};
-  font-variant-numeric: tabular-nums;
-`
-
-const RemainingLabel = styled.span<ThemedStyles>`
-  font-family: 'Open Sans';
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: ${({ theme }) => transparentize(0.4, theme.secondary)};
-  text-transform: uppercase;
-`
-
-const Subtitle = styled.p<ThemedStyles>`
-  font-family: 'Open Sans';
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme.grey[10]};
-  margin: 0;
-`
-
-const Buttons = styled.div<ThemedStyles>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 1.2rem 1.2rem;
-  border-top: 1px solid ${({ theme }) => theme.grey[2]};
-  background: ${({ theme }) => theme.grey[0]};
-  min-height: 5rem;
-`
-
-const BtnEnd = styled.div<ThemedStyles>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font: 700 1.5rem 'Open Sans';
-  text-transform: uppercase;
-  padding: 0.75rem 1rem;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  transition: background 0.3s;
-  cursor: pointer;
-  color: white;
-  background: ${({ theme }) => theme.secondary};
-  &:hover { background: ${({ theme }) => darken(0.1, theme.secondary)}; }
-`
 
 interface Props {
   dir: string
@@ -135,25 +22,39 @@ export default function BreakTimerModal({ dir, title, subtitle, remainingLabel, 
   const offset = CIRCUMFERENCE * (1 - progress)
   return (
     <ModalOverlay>
-      <BreakCard>
-        <Title>{title}</Title>
-        <Body $dir={dir}>
-          <RingWrap>
-            <RingSvg viewBox={`0 0 ${RING_SIZE} ${RING_SIZE}`}>
-              <RingTrack cx={RING_SIZE / 2} cy={RING_SIZE / 2} r={RING_RADIUS} />
-              <RingProgress cx={RING_SIZE / 2} cy={RING_SIZE / 2} r={RING_RADIUS} $offset={offset} />
-            </RingSvg>
-            <RingCenter>
-              <Digits>{timeDisplay}</Digits>
-              <RemainingLabel>{remainingLabel}</RemainingLabel>
-            </RingCenter>
-          </RingWrap>
-          <Subtitle>{subtitle}</Subtitle>
-        </Body>
-        <Buttons>
-          <BtnEnd onClick={onEnd}>{endLabel}</BtnEnd>
-        </Buttons>
-      </BreakCard>
+      <div className={BREAK_CARD_CLASSES}>
+        <div className="h-12.5 flex justify-center items-center text-xl font-semibold bg-primary">{title}</div>
+        <div className="flex flex-col items-center py-6 px-5 text-center" style={{ direction: dir as CSSProperties['direction'] }}>
+          <div className="relative w-40 h-40 mb-4">
+            <svg viewBox={`0 0 ${RING_SIZE} ${RING_SIZE}`} className="block w-full h-full -rotate-90 origin-center">
+              <circle cx={RING_SIZE / 2} cy={RING_SIZE / 2} r={RING_RADIUS} strokeWidth={6} className="fill-none stroke-grey-200" />
+              <circle
+                cx={RING_SIZE / 2}
+                cy={RING_SIZE / 2}
+                r={RING_RADIUS}
+                strokeWidth={6}
+                strokeLinecap="round"
+                strokeDasharray={CIRCUMFERENCE}
+                strokeDashoffset={offset}
+                className="ring-progress fill-none stroke-primary"
+              />
+            </svg>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1">
+              <span className="font-sans text-4xl font-bold text-secondary tabular-nums">{timeDisplay}</span>
+              <span className="font-sans text-base font-bold text-secondary/60 uppercase">{remainingLabel}</span>
+            </div>
+          </div>
+          <p className="font-sans text-lg font-semibold text-grey-950 m-0">{subtitle}</p>
+        </div>
+        <div className="flex items-center justify-center pt-0 px-3 pb-3 border-t border-grey-200 bg-grey-50 min-h-12.5">
+          <button
+            className="flex items-center justify-center font-bold text-base uppercase py-2 px-2.5 rounded-xs transition-colors duration-300 cursor-pointer text-white bg-secondary hover:bg-secondary-hover"
+            onClick={onEnd}
+          >
+            {endLabel}
+          </button>
+        </div>
+      </div>
     </ModalOverlay>
   )
 }

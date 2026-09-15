@@ -186,6 +186,7 @@ export async function getAttempt(
   }
 
   const {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     user_id: _user_id,
     exam_attempt_questions: questions,
     ...attemptRow

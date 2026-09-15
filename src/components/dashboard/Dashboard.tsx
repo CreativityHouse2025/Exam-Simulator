@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-// @ts-expect-error
+// @ts-expect-error -- pre-existing, unrelated to this change
 import Logo from "@/assets/logo.png"
 import { translate } from "@/utils/translation"
 
@@ -13,7 +13,7 @@ const Dashboard = ({ subtitle, children }: DashboardProps) => {
   return (
     <div
       id="dashboard"
-      className="tailwind-page flex flex-1 flex-col items-center justify-center justify-self-center p-2.5"
+      className="flex flex-1 flex-col items-center justify-center justify-self-center p-2.5"
     >
       <img
         id="image"

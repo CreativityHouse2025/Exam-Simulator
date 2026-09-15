@@ -1,7 +1,6 @@
-import type { Results, ThemedStyles } from '../../../types'
+import type { Results } from '../../../types'
 
 import React from 'react'
-import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import SummaryRow from '../shared/SummaryRow'
 import { formatDate, formatTimer } from '../../../utils/format'
@@ -11,95 +10,13 @@ import { canRetryAttempt } from '../../../utils/exam'
 import { ROUTES } from '../../../config/routes'
 import { useExamSessionCore } from '../../../hooks/examSession/useExamSessionCore'
 import { useFullExamSession } from '../../../hooks/examSession/useFullExamSession'
+import { cn } from '../../ui/utils'
 
-const TitleStyles = styled.div<ThemedStyles>`
-  justify-self: center;
-  font: 4rem 'Open Sans';
-  font-weight: 700;
-  text-align: center;
-  color: ${({ theme }) => theme.black};
-`
-
-const TopColumnStyles = styled.div`
-  display: grid;
-  grid-template-rows: repeat(5, auto);
-  width: 100%;
-`
-
-const ColumnStyles = styled.div`
-  padding-top: 5rem;
-  display: grid;
-  grid-template-rows: repeat(4, auto);
-  width: 100%;
-`
-
-const SummaryContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-`
-
-const RestartButton = styled.button<ThemedStyles>`
-  background: ${({ theme }) => theme.primary};
-  color: white;
-  border: none;
-  padding: 1.2rem 1.6rem;
-  font-size: 1.8rem;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  min-width: 260px;
-  width: 100%;
-  max-width: 300px;
-  display: inline-block;
-  &:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-`
-
-const RetakeButton = styled.button<ThemedStyles>`
-  background: ${({ theme }) => theme.secondary};
-  color: white;
-  border: none;
-  padding: 1.2rem 1.6rem;
-  font-size: 1.8rem;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  min-width: 260px;
-  width: 100%;
-  max-width: 300px;
-  display: inline-block;
-
-  &:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-`
-
-const ButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
-  gap: 1rem;
-
-  @media (max-width: 48rem) {
-    flex-direction: column;
-  }
-`
+// grid-template-rows: repeat(N, auto) is what CSS Grid already does by default when no explicit
+// row sizing is set — omitting it entirely (just `grid`) is the exact same render, not an
+// approximation.
+const BUTTON_BASE =
+  "text-white py-3 px-4 text-lg font-semibold rounded-lg transition-all duration-300 cursor-pointer min-w-65 w-full max-w-75 inline-block hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0"
 
 const FullExamSummary: React.FC = () => {
   const {
@@ -134,11 +51,11 @@ const FullExamSummary: React.FC = () => {
   const navigate = useNavigate()
 
   return (
-    <SummaryContainer id="summary">
-      <TitleStyles id="title">{translated.title}</TitleStyles>
+    <div id="summary" className="flex flex-col gap-10">
+      <div id="title" className="justify-self-center text-4xl font-bold text-center text-black">{translated.title}</div>
 
       <div id="columns" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <TopColumnStyles id="column">
+        <div id="column" className="grid w-full">
           {pass !== undefined && (
             <SummaryRow type="status" value={translated.status} status={pass} isStatus />
           )}
@@ -150,35 +67,40 @@ const FullExamSummary: React.FC = () => {
           <SummaryRow type="time" value={formatTimer(elapsedTime)} status={pass} />
           <SummaryRow type="date" value={formatDate(date)} status={pass} />
           {sourceLabel && <SummaryRow type={sourceType} value={sourceLabel} status={pass} />}
-        </TopColumnStyles>
+        </div>
 
-        <ColumnStyles id="column">
+        <div id="column" className="pt-12.5 grid w-full">
           <SummaryRow type="score" value={`${score} %`} status={pass} />
           <SummaryRow type="correct" value={`${correctCount} / ${totalQuestions}`} status={pass} />
           <SummaryRow type="incorrect" value={`${incorrectCount} / ${totalQuestions}`} status={pass} />
           <SummaryRow type="incomplete" value={`${incompleteCount} / ${totalQuestions}`} status={pass} />
-        </ColumnStyles>
+        </div>
       </div>
 
-      <ButtonsContainer>
+      <div className="flex flex-col md:flex-row items-center justify-center mt-5 gap-2.5">
         {canRetake && (
-          <RetakeButton
+          <button
             id="retake-button"
             title="Revise your mistakes"
-            className="no-select"
+            className={cn(BUTTON_BASE, "no-select bg-secondary")}
             onClick={async () => {
               const id = await startRevision(sessionId)
               if (id) navigate(ROUTES.exam.to(id, true))
             }}
           >
             {translated.retake}
-          </RetakeButton>
+          </button>
         )}
-        <RestartButton id="restart-button" title="Homepage" className="no-select" onClick={() => navigate(ROUTES.home)}>
+        <button
+          id="restart-button"
+          title="Homepage"
+          className={cn(BUTTON_BASE, "no-select bg-primary")}
+          onClick={() => navigate(ROUTES.home)}
+        >
           {translated.home}
-        </RestartButton>
-      </ButtonsContainer>
-    </SummaryContainer>
+        </button>
+      </div>
+    </div>
   )
 }
 

@@ -1,29 +1,6 @@
-import styled from "styled-components";
 import { MENU_PADDING } from "../../constants";
 import type { DropdownItem } from "../../types";
 import MenuItem from "./MenuItem";
-
-const MenuListStyles = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.7rem;
-  list-style: none;
-  margin: 0;
-  margin-top: -0.5rem;
-  padding: ${MENU_PADDING};
-
-  @media (min-width: 480px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(5, 1fr);
-  }
-`;
 
 type MenuListProps<TId = number, TLabel = string> = {
     items: DropdownItem<TId, TLabel>[]
@@ -33,13 +10,16 @@ type MenuListProps<TId = number, TLabel = string> = {
 
 const MenuList = <TId, TLabel>({ items, onSelect, emptyMessage }: MenuListProps<TId, TLabel>) => {
     return (
-        <MenuListStyles>
+        <ul
+            className="grid grid-cols-2 min-[480px]:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1.75 list-none m-0 -mt-1.25"
+            style={{ padding: MENU_PADDING }}
+        >
             {items.length > 0
                 ? items.map((item) => (
                     <MenuItem key={`${item.id}`} label={`${item.label}`} onSelect={() => onSelect(item.id)} />
                 ))
                 : (emptyMessage ?? "There are no items at the moment.")}
-        </MenuListStyles>
+        </ul>
     )
 }
 

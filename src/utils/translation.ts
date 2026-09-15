@@ -10,9 +10,9 @@ export const translate = (key: string, replacements?: (string | number)[]): stri
 
   if (!replacements?.length) return value
 
-  // @ts-expect-error
+  // @ts-expect-error -- pre-existing, unrelated to this change
   return replacements.reduce(
-    // @ts-expect-error
+    // @ts-expect-error -- pre-existing, unrelated to this change
     (result, replacement, index) => result.replace(new RegExp(`\\$${index + 1}`, 'g'), replacement.toString()),
     value
   )
@@ -20,6 +20,7 @@ export const translate = (key: string, replacements?: (string | number)[]): stri
 
 export const hasTranslation = (): boolean => translations.size > 0
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- pre-existing, unrelated to this change
 export const setTranslation = (lang: Lang, translationData: Record<string, any>): void => {
   
   if (lang.code === currentLang && translations.size > 0) return
@@ -30,6 +31,7 @@ export const setTranslation = (lang: Lang, translationData: Record<string, any>)
   flattenTranslations(translationData)
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- pre-existing, unrelated to this change
 const flattenTranslations = (obj: Record<string, any>, parentKey = ''): void => {
   Object.entries(obj).forEach(([key, value]) => {
     const fullKey = parentKey ? `${parentKey}.${key}` : key

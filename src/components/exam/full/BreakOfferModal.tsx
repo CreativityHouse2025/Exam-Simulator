@@ -1,64 +1,9 @@
-import type { ThemedStyles } from '../../../types'
 import React from 'react'
-import styled from 'styled-components'
-import darken from 'polished/lib/color/darken'
 import { ModalOverlay } from '../../SharedStyles'
-import { BreakCard } from './BreakModalsStyles'
+import { BREAK_CARD_CLASSES } from './BreakModalsStyles'
+import { cn } from '../../ui/utils'
 
-const Title = styled.div<ThemedStyles>`
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font: 600 2rem 'Open Sans';
-  background: ${({ theme }) => theme.primary};
-`
-
-const Message = styled.div<ThemedStyles>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Open Sans';
-  font-size: 2.5rem;
-  font-weight: 600;
-  padding: 2.4rem 2rem;
-  text-align: center;
-`
-
-const Buttons = styled.div<ThemedStyles>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 0 1.2rem 1.2rem;
-  border-top: 1px solid ${({ theme }) => theme.grey[2]};
-  background: ${({ theme }) => theme.grey[0]};
-  min-height: 5rem;
-`
-
-const Btn = styled.div<ThemedStyles>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font: 700 1.5rem 'Open Sans';
-  text-transform: uppercase;
-  padding: 0.75rem 1rem;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  transition: background 0.3s;
-  cursor: pointer;
-`
-
-const BtnConfirm = styled(Btn)<ThemedStyles>`
-  color: white;
-  background: ${({ theme }) => theme.secondary};
-  &:hover { background: ${({ theme }) => darken(0.1, theme.secondary)}; }
-`
-
-const BtnCancel = styled(Btn)<ThemedStyles>`
-  color: ${({ theme }) => theme.grey[10]};
-  background: ${({ theme }) => theme.grey[2]};
-  &:hover { background: ${({ theme }) => theme.grey[3]}; }
-`
+const BTN_BASE = "flex items-center justify-center font-bold text-base uppercase py-2 px-2.5 rounded-xs transition-colors duration-300 cursor-pointer"
 
 interface Props {
   dir: string
@@ -78,14 +23,18 @@ export default function BreakOfferModal({ title, message, primaryLabel, secondar
 
   return (
     <ModalOverlay onClick={handleBackdropClick}>
-      <BreakCard>
-        <Title>{title}</Title>
-        <Message>{message}</Message>
-        <Buttons>
-          <BtnConfirm onClick={onTake}>{primaryLabel}</BtnConfirm>
-          <BtnCancel onClick={onSkip}>{secondaryLabel}</BtnCancel>
-        </Buttons>
-      </BreakCard>
+      <div className={BREAK_CARD_CLASSES}>
+        <div className="h-12.5 flex justify-center items-center text-xl font-semibold bg-primary">{title}</div>
+        <div className="flex items-center justify-center text-2xl font-semibold py-6 px-5 text-center font-sans">{message}</div>
+        <div className="flex items-center justify-center gap-2.5 pt-0 px-3 pb-3 border-t border-grey-200 bg-grey-50 min-h-12.5">
+          <button className={cn(BTN_BASE, "text-white bg-secondary hover:bg-secondary-hover")} onClick={onTake}>
+            {primaryLabel}
+          </button>
+          <button className={cn(BTN_BASE, "text-grey-950 bg-grey-200 hover:bg-grey-300")} onClick={onSkip}>
+            {secondaryLabel}
+          </button>
+        </div>
+      </div>
     </ModalOverlay>
   )
 }

@@ -1,5 +1,4 @@
 import React from "react"
-import styled from "styled-components"
 import useSettings from "../../hooks/useSettings"
 import { formatDate } from "../../utils/format"
 import { translate } from "../../utils/translation"
@@ -9,7 +8,7 @@ import AttemptStateIcon from "./AttemptStateIcon"
 import AttemptStatusBadge from "./AttemptStatusBadge"
 import { Tr, Td } from "./AttemptHistoryStyles"
 import type { AttemptSummary } from "@shared/attempt.schema"
-import type { ThemedStyles } from "../../types"
+import { cn } from "../ui/utils"
 
 type Props = {
   attempt: AttemptSummary
@@ -19,101 +18,7 @@ type Props = {
   onRetry: (id: string) => void
 }
 
-const TypeBadge = styled.span<ThemedStyles & { $type: string }>`
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 4px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-align: center;
-  background: ${({ $type }) =>
-    $type === "full" ? "rgba(181, 150, 93, 0.14)" : "rgba(89, 55, 82, 0.1)"};
-  color: ${({ theme, $type }) => ($type === "full" ? theme.primary : theme.secondary)};
-`
-
-/** Bold prominent text for the exam / domain name column. */
-const ExamName = styled.span<ThemedStyles>`
-  font-weight: 600;
-  font-size: 1.4rem;
-  color: ${({ theme }) => theme.black};
-`
-
-const ScoreText = styled.span<ThemedStyles & { $status: string | null }>`
-  font-size: 1.55rem;
-  font-weight: 600;
-  color: ${({ theme, $status }) =>
-    $status === "pass" ? theme.correct : $status === "fail" ? theme.incorrect : theme.grey[7]};
-`
-
-const ActionButtons = styled.div`
-  display: flex;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  @media (min-width: 768px) {
-    justify-content: flex-start;
-  }
-`
-
-const ReviewButton = styled.button<ThemedStyles>`
-  background: none;
-  border: 1.5px solid ${({ theme }) => theme.primary};
-  border-radius: 6px;
-  padding: 0.55rem;
-  width: 11rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme.primary};
-  cursor: pointer;
-  white-space: nowrap;
-  font-family: ${({ theme }) => theme.fontFamily};
-  transition: opacity 0.15s ease;
-
-  &:hover {
-    opacity: 0.7;
-  }
-`
-
-const RetryButton = styled.button<ThemedStyles & { $disabled: boolean }>`
-  background: ${({ theme, $disabled }) => $disabled ? theme.grey[4] : theme.tertiary};
-  border: none;
-  border-radius: 6px;
-  padding: 0.55rem;
-  width: 11rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #fff;
-  cursor: ${({ $disabled }) => $disabled ? "not-allowed" : "pointer"};
-  white-space: nowrap;
-  font-family: ${({ theme }) => theme.fontFamily};
-  transition: opacity 0.2s ease;
-  opacity: ${({ $disabled }) => $disabled ? 0.5 : 1};
-
-  &:hover {
-    opacity: ${({ $disabled }) => $disabled ? 0.5 : 0.82};
-  }
-`
-
-const ContinueButton = styled.button<ThemedStyles>`
-  background: ${({ theme }) => theme.primary};
-  border: none;
-  border-radius: 6px;
-  padding: 0.55rem;
-  width: 11rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-  white-space: nowrap;
-  font-family: ${({ theme }) => theme.fontFamily};
-
-  &:hover {
-    opacity: 0.82;
-  }
-`
+const ACTION_BUTTON_BASE = "rounded-md p-1.5 w-27.5 text-xs font-semibold font-sans whitespace-nowrap"
 
 /** Renders one exam attempt as a responsive row (card on mobile, table row on desktop). */
 const AttemptHistoryRow: React.FC<Props> = ({ attempt, index, onContinue, onReview, onRetry }) => {
@@ -125,47 +30,69 @@ const AttemptHistoryRow: React.FC<Props> = ({ attempt, index, onContinue, onRevi
   const scoreDisplay = attempt.exam_state === "completed" ? `${attempt.score}%` : "—"
   const isInProgress = attempt.exam_state === "in-progress"
   const retryEnabled = attempt.exam_state === "completed" && canRetryAttempt(attempt.exam_type, attempt.score < 100)
+  const isFull = attempt.exam_type === "full"
+
+  const scoreColor =
+    attempt.status === "pass" ? "text-correct" : attempt.status === "fail" ? "text-destructive" : "text-grey-700"
 
   return (
-    <Tr $index={index}>
+    <Tr index={index}>
       <Td data-label={translate("history.table.type")}>
-        <TypeBadge $type={attempt.exam_type}>
-          {translate(attempt.exam_type === "full" ? "history.type.full" : "history.type.domain")}
-        </TypeBadge>
+        <span
+          className={cn(
+            "inline-block py-0.75 px-2 rounded-sm text-xs font-bold tracking-wider uppercase text-center",
+            isFull ? "bg-primary/14 text-primary" : "bg-secondary/10 text-secondary",
+          )}
+        >
+          {translate(isFull ? "history.type.full" : "history.type.domain")}
+        </span>
       </Td>
       <Td data-label={translate("history.table.exam-domain")}>
-        <ExamName>{examLabel}</ExamName>
+        <span className="font-semibold text-sm text-black">{examLabel}</span>
       </Td>
       <Td data-label={translate("history.table.state")}>
         <AttemptStateIcon state={attempt.exam_state} />
       </Td>
       <Td data-label={translate("history.table.score")}>
-        <ScoreText $status={attempt.status}>{scoreDisplay}</ScoreText>
+        <span className={cn("text-base font-semibold", scoreColor)}>{scoreDisplay}</span>
       </Td>
       <Td data-label={translate("history.table.status")}>
         <AttemptStatusBadge status={attempt.status} />
       </Td>
       <Td data-label={translate("history.table.date")}>{formatDate(attempt.created_at)}</Td>
       <Td data-label={translate("history.table.action")}>
-        <ActionButtons>
+        <div className="flex gap-1.5 flex-wrap justify-end md:justify-start">
           {isInProgress ? (
-            <ContinueButton onClick={() => onContinue(attempt.id)}>
+            <button
+              className={cn(ACTION_BUTTON_BASE, "cursor-pointer bg-primary text-white transition-opacity duration-200 hover:opacity-82")}
+              onClick={() => onContinue(attempt.id)}
+            >
               {translate("history.actions.continue")}
-            </ContinueButton>
+            </button>
           ) : (
-            <ReviewButton onClick={() => onReview(attempt.id)}>
+            <button
+              className={cn(
+                ACTION_BUTTON_BASE,
+                "cursor-pointer bg-transparent border-2 border-primary text-primary transition-opacity duration-150 hover:opacity-70",
+              )}
+              onClick={() => onReview(attempt.id)}
+            >
               {translate("history.actions.review")}
-            </ReviewButton>
+            </button>
           )}
-          {attempt.exam_type === "full" && (
-            <RetryButton
-              $disabled={!retryEnabled}
+          {isFull && (
+            <button
+              className={cn(
+                ACTION_BUTTON_BASE,
+                "text-white transition-opacity duration-200",
+                retryEnabled ? "bg-tertiary cursor-pointer opacity-100 hover:opacity-82" : "bg-grey-400 cursor-not-allowed opacity-50 hover:opacity-50",
+              )}
               onClick={retryEnabled ? () => onRetry(attempt.id) : undefined}
             >
               {translate("history.actions.retry")}
-            </RetryButton>
+            </button>
           )}
-        </ActionButtons>
+        </div>
       </Td>
     </Tr>
   )

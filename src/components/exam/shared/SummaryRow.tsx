@@ -1,47 +1,17 @@
-import type { ThemedStyles } from '../../../types'
-
 import React from 'react'
-import styled from 'styled-components'
 import { translate } from '../../../utils/translation'
-
-export const RowStyles = styled.div<SummaryStylesProps>`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 5rem;
-  justify-items: center;
-  align-items: start;
-
-
-  .status {
-    color: ${({ $status, theme }) =>
-    $status === false ? theme.incorrect : theme.correct};
-  }
-`
-
-export const RowKeyStyles = styled.div<ThemedStyles>`
-  font: 2rem 'Open Sans';
-  text-align: center;
-  font-weight: 700;
-  color: ${({ theme }) => theme.grey[10]};
-`
-
-export const RowValueStyles = styled.div<ThemedStyles>`
-  font: 2rem 'Open Sans';
-  text-align: center;
-  font-weight: 700;
-  color: ${({ theme }) => theme.black};
-`
 
 const SummaryRowComponent: React.FC<SummaryRowProps> = ({ type, value, status, isStatus }) => {
   const typeLabel = translate(`content.summary.${type}`)
+  const statusColor = isStatus ? (status === false ? "text-destructive" : "text-correct") : "text-black"
 
   return (
-    <RowStyles data-test={`summary-row-${type}`} $status={status}>
-      <RowKeyStyles>{typeLabel}</RowKeyStyles>
-      <RowValueStyles className={isStatus ? 'status' : ''}>
+    <div data-test={`summary-row-${type}`} className="grid grid-cols-2 gap-x-12.5 justify-items-center items-start">
+      <div className="text-xl text-center font-bold text-grey-950">{typeLabel}</div>
+      <div className={`text-xl text-center font-bold ${statusColor}`}>
         {value}
-      </RowValueStyles>
-    </RowStyles>
+      </div>
+    </div>
   )
 }
 
@@ -52,8 +22,4 @@ export interface SummaryRowProps {
   value: string
   status?: boolean
   isStatus?: boolean
-}
-
-export interface SummaryStylesProps extends ThemedStyles {
-  $status?: boolean
 }

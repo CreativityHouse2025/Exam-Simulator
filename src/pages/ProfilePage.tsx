@@ -1,86 +1,14 @@
 import React, { useState } from "react"
-import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
-import { ArrowBack } from "@styled-icons/material/ArrowBack"
+import { ArrowLeft } from "lucide-react"
 import useAuth from "../hooks/useAuth"
 import useToast from "../hooks/useToast"
 import { formatDate } from "../utils/format"
 import { translate } from "../utils/translation"
 import { ROUTES } from "../config/routes"
-import type { ThemedStyles } from "../types"
 import { PageWrapper, Card, BackButton, PageTitle, PageSubtitle, NavLink, CardFooter } from "../components/SharedStyles"
 import InitialsAvatar from "../components/InitialsAvatar"
-
-const ProfileCard = styled(Card)`
-  max-width: 500px;
-  position: relative;
-`
-
-const InfoGroup = styled.div`
-  margin-bottom: 1.4rem;
-`
-
-const InfoLabel = styled.p<ThemedStyles>`
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme.black};
-  margin: 0 0 0.5rem;
-
-  @media (min-width: 768px) {
-    font-size: 1.4rem;
-  }
-`
-
-const InfoValue = styled.p<ThemedStyles>`
-  font-size: 1.4rem;
-  color: ${({ theme }) => theme.black};
-  margin: 0;
-  padding: 0.8rem 1rem;
-  background: ${({ theme }) => theme.grey[0]};
-  border-radius: 8px;
-  border: 1px solid ${({ theme }) => theme.grey[2]};
-
-  @media (min-width: 768px) {
-    font-size: 1.45rem;
-  }
-`
-
-const Divider = styled.hr<ThemedStyles>`
-  border: none;
-  border-top: 1px solid ${({ theme }) => theme.grey[2]};
-  margin: 2rem 0;
-`
-
-const ActionButton = styled.button<ThemedStyles & { $variant?: "danger" | "secondary" }>`
-  width: 100%;
-  padding: 1.1rem;
-  font-size: 1.4rem;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-bottom: 0.8rem;
-  transition: all 0.3s ease;
-  border: ${({ theme, $variant }) =>
-    $variant === "danger" ? `1.5px solid ${theme.incorrect}` : "none"};
-  background: ${({ theme, $variant }) => ($variant === "danger" ? "#fef2f2" : theme.primary)};
-  color: ${({ theme, $variant }) => ($variant === "danger" ? theme.incorrect : "white")};
-
-  &:hover:not(:disabled) {
-    background: ${({ $variant }) => ($variant === "danger" ? "#fde8e8" : undefined)};
-    border-color: ${({ theme, $variant }) => ($variant === "danger" ? theme.incorrect : undefined)};
-    opacity: ${({ $variant }) => ($variant === "danger" ? 1 : 0.9)};
-    transform: translateY(-2px);
-  }
-
-  &:active:not(:disabled) {
-    transform: translateY(0);
-  }
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-`
+import { cn } from "../components/ui/utils"
 
 /** Profile page — displays user account details with initials avatar. */
 const ProfilePage: React.FC = () => {
@@ -111,34 +39,49 @@ const ProfilePage: React.FC = () => {
 
   return (
     <PageWrapper>
-      <ProfileCard>
+      <Card className="max-w-125 relative">
         <BackButton title={t.backHome} onClick={() => navigate(ROUTES.home)} aria-label={t.backHome}>
-          <ArrowBack size={30} />
+          <ArrowLeft size={30} />
         </BackButton>
         <InitialsAvatar
           firstName={user.first_name}
           lastName={user.last_name}
-          className="mx-auto mb-3 size-[72px] text-2xl"
+          className="mx-auto mb-3 size-18 text-2xl"
         />
         <PageTitle>{user.first_name} {user.last_name}</PageTitle>
         <PageSubtitle>{user.email}</PageSubtitle>
 
-        <InfoGroup>
-          <InfoLabel>{t.expires}</InfoLabel>
-          <InfoValue>{formatDate(user.expires_at)}</InfoValue>
-        </InfoGroup>
+        <div className="mb-3.5">
+          <p className="text-sm font-semibold text-black mb-1.25">{t.expires}</p>
+          <p className="text-sm text-black m-0 py-2 px-2.5 bg-grey-50 rounded-lg border border-grey-200">{formatDate(user.expires_at)}</p>
+        </div>
 
-        <Divider />
+        <hr className="border-0 border-t border-grey-200 my-5" />
 
-        <ActionButton title="Reset your account's password" $variant="secondary" onClick={handlePasswordReset}>{t.resetPassword}</ActionButton>
-        <ActionButton title="Sign out from this device" $variant="danger" disabled={signingOut} onClick={handleSignOut}>
+        <button
+          title="Reset your account's password"
+          className="w-full p-2.75 text-sm font-semibold rounded-lg cursor-pointer mb-2 transition-all duration-300 border-0 bg-primary text-white hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60 disabled:cursor-not-allowed"
+          onClick={handlePasswordReset}
+        >
+          {t.resetPassword}
+        </button>
+        <button
+          title="Sign out from this device"
+          disabled={signingOut}
+          className={cn(
+            "w-full p-2.75 text-sm font-semibold rounded-lg cursor-pointer mb-2 transition-all duration-300",
+            "border-2 border-destructive bg-red-50 text-destructive hover:bg-danger-bg-hover",
+            "hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60 disabled:cursor-not-allowed",
+          )}
+          onClick={handleSignOut}
+        >
           {signingOut ? t.signingOut : t.signOut}
-        </ActionButton>
+        </button>
 
         <CardFooter>
           <NavLink to={ROUTES.home}>{t.backHome}</NavLink>
         </CardFooter>
-      </ProfileCard>
+      </Card>
     </PageWrapper>
   )
 }

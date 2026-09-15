@@ -1,26 +1,19 @@
-import type { QuestionFilter, ThemedStyles } from '../../../../types'
+import type { QuestionFilter } from '../../../../types'
 
 import React from 'react'
-import styled from 'styled-components'
 import Cell from './Cell'
 import { useExamSessionCore } from '../../../../hooks/examSession/useExamSessionCore'
 import { isAnswerCorrect } from '../../../../utils/results'
 
-const GridStyles = styled.div<ThemedStyles>`
-  max-height: 20rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  padding: 1rem;
-  overflow-y: auto;
-  border-top: 1px solid ${({ theme }) => theme.grey[2]};
-  border-bottom: 1px solid ${({ theme }) => theme.grey[2]};
-`
-
 const GridComponent: React.FC<GridProps> = ({ filter }) => {
   const { exam, bookmarks, selectedOriginalIndices } = useExamSessionCore()
 
-  if (!exam || exam.length === 0) return null
+  // Pre-existing bug fix (unrelated to this migration): hooks below must run unconditionally.
+  // `exam` used to be null-checked with an early return BEFORE these useMemo calls, which
+  // violates rules-of-hooks — if `exam` transitions from null to populated without a remount,
+  // React throws "rendered fewer hooks than expected". `examList` keeps the hooks unconditional;
+  // the null/empty check moves below them and still short-circuits the render identically.
+  const examList = exam ?? []
 
   const categorizedAnswers = React.useMemo(() => {
     const answered: number[] = []
@@ -33,7 +26,7 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
       if (hasAnswer) {
         answered.push(i)
 
-        const isCorrect = isAnswerCorrect(userAnswer, exam[i].answer)
+        const isCorrect = isAnswerCorrect(userAnswer, examList[i].answer)
 
         if (isCorrect) {
           correct.push(i)
@@ -43,10 +36,10 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
       }
     })
 
-    const incomplete = Array.from({ length: exam.length }, (_, i) => i).filter((i) => !answered.includes(i))
+    const incomplete = Array.from({ length: examList.length }, (_, i) => i).filter((i) => !answered.includes(i))
 
     return { answered, correct, incorrect, incomplete }
-  }, [exam, selectedOriginalIndices])
+  }, [examList, selectedOriginalIndices])
 
   const visibleQuestions = React.useMemo(() => {
     switch (filter) {
@@ -62,16 +55,18 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
         return categorizedAnswers.incomplete
       case 'all':
       default:
-        return Array.from({ length: exam.length }, (_, i) => i)
+        return Array.from({ length: examList.length }, (_, i) => i)
     }
-  }, [filter, exam.length, bookmarks, categorizedAnswers])
+  }, [filter, examList.length, bookmarks, categorizedAnswers])
+
+  if (!exam || exam.length === 0) return null
 
   return (
-    <GridStyles id="grid">
+    <div id="grid" className="max-h-50 flex flex-wrap content-start p-2.5 overflow-y-auto border-y border-grey-200">
       {visibleQuestions.map((i) => (
         <Cell key={i} index={i} bookmarks={bookmarks} answered={categorizedAnswers.answered} />
       ))}
-    </GridStyles>
+    </div>
   )
 }
 

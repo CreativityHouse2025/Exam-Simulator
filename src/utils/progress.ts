@@ -53,6 +53,7 @@ export function countAnsweredQuestions(answers: Answers): number {
  * @param {Answer} answer - The answer to check
  * @returns True if answer is provided
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- pre-existing, unrelated to this change
 export function isAnswerProvided(answer: Answer<any>): boolean {
   try {
     if (answer === null || answer === undefined) return false

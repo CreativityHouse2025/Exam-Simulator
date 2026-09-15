@@ -1,10 +1,10 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import styled from "styled-components"
-import type { DropdownItem, ThemedStyles } from "../../types"
-import { Close } from "@styled-icons/material/Close"
+import { X } from "lucide-react"
+import type { DropdownItem } from "../../types"
 import { MENU_PADDING } from "../../constants"
 import MenuList from "./MenuList"
+import { cn } from "../ui/utils"
 
 type DropdownProps<TId = number, TLabel = string> = {
   title: string
@@ -15,77 +15,6 @@ type DropdownProps<TId = number, TLabel = string> = {
   buttonRef?: React.RefObject<HTMLButtonElement | null>
   emptyMessage?: string
 }
-
-// Rendered via portal so position: fixed is always relative to the viewport,
-// regardless of any ancestor transform/overflow in the component tree.
-const Overlay = styled.div<{ open: boolean }>`
-  position: fixed;
-  inset: 0;
-  backdrop-filter: ${(p) => (p.open ? "blur(3px)" : "none")};
-  background: ${(p) => (p.open ? "rgba(0,0,0,0.15)" : "transparent")};
-  pointer-events: ${(p) => (p.open ? "auto" : "none")};
-  visibility: ${(p) => (p.open ? "visible" : "hidden")};
-  transition:
-    backdrop-filter 0.25s ease,
-    background 0.25s ease,
-    visibility 0s ${(p) => (p.open ? "0s" : "0.25s")};
-  z-index: 1000;
-`
-
-const MenuWrapper = styled.div<{ open: boolean }>`
-  position: fixed;
-  inset: 0;
-  display: flex;
-  padding: 1rem;
-  align-items: center;
-  justify-content: center;
-  pointer-events: ${(p) => (p.open ? "auto" : "none")};
-  visibility: ${(p) => (p.open ? "visible" : "hidden")};
-  transition: visibility 0s ${(p) => (p.open ? "0s" : "0.2s")};
-  z-index: 1001;
-`
-
-const Menu = styled.div<{ open: boolean } & ThemedStyles>`
-  font-family: ${({ theme }) => theme.fontFamily};
-  position: relative;
-  background: ${({ theme }) => theme.white};
-  color: ${({ theme }) => theme.black};
-  border-radius: 10px;
-  width: min(92vw, 120rem);
-  max-height: 85vh;
-  overflow-y: auto;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-  opacity: ${(p) => (p.open ? 1 : 0)};
-  transform: translateY(${(p) => (p.open ? "0" : "10px")});
-  transition: opacity 0.2s ease, transform 0.2s ease;
-`
-
-const MenuHeader = styled.div<ThemedStyles>`
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  align-items: center;
-  border-radius: 10px 10px 0 0;
-  padding: ${MENU_PADDING};
-  background-color: ${({ theme }) => theme.primary};
-  color: ${({ theme }) => theme.white};
-`
-
-const Title = styled.div<ThemedStyles>`
-  font-size: 2rem;
-  font-weight: 700;
-`
-
-const CloseButton = styled.button<ThemedStyles>`
-  color: ${({ theme }) => theme.white};
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: color 0.1s ease;
-  &:hover {
-    color: ${({ theme }) => theme.grey[2]};
-  }
-`
 
 const Dropdown = <TId, TLabel>({
   buttonRef,
@@ -122,16 +51,39 @@ const Dropdown = <TId, TLabel>({
 
   return ReactDOM.createPortal(
     <>
-      <Overlay open={open} />
+      {/* Rendered via portal so position: fixed is always relative to the viewport,
+          regardless of any ancestor transform/overflow in the component tree. */}
+      <div
+        data-open={open}
+        className={cn(
+          "exam-dropdown-overlay fixed inset-0 z-1000",
+          open ? "backdrop-blur-xs bg-black/15 pointer-events-auto visible" : "backdrop-blur-none bg-transparent pointer-events-none invisible",
+        )}
+      />
 
-      <MenuWrapper open={open}>
-        <Menu ref={menuRef} open={open}>
-          <MenuHeader>
-            <Title>{title}</Title>
-            <CloseButton onClick={() => setOpen(false)}>
-              <Close size={25} />
-            </CloseButton>
-          </MenuHeader>
+      <div
+        data-open={open}
+        className={cn(
+          "exam-dropdown-wrapper fixed inset-0 flex p-2.5 items-center justify-center z-1001",
+          open ? "pointer-events-auto visible" : "pointer-events-none invisible",
+        )}
+      >
+        <div
+          ref={menuRef}
+          className={cn(
+            "exam-dropdown-menu font-sans relative bg-white text-black rounded-xl overflow-y-auto transition duration-200",
+            open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2.5",
+          )}
+        >
+          <div className="flex justify-between gap-2.5 items-center rounded-t-xl bg-primary text-white" style={{ padding: MENU_PADDING }}>
+            <div className="text-xl font-bold">{title}</div>
+            <button
+              onClick={() => setOpen(false)}
+              className="text-white bg-transparent border-0 cursor-pointer transition-colors duration-100 hover:text-grey-200"
+            >
+              <X size={25} />
+            </button>
+          </div>
           <MenuList
             items={items}
             onSelect={(value) => {
@@ -140,8 +92,8 @@ const Dropdown = <TId, TLabel>({
             }}
             emptyMessage={emptyMessage}
           />
-        </Menu>
-      </MenuWrapper>
+        </div>
+      </div>
     </>,
     document.body
   )

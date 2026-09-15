@@ -1,26 +1,7 @@
-import type { ThemedStyles } from '../../../../types'
-
 import React from 'react'
-import styled from 'styled-components'
 import { gridItemBackgroundColor } from '../../../../utils/color'
 import { useExamSessionCore } from '../../../../hooks/examSession/useExamSessionCore'
-
-const CellStyles = styled.div<CellStylesProps>`
-  width: 4.5rem;
-  height: 4.5rem;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
-  background: ${({ $background }) => $background};
-  color: #333;
-  border: 1px solid ${({ theme }) => theme.grey[3]};
-  font: 1rem 'Open Sans';
-  font-weight: 700;
-  outline: 3px solid ${({ $selected, theme }) => ($selected ? theme.grey[10] : 'transparent')};
-  cursor: pointer;
-`
+import { cn } from '../../../ui/utils'
 
 const CellComponent: React.FC<CellProps> = ({ index: myIndex, bookmarks, answered }) => {
   const { index, examState, reviewState, setIndex } = useExamSessionCore()
@@ -36,15 +17,18 @@ const CellComponent: React.FC<CellProps> = ({ index: myIndex, bookmarks, answere
   )
 
   return (
-    <CellStyles
+    <div
       data-test={`Cell ${myIndex}`}
-      className="no-select"
-      $background={gridItemBackgroundColor(myIndex, bookmarks, answered)}
-      $selected={isSelected}
+      className={cn(
+        "no-select w-11.25 h-11.25 grid justify-items-center items-center mr-1.25 mb-1.25",
+        "text-black border border-grey-300 text-xs font-bold cursor-pointer outline-3",
+        gridItemBackgroundColor(myIndex, bookmarks, answered),
+        isSelected ? "outline-grey-950" : "outline-transparent",
+      )}
       onClick={() => onClickCell(myIndex)}
     >
       {myIndex + 1}
-    </CellStyles>
+    </div>
   )
 }
 
@@ -54,9 +38,4 @@ export interface CellProps {
   index: number
   bookmarks: number[]
   answered: number[]
-}
-
-export interface CellStylesProps extends ThemedStyles {
-  $background: string
-  $selected: boolean
 }

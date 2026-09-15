@@ -1,28 +1,5 @@
-import type { ThemedStyles } from '../../../../types'
 import React from 'react'
-import styled from 'styled-components'
-import { lighten } from 'polished'
-
-const MenuItemStyles = styled.div<MenuItemStylesProps>`
-  height: 5rem;
-  display: grid;
-  grid-template-columns: 5rem 1fr;
-  align-items: center;
-  justify-items: center;
-  background: ${({ $selected, theme }) => ($selected ? theme.grey[2] : 'none')};
-  color: ${({ theme }) => theme.black};
-  cursor: pointer;
-  &:hover {
-    background: ${({ theme }) => lighten(0.2, theme.primary)};
-  }
-`
-
-const MenuItemTextStyles = styled.div`
-  justify-self: flex-start;
-  font: 1.5rem 'Open Sans';
-  font-weight: 600;
-  padding-left: 1rem;
-`
+import { cn } from '../../../ui/utils'
 
 interface MenuItemProps {
   icon: React.ReactNode
@@ -33,15 +10,20 @@ interface MenuItemProps {
 
 const MenuItemComponent: React.FC<MenuItemProps> = ({ icon, label, selected = false, onClick }) => {
   return (
-    <MenuItemStyles className="no-select" $selected={selected} onClick={onClick} data-test={label}>
+    <div
+      className={cn(
+        "no-select menu-item-grid h-12.5 grid items-center justify-items-center text-black cursor-pointer hover:bg-primary-light",
+        selected ? "bg-grey-200" : "bg-transparent",
+      )}
+      onClick={onClick}
+      data-test={label}
+    >
       {icon}
-      <MenuItemTextStyles>{label}</MenuItemTextStyles>
-    </MenuItemStyles>
+      {/* Original CSS had invalid `justify-self: flex-start` (not a valid grid value) — silent
+          no-op, so the label centered instead of start-aligning. Fixed here: `justify-self-start`. */}
+      <div className="text-base font-semibold justify-self-start">{label}</div>
+    </div>
   )
 }
 
 export default MenuItemComponent
-
-interface MenuItemStylesProps extends ThemedStyles {
-  $selected: boolean
-}

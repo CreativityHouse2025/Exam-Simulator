@@ -1,51 +1,27 @@
-import type { GridTagTypes, ThemedStyles } from '../../../../types'
+import type { GridTagTypes } from '../../../../types'
 
 import React from 'react'
-import styled from 'styled-components'
-import { lighten } from 'polished'
 import { translate } from '../../../../utils/translation'
 
-const LegendStyles = styled.div<ThemedStyles>`
-  display: flex;
-  align-items: center;
-  margin-right: 1rem;
-  .complete,
-  .correct {
-    background: ${({ theme }) => lighten(0.2, theme.primary)};
-  }
-  .bookmarked,
-  .marked {
-    background: ${({ theme }) => theme.quatro};
-  }
-  .incorrect {
-    background: ${({ theme }) => lighten(0.2, theme.secondary)};
-  }
-  .incomplete {
-    background: ${({ theme }) => theme.grey[2]};
-  }
-`
-
-const ColoredSquareStyles = styled.div<ThemedStyles>`
-  width: 1rem;
-  height: 1rem;
-  margin-right: 0.25rem;
-  margin-left: 0.25rem;
-  border: 0.5px solid ${({ theme }) => theme.grey[2]};
-`
-
-const NameStyles = styled.div<ThemedStyles>`
-  font: 0.9rem 'Open Sans';
-  font-weight: 600;
-`
+// The pre-migration CSS also had a `.bookmarked` selector alongside `.marked`, but
+// `type` is typed as GridTagTypes, which has no "bookmarked" member — that rule was unreachable
+// dead code even before this migration. Not ported; see PRE-EXISTING DEFECTS FOUND.
+const SWATCH_COLOR: Record<GridTagTypes, string> = {
+  complete: "bg-primary-light",
+  correct: "bg-primary-light",
+  marked: "bg-quatro",
+  incorrect: "bg-secondary-light",
+  incomplete: "bg-grey-200",
+}
 
 const LegendComponent: React.FC<LegendItemProps> = ({ type }) => {
   const legendName = translate(`nav.grid.${type}`)
 
   return (
-    <LegendStyles className="no-select">
-      <ColoredSquareStyles className={type} />
-      <NameStyles>{legendName}</NameStyles>
-    </LegendStyles>
+    <div className="no-select flex items-center mr-2.5">
+      <div className={`w-2.5 h-2.5 mr-0.75 ml-0.75 border border-grey-200 ${SWATCH_COLOR[type]}`} />
+      <div className="text-xs font-semibold">{legendName}</div>
+    </div>
   )
 }
 

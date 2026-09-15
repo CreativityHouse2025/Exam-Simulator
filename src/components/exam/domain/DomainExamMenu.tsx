@@ -1,15 +1,7 @@
-import type { QuestionFilter, ThemedStyles } from '../../../types'
+import type { QuestionFilter } from '../../../types'
 
 import React from 'react'
-import styled from 'styled-components'
-import { FormatListNumbered } from '@styled-icons/material/FormatListNumbered'
-import { Bookmark } from '@styled-icons/material/Bookmark'
-import { CheckBoxOutlineBlank } from '@styled-icons/material/CheckBoxOutlineBlank'
-import { CheckBox } from '@styled-icons/material/CheckBox'
-import { DoneAll } from '@styled-icons/material/DoneAll'
-import { Cancel } from '@styled-icons/material/Cancel'
-import { AssignmentTurnedIn } from '@styled-icons/material/AssignmentTurnedIn'
-import { Report } from '@styled-icons/boxicons-solid/Report'
+import { ListOrdered, Bookmark, Square, SquareCheck, CheckCheck, XCircle, ClipboardCheck, FileCheckCorner } from 'lucide-react'
 import MenuItem from '../shared/Drawer/MenuItem'
 import Legends from '../shared/Drawer/Legends'
 import Grid from '../shared/Drawer/Grid'
@@ -18,13 +10,6 @@ import { translate } from '../../../utils/translation'
 import { useExamSessionCore } from '../../../hooks/examSession/useExamSessionCore'
 import { useDomainExamSession } from '../../../hooks/examSession/useDomainExamSession'
 import useResults from '../../../hooks/useResults'
-
-const MainMenu = styled.div<ThemedStyles>`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid ${({ theme }) => theme.grey[1]};
-`
 
 interface DomainExamMenuProps {
   open: boolean
@@ -47,24 +32,24 @@ const DomainExamMenu: React.FC<DomainExamMenuProps> = ({ open }) => {
   )
 
   const inProgressFilters: { filter: QuestionFilter; icon: React.ReactNode }[] = [
-    { filter: 'all', icon: <FormatListNumbered size={20} /> },
+    { filter: 'all', icon: <ListOrdered size={20} /> },
     { filter: 'marked', icon: <Bookmark size={20} /> },
-    { filter: 'incomplete', icon: <CheckBoxOutlineBlank size={20} /> },
-    { filter: 'complete', icon: <CheckBox size={20} /> },
+    { filter: 'incomplete', icon: <Square size={20} /> },
+    { filter: 'complete', icon: <SquareCheck size={20} /> },
   ]
 
   const completedFilters: { filter: QuestionFilter; icon: React.ReactNode }[] = [
-    { filter: 'all', icon: <FormatListNumbered size={20} /> },
+    { filter: 'all', icon: <ListOrdered size={20} /> },
     { filter: 'marked', icon: <Bookmark size={20} /> },
-    { filter: 'incomplete', icon: <CheckBoxOutlineBlank size={20} /> },
-    { filter: 'incorrect', icon: <Cancel size={20} /> },
-    { filter: 'correct', icon: <DoneAll size={20} /> },
+    { filter: 'incomplete', icon: <Square size={20} /> },
+    { filter: 'incorrect', icon: <XCircle size={20} /> },
+    { filter: 'correct', icon: <CheckCheck size={20} /> },
   ]
 
   const currentFilters = examState === 'in-progress' ? inProgressFilters : completedFilters
 
   return (
-    <MainMenu>
+    <div className="flex-1 flex flex-col border-r border-grey-100">
       {currentFilters.map(({ filter: f, icon }) => (
         <MenuItem
           key={f}
@@ -83,11 +68,11 @@ const DomainExamMenu: React.FC<DomainExamMenuProps> = ({ open }) => {
       )}
 
       {examState === 'in-progress' && (
-        <MenuItem icon={<AssignmentTurnedIn size={20} />} label={translate('nav.drawer.stop')} onClick={actions.stop} />
+        <MenuItem icon={<ClipboardCheck size={20} />} label={translate('nav.drawer.stop')} onClick={actions.stop} />
       )}
 
       {examState === 'completed' && (
-        <MenuItem icon={<Report size={20} />} label={translate('nav.drawer.summary')} onClick={actions.summary} />
+        <MenuItem icon={<FileCheckCorner size={20} />} label={translate('nav.drawer.summary')} onClick={actions.summary} />
       )}
 
       {showSubmitConfirm && (
@@ -96,7 +81,7 @@ const DomainExamMenu: React.FC<DomainExamMenuProps> = ({ open }) => {
           onClose={() => setShowSubmitConfirm(false)}
         />
       )}
-    </MainMenu>
+    </div>
   )
 }
 

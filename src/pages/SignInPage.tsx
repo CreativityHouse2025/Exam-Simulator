@@ -6,7 +6,7 @@ import useFormField from "../hooks/useFormField"
 import { validateEmail, validateExistingPassword } from "../utils/authValidation"
 import { translate } from "../utils/translation"
 import { ROUTES } from "../config/routes"
-// @ts-expect-error
+// @ts-expect-error -- pre-existing, unrelated to this change
 import Logo from "../assets/logo.png"
 import { EmailField, PasswordField } from "../components/Auth"
 import {
