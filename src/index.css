@@ -92,18 +92,18 @@
   }
 }
 
-/* Toast.tsx's entrance. Kept as a real keyframe (not tw-animate-css's slide-in-from-top) because
-   the toast also needs a constant, non-animated translateX(-50%) for horizontal centering that
-   has to live in the same `transform` property this keyframe drives — simplest to keep both X and
-   Y in one custom animation exactly as authored, including its non-default cubic-bezier. */
+/* Toast.tsx's entrance. Kept as a real keyframe (not tw-animate-css's slide-in-from-top) for its
+   non-default cubic-bezier. Y only: the toast's horizontal centering comes from `-translate-x-1/2`,
+   which in Tailwind v4 emits the standalone `translate` property rather than writing into
+   `transform`. The two compose, so repeating translateX(-50%) here would double the offset. */
 @keyframes slide-down {
   from {
     opacity: 0;
-    transform: translate(-50%, -32px);
+    transform: translateY(-32px);
   }
   to {
     opacity: 1;
-    transform: translate(-50%, 0);
+    transform: translateY(0);
   }
 }
 
@@ -118,15 +118,16 @@
   }
 }
 
-/* Modal.tsx's entrance — same "constant transform + animated transform, same property" reason as
-   Toast's slide-down above: Window needs a permanent translate(-50%,-50%) centering baked into
-   the same keyframe that animates the scale. */
+/* Modal.tsx's entrance. Scale only — same reason as Toast's slide-down above: the window's
+   centering comes from `-translate-x-1/2 -translate-y-1/2`, which Tailwind v4 emits as the
+   standalone `translate` property. It composes with this keyframe's `transform` instead of being
+   replaced by it, so baking translate(-50%,-50%) in here would offset the window while it grows. */
 @keyframes grow {
   from {
-    transform: scale(0.25) translate(-50%, -50%);
+    transform: scale(0.25);
   }
   to {
-    transform: scale(1) translate(-50%, -50%);
+    transform: scale(1);
   }
 }
 
