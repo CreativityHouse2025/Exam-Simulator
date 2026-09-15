@@ -22,7 +22,6 @@ const ProfilePage: React.FC = () => {
     resetPassword: translate('auth.profile.reset-password'),
     signOut: translate('auth.profile.sign-out'),
     signingOut: translate('auth.profile.signing-out'),
-    signOutSuccess: translate('auth.profile.sign-out-success'),
     backHome: translate('auth.profile.back-home'),
   }
 
@@ -30,7 +29,7 @@ const ProfilePage: React.FC = () => {
 
   const handleSignOut = async () => {
     setSigningOut(true)
-    await signOut(() => showToast(t.signOutSuccess, 5000))
+    await signOut(() => showToast('auth.profile.sign-out-success', 5000))
   }
 
   const handlePasswordReset = () => {

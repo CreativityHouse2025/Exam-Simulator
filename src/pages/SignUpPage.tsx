@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
 import { validateEmail, validatePassword, validateConfirmPassword, validateRequired, validateName } from "../utils/authValidation"
 import { translate } from "../utils/translation"
+import { resolveErrorKey } from "../utils/errorTranslation"
 import { ROUTES } from "../config/routes"
 // @ts-expect-error -- pre-existing, unrelated to this change
 import Logo from "../assets/logo.png"
@@ -55,7 +56,6 @@ const SignUpPage: React.FC = () => {
     confirmPasswordPlaceholder: translate('auth.fields.confirm-password-placeholder'),
     submit: translate('auth.signup.submit'),
     submitting: translate('auth.signup.submitting'),
-    error: translate('auth.signup.error'),
     hasAccount: translate('auth.signup.has-account'),
     signinLink: translate('auth.signup.signin-link'),
     successTitle: translate('auth.signup.success-title'),
@@ -103,7 +103,7 @@ const SignUpPage: React.FC = () => {
       await signUp(email.value, password.value, toTitleCase(firstName.value), toTitleCase(lastName.value))
       setSuccess(true)
     } catch (err) {
-      setServerError(err instanceof Error ? err.message : t.error)
+      setServerError(translate(resolveErrorKey(err)))
     } finally {
       setSubmitting(false)
     }

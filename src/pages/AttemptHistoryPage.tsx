@@ -20,7 +20,7 @@ const AttemptHistoryPage: React.FC = () => {
   const [isStarting, setIsStarting] = React.useState(false)
 
   React.useEffect(() => {
-    if (error) showToast(translate("history.fetchError"))
+    if (error) showToast("history.fetchError")
   }, [error])
 
   const handleContinue = async (id: string) => {

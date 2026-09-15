@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import React from 'react'
-import { Languages, Menu } from 'lucide-react'
+import { Globe, Menu } from 'lucide-react'
 // @ts-expect-error -- pre-existing, unrelated to this change
 import Logo from '../assets/logo.png'
 import { translate } from '../utils/translation'
@@ -75,7 +75,7 @@ const HeaderComponent: React.FC = () => {
           className="no-select justify-self-center cursor-pointer [&>svg]:text-black"
           onClick={toggleLanguage}
         >
-          <Languages size={38} />
+          <Globe size={38} />
         </div>
         {navItems.map(({ icon: Icon, path, labelKey }) => (
           <div
@@ -100,7 +100,7 @@ const HeaderComponent: React.FC = () => {
         </button>
         <div
           className={cn(
-            "flex flex-col absolute top-full mt-1.25 end-0 bg-tertiary rounded-md shadow-8 min-w-45 overflow-hidden",
+            "flex flex-col absolute top-full mt-1.25 inset-e-0 bg-tertiary rounded-md shadow-8 min-w-45 overflow-hidden",
             "z-200 origin-top transition duration-180",
             isMenuOpen ? "opacity-100 scale-y-100 pointer-events-auto" : "opacity-0 scale-y-85 pointer-events-none",
           )}
@@ -109,7 +109,7 @@ const HeaderComponent: React.FC = () => {
             className="flex items-center gap-2.25 bg-transparent cursor-pointer py-2.25 px-2.75 text-quatro text-xs font-semibold text-start w-full transition-colors duration-150 hover:bg-secondary [&>svg]:text-primary [&>svg]:shrink-0"
             onClick={() => handleMenuAction(toggleLanguage)}
           >
-            <Languages size={22} />
+            <Globe size={22} />
             {translate('header.changeLanguage')}
           </button>
           {navItems.map(({ icon: Icon, path, labelKey }) => (

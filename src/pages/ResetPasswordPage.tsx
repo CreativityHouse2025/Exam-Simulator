@@ -6,6 +6,7 @@ import useToast from "../hooks/useToast"
 import useFormField from "../hooks/useFormField"
 import { validatePassword, validateConfirmPassword } from "../utils/authValidation"
 import { translate } from "../utils/translation"
+import { resolveErrorKey } from "../utils/errorTranslation"
 import { ROUTES } from "../config/routes"
 // @ts-expect-error -- pre-existing, unrelated to this change
 import Logo from "../assets/logo.png"
@@ -39,8 +40,6 @@ const ResetPasswordPage: React.FC = () => {
     confirmPasswordPlaceholder: translate('auth.fields.confirm-password-placeholder'),
     submit: translate('auth.reset-password.submit'),
     submitting: translate('auth.reset-password.submitting'),
-    success: translate('auth.reset-password.success'),
-    error: translate('auth.forgot-password.error'),
     backHome: translate('auth.profile.back-home'),
   }
 
@@ -71,9 +70,9 @@ const ResetPasswordPage: React.FC = () => {
 
     try {
       await updatePassword(password.value)
-      await signOut(() => showToast(t.success, 7000))
+      await signOut(() => showToast('auth.reset-password.success', 7000))
     } catch (err) {
-      setServerError(err instanceof Error ? err.message : t.error)
+      setServerError(translate(resolveErrorKey(err)))
       setSubmitting(false)
     }
   }

@@ -11,13 +11,12 @@ import { startAttempt, getAttempt } from "../services/attempt.service";
 import useLatestAttemptId from "../hooks/useLatestAttempt";
 import useToast from "../hooks/useToast";
 import useSessionReducer from "../hooks/useSessionReducer";
-import { translate } from "../utils/translation";
 import { loadDomainExam, loadFullExam } from "../utils/exam";
 import {
   adaptAttemptToSession,
   adaptAttemptToRevision,
 } from "../utils/attemptAdapter";
-import { AppApiError } from "../errors";
+import { resolveErrorKey } from "../utils/errorTranslation";
 import { PREVIEW_ATTEMPT_ID, PREVIEW_TIME_SECONDS } from "../constants";
 import type { Session, StartNewExamParams } from "../types";
 import useSettings from "../hooks/useSettings";
@@ -79,7 +78,7 @@ export default function SessionProvider({
 
         const resolvedQuestions = examDetails.questionList;
         if (resolvedQuestions === null) {
-          showToast(translate("cover.invalid-exam-message"), 5000);
+          showToast("cover.invalid-exam-message", 5000);
           return null;
         }
 
@@ -160,11 +159,7 @@ export default function SessionProvider({
         if (!preview) setLatestAttemptId(attempt_id);
         return attempt_id;
       } catch (error) {
-        if (error instanceof AppApiError) {
-          showToast(error.message, 5000);
-        } else {
-          showToast(translate("attempts.errors.server-unknown"), 5000);
-        }
+        showToast(resolveErrorKey(error), 5000);
         return null;
       }
     },
@@ -185,7 +180,7 @@ export default function SessionProvider({
         const nextSession = adaptAttemptToSession(attemptSnapshot);
 
         if (!nextSession) {
-          showToast(translate("cover.invalid-exam-message"), 5000);
+          showToast("cover.invalid-exam-message", 5000);
           return null;
         }
 
@@ -194,11 +189,7 @@ export default function SessionProvider({
         setLatestAttemptId(attemptSnapshot.attempt.id);
         return attemptSnapshot.attempt.id;
       } catch (error) {
-        if (error instanceof AppApiError) {
-          showToast(error.message, 5000);
-        } else {
-          showToast(translate("attempts.errors.server-unknown"), 5000);
-        }
+        showToast(resolveErrorKey(error), 5000);
         return null;
       }
     },
@@ -227,7 +218,7 @@ export default function SessionProvider({
           attemptSnapshot.attempt.exam_type !== "full" ||
           attemptSnapshot.attempt.exam_id == null
         ) {
-          showToast(translate("cover.invalid-exam-message"), 5000);
+          showToast("cover.invalid-exam-message", 5000);
           return null;
         }
 
@@ -240,7 +231,7 @@ export default function SessionProvider({
         );
 
         if (!questionList || questionList.length === 0) {
-          showToast(translate("cover.invalid-exam-message"), 5000);
+          showToast("cover.invalid-exam-message", 5000);
           return null;
         }
 
@@ -251,18 +242,14 @@ export default function SessionProvider({
 
         if (!revisionSession) {
           // null means the user made no mistakes — nothing to revise.
-          showToast(translate("attempts.errors.no-mistakes"), 5000);
+          showToast("attempts.errors.no-mistakes", 5000);
           return null;
         }
 
         setStartingSession(revisionSession);
         return attemptId;
       } catch (error) {
-        if (error instanceof AppApiError) {
-          showToast(error.message, 5000);
-        } else {
-          showToast(translate("attempts.errors.server-unknown"), 5000);
-        }
+        showToast(resolveErrorKey(error), 5000);
         return null;
       }
     },

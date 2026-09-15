@@ -12,7 +12,7 @@ export const ModalOverlay: React.FC<React.ComponentProps<"div">> = ({ className,
 /** Full-viewport wrapper shared across pages — background is provided by AppBackground in App.tsx. */
 export const PageWrapper: React.FC<React.ComponentProps<"div">> = ({ className, ...rest }) => (
   <div
-    className={cn("flex flex-1 items-center justify-center justify-self-center pt-0 px-4 pb-4", className)}
+    className={cn("flex flex-1 items-center justify-center justify-self-center pt-6 px-4 pb-4", className)}
     {...rest}
   />
 )

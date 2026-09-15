@@ -240,14 +240,15 @@ export type ExamContextType = {
   exam: Exam | null;
 };
 
-// Type for the toast component state
+// Type for the toast component state. Holds a translation key, not copy — the toast translates
+// at render time so the message follows the current language.
 export type ToastState = {
-  message: string;
+  translationKey: string;
   visible: boolean;
 };
 
 export interface ToastContextType {
-  message: string;
+  translationKey: string;
   visible: boolean;
   setToast: React.Dispatch<React.SetStateAction<ToastState>>;
 }

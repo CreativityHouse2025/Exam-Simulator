@@ -1,7 +1,6 @@
 import { AppApiError } from "../errors";
 import { apiFetch } from "../utils/apiFetch";
-import { createErrorCodeTranslator } from "../utils/errorTranslation";
-import type { ApiResponse, AppErrorCode } from "@shared/api.schema";
+import type { ApiResponse } from "@shared/api.schema";
 import type {
   AttemptSummary,
   GetAttemptResult,
@@ -9,38 +8,6 @@ import type {
   SaveAttemptInProgress,
   SaveAttemptCompleted,
 } from "@shared/attempt.schema";
-
-type AttemptErrorCode = Extract<
-  AppErrorCode,
-  | "NOT_FOUND"
-  | "FORBIDDEN"
-  | "CONFLICT"
-  | "ATTEMPT_CREATE_FAILED"
-  | "ATTEMPT_SAVE_FAILED"
-  | "UNAUTHORIZED"
-  | "INTERNAL_ERROR"
-  | "VALIDATION_ERROR"
-  | "METHOD_NOT_ALLOWED"
-  | "SUBSCRIPTION_CHECK_FAILED"
->;
-
-const errorCodeToTranslationKey: Record<AttemptErrorCode, string> = {
-  NOT_FOUND: "attempts.errors.server-not-found",
-  FORBIDDEN: "attempts.errors.server-forbidden",
-  CONFLICT: "attempts.errors.server-conflict",
-  ATTEMPT_CREATE_FAILED: "attempts.errors.server-create-failed",
-  ATTEMPT_SAVE_FAILED: "attempts.errors.server-save-failed",
-  UNAUTHORIZED: "attempts.errors.server-unknown",
-  INTERNAL_ERROR: "attempts.errors.server-unknown",
-  VALIDATION_ERROR: "attempts.errors.server-unknown",
-  METHOD_NOT_ALLOWED: "attempts.errors.server-unknown",
-  SUBSCRIPTION_CHECK_FAILED: "attempts.errors.server-unknown",
-};
-
-const translateErrorCode = createErrorCodeTranslator<AttemptErrorCode>(
-  errorCodeToTranslationKey,
-  "attempts.errors.server-unknown",
-);
 
 export async function getAttempts(): Promise<AttemptSummary[]> {
   const response = await apiFetch("/api/attempts", {
@@ -50,10 +17,7 @@ export async function getAttempts(): Promise<AttemptSummary[]> {
     await response.json();
 
   if (!result.success) {
-    throw new AppApiError(
-      translateErrorCode(result.error.code),
-      result.error.code,
-    );
+    throw new AppApiError(result.error.code, "attempts");
   }
 
   return result.data.attempts;
@@ -66,10 +30,7 @@ export async function getAttempt(id: string): Promise<GetAttemptResult> {
   const result: ApiResponse<GetAttemptResult> = await response.json();
 
   if (!result.success) {
-    throw new AppApiError(
-      translateErrorCode(result.error.code),
-      result.error.code,
-    );
+    throw new AppApiError(result.error.code, "attempts");
   }
 
   return result.data;
@@ -88,10 +49,7 @@ export async function startAttempt(
   const result: ApiResponse<{ attempt_id: string }> = await response.json();
 
   if (!result.success) {
-    throw new AppApiError(
-      translateErrorCode(result.error.code),
-      result.error.code,
-    );
+    throw new AppApiError(result.error.code, "attempts");
   }
 
   return { attempt_id: result.data.attempt_id };
@@ -111,10 +69,7 @@ export async function saveAttempt(
   const result: ApiResponse<object> = await response.json();
 
   if (!result.success) {
-    throw new AppApiError(
-      translateErrorCode(result.error.code),
-      result.error.code,
-    );
+    throw new AppApiError(result.error.code, "attempts");
   }
 }
 
@@ -132,9 +87,6 @@ export async function submitAttempt(
   const result: ApiResponse<object> = await response.json();
 
   if (!result.success) {
-    throw new AppApiError(
-      translateErrorCode(result.error.code),
-      result.error.code,
-    );
+    throw new AppApiError(result.error.code, "attempts");
   }
 }

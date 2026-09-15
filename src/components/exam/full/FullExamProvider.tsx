@@ -10,7 +10,7 @@ import { loadFullExam } from '../../../utils/exam'
 import { ROUTES } from '../../../config/routes'
 import useToast from '../../../hooks/useToast'
 import useUnsavedChangesWarning from '../../../hooks/useUnsavedChangesWarning'
-import { translate } from '../../../utils/translation'
+import { resolveErrorKey } from '../../../utils/errorTranslation'
 import useSettings from '../../../hooks/useSettings'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
@@ -31,7 +31,7 @@ export default function FullExamProvider() {
 
   React.useEffect(() => {
     if (!attemptId) navigate(ROUTES.home)
-  }, [])
+  }, [attemptId, navigate])
 
   const { session } = useSessionControl()
   const { dirtyQuestions } = useSessionData()
@@ -49,7 +49,7 @@ export default function FullExamProvider() {
       if (cancelled) return
 
       if (examDetails.questionList === null) {
-        showToast(translate('cover.invalid-exam-message'), 5000)
+        showToast('cover.invalid-exam-message', 5000)
         return
       }
 
@@ -62,7 +62,7 @@ export default function FullExamProvider() {
         )
         const subsetExam = session!.questionIds.map((id) => questionsByQuestionId[id])
         if (subsetExam.some((q) => q === undefined)) {
-          showToast(translate('attempts.errors.server-unknown'), 5000)
+          showToast('attempts.errors.server-unknown', 5000)
           return
         }
         questionsForSession = subsetExam
@@ -72,8 +72,8 @@ export default function FullExamProvider() {
       setExam(nextExam)
     }
 
-    loadExamData().catch(() => {
-      if (!cancelled) showToast(translate('attempts.errors.server-unknown'), 5000)
+    loadExamData().catch((error) => {
+      if (!cancelled) showToast(resolveErrorKey(error), 5000)
     })
 
     return () => { cancelled = true }

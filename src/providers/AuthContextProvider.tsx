@@ -1,49 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { AuthContext } from "../contexts";
-import { apiFetch, registerUnauthorizedHandler } from "../utils/apiFetch";
-import { createErrorCodeTranslator } from "../utils/errorTranslation";
-import { AppApiError } from "../errors";
+import { registerUnauthorizedHandler } from "../utils/apiFetch";
+import * as authService from "../services/auth.service";
 import type { AuthStatus } from "../types";
-import type { ApiResponse, AppErrorCode } from "@shared/api.schema";
 import type { User } from "@shared/user.schema";
-
-type AuthErrorCode = Extract<
-  AppErrorCode,
-  | "INVALID_CREDENTIALS"
-  | "ACCOUNT_EXPIRED"
-  | "SUBSCRIPTION_REQUIRED"
-  | "SIGNUP_FAILED"
-  | "SIGNIN_FAILED"
-  | "CONFIRMATION_FAILED"
-  | "VALIDATION_ERROR"
-  | "SESSION_CONFLICT"
-  | "SIGNOUT_FAILED"
-  | "UNAUTHORIZED"
-  | "INTERNAL_ERROR"
-  | "METHOD_NOT_ALLOWED"
-  | "PASSWORD_UPDATE_FAILED"
->;
-
-const errorCodeToTranslationKey: Record<AuthErrorCode, string> = {
-  INVALID_CREDENTIALS: "auth.errors.server-invalid-credentials",
-  ACCOUNT_EXPIRED: "auth.errors.server-account-expired",
-  SUBSCRIPTION_REQUIRED: "auth.errors.server-subscription-required",
-  SIGNUP_FAILED: "auth.errors.server-signup-failed",
-  SIGNIN_FAILED: "auth.errors.server-signin-failed",
-  CONFIRMATION_FAILED: "auth.errors.server-confirmation-failed",
-  VALIDATION_ERROR: "auth.errors.server-validation-error",
-  SESSION_CONFLICT: "auth.errors.server-session-conflict",
-  SIGNOUT_FAILED: "auth.errors.server-unknown",
-  UNAUTHORIZED: "auth.errors.server-unknown",
-  INTERNAL_ERROR: "auth.errors.server-unknown",
-  METHOD_NOT_ALLOWED: "auth.errors.server-unknown",
-  PASSWORD_UPDATE_FAILED: "auth.errors.server-unknown",
-};
-
-const translateErrorCode = createErrorCodeTranslator<AuthErrorCode>(
-  errorCodeToTranslationKey,
-  "auth.errors.server-unknown",
-);
 
 /** Provides auth state and lifecycle methods to the app. Restores session from cookies via /me on mount. */
 export default function AuthContextProvider({
@@ -61,24 +21,10 @@ export default function AuthContextProvider({
 
   const signIn = useCallback(
     async (email: string, password: string, force: boolean) => {
-      const response = await apiFetch("/api/auth/signin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, force }),
-        handleUnauthorized: false,
-      });
-
-      const result: ApiResponse<{ user: User }> = await response.json();
-
-      if (!result.success) {
-        throw new AppApiError(
-          translateErrorCode(result.error.code),
-          result.error.code,
-        );
-      }
+      const signedInUser = await authService.signIn(email, password, force);
 
       cancelSessionCheck();
-      setUser(result.data.user);
+      setUser(signedInUser);
       setAuthStatus("authenticated");
     },
     [cancelSessionCheck],
@@ -91,23 +37,7 @@ export default function AuthContextProvider({
       firstName: string,
       lastName: string,
     ) => {
-      const response = await apiFetch("/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          password,
-          first_name: firstName,
-          last_name: lastName,
-        }),
-        handleUnauthorized: false,
-      });
-
-      const result: ApiResponse<null> = await response.json();
-
-      if (!result.success) {
-        throw new Error(translateErrorCode(result.error.code));
-      }
+      await authService.signUp(email, password, firstName, lastName);
 
       // Do NOT set user — email confirmation is required first
     },
@@ -116,66 +46,30 @@ export default function AuthContextProvider({
 
   const exchangeToken = useCallback(
     async (accessToken: string, refreshToken: string) => {
-      const response = await apiFetch("/api/auth/token-exchange", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          access_token: accessToken,
-          refresh_token: refreshToken,
-        }),
-        handleUnauthorized: false,
-      });
-
-      const result: ApiResponse<{ user: User }> = await response.json();
-
-      if (!result.success) {
-        throw new Error(translateErrorCode(result.error.code));
-      }
+      const exchangedUser = await authService.exchangeToken(
+        accessToken,
+        refreshToken,
+      );
 
       cancelSessionCheck();
-      setUser(result.data.user);
+      setUser(exchangedUser);
       setAuthStatus("authenticated");
     },
     [cancelSessionCheck],
   );
 
   const requestPasswordReset = useCallback(async (email: string) => {
-    const response = await apiFetch("/api/auth/password-reset", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-      handleUnauthorized: false,
-    });
-
-    const result: ApiResponse<null> = await response.json();
-
-    if (!result.success) {
-      throw new Error(translateErrorCode(result.error.code));
-    }
+    await authService.requestPasswordReset(email);
   }, []);
 
   const updatePassword = useCallback(async (password: string) => {
-    const response = await apiFetch("/api/auth/update-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-      handleUnauthorized: true,
-    });
-
-    const result: ApiResponse<null> = await response.json();
-
-    if (!result.success) {
-      throw new Error(translateErrorCode(result.error.code));
-    }
+    await authService.updatePassword(password);
   }, []);
 
   const signOut = useCallback(
     async (onSuccess?: () => void) => {
       try {
-        await apiFetch("/api/auth/signout", {
-          method: "POST",
-          handleUnauthorized: false,
-        });
+        await authService.signOut();
       } finally {
         cancelSessionCheck();
         setUser(null);
@@ -196,21 +90,14 @@ export default function AuthContextProvider({
 
     async function checkSession() {
       try {
-        const response = await apiFetch("/api/auth/me", {
-          handleUnauthorized: false,
-        });
-        const result: ApiResponse<{ user: User }> = await response.json();
+        const currentUser = await authService.getCurrentUser();
 
         // unmounted: component no longer exists, don't update state
         // sessionCheckCancelled: an active auth flow (signIn, exchangeToken) took over
         if (unmounted || sessionCheckCancelled.current) return;
 
-        if (result.success) {
-          setUser(result.data.user);
-          setAuthStatus("authenticated");
-        } else {
-          setAuthStatus("unauthenticated");
-        }
+        setUser(currentUser);
+        setAuthStatus("authenticated");
       } catch {
         //                don't override active auth flows
         if (!unmounted && !sessionCheckCancelled.current) {

@@ -1,9 +1,10 @@
 import React from "react";
 import useToast from "../hooks/useToast";
+import { translate } from "../utils/translation";
 import { cn } from "./ui/utils";
 
 const Toast: React.FC = () => {
-	const { visible, message, closeToast } = useToast();
+	const { visible, translationKey, closeToast } = useToast();
 	return (
 		<div
 			role="alert"
@@ -14,7 +15,7 @@ const Toast: React.FC = () => {
 				visible ? "opacity-100 animate-slide-down" : "opacity-0",
 			)}
 		>
-			<span style={{ flex: 1 }}>{message}</span>
+			<span style={{ flex: 1 }}>{translationKey && translate(translationKey)}</span>
 			<button
 				aria-label="Close"
 				onClick={closeToast}

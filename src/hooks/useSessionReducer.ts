@@ -6,8 +6,7 @@ import {
   noopAttemptPersistence,
 } from "../services/attemptPersistence.service";
 import type { AttemptPersistence } from "../services/attemptPersistence.service";
-import { AppApiError } from "../errors";
-import { translate } from "../utils/translation";
+import { resolveErrorKey } from "../utils/errorTranslation";
 import useToast from "../hooks/useToast";
 import type { Session, SessionDispatch } from "../types";
 
@@ -85,11 +84,7 @@ export default function useSessionReducer(startingSession: Session | null) {
 
       updateSession({ type: SESSION_ACTION_TYPES.CLEAR_DIRTY, payload: null });
     } catch (error) {
-      if (error instanceof AppApiError) {
-        showToast(error.message, 5000);
-      } else {
-        showToast(translate("attempts.errors.server-unknown"), 5000);
-      }
+      showToast(resolveErrorKey(error), 5000);
     } finally {
       isSyncingRef.current = false;
       setIsSyncing(false);
@@ -137,11 +132,7 @@ export default function useSessionReducer(startingSession: Session | null) {
           payload: null,
         });
       } catch (error) {
-        if (error instanceof AppApiError) {
-          showToast(error.message, 5000);
-        } else {
-          showToast(translate("attempts.errors.server-unknown"), 5000);
-        }
+        showToast(resolveErrorKey(error), 5000);
       } finally {
         isSyncingRef.current = false;
         setIsSyncing(false);
@@ -195,17 +186,7 @@ export default function useSessionReducer(startingSession: Session | null) {
           { type: SESSION_ACTION_TYPES.SET_EXAM_STATE, payload: "completed" },
         ]);
       } catch (error) {
-        if (error instanceof AppApiError) {
-          // ATTEMPT_SAVE_FAILED is the backend code for RPC failures on this endpoint;
-          // surface a submit-specific message so the user knows to retry the submit, not a mid-exam save.
-          const msg =
-            error.code === "ATTEMPT_SAVE_FAILED"
-              ? translate("attempts.errors.server-submit-failed")
-              : error.message;
-          showToast(msg, 5000);
-        } else {
-          showToast(translate("attempts.errors.server-unknown"), 5000);
-        }
+        showToast(resolveErrorKey(error), 5000);
       } finally {
         isSyncingRef.current = false;
         setIsSyncing(false);

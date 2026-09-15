@@ -5,6 +5,7 @@ import { AppApiError } from "../errors"
 import useFormField from "../hooks/useFormField"
 import { validateEmail, validateExistingPassword } from "../utils/authValidation"
 import { translate } from "../utils/translation"
+import { resolveErrorKey } from "../utils/errorTranslation"
 import { ROUTES } from "../config/routes"
 // @ts-expect-error -- pre-existing, unrelated to this change
 import Logo from "../assets/logo.png"
@@ -45,7 +46,6 @@ const SignInPage: React.FC = () => {
     submit: translate('auth.signin.submit'),
     submitting: translate('auth.signin.submitting'),
     forceSubmit: translate('auth.signin.force-submit'),
-    error: translate('auth.signin.error'),
     noAccount: translate('auth.signin.no-account'),
     signupLink: translate('auth.signin.signup-link'),
     forgotPassword: translate('auth.signin.forgot-password'),
@@ -79,7 +79,7 @@ const SignInPage: React.FC = () => {
       } else {
         setSessionConflict(false)
       }
-      setServerError(err instanceof Error ? err.message : t.error)
+      setServerError(translate(resolveErrorKey(err)))
     } finally {
       setSubmitting(false)
     }
@@ -118,7 +118,7 @@ const SignInPage: React.FC = () => {
             onChange={password.onChange}
           />
 
-          <NavLink to={ROUTES.forgotPassword} style={{ display: "block", textAlign: "end", marginBottom: "0.8rem", fontSize: "1.3rem" }}>
+          <NavLink to={ROUTES.forgotPassword} style={{ display: "block", textAlign: "end", marginBottom: "0.8rem", fontSize: "0.9rem" }}>
             {t.forgotPassword}
           </NavLink>
 

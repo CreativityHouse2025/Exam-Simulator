@@ -7,7 +7,7 @@ import { applyQuestionChoiceOrders } from '../../../utils/format'
 import { loadFullExam } from '../../../utils/exam'
 import { ROUTES } from '../../../config/routes'
 import useToast from '../../../hooks/useToast'
-import { translate } from '../../../utils/translation'
+import { resolveErrorKey } from '../../../utils/errorTranslation'
 import useSettings from '../../../hooks/useSettings'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
@@ -41,7 +41,7 @@ export default function RevisionProvider() {
       if (cancelled) return
 
       if (examDetails.questionList === null) {
-        showToast(translate('cover.invalid-exam-message'), 5000)
+        showToast('cover.invalid-exam-message', 5000)
         return
       }
 
@@ -54,7 +54,7 @@ export default function RevisionProvider() {
         )
         const subsetExam = session!.questionIds.map((id) => questionsByQuestionId[id])
         if (subsetExam.some((q) => q === undefined)) {
-          showToast(translate('attempts.errors.server-unknown'), 5000)
+          showToast('attempts.errors.server-unknown', 5000)
           return
         }
         questionsForSession = subsetExam
@@ -64,8 +64,8 @@ export default function RevisionProvider() {
       setExam(nextExam)
     }
 
-    loadExamData().catch(() => {
-      if (!cancelled) showToast(translate('attempts.errors.server-unknown'), 5000)
+    loadExamData().catch((error) => {
+      if (!cancelled) showToast(resolveErrorKey(error), 5000)
     })
 
     return () => { cancelled = true }

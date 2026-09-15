@@ -4,29 +4,30 @@ import { ToastContextType } from "../types";
 
 export default function useToast() {
   const context = useContext(ToastContext);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   if (!context) {
     throw new Error("useToast must be used within ToastContextProvider");
   }
 
-  const { message, visible, setToast } = context as ToastContextType;
+  const { translationKey, visible, setToast } = context as ToastContextType;
 
-  const showToast = useCallback((msg: string, duration: number = 3000) => {
-    setToast({ message: msg, visible: true });
+  /** @param key - a translation key; the toast resolves it to copy when it renders */
+  const showToast = useCallback((key: string, duration: number = 3000) => {
+    setToast({ translationKey: key, visible: true });
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
-      setToast({ message: "", visible: false });
+      setToast({ translationKey: "", visible: false });
     }, duration);
   }, [setToast]);
 
   const closeToast = useCallback(() => {
-    setToast({ message: "", visible: false });
+    setToast({ translationKey: "", visible: false });
     if (timerRef.current) clearTimeout(timerRef.current);
   }, [setToast]);
 
   return {
-    message,
+    translationKey,
     visible,
     showToast,
     closeToast,

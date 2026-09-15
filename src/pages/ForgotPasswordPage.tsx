@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
 import { validateEmail } from "../utils/authValidation"
 import { translate } from "../utils/translation"
+import { resolveErrorKey } from "../utils/errorTranslation"
 import { ROUTES } from "../config/routes"
 // @ts-expect-error -- pre-existing, unrelated to this change
 import Logo from "../assets/logo.png"
@@ -32,7 +33,6 @@ const ForgotPasswordPage: React.FC = () => {
     emailPlaceholder: translate('auth.fields.email-placeholder'),
     submit: translate('auth.forgot-password.submit'),
     submitting: translate('auth.forgot-password.submitting'),
-    error: translate('auth.forgot-password.error'),
     backToSignin: translate('auth.forgot-password.back-to-signin'),
     sentTitle: translate('auth.forgot-password.sent-title'),
     sentSubtitle: translate('auth.forgot-password.sent-subtitle'),
@@ -63,7 +63,7 @@ const ForgotPasswordPage: React.FC = () => {
       await requestPasswordReset(email.value)
       setSent(true)
     } catch (err) {
-      setServerError(err instanceof Error ? err.message : t.error)
+      setServerError(translate(resolveErrorKey(err)))
     } finally {
       setSubmitting(false)
     }

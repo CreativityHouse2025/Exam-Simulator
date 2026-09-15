@@ -24,6 +24,9 @@ export const AppErrorCodeSchema = z.enum([
   "NOT_FOUND",
   "FORBIDDEN",
   "CONFLICT",
+  // Produced by the platform's edge rate limiter, not by an API handler — the frontend raises it
+  // from the raw 429 response so every failure reaching a caller carries an error code.
+  "RATE_LIMITED",
 ])
 
 export type AppErrorCode = z.infer<typeof AppErrorCodeSchema>
