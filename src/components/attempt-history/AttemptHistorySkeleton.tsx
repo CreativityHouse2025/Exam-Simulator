@@ -1,28 +1,6 @@
 import React from "react"
-import styled, { keyframes } from "styled-components"
 import { translate } from "../../utils/translation"
 import { Tr, Td } from "./AttemptHistoryStyles"
-
-const wave = keyframes`
-  0%   { background-position: -600px 0; }
-  100% { background-position:  600px 0; }
-`
-
-const SkeletonRect = styled.span<{ $width: string; $height?: string; $radius?: string }>`
-  display: inline-block;
-  width: ${({ $width }) => $width};
-  height: ${({ $height }) => $height ?? "14px"};
-  border-radius: ${({ $radius }) => $radius ?? "4px"};
-  background: linear-gradient(90deg, #ebebeb 25%, #d6d6d6 50%, #ebebeb 75%);
-  background-size: 1200px 100%;
-  animation: ${wave} 1.5s infinite linear;
-`
-
-const SkeletonRects = styled.div`
-  display: flex;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-`
 
 type Rect = { width: string; height?: string; radius?: string }
 
@@ -53,14 +31,22 @@ const ROWS = 5
 const AttemptHistorySkeleton: React.FC = () => (
   <>
     {Array.from({ length: ROWS }, (_, i) => (
-      <Tr key={i} $index={i}>
+      <Tr key={i} index={i}>
         {CELLS.map(({ labelKey, rects }) => (
           <Td key={labelKey} data-label={translate(labelKey)}>
-            <SkeletonRects>
+            <div className="flex gap-1.5 flex-wrap">
               {rects.map((rect, j) => (
-                <SkeletonRect key={j} $width={rect.width} $height={rect.height} $radius={rect.radius} />
+                <span
+                  key={j}
+                  className="skeleton-shimmer inline-block"
+                  style={{
+                    width: rect.width,
+                    height: rect.height ?? "14px",
+                    borderRadius: rect.radius ?? "4px",
+                  }}
+                />
               ))}
-            </SkeletonRects>
+            </div>
           </Td>
         ))}
       </Tr>

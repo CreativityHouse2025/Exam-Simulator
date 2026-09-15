@@ -1,40 +1,6 @@
-import type { ThemedStyles } from '../../../types'
-
 import React from 'react'
-import styled from 'styled-components'
 import { calculateProgressStats } from '../../../utils/progress'
 import { useExamSessionCore } from '../../../hooks/examSession/useExamSessionCore'
-
-const ProgressContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-`
-
-const ProgressBar = styled.div<ThemedStyles>`
-  width: 100%;
-  height: 0.5rem;
-  background: ${({ theme }) => theme.secondary};
-  border-radius: 0.25rem;
-  overflow: hidden;
-`
-
-const ProgressFill = styled.div<ProgressFillProps>`
-  height: 100%;
-  width: ${({ $percentage }) => $percentage}%;
-  background: ${({ theme }) => theme.primary};
-  border-radius: 0.25rem;
-  transition: width 0.3s ease;
-`
-
-const StatNumber = styled.span<ThemedStyles>`
-  font-size: 2rem;
-  font-weight: bold;
-  color: ${({ theme }) => theme.primary};
-`
 
 const ProgressComponent: React.FC<ProgressProps> = ({ questionCount }) => {
   const { selectedOriginalIndices } = useExamSessionCore()
@@ -44,13 +10,13 @@ const ProgressComponent: React.FC<ProgressProps> = ({ questionCount }) => {
   }, [questionCount, selectedOriginalIndices])
 
   return (
-    <ProgressContainer id="progress" className="no-select">
-      <StatNumber>{`✍️ ${answeredCount} (${percentage}%)`}</StatNumber>
+    <div id="progress" className="no-select flex flex-col gap-1.25 p-2.5 rounded-sm mb-2.5">
+      <span className="text-xl font-bold text-primary">{`✍️ ${answeredCount} (${percentage}%)`}</span>
 
-      <ProgressBar id="progress-bar">
-        <ProgressFill id="progress-fill" $percentage={percentage} />
-      </ProgressBar>
-    </ProgressContainer>
+      <div id="progress-bar" className="w-full h-1.25 bg-secondary rounded-sm overflow-hidden">
+        <div id="progress-fill" className="h-full bg-primary rounded-sm transition-all duration-300" style={{ width: `${percentage}%` }} />
+      </div>
+    </div>
   )
 }
 
@@ -58,8 +24,4 @@ export default ProgressComponent
 
 export interface ProgressProps {
   questionCount: number
-}
-
-export interface ProgressFillProps extends ThemedStyles {
-  $percentage: number
 }

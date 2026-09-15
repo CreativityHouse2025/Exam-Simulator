@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react"
-import { MarkEmailRead } from "@styled-icons/material/MarkEmailRead"
+import { MailCheck } from "lucide-react"
 import useAuth from "../hooks/useAuth"
 import useFormField from "../hooks/useFormField"
 import { validateEmail, validatePassword, validateConfirmPassword, validateRequired, validateName } from "../utils/authValidation"
 import { translate } from "../utils/translation"
 import { ROUTES } from "../config/routes"
-// @ts-expect-error
+// @ts-expect-error -- pre-existing, unrelated to this change
 import Logo from "../assets/logo.png"
 import { ConfirmationCard, EmailField, PasswordField } from "../components/Auth"
 import {
@@ -112,7 +112,7 @@ const SignUpPage: React.FC = () => {
   if (success) {
     return (
       <ConfirmationCard
-        icon={<MarkEmailRead size={64} style={{ color: "#593752", display: "block", margin: "0 auto 1rem" }} />}
+        icon={<MailCheck size={64} style={{ color: "#593752", display: "block", margin: "0 auto 1rem" }} />}
         title={t.successTitle}
         subtitle={t.successMessage}
         linkTo="/signin"

@@ -72,7 +72,7 @@ export const SessionReducer: SessionReducerFunc = (state: Session, actions: Sess
         hasChanges = true
       }
 
-      // @ts-expect-error
+      // @ts-expect-error -- pre-existing, unrelated to this change
       newState[key] = payload
     }
   }

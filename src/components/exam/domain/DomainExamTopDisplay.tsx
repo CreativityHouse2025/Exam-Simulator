@@ -1,7 +1,4 @@
-import type { ThemedStyles } from '../../../types'
-
 import React from 'react'
-import styled from 'styled-components'
 import BookmarkButton from '../shared/BookmarkButton'
 import SaveButtonWithReminder from '../shared/SaveButtonWithReminder'
 import RevealAnswerButton from './RevealAnswerButton'
@@ -9,62 +6,6 @@ import { translate } from '../../../utils/translation'
 import { useExamSessionCore } from '../../../hooks/examSession/useExamSessionCore'
 import { useDomainExamSession } from '../../../hooks/examSession/useDomainExamSession'
 import useCategoryLabel from '../../../hooks/useCategoryLabel'
-
-const TopDisplayStyles = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-width: 100%;
-`
-
-const ExamHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 3rem;
-`
-
-const CategoryExamChip = styled.div<ThemedStyles>`
-  padding: 0.6rem 1rem;
-  font-family: ${({ theme }) => theme.fontFamily};
-  background-color: ${({ theme }) => theme.grey[1]};
-  color: ${({ theme }) => theme.grey[10]};
-  font-size: calc(${({ theme }) => theme.fontSize} + 0.5rem);
-  font-weight: 600;
-  border-radius: 20px;
-  border: 1px solid ${({ theme }) => theme.grey[2]};
-  width: auto;
-`
-
-const ChipRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-`
-
-const RightControls = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-inline-end: 0.5rem;
-
-  @media (min-width: 768px) {
-    gap: 1rem;
-    margin-inline-end: 2rem;
-  }
-`
-
-const QuestionTextStyles = styled.div<ThemedStyles>`
-  display: flex;
-  align-items: center;
-  font: 4rem 'Open Sans';
-  font-weight: 700;
-  color: ${({ theme }) => theme.grey[10]};
-`
 
 const DomainExamTopDisplay: React.FC<TopDisplayProps> = ({
   questionCount,
@@ -80,12 +21,12 @@ const DomainExamTopDisplay: React.FC<TopDisplayProps> = ({
   const categoryChipLabel = translate('content.top-display.category')
 
   return (
-    <ExamHeader id="exam-header">
-      <TopDisplayStyles id="top-display">
-        <QuestionTextStyles id="question-text">{question}</QuestionTextStyles>
+    <div id="exam-header" className="flex flex-col items-start justify-center gap-1.25 mb-7.5">
+      <div id="top-display" className="flex items-center justify-between min-w-full">
+        <div id="question-text" className="flex items-center text-4xl font-bold text-grey-950">{question}</div>
 
         {!isReview && (
-          <RightControls>
+          <div className="flex items-center justify-end flex-wrap gap-1.25 me-1.25 md:gap-2.5 md:me-5">
             <SaveButtonWithReminder
               isSyncing={isSyncing}
               dirtyCount={Object.keys(dirtyQuestions).length}
@@ -96,15 +37,15 @@ const DomainExamTopDisplay: React.FC<TopDisplayProps> = ({
               onToggleAnswerReveal={onToggleAnswerReveal}
             />
             <BookmarkButton />
-          </RightControls>
+          </div>
         )}
-      </TopDisplayStyles>
-      <ChipRow>
-        <CategoryExamChip>
+      </div>
+      <div className="flex items-center gap-2">
+        <div className="py-1.5 px-2.5 font-sans bg-grey-100 text-grey-950 text-base font-semibold rounded-3xl border border-grey-200 w-auto">
           {categoryChipLabel}: {categoryLabel ?? 'undefined category label'}
-        </CategoryExamChip>
-      </ChipRow>
-    </ExamHeader>
+        </div>
+      </div>
+    </div>
   )
 }
 

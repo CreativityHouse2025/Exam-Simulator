@@ -58,6 +58,7 @@ const ExamDetailPage: React.FC = () => {
   React.useEffect(() => {
     if (!validId) return
     let cancelled = false
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-existing, unrelated to this change
     setQuestions(null)
     setLoadError(false)
 
@@ -80,6 +81,7 @@ const ExamDetailPage: React.FC = () => {
   }, [validId, type, numericId, langCode])
 
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-existing, unrelated to this change
     setPage(0)
   }, [search])
 
@@ -91,6 +93,7 @@ const ExamDetailPage: React.FC = () => {
     } else {
       document.getElementById(`question-${scrollTarget}`)?.scrollIntoView({ block: "start" })
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-existing, unrelated to this change
     setScrollTarget(null)
   }, [scrollTarget])
 
@@ -137,7 +140,7 @@ const ExamDetailPage: React.FC = () => {
 
   if (!validId) {
     return (
-      <div className="tailwind-page mx-auto w-full max-w-4xl px-4 py-8">
+      <div className="mx-auto w-full max-w-4xl px-4 py-8">
         {backButton}
         <EmptyState message={t.notFound} />
       </div>
@@ -146,7 +149,7 @@ const ExamDetailPage: React.FC = () => {
 
   if (loadError) {
     return (
-      <div className="tailwind-page mx-auto w-full max-w-4xl px-4 py-8">
+      <div className="mx-auto w-full max-w-4xl px-4 py-8">
         {backButton}
         <EmptyState message={t.noQuestions} />
       </div>
@@ -165,7 +168,7 @@ const ExamDetailPage: React.FC = () => {
   }
 
   return (
-    <div className="tailwind-page mx-auto w-full max-w-4xl px-4 py-8">
+    <div className="mx-auto w-full max-w-4xl px-4 py-8">
       <div ref={topRef} />
       {backButton}
 

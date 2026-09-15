@@ -76,7 +76,7 @@ const StudentAttemptsPage: React.FC = () => {
     attempts.find((attempt) => attempt.id === selectedAttemptId) ?? null;
 
   return (
-    <div className="tailwind-page mx-auto w-full max-w-4xl px-4 py-8">
+    <div className="mx-auto w-full max-w-4xl px-4 py-8">
       <Breadcrumb className="mb-4">
         <BreadcrumbList>
           <BreadcrumbItem>

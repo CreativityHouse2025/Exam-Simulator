@@ -1,6 +1,6 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import { Assignment, PlayArrow, ViewModule } from "@styled-icons/material"
+import { ClipboardList, Play, LayoutGrid } from "lucide-react"
 import Dashboard from "@/components/dashboard/Dashboard"
 import DashboardButton from "@/components/dashboard/DashboardButton"
 import DashboardButtonRow from "@/components/dashboard/DashboardButtonRow"
@@ -59,7 +59,7 @@ const StudentDashboardPage: React.FC = () => {
           ref={fullButtonRef}
           className="no-select"
           title="Start a new exam"
-          icon={<Assignment size={22} />}
+          icon={<ClipboardList size={22} />}
           label={translate("dashboard.student.new")}
           onClick={() => setFullExamDropdown(true)}
         />
@@ -68,7 +68,7 @@ const StudentDashboardPage: React.FC = () => {
           ref={miniButtonRef}
           className="no-select"
           title="Start a mini-exam"
-          icon={<ViewModule size={22} />}
+          icon={<LayoutGrid size={22} />}
           label={translate("dashboard.student.mini")}
           onClick={() => setCategoryDropdown(true)}
         />
@@ -79,7 +79,7 @@ const StudentDashboardPage: React.FC = () => {
           variant="secondary"
           className="no-select"
           title="Continue last exam"
-          icon={<PlayArrow size={22} />}
+          icon={<Play size={22} />}
           label={translate("dashboard.student.continue")}
           onClick={handleContinue}
         />

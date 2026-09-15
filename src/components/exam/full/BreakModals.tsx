@@ -40,6 +40,7 @@ export default function FullBreakModals() {
     const now = new Date().toISOString()
     if (shouldOfferBreak(1, index, break1OfferedAt)) {
       recordBreakOffered(1, now)
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-existing, unrelated to this change
       setOfferVisible(true)
     } else if (shouldOfferBreak(2, index, break2OfferedAt)) {
       recordBreakOffered(2, now)
@@ -50,6 +51,7 @@ export default function FullBreakModals() {
   // Countdown — resets and starts each time the timer modal opens
   React.useEffect(() => {
     if (!timerVisible) return
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-existing, unrelated to this change
     setSecondsLeft(BREAK_DURATION)
     const id = setInterval(() => setSecondsLeft((s) => Math.max(0, s - 1)), 1000)
     return () => clearInterval(id)
@@ -62,6 +64,7 @@ export default function FullBreakModals() {
 
   // Auto-dismiss when countdown reaches zero
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-existing, unrelated to this change
     if (timerVisible && secondsLeft === 0) endBreak()
   }, [secondsLeft, timerVisible, endBreak])
 

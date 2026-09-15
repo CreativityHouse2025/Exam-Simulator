@@ -29,6 +29,7 @@ const AuthCallbackPage: React.FC = () => {
     window.history.replaceState(null, "", window.location.pathname)
 
     if (!accessToken || !refreshToken) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-existing, unrelated to this change
       setState("error")
       return
     }

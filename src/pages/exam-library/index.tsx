@@ -72,7 +72,7 @@ const ExamLibraryPage: React.FC = () => {
   }
 
   return (
-    <div className="tailwind-page mx-auto w-full max-w-4xl px-4 py-8">
+    <div className="mx-auto w-full max-w-4xl px-4 py-8">
       <BackButton to={ROUTES.home} text={t.back} />
 
       <div className="mb-6 flex items-start justify-between gap-4">

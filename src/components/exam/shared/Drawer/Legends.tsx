@@ -1,18 +1,6 @@
-import type { ThemedStyles } from '../../../../types'
-
 import React from 'react'
-import styled from 'styled-components'
 import Legend from './Legend'
 import { useExamSessionCore } from '../../../../hooks/examSession/useExamSessionCore'
-
-const LegendStyles = styled.div<ThemedStyles>`
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 1px solid ${({ theme }) => theme.grey[2]};
-  border-bottom: 1px solid ${({ theme }) => theme.grey[2]};
-`
 
 const LegendsComponent: React.FC = () => {
   const { examState } = useExamSessionCore()
@@ -21,7 +9,7 @@ const LegendsComponent: React.FC = () => {
   const completed = examState === 'completed'
 
   return (
-    <LegendStyles>
+    <div className="h-7.5 flex justify-center items-center border-y border-grey-200">
       <Legend type="marked" />
       <Legend type="incomplete" />
       {inProgress && <Legend type="complete" />}
@@ -31,7 +19,7 @@ const LegendsComponent: React.FC = () => {
           <Legend type="correct" />
         </>
       )}
-    </LegendStyles>
+    </div>
   )
 }
 

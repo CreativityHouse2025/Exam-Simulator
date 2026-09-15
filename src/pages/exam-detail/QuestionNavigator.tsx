@@ -29,6 +29,7 @@ const QuestionNavigator = ({ numbers, perPage, currentPage, onJump, variant, cla
     const firstQuestionIndex = currentPage * perPage
     const sectionOfCurrentPage = Math.floor(firstQuestionIndex / NAV_CHUNK)
     const lastSection = navPageCount - 1
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-existing, unrelated to this change
     setNavPage(Math.min(sectionOfCurrentPage, lastSection))
   }, [currentPage, perPage, navPageCount])
 

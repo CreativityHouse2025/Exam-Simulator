@@ -110,7 +110,7 @@ const StudentSearchPage: React.FC = () => {
   }
 
   return (
-    <div className="tailwind-page mx-auto w-full max-w-4xl px-4 py-8">
+    <div className="mx-auto w-full max-w-4xl px-4 py-8">
       <BackButton to={ROUTES.home} text={t.back} />
 
       <h1 className="text-2xl font-bold text-tertiary">{t.title}</h1>

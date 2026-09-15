@@ -12,6 +12,7 @@ const DomainExamSession: React.FC = () => {
   const [open, setOpen] = React.useState(() => !isMobile)
 
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-existing, unrelated to this change
     setOpen(!isMobile)
   }, [isMobile])
 

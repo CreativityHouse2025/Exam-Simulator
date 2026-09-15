@@ -1,7 +1,6 @@
 import React from "react"
-import styled from "styled-components"
-import type { ThemedStyles } from "../../types"
 import { PageWrapper, Card, PageTitle, PageSubtitle, CardFooter, NavLink } from "../SharedStyles"
+import { cn } from "../ui/utils"
 
 export interface ConfirmationHint {
   text: string
@@ -19,19 +18,12 @@ interface ConfirmationCardProps {
   hint?: ConfirmationHint
 }
 
-const HintSection = styled.div<ThemedStyles>`
-  margin-top: 1.6rem;
-  padding-top: 1.4rem;
-  border-top: 1px solid ${({ theme }) => theme.grey[2]};
-  text-align: center;
-  font-size: 1.3rem;
-  color: ${({ theme }) => theme.grey[8]};
-  line-height: 1.6;
-
-  @media (min-width: 768px) {
-    font-size: 1.35rem;
-  }
-`
+const HintSection: React.FC<React.ComponentProps<"div">> = ({ className, ...rest }) => (
+  <div
+    className={cn("mt-4 pt-3.5 border-t border-grey-200 text-center text-sm text-grey-800 leading-relaxed", className)}
+    {...rest}
+  />
+)
 
 /**
  * Full-page confirmation card with icon, message, and navigation link.

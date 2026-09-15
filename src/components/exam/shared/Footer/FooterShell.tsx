@@ -1,16 +1,4 @@
-import type { ThemedStyles } from '../../../../types'
 import React from 'react'
-import styled from 'styled-components'
-
-const FooterStyles = styled.div<FooterStylesProps>`
-  width: 100%;
-  background: ${({ theme }) => theme.grey[0]};
-  border-top: 1px solid ${({ theme }) => theme.grey[1]};
-  max-height: 50px;
-  display: grid;
-  grid-template-columns: 0.5fr 0.5fr;
-  transition: 0.3s;
-`
 
 interface FooterShellProps {
   open: boolean
@@ -18,14 +6,12 @@ interface FooterShellProps {
 }
 
 /** Footer shell with grid layout. Renders child nodes (arrows + optional timer). */
-const FooterShell: React.FC<FooterShellProps> = ({ open, children }) => (
-  <FooterStyles id="footer" $open={open}>
+// `open` is accepted but unused — pre-existing (the original CSS rule never
+// referenced it either). See docs/refactor/phase-1-report.md PRE-EXISTING DEFECTS FOUND.
+const FooterShell: React.FC<FooterShellProps> = ({ children }) => (
+  <div id="footer" className="w-full bg-grey-50 border-t border-grey-100 max-h-12.5 grid grid-cols-2 transition-all duration-300">
     {children}
-  </FooterStyles>
+  </div>
 )
 
 export default FooterShell
-
-interface FooterStylesProps extends ThemedStyles {
-  $open: boolean
-}

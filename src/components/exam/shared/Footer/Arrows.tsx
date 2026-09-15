@@ -1,31 +1,8 @@
-import type { ThemedStyles } from '../../../../types'
 import type { MouseEventHandler } from 'react'
 
 import React from 'react'
-import styled from 'styled-components'
-import { lighten } from 'polished'
-import { SkipPrevious } from '@styled-icons/material/SkipPrevious'
-import { KeyboardArrowRight } from '@styled-icons/material/KeyboardArrowRight'
-import { KeyboardArrowLeft } from '@styled-icons/material/KeyboardArrowLeft'
-import { SkipNext } from '@styled-icons/material/SkipNext'
+import { SkipBack, SkipForward, ChevronRight, ChevronLeft } from 'lucide-react'
 import { useExamSessionCore } from '../../../../hooks/examSession/useExamSessionCore'
-
-const ArrowsStyles = styled.div<ThemedStyles>`
-  justify-self: center;
-  display: grid;
-  grid-template-columns: repeat(4, 5rem);
-`
-
-const ArrowStyles = styled.div<ThemedStyles>`
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  cursor: pointer;
-  color: ${({ theme }) => theme.black};
-  &:hover {
-    background: ${({ theme }) => lighten(0.2, theme.primary)};
-  }
-`
 
 const ArrowsComponent: React.FC<ArrowsProps> = ({ questionCount }) => {
   const { index, setIndex } = useExamSessionCore()
@@ -44,22 +21,22 @@ const ArrowsComponent: React.FC<ArrowsProps> = ({ questionCount }) => {
     () => [
       {
         onClick: () => navigate(0),
-        Icon: isLTR ? SkipPrevious : SkipNext,
+        Icon: isLTR ? SkipBack : SkipForward,
         disabled: index === 0
       },
       {
         onClick: () => navigate(index - 1),
-        Icon: isLTR ? KeyboardArrowLeft : KeyboardArrowRight,
+        Icon: isLTR ? ChevronLeft : ChevronRight,
         disabled: index === 0
       },
       {
         onClick: () => navigate(index + 1),
-        Icon: isLTR ? KeyboardArrowRight : KeyboardArrowLeft,
+        Icon: isLTR ? ChevronRight : ChevronLeft,
         disabled: index >= questionCount - 1
       },
       {
         onClick: () => navigate(questionCount - 1),
-        Icon: isLTR ? SkipNext : SkipPrevious,
+        Icon: isLTR ? SkipForward : SkipBack,
         disabled: index >= questionCount - 1
       }
     ],
@@ -67,18 +44,18 @@ const ArrowsComponent: React.FC<ArrowsProps> = ({ questionCount }) => {
   )
 
   return (
-    <ArrowsStyles id="arrows">
+    <div id="arrows" className="justify-self-center grid grid-cols-4 w-50">
       {arrows.map(({ onClick, Icon, disabled }, i) => (
-        <ArrowStyles
+        <div
           key={i}
-          className="no-select"
+          className="no-select grid justify-items-center items-center cursor-pointer text-black hover:bg-primary-light"
           onClick={disabled ? undefined : onClick}
           style={{ opacity: disabled ? 0.5 : 1, cursor: disabled ? 'not-allowed' : 'pointer' }}
         >
           <Icon size={30} />
-        </ArrowStyles>
+        </div>
       ))}
-    </ArrowsStyles>
+    </div>
   )
 }
 

@@ -1,30 +1,6 @@
 import type { ExamState, ReviewState } from "@shared/attempt.schema";
 import type { Role, User } from "@shared/user.schema";
 
-// Theme types
-export interface Theme {
-  grey: string[];
-  white: string;
-  black: string;
-  primary: string;
-  secondary: string;
-  tertiary: string;
-  quatro: string;
-  correct: string;
-  incorrect: string;
-  borderRadius: string;
-  shadows: string[];
-  scrollbar: string;
-  fontSize: string;
-  fontFamily: string;
-  displayFontFamily: string;
-}
-
-export interface ThemedStyles {
-  /**  */
-  theme: Theme;
-}
-
 // Language types
 export type LangDir = "rtl" | "ltr";
 export type LangCode = "ar" | "en";

@@ -1,64 +1,12 @@
-import type { Answer, LangCode, Question, QuestionTypes, ThemedStyles } from '../../../types'
+import type { Answer, LangCode, Question, QuestionTypes } from '../../../types'
 
 import React from 'react'
-import styled from 'styled-components'
-import { lighten, darken } from 'polished'
-import { VisibilityOff } from '@styled-icons/material/VisibilityOff'
+import { EyeOff } from 'lucide-react'
 import { formatCorrectAnswerLabel } from '../../../utils/format'
 import { isAnswerCorrect } from '../../../utils/results'
 import { translate } from '../../../utils/translation'
 import useSettings from '../../../hooks/useSettings'
-import { fadeIn } from '../../SharedStyles'
-
-const ExplanationStyles = styled.div<ExplanationStylesProps>`
-  position: relative;
-  background: ${({ $correct, theme }) => lighten(0.4, $correct ? theme.correct : theme.incorrect)};
-  border: 1px solid ${({ theme }) => theme.grey[2]};
-  margin-top: 5rem;
-  padding: 1rem 1rem 1rem 1rem;
-  font: 1.4rem 'Open Sans';
-  animation: ${fadeIn} 0.4s ease-out;
-`
-
-const HideButtonStyles = styled.button<ThemedStyles>`
-  position: absolute;
-  top: 0.5rem;
-  inset-inline-end: 0.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${({ theme }) => theme.grey[8]};
-  transition: color 0.3s;
-
-  &:hover {
-    color: ${({ theme }) => theme.tertiary};
-  }
-`
-
-const StatusStyles = styled.span<ExplanationStylesProps>`
-  text-transform: uppercase;
-  font-weight: 700;
-  color: ${({ $correct, theme }) => darken(0.1, $correct ? theme.correct : theme.incorrect)};
-`
-
-const CorrectStyles = styled.span<ThemedStyles>`
-  font-weight: 700;
-  color: ${({ theme }) => darken(0.1, theme.correct)};
-`
-
-const ExplanationTextStyles = styled.p`
-  font-weight: 700;
-  margin-top: 1rem;
-`
-
-const NormalText = styled.span`
-  font: 1.4rem 'Open Sans';
-  margin-bottom: 0.5rem;
-`
+import { cn } from '../../ui/utils'
 
 const ExplanationComponent = React.forwardRef<HTMLDivElement, ExplanationProps>(
   ({ question, userAnswer, onHide }, ref) => {
@@ -74,32 +22,50 @@ const ExplanationComponent = React.forwardRef<HTMLDivElement, ExplanationProps>(
       explain: translate('content.explain.explain')
     }
 
+    const strongColor = correct ? "text-correct-strong" : "text-destructive-strong"
+
     return (
-      <ExplanationStyles ref={ref} id="explanation" $correct={correct}>
+      <div
+        ref={ref}
+        id="explanation"
+        className={cn(
+          "relative border border-grey-200 mt-12.5 p-2.5 text-sm",
+          "animate-in fade-in slide-in-from-bottom-3 animation-duration-400 ease-out",
+          correct ? "bg-correct-bg" : "bg-destructive-bg",
+        )}
+      >
         {onHide && (
-          <HideButtonStyles type="button" onClick={onHide} aria-label="Hide explanation">
-            <VisibilityOff size={28} />
-          </HideButtonStyles>
+          <button
+            type="button"
+            onClick={onHide}
+            aria-label="Hide explanation"
+            className="absolute top-1.25 end-1.25 bg-transparent border-0 cursor-pointer p-1 flex items-center justify-center text-grey-800 transition-colors duration-300 hover:text-tertiary"
+          >
+            <EyeOff size={28} />
+          </button>
         )}
 
         <p>
           {translated.yours}
-          <StatusStyles $correct={correct}>{translated.correct}</StatusStyles>
+          <span className={cn("uppercase font-bold", strongColor)}>{translated.correct}</span>
         </p>
 
         <p>
           {translated.answer}
-          <CorrectStyles>{formatCorrectAnswerLabel(question, langCode as LangCode)}</CorrectStyles>
+          <span className="font-bold text-correct-strong">{formatCorrectAnswerLabel(question, langCode as LangCode)}</span>
         </p>
 
         {question.explanation && (
-          <ExplanationTextStyles>
+          <p className="font-bold mt-2.5">
             {translated.explain}
             <br />
-            <NormalText>{question.explanation}</NormalText>
-          </ExplanationTextStyles>
+            {/* margin-bottom on the original inline <span> was a no-op (vertical margin doesn't
+                apply to inline elements) — preserved as-is, not "fixed" into a block element.
+                See docs/refactor/phase-1-report.md PRE-EXISTING DEFECTS FOUND. */}
+            <span className="font-normal text-sm">{question.explanation}</span>
+          </p>
         )}
-      </ExplanationStyles>
+      </div>
     )
   }
 )
@@ -112,8 +78,4 @@ export interface ExplanationProps {
   question: Question
   userAnswer: Answer<QuestionTypes>
   onHide?: () => void
-}
-
-export interface ExplanationStylesProps extends ThemedStyles {
-  $correct: boolean
 }

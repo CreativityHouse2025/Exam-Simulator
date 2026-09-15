@@ -1,6 +1,5 @@
 import React from "react";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
-import styled from "styled-components";
 import Toast from "./components/Toast";
 import Header from "./components/Header";
 import Loading from "./components/Loading";
@@ -24,47 +23,6 @@ import useSettings from "./hooks/useSettings";
 import type { LangCode } from "./types";
 import SessionProvider from "./providers/SessionProvider";
 import ExamPage from "./pages/ExamPage";
-
-const AppBackground = styled.div`
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(
-      ellipse 80% 65% at 50% 115%,
-      rgba(255, 220, 154, 0.87) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse 55% 45% at 90% 75%,
-      rgba(181, 150, 93, 0.2) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse 50% 40% at 10% 85%,
-      rgba(181, 150, 93, 0.14) 0%,
-      transparent 45%
-    ),
-    radial-gradient(
-      ellipse 90% 80% at 50% 50%,
-      #fafaf8 0%,
-      #f2f0ec 45%,
-      #e9e7e3 100%
-    );
-`;
-
-const AppLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100dvh;
-`;
-
-const RoutesArea = styled.div`
-  flex: 1;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-`;
 
 const App: React.FC = () => {
   const { settings } = useSettings();
@@ -108,10 +66,10 @@ const App: React.FC = () => {
 
   return (
     <>
-      <AppBackground />
-      <AppLayout>
+      <div className="app-background" />
+      <div className="flex flex-col h-dvh">
         <Header />
-        <RoutesArea>
+        <div className="flex-1 overflow-auto flex flex-col">
           <Routes>
             {/* Public */}
             <Route
@@ -201,8 +159,8 @@ const App: React.FC = () => {
             {/* Catch all undefined routes and redirect to homepage */}
             <Route path="*" element={<Navigate to={ROUTES.home} replace />} />
           </Routes>
-        </RoutesArea>
-      </AppLayout>
+        </div>
+      </div>
       <Toast />
     </>
   );

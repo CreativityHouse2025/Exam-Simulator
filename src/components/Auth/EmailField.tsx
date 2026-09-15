@@ -1,5 +1,5 @@
 import React from "react"
-import { Email } from "@styled-icons/material/Email"
+import { Mail } from "lucide-react"
 import { FormGroup, FormLabel, FormInput, InputWrapper, InputIcon, FieldError } from "../SharedStyles"
 
 interface EmailFieldProps {
@@ -18,7 +18,7 @@ const EmailField = React.forwardRef<HTMLInputElement, EmailFieldProps>(
       <FormLabel htmlFor="email">{label}</FormLabel>
       <InputWrapper>
         <InputIcon>
-          <Email size={18} />
+          <Mail size={18} />
         </InputIcon>
         <FormInput
           ref={ref}

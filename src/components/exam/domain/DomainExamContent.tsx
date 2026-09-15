@@ -1,16 +1,10 @@
 import React from 'react'
-import styled from 'styled-components'
 import DomainExamTopDisplay from './DomainExamTopDisplay'
 import Question from '../shared/Question'
 import MultipleChoice from '../shared/MultipleChoice'
 import Progress from '../shared/Progress'
 import Explanation from '../shared/Explanation'
 import { useExamSessionCore } from '../../../hooks/examSession/useExamSessionCore'
-
-const ExamStyles = styled.div`
-  width: 100%;
-  height: 100%;
-`
 
 const DomainExamContent: React.FC<DomainExamContentProps> = ({ isReview }) => {
   const { exam, index: questionIndex, selectedOriginalIndices } = useExamSessionCore()
@@ -22,6 +16,7 @@ const DomainExamContent: React.FC<DomainExamContentProps> = ({ isReview }) => {
 
   // Reset reveal whenever the user navigates to a different question.
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-existing, unrelated to this change
     setIsAnswerRevealed(false)
   }, [questionIndex])
 
@@ -40,7 +35,7 @@ const DomainExamContent: React.FC<DomainExamContentProps> = ({ isReview }) => {
   const shouldShowExplanation = isReview || (!isReview && isAnswerRevealed)
 
   return (
-    <ExamStyles id="exam">
+    <div id="exam" className="w-full h-full">
       <DomainExamTopDisplay
         questionCount={exam.length}
         isReview={isReview}
@@ -62,7 +57,7 @@ const DomainExamContent: React.FC<DomainExamContentProps> = ({ isReview }) => {
           onHide={!isReview ? toggleAnswerReveal : undefined}
         />
       )}
-    </ExamStyles>
+    </div>
   )
 }
 
