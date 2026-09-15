@@ -1,76 +1,77 @@
 ---
 name: styling-guide
-description: "The rules that make Tailwind v4 and styled-components coexist in the Exam Simulator without breaking each other — Preflight is disabled on purpose, the root font-size is 10px so every Tailwind page root needs .tailwind-page, dark: variants are deliberately inert, and shadcn primitives come from the CLI. Use this skill before writing or editing ANY styling: Tailwind classes, styled-components, src/index.css, theme values, a shadcn/ui primitive, or a new page layout. Also use whenever Tailwind 'looks broken' — serif text, underlined links, OS-chrome buttons, a near-black outline border, content overflowing its container, or styling that only breaks on a dark-mode machine. Do not improvise CSS in this repo; nearly every styling bug here traces back to one of these four constraints."
+description: "Styling rules for the Exam Simulator — Tailwind v4 is the only styling system, real Preflight is enabled, the root font-size is the browser default 16px, every design token lives in src/index.css, dark: variants are deliberately inert, shadcn/ui primitives come from the CLI and icons from lucide-react. Use this skill before writing or editing ANY styling: Tailwind classes, src/index.css, a theme token, a shadcn/ui primitive, or a new page layout. Also use when Tailwind 'looks broken' — a heading rendering at body text size, a near-black border on a bordered element, styling that only breaks on a dark-mode machine — or when a value seems to have no utility and you are tempted to write plain CSS. styled-components, polished and @styled-icons are gone; nothing in src/ uses them."
 ---
 
-# Styling Guide (Tailwind v4 + styled-components)
+# Styling Guide (Tailwind v4)
 
-## Overview
+## One system
 
-Two styling systems are live in the same app. New UI (supervisor pages, shadcn primitives) is
-Tailwind v4; old UI is styled-components. That coexistence forces four non-obvious constraints.
-**Nearly every "Tailwind looks broken" bug in this codebase traces back to one of them** — so
-recognise the symptom and apply the known fix rather than re-diagnosing from scratch.
+Tailwind v4 plus shadcn/ui primitives (on `radix-ui`) is the only styling system in `src/`.
+styled-components, `polished` and `@styled-icons/*` were removed entirely — there is no
+`ThemeProvider`, no `GlobalStyle`, no `DEFAULT_THEME`, no `theme.*` lookup and no `Theme`/
+`ThemedStyles` type. Icons come from `lucide-react`. Don't reintroduce any of them.
 
-## 1. Preflight is OFF, and stays off
+## Preflight is ON and the root is 16px
 
-`src/index.css` imports only `tailwindcss/theme.css` and `tailwindcss/utilities.css` — never
-`tailwindcss/preflight.css`. Preflight sets `box-sizing`, `img { display: block }`, and list/table/
-border defaults that **nothing in the styled-components pages overrides**, so enabling it globally
-reflows the entire existing app.
+`src/index.css` declares the cascade layer order and imports real Preflight:
 
-The cost: browser UA defaults leak into Tailwind markup. `src/index.css` has a hand-written
-`@layer base` replacing only the Preflight rules the Tailwind pages actually need. Each rule there
-is safe because it is either overridden by an existing styled-component or a no-op for the old pages.
+```css
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+```
 
-**Cascade layers are what makes this safe, and the rule is per-declaration, not per-file:**
-styled-components emit *unlayered* CSS, which beats *any* cascade layer regardless of specificity.
-So a layered `base` rule can only ever affect a property that no styled-component declares. Before
-adding anything to `@layer base`, confirm the property is already declared by the old components
-(or is inert for them). That is exactly why full Preflight is unsafe and the hand-picked subset is not.
+So `box-sizing: border-box`, the border/form/media resets and `img { display: block }` apply
+globally, to every element. The root font-size is the browser default, so Tailwind's stock rem
+scale (`p-4`, `text-sm`, `rounded-lg`) is correct exactly as shipped: nothing restates the scale
+in px, and there is no `.tailwind-page` scoping class. Both existed only for the old 10px root
+and no longer exist anywhere.
 
-Symptoms already hit and fixed — recognise these rather than re-diagnosing them:
+Never hand-author a rem value — not `p-[1.2rem]`, not `style={{ fontSize: "0.9rem" }}`. Use the
+scale; it is dynamic, so odd-but-real pixel values are reachable (`p-3.25` = 13px).
 
-| Symptom | Cause |
-| --- | --- |
-| Serif text / underlined links | No `body { font-family }`, no `a { text-decoration: inherit }` |
-| Buttons look like raw OS chrome | UA `background-color: buttonface` + `outset` border |
-| An `outline` button has a heavy near-black border | Tailwind defaults an uncoloured border to `currentColor` — always pair `border` with an explicit colour, e.g. `border-border` |
-| Content overflows its container | Elements default to `content-box`, but every Tailwind utility assumes `border-box` |
+On top of Preflight, `@layer base` in `index.css` adds app-wide rules. The one that surprises
+people: `h1`–`h6` and `p` are reset to `font-size: inherit; font-weight: inherit; margin: 0`, so
+a heading renders at body size until you give it `text-*`/`font-*` classes. `ol`/`ul` are
+`list-style: none` with no padding. Also there: `body`'s font and `direction: inherit` (the
+per-language `dir` propagates from it), the `::-webkit-scrollbar*` styling, and `.no-select`.
 
-## 2. Every Tailwind page root needs `.tailwind-page`
+## Design tokens live only in src/index.css
 
-`GlobalStyle` (`src/main.tsx`) sets `html { font-size: 10px }` (`theme.fontSize`), and ~320 `rem`
-values across the styled-components are authored against that root. It cannot be changed to 16px.
+Three blocks, and which one you put a token in matters:
 
-Two consequences, both already handled — **do not "fix" them again**:
+- **`:root`** — raw values: `--primary`/`--secondary`, `--grey-50` … `--grey-1000`, the shadcn
+  surface tokens (`--background`, `--border`, `--muted` …), and the precomputed hover/light
+  variants that used to be computed by `polished` at runtime (`--primary-light`, `--danger-hover`,
+  `--correct-bg` …).
+- **`@theme inline`** — the `--color-*` aliases that turn those into utilities (`bg-primary`,
+  `text-grey-900`, `border-border`), plus `--font-sans`.
+- **`@theme`** — tokens whose value is defined here rather than aliased: `--shadow-1/4/8` and the
+  `--animate-*` keyframe tokens.
 
-- Tailwind's default scale is `rem`-based and would render at 62.5%. `src/index.css` restates
-  `--spacing`, `--text-*`, `--radius-*` and `--container-*` in **px** so the utilities are
-  root-agnostic. `--breakpoint-*` is deliberately left in `rem`: inside a media query, `rem`
-  resolves against the browser's initial 16px, not `html`, so breakpoints were never affected.
-- The `.tailwind-page` class (defined in `@layer base`) applies `box-sizing: border-box` to a
-  subtree and sets a 16px font baseline. **Put it on the root element of every Tailwind-built
-  page.** Without it, unsized text inherits 10px and padded elements overflow.
+Tailwind's utility generator only scans `@theme` blocks. **A token defined solely under `:root`
+generates no utility at all** — which is why each one needs either a `@theme inline` alias or a
+direct `@theme` definition. This fails silently: the class name looks fine and emits no CSS.
 
-New sizing uses the standard scale (`p-4`, `text-sm`). Never hand-write `rem` values like
-`p-[1.2rem]` — those bypass the px scale and silently resolve against the 10px root.
+Add a new color as a `:root` value plus a `@theme inline` alias. Don't hardcode a hex in markup.
 
-## 3. `dark:` variants never fire
+## `dark:` never fires
 
-The app is light-only, but the shadcn primitives ship `dark:` classes throughout. Tailwind binds
-`dark:` to `prefers-color-scheme: dark` by default, so on a dark-mode machine those variants
-activate and override the intended light styling — a bug invisible to anyone developing in light
-mode. `src/index.css` rebinds it:
+The app is light-only, but the shadcn primitives ship `dark:` classes throughout, and Tailwind
+binds `dark:` to `prefers-color-scheme: dark` by default — on a dark-mode machine those variants
+would activate and override the intended light styling, a bug invisible to anyone developing in
+light mode. `index.css` rebinds it:
 
 ```css
 @custom-variant dark (&:where(.dark, .dark *));
 ```
 
-Nothing sets `.dark`, so `dark:` is inert. Leave it that way. Don't strip `dark:` classes out of
-primitives either — that fights the CLI on the next update for no benefit.
+Nothing sets `.dark`, so `dark:` is inert. Leave it that way, and don't strip `dark:` classes out
+of primitives either — that fights the CLI on the next update for no benefit.
 
-## 4. shadcn primitives
+## shadcn primitives
 
 Pull them with the real CLI, never hand-author them:
 
@@ -78,18 +79,34 @@ Pull them with the real CLI, never hand-author them:
 npx shadcn add <name>
 ```
 
-Prefer fixing a shared defect in the primitive itself (as with `outline`'s missing `border-border`)
-over patching each call site — one fix, every consumer. Icons in new UI use `lucide-react`; the
-existing `@styled-icons/material` usage in old UI stays as-is.
+Files under `src/components/ui/` stay close to what the CLI emits: color/radius classes repointed
+at our `@theme` tokens, and a CVA variant added when a call site genuinely needs one. Anything
+else — extra props, hooks, structural JSX changes — belongs in a wrapper under
+`src/components/<feature>/`. Prefer fixing a shared defect in the primitive over patching each
+call site.
 
-## Which system for new work
+Note that Tailwind resolves an uncolored `border` to `currentColor` (Preflight does not set a
+default border color either), so always pair `border` with an explicit color such as
+`border-border`.
 
-Tailwind + shadcn is the default for new UI. Use styled-components only when extending an existing
-styled-components page, and put provider-specific styled components in their own `*Styles.ts` file —
-a provider file may only default-export its component (see `frontend-guide` on fast refresh).
+## Plain CSS is a last resort, and it lives in index.css
 
-Old-UI styled components read design tokens from the theme in `constants.ts` rather than hardcoded
-values. Build every component mobile-first and responsive across devices.
+Some styling has no utility form: `attr()`, `min()`, mixed fixed/`fr` grid templates,
+pseudo-element triangles, per-property transition delays, an SVG `stroke-dashoffset` transition,
+bespoke gradients, custom keyframes. Those are plain classes at the bottom of `index.css`, each
+carrying a comment explaining why it isn't Tailwind — `.app-background`, `.modal-inner-grid`,
+`.choice-grid`, `.menu-item-grid`, `.save-button`, `.reminder-tooltip`, `.break-card`,
+`.ring-progress`, `.skeleton-shimmer`, `.exam-dropdown-*`, `.attempt-tr`/`.attempt-td`,
+`.custom-checkbox::after`. Follow the pattern: confirm no utility exists, add the class beside its
+peers, say why in a comment.
+
+For repeated Tailwind markup, reuse the feature-scoped modules instead of a new plain class:
+`src/components/SharedStyles.tsx` (auth/page primitives — `PageWrapper`, `Card`, `FormInput`,
+`SubmitButton`, `WarningBanner` …, all `className`-mergeable), `AttemptHistoryStyles.tsx`,
+`BreakModalsStyles.ts` (exported class-name constants).
+
+Build every component mobile-first and responsive. `--breakpoint-*` is never overridden, so the
+default breakpoints apply; `480px` has no named breakpoint and uses `min-[480px]:`.
 
 ## Related skills
 

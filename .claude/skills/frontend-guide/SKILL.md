@@ -58,8 +58,8 @@ Routing lives in `src/App.tsx`; every URL comes from `src/config/routes.ts` (dyn
 expose `pattern` for `<Route>` and `to()` for links — never hand-build a URL string).
 
 Provider order in `src/main.tsx`:
-`SettingsProvider` → `ThemeProvider` → `BrowserRouter` → `QueryClientProvider` →
-`AuthContextProvider` → `ToastContextProvider` → `App`.
+`SettingsProvider` → `BrowserRouter` → `QueryClientProvider` → `AuthContextProvider` →
+`ToastContextProvider` → `App`.
 
 **SessionProvider** sits at the root of the authenticated route branch so a started session
 survives navigating from `/` to `/exam`. It owns the whole session lifecycle and *always*
@@ -124,14 +124,15 @@ for the `AppError` shape the frontend parses.
 
 Provider files (`src/providers/*.tsx` and the exam providers under `src/components/exam/*/`)
 must have **only a default export** — the React component. Any additional export (hook, styled
-component, type) breaks fast refresh and produces HMR violations that look like random state loss.
+wrapper, class-name constant, type) breaks fast refresh and produces HMR violations that look like
+random state loss.
 
 The pattern:
 
 1. Contexts and hooks go in `src/contexts.ts` (not a provider file, so multiple exports are fine).
 2. Each provider file is **only** the component, default-exported.
-3. Styled components specific to a provider live in their own `*Styles.ts` file
-   (e.g. `AttemptHistoryStyles.ts`, `BreakModalsStyles.ts`).
+3. Shared markup or class names a provider's tree needs live in their own `*Styles.ts(x)` file
+   (e.g. `AttemptHistoryStyles.tsx`, `BreakModalsStyles.ts`).
 
 ## Dynamic imports and exam loading
 
@@ -174,9 +175,10 @@ the same `ExamPage` tree. Revision is unavailable for preview sessions.
 This skill covers structure and state. Three areas have their own hard-won constraints and
 routinely break when improvised:
 
-- **Any CSS, Tailwind class, styled-component, or shadcn primitive → invoke `styling-guide` first.**
-  Tailwind and styled-components coexist here under non-obvious rules (Preflight is off, the root
-  font-size is 10px). Writing Tailwind markup without reading it produces subtly broken layout.
+- **Any CSS, Tailwind class, theme token, or shadcn primitive → invoke `styling-guide` first.**
+  Tailwind v4 is the only styling system, and its non-obvious rules here (where tokens must be
+  declared to generate utilities, the `@layer base` heading reset, when plain CSS is allowed) are
+  what make improvised markup render wrong.
 - **Route guards, role gating, nav items, or anything touching who can see what → invoke `auth-rbac-guide`.**
 - **Question banks, exam definitions, category lists, or fixing an answer → invoke `exam-data-guide`.**
 - **Calling or adding an API endpoint → invoke `backend-guide`** for the error-code contract and

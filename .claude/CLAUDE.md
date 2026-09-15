@@ -19,14 +19,14 @@ costs one tool call and prevents the class of bug it exists to describe.
 | Anything under `src/` — components, pages, hooks, contexts, providers, routes, services | `frontend-guide` |
 | Anything under `api/` — endpoints, handlers, services, validators, middleware | `backend-guide` |
 | Anything under `supabase/` — migrations, RPCs, schema, generated types | `database-guide` |
-| Any CSS, Tailwind class, styled-component, shadcn primitive, or new page layout | `styling-guide` |
+| Any CSS, Tailwind class, theme token, shadcn primitive, or new page layout | `styling-guide` |
 | Sign-in/out, sessions, cookies, roles, route guards, who-can-see-what | `auth-rbac-guide` |
 | Anything under `src/data/` — questions, answers, exams, categories, translations | `exam-data-guide` |
 
 Tripwires — if any of these describe your task, the skill above is not optional:
 
-- **Writing Tailwind markup** → `styling-guide`. Preflight is disabled and the root font-size is
-  10px. Tailwind written without those two facts looks broken in ways that are tedious to diagnose.
+- **Writing Tailwind markup** → `styling-guide`. Tailwind v4 is the only styling system here, and
+  a design token declared in the wrong block generates no CSS at all — silently.
 - **Adding an API endpoint** → `backend-guide` + `auth-rbac-guide`. Access control fails *open* if
   `withRole` is omitted.
 - **Fixing a question's answer** → `exam-data-guide`. Question ids are not unique across banks; a
@@ -52,8 +52,7 @@ npm run typecheck # Type-check the entire project (tsc --build + vite config)
 
 - React 19 + TypeScript 5.9 with Vite (React plugin)
 - React Router 7 for routing
-- Styled Components for CSS-in-JS (old UI)
-- Tailwind v4 + shadcn/ui primitives on `radix-ui` (new UI — prioritize it)
+- Tailwind v4 + shadcn/ui primitives on `radix-ui` for all styling; `lucide-react` for icons
 - React Context API for client/session state (split into 5 session contexts for performance)
 - TanStack Query for server state (attempt lists, student search, student attempts)
 - Supabase (auth + Postgres) behind Vercel serverless functions (`/api`)
