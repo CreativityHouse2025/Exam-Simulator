@@ -12,7 +12,7 @@
 -- The API reads tables with the secret key (service_role) and writes only through
 -- security-definer RPCs, so SELECT is the whole requirement. anon and authenticated
 -- get nothing: the frontend never talks to Supabase directly.
-grant select on public.users, public.exam_attempts, public.exam_attempt_questions to service_role;
+grant select on public.users, public.exam_attempts, public.attempt_answers, public.offered_breaks to service_role;
 
 -- --- Profile creation on email confirmation -----------------------------------
 -- Mirrors the production `on_email_confirmed` trigger. Signup stores the profile

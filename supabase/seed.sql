@@ -51,12 +51,10 @@ values
 on conflict (id) do nothing;
 
 -- 3 attempts per student: one completed pass, one completed fail, one in-progress.
-insert into public.exam_attempts (user_id, exam_type, exam_id, category_id, exam_state, status, score, time_remaining, created_at)
+insert into public.exam_attempts (user_id, exam_id, exam_state, status, score, time_remaining, created_at)
 select
   u.id,
-  a.exam_type,
   a.exam_id,
-  a.category_id,
   a.exam_state,
   a.status,
   a.score,
@@ -65,8 +63,8 @@ select
 from public.users u
 cross join (
   values
-    ('full',   1, null::int, 'completed',   'pass', 78.50,    0, interval '10 days'),
-    ('domain', null::int, 2, 'completed',   'fail', 55.00,    0, interval '5 days'),
-    ('full',   1, null::int, 'in-progress', null,    0.00, 3600, interval '1 day')
-) as a(exam_type, exam_id, category_id, exam_state, status, score, time_remaining, age)
+    (1, 'completed',   'pass', 78.50,    0, interval '10 days'),
+    (2, 'completed',   'fail', 55.00,    0, interval '5 days'),
+    (1, 'in-progress', null,    0.00, 3600, interval '1 day')
+) as a(exam_id, exam_state, status, score, time_remaining, age)
 where u.role = 'student';
