@@ -24,6 +24,7 @@ Order matters. Step 4 before step 3 takes production sign-in down.
       Rollback: re-apply `002_count_user_sessions_rpc.sql` (plain `CREATE OR REPLACE`).
 - [ ] **5. Regenerate `api/_lib/database.types.ts`** after step 4 and commit. It still carries a
       `count_user_sessions` entry, which stays correct until the function is actually dropped.
+- [ ] **5. Update** user creation trigger in production to remove creating expires_at.
 
 ### Expected behaviour change
 
@@ -31,8 +32,3 @@ Newest sign-in wins, silently. A student displaced by a second sign-in gets no m
 401 and land on the sign-in page, up to the JWT expiry later, possibly mid-exam. Exam progress is
 client-side so answers survive, but the attempt-save call fails first. Previously the *second*
 sign-in was blocked with `SESSION_CONFLICT` and the first device was untouched.
-
-### Loose end
-
-- [ ] `WarningBanner` (`src/components/SharedStyles.tsx:148`) has no remaining usages — it only
-      rendered the session-conflict warning. Delete or keep.

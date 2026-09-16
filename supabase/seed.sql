@@ -31,6 +31,25 @@ values
   ('91e9a4fe-9760-4900-a46f-03ceb3559f4c', 'Tarek',   'Nabil',    now() + interval '30 days', 'student')
 on conflict (id) do nothing;
 
+
+-- Two memorable logins for local development, one per role. Password for every seeded
+-- account is `password123`.
+insert into auth.users (
+  instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, email_change, email_change_token_new, recovery_token
+)
+values
+  ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-111111111111', 'authenticated', 'authenticated', 'supervisor@local.test', crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', '22222222-2222-4222-8222-222222222222', 'authenticated', 'authenticated', 'student@local.test',    crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', '')
+on conflict (id) do nothing;
+
+insert into public.users (id, first_name, last_name, expires_at, role)
+values
+  ('11111111-1111-4111-8111-111111111111', 'Local', 'Supervisor', now() + interval '365 days', 'supervisor'),
+  ('22222222-2222-4222-8222-222222222222', 'Local', 'Student',    now() + interval '365 days', 'student')
+on conflict (id) do nothing;
+
 -- 3 attempts per student: one completed pass, one completed fail, one in-progress.
 insert into public.exam_attempts (user_id, exam_type, exam_id, category_id, exam_state, status, score, time_remaining, created_at)
 select

@@ -22,6 +22,7 @@ costs one tool call and prevents the class of bug it exists to describe.
 | Any CSS, Tailwind class, theme token, shadcn primitive, or new page layout | `styling-guide` |
 | Sign-in/out, sessions, cookies, roles, route guards, who-can-see-what | `auth-rbac-guide` |
 | Anything under `src/data/` — questions, answers, exams, categories, translations | `exam-data-guide` |
+| Running, resetting, or seeding the local Supabase Docker stack; `npm run db:*`; `.env` Supabase values | `local-supabase-guide` |
 
 Tripwires — if any of these describe your task, the skill above is not optional:
 
@@ -31,6 +32,8 @@ Tripwires — if any of these describe your task, the skill above is not optiona
   `withRole` is omitted.
 - **Fixing a question's answer** → `exam-data-guide`. Question ids are not unique across banks; a
   one-file fix leaves the other copy wrong.
+- **Running or resetting the local database** → `local-supabase-guide`. Migrations are replayed by
+  `npm run db:reset`, never applied by hand, and `supabase migration new` breaks the `NNN_` numbering.
 - **Adding state or a provider** → `frontend-guide`. Contexts are split on purpose and provider
   files may only have a default export.
 

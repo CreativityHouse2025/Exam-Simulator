@@ -73,7 +73,7 @@ export const InputWrapper: React.FC<React.ComponentProps<"div">> = ({ className,
 
 /** Absolutely positioned icon inside an input field. */
 export const InputIcon: React.FC<React.ComponentProps<"span">> = ({ className, ...rest }) => (
-  <span className={cn("absolute start-3 flex items-center pointer-events-none text-grey-700", className)} {...rest} />
+  <span className={cn("absolute inset-s-3 flex items-center pointer-events-none text-grey-700", className)} {...rest} />
 )
 
 interface FormInputProps extends React.ComponentProps<"input"> {
@@ -110,7 +110,7 @@ export const PasswordInputWrapper: React.FC<React.ComponentProps<"div">> = ({ cl
 export const TogglePasswordButton: React.FC<React.ComponentProps<"button">> = ({ className, ...rest }) => (
   <button
     className={cn(
-      "absolute end-2 bg-transparent border-0 cursor-pointer p-1.5 min-w-11 min-h-11",
+      "absolute inset-e-2 bg-transparent border-0 cursor-pointer p-1.5 min-w-11 min-h-11",
       "flex items-center justify-center text-grey-800 transition-colors duration-150 hover:text-primary",
       className,
     )}
@@ -134,21 +134,6 @@ export const FormError: React.FC<React.ComponentProps<"div">> = ({ className, ..
   <div
     className={cn(
       "bg-red-50 border border-destructive rounded-lg py-2.5 px-3 mb-3.5 text-xs text-destructive",
-      "animate-in fade-in slide-in-from-top-1 animation-duration-250 ease-out",
-      className,
-    )}
-    {...rest}
-  />
-)
-
-/**
- * Amber warning banner for non-error decision states (e.g. session conflict).
- * Visually distinct from FormError — signals a choice, not a failure.
- */
-export const WarningBanner: React.FC<React.ComponentProps<"div">> = ({ className, ...rest }) => (
-  <div
-    className={cn(
-      "bg-amber-50 border border-amber-500 rounded-lg py-2.5 px-3 mb-3.5 text-xs text-amber-800",
       "animate-in fade-in slide-in-from-top-1 animation-duration-250 ease-out",
       className,
     )}

@@ -12,6 +12,7 @@
   - [Language Support](#language-support)
 - [Screenshots](#screenshots)
 - [Tech Stack](#tech-stack)
+- [Local Development](#local-development)
 - [Roadmap](#roadmap)
 
 ---
@@ -125,13 +126,87 @@ HTML email report sent to the user's inbox.
 
 | Layer | Technology |
 |---|---|
-| Frontend | React 19, TypeScript, Styled Components |
+| Frontend | React 19, TypeScript |
+| Styling | Tailwind CSS v4, shadcn/ui (on `radix-ui`), `lucide-react` icons |
 | State Management | React Context API (5 split contexts) |
 | Backend | Vercel Serverless Functions (`/api`) |
 | Database | Supabase (PostgreSQL) |
 | Auth | Supabase Auth |
 | CRM Integration | HighLevel (subscription verification) |
 | Hosting | Vercel |
+
+---
+
+## Local Development
+
+The entire backend — Postgres, Auth, Storage, Studio and a fake SMTP inbox — runs locally in
+Docker via the Supabase CLI. There is no shared remote development database.
+
+### Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/), installed and running
+- Node.js 20+
+
+The Supabase CLI ships as a devDependency, so there is nothing to install globally.
+
+### First run
+
+```bash
+npm install
+npm run db:start          # boots the stack (first run pulls ~10 images, this takes a while)
+cp .env.example .env      # then paste the values printed by the previous command
+npm run db:reset          # applies every migration and loads the seed data
+npx vercel dev            # serves the app at http://localhost:3000, including /api
+```
+
+`npx supabase status -o env` reprints the URL and keys at any time.
+
+> `npm run dev` runs Vite alone and does **not** serve `/api`. Use `vercel dev` for anything that
+> talks to the backend.
+
+### Daily commands
+
+| Command | What it does |
+|---|---|
+| `npm run db:start` | Start the local stack |
+| `npm run db:stop` | Stop it, keeping the data |
+| `npm run db:reset` | Wipe, replay all migrations, reload `supabase/seed.sql` |
+| `npm run db:types` | Regenerate `api/_lib/database.types.ts` from the local schema |
+
+### Services
+
+| Service | URL |
+|---|---|
+| API | http://127.0.0.1:54321 |
+| Postgres | `postgresql://postgres:postgres@127.0.0.1:54322/postgres` |
+| Studio | http://127.0.0.1:54323 |
+| Inbucket (captured emails) | http://127.0.0.1:54324 |
+
+### Seeded accounts
+
+Every seeded account uses the password `password123`.
+
+| Email | Role |
+|---|---|
+| `supervisor@local.test` | Supervisor |
+| `student@local.test` | Student (with exam attempt history) |
+| `amira.hassan@example.com` and 9 others | Students, for testing student search |
+
+### Known local limitations
+
+- **Sign-up does not work offline.** It verifies a paid offer against the live HighLevel CRM and
+  needs `HIGHLEVEL_PRIVATE_INTEGRATION_TOKEN` and `HIGHLEVEL_SUBACCOUNT_LOCATION_ID`. Sign in with
+  a seeded account instead.
+- **Emails are captured, never sent** — read them in Inbucket.
+- **Single-session-per-account is not enforced locally**; it is a hosted Supabase Auth setting.
+- **Some schema objects are not in the migrations.** Table grants and the `on_email_confirmed`
+  trigger were applied to production through the dashboard, so `supabase/local/bootstrap.sql`
+  recreates them locally. It is not a migration — keep it in sync by hand if production changes.
+
+### Adding a migration
+
+Create `supabase/migrations/NNN_name.sql` by hand with the next number, run `npm run db:reset` to
+prove it replays from scratch, then `npm run db:types` and commit the regenerated types with it.
 
 ---
 
