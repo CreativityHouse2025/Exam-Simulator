@@ -1,32 +1,18 @@
-
 import { withAuth } from "../_lib/middleware/withAuth.js"
 import { withErrorHandler } from "../_lib/middleware/withErrorHandler.js"
 import { successResponse } from "../_lib/utils/response.js"
-import { supabaseAdmin } from "../_lib/supabaseClient.js"
-import { AppError } from "../_lib/errors/AppError.js"
-import type { User } from "../../shared/schemas/user.schema.js"
+import type { UserWithTracks } from "../../shared/schemas/user.schema.js"
+import { getUserWithTracks } from "../_lib/services/userService.js"
 
+// Maps to GET /api/auth/me
+// The caller's own profile and the tracks they may currently open. The track catalogue itself
+// comes from /api/tracks; merging the two is the frontend's job.
+//
+// The email is handed over rather than looked up: withAuth already verified it off the JWT, so the
+// whole response costs one query.
 export const GET = withErrorHandler(
-  withAuth(async (_request: Request, authUser, cookieHeaders) => {
-    const { data: user, error } = await supabaseAdmin
-      .from("users")
-      .select("id, first_name, last_name, expires_at, role")
-      .eq("id", authUser.id)
-      .single()
-
-    if (error || !user) {
-      throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "User not found" })
-    }
-
-    const profile: User = {
-      id: user.id,
-      email: authUser.email,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      expires_at: user.expires_at,
-      role: user.role,
-    }
-
-    return successResponse({ user: profile }, 200, cookieHeaders)
+  withAuth(async (_request, authUser, cookieHeaders) => {
+    const result: UserWithTracks = await getUserWithTracks(authUser.id, authUser.email)
+    return successResponse(result, 200, cookieHeaders)
   }),
 )

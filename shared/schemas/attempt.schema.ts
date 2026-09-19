@@ -1,166 +1,204 @@
-import { z } from "zod"
+import { z } from "zod";
+import {
+  DisclosedQuestionSchema,
+  ExamConfigSchema,
+  ExamSchema,
+  LangSchema,
+  QuestionSchema,
+} from "./exam.schema.js";
 
-export const ExamStateSchema = z.enum(["in-progress", "completed"])
-export const ReviewStateSchema = z.enum(["summary", "question"])
-export const AttemptStatusSchema = z.enum(["pass", "fail"])
-export const EmailReportStateSchema = z.enum([
-  "unsent",
-  "pending",
-  "sent",
-  "failed",
-])
+export const ExamStateSchema = z.enum(["in-progress", "completed"]);
+export const AttemptStatusSchema = z.enum(["pass", "fail"]);
 
-/** Exam types the database knows about. `revision` is a client-only session and is never persisted. */
-export const BackendExamTypeSchema = z.enum(["full", "domain"])
+export type ExamState = z.infer<typeof ExamStateSchema>;
+export type AttemptStatus = z.infer<typeof AttemptStatusSchema>;
 
-export type ExamState = z.infer<typeof ExamStateSchema>
-export type ReviewState = z.infer<typeof ReviewStateSchema>
-export type AttemptStatus = z.infer<typeof AttemptStatusSchema>
-export type BackendExamType = z.infer<typeof BackendExamTypeSchema>
+export const AttemptIdSchema = z.uuid({ error: "id must be a valid UUID" });
 
-export const AttemptIdSchema = z.uuid({ error: "id must be a valid UUID" })
+const nonNegativeInt = z.int().nonnegative();
+const positiveInt = z.int().positive();
 
-const nonNegativeInt = z.int().nonnegative()
-const positiveInt = z.int().positive()
-
-/** Postgres timestamptz in a response. Plain string — Supabase renders offsets as `+00:00`, not `Z`. */
-const timestamp = z.string()
-
-/** An ISO timestamp in a *request*, or null. Absent is accepted and normalised to null. */
-const optionalIsoTimestamp = z.iso
-  .datetime({ offset: true })
-  .nullish()
-  .transform((value) => value ?? null)
+/** Postgres timestamptz in a response. Plain string — responses are built from rows, never parsed. */
+const timestamp = z.string();
 
 // ---------------------------------------------------------------------------
 // Responses — built by the API from database rows, never parsed at runtime.
 // ---------------------------------------------------------------------------
 
+/**
+ * One row of attempt history. `config_snapshot` is the attempt's own frozen config, not the exam's
+ * current one. The exam NAME is absent — callers resolve it from the track's exam list.
+ */
 export const AttemptSummarySchema = z.object({
-  id: z.uuid(),
-  exam_type: BackendExamTypeSchema,
-  exam_id: z.int().nullable(),
-  category_id: z.int().nullable(),
+  id: AttemptIdSchema,
+  exam_id: z.int(),
   exam_state: ExamStateSchema,
   score: z.number(),
   status: AttemptStatusSchema.nullable(),
   created_at: timestamp,
   time_remaining: z.int(),
+  config_snapshot: ExamConfigSchema,
+  /** `cardinality(question_ids_snapshot)`, never a count of answer rows — an unanswered question has no row. */
   total_questions: z.int(),
-})
+});
 
-export type AttemptSummary = z.infer<typeof AttemptSummarySchema>
+export type AttemptSummary = z.infer<typeof AttemptSummarySchema>;
 
-/** Full attempt row returned by GET /api/attempts/:id — includes all mutable resume fields. */
 export const AttemptDetailSchema = AttemptSummarySchema.extend({
   current_index: z.int(),
-  review_state: ReviewStateSchema,
-  email_report_state: EmailReportStateSchema,
-  break_1_offered_at: timestamp.nullable(),
-  break_2_offered_at: timestamp.nullable(),
-})
+  /** `show_at_index` values already offered, so a resumed attempt does not offer them again. */
+  offered_breaks: z.array(nonNegativeInt),
+});
 
-export type AttemptDetail = z.infer<typeof AttemptDetailSchema>
+export type AttemptDetail = z.infer<typeof AttemptDetailSchema>;
 
-export const AttemptQuestionSchema = z.object({
-  question_index: z.int(),
-  question_id: z.int(),
-  choices_order: z.array(z.int()),
-  selected_choices: z.array(z.int()),
+/** A question inside an attempt: the content, plus what this student did with it. */
+const attemptAnswerState = {
+  selected_choices: z.array(nonNegativeInt),
   is_bookmarked: z.boolean(),
-})
+};
 
-export type AttemptQuestion = z.infer<typeof AttemptQuestionSchema>
+export const AttemptQuestionSchema = QuestionSchema.extend(attemptAnswerState);
 
-export const ListAttemptsResultSchema = z.object({
+export type AttemptQuestion = z.infer<typeof AttemptQuestionSchema>;
+
+export const DisclosedAttemptQuestionSchema =
+  DisclosedQuestionSchema.extend(attemptAnswerState);
+
+export type DisclosedAttemptQuestion = z.infer<
+  typeof DisclosedAttemptQuestionSchema
+>;
+
+/** GET /api/attempts?trackId= — `trackId` is required, so no unfiltered query exists to call by accident. */
+export const AttemptListSchema = z.object({
   attempts: z.array(AttemptSummarySchema),
-})
+});
 
-export type ListAttemptsResult = z.infer<typeof ListAttemptsResultSchema>
+export type AttemptList = z.infer<typeof AttemptListSchema>;
 
-export const GetAttemptResultSchema = z.object({
+/**
+ * What start, resume and submit all return, so they feed one adapter. Questions are ordered by the
+ * attempt's `question_ids_snapshot`.
+ */
+export const AttemptWithQuestionsSchema = z.object({
   attempt: AttemptDetailSchema,
-  questions: z.array(AttemptQuestionSchema),
-})
+  questions: z.union([
+    z.array(AttemptQuestionSchema),
+    z.array(DisclosedAttemptQuestionSchema),
+  ]),
+});
 
-export type GetAttemptResult = z.infer<typeof GetAttemptResultSchema>
+export type AttemptWithQuestions = z.infer<typeof AttemptWithQuestionsSchema>;
+
+/**
+ * POST /api/attempts — a started attempt, plus the exam it belongs to.
+ *
+ * The exam rides along because starting one navigates straight into the session, which needs the
+ * name without waiting on the track's exam list. It carries no config: the attempt's own
+ * `config_snapshot` is what governs the session, and a second, possibly newer config in the same
+ * payload is only an opportunity to read the wrong one.
+ */
+export const StartedAttemptSchema = AttemptWithQuestionsSchema.extend({
+  exam: ExamSchema,
+});
+
+export type StartedAttempt = z.infer<typeof StartedAttemptSchema>;
+
+/**
+ * POST /api/attempts/:id/submit — what the results summary renders, and nothing more.
+ *
+ * Question content does not come back with a submission: the summary page shows the score and the
+ * tally, and a student who wants a question-by-question review reads the completed attempt, which
+ * discloses the answer key once it is completed.
+ */
+export const AttemptResultSchema = z.object({
+  score: z.number(),
+  status: AttemptStatusSchema,
+  /** Questions answered wrong OR never answered — an unanswered question is wrong by absence. */
+  wrong_questions: z.int(),
+  total_questions: z.int(),
+});
+
+export type AttemptResult = z.infer<typeof AttemptResultSchema>;
+
+/**
+ * GET /api/attempts/:id/revision — the "wrong or unanswered" set, always disclosed. Carries the
+ * parent exam without its config; the revision session's config is a frontend constant.
+ * An empty `questions` array is a valid 200.
+ */
+export const RevisionSchema = z.object({
+  parent_exam: ExamSchema,
+  questions: z.array(DisclosedQuestionSchema),
+});
+
+export type Revision = z.infer<typeof RevisionSchema>;
 
 // ---------------------------------------------------------------------------
 // Requests — parsed with safeParse at the handler boundary.
 // ---------------------------------------------------------------------------
 
-const InsertAttemptFullSchema = z.strictObject({
-  exam_type: z.literal("full"),
+/**
+ * The client sends only which exam, in which language. The server decides the question set, the
+ * order, the config and the clock.
+ */
+export const StartAttemptRequestSchema = z.strictObject({
   exam_id: positiveInt,
-  category_id: z.null().default(null),
-  question_ids: z.array(nonNegativeInt).min(1),
-  choices_orders: z.array(z.array(nonNegativeInt).min(1)),
-  duration_minutes: positiveInt,
-})
+  lang: LangSchema,
+});
 
-const InsertAttemptDomainSchema = z.strictObject({
-  exam_type: z.literal("domain"),
-  category_id: positiveInt,
-  exam_id: z.null().default(null),
-  question_ids: z.array(nonNegativeInt).min(1),
-  choices_orders: z.array(z.array(nonNegativeInt).min(1)),
-  duration_minutes: positiveInt,
-})
-
-export const InsertAttemptRequestSchema = z
-  .discriminatedUnion("exam_type", [
-    InsertAttemptFullSchema,
-    InsertAttemptDomainSchema,
-  ])
-  .refine((body) => body.choices_orders.length === body.question_ids.length, {
-    error: "choices_orders must have the same length as question_ids",
-    path: ["choices_orders"],
-  })
-
-export type InsertAttemptRequestBody = z.infer<
-  typeof InsertAttemptRequestSchema
->
-
-export const SaveAttemptAnswerSchema = z.strictObject({
-  question_index: nonNegativeInt,
-  selected_choices: z.array(nonNegativeInt),
-  is_bookmarked: z.boolean(),
-})
-
-export type SaveAttemptAnswer = z.infer<typeof SaveAttemptAnswerSchema>
+export type StartAttemptRequestBody = z.infer<typeof StartAttemptRequestSchema>;
 
 /**
- * `score` and `status` are deliberately undeclared here. Combined with `strictObject` they act as a
- * tripwire: a client that computed a score but forgot `exam_state: "completed"` gets a 400 instead
- * of a silent 200 that drops the score and strands the attempt in progress.
+ * One entry of the answer diff. An empty `selected_choices` with `is_bookmarked: false` is a DELETE
+ * instruction, not invalid input, so emptiness is accepted here on purpose.
  */
-export const SaveAttemptInProgressSchema = z.strictObject({
-  exam_state: z.literal("in-progress"),
+export const SaveAttemptAnswerSchema = z.strictObject({
+  question_id: nonNegativeInt,
+  selected_choices: z.array(nonNegativeInt),
+  is_bookmarked: z.boolean(),
+});
+
+export type SaveAttemptAnswer = z.infer<typeof SaveAttemptAnswerSchema>;
+
+/**
+ * The answer diff sent by save and submit — dirty questions only, never the complete set.
+ * A repeated question_id is rejected here as a 400: `apply_answer_diff` would raise on it.
+ */
+export const SaveAttemptAnswersSchema = z
+  .array(SaveAttemptAnswerSchema)
+  .refine(
+    (answers) =>
+      new Set(answers.map((answer) => answer.question_id)).size ===
+      answers.length,
+    {
+      error: "answers must not repeat a question_id",
+    },
+  );
+
+/**
+ * In-progress state only. `score` and `status` are undeclared on purpose: with `strictObject` a
+ * client that tries to send either gets a 400. Grading lives behind submit and nowhere else.
+ */
+export const SaveAttemptRequestSchema = z.strictObject({
   current_index: nonNegativeInt,
   time_remaining: nonNegativeInt,
-  review_state: ReviewStateSchema,
-  answers: z.array(SaveAttemptAnswerSchema),
-  break_1_offered_at: optionalIsoTimestamp,
-  break_2_offered_at: optionalIsoTimestamp,
-})
+  answers: SaveAttemptAnswersSchema,
+  /** `show_at_index` values offered since the last save. `offered_at` is stamped by the server. */
+  offered_breaks: z.array(nonNegativeInt).default([]),
+});
 
-export type SaveAttemptInProgress = z.infer<typeof SaveAttemptInProgressSchema>
+export type SaveAttemptRequestBody = z.infer<typeof SaveAttemptRequestSchema>;
 
-export const SaveAttemptCompletedSchema = z.strictObject({
-  exam_state: z.literal("completed"),
+/**
+ * The final diff travels WITH the submission, so the last answers and the grading share one
+ * transaction rather than two a lost request could fall between.
+ */
+export const SubmitAttemptRequestSchema = z.strictObject({
   current_index: nonNegativeInt,
   time_remaining: nonNegativeInt,
-  review_state: ReviewStateSchema,
-  answers: z.array(SaveAttemptAnswerSchema),
-  score: z.number().min(0).max(100),
-  status: AttemptStatusSchema,
-})
+  answers: SaveAttemptAnswersSchema,
+});
 
-export type SaveAttemptCompleted = z.infer<typeof SaveAttemptCompletedSchema>
-
-export const SaveAttemptRequestSchema = z.discriminatedUnion("exam_state", [
-  SaveAttemptInProgressSchema,
-  SaveAttemptCompletedSchema,
-])
-
-export type SaveAttemptRequestBody = z.infer<typeof SaveAttemptRequestSchema>
+export type SubmitAttemptRequestBody = z.infer<
+  typeof SubmitAttemptRequestSchema
+>;

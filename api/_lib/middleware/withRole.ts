@@ -8,6 +8,10 @@ import { supabaseAdmin } from "../supabaseClient.js"
  *
  * Fail-closed: the wrapped handler only runs if the role check passes.
  *
+ * A pure guard: the handler receives the same `AuthUser` `withAuth` resolved. The role is not
+ * passed on — no handler branches on it, and one in the signature invites a second authorization
+ * decision outside this file.
+ *
  * Usage: `withErrorHandler(withAuth(withRole(["student"], handler)))`
  */
 export function withRole(allowedRoles: Role[], handler: AuthenticatedApiHandler): AuthenticatedApiHandler {

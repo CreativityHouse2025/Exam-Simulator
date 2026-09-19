@@ -1,36 +1,41 @@
-import { z } from "zod"
-import { AttemptSummarySchema } from "./attempt.schema.js"
+import { z } from "zod";
+import { EnrolledTrackSchema } from "./track.schema.js";
 
-export const MIN_SEARCH_QUERY_LENGTH = 2
-export const MAX_SEARCH_QUERY_LENGTH = 100
+export const MIN_SEARCH_QUERY_LENGTH = 2;
+export const MAX_SEARCH_QUERY_LENGTH = 100;
 
 /** `\\`, `%` and `_` are LIKE wildcards in Postgres and must be escaped before they reach the RPC. */
-const ESCAPE_LIKE_METACHARS = /[\\%_]/g
+const ESCAPE_LIKE_METACHARS = /[\\%_]/g;
 
-export const StudentIdSchema = z.uuid({ error: "id must be a valid UUID" })
+export const StudentIdSchema = z.uuid({ error: "id must be a valid UUID" });
 
-export const StudentSearchResultSchema = z.object({
-  id: z.uuid(),
+/** A student as a supervisor sees them. Never carries anything about their answers. */
+export const StudentProfileSchema = z.object({
+  id: StudentIdSchema,
   first_name: z.string(),
   last_name: z.string(),
   email: z.email(),
   created_at: z.string(),
-})
+});
 
-export type StudentSearchResult = z.infer<typeof StudentSearchResultSchema>
+export type StudentProfile = z.infer<typeof StudentProfileSchema>;
 
-export const SearchStudentsResultSchema = z.object({
-  students: z.array(StudentSearchResultSchema),
-})
+/** GET /api/students?q= — search hits, profile only. Tracks come from the detail call. */
+export const StudentListSchema = z.object({
+  students: z.array(StudentProfileSchema),
+});
 
-export type SearchStudentsResult = z.infer<typeof SearchStudentsResultSchema>
+export type StudentList = z.infer<typeof StudentListSchema>;
 
-export const StudentAttemptsResultSchema = z.object({
-  student: StudentSearchResultSchema,
-  attempts: z.array(AttemptSummarySchema),
-})
+/**
+ * GET /api/students/:id — one student in full: their profile and the tracks they hold an ACTIVE
+ * enrollment in. This is what a supervisor opens a search hit into.
+ */
+export const StudentDetailsSchema = StudentProfileSchema.extend({
+  tracks: z.array(EnrolledTrackSchema),
+});
 
-export type StudentAttemptsResult = z.infer<typeof StudentAttemptsResultSchema>
+export type StudentDetails = z.infer<typeof StudentDetailsSchema>;
 
 /**
  * Normalises the raw `q` param into an RPC-ready LIKE pattern.
@@ -56,4 +61,4 @@ export const StudentSearchQuerySchema = z
   )
   .transform((escaped) =>
     escaped.length < MIN_SEARCH_QUERY_LENGTH ? null : escaped,
-  )
+  );

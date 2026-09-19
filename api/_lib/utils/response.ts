@@ -15,13 +15,18 @@ export function successResponse<T>(data: T, status = 200, headers?: ResponseHead
 }
 
 /**
- * Creates a failed JSON response with a consistent envelope.
- * @param code - A stable machine-readable error constant for the frontend to switch on (e.g. `'SUBSCRIPTION_EXPIRED'`).
- * @param message - A human-readable description of the error.
+ * Creates a failed JSON response, and logs why.
+ *
+ * Every error path ends here — `withErrorHandler` and `withAuth` alike — so the logging lives here
+ * and no later path can forget it or leak a cause by serializing one.
+ *
+ * @param code - Machine-readable constant the frontend switches on. The only thing sent.
+ * @param logMessage - Why it failed. NEVER reaches the client, so it may carry driver text and ids.
  * @param status - HTTP status code (e.g. 400, 401, 404, 500).
- * @returns A `Response` object with `{ success: false, error: { code, message } }`.
+ * @returns A `Response` with `{ success: false, error: { code } }`.
  */
-export function errorResponse(code: AppErrorCode, message: string, status: number, headers?: ResponseHeaders): Response {
-  const body: ApiError = { success: false, error: { code, message } };
+export function errorResponse(code: AppErrorCode, logMessage: string, status: number, headers?: ResponseHeaders): Response {
+  console.error(`[${status} ${code}] ${logMessage}`);
+  const body: ApiError = { success: false, error: { code } };
   return Response.json(body, { status, headers });
 }

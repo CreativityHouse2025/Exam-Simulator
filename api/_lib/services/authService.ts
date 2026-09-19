@@ -4,49 +4,6 @@ import type { SignupRequestBody, SigninRequestBody, SigninResult } from "../../.
 import emailHasOffer from "./offerVerifier.js"
 
 /**
- * Checks that a user's account has not expired.
- * Queries the `users` table unless `knownExpiresAt` is provided (avoids a redundant DB hit
- * when the caller already has the value, e.g. after fetching the profile in `signin`).
- *
- * If the account is expired and `revokeAccessToken` is provided, a global signout is
- * awaited before throwing to ensure the session is revoked.
- *
- * @throws {AppError} 401 `UNAUTHORIZED` — user not found in the database.
- * @throws {AppError} 403 `ACCOUNT_EXPIRED` — account past its expiry date.
- */
-export async function assertAccountNotExpired(
-  userId: string,
-  options?: { revokeAccessToken?: string; knownExpiresAt?: string },
-): Promise<void> {
-  let expiresAtRaw = options?.knownExpiresAt
-
-  if (!expiresAtRaw) {
-    const { data, error } = await supabaseAdmin.from("users").select("expires_at").eq("id", userId).single()
-
-    if (error || !data) {
-      throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "User not found" })
-    }
-
-    expiresAtRaw = data.expires_at
-  }  
-
-  // if account is expired, sign the user out of all devices using global scope
-  const expiresAt = new Date(expiresAtRaw)
-  if (expiresAt <= new Date()) {
-    if (options?.revokeAccessToken) {
-      const { error: signOutError } = await supabaseAdmin.auth.admin.signOut(options.revokeAccessToken, "global")
-      if (signOutError) {
-        console.error(`[assertAccountNotExpired] Failed to sign out expired user ${userId}:`, signOutError)
-      } else {
-        console.log("[assertAccountNotExpired] Logged user out of all devices")
-      }
-    }
-    console.log(`[assertAccountNotExpired] User ${userId} account has expired`)
-    throw new AppError({ statusCode: 403, code: "ACCOUNT_EXPIRED", message: "Account has expired" })
-  }
-}
-
-/**
  * Best-effort server-side session revocation with two fallback strategies.
  * **Never throws** — the handler always clears cookies regardless of outcome.
  *
@@ -93,7 +50,9 @@ export type SignupResult = {
 
 /**
  * Registers a new user after verifying an active HighLevel subscription.
- * Creates a Supabase auth user with a 6-month expiry stored in user metadata.
+ *
+ * The `public.users` row is not written here — the `on_email_confirmed` trigger materialises it
+ * from this auth user's metadata once the email is confirmed.
  *
  * @throws {AppError} 500 `SIGNUP_FAILED` — user already exists.
  * @throws {AppError} 403 `SUBSCRIPTION_REQUIRED` — no active HighLevel subscription found.
@@ -106,11 +65,6 @@ export async function signup(input: SignupRequestBody): Promise<SignupResult> {
   if (!verified) {
     throw new AppError({ statusCode: 403, code: "SUBSCRIPTION_REQUIRED", message: "Active subscription not found" })
   }
-
-  const offerDurationInMonths = 6;
-
-  const expiresAt = new Date()
-  expiresAt.setMonth(expiresAt.getMonth() + offerDurationInMonths)
 
   const userClient = createUserClient()
   const { data, error } = await userClient.auth.signUp({
@@ -144,7 +98,6 @@ export async function signup(input: SignupRequestBody): Promise<SignupResult> {
  * @throws {AppError} 401 `INVALID_CREDENTIALS` — wrong email or password.
  * @throws {AppError} 500 `SIGNIN_FAILED` — no session returned or profile not found.
  * @throws {AppError} 500 `INTERNAL_ERROR` — missing user id (fail-closed).
- * @throws {AppError} 403 `ACCOUNT_EXPIRED` — account past its expiry date.
  */
 export async function signin(input: SigninRequestBody): Promise<SigninResult> {
   const { email, password } = input
@@ -170,18 +123,13 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
 
   const { data: profile, error: profileError } = await supabaseAdmin
     .from("users")
-    .select("id, first_name, last_name, expires_at, role")
+    .select("id, first_name, last_name, created_at, role")
     .eq("id", userId)
     .single()
 
   if (profileError || !profile) {
     throw new AppError({ statusCode: 500, code: "SIGNIN_FAILED", message: "Failed to retrieve user profile" })
   }
-
-  await assertAccountNotExpired(userId, {
-    revokeAccessToken: accessToken,
-    knownExpiresAt: profile.expires_at,
-  })
 
   console.log(`[signin] User ${userId} signed in successfully`)
 
@@ -191,7 +139,7 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
       email: data.user.email!,
       first_name: profile.first_name,
       last_name: profile.last_name,
-      expires_at: profile.expires_at,
+      created_at: profile.created_at,
       role: profile.role,
     },
     access_token: accessToken,
@@ -216,18 +164,13 @@ export async function confirmMagicLinkSignin(accessToken: string, refreshToken: 
 
   const { data: profile, error: profileError } = await supabaseAdmin
     .from("users")
-    .select("id, first_name, last_name, expires_at, role")
+    .select("id, first_name, last_name, created_at, role")
     .eq("id", authUser.user.id)
     .single()
 
   if (profileError || !profile) {
     throw new AppError({ statusCode: 500, code: "CONFIRMATION_FAILED", message: "User profile not found" })
   }
-
-  await assertAccountNotExpired(authUser.user.id, {
-    revokeAccessToken: accessToken,
-    knownExpiresAt: profile.expires_at,
-  })
 
   // Sign the user out of all other devices immediately. Supabase's own single-session setting only
   // takes effect when the other session next refreshes, which is too late for a password reset:
@@ -243,7 +186,7 @@ export async function confirmMagicLinkSignin(accessToken: string, refreshToken: 
       email: authUser.user.email!,
       first_name: profile.first_name,
       last_name: profile.last_name,
-      expires_at: profile.expires_at,
+      created_at: profile.created_at,
       role: profile.role,
     },
     access_token: accessToken,

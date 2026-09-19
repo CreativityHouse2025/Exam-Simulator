@@ -12,8 +12,8 @@ export function withErrorHandler(handler: ApiHandler): ApiHandler {
     try {
       return await handler(req)
     } catch (error: unknown) {
+      // errorResponse logs the message. Only the unhandled case logs separately, for its stack.
       if (error instanceof AppError) {
-        console.error(`[AppError] ${error.code}: ${error.message}`)
         return errorResponse(error.code, error.message, error.statusCode)
       }
 
