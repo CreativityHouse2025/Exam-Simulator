@@ -202,6 +202,7 @@ export type Database = {
           total_questions: number
           updated_at: string
           user_id: string
+          wrong_questions: number | null
         }
         Insert: {
           config_snapshot: Json
@@ -217,6 +218,7 @@ export type Database = {
           total_questions?: number
           updated_at?: string
           user_id: string
+          wrong_questions?: number | null
         }
         Update: {
           config_snapshot?: Json
@@ -232,6 +234,7 @@ export type Database = {
           total_questions?: number
           updated_at?: string
           user_id?: string
+          wrong_questions?: number | null
         }
         Relationships: [
           {
@@ -434,6 +437,7 @@ export type Database = {
       }
       questions: {
         Row: {
+          answer_count: number
           created_at: string
           explanation_ar: string
           explanation_en: string
@@ -444,6 +448,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          answer_count: number
           created_at?: string
           explanation_ar: string
           explanation_en: string
@@ -454,6 +459,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          answer_count?: number
           created_at?: string
           explanation_ar?: string
           explanation_en?: string
@@ -594,13 +600,7 @@ export type Database = {
           p_time_remaining: number
           p_user_id: string
         }
-        Returns: {
-          result: string
-          score: number
-          status: string
-          total_questions: number
-          wrong_questions: number
-        }[]
+        Returns: string
       }
     }
     Enums: {

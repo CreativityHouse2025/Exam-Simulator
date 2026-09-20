@@ -1,0 +1,59 @@
+import React from 'react'
+import { Timer } from 'lucide-react'
+import { formatTimer } from '../../utils/format'
+import { useExamSession } from '../../hooks/examSession/useExamSession'
+import { useExamTimer } from '../../hooks/examSession/useExamTimer'
+
+const TimerComponent: React.FC = () => {
+  const { examState } = useExamSession()
+  const { time, maxTime, paused, setTime } = useExamTimer()
+  const intervalRef = React.useRef<ReturnType<typeof setInterval> | null>(null)
+
+  React.useEffect(() => {
+    // Clear existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+
+    // Start new interval if timer is active
+    if (!paused && time > 0 && examState !== 'completed') {
+      intervalRef.current = setInterval(() => {
+        setTime(Math.max(0, time - 1))
+      }, 1000)
+    }
+
+    // Cleanup on unmount or dependency change
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+    // examState is a real dependency: without it a completed exam keeps its interval alive until
+    // the next tick happens to re-run this effect.
+  }, [paused, time, examState])
+
+  // Handle timer expiration
+  React.useEffect(() => {
+    if (time <= 0 && intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+  }, [time])
+
+  // maxTime === 0 means there is no real timer (a preview session never counts down) —
+  // shown as the placeholder, never as a warning.
+  const hasTimer = maxTime > 0
+  const warning = hasTimer && time < 120
+
+  return (
+    <div id="timer" className={`flex items-center justify-center ${warning ? "text-secondary" : "text-black"}`}>
+      <div data-test="Timer" className="text-xl font-bold p-1.25">{formatTimer(hasTimer ? time : null)}</div>
+
+      <Timer size={30} className="m-1.25" />
+    </div>
+  )
+}
+
+export default TimerComponent

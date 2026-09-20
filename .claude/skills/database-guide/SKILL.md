@@ -39,7 +39,7 @@ Rules that follow from that layout:
   `007_save_attempt_rpc_breaks.sql`, which supersedes `005`.
 
 Before altering a table or writing a query against it, **read its migration**. The schema is not
-guessable — `users` carries `expires_at` and `role` columns that drive account expiry and access
+guessable — `users` carries a `role` column, and `enrollments` the expiry, that drive access
 control, and assuming a conventional shape will produce code that compiles and fails in production.
 
 ## When to write an RPC
@@ -87,6 +87,6 @@ letting an analysis query drift into `migrations/`.
 
 - **The service or handler that calls this query → invoke `backend-guide`.** Query results are
   shaped in the service layer; handlers never talk to Supabase directly.
-- **Anything touching `users.role`, `users.expires_at`, or `auth.sessions` → invoke
+- **Anything touching `users.role`, `enrollments`, or `auth.sessions` → invoke
   `auth-rbac-guide`** before changing it; those columns back the access-control and
   single-session rules.

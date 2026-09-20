@@ -1,10 +1,8 @@
-import useSettings from "@/hooks/useSettings";
 import useDirectionalChevron from "@/hooks/useDirectionalChevron";
 import { formatDate } from "@/utils/format";
 import { translate } from "@/utils/translation";
 import AttemptStateBadge from "./AttemptStateBadge";
-import { resolveExamLabel } from "@/utils/resolveExamLabel";
-import type { AttemptSummary } from "@shared/attempt.schema";
+import type { AttemptSummary } from "@/apiTypes";
 
 type AttemptCardProps = {
   attempt: AttemptSummary;
@@ -12,10 +10,10 @@ type AttemptCardProps = {
 };
 
 const AttemptCard = ({ attempt, onSelect }: AttemptCardProps) => {
-  const { settings } = useSettings();
   const { NextIcon: ChevronIcon } = useDirectionalChevron();
-  const examLabel = resolveExamLabel(attempt, settings.language);
-  const isCompleted = attempt.exam_state === "completed";
+  // resolveExamLabel and the exam-type distinction it used are gone with the exam-type JSON.
+  const examLabel = String(attempt.examId);
+  const isCompleted = attempt.examState === "completed";
   const isPass = attempt.status === "pass";
 
   const barColor = !isCompleted ? "bg-grey-500" : isPass ? "bg-correct" : "bg-destructive";
@@ -31,7 +29,7 @@ const AttemptCard = ({ attempt, onSelect }: AttemptCardProps) => {
 
       <span className="min-w-0 flex-1">
         <span className="block truncate text-tertiary">{examLabel}</span>
-        <span className="block truncate text-sm text-grey-800">{formatDate(attempt.created_at)}</span>
+        <span className="block truncate text-sm text-grey-800">{formatDate(attempt.createdAt)}</span>
       </span>
 
       <span className="flex shrink-0 flex-col items-end gap-1">
@@ -40,7 +38,7 @@ const AttemptCard = ({ attempt, onSelect }: AttemptCardProps) => {
         )}
 
         <AttemptStateBadge
-          examState={attempt.exam_state}
+          examState={attempt.examState}
           status={attempt.status}
           inProgressLabel={translate("history.state.in-progress")}
           passLabel={translate("history.status.pass")}

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 import { ArrowLeft } from "lucide-react"
 import useAuth from "../hooks/useAuth"
 import useToast from "../hooks/useToast"
-import { formatDate } from "../utils/format"
 import { translate } from "../utils/translation"
 import { ROUTES } from "../config/routes"
 import { PageWrapper, Card, BackButton, PageTitle, PageSubtitle, NavLink, CardFooter } from "../components/SharedStyles"
@@ -18,7 +17,6 @@ const ProfilePage: React.FC = () => {
   const [signingOut, setSigningOut] = useState(false)
 
   const t = {
-    expires: translate('auth.profile.expires'),
     resetPassword: translate('auth.profile.reset-password'),
     signOut: translate('auth.profile.sign-out'),
     signingOut: translate('auth.profile.signing-out'),
@@ -43,17 +41,12 @@ const ProfilePage: React.FC = () => {
           <ArrowLeft size={30} />
         </BackButton>
         <InitialsAvatar
-          firstName={user.first_name}
-          lastName={user.last_name}
+          firstName={user.firstName}
+          lastName={user.lastName}
           className="mx-auto mb-3 size-18 text-2xl"
         />
-        <PageTitle>{user.first_name} {user.last_name}</PageTitle>
+        <PageTitle>{user.firstName} {user.lastName}</PageTitle>
         <PageSubtitle>{user.email}</PageSubtitle>
-
-        <div className="mb-3.5">
-          <p className="text-sm font-semibold text-black mb-1.25">{t.expires}</p>
-          <p className="text-sm text-black m-0 py-2 px-2.5 bg-grey-50 rounded-lg border border-grey-200">{formatDate(user.expires_at)}</p>
-        </div>
 
         <hr className="border-0 border-t border-grey-200 my-5" />
 

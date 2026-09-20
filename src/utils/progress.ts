@@ -1,14 +1,17 @@
-import type { Answers, Answer } from '../types'
+import type { Answers } from '../types'
+import type { ExamConfigBreak } from '../apiTypes'
 
-// Break 1 triggers at index 60 (Q61), break 2 at index 120 (Q121). Full exams only.
-export const BREAK_THRESHOLDS = { 1: 60, 2: 120 } as const
-
+/**
+ * True when the exam's config schedules a break at this exact question index, and it hasn't
+ * already been offered this session. Breaks are config-driven now — an exam can have any number
+ * of them at any index, not a fixed pair.
+ */
 export function shouldOfferBreak(
-  breakNumber: 1 | 2,
+  breaks: ExamConfigBreak[],
   currentIndex: number,
-  offeredAt: string | null
+  offeredBreaks: number[]
 ): boolean {
-  return currentIndex === BREAK_THRESHOLDS[breakNumber] && offeredAt === null
+  return breaks.some((b) => b.showAtIndex === currentIndex) && !offeredBreaks.includes(currentIndex)
 }
 
 export interface ProgressStats {
@@ -50,11 +53,10 @@ export function countAnsweredQuestions(answers: Answers): number {
 
 /**
  * Check if an answer has been provided (not null, undefined, or empty array)
- * @param {Answer} answer - The answer to check
+ * @param {number[]} answer - The answer to check
  * @returns True if answer is provided
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- pre-existing, unrelated to this change
-export function isAnswerProvided(answer: Answer<any>): boolean {
+export function isAnswerProvided(answer: number[]): boolean {
   try {
     if (answer === null || answer === undefined) return false
     if (Array.isArray(answer)) return answer.length > 0

@@ -1,17 +1,17 @@
 import React from "react"
+import { useQuery } from "@tanstack/react-query"
 import { Download, FileQuestion } from "lucide-react"
-import fullExams from "@/data/exam/full-exams.json"
-import categories from "@/data/exam/categories.json"
-import examTypes from "@/data/exam/exam-types.json"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import SearchBar from "@/components/SearchBar"
 import BackButton from "@/components/BackButton"
 import ExamCard from "./ExamCard"
 import useSettings from "@/hooks/useSettings"
+import useAuth from "@/hooks/useAuth"
 import { translate } from "@/utils/translation"
 import { LANGUAGES } from "@/constants"
 import { ROUTES } from "@/config/routes"
+import { createTrackExamsQueryOptions } from "@/utils/queryOptions"
 import type { ExamListItem } from "./types"
 
 type Tab = "all" | "full" | "domain"
@@ -22,31 +22,36 @@ const TAB_VALUES: Tab[] = ["all", "full", "domain"]
 const ExamLibraryPage: React.FC = () => {
   const { settings } = useSettings()
   const langCode = settings.language
+  // The supervisor's own first enrolled track — this page has no track picker.
+  const { enrolledTracks } = useAuth()
+  const trackId = enrolledTracks[0]?.id ?? ""
 
   const [tab, setTab] = React.useState<Tab>("all")
   const [search, setSearch] = React.useState("")
 
+  const { data } = useQuery({ ...createTrackExamsQueryOptions(trackId), enabled: trackId !== "" })
+
   const exams: ExamListItem[] = React.useMemo(() => {
-    const full = fullExams.map((exam) => ({
-      type: "full" as const,
-      id: exam.id,
-      name: exam.name[langCode],
-      durationMinutes: examTypes.full.durationMinutes,
-      passingRate: examTypes.full.passingRate,
-      questionCount: exam.questionCount
-    }))
+    if (!data) return []
 
-    const domain = categories.map((category) => ({
-      type: "domain" as const,
-      id: category.id,
-      name: category.name[langCode],
-      durationMinutes: examTypes.domain.durationMinutes,
-      passingRate: examTypes.domain.passingRate,
-      questionCount: category.questionCount
-    }))
+    // full-exams.json/categories.json/exam-types.json are gone — exams come from the track's own
+    // list now. "full"/"domain" is derived from each exam's type name, the same distinction the
+    // old JSON split full/ vs domain/ files on; duration and passing rate are each exam's own
+    // config rather than one static value per type.
+    const typeById = new Map(data.types.map((examType) => [examType.id, examType]))
 
-    return [...full, ...domain]
-  }, [langCode])
+    return data.exams.map((exam) => {
+      const typeName = typeById.get(exam.typeId)?.name.en.toLowerCase() ?? ""
+      return {
+        type: typeName.includes("domain") ? ("domain" as const) : ("full" as const),
+        id: exam.id,
+        name: exam.name[langCode],
+        durationMinutes: exam.config.examDurationMinutes ?? 0,
+        passingRate: exam.config.passingRate ?? 0,
+        questionCount: exam.questionCount
+      }
+    })
+  }, [data, langCode])
 
   const byTab = tab === "all" ? exams : exams.filter((exam) => exam.type === tab)
   const filtered = search.trim() ? byTab.filter((exam) => exam.name.toLowerCase().includes(search.trim().toLowerCase())) : byTab

@@ -255,6 +255,7 @@
       "server-conflict": "This attempt has already been submitted.",
       "server-create-failed": "Failed to start the attempt. Please try again.",
       "server-save-failed": "Failed to save your exam. Please try again.",
+      "server-submit-failed": "Failed to submit your exam. Please try again.",
       "server-unknown": "An unexpected error occurred. Please try again.",
       "no-attempt-id": "No exam session found. Please start a new exam from the home page.",
       "no-mistakes": "You have no mistakes to revise."
@@ -355,6 +356,19 @@
     "errors": {
       "server-not-found": "Student not found.",
       "server-forbidden": "You don't have permission to view this student.",
+      "server-unknown": "Something went wrong. Please try again."
+    }
+  },
+  "exams": {
+    "errors": {
+      "server-not-found": "This exam could not be found.",
+      "server-forbidden": "You don't have access to this exam.",
+      "server-unknown": "Something went wrong. Please try again."
+    }
+  },
+  "tracks": {
+    "errors": {
+      "server-forbidden": "You don't have access to this track.",
       "server-unknown": "Something went wrong. Please try again."
     }
   }

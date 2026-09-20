@@ -9,7 +9,6 @@ import type {
 import type {
   AttemptDetail,
   AttemptList,
-  AttemptResult,
   AttemptStatus,
   AttemptSummary,
   AttemptWithQuestions,
@@ -32,7 +31,7 @@ const TRACK_ATTEMPT_CAP = 25;
  * list does not ship 25 × 180 int4 to read one number off.
  */
 const ATTEMPT_COLUMNS =
-  "id, exam_id, exam_state, score, status, created_at, time_remaining, config_snapshot, total_questions";
+  "id, exam_id, exam_state, score, status, created_at, time_remaining, config_snapshot, total_questions, wrong_questions";
 
 /** What a read that also serves question CONTENT needs on top: the frozen set, in its frozen order. */
 const ATTEMPT_DETAIL_COLUMNS = `${ATTEMPT_COLUMNS}, question_ids_snapshot`;
@@ -67,6 +66,7 @@ type AttemptSummaryRow = {
   time_remaining: number;
   config_snapshot: unknown;
   total_questions: number;
+  wrong_questions: number | null;
 };
 
 /**
@@ -86,6 +86,7 @@ function toAttemptSummary(row: AttemptSummaryRow): AttemptSummary {
     time_remaining: row.time_remaining,
     config_snapshot: row.config_snapshot as ExamConfig,
     total_questions: row.total_questions,
+    wrong_questions: row.wrong_questions,
   };
 }
 
@@ -126,7 +127,9 @@ export async function startAttempt(
 
   const attempt: AttemptDetail = {
     // The RPC returns the snapshot, not the generated column, so the count comes off the array.
-    ...toAttemptSummary({ ...data, total_questions: data.question_ids_snapshot.length }),
+    // It also predates 021's wrong_questions column and never will carry it — a just-started
+    // attempt is always in-progress, so it is always null, the same reasoning as offered_breaks.
+    ...toAttemptSummary({ ...data, total_questions: data.question_ids_snapshot.length, wrong_questions: null }),
     current_index: data.current_index,
     // A new attempt has answered nothing and been offered no break, so neither needs a query.
     offered_breaks: [],
@@ -202,9 +205,11 @@ export async function saveAttempt(
  * rows, never the request — an unanswered question is wrong by absence — and the pass mark comes
  * from the attempt's own `config_snapshot`, not the exam's current config.
  *
- * @returns What the results summary needs. Question content is deliberately absent: a student who
- * wants a question-by-question review reads the completed attempt, which by then discloses the
- * answer key, rather than paying for the whole bank on every submission.
+ * Writes the grade (score, status, wrong_questions) to the row rather than returning it — the
+ * caller reads it back with `getAttempt`, the same call a resume already makes, which is also
+ * what discloses the questions. Question content is deliberately absent from this call: a student
+ * who wants a question-by-question review reads the completed attempt, not this response.
+ *
  * @throws {AppError} 400 `VALIDATION_ERROR` — an answer names a question or choice outside the attempt.
  * @throws {AppError} 404 `NOT_FOUND` — no attempt with this id.
  * @throws {AppError} 403 `FORBIDDEN` — the attempt belongs to someone else.
@@ -215,33 +220,24 @@ export async function submitAttempt(
   userId: string,
   attemptId: string,
   { current_index, time_remaining, answers }: SubmitAttemptRequestBody,
-): Promise<AttemptResult> {
-  const { data, error } = await supabaseAdmin
-    .rpc("submit_attempt", {
-      p_user_id: userId,
-      p_attempt_id: attemptId,
-      p_current_index: current_index,
-      p_time_remaining: time_remaining,
-      p_answers: answers,
-    })
-    .single();
+): Promise<void> {
+  const { data: result, error } = await supabaseAdmin.rpc("submit_attempt", {
+    p_user_id: userId,
+    p_attempt_id: attemptId,
+    p_current_index: current_index,
+    p_time_remaining: time_remaining,
+    p_answers: answers,
+  });
 
-  if (error || !data) {
+  if (error) {
     throw new AppError({
       statusCode: 500,
       code: "ATTEMPT_SUBMIT_FAILED",
-      message: `Failed to submit attempt ${attemptId} (${error?.message ?? "no row returned"})`,
+      message: `Failed to submit attempt ${attemptId} (${error.message})`,
     });
   }
 
-  throwOnRpcFailure(data.result);
-
-  return {
-    score: data.score,
-    status: data.status as AttemptStatus,
-    wrong_questions: data.wrong_questions,
-    total_questions: data.total_questions,
-  };
+  throwOnRpcFailure(result);
 }
 
 /**

@@ -1,11 +1,13 @@
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import type { DropdownItem, LangCode } from "../../types";
 import Dropdown from "./Dropdown";
-import rawFullExams from '../../data/exam/full-exams.json'
+import { createTrackExamsQueryOptions } from "../../utils/queryOptions";
 import useSettings from "../../hooks/useSettings";
 
 type FullExamDropdownProps = {
   title: string
+  trackId: string
   open: boolean
   setOpen: (open: boolean) => void
   onSelect: (value: DropdownItem['id']) => void
@@ -17,15 +19,19 @@ const FullExamDropdown: React.FC<FullExamDropdownProps> = ({
   open,
   setOpen,
   title,
+  trackId,
   onSelect
 }) => {
   const { settings } = useSettings();
   const langCode: LangCode = settings.language;
+  const { data } = useQuery({ ...createTrackExamsQueryOptions(trackId), enabled: trackId !== "" });
 
-  const exams: DropdownItem[] = rawFullExams.map(e => ({
-    id: e.id,
-    label: e['name'][langCode]
-  }))
+  // full-exams.json is gone — exams come from the track's own list now, filtered to the type
+  // whose name contains "full", the same distinction the old JSON split full/ vs domain/ files on.
+  const fullTypeId = data?.types.find((type) => type.name.en.toLowerCase().includes("full"))?.id;
+  const exams: DropdownItem[] = (data?.exams ?? [])
+    .filter((exam) => exam.typeId === fullTypeId)
+    .map((exam) => ({ id: exam.id, label: exam.name[langCode] }));
 
   return (
     <Dropdown

@@ -4,7 +4,7 @@ import { withRole } from "../_lib/middleware/withRole.js"
 import { successResponse } from "../_lib/utils/response.js"
 import { parseJsonBody } from "../_lib/utils/parseBody.js"
 import { parseOrThrow } from "../_lib/utils/parse.js"
-import { StartAttemptRequestSchema, type StartedAttempt } from "../../shared/schemas/attempt.schema.js"
+import { StartAttemptRequestSchema, type AttemptWithExam } from "../../shared/schemas/attempt.schema.js"
 import { TrackIdSchema } from "../../shared/schemas/track.schema.js"
 import { listAttempts, startAttempt } from "../_lib/services/attemptService.js"
 import { getExam } from "../_lib/services/examService.js"
@@ -24,7 +24,7 @@ export const POST = withErrorHandler(
       const { config: _config, ...exam } = await getExam(validatedInput.exam_id)
       await assertTrackAccess(authUser.id, exam.track_id)
 
-      const result: StartedAttempt = { ...(await startAttempt(authUser.id, validatedInput)), exam }
+      const result: AttemptWithExam = { ...(await startAttempt(authUser.id, validatedInput)), exam }
       return successResponse(result, 201, cookieHeaders)
     }),
   ),

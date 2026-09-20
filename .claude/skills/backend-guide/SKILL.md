@@ -37,11 +37,11 @@ export const GET = withErrorHandler(withAuth(withRole(["supervisor"], handler)))
   parsing) to an HTTP error response. Without it on the outside, a throw from any inner layer
   escapes as an opaque 500.
 - `withAuth` — validates the access token from cookies via `getClaims` (local JWKS verification),
-  falls back to `refreshSession` with the refresh token, re-checks account expiry, and forwards
-  refreshed `Set-Cookie` headers to the handler. Dev-only bypass: `BYPASS_AUTH=true` +
-  `BYPASS_AUTH_USER_ID`. Never set in production.
+  falls back to `refreshSession` with the refresh token, and forwards refreshed `Set-Cookie`
+  headers to the handler. **There is no bypass** — the `BYPASS_AUTH` /
+  `BYPASS_AUTH_USER_ID` escape hatch was removed. Sign in with a seeded account instead.
 - `withRole` — reads `users.role` with the admin client and **fails closed** with 403 unless the
-  role is allowed.
+  role is allowed. A **pure guard**: it does not pass the role to the handler.
 
 Handlers receive `(request, authUser, cookieHeaders)` and must pass `cookieHeaders` into
 `successResponse`. Forgetting that silently drops a refreshed session, and the user gets logged
@@ -76,6 +76,16 @@ The frontend identifies backend errors by their **error code**, not the message.
 new failure mode, add a code — a new message string on an existing code will not reach the UI
 correctly, and a bare `throw new Error(...)` becomes a generic 500 with nothing the client can
 branch on. Surface errors explicitly rather than returning a success shape with an empty payload.
+
+**The response body carries the code and nothing else.** `ApiError` is `{ success: false, error:
+{ code } }` — there is no `message` on the wire. An `AppError`'s message is a *log* line:
+`errorResponse` prints it and drops it, so it is free to carry the driver's error text and the
+ids involved, and a Postgres message can never reach a network tab. Write messages for whoever
+reads the logs, and keep writing them detailed — but never make the client depend on one.
+
+That logging lives in `errorResponse` rather than in `withErrorHandler` on purpose: `withAuth`
+answers directly on its refresh-failure paths without going through `withErrorHandler`, so the
+response builder is the only chokepoint every failure actually passes through.
 
 ## TypeScript constraints
 

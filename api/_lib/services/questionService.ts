@@ -34,7 +34,8 @@ type QuestionRow = Question &
  * Assembled at runtime, which is why every caller has to override its row type.
  */
 function contentColumns(lang: LangCode, discloseAnswers: boolean): string {
-  const questionColumns = ["id", "type", aliasColumn("text", lang)];
+  // answer_count is a count, not the key — selected unconditionally, disclosed or not.
+  const questionColumns = ["id", "type", "answer_count", aliasColumn("text", lang)];
   const choiceColumns = ["position", aliasColumn("text", lang)];
 
   if (discloseAnswers) {

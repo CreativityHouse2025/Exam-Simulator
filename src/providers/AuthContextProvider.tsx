@@ -3,15 +3,16 @@ import { AuthContext } from "../contexts";
 import { registerUnauthorizedHandler } from "../utils/apiFetch";
 import * as authService from "../services/auth.service";
 import type { AuthStatus } from "../types";
-import type { User } from "@shared/user.schema";
+import type { EnrolledTrack, User } from "../apiTypes";
 
-/** Provides auth state and lifecycle methods to the app. Restores session from cookies via /me on mount. */
+/** Provides auth state and lifecycle methods to the app. Restores session (and its enrolled tracks) from cookies via /me on mount. */
 export default function AuthContextProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const [user, setUser] = useState<User | null>(null);
+  const [enrolledTracks, setEnrolledTracks] = useState<EnrolledTrack[]>([]);
   const [authStatus, setAuthStatus] = useState<AuthStatus>("pending");
   const sessionCheckCancelled = useRef(false);
 
@@ -21,10 +22,13 @@ export default function AuthContextProvider({
 
   const signIn = useCallback(
     async (email: string, password: string) => {
-      const signedInUser = await authService.signIn(email, password);
+      await authService.signIn(email, password);
+      // /me is the one call that carries enrolled tracks alongside the user — see auth-rbac-guide.
+      const me = await authService.getMe();
 
       cancelSessionCheck();
-      setUser(signedInUser);
+      setUser(me.user);
+      setEnrolledTracks(me.tracks);
       setAuthStatus("authenticated");
     },
     [cancelSessionCheck],
@@ -46,13 +50,12 @@ export default function AuthContextProvider({
 
   const exchangeToken = useCallback(
     async (accessToken: string, refreshToken: string) => {
-      const exchangedUser = await authService.exchangeToken(
-        accessToken,
-        refreshToken,
-      );
+      await authService.exchangeToken(accessToken, refreshToken);
+      const me = await authService.getMe();
 
       cancelSessionCheck();
-      setUser(exchangedUser);
+      setUser(me.user);
+      setEnrolledTracks(me.tracks);
       setAuthStatus("authenticated");
     },
     [cancelSessionCheck],
@@ -73,6 +76,7 @@ export default function AuthContextProvider({
       } finally {
         cancelSessionCheck();
         setUser(null);
+        setEnrolledTracks([]);
         setAuthStatus("unauthenticated");
         onSuccess?.();
       }
@@ -90,13 +94,14 @@ export default function AuthContextProvider({
 
     async function checkSession() {
       try {
-        const currentUser = await authService.getCurrentUser();
+        const me = await authService.getMe();
 
         // unmounted: component no longer exists, don't update state
         // sessionCheckCancelled: an active auth flow (signIn, exchangeToken) took over
         if (unmounted || sessionCheckCancelled.current) return;
 
-        setUser(currentUser);
+        setUser(me.user);
+        setEnrolledTracks(me.tracks);
         setAuthStatus("authenticated");
       } catch {
         //                don't override active auth flows
@@ -115,6 +120,7 @@ export default function AuthContextProvider({
 
   const value = {
     user,
+    enrolledTracks,
     isAuthenticated: authStatus === "authenticated",
     isLoading: authStatus === "pending",
     signIn,

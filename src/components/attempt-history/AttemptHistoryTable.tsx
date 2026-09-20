@@ -3,7 +3,7 @@ import { RefreshCw } from "lucide-react"
 import AttemptHistoryRow from "./AttemptHistoryRow"
 import AttemptHistorySkeleton from "./AttemptHistorySkeleton"
 import { translate } from "../../utils/translation"
-import type { AttemptSummary } from "@shared/attempt.schema"
+import type { AttemptSummary } from "../../apiTypes"
 import { cn } from "../ui/utils"
 
 type Props = {
@@ -19,8 +19,9 @@ type Props = {
 const THEAD_TH_CLASSES =
   "pt-3.5 px-3.5 pb-3.25 text-start text-xs font-bold tracking-widest uppercase text-grey-900 border-b-2 border-primary whitespace-nowrap"
 
+// "history.table.type" dropped — the full/domain exam-type distinction it showed is gone with
+// the exam-type JSON (AttemptHistoryRow no longer has a type cell to match it).
 const COLUMN_HEADER_KEYS = [
-  "history.table.type",
   "history.table.exam-domain",
   "history.table.state",
   "history.table.score",
@@ -59,7 +60,7 @@ const AttemptHistoryTable: React.FC<Props> = ({ attempts, loading, isFetching = 
               <AttemptHistorySkeleton />
             ) : attempts.length === 0 ? (
               <tr>
-                <td colSpan={7} className="p-12.5 text-center text-sm text-grey-800">{translate("history.table.empty")}</td>
+                <td colSpan={6} className="p-12.5 text-center text-sm text-grey-800">{translate("history.table.empty")}</td>
               </tr>
             ) : (
               attempts.map((attempt, index) => (

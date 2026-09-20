@@ -15,7 +15,7 @@ import InitialsAvatar from "@/components/InitialsAvatar";
 import { formatDate } from "@/utils/format";
 import { translate } from "@/utils/translation";
 import { ROUTES } from "@/config/routes";
-import { createStudentAttemptsQueryOptions } from "@/utils/queryOptions";
+import { createStudentQueryOptions, createStudentAttemptsQueryOptions } from "@/utils/queryOptions";
 import AttemptCard from "./AttemptCard";
 import AttemptDetailDialog from "./AttemptDetailDialog";
 
@@ -36,9 +36,22 @@ const StudentAttemptsPage: React.FC = () => {
     string | null
   >(null);
 
-  const { data, isLoading, isError, refetch } = useQuery(
-    createStudentAttemptsQueryOptions(id ?? ""),
+  const { data: profile, isLoading: isProfileLoading, isError: isProfileError, refetch: refetchProfile } = useQuery(
+    createStudentQueryOptions(id ?? ""),
   );
+  // The student's own first enrolled track — this page has no track picker.
+  const trackId = profile?.tracks[0]?.id ?? "";
+  const { data: attempts = [], isLoading: isAttemptsLoading, isError: isAttemptsError, refetch: refetchAttempts } = useQuery({
+    ...createStudentAttemptsQueryOptions(id ?? "", trackId),
+    enabled: trackId !== "",
+  });
+
+  const isLoading = isProfileLoading || isAttemptsLoading;
+  const isError = isProfileError || isAttemptsError;
+  const refetch = () => {
+    refetchProfile();
+    refetchAttempts();
+  };
 
   const t = {
     breadcrumbRoot: translate("students.attempts.breadcrumb-root"),
@@ -54,9 +67,8 @@ const StudentAttemptsPage: React.FC = () => {
     retry: translate("students.search.retry"),
   };
 
-  const attempts = data?.attempts ?? [];
   const completedAttempts = attempts.filter(
-    (attempt) => attempt.exam_state === "completed",
+    (attempt) => attempt.examState === "completed",
   );
   const passedAttempts = completedAttempts.filter(
     (attempt) => attempt.status === "pass",
@@ -89,8 +101,8 @@ const StudentAttemptsPage: React.FC = () => {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbPage>
-              {data
-                ? `${data.student.first_name} ${data.student.last_name}`
+              {profile
+                ? `${profile.user.firstName} ${profile.user.lastName}`
                 : "…"}
             </BreadcrumbPage>
           </BreadcrumbItem>
@@ -101,7 +113,7 @@ const StudentAttemptsPage: React.FC = () => {
         <div className="flex justify-center py-20">
           <Loader2 className="size-8 animate-spin text-primary" />
         </div>
-      ) : isError || !data ? (
+      ) : isError || !profile ? (
         <div className="flex flex-col items-center gap-3 py-20">
           <p className="text-sm text-grey-800">{t.error}</p>
           <Button variant="outline" size="sm" onClick={() => refetch()}>
@@ -113,22 +125,22 @@ const StudentAttemptsPage: React.FC = () => {
           <div className="mb-4 flex animate-[fadeIn_0.25s_ease-out] flex-col gap-3 rounded-xl border border-border bg-card p-6 shadow-sm">
             <div className="flex items-center gap-4">
               <InitialsAvatar
-                firstName={data.student.first_name}
-                lastName={data.student.last_name}
+                firstName={profile.user.firstName}
+                lastName={profile.user.lastName}
                 className="size-14 text-lg"
               />
               <div className="min-w-0">
                 <p className="truncate text-lg font-bold text-tertiary">
-                  {data.student.first_name} {data.student.last_name}
+                  {profile.user.firstName} {profile.user.lastName}
                 </p>
-                <p className="truncate text-sm text-grey-800">{data.student.email}</p>
+                <p className="truncate text-sm text-grey-800">{profile.user.email}</p>
               </div>
             </div>
 
             <p className="flex items-center gap-1.5 text-xs text-grey-800">
               <Calendar className="size-3.5" />
               {t.joined}{" "}
-              <span className="font-bold text-grey-900">{formatDate(data.student.created_at)}</span>
+              <span className="font-bold text-grey-900">{formatDate(profile.user.createdAt)}</span>
             </p>
           </div>
 

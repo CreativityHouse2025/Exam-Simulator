@@ -16,8 +16,13 @@ export type DomainErrorCodes = {
     | "CONFIRMATION_FAILED"
     | "VALIDATION_ERROR"
   >
-  attempts: Extract<AppErrorCode, "NOT_FOUND" | "FORBIDDEN" | "CONFLICT" | "ATTEMPT_CREATE_FAILED" | "ATTEMPT_SAVE_FAILED">
+  attempts: Extract<
+    AppErrorCode,
+    "NOT_FOUND" | "FORBIDDEN" | "CONFLICT" | "ATTEMPT_CREATE_FAILED" | "ATTEMPT_SAVE_FAILED" | "ATTEMPT_SUBMIT_FAILED"
+  >
   students: Extract<AppErrorCode, "NOT_FOUND" | "FORBIDDEN">
+  exams: Extract<AppErrorCode, "NOT_FOUND" | "FORBIDDEN">
+  tracks: Extract<AppErrorCode, "FORBIDDEN">
   api: Extract<AppErrorCode, "UNAUTHORIZED" | "RATE_LIMITED">
 }
 

@@ -1,7 +1,10 @@
+import camelcaseKeys from "camelcase-keys";
 import { AppApiError } from "../errors";
 import { apiFetch } from "../utils/apiFetch";
 import type { ApiResponse } from "@shared/api.schema";
 import type { User } from "@shared/user.schema";
+import type { UserWithTracks } from "@shared/user.schema";
+import type { User as FrontendUser, UserWithTracks as FrontendUserWithTracks } from "../apiTypes";
 
 async function parseAuthResponse<T>(response: Response): Promise<T> {
   const result: ApiResponse<T> = await response.json();
@@ -28,9 +31,9 @@ async function postAuth<T>(endpoint: string, body: object, handleUnauthorized = 
   return parseAuthResponse<T>(response);
 }
 
-export async function signIn(email: string, password: string): Promise<User> {
+export async function signIn(email: string, password: string): Promise<FrontendUser> {
   const { user } = await postAuth<{ user: User }>("/api/auth/signin", { email, password });
-  return user;
+  return camelcaseKeys(user, { deep: true });
 }
 
 export async function signUp(
@@ -47,12 +50,12 @@ export async function signUp(
   });
 }
 
-export async function exchangeToken(accessToken: string, refreshToken: string): Promise<User> {
+export async function exchangeToken(accessToken: string, refreshToken: string): Promise<FrontendUser> {
   const { user } = await postAuth<{ user: User }>("/api/auth/token-exchange", {
     access_token: accessToken,
     refresh_token: refreshToken,
   });
-  return user;
+  return camelcaseKeys(user, { deep: true });
 }
 
 export async function requestPasswordReset(email: string): Promise<void> {
@@ -70,9 +73,9 @@ export async function signOut(): Promise<void> {
   });
 }
 
-/** Restores the signed-in user from the session cookies. Throws when there is no valid session. */
-export async function getCurrentUser(): Promise<User> {
+/** Restores the signed-in user and their active-enrollment tracks from the session cookies. Throws when there is no valid session. */
+export async function getMe(): Promise<FrontendUserWithTracks> {
   const response = await apiFetch("/api/auth/me", { handleUnauthorized: false });
-  const { user } = await parseAuthResponse<{ user: User }>(response);
-  return user;
+  const result = await parseAuthResponse<UserWithTracks>(response);
+  return camelcaseKeys(result, { deep: true });
 }

@@ -5,11 +5,11 @@ import SectionToggle from "./SectionToggle"
 import { formatChoiceLabel } from "@/utils/format"
 import { translate } from "@/utils/translation"
 import useSettings from "@/hooks/useSettings"
-import type { Question } from "@/types"
+import type { DisclosedQuestion } from "@/apiTypes"
 import type { QuestionSection, SectionOpen } from "./types"
 
 type QuestionCardProps = {
-  question: Question
+  question: DisclosedQuestion
   number: number
   open: SectionOpen
   onToggle: (section: QuestionSection) => void

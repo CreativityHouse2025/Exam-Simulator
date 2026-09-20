@@ -24,7 +24,8 @@ Order matters. Step 4 before step 3 takes production sign-in down.
       Rollback: re-apply `002_count_user_sessions_rpc.sql` (plain `CREATE OR REPLACE`).
 - [ ] **5. Regenerate `api/_lib/database.types.ts`** after step 4 and commit. It still carries a
       `count_user_sessions` entry, which stays correct until the function is actually dropped.
-- [ ] **5. Update** user creation trigger in production to remove creating expires_at.
+- [ ] **6. Update** user creation trigger in production to remove creating expires_at.
+- [ ] **7. Move** offered breaks showed at from frontend to now() in the backend. 
 
 ### Expected behaviour change
 

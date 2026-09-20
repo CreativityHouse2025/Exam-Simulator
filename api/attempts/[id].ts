@@ -3,6 +3,7 @@ import { withAuth } from "../_lib/middleware/withAuth.js"
 import { successResponse } from "../_lib/utils/response.js"
 import { parseJsonBody } from "../_lib/utils/parseBody.js"
 import { getAttempt, saveAttempt } from "../_lib/services/attemptService.js"
+import { getExam } from "../_lib/services/examService.js"
 import { parseOrThrow } from "../_lib/utils/parse.js"
 import { AttemptIdSchema, SaveAttemptRequestSchema } from "../../shared/schemas/attempt.schema.js"
 import { LangSchema } from "../../shared/schemas/exam.schema.js"
@@ -19,8 +20,10 @@ export const GET = withErrorHandler(
     // Content is single-language. A missing lang is a caller bug, not a reason to guess one.
     const lang = parseOrThrow(LangSchema, new URL(request.url).searchParams.get("lang") ?? "")
 
-    const result = await getAttempt(authUser.id, attemptId, lang)
-    return successResponse(result, 200, cookieHeaders)
+    const { attempt, questions } = await getAttempt(authUser.id, attemptId, lang)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { config: _config, ...exam } = await getExam(attempt.exam_id)
+    return successResponse({ attempt, questions, exam }, 200, cookieHeaders)
   }),
 )
 

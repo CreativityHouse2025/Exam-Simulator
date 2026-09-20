@@ -15,9 +15,12 @@ export function timerIsRunning(
 export function timerHaveExpired({
   examState,
   paused,
-  time
-}: Pick<SessionExam, 'examState'> & Pick<SessionTimer, 'paused' | 'time'>): boolean {
-  return examState === 'in-progress' && !paused && time <= 0
+  time,
+  maxTime
+}: Pick<SessionExam, 'examState'> & Pick<SessionTimer, 'paused' | 'time' | 'maxTime'>): boolean {
+  // maxTime === 0 means there is no real timer (untimed, or a preview session) — 0 is never a
+  // countdown that has run out, only one that was never running.
+  return examState === 'in-progress' && !paused && maxTime > 0 && time <= 0
 }
 
 function examStarted(session: Pick<SessionExam, 'examState'> & Pick<SessionTimer, 'time' | 'maxTime'>): boolean {

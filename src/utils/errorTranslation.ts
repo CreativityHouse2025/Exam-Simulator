@@ -31,6 +31,7 @@ const ERROR_DOMAINS: { [D in ErrorDomain]: ErrorDomainEntry<D> } = {
       CONFLICT: "attempts.errors.server-conflict",
       ATTEMPT_CREATE_FAILED: "attempts.errors.server-create-failed",
       ATTEMPT_SAVE_FAILED: "attempts.errors.server-save-failed",
+      ATTEMPT_SUBMIT_FAILED: "attempts.errors.server-submit-failed",
     },
     fallback: "attempts.errors.server-unknown",
   },
@@ -40,6 +41,19 @@ const ERROR_DOMAINS: { [D in ErrorDomain]: ErrorDomainEntry<D> } = {
       FORBIDDEN: "students.errors.server-forbidden",
     },
     fallback: "students.errors.server-unknown",
+  },
+  exams: {
+    codes: {
+      NOT_FOUND: "exams.errors.server-not-found",
+      FORBIDDEN: "exams.errors.server-forbidden",
+    },
+    fallback: "exams.errors.server-unknown",
+  },
+  tracks: {
+    codes: {
+      FORBIDDEN: "tracks.errors.server-forbidden",
+    },
+    fallback: "tracks.errors.server-unknown",
   },
   api: {
     codes: {

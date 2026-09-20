@@ -86,6 +86,12 @@ export const QuestionSchema = z.object({
   id: z.int(),
   type: z.string(),
   text: z.string(),
+  /**
+   * How many choices are correct — never the answer key itself, so it is selected on every read
+   * regardless of disclosure. Lets the UI decide radio-vs-checkbox and cap selection at the right
+   * count before the key is ever revealed. Most questions are 1; some are 2-4.
+   */
+  answer_count: z.int().positive(),
   choices: z.array(ChoiceSchema),
 });
 

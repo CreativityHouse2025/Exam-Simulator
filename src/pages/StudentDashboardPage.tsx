@@ -9,6 +9,7 @@ import FullExamDropdown from "@/components/exam-dropdown/FullExamDropdown"
 import Loading from "@/components/Loading"
 import useLatestAttemptId from "@/hooks/useLatestAttempt"
 import { useSessionControl } from "@/contexts"
+import useAuth from "@/hooks/useAuth"
 import { translate } from "@/utils/translation"
 import { ROUTES } from "@/config/routes"
 import type { DropdownItem } from "@/types"
@@ -19,6 +20,9 @@ const StudentDashboardPage: React.FC = () => {
   const { startNewExam, resumeAttempt } = useSessionControl()
   const [latestAttemptId] = useLatestAttemptId()
   const [isStarting, setIsStarting] = React.useState(false)
+  // The student's own first enrolled track — this page has no track picker.
+  const { enrolledTracks } = useAuth()
+  const trackId = enrolledTracks[0]?.id ?? ""
 
   const [fullExamDropdown, setFullExamDropdown] = React.useState(false)
   const [categoryDropdown, setCategoryDropdown] = React.useState(false)
@@ -29,14 +33,14 @@ const StudentDashboardPage: React.FC = () => {
 
   const handleFullExam = async (examId: DropdownItem["id"]) => {
     setIsStarting(true)
-    const id = await startNewExam({ type: "full", examOrCategoryId: examId })
+    const id = await startNewExam(examId)
     if (id) navigate(ROUTES.exam.to(id))
     else setIsStarting(false)
   }
 
   const handleDomainExam = async (categoryId: DropdownItem["id"]) => {
     setIsStarting(true)
-    const id = await startNewExam({ type: "domain", examOrCategoryId: categoryId })
+    const id = await startNewExam(categoryId)
     if (id) navigate(ROUTES.exam.to(id))
     else setIsStarting(false)
   }
@@ -90,6 +94,7 @@ const StudentDashboardPage: React.FC = () => {
         setOpen={setFullExamDropdown}
         buttonRef={fullButtonRef}
         title={translate("dashboard.student.select-fullexam")}
+        trackId={trackId}
         onSelect={handleFullExam}
       />
       <CategoryDropdown
@@ -97,6 +102,7 @@ const StudentDashboardPage: React.FC = () => {
         setOpen={setCategoryDropdown}
         buttonRef={miniButtonRef}
         title={translate("dashboard.student.select-category")}
+        trackId={trackId}
         onSelect={handleDomainExam}
       />
     </Dashboard>

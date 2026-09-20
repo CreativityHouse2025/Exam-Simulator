@@ -5,12 +5,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import useSettings from "@/hooks/useSettings";
 import { formatDate } from "@/utils/format";
 import { translate } from "@/utils/translation";
-import examTypes from "@/data/exam/exam-types.json";
-import { resolveExamLabel } from "@/utils/resolveExamLabel";
-import type { AttemptSummary } from "@shared/attempt.schema";
+import type { AttemptSummary } from "@/apiTypes";
 
 type AttemptDetailDialogProps = {
   /** The caller only mounts this component when a selection exists — Dialog stays `open` for its whole lifetime. */
@@ -47,8 +44,6 @@ const AttemptDetailDialog = ({
   attempt,
   onOpenChange,
 }: AttemptDetailDialogProps) => {
-  const { settings } = useSettings();
-
   const t = {
     correct: translate("students.detail.correct"),
     incorrect: translate("students.detail.incorrect"),
@@ -56,21 +51,22 @@ const AttemptDetailDialog = ({
     inProgressMessage: translate("students.detail.in-progress-message"),
   };
 
-  const examLabel = resolveExamLabel(attempt, settings.language);
-  const isCompleted = attempt.exam_state === "completed";
+  // resolveExamLabel and the exam-type distinction it used are gone with the exam-type JSON.
+  const examLabel = String(attempt.examId);
+  const isCompleted = attempt.examState === "completed";
   const isPass = attempt.status === "pass";
   const scoreColor = isPass ? "text-correct" : "text-destructive";
   const ringColor = isPass ? "var(--correct)" : "var(--destructive)";
 
   const correctCount = isCompleted
-    ? Math.round((attempt.score * attempt.total_questions) / 100)
+    ? Math.round((attempt.score * attempt.totalQuestions) / 100)
     : 0;
   const incorrectCount = isCompleted
-    ? attempt.total_questions - correctCount
+    ? attempt.totalQuestions - correctCount
     : 0;
-  const durationSeconds = examTypes[attempt.exam_type].durationMinutes * 60;
+  const durationSeconds = (attempt.configSnapshot.examDurationMinutes ?? 0) * 60;
   const timeTaken = isCompleted
-    ? formatDurationHoursMinutes(durationSeconds - attempt.time_remaining)
+    ? formatDurationHoursMinutes(durationSeconds - attempt.timeRemaining)
     : null;
 
   return (
@@ -114,7 +110,7 @@ const AttemptDetailDialog = ({
               )}
 
               <span className="max-w-full truncate text-base font-bold text-tertiary">{examLabel}</span>
-              <span className="text-sm text-grey-800">{formatDate(attempt.created_at)}</span>
+              <span className="text-sm text-grey-800">{formatDate(attempt.createdAt)}</span>
             </div>
           </DialogHeader>
 

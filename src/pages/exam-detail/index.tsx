@@ -1,9 +1,7 @@
 import React from "react"
 import { useParams } from "react-router-dom"
+import { useQuery } from "@tanstack/react-query"
 import { Download, FileQuestion, Loader2 } from "lucide-react"
-import fullExams from "@/data/exam/full-exams.json"
-import categories from "@/data/exam/categories.json"
-import examTypes from "@/data/exam/exam-types.json"
 import { Button } from "@/components/ui/button"
 import SearchBar from "@/components/SearchBar"
 import ExamTypeBadge from "@/components/ExamTypeBadge"
@@ -13,11 +11,11 @@ import QuestionCard from "./QuestionCard"
 import QuestionNavigator from "./QuestionNavigator"
 import Pager from "./Pager"
 import BackButton from "@/components/BackButton"
-import { loadFullExam, loadDomainExam } from "@/utils/exam"
+import { createExamQuestionsQueryOptions } from "@/utils/queryOptions"
 import { translate } from "@/utils/translation"
 import { ROUTES } from "@/config/routes"
 import useSettings from "@/hooks/useSettings"
-import type { Question } from "@/types"
+import type { DisclosedQuestion } from "@/apiTypes"
 import type { OpenState, QuestionSection, SectionOpen } from "./types"
 
 const PER_PAGE = 10
@@ -38,16 +36,17 @@ const ExamDetailPage: React.FC = () => {
 
   const validType = type === "full" || type === "domain"
   const numericId = Number(id)
-  // Single source of truth for the exam/category — drives validity, name, and question count below.
-  const record = !validType
-    ? undefined
-    : type === "full"
-      ? fullExams.find((e) => e.id === numericId)
-      : categories.find((c) => c.id === numericId)
-  const validId = record !== undefined
+  const validId = validType && Number.isInteger(numericId) && numericId > 0
 
-  const [questions, setQuestions] = React.useState<Question[] | null>(null)
-  const [loadError, setLoadError] = React.useState(false)
+  // full-exams.json/categories.json/exam-types.json and loadFullExam/loadDomainExam are gone —
+  // one endpoint now serves any exam's disclosed content regardless of type.
+  const { data, isFetching, isError: loadError } = useQuery({
+    ...createExamQuestionsQueryOptions(numericId, langCode),
+    enabled: validId,
+  })
+
+  const questions: DisclosedQuestion[] | null = data?.questions ?? null
+
   const [open, setOpen] = React.useState<OpenState>({})
   const [search, setSearch] = React.useState("")
   const [page, setPage] = React.useState(0)
@@ -56,29 +55,10 @@ const ExamDetailPage: React.FC = () => {
   const topRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
-    if (!validId) return
-    let cancelled = false
+    if (!questions) return
     // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-existing, unrelated to this change
-    setQuestions(null)
-    setLoadError(false)
-
-    async function loadExam() {
-      try {
-        const loader = type === "full" ? loadFullExam : loadDomainExam
-        const { questionList } = await loader(numericId, langCode)
-        if (cancelled) return
-        setQuestions(questionList)
-        setOpen(Object.fromEntries(questionList.map((q) => [q.id, DEFAULT_OPEN])))
-      } catch {
-        if (!cancelled) setLoadError(true)
-      }
-    }
-    loadExam()
-
-    return () => {
-      cancelled = true
-    }
-  }, [validId, type, numericId, langCode])
+    setOpen(Object.fromEntries(questions.map((q) => [q.id, DEFAULT_OPEN])))
+  }, [questions])
 
   React.useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-existing, unrelated to this change
@@ -114,7 +94,7 @@ const ExamDetailPage: React.FC = () => {
     setOpen(Object.fromEntries(questions.map((q) => [q.id, { choices: value, explanation: value }])))
   }
 
-  const toggleSection = (questionId: Question["id"], section: QuestionSection) => {
+  const toggleSection = (questionId: DisclosedQuestion["id"], section: QuestionSection) => {
     setOpen((prev) => ({ ...prev, [questionId]: { ...prev[questionId], [section]: !prev[questionId][section] } }))
   }
 
@@ -157,14 +137,13 @@ const ExamDetailPage: React.FC = () => {
   }
 
   const examType = type as "full" | "domain" // guaranteed valid past the guards above
-  const meta = examTypes[examType]
-  const name = record?.name[langCode]
-  const questionCount = record?.questionCount
+  const name = data?.exam.name[langCode]
+  const questionCount = data?.exam.questionCount
   const typeLabel = translate(`exam.type.${examType}`)
   const stats = {
-    duration: translate("exam.stats.duration", [meta.durationMinutes]),
+    duration: translate("exam.stats.duration", [data?.exam.config.examDurationMinutes ?? 0]),
     questions: translate("exam.stats.questions", [questionCount ?? 0]),
-    pass: translate("exam.stats.pass", [meta.passingRate])
+    pass: translate("exam.stats.pass", [data?.exam.config.passingRate ?? 0])
   }
 
   return (
@@ -205,7 +184,7 @@ const ExamDetailPage: React.FC = () => {
 
       <div className="flex gap-6">
         <div className="flex min-w-0 flex-1 flex-col gap-4">
-          {questions === null ? (
+          {questions === null || isFetching ? (
             <div className="flex justify-center py-20">
               <Loader2 className="size-8 animate-spin text-primary" />
             </div>

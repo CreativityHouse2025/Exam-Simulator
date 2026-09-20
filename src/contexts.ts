@@ -4,6 +4,7 @@ import type { AuthContextType, SessionDispatch, SessionNavigation, SessionTimer,
 // Auth context
 export const AuthContext = React.createContext<AuthContextType>({
   user: null,
+  enrolledTracks: [],
   isAuthenticated: false,
   isLoading: true,
   signIn: async () => {},
@@ -44,7 +45,7 @@ export const SessionControlContext = React.createContext<SessionControlContextTy
   resumeAttempt: async () => null,
   startRevision: async () => null,
   syncProgress: async () => {},
-  submitExam: async () => {},
+  submitExam: async () => null,
   saveBreakOffer: async () => {},
 })
 
@@ -81,29 +82,25 @@ export function useSessionTimer() {
 
 export const SessionExamContext = React.createContext<SessionExam>({
   examState: 'in-progress',
-  reviewState: 'summary',
-  categoryId: null,
-  examId: null,
+  result: null,
   update: noopUpdate
 })
 
-/** Access the exam state (examState, reviewState, categoryId, examId) and its updater. Must be used within SessionProvider. */
+/** Access the exam state (examState) and its updater. Must be used within SessionProvider. */
 export function useSessionExam() {
   return React.useContext(SessionExamContext)
 }
 
 export const SessionDataContext = React.createContext<SessionData>({
   bookmarks: [],
-  selectedOriginalIndices: [],
-  examType: 'full',
+  selectedChoices: [],
   dirtyQuestions: {},
+  offeredBreaks: [],
   isSyncing: false,
-  break1OfferedAt: null,
-  break2OfferedAt: null,
   update: noopUpdate
 })
 
-/** Access the session data (bookmarks, selectedOriginalIndices, examType, isSyncing) and its updater. Must be used within SessionProvider. */
+/** Access the session data (bookmarks, selectedChoices, offeredBreaks, isSyncing) and its updater. Must be used within SessionProvider. */
 export function useSessionData() {
   return React.useContext(SessionDataContext)
 }

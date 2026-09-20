@@ -1,11 +1,20 @@
-import type { Session, SessionReducerFunc, SessionActions } from '../types'
+import type { Session, SessionReducerFunc, SessionActions, SessionAction } from '../types'
 import { SESSION_ACTION_PROPS } from '../constants'
 
-export const SessionReducer: SessionReducerFunc = (state: Session, actions: SessionActions): Session => {
+function applyOffered(state: Session, action: SessionAction<'SET_OFFERED_BREAK'>): Session {
+  const showAtIndex = action.payload
+  if (state.offeredBreaks.includes(showAtIndex)) return state
+  return { ...state, offeredBreaks: [...state.offeredBreaks, showAtIndex] }
+}
+
+export const SessionReducer: SessionReducerFunc = (state: Session | null, actions: SessionActions): Session | null => {
   // Handle single action
   if (!Array.isArray(actions)) {
     const { type, payload } = actions
     if (type === 'RESET_SESSION') return payload as Session
+
+    // No session mounted — every other action is a stray dispatch from an unmounting tree.
+    if (state === null) return null
 
     if (type === 'MARK_DIRTY') {
       const questionIndex = payload as number
@@ -19,9 +28,8 @@ export const SessionReducer: SessionReducerFunc = (state: Session, actions: Sess
       return { ...state, dirtyQuestions: {} }
     }
 
-    if (type === 'SET_BREAK1_OFFERED_AT' || type === 'SET_BREAK2_OFFERED_AT') {
-      if (state.examType !== 'full') return state
-      // fall through to generic prop lookup
+    if (type === 'SET_OFFERED_BREAK') {
+      return applyOffered(state, actions as SessionAction<'SET_OFFERED_BREAK'>)
     }
 
     const key = SESSION_ACTION_PROPS[type]
@@ -33,13 +41,19 @@ export const SessionReducer: SessionReducerFunc = (state: Session, actions: Sess
   }
 
   // Handle multiple actions
-  let newState = state
-  let hasChanges = false
+  const reset = actions.find((action): action is SessionAction<'RESET_SESSION'> => action.type === 'RESET_SESSION')
+
+  // No session mounted and nothing in this batch mounts one — every action here is a stray
+  // dispatch from an unmounting tree.
+  if (state === null && !reset) return null
+
+  let newState: Session = reset ? (reset.payload as Session) : (state as Session)
+  let hasChanges = reset !== undefined
 
   for (const action of actions) {
     const { type, payload } = action
 
-    if (type === 'RESET_SESSION') { newState = payload as Session; hasChanges = true; continue }
+    if (type === 'RESET_SESSION') continue
 
     if (type === 'MARK_DIRTY') {
       const questionIndex = payload as number
@@ -58,9 +72,10 @@ export const SessionReducer: SessionReducerFunc = (state: Session, actions: Sess
       continue
     }
 
-    if (type === 'SET_BREAK1_OFFERED_AT' || type === 'SET_BREAK2_OFFERED_AT') {
-      if (newState.examType !== 'full') continue
-      // fall through to generic prop lookup
+    if (type === 'SET_OFFERED_BREAK') {
+      const updated = applyOffered(newState, action as SessionAction<'SET_OFFERED_BREAK'>)
+      if (updated !== newState) { newState = updated; hasChanges = true }
+      continue
     }
 
     const key = SESSION_ACTION_PROPS[type]

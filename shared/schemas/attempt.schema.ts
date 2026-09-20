@@ -40,6 +40,13 @@ export const AttemptSummarySchema = z.object({
   config_snapshot: ExamConfigSchema,
   /** `cardinality(question_ids_snapshot)`, never a count of answer rows — an unanswered question has no row. */
   total_questions: z.int(),
+  /**
+   * Wrong OR unanswered, stored by `submit_attempt` alongside score and status — null while
+   * `exam_state` is 'in-progress'. The backend is the only source of a persisted attempt's grade;
+   * nothing client-side recomputes it. A revision session has no row at all, so it has no analog
+   * — see `utils/results.ts computeLocalResult`.
+   */
+  wrong_questions: nonNegativeInt.nullable(),
 });
 
 export type AttemptSummary = z.infer<typeof AttemptSummarySchema>;
@@ -91,35 +98,18 @@ export const AttemptWithQuestionsSchema = z.object({
 export type AttemptWithQuestions = z.infer<typeof AttemptWithQuestionsSchema>;
 
 /**
- * POST /api/attempts — a started attempt, plus the exam it belongs to.
+ * POST /api/attempts and GET /api/attempts/:id — an attempt, plus the exam it belongs to.
  *
- * The exam rides along because starting one navigates straight into the session, which needs the
- * name without waiting on the track's exam list. It carries no config: the attempt's own
- * `config_snapshot` is what governs the session, and a second, possibly newer config in the same
- * payload is only an opportunity to read the wrong one.
+ * The exam rides along because both starting and resuming navigate straight into the session,
+ * which needs the name without waiting on the track's exam list. It carries no config: the
+ * attempt's own `config_snapshot` is what governs the session, and a second, possibly newer
+ * config in the same payload is only an opportunity to read the wrong one.
  */
-export const StartedAttemptSchema = AttemptWithQuestionsSchema.extend({
+export const AttemptWithExamSchema = AttemptWithQuestionsSchema.extend({
   exam: ExamSchema,
 });
 
-export type StartedAttempt = z.infer<typeof StartedAttemptSchema>;
-
-/**
- * POST /api/attempts/:id/submit — what the results summary renders, and nothing more.
- *
- * Question content does not come back with a submission: the summary page shows the score and the
- * tally, and a student who wants a question-by-question review reads the completed attempt, which
- * discloses the answer key once it is completed.
- */
-export const AttemptResultSchema = z.object({
-  score: z.number(),
-  status: AttemptStatusSchema,
-  /** Questions answered wrong OR never answered — an unanswered question is wrong by absence. */
-  wrong_questions: z.int(),
-  total_questions: z.int(),
-});
-
-export type AttemptResult = z.infer<typeof AttemptResultSchema>;
+export type AttemptWithExam = z.infer<typeof AttemptWithExamSchema>;
 
 /**
  * GET /api/attempts/:id/revision — the "wrong or unanswered" set, always disclosed. Carries the
@@ -192,6 +182,10 @@ export type SaveAttemptRequestBody = z.infer<typeof SaveAttemptRequestSchema>;
 /**
  * The final diff travels WITH the submission, so the last answers and the grading share one
  * transaction rather than two a lost request could fall between.
+ *
+ * The response is `null`, same as save — the grade is written to the row (score, status,
+ * wrong_questions), not returned. The client reads it back with a follow-up GET, the same call a
+ * resume already makes, which is also what discloses the questions.
  */
 export const SubmitAttemptRequestSchema = z.strictObject({
   current_index: nonNegativeInt,

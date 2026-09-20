@@ -8,6 +8,7 @@ import { ROUTES } from "../config/routes"
 import { useQuery } from "@tanstack/react-query"
 import { createAttemptsQueryOptions } from "../utils/queryOptions"
 import { useSessionControl } from "../contexts"
+import useAuth from "../hooks/useAuth"
 import useToast from "../hooks/useToast"
 import { cn } from "../components/ui/utils"
 
@@ -16,7 +17,13 @@ const AttemptHistoryPage: React.FC = () => {
   const navigate = useNavigate()
   const { resumeAttempt, startRevision } = useSessionControl()
   const { showToast } = useToast()
-  const { data: attempts = [], isPending, isFetching, refetch, error } = useQuery(createAttemptsQueryOptions())
+  // The user's own first enrolled track — this page has no track picker.
+  const { enrolledTracks } = useAuth()
+  const trackId = enrolledTracks[0]?.id ?? ""
+  const { data: attempts = [], isPending, isFetching, refetch, error } = useQuery({
+    ...createAttemptsQueryOptions(trackId),
+    enabled: trackId !== "",
+  })
   const [isStarting, setIsStarting] = React.useState(false)
 
   React.useEffect(() => {

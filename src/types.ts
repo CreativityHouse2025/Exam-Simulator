@@ -1,9 +1,19 @@
-import type { ExamState, ReviewState } from "@shared/attempt.schema";
-import type { Role, User } from "@shared/user.schema";
+import type { ExamState } from "@shared/attempt.schema";
+import type { LangCode as SharedLangCode } from "@shared/exam.schema";
+import type { Role } from "@shared/user.schema";
+import type {
+  AttemptResult,
+  DisclosedQuestion,
+  EnrolledTrack,
+  ExamDetails,
+  Question,
+  User,
+} from "./apiTypes";
 
 // Language types
 export type LangDir = "rtl" | "ltr";
-export type LangCode = "ar" | "en";
+/** Re-exported, not redeclared: the API decides which languages exist. */
+export type LangCode = SharedLangCode;
 export type LangName = "العربية" | "English";
 
 export interface Lang {
@@ -12,7 +22,6 @@ export interface Lang {
   dir: LangDir;
 }
 
-// Question and exam types
 export type QuestionFilter = "all" | GridTagTypes;
 export type GridTagTypes =
   | "marked"
@@ -21,90 +30,31 @@ export type GridTagTypes =
   | "incorrect"
   | "correct";
 
-// v1.1: Add new type 'revision' for mistake revision exam and remove ExamID type
-// v2.0 pre-phase 5: renamed 'exam' → 'full' and 'miniexam' → 'domain' to match the DB schema
-export type ExamType = "full" | "domain" | "revision";
-export type Exam = Question[];
+/** Selected choice positions per question, indexed the same way as Session.questionIds. */
+export type Answers = number[][];
 
-export type QuestionTypes = "multiple-choice";
-
-// v1.1: Add id and categoryId
-export interface Question<QT extends QuestionTypes = QuestionTypes> {
-  /** question id */
-  id: number;
-  /** question type */
-  type: QT;
-  /** null means the question is not assigned to any domain category */
-  categoryId: number | null;
-  /** question content */
-  text: string;
-  /** explanation of why the correct answer is correct */
-  explanation: string;
-  /** choices of the question */
-  choices: Choice[];
-  /** id of the correct choice for quick access */
-  answer: Answer<QT>;
-}
-
-export interface Choice {
-  /** content of choice */
-  text: string;
-  /** is the choice correct */
-  correct: boolean;
-  /** original index in the question bank before any shuffle; present only after reconstructing the snapshot from DB */
-  originalIndex?: number;
-}
-
-// Answer types
-export type AnswerOf = {
-  "multiple-choice": number[];
-};
-
-export type Answer<QT extends QuestionTypes> = AnswerOf[QT];
-export type AnswerOfMultipleChoice = AnswerOf["multiple-choice"];
-export type Answers = AnswerOfMultipleChoice[];
-
-// Base session — fields shared by all three exam types
-interface BaseSession {
+// A single session shape for every exam type — behaviour differences are driven by
+// ExamContext's config, not by branching on a session field. See spec-add-tracks.md.
+export interface Session {
   id: string;
   index: number;
   examState: ExamState;
-  reviewState: ReviewState;
-  questionChoiceOrders: Record<number, number[]>;
-  selectedOriginalIndices: Answers;
+  selectedChoices: Answers;
   bookmarks: number[];
-  questionIds: number[] | "ALL";
+  questionIds: number[];
   dirtyQuestions: Record<number, true>;
   maxTime: number;
   time: number;
   paused: boolean;
-  /** Supervisor "preview" session — client-only, never persisted to the DB. */
+  /** Never persisted to the DB — a supervisor preview or a revision retry. Neither has a real
+   * backend attempt to write through to, so the session lifecycle skips the network entirely. */
   preview: boolean;
+  /** showAtIndex values already offered this session — mirrors AttemptDetail.offeredBreaks. */
+  offeredBreaks: number[];
+  /** Set once, on completion. Server-computed for a persisted session; computed locally
+   * (utils/results.ts computeLocalResult) for one that never reaches the server. */
+  result: AttemptResult | null;
 }
-
-export interface FullExamSession extends BaseSession {
-  examType: "full";
-  examId: number;
-  categoryId: null;
-  break1OfferedAt: string | null;
-  break2OfferedAt: string | null;
-}
-
-export interface DomainExamSession extends BaseSession {
-  examType: "domain";
-  categoryId: number;
-  examId: null;
-}
-
-export interface RevisionSession extends BaseSession {
-  examType: "revision";
-  examId: number;
-  categoryId: null;
-}
-
-export type Session = FullExamSession | DomainExamSession | RevisionSession;
-
-export type { BaseSession };
 
 // v2.0: Type for the generic dropdown item (category or fullexam)
 export type DropdownItem<TId = number, TLabel = string> = {
@@ -120,29 +70,28 @@ export type SessionActionTypes =
   | "SET_TIME"
   | "SET_TIMER_PAUSED"
   | "SET_EXAM_STATE"
-  | "SET_REVIEW_STATE"
   | "RESET_SESSION"
   | "MARK_DIRTY"
   | "CLEAR_DIRTY"
-  | "SET_BREAK1_OFFERED_AT"
-  | "SET_BREAK2_OFFERED_AT";
+  | "SET_OFFERED_BREAK"
+  | "SET_RESULT";
 
 // Session actions mapping
 type SessionActionsMap = {
   SET_INDEX: { payload: number; prop: "index" };
   SET_BOOKMARKS: { payload: number[]; prop: "bookmarks" };
-  SET_ANSWERS: { payload: Answers; prop: "selectedOriginalIndices" };
+  SET_ANSWERS: { payload: Answers; prop: "selectedChoices" };
   SET_TIME: { payload: number; prop: "time" };
   SET_TIMER_PAUSED: { payload: boolean; prop: "paused" };
   SET_EXAM_STATE: { payload: ExamState; prop: "examState" };
-  SET_REVIEW_STATE: { payload: ReviewState; prop: "reviewState" };
+  SET_RESULT: { payload: AttemptResult | null; prop: "result" };
   // Internal-only: replaces the entire session state. Not intended for component use.
   RESET_SESSION: { payload: Session; prop: "id" };
   // Internal-only: both handled via early return in the reducer before the generic prop-lookup runs.
   MARK_DIRTY: { payload: number; prop: "dirtyQuestions" };
   CLEAR_DIRTY: { payload: null; prop: "dirtyQuestions" };
-  SET_BREAK1_OFFERED_AT: { payload: string | null; prop: "break1OfferedAt" };
-  SET_BREAK2_OFFERED_AT: { payload: string | null; prop: "break2OfferedAt" };
+  // Handled via early return in the reducer: appends to offeredBreaks rather than replacing it.
+  SET_OFFERED_BREAK: { payload: number; prop: "offeredBreaks" };
 };
 
 export interface SessionAction<
@@ -157,9 +106,9 @@ export type SessionActions = SessionAction | SessionAction[];
 
 // Function types
 export type SessionReducerFunc = (
-  state: Session,
+  state: Session | null,
   actions: SessionActions,
-) => Session;
+) => Session | null;
 export type SessionDispatch = <T extends SessionActionTypes>(
   ...actions: [T, SessionActionsMap[T]["payload"]][]
 ) => void;
@@ -172,53 +121,50 @@ export type SessionNavigation = Pick<Session, "index"> & {
 export type SessionTimer = Pick<Session, "time" | "maxTime" | "paused"> & {
   update: SessionDispatch;
 };
-export type SessionExam = Pick<
-  Session,
-  "examState" | "reviewState" | "categoryId" | "examId"
-> & { update: SessionDispatch };
+export type SessionExam = Pick<Session, "examState" | "result"> & {
+  update: SessionDispatch;
+};
 export type SessionData = Pick<
   Session,
-  "bookmarks" | "selectedOriginalIndices" | "examType" | "dirtyQuestions"
+  "bookmarks" | "selectedChoices" | "dirtyQuestions" | "offeredBreaks"
 > & {
-  /** null for domain and revision sessions (break fields only exist on FullExamSession) */
-  break1OfferedAt: string | null;
-  /** null for domain and revision sessions (break fields only exist on FullExamSession) */
-  break2OfferedAt: string | null;
   isSyncing: boolean;
   update: SessionDispatch;
 };
 
-export type StartNewExamParams = {
-  type: ExamType;
-  examOrCategoryId: number;
-  /** Supervisor preview: skips startAttempt and localStorage persistence, builds a client-only session. Defaults to false. */
+export type StartNewExamOptions = {
+  /** Supervisor preview: skips persistence and builds a client-only session. Defaults to false. */
   preview?: boolean;
 };
 
 export type SessionControlContextType = {
   session: Session | null;
   update: SessionDispatch;
-  /** Loads exam data, saves the attempt to the DB, builds the full Session state, and mounts the active session.
-   * Returns the new attemptId on success, or null on failure. */
-  startNewExam: (params: StartNewExamParams) => Promise<string | null>;
+  /** Starts a real attempt (student) or builds a client-only preview session (supervisor), and
+   * mounts it. Returns the new attemptId on success, or null on failure. */
+  startNewExam: (
+    examId: number,
+    options?: StartNewExamOptions,
+  ) => Promise<string | null>;
   /** Fetches an in-progress attempt snapshot from the DB, hydrates the full Session state, mounts the active
    * session, and persists the attemptId to localStorage.
    * Returns the attemptId on success, or null on failure so callers can reset their loading state. */
   resumeAttempt: (attemptId: string) => Promise<string | null>;
-  /** Fetches a completed full-exam attempt snapshot from the DB, filters to wrong/unanswered questions only,
-   * and mounts an ephemeral revision session (not persisted to localStorage).
+  /** Fetches the "wrong or unanswered" set of a completed attempt and mounts an ephemeral revision
+   * session (not persisted to localStorage) using REVISION_CONFIG.
    * Returns the attemptId on success, or null on failure so callers can reset their loading state. */
   startRevision: (attemptId: string) => Promise<string | null>;
   /** Sends only the dirty questions (answers + bookmark state) to the DB and clears the dirty set on success.
-   * No-op when nothing is dirty or a sync is already in flight. */
+   * No-op when nothing is dirty, a sync is already in flight, or the session is never persisted. */
   syncProgress: () => Promise<void>;
-  /** Saves the break offer timestamp to the DB immediately, bypassing the dirty-questions guard.
-   * Takes the fresh timestamp so it is not affected by stale closure state. */
-  saveBreakOffer: (breakNumber: 1 | 2, offeredAt: string) => Promise<void>;
-  /** Flushes dirty answers and marks the attempt completed in the DB.
-   * Dispatches SET_EXAM_STATE 'completed' only on success.
-   * No-op for revision sessions or while a sync is in flight. */
-  submitExam: (score: number, status: "pass" | "fail") => Promise<void>;
+  /** Records a break as offered, both locally and (unless never persisted) on the server. */
+  saveBreakOffer: (showAtIndex: number) => Promise<void>;
+  /** Flushes dirty answers and submits for grading. The server writes the score/status/
+   * wrongQuestions to the row rather than returning them (submit_attempt, migration 021) — on
+   * success this re-fetches the attempt via the same read `resumeAttempt` uses, which both
+   * discloses the questions (a completed attempt is always disclosed) and returns the graded
+   * result. Returns null on failure/no-op. */
+  submitExam: () => Promise<AttemptResult | null>;
 };
 
 // User settings (initially null until user inserts data)
@@ -237,7 +183,8 @@ export type SettingsContextType = {
 };
 
 export type ExamContextType = {
-  exam: Exam | null;
+  examDetails: ExamDetails | null;
+  questions: (Question | DisclosedQuestion)[] | null;
 };
 
 // Type for the toast component state. Holds a translation key, not copy — the toast translates
@@ -263,6 +210,8 @@ export type ViewerRole = Role | "guest";
 
 export type AuthContextType = {
   user: User | null;
+  /** Tracks the user holds an ACTIVE enrollment in — see GET /api/auth/me. */
+  enrolledTracks: EnrolledTrack[];
   isAuthenticated: boolean;
   isLoading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
@@ -276,25 +225,4 @@ export type AuthContextType = {
   requestPasswordReset: (email: string) => Promise<void>;
   updatePassword: (password: string) => Promise<void>;
   signOut: (onSuccess?: () => void) => Promise<void>;
-};
-
-export type Results = {
-  // status-related
-  pass?: boolean;
-  /** "fail" when no passing rate is configured for the exam type */
-  status: "pass" | "fail";
-  score: number;
-  passPercent?: number;
-
-  // time & meta
-  elapsedTime: number;
-  date: Date;
-  sourceLabel: string | undefined;
-  sourceType: "category" | "exam";
-
-  // question stats
-  correctCount: number;
-  incorrectCount: number;
-  incompleteCount: number;
-  totalQuestions: number;
 };

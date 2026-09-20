@@ -11,7 +11,7 @@ export default function useExamPreview(type: "full" | "domain", id: number) {
 
   const handlePreview = async () => {
     setIsPreviewing(true)
-    const attemptId = await startNewExam({ type, examOrCategoryId: id, preview: true })
+    const attemptId = await startNewExam(id, { preview: true })
     if (attemptId) navigate(ROUTES.examPreview.to(type, id, attemptId))
     else setIsPreviewing(false)
   }

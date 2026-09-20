@@ -1,6 +1,6 @@
 ---
 name: auth-rbac-guide
-description: "Authentication, roles, and access control for the Exam Simulator — the student/supervisor/guest role model, RouteGuard and nav gating on the frontend, withAuth/withRole enforcement on the backend, account expiry, and the single-session-per-account limit now enforced by Supabase Auth itself rather than by this codebase. Use this skill before touching sign-in, sign-up, sign-out, password reset, token exchange, session cookies, users.role or users.expires_at, RouteGuard, src/config/roles.ts or nav.ts, or any check of who is allowed to see or do something. Also use when debugging an unexpected 403, a user logged out for no reason, or a suspected account-sharing bypass. These rules fail open when improvised — read them before writing the check."
+description: "Authentication, roles, and access control for the Exam Simulator — the student/supervisor/guest role model, RouteGuard and nav gating on the frontend, withAuth/withRole enforcement on the backend, enrollment-based track access, and the single-session-per-account limit now enforced by Supabase Auth itself rather than by this codebase. Use this skill before touching sign-in, sign-up, sign-out, password reset, token exchange, session cookies, users.role, enrollments, RouteGuard, src/config/roles.ts or nav.ts, or any check of who is allowed to see or do something. Also use when debugging an unexpected 403, a user logged out for no reason, or a suspected account-sharing bypass. These rules fail open when improvised — read them before writing the check."
 ---
 
 # Auth & RBAC Guide
@@ -41,11 +41,14 @@ export const GET = withErrorHandler(withAuth(withRole(["supervisor"], handler)))
 ```
 
 - `withAuth` — validates the access token from cookies via `getClaims` (local JWKS verification),
-  falls back to `refreshSession` with the refresh token, re-checks account expiry, and forwards
-  refreshed `Set-Cookie` headers to the handler. Dev-only bypass: `BYPASS_AUTH=true` +
-  `BYPASS_AUTH_USER_ID` — **never set in production**.
+  falls back to `refreshSession` with the refresh token, and forwards refreshed `Set-Cookie`
+  headers to the handler. **There is no bypass** — the `BYPASS_AUTH` /
+  `BYPASS_AUTH_USER_ID` escape hatch was removed. Sign in with a seeded account instead. Do not
+  reintroduce one: a switch that disables authentication is one stray environment variable away
+  from handing over every account.
 - `withRole` — reads `users.role` with the admin client and **fails closed** with 403 unless the
-  role is allowed.
+  role is allowed. It is a **pure guard**: it does not hand the role down, because no handler
+  branches on it and a role in the signature invites one to start.
 
 Handlers must pass `cookieHeaders` into `successResponse`, or a refreshed session is dropped and
 the user is logged out on their next request. See `backend-guide` for the full middleware chain.
@@ -53,11 +56,46 @@ the user is logged out on their next request. See `backend-guide` for the full m
 Adding a new endpoint without `withRole` is the single easiest way to open a hole here. If an
 endpoint is genuinely public, say so in a comment so the omission reads as intentional.
 
-## Account expiry
+## Account expiry — removed
 
-Enforced by `assertAccountNotExpired`, called on sign-in **and on every token refresh** in
-`withAuth`. An expired account is signed out globally. Expiry is a column on `public.users`
-(`expires_at`), so it survives independently of the auth session — see `database-guide`.
+There is none, as of migration 019. `users.expires_at`, `assertAccountNotExpired` and the global
+sign-out it triggered are all gone. **An account signs in indefinitely.** What a user may actually
+do is decided by enrollments alone, below.
+
+`ACCOUNT_EXPIRED` still exists in the `AppErrorCode` enum and in the frontend's translation map,
+but nothing can emit it. Do not reach for it.
+
+## Enrollment expiry — a different clock, and both bounds
+
+`enrollments.expires_at` is now the only expiry in the system — the account one was dropped in
+019. Note `EnrolledTrack.expires_at` in a response is the ENROLLMENT's, never the user's.
+
+An enrollment is ACTIVE when its window **contains now** — `created_at <= now() AND
+expires_at > now()`. Filter on both bounds, always:
+
+```ts
+.lte("created_at", "now")   // "now" is evaluated by Postgres, not Node
+.gt("expires_at", "now")
+```
+
+`enrollments_no_overlap` (011) excludes *overlapping* ranges, not adjacent ones, so a renewal
+dated to begin exactly when the current one ends is a supported state. Filtering on `expires_at`
+alone then matches the future row as readily as the running one, which caused two bugs at once:
+a pre-provisioned enrollment granted access before its start date, and two rows matched a
+`maybeSingle()`, returning PGRST116 — a 500 that locked the student out of the track entirely.
+With both bounds the exclusion constraint guarantees at most one match, which is what makes
+`maybeSingle()` correct rather than lucky.
+
+Two readers apply this rule and **must stay in step** — change one, change both, or a track is
+advertised by `/api/auth/me` and then refused by every endpoint scoped to it:
+
+- `trackService.assertTrackAccess` — the guard on every track-scoped resource
+- `userService.getUserWithTracks` — the same filter applied to the embedded resource
+  (`.lte("enrollments.created_at", "now")`)
+
+Track access applies to **both roles**. A supervisor enrols exactly as a student does and sees
+nothing of a track they hold no active enrollment in — not its exam list, not its question
+content, not a student's attempts within it.
 
 ## Single session enforcement
 
@@ -106,7 +144,7 @@ sign-in response reaching the profile query. Keep it.
 ## Related skills
 
 - **Middleware composition, handler/service layering, error codes → invoke `backend-guide`.**
-- **`users.role`, `users.expires_at`, the session-counting RPC → invoke `database-guide`.**
+- **`users.role`, `enrollments`, the session-counting RPC → invoke `database-guide`.**
 - **RouteGuard placement, nav config, provider tree → invoke `frontend-guide`.**
 - **Supervisor preview sessions** (running an exam without writing to the DB) are documented in
   `frontend-guide`.
