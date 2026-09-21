@@ -1,47 +1,58 @@
-import React from 'react'
-import { Save, X } from 'lucide-react'
-import { translate } from '../../utils/translation'
-import { cn } from '../ui/utils'
+import React from "react";
+import { Save, X } from "lucide-react";
+import { translate } from "../../utils/translation";
+import { cn } from "../ui/utils";
 
-const DIRTY_QUESTIONS_PER_REMINDER = 5
+const DIRTY_QUESTIONS_PER_REMINDER = 5;
 
-type ReminderKind = 'initial' | 'unsaved'
+type ReminderKind = "initial" | "unsaved";
 
-const SaveButtonWithReminder: React.FC<SaveButtonWithReminderProps> = ({ isSyncing, dirtyCount, syncProgress }) => {
-  const saveLabel = translate('content.top-display.save')
-  const initialMessage = translate('content.save-reminder.initial-message')
-  const unsavedMessage = translate('content.save-reminder.unsaved-message')
-  const silenceLabel = translate('content.save-reminder.silence-label')
+const SaveButtonWithReminder: React.FC<SaveButtonWithReminderProps> = ({
+  isSyncing,
+  dirtyCount,
+  syncProgress,
+}) => {
+  const saveLabel = translate("content.top-display.save");
+  const initialMessage = translate("content.save-reminder.initial-message");
+  const unsavedMessage = translate("content.save-reminder.unsaved-message");
+  const silenceLabel = translate("content.save-reminder.silence-label");
 
-  const [isReminderVisible, setIsReminderVisible] = React.useState(true)
-  const [reminderKind, setReminderKind] = React.useState<ReminderKind>('initial')
-  const [isReminderSilencedForSession, setIsReminderSilencedForSession] = React.useState(false)
-  const lastRemindedMilestone = React.useRef(0)
+  const [isReminderVisible, setIsReminderVisible] = React.useState(true);
+  const [reminderKind, setReminderKind] =
+    React.useState<ReminderKind>("initial");
+  const [isReminderSilencedForSession, setIsReminderSilencedForSession] =
+    React.useState(false);
+  const lastRemindedMilestone = React.useRef(0);
 
   React.useEffect(() => {
-    if (isReminderSilencedForSession) return
+    if (isReminderSilencedForSession) return;
 
     const milestone =
-      Math.floor(dirtyCount / DIRTY_QUESTIONS_PER_REMINDER) * DIRTY_QUESTIONS_PER_REMINDER
+      Math.floor(dirtyCount / DIRTY_QUESTIONS_PER_REMINDER) *
+      DIRTY_QUESTIONS_PER_REMINDER;
 
-    if (milestone >= DIRTY_QUESTIONS_PER_REMINDER && milestone > lastRemindedMilestone.current) {
-      lastRemindedMilestone.current = milestone
-      setReminderKind('unsaved')
-      setIsReminderVisible(true)
+    if (
+      milestone >= DIRTY_QUESTIONS_PER_REMINDER &&
+      milestone > lastRemindedMilestone.current
+    ) {
+      lastRemindedMilestone.current = milestone;
+      setReminderKind("unsaved");
+      setIsReminderVisible(true);
     }
-  }, [dirtyCount, isReminderSilencedForSession])
+  }, [dirtyCount, isReminderSilencedForSession]);
 
   const handleCloseReminder = () => {
-    setIsReminderVisible(false)
-  }
+    setIsReminderVisible(false);
+  };
 
   const handleSilenceForSession = () => {
-    setIsReminderSilencedForSession(true)
-    setIsReminderVisible(false)
-  }
+    setIsReminderSilencedForSession(true);
+    setIsReminderVisible(false);
+  };
 
-  const reminderMessage = reminderKind === 'initial' ? initialMessage : unsavedMessage
-  const shouldShowReminder = isReminderVisible && !isReminderSilencedForSession
+  const reminderMessage =
+    reminderKind === "initial" ? initialMessage : unsavedMessage;
+  const shouldShowReminder = isReminderVisible && !isReminderSilencedForSession;
 
   return (
     <div className="relative inline-flex">
@@ -56,7 +67,7 @@ const SaveButtonWithReminder: React.FC<SaveButtonWithReminderProps> = ({ isSynci
           "disabled:opacity-45 disabled:cursor-not-allowed",
         )}
       >
-        <Save size={17} style={{ position: 'relative', top: '1px' }} />
+        <Save size={17} style={{ position: "relative", top: "1px" }} />
         {saveLabel}
       </button>
 
@@ -71,7 +82,9 @@ const SaveButtonWithReminder: React.FC<SaveButtonWithReminderProps> = ({ isSynci
         >
           <div className="py-2 px-2.25 md:pt-2.25 md:px-2.5 md:pb-2">
             <div className="flex items-start justify-between gap-1.25 mb-1.75">
-              <p className="m-0 font-sans text-sm font-normal leading-normal text-grey-1000 flex-1">{reminderMessage}</p>
+              <p className="m-0 font-sans text-sm font-normal leading-normal text-grey-1000 flex-1">
+                {reminderMessage}
+              </p>
               <button
                 onClick={handleCloseReminder}
                 aria-label="Dismiss reminder"
@@ -92,7 +105,9 @@ const SaveButtonWithReminder: React.FC<SaveButtonWithReminderProps> = ({ isSynci
               <span
                 className={cn(
                   "custom-checkbox shrink-0 relative inline-flex items-center justify-center w-2.5 h-2.5 rounded-sm border-2 transition-colors duration-150",
-                  isReminderSilencedForSession ? "border-primary bg-primary [&::after]:block" : "border-grey-400 bg-transparent",
+                  isReminderSilencedForSession
+                    ? "border-primary bg-primary [&::after]:block"
+                    : "border-grey-400 bg-transparent",
                 )}
               />
               {silenceLabel}
@@ -101,13 +116,13 @@ const SaveButtonWithReminder: React.FC<SaveButtonWithReminderProps> = ({ isSynci
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default SaveButtonWithReminder
+export default SaveButtonWithReminder;
 
 export interface SaveButtonWithReminderProps {
-  isSyncing: boolean
-  dirtyCount: number
-  syncProgress: () => Promise<void>
+  isSyncing: boolean;
+  dirtyCount: number;
+  syncProgress: () => Promise<boolean>;
 }

@@ -1,15 +1,19 @@
-import React from 'react'
-import Control from './Control'
-import { cn } from '../../ui/utils'
+import React from "react";
+import Control from "./Control";
+import { cn } from "../../ui/utils";
 
 interface DrawerShellProps {
-  open: boolean
-  toggleOpen: () => void
-  menu: React.ReactNode
+  open: boolean;
+  toggleOpen: () => void;
+  menu: React.ReactNode;
 }
 
 /** Drawer container with animated width — renders Control (toggle) and the menu content. */
-const DrawerShell: React.FC<DrawerShellProps> = ({ open, toggleOpen, menu }) => {
+const DrawerShell: React.FC<DrawerShellProps> = ({
+  open,
+  toggleOpen,
+  menu,
+}) => {
   return (
     <div
       id="drawer"
@@ -21,7 +25,7 @@ const DrawerShell: React.FC<DrawerShellProps> = ({ open, toggleOpen, menu }) => 
       <Control open={open} toggleOpen={toggleOpen} />
       {menu}
     </div>
-  )
-}
+  );
+};
 
-export default DrawerShell
+export default DrawerShell;

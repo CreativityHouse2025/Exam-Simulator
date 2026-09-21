@@ -67,7 +67,8 @@ npm run typecheck # Type-check the entire project (tsc --build + vite config)
 src/components/exam/{full,domain,revision}/  per-exam-type session trees
 src/components/exam/shared/                  reusable exam UI
 src/components/ui/                           shadcn/ui primitives
-src/pages/                                   route components
+src/components/{exams,tracks,students,attempts,states}/  cross-page feature components
+src/pages/<page>/index.tsx                   one folder per route; a page never imports another
 src/hooks/examSession/                       exam session facade hooks
 src/config/                                  routes.ts, nav.ts, roles.ts, icons.ts
 src/data/exam/                               question banks, exam definitions, categories

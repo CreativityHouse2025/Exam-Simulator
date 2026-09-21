@@ -4,28 +4,35 @@ import Toast from "./components/Toast";
 import Header from "./components/Header";
 import Loading from "./components/Loading";
 import RouteGuard from "./guards/RouteGuard";
-import SignInPage from "./pages/SignInPage";
-import SignUpPage from "./pages/SignUpPage";
-import ProfilePage from "./pages/ProfilePage";
-import AuthCallbackPage from "./pages/AuthCallbackPage";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
-import AttemptHistoryPage from "./pages/AttemptHistoryPage";
-import HomePage from "./pages/HomePage";
+import SignInPage from "./pages/sign-in";
+import SignUpPage from "./pages/sign-up";
+import ProfilePage from "./pages/profile";
+import AuthCallbackPage from "./pages/auth-callback";
+import ForgotPasswordPage from "./pages/forgot-password";
+import ResetPasswordPage from "./pages/reset-password";
+import AttemptHistoryPage from "./pages/track-history";
+import TracksPage from "./pages/tracks";
+import TrackPage from "./pages/track";
+import SupervisorDashboardPage from "./pages/supervisor";
+import ExamTracksPage from "./pages/exam-tracks";
 import ExamLibraryPage from "./pages/exam-library";
 import ExamDetailPage from "./pages/exam-detail";
 import StudentSearchPage from "./pages/student-search";
+import StudentProfilePage from "./pages/student-profile";
 import StudentAttemptsPage from "./pages/student-attempts";
+import ExamPage from "./pages/exam";
 import { hasTranslation, setTranslation } from "./utils/translation";
 import { LANGUAGES } from "./constants";
 import { ROUTES } from "./config/routes";
+import { roleOf } from "./config/roles";
+import useAuth from "./hooks/useAuth";
 import useSettings from "./hooks/useSettings";
 import type { LangCode } from "./types";
 import SessionProvider from "./providers/SessionProvider";
-import ExamPage from "./pages/ExamPage";
 
 const App: React.FC = () => {
   const { settings } = useSettings();
+  const { user } = useAuth();
 
   const langCode = settings.language;
   const [translationVersion, setTranslationVersion] = React.useState<number>(
@@ -111,8 +118,19 @@ const App: React.FC = () => {
                 </RouteGuard>
               }
             >
-              {/* Shared routes */}
-              <Route index element={<HomePage />} />
+              {/* Shared routes. "/" is one URL with two pages behind it — the role switch lives
+                  here rather than in a page, so no page ever imports another. Guests never reach
+                  it; the surrounding RouteGuard has already sent them to sign-in. */}
+              <Route
+                index
+                element={
+                  roleOf(user) === "supervisor" ? (
+                    <SupervisorDashboardPage />
+                  ) : (
+                    <TracksPage />
+                  )
+                }
+              />
               <Route path={ROUTES.profile} element={<ProfilePage />} />
               <Route
                 path={ROUTES.resetPassword}
@@ -127,7 +145,11 @@ const App: React.FC = () => {
                   </RouteGuard>
                 }
               >
-                <Route path={ROUTES.exams} element={<ExamLibraryPage />} />
+                <Route path={ROUTES.exams} element={<ExamTracksPage />} />
+                <Route
+                  path={ROUTES.examLibrary.pattern}
+                  element={<ExamLibraryPage />}
+                />
                 <Route
                   path={ROUTES.examDetail.pattern}
                   element={<ExamDetailPage />}
@@ -137,6 +159,10 @@ const App: React.FC = () => {
                   element={<ExamPage />}
                 />
                 <Route path={ROUTES.students} element={<StudentSearchPage />} />
+                <Route
+                  path={ROUTES.student.pattern}
+                  element={<StudentProfilePage />}
+                />
                 <Route
                   path={ROUTES.studentAttempts.pattern}
                   element={<StudentAttemptsPage />}
@@ -151,7 +177,11 @@ const App: React.FC = () => {
                   </RouteGuard>
                 }
               >
-                <Route path={ROUTES.history} element={<AttemptHistoryPage />} />
+                <Route path={ROUTES.track.pattern} element={<TrackPage />} />
+                <Route
+                  path={ROUTES.trackHistory.pattern}
+                  element={<AttemptHistoryPage />}
+                />
                 <Route path={ROUTES.exam.pattern} element={<ExamPage />} />
               </Route>
             </Route>

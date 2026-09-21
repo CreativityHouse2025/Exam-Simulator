@@ -1,8 +1,11 @@
-import React from 'react'
-import { Eye, EyeOff } from 'lucide-react'
+import React from "react";
+import { Eye, EyeOff } from "lucide-react";
 
-const RevealAnswerButton: React.FC<RevealAnswerButtonProps> = ({ isAnswerRevealed, onToggleAnswerReveal }) => {
-  const IconComponent = isAnswerRevealed ? EyeOff : Eye
+const RevealAnswerButton: React.FC<RevealAnswerButtonProps> = ({
+  isAnswerRevealed,
+  onToggleAnswerReveal,
+}) => {
+  const IconComponent = isAnswerRevealed ? EyeOff : Eye;
 
   return (
     <div
@@ -10,12 +13,12 @@ const RevealAnswerButton: React.FC<RevealAnswerButtonProps> = ({ isAnswerReveale
     >
       <IconComponent size={35} onClick={onToggleAnswerReveal} />
     </div>
-  )
-}
+  );
+};
 
-export default RevealAnswerButton
+export default RevealAnswerButton;
 
 export interface RevealAnswerButtonProps {
-  isAnswerRevealed: boolean
-  onToggleAnswerReveal: () => void
+  isAnswerRevealed: boolean;
+  onToggleAnswerReveal: () => void;
 }

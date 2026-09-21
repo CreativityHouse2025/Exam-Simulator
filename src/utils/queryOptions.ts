@@ -1,6 +1,10 @@
 import { queryOptions } from "@tanstack/react-query";
 import { getAttempts } from "../services/attempt.service";
-import { searchStudents, getStudent, getStudentAttempts } from "../services/student.service";
+import {
+  searchStudents,
+  getStudent,
+  getStudentAttempts,
+} from "../services/student.service";
 import { getTrackExams, getExamQuestions } from "../services/exams.service";
 import { getTracks } from "../services/track.service";
 import type { LangCode } from "../types";
@@ -25,7 +29,10 @@ export const createStudentSearchQueryOptions = (query: string) =>
     retry: 1,
   });
 
-export const createStudentAttemptsQueryOptions = (id: string, trackId: string) =>
+export const createStudentAttemptsQueryOptions = (
+  id: string,
+  trackId: string,
+) =>
   queryOptions({
     queryKey: ["students", id, "attempts", trackId],
     queryFn: ({ signal }) => getStudentAttempts(id, trackId, signal),
@@ -53,7 +60,10 @@ export const createTrackExamsQueryOptions = (trackId: string) =>
   });
 
 /** Supervisor-only, fully disclosed content — the question viewer and preview sessions. */
-export const createExamQuestionsQueryOptions = (examId: number, lang: LangCode) =>
+export const createExamQuestionsQueryOptions = (
+  examId: number,
+  lang: LangCode,
+) =>
   queryOptions({
     queryKey: ["exams", examId, "questions", lang],
     queryFn: () => getExamQuestions(examId, lang),

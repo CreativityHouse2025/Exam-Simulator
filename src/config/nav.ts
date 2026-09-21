@@ -13,11 +13,6 @@ const profile: NavItem = {
   path: ROUTES.profile,
   labelKey: "header.profile",
 };
-const history: NavItem = {
-  icon: ICONS.history,
-  path: ROUTES.history,
-  labelKey: "header.history",
-};
 const exams: NavItem = {
   icon: ICONS.exams,
   path: ROUTES.exams,
@@ -32,7 +27,8 @@ const search: NavItem = {
 // Navigation items for each role
 const ACCESS: Record<ViewerRole, { nav: NavItem[] }> = {
   guest: { nav: [] },
-  student: { nav: [history, profile] },
+  // History is reached from a track page, not globally — it needs a trackId the nav cannot supply.
+  student: { nav: [profile] },
   supervisor: { nav: [search, exams, profile] },
 };
 

@@ -1,10 +1,10 @@
-import React from 'react'
-import BookmarkButton from './BookmarkButton'
-import SaveButtonWithReminder from './SaveButtonWithReminder'
-import RevealAnswerButton from './RevealAnswerButton'
-import { translate } from '../../utils/translation'
-import useSettings from '../../hooks/useSettings'
-import { useExamSession } from '../../hooks/examSession/useExamSession'
+import React from "react";
+import BookmarkButton from "./BookmarkButton";
+import SaveButtonWithReminder from "./SaveButtonWithReminder";
+import RevealAnswerButton from "./RevealAnswerButton";
+import { translate } from "../../utils/translation";
+import useSettings from "../../hooks/useSettings";
+import { useExamSession } from "../../hooks/examSession/useExamSession";
 
 const ExamTopDisplay: React.FC<TopDisplayProps> = ({
   questionCount,
@@ -12,17 +12,38 @@ const ExamTopDisplay: React.FC<TopDisplayProps> = ({
   isAnswerRevealed = false,
   onToggleAnswerReveal,
 }) => {
-  const { index, dirtyQuestions, isSyncing, syncProgress, persists, examDetails } = useExamSession()
-  const { settings } = useSettings()
-  const langCode = settings.language
+  const {
+    index,
+    dirtyQuestions,
+    isSyncing,
+    syncProgress,
+    persists,
+    examDetails,
+  } = useExamSession();
+  const { settings } = useSettings();
+  const langCode = settings.language;
 
-  const question = translate('content.top-display.question', [index + 1, questionCount])
-  const examChipLabel = translate('content.top-display.exam')
+  const question = translate("content.top-display.question", [
+    index + 1,
+    questionCount,
+  ]);
+  const examChipLabel = translate("content.top-display.exam");
 
   return (
-    <div id="exam-header" className="flex flex-col items-start justify-center gap-1.25 mb-7.5">
-      <div id="top-display" className="flex items-center justify-between min-w-full">
-        <div id="question-text" className="flex items-center text-4xl font-bold text-grey-950">{question}</div>
+    <div
+      id="exam-header"
+      className="flex flex-col items-start justify-center gap-1.25 mb-7.5"
+    >
+      <div
+        id="top-display"
+        className="flex items-center justify-between min-w-full"
+      >
+        <div
+          id="question-text"
+          className="flex items-center text-xl md:text-2xl font-bold text-grey-950"
+        >
+          {question}
+        </div>
 
         {!isReview && (
           <div className="flex items-center justify-end flex-wrap gap-1.25 me-1.25 md:gap-2.5 md:me-5">
@@ -46,19 +67,19 @@ const ExamTopDisplay: React.FC<TopDisplayProps> = ({
         )}
       </div>
       <div className="flex items-center gap-2">
-        <div className="py-1.5 px-2.5 font-sans bg-grey-100 text-grey-950 text-base font-semibold rounded-3xl border border-grey-200 w-auto">
+        <div className="py-1 px-2.5 font-sans bg-grey-100 text-grey-950 text-xs md:text-sm font-semibold rounded-3xl border border-grey-200 w-auto">
           {examChipLabel}: {examDetails.name[langCode]}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ExamTopDisplay
+export default ExamTopDisplay;
 
 export interface TopDisplayProps {
-  questionCount: number
-  isReview?: boolean
-  isAnswerRevealed?: boolean
-  onToggleAnswerReveal?: () => void
+  questionCount: number;
+  isReview?: boolean;
+  isAnswerRevealed?: boolean;
+  onToggleAnswerReveal?: () => void;
 }

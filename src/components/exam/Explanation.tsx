@@ -1,30 +1,39 @@
-import type { LangCode } from '../../types'
-import type { DisclosedQuestion, DisclosedAttemptQuestion } from '../../apiTypes'
+import type { LangCode } from "../../types";
+import type {
+  DisclosedQuestion,
+  DisclosedAttemptQuestion,
+} from "../../apiTypes";
 
-import React from 'react'
-import { EyeOff } from 'lucide-react'
-import { formatCorrectAnswerLabel } from '../../utils/format'
-import { isAnswerCorrect } from '../../utils/results'
-import { translate } from '../../utils/translation'
-import useSettings from '../../hooks/useSettings'
-import { cn } from '../ui/utils'
+import React from "react";
+import { EyeOff } from "lucide-react";
+import { formatCorrectAnswerLabel } from "../../utils/format";
+import { isAnswerCorrect } from "../../utils/results";
+import { translate } from "../../utils/translation";
+import useSettings from "../../hooks/useSettings";
+import { cn } from "../ui/utils";
 
 const ExplanationComponent = React.forwardRef<HTMLDivElement, ExplanationProps>(
   ({ question, userAnswer, onHide }, ref) => {
-    const correctPositions = question.choices.filter((choice) => choice.isCorrect).map((choice) => choice.position)
-    const correct = isAnswerCorrect(userAnswer, correctPositions)
+    const correctPositions = question.choices
+      .filter((choice) => choice.isCorrect)
+      .map((choice) => choice.position);
+    const correct = isAnswerCorrect(userAnswer, correctPositions);
 
-    const { settings } = useSettings()
-    const langCode = settings.language
+    const { settings } = useSettings();
+    const langCode = settings.language;
 
     const translated = {
-      yours: translate('content.explain.yours'),
-      correct: translate(`content.explain.${correct ? 'correct' : 'incorrect'}`),
-      answer: translate('content.explain.answer'),
-      explain: translate('content.explain.explain')
-    }
+      yours: translate("content.explain.yours"),
+      correct: translate(
+        `content.explain.${correct ? "correct" : "incorrect"}`,
+      ),
+      answer: translate("content.explain.answer"),
+      explain: translate("content.explain.explain"),
+    };
 
-    const strongColor = correct ? "text-correct-strong" : "text-destructive-strong"
+    const strongColor = correct
+      ? "text-correct-strong"
+      : "text-destructive-strong";
 
     return (
       <div
@@ -49,12 +58,16 @@ const ExplanationComponent = React.forwardRef<HTMLDivElement, ExplanationProps>(
 
         <p>
           {translated.yours}
-          <span className={cn("uppercase font-bold", strongColor)}>{translated.correct}</span>
+          <span className={cn("uppercase font-bold", strongColor)}>
+            {translated.correct}
+          </span>
         </p>
 
         <p>
           {translated.answer}
-          <span className="font-bold text-correct-strong">{formatCorrectAnswerLabel(question, langCode as LangCode)}</span>
+          <span className="font-bold text-correct-strong">
+            {formatCorrectAnswerLabel(question, langCode as LangCode)}
+          </span>
         </p>
 
         {question.explanation && (
@@ -68,16 +81,16 @@ const ExplanationComponent = React.forwardRef<HTMLDivElement, ExplanationProps>(
           </p>
         )}
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
-ExplanationComponent.displayName = 'Explanation'
+ExplanationComponent.displayName = "Explanation";
 
-export default ExplanationComponent
+export default ExplanationComponent;
 
 export interface ExplanationProps {
-  question: DisclosedQuestion | DisclosedAttemptQuestion
-  userAnswer: number[]
-  onHide?: () => void
+  question: DisclosedQuestion | DisclosedAttemptQuestion;
+  userAnswer: number[];
+  onHide?: () => void;
 }

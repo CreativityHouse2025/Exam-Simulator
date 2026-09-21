@@ -1,4 +1,4 @@
-import type { AppErrorCode } from "@shared/api.schema"
+import type { AppErrorCode } from "@shared/api.schema";
 
 /**
  * The feature a failure belongs to. The same code reads differently per domain — `NOT_FOUND` is
@@ -15,18 +15,23 @@ export type DomainErrorCodes = {
     | "SIGNIN_FAILED"
     | "CONFIRMATION_FAILED"
     | "VALIDATION_ERROR"
-  >
+  >;
   attempts: Extract<
     AppErrorCode,
-    "NOT_FOUND" | "FORBIDDEN" | "CONFLICT" | "ATTEMPT_CREATE_FAILED" | "ATTEMPT_SAVE_FAILED" | "ATTEMPT_SUBMIT_FAILED"
-  >
-  students: Extract<AppErrorCode, "NOT_FOUND" | "FORBIDDEN">
-  exams: Extract<AppErrorCode, "NOT_FOUND" | "FORBIDDEN">
-  tracks: Extract<AppErrorCode, "FORBIDDEN">
-  api: Extract<AppErrorCode, "UNAUTHORIZED" | "RATE_LIMITED">
-}
+    | "NOT_FOUND"
+    | "FORBIDDEN"
+    | "CONFLICT"
+    | "ATTEMPT_CREATE_FAILED"
+    | "ATTEMPT_SAVE_FAILED"
+    | "ATTEMPT_SUBMIT_FAILED"
+  >;
+  students: Extract<AppErrorCode, "NOT_FOUND" | "FORBIDDEN">;
+  exams: Extract<AppErrorCode, "NOT_FOUND" | "FORBIDDEN">;
+  tracks: Extract<AppErrorCode, "FORBIDDEN">;
+  api: Extract<AppErrorCode, "UNAUTHORIZED" | "RATE_LIMITED">;
+};
 
-export type ErrorDomain = keyof DomainErrorCodes
+export type ErrorDomain = keyof DomainErrorCodes;
 
 /**
  * An API failure carrying only what identifies it: the error code and the domain that raised it.
@@ -37,7 +42,7 @@ export class AppApiError extends Error {
     public readonly code: AppErrorCode,
     public readonly domain: ErrorDomain,
   ) {
-    super(`${domain}/${code}`)
-    this.name = "AppApiError"
+    super(`${domain}/${code}`);
+    this.name = "AppApiError";
   }
 }

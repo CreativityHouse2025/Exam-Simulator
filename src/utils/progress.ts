@@ -1,5 +1,5 @@
-import type { Answers } from '../types'
-import type { ExamConfigBreak } from '../apiTypes'
+import type { Answers } from "../types";
+import type { ExamConfigBreak } from "../apiTypes";
 
 /**
  * True when the exam's config schedules a break at this exact question index, and it hasn't
@@ -9,14 +9,17 @@ import type { ExamConfigBreak } from '../apiTypes'
 export function shouldOfferBreak(
   breaks: ExamConfigBreak[],
   currentIndex: number,
-  offeredBreaks: number[]
+  offeredBreaks: number[],
 ): boolean {
-  return breaks.some((b) => b.showAtIndex === currentIndex) && !offeredBreaks.includes(currentIndex)
+  return (
+    breaks.some((b) => b.showAtIndex === currentIndex) &&
+    !offeredBreaks.includes(currentIndex)
+  );
 }
 
 export interface ProgressStats {
-  answeredCount: number
-  percentage: number
+  answeredCount: number;
+  percentage: number;
 }
 
 /**
@@ -25,15 +28,19 @@ export interface ProgressStats {
  * @param {Answers} answers - Array of answers
  * @returns ProgressStats object with all progress information
  */
-export function calculateProgressStats(questionCount: number, answers: Answers): ProgressStats {
+export function calculateProgressStats(
+  questionCount: number,
+  answers: Answers,
+): ProgressStats {
   try {
-    const answeredCount = countAnsweredQuestions(answers)
-    const percentage = questionCount > 0 ? Math.round((answeredCount / questionCount) * 100) : 0
+    const answeredCount = countAnsweredQuestions(answers);
+    const percentage =
+      questionCount > 0 ? Math.round((answeredCount / questionCount) * 100) : 0;
 
-    return { answeredCount, percentage }
+    return { answeredCount, percentage };
   } catch (err) {
-    console.error('Error in utils/progress.ts/calculateProgressStats:', err)
-    return { answeredCount: 0, percentage: 0 }
+    console.error("Error in utils/progress.ts/calculateProgressStats:", err);
+    return { answeredCount: 0, percentage: 0 };
   }
 }
 
@@ -44,10 +51,10 @@ export function calculateProgressStats(questionCount: number, answers: Answers):
  */
 export function countAnsweredQuestions(answers: Answers): number {
   try {
-    return answers.filter((answer) => isAnswerProvided(answer)).length
+    return answers.filter((answer) => isAnswerProvided(answer)).length;
   } catch (err) {
-    console.error('Error in utils/progress.ts/countAnsweredQuestions:', err)
-    return 0
+    console.error("Error in utils/progress.ts/countAnsweredQuestions:", err);
+    return 0;
   }
 }
 
@@ -58,11 +65,11 @@ export function countAnsweredQuestions(answers: Answers): number {
  */
 export function isAnswerProvided(answer: number[]): boolean {
   try {
-    if (answer === null || answer === undefined) return false
-    if (Array.isArray(answer)) return answer.length > 0
-    return true
+    if (answer === null || answer === undefined) return false;
+    if (Array.isArray(answer)) return answer.length > 0;
+    return true;
   } catch (err) {
-    console.error('Error in utils/progress.ts/isAnswerProvided:', err)
-    return false
+    console.error("Error in utils/progress.ts/isAnswerProvided:", err);
+    return false;
   }
 }

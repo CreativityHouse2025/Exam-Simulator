@@ -1,24 +1,29 @@
-import React from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { gridItemBackgroundColor } from '../../../utils/color'
-import { useExamSession } from '../../../hooks/examSession/useExamSession'
-import { cn } from '../../ui/utils'
+import React from "react";
+import { useSearchParams } from "react-router-dom";
+import { gridItemBackgroundColor } from "../../../utils/color";
+import { useExamSession } from "../../../hooks/examSession/useExamSession";
+import { cn } from "../../ui/utils";
 
-const CellComponent: React.FC<CellProps> = ({ index: myIndex, bookmarks, answered }) => {
-  const { index, examState, setIndex } = useExamSession()
-  const [searchParams] = useSearchParams()
+const CellComponent: React.FC<CellProps> = ({
+  index: myIndex,
+  bookmarks,
+  answered,
+}) => {
+  const { index, examState, setIndex } = useExamSession();
+  const [searchParams] = useSearchParams();
   // Absence of ?view= (or any value but 'question') means summary — same default ExamMain uses.
-  const isQuestionView = searchParams.get('view') === 'question'
+  const isQuestionView = searchParams.get("view") === "question";
 
-  const isSelected = myIndex === index && (examState !== 'completed' || isQuestionView)
+  const isSelected =
+    myIndex === index && (examState !== "completed" || isQuestionView);
 
   const onClickCell = React.useCallback(
     (newIndex: number) => {
-      if (isSelected) return
-      setIndex(newIndex)
+      if (isSelected) return;
+      setIndex(newIndex);
     },
-    [isSelected, setIndex]
-  )
+    [isSelected, setIndex],
+  );
 
   return (
     <div
@@ -33,13 +38,13 @@ const CellComponent: React.FC<CellProps> = ({ index: myIndex, bookmarks, answere
     >
       {myIndex + 1}
     </div>
-  )
-}
+  );
+};
 
-export default CellComponent
+export default CellComponent;
 
 export interface CellProps {
-  index: number
-  bookmarks: number[]
-  answered: number[]
+  index: number;
+  bookmarks: number[];
+  answered: number[];
 }

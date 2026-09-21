@@ -4,7 +4,10 @@ import { apiFetch } from "../utils/apiFetch";
 import type { ApiResponse } from "@shared/api.schema";
 import type { User } from "@shared/user.schema";
 import type { UserWithTracks } from "@shared/user.schema";
-import type { User as FrontendUser, UserWithTracks as FrontendUserWithTracks } from "../apiTypes";
+import type {
+  User as FrontendUser,
+  UserWithTracks as FrontendUserWithTracks,
+} from "../apiTypes";
 
 async function parseAuthResponse<T>(response: Response): Promise<T> {
   const result: ApiResponse<T> = await response.json();
@@ -20,7 +23,11 @@ async function parseAuthResponse<T>(response: Response): Promise<T> {
  * @param handleUnauthorized - whether a 401 should sign the user out globally. False for the flows
  * that run while signed out (a 401 there is the answer, not an expired session).
  */
-async function postAuth<T>(endpoint: string, body: object, handleUnauthorized = false): Promise<T> {
+async function postAuth<T>(
+  endpoint: string,
+  body: object,
+  handleUnauthorized = false,
+): Promise<T> {
   const response = await apiFetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -31,8 +38,14 @@ async function postAuth<T>(endpoint: string, body: object, handleUnauthorized = 
   return parseAuthResponse<T>(response);
 }
 
-export async function signIn(email: string, password: string): Promise<FrontendUser> {
-  const { user } = await postAuth<{ user: User }>("/api/auth/signin", { email, password });
+export async function signIn(
+  email: string,
+  password: string,
+): Promise<FrontendUser> {
+  const { user } = await postAuth<{ user: User }>("/api/auth/signin", {
+    email,
+    password,
+  });
   return camelcaseKeys(user, { deep: true });
 }
 
@@ -50,7 +63,10 @@ export async function signUp(
   });
 }
 
-export async function exchangeToken(accessToken: string, refreshToken: string): Promise<FrontendUser> {
+export async function exchangeToken(
+  accessToken: string,
+  refreshToken: string,
+): Promise<FrontendUser> {
   const { user } = await postAuth<{ user: User }>("/api/auth/token-exchange", {
     access_token: accessToken,
     refresh_token: refreshToken,
@@ -75,7 +91,9 @@ export async function signOut(): Promise<void> {
 
 /** Restores the signed-in user and their active-enrollment tracks from the session cookies. Throws when there is no valid session. */
 export async function getMe(): Promise<FrontendUserWithTracks> {
-  const response = await apiFetch("/api/auth/me", { handleUnauthorized: false });
+  const response = await apiFetch("/api/auth/me", {
+    handleUnauthorized: false,
+  });
   const result = await parseAuthResponse<UserWithTracks>(response);
   return camelcaseKeys(result, { deep: true });
 }

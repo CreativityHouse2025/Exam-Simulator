@@ -2,8 +2,13 @@ import React from "react";
 import { ToastContext } from "../contexts";
 import { ToastState } from "../types";
 
-const ToastContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [toast, setToast] = React.useState<ToastState>({ translationKey: "", visible: false });
+const ToastContextProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [toast, setToast] = React.useState<ToastState>({
+    translationKey: "",
+    visible: false,
+  });
 
   return (
     <ToastContext.Provider value={{ ...toast, setToast }}>
@@ -11,6 +16,5 @@ const ToastContextProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     </ToastContext.Provider>
   );
 };
-
 
 export default ToastContextProvider;

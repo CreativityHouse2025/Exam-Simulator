@@ -1,12 +1,12 @@
-import React from 'react'
-import Legend from './Legend'
-import { useExamSession } from '../../../hooks/examSession/useExamSession'
+import React from "react";
+import Legend from "./Legend";
+import { useExamSession } from "../../../hooks/examSession/useExamSession";
 
 const LegendsComponent: React.FC = () => {
-  const { examState } = useExamSession()
+  const { examState } = useExamSession();
 
-  const inProgress = examState === 'in-progress'
-  const completed = examState === 'completed'
+  const inProgress = examState === "in-progress";
+  const completed = examState === "completed";
 
   return (
     <div className="h-7.5 flex justify-center items-center border-y border-grey-200">
@@ -20,7 +20,7 @@ const LegendsComponent: React.FC = () => {
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default LegendsComponent
+export default LegendsComponent;

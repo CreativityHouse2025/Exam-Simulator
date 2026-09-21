@@ -8,19 +8,30 @@ import {
   SessionNavigationContext,
   SessionTimerContext,
 } from "../contexts";
-import { startAttempt, getAttempt, getRevision } from "../services/attempt.service";
+import {
+  startAttempt,
+  getAttempt,
+  getRevision,
+} from "../services/attempt.service";
 import { getExamQuestions } from "../services/exams.service";
-import useLatestAttemptId from "../hooks/useLatestAttempt";
 import useToast from "../hooks/useToast";
 import useSessionReducer from "../hooks/useSessionReducer";
 import { resolveErrorKey } from "../utils/errorTranslation";
 import { computeLocalResult } from "../utils/results";
 import { PREVIEW_ATTEMPT_ID, REVISION_CONFIG } from "../constants";
 import type { Session, StartNewExamOptions, ExamContextType } from "../types";
-import type { AttemptDetail, AttemptQuestion, AttemptResult, DisclosedAttemptQuestion } from "../apiTypes";
+import type {
+  AttemptDetail,
+  AttemptQuestion,
+  AttemptResult,
+  DisclosedAttemptQuestion,
+} from "../apiTypes";
 import useSettings from "../hooks/useSettings";
 
-const EMPTY_EXAM_CONTEXT: ExamContextType = { examDetails: null, questions: null };
+const EMPTY_EXAM_CONTEXT: ExamContextType = {
+  examDetails: null,
+  questions: null,
+};
 
 /** Shared by startNewExam and resumeAttempt — both resolve an AttemptDetail alongside its questions. */
 function buildSessionFromAttempt(
@@ -81,9 +92,8 @@ export default function SessionProvider({
   const [startingSession, setStartingSession] = React.useState<Session | null>(
     null,
   );
-  const [examContextValue, setExamContextValue] = React.useState<ExamContextType>(
-    EMPTY_EXAM_CONTEXT,
-  );
+  const [examContextValue, setExamContextValue] =
+    React.useState<ExamContextType>(EMPTY_EXAM_CONTEXT);
   const {
     session,
     sessionUpdate,
@@ -91,16 +101,16 @@ export default function SessionProvider({
     syncProgress,
     submitExam: reducerSubmitExam,
     saveBreakOffer,
+    setIsSyncing,
   } = useSessionReducer(startingSession);
   const { showToast } = useToast();
 
-  const [, setLatestAttemptId] = useLatestAttemptId();
   const langCode = useSettings().settings.language;
 
   /**
    * A real attempt (student) via POST /api/attempts, or a client-only preview session (supervisor)
    * built from the exam's disclosed content — never written to the DB, never role-checked as a
-   * student action. Sets the attemptId in localStorage for "continue latest exam" on cover page.
+   * student action.
    */
   const startNewExam = React.useCallback(
     async (
@@ -133,28 +143,39 @@ export default function SessionProvider({
           // Preview never reaches the server — `persist: false` is the single UI predicate every
           // component reads, so it must disagree with `markPersisted`'s stamp on the exam's own
           // config here, not just with Session.preview.
-          setExamContextValue({ examDetails: { ...exam, config: { ...exam.config, persist: false } }, questions });
+          setExamContextValue({
+            examDetails: {
+              ...exam,
+              config: { ...exam.config, persist: false },
+            },
+            questions,
+          });
           setStartingSession(nextSession);
           return PREVIEW_ATTEMPT_ID;
         }
 
-        const { attempt, questions, exam } = await startAttempt(examId, langCode);
+        const { attempt, questions, exam } = await startAttempt(
+          examId,
+          langCode,
+        );
 
-        setExamContextValue({ examDetails: { ...exam, config: attempt.configSnapshot }, questions });
+        setExamContextValue({
+          examDetails: { ...exam, config: attempt.configSnapshot },
+          questions,
+        });
         setStartingSession(buildSessionFromAttempt(attempt, questions));
-        setLatestAttemptId(attempt.id);
         return attempt.id;
       } catch (error) {
         showToast(resolveErrorKey(error), 5000);
         return null;
       }
     },
-    [showToast, setLatestAttemptId, langCode],
+    [showToast, langCode],
   );
 
   /**
    * Fetches an in-progress (or completed) attempt snapshot, hydrates the full Session state, mounts
-   * the active session, and sets the attemptId in localStorage for "continue latest exam" on cover page.
+   * the active session.
    * A completed attempt comes back disclosed (getAttempt's own rule), so resuming one to review it
    * needs no separate fetch.
    * Navigation to /exams/:id is the caller's responsibility.
@@ -162,18 +183,23 @@ export default function SessionProvider({
   const resumeAttempt = React.useCallback(
     async (attemptId: string): Promise<string | null> => {
       try {
-        const { attempt, questions, exam } = await getAttempt(attemptId, langCode);
+        const { attempt, questions, exam } = await getAttempt(
+          attemptId,
+          langCode,
+        );
 
-        setExamContextValue({ examDetails: { ...exam, config: attempt.configSnapshot }, questions });
+        setExamContextValue({
+          examDetails: { ...exam, config: attempt.configSnapshot },
+          questions,
+        });
         setStartingSession(buildSessionFromAttempt(attempt, questions));
-        setLatestAttemptId(attempt.id);
         return attempt.id;
       } catch (error) {
         showToast(resolveErrorKey(error), 5000);
         return null;
       }
     },
-    [showToast, setLatestAttemptId, langCode],
+    [showToast, langCode],
   );
 
   /**
@@ -182,54 +208,87 @@ export default function SessionProvider({
    * Persisted sessions: the server grades and writes the result to the row rather than returning
    * it (submit_attempt, migration 021), so this follows up with the same read `resumeAttempt`
    * uses — disclosing the questions and returning the authoritative score/status/wrongQuestions in
-   * one round trip. If that follow-up read fails after a successful grade, the attempt is still
-   * marked completed locally (the reducer already dispatched that); the result simply is not shown
-   * yet, and the next resume of this attempt recovers it.
+   * one round trip.
+   *
+   * The session flips to 'completed' only once that read settles, so the summary never renders
+   * before there is a result to put in it. If the read fails the attempt is still marked completed
+   * — it IS submitted server-side — and ExamSummary offers a retry for the missing result.
    *
    * Preview/revision: never reaches the server — graded locally from the disclosed content already
    * in memory (both fetch fully disclosed content up front).
    */
-  const submitExam = React.useCallback(async (): Promise<AttemptResult | null> => {
-    if (!session) return null;
-    const config = examContextValue.examDetails?.config;
+  const submitExam =
+    React.useCallback(async (): Promise<AttemptResult | null> => {
+      if (!session) return null;
+      const config = examContextValue.examDetails?.config;
 
-    if (config?.persist) {
-      const submitted = await reducerSubmitExam();
-      if (!submitted) return null;
+      if (config?.persist) {
+        const submitted = await reducerSubmitExam();
+        if (!submitted) return null;
 
-      try {
-        const { attempt, questions, exam } = await getAttempt(session.id, langCode);
-        const result: AttemptResult = {
-          score: attempt.score,
-          // A just-graded attempt is always 'completed', which submit_attempt always resolves to
-          // pass or fail — never the frontend-only null (that is revision's alone).
-          status: attempt.status,
-          wrongQuestions: attempt.wrongQuestions ?? 0,
-          totalQuestions: attempt.totalQuestions,
-        };
-        sessionUpdate(["SET_RESULT", result]);
-        setExamContextValue({ examDetails: { ...exam, config: attempt.configSnapshot }, questions });
-        return result;
-      } catch (error) {
-        showToast(resolveErrorKey(error), 5000);
-        return null;
+        // The overlay stays up across this read: the exam is submitted but the student should not
+        // reach the summary until a result exists to put in it.
+        setIsSyncing(true);
+        try {
+          const { attempt, questions, exam } = await getAttempt(
+            session.id,
+            langCode,
+          );
+          const result: AttemptResult = {
+            score: attempt.score,
+            // A just-graded attempt is always 'completed', which submit_attempt always resolves to
+            // pass or fail — never the frontend-only null (that is revision's alone).
+            status: attempt.status,
+            wrongQuestions: attempt.wrongQuestions ?? 0,
+            totalQuestions: attempt.totalQuestions,
+          };
+          setExamContextValue({
+            examDetails: { ...exam, config: attempt.configSnapshot },
+            questions,
+          });
+          // Result and state together, so the summary never renders without a result to show.
+          sessionUpdate(
+            ["SET_RESULT", result],
+            ["SET_TIMER_PAUSED", true],
+            ["SET_EXAM_STATE", "completed"],
+          );
+          return result;
+        } catch (error) {
+          showToast(resolveErrorKey(error), 5000);
+          // The attempt IS submitted server-side, so the session must still read as completed —
+          // ExamSummary offers a retry for the missing result rather than a blank page.
+          sessionUpdate(
+            ["SET_TIMER_PAUSED", true],
+            ["SET_EXAM_STATE", "completed"],
+          );
+          return null;
+        } finally {
+          setIsSyncing(false);
+        }
       }
-    }
 
-    if (!examContextValue.questions) return null;
-    const result = computeLocalResult(
-      // Preview and revision both hold fully disclosed content from the moment they're built.
-      examContextValue.questions as DisclosedAttemptQuestion[],
-      session.selectedChoices,
-      config?.passingRate ?? null,
-    );
-    sessionUpdate(
-      ["SET_RESULT", result],
-      ["SET_TIMER_PAUSED", true],
-      ["SET_EXAM_STATE", "completed"],
-    );
-    return result;
-  }, [session, examContextValue, reducerSubmitExam, sessionUpdate, langCode, showToast]);
+      if (!examContextValue.questions) return null;
+      const result = computeLocalResult(
+        // Preview and revision both hold fully disclosed content from the moment they're built.
+        examContextValue.questions as DisclosedAttemptQuestion[],
+        session.selectedChoices,
+        config?.passingRate ?? null,
+      );
+      sessionUpdate(
+        ["SET_RESULT", result],
+        ["SET_TIMER_PAUSED", true],
+        ["SET_EXAM_STATE", "completed"],
+      );
+      return result;
+    }, [
+      session,
+      examContextValue,
+      reducerSubmitExam,
+      sessionUpdate,
+      langCode,
+      showToast,
+      setIsSyncing,
+    ]);
 
   /**
    * Fetches the "wrong or unanswered" set of a completed attempt and mounts an ephemeral revision
@@ -244,7 +303,10 @@ export default function SessionProvider({
       if (session?.preview) return null;
 
       try {
-        const { parentExam, questions } = await getRevision(attemptId, langCode);
+        const { parentExam, questions } = await getRevision(
+          attemptId,
+          langCode,
+        );
 
         if (questions.length === 0) {
           showToast("attempts.errors.no-mistakes", 5000);

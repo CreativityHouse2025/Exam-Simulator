@@ -1,5 +1,5 @@
-import { useSessionTimer } from '../../contexts'
-import { SESSION_ACTION_TYPES } from '../../constants'
+import { useSessionTimer } from "../../contexts";
+import { SESSION_ACTION_TYPES } from "../../constants";
 
 /**
  * The clock, split out of `useExamSession` on purpose: this is the only hook that subscribes to
@@ -8,15 +8,15 @@ import { SESSION_ACTION_TYPES } from '../../constants'
  * `useExamSession` and stays off the tick.
  */
 export function useExamTimer() {
-  const { time, maxTime, paused, update } = useSessionTimer()
+  const { time, maxTime, paused, update } = useSessionTimer();
 
   const setPaused = (value: boolean) => {
-    update!([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, value])
-  }
+    update!([SESSION_ACTION_TYPES.SET_TIMER_PAUSED, value]);
+  };
 
   const setTime = (value: number) => {
-    update!([SESSION_ACTION_TYPES.SET_TIME, value])
-  }
+    update!([SESSION_ACTION_TYPES.SET_TIME, value]);
+  };
 
-  return { time, maxTime, paused, setPaused, setTime }
+  return { time, maxTime, paused, setPaused, setTime };
 }

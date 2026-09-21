@@ -1,34 +1,44 @@
-import { Button } from "@/components/ui/button"
-import useDirectionalChevron from "@/hooks/useDirectionalChevron"
-import { translate } from "@/utils/translation"
+import { Button } from "@/components/ui/button";
+import useDirectionalChevron from "@/hooks/useDirectionalChevron";
+import { translate } from "@/utils/translation";
 
 type PagerProps = {
   /** 0-based current page. */
-  page: number
-  pageCount: number
-  onChange: (page: number) => void
+  page: number;
+  pageCount: number;
+  onChange: (page: number) => void;
   /** Show the "Previous"/"Next" labels beside the chevrons. Defaults to icon-only. */
-  showText?: boolean
+  showText?: boolean;
   /** Center the three items (Previous · indicator · Next) instead of spreading them apart. Pass a `gap-*` class for spacing. */
-  centered?: boolean
+  centered?: boolean;
   /** Pre-translated noun shown in the indicator, e.g. "Page 1 / 2" or "Section 1 / 2". */
-  label: string
-  className?: string
-}
+  label: string;
+  className?: string;
+};
 
 /** Previous/next pagination control with a "<label> X / Y" indicator. Chevrons flip and Previous/Next translate under RTL. */
-const Pager = ({ page, pageCount, onChange, showText = false, centered = false, label, className }: PagerProps) => {
-  const { PrevIcon, NextIcon } = useDirectionalChevron()
+const Pager = ({
+  page,
+  pageCount,
+  onChange,
+  showText = false,
+  centered = false,
+  label,
+  className,
+}: PagerProps) => {
+  const { PrevIcon, NextIcon } = useDirectionalChevron();
 
   const t = {
     previous: translate("exam.details.pager.previous"),
-    next: translate("exam.details.pager.next")
-  }
+    next: translate("exam.details.pager.next"),
+  };
 
-  const size = showText ? "sm" : "icon-sm"
+  const size = showText ? "sm" : "icon-sm";
 
   return (
-    <div className={`flex items-center ${centered ? "justify-center" : "justify-between"} ${className ?? ""}`}>
+    <div
+      className={`flex items-center ${centered ? "justify-center" : "justify-between"} ${className ?? ""}`}
+    >
       <Button
         variant="outline"
         size={size}
@@ -57,7 +67,7 @@ const Pager = ({ page, pageCount, onChange, showText = false, centered = false, 
         <NextIcon className="size-4" />
       </Button>
     </div>
-  )
-}
+  );
+};
 
-export default Pager
+export default Pager;

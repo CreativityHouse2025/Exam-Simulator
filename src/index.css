@@ -65,11 +65,13 @@
   position: fixed;
   inset: 0;
   z-index: -10;
+  /* Accents echo the plum header, but keyed off the lighter --secondary-light at low alpha: the
+     dark plum at high alpha turned the near-white base grey. */
   background:
-    radial-gradient(ellipse 80% 65% at 50% 115%, rgba(255, 220, 154, 0.87) 0%, transparent 55%),
-    radial-gradient(ellipse 55% 45% at 90% 75%, rgba(181, 150, 93, 0.2) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 40% at 10% 85%, rgba(181, 150, 93, 0.14) 0%, transparent 45%),
-    radial-gradient(ellipse 90% 80% at 50% 50%, #fafaf8 0%, #f2f0ec 45%, #e9e7e3 100%);
+    radial-gradient(ellipse 80% 65% at 50% 115%, rgba(152, 94, 140, 0.16) 0%, transparent 58%),
+    radial-gradient(ellipse 55% 45% at 88% 72%, rgba(181, 150, 93, 0.09) 0%, transparent 52%),
+    radial-gradient(ellipse 60% 50% at 12% 82%, rgba(152, 94, 140, 0.09) 0%, transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #fdfbfd 55%, #f8f3f7 100%);
 }
 
 @keyframes fadeIn {
@@ -132,6 +134,9 @@
 }
 
 :root {
+  /* App.tsx sets documentElement.lang, so the Arabic face swaps in on language change. */
+  --app-font: "Open Sans", sans-serif;
+
   --primary: #b5965d;
   --primary-foreground: #ffffff;
   --secondary: #593752;
@@ -170,6 +175,9 @@
   --ring: #b5965d;
   --card: #ffffff;
   --card-foreground: #333333;
+  /* Radix popovers (Select, Dialog) render on these; without them the panel has no background. */
+  --popover: #ffffff;
+  --popover-foreground: #333333;
   --muted: #e6e5e5;
   --muted-foreground: #817e7e;
 
@@ -287,137 +295,6 @@
   transition: stroke-dashoffset 1s linear;
 }
 
-/* AttemptHistorySkeleton.tsx's shimmer placeholder. Colors and animation are the same for every
-   instance; only width/height/radius vary per skeleton rect, which stay inline style (they come
-   from a data table of arbitrary placeholder sizes, not a design-scale value). */
-.skeleton-shimmer {
-  background: linear-gradient(90deg, #ebebeb 25%, #d6d6d6 50%, #ebebeb 75%);
-  background-size: 1200px 100%;
-  animation: skeleton-wave 1.5s infinite linear;
-}
-@keyframes skeleton-wave {
-  0% {
-    background-position: -600px 0;
-  }
-  100% {
-    background-position: 600px 0;
-  }
-}
-
-/* exam-dropdown/Dropdown.tsx — the overlay and menu-wrapper each transition `visibility` with a
-   delay that depends on open/closed state (no delay appearing, delayed disappearing so the
-   opacity/blur fade finishes first). Multiple properties with different individual delays isn't
-   one Tailwind transition utility's shape. */
-.exam-dropdown-overlay {
-  transition:
-    backdrop-filter 0.25s ease,
-    background 0.25s ease,
-    visibility 0s 0.25s;
-}
-.exam-dropdown-overlay[data-open="true"] {
-  transition:
-    backdrop-filter 0.25s ease,
-    background 0.25s ease,
-    visibility 0s 0s;
-}
-.exam-dropdown-wrapper {
-  transition: visibility 0s 0.2s;
-}
-.exam-dropdown-wrapper[data-open="true"] {
-  transition: visibility 0s 0s;
-}
-
-/* exam-dropdown/Dropdown.tsx's menu box — `min()` (no Tailwind utility) and a custom box-shadow
-   that doesn't match any of the app's 3 ported shadow tokens. */
-.exam-dropdown-menu {
-  width: min(92vw, 1200px);
-  max-height: 85vh;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-}
-
-/* exam-dropdown/MenuItem.tsx's hover shadow — same "no matching token" reason. */
-.exam-dropdown-menu-item:hover {
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* AttemptHistoryStyles.tsx's Tr/Td — a responsive table that's a translucent card on mobile and
-   a real <table> row on desktop. Kept as one cohesive plain-CSS pair (not split between Tailwind
-   utilities and a plain ::before) because: (1) the mobile ::before's `content: attr(data-label)`
-   reads a live DOM attribute — attr() has no Tailwind representation at all, static or dynamic;
-   (2) the desktop-only "row hover recolors every cell" rule is cross-element, cleaner as a plain
-   descendant selector than wiring up Tailwind's `group`/`group-hover` here. Only the per-row
-   `animation-delay` (position in the list) stays as inline style in the component — Tailwind's
-   `delay-*` is dynamic but only for literal class names its scanner can see in source, not a
-   runtime-computed one. */
-.attempt-tr {
-  display: flex;
-  flex-direction: column;
-  background: transparent;
-  border: 1px solid var(--grey-400);
-  border-radius: 12px;
-  padding: 14px 16px;
-  margin-bottom: 10px;
-  animation: fade-in-only 0.45s ease-out both;
-}
-@keyframes fade-in-only {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@media (min-width: 768px) {
-  .attempt-tr {
-    display: table-row;
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    padding: 0;
-    margin-bottom: 0;
-  }
-  .attempt-tr:hover .attempt-td {
-    background: rgba(181, 150, 93, 0.04);
-  }
-}
-
-.attempt-td {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 0;
-  font-size: 13.5px;
-  color: var(--black);
-  border-bottom: 1px solid var(--grey-100);
-}
-.attempt-td:last-child {
-  border-bottom: none;
-}
-.attempt-td::before {
-  content: attr(data-label);
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--grey-900);
-  margin-inline-end: 10px;
-  flex-shrink: 0;
-}
-@media (min-width: 768px) {
-  .attempt-td {
-    display: table-cell;
-    padding: 16.5px 14px;
-    border-bottom: 1px solid var(--grey-200);
-    vertical-align: middle;
-    transition: background 0.15s ease;
-  }
-  .attempt-td::before {
-    display: none;
-  }
-  .attempt-td:last-child {
-    border-bottom: 1px solid var(--grey-200);
-  }
-}
 
 .custom-checkbox::after {
   content: '';
@@ -430,9 +307,13 @@
   transform: rotate(45deg) translate(-0.5px, -1px);
 }
 
+:root[lang="ar"] {
+  --app-font: "Noto Kufi Arabic", "Open Sans", sans-serif;
+}
+
 @theme inline {
-  /* App font — keep in sync with theme.fontFamily in src/constants.ts */
-  --font-sans: "Open Sans", sans-serif;
+  /* `inline` keeps this a var() reference, so the per-language override resolves at runtime. */
+  --font-sans: var(--app-font);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
@@ -464,6 +345,8 @@
   --color-ring: var(--ring);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 

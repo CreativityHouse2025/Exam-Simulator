@@ -1,7 +1,13 @@
-import { useSearchParams } from 'react-router-dom'
-import { useSessionControl, useSessionNavigation, useSessionExam, useSessionData, useExam } from '../../contexts'
-import { SESSION_ACTION_TYPES } from '../../constants'
-import type { Answers } from '../../types'
+import { useSearchParams } from "react-router-dom";
+import {
+  useSessionControl,
+  useSessionNavigation,
+  useSessionExam,
+  useSessionData,
+  useExam,
+} from "../../contexts";
+import { SESSION_ACTION_TYPES } from "../../constants";
+import type { Answers } from "../../types";
 
 /**
  * The single facade for the exam session tree. Exposes exam content, session state, config-derived
@@ -13,54 +19,69 @@ import type { Answers } from '../../types'
  * and content tree off the tick.
  */
 export function useExamSession() {
-  const { session, startRevision, submitExam, syncProgress, saveBreakOffer } = useSessionControl()
-  const { index, update: navUpdate } = useSessionNavigation()
-  const { examState, result } = useSessionExam()
-  const { bookmarks, selectedChoices, dirtyQuestions, offeredBreaks, isSyncing, update: dataUpdate } = useSessionData()
-  const { examDetails, questions } = useExam()
-  const [, setSearchParams] = useSearchParams()
+  const { session, startRevision, submitExam, syncProgress, saveBreakOffer } =
+    useSessionControl();
+  const { index, update: navUpdate } = useSessionNavigation();
+  const { examState, result } = useSessionExam();
+  const {
+    bookmarks,
+    selectedChoices,
+    dirtyQuestions,
+    offeredBreaks,
+    isSyncing,
+    update: dataUpdate,
+  } = useSessionData();
+  const { examDetails, questions } = useExam();
+  const [, setSearchParams] = useSearchParams();
 
-  const config = examDetails!.config
+  const config = examDetails!.config;
 
   // A persisted index can outlive its question set (revision subset, shrunk bank) — clamp rather
   // than hand consumers an undefined question.
-  const questionList = questions ?? []
-  const safeIndex = questionList.length === 0 ? 0 : Math.min(Math.max(index, 0), questionList.length - 1)
-  const question = questionList[safeIndex]
+  const questionList = questions ?? [];
+  const safeIndex =
+    questionList.length === 0
+      ? 0
+      : Math.min(Math.max(index, 0), questionList.length - 1);
+  const question = questionList[safeIndex];
 
   // Once completed, `?view=` decides summary vs. question (see ExamMain) — jumping to a question
   // from the grid or footer arrows must switch out of the summary the same way the old
   // SET_REVIEW_STATE batch did. A no-op while in-progress: nothing reads `view` before completion.
   const setIndex = (newIndex: number) => {
-    navUpdate!([SESSION_ACTION_TYPES.SET_INDEX, newIndex])
-    if (examState === 'completed') {
+    navUpdate!([SESSION_ACTION_TYPES.SET_INDEX, newIndex]);
+    if (examState === "completed") {
       setSearchParams(
         (prev) => {
-          const next = new URLSearchParams(prev)
-          next.set('view', 'question')
-          return next
+          const next = new URLSearchParams(prev);
+          next.set("view", "question");
+          return next;
         },
-        { replace: true }
-      )
+        { replace: true },
+      );
     }
-  }
+  };
 
   const toggleBookmark = () => {
-    const isBookmarked = bookmarks.includes(safeIndex)
-    const newBookmarks = isBookmarked ? bookmarks.filter((i) => i !== safeIndex) : [...bookmarks, safeIndex]
+    const isBookmarked = bookmarks.includes(safeIndex);
+    const newBookmarks = isBookmarked
+      ? bookmarks.filter((i) => i !== safeIndex)
+      : [...bookmarks, safeIndex];
     dataUpdate!(
       [SESSION_ACTION_TYPES.SET_BOOKMARKS, newBookmarks],
-      [SESSION_ACTION_TYPES.MARK_DIRTY, safeIndex]
-    )
-  }
+      [SESSION_ACTION_TYPES.MARK_DIRTY, safeIndex],
+    );
+  };
 
   const setAnswer = (questionIndex: number, newChoices: number[]) => {
-    const newSelected: Answers = selectedChoices.map((choices, i) => (i === questionIndex ? newChoices : choices))
+    const newSelected: Answers = selectedChoices.map((choices, i) =>
+      i === questionIndex ? newChoices : choices,
+    );
     dataUpdate!(
       [SESSION_ACTION_TYPES.SET_ANSWERS, newSelected],
-      [SESSION_ACTION_TYPES.MARK_DIRTY, questionIndex]
-    )
-  }
+      [SESSION_ACTION_TYPES.MARK_DIRTY, questionIndex],
+    );
+  };
 
   return {
     // content
@@ -80,8 +101,10 @@ export function useExamSession() {
     isSyncing,
 
     // capabilities — derived once, here, from config. Components never read ExamConfig directly.
-    isTimed: config.examDurationMinutes !== null,
-    canPause: config.examDurationMinutes !== null,
+    // A real countdown exists. Null (untimed) and 0 (revision) are both false — the Timer still
+    // renders in both cases, it just shows the placeholder.
+    isTimed: (config.examDurationMinutes ?? 0) > 0,
+    canPause: (config.examDurationMinutes ?? 0) > 0,
     canReveal: config.canRevealAnswers,
     canRetake: config.allowRetryWrong && config.persist,
     persists: config.persist,
@@ -96,5 +119,5 @@ export function useExamSession() {
     submitExam,
     syncProgress,
     saveBreakOffer,
-  }
+  };
 }

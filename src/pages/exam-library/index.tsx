@@ -1,124 +1,87 @@
-import React from "react"
-import { useQuery } from "@tanstack/react-query"
-import { Download, FileQuestion } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import SearchBar from "@/components/SearchBar"
-import BackButton from "@/components/BackButton"
-import ExamCard from "./ExamCard"
-import useSettings from "@/hooks/useSettings"
-import useAuth from "@/hooks/useAuth"
-import { translate } from "@/utils/translation"
-import { LANGUAGES } from "@/constants"
-import { ROUTES } from "@/config/routes"
-import { createTrackExamsQueryOptions } from "@/utils/queryOptions"
-import type { ExamListItem } from "./types"
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Lock } from "lucide-react";
+import ExamCard from "./ExamCard";
+import ExamBrowser from "@/components/exams/ExamBrowser";
+import EmptyState from "@/components/states/EmptyState";
+import BackButton from "@/components/BackButton";
+import useAuth from "@/hooks/useAuth";
+import useSettings from "@/hooks/useSettings";
+import { createTrackExamsQueryOptions } from "@/utils/queryOptions";
+import { translate } from "@/utils/translation";
+import { ROUTES } from "@/config/routes";
 
-type Tab = "all" | "full" | "domain"
-
-const TAB_VALUES: Tab[] = ["all", "full", "domain"]
-
-/** Supervisor-only: browse every exam in the system (full exams + domain/category exams). */
+/**
+ * `/exams/:trackId` — every exam in one track, for a supervisor.
+ *
+ * The page holds no filtering logic of its own: it fetches the track's exams and hands them to
+ * `ExamBrowser`, which is also what the student's track page uses. All this page decides is what
+ * a single card offers.
+ */
 const ExamLibraryPage: React.FC = () => {
-  const { settings } = useSettings()
-  const langCode = settings.language
-  // The supervisor's own first enrolled track — this page has no track picker.
-  const { enrolledTracks } = useAuth()
-  const trackId = enrolledTracks[0]?.id ?? ""
+  const { trackId = "" } = useParams();
+  const { settings } = useSettings();
+  const langCode = settings.language;
+  const { enrolledTracks } = useAuth();
 
-  const [tab, setTab] = React.useState<Tab>("all")
-  const [search, setSearch] = React.useState("")
+  const track = enrolledTracks.find((enrolled) => enrolled.id === trackId);
+  const isEnrolled = track !== undefined;
 
-  const { data } = useQuery({ ...createTrackExamsQueryOptions(trackId), enabled: trackId !== "" })
+  const examsQuery = useQuery({
+    ...createTrackExamsQueryOptions(trackId),
+    enabled: isEnrolled,
+  });
 
-  const exams: ExamListItem[] = React.useMemo(() => {
-    if (!data) return []
-
-    // full-exams.json/categories.json/exam-types.json are gone — exams come from the track's own
-    // list now. "full"/"domain" is derived from each exam's type name, the same distinction the
-    // old JSON split full/ vs domain/ files on; duration and passing rate are each exam's own
-    // config rather than one static value per type.
-    const typeById = new Map(data.types.map((examType) => [examType.id, examType]))
-
-    return data.exams.map((exam) => {
-      const typeName = typeById.get(exam.typeId)?.name.en.toLowerCase() ?? ""
-      return {
-        type: typeName.includes("domain") ? ("domain" as const) : ("full" as const),
-        id: exam.id,
-        name: exam.name[langCode],
-        durationMinutes: exam.config.examDurationMinutes ?? 0,
-        passingRate: exam.config.passingRate ?? 0,
-        questionCount: exam.questionCount
-      }
-    })
-  }, [data, langCode])
-
-  const byTab = tab === "all" ? exams : exams.filter((exam) => exam.type === tab)
-  const filtered = search.trim() ? byTab.filter((exam) => exam.name.toLowerCase().includes(search.trim().toLowerCase())) : byTab
-
-  const counts = {
-    all: exams.length,
-    full: exams.filter((exam) => exam.type === "full").length,
-    domain: exams.filter((exam) => exam.type === "domain").length
-  }
-
-  const t = {
-    back: translate("exam.library.back"),
-    title: translate("exam.library.title"),
-    subtitle: translate("exam.library.subtitle"),
-    export: translate("exam.export"),
-    search: translate("exam.library.search"),
-    empty: translate("exam.library.empty"),
-    tabs: {
-      all: translate("exam.library.tabs.all"),
-      full: translate("exam.library.tabs.full"),
-      domain: translate("exam.library.tabs.domain")
-    }
+  // Enrollment gates the whole page; `/api/tracks/:trackId/exams` would answer 403 anyway.
+  if (!isEnrolled) {
+    return (
+      <div className="mx-auto w-full max-w-4xl px-4 py-8">
+        <BackButton to={ROUTES.exams} text={translate("exam.tracks.back")} />
+        <EmptyState
+          icon={Lock}
+          message={translate("tracks.locked")}
+          hint={translate("tracks.locked-hint")}
+          className="mt-6"
+        />
+      </div>
+    );
   }
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-8">
-      <BackButton to={ROUTES.home} text={t.back} />
+      <BackButton to={ROUTES.exams} text={translate("exam.tracks.back")} />
 
-      <div className="mb-6 flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-tertiary">{t.title}</h1>
-          <p className="mt-1.5 mb-0 text-xs text-grey-800">{t.subtitle}</p>
-        </div>
+      <header className="mb-6">
+        <h1 className="text-2xl font-bold text-tertiary md:text-3xl">
+          {track.name[langCode]}
+        </h1>
+        <p className="mt-1.5 text-sm text-grey-800">
+          {translate("exam.library.subtitle")}
+        </p>
+      </header>
 
-        {/* TODO(export-csv): unhide once CSV export is implemented (spec AC3). Kept rendered-but-hidden for now. */}
-        <Button variant="outline" size="sm" className="hidden gap-2 text-grey-900 hover:text-tertiary">
-          <Download className="size-4 text-primary" />
-          {t.export}
-        </Button>
-      </div>
-
-      <SearchBar value={search} onChange={setSearch} placeholder={t.search} className="mb-4" />
-
-      <Tabs value={tab} onValueChange={(value) => setTab(value as Tab)} dir={LANGUAGES[langCode].dir} className="mb-6">
-        <TabsList>
-          {TAB_VALUES.map((value) => (
-            <TabsTrigger key={value} value={value} className="cursor-pointer data-[state=active]:text-tertiary">
-              {t.tabs[value]} ({counts[value]})
-            </TabsTrigger>
-          ))}
-        </TabsList>
-      </Tabs>
-
-      {filtered.length === 0 ? (
-        <div className="flex flex-col items-center gap-3 py-20">
-          <FileQuestion className="size-9 text-grey-500" strokeWidth={1.4} />
-          <p className="text-sm text-grey-800">{t.empty}</p>
-        </div>
-      ) : (
-        <div className="flex animate-[fadeIn_0.25s_ease-out] flex-col gap-3">
-          {filtered.map((exam) => (
-            <ExamCard key={`${exam.type}-${exam.id}`} exam={exam} />
-          ))}
-        </div>
-      )}
+      <ExamBrowser
+        exams={examsQuery.data?.exams ?? []}
+        types={examsQuery.data?.types ?? []}
+        langCode={langCode}
+        isPending={examsQuery.isPending}
+        isError={examsQuery.isError}
+        errorMessage={translate("exams.errors.fetch")}
+        onRetry={examsQuery.refetch}
+        isRetrying={examsQuery.isFetching}
+        emptyMessage={translate("exams.empty")}
+        renderCard={(exam, examType) => (
+          <ExamCard
+            exam={exam}
+            examType={examType}
+            trackId={trackId}
+            langCode={langCode}
+          />
+        )}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default ExamLibraryPage
+export default ExamLibraryPage;

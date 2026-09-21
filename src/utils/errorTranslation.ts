@@ -1,15 +1,15 @@
-import { AppApiError } from "../errors"
-import type { DomainErrorCodes, ErrorDomain } from "../errors"
-import type { AppErrorCode } from "@shared/api.schema"
+import { AppApiError } from "../errors";
+import type { DomainErrorCodes, ErrorDomain } from "../errors";
+import type { AppErrorCode } from "@shared/api.schema";
 
-const UNKNOWN_ERROR_KEY = "errors.unknown"
+const UNKNOWN_ERROR_KEY = "errors.unknown";
 
 type ErrorDomainEntry<D extends ErrorDomain> = {
   /** Codes whose copy is specific to this domain. Every declared code must be mapped. */
-  codes: Record<DomainErrorCodes[D], string>
+  codes: Record<DomainErrorCodes[D], string>;
   /** Used for any code the domain does not declare — the server can return codes a domain never anticipated. */
-  fallback: string
-}
+  fallback: string;
+};
 
 const ERROR_DOMAINS: { [D in ErrorDomain]: ErrorDomainEntry<D> } = {
   auth: {
@@ -62,7 +62,7 @@ const ERROR_DOMAINS: { [D in ErrorDomain]: ErrorDomainEntry<D> } = {
     },
     fallback: UNKNOWN_ERROR_KEY,
   },
-}
+};
 
 /**
  * Resolves any caught value to a translation key. Callers pass the key straight to `showToast`
@@ -70,9 +70,9 @@ const ERROR_DOMAINS: { [D in ErrorDomain]: ErrorDomainEntry<D> } = {
  * switch between the failure and the render still produces the right text.
  */
 export function resolveErrorKey(error: unknown): string {
-  if (!(error instanceof AppApiError)) return UNKNOWN_ERROR_KEY
+  if (!(error instanceof AppApiError)) return UNKNOWN_ERROR_KEY;
 
-  const { codes, fallback } = ERROR_DOMAINS[error.domain]
-  const keysByCode: Partial<Record<AppErrorCode, string>> = codes
-  return keysByCode[error.code] ?? fallback
+  const { codes, fallback } = ERROR_DOMAINS[error.domain];
+  const keysByCode: Partial<Record<AppErrorCode, string>> = codes;
+  return keysByCode[error.code] ?? fallback;
 }

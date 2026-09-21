@@ -5,7 +5,10 @@
  * drift from the wire contract in `shared/schemas/`.
  */
 import type { CamelCaseKeys } from "camelcase-keys";
-import type { Track as SharedTrack, EnrolledTrack as SharedEnrolledTrack } from "@shared/track.schema";
+import type {
+  Track as SharedTrack,
+  EnrolledTrack as SharedEnrolledTrack,
+} from "@shared/track.schema";
 import type {
   BilingualText,
   ExamType as SharedExamType,
@@ -29,7 +32,10 @@ import type {
   AttemptWithExam as SharedAttemptWithExam,
   Revision as SharedRevision,
 } from "@shared/attempt.schema";
-import type { User as SharedUser, UserWithTracks as SharedUserWithTracks } from "@shared/user.schema";
+import type {
+  User as SharedUser,
+  UserWithTracks as SharedUserWithTracks,
+} from "@shared/user.schema";
 import type { StudentProfile as SharedStudentProfile } from "@shared/student.schema";
 
 // Already camelCase-safe (single-word ar/en keys) — re-exported so callers never import @shared directly.
@@ -47,31 +53,58 @@ export type ExamConfigBreak = CamelCaseKeys<SharedExamConfigBreak, true>;
  * graded and never written to the DB. Every real config a service returns sets `persist: true`
  * and always carries a real `passingRate`.
  */
-export type ExamConfig = Omit<CamelCaseKeys<SharedExamConfig, true>, "passingRate"> & {
+export type ExamConfig = Omit<
+  CamelCaseKeys<SharedExamConfig, true>,
+  "passingRate"
+> & {
   passingRate: number | null;
   persist: boolean;
 };
 export type Exam = CamelCaseKeys<SharedExam, true>;
-export type ExamDetails = Omit<CamelCaseKeys<SharedExamDetails, true>, "config"> & { config: ExamConfig };
+export type ExamDetails = Omit<
+  CamelCaseKeys<SharedExamDetails, true>,
+  "config"
+> & { config: ExamConfig };
 export type Choice = CamelCaseKeys<SharedChoice, true>;
 export type DisclosedChoice = CamelCaseKeys<SharedDisclosedChoice, true>;
 export type Question = CamelCaseKeys<SharedQuestion, true>;
 export type DisclosedQuestion = CamelCaseKeys<SharedDisclosedQuestion, true>;
-export type TrackExams = Omit<CamelCaseKeys<SharedTrackExams, true>, "exams"> & { exams: ExamDetails[] };
-export type ExamWithQuestions = Omit<CamelCaseKeys<SharedExamWithQuestions, true>, "exam"> & { exam: ExamDetails };
+export type TrackExams = Omit<
+  CamelCaseKeys<SharedTrackExams, true>,
+  "exams"
+> & { exams: ExamDetails[] };
+export type ExamWithQuestions = Omit<
+  CamelCaseKeys<SharedExamWithQuestions, true>,
+  "exam"
+> & { exam: ExamDetails };
 
-export type AttemptSummary = Omit<CamelCaseKeys<SharedAttemptSummary, true>, "configSnapshot"> & {
+export type AttemptSummary = Omit<
+  CamelCaseKeys<SharedAttemptSummary, true>,
+  "configSnapshot"
+> & {
   configSnapshot: ExamConfig;
 };
-export type AttemptDetail = Omit<CamelCaseKeys<SharedAttemptDetail, true>, "configSnapshot"> & {
+export type AttemptDetail = Omit<
+  CamelCaseKeys<SharedAttemptDetail, true>,
+  "configSnapshot"
+> & {
   configSnapshot: ExamConfig;
 };
 export type AttemptQuestion = CamelCaseKeys<SharedAttemptQuestion, true>;
-export type DisclosedAttemptQuestion = CamelCaseKeys<SharedDisclosedAttemptQuestion, true>;
-export type AttemptWithQuestions = Omit<CamelCaseKeys<SharedAttemptWithQuestions, true>, "attempt"> & {
+export type DisclosedAttemptQuestion = CamelCaseKeys<
+  SharedDisclosedAttemptQuestion,
+  true
+>;
+export type AttemptWithQuestions = Omit<
+  CamelCaseKeys<SharedAttemptWithQuestions, true>,
+  "attempt"
+> & {
   attempt: AttemptDetail;
 };
-export type AttemptWithExam = Omit<CamelCaseKeys<SharedAttemptWithExam, true>, "attempt"> & { attempt: AttemptDetail };
+export type AttemptWithExam = Omit<
+  CamelCaseKeys<SharedAttemptWithExam, true>,
+  "attempt"
+> & { attempt: AttemptDetail };
 
 /**
  * Never on the wire — `submit_attempt` writes the grade to the row (score, status,
@@ -94,6 +127,8 @@ export type UserWithTracks = CamelCaseKeys<SharedUserWithTracks, true>;
 export type StudentProfile = CamelCaseKeys<SharedStudentProfile, true>;
 
 /** Stamps a real, wire-derived config as persisted. Every service that maps a config calls this. */
-export function markPersisted(config: CamelCaseKeys<SharedExamConfig, true>): ExamConfig {
+export function markPersisted(
+  config: CamelCaseKeys<SharedExamConfig, true>,
+): ExamConfig {
   return { ...config, persist: true };
 }

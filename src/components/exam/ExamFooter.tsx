@@ -1,23 +1,19 @@
-import React from 'react'
-import FooterShell from './Footer/FooterShell'
-import Arrows from './Footer/Arrows'
-import Timer from './Timer'
-import { useExamSession } from '../../hooks/examSession/useExamSession'
+import React from "react";
+import FooterShell from "./Footer/FooterShell";
+import Arrows from "./Footer/Arrows";
+import Timer from "./Timer";
 
 interface ExamFooterProps {
-  open: boolean
-  questionCount: number
+  open: boolean;
+  questionCount: number;
 }
 
-const ExamFooter: React.FC<ExamFooterProps> = ({ open, questionCount }) => {
-  const { isTimed } = useExamSession()
+// Timer renders unconditionally — it shows --:--:-- when maxTime is 0 (untimed, revision, preview).
+const ExamFooter: React.FC<ExamFooterProps> = ({ open, questionCount }) => (
+  <FooterShell open={open}>
+    <Arrows questionCount={questionCount} />
+    <Timer />
+  </FooterShell>
+);
 
-  return (
-    <FooterShell open={open}>
-      <Arrows questionCount={questionCount} />
-      {isTimed && <Timer />}
-    </FooterShell>
-  )
-}
-
-export default ExamFooter
+export default ExamFooter;

@@ -1,17 +1,19 @@
-import { AppApiError } from "../errors"
-import type { ApiError, AppErrorCode } from "@shared/api.schema"
+import { AppApiError } from "../errors";
+import type { ApiError, AppErrorCode } from "@shared/api.schema";
 
-let onUnauthorized: (() => Promise<void>) | null = null
+let onUnauthorized: (() => Promise<void>) | null = null;
 
-const VERCEL_RATE_LIMIT_RESPONSE_STATUS = 429
-const UNAUTHORIZED_RESPONSE_STATUS = 401
+const VERCEL_RATE_LIMIT_RESPONSE_STATUS = 429;
+const UNAUTHORIZED_RESPONSE_STATUS = 401;
 
 export type ApiFetchOptions = RequestInit & {
-  handleUnauthorized: boolean
-}
+  handleUnauthorized: boolean;
+};
 
-export function registerUnauthorizedHandler(signoutFunction: () => Promise<void>) {
-  onUnauthorized = signoutFunction
+export function registerUnauthorizedHandler(
+  signoutFunction: () => Promise<void>,
+) {
+  onUnauthorized = signoutFunction;
 }
 
 /**
@@ -24,23 +26,30 @@ export function registerUnauthorizedHandler(signoutFunction: () => Promise<void>
  *
  * @throws { AppApiError } - If the endpoint is rate limited for the user, or the session is expired
  */
-export async function apiFetch(endpoint: string, init: ApiFetchOptions): Promise<Response> {
-  const { handleUnauthorized, ...fetchInit } = init
-  const response = await fetch(endpoint, fetchInit)
+export async function apiFetch(
+  endpoint: string,
+  init: ApiFetchOptions,
+): Promise<Response> {
+  const { handleUnauthorized, ...fetchInit } = init;
+  const response = await fetch(endpoint, fetchInit);
 
   if (response.status === VERCEL_RATE_LIMIT_RESPONSE_STATUS) {
-    throw new AppApiError("RATE_LIMITED", "api")
-  } else if (onUnauthorized && handleUnauthorized && response.status === UNAUTHORIZED_RESPONSE_STATUS) {
-    await onUnauthorized()
-    let code: AppErrorCode = "UNAUTHORIZED"
+    throw new AppApiError("RATE_LIMITED", "api");
+  } else if (
+    onUnauthorized &&
+    handleUnauthorized &&
+    response.status === UNAUTHORIZED_RESPONSE_STATUS
+  ) {
+    await onUnauthorized();
+    let code: AppErrorCode = "UNAUTHORIZED";
     try {
-      const result: ApiError = await response.json()
-      code = result.error.code
+      const result: ApiError = await response.json();
+      code = result.error.code;
     } catch {
       // absorb .json errors
     }
-    throw new AppApiError(code, "api")
+    throw new AppApiError(code, "api");
   }
 
-  return response
+  return response;
 }

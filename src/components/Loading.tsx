@@ -1,5 +1,5 @@
-import React from 'react'
-import { Repeat } from 'lucide-react'
+import React from "react";
+import { Repeat } from "lucide-react";
 
 const LoadingComponent: React.FC<LoadingProps> = ({ size }) => (
   <div
@@ -8,10 +8,10 @@ const LoadingComponent: React.FC<LoadingProps> = ({ size }) => (
   >
     <Repeat size={size} className="animate-rotate" />
   </div>
-)
+);
 
-export default LoadingComponent
+export default LoadingComponent;
 
 export interface LoadingProps {
-  size: number
+  size: number;
 }

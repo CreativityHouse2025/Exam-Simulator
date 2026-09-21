@@ -159,13 +159,38 @@ Supervisors can run any exam without touching the DB. `startNewExam({ preview: t
 session gets `noopAttemptPersistence`. Preview routes live under `ROUTES.examPreview` and reuse
 the same `ExamPage` tree. Revision is unavailable for preview sessions.
 
+Every supervisor URL is track-scoped (`/exams/:trackId/...`, `/students/:id/tracks/:trackId`),
+mirroring `assertTrackAccess` on the API. Access is checked twice on purpose: the page filters to
+the supervisor's own `enrolledTracks` so a doomed request is never sent, and the attempts page
+also renders a lock state when the API answers `FORBIDDEN` — which is what a deep link or an
+enrollment expiring mid-session produces. Leaving an exam routes by role: a supervisor's exit from
+a preview goes to `ROUTES.examLibrary`, never to the student-only `/tracks/:id`.
+
+## Page structure — folder per page, no page imports another
+
+Every route component is `src/pages/<kebab-name>/index.tsx`, with its own sub-components beside it
+in that folder. There are no loose `XxxPage.tsx` files left in `src/pages/`.
+
+Two rules hold this together, and both are load-bearing:
+
+- **A page never imports from another page.** The moment two pages need the same component, it
+  moves to `src/components/<feature>/` — that is how `ExamBrowser`, `ExamFacts`, `TrackLinkCard`,
+  `TrackCardSkeleton`, `StudentSummaryCard` and `StudentBreadcrumb` got there.
+- **Route composition lives in `App.tsx`, not in a page.** `/` resolves to the supervisor
+  dashboard or the student's track list by `roleOf(user)` *inside the router*. There is no
+  `HomePage` delegating to two other pages.
+
+Imports inside a page use the `@/` alias rather than `../..` chains.
+
 ## Key directories
 
 - `src/components/exam/{full,domain,revision}/` — per-exam-type session trees
 - `src/components/exam/shared/` — reusable exam UI
 - `src/components/ui/` — shadcn/ui primitives (Tailwind)
-- `src/components/attempt-history/`, `src/components/dashboard/`, `src/components/exam-dropdown/`
-- `src/pages/` — route components; folder-per-page for bigger ones (`exam-library/`, `exam-detail/`, `student-search/`, `student-attempts/`)
+- `src/components/{exams,tracks,students,attempts,states}/` — cross-page feature components:
+  the exam browser and facts, track cards, student identity/breadcrumb, the attempts table, and
+  the shared `EmptyState`/`ErrorState`
+- `src/pages/<page>/index.tsx` — one folder per route (see above)
 - `src/hooks/examSession/` — exam session facade hooks
 - `src/config/` — `routes.ts`, `nav.ts`, `roles.ts`, `icons.ts`
 - `src/services/` — frontend API clients; `src/utils/queryOptions.ts` — query definitions

@@ -156,7 +156,7 @@ export type SessionControlContextType = {
   startRevision: (attemptId: string) => Promise<string | null>;
   /** Sends only the dirty questions (answers + bookmark state) to the DB and clears the dirty set on success.
    * No-op when nothing is dirty, a sync is already in flight, or the session is never persisted. */
-  syncProgress: () => Promise<void>;
+  syncProgress: () => Promise<boolean>;
   /** Records a break as offered, both locally and (unless never persisted) on the server. */
   saveBreakOffer: (showAtIndex: number) => Promise<void>;
   /** Flushes dirty answers and submits for grading. The server writes the score/status/

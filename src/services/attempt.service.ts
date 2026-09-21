@@ -37,8 +37,17 @@ export async function startAttempt(
     throw new AppApiError(result.error.code, "attempts");
   }
 
-  const { attempt, questions, exam } = camelcaseKeys(result.data, { deep: true });
-  return { attempt: { ...attempt, configSnapshot: markPersisted(attempt.configSnapshot) }, questions, exam };
+  const { attempt, questions, exam } = camelcaseKeys(result.data, {
+    deep: true,
+  });
+  return {
+    attempt: {
+      ...attempt,
+      configSnapshot: markPersisted(attempt.configSnapshot),
+    },
+    questions,
+    exam,
+  };
 }
 
 export async function getAttempt(
@@ -54,8 +63,17 @@ export async function getAttempt(
     throw new AppApiError(result.error.code, "attempts");
   }
 
-  const { attempt, questions, exam } = camelcaseKeys(result.data, { deep: true });
-  return { attempt: { ...attempt, configSnapshot: markPersisted(attempt.configSnapshot) }, questions, exam };
+  const { attempt, questions, exam } = camelcaseKeys(result.data, {
+    deep: true,
+  });
+  return {
+    attempt: {
+      ...attempt,
+      configSnapshot: markPersisted(attempt.configSnapshot),
+    },
+    questions,
+    exam,
+  };
 }
 
 export async function saveAttempt(

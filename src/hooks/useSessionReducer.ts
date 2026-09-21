@@ -47,12 +47,18 @@ export default function useSessionReducer(startingSession: Session | null) {
    * Sends only the dirty questions (changed answers/bookmark state) to the DB.
    * No-op when nothing is dirty, a sync is already in flight, or the session never persists
    * (supervisor preview / revision — see Session.preview).
+   *
+   * @returns whether progress is safe to consider saved. False means a write failed or one is
+   * already in flight, so a caller that navigates away on success must not.
    */
-  const syncProgress = React.useCallback(async () => {
-    if (!session || session.preview || isSyncingRef.current) return;
+  const syncProgress = React.useCallback(async (): Promise<boolean> => {
+    if (!session) return false;
+    // Nothing to persist, so there is nothing that could be lost.
+    if (session.preview) return true;
+    if (isSyncingRef.current) return false;
 
     const answers = buildDirtyAnswers(session);
-    if (answers.length === 0) return;
+    if (answers.length === 0) return true;
 
     isSyncingRef.current = true;
     setIsSyncing(true);
@@ -66,8 +72,10 @@ export default function useSessionReducer(startingSession: Session | null) {
       });
 
       updateSession({ type: SESSION_ACTION_TYPES.CLEAR_DIRTY, payload: null });
+      return true;
     } catch (error) {
       showToast(resolveErrorKey(error), 5000);
+      return false;
     } finally {
       isSyncingRef.current = false;
       setIsSyncing(false);
@@ -103,7 +111,10 @@ export default function useSessionReducer(startingSession: Session | null) {
           offeredBreaks: [showAtIndex],
         });
 
-        updateSession({ type: SESSION_ACTION_TYPES.CLEAR_DIRTY, payload: null });
+        updateSession({
+          type: SESSION_ACTION_TYPES.CLEAR_DIRTY,
+          payload: null,
+        });
       } catch (error) {
         showToast(resolveErrorKey(error), 5000);
       } finally {
@@ -137,11 +148,10 @@ export default function useSessionReducer(startingSession: Session | null) {
         answers,
       });
 
-      updateSession([
-        { type: SESSION_ACTION_TYPES.CLEAR_DIRTY, payload: null },
-        { type: SESSION_ACTION_TYPES.SET_TIMER_PAUSED, payload: true },
-        { type: SESSION_ACTION_TYPES.SET_EXAM_STATE, payload: "completed" },
-      ]);
+      // Only CLEAR_DIRTY here. Pausing and completing must land in ONE batch — a paused,
+      // still-in-progress session is what TimerConfirms renders the "exam paused" modal for.
+      // SessionProvider.submitExam dispatches both once the follow-up read settles.
+      updateSession({ type: SESSION_ACTION_TYPES.CLEAR_DIRTY, payload: null });
 
       return true;
     } catch (error) {
@@ -183,5 +193,6 @@ export default function useSessionReducer(startingSession: Session | null) {
     syncProgress,
     submitExam,
     saveBreakOffer,
+    setIsSyncing,
   };
 }

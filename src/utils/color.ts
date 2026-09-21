@@ -5,14 +5,18 @@
  * @param {number[]} answered - The indices of answered questions
  * @returns The Tailwind `bg-*` class for the grid item
  */
-export function gridItemBackgroundColor(questionIndex: number, bookmarked: number[], answered: number[]): string {
+export function gridItemBackgroundColor(
+  questionIndex: number,
+  bookmarked: number[],
+  answered: number[],
+): string {
   if (bookmarked.includes(questionIndex)) {
-    return "bg-quatro" // Bookmarked
+    return "bg-quatro"; // Bookmarked
   }
 
   if (answered.includes(questionIndex)) {
-    return "bg-primary-light" // Completed — polished's lighten(0.2, primary), see index.css
+    return "bg-primary-light"; // Completed — polished's lighten(0.2, primary), see index.css
   }
 
-  return "bg-grey-100" // Incomplete
+  return "bg-grey-100"; // Incomplete
 }

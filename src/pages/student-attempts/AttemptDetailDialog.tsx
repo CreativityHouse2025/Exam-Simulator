@@ -12,6 +12,8 @@ import type { AttemptSummary } from "@/apiTypes";
 type AttemptDetailDialogProps = {
   /** The caller only mounts this component when a selection exists — Dialog stays `open` for its whole lifetime. */
   attempt: AttemptSummary;
+  /** Resolved by the caller from the track's exam list — an attempt carries only `examId`. */
+  examName: string;
   onOpenChange: (open: boolean) => void;
 };
 
@@ -42,6 +44,7 @@ const StatItem = ({
 
 const AttemptDetailDialog = ({
   attempt,
+  examName,
   onOpenChange,
 }: AttemptDetailDialogProps) => {
   const t = {
@@ -51,8 +54,7 @@ const AttemptDetailDialog = ({
     inProgressMessage: translate("students.detail.in-progress-message"),
   };
 
-  // resolveExamLabel and the exam-type distinction it used are gone with the exam-type JSON.
-  const examLabel = String(attempt.examId);
+  const examLabel = examName;
   const isCompleted = attempt.examState === "completed";
   const isPass = attempt.status === "pass";
   const scoreColor = isPass ? "text-correct" : "text-destructive";
@@ -64,7 +66,8 @@ const AttemptDetailDialog = ({
   const incorrectCount = isCompleted
     ? attempt.totalQuestions - correctCount
     : 0;
-  const durationSeconds = (attempt.configSnapshot.examDurationMinutes ?? 0) * 60;
+  const durationSeconds =
+    (attempt.configSnapshot.examDurationMinutes ?? 0) * 60;
   const timeTaken = isCompleted
     ? formatDurationHoursMinutes(durationSeconds - attempt.timeRemaining)
     : null;
@@ -88,12 +91,17 @@ const AttemptDetailDialog = ({
                   }}
                 >
                   <div className="absolute inset-[6px] flex items-center justify-center rounded-full bg-card">
-                    <span className={`text-2xl font-bold ${scoreColor}`}>{attempt.score}%</span>
+                    <span className={`text-2xl font-bold ${scoreColor}`}>
+                      {attempt.score}%
+                    </span>
                   </div>
                 </div>
               ) : (
                 <div className="flex size-24 shrink-0 items-center justify-center rounded-full bg-grey-100">
-                  <Hourglass className="size-9 text-grey-500" strokeWidth={1.4} />
+                  <Hourglass
+                    className="size-9 text-grey-500"
+                    strokeWidth={1.4}
+                  />
                 </div>
               )}
 
@@ -109,8 +117,12 @@ const AttemptDetailDialog = ({
                 </span>
               )}
 
-              <span className="max-w-full truncate text-base font-bold text-tertiary">{examLabel}</span>
-              <span className="text-sm text-grey-800">{formatDate(attempt.createdAt)}</span>
+              <span className="max-w-full truncate text-base font-bold text-tertiary">
+                {examLabel}
+              </span>
+              <span className="text-sm text-grey-800">
+                {formatDate(attempt.createdAt)}
+              </span>
             </div>
           </DialogHeader>
 
@@ -137,7 +149,9 @@ const AttemptDetailDialog = ({
                 />
               </div>
             ) : (
-              <p className="py-2 text-center text-sm text-grey-800">{t.inProgressMessage}</p>
+              <p className="py-2 text-center text-sm text-grey-800">
+                {t.inProgressMessage}
+              </p>
             )}
           </div>
         </div>
