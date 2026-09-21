@@ -147,6 +147,6 @@ script.js
 
 **/query/*
 # قالب متغيرات البيئة للتطوير المحلي (بدون أسرار)
-!.env.example
+.env.example
 
 src/data/exam/*
