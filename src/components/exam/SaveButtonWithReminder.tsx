@@ -10,7 +10,7 @@ type ReminderKind = "initial" | "unsaved";
 const SaveButtonWithReminder: React.FC<SaveButtonWithReminderProps> = ({
   isSyncing,
   dirtyCount,
-  syncProgress,
+  onSave,
 }) => {
   const saveLabel = translate("content.top-display.save");
   const initialMessage = translate("content.save-reminder.initial-message");
@@ -57,7 +57,7 @@ const SaveButtonWithReminder: React.FC<SaveButtonWithReminderProps> = ({
   return (
     <div className="relative inline-flex">
       <button
-        onClick={syncProgress}
+        onClick={onSave}
         disabled={isSyncing || dirtyCount === 0}
         aria-label={saveLabel}
         className={cn(
@@ -124,5 +124,6 @@ export default SaveButtonWithReminder;
 export interface SaveButtonWithReminderProps {
   isSyncing: boolean;
   dirtyCount: number;
-  syncProgress: () => Promise<boolean>;
+  /** Takes no arguments on purpose — the click event is not save options. */
+  onSave: () => void;
 }

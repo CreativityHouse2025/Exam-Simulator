@@ -80,7 +80,8 @@ export async function saveAttempt(
   attemptId: string,
   args: {
     currentIndex: number;
-    timeRemaining: number;
+    /** Null when the attempt is untimed. */
+    timeRemaining: number | null;
     answers: SaveAttemptAnswer[];
     offeredBreaks: number[];
   },
@@ -117,7 +118,8 @@ export async function submitAttempt(
   attemptId: string,
   args: {
     currentIndex: number;
-    timeRemaining: number;
+    /** Null when the attempt is untimed. */
+    timeRemaining: number | null;
     answers: SaveAttemptAnswer[];
   },
 ): Promise<void> {

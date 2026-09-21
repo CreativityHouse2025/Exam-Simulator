@@ -33,7 +33,7 @@ const ExamMenu: React.FC<ExamMenuProps> = ({ open }) => {
     examState,
     canPause,
     submitExam,
-    syncProgress,
+    saveProgress,
     persists,
     examDetails,
   } = useExamSession();
@@ -60,9 +60,9 @@ const ExamMenu: React.FC<ExamMenuProps> = ({ open }) => {
     if (isLeaving) return;
     setIsLeaving(true);
 
-    // syncProgress reports failure rather than throwing — stay put rather than navigate away
+    // saveProgress reports failure rather than throwing — stay put rather than navigate away
     // from answers that were never written.
-    if (persists && !(await syncProgress())) {
+    if (persists && !(await saveProgress())) {
       setIsLeaving(false);
       return;
     }

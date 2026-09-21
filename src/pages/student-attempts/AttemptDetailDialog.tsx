@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { formatDate } from "@/utils/format";
+import { formatDate, formatDurationHoursMinutes } from "@/utils/format";
 import { translate } from "@/utils/translation";
 import type { AttemptSummary } from "@/apiTypes";
 
@@ -16,13 +16,6 @@ type AttemptDetailDialogProps = {
   examName: string;
   onOpenChange: (open: boolean) => void;
 };
-
-/** Formats a duration in seconds as "Xh Ym" (or just "Ym" under an hour). */
-function formatDurationHoursMinutes(totalSeconds: number): string {
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
-}
 
 const StatItem = ({
   icon: Icon,
@@ -66,11 +59,15 @@ const AttemptDetailDialog = ({
   const incorrectCount = isCompleted
     ? attempt.totalQuestions - correctCount
     : 0;
-  const durationSeconds =
-    (attempt.configSnapshot.examDurationMinutes ?? 0) * 60;
-  const timeTaken = isCompleted
-    ? formatDurationHoursMinutes(durationSeconds - attempt.timeRemaining)
-    : null;
+  const { examDurationMinutes } = attempt.configSnapshot;
+  // An untimed attempt has no clock at either end, so there is no time taken to derive — the row
+  // falls back to its dash.
+  const timeTaken =
+    isCompleted && examDurationMinutes !== null && attempt.timeRemaining !== null
+      ? formatDurationHoursMinutes(
+          examDurationMinutes * 60 - attempt.timeRemaining,
+        )
+      : null;
 
   return (
     <Dialog open={true} onOpenChange={onOpenChange}>

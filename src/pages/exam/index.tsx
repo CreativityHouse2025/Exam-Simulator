@@ -1,70 +1,26 @@
 import React from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useSessionControl } from "@/contexts";
 import { useExamSession } from "@/hooks/examSession/useExamSession";
 import useUnsavedChangesWarning from "@/hooks/useUnsavedChangesWarning";
-import { PREVIEW_ATTEMPT_ID } from "@/constants";
 import { ROUTES } from "@/config/routes";
-import Loading from "@/components/Loading";
 import ExamSession from "@/components/exam/ExamSession";
 import TimerConfirms from "@/components/exam/TimerConfirms";
 import BreakModals from "@/components/exam/breaks/BreakModals";
 
 /**
- * Resolves the active session, then renders the exam tree — one config-driven shell for every
- * exam type, gated by capability rather than a switch on session.examType.
+ * Renders the exam tree for the mounted session — one config-driven shell for every exam type,
+ * gated by capability rather than a switch on session.examType.
  *
- * A cold hit of `/exam?id=<attemptId>` with no session mounted yet (a refresh, a deep link,
- * back-navigation after unmount) auto-resumes from the id in the URL instead of rendering blank.
- * Neither `id=preview` nor a `revision=1` URL is resumable — a preview was never a real attempt,
- * and a revision's `id` is its PARENT attempt — so both go home.
+ * The route renders a session, it never resolves one: a session exists only because
+ * startNewExam / resumeAttempt / startRevision mounted it and then navigated here. A cold hit of
+ * `/exam` (a refresh, a deep link, back-navigation after unmount) therefore goes home — the query
+ * string is not a session, and the student re-enters through the track or history page.
  */
 const ExamPage: React.FC = () => {
-  const { session, resumeAttempt } = useSessionControl();
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const attemptId = searchParams.get("id");
-  const isRevision = searchParams.get("revision") === "1";
+  const { session } = useSessionControl();
 
-  const [isResuming, setIsResuming] = React.useState(false);
-
-  React.useEffect(() => {
-    if (session) return;
-
-    // `id` on a revision URL is the PARENT attempt, so resuming it would silently open a review of
-    // the parent instead. A revision is ephemeral and was never a row — same as a preview.
-    if (!attemptId || attemptId === PREVIEW_ATTEMPT_ID || isRevision) {
-      navigate(ROUTES.home);
-      return;
-    }
-
-    let cancelled = false;
-
-    const resume = async () => {
-      setIsResuming(true);
-
-      // resumeAttempt resolves null on failure today, but a rejection here would otherwise leave
-      // isResuming stuck true — a deep link that never stops loading. Treat both the same.
-      let resumedId: string | null;
-      try {
-        resumedId = await resumeAttempt(attemptId);
-      } catch {
-        resumedId = null;
-      }
-
-      if (cancelled) return;
-      if (!resumedId) navigate(ROUTES.home);
-      setIsResuming(false);
-    };
-
-    resume();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [session, attemptId, isRevision, resumeAttempt, navigate]);
-
-  if (!session || isResuming) return <Loading size={100} />;
+  if (!session) return <Navigate to={ROUTES.home} replace />;
 
   return <ExamPageContent />;
 };

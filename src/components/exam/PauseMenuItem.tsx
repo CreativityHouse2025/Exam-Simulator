@@ -14,9 +14,9 @@ const PauseMenuItem: React.FC = () => {
   const { examState } = useExamSession();
   const { time, maxTime, paused, setPaused } = useExamTimer();
 
-  // A preview session carries a timed config but maxTime 0, so the clock never runs and pausing
+  // A preview session carries a timed config but no clock, so the timer never runs and pausing
   // would be a no-op item. Hidden here rather than in the facade, which stays off the timer tick.
-  if (maxTime === 0) return null;
+  if (maxTime === null) return null;
 
   const onClick = () => {
     if (timerIsRunning({ time, maxTime, paused, examState })) setPaused(true);

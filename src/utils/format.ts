@@ -68,6 +68,24 @@ export function formatTimer(sec: number | null): string {
   }
 }
 
+/**
+ * Format a span of seconds as "2h 15m", or "15m" under an hour. Null for anything that is not a
+ * real span — a negative one is the caller's arithmetic disagreeing with itself (a clock reported
+ * above its own exam duration), not a duration to render.
+ * @param {number} totalSeconds - The span in seconds.
+ * @returns {string | null} The formatted span, or null when there isn't one.
+ */
+export function formatDurationHoursMinutes(
+  totalSeconds: number,
+): string | null {
+  if (!Number.isFinite(totalSeconds) || totalSeconds < 0) return null;
+
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+
+  return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+}
+
 // Choice labels for different languages
 const CHOICE_LABELS = {
   en: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),

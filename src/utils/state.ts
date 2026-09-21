@@ -21,9 +21,14 @@ export function timerHaveExpired({
   maxTime,
 }: Pick<SessionExam, "examState"> &
   Pick<SessionTimer, "paused" | "time" | "maxTime">): boolean {
-  // maxTime === 0 means there is no real timer (untimed, or a preview session) — 0 is never a
-  // countdown that has run out, only one that was never running.
-  return examState === "in-progress" && !paused && maxTime > 0 && time <= 0;
+  // A null clock (untimed, preview, revision) never expires — there is no countdown to run out.
+  return (
+    examState === "in-progress" &&
+    !paused &&
+    maxTime !== null &&
+    time !== null &&
+    time <= 0
+  );
 }
 
 function examStarted(
@@ -36,5 +41,5 @@ function examStarted(
 function timerHasRan({
   time,
 }: Pick<SessionTimer, "time" | "maxTime">): boolean {
-  return time > 0;
+  return time !== null && time > 0;
 }

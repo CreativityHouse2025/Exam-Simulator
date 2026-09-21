@@ -8,7 +8,7 @@ interface ExamFooterProps {
   questionCount: number;
 }
 
-// Timer renders unconditionally — it shows --:--:-- when maxTime is 0 (untimed, revision, preview).
+// Timer renders unconditionally — it shows --:--:-- when there is no clock (untimed, revision, preview).
 const ExamFooter: React.FC<ExamFooterProps> = ({ open, questionCount }) => (
   <FooterShell open={open}>
     <Arrows questionCount={questionCount} />

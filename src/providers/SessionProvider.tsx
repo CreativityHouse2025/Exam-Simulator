@@ -19,7 +19,7 @@ import useSessionReducer from "../hooks/useSessionReducer";
 import { resolveErrorKey } from "../utils/errorTranslation";
 import { computeLocalResult } from "../utils/results";
 import { PREVIEW_ATTEMPT_ID, REVISION_CONFIG } from "../constants";
-import type { Session, StartNewExamOptions, ExamContextType } from "../types";
+import type { Session, StartNewExamOptions } from "../types";
 import type {
   AttemptDetail,
   AttemptQuestion,
@@ -27,11 +27,6 @@ import type {
   DisclosedAttemptQuestion,
 } from "../apiTypes";
 import useSettings from "../hooks/useSettings";
-
-const EMPTY_EXAM_CONTEXT: ExamContextType = {
-  examDetails: null,
-  questions: null,
-};
 
 /** Shared by startNewExam and resumeAttempt — both resolve an AttemptDetail alongside its questions. */
 function buildSessionFromAttempt(
@@ -54,20 +49,24 @@ function buildSessionFromAttempt(
     maxTime:
       attempt.configSnapshot.examDurationMinutes !== null
         ? attempt.configSnapshot.examDurationMinutes * 60
-        : 0,
+        : null,
     time: attempt.timeRemaining,
     paused: attempt.examState === "completed",
     preview: false,
     offeredBreaks: attempt.offeredBreaks,
+    createdAt: attempt.createdAt,
+    // The stored grade, never a local recompute: submit_attempt rounds to 2dp against the
+    // attempt's own passing rate, and computeLocalResult rounds to whole percent — recomputing
+    // here makes the same attempt read 74.72% fail in the history list and 75% pass in the
+    // summary. The server is the only source of a persisted attempt's grade.
     result:
       attempt.examState === "completed"
-        ? computeLocalResult(
-            // getAttempt discloses whenever the attempt is completed, so every question here
-            // carries isCorrect regardless of the exam's own can_reveal_answers setting.
-            questions as DisclosedAttemptQuestion[],
-            selectedChoices,
-            attempt.configSnapshot.passingRate,
-          )
+        ? {
+            score: attempt.score,
+            status: attempt.status,
+            wrongQuestions: attempt.wrongQuestions ?? 0,
+            totalQuestions: attempt.totalQuestions,
+          }
         : null,
   };
 }
@@ -78,8 +77,10 @@ function buildSessionFromAttempt(
  *
  * All 6 context providers are always rendered so {children} stays in a stable tree position —
  * this prevents sibling routes (e.g. AttemptHistoryPage) from unmounting when a session starts.
- * The reducer is reset via RESET_SESSION when startingSession changes, replacing the old key-based
- * remount on ActiveSession.
+ *
+ * A session and its exam content are only ever set through `mountSession`, which writes both in
+ * one commit — every lifecycle call below ends in exactly one of those, and nothing here holds a
+ * setter for either on its own.
  *
  * When no session is active, SessionControlContext exposes session: null so pages can call
  * startNewExam / resumeAttempt / startRevision before any session is mounted.
@@ -89,20 +90,16 @@ export default function SessionProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [startingSession, setStartingSession] = React.useState<Session | null>(
-    null,
-  );
-  const [examContextValue, setExamContextValue] =
-    React.useState<ExamContextType>(EMPTY_EXAM_CONTEXT);
   const {
     session,
+    examContext,
+    mountSession,
     sessionUpdate,
     contextValues,
-    syncProgress,
+    saveProgress,
     submitExam: reducerSubmitExam,
-    saveBreakOffer,
     setIsSyncing,
-  } = useSessionReducer(startingSession);
+  } = useSessionReducer();
   const { showToast } = useToast();
 
   const langCode = useSettings().settings.language;
@@ -129,28 +126,28 @@ export default function SessionProvider({
             bookmarks: [],
             questionIds: questions.map((question) => question.id),
             dirtyQuestions: {},
-            // 0 means "no real timer" (Timer, timerHaveExpired) — same convention as revision.
-            // The exam's own config may still say it's timed (canPause etc. still apply), but a
-            // preview never actually counts down or expires.
-            maxTime: 0,
-            time: 0,
+            // No clock at all: the exam's own config may say it's timed, but a preview never
+            // counts down or expires — same convention as revision.
+            maxTime: null,
+            time: null,
             paused: false,
             preview: true,
             offeredBreaks: [],
+            // Never a row, so there is no created_at to read — stamped as it is built.
+            createdAt: new Date().toISOString(),
             result: null,
           };
 
           // Preview never reaches the server — `persist: false` is the single UI predicate every
           // component reads, so it must disagree with `markPersisted`'s stamp on the exam's own
           // config here, not just with Session.preview.
-          setExamContextValue({
+          mountSession(nextSession, {
             examDetails: {
               ...exam,
               config: { ...exam.config, persist: false },
             },
             questions,
           });
-          setStartingSession(nextSession);
           return PREVIEW_ATTEMPT_ID;
         }
 
@@ -159,18 +156,17 @@ export default function SessionProvider({
           langCode,
         );
 
-        setExamContextValue({
+        mountSession(buildSessionFromAttempt(attempt, questions), {
           examDetails: { ...exam, config: attempt.configSnapshot },
           questions,
         });
-        setStartingSession(buildSessionFromAttempt(attempt, questions));
         return attempt.id;
       } catch (error) {
         showToast(resolveErrorKey(error), 5000);
         return null;
       }
     },
-    [showToast, langCode],
+    [showToast, langCode, mountSession],
   );
 
   /**
@@ -188,18 +184,17 @@ export default function SessionProvider({
           langCode,
         );
 
-        setExamContextValue({
+        mountSession(buildSessionFromAttempt(attempt, questions), {
           examDetails: { ...exam, config: attempt.configSnapshot },
           questions,
         });
-        setStartingSession(buildSessionFromAttempt(attempt, questions));
         return attempt.id;
       } catch (error) {
         showToast(resolveErrorKey(error), 5000);
         return null;
       }
     },
-    [showToast, langCode],
+    [showToast, langCode, mountSession],
   );
 
   /**
@@ -210,9 +205,11 @@ export default function SessionProvider({
    * uses — disclosing the questions and returning the authoritative score/status/wrongQuestions in
    * one round trip.
    *
-   * The session flips to 'completed' only once that read settles, so the summary never renders
-   * before there is a result to put in it. If the read fails the attempt is still marked completed
-   * — it IS submitted server-side — and ExamSummary offers a retry for the missing result.
+   * The graded attempt is re-mounted exactly as a resume mounts it, because after submit it IS a
+   * resume of a completed attempt: same read, same shape, same builder. The session flips to
+   * 'completed' only once that read settles, so the summary never renders before there is a result
+   * to put in it. If the read fails the attempt is still marked completed — it IS submitted
+   * server-side — and ExamSummary offers a retry for the missing result.
    *
    * Preview/revision: never reaches the server — graded locally from the disclosed content already
    * in memory (both fetch fully disclosed content up front).
@@ -220,7 +217,7 @@ export default function SessionProvider({
   const submitExam =
     React.useCallback(async (): Promise<AttemptResult | null> => {
       if (!session) return null;
-      const config = examContextValue.examDetails?.config;
+      const config = examContext.examDetails?.config;
 
       if (config?.persist) {
         const submitted = await reducerSubmitExam();
@@ -234,25 +231,16 @@ export default function SessionProvider({
             session.id,
             langCode,
           );
-          const result: AttemptResult = {
-            score: attempt.score,
-            // A just-graded attempt is always 'completed', which submit_attempt always resolves to
-            // pass or fail — never the frontend-only null (that is revision's alone).
-            status: attempt.status,
-            wrongQuestions: attempt.wrongQuestions ?? 0,
-            totalQuestions: attempt.totalQuestions,
-          };
-          setExamContextValue({
+          // The graded row now disclosed: content and the completed session land together, so the
+          // summary cannot render before there is a result in it. buildSessionFromAttempt reads
+          // the result off the row — a just-graded attempt is always 'completed', which
+          // submit_attempt always resolves to pass or fail, never the frontend-only null.
+          const graded = buildSessionFromAttempt(attempt, questions);
+          mountSession(graded, {
             examDetails: { ...exam, config: attempt.configSnapshot },
             questions,
           });
-          // Result and state together, so the summary never renders without a result to show.
-          sessionUpdate(
-            ["SET_RESULT", result],
-            ["SET_TIMER_PAUSED", true],
-            ["SET_EXAM_STATE", "completed"],
-          );
-          return result;
+          return graded.result;
         } catch (error) {
           showToast(resolveErrorKey(error), 5000);
           // The attempt IS submitted server-side, so the session must still read as completed —
@@ -267,10 +255,10 @@ export default function SessionProvider({
         }
       }
 
-      if (!examContextValue.questions) return null;
+      if (!examContext.questions) return null;
       const result = computeLocalResult(
         // Preview and revision both hold fully disclosed content from the moment they're built.
-        examContextValue.questions as DisclosedAttemptQuestion[],
+        examContext.questions as DisclosedAttemptQuestion[],
         session.selectedChoices,
         config?.passingRate ?? null,
       );
@@ -282,7 +270,8 @@ export default function SessionProvider({
       return result;
     }, [
       session,
-      examContextValue,
+      examContext,
+      mountSession,
       reducerSubmitExam,
       sessionUpdate,
       langCode,
@@ -321,48 +310,48 @@ export default function SessionProvider({
           bookmarks: [],
           questionIds: questions.map((question) => question.id),
           dirtyQuestions: {},
-          maxTime: 0,
-          time: 0,
+          maxTime: null,
+          time: null,
           paused: false,
           preview: true,
           offeredBreaks: [],
+          // Ephemeral, like a preview: the parent attempt's date belongs to the parent.
+          createdAt: new Date().toISOString(),
           result: null,
         };
 
-        setExamContextValue({
+        mountSession(nextSession, {
           examDetails: { ...parentExam, config: REVISION_CONFIG },
           questions,
         });
-        setStartingSession(nextSession);
         return attemptId;
       } catch (error) {
         showToast(resolveErrorKey(error), 5000);
         return null;
       }
     },
-    [showToast, langCode, session?.preview],
+    [showToast, langCode, session?.preview, mountSession],
   );
 
   return (
     <SessionControlContext.Provider
       value={{
-        session: startingSession !== null ? session : null,
+        session,
         update: sessionUpdate,
         startNewExam,
         resumeAttempt,
         startRevision,
-        syncProgress,
+        saveProgress,
         submitExam,
-        saveBreakOffer,
       }}
     >
       <SessionNavigationContext.Provider value={contextValues.navigation}>
         <SessionTimerContext.Provider value={contextValues.timer}>
           <SessionExamContext.Provider value={contextValues.exam}>
             <SessionDataContext.Provider value={contextValues.data}>
-              <ExamProvider {...examContextValue}>
+              <ExamProvider {...examContext}>
                 {children}
-                {startingSession !== null && (
+                {session !== null && (
                   <SyncOverlay visible={contextValues.data.isSyncing} />
                 )}
               </ExamProvider>

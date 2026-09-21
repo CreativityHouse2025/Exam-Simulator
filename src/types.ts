@@ -43,14 +43,20 @@ export interface Session {
   bookmarks: number[];
   questionIds: number[];
   dirtyQuestions: Record<number, true>;
-  maxTime: number;
-  time: number;
+  /** Full duration in seconds, null when untimed — never 0. Same distinction as the backend's
+   * `exam_duration_minutes`. */
+  maxTime: number | null;
+  /** Seconds left, null when there is no clock. */
+  time: number | null;
   paused: boolean;
   /** Never persisted to the DB — a supervisor preview or a revision retry. Neither has a real
    * backend attempt to write through to, so the session lifecycle skips the network entirely. */
   preview: boolean;
   /** showAtIndex values already offered this session — mirrors AttemptDetail.offeredBreaks. */
   offeredBreaks: number[];
+  /** The attempt row's created_at. A session that was never a row (preview, revision) is stamped
+   * when it is built, so every session has a date to show. */
+  createdAt: string;
   /** Set once, on completion. Server-computed for a persisted session; computed locally
    * (utils/results.ts computeLocalResult) for one that never reaches the server. */
   result: AttemptResult | null;
@@ -137,6 +143,12 @@ export type StartNewExamOptions = {
   preview?: boolean;
 };
 
+export type SaveProgressOptions = {
+  /** A break's showAtIndex, when this save is the one recording that it was offered. Recorded
+   * locally even for a session that never persists, so it is never offered twice. */
+  offeredBreak?: number;
+};
+
 export type SessionControlContextType = {
   session: Session | null;
   update: SessionDispatch;
@@ -154,11 +166,10 @@ export type SessionControlContextType = {
    * session (not persisted to localStorage) using REVISION_CONFIG.
    * Returns the attemptId on success, or null on failure so callers can reset their loading state. */
   startRevision: (attemptId: string) => Promise<string | null>;
-  /** Sends only the dirty questions (answers + bookmark state) to the DB and clears the dirty set on success.
-   * No-op when nothing is dirty, a sync is already in flight, or the session is never persisted. */
-  syncProgress: () => Promise<boolean>;
-  /** Records a break as offered, both locally and (unless never persisted) on the server. */
-  saveBreakOffer: (showAtIndex: number) => Promise<void>;
+  /** Sends the dirty questions (answers + bookmark state), the position, the clock and any break
+   * just offered to the DB, and clears the dirty set on success. No-op on the network when a save
+   * is already in flight or the session is never persisted. */
+  saveProgress: (options?: SaveProgressOptions) => Promise<boolean>;
   /** Flushes dirty answers and submits for grading. The server writes the score/status/
    * wrongQuestions to the row rather than returning them (submit_attempt, migration 021) — on
    * success this re-fetches the attempt via the same read `resumeAttempt` uses, which both

@@ -26,7 +26,7 @@ exports are safe there).
 | `ExamContext` | Current exam questions (read-only), supplied by the per-exam-type provider that owns the route |
 | `SettingsContext` | Language, user info (localStorage-backed) |
 | `ToastContext` | App-wide toast messages |
-| `SessionControlContext` | Lifecycle + persistence: `startNewExam`, `resumeAttempt`, `startRevision`, `syncProgress`, `submitExam`, `saveBreakOffer`, current session, updater |
+| `SessionControlContext` | Lifecycle + persistence: `startNewExam`, `resumeAttempt`, `startRevision`, `saveProgress`, `submitExam`, current session, updater |
 | `SessionNavigationContext` | Current question index + updater |
 | `SessionTimerContext` | `time`, `maxTime`, `paused` + updater |
 | `SessionExamContext` | `examState`, `reviewState`, `categoryId`, `examId` + updater |
@@ -91,9 +91,15 @@ put anything reusable there rather than duplicating it per exam type.
 accepts a single action or an array and only allocates a new state object when something actually
 changed.
 
-`src/hooks/useSessionReducer.ts` wraps it and owns persistence. Three rules that are easy to
-break by accident:
+`src/hooks/useSessionReducer.ts` wraps it and owns both the session and the exam content it
+belongs to. Rules that are easy to break by accident:
 
+- **Atomic mount** — `mountSession(session, examContext)` is the only way either is set, and it
+  writes both in one commit. Start, resume, revision and the post-submit re-mount all end in one
+  of those calls. Never hold a setter for one alone: a render that pairs a new question list with
+  the previous session's answers paints the old attempt's state onto the new exam, because answers
+  are indexed by position into the question list. This is also why the reset is a direct dispatch
+  and not an effect — an effect lands a render late, which is exactly the frame to avoid.
 - **Dirty tracking** — only questions marked dirty are sent on save; `CLEAR_DIRTY` fires on success.
 - **Sync guard** — `isSyncingRef` drops component-dispatched actions while a save is in flight, so
   an answer changed mid-request isn't wiped by the `CLEAR_DIRTY` that follows. Internal dispatches
@@ -102,9 +108,13 @@ break by accident:
   (revision sessions transition locally with no DB call). Never flip the state optimistically;
   a failed write with a `completed` UI loses the attempt.
 
-Persistence strategy lives in `src/services/attemptPersistence.service.ts`:
-`remoteAttemptPersistence` and `noopAttemptPersistence`. Preview sessions get the no-op, so
-`syncProgress` / `submitExam` / `saveBreakOffer` never need to branch on `session.preview`.
+- **One write path** — `saveProgress({ offeredBreak? })` is the only in-progress write: dirty
+  answers, position, clock and a break offer all travel in the same PATCH. An empty answer diff is
+  still sent, because the position and the clock move without any question going dirty. A break
+  offer is recorded locally first and always, even for a session that never persists.
+
+A session that never persists (`session.preview` — supervisor preview and revision) short-circuits
+inside `saveProgress` / `submitExam`, so no caller branches on it.
 
 ## Server state (TanStack Query)
 

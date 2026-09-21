@@ -48,8 +48,8 @@ export const TRACK_ATTEMPT_CAP = 25;
  * shown), reveal-only (no further retry of a retry). See spec-add-tracks.md decision 16.d.
  */
 export const REVISION_CONFIG: ExamConfig = {
-  // 0, not null: the footer still shows a clock, rendered as the --:--:-- placeholder.
-  examDurationMinutes: 0,
+  // Untimed: the footer still shows a clock, rendered as the --:--:-- placeholder.
+  examDurationMinutes: null,
   passingRate: null,
   canRevealAnswers: true,
   allowRetryWrong: false,

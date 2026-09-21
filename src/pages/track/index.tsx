@@ -177,6 +177,8 @@ const TrackPage: React.FC = () => {
               disabled={isBusy}
               onOpen={openAttempt}
               onRevise={reviseAttempt}
+              onRefresh={attemptsQuery.refetch}
+              isRefreshing={attemptsQuery.isFetching}
             />
 
             <div className="mt-4 flex justify-center">

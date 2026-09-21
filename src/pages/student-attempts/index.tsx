@@ -154,6 +154,8 @@ const StudentAttemptsPage: React.FC = () => {
                     attempts={attempts}
                     examNameById={examNameById}
                     onDetails={setSelectedAttempt}
+                    onRefresh={attemptsQuery.refetch}
+                    isRefreshing={attemptsQuery.isFetching}
                   />
                 </div>
               </>

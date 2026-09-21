@@ -25,6 +25,7 @@ const ExamSummary: React.FC = () => {
     selectedChoices,
     examDetails,
     sessionId,
+    createdAt,
     canRetake,
     startRevision,
   } = useExamSession();
@@ -104,16 +105,18 @@ const ExamSummary: React.FC = () => {
             />
           )}
 
+          {/* No clock (untimed, preview, revision) means no time taken to report — the
+              placeholder, not 00:00:00. */}
           <SummaryRow
             type="time"
-            value={formatTimer(maxTime - time)}
+            value={formatTimer(
+              maxTime !== null && time !== null ? maxTime - time : null,
+            )}
             status={pass}
           />
-          <SummaryRow
-            type="date"
-            value={formatDate(new Date())}
-            status={pass}
-          />
+          {/* The attempt's own created_at, so reviewing an old attempt shows when it was taken
+              rather than today. */}
+          <SummaryRow type="date" value={formatDate(createdAt)} status={pass} />
           <SummaryRow
             type="exam"
             value={examDetails.name[settings.language]}

@@ -16,7 +16,7 @@ const ExamTopDisplay: React.FC<TopDisplayProps> = ({
     index,
     dirtyQuestions,
     isSyncing,
-    syncProgress,
+    saveProgress,
     persists,
     examDetails,
   } = useExamSession();
@@ -52,7 +52,7 @@ const ExamTopDisplay: React.FC<TopDisplayProps> = ({
               <SaveButtonWithReminder
                 isSyncing={isSyncing}
                 dirtyCount={Object.keys(dirtyQuestions).length}
-                syncProgress={syncProgress}
+                onSave={() => saveProgress()}
               />
             )}
             {/* Only present when ExamContent's canReveal capability allows it. */}

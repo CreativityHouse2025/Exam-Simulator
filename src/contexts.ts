@@ -62,9 +62,8 @@ export const SessionControlContext =
     startNewExam: async () => null,
     resumeAttempt: async () => null,
     startRevision: async () => null,
-    syncProgress: async () => false,
+    saveProgress: async () => false,
     submitExam: async () => null,
-    saveBreakOffer: async () => {},
   });
 
 /** Access the session lifecycle controls (startNewExam, resumeAttempt, startRevision, session, update).
@@ -88,8 +87,8 @@ export function useSessionNavigation() {
 }
 
 export const SessionTimerContext = React.createContext<SessionTimer>({
-  time: 0,
-  maxTime: 0,
+  time: null,
+  maxTime: null,
   paused: false,
   update: noopUpdate,
 });

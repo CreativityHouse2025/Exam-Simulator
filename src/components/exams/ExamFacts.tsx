@@ -1,5 +1,11 @@
 import React from "react";
-import { Clock, Coffee, FileText, Target } from "lucide-react";
+import {
+  Clock,
+  Coffee,
+  FileText,
+  Infinity as InfinityIcon,
+  Target,
+} from "lucide-react";
 import { translate } from "@/utils/translation";
 import { cn } from "@/components/ui/utils";
 import type { ExamConfig } from "@/apiTypes";
@@ -25,14 +31,18 @@ const ExamFacts: React.FC<ExamFactsProps> = ({
 }) => {
   const { examDurationMinutes, passingRate, breaks } = config;
 
-  const durationLabel =
-    examDurationMinutes && examDurationMinutes > 0
-      ? translate("exams.config.minutes", [examDurationMinutes])
-      : translate("exams.config.untimed");
+  // Null is the only untimed value an exam can carry — the column forbids 0.
+  const isUntimed = examDurationMinutes === null;
 
   const facts = [
     { icon: FileText, label: translate("exams.questions", [questionCount]) },
-    { icon: Clock, label: durationLabel },
+    {
+      // An exam with no clock says so with the infinity mark, not a clock face reading zero.
+      icon: isUntimed ? InfinityIcon : Clock,
+      label: isUntimed
+        ? translate("exams.config.untimed")
+        : translate("exams.config.minutes", [examDurationMinutes]),
+    },
     // passingRate is null only for REVISION_CONFIG, which no real exam ever uses.
     ...(passingRate !== null
       ? [{ icon: Target, label: translate("exams.pass-mark", [passingRate]) }]

@@ -1,5 +1,5 @@
 import React from "react";
-import { Eye, RotateCcw, SquareArrowOutUpRight } from "lucide-react";
+import { Eye, RefreshCw, RotateCcw, SquareArrowOutUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -23,6 +23,9 @@ type AttemptsTableProps = {
   onRevise?: (attemptId: string) => void;
   /** Opens the read-only breakdown. The supervisor's only action on a row. */
   onDetails?: (attempt: AttemptSummary) => void;
+  /** Refetches the list. Omitted where the caller has no query to refresh. */
+  onRefresh?: () => void;
+  isRefreshing?: boolean;
   disabled?: boolean;
 };
 
@@ -36,6 +39,8 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
   onOpen,
   onRevise,
   onDetails,
+  onRefresh,
+  isRefreshing = false,
   disabled = false,
 }) => {
   // Retry is offered whenever the exam allows it, but only works on a completed, imperfect attempt.
@@ -147,7 +152,26 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
                 {translate("history.table.date")}
               </TableHead>
               <TableHead className={cn(HEAD_CLASSES, "text-end")}>
-                {translate("history.table.action")}
+                <span className="inline-flex items-center gap-1.5">
+                  {translate("history.table.action")}
+                  {onRefresh && (
+                    <Button
+                      size="icon-sm"
+                      variant="ghost"
+                      disabled={isRefreshing}
+                      onClick={onRefresh}
+                      aria-label={translate("common.retry")}
+                      className="text-secondary hover:bg-secondary/10 hover:text-secondary"
+                    >
+                      <RefreshCw
+                        className={cn(
+                          "size-4.5",
+                          isRefreshing && "animate-spin-fast",
+                        )}
+                      />
+                    </Button>
+                  )}
+                </span>
               </TableHead>
             </TableRow>
           </TableHeader>

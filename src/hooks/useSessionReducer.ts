@@ -4,24 +4,49 @@ import { SESSION_ACTION_TYPES } from "../constants";
 import { saveAttempt, submitAttempt } from "../services/attempt.service";
 import { resolveErrorKey } from "../utils/errorTranslation";
 import useToast from "../hooks/useToast";
-import type { Session, SessionDispatch } from "../types";
+import type {
+  ExamContextType,
+  SaveProgressOptions,
+  Session,
+  SessionDispatch,
+} from "../types";
 
-export default function useSessionReducer(startingSession: Session | null) {
+const EMPTY_EXAM_CONTEXT: ExamContextType = {
+  examDetails: null,
+  questions: null,
+};
+
+export default function useSessionReducer() {
   const [session, updateSession] = React.useReducer(SessionReducer, null);
+  const [examContext, setExamContext] =
+    React.useState<ExamContextType>(EMPTY_EXAM_CONTEXT);
   const [isSyncing, setIsSyncing] = React.useState(false);
   // Ref guards against a second click landing while the first request is in flight
   const isSyncingRef = React.useRef(false);
 
   const { showToast } = useToast();
 
-  // When startingSession changes (new exam, resume, or revision), reset the reducer to that session
-  React.useEffect(() => {
-    if (!startingSession) return;
-    updateSession({
-      type: SESSION_ACTION_TYPES.RESET_SESSION,
-      payload: startingSession,
-    });
-  }, [startingSession]);
+  /**
+   * Mounts a session and the exam content it belongs to — the ONLY way either is set.
+   *
+   * The two are one fact, so they are written in one call: a session's answers are indexed by
+   * position into its question list, and a render that holds a new question list beside the
+   * previous session's answers paints the old attempt's state onto the new exam's questions. Both
+   * writes land in the same React commit, so that render cannot exist.
+   *
+   * Used to start, to resume, to open a revision, and to re-mount an attempt from its graded read
+   * after submit.
+   */
+  const mountSession = React.useCallback(
+    (next: Session, exam: ExamContextType) => {
+      setExamContext(exam);
+      updateSession({
+        type: SESSION_ACTION_TYPES.RESET_SESSION,
+        payload: next,
+      });
+    },
+    [],
+  );
 
   const sessionUpdate = React.useCallback<SessionDispatch>((...actions) => {
     // Drop all component-dispatched actions while a sync is in flight.
@@ -44,79 +69,60 @@ export default function useSessionReducer(startingSession: Session | null) {
   }
 
   /**
-   * Sends only the dirty questions (changed answers/bookmark state) to the DB.
-   * No-op when nothing is dirty, a sync is already in flight, or the session never persists
+   * The one write path for in-progress state: the dirty questions (changed answers/bookmark
+   * state), the position, the clock, and any break just offered.
+   *
+   * Position and clock move without any question going dirty, so an empty diff is still a write
+   * worth making: skipping it resumed the attempt at a stale index with the clock it had at the
+   * last answer.
+   *
+   * `offeredBreak` is recorded locally first and always — even for a session that never persists,
+   * which has no server to tell — so the same break is never offered twice in one session.
+   *
+   * No-op on the network when a save is already in flight, or when the session never persists
    * (supervisor preview / revision — see Session.preview).
    *
    * @returns whether progress is safe to consider saved. False means a write failed or one is
    * already in flight, so a caller that navigates away on success must not.
    */
-  const syncProgress = React.useCallback(async (): Promise<boolean> => {
-    if (!session) return false;
-    // Nothing to persist, so there is nothing that could be lost.
-    if (session.preview) return true;
-    if (isSyncingRef.current) return false;
+  const saveProgress = React.useCallback(
+    async ({ offeredBreak }: SaveProgressOptions = {}): Promise<boolean> => {
+      if (!session) return false;
 
-    const answers = buildDirtyAnswers(session);
-    if (answers.length === 0) return true;
+      // Bypasses the isSyncing drop-guard, like CLEAR_DIRTY: whether the offer was shown is a
+      // fact about this session, not an edit that a sync could be about to overwrite.
+      if (offeredBreak !== undefined) {
+        updateSession({
+          type: SESSION_ACTION_TYPES.SET_OFFERED_BREAK,
+          payload: offeredBreak,
+        });
+      }
 
-    isSyncingRef.current = true;
-    setIsSyncing(true);
+      // Nothing to persist, so there is nothing that could be lost.
+      if (session.preview) return true;
+      if (isSyncingRef.current) return false;
 
-    try {
-      await saveAttempt(session.id, {
-        currentIndex: session.index,
-        timeRemaining: session.time,
-        answers,
-        offeredBreaks: [],
-      });
-
-      updateSession({ type: SESSION_ACTION_TYPES.CLEAR_DIRTY, payload: null });
-      return true;
-    } catch (error) {
-      showToast(resolveErrorKey(error), 5000);
-      return false;
-    } finally {
-      isSyncingRef.current = false;
-      setIsSyncing(false);
-    }
-  }, [session, showToast]);
-
-  /**
-   * Records a break as offered: always locally (even for a session that never persists), and —
-   * unless the session never persists — immediately on the server too, bypassing the dirty-questions
-   * guard so it isn't lost to a race with the next autosave.
-   */
-  const saveBreakOffer = React.useCallback(
-    async (showAtIndex: number) => {
-      // Bypasses the isSyncing drop-guard, like CLEAR_DIRTY — a break threshold can be crossed
-      // mid-autosave and must not be lost.
-      updateSession({
-        type: SESSION_ACTION_TYPES.SET_OFFERED_BREAK,
-        payload: showAtIndex,
-      });
-
-      if (!session || session.preview) return;
+      const answers = buildDirtyAnswers(session);
 
       isSyncingRef.current = true;
       setIsSyncing(true);
 
       try {
-        const answers = buildDirtyAnswers(session);
-
         await saveAttempt(session.id, {
           currentIndex: session.index,
           timeRemaining: session.time,
           answers,
-          offeredBreaks: [showAtIndex],
+          offeredBreaks: offeredBreak !== undefined ? [offeredBreak] : [],
         });
 
         updateSession({
           type: SESSION_ACTION_TYPES.CLEAR_DIRTY,
           payload: null,
         });
+        return true;
       } catch (error) {
         showToast(resolveErrorKey(error), 5000);
+        return false;
       } finally {
         isSyncingRef.current = false;
         setIsSyncing(false);
@@ -166,8 +172,8 @@ export default function useSessionReducer(startingSession: Session | null) {
   const contextValues = {
     navigation: { index: session?.index ?? 0, update: sessionUpdate },
     timer: {
-      time: session?.time ?? 0,
-      maxTime: session?.maxTime ?? 0,
+      time: session?.time ?? null,
+      maxTime: session?.maxTime ?? null,
       paused: session?.paused ?? false,
       update: sessionUpdate,
     },
@@ -188,11 +194,12 @@ export default function useSessionReducer(startingSession: Session | null) {
 
   return {
     session,
+    examContext,
+    mountSession,
     sessionUpdate,
     contextValues,
-    syncProgress,
+    saveProgress,
     submitExam,
-    saveBreakOffer,
     setIsSyncing,
   };
 }

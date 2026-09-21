@@ -25,7 +25,7 @@ function formatTime(s: number) {
  * Pauses the exam timer for the duration of a taken break.
  */
 export default function BreakModals() {
-  const { index, examState, breaks, offeredBreaks, saveBreakOffer } =
+  const { index, examState, breaks, offeredBreaks, saveProgress } =
     useExamSession();
   const { setPaused } = useExamTimer();
   const { settings } = useSettings();
@@ -41,7 +41,7 @@ export default function BreakModals() {
     if (examState !== "in-progress") return;
 
     if (shouldOfferBreak(breaks, index, offeredBreaks)) {
-      saveBreakOffer(index);
+      saveProgress({ offeredBreak: index });
       // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-existing, unrelated to this change
       setOfferVisible(true);
     }

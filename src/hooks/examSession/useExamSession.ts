@@ -19,7 +19,7 @@ import type { Answers } from "../../types";
  * and content tree off the tick.
  */
 export function useExamSession() {
-  const { session, startRevision, submitExam, syncProgress, saveBreakOffer } =
+  const { session, startRevision, submitExam, saveProgress } =
     useSessionControl();
   const { index, update: navUpdate } = useSessionNavigation();
   const { examState, result } = useSessionExam();
@@ -86,6 +86,7 @@ export function useExamSession() {
   return {
     // content
     sessionId: session!.id,
+    createdAt: session!.createdAt,
     examDetails: examDetails!,
     questions: questionList,
     question,
@@ -101,10 +102,10 @@ export function useExamSession() {
     isSyncing,
 
     // capabilities — derived once, here, from config. Components never read ExamConfig directly.
-    // A real countdown exists. Null (untimed) and 0 (revision) are both false — the Timer still
-    // renders in both cases, it just shows the placeholder.
-    isTimed: (config.examDurationMinutes ?? 0) > 0,
-    canPause: (config.examDurationMinutes ?? 0) > 0,
+    // Null is untimed (a real exam with no clock, a preview, a revision) — the Timer still renders,
+    // it just shows the placeholder.
+    isTimed: config.examDurationMinutes !== null,
+    canPause: config.examDurationMinutes !== null,
     canReveal: config.canRevealAnswers,
     canRetake: config.allowRetryWrong && config.persist,
     persists: config.persist,
@@ -117,7 +118,6 @@ export function useExamSession() {
     toggleBookmark,
     startRevision,
     submitExam,
-    syncProgress,
-    saveBreakOffer,
+    saveProgress,
   };
 }

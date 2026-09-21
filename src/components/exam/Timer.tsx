@@ -16,8 +16,8 @@ const TimerComponent: React.FC = () => {
       intervalRef.current = null;
     }
 
-    // Start new interval if timer is active
-    if (!paused && time > 0 && examState !== "completed") {
+    // Start new interval if timer is active. A null clock (untimed, preview, revision) never ticks.
+    if (time !== null && time > 0 && !paused && examState !== "completed") {
       intervalRef.current = setInterval(() => {
         setTime(Math.max(0, time - 1));
       }, 1000);
@@ -36,16 +36,14 @@ const TimerComponent: React.FC = () => {
 
   // Handle timer expiration
   React.useEffect(() => {
-    if (time <= 0 && intervalRef.current) {
+    if (time !== null && time <= 0 && intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
   }, [time]);
 
-  // maxTime === 0 means there is no real timer (a preview session never counts down) —
-  // shown as the placeholder, never as a warning.
-  const hasTimer = maxTime > 0;
-  const warning = hasTimer && time < 120;
+  // A null clock (untimed, preview, revision) shows the placeholder, never a warning.
+  const warning = maxTime !== null && time !== null && time < 120;
 
   return (
     <div
@@ -53,7 +51,7 @@ const TimerComponent: React.FC = () => {
       className={`flex items-center justify-center ${warning ? "text-secondary" : "text-black"}`}
     >
       <div data-test="Timer" className="text-xl font-bold p-1.25">
-        {formatTimer(hasTimer ? time : null)}
+        {formatTimer(time)}
       </div>
 
       <Timer size={30} className="m-1.25" />
