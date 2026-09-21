@@ -35,10 +35,10 @@ export const ROUTES = {
       `${EXAM}?id=${attemptId}${revision ? "&revision=1" : ""}`,
   },
   /** Supervisor track picker — the entry point to the exam library. */
-  exams: EXAMS,
+  exams: TRACKS,
   examLibrary: {
-    pattern: `${EXAMS}/:trackId`,
-    to: (trackId: string) => `${EXAMS}/${trackId}`,
+    pattern: `${TRACKS}/:trackId/exams`,
+    to: (trackId: string) => `${TRACKS}/${trackId}/exams`,
   },
   examDetail: {
     pattern: `${EXAMS}/:trackId/:examId`,

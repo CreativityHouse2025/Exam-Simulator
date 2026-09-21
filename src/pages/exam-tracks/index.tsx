@@ -23,7 +23,7 @@ const ExamTracksPage: React.FC = () => {
   const langCode = settings.language;
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-8">
+    <div className="mx-auto w-full max-w-4xl px-4 py-8">
       <BackButton to={ROUTES.home} text={translate("exam.library.back")} />
 
       <header className="mb-6">

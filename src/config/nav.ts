@@ -16,7 +16,7 @@ const profile: NavItem = {
 const exams: NavItem = {
   icon: ICONS.exams,
   path: ROUTES.exams,
-  labelKey: "dashboard.supervisor.view-exams",
+  labelKey: "dashboard.supervisor.library",
 };
 const search: NavItem = {
   icon: ICONS.searchStudents,

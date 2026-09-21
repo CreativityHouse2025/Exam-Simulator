@@ -1,63 +1,30 @@
 -- LOCAL DEVELOPMENT ONLY — not a migration, never applied to production.
 --
--- These objects already exist in the production database but were created
--- out-of-band (Supabase dashboard), so `supabase/migrations/` does not describe
--- them. Without them a freshly reset local database is not a faithful copy:
--- every API read fails with `permission denied for table users`.
+-- One object remains here: the trigger on auth.users. It exists in production
+-- but was created out-of-band through the Supabase dashboard, so no migration
+-- describes it, and a freshly reset local database would not have it.
 --
 -- Loaded by [db.seed].sql_paths in supabase/config.toml, ahead of seed.sql.
--- If production's definitions change, change them here too.
-
--- --- Table privileges ---------------------------------------------------------
--- The API reads tables with the secret key (service_role) and writes only through
--- security-definer RPCs, so SELECT is the whole requirement. anon and authenticated
--- get nothing: the frontend never talks to Supabase directly.
 --
--- Production does not need this: migrations are applied through the dashboard, which
--- runs as `postgres` and picks up Supabase's default privileges. The CLI's local
--- replay does not, so every table a migration creates has to be listed here or its
--- first read fails with `permission denied for table <name>`.
-grant select on
-  public.users,
-  public.exam_attempts,
-  public.attempt_answers,
-  public.offered_breaks,
-  public.tracks,
-  public.enrollments,
-  public.exams,
-  public.exam_type,
-  public.exam_config,
-  public.breaks,
-  public.allowed_config,
-  public.questions,
-  public.choices,
-  public.exam_questions
-to service_role;
+-- What used to be here and no longer is:
+--
+--   * The GRANT SELECT list. Table and routine privileges are now stated
+--     explicitly in supabase/migrations/016_privileges.sql, which runs in every
+--     environment. Keeping a hand-maintained copy here meant local and
+--     production could disagree silently, and the list had to be extended by
+--     hand for every new table.
+--
+--   * The create_user_profile() body. 015_user_enrollments.sql defines it, so
+--     it is real schema now rather than something local had to mirror. Do not
+--     re-create it here: this file runs AFTER migrations, so a definition here
+--     would silently overwrite the migration's version.
 
 -- --- Profile creation on email confirmation -----------------------------------
 -- Mirrors the production `on_email_confirmed` trigger. Signup stores the profile
 -- fields in auth user metadata and never inserts into public.users itself; this
--- trigger is what materialises the row. It no longer stamps an expiry: 019
--- dropped users.expires_at, and enrollments are the only expiry left.
-create or replace function public.handle_email_confirmed()
-returns trigger
-language plpgsql
-security definer
-set search_path = ''
-as $$
-begin
-  insert into public.users (id, first_name, last_name, highlevel_id)
-  values (
-    new.id,
-    new.raw_user_meta_data->>'first_name',
-    new.raw_user_meta_data->>'last_name',
-    new.raw_user_meta_data->>'highlevel_id'
-  )
-  on conflict (id) do nothing;
-  return new;
-end;
-$$;
-
+-- trigger is what materialises the row. The function it calls comes from
+-- migration 015.
+--
 -- AFTER UPDATE only, matching production. Note that local config disables email
 -- confirmation (auth.email.enable_confirmations = false), so GoTrue stamps
 -- email_confirmed_at during the INSERT and this trigger never fires for a locally
@@ -68,4 +35,4 @@ create trigger on_email_confirmed
   after update on auth.users
   for each row
   when (old.email_confirmed_at is null and new.email_confirmed_at is not null)
-  execute function public.handle_email_confirmed();
+  execute function public.create_user_profile();

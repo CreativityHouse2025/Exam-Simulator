@@ -52,9 +52,12 @@ on conflict (id) do nothing;
 
 -- 3 attempts per student: one completed pass, one completed fail, one in-progress.
 -- config_snapshot is a literal here rather than a join, to keep these fixtures
--- readable: exam ids 1 and 2 are both PMP Full Exams under exam_config id 1 in
--- migration 013_content_tracks_exams.sql — keep this literal in sync with that
+-- readable: exam ids 2 and 4 are both PMP Full Exams under exam_config id 1 in
+-- migration 011_content_catalogue.sql — keep this literal in sync with that
 -- row if it changes.
+--
+-- NOT exams 1, 3 or 5: those are held out of the catalogue while their ar/en
+-- banks disagree, so an attempt on one would fail exam_attempts_exam_id_fkey.
 --
 -- question_ids_snapshot IS joined, from exam_questions. It is NOT NULL and
 -- non-empty by CHECK (migration 016 step 6), and the exams and question banks
@@ -86,8 +89,11 @@ select
 from public.users u
 cross join (
   values
-    (1, 'completed',   'pass', 78.50,    0, interval '10 days'),
-    (2, 'completed',   'fail', 55.00,    0, interval '5 days'),
-    (1, 'in-progress', null,    0.00, 3600, interval '1 day')
+    (2, 'completed',   'pass', 78.50,    0, interval '10 days'),
+    (4, 'completed',   'fail', 55.00,    0, interval '5 days'),
+    (2, 'in-progress', null,    0.00, 3600, interval '1 day')
 ) as a(exam_id, exam_state, status, score, time_remaining, age)
-where u.role = 'student';
+where u.role = 'student'
+  -- dina.mahmoud is left with no attempts at all, so the empty-history state
+  -- is reachable in the demo. Every other student gets the three above.
+  and u.id <> '6672d13d-31e2-49c0-b30d-b947f44d6e40';
