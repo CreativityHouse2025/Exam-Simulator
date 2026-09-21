@@ -198,7 +198,7 @@ export type Database = {
           question_ids_snapshot: number[]
           score: number
           status: string | null
-          time_remaining: number
+          time_remaining: number | null
           total_questions: number
           updated_at: string
           user_id: string
@@ -214,7 +214,7 @@ export type Database = {
           question_ids_snapshot: number[]
           score?: number
           status?: string | null
-          time_remaining?: number
+          time_remaining?: number | null
           total_questions?: number
           updated_at?: string
           user_id: string
@@ -230,7 +230,7 @@ export type Database = {
           question_ids_snapshot?: number[]
           score?: number
           status?: string | null
-          time_remaining?: number
+          time_remaining?: number | null
           total_questions?: number
           updated_at?: string
           user_id?: string
@@ -557,11 +557,11 @@ export type Database = {
       }
       save_attempt: {
         Args: {
-          p_answers: Json
+          p_answers?: Json
           p_attempt_id: string
           p_current_index: number
           p_offered_breaks?: Json
-          p_time_remaining: number
+          p_time_remaining?: number
           p_user_id: string
         }
         Returns: string
@@ -594,10 +594,10 @@ export type Database = {
       }
       submit_attempt: {
         Args: {
-          p_answers: Json
+          p_answers?: Json
           p_attempt_id: string
           p_current_index: number
-          p_time_remaining: number
+          p_time_remaining?: number
           p_user_id: string
         }
         Returns: string

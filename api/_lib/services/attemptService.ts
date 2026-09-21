@@ -53,6 +53,11 @@ const RPC_FAILURES = {
     code: "VALIDATION_ERROR",
     message: "An answer names a question or choice this attempt does not have",
   },
+  invalid_time: {
+    statusCode: 400,
+    code: "VALIDATION_ERROR",
+    message: "time_remaining disagrees with the attempt's config snapshot: null is untimed, a number is a running clock",
+  },
 } as const satisfies Record<string, AppErrorParams>;
 
 /** What `toAttemptSummary` reads. Every attempt read selects at least these. */
@@ -63,7 +68,8 @@ type AttemptSummaryRow = {
   score: number;
   status: string | null;
   created_at: string;
-  time_remaining: number;
+  /** NULL when the attempt is untimed. */
+  time_remaining: number | null;
   config_snapshot: unknown;
   total_questions: number;
   wrong_questions: number | null;
@@ -181,7 +187,8 @@ export async function saveAttempt(
     p_user_id: userId,
     p_attempt_id: attemptId,
     p_current_index: current_index,
-    p_time_remaining: time_remaining,
+    // Untimed attempts have no clock to report, so the argument is left off entirely.
+    p_time_remaining: time_remaining ?? undefined,
     p_answers: answers,
     p_offered_breaks: offered_breaks,
   });
@@ -225,7 +232,8 @@ export async function submitAttempt(
     p_user_id: userId,
     p_attempt_id: attemptId,
     p_current_index: current_index,
-    p_time_remaining: time_remaining,
+    // Untimed attempts have no clock to report — see saveAttempt.
+    p_time_remaining: time_remaining ?? undefined,
     p_answers: answers,
   });
 

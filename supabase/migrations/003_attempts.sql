@@ -13,7 +13,9 @@ CREATE TABLE public.exam_attempts (
   exam_id             INTEGER,
   category_id         INTEGER,
   current_index       SMALLINT      NOT NULL DEFAULT 0,
-  time_remaining      INTEGER       NOT NULL DEFAULT 0,
+  -- NULL when the exam is untimed, mirroring exam_config.exam_duration_minutes. 0 is a timed
+  -- attempt whose clock ran out, which is why the floor is >= 0 rather than > 0.
+  time_remaining      INTEGER,
   exam_state          TEXT          NOT NULL DEFAULT 'in-progress',
   review_state        TEXT          NOT NULL DEFAULT 'summary',
   email_report_state  TEXT          NOT NULL DEFAULT 'unsent',
@@ -28,6 +30,7 @@ CREATE TABLE public.exam_attempts (
   CONSTRAINT chk_review_state        CHECK (review_state       IN ('summary', 'question')),
   CONSTRAINT chk_email_report_state  CHECK (email_report_state IN ('unsent', 'pending', 'sent', 'failed')),
   CONSTRAINT chk_status              CHECK (status             IN ('pass', 'fail')),
+  CONSTRAINT chk_time_remaining      CHECK (time_remaining IS NULL OR time_remaining >= 0),
 
   -- Mutual exclusivity: full requires exam_id, domain requires category_id
   CONSTRAINT chk_exam_type_full   CHECK (

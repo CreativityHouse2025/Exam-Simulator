@@ -36,7 +36,8 @@ export const AttemptSummarySchema = z.object({
   score: z.number(),
   status: AttemptStatusSchema.nullable(),
   created_at: timestamp,
-  time_remaining: z.int(),
+  /** Seconds left, or null when the exam is untimed — same distinction as `exam_duration_minutes`. */
+  time_remaining: z.int().nullable(),
   config_snapshot: ExamConfigSchema,
   /** `cardinality(question_ids_snapshot)`, never a count of answer rows — an unanswered question has no row. */
   total_questions: z.int(),
@@ -171,7 +172,9 @@ export const SaveAttemptAnswersSchema = z
  */
 export const SaveAttemptRequestSchema = z.strictObject({
   current_index: nonNegativeInt,
-  time_remaining: nonNegativeInt,
+  /** Null exactly when the attempt is untimed; the RPC refuses a payload that disagrees with its
+   * config snapshot (`invalid_time`). */
+  time_remaining: nonNegativeInt.nullable(),
   answers: SaveAttemptAnswersSchema,
   /** `show_at_index` values offered since the last save. `offered_at` is stamped by the server. */
   offered_breaks: z.array(nonNegativeInt).default([]),
@@ -189,7 +192,8 @@ export type SaveAttemptRequestBody = z.infer<typeof SaveAttemptRequestSchema>;
  */
 export const SubmitAttemptRequestSchema = z.strictObject({
   current_index: nonNegativeInt,
-  time_remaining: nonNegativeInt,
+  /** Null exactly when the attempt is untimed — see SaveAttemptRequestSchema. */
+  time_remaining: nonNegativeInt.nullable(),
   answers: SaveAttemptAnswersSchema,
 });
 

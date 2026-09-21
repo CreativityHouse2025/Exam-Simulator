@@ -191,7 +191,7 @@ REVOKE EXECUTE ON FUNCTION public.attempt_correct_question_ids(UUID) FROM anon, 
 -- The client sends an exam id and nothing else. This function:
 --   1. snapshots the exam's config from exam_config + breaks
 --   2. snapshots the exam's question ids, ordered by question_index
---   3. derives the clock from the snapshot (untimed -> 0)
+--   3. derives the clock from the snapshot (untimed -> NULL, never 0)
 --   4. inserts the attempt; no attempt_answers rows are pre-seeded, because an
 --      untouched question has no row (8.3)
 --
@@ -249,7 +249,7 @@ BEGIN
              '[]'::jsonb
            )
          ),
-         COALESCE(c.exam_duration_minutes, 0)
+         c.exam_duration_minutes
     INTO v_config, v_duration
     FROM public.exams x
     JOIN public.exam_config c ON c.id = x.config_id
@@ -318,15 +318,22 @@ GRANT  EXECUTE ON FUNCTION public.start_attempt(UUID, SMALLINT) TO service_role;
 -- state are enforced above, the primary key bounds it to one row per index, and
 -- the only thing a student can corrupt is their own break record.
 --
--- Returns 'ok' | 'not_found' | 'forbidden' | 'conflict' | 'invalid_question'.
+-- p_time_remaining is NULL exactly when the attempt is untimed, and 'invalid_time' says it was
+-- not: seconds on an attempt that has no clock, or no clock on an attempt that has one. A timed
+-- value is clamped to the snapshot's own duration — the client owns the clock but cannot report
+-- more of it than the exam ever had.
+--
+-- Returns 'ok' | 'not_found' | 'forbidden' | 'conflict' | 'invalid_question' | 'invalid_time'.
 -- Every one of those leaves the attempt untouched; only 'ok' writes.
 -- ---------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION public.save_attempt(
   p_user_id        UUID,
   p_attempt_id     UUID,
   p_current_index  INTEGER,
-  p_time_remaining INTEGER,
-  p_answers        JSONB,
+  -- Omitted by an untimed attempt, which has no clock to report. A default here forces one on
+  -- every parameter after it, which costs nothing: an empty diff is already a valid save.
+  p_time_remaining INTEGER DEFAULT NULL,
+  p_answers        JSONB DEFAULT '[]'::jsonb,
   p_offered_breaks JSONB DEFAULT '[]'::jsonb
 )
 RETURNS TEXT
@@ -335,15 +342,18 @@ SECURITY DEFINER
 SET search_path = ''
 AS $$
 DECLARE
-  v_owner TEXT;
-  v_state TEXT;
-  v_diff  TEXT;
+  v_owner            TEXT;
+  v_state            TEXT;
+  v_duration_seconds INTEGER;
+  v_diff             TEXT;
 BEGIN
   -- Access and state are resolved first, and the answer diff is validated
   -- before anything is written, so every failure leaves the attempt exactly as
   -- it was and comes back as a sentinel the handler maps to a status code.
-  SELECT a.user_id::TEXT, a.exam_state
-    INTO v_owner, v_state
+  SELECT a.user_id::TEXT,
+         a.exam_state,
+         (a.config_snapshot->>'exam_duration_minutes')::INTEGER * 60
+    INTO v_owner, v_state, v_duration_seconds
     FROM public.exam_attempts a
    WHERE a.id = p_attempt_id
      FOR UPDATE;
@@ -358,6 +368,12 @@ BEGIN
     RETURN 'conflict';
   END IF;
 
+  -- The clock in the payload must agree with the attempt's own snapshot: an untimed attempt has
+  -- no seconds to report, and a timed one cannot report "no clock" without erasing a real one.
+  IF (v_duration_seconds IS NULL) <> (p_time_remaining IS NULL) THEN
+    RETURN 'invalid_time';
+  END IF;
+
   -- apply_answer_diff validates the whole payload before its first write, so a
   -- rejected diff has changed nothing here.
   v_diff := public.apply_answer_diff(p_attempt_id, p_answers);
@@ -365,9 +381,11 @@ BEGIN
     RETURN v_diff;
   END IF;
 
+  -- Clamped to the attempt's own duration: the clock is the client's to report but not to invent,
+  -- and a value above the exam's length is the one thing it can never legitimately be.
   UPDATE public.exam_attempts
      SET current_index  = p_current_index::SMALLINT,
-         time_remaining = p_time_remaining
+         time_remaining = LEAST(p_time_remaining, v_duration_seconds)
    WHERE id = p_attempt_id;
 
   IF p_offered_breaks IS NOT NULL AND jsonb_array_length(p_offered_breaks) > 0 THEN
