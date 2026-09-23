@@ -1,57 +1,18 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { AuthContext } from "../contexts";
-import { apiFetch, registerUnauthorizedHandler } from "../utils/apiFetch";
-import { createErrorCodeTranslator } from "../utils/errorTranslation";
-import { AppApiError } from "../errors";
-import type { ApiResponse, AppErrorCode, AuthStatus, User } from "../types";
+import { registerUnauthorizedHandler } from "../utils/apiFetch";
+import * as authService from "../services/auth.service";
+import type { AuthStatus } from "../types";
+import type { EnrolledTrack, User } from "../apiTypes";
 
-type AuthErrorCode = Extract<
-  AppErrorCode,
-  | "INVALID_CREDENTIALS"
-  | "ACCOUNT_EXPIRED"
-  | "SUBSCRIPTION_REQUIRED"
-  | "SIGNUP_FAILED"
-  | "SIGNIN_FAILED"
-  | "CONFIRMATION_FAILED"
-  | "VALIDATION_ERROR"
-  | "MISSING_FIELDS"
-  | "SESSION_CONFLICT"
-  | "SIGNOUT_FAILED"
-  | "UNAUTHORIZED"
-  | "INTERNAL_ERROR"
-  | "METHOD_NOT_ALLOWED"
-  | "PASSWORD_UPDATE_FAILED"
->;
-
-const errorCodeToTranslationKey: Record<AuthErrorCode, string> = {
-  INVALID_CREDENTIALS: "auth.errors.server-invalid-credentials",
-  ACCOUNT_EXPIRED: "auth.errors.server-account-expired",
-  SUBSCRIPTION_REQUIRED: "auth.errors.server-subscription-required",
-  SIGNUP_FAILED: "auth.errors.server-signup-failed",
-  SIGNIN_FAILED: "auth.errors.server-signin-failed",
-  CONFIRMATION_FAILED: "auth.errors.server-confirmation-failed",
-  VALIDATION_ERROR: "auth.errors.server-validation-error",
-  MISSING_FIELDS: "auth.errors.server-missing-fields",
-  SESSION_CONFLICT: "auth.errors.server-session-conflict",
-  SIGNOUT_FAILED: "auth.errors.server-unknown",
-  UNAUTHORIZED: "auth.errors.server-unknown",
-  INTERNAL_ERROR: "auth.errors.server-unknown",
-  METHOD_NOT_ALLOWED: "auth.errors.server-unknown",
-  PASSWORD_UPDATE_FAILED: "auth.errors.server-unknown",
-};
-
-const translateErrorCode = createErrorCodeTranslator<AuthErrorCode>(
-  errorCodeToTranslationKey,
-  "auth.errors.server-unknown",
-);
-
-/** Provides auth state and lifecycle methods to the app. Restores session from cookies via /me on mount. */
+/** Provides auth state and lifecycle methods to the app. Restores session (and its enrolled tracks) from cookies via /me on mount. */
 export default function AuthContextProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const [user, setUser] = useState<User | null>(null);
+  const [enrolledTracks, setEnrolledTracks] = useState<EnrolledTrack[]>([]);
   const [authStatus, setAuthStatus] = useState<AuthStatus>("pending");
   const sessionCheckCancelled = useRef(false);
 
@@ -60,25 +21,14 @@ export default function AuthContextProvider({
   }, []);
 
   const signIn = useCallback(
-    async (email: string, password: string, force: boolean) => {
-      const response = await apiFetch("/api/auth/signin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, force }),
-        handleUnauthorized: false,
-      });
-
-      const result: ApiResponse<{ user: User }> = await response.json();
-
-      if (!result.success) {
-        throw new AppApiError(
-          translateErrorCode(result.error.code),
-          result.error.code,
-        );
-      }
+    async (email: string, password: string) => {
+      await authService.signIn(email, password);
+      // /me is the one call that carries enrolled tracks alongside the user — see auth-rbac-guide.
+      const me = await authService.getMe();
 
       cancelSessionCheck();
-      setUser(result.data.user);
+      setUser(me.user);
+      setEnrolledTracks(me.tracks);
       setAuthStatus("authenticated");
     },
     [cancelSessionCheck],
@@ -91,23 +41,7 @@ export default function AuthContextProvider({
       firstName: string,
       lastName: string,
     ) => {
-      const response = await apiFetch("/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          password,
-          first_name: firstName,
-          last_name: lastName,
-        }),
-        handleUnauthorized: false,
-      });
-
-      const result: ApiResponse<null> = await response.json();
-
-      if (!result.success) {
-        throw new Error(translateErrorCode(result.error.code));
-      }
+      await authService.signUp(email, password, firstName, lastName);
 
       // Do NOT set user — email confirmation is required first
     },
@@ -116,69 +50,33 @@ export default function AuthContextProvider({
 
   const exchangeToken = useCallback(
     async (accessToken: string, refreshToken: string) => {
-      const response = await apiFetch("/api/auth/token-exchange", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          access_token: accessToken,
-          refresh_token: refreshToken,
-        }),
-        handleUnauthorized: false,
-      });
-
-      const result: ApiResponse<{ user: User }> = await response.json();
-
-      if (!result.success) {
-        throw new Error(translateErrorCode(result.error.code));
-      }
+      await authService.exchangeToken(accessToken, refreshToken);
+      const me = await authService.getMe();
 
       cancelSessionCheck();
-      setUser(result.data.user);
+      setUser(me.user);
+      setEnrolledTracks(me.tracks);
       setAuthStatus("authenticated");
     },
     [cancelSessionCheck],
   );
 
   const requestPasswordReset = useCallback(async (email: string) => {
-    const response = await apiFetch("/api/auth/password-reset", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-      handleUnauthorized: false,
-    });
-
-    const result: ApiResponse<null> = await response.json();
-
-    if (!result.success) {
-      throw new Error(translateErrorCode(result.error.code));
-    }
+    await authService.requestPasswordReset(email);
   }, []);
 
   const updatePassword = useCallback(async (password: string) => {
-    const response = await apiFetch("/api/auth/update-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-      handleUnauthorized: true,
-    });
-
-    const result: ApiResponse<null> = await response.json();
-
-    if (!result.success) {
-      throw new Error(translateErrorCode(result.error.code));
-    }
+    await authService.updatePassword(password);
   }, []);
 
   const signOut = useCallback(
     async (onSuccess?: () => void) => {
       try {
-        await apiFetch("/api/auth/signout", {
-          method: "POST",
-          handleUnauthorized: false,
-        });
+        await authService.signOut();
       } finally {
         cancelSessionCheck();
         setUser(null);
+        setEnrolledTracks([]);
         setAuthStatus("unauthenticated");
         onSuccess?.();
       }
@@ -196,21 +94,15 @@ export default function AuthContextProvider({
 
     async function checkSession() {
       try {
-        const response = await apiFetch("/api/auth/me", {
-          handleUnauthorized: false,
-        });
-        const result: ApiResponse<{ user: User }> = await response.json();
+        const me = await authService.getMe();
 
         // unmounted: component no longer exists, don't update state
         // sessionCheckCancelled: an active auth flow (signIn, exchangeToken) took over
         if (unmounted || sessionCheckCancelled.current) return;
 
-        if (result.success) {
-          setUser(result.data.user);
-          setAuthStatus("authenticated");
-        } else {
-          setAuthStatus("unauthenticated");
-        }
+        setUser(me.user);
+        setEnrolledTracks(me.tracks);
+        setAuthStatus("authenticated");
       } catch {
         //                don't override active auth flows
         if (!unmounted && !sessionCheckCancelled.current) {
@@ -228,6 +120,7 @@ export default function AuthContextProvider({
 
   const value = {
     user,
+    enrolledTracks,
     isAuthenticated: authStatus === "authenticated",
     isLoading: authStatus === "pending",
     signIn,

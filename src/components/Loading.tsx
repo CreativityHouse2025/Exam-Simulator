@@ -1,40 +1,17 @@
-import type { ThemedStyles } from '../types'
-
-import React from 'react'
-import styled, { keyframes } from 'styled-components'
-import { Repeat } from '@styled-icons/material'
-
-export const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`
-
-export const LoadingStyles = styled.div<ThemedStyles>`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: ${({ theme }) => theme.grey[0]};
-  svg {
-    color: ${({ theme }) => theme.secondary};
-    animation: ${rotate} 1s infinite;
-  }
-`
+import React from "react";
+import { Repeat } from "lucide-react";
 
 const LoadingComponent: React.FC<LoadingProps> = ({ size }) => (
-  <LoadingStyles id="loading">
-    <Repeat size={size} />
-  </LoadingStyles>
-)
+  <div
+    id="loading"
+    className="w-screen h-screen flex flex-col justify-center items-center bg-grey-50 text-secondary"
+  >
+    <Repeat size={size} className="animate-rotate" />
+  </div>
+);
 
-export default LoadingComponent
+export default LoadingComponent;
 
 export interface LoadingProps {
-  size: number
+  size: number;
 }

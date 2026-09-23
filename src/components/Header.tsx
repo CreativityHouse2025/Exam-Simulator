@@ -1,232 +1,168 @@
-import type { ThemedStyles } from '../types'
-import { useNavigate } from "react-router-dom"
-import React from 'react'
-import styled, { css } from 'styled-components'
-import { Language } from '@styled-icons/material/Language'
-import { Menu } from '@styled-icons/material/Menu'
-// @ts-expect-error
-import Logo from '../assets/logo.png'
-import { translate } from '../utils/translation'
-import useSettings from '../hooks/useSettings'
-import useAuth from '../hooks/useAuth'
-import { roleOf } from '../config/roles'
-import { ROUTES } from '../config/routes'
-import { getNavItems } from '../config/nav'
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Globe, Menu, X } from "lucide-react";
+// @ts-expect-error -- pre-existing, unrelated to this change
+import Logo from "../assets/logo.png";
+import { translate } from "../utils/translation";
+import useSettings from "../hooks/useSettings";
+import useAuth from "../hooks/useAuth";
+import { roleOf } from "../config/roles";
+import { ROUTES } from "../config/routes";
+import { getNavItems } from "../config/nav";
+import { cn } from "./ui/utils";
 
-const HeaderStyles = styled.div<ThemedStyles>`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  width: 100%;
-  background: ${({ theme }) => theme.primary};
-  padding: 0 1.2rem;
-  box-sizing: border-box;
-  z-index: 100;
+const NAV_ITEM_BASE =
+  "flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold transition-colors duration-200 cursor-pointer";
 
-  @media (min-width: 768px) {
-    padding: 0 3rem;
-  }
-`
-
-const TitleStyles = styled.div<ThemedStyles>`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font: 1.8rem 'Open Sans';
-  font-weight: 700;
-  color: ${({ theme }) => theme.black};
-  cursor: pointer;
-  white-space: nowrap;
-
-  @media (min-width: 768px) {
-    font-size: 2rem;
-  }
-`
-
-const IconsContainer = styled.div`
-  display: none;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-
-  @media (min-width: 768px) {
-    display: flex;
-  }
-`
-
-const MenuWrapper = styled.div`
-  position: relative;
-
-  @media (min-width: 768px) {
-    display: none;
-  }
-`
-
-const MenuButton = styled.button<ThemedStyles>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.4rem;
-  color: ${({ theme }) => theme.black};
-`
-
-const DropdownMenu = styled.div<ThemedStyles & { $open: boolean }>`
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  inset-inline-end: 0;
-  background: ${({ theme }) => theme.tertiary};
-  border-radius: 6px;
-  box-shadow: ${({ theme }) => theme.shadows[8]};
-  min-width: 18rem;
-  overflow: hidden;
-  z-index: 200;
-  transform-origin: top center;
-  transition: opacity 0.18s ease, transform 0.18s ease;
-
-  ${({ $open }) =>
-    $open
-      ? css`
-          opacity: 1;
-          transform: scaleY(1);
-          pointer-events: all;
-        `
-      : css`
-          opacity: 0;
-          transform: scaleY(0.85);
-          pointer-events: none;
-        `}
-`
-
-const DropdownItem = styled.button<ThemedStyles>`
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.85rem 1.1rem;
-  color: ${({ theme }) => theme.quatro};
-  font: 1.25rem 'Open Sans';
-  font-weight: 600;
-  text-align: start;
-  width: 100%;
-  transition: background 0.15s ease;
-
-  svg {
-    color: ${({ theme }) => theme.primary};
-    flex-shrink: 0;
-  }
-
-  &:hover {
-    background: ${({ theme }) => theme.secondary};
-  }
-
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      display: none;
-    `}
-`
-
-const ImageStyles = styled.img`
-  cursor: pointer;
-  width: 4.5rem;
-  justify-self: center;
-
-  @media (min-width: 768px) {
-    width: 6rem;
-  }
-`
-
-const IconStyles = styled.div<ThemedStyles>`
-  justify-self: center;
-  align-items: center;
-  cursor: pointer;
-  svg {
-    color: ${({ theme }) => theme.black};
-  }
-`
-
-/** App header with language toggle and role-driven navigation icons. */
+/** App header — brand mark, language toggle and role-driven navigation. */
 const HeaderComponent: React.FC = () => {
-  const title = translate('about.title')
-  const navigate = useNavigate()
-  const { settings, updateLanguage } = useSettings()
-  const { user } = useAuth()
-  const navItems = getNavItems(roleOf(user))
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
-  const menuRef = React.useRef<HTMLDivElement>(null)
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const { settings, updateLanguage } = useSettings();
+  const { user } = useAuth();
+  const navItems = getNavItems(roleOf(user));
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const menuRef = React.useRef<HTMLDivElement>(null);
+
+  // The toggle names the language it switches TO, so the label is the action rather than the state.
+  const nextLanguage = settings.language === "ar" ? "en" : "ar";
+  const nextLanguageLabel = nextLanguage === "ar" ? "العربية" : "English";
+
+  // Exam content is fetched per language, so switching mid-session would need a refetch that could
+  // discard unsaved answers. Locked here; the copy tells them to save, leave and come back, which
+  // reloads the attempt in the language picked afterwards.
+  const isInExam =
+    pathname === ROUTES.exam.pattern || pathname.endsWith("/preview");
+  const languageHint = isInExam
+    ? translate("header.language-locked")
+    : translate("header.changeLanguage");
 
   const toggleLanguage = React.useCallback(() => {
-    const nextCode = settings.language === "ar" ? "en" : "ar"
-    updateLanguage(nextCode)
-  }, [settings.language, updateLanguage])
-
-  function handleHomepage() {
-    navigate(ROUTES.home)
-  }
+    if (isInExam) return;
+    updateLanguage(nextLanguage);
+  }, [isInExam, nextLanguage, updateLanguage]);
 
   function handleMenuAction(action: () => void) {
-    setIsMenuOpen(false)
-    action()
+    setIsMenuOpen(false);
+    action();
   }
 
   React.useEffect(() => {
     function handlePointerOutside(e: PointerEvent) {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setIsMenuOpen(false)
+        setIsMenuOpen(false);
       }
     }
-    document.addEventListener('pointerdown', handlePointerOutside)
-    return () => document.removeEventListener('pointerdown', handlePointerOutside)
-  }, [])
+    document.addEventListener("pointerdown", handlePointerOutside);
+    return () =>
+      document.removeEventListener("pointerdown", handlePointerOutside);
+  }, []);
 
   return (
-    <HeaderStyles id="header">
-      <ImageStyles title='Creativity House' alt='Creativity House Logo' id="image" className="no-select" src={Logo} onClick={handleHomepage} />
+    <header className="sticky top-0 z-100 w-full border-b border-primary/30 bg-tertiary">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-3 px-3 md:h-20 md:px-6">
+        <button
+          onClick={() => navigate(ROUTES.home)}
+          aria-label={translate("about.title")}
+          className="no-select flex cursor-pointer items-center bg-transparent"
+        >
+          {/* brightness-0 + invert forces any source colour to flat white against the plum bar. */}
+          <img
+            src={Logo}
+            alt=""
+            className="h-11 w-auto brightness-0 invert md:h-14"
+          />
+        </button>
 
-      <TitleStyles id="title" className="no-select" onClick={handleHomepage}>
-        {title}
-      </TitleStyles>
+        <nav className="hidden items-center gap-1 md:flex">
+          {navItems.map(({ icon: Icon, path, labelKey }) => {
+            const isActive = pathname === path;
+            return (
+              <button
+                key={path}
+                onClick={() => navigate(path)}
+                aria-current={isActive ? "page" : undefined}
+                className={cn(
+                  NAV_ITEM_BASE,
+                  // Active fill reuses the same quatro the label carries when unfilled.
+                  isActive
+                    ? "bg-quatro text-tertiary"
+                    : "text-quatro hover:bg-white/10 hover:text-white",
+                )}
+              >
+                <Icon size={18} />
+                {translate(labelKey)}
+              </button>
+            );
+          })}
 
-      <IconsContainer>
-        <IconStyles title='Change language' aria-label='Language Icon' id="language" className="no-select" onClick={toggleLanguage}>
-          <Language size={38} />
-        </IconStyles>
-        {navItems.map(({ icon: Icon, path, labelKey }) => (
-          <IconStyles key={path} title={translate(labelKey)} aria-label={translate(labelKey)} className="no-select" onClick={() => navigate(path)}>
-            <Icon size={35} />
-          </IconStyles>
-        ))}
-      </IconsContainer>
+          <button
+            onClick={toggleLanguage}
+            disabled={isInExam}
+            title={languageHint}
+            aria-label={languageHint}
+            className={cn(
+              NAV_ITEM_BASE,
+              "ms-1 border border-primary/40 text-quatro",
+              isInExam
+                ? "cursor-not-allowed opacity-45"
+                : "hover:bg-white/10 hover:text-white",
+            )}
+          >
+            <Globe size={18} />
+            {nextLanguageLabel}
+          </button>
+        </nav>
 
-      <MenuWrapper ref={menuRef}>
-        <MenuButton aria-label='Open menu' onClick={() => setIsMenuOpen(prev => !prev)}>
-          <Menu size={32} />
-        </MenuButton>
-        <DropdownMenu $open={isMenuOpen}>
-          <DropdownItem onClick={() => handleMenuAction(toggleLanguage)}>
-            <Language size={22} />
-            {translate('header.changeLanguage')}
-          </DropdownItem>
-          {navItems.map(({ icon: Icon, path, labelKey }) => (
-            <DropdownItem key={path} onClick={() => handleMenuAction(() => navigate(path))}>
-              <Icon size={22} />
-              {translate(labelKey)}
-            </DropdownItem>
-          ))}
-        </DropdownMenu>
-      </MenuWrapper>
-    </HeaderStyles>
-  )
-}
+        <div ref={menuRef} className="relative md:hidden">
+          <button
+            aria-label={translate("header.menu")}
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-transparent text-quatro transition-colors duration-200 hover:bg-white/10"
+          >
+            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
 
-export default HeaderComponent
+          <div
+            className={cn(
+              "absolute end-0 top-full z-200 mt-2 min-w-48 origin-top overflow-hidden rounded-xl border border-primary/25 bg-tertiary shadow-8",
+              "transition duration-200",
+              isMenuOpen
+                ? "pointer-events-auto scale-y-100 opacity-100"
+                : "pointer-events-none scale-y-90 opacity-0",
+            )}
+          >
+            {navItems.map(({ icon: Icon, path, labelKey }) => (
+              <button
+                key={path}
+                onClick={() => handleMenuAction(() => navigate(path))}
+                className="flex min-h-11 w-full cursor-pointer items-center gap-2.5 bg-transparent px-3.5 text-start text-sm font-semibold text-quatro transition-colors duration-150 hover:bg-secondary [&>svg]:shrink-0 [&>svg]:text-primary"
+              >
+                <Icon size={20} />
+                {translate(labelKey)}
+              </button>
+            ))}
+
+            <button
+              onClick={() => handleMenuAction(toggleLanguage)}
+              disabled={isInExam}
+              title={languageHint}
+              className={cn(
+                "flex min-h-11 w-full items-center gap-2.5 border-t border-primary/20 bg-transparent px-3.5 text-start text-sm font-semibold text-quatro transition-colors duration-150 [&>svg]:shrink-0 [&>svg]:text-primary",
+                isInExam
+                  ? "cursor-not-allowed opacity-45"
+                  : "cursor-pointer hover:bg-secondary",
+              )}
+            >
+              <Globe size={20} />
+              {nextLanguageLabel}
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default HeaderComponent;

@@ -1,74 +1,65 @@
+import camelcaseKeys from "camelcase-keys";
 import { AppApiError } from "../errors";
 import { apiFetch } from "../utils/apiFetch";
-import { createErrorCodeTranslator } from "../utils/errorTranslation";
+import type { ApiResponse } from "@shared/api.schema";
+import type { StudentList } from "@shared/student.schema";
+import type { AttemptList } from "@shared/attempt.schema";
+import type { UserWithTracks } from "@shared/user.schema";
+import { markPersisted } from "../apiTypes";
 import type {
-  ApiResponse,
-  AppErrorCode,
-  SearchStudentsResult,
-  StudentAttemptsResult,
-  StudentSearchResult,
-} from "../types";
-
-type StudentErrorCode = Extract<
-  AppErrorCode,
-  | "NOT_FOUND"
-  | "FORBIDDEN"
-  | "VALIDATION_ERROR"
-  | "INTERNAL_ERROR"
-  | "UNAUTHORIZED"
-  | "METHOD_NOT_ALLOWED"
->;
-
-const errorCodeToTranslationKey: Record<StudentErrorCode, string> = {
-  NOT_FOUND: "students.errors.server-not-found",
-  FORBIDDEN: "students.errors.server-forbidden",
-  VALIDATION_ERROR: "students.errors.server-unknown",
-  INTERNAL_ERROR: "students.errors.server-unknown",
-  UNAUTHORIZED: "students.errors.server-unknown",
-  METHOD_NOT_ALLOWED: "students.errors.server-unknown",
-};
-
-const translateErrorCode = createErrorCodeTranslator<StudentErrorCode>(
-  errorCodeToTranslationKey,
-  "students.errors.server-unknown",
-);
+  AttemptSummary,
+  StudentProfile,
+  UserWithTracks as FrontendUserWithTracks,
+} from "../apiTypes";
 
 export async function searchStudents(
   query: string,
   signal?: AbortSignal,
-): Promise<StudentSearchResult[]> {
+): Promise<StudentProfile[]> {
   const response = await apiFetch(
     `/api/students?q=${encodeURIComponent(query)}`,
     { handleUnauthorized: true, signal },
   );
-  const result: ApiResponse<SearchStudentsResult> = await response.json();
+  const result: ApiResponse<StudentList> = await response.json();
 
   if (!result.success) {
-    throw new AppApiError(
-      translateErrorCode(result.error.code),
-      result.error.code,
-    );
+    throw new AppApiError(result.error.code, "students");
   }
 
-  return result.data.students;
+  return camelcaseKeys(result.data.students, { deep: true });
+}
+
+/** A student's profile and the tracks they hold an active enrollment in. */
+export async function getStudent(id: string): Promise<FrontendUserWithTracks> {
+  const response = await apiFetch(`/api/students/${id}`, {
+    handleUnauthorized: true,
+  });
+  const result: ApiResponse<UserWithTracks> = await response.json();
+
+  if (!result.success) {
+    throw new AppApiError(result.error.code, "students");
+  }
+
+  return camelcaseKeys(result.data, { deep: true });
 }
 
 export async function getStudentAttempts(
   id: string,
+  trackId: string,
   signal?: AbortSignal,
-): Promise<StudentAttemptsResult> {
-  const response = await apiFetch(`/api/students/${id}/attempts`, {
-    handleUnauthorized: true,
-    signal,
-  });
-  const result: ApiResponse<StudentAttemptsResult> = await response.json();
+): Promise<AttemptSummary[]> {
+  const response = await apiFetch(
+    `/api/students/${id}/attempts?trackId=${trackId}`,
+    { handleUnauthorized: true, signal },
+  );
+  const result: ApiResponse<AttemptList> = await response.json();
 
   if (!result.success) {
-    throw new AppApiError(
-      translateErrorCode(result.error.code),
-      result.error.code,
-    );
+    throw new AppApiError(result.error.code, "students");
   }
 
-  return result.data;
+  return camelcaseKeys(result.data.attempts, { deep: true }).map((attempt) => ({
+    ...attempt,
+    configSnapshot: markPersisted(attempt.configSnapshot),
+  }));
 }

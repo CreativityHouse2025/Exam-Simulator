@@ -1,65 +1,106 @@
-import { Link } from "react-router-dom"
-import { HelpCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import ExamTypeBadge from "@/components/ExamTypeBadge"
-import ExamStats from "@/components/ExamStats"
-import PreviewExamButton from "@/components/PreviewExamButton"
-import { translate } from "@/utils/translation"
-import { ROUTES } from "@/config/routes"
-import type { ExamListItem } from "./types"
+import React from "react";
+import { Link } from "react-router-dom";
+import { ListChecks } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader } from "@/components/ui/card";
+import ExamFacts from "@/components/exams/ExamFacts";
+import PreviewExamButton from "@/components/PreviewExamButton";
+import { translate } from "@/utils/translation";
+import { examTypeAccent } from "@/utils/examTypeColour";
+import { ROUTES } from "@/config/routes";
+import { cn } from "@/components/ui/utils";
+import type { ExamDetails, ExamType } from "@/apiTypes";
+import type { LangCode } from "@/types";
 
 type ExamCardProps = {
-  exam: ExamListItem
-}
+  exam: ExamDetails;
+  examType: ExamType | undefined;
+  trackId: string;
+  langCode: LangCode;
+};
 
-/** Each exam type carries its own accent colour, applied to the card's edge bar and action buttons. */
-const ACCENT = {
-  full: {
-    bar: "bg-primary",
-    button: "border-primary text-primary hover:bg-primary/10 hover:text-primary"
-  },
-  domain: {
-    bar: "bg-secondary",
-    button: "border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary"
-  }
-} as const
-
-const ExamCard = ({ exam }: ExamCardProps) => {
-  const accent = ACCENT[exam.type]
-
-  const t = {
-    type: translate(`exam.type.${exam.type}`),
-    viewQuestions: translate("exam.library.view-questions"),
-    duration: translate("exam.stats.duration", [exam.durationMinutes]),
-    questions: translate("exam.stats.questions", [exam.questionCount]),
-    pass: translate("exam.stats.pass", [exam.passingRate])
-  }
+/**
+ * One exam as a supervisor reads it: what it is made of, and the two ways in — the question
+ * viewer, or an ephemeral preview session that writes nothing to the database.
+ */
+const ExamCard: React.FC<ExamCardProps> = ({
+  exam,
+  examType,
+  trackId,
+  langCode,
+}) => {
+  const accent = examTypeAccent(examType?.colour ?? null);
 
   return (
-    <div className="flex gap-4 rounded-xl border border-border bg-card p-4 text-card-foreground shadow-sm transition-shadow hover:shadow-md">
-      <div className={`w-1 shrink-0 self-stretch rounded ${accent.bar}`} />
+    <Card
+      className={cn(
+        "overflow-hidden border-grey-200 pt-0 transition-colors duration-200",
+        accent.hoverBorder,
+      )}
+    >
+      <div className={cn("h-1.5 w-full", accent.rail)} />
 
-      <div className="min-w-0 flex-1">
-        <div className="mb-1.5 flex flex-wrap items-center gap-2">
-          <span className="font-bold text-tertiary">{exam.name}</span>
-          <ExamTypeBadge type={exam.type} label={t.type} />
+      <CardHeader className="gap-3">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div className="flex min-w-0 flex-col gap-1.5">
+            <div className="flex flex-wrap items-center gap-2">
+              {examType && (
+                <Badge className={cn("shrink-0 text-xs", accent.chip)}>
+                  {examType.name[langCode]}
+                </Badge>
+              )}
+              {exam.config.canRevealAnswers && (
+                <Badge
+                  variant="outline"
+                  className="shrink-0 border-grey-300 text-xs text-grey-800"
+                >
+                  {translate("exams.config.reveal")}
+                </Badge>
+              )}
+              {exam.config.allowRetryWrong && (
+                <Badge
+                  variant="outline"
+                  className="shrink-0 border-grey-300 text-xs text-grey-800"
+                >
+                  {translate("exams.config.retry")}
+                </Badge>
+              )}
+            </div>
+
+            <h3 className="text-base font-bold text-tertiary md:text-lg">
+              {exam.name[langCode]}
+            </h3>
+          </div>
+
+          <div className="flex shrink-0 flex-wrap items-center gap-2">
+            <PreviewExamButton trackId={trackId} examId={exam.id} />
+
+            <Button
+              asChild
+              size="sm"
+              className={cn("gap-1.5 font-semibold", accent.button)}
+            >
+              <Link to={ROUTES.examDetail.to(trackId, exam.id)}>
+                <ListChecks className="size-4" />
+                {translate("exam.library.view-questions")}
+              </Link>
+            </Button>
+          </div>
         </div>
 
-        <ExamStats duration={t.duration} questions={t.questions} pass={t.pass} />
-      </div>
+        <p className="text-sm leading-relaxed text-grey-800">
+          {exam.description[langCode]}
+        </p>
 
-      <div className="flex shrink-0 flex-row items-center gap-2">
-        <Button variant="outline" size="sm" className={`gap-1.5 md:min-w-36 ${accent.button}`} asChild>
-          <Link to={ROUTES.examDetail.to(exam.type, exam.id)}>
-            <HelpCircle className="size-4" />
-            <span className="hidden md:inline">{t.viewQuestions}</span>
-          </Link>
-        </Button>
+        <ExamFacts
+          config={exam.config}
+          questionCount={exam.questionCount}
+          iconClassName={accent.icon}
+        />
+      </CardHeader>
+    </Card>
+  );
+};
 
-        <PreviewExamButton type={exam.type} id={exam.id} className={accent.button} />
-      </div>
-    </div>
-  )
-}
-
-export default ExamCard
+export default ExamCard;

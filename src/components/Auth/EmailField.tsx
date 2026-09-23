@@ -1,24 +1,34 @@
-import React from "react"
-import { Email } from "@styled-icons/material/Email"
-import { FormGroup, FormLabel, FormInput, InputWrapper, InputIcon, FieldError } from "../SharedStyles"
+import React from "react";
+import { Mail } from "lucide-react";
+import {
+  FormGroup,
+  FormLabel,
+  FormInput,
+  InputWrapper,
+  InputIcon,
+  FieldError,
+} from "../SharedStyles";
 
 interface EmailFieldProps {
-  label: string
-  placeholder: string
-  autoComplete?: string
-  value: string
-  error: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  label: string;
+  placeholder: string;
+  autoComplete?: string;
+  value: string;
+  error: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 /** Email input with envelope icon and error display. */
 const EmailField = React.forwardRef<HTMLInputElement, EmailFieldProps>(
-  ({ label, placeholder, autoComplete = "email", value, error, onChange }, ref) => (
+  (
+    { label, placeholder, autoComplete = "email", value, error, onChange },
+    ref,
+  ) => (
     <FormGroup>
       <FormLabel htmlFor="email">{label}</FormLabel>
       <InputWrapper>
         <InputIcon>
-          <Email size={18} />
+          <Mail size={18} />
         </InputIcon>
         <FormInput
           ref={ref}
@@ -35,8 +45,8 @@ const EmailField = React.forwardRef<HTMLInputElement, EmailFieldProps>(
       {error && <FieldError>{error}</FieldError>}
     </FormGroup>
   ),
-)
+);
 
-EmailField.displayName = "EmailField"
+EmailField.displayName = "EmailField";
 
-export default EmailField
+export default EmailField;

@@ -1,13 +1,16 @@
-import type { ExamListItem } from "../pages/exam-library/types";
-
 const EXAMS = "/exams";
 const EXAM = "/exam";
 const STUDENTS = "/students";
+const TRACKS = "/tracks";
 
 /**
  * Single source of every app URL.
  *
- * Dynamic routes expose `pattern` for `<Route path>` and `to()` for links.
+ * Dynamic routes expose `pattern` for `<Route>` and `to()` for links.
+ *
+ * Every supervisor URL below carries a trackId, because every track-scoped endpoint behind it is
+ * guarded by `assertTrackAccess` on the supervisor's own enrollment. Keeping the track in the path
+ * rather than in component state is what makes these pages refreshable and shareable.
  */
 export const ROUTES = {
   home: "/",
@@ -17,26 +20,42 @@ export const ROUTES = {
   authCallback: "/auth/callback",
   profile: "/profile",
   resetPassword: "/reset-password",
-  history: "/history",
+  // Track-scoped: GET /api/attempts requires a trackId, so there is no cross-track history.
+  track: {
+    pattern: `${TRACKS}/:trackId`,
+    to: (trackId: string) => `${TRACKS}/${trackId}`,
+  },
+  trackHistory: {
+    pattern: `${TRACKS}/:trackId/history`,
+    to: (trackId: string) => `${TRACKS}/${trackId}/history`,
+  },
   exam: {
     pattern: EXAM,
     to: (attemptId: string, revision = false) =>
       `${EXAM}?id=${attemptId}${revision ? "&revision=1" : ""}`,
   },
-  exams: EXAMS,
+  /** Supervisor track picker — the entry point to the exam library. */
+  exams: TRACKS,
+  examLibrary: {
+    pattern: `${TRACKS}/:trackId/exams`,
+    to: (trackId: string) => `${TRACKS}/${trackId}/exams`,
+  },
   examDetail: {
-    pattern: `${EXAMS}/:type/:id`,
-    to: (type: ExamListItem["type"], id: ExamListItem["id"]) =>
-      `${EXAMS}/${type}/${id}`,
+    pattern: `${EXAMS}/:trackId/:examId`,
+    to: (trackId: string, examId: number) => `${EXAMS}/${trackId}/${examId}`,
   },
   examPreview: {
-    pattern: `${EXAMS}/:type/:id/preview`,
-    to: (type: ExamListItem["type"], id: ExamListItem["id"], attemptId: string) =>
-      `${EXAMS}/${type}/${id}/preview?id=${attemptId}`,
+    pattern: `${EXAMS}/:trackId/:examId/preview`,
+    to: (trackId: string, examId: number, attemptId: string) =>
+      `${EXAMS}/${trackId}/${examId}/preview?id=${attemptId}`,
   },
   students: STUDENTS,
+  student: {
+    pattern: `${STUDENTS}/:id`,
+    to: (id: string) => `${STUDENTS}/${id}`,
+  },
   studentAttempts: {
-    pattern: `${STUDENTS}/:id/attempts`,
-    to: (id: string) => `${STUDENTS}/${id}/attempts`,
+    pattern: `${STUDENTS}/:id/tracks/:trackId`,
+    to: (id: string, trackId: string) => `${STUDENTS}/${id}/tracks/${trackId}`,
   },
 } as const;

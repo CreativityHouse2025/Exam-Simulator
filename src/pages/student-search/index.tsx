@@ -2,10 +2,11 @@ import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useDebouncedValue } from "@mantine/hooks";
-import { UserSearch, Search as SearchIcon, RotateCcw } from "lucide-react";
+import { Search, UserSearch } from "lucide-react";
 import SearchBar from "@/components/SearchBar";
-import { Button } from "@/components/ui/button";
 import BackButton from "@/components/BackButton";
+import EmptyState from "@/components/states/EmptyState";
+import ErrorState from "@/components/states/ErrorState";
 import StudentCard, { StudentCardSkeleton } from "./StudentCard";
 import { createStudentSearchQueryOptions } from "@/utils/queryOptions";
 import { translate } from "@/utils/translation";
@@ -15,20 +16,10 @@ const MIN_QUERY_LENGTH = 2;
 const SEARCH_DEBOUNCE_MS = 300;
 const SKELETON_COUNT = 5;
 
-const EmptyState = ({
-  icon: Icon,
-  message,
-}: {
-  icon: typeof SearchIcon;
-  message: string;
-}) => (
-  <div className="flex flex-col items-center gap-3 py-20">
-    <Icon className="size-9 text-grey-500" strokeWidth={1.4} />
-    <p className="text-sm text-grey-800">{message}</p>
-  </div>
-);
+const LIST_CLASSES =
+  "divide-y divide-grey-100 overflow-hidden rounded-xl border border-grey-200 bg-white";
 
-/** Supervisor-only: search students by name or email, then open a student to review their attempts. */
+/** Supervisor-only: search students by name or email, then open one to review their attempts. */
 const StudentSearchPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [inputValue, setInputValue] = React.useState(
@@ -51,18 +42,6 @@ const StudentSearchPage: React.FC = () => {
     refetch,
   } = useQuery(createStudentSearchQueryOptions(query));
 
-  const t = {
-    back: translate("exam.library.back"),
-    title: translate("students.search.title"),
-    subtitle: translate("students.search.subtitle"),
-    placeholder: translate("students.search.placeholder"),
-    idle: translate("students.search.idle"),
-    empty: translate("students.search.empty", [query]),
-    error: translate("students.search.error"),
-    retry: translate("students.search.retry"),
-    count: (n: number) => translate("students.search.count", [n]),
-  };
-
   const fromSearch = searchParams.toString()
     ? `?${searchParams.toString()}`
     : "";
@@ -70,34 +49,46 @@ const StudentSearchPage: React.FC = () => {
   let content: React.ReactNode;
 
   if (isIdle) {
-    content = <EmptyState icon={SearchIcon} message={t.idle} />;
+    content = (
+      <EmptyState
+        icon={Search}
+        message={translate("students.search.idle")}
+        hint={translate("students.search.idle-hint")}
+      />
+    );
   } else if (isFetching) {
     content = (
-      <div className="divide-y divide-grey-100 overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-        {Array.from({ length: SKELETON_COUNT }).map((_, i) => (
+      <div className={LIST_CLASSES}>
+        {Array.from({ length: SKELETON_COUNT }, (_, i) => (
           <StudentCardSkeleton key={i} />
         ))}
       </div>
     );
   } else if (isError) {
     content = (
-      <div className="flex flex-col items-center gap-3 py-20">
-        <p className="text-sm text-grey-800">{t.error}</p>
-        <Button variant="outline" size="sm" onClick={() => refetch()}>
-          <RotateCcw className="size-3.5" />
-          {t.retry}
-        </Button>
-      </div>
+      <ErrorState
+        message={translate("students.search.error")}
+        onRetry={refetch}
+        isRetrying={isFetching}
+      />
     );
-  } else if (students && students.length === 0) {
-    content = <EmptyState icon={UserSearch} message={t.empty} />;
+  } else if (!students || students.length === 0) {
+    content = (
+      <EmptyState
+        icon={UserSearch}
+        message={translate("students.search.empty", [query])}
+        hint={translate("students.search.empty-hint")}
+      />
+    );
   } else {
     content = (
       <div className="animate-[fadeIn_0.25s_ease-out]">
-        <p className="mb-3 text-xs text-grey-800">{t.count(students?.length ?? 0)}</p>
+        <p className="mb-3 text-xs text-grey-800">
+          {translate("students.search.count", [students.length])}
+        </p>
 
-        <div className="divide-y divide-grey-100 overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-          {students?.map((student) => (
+        <div className={LIST_CLASSES}>
+          {students.map((student) => (
             <StudentCard
               key={student.id}
               student={student}
@@ -110,17 +101,23 @@ const StudentSearchPage: React.FC = () => {
   }
 
   return (
-    <div className="tailwind-page mx-auto w-full max-w-4xl px-4 py-8">
-      <BackButton to={ROUTES.home} text={t.back} />
+    <div className="mx-auto w-full max-w-4xl px-4 py-8">
+      <BackButton to={ROUTES.home} text={translate("exam.library.back")} />
 
-      <h1 className="text-2xl font-bold text-tertiary">{t.title}</h1>
-      <p className="mt-1.5 mb-0 text-xs text-grey-800">{t.subtitle}</p>
+      <header className="mb-6">
+        <h1 className="text-2xl font-bold text-tertiary md:text-3xl">
+          {translate("students.search.title")}
+        </h1>
+        <p className="mt-1.5 text-sm text-grey-800">
+          {translate("students.search.subtitle")}
+        </p>
+      </header>
 
       <SearchBar
         value={inputValue}
         onChange={setInputValue}
-        placeholder={t.placeholder}
-        className="mt-6 mb-4"
+        placeholder={translate("students.search.placeholder")}
+        className="mb-5"
       />
 
       {content}

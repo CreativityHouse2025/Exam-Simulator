@@ -1,44 +1,56 @@
-import React from "react"
-import styled from "styled-components"
-import type { ThemedStyles } from "../../types"
-import { PageWrapper, Card, PageTitle, PageSubtitle, CardFooter, NavLink } from "../SharedStyles"
+import React from "react";
+import {
+  PageWrapper,
+  Card,
+  PageTitle,
+  PageSubtitle,
+  CardFooter,
+  NavLink,
+} from "../SharedStyles";
+import { cn } from "../ui/utils";
 
 export interface ConfirmationHint {
-  text: string
-  linkTo: string
-  linkText: string
+  text: string;
+  linkTo: string;
+  linkText: string;
 }
 
 interface ConfirmationCardProps {
-  icon: React.ReactNode
-  title: string
-  subtitle: string
-  linkTo: string
-  linkText: string
+  icon: React.ReactNode;
+  title: string;
+  subtitle: string;
+  linkTo: string;
+  linkText: string;
   /** Optional secondary hint shown below the main action (e.g. "didn't get an email? reset password"). */
-  hint?: ConfirmationHint
+  hint?: ConfirmationHint;
 }
 
-const HintSection = styled.div<ThemedStyles>`
-  margin-top: 1.6rem;
-  padding-top: 1.4rem;
-  border-top: 1px solid ${({ theme }) => theme.grey[2]};
-  text-align: center;
-  font-size: 1.3rem;
-  color: ${({ theme }) => theme.grey[8]};
-  line-height: 1.6;
-
-  @media (min-width: 768px) {
-    font-size: 1.35rem;
-  }
-`
+const HintSection: React.FC<React.ComponentProps<"div">> = ({
+  className,
+  ...rest
+}) => (
+  <div
+    className={cn(
+      "mt-4 pt-3.5 border-t border-grey-200 text-center text-sm text-grey-800 leading-relaxed",
+      className,
+    )}
+    {...rest}
+  />
+);
 
 /**
  * Full-page confirmation card with icon, message, and navigation link.
  * Accepts an optional `hint` to show a secondary action below the main link
  * (e.g. a "forgot password" escape hatch on the sign-up success screen).
  */
-const ConfirmationCard: React.FC<ConfirmationCardProps> = ({ icon, title, subtitle, linkTo, linkText, hint }) => (
+const ConfirmationCard: React.FC<ConfirmationCardProps> = ({
+  icon,
+  title,
+  subtitle,
+  linkTo,
+  linkText,
+  hint,
+}) => (
   <PageWrapper>
     <Card>
       {icon}
@@ -49,12 +61,11 @@ const ConfirmationCard: React.FC<ConfirmationCardProps> = ({ icon, title, subtit
       </CardFooter>
       {hint && (
         <HintSection>
-          {hint.text}{" "}
-          <NavLink to={hint.linkTo}>{hint.linkText}</NavLink>
+          {hint.text} <NavLink to={hint.linkTo}>{hint.linkText}</NavLink>
         </HintSection>
       )}
     </Card>
   </PageWrapper>
-)
+);
 
-export default ConfirmationCard
+export default ConfirmationCard;

@@ -1,4 +1,5 @@
-import type { AuthenticatedApiHandler, Role } from "../types.js"
+import type { AuthenticatedApiHandler } from "./withAuth.js"
+import type { Role } from "../../../shared/schemas/user.schema.js"
 import { AppError } from "../errors/AppError.js"
 import { supabaseAdmin } from "../supabaseClient.js"
 
@@ -6,6 +7,10 @@ import { supabaseAdmin } from "../supabaseClient.js"
  * Middleware that guards a handler by role. Must run after `withAuth` (relies on `authUser`).
  *
  * Fail-closed: the wrapped handler only runs if the role check passes.
+ *
+ * A pure guard: the handler receives the same `AuthUser` `withAuth` resolved. The role is not
+ * passed on — no handler branches on it, and one in the signature invites a second authorization
+ * decision outside this file.
  *
  * Usage: `withErrorHandler(withAuth(withRole(["student"], handler)))`
  */

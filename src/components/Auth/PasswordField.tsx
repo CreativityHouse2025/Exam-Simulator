@@ -1,7 +1,5 @@
-import React, { useState } from "react"
-import { Lock } from "@styled-icons/material/Lock"
-import { Visibility } from "@styled-icons/material/Visibility"
-import { VisibilityOff } from "@styled-icons/material/VisibilityOff"
+import React, { useState } from "react";
+import { Lock, Eye, EyeOff } from "lucide-react";
 import {
   FormGroup,
   FormLabel,
@@ -10,22 +8,22 @@ import {
   PasswordInputWrapper,
   TogglePasswordButton,
   FieldError,
-} from "../SharedStyles"
+} from "../SharedStyles";
 
 interface PasswordFieldProps {
-  id: string
-  label: string
-  placeholder: string
-  autoComplete: string
-  value: string
-  error: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  id: string;
+  label: string;
+  placeholder: string;
+  autoComplete: string;
+  value: string;
+  error: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 /** Password input with lock icon and visibility toggle. Manages show/hide state internally. */
 const PasswordField = React.forwardRef<HTMLInputElement, PasswordFieldProps>(
   ({ id, label, placeholder, autoComplete, value, error, onChange }, ref) => {
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState(false);
 
     return (
       <FormGroup>
@@ -50,15 +48,15 @@ const PasswordField = React.forwardRef<HTMLInputElement, PasswordFieldProps>(
             onClick={() => setVisible((s) => !s)}
             aria-label={`Toggle ${label.toLowerCase()} visibility`}
           >
-            {visible ? <VisibilityOff size={20} /> : <Visibility size={20} />}
+            {visible ? <EyeOff size={20} /> : <Eye size={20} />}
           </TogglePasswordButton>
         </PasswordInputWrapper>
         {error && <FieldError>{error}</FieldError>}
       </FormGroup>
-    )
+    );
   },
-)
+);
 
-PasswordField.displayName = "PasswordField"
+PasswordField.displayName = "PasswordField";
 
-export default PasswordField
+export default PasswordField;

@@ -1,4 +1,4 @@
-import type { Role } from "../types";
+import type { ViewerRole } from "../types";
 import { ICONS, type IconComponent } from "./icons";
 import { ROUTES } from "./routes";
 
@@ -13,15 +13,10 @@ const profile: NavItem = {
   path: ROUTES.profile,
   labelKey: "header.profile",
 };
-const history: NavItem = {
-  icon: ICONS.history,
-  path: ROUTES.history,
-  labelKey: "header.history",
-};
 const exams: NavItem = {
   icon: ICONS.exams,
   path: ROUTES.exams,
-  labelKey: "dashboard.supervisor.view-exams",
+  labelKey: "dashboard.supervisor.library",
 };
 const search: NavItem = {
   icon: ICONS.searchStudents,
@@ -30,10 +25,11 @@ const search: NavItem = {
 };
 
 // Navigation items for each role
-const ACCESS: Record<Role, { nav: NavItem[] }> = {
+const ACCESS: Record<ViewerRole, { nav: NavItem[] }> = {
   guest: { nav: [] },
-  student: { nav: [history, profile] },
+  // History is reached from a track page, not globally — it needs a trackId the nav cannot supply.
+  student: { nav: [profile] },
   supervisor: { nav: [search, exams, profile] },
 };
 
-export const getNavItems = (role: Role): NavItem[] => ACCESS[role].nav;
+export const getNavItems = (role: ViewerRole): NavItem[] => ACCESS[role].nav;

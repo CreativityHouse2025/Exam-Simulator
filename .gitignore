@@ -140,10 +140,13 @@ dist
 
 script.js
 
-.claude/*
 .vercel
 
 .vercel
 .env*
 
 **/query/*
+# قالب متغيرات البيئة للتطوير المحلي (بدون أسرار)
+.env.example
+
+src/data/exam/*
