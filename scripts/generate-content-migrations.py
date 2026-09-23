@@ -24,11 +24,8 @@ Replaces supabase/legacy/generate-question-seed.py, which emitted only the bank
 half and then reconciled question_count afterwards with an UPDATE. Nothing to
 reconcile now — the catalogue is generated from the same counts.
 
-EXCLUDED_EXAM_IDS holds back the exams whose Arabic and English banks disagree.
-Exclusion is per EXAM, not per question: exams 1, 3 and 5 share no question with
-any other exam, so dropping them removes all eight conflicts and costs nothing
-else. When the conflicts are resolved, take the ids out of the set, re-run, and
-commit the result as a NEW migration — do not edit one that has been applied.
+Any question whose Arabic and English banks disagree refuses the run. Resolve it
+in src/data/exam/ first; scripts/analyze-banks.py reports them.
 
 Re-run whenever the banks change, and commit the result.
 """
@@ -47,12 +44,8 @@ RMP_PATH = MIGRATIONS / "017_rmp_content.sql"
 LANGS = ("ar", "en")
 ROWS_PER_INSERT = 200
 
-# Exams held back because their ar/en banks disagree. See docs/specs/bank-conflicts.md
-# and src/data/bank-conflicts.pdf.
-EXCLUDED_EXAM_IDS = {1, 3, 5}
-
 # Asserted after generation. A mismatch means the banks changed under the script.
-EXPECTED = {"questions": 2613, "choices": 10566, "exam_questions": 3340}
+EXPECTED = {"questions": 3138, "choices": 12685, "exam_questions": 3865}
 # 1841, not 459*4: five questions in RMP exam 4 are multi-select and carry five
 # choices. Eight questions across the set have more than one correct answer.
 EXPECTED_RMP = {"questions": 459, "choices": 1841, "exam_questions": 459}
@@ -61,8 +54,7 @@ EXPECTED_RMP = {"questions": 459, "choices": 1841, "exam_questions": 459}
 #
 # The RMP bank files number themselves 3138-3596, continuing straight on from the
 # PMP banks' highest id. That is collision-free on its own: PMP ids run 0..3137
-# with 525 holes, every hole belonging to held-out exam 1, 3 or 5, and nothing
-# above 3137. So base 3137 (= no remap, ids land exactly where the banks say)
+# with nothing above 3137. So base 3137 (= no remap, ids land exactly where the banks say)
 # is correct and keeps bank id == database id for every exam in the product.
 #
 # Base 4000 was chosen instead, leaving 3138..4000 as headroom. The cost is that
@@ -157,7 +149,7 @@ RMP_CONFIG = {
 }
 
 # Bank file stem -> catalogue row. exam ids continue from PMP's 43, and
-# display_order from PMP's 42 — 8, 10 and 12 stay reserved for exams 1, 3 and 5.
+# display_order from PMP's 42 — 8, 10 and 12 belong to exams 1, 3 and 5.
 RMP_EXAMS = [
     {"id": 44, "display_order": 43, "stem": "pmi_rmp_exam_1", "name_en": "RMP Exam 1", "name_ar": "اختبار RMP 1"},
     {"id": 45, "display_order": 44, "stem": "pmi_rmp_exam_2", "name_en": "RMP Exam 2", "name_ar": "اختبار RMP 2"},
@@ -406,8 +398,6 @@ def render_inserts(table, columns, rows, render_row):
 
 def render_catalogue(exam_rows, counts):
     configs_by_key = {config["key"]: config for config in EXAM_CONFIGS}
-    kept = [row for row in exam_rows if row["id"] not in EXCLUDED_EXAM_IDS]
-
     lines = [
         "-- =============================================================================",
         "-- Migration 011: track and exam catalogue",
@@ -422,13 +412,7 @@ def render_catalogue(exam_rows, counts):
         "--   2. exam_questions (012) has a foreign key to public.exams. A seed cannot",
         "--      satisfy a foreign key declared by a migration.",
         "--",
-        f"-- EXAMS {', '.join(str(i) for i in sorted(EXCLUDED_EXAM_IDS))} ARE ABSENT: their Arabic and English banks disagree",
-        "-- on the correct answer for eight questions. They share no question with any",
-        "-- other exam, so holding the whole exam back costs nothing else. Their",
-        "-- display_order values are left as gaps so they slot back into position when",
-        "-- a later migration restores them. See docs/specs/bank-conflicts.md.",
-        "--",
-        f"--   tracks  {len(TRACKS)}    exam_type  {len(EXAM_TYPES)}    exam_config  {len(EXAM_CONFIGS)}    exams  {len(kept)}",
+        f"--   tracks  {len(TRACKS)}    exam_type  {len(EXAM_TYPES)}    exam_config  {len(EXAM_CONFIGS)}    exams  {len(exam_rows)}",
         "-- =============================================================================",
         "",
         "",
@@ -552,14 +536,14 @@ def render_catalogue(exam_rows, counts):
         "-- exams",
         "--",
         "-- display_order follows src/data/exam/exams.json, which is the order the",
-        f"-- list is meant to read in. {', '.join(str(i) for i in sorted(EXCLUDED_EXAM_IDS))} are skipped, leaving their positions free.",
+        "-- list is meant to read in.",
         "-- question_count is counted from the banks, not copied from exams.json, and",
         "-- is the same number the description quotes.",
         "-- ---------------------------------------------------------------------",
         "INSERT INTO public.exams (id, track_id, config_id, type_id, display_order, name_ar, name_en, description_ar, description_en, question_count)",
         "VALUES",
     ]
-    for index, row in enumerate(kept):
+    for index, row in enumerate(exam_rows):
         config = configs_by_key[row["type"]]
         count = counts[row["id"]]
         description_ar, description_en = describe(row["type"], count, config)
@@ -577,7 +561,7 @@ def render_catalogue(exam_rows, counts):
                 str(count),
             ]
         )
-        lines.append(f"  ({values})" + ("," if index < len(kept) - 1 else ""))
+        lines.append(f"  ({values})" + ("," if index < len(exam_rows) - 1 else ""))
     lines += [
         "ON CONFLICT (id) DO NOTHING;",
         "",
@@ -843,8 +827,6 @@ def render_banks(questions, choices, exam_questions):
         "-- Source: src/data/exam/{ar,en}/<exam id>.json. 11.json does not exist; that is",
         "-- a fact about the banks, not a gap.",
         "--",
-        f"-- Exams {', '.join(str(i) for i in sorted(EXCLUDED_EXAM_IDS))} are absent - see 011 and docs/specs/bank-conflicts.md.",
-        "--",
         f"--   questions       {len(questions):>6,}",
         f"--   choices         {len(choices):>6,}",
         f"--   exam_questions  {len(exam_questions):>6,}",
@@ -891,9 +873,8 @@ def render_banks(questions, choices, exam_questions):
     lines += [
         "-- exam_questions ------------------------------------------------------------",
         "--",
-        "-- question_index is 0..n-1 with no gaps. Exclusion is per exam, so no kept",
-        "-- exam has a hole in it - and breaks.show_at_index is a position in the exam,",
-        "-- which a hole would shift.",
+        "-- question_index is 0..n-1 with no gaps - breaks.show_at_index is a position",
+        "-- in the exam, which a hole would shift.",
         "",
     ]
     lines += render_inserts(
@@ -1031,25 +1012,15 @@ def main():
             f"  bank files only:    {sorted(set(banks) - listed)}"
         )
 
-    # The exclusion is justified by the conflicts being confined to those exams.
-    # If one ever appears in an exam we ship, the justification is gone.
     conflicts = find_conflicts(banks)
-    leaked = {exam: ids for exam, ids in conflicts.items() if exam not in EXCLUDED_EXAM_IDS}
-    if leaked:
-        print("REFUSING TO GENERATE - ar/en conflicts in an exam that is being shipped.", file=sys.stderr)
-        for exam, ids in sorted(leaked.items()):
+    if conflicts:
+        print("REFUSING TO GENERATE - ar/en conflicts in the PMP banks.", file=sys.stderr)
+        for exam, ids in sorted(conflicts.items()):
             print(f"  exam {exam}: question ids {sorted(ids)}", file=sys.stderr)
-        print("  Resolve them in src/data/exam/, or add the exam to EXCLUDED_EXAM_IDS.", file=sys.stderr)
+        print("  Resolve them in src/data/exam/.", file=sys.stderr)
         return 1
 
-    clean = sorted(exam for exam in EXCLUDED_EXAM_IDS if not conflicts.get(exam))
-    if clean:
-        print(f"REFUSING TO GENERATE - exam(s) {clean} are excluded but no longer conflict.", file=sys.stderr)
-        print("  Remove them from EXCLUDED_EXAM_IDS, update EXPECTED, and re-run.", file=sys.stderr)
-        return 1
-
-    kept_ids = listed - EXCLUDED_EXAM_IDS
-    questions, choices, exam_questions = collect(banks, kept_ids)
+    questions, choices, exam_questions = collect(banks, set(banks))
 
     counts = defaultdict(int)
     for exam_id, _index, _question_id in exam_questions:
@@ -1066,10 +1037,8 @@ def main():
         return 1
 
     # --- RMP -----------------------------------------------------------------
-    # Held to the same standard as the PMP banks: a disagreement between the
-    # Arabic and English file about which choice is correct is the defect that
-    # cost exams 1, 3 and 5 their place in the catalogue, and there is no
-    # exclusion list here to absorb one.
+    # Held to the same standard as the PMP banks: any disagreement between the
+    # Arabic and English file about which choice is correct refuses the run.
     rmp_banks = load_rmp_banks()
     rmp_conflicts = find_conflicts(rmp_banks)
     if rmp_conflicts:
@@ -1137,7 +1106,7 @@ def main():
     write(BANKS_PATH, render_banks(questions, choices, exam_questions))
     write(RMP_PATH, render_rmp(rmp_questions, rmp_choices, rmp_exam_questions, rmp_counts, offset))
 
-    print(f"exams           {len(kept_ids):,} kept, {len(EXCLUDED_EXAM_IDS)} excluded {sorted(EXCLUDED_EXAM_IDS)}")
+    print(f"exams           {len(banks):,}")
     print(f"questions       {actual['questions']:,}")
     print(f"choices         {actual['choices']:,}")
     print(f"exam_questions  {actual['exam_questions']:,}")

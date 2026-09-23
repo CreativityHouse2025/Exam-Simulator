@@ -11,13 +11,7 @@
 --   2. exam_questions (012) has a foreign key to public.exams. A seed cannot
 --      satisfy a foreign key declared by a migration.
 --
--- EXAMS 1, 3, 5 ARE ABSENT: their Arabic and English banks disagree
--- on the correct answer for eight questions. They share no question with any
--- other exam, so holding the whole exam back costs nothing else. Their
--- display_order values are left as gaps so they slot back into position when
--- a later migration restores them. See docs/specs/bank-conflicts.md.
---
---   tracks  2    exam_type  2    exam_config  2    exams  39
+--   tracks  2    exam_type  2    exam_config  2    exams  42
 -- =============================================================================
 
 
@@ -92,7 +86,7 @@ ON CONFLICT (config_id, show_at_index) DO NOTHING;
 -- exams
 --
 -- display_order follows src/data/exam/exams.json, which is the order the
--- list is meant to read in. 1, 3, 5 are skipped, leaving their positions free.
+-- list is meant to read in.
 -- question_count is counted from the banks, not copied from exams.json, and
 -- is the same number the description quotes.
 -- ---------------------------------------------------------------------
@@ -105,8 +99,11 @@ VALUES
   (15, '33333333-3333-4333-8333-333333333333', 1, 1, 5, 'اختبار PMI 3', 'PMI Exam 3', 'امتحان كامل من 180 سؤالًا يغطي مجالات PMP الثلاثة، بمدة 4 ساعات واستراحتين.', '180 questions across the three PMP domains, timed at 4 hours with two scheduled breaks.', 180),
   (12, '33333333-3333-4333-8333-333333333333', 1, 1, 6, 'اختبار PMP ECO الكامل 1', 'PMP Full Exam ECO 1', 'امتحان كامل من 180 سؤالًا يغطي مجالات PMP الثلاثة، بمدة 4 ساعات واستراحتين.', '180 questions across the three PMP domains, timed at 4 hours with two scheduled breaks.', 180),
   (13, '33333333-3333-4333-8333-333333333333', 1, 1, 7, 'اختبار PMP ECO الكامل 2', 'PMP Full Exam ECO 2', 'امتحان كامل من 175 سؤالًا يغطي مجالات PMP الثلاثة، بمدة 4 ساعات واستراحتين.', '175 questions across the three PMP domains, timed at 4 hours with two scheduled breaks.', 175),
+  (1, '33333333-3333-4333-8333-333333333333', 1, 1, 8, 'اختبار PMP الكامل 1', 'PMP Full Exam 1', 'امتحان كامل من 175 سؤالًا يغطي مجالات PMP الثلاثة، بمدة 4 ساعات واستراحتين.', '175 questions across the three PMP domains, timed at 4 hours with two scheduled breaks.', 175),
   (2, '33333333-3333-4333-8333-333333333333', 1, 1, 9, 'اختبار PMP الكامل 2', 'PMP Full Exam 2', 'امتحان كامل من 175 سؤالًا يغطي مجالات PMP الثلاثة، بمدة 4 ساعات واستراحتين.', '175 questions across the three PMP domains, timed at 4 hours with two scheduled breaks.', 175),
+  (3, '33333333-3333-4333-8333-333333333333', 1, 1, 10, 'اختبار PMP الكامل 3', 'PMP Full Exam 3', 'امتحان كامل من 175 سؤالًا يغطي مجالات PMP الثلاثة، بمدة 4 ساعات واستراحتين.', '175 questions across the three PMP domains, timed at 4 hours with two scheduled breaks.', 175),
   (4, '33333333-3333-4333-8333-333333333333', 1, 1, 11, 'اختبار PMP الكامل 4', 'PMP Full Exam 4', 'امتحان كامل من 175 سؤالًا يغطي مجالات PMP الثلاثة، بمدة 4 ساعات واستراحتين.', '175 questions across the three PMP domains, timed at 4 hours with two scheduled breaks.', 175),
+  (5, '33333333-3333-4333-8333-333333333333', 1, 1, 12, 'اختبار PMP الكامل 5', 'PMP Full Exam 5', 'امتحان كامل من 175 سؤالًا يغطي مجالات PMP الثلاثة، بمدة 4 ساعات واستراحتين.', '175 questions across the three PMP domains, timed at 4 hours with two scheduled breaks.', 175),
   (6, '33333333-3333-4333-8333-333333333333', 1, 1, 13, 'اختبار PMP التجريبي 1', 'PMP Mock Exam 1', 'امتحان كامل من 181 سؤالًا يغطي مجالات PMP الثلاثة، بمدة 4 ساعات واستراحتين.', '181 questions across the three PMP domains, timed at 4 hours with two scheduled breaks.', 181),
   (7, '33333333-3333-4333-8333-333333333333', 1, 1, 14, 'اختبار PMP التجريبي 2', 'PMP Mock Exam 2', 'امتحان كامل من 181 سؤالًا يغطي مجالات PMP الثلاثة، بمدة 4 ساعات واستراحتين.', '181 questions across the three PMP domains, timed at 4 hours with two scheduled breaks.', 181),
   (8, '33333333-3333-4333-8333-333333333333', 1, 1, 15, 'اختبار PMP التجريبي 3', 'PMP Mock Exam 3', 'امتحان كامل من 181 سؤالًا يغطي مجالات PMP الثلاثة، بمدة 4 ساعات واستراحتين.', '181 questions across the three PMP domains, timed at 4 hours with two scheduled breaks.', 181),

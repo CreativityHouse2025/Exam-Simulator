@@ -33,7 +33,7 @@ LANGS = ("ar", "en")
 
 def load_banks():
     """Returns {exam_id: {lang: [question, ...]}} for every exam present in both languages."""
-    ids = sorted(int(p.stem) for p in (BANK_DIR / "ar").glob("*.json"))
+    ids = sorted(int(p.stem) for p in (BANK_DIR / "ar").glob("*.json") if p.stem.isdigit())
     banks = {}
     for exam_id in ids:
         banks[exam_id] = {
