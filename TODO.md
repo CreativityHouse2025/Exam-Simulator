@@ -1,33 +1,5 @@
 # TODO
 
-## Single-session enforcement cutover (Supabase-side)
-
-Backend enforcement was removed from the codebase; the one-active-session limit is now expected to
-come from Supabase Auth. **Until step 1 is done there is no enforcement at all** — nothing in the
-code checks session count any more.
-
-Order matters. Step 4 before step 3 takes production sign-in down.
-
-- [ ] **1. Enable "Single session per user"** — Supabase dashboard → Auth → Sessions. Pro plan
-      feature. Do this for every project the app uses (production and any staging project); the
-      setting is per-project and is not in version control.
-- [ ] **2. Set JWT expiry to 30m** — Project Settings → JWT Keys. Supabase only checks the session
-      limit when a session refreshes, and `withAuth` verifies access tokens locally, so a
-      terminated session keeps working until its access token expires. This setting is the only
-      thing that bounds that window.
-- [ ] **3. Deploy backend and frontend together.** `SigninRequestSchema` is a `strictObject` and no
-      longer accepts `force`; a stale frontend bundle still sending it gets `VALIDATION_ERROR` on
-      every sign-in.
-- [ ] **4. Apply `supabase/migrations/010_tracks_and_question_schema.sql`** — only after step 3.
-      The `DROP FUNCTION public.count_user_sessions` that used to be its own migration is now the
-      first statement of `010` (the standalone file moved to `supabase/legacy/`). The previously
-      deployed backend calls `count_user_sessions` and fails closed on RPC error, so dropping the
-      function while that code is live breaks sign-in for everyone.
-      Rollback: re-apply `002_count_user_sessions_rpc.sql` (plain `CREATE OR REPLACE`).
-      **Note:** `010` can no longer be applied on its own — it is the head of the `010`–`017`
-      chain and the production push applies all of them. Sequence this step against that push,
-      not against a single file.
-
 ### Expected behaviour change
 
 Newest sign-in wins, silently. A student displaced by a second sign-in gets no message — they hit a
