@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/bench/fra1.ts": { "regions": ["fra1"] },
+    "api/bench/iad1.ts": { "regions": ["iad1"] },
+    "api/bench/sin1.ts": { "regions": ["sin1"] }
+  },
   "headers": [
     {
       "source": "/((?!api/|assets/).*)",
