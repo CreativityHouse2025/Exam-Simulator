@@ -1,46 +1,51 @@
+import { eq } from "drizzle-orm";
 import type { UserWithTracks } from "../../../shared/schemas/user.schema.js";
 import { AppError } from "../errors/AppError.js";
 import { supabaseAdmin } from "../supabaseClient.js";
-import { TRACK_COLUMNS, toTrack } from "./trackService.js";
+import { db, queryFailed } from "../db/client.js";
+import { users } from "../db/schema.js";
+import { TRACK_COLUMNS, activeEnrollment, toTrack } from "./trackService.js";
 
 /**
- * One user and the tracks they hold an ACTIVE enrollment in, in a single query.
+ * One user and the tracks they hold an ACTIVE enrollment in.
  *
  * Serves `/api/auth/me` and a supervisor opening a student, which is what keeps the student search
  * list cheap — it carries no tracks at all.
  *
- * Enrollments ride along as an embed, ACTIVE meaning the window CONTAINS now — both bounds, or a
- * not-yet-started renewal matches too. Same rule as `assertTrackAccess`; change one, change both.
- * Filtering an embedded resource drops those rows, not the user: a lapsed user still reads back,
- * with no tracks.
+ * Enrollments ride along filtered by `activeEnrollment` — the same rule as `assertTrackAccess`.
+ * Filtering the relation drops those rows, not the user: a lapsed user still reads back, with no
+ * tracks.
  *
- * `knownEmail` is what keeps this to one round trip. Email lives on the auth user rather than on
- * `users`, so it cannot join and reaching it costs an HTTP call to GoTrue. A caller reading
- * themselves already holds a verified one — `withAuth` took it off the JWT — and passes it in;
- * only a caller reading someone else pays for the lookup.
+ * Email lives on the auth user rather than on `users`, so it costs a GoTrue call. A caller reading
+ * themselves already holds a verified one — `withAuth` took it off the JWT — and passes it in.
+ * Otherwise the lookup runs alongside the profile query, and the profile is judged first: an
+ * unknown id is a 404 whichever of the two finishes first.
  *
  * @throws {AppError} 404 `NOT_FOUND` — no such user.
  * @throws {AppError} 500 `INTERNAL_ERROR` — a query failed.
  */
 export async function getUserWithTracks(userId: string, knownEmail?: string): Promise<UserWithTracks> {
-  const { data, error } = await supabaseAdmin
-    .from("users")
-    .select(`id, first_name, last_name, created_at, role, enrollments(expires_at, tracks(${TRACK_COLUMNS}))`)
-    .eq("id", userId)
-    // "now" is evaluated by Postgres, so expiry is decided by the database clock.
-    .lte("enrollments.created_at", "now")
-    .gt("enrollments.expires_at", "now")
-    .maybeSingle();
+  const [profile, email] = await Promise.allSettled([
+    db.query.users.findFirst({
+      columns: { id: true, firstName: true, lastName: true, createdAt: true, role: true },
+      where: eq(users.id, userId),
+      with: {
+        enrollments: {
+          columns: { expiresAt: true },
+          where: (enrollment) => activeEnrollment(enrollment),
+          with: { track: { columns: TRACK_COLUMNS } },
+        },
+      },
+    }),
+    knownEmail ?? fetchAuthEmail(userId),
+  ]);
 
-  if (error) {
-    throw new AppError({
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: `Failed to fetch user ${userId} (${error.message})`,
-    });
+  if (profile.status === "rejected") {
+    const reason: unknown = profile.reason;
+    throw queryFailed(`Failed to fetch user ${userId}`, reason);
   }
 
-  if (!data) {
+  if (!profile.value) {
     throw new AppError({
       statusCode: 404,
       code: "NOT_FOUND",
@@ -48,16 +53,24 @@ export async function getUserWithTracks(userId: string, knownEmail?: string): Pr
     });
   }
 
+  if (email.status === "rejected") {
+    // `reason` is typed `any` by the standard library; fetchAuthEmail only ever rejects with AppError.
+    const reason: unknown = email.reason;
+    throw reason instanceof AppError ? reason : queryFailed(`Failed to load the email of user ${userId}`, reason);
+  }
+
+  const user = profile.value;
+
   return {
     user: {
-      id: data.id,
-      email: knownEmail ?? (await fetchAuthEmail(userId)),
-      first_name: data.first_name,
-      last_name: data.last_name,
-      created_at: data.created_at,
-      role: data.role,
+      id: user.id,
+      email: email.value,
+      first_name: user.firstName,
+      last_name: user.lastName,
+      created_at: user.createdAt,
+      role: user.role,
     },
-    tracks: data.enrollments.map(({ expires_at, tracks: track }) => ({ ...toTrack(track), expires_at })),
+    tracks: user.enrollments.map(({ expiresAt, track }) => ({ ...toTrack(track), expires_at: expiresAt })),
   };
 }
 

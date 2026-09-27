@@ -1,49 +1,72 @@
 import type {
   DisclosedQuestion,
-  ExamConfig,
   ExamDetails,
   ExamWithQuestions,
   LangCode,
   TrackExams,
 } from "../../../shared/schemas/exam.schema.js";
+import { asc, eq } from "drizzle-orm";
 import { AppError } from "../errors/AppError.js";
-import { supabaseAdmin } from "../supabaseClient.js";
+import { db, runQuery } from "../db/client.js";
+import { breaks, exams } from "../db/schema.js";
 import { getExamQuestionContent } from "./questionService.js";
 
-/**
- * The exam columns both readers select. `allowed_config` is the join table the config is reached
- * through; the embed below it is already `ExamConfig`, field for field.
- */
-type ExamRow = {
-  id: number
-  track_id: string
-  type_id: number
-  display_order: number
-  name_ar: string
-  name_en: string
-  description_ar: string
-  description_en: string
-  question_count: number
-  allowed_config: { exam_config: ExamConfig }
+/** The exam columns and config both readers select. The config is already `ExamConfig`, field for field. */
+const EXAM_QUERY = {
+  columns: {
+    id: true,
+    trackId: true,
+    typeId: true,
+    displayOrder: true,
+    nameAr: true,
+    nameEn: true,
+    descriptionAr: true,
+    descriptionEn: true,
+    questionCount: true,
+  },
+  with: {
+    config: {
+      columns: { examDurationMinutes: true, passingRate: true, canRevealAnswers: true, allowRetryWrong: true },
+      with: {
+        // A break's position is part of the config, not something the caller sorts.
+        breaks: { columns: { showAtIndex: true, durationMinutes: true }, orderBy: asc(breaks.showAtIndex) },
+      },
+    },
+  },
+} as const;
+
+type ExamRow = NonNullable<Awaited<ReturnType<typeof findExam>>>;
+
+function findExam(examId: number) {
+  return db.query.exams.findFirst({ ...EXAM_QUERY, where: eq(exams.id, examId) });
 }
 
-/** Bilingual columns collapse into one object; the embedded config passes through untouched. */
+/** Bilingual columns collapse into one object; the config becomes `ExamConfig`. */
 function toExamDetails(row: ExamRow): ExamDetails {
   return {
     id: row.id,
-    track_id: row.track_id,
-    type_id: row.type_id,
-    display_order: row.display_order,
+    track_id: row.trackId,
+    type_id: row.typeId,
+    display_order: row.displayOrder,
     name: {
-      ar: row.name_ar,
-      en: row.name_en
+      ar: row.nameAr,
+      en: row.nameEn
     },
     description: {
-      ar: row.description_ar,
-      en: row.description_en
+      ar: row.descriptionAr,
+      en: row.descriptionEn
     },
-    question_count: row.question_count,
-    config: row.allowed_config.exam_config
+    question_count: row.questionCount,
+    config: {
+      exam_duration_minutes: row.config.examDurationMinutes,
+      passing_rate: row.config.passingRate,
+      can_reveal_answers: row.config.canRevealAnswers,
+      allow_retry_wrong: row.config.allowRetryWrong,
+      breaks: row.config.breaks.map((entry) => ({
+        show_at_index: entry.showAtIndex,
+        duration_minutes: entry.durationMinutes,
+      })),
+    }
   }
 }
 
@@ -53,32 +76,15 @@ function toExamDetails(row: ExamRow): ExamDetails {
  * The single way to read an exam by id. Callers that want less take less: the attempt write path
  * reads `track_id` off it for `assertTrackAccess`, and the revision response drops `config`
  * because a revision session's rules are a frontend constant. Neither justifies a second, leaner
- * reader — `config_id` would have to leave the service for that, and it is not a response field.
+ * reader.
  *
  * @throws {AppError} 404 `NOT_FOUND` — no exam with this id.
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
 export async function getExam(examId: number): Promise<ExamDetails> {
-  const { data, error } = await supabaseAdmin
-    .from('exams')
-    // Config is reached through allowed_config: exams holds no direct FK to exam_config, because
-    // which configs a track may use is allowed_config's job. One roundtrip either way.
-    // Must stay ONE string literal: concatenation widens it to `string` and supabase-js loses the
-    // row type entirely.
-    .select('id, track_id, type_id, display_order, name_ar, name_en, description_ar, description_en, question_count, allowed_config(exam_config(exam_duration_minutes, passing_rate, can_reveal_answers, allow_retry_wrong, breaks(show_at_index, duration_minutes)))')
-    .eq('id', examId)
-    // A break's position is part of the config, not something the caller sorts.
-    .order('show_at_index', { referencedTable: 'allowed_config.exam_config.breaks', ascending: true })
-    .maybeSingle()
+  const row = await runQuery(`Could not fetch exam with id ${examId}`, findExam(examId))
 
-  if (error) {
-    throw new AppError({ 
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: "Could not fetch exam with id " + examId + "." })
-  }
-
-  if (!data) {
+  if (!row) {
     throw new AppError({
       statusCode: 404,
       code: "NOT_FOUND",
@@ -86,7 +92,7 @@ export async function getExam(examId: number): Promise<ExamDetails> {
     })
   }
 
-  return toExamDetails(data)
+  return toExamDetails(row)
 }
 
 /**
@@ -95,40 +101,33 @@ export async function getExam(examId: number): Promise<ExamDetails> {
  * `types` holds only the `exam_type` rows this track's exams actually reference, so a filter chip
  * can never render a type with zero exams. Exams are ordered by `display_order`.
  *
- * Access is the caller's job: the handler runs `assertTrackAccess` before calling this.
+ * Access is the caller's job: the handler runs `assertTrackAccess` alongside this.
  *
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
 export async function getTrackExams(trackId: string): Promise<TrackExams> {
-  const { data, error } = await supabaseAdmin
-    .from('exams')
-    // `getExam`'s select plus the type row, which rides along on every exam that uses it. One
-    // string literal, for the reason given there.
-    .select('id, track_id, type_id, display_order, name_ar, name_en, description_ar, description_en, question_count, allowed_config(exam_config(exam_duration_minutes, passing_rate, can_reveal_answers, allow_retry_wrong, breaks(show_at_index, duration_minutes))), exam_type(id, name_ar, name_en, colour)')
-    .eq('track_id', trackId)
-    .order('display_order', { ascending: true })
-    .order('show_at_index', { referencedTable: 'allowed_config.exam_config.breaks', ascending: true })
-
-  if (error) {
-    throw new AppError({
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: `Failed to fetch exams for track ${trackId} (${error.message})`
-    })
-  }
+  const rows = await runQuery(
+    `Failed to fetch exams for track ${trackId}`,
+    db.query.exams.findMany({
+      columns: EXAM_QUERY.columns,
+      with: { ...EXAM_QUERY.with, examType: { columns: { id: true, nameAr: true, nameEn: true, colour: true } } },
+      where: eq(exams.trackId, trackId),
+      orderBy: asc(exams.displayOrder),
+    }),
+  )
 
   // The same type row repeats once per exam using it; the Map keeps the first of each, so types
   // come out in display_order. A track with no exams returns two empty arrays — a valid response,
-  // not a 404: a track the caller may not see was already refused by assertTrackAccess.
-  const usedTypes = new Map(data.map((row) => [row.exam_type.id, row.exam_type]))
+  // not a 404: a track the caller may not see is refused by assertTrackAccess.
+  const usedTypes = new Map(rows.map((row) => [row.examType.id, row.examType]))
 
   return {
-    exams: data.map(toExamDetails),
+    exams: rows.map(toExamDetails),
     types: [...usedTypes.values()].map((type) => ({
       id: type.id,
       name: {
-        ar: type.name_ar,
-        en: type.name_en
+        ar: type.nameAr,
+        en: type.nameEn
       },
       colour: type.colour
     }))

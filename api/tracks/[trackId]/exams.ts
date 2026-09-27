@@ -15,9 +15,12 @@ export const GET = withErrorHandler(
     // Path is /api/tracks/<id>/exams — the id is the second-to-last segment.
     const trackId = parseOrThrow(TrackIdSchema, new URL(request.url).pathname.split("/").at(-2) ?? "")
 
-    await assertTrackAccess(authUser.id, trackId)
-
-    const result: TrackExams = await getTrackExams(trackId)
+    // Read alongside the access check: nothing is returned unless both succeed, so a refused caller
+    // still gets the 403 and never the list.
+    const [, result]: [void, TrackExams] = await Promise.all([
+      assertTrackAccess(authUser.id, trackId),
+      getTrackExams(trackId),
+    ])
     return successResponse(result, 200, cookieHeaders)
   }),
 )

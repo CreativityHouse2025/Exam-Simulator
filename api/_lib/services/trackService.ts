@@ -1,27 +1,43 @@
+import { and, desc, eq, gt, lte, sql, type SQL } from "drizzle-orm";
 import type { Track } from "../../../shared/schemas/track.schema.js";
 import { AppError } from "../errors/AppError.js";
-import { supabaseAdmin } from "../supabaseClient.js";
+import { db, runQuery } from "../db/client.js";
+import { enrollments, tracks } from "../db/schema.js";
 
-export const TRACK_COLUMNS = "id, name_ar, name_en, description_ar, description_en";
+/** The track columns every reader selects. */
+export const TRACK_COLUMNS = {
+  id: true,
+  nameAr: true,
+  nameEn: true,
+  descriptionAr: true,
+  descriptionEn: true,
+} as const;
 
-type TrackRow = {
-  id: string;
-  name_ar: string;
-  name_en: string;
-  description_ar: string | null;
-  description_en: string | null;
-};
+type TrackRow = Pick<typeof tracks.$inferSelect, keyof typeof TRACK_COLUMNS>;
 
 /** Both description columns are null or both are set — `tracks_description_both_or_neither`. */
 export function toTrack(row: TrackRow): Track {
   return {
     id: row.id,
-    name: { ar: row.name_ar, en: row.name_en },
+    name: { ar: row.nameAr, en: row.nameEn },
     description:
-      row.description_ar !== null && row.description_en !== null
-        ? { ar: row.description_ar, en: row.description_en }
+      row.descriptionAr !== null && row.descriptionEn !== null
+        ? { ar: row.descriptionAr, en: row.descriptionEn }
         : null,
   };
+}
+
+/**
+ * ACTIVE means the window contains now — both bounds, or a not-yet-started renewal matches too.
+ * `now()` is evaluated by Postgres, so the window is judged by the database clock.
+ *
+ * The one statement of the rule: `assertTrackAccess` and `getUserWithTracks` both filter with it.
+ * Takes the columns to judge because a relational query hands in an aliased copy of the table.
+ */
+export function activeEnrollment(
+  enrollment: Pick<typeof enrollments, "createdAt" | "expiresAt"> = enrollments,
+): SQL | undefined {
+  return and(lte(enrollment.createdAt, sql`now()`), gt(enrollment.expiresAt, sql`now()`));
 }
 
 /**
@@ -31,20 +47,11 @@ export function toTrack(row: TrackRow): Track {
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
 export async function listTracks(): Promise<Track[]> {
-  const { data, error } = await supabaseAdmin
-    .from("tracks")
-    .select(TRACK_COLUMNS)
-    .order("created_at", { ascending: false });
-
-  if (error || !data) {
-    throw new AppError({
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: `Failed to fetch tracks (${error?.message ?? "no rows returned"})`,
-    });
-  }
-
-  return data.map(toTrack);
+  const rows = await runQuery(
+    "Failed to fetch tracks",
+    db.query.tracks.findMany({ columns: TRACK_COLUMNS, orderBy: desc(tracks.createdAt) }),
+  );
+  return rows.map(toTrack);
 }
 
 /**
@@ -54,32 +61,21 @@ export async function listTracks(): Promise<Track[]> {
  * Fail-closed, and deliberately undiscriminating: an expired enrollment and no enrollment at all
  * produce the same 403. The client derives the difference from `/api/auth/me` plus `/api/tracks`.
  *
- * ACTIVE means the window contains now — both bounds. That is also what bounds the result to one
- * row, making `maybeSingle` safe.
+ * `enrollments_no_overlap` bounds an ACTIVE match to one row.
  *
  * @throws {AppError} 403 `FORBIDDEN` — no active enrollment for this user and track.
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
 export async function assertTrackAccess(userId: string, trackId: string): Promise<void> {
-  const { data, error } = await supabaseAdmin
-    .from("enrollments")
-    .select("id")
-    .eq("user_id", userId)
-    .eq("track_id", trackId)
-    // "now" is evaluated by Postgres, so the window is judged by the database clock.
-    .lte("created_at", "now")
-    .gt("expires_at", "now")
-    .maybeSingle();
+  const enrollment = await runQuery(
+    "Failed to verify track access",
+    db.query.enrollments.findFirst({
+      columns: { id: true },
+      where: and(eq(enrollments.userId, userId), eq(enrollments.trackId, trackId), activeEnrollment()),
+    }),
+  );
 
-  if (error) {
-    throw new AppError({
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: `Failed to verify track access (${error.message})`,
-    });
-  }
-
-  if (!data) {
+  if (!enrollment) {
     throw new AppError({
       statusCode: 403,
       code: "FORBIDDEN",
