@@ -1,9 +1,11 @@
-import { supabaseAdmin } from "../supabaseClient.js";
-import { AppError } from "../errors/AppError.js";
+import { sql } from "drizzle-orm";
 import type { StudentList } from "../../../shared/schemas/student.schema.js";
+import { db, parseRows, runQuery } from "../db/client.js";
+import { StudentSearchRowSchema } from "../db/schema.js";
 
 /**
- * Searches students by name/email prefix via the `search_students` RPC.
+ * Searches students by name/email prefix through the `search_students` Postgres function, which
+ * joins `auth.users` for the email — a schema the API does not map.
  * A `null` query (too short to search on) short-circuits to an empty result — this is the
  * idle state, not a failed search.
  *
@@ -17,19 +19,11 @@ export async function searchStudentsByEmailOrName(
     return { students: [] };
   }
 
-  const { data, error } = await supabaseAdmin.rpc("search_students", {
-    p_query: query,
-    p_limit: rowLimit,
-  });  
-  
+  // `query` arrives lowercased and wildcard-escaped by StudentSearchQuerySchema.
+  const rows = await runQuery(
+    "Failed to search students",
+    db.execute(sql`select * from public.search_students(${query}, ${rowLimit})`),
+  );
 
-  if (error) {
-    throw new AppError({
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: "Failed to search students",
-    });
-  }
-
-  return { students: (data ?? []) } as StudentList;
+  return { students: parseRows("search_students", StudentSearchRowSchema, rows) };
 }

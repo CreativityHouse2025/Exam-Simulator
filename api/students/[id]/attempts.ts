@@ -19,10 +19,12 @@ export const GET = withErrorHandler(
       const trackId = parseOrThrow(TrackIdSchema, url.searchParams.get("trackId") ?? "");
 
       // A supervisor sees nothing of a track they hold no active enrollment in — not its exams,
-      // not its content, and not a student's attempts within it.
-      await assertTrackAccess(authUser.id, trackId);
-
-      const result: AttemptList = await listAttempts(studentId, trackId);
+      // not its content, and not a student's attempts within it. The list reads alongside the
+      // check; nothing is returned unless both succeed.
+      const [, result]: [void, AttemptList] = await Promise.all([
+        assertTrackAccess(authUser.id, trackId),
+        listAttempts(studentId, trackId),
+      ]);
       return successResponse(result, 200, cookieHeaders);
     }),
   ),
