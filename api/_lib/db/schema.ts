@@ -5,7 +5,7 @@
  * Derived from `drizzle-kit pull` against the local stack, trimmed to the columns and relations the
  * services read. `supabase/migrations/` stays the single source of truth for the schema: this file
  * describes it and never generates it. Never run `drizzle-kit generate` or `push`. After a migration
- * changes a table used here, re-run `npx drizzle-kit pull` and bring the difference across by hand.
+ * changes a table used here, re-run `npm run db:pull` and bring the difference across by hand.
  *
  * Wire format matches what PostgREST used to send, so responses did not change with the client:
  * - timestamptz  ISO 8601 with a `+HH:MM` offset (`isoTimestamptz`)

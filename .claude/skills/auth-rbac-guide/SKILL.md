@@ -46,7 +46,7 @@ export const GET = withErrorHandler(withAuth(withRole(["supervisor"], handler)))
   `BYPASS_AUTH_USER_ID` escape hatch was removed. Sign in with a seeded account instead. Do not
   reintroduce one: a switch that disables authentication is one stray environment variable away
   from handing over every account.
-- `withRole` — reads `users.role` with the admin client and **fails closed** with 403 unless the
+- `withRole` — reads `users.role` through Drizzle and **fails closed** with 403 unless the
   role is allowed. It is a **pure guard**: it does not hand the role down, because no handler
   branches on it and a role in the signature invites one to start.
 

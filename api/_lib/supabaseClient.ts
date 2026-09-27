@@ -1,5 +1,4 @@
 import { createClient } from "@supabase/supabase-js"
-import type { Database } from "./database.types.js"
 import { requireEnv } from "./utils/env.js"
 
 const supabaseUrl = requireEnv("SB_URL")
@@ -10,14 +9,17 @@ const authOptions = {
   detectSessionInUrl: false,
 } as const
 
-/** Admin client using service role key — bypasses RLS. Use for privileged operations only. */
-export const supabaseAdmin = createClient<Database>(supabaseUrl, requireEnv("SB_SECRET_KEY"), {
+/**
+ * Admin client using the secret key — auth admin operations only (sign-out, user lookup, password
+ * updates). Every table read and write goes through Drizzle (`db/client.ts`).
+ */
+export const supabaseAdmin = createClient(supabaseUrl, requireEnv("SB_SECRET_KEY"), {
   auth: authOptions,
 })
 
 /** Creates a fresh user-scoped Supabase client for auth operations (signup, signin, token refresh). */
 export function createUserClient() {
-  return createClient<Database>(supabaseUrl, requireEnv("SB_PUBLISHABLE_KEY"), {
+  return createClient(supabaseUrl, requireEnv("SB_PUBLISHABLE_KEY"), {
     auth: authOptions,
   })
 }

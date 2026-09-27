@@ -1,6 +1,6 @@
 ---
 name: database-guide
-description: "Supabase/Postgres conventions for the Exam Simulator — how numbered SQL migrations under supabase/migrations are written and applied, when logic belongs in an RPC instead of a service, the security-definer/search-path rules RPCs follow, how api/_lib/database.types.ts is regenerated, and where ad-hoc analytics queries live. Use this skill whenever adding or altering a table, column, index, trigger, or RLS policy, writing or changing a Postgres function or RPC, regenerating Supabase types, or debugging a query that returns the wrong rows or silently returns none. Also use before assuming a table's shape — read its migration first. Routes on to backend-guide for the service layer that calls these queries."
+description: "Supabase/Postgres conventions for the Exam Simulator — how numbered SQL migrations under supabase/migrations are written and applied, when logic belongs in an RPC instead of a service, the security-definer/search-path rules RPCs follow, how api/_lib/db/schema.ts (Drizzle) is kept in step with the migrations, and where ad-hoc analytics queries live. Use this skill whenever adding or altering a table, column, index, trigger, or RLS policy, writing or changing a Postgres function or RPC, updating the Drizzle schema, or debugging a query that returns the wrong rows or silently returns none. Also use before assuming a table's shape — read its migration first. Routes on to backend-guide for the service layer that calls these queries."
 ---
 
 # Database Guide (Supabase / Postgres)
@@ -71,11 +71,34 @@ as $$ ... $$;
   expects a query string the backend has already lowercased and wildcard-escaped.
 - Return a well-defined `table (...)`, not `setof record`, so the generated types are usable.
 
-## Generated types
+## Querying from the API — Drizzle
 
-`api/_lib/database.types.ts` is generated from the live schema, not hand-written. After a
-migration changes any table or function signature, regenerate it and commit the result; the
-backend's type safety depends on it matching reality.
+Every table read and write in `api/` goes through Drizzle (`api/_lib/db/client.ts`) over
+`DATABASE_URL`: a direct Postgres connection through the Supavisor **transaction-mode** pooler, so
+the client runs with `prepare: false`. The Supabase SDK is kept for auth only. Consequences:
+
+- **Every parameterised query costs two round trips** (postgres-js describes it first when it
+  cannot prepare). Cheap next to the database, expensive far from it: the API belongs in `fra1`, the
+  database's region.
+- **Postgres functions are called, not reimplemented.** `start_attempt`, `save_attempt`,
+  `submit_attempt`, `revision_question_ids` and `search_students` run through
+  ``db.execute(sql`select … from public.fn(…)`)`` — one round trip, and the atomicity stays in
+  Postgres. Cast every argument (`::uuid`, `::jsonb`) and narrow the rows with the Zod shape
+  declared for that function in `schema.ts` (`parseRows`/`parseSingleRow`). A raw call bypasses
+  the column mappers, so the shape restates their conversions.
+- **Wire format is PostgREST's.** `timestamptz` columns use `isoTimestamptz` (ISO 8601, `+HH:MM`)
+  and `numeric` uses `mode: "number"`. A new timestamp or numeric column must use the same, or its
+  JSON changes shape under the frontend without a type error anywhere.
+- **Nested relational `where` gets an aliased table.** Pass the callback's columns into shared
+  predicates (see `activeEnrollment` in `trackService`) instead of referencing the table object.
+
+## The Drizzle schema
+
+`api/_lib/db/schema.ts` describes the schema; `supabase/migrations/` still owns it. Never run
+`drizzle-kit generate` or `push`. After a migration changes a table or a function signature the API uses, run `npm run db:pull` (writes
+the introspected schema to `node_modules/.tmp/drizzle-pull`), bring the difference across to
+`schema.ts` by hand, and commit it with the migration. Nothing checks the two agree at build
+time — a drifted column fails at runtime, and a drifted function row fails `parseRows` as a 500.
 
 ## Ad-hoc analytics
 

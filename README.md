@@ -171,7 +171,7 @@ npx vercel dev            # serves the app at http://localhost:3000, including /
 | `npm run db:start` | Start the local stack |
 | `npm run db:stop` | Stop it, keeping the data |
 | `npm run db:reset` | Wipe, replay all migrations, reload `supabase/seed.sql` |
-| `npm run db:types` | Regenerate `api/_lib/database.types.ts` from the local schema |
+| `npm run db:pull` | Introspect the local schema with `drizzle-kit pull`, to update `api/_lib/db/schema.ts` by hand |
 
 ### Services
 
@@ -206,7 +206,8 @@ Every seeded account uses the password `password123`.
 ### Adding a migration
 
 Create `supabase/migrations/NNN_name.sql` by hand with the next number, run `npm run db:reset` to
-prove it replays from scratch, then `npm run db:types` and commit the regenerated types with it.
+prove it replays from scratch, then bring any table or function change across to `api/_lib/db/schema.ts`
+(`npm run db:pull` shows the introspected shape) and commit it with the migration.
 
 ---
 

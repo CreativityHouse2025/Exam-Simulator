@@ -1,5 +1,9 @@
+import { eq } from "drizzle-orm"
 import { supabaseAdmin, createUserClient } from "../supabaseClient.js"
 import { AppError } from "../errors/AppError.js"
+import type { AppErrorCode } from "../../../shared/schemas/api.schema.js"
+import { db, runQuery } from "../db/client.js"
+import { users } from "../db/schema.js"
 import type { SignupRequestBody, SigninRequestBody, SigninResult } from "../../../shared/schemas/auth.schema.js"
 import emailHasOffer from "./offerVerifier.js"
 
@@ -41,6 +45,34 @@ export async function signout(params: { accessToken?: string; refreshToken?: str
 
   // No tokens provided at all
   console.warn("[signout] No tokens provided. Cookies will be cleared but no server session revoked")
+}
+
+/**
+ * The `public.users` profile behind an authenticated user — the one database read the auth flow
+ * makes. A failed query and a missing row are both `code`: to the caller either means the session
+ * cannot be completed.
+ */
+async function getProfile(userId: string, code: AppErrorCode, message: string): Promise<Omit<SigninResult["user"], "email">> {
+  const profile = await runQuery(
+    message,
+    db.query.users.findFirst({
+      columns: { id: true, firstName: true, lastName: true, createdAt: true, role: true },
+      where: eq(users.id, userId),
+    }),
+    code,
+  )
+
+  if (!profile) {
+    throw new AppError({ statusCode: 500, code, message })
+  }
+
+  return {
+    id: profile.id,
+    first_name: profile.firstName,
+    last_name: profile.lastName,
+    created_at: profile.createdAt,
+    role: profile.role,
+  }
 }
 
 export type SignupResult = {
@@ -121,27 +153,12 @@ export async function signin(input: SigninRequestBody): Promise<SigninResult> {
   const userId = data.user.id
   const accessToken = data.session.access_token
 
-  const { data: profile, error: profileError } = await supabaseAdmin
-    .from("users")
-    .select("id, first_name, last_name, created_at, role")
-    .eq("id", userId)
-    .single()
-
-  if (profileError || !profile) {
-    throw new AppError({ statusCode: 500, code: "SIGNIN_FAILED", message: "Failed to retrieve user profile" })
-  }
+  const profile = await getProfile(userId, "SIGNIN_FAILED", "Failed to retrieve user profile")
 
   console.log(`[signin] User ${userId} signed in successfully`)
 
   return {
-    user: {
-      id: profile.id,
-      email: data.user.email!,
-      first_name: profile.first_name,
-      last_name: profile.last_name,
-      created_at: profile.created_at,
-      role: profile.role,
-    },
+    user: { ...profile, email: data.user.email! },
     access_token: accessToken,
     refresh_token: data.session.refresh_token,
   }
@@ -162,15 +179,7 @@ export async function confirmMagicLinkSignin(accessToken: string, refreshToken: 
     throw new AppError({ statusCode: 401, code: "CONFIRMATION_FAILED", message: "Invalid or expired confirmation link" })
   }
 
-  const { data: profile, error: profileError } = await supabaseAdmin
-    .from("users")
-    .select("id, first_name, last_name, created_at, role")
-    .eq("id", authUser.user.id)
-    .single()
-
-  if (profileError || !profile) {
-    throw new AppError({ statusCode: 500, code: "CONFIRMATION_FAILED", message: "User profile not found" })
-  }
+  const profile = await getProfile(authUser.user.id, "CONFIRMATION_FAILED", "User profile not found")
 
   // Sign the user out of all other devices immediately. Supabase's own single-session setting only
   // takes effect when the other session next refreshes, which is too late for a password reset:
@@ -181,14 +190,7 @@ export async function confirmMagicLinkSignin(accessToken: string, refreshToken: 
   console.log(`[confirmSignup] User ${authUser.user.id} signed in using magic link`)
 
   return {
-    user: {
-      id: profile.id,
-      email: authUser.user.email!,
-      first_name: profile.first_name,
-      last_name: profile.last_name,
-      created_at: profile.created_at,
-      role: profile.role,
-    },
+    user: { ...profile, email: authUser.user.email! },
     access_token: accessToken,
     refresh_token: refreshToken,
   }

@@ -40,7 +40,7 @@ export const GET = withErrorHandler(withAuth(withRole(["supervisor"], handler)))
   falls back to `refreshSession` with the refresh token, and forwards refreshed `Set-Cookie`
   headers to the handler. **There is no bypass** — the `BYPASS_AUTH` /
   `BYPASS_AUTH_USER_ID` escape hatch was removed. Sign in with a seeded account instead.
-- `withRole` — reads `users.role` with the admin client and **fails closed** with 403 unless the
+- `withRole` — reads `users.role` through Drizzle and **fails closed** with 403 unless the
   role is allowed. A **pure guard**: it does not pass the role to the handler.
 
 Handlers receive `(request, authUser, cookieHeaders)` and must pass `cookieHeaders` into
@@ -66,9 +66,13 @@ every non-public endpoint needs `withRole`.
 - `api/_lib/errors/AppError.ts` — structured API errors
 - `api/_lib/middleware/*` — `withErrorHandler`, `withAuth`, `withRole`
 - `api/_lib/utils/` — `cookies.ts`, `env.ts`, `parseBody.ts`, `uuid.ts`
-- `api/_lib/supabaseClient.ts` — Supabase clients (anon + admin)
+- `api/_lib/db/client.ts` — the Drizzle client (`db`), `runQuery` (a failed query becomes a 500
+  `AppError` carrying the driver message in its log line), and `parseRows`/`parseSingleRow` for
+  narrowing a raw Postgres function call's `unknown` rows through a Zod schema
+- `api/_lib/db/schema.ts` — tables, relations and Postgres function row shapes, in one file
+- `api/_lib/supabaseClient.ts` — Supabase clients (publishable + admin), **auth only**. No service
+  reads a table through them
 - `api/_lib/services/offerVerifier.ts` — verifies the email has a qualifying HighLevel payment before signup
-- `api/_lib/database.types.ts` — generated Supabase types
 
 ## Error contract
 
@@ -112,6 +116,6 @@ endpoints.
 - **Session creation, role checks, expiry, single-session enforcement → invoke `auth-rbac-guide`.**
   Anything under `api/auth/`, `withAuth`, or `withRole` has rules there that fail dangerously
   (open, rather than closed) when improvised.
-- **Writing a query, calling an RPC, or changing a table → invoke `database-guide`.**
+- **Writing a query, calling a Postgres function, or changing a table → invoke `database-guide`.**
 - **Consuming the endpoint from React → invoke `frontend-guide`** for `apiFetch` and the
   TanStack Query conventions.

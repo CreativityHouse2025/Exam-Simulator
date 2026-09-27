@@ -1,6 +1,6 @@
 ---
 name: local-supabase-guide
-description: "Running the Exam Simulator's Supabase stack locally in Docker — the npm db:* scripts that wrap the CLI, the unsuffixed SB_URL/SB_PUBLISHABLE_KEY/SB_SECRET_KEY contract shared by local and production, the seeded accounts and ports, how a migration is written and replayed locally before it ever reaches production, and which flows (signup, email, single-session) do not work the same way locally. Use this skill before starting, resetting, or debugging the local database, when regenerating api/_lib/database.types.ts, when an API call fails with a missing-environment-variable error, or when local behaviour diverges from the deployed app. Routes on to database-guide for what goes inside a migration."
+description: "Running the Exam Simulator's Supabase stack locally in Docker — the npm db:* scripts that wrap the CLI, the unsuffixed SB_URL/SB_PUBLISHABLE_KEY/SB_SECRET_KEY contract shared by local and production, the seeded accounts and ports, how a migration is written and replayed locally before it ever reaches production, and which flows (signup, email, single-session) do not work the same way locally. Use this skill before starting, resetting, or debugging the local database, when introspecting the schema for api/_lib/db/schema.ts, when an API call fails with a missing-environment-variable error, or when local behaviour diverges from the deployed app. Routes on to database-guide for what goes inside a migration."
 ---
 
 # Local Supabase Guide (Docker)
@@ -29,7 +29,7 @@ below goes through npm, so every developer runs the same pinned version.
 npm run db:start   # supabase start     — boot the stack, print URLs and keys
 npm run db:reset   # supabase db reset  — drop, replay every migration, run supabase/seed.sql
 npm run db:stop    # supabase stop      — stop containers, keep the data volume
-npm run db:types   # regenerate api/_lib/database.types.ts from the LOCAL schema
+npm run db:pull    # introspect the LOCAL schema with drizzle-kit (never generate/push)
 npx supabase status          # reprint URLs and keys for a running stack
 npx supabase status -o env   # same, as KEY=value lines ready to paste into .env
 ```
@@ -68,6 +68,16 @@ suffixes; a single name is what keeps deployed and local code identical.
 Local values come from `npx supabase status` after the stack is up. They are the CLI's fixed
 development keys — identical on every machine, worthless outside localhost, and therefore safe to
 commit in `.env.example`.
+
+Business-logic queries run through Drizzle over a fourth variable, also unsuffixed:
+
+```
+DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:54322/postgres
+```
+
+Use the **host** port `54322`. `5432` is the port inside the container; on the host it reaches
+whatever else is listening there and fails with `28P01 password authentication failed`. In
+production it is the Supavisor transaction-mode pooler (port 6543).
 
 `.env` is read by `vercel dev`, which is what serves `/api`. Plain `npm run dev` (Vite alone) does
 not run the serverless functions, so it never touches Supabase at all.
@@ -125,14 +135,13 @@ the next reset and cannot be reviewed in a diff.
    numbers sequentially (see `database-guide` for what belongs inside the file).
 2. `npm run db:reset` — this replays the full history, so it catches a migration that only works
    against your current database.
-3. `npm run db:types` if the change touches a table or a function signature, then commit
-   `api/_lib/database.types.ts` alongside the migration. The script passes `--schema public`
-   deliberately — the committed file covers `public` only, and dropping the flag adds a
-   `graphql_public` block that has nothing to do with your change.
+3. If the change touches a table or a function signature the API uses, run `npm run db:pull`
+   and bring the difference across to `api/_lib/db/schema.ts` (see `database-guide`), then commit
+   it alongside the migration.
 
-Regenerating from local emits the schema **as the migrations describe it**, which is not
-necessarily what production currently runs. If a migration has not been applied to production
-yet, its tables appear in the generated types — check the diff before committing.
+Introspecting local shows the schema **as the migrations describe it**, which is not necessarily
+what production currently runs. Do not map a column into `schema.ts` before its migration has
+reached production — the API would query a column production does not have.
 
 `supabase db push` applies migrations to a **linked remote project**. This repo is deliberately
 not linked; production migrations are applied through the Supabase dashboard. Do not run `push`
