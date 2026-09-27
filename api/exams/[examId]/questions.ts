@@ -26,9 +26,12 @@ export const GET = withErrorHandler(
       // The exam names its own track; a supervisor without an active enrollment sees nothing.
       // Read once and handed on — the response carries it anyway.
       const exam = await getExam(examId)
-      await assertTrackAccess(authUser.id, exam.track_id)
 
-      const result: ExamWithQuestions = await getExamQuestions(exam, lang)
+      // Content reads alongside the access check: nothing is returned unless both succeed.
+      const [, result]: [void, ExamWithQuestions] = await Promise.all([
+        assertTrackAccess(authUser.id, exam.track_id),
+        getExamQuestions(exam, lang),
+      ])
       return successResponse(result, 200, cookieHeaders)
     }),
   ),

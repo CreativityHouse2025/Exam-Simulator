@@ -1,7 +1,9 @@
 import type { AuthenticatedApiHandler } from "./withAuth.js"
 import type { Role } from "../../../shared/schemas/user.schema.js"
 import { AppError } from "../errors/AppError.js"
-import { supabaseAdmin } from "../supabaseClient.js"
+import { eq } from "drizzle-orm"
+import { db, runQuery } from "../db/client.js"
+import { users } from "../db/schema.js"
 
 /**
  * Middleware that guards a handler by role. Must run after `withAuth` (relies on `authUser`).
@@ -16,18 +18,18 @@ import { supabaseAdmin } from "../supabaseClient.js"
  */
 export function withRole(allowedRoles: Role[], handler: AuthenticatedApiHandler): AuthenticatedApiHandler {
   return async (req, authUser, cookieHeaders) => {
-    const { data, error } = await supabaseAdmin.from("users").select("role").eq("id", authUser.id).single()
+    // A failed query is a 500 (runQuery) and never falls through to the handler.
+    const user = await runQuery(
+      "Failed to verify role",
+      db.query.users.findFirst({ columns: { role: true }, where: eq(users.id, authUser.id) }),
+    )
 
-    if (!data || error) {
-      // PGRST116 = zero or more than one row
-      if (error.code === "PGRST116") {
-        throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "User not found" })
-      }
-      // database error
-      throw new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: "Failed to verify role" })
+    // A valid token with no profile row: the account is gone.
+    if (!user) {
+      throw new AppError({ statusCode: 401, code: "UNAUTHORIZED", message: "User not found" })
     }
 
-    if (!allowedRoles.includes(data.role)) {
+    if (!allowedRoles.includes(user.role)) {
       throw new AppError({ statusCode: 403, code: "FORBIDDEN", message: "Access denied" })
     }
 

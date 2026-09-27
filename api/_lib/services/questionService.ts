@@ -1,56 +1,99 @@
+import { asc, eq, inArray } from "drizzle-orm";
 import type {
-  Choice,
-  DisclosedChoice,
   DisclosedQuestion,
   LangCode,
   Question,
 } from "../../../shared/schemas/exam.schema.js";
 import { AppError } from "../errors/AppError.js";
-import { supabaseAdmin } from "../supabaseClient.js";
-
-/** Columns stored once per language, as `<column>_<lang>`. */
-type BilingualColumn = "text" | "explanation";
+import { db, runQuery } from "../db/client.js";
+import { choices, examQuestions, questions } from "../db/schema.js";
 
 /**
- * Map column to PostgREST's `alias:column` syntax.
+ * The content columns of a question and one of its choices, in one language. One row per choice:
+ * the question columns repeat, `groupByQuestion` folds them back.
+ *
+ * The answer key (`explanation`, `is_correct`) is always read but only ever MAPPED when disclosing —
+ * `toQuestion` builds a `Question`, whose type has no slot for either, so it cannot leak by omission.
  */
-function aliasColumn(column: BilingualColumn, lang: LangCode): string {
-  return `${column}:${column}_${lang}`;
+function contentColumns(lang: LangCode) {
+  const ar = lang === "ar";
+  return {
+    id: questions.id,
+    type: questions.type,
+    answerCount: questions.answerCount,
+    text: ar ? questions.textAr : questions.textEn,
+    explanation: ar ? questions.explanationAr : questions.explanationEn,
+    choicePosition: choices.position,
+    choiceText: ar ? choices.textAr : choices.textEn,
+    choiceIsCorrect: choices.isCorrect,
+  };
 }
 
-/**
- * What the select yields. `explanation` and `is_correct` are optional here because they are
- * selected only when disclosing
- */
-type QuestionRow = Question &
-  Partial<Pick<DisclosedQuestion, "explanation">> & {
-    choices: (Choice & Partial<Pick<DisclosedChoice, "is_correct">>)[];
-  };
+/** Content rows for a set of question ids — the shape every content read shares. */
+function questionContentRows(lang: LangCode, questionIds: number[]) {
+  return db
+    .select(contentColumns(lang))
+    .from(questions)
+    .leftJoin(choices, eq(choices.questionId, questions.id))
+    .where(inArray(questions.id, questionIds))
+    .orderBy(asc(choices.position));
+}
+
+type ContentRow = Awaited<ReturnType<typeof questionContentRows>>[number];
+
+type ContentChoice = { position: number; text: string; isCorrect: boolean };
+
+type QuestionRows = { head: ContentRow; choices: ContentChoice[] };
 
 /**
- * The content columns of a question and its choices, in one language.
- *
- * The answer key is selected only when disclosing, so it cannot leak by omission further up.
- * Assembled at runtime, which is why every caller has to override its row type.
+ * One entry per question, in first-seen order. The choice columns are null only on the row a
+ * choiceless question produces through the left join, and that row contributes no choice.
  */
-function contentColumns(lang: LangCode, discloseAnswers: boolean): string {
-  // answer_count is a count, not the key — selected unconditionally, disclosed or not.
-  const questionColumns = ["id", "type", "answer_count", aliasColumn("text", lang)];
-  const choiceColumns = ["position", aliasColumn("text", lang)];
+function groupByQuestion(rows: ContentRow[]): Map<number, QuestionRows> {
+  const grouped = new Map<number, QuestionRows>();
 
-  if (discloseAnswers) {
-    questionColumns.push(aliasColumn("explanation", lang));
-    choiceColumns.push("is_correct");
+  for (const row of rows) {
+    const entry = grouped.get(row.id) ?? { head: row, choices: [] };
+    const { choicePosition, choiceText, choiceIsCorrect } = row;
+    if (choicePosition !== null && choiceText !== null && choiceIsCorrect !== null) {
+      entry.choices.push({ position: choicePosition, text: choiceText, isCorrect: choiceIsCorrect });
+    }
+    grouped.set(row.id, entry);
   }
 
-  return `${questionColumns.join(", ")}, choices(${choiceColumns.join(", ")})`;
+  return grouped;
+}
+
+function toQuestion({ head, choices: rows }: QuestionRows): Question {
+  return {
+    id: head.id,
+    type: head.type,
+    answer_count: head.answerCount,
+    text: head.text,
+    choices: rows.map((choice) => ({ position: choice.position, text: choice.text })),
+  };
+}
+
+function toDisclosedQuestion({ head, choices: rows }: QuestionRows): DisclosedQuestion {
+  return {
+    id: head.id,
+    type: head.type,
+    answer_count: head.answerCount,
+    text: head.text,
+    explanation: head.explanation,
+    choices: rows.map((choice) => ({ position: choice.position, text: choice.text, is_correct: choice.isCorrect })),
+  };
+}
+
+function toContent(grouped: QuestionRows[], discloseAnswers: boolean): Question[] | DisclosedQuestion[] {
+  return discloseAnswers ? grouped.map(toDisclosedQuestion) : grouped.map(toQuestion);
 }
 
 /**
  * Question content for a set of ids, in one language, ordered to match `questionIds`.
  *
- * When `discloseAnswers` is false the answer key is never selected, so it cannot leak by omission
- * further up. Callers that know they disclosed narrow the union themselves.
+ * When `discloseAnswers` is false the answer key is never mapped into the result. Callers that know
+ * they disclosed narrow the union themselves.
  *
  * @returns One question per id, in the order given. `DisclosedQuestion[]` when `discloseAnswers`
  * is true — each question carrying its `explanation` and each choice its `is_correct` — and
@@ -65,26 +108,12 @@ export async function getQuestions(
 ): Promise<Question[] | DisclosedQuestion[]> {
   if (questionIds.length === 0) return [];
 
-  const { data, error } = await supabaseAdmin
-    .from("questions")
-    .select(contentColumns(lang, discloseAnswers))
-    .in("id", questionIds)
-    .order("position", { referencedTable: "choices", ascending: true })
-    // The select is assembled at runtime, so it cannot be inferred from a string literal.
-    .overrideTypes<QuestionRow[], { merge: false }>();
+  const rows = await runQuery("Failed to fetch question content", questionContentRows(lang, questionIds));
 
-  if (error || !data) {
-    throw new AppError({
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: `Failed to fetch question content (${error?.message ?? "no rows returned"})`,
-    });
-  }
+  const byId = groupByQuestion(rows);
 
-  // `.in()` does not preserve the requested order, and the caller's order is the attempt's own.
-  const byId = new Map(data.map((question) => [question.id, question]));
-
-  return questionIds.map((id) => {
+  // The query does not preserve the requested order, and the caller's order is the attempt's own.
+  const ordered = questionIds.map((id) => {
     const question = byId.get(id);
     if (!question) {
       throw new AppError({
@@ -95,6 +124,8 @@ export async function getQuestions(
     }
     return question;
   });
+
+  return toContent(ordered, discloseAnswers);
 }
 
 /**
@@ -113,22 +144,16 @@ export async function getExamQuestionContent(
   lang: LangCode,
   discloseAnswers: boolean,
 ): Promise<Question[] | DisclosedQuestion[]> {
-  const { data, error } = await supabaseAdmin
-    .from("exam_questions")
-    .select(`questions(${contentColumns(lang, discloseAnswers)})`)
-    .eq("exam_id", examId)
-    .order("question_index", { ascending: true })
-    .order("position", { referencedTable: "questions.choices", ascending: true })
-    // The select is assembled at runtime, so it cannot be inferred from a string literal.
-    .overrideTypes<{ questions: QuestionRow }[], { merge: false }>();
+  const rows = await runQuery(
+    `Failed to fetch the content of exam ${examId}`,
+    db
+      .select(contentColumns(lang))
+      .from(examQuestions)
+      .innerJoin(questions, eq(questions.id, examQuestions.questionId))
+      .leftJoin(choices, eq(choices.questionId, questions.id))
+      .where(eq(examQuestions.examId, examId))
+      .orderBy(asc(examQuestions.questionIndex), asc(choices.position)),
+  );
 
-  if (error || !data) {
-    throw new AppError({
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: `Failed to fetch the content of exam ${examId} (${error?.message ?? "no rows returned"})`,
-    });
-  }
-
-  return data.map((row) => row.questions);
+  return toContent([...groupByQuestion(rows).values()], discloseAnswers);
 }
