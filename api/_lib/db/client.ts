@@ -3,6 +3,7 @@ import postgres from "postgres"
 import type { z } from "zod"
 import { requireEnv } from "../utils/env.js"
 import { AppError } from "../errors/AppError.js"
+import type { AppErrorCode } from "../../../shared/schemas/api.schema.js"
 import * as schema from "./schema.js"
 
 /**
@@ -18,17 +19,21 @@ export const db = drizzle(postgres(requireEnv("DATABASE_URL"), { prepare: false 
  * The 500 a failed query becomes. The driver's message goes into the log line (never the response
  * body — see `errorResponse`), after `context` naming what was being read or written.
  */
-export function queryFailed(context: string, error: unknown): AppError {
+export function queryFailed(context: string, error: unknown, code: AppErrorCode = "INTERNAL_ERROR"): AppError {
   const cause = error instanceof Error ? error.message : String(error)
-  return new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: `${context} (${cause})` })
+  return new AppError({ statusCode: 500, code, message: `${context} (${cause})` })
 }
 
-/** Awaits a query, turning any driver failure into `queryFailed(context, …)`. */
-export async function runQuery<T>(context: string, query: PromiseLike<T>): Promise<T> {
+/** Awaits a query, turning any driver failure into `queryFailed(context, …, code)`. */
+export async function runQuery<T>(
+  context: string,
+  query: PromiseLike<T>,
+  code: AppErrorCode = "INTERNAL_ERROR",
+): Promise<T> {
   try {
     return await query
   } catch (error) {
-    throw queryFailed(context, error)
+    throw queryFailed(context, error, code)
   }
 }
 

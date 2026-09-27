@@ -1,5 +1,15 @@
-import { supabaseAdmin } from "../supabaseClient.js";
+import { and, desc, eq, sql } from "drizzle-orm";
+import type { z } from "zod";
 import { AppError, type AppErrorParams } from "../errors/AppError.js";
+import { db, parseSingleRow, runQuery } from "../db/client.js";
+import {
+  examAttempts,
+  exams,
+  FunctionResultSchema,
+  RevisionRowSchema,
+  SentinelRowSchema,
+  StartAttemptRowSchema,
+} from "../db/schema.js";
 import type {
   DisclosedQuestion,
   ExamConfig,
@@ -11,6 +21,7 @@ import type {
   AttemptList,
   AttemptStatus,
   AttemptSummary,
+  AttemptWithExam,
   AttemptWithQuestions,
   ExamState,
   Revision,
@@ -25,26 +36,35 @@ import { getQuestions } from "./questionService.js";
 const TRACK_ATTEMPT_CAP = 25;
 
 /**
- * The attempt columns every read selects. `exams` is joined only to filter by track.
+ * The attempt columns every list read selects, keyed as `toAttemptSummary` reads them.
  *
  * `total_questions` is the generated column from 018 rather than the snapshot's length, so the
  * list does not ship 25 × 180 int4 to read one number off.
  */
-const ATTEMPT_COLUMNS =
-  "id, exam_id, exam_state, score, status, created_at, time_remaining, config_snapshot, total_questions, wrong_questions";
+const ATTEMPT_COLUMNS = {
+  id: examAttempts.id,
+  exam_id: examAttempts.examId,
+  exam_state: examAttempts.examState,
+  score: examAttempts.score,
+  status: examAttempts.status,
+  created_at: examAttempts.createdAt,
+  time_remaining: examAttempts.timeRemaining,
+  config_snapshot: examAttempts.configSnapshot,
+  total_questions: examAttempts.totalQuestions,
+  wrong_questions: examAttempts.wrongQuestions,
+};
 
-/** What a read that also serves question CONTENT needs on top: the frozen set, in its frozen order. */
-const ATTEMPT_DETAIL_COLUMNS = `${ATTEMPT_COLUMNS}, question_ids_snapshot`;
+type FunctionFailure = Exclude<z.infer<typeof FunctionResultSchema>, "ok">;
 
 /**
- * How the attempt RPCs' sentinels answer over HTTP. None raises; anything but `ok` means nothing
- * was written.
+ * How the attempt functions' sentinels answer over HTTP. None raises; anything but `ok` means
+ * nothing was written.
  *
  * `invalid_question` is a 400, not a 404: the payload named a question or choice position outside
  * the attempt's frozen set. Zod cannot catch that — it depends on the snapshot — but it is still a
  * malformed request.
  */
-const RPC_FAILURES = {
+const FUNCTION_FAILURES = {
   not_found: { statusCode: 404, code: "NOT_FOUND", message: "Attempt not found" },
   forbidden: { statusCode: 403, code: "FORBIDDEN", message: "Access denied" },
   conflict: { statusCode: 409, code: "CONFLICT", message: "Attempt is already completed" },
@@ -58,7 +78,12 @@ const RPC_FAILURES = {
     code: "VALIDATION_ERROR",
     message: "time_remaining disagrees with the attempt's config snapshot: null is untimed, a number is a running clock",
   },
-} as const satisfies Record<string, AppErrorParams>;
+} as const satisfies Record<FunctionFailure, AppErrorParams>;
+
+/** The error an attempt function's refusal stands for. */
+function functionFailure(result: FunctionFailure): AppError {
+  return new AppError(FUNCTION_FAILURES[result]);
+}
 
 /** What `toAttemptSummary` reads. Every attempt read selects at least these. */
 type AttemptSummaryRow = {
@@ -111,17 +136,12 @@ export async function startAttempt(
   userId: string,
   { exam_id, lang }: StartAttemptRequestBody,
 ): Promise<AttemptWithQuestions> {
-  const { data, error } = await supabaseAdmin
-    .rpc("start_attempt", { p_user_id: userId, p_exam_id: exam_id })
-    .single();
-
-  if (error || !data) {
-    throw new AppError({
-      statusCode: 500,
-      code: "ATTEMPT_CREATE_FAILED",
-      message: `Failed to start exam ${exam_id} (${error?.message ?? "no row returned"})`,
-    });
-  }
+  const rows = await runQuery(
+    `Failed to start exam ${exam_id}`,
+    db.execute(sql`select * from public.start_attempt(${userId}::uuid, ${exam_id}::smallint)`),
+    "ATTEMPT_CREATE_FAILED",
+  );
+  const data = parseSingleRow("start_attempt", StartAttemptRowSchema, rows);
 
   if (data.result === "not_found") {
     throw new AppError({
@@ -132,8 +152,8 @@ export async function startAttempt(
   }
 
   const attempt: AttemptDetail = {
-    // The RPC returns the snapshot, not the generated column, so the count comes off the array.
-    // It also predates 021's wrong_questions column and never will carry it — a just-started
+    // The function returns the snapshot, not the generated column, so the count comes off the
+    // array. It also predates 021's wrong_questions column and never will carry it — a just-started
     // attempt is always in-progress, so it is always null, the same reasoning as offered_breaks.
     ...toAttemptSummary({ ...data, total_questions: data.question_ids_snapshot.length, wrong_questions: null }),
     current_index: data.current_index,
@@ -156,15 +176,6 @@ export async function startAttempt(
   return { attempt, questions };
 }
 
-/** Turns an attempt RPC's sentinel into the error it stands for. `ok` passes through. */
-function throwOnRpcFailure(result: string): void {
-  const failure = RPC_FAILURES[result as keyof typeof RPC_FAILURES];
-
-  if (failure) {
-    throw new AppError(failure);
-  }
-}
-
 /**
  * Saves in-progress state: the position, the clock, an answer DIFF, and any breaks just offered.
  *
@@ -183,25 +194,24 @@ export async function saveAttempt(
   attemptId: string,
   { current_index, time_remaining, answers, offered_breaks }: SaveAttemptRequestBody,
 ): Promise<void> {
-  const { data: result, error } = await supabaseAdmin.rpc("save_attempt", {
-    p_user_id: userId,
-    p_attempt_id: attemptId,
-    p_current_index: current_index,
-    // Untimed attempts have no clock to report, so the argument is left off entirely.
-    p_time_remaining: time_remaining ?? undefined,
-    p_answers: answers,
-    p_offered_breaks: offered_breaks,
-  });
+  // An untimed attempt reports no clock: a null time_remaining is exactly the function's default.
+  const rows = await runQuery(
+    `Failed to save attempt ${attemptId}`,
+    db.execute(sql`select public.save_attempt(
+      ${userId}::uuid,
+      ${attemptId}::uuid,
+      ${current_index}::integer,
+      ${time_remaining}::integer,
+      ${JSON.stringify(answers)}::jsonb,
+      ${JSON.stringify(offered_breaks)}::jsonb
+    ) as result`),
+    "ATTEMPT_SAVE_FAILED",
+  );
+  const { result } = parseSingleRow("save_attempt", SentinelRowSchema, rows);
 
-  if (error) {
-    throw new AppError({
-      statusCode: 500,
-      code: "ATTEMPT_SAVE_FAILED",
-      message: `Failed to save attempt ${attemptId} (${error.message})`,
-    });
+  if (result !== "ok") {
+    throw functionFailure(result);
   }
-
-  throwOnRpcFailure(result);
 }
 
 /**
@@ -228,24 +238,23 @@ export async function submitAttempt(
   attemptId: string,
   { current_index, time_remaining, answers }: SubmitAttemptRequestBody,
 ): Promise<void> {
-  const { data: result, error } = await supabaseAdmin.rpc("submit_attempt", {
-    p_user_id: userId,
-    p_attempt_id: attemptId,
-    p_current_index: current_index,
-    // Untimed attempts have no clock to report — see saveAttempt.
-    p_time_remaining: time_remaining ?? undefined,
-    p_answers: answers,
-  });
+  // Untimed attempts report no clock — see saveAttempt.
+  const rows = await runQuery(
+    `Failed to submit attempt ${attemptId}`,
+    db.execute(sql`select public.submit_attempt(
+      ${userId}::uuid,
+      ${attemptId}::uuid,
+      ${current_index}::integer,
+      ${time_remaining}::integer,
+      ${JSON.stringify(answers)}::jsonb
+    ) as result`),
+    "ATTEMPT_SUBMIT_FAILED",
+  );
+  const { result } = parseSingleRow("submit_attempt", SentinelRowSchema, rows);
 
-  if (error) {
-    throw new AppError({
-      statusCode: 500,
-      code: "ATTEMPT_SUBMIT_FAILED",
-      message: `Failed to submit attempt ${attemptId} (${error.message})`,
-    });
+  if (result !== "ok") {
+    throw functionFailure(result);
   }
-
-  throwOnRpcFailure(result);
 }
 
 /**
@@ -257,33 +266,33 @@ export async function submitAttempt(
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
 export async function listAttempts(userId: string, trackId: string): Promise<AttemptList> {
-  const { data, error } = await supabaseAdmin
-    .from("exam_attempts")
-    .select(`${ATTEMPT_COLUMNS}, exams!inner(track_id)`)
-    .eq("user_id", userId)
-    .eq("exams.track_id", trackId)
-    .order("created_at", { ascending: false })
-    .limit(TRACK_ATTEMPT_CAP);
+  const rows = await runQuery(
+    `Failed to fetch attempts for track ${trackId}`,
+    db
+      .select(ATTEMPT_COLUMNS)
+      .from(examAttempts)
+      .innerJoin(exams, eq(exams.id, examAttempts.examId))
+      .where(and(eq(examAttempts.userId, userId), eq(exams.trackId, trackId)))
+      .orderBy(desc(examAttempts.createdAt))
+      .limit(TRACK_ATTEMPT_CAP),
+  );
 
-  if (error || !data) {
-    throw new AppError({
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: `Failed to fetch attempts for track ${trackId} (${error?.message ?? "no rows returned"})`,
-    });
-  }
-
-  return { attempts: data.map(toAttemptSummary) };
+  return { attempts: rows.map(toAttemptSummary) };
 }
 
 /**
- * One attempt, its stored answers, and its question content in the requested language.
+ * One attempt, its stored answers, its question content in the requested language, and the exam
+ * it belongs to.
  *
  * Ownership is the only gate. An attempt outlives the enrollment it was earned under, so nothing
  * here consults a track. Questions come back in the attempt's own frozen order, and the answer key
- * is selected only when the exam allows revealing it or the attempt is already completed.
+ * is disclosed only when the exam allows revealing it or the attempt is already completed.
  *
- * @throws {AppError} 404 `NOT_FOUND` — no attempt with this id.
+ * Content and exam both depend only on the attempt row, so they are read together once ownership
+ * is settled. The exam ships without its config — the attempt's own `config_snapshot` governs the
+ * session.
+ *
+ * @throws {AppError} 404 `NOT_FOUND` — no attempt with this id, or its exam is gone.
  * @throws {AppError} 403 `FORBIDDEN` — the attempt belongs to someone else.
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
@@ -291,22 +300,32 @@ export async function getAttempt(
   userId: string,
   attemptId: string,
   lang: LangCode,
-): Promise<AttemptWithQuestions> {
-  const { data, error } = await supabaseAdmin
-    .from("exam_attempts")
-    .select(
-      `${ATTEMPT_DETAIL_COLUMNS}, user_id, current_index, attempt_answers(question_id, selected_choices, is_bookmarked), offered_breaks(show_at_index)`,
-    )
-    .eq("id", attemptId)
-    .maybeSingle();
-
-  if (error) {
-    throw new AppError({
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: `Failed to fetch attempt ${attemptId} (${error.message})`,
-    });
-  }
+): Promise<AttemptWithExam> {
+  const data = await runQuery(
+    `Failed to fetch attempt ${attemptId}`,
+    db.query.examAttempts.findFirst({
+      columns: {
+        id: true,
+        userId: true,
+        examId: true,
+        examState: true,
+        score: true,
+        status: true,
+        createdAt: true,
+        timeRemaining: true,
+        configSnapshot: true,
+        totalQuestions: true,
+        wrongQuestions: true,
+        currentIndex: true,
+        questionIdsSnapshot: true,
+      },
+      with: {
+        attemptAnswers: { columns: { questionId: true, selectedChoices: true, isBookmarked: true } },
+        offeredBreaks: { columns: { showAtIndex: true } },
+      },
+      where: eq(examAttempts.id, attemptId),
+    }),
+  );
 
   if (!data) {
     throw new AppError({
@@ -316,7 +335,7 @@ export async function getAttempt(
     });
   }
 
-  if (data.user_id !== userId) {
+  if (data.userId !== userId) {
     throw new AppError({
       statusCode: 403,
       code: "FORBIDDEN",
@@ -325,36 +344,54 @@ export async function getAttempt(
   }
 
   const attempt: AttemptDetail = {
-    ...toAttemptSummary(data),
-    current_index: data.current_index,
-    offered_breaks: data.offered_breaks.map((offered) => offered.show_at_index),
+    ...toAttemptSummary({
+      id: data.id,
+      exam_id: data.examId,
+      exam_state: data.examState,
+      score: data.score,
+      status: data.status,
+      created_at: data.createdAt,
+      time_remaining: data.timeRemaining,
+      config_snapshot: data.configSnapshot,
+      total_questions: data.totalQuestions,
+      wrong_questions: data.wrongQuestions,
+    }),
+    current_index: data.currentIndex,
+    offered_breaks: data.offeredBreaks.map((offered) => offered.showAtIndex),
   };
 
-  const content = (await getQuestions(
-    data.question_ids_snapshot,
-    lang,
-    attempt.config_snapshot.can_reveal_answers || attempt.exam_state === "completed",
-  )) as Question[];
+  const [content, exam] = await Promise.all([
+    getQuestions(
+      data.questionIdsSnapshot,
+      lang,
+      attempt.config_snapshot.can_reveal_answers || attempt.exam_state === "completed",
+    ) as Promise<Question[]>,
+    getExam(data.examId),
+  ]);
 
-  const answers = new Map(data.attempt_answers.map((answer) => [answer.question_id, answer]));
+  const answers = new Map(data.attemptAnswers.map((answer) => [answer.questionId, answer]));
 
   // A question with no stored row was never answered or bookmarked. The disclosed shape is decided
   // by the flag above, which the return union cannot express.
   const questions = content.map((question) => ({
     ...question,
-    selected_choices: answers.get(question.id)?.selected_choices ?? [],
-    is_bookmarked: answers.get(question.id)?.is_bookmarked ?? false,
+    selected_choices: answers.get(question.id)?.selectedChoices ?? [],
+    is_bookmarked: answers.get(question.id)?.isBookmarked ?? false,
   })) as AttemptWithQuestions["questions"];
 
-  return { attempt, questions };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { config: _config, ...parentExam } = exam;
+
+  return { attempt, questions, exam: parentExam };
 }
 
 /**
  * The "wrong or unanswered" set of a completed attempt, as a fresh revision session.
  *
- * Membership comes from `revision_question_ids` (018) — the complement of the predicate
- * `submit_attempt` grades with, so the rule lives in one place rather than being recomputed here.
- * Ids arrive in the attempt's frozen order; an unopened question falls in by absence.
+ * Membership comes from the `revision_question_ids` function (018) — the complement of the
+ * predicate `submit_attempt` grades with, so the rule lives in one place rather than being
+ * recomputed here. Ids arrive in the attempt's frozen order; an unopened question falls in by
+ * absence.
  *
  * Nothing is persisted, and an empty set is a normal outcome. The parent exam travels without its
  * config: a revision session's rules are a frontend constant, not the exam's.
@@ -364,20 +401,16 @@ export async function getAttempt(
  * @throws {AppError} 500 `INTERNAL_ERROR` — the call failed.
  */
 export async function getRevision(userId: string, attemptId: string, lang: LangCode): Promise<Revision> {
-  const { data, error } = await supabaseAdmin
-    .rpc("revision_question_ids", { p_user_id: userId, p_attempt_id: attemptId })
-    .single();
-
-  if (error || !data) {
-    throw new AppError({
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: `Failed to build the revision set of attempt ${attemptId} (${error?.message ?? "no row returned"})`,
-    });
-  }
+  const rows = await runQuery(
+    `Failed to build the revision set of attempt ${attemptId}`,
+    db.execute(sql`select * from public.revision_question_ids(${userId}::uuid, ${attemptId}::uuid)`),
+  );
+  const data = parseSingleRow("revision_question_ids", RevisionRowSchema, rows);
 
   // Not the owner, not completed and retry-disabled all answer alike: a flat refusal.
-  throwOnRpcFailure(data.result);
+  if (data.result !== "ok") {
+    throw functionFailure(data.result);
+  }
 
   const [exam, questions] = await Promise.all([
     getExam(data.exam_id),
