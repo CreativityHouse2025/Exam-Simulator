@@ -5,25 +5,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import useSettings from "@/hooks/useSettings";
-import { formatDate } from "@/utils/format";
+import { formatDate, formatDurationHoursMinutes } from "@/utils/format";
 import { translate } from "@/utils/translation";
-import examTypes from "@/data/exam/exam-types.json";
-import { resolveExamLabel } from "@/utils/resolveExamLabel";
-import type { AttemptSummary } from "@/types";
+import type { AttemptSummary } from "@/apiTypes";
 
 type AttemptDetailDialogProps = {
   /** The caller only mounts this component when a selection exists — Dialog stays `open` for its whole lifetime. */
   attempt: AttemptSummary;
+  /** Resolved by the caller from the track's exam list — an attempt carries only `examId`. */
+  examName: string;
   onOpenChange: (open: boolean) => void;
 };
-
-/** Formats a duration in seconds as "Xh Ym" (or just "Ym" under an hour). */
-function formatDurationHoursMinutes(totalSeconds: number): string {
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
-}
 
 const StatItem = ({
   icon: Icon,
@@ -45,10 +37,9 @@ const StatItem = ({
 
 const AttemptDetailDialog = ({
   attempt,
+  examName,
   onOpenChange,
 }: AttemptDetailDialogProps) => {
-  const { settings } = useSettings();
-
   const t = {
     correct: translate("students.detail.correct"),
     incorrect: translate("students.detail.incorrect"),
@@ -56,22 +47,27 @@ const AttemptDetailDialog = ({
     inProgressMessage: translate("students.detail.in-progress-message"),
   };
 
-  const examLabel = resolveExamLabel(attempt, settings.language);
-  const isCompleted = attempt.exam_state === "completed";
+  const examLabel = examName;
+  const isCompleted = attempt.examState === "completed";
   const isPass = attempt.status === "pass";
   const scoreColor = isPass ? "text-correct" : "text-destructive";
   const ringColor = isPass ? "var(--correct)" : "var(--destructive)";
 
   const correctCount = isCompleted
-    ? Math.round((attempt.score * attempt.total_questions) / 100)
+    ? Math.round((attempt.score * attempt.totalQuestions) / 100)
     : 0;
   const incorrectCount = isCompleted
-    ? attempt.total_questions - correctCount
+    ? attempt.totalQuestions - correctCount
     : 0;
-  const durationSeconds = examTypes[attempt.exam_type].durationMinutes * 60;
-  const timeTaken = isCompleted
-    ? formatDurationHoursMinutes(durationSeconds - attempt.time_remaining)
-    : null;
+  const { examDurationMinutes } = attempt.configSnapshot;
+  // An untimed attempt has no clock at either end, so there is no time taken to derive — the row
+  // falls back to its dash.
+  const timeTaken =
+    isCompleted && examDurationMinutes !== null && attempt.timeRemaining !== null
+      ? formatDurationHoursMinutes(
+          examDurationMinutes * 60 - attempt.timeRemaining,
+        )
+      : null;
 
   return (
     <Dialog open={true} onOpenChange={onOpenChange}>
@@ -92,12 +88,17 @@ const AttemptDetailDialog = ({
                   }}
                 >
                   <div className="absolute inset-[6px] flex items-center justify-center rounded-full bg-card">
-                    <span className={`text-2xl font-bold ${scoreColor}`}>{attempt.score}%</span>
+                    <span className={`text-2xl font-bold ${scoreColor}`}>
+                      {attempt.score}%
+                    </span>
                   </div>
                 </div>
               ) : (
                 <div className="flex size-24 shrink-0 items-center justify-center rounded-full bg-grey-100">
-                  <Hourglass className="size-9 text-grey-500" strokeWidth={1.4} />
+                  <Hourglass
+                    className="size-9 text-grey-500"
+                    strokeWidth={1.4}
+                  />
                 </div>
               )}
 
@@ -113,8 +114,12 @@ const AttemptDetailDialog = ({
                 </span>
               )}
 
-              <span className="max-w-full truncate text-base font-bold text-tertiary">{examLabel}</span>
-              <span className="text-sm text-grey-800">{formatDate(attempt.created_at)}</span>
+              <span className="max-w-full truncate text-base font-bold text-tertiary">
+                {examLabel}
+              </span>
+              <span className="text-sm text-grey-800">
+                {formatDate(attempt.createdAt)}
+              </span>
             </div>
           </DialogHeader>
 
@@ -141,7 +146,9 @@ const AttemptDetailDialog = ({
                 />
               </div>
             ) : (
-              <p className="py-2 text-center text-sm text-grey-800">{t.inProgressMessage}</p>
+              <p className="py-2 text-center text-sm text-grey-800">
+                {t.inProgressMessage}
+              </p>
             )}
           </div>
         </div>

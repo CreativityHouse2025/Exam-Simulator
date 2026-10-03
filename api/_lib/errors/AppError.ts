@@ -1,4 +1,10 @@
-import type { AppErrorCode, AppErrorParams } from "../types.js"
+import type { AppErrorCode } from "../../../shared/schemas/api.schema.js"
+
+export type AppErrorParams = {
+  statusCode: number
+  code: AppErrorCode
+  message: string
+}
 
 export class AppError extends Error {
   readonly statusCode: number

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 /**
  * Triggers the browser's native "unsaved changes" confirmation dialog when the
@@ -7,14 +7,14 @@ import React from 'react'
  */
 export default function useUnsavedChangesWarning(hasUnsavedChanges: boolean) {
   React.useEffect(() => {
-    if (!hasUnsavedChanges) return
+    if (!hasUnsavedChanges) return;
 
     const handler = (event: BeforeUnloadEvent) => {
-      event.preventDefault()
-      event.returnValue = ''
-    }
+      event.preventDefault();
+      event.returnValue = "";
+    };
 
-    window.addEventListener('beforeunload', handler)
-    return () => window.removeEventListener('beforeunload', handler)
-  }, [hasUnsavedChanges])
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [hasUnsavedChanges]);
 }

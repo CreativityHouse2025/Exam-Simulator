@@ -1,21 +1,22 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
-import { Slot } from "radix-ui"
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { Slot } from "radix-ui";
 
-import { cn } from "@/components/ui/utils"
+import { cn } from "@/components/ui/utils";
 
 const buttonVariants = cva(
-  // Preflight is disabled app-wide (see index.css) — cursor-pointer, border-0 and
-  // font-sans neutralize the browser's default <button> styles here instead.
-  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-md border-0 font-sans text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  // cursor-pointer (buttons default to an arrow cursor, not a pointer) and font-sans
+  // (the design system's font, not the UA default) are deliberate — not a Preflight patch.
+  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-md font-sans text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40",
-        // border-border is explicit because Preflight is off: Tailwind defaults an
-        // uncoloured border to currentColor, which draws it in the near-black text colour.
+        // border-border is explicit regardless of Preflight: Tailwind v4's `border` utility never
+        // sets a default border-color, so an uncoloured border draws in currentColor (near-black
+        // text here) unless a color is named.
         outline:
           "border border-border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
@@ -39,8 +40,8 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
-)
+  },
+);
 
 function Button({
   className,
@@ -50,9 +51,9 @@ function Button({
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
+    asChild?: boolean;
   }) {
-  const Comp = asChild ? Slot.Root : "button"
+  const Comp = asChild ? Slot.Root : "button";
 
   return (
     <Comp
@@ -62,7 +63,7 @@ function Button({
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
-  )
+  );
 }
 
-export { Button, buttonVariants }
+export { Button, buttonVariants };

@@ -1,148 +1,98 @@
-import type { ThemedStyles } from '../types'
+import React from "react";
+import { cn } from "./ui/utils";
 
-import React from 'react'
-import styled, { keyframes } from 'styled-components'
-import darken from 'polished/lib/color/darken'
+const BUTTON_BASE =
+  "flex items-center justify-center text-sm sm:text-base font-bold uppercase py-2 px-2 sm:px-2.5 rounded-xs transition-all duration-300 cursor-pointer";
 
-const grow = keyframes`
-  from {
-    transform: scale(.25) translate(-50%, -50%);
-  }
-  to {
-    transform: scale(1) translate(-50%, -50%);
-  }
-`
-
-const Cover = styled.div`
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-`
-
-const Window = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 10;
-  transform: translate(-50%, -50%);
-  animation: ${grow} 200ms ease;
-`
-
-const Inner = styled.div<ThemedStyles>`
-  display: grid;
-  grid-template-rows: 3rem 1fr 5rem;
-  background: white;
-  box-shadow: ${({ theme }) => theme.shadows[1]};
-`
-
-const Title = styled.div<ThemedStyles>`
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font: 2rem 'Open Sans';
-  font-weight: 600;
-  background: ${({ theme }) => theme.primary};
-`
-
-const Message = styled.div`
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font: 3rem 'Open Sans';
-  font-weight: 600;
-  padding: 3rem 2rem;
-`
-
-const Buttons = styled.div<ThemedStyles>`
-  height: 5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-top: 1px solid ${({ theme }) => theme.grey[2]};
-  background: ${({ theme }) => theme.grey[0]};
-`
-
-const Button = styled.div<ThemedStyles>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font: 1.5rem 'Open Sans';
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 0.75rem 1rem;
-  margin-right: 1rem;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  transition: 0.3s;
-  cursor: pointer;
-`
-
-const DANGER_COLOR = '#dc2626'
-
-const ButtonConfirm = styled(Button)<{ $danger?: boolean }>`
-  color: white;
-  background: ${({ $danger, theme }) => ($danger ? DANGER_COLOR : theme.secondary)};
-  &:hover {
-    background: ${({ $danger, theme }) => ($danger ? darken(0.1, DANGER_COLOR) : darken(0.1, theme.secondary))};
-  }
-`
-
-const ButtonCancel = styled(Button)`
-  color: ${({ theme }) => theme.grey[10]};
-  background: ${({ theme }) => theme.grey[2]};
-  &:hover {
-    background: ${({ theme }) => theme.grey[3]};
-  }
-`
-
-const ModalComponent: React.FC<ModalProps> = ({ title, message, buttons, onConfirm, onClose, variant }) => {
+const ModalComponent: React.FC<ModalProps> = ({
+  title,
+  message,
+  buttons,
+  onConfirm,
+  onClose,
+  variant,
+}) => {
   const handleBackdropClick = React.useCallback(
     (e: React.MouseEvent) => {
       if (e.target === e.currentTarget) {
-        ;(onClose || onConfirm)?.()
+        (onClose || onConfirm)?.();
       }
     },
-    [onClose, onConfirm]
-  )
+    [onClose, onConfirm],
+  );
 
   return (
-    <Cover id="modal-cover" onClick={handleBackdropClick}>
-      <Window id="modal-window">
-        <Inner id="modal-inner">
-          <Title id="title">{title}</Title>
+    <div
+      id="modal-cover"
+      className="fixed top-0 left-0 z-5 w-full h-full bg-black/50"
+      onClick={handleBackdropClick}
+    >
+      <div
+        id="modal-window"
+        className="fixed top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 animate-grow"
+      >
+        <div
+          id="modal-inner"
+          className="break-card modal-inner-grid grid bg-white shadow-1"
+        >
+          <div
+            id="title"
+            className="h-10 sm:h-12.5 flex justify-center items-center px-4 text-lg sm:text-xl font-semibold bg-primary"
+          >
+            {title}
+          </div>
 
-          <Message id="message">{message}</Message>
+          <div
+            id="message"
+            className="h-auto flex items-center justify-center py-5 px-4 sm:py-7.5 sm:px-5 text-xl sm:text-3xl font-semibold"
+          >
+            {message}
+          </div>
 
-          <Buttons id="buttons">
-            <ButtonConfirm id="button-confirm" className="no-select" $danger={variant === 'danger'} onClick={onConfirm}>
+          <div
+            id="buttons"
+            className="h-12.5 flex items-center justify-center gap-2.5 border-t border-grey-200 bg-grey-50"
+          >
+            <button
+              id="button-confirm"
+              className={cn(
+                BUTTON_BASE,
+                "no-select text-white",
+                variant === "danger"
+                  ? "bg-danger hover:bg-danger-hover"
+                  : "bg-secondary hover:bg-secondary-hover",
+              )}
+              onClick={onConfirm}
+            >
               {buttons[0]}
-            </ButtonConfirm>
+            </button>
 
             {onClose && (
-              <ButtonCancel id="button-cancel" className="no-select" onClick={onClose}>
+              <button
+                id="button-cancel"
+                className={cn(
+                  BUTTON_BASE,
+                  "no-select text-grey-950 bg-grey-200 hover:bg-grey-300",
+                )}
+                onClick={onClose}
+              >
                 {buttons[1]}
-              </ButtonCancel>
+              </button>
             )}
-          </Buttons>
-        </Inner>
-      </Window>
-    </Cover>
-  )
-}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default ModalComponent
+export default ModalComponent;
 
 export interface ModalProps {
-  title: string
-  message: string
-  buttons: [string] | [string, string] // ['Okay', 'Cancel']
-  onConfirm?: () => void
-  onClose?: () => void
-  variant?: 'danger'
+  title: string;
+  message: string;
+  buttons: [string] | [string, string]; // ['Okay', 'Cancel']
+  onConfirm?: () => void;
+  onClose?: () => void;
+  variant?: "danger";
 }

@@ -5,7 +5,7 @@ import { ROUTES } from "@/config/routes";
 import useDirectionalChevron from "@/hooks/useDirectionalChevron";
 import InitialsAvatar from "@/components/InitialsAvatar";
 import { Skeleton } from "@/components/ui/skeleton";
-import type { StudentSearchResult } from "@/types";
+import type { StudentProfile } from "@/apiTypes";
 
 /** Mirrors StudentCard's layout part-by-part (avatar, name, email, date) instead of one solid block. */
 export const StudentCardSkeleton = () => (
@@ -27,7 +27,7 @@ export const StudentCardSkeleton = () => (
 );
 
 type StudentCardProps = {
-  student: StudentSearchResult;
+  student: StudentProfile;
   /** Current search-page URL (query string) — carried so the attempts page's breadcrumb can restore it. */
   fromSearch: string;
 };
@@ -41,22 +41,30 @@ const StudentCard = ({ student, fromSearch }: StudentCardProps) => {
 
   return (
     <Link
-      to={ROUTES.studentAttempts.to(student.id)}
+      to={ROUTES.student.to(student.id)}
       state={{ from: fromSearch }}
       className="flex items-center gap-4 p-4 transition-colors hover:bg-grey-50"
     >
-      <InitialsAvatar firstName={student.first_name} lastName={student.last_name} className="size-10 text-sm" />
+      <InitialsAvatar
+        firstName={student.firstName}
+        lastName={student.lastName}
+        className="size-10 text-sm"
+      />
 
       <span className="min-w-0 flex-1">
         <span className="block truncate font-bold text-tertiary">
-          {student.first_name} {student.last_name}
+          {student.firstName} {student.lastName}
         </span>
-        <span className="block truncate text-sm text-grey-800">{student.email}</span>
+        <span className="block truncate text-sm text-grey-800">
+          {student.email}
+        </span>
       </span>
 
       <span className="shrink-0 text-end text-xs text-grey-800">
         <span className="block">{t.joined}</span>
-        <span className="block font-medium text-grey-900">{formatDate(student.created_at)}</span>
+        <span className="block font-medium text-grey-900">
+          {formatDate(student.createdAt)}
+        </span>
       </span>
 
       <ChevronIcon className="size-4 shrink-0 text-grey-500" />

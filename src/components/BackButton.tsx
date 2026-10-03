@@ -1,20 +1,20 @@
-import { Link } from "react-router-dom"
-import { ArrowLeft, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import useSettings from "@/hooks/useSettings"
+import { Link } from "react-router-dom";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import useSettings from "@/hooks/useSettings";
 
 type BackButtonProps = {
   /** Destination route. */
-  to: string
+  to: string;
   /** Link label. */
-  text: string
-  className?: string
-}
+  text: string;
+  className?: string;
+};
 
 /** Ghost "back" navigation link with an RTL-aware arrow. Shared across the Tailwind pages. */
 const BackButton = ({ to, text, className }: BackButtonProps) => {
-  const { settings } = useSettings()
-  const Icon = settings.language === "ar" ? ArrowRight : ArrowLeft
+  const { settings } = useSettings();
+  const Icon = settings.language === "ar" ? ArrowRight : ArrowLeft;
 
   return (
     <Button
@@ -28,7 +28,7 @@ const BackButton = ({ to, text, className }: BackButtonProps) => {
         {text}
       </Link>
     </Button>
-  )
-}
+  );
+};
 
-export default BackButton
+export default BackButton;

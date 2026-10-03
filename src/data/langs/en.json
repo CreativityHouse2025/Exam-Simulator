@@ -4,7 +4,9 @@
     "description": "Situational Questions in Professional Project Management"
   },
   "common": {
-    "logo-alt": "Logo"
+    "logo-alt": "Logo",
+    "retry": "Try again",
+    "clear": "Clear"
   },
   "cover": {
     "general": "General",
@@ -21,7 +23,9 @@
       "correct": "Correct Questions",
       "summary": "Report Summary",
       "pause": "Pause Exam",
-      "stop": "Submit Exam"
+      "stop": "Submit Exam",
+      "save-and-leave": "Save & Leave",
+      "leave": "Leave"
     },
     "grid": {
       "marked": "Marked",
@@ -67,7 +71,8 @@
       "home": "Go Home",
       "retake-wrong": "Retry Mistakes",
       "category": "Category",
-      "exam": "Exam"
+      "exam": "Exam",
+      "result-unavailable": "Your exam was submitted, but the result could not be loaded."
     }
   },
   "confirm": {
@@ -131,7 +136,6 @@
       "subtitle": "Sign in if you have created an account to access the exam simulator.",
       "submit": "Sign In",
       "submitting": "Signing in...",
-      "force-submit": "Sign In Anyway",
       "error": "Sign in failed. Please try again.",
       "no-account": "New here? You'll need to",
       "signup-link": "create an account first.",
@@ -180,10 +184,13 @@
     "errors": {
       "required": "$1 is required",
       "name-invalid": "$1 must contain letters only",
+      "name-too-long": "$1 must be at most 100 characters",
       "email-required": "Email is required",
       "email-invalid": "Please enter a valid email address",
+      "email-too-long": "Email must be at most 254 characters",
       "password-required": "Password is required",
       "password-too-short": "Password must be at least 8 characters",
+      "password-too-long": "Password must be at most 128 characters",
       "password-no-letter": "Password must contain at least one letter",
       "password-no-digit": "Password must contain at least one digit",
       "confirm-required": "Please confirm your password",
@@ -196,7 +203,6 @@
       "server-confirmation-failed": "Email confirmation failed. Please try again.",
       "server-validation-error": "Please check your input and try again.",
       "server-missing-fields": "Please fill in all required fields.",
-      "server-session-conflict": "You're already signed in on another device. Click 'Sign In Anyway' to sign out of all other devices and continue here.",
       "server-unknown": "An unexpected error occurred. Please try again."
     },
     "callback": {
@@ -207,27 +213,28 @@
   "header": {
     "changeLanguage": "Change Language",
     "history": "History",
-    "profile": "Profile"
+    "profile": "Profile",
+    "menu": "Menu",
+    "language-locked": "Save and leave your exam to change language"
   },
   "errors": {
-    "rate-limited": "Please try again in $1 minute(s).",
     "rate-limited-generic": "Please try again later.",
-    "session-expired": "Your session has expired. Please sign in again."
+    "session-expired": "Your session has expired. Please sign in again.",
+    "unknown": "An unexpected error occurred. Please try again."
   },
   "history": {
     "title": "Attempt History",
-    "subtitle": "An overview of your exam attempts and results.",
+    "subtitle": "Your latest $1 exam attempts for $2",
     "loading": "Loading...",
     "fetchError": "Failed to load attempt history. Please try again.",
     "table": {
-      "type": "Type",
-      "exam-domain": "Exam / Domain",
       "state": "State",
       "score": "Score",
       "status": "Status",
       "date": "Date",
       "action": "Action",
-      "empty": "No attempts yet."
+      "empty": "No attempts yet.",
+      "exam": "Exam"
     },
     "type": {
       "full": "Full",
@@ -244,8 +251,13 @@
     "actions": {
       "continue": "Continue",
       "review": "Review",
-      "retry": "Retry Mistakes"
-    }
+      "retry": "Retry Mistakes",
+      "details": "Details"
+    },
+    "recent": "Recent attempts",
+    "view-all": "View all",
+    "empty-hint": "Start an exam above to see it here.",
+    "back": "Back to $1"
   },
   "attempts": {
     "errors": {
@@ -253,25 +265,25 @@
       "server-forbidden": "You do not have access to this attempt.",
       "server-conflict": "This attempt has already been submitted.",
       "server-create-failed": "Failed to start the attempt. Please try again.",
-      "server-save-failed": "Failed to save your progress. Please try again.",
-      "server-submit-failed": "Failed to submit the exam. Please try again.",
+      "server-save-failed": "Failed to save your exam. Please try again.",
+      "server-submit-failed": "Failed to submit your exam. Please try again.",
       "server-unknown": "An unexpected error occurred. Please try again.",
       "no-attempt-id": "No exam session found. Please start a new exam from the home page.",
       "no-mistakes": "You have no mistakes to revise."
     }
   },
   "dashboard": {
-    "student": {
-      "continue": "Continue Last Exam",
-      "new": "Start a Full Exam",
-      "mini": "Start a Domain Exam",
-      "select-category": "Choose a question category",
-      "select-fullexam": "Choose an exam to start"
-    },
     "supervisor": {
-      "subtitle": "Supervisor Portal - Exam Simulator",
       "search-students": "Search Students",
-      "view-exams": "View Exams"
+      "view-exams": "View Exams",
+      "welcome": "Welcome back, $1",
+      "lead": "Look up a student, or open a track's exam library.",
+      "search-placeholder": "Search students by name or email",
+      "students-description": "Find a student and review their attempts, track by track.",
+      "exams-description": "Browse every exam in a track, question by question.",
+      "library": "Library",
+      "tracks-title": "Your enrolled tracks",
+      "tracks-empty": "You are not enrolled in any track"
     }
   },
   "exam": {
@@ -280,24 +292,12 @@
       "full": "Full Exam",
       "domain": "Domain"
     },
-    "stats": {
-      "duration": "$1m",
-      "questions": "$1 questions",
-      "pass": "Pass: $1%"
-    },
     "library": {
       "back": "Back to Home",
-      "title": "PMP Exam Library",
-      "subtitle": "Browse all available exams. Select an exam to view its questions",
+      "subtitle": "Open an exam to read its questions, or preview it exactly as a student sees it.",
       "search": "Search exams by title…",
-      "empty": "No exams match your search",
       "view-questions": "View Questions",
-      "preview": "Preview Exam",
-      "tabs": {
-        "all": "All Exams",
-        "full": "Full",
-        "domain": "Domain"
-      }
+      "preview": "Preview Exam"
     },
     "details": {
       "back": "Back to Exam Library",
@@ -314,6 +314,12 @@
         "page": "Page",
         "section": "Section"
       }
+    },
+    "tracks": {
+      "title": "Exam library",
+      "subtitle": "Pick a track to browse its exams.",
+      "empty": "You are not enrolled in any track",
+      "back": "All tracks"
     }
   },
   "students": {
@@ -325,23 +331,27 @@
       "empty": "No students found for '$1'",
       "error": "Failed to search students. Please try again.",
       "retry": "Retry",
-      "count": "$1 students found"
+      "count": "$1 students found",
+      "idle-hint": "Type at least two characters.",
+      "empty-hint": "Check the spelling, or search by email instead."
     },
     "card": {
       "joined": "Joined"
     },
     "attempts": {
       "breadcrumb-root": "Students",
-      "joined": "Joined",
-      "title": "Exam History",
-      "summary": "$1 passed, $2 failed",
       "stats": {
         "total": "Total Attempts",
         "average": "Average Score",
         "pass-rate": "Pass Rate"
       },
       "empty": "This student hasn't made any attempts yet.",
-      "error": "Failed to load this student's attempts. Please try again."
+      "error": "Failed to load this student's attempts. Please try again.",
+      "title-in-track": "Attempts in $1",
+      "track-fallback": "this track",
+      "forbidden": "You are not enrolled in this track",
+      "forbidden-hint": "Attempts are only visible in tracks you are enrolled in. Contact Creativity House for access.",
+      "empty-hint": "Nothing to review in this track yet."
     },
     "detail": {
       "score": "Score",
@@ -356,6 +366,76 @@
       "server-not-found": "Student not found.",
       "server-forbidden": "You don't have permission to view this student.",
       "server-unknown": "Something went wrong. Please try again."
+    },
+    "profile": {
+      "error": "Failed to load this student. Please try again.",
+      "tracks-title": "Tracks",
+      "tracks-subtitle": "Open a track to read this student's attempts in it.",
+      "tracks-empty": "No tracks you can open",
+      "tracks-empty-hint": "This student holds no track you are enrolled in.",
+      "enrolled-until": "Enrolled until $1"
     }
+  },
+  "exams": {
+    "errors": {
+      "server-not-found": "This exam could not be found.",
+      "server-forbidden": "You don't have access to this exam.",
+      "server-unknown": "Something went wrong. Please try again.",
+      "fetch": "Failed to load exams."
+    },
+    "title": "Exams",
+    "start": "Start",
+    "search": "Search exams by name",
+    "empty": "No exams in this track yet",
+    "no-results": "No exams match your filters",
+    "no-results-hint": "Try a different name or exam type.",
+    "taken": "Taken $1x",
+    "questions": "$1 questions",
+    "pass-mark": "$1% to pass",
+    "in-progress": "$1 attempts uncompleted",
+    "show-details": "Show configuration",
+    "hide-details": "Hide configuration",
+    "filter": {
+      "type": "Exam type",
+      "all": "All types"
+    },
+    "config": {
+      "duration": "Duration",
+      "passing": "Passing rate",
+      "breaks": "Breaks",
+      "reveal": "Reveal answers",
+      "retry": "Retry wrong answers",
+      "minutes": "$1 min",
+      "untimed": "Untimed",
+      "none": "None",
+      "allowed": "Allowed",
+      "not-allowed": "Not allowed"
+    },
+    "breaks": "$1 breaks",
+    "show-more": "Show $1 more",
+    "show-less": "Show fewer",
+    "hide-section": "Hide exams",
+    "show-section": "Show exams"
+  },
+  "tracks": {
+    "errors": {
+      "server-forbidden": "You don't have access to this track.",
+      "server-unknown": "Something went wrong. Please try again.",
+      "fetch": "Failed to load tracks."
+    },
+    "title": "Your tracks",
+    "subtitle": "Pick a track to see its exams and your attempts.",
+    "empty": "No tracks available",
+    "empty-hint": "There are no tracks in the catalogue yet.",
+    "locked-hint": "Contact Creativity House for access.",
+    "expires": "Expires $1",
+    "badge": {
+      "active": "Active",
+      "locked": "Not enrolled"
+    },
+    "welcome": "Welcome back, $1",
+    "continue": "Continue $1",
+    "back": "All tracks",
+    "locked": "You are not enrolled in this track"
   }
 }

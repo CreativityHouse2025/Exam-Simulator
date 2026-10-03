@@ -1,30 +1,36 @@
-import type { ApiHandler, AuthenticatedApiHandler, AuthUser, ResponseHeaders } from "../types.js"
+import type { ApiHandler } from "./types.js"
 import { AppError } from "../errors/AppError.js"
 import { createUserClient } from "../supabaseClient.js"
-import { assertAccountNotExpired } from "../services/authService.js"
 import { parseCookies, serializeAuthCookies, clearAuthCookies } from "../utils/cookies.js"
-import { errorResponse } from "../utils/response.js"
+import { errorResponse, type ResponseHeaders } from "../utils/response.js"
+
+/** The caller identity `withAuth` resolves from cookies and hands to the wrapped handler. */
+export type AuthUser = {
+  id: string
+  email: string
+  accessToken: string
+}
+
+/** A handler that may only run once `withAuth` has established who is calling. */
+export type AuthenticatedApiHandler = (
+  req: Request,
+  authUser: AuthUser,
+  cookieHeaders?: ResponseHeaders,
+) => Promise<Response>
 
 /**
  * Middleware that validates auth tokens from cookies before calling the handler.
  * If the access token is expired but a refresh token exists, it refreshes the session
  * and sets updated cookies on the response.
  *
- * Bypass mode: set BYPASS_AUTH=true in your .env.local to skip token validation entirely.
- * When bypassed, BYPASS_AUTH_USER_ID must also be set to a valid user UUID.
- * NEVER set BYPASS_AUTH in a production environment.
+ * There is no bypass, in any environment: a switch that disables authentication is one stray
+ * environment variable away from handing over every account.
  *
  * Must be wrapped with `withErrorHandler` on the outside:
  * `withErrorHandler(withAuth(handler))`
  */
 export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
   return async (req: Request) => {
-    if (process.env.BYPASS_AUTH === "true") {
-      const userId = process.env.BYPASS_AUTH_USER_ID
-      if (!userId) throw new AppError({ statusCode: 500, code: "INTERNAL_ERROR", message: "BYPASS_AUTH is enabled but BYPASS_AUTH_USER_ID is not set" })
-      return handler(req, { id: userId, email: "bypass@local.dev", accessToken: "bypass" })
-    }
-
     const cookieHeader = req.headers.get("Cookie") ?? ""
     const cookies = parseCookies(cookieHeader)
     const accessToken = cookies["access_token"]
@@ -62,26 +68,10 @@ export function withAuth(handler: AuthenticatedApiHandler): ApiHandler {
     })
 
     if (refreshError || !refreshData.session || !refreshData.user) {
-      // The refresh token is dead — likely revoked by a force-signin, password update, or account expiry
-      // from another session. Clear the cookies so the browser stops retrying with the same dead token,
+      // The refresh token is dead — likely revoked by a sign-in on another device or a password update. Clear the cookies so the browser stops retrying with the same dead token,
       // which would produce a refresh_token_not_found loop in Supabase on every subsequent request.
       const expiredCookieHeaders: ResponseHeaders = clearAuthCookies().map((c) => ["Set-Cookie", c] as [string, string])
       return errorResponse("UNAUTHORIZED", "Authentication required (refresh token invalid)", 401, expiredCookieHeaders)
-    }
-
-    // if the refresh succeeds, ensure account expiry date is valid
-    try {
-      await assertAccountNotExpired(refreshData.user.id, {
-        revokeAccessToken: refreshData.session.access_token,
-      })
-    } catch (error) {
-      // Clear cookies for any failure here — the refresh token was already consumed by refreshSession
-      // above, so the client has no valid credentials regardless of the error type.
-      const expiredCookieHeaders: ResponseHeaders = clearAuthCookies().map((c) => ["Set-Cookie", c] as [string, string])
-      if (error instanceof AppError) {
-        return errorResponse(error.code, error.message, error.statusCode, expiredCookieHeaders)
-      }
-      return errorResponse("INTERNAL_ERROR", "An unexpected error occurred", 500, expiredCookieHeaders)
     }
 
     const cookieHeaders: ResponseHeaders = serializeAuthCookies(

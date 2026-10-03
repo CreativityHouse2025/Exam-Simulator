@@ -1,16 +1,78 @@
-import { translate } from "./translation";
-import type { AppErrorCode } from "../types";
+import { AppApiError } from "../errors";
+import type { DomainErrorCodes, ErrorDomain } from "../errors";
+import type { AppErrorCode } from "@shared/api.schema";
+
+const UNKNOWN_ERROR_KEY = "errors.unknown";
+
+type ErrorDomainEntry<D extends ErrorDomain> = {
+  /** Codes whose copy is specific to this domain. Every declared code must be mapped. */
+  codes: Record<DomainErrorCodes[D], string>;
+  /** Used for any code the domain does not declare — the server can return codes a domain never anticipated. */
+  fallback: string;
+};
+
+const ERROR_DOMAINS: { [D in ErrorDomain]: ErrorDomainEntry<D> } = {
+  auth: {
+    codes: {
+      INVALID_CREDENTIALS: "auth.errors.server-invalid-credentials",
+      ACCOUNT_EXPIRED: "auth.errors.server-account-expired",
+      SUBSCRIPTION_REQUIRED: "auth.errors.server-subscription-required",
+      SIGNUP_FAILED: "auth.errors.server-signup-failed",
+      SIGNIN_FAILED: "auth.errors.server-signin-failed",
+      CONFIRMATION_FAILED: "auth.errors.server-confirmation-failed",
+      VALIDATION_ERROR: "auth.errors.server-validation-error",
+    },
+    fallback: "auth.errors.server-unknown",
+  },
+  attempts: {
+    codes: {
+      NOT_FOUND: "attempts.errors.server-not-found",
+      FORBIDDEN: "attempts.errors.server-forbidden",
+      CONFLICT: "attempts.errors.server-conflict",
+      ATTEMPT_CREATE_FAILED: "attempts.errors.server-create-failed",
+      ATTEMPT_SAVE_FAILED: "attempts.errors.server-save-failed",
+      ATTEMPT_SUBMIT_FAILED: "attempts.errors.server-submit-failed",
+    },
+    fallback: "attempts.errors.server-unknown",
+  },
+  students: {
+    codes: {
+      NOT_FOUND: "students.errors.server-not-found",
+      FORBIDDEN: "students.errors.server-forbidden",
+    },
+    fallback: "students.errors.server-unknown",
+  },
+  exams: {
+    codes: {
+      NOT_FOUND: "exams.errors.server-not-found",
+      FORBIDDEN: "exams.errors.server-forbidden",
+    },
+    fallback: "exams.errors.server-unknown",
+  },
+  tracks: {
+    codes: {
+      FORBIDDEN: "tracks.errors.server-forbidden",
+    },
+    fallback: "tracks.errors.server-unknown",
+  },
+  api: {
+    codes: {
+      UNAUTHORIZED: "errors.session-expired",
+      RATE_LIMITED: "errors.rate-limited-generic",
+    },
+    fallback: UNKNOWN_ERROR_KEY,
+  },
+};
 
 /**
- * Builds a `translateErrorCode` function from a domain-specific error-code → translation-key
- * map. Codes absent from the map (or not in this domain's subset) fall back to `fallbackKey`.
+ * Resolves any caught value to a translation key. Callers pass the key straight to `showToast`
+ * (or to `translate` for inline rendering) — copy is never resolved at throw time, so a language
+ * switch between the failure and the render still produces the right text.
  */
-export function createErrorCodeTranslator<TCode extends AppErrorCode>(
-  errorCodeToTranslationKey: Record<TCode, string>,
-  fallbackKey: string,
-) {
-  return function translateErrorCode(code: AppErrorCode): string {
-    const key = errorCodeToTranslationKey[code as TCode];
-    return key ? translate(key) : translate(fallbackKey);
-  };
+export function resolveErrorKey(error: unknown): string {
+  if (!(error instanceof AppApiError)) return UNKNOWN_ERROR_KEY;
+
+  const { codes, fallback } = ERROR_DOMAINS[error.domain];
+  const keysByCode: Partial<Record<AppErrorCode, string>> = codes;
+  return keysByCode[error.code] ?? fallback;
 }

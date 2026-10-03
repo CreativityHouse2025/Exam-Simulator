@@ -1,0 +1,293 @@
+#!/usr/bin/env python3
+"""
+Generate supabase/migrations/015_question_banks.sql from the JSON question banks.
+
+Usage:
+    python scripts/generate-question-seed.py
+
+Reads every src/data/exam/{ar,en}/<id>.json pair and emits one migration holding
+public.questions, public.choices and public.exam_questions, plus the UPDATE that
+reconciles exams.question_count against the rows actually written.
+
+Run scripts/analyze-banks.py first - it is the gate. This script refuses to run
+if the set of ar/en conflicts is not exactly EXCLUDED_QUESTION_IDS below, because
+a changed conflict set means either a bank edit resolved one (good - shrink the
+list) or introduced one (bad - a question would be silently dropped).
+
+Re-run this whenever the banks change, and commit the result.
+"""
+
+import json
+import sys
+from collections import defaultdict
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+BANK_DIR = ROOT / "src" / "data" / "exam"
+OUT_PATH = ROOT / "supabase" / "migrations" / "015_question_banks.sql"
+LANGS = ("ar", "en")
+
+# Arabic and English disagree on the correct answer for these. One row holds one
+# truth, so they are omitted entirely until a human resolves them. See the block
+# at the top of docs/specs/spec-add-tracks-api.md and docs/specs/bank-conflicts.md.
+EXCLUDED_QUESTION_IDS = {640, 643, 989, 990, 992, 993, 994, 1381}
+
+# Asserted after generation. A mismatch means the banks changed under the script.
+EXPECTED = {"questions": 3130, "choices": 12653, "exam_questions": 3857}
+
+ROWS_PER_INSERT = 200
+
+
+def sql_string(value):
+    """Postgres literal. standard_conforming_strings is on, so only quotes need doubling."""
+    if "\x00" in value:
+        raise ValueError("NUL byte in bank text")
+    return "'" + value.replace("'", "''") + "'"
+
+
+def load_banks():
+    exam_ids = sorted(int(path.stem) for path in (BANK_DIR / "ar").glob("*.json"))
+    return {
+        exam_id: {
+            lang: json.loads((BANK_DIR / lang / f"{exam_id}.json").read_text(encoding="utf-8"))
+            for lang in LANGS
+        }
+        for exam_id in exam_ids
+    }
+
+
+def correct_set(question):
+    return frozenset(i for i, choice in enumerate(question["choices"]) if choice["correct"])
+
+
+def find_conflicts(banks):
+    """Mirrors scripts/analyze-banks.py. Duplicated deliberately: this script must not
+    generate a seed on the strength of a report file that may be stale."""
+    conflicts = set()
+    for langs in banks.values():
+        for ar, en in zip(langs["ar"], langs["en"]):
+            if ar["id"] != en["id"]:
+                raise SystemExit("ar/en parity break - run scripts/analyze-banks.py")
+            if len(ar["choices"]) != len(en["choices"]) or correct_set(ar) != correct_set(en):
+                conflicts.add(ar["id"])
+    return conflicts
+
+
+def collect(banks):
+    """Returns (questions, choices, exam_questions) as row tuples, excluded ids dropped.
+
+    question_index is re-densified to 0..n-1 per exam. Leaving gaps where an excluded
+    question was would misalign break positions: breaks.show_at_index is a position in
+    the exam, not a question id.
+    """
+    questions = {}
+    choices = defaultdict(list)
+    exam_questions = []
+
+    for exam_id in sorted(banks):
+        ar_bank, en_bank = banks[exam_id]["ar"], banks[exam_id]["en"]
+        index = 0
+        for ar, en in zip(ar_bank, en_bank):
+            question_id = ar["id"]
+            if question_id in EXCLUDED_QUESTION_IDS:
+                continue
+
+            exam_questions.append((exam_id, index, question_id))
+            index += 1
+
+            if question_id in questions:
+                continue
+
+            questions[question_id] = (
+                question_id,
+                en["type"],
+                ar["text"],
+                en["text"],
+                ar["explanation"],
+                en["explanation"],
+            )
+            choices[question_id] = [
+                (question_id, position, ar_choice["text"], en_choice["text"], en_choice["correct"])
+                for position, (ar_choice, en_choice) in enumerate(zip(ar["choices"], en["choices"]))
+            ]
+
+    choice_rows = [row for question_id in sorted(choices) for row in choices[question_id]]
+    return [questions[key] for key in sorted(questions)], choice_rows, exam_questions
+
+
+def render_inserts(table, columns, rows, render_row):
+    lines = []
+    for start in range(0, len(rows), ROWS_PER_INSERT):
+        batch = rows[start : start + ROWS_PER_INSERT]
+        lines.append(f"INSERT INTO public.{table} ({', '.join(columns)}) VALUES")
+        lines += [f"  ({render_row(row)})," for row in batch[:-1]]
+        lines.append(f"  ({render_row(batch[-1])});")
+        lines.append("")
+    return lines
+
+
+def render(questions, choices, exam_questions):
+    lines = [
+        "-- =============================================================================",
+        "-- Migration 015: question bank content",
+        "--",
+        "-- GENERATED by scripts/generate-question-seed.py - do not edit by hand.",
+        "--",
+        "-- Source: src/data/exam/{ar,en}/<exam id>.json, 42 files, ids 1-10 and 12-43.",
+        "-- 11.json does not exist; that is a fact about the banks, not a gap.",
+        "--",
+        "-- EIGHT QUESTIONS ARE DELIBERATELY ABSENT: Arabic and English disagree on their",
+        "-- correct answer, and one row cannot hold two truths. Ids "
+        + ", ".join(str(i) for i in sorted(EXCLUDED_QUESTION_IDS))
+        + ".",
+        "-- See the block at the top of docs/specs/spec-add-tracks-api.md before",
+        "-- 'fixing' the counts below.",
+        "--",
+        f"--   questions       {len(questions):>6,}",
+        f"--   choices         {len(choices):>6,}",
+        f"--   exam_questions  {len(exam_questions):>6,}",
+        "-- =============================================================================",
+        "",
+        "",
+    ]
+
+    lines.append("-- questions -----------------------------------------------------------------")
+    lines.append("")
+    lines += render_inserts(
+        "questions",
+        ("id", "type", "text_ar", "text_en", "explanation_ar", "explanation_en"),
+        questions,
+        lambda row: ", ".join([str(row[0])] + [sql_string(value) for value in row[1:]]),
+    )
+
+    lines += [
+        "-- The ids above come from the banks, so the identity sequence has never been",
+        "-- advanced. Without this a question authored later collides with a seeded id.",
+        "SELECT setval(",
+        "  pg_get_serial_sequence('public.questions', 'id'),",
+        "  (SELECT max(id) FROM public.questions)",
+        ");",
+        "",
+        "",
+    ]
+
+    lines.append("-- choices -------------------------------------------------------------------")
+    lines.append("")
+    lines += render_inserts(
+        "choices",
+        ("question_id", "position", "text_ar", "text_en", "is_correct"),
+        choices,
+        lambda row: ", ".join(
+            [str(row[0]), str(row[1]), sql_string(row[2]), sql_string(row[3]), str(row[4]).lower()]
+        ),
+    )
+
+    lines.append("-- exam_questions ------------------------------------------------------------")
+    lines.append("--")
+    lines.append("-- question_index is 0..n-1 with no gaps: an excluded question closes the gap")
+    lines.append("-- behind it, because breaks.show_at_index is a position in the exam.")
+    lines.append("")
+    lines += render_inserts(
+        "exam_questions",
+        ("exam_id", "question_index", "question_id"),
+        exam_questions,
+        lambda row: ", ".join(str(value) for value in row),
+    )
+
+    lines += [
+        "-- ---------------------------------------------------------------------------",
+        "-- Reconcile exams.question_count with the rows that actually exist.",
+        "--",
+        "-- 013 inserted the counts the JSON banks advertise. Exams 1, 3 and 5 lost",
+        "-- questions to the exclusions above, and an exam that advertises a question it",
+        "-- can never serve is a bug the student sees. exam_questions is the one source",
+        "-- of truth for how long an exam is.",
+        "-- ---------------------------------------------------------------------------",
+        "UPDATE public.exams x",
+        "   SET question_count = (",
+        "         SELECT count(*) FROM public.exam_questions q WHERE q.exam_id = x.id",
+        "       )",
+        " WHERE question_count <> (",
+        "         SELECT count(*) FROM public.exam_questions q WHERE q.exam_id = x.id",
+        "       );",
+        "",
+        "",
+        "-- Every exam in the catalogue must have questions. An exam with none would",
+        "-- violate question_count > 0 and is a generation failure, not a data state.",
+        "DO $$",
+        "DECLARE",
+        "  v_empty INTEGER;",
+        "BEGIN",
+        "  SELECT count(*) INTO v_empty",
+        "    FROM public.exams x",
+        "   WHERE NOT EXISTS (SELECT 1 FROM public.exam_questions q WHERE q.exam_id = x.id);",
+        "",
+        "  IF v_empty > 0 THEN",
+        "    RAISE EXCEPTION 'Migration 015: % exam(s) have no questions', v_empty;",
+        "  END IF;",
+        "END $$;",
+        "",
+    ]
+
+    return "\n".join(lines)
+
+
+def main():
+    banks = load_banks()
+
+    conflicts = find_conflicts(banks)
+    if conflicts != EXCLUDED_QUESTION_IDS:
+        resolved = EXCLUDED_QUESTION_IDS - conflicts
+        introduced = conflicts - EXCLUDED_QUESTION_IDS
+        print("REFUSING TO GENERATE - the ar/en conflict set changed.", file=sys.stderr)
+        if resolved:
+            print(f"  resolved (remove from EXCLUDED_QUESTION_IDS): {sorted(resolved)}", file=sys.stderr)
+        if introduced:
+            print(f"  newly conflicting (resolve in the banks): {sorted(introduced)}", file=sys.stderr)
+        return 1
+
+    questions, choices, exam_questions = collect(banks)
+
+    # A question with no correct choice is unwinnable: submit_attempt compares the
+    # student's selections against array_agg(position) FILTER (is_correct), which is
+    # NULL, and NULL = anything is NULL, so the question grades wrong whatever is
+    # picked — silently. Nothing in the banks violates this today; the assertion is
+    # here so that stays true.
+    correct_counts = {question_id: 0 for question_id, *_ in questions}
+    for question_id, _position, _ar, _en, is_correct in choices:
+        if is_correct:
+            correct_counts[question_id] += 1
+
+    unwinnable = sorted(qid for qid, count in correct_counts.items() if count == 0)
+    if unwinnable:
+        print(f"REFUSING TO GENERATE - {len(unwinnable)} question(s) have no correct choice.", file=sys.stderr)
+        print(f"  ids: {unwinnable}", file=sys.stderr)
+        print("  Fix the `correct` flags in src/data/exam/{ar,en}/, or exclude the ids.", file=sys.stderr)
+        return 1
+
+    actual = {
+        "questions": len(questions),
+        "choices": len(choices),
+        "exam_questions": len(exam_questions),
+    }
+    if actual != EXPECTED:
+        print(f"REFUSING TO GENERATE - volumes changed.\n  expected {EXPECTED}\n  actual   {actual}", file=sys.stderr)
+        print("  Update EXPECTED and spec 12.5 together if this is intended.", file=sys.stderr)
+        return 1
+
+    # newline="" disables Windows \n -> \r\n translation. Without it every newline
+    # INSIDE a quoted bank string is rewritten too, and the text lands in Postgres
+    # carrying carriage returns it never had. 2,115 questions contain newlines.
+    with OUT_PATH.open("w", encoding="utf-8", newline="") as handle:
+        handle.write(render(questions, choices, exam_questions))
+
+    print(f"questions       {actual['questions']:,}")
+    print(f"choices         {actual['choices']:,}")
+    print(f"exam_questions  {actual['exam_questions']:,}")
+    print(f"excluded        {len(EXCLUDED_QUESTION_IDS)} question(s)")
+    print(f"written         {OUT_PATH} ({OUT_PATH.stat().st_size / 1_000_000:.1f} MB)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

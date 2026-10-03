@@ -1,188 +1,177 @@
 import React from "react";
-import { useParams, useLocation, Link } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, Inbox, Award, BadgePercent, CheckCircle2, Calendar } from "lucide-react";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
-import InitialsAvatar from "@/components/InitialsAvatar";
-import { formatDate } from "@/utils/format";
-import { translate } from "@/utils/translation";
-import { ROUTES } from "@/config/routes";
-import { createStudentAttemptsQueryOptions } from "@/utils/queryOptions";
-import AttemptCard from "./AttemptCard";
+import { Inbox, Lock } from "lucide-react";
+import AttemptsTable from "@/components/attempts/AttemptsTable";
+import AttemptsTableSkeleton from "@/components/attempts/AttemptsTableSkeleton";
+import StudentSummaryCard, {
+  StudentSummaryCardSkeleton,
+} from "@/components/students/StudentSummaryCard";
+import StudentBreadcrumb from "@/components/students/StudentBreadcrumb";
+import EmptyState from "@/components/states/EmptyState";
+import ErrorState from "@/components/states/ErrorState";
+import AttemptStats from "./AttemptStats";
 import AttemptDetailDialog from "./AttemptDetailDialog";
+import useAuth from "@/hooks/useAuth";
+import useSettings from "@/hooks/useSettings";
+import { AppApiError } from "@/errors";
+import {
+  createStudentAttemptsQueryOptions,
+  createStudentQueryOptions,
+  createTrackExamsQueryOptions,
+} from "@/utils/queryOptions";
+import { resolveErrorKey } from "@/utils/errorTranslation";
+import { translate } from "@/utils/translation";
+import type { AttemptSummary } from "@/apiTypes";
 
-const EmptyState = ({ message }: { message: string }) => (
-  <div className="flex flex-col items-center gap-3 py-20">
-    <Inbox className="size-9 text-grey-500" strokeWidth={1.4} />
-    <p className="text-sm text-grey-800">{message}</p>
-  </div>
-);
-
-/** Supervisor-only: a student's profile stats and their exam attempts, opened from the search page. */
+/**
+ * `/students/:id/tracks/:trackId` — one student's attempts in one track.
+ *
+ * Read-only: the table is the student's own history table with its resume and retry actions left
+ * out, so both roles read an attempt the same way. Access is the supervisor's own enrollment,
+ * checked here to avoid a doomed request and again against the API's 403 for deep links.
+ */
 const StudentAttemptsPage: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id = "", trackId = "" } = useParams();
   const location = useLocation();
   const fromSearch = (location.state as { from?: string } | null)?.from ?? "";
+  const { settings } = useSettings();
+  const langCode = settings.language;
+  const { enrolledTracks } = useAuth();
 
-  const [selectedAttemptId, setSelectedAttemptId] = React.useState<
-    string | null
-  >(null);
+  const [selectedAttempt, setSelectedAttempt] =
+    React.useState<AttemptSummary | null>(null);
 
-  const { data, isLoading, isError, refetch } = useQuery(
-    createStudentAttemptsQueryOptions(id ?? ""),
+  const supervisorTrack = enrolledTracks.find((track) => track.id === trackId);
+  const hasAccess = supervisorTrack !== undefined;
+
+  const profileQuery = useQuery(createStudentQueryOptions(id));
+  const attemptsQuery = useQuery({
+    ...createStudentAttemptsQueryOptions(id, trackId),
+    enabled: hasAccess,
+  });
+  // Only for resolving exam names — an AttemptSummary carries examId but never the name.
+  const examsQuery = useQuery({
+    ...createTrackExamsQueryOptions(trackId),
+    enabled: hasAccess,
+  });
+
+  const examNameById = React.useMemo(
+    () =>
+      new Map(
+        (examsQuery.data?.exams ?? []).map((exam) => [
+          exam.id,
+          exam.name[langCode],
+        ]),
+      ),
+    [examsQuery.data, langCode],
   );
 
-  const t = {
-    breadcrumbRoot: translate("students.attempts.breadcrumb-root"),
-    joined: translate("students.attempts.joined"),
-    title: translate("students.attempts.title"),
-    summary: (passed: number, failed: number) =>
-      translate("students.attempts.summary", [passed, failed]),
-    totalAttempts: translate("students.attempts.stats.total"),
-    averageScore: translate("students.attempts.stats.average"),
-    passRate: translate("students.attempts.stats.pass-rate"),
-    empty: translate("students.attempts.empty"),
-    error: translate("students.attempts.error"),
-    retry: translate("students.search.retry"),
-  };
+  const studentName = profileQuery.data
+    ? `${profileQuery.data.user.firstName} ${profileQuery.data.user.lastName}`
+    : "…";
+  const trackName =
+    supervisorTrack?.name[langCode] ??
+    translate("students.attempts.track-fallback");
 
-  const attempts = data?.attempts ?? [];
-  const completedAttempts = attempts.filter(
-    (attempt) => attempt.exam_state === "completed",
+  const breadcrumb = (
+    <StudentBreadcrumb
+      fromSearch={fromSearch}
+      studentId={id}
+      studentName={studentName}
+      trackName={trackName}
+    />
   );
-  const passedAttempts = completedAttempts.filter(
-    (attempt) => attempt.status === "pass",
-  );
-  const failedCount = completedAttempts.length - passedAttempts.length;
-  const averageScore = completedAttempts.length
-    ? Math.round(
-      completedAttempts.reduce((sum, attempt) => sum + attempt.score, 0) /
-      completedAttempts.length,
-    )
-    : 0;
-  const passRate = completedAttempts.length
-    ? Math.round((passedAttempts.length / completedAttempts.length) * 100)
-    : 0;
 
-  const selectedAttempt =
-    attempts.find((attempt) => attempt.id === selectedAttemptId) ?? null;
+  // A lapsed or missing enrollment on the SUPERVISOR's side — the student's own access is not the
+  // question here, which is why the copy names the supervisor.
+  const isForbidden =
+    !hasAccess ||
+    (attemptsQuery.error instanceof AppApiError &&
+      attemptsQuery.error.code === "FORBIDDEN");
+
+  if (isForbidden) {
+    return (
+      <div className="mx-auto w-full max-w-4xl px-4 py-8">
+        {breadcrumb}
+        <EmptyState
+          icon={Lock}
+          message={translate("students.attempts.forbidden")}
+          hint={translate("students.attempts.forbidden-hint")}
+          className="mt-6"
+        />
+      </div>
+    );
+  }
+
+  const attempts = attemptsQuery.data ?? [];
+  const isPending = profileQuery.isPending || attemptsQuery.isPending;
 
   return (
-    <div className="tailwind-page mx-auto w-full max-w-4xl px-4 py-8">
-      <Breadcrumb className="mb-4">
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link to={`${ROUTES.students}${fromSearch}`}>
-                {t.breadcrumbRoot}
-              </Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>
-              {data
-                ? `${data.student.first_name} ${data.student.last_name}`
-                : "…"}
-            </BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+    <div className="mx-auto w-full max-w-4xl px-4 py-8">
+      {breadcrumb}
 
-      {isLoading ? (
-        <div className="flex justify-center py-20">
-          <Loader2 className="size-8 animate-spin text-primary" />
-        </div>
-      ) : isError || !data ? (
-        <div className="flex flex-col items-center gap-3 py-20">
-          <p className="text-sm text-grey-800">{t.error}</p>
-          <Button variant="outline" size="sm" onClick={() => refetch()}>
-            {t.retry}
-          </Button>
-        </div>
+      {isPending ? (
+        <>
+          <StudentSummaryCardSkeleton />
+          <div className="mt-6">
+            <AttemptsTableSkeleton rows={5} />
+          </div>
+        </>
+      ) : profileQuery.isError || !profileQuery.data ? (
+        <ErrorState
+          message={translate(resolveErrorKey(profileQuery.error))}
+          onRetry={profileQuery.refetch}
+          isRetrying={profileQuery.isFetching}
+        />
       ) : (
         <>
-          <div className="mb-4 flex animate-[fadeIn_0.25s_ease-out] flex-col gap-3 rounded-xl border border-border bg-card p-6 shadow-sm">
-            <div className="flex items-center gap-4">
-              <InitialsAvatar
-                firstName={data.student.first_name}
-                lastName={data.student.last_name}
-                className="size-14 text-lg"
+          <StudentSummaryCard student={profileQuery.data.user} />
+
+          <section className="mt-6">
+            <h1 className="mb-4 text-lg font-bold text-tertiary md:text-xl">
+              {translate("students.attempts.title-in-track", [trackName])}
+            </h1>
+
+            {attemptsQuery.isError ? (
+              <ErrorState
+                message={translate("students.attempts.error")}
+                onRetry={attemptsQuery.refetch}
+                isRetrying={attemptsQuery.isFetching}
               />
-              <div className="min-w-0">
-                <p className="truncate text-lg font-bold text-tertiary">
-                  {data.student.first_name} {data.student.last_name}
-                </p>
-                <p className="truncate text-sm text-grey-800">{data.student.email}</p>
-              </div>
-            </div>
+            ) : attempts.length === 0 ? (
+              <EmptyState
+                icon={Inbox}
+                message={translate("students.attempts.empty")}
+                hint={translate("students.attempts.empty-hint")}
+              />
+            ) : (
+              <>
+                <AttemptStats attempts={attempts} />
 
-            <p className="flex items-center gap-1.5 text-xs text-grey-800">
-              <Calendar className="size-3.5" />
-              {t.joined}{" "}
-              <span className="font-bold text-grey-900">{formatDate(data.student.created_at)}</span>
-            </p>
-          </div>
-
-          <div className="mb-4 grid animate-[fadeIn_0.25s_ease-out] grid-cols-3 gap-3">
-            <div className="flex flex-col items-center gap-1 rounded-xl border border-border bg-card p-4 text-center">
-              <Award className="size-6 text-primary" />
-              <p className="text-2xl font-bold text-tertiary">
-                {attempts.length}
-              </p>
-              <p className="text-xs text-grey-800">{t.totalAttempts}</p>
-            </div>
-            <div className="flex flex-col items-center gap-1 rounded-xl border border-border bg-card p-4 text-center">
-              <BadgePercent className="size-6 text-tertiary" />
-              <p className="text-2xl font-bold text-tertiary">
-                {averageScore}%
-              </p>
-              <p className="text-xs text-grey-800">{t.averageScore}</p>
-            </div>
-            <div className="flex flex-col items-center gap-1 rounded-xl border border-border bg-card p-4 text-center">
-              <CheckCircle2 className="size-6 text-correct" />
-              <p className="text-2xl font-bold text-tertiary">{passRate}%</p>
-              <p className="text-xs text-grey-800">{t.passRate}</p>
-            </div>
-          </div>
-
-          <div className="mb-3 flex items-center justify-between gap-2">
-            <h2 className="font-bold text-tertiary">{t.title}</h2>
-            {completedAttempts.length > 0 && (
-              <p className="text-xs text-grey-800">
-                {t.summary(passedAttempts.length, failedCount)}
-              </p>
+                <div className="mt-6">
+                  <AttemptsTable
+                    attempts={attempts}
+                    examNameById={examNameById}
+                    onDetails={setSelectedAttempt}
+                    onRefresh={attemptsQuery.refetch}
+                    isRefreshing={attemptsQuery.isFetching}
+                  />
+                </div>
+              </>
             )}
-          </div>
-
-          {attempts.length === 0 ? (
-            <EmptyState message={t.empty} />
-          ) : (
-            <div className="animate-[fadeIn_0.25s_ease-out] divide-y divide-border overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-              {attempts.map((attempt) => (
-                <AttemptCard
-                  key={attempt.id}
-                  attempt={attempt}
-                  onSelect={setSelectedAttemptId}
-                />
-              ))}
-            </div>
-          )}
+          </section>
         </>
       )}
 
       {selectedAttempt && (
         <AttemptDetailDialog
           attempt={selectedAttempt}
-          onOpenChange={(open) => !open && setSelectedAttemptId(null)}
+          examName={
+            examNameById.get(selectedAttempt.examId) ??
+            `#${selectedAttempt.examId}`
+          }
+          onOpenChange={(open) => !open && setSelectedAttempt(null)}
         />
       )}
     </div>
