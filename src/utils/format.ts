@@ -46,25 +46,22 @@ export function formatDate(date: number | string | Date): string {
 }
 
 /**
- * Format seconds into HH:MM:SS. `null` means there is no timer to show (a supervisor preview
- * session never runs a real countdown) — the caller decides what counts as "no timer", this just
- * renders the placeholder for it.
+ * Format seconds into total minutes and seconds, e.g. "239m 13s". `null` means there is no timer
+ * to show (a supervisor preview session never runs a real countdown) — the caller decides what
+ * counts as "no timer", this just renders the placeholder for it.
  * @param {number | null} sec - The time in seconds to format, or null for no timer.
  * @returns {string}
  */
 export function formatTimer(sec: number | null): string {
-  if (sec === null) return "--:--:--";
+  if (sec === null) return "--- ---";
 
   try {
-    const hours = Math.floor(sec / 3600);
-    const minutes = Math.floor((sec % 3600) / 60);
+    const minutes = Math.floor(sec / 60);
     const seconds = sec % 60;
 
-    return [hours, minutes, seconds]
-      .map((unit) => unit.toString().padStart(2, "0"))
-      .join(":");
+    return `${minutes}m ${seconds.toString().padStart(2, "0")}s`;
   } catch {
-    return "00:00:00";
+    return "0m 00s";
   }
 }
 
