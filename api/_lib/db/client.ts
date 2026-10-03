@@ -1,4 +1,5 @@
 import { drizzle } from "drizzle-orm/postgres-js"
+import { DrizzleQueryError } from "drizzle-orm/errors"
 import postgres from "postgres"
 import type { z } from "zod"
 import { requireEnv } from "../utils/env.js"
@@ -16,12 +17,30 @@ import * as schema from "./schema.js"
 export const db = drizzle(postgres(requireEnv("DATABASE_URL"), { prepare: false }), { schema })
 
 /**
- * The 500 a failed query becomes. The driver's message goes into the log line (never the response
+ * Why a query failed, as Postgres put it: `SQLSTATE message`. A constraint violation's message
+ * already names the constraint.
+ *
+ * Drizzle wraps every driver failure in a `DrizzleQueryError` whose own message is the SQL plus its
+ * parameter VALUES — user ids, answer payloads, search text — and not the reason. The reason is the
+ * `PostgresError` in `cause`, so that is what gets described. Neither the parameters nor `detail`
+ * (which echoes the offending key values) are read.
+ */
+function describeFailure(error: unknown): string {
+  const cause = error instanceof DrizzleQueryError ? error.cause : error
+
+  if (cause instanceof postgres.PostgresError) {
+    return `${cause.code} ${cause.message}`
+  }
+
+  return cause instanceof Error ? cause.message : String(cause)
+}
+
+/**
+ * The 500 a failed query becomes. The driver's reason goes into the log line (never the response
  * body — see `errorResponse`), after `context` naming what was being read or written.
  */
 export function queryFailed(context: string, error: unknown, code: AppErrorCode = "INTERNAL_ERROR"): AppError {
-  const cause = error instanceof Error ? error.message : String(error)
-  return new AppError({ statusCode: 500, code, message: `${context} (${cause})` })
+  return new AppError({ statusCode: 500, code, message: `${context} (${describeFailure(error)})` })
 }
 
 /** Awaits a query, turning any driver failure into `queryFailed(context, …, code)`. */
