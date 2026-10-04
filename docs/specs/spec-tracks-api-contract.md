@@ -30,8 +30,9 @@ DECISIONS
   not a student's attempts within it.
 - An attempt stays reachable after its enrollment expires. Attempts are gated by
   ownership, never by enrollment.
-- Content is single-language (?lang=ar|en), never bilingual in one response.
-- Answer disclosure (is_correct / explanation) is included when the caller is a
+- Content carries every language in one response (text_ar/text_en,
+  explanation_ar/explanation_en). The client picks the language to display.
+- Answer disclosure (is_correct / explanation_*) is included when the caller is a
   supervisor, OR the exam allows revealing answers, OR the attempt is completed.
   Otherwise the fields are omitted — not null, absent.
 - A student never gets direct access to question content. Only through an attempt
@@ -93,13 +94,13 @@ ENDPOINTS
 | GET    | /api/auth/me                  | any authenticated                            | –                                   | { user: User, tracks: EnrolledTrack[] } |
 | GET    | /api/tracks                   | any authenticated                            | –                                   | { tracks: Track[] } |
 | GET    | /api/tracks/:trackId/exams    | active enrollment (either role)              | –                                   | { exams: ExamDetails[], types: ExamType[] } |
-| GET    | /api/exams/:examId/questions  | supervisor + active enrollment in its track   | ?lang=ar\|en                        | { exam: ExamDetails, questions: DisclosedQuestion[] } — always disclosed |
-| POST   | /api/attempts                 | student (active enrollment)                  | { exam_id: number, lang: ar\|en }   | { attempt: AttemptDetail, questions: AttemptQuestion[] \| DisclosedAttemptQuestion[], exam: Exam } — 201 |
+| GET    | /api/exams/:examId/questions  | supervisor + active enrollment in its track   | –                                   | { exam: ExamDetails, questions: DisclosedQuestion[] } — always disclosed |
+| POST   | /api/attempts                 | student (active enrollment)                  | { exam_id: number }                 | { attempt: AttemptDetail, questions: AttemptQuestion[] \| DisclosedAttemptQuestion[], exam: Exam } — 201 |
 | GET    | /api/attempts                 | owner                                         | ?trackId=uuid (required)            | { attempts: AttemptSummary[] } |
-| GET    | /api/attempts/:id             | owner                                         | ?lang=ar\|en                        | { attempt: AttemptDetail, questions: AttemptQuestion[] \| DisclosedAttemptQuestion[] } — per the disclosure rule (always disclosed once completed) |
+| GET    | /api/attempts/:id             | owner                                         | –                                   | { attempt: AttemptDetail, questions: AttemptQuestion[] \| DisclosedAttemptQuestion[] } — per the disclosure rule (always disclosed once completed) |
 | PATCH  | /api/attempts/:id             | owner                                         | SaveAttemptRequest                   | – (empty) |
 | POST   | /api/attempts/:id/submit      | owner                                         | SubmitAttemptRequest                 | AttemptResult — the results summary; no question content |
-| GET    | /api/attempts/:id/revision    | owner                                         | ?lang=ar\|en                        | { parent_exam: Exam, questions: DisclosedQuestion[] } — always disclosed; sent without its config |
+| GET    | /api/attempts/:id/revision    | owner                                         | –                                   | { parent_exam: Exam, questions: DisclosedQuestion[] } — always disclosed; sent without its config |
 | GET    | /api/students                 | supervisor                                    | ?q=string (min 2 chars)             | { students: StudentProfile[] } — search hits, no tracks |
 | GET    | /api/students/:id             | supervisor                                    | –                                   | { user: User, tracks: EnrolledTrack[] } — the same shape /api/auth/me returns |
 | GET    | /api/students/:id/attempts    | supervisor + active enrollment in that track  | ?trackId=uuid (required)            | { attempts: AttemptSummary[] } |
@@ -131,10 +132,12 @@ SCHEMAS
                       question_count: number }
   ExamDetails       Exam & { config: ExamConfig }
 
-  Choice            { position: number, text: string }
+  Choice            { position: number, text_ar: string, text_en: string }
   DisclosedChoice   Choice & { is_correct: boolean }
-  Question          { id: number, type: string, text: string, choices: Choice[] }
-  DisclosedQuestion Question & { explanation: string, choices: DisclosedChoice[] }
+  Question          { id: number, type: string, text_ar: string, text_en: string,
+                      answer_count: number, choices: Choice[] }
+  DisclosedQuestion Question & { explanation_ar: string, explanation_en: string,
+                      choices: DisclosedChoice[] }
                       — disclosure is a TYPE distinction, not optional fields: a
                         response carries one shape or the other, never a mix
   AttemptQuestion            Question & { selected_choices: number[], is_bookmarked: boolean }

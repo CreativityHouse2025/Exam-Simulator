@@ -214,8 +214,7 @@
     "changeLanguage": "Change Language",
     "history": "History",
     "profile": "Profile",
-    "menu": "Menu",
-    "language-locked": "Save and leave your exam to change language"
+    "menu": "Menu"
   },
   "errors": {
     "rate-limited-generic": "Please try again later.",

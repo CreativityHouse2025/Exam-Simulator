@@ -23,7 +23,7 @@ exports are safe there).
 | Context | Owns |
 | --- | --- |
 | `AuthContext` | Current user + auth actions (signIn, signUp, signOut, exchangeToken, password reset/update) |
-| `ExamContext` | Current exam questions (read-only), supplied by the per-exam-type provider that owns the route |
+| `ExamContext` | Current exam details + questions (read-only), already localized to the current language by `ExamProvider` |
 | `SettingsContext` | Language, user info (localStorage-backed) |
 | `ToastContext` | App-wide toast messages |
 | `SessionControlContext` | Lifecycle + persistence: `startNewExam`, `resumeAttempt`, `startRevision`, `saveProgress`, `submitExam`, current session, updater |
@@ -69,19 +69,12 @@ provider rendering would remount the subtree and lose component state. With no a
 are still callable. Starting a session sets `startingSession`, which resets the reducer via
 `RESET_SESSION`.
 
-**ExamPage** (`src/pages/ExamPage.tsx`) reads `session.examType` and delegates:
+**ExamPage** (`src/pages/exam/index.tsx`) renders one config-driven shell for every exam type
+(`ExamSession`, plus `TimerConfirms` when timed and `BreakModals` when the config has breaks). It
+never resolves a session — a cold hit of `/exam` redirects home.
 
-| Session type | Provider | Tree contents |
-| --- | --- | --- |
-| `full` | `components/exam/full/FullExamProvider` | session + confirms + break modals |
-| `domain` | `components/exam/domain/DomainExamProvider` | session + confirms |
-| `revision` | `components/exam/revision/RevisionProvider` | session only (ephemeral) |
-
-Each provider loads its exam JSON, resolves the session's question subset
-(`session.questionIds === 'ALL'` or a list of ids), applies `applyQuestionChoiceOrders`, and
-supplies `ExamContext`. They re-load on language change. Shared presentation lives in
-`components/exam/shared/` (Drawer, Footer, Question, Choice, Layout, Progress, Explanation…) —
-put anything reusable there rather than duplicating it per exam type.
+**ExamProvider** (`src/providers/ExamProvider.tsx`) sits inside SessionProvider and supplies
+`ExamContext`. It never fetches; see "Exam content and language" below.
 
 ## Session reducer and persistence
 
@@ -144,23 +137,32 @@ The pattern:
 3. Shared markup or class names a provider's tree needs live in their own `*Styles.ts(x)` file
    (e.g. `AttemptHistoryStyles.tsx`, `BreakModalsStyles.ts`).
 
-## Dynamic imports and exam loading
+## Exam content and language
 
-Language files are imported per language for code-splitting:
+UI strings are imported per language for code-splitting:
 
 ```typescript
 import(`./data/langs/${langCode}.json`)
 ```
 
-Exam data is loaded on demand via `loadFullExam(examId, langCode)` / `loadDomainExam(categoryId, langCode)`.
-This happens in two places on purpose:
+Exam content comes from the API in **every language at once** — questions carry
+`textAr`/`textEn`, `explanationAr`/`explanationEn` and choice `textAr`/`textEn`; exam names are
+`BilingualText`. No content request takes a language.
 
-1. `startNewExam` — loads the file to build question ids and choice orders for the DB insert, then discards it
-2. The exam-type provider — re-loads the same file on exam route mount to populate exam data in memory
+- **Storage** — `useSessionReducer` holds the bilingual content (`ExamContent` type) next to the
+  session, set only through `mountSession`. Nothing about content is in localStorage.
+- **Localization** — `ExamProvider` reads `settings.language` and maps the content through
+  `localizeQuestion` / `localizeExamDetails` (`src/utils/localize.ts`) in a `useMemo`.
+  `ExamContext` therefore holds `Localized<…>` types: `text`, `explanation`, `name` are plain
+  strings and the per-language fields are gone.
+- **Switching language mid-exam** re-runs only that map. No fetch, and the session (answers,
+  index, timer) is untouched — which is why the header toggle is never locked.
 
-The duplication is intentional: SessionProvider owns Session state, the exam provider owns exam
-data, and Vite's module cache makes the second read effectively free. Don't "optimise" it by
-hoisting exam data into the session.
+The rule: **exam UI children never pick a language for content.** They read `question.text`,
+never `textAr`/`textEn` (the `Localized` type removes them, so the compiler enforces it). Only the
+owner of the content localizes — `ExamProvider` for sessions, the page for the supervisor question
+viewer (`pages/exam-detail`, which localizes per rendered card and searches both languages).
+Language-dependent UI chrome (choice letters, `dir`) is not content and may read settings.
 
 ## Supervisor preview sessions
 

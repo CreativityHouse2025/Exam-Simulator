@@ -2,11 +2,7 @@ import camelcaseKeys from "camelcase-keys";
 import { AppApiError } from "../errors";
 import { apiFetch } from "../utils/apiFetch";
 import type { ApiResponse } from "@shared/api.schema";
-import type {
-  ExamWithQuestions,
-  LangCode,
-  TrackExams,
-} from "@shared/exam.schema";
+import type { ExamWithQuestions, TrackExams } from "@shared/exam.schema";
 import { markPersisted } from "../apiTypes";
 import type {
   ExamWithQuestions as FrontendExamWithQuestions,
@@ -38,14 +34,10 @@ export async function getTrackExams(
 /** Supervisor-only: full, disclosed content of one exam. Powers the question viewer and preview sessions. */
 export async function getExamQuestions(
   examId: number,
-  lang: LangCode,
 ): Promise<FrontendExamWithQuestions> {
-  const response = await apiFetch(
-    `/api/exams/${examId}/questions?lang=${lang}`,
-    {
-      handleUnauthorized: true,
-    },
-  );
+  const response = await apiFetch(`/api/exams/${examId}/questions`, {
+    handleUnauthorized: true,
+  });
   const result: ApiResponse<ExamWithQuestions> = await response.json();
 
   if (!result.success) {

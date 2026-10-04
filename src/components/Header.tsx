@@ -28,19 +28,11 @@ const HeaderComponent: React.FC = () => {
   const nextLanguage = settings.language === "ar" ? "en" : "ar";
   const nextLanguageLabel = nextLanguage === "ar" ? "العربية" : "English";
 
-  // Exam content is fetched per language, so switching mid-session would need a refetch that could
-  // discard unsaved answers. Locked here; the copy tells them to save, leave and come back, which
-  // reloads the attempt in the language picked afterwards.
-  const isInExam =
-    pathname === ROUTES.exam.pattern || pathname.endsWith("/preview");
-  const languageHint = isInExam
-    ? translate("header.language-locked")
-    : translate("header.changeLanguage");
+  const languageHint = translate("header.changeLanguage");
 
   const toggleLanguage = React.useCallback(() => {
-    if (isInExam) return;
     updateLanguage(nextLanguage);
-  }, [isInExam, nextLanguage, updateLanguage]);
+  }, [nextLanguage, updateLanguage]);
 
   function handleMenuAction(action: () => void) {
     setIsMenuOpen(false);
@@ -98,15 +90,11 @@ const HeaderComponent: React.FC = () => {
 
           <button
             onClick={toggleLanguage}
-            disabled={isInExam}
             title={languageHint}
             aria-label={languageHint}
             className={cn(
               NAV_ITEM_BASE,
-              "ms-1 border border-primary/40 text-quatro",
-              isInExam
-                ? "cursor-not-allowed opacity-45"
-                : "hover:bg-white/10 hover:text-white",
+              "ms-1 border border-primary/40 text-quatro hover:bg-white/10 hover:text-white",
             )}
           >
             <Globe size={18} />
@@ -146,14 +134,8 @@ const HeaderComponent: React.FC = () => {
 
             <button
               onClick={() => handleMenuAction(toggleLanguage)}
-              disabled={isInExam}
               title={languageHint}
-              className={cn(
-                "flex min-h-11 w-full items-center gap-2.5 border-t border-primary/20 bg-transparent px-3.5 text-start text-sm font-semibold text-quatro transition-colors duration-150 [&>svg]:shrink-0 [&>svg]:text-primary",
-                isInExam
-                  ? "cursor-not-allowed opacity-45"
-                  : "cursor-pointer hover:bg-secondary",
-              )}
+              className="flex min-h-11 w-full cursor-pointer items-center gap-2.5 border-t border-primary/20 bg-transparent px-3.5 text-start text-sm font-semibold text-quatro transition-colors duration-150 hover:bg-secondary [&>svg]:shrink-0 [&>svg]:text-primary"
             >
               <Globe size={20} />
               {nextLanguageLabel}

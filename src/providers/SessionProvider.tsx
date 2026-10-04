@@ -26,7 +26,6 @@ import type {
   AttemptResult,
   DisclosedAttemptQuestion,
 } from "../apiTypes";
-import useSettings from "../hooks/useSettings";
 
 /** Shared by startNewExam and resumeAttempt — both resolve an AttemptDetail alongside its questions. */
 function buildSessionFromAttempt(
@@ -102,8 +101,6 @@ export default function SessionProvider({
   } = useSessionReducer();
   const { showToast } = useToast();
 
-  const langCode = useSettings().settings.language;
-
   /**
    * A real attempt (student) via POST /api/attempts, or a client-only preview session (supervisor)
    * built from the exam's disclosed content — never written to the DB, never role-checked as a
@@ -116,7 +113,7 @@ export default function SessionProvider({
     ): Promise<string | null> => {
       try {
         if (preview) {
-          const { exam, questions } = await getExamQuestions(examId, langCode);
+          const { exam, questions } = await getExamQuestions(examId);
 
           const nextSession: Session = {
             id: PREVIEW_ATTEMPT_ID,
@@ -151,10 +148,7 @@ export default function SessionProvider({
           return PREVIEW_ATTEMPT_ID;
         }
 
-        const { attempt, questions, exam } = await startAttempt(
-          examId,
-          langCode,
-        );
+        const { attempt, questions, exam } = await startAttempt(examId);
 
         mountSession(buildSessionFromAttempt(attempt, questions), {
           examDetails: { ...exam, config: attempt.configSnapshot },
@@ -166,7 +160,7 @@ export default function SessionProvider({
         return null;
       }
     },
-    [showToast, langCode, mountSession],
+    [showToast, mountSession],
   );
 
   /**
@@ -179,10 +173,7 @@ export default function SessionProvider({
   const resumeAttempt = React.useCallback(
     async (attemptId: string): Promise<string | null> => {
       try {
-        const { attempt, questions, exam } = await getAttempt(
-          attemptId,
-          langCode,
-        );
+        const { attempt, questions, exam } = await getAttempt(attemptId);
 
         mountSession(buildSessionFromAttempt(attempt, questions), {
           examDetails: { ...exam, config: attempt.configSnapshot },
@@ -194,7 +185,7 @@ export default function SessionProvider({
         return null;
       }
     },
-    [showToast, langCode, mountSession],
+    [showToast, mountSession],
   );
 
   /**
@@ -227,10 +218,7 @@ export default function SessionProvider({
         // reach the summary until a result exists to put in it.
         setIsSyncing(true);
         try {
-          const { attempt, questions, exam } = await getAttempt(
-            session.id,
-            langCode,
-          );
+          const { attempt, questions, exam } = await getAttempt(session.id);
           // The graded row now disclosed: content and the completed session land together, so the
           // summary cannot render before there is a result in it. buildSessionFromAttempt reads
           // the result off the row — a just-graded attempt is always 'completed', which
@@ -274,7 +262,6 @@ export default function SessionProvider({
       mountSession,
       reducerSubmitExam,
       sessionUpdate,
-      langCode,
       showToast,
       setIsSyncing,
     ]);
@@ -292,10 +279,7 @@ export default function SessionProvider({
       if (session?.preview) return null;
 
       try {
-        const { parentExam, questions } = await getRevision(
-          attemptId,
-          langCode,
-        );
+        const { parentExam, questions } = await getRevision(attemptId);
 
         if (questions.length === 0) {
           showToast("attempts.errors.no-mistakes", 5000);
@@ -330,7 +314,7 @@ export default function SessionProvider({
         return null;
       }
     },
-    [showToast, langCode, session?.preview, mountSession],
+    [showToast, session?.preview, mountSession],
   );
 
   return (

@@ -231,8 +231,7 @@
     "changeLanguage": "تغيير اللغة",
     "history": "السجل",
     "profile": "الملف الشخصي",
-    "menu": "القائمة",
-    "language-locked": "احفظ امتحانك وغادره لتغيير اللغة"
+    "menu": "القائمة"
   },
   "errors": {
     "rate-limited-generic": "يرجى المحاولة لاحقًا.",

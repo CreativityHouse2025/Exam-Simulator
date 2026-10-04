@@ -22,6 +22,7 @@ import { examTypeAccent } from "@/utils/examTypeColour";
 import { ROUTES } from "@/config/routes";
 import { cn } from "@/components/ui/utils";
 import useSettings from "@/hooks/useSettings";
+import { localizeQuestion } from "@/utils/localize";
 import type { DisclosedQuestion } from "@/apiTypes";
 import type { OpenState, QuestionSection, SectionOpen } from "./types";
 
@@ -41,7 +42,7 @@ const ExamDetailPage: React.FC = () => {
   const validId = Number.isInteger(numericId) && numericId > 0;
 
   const { data, isPending, isError, refetch, isFetching } = useQuery({
-    ...createExamQuestionsQueryOptions(numericId, langCode),
+    ...createExamQuestionsQueryOptions(numericId),
     enabled: validId,
   });
 
@@ -98,7 +99,9 @@ const ExamDetailPage: React.FC = () => {
     const q = search.trim().toLowerCase();
     return q
       ? withNumber.filter(({ question }) =>
-          question.text.toLowerCase().includes(q),
+          [question.textAr, question.textEn].some((text) =>
+            text.toLowerCase().includes(q),
+          ),
         )
       : withNumber;
   }, [questions, search]);
@@ -267,7 +270,7 @@ const ExamDetailPage: React.FC = () => {
                 {pageQuestions.map(({ question, number }) => (
                   <QuestionCard
                     key={question.id}
-                    question={question}
+                    question={localizeQuestion(question, langCode)}
                     number={number}
                     open={open[question.id] ?? DEFAULT_OPEN}
                     onToggle={(section) => toggleSection(question.id, section)}

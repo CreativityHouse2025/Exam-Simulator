@@ -193,9 +193,33 @@ export type SettingsContextType = {
   setSettings: React.Dispatch<React.SetStateAction<Settings>>;
 };
 
-export type ExamContextType = {
+/** Exam content as the API returns it, in every language. */
+export type ExamContent = {
   examDetails: ExamDetails | null;
   questions: (Question | DisclosedQuestion)[] | null;
+};
+
+/** Per-language content fields, one per language. */
+type PerLanguageField = "textAr" | "textEn" | "explanationAr" | "explanationEn";
+
+/** `T` with its per-language fields replaced by `text`/`explanation` in the chosen language. */
+export type Localized<T> = T extends unknown
+  ? Omit<T, PerLanguageField | "choices"> & { text: string } & (T extends { explanationAr: string }
+        ? { explanation: string }
+        : unknown) &
+      (T extends { choices: (infer C)[] } ? { choices: Localized<C>[] } : unknown)
+  : never;
+
+/** Exam details with name and description in the chosen language. */
+export type LocalizedExamDetails = Omit<ExamDetails, "name" | "description"> & {
+  name: string;
+  description: string;
+};
+
+/** Exam content in the chosen language — what the exam UI reads. */
+export type ExamContextType = {
+  examDetails: LocalizedExamDetails | null;
+  questions: Localized<Question | DisclosedQuestion>[] | null;
 };
 
 // Type for the toast component state. Holds a translation key, not copy — the toast translates

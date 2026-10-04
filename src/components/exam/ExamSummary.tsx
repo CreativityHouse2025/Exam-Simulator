@@ -10,7 +10,6 @@ import { useExamSession } from "../../hooks/examSession/useExamSession";
 import { useSessionControl } from "../../contexts";
 import ErrorState from "../states/ErrorState";
 import { useExamTimer } from "../../hooks/examSession/useExamTimer";
-import useSettings from "../../hooks/useSettings";
 import { cn } from "../ui/utils";
 
 // grid-template-rows: repeat(N, auto) is what CSS Grid already does by default when no explicit
@@ -32,7 +31,6 @@ const ExamSummary: React.FC = () => {
   // Safe off the tick here — Timer's own interval never runs once examState is 'completed', which
   // is the only state ExamMain renders this component in.
   const { time, maxTime } = useExamTimer();
-  const { settings } = useSettings();
   const { resumeAttempt } = useSessionControl();
   const navigate = useNavigate();
   const [isStartingRevision, setIsStartingRevision] = React.useState(false);
@@ -119,7 +117,7 @@ const ExamSummary: React.FC = () => {
           <SummaryRow type="date" value={formatDate(createdAt)} status={pass} />
           <SummaryRow
             type="exam"
-            value={examDetails.name[settings.language]}
+            value={examDetails.name}
             status={pass}
           />
         </div>

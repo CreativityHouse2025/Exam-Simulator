@@ -1,20 +1,27 @@
 import React from "react";
 import { ExamContext } from "../contexts";
-import type { ExamContextType } from "../types";
+import useSettings from "../hooks/useSettings";
+import { localizeExamDetails, localizeQuestion } from "../utils/localize";
+import type { ExamContent } from "../types";
 
 /**
- * Sets ExamContext from already-resolved data. Never fetches — SessionProvider builds its props
- * from an attempt/revision response, and a supervisor-side fetch wrapper (question viewer,
- * preview) builds them from GET /api/exams/:examId/questions. Both render this the same way.
+ * Sets ExamContext from already-resolved content, localized to the current language. Never
+ * fetches — SessionProvider builds its props from an attempt, revision or preview response.
  */
 export default function ExamProvider({
   examDetails,
   questions,
   children,
-}: ExamContextType & { children: React.ReactNode }) {
-  return (
-    <ExamContext.Provider value={{ examDetails, questions }}>
-      {children}
-    </ExamContext.Provider>
+}: ExamContent & { children: React.ReactNode }) {
+  const lang = useSettings().settings.language;
+
+  const value = React.useMemo(
+    () => ({
+      examDetails: examDetails && localizeExamDetails(examDetails, lang),
+      questions: questions && questions.map((question) => localizeQuestion(question, lang)),
+    }),
+    [examDetails, questions, lang],
   );
+
+  return <ExamContext.Provider value={value}>{children}</ExamContext.Provider>;
 }

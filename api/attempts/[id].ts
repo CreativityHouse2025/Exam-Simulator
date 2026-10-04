@@ -6,21 +6,18 @@ import { getAttempt, saveAttempt } from "../_lib/services/attemptService.js"
 import { getExam } from "../_lib/services/examService.js"
 import { parseOrThrow } from "../_lib/utils/parse.js"
 import { AttemptIdSchema, SaveAttemptRequestSchema } from "../../shared/schemas/attempt.schema.js"
-import { LangSchema } from "../../shared/schemas/exam.schema.js"
 
 /** The attempt id is the last path segment. */
 function attemptIdOf(request: Request): string {
   return parseOrThrow(AttemptIdSchema, new URL(request.url).pathname.split("/").pop() ?? "")
 }
 
-// Maps to GET /api/attempts/<attempt_id>?lang=<ar|en>
+// Maps to GET /api/attempts/<attempt_id>
 export const GET = withErrorHandler(
   withAuth(async (request, authUser, cookieHeaders) => {
     const attemptId = attemptIdOf(request)
-    // Content is single-language. A missing lang is a caller bug, not a reason to guess one.
-    const lang = parseOrThrow(LangSchema, new URL(request.url).searchParams.get("lang") ?? "")
 
-    const { attempt, questions } = await getAttempt(authUser.id, attemptId, lang)
+    const { attempt, questions } = await getAttempt(authUser.id, attemptId)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { config: _config, ...exam } = await getExam(attempt.exam_id)
     return successResponse({ attempt, questions, exam }, 200, cookieHeaders)

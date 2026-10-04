@@ -3,7 +3,6 @@ import { AppError, type AppErrorParams } from "../errors/AppError.js";
 import type {
   DisclosedQuestion,
   ExamConfig,
-  LangCode,
   Question,
 } from "../../../shared/schemas/exam.schema.js";
 import type {
@@ -99,7 +98,7 @@ function toAttemptSummary(row: AttemptSummaryRow): AttemptSummary {
 
 /**
  * Starts an exam. The server decides the question set, the order, the config and the clock; the
- * client sends only which exam, in which language.
+ * client sends only which exam.
  *
  * Every call creates an attempt. Sending the request once is the frontend's job — several
  * unfinished attempts for one exam are a legitimate state, bounded by the per-track cap.
@@ -109,7 +108,7 @@ function toAttemptSummary(row: AttemptSummaryRow): AttemptSummary {
  */
 export async function startAttempt(
   userId: string,
-  { exam_id, lang }: StartAttemptRequestBody,
+  { exam_id }: StartAttemptRequestBody,
 ): Promise<AttemptWithQuestions> {
   const { data, error } = await supabaseAdmin
     .rpc("start_attempt", { p_user_id: userId, p_exam_id: exam_id })
@@ -143,7 +142,6 @@ export async function startAttempt(
 
   const content = (await getQuestions(
     data.question_ids_snapshot,
-    lang,
     attempt.config_snapshot.can_reveal_answers,
   )) as Question[];
 
@@ -277,7 +275,7 @@ export async function listAttempts(userId: string, trackId: string): Promise<Att
 }
 
 /**
- * One attempt, its stored answers, and its question content in the requested language.
+ * One attempt, its stored answers, and its question content in every language.
  *
  * Ownership is the only gate. An attempt outlives the enrollment it was earned under, so nothing
  * here consults a track. Questions come back in the attempt's own frozen order, and the answer key
@@ -290,7 +288,6 @@ export async function listAttempts(userId: string, trackId: string): Promise<Att
 export async function getAttempt(
   userId: string,
   attemptId: string,
-  lang: LangCode,
 ): Promise<AttemptWithQuestions> {
   const { data, error } = await supabaseAdmin
     .from("exam_attempts")
@@ -332,7 +329,6 @@ export async function getAttempt(
 
   const content = (await getQuestions(
     data.question_ids_snapshot,
-    lang,
     attempt.config_snapshot.can_reveal_answers || attempt.exam_state === "completed",
   )) as Question[];
 
@@ -363,7 +359,7 @@ export async function getAttempt(
  * @throws {AppError} 403 `FORBIDDEN` — not the owner, not completed, or retry is disabled.
  * @throws {AppError} 500 `INTERNAL_ERROR` — the call failed.
  */
-export async function getRevision(userId: string, attemptId: string, lang: LangCode): Promise<Revision> {
+export async function getRevision(userId: string, attemptId: string): Promise<Revision> {
   const { data, error } = await supabaseAdmin
     .rpc("revision_question_ids", { p_user_id: userId, p_attempt_id: attemptId })
     .single();
@@ -381,7 +377,7 @@ export async function getRevision(userId: string, attemptId: string, lang: LangC
 
   const [exam, questions] = await Promise.all([
     getExam(data.exam_id),
-    getQuestions(data.question_ids, lang, true) as Promise<DisclosedQuestion[]>,
+    getQuestions(data.question_ids, true) as Promise<DisclosedQuestion[]>,
   ]);
 
   // The parent exam sheds its config on the way out: `Exam`, not `ExamDetails`.

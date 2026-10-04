@@ -7,7 +7,6 @@ import {
 } from "../services/student.service";
 import { getTrackExams, getExamQuestions } from "../services/exams.service";
 import { getTracks } from "../services/track.service";
-import type { LangCode } from "../types";
 
 export const createAttemptsQueryOptions = (trackId: string) =>
   queryOptions({
@@ -60,13 +59,10 @@ export const createTrackExamsQueryOptions = (trackId: string) =>
   });
 
 /** Supervisor-only, fully disclosed content — the question viewer and preview sessions. */
-export const createExamQuestionsQueryOptions = (
-  examId: number,
-  lang: LangCode,
-) =>
+export const createExamQuestionsQueryOptions = (examId: number) =>
   queryOptions({
-    queryKey: ["exams", examId, "questions", lang],
-    queryFn: () => getExamQuestions(examId, lang),
+    queryKey: ["exams", examId, "questions"],
+    queryFn: () => getExamQuestions(examId),
     staleTime: 10 * 60 * 1000,
     gcTime: 30 * 60 * 1000,
     retry: 2,

@@ -1,14 +1,11 @@
 import { z } from "zod";
 
-/**
- * Content language. Required on every content endpoint — a response is single-language, never
- * bilingual, and a missing `?lang=` is a caller bug rather than a reason to guess.
- */
+/** Supported content languages. */
 export const LangSchema = z.enum(["ar", "en"]);
 
 export type LangCode = z.infer<typeof LangSchema>;
 
-/** Names and descriptions are bilingual even though question CONTENT never is. */
+/** One string per language. */
 export const BilingualTextSchema = z.object({
   ar: z.string(),
   en: z.string(),
@@ -71,7 +68,8 @@ export type ExamDetails = z.infer<typeof ExamDetailsSchema>;
 export const ChoiceSchema = z.object({
   /** Source order. Choices are never shuffled. */
   position: z.int().nonnegative(),
-  text: z.string(),
+  text_ar: z.string(),
+  text_en: z.string(),
 });
 
 export type Choice = z.infer<typeof ChoiceSchema>;
@@ -85,7 +83,8 @@ export type DisclosedChoice = z.infer<typeof DisclosedChoiceSchema>;
 export const QuestionSchema = z.object({
   id: z.int(),
   type: z.string(),
-  text: z.string(),
+  text_ar: z.string(),
+  text_en: z.string(),
   /**
    * How many choices are correct — never the answer key itself, so it is selected on every read
    * regardless of disclosure. Lets the UI decide radio-vs-checkbox and cap selection at the right
@@ -98,7 +97,8 @@ export const QuestionSchema = z.object({
 export type Question = z.infer<typeof QuestionSchema>;
 
 export const DisclosedQuestionSchema = QuestionSchema.extend({
-  explanation: z.string(),
+  explanation_ar: z.string(),
+  explanation_en: z.string(),
   choices: z.array(DisclosedChoiceSchema),
 });
 

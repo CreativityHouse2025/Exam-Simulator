@@ -3,7 +3,6 @@ import {
   DisclosedQuestionSchema,
   ExamConfigSchema,
   ExamSchema,
-  LangSchema,
   QuestionSchema,
 } from "./exam.schema.js";
 
@@ -129,12 +128,11 @@ export type Revision = z.infer<typeof RevisionSchema>;
 // ---------------------------------------------------------------------------
 
 /**
- * The client sends only which exam, in which language. The server decides the question set, the
- * order, the config and the clock.
+ * The client sends only which exam. The server decides the question set, the order, the config
+ * and the clock.
  */
 export const StartAttemptRequestSchema = z.strictObject({
   exam_id: positiveInt,
-  lang: LangSchema,
 });
 
 export type StartAttemptRequestBody = z.infer<typeof StartAttemptRequestSchema>;

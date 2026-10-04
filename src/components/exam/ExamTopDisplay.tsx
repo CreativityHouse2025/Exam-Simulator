@@ -3,7 +3,6 @@ import BookmarkButton from "./BookmarkButton";
 import SaveButtonWithReminder from "./SaveButtonWithReminder";
 import RevealAnswerButton from "./RevealAnswerButton";
 import { translate } from "../../utils/translation";
-import useSettings from "../../hooks/useSettings";
 import { useExamSession } from "../../hooks/examSession/useExamSession";
 
 const ExamTopDisplay: React.FC<TopDisplayProps> = ({
@@ -20,8 +19,6 @@ const ExamTopDisplay: React.FC<TopDisplayProps> = ({
     persists,
     examDetails,
   } = useExamSession();
-  const { settings } = useSettings();
-  const langCode = settings.language;
 
   const question = translate("content.top-display.question", [
     index + 1,
@@ -68,7 +65,7 @@ const ExamTopDisplay: React.FC<TopDisplayProps> = ({
       </div>
       <div className="flex items-center gap-2">
         <div className="py-1 px-2.5 font-sans bg-grey-100 text-grey-950 text-xs md:text-sm font-semibold rounded-3xl border border-grey-200 w-auto">
-          {examChipLabel}: {examDetails.name[langCode]}
+          {examChipLabel}: {examDetails.name}
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
-import type { DisclosedAttemptQuestion } from "../../apiTypes";
+import type { DisclosedQuestion } from "../../apiTypes";
+import type { Localized } from "../../types";
 
 import React from "react";
 import ExamTopDisplay from "./ExamTopDisplay";
@@ -74,7 +75,7 @@ const ExamContent: React.FC<ExamContentProps> = ({ isReview }) => {
           // Disclosed whenever this renders: isReview is only true once completed (the backend
           // always discloses by then), and canToggleReveal is only true when canReveal already
           // means the backend disclosed this session's content from the start.
-          question={question as DisclosedAttemptQuestion}
+          question={question as Localized<DisclosedQuestion>}
           userAnswer={userAnswer}
           onHide={!isReview ? toggleAnswerReveal : undefined}
         />

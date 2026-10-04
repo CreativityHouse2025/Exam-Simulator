@@ -54,9 +54,24 @@ every non-public endpoint needs `withRole`.
 
 - `api/auth/*` — signin, signup, signout, me, password-reset, update-password, token-exchange
 - `api/attempts/index.ts` — `POST` start attempt, `GET` recent attempts (student)
-- `api/attempts/[id].ts` — read/save/submit a single attempt (student)
+- `api/attempts/[id].ts` — `GET` read / `PATCH` save a single attempt (owner)
+- `api/attempts/[id]/submit.ts` — `POST` submit and grade (owner)
+- `api/attempts/[id]/revision.ts` — `GET` the wrong-or-unanswered set (owner)
+- `api/exams/[examId]/questions.ts` — `GET` an exam's full disclosed content (supervisor)
 - `api/students/index.ts` — `GET /api/students?q=` student search (supervisor)
 - `api/students/[id]/attempts.ts` — a student's attempts (supervisor)
+
+## Question content
+
+Four endpoints return question content — start attempt, read attempt, revision, and exam
+questions — all through `api/_lib/services/questionService.ts`. Every response carries **every
+language**: `text_ar`/`text_en` on questions and choices, `explanation_ar`/`explanation_en` when
+disclosed. No content endpoint takes a `lang` parameter; the frontend picks what to display.
+
+`contentColumns(discloseAnswers)` selects `explanation_*` and `is_correct` only when disclosing,
+so the answer key cannot leak by omission. The select is assembled at runtime and its row type is
+asserted with `overrideTypes`, so **typecheck does not verify the response shape** — check a
+changed select against a real response.
 
 ## Shared utilities
 

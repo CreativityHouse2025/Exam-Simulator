@@ -14,7 +14,7 @@ import { assertTrackAccess } from "../_lib/services/trackService.js"
 export const POST = withErrorHandler(
   withAuth(
     withRole(["student"], async (request, authUser, cookieHeaders) => {
-      // The body is { exam_id, lang } and nothing else — the server decides the rest.
+      // The body is { exam_id } and nothing else — the server decides the rest.
       const parsedBody = await parseJsonBody(request)
       const validatedInput = parseOrThrow(StartAttemptRequestSchema, parsedBody)
 

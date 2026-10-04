@@ -2,44 +2,33 @@ import type {
   Choice,
   DisclosedChoice,
   DisclosedQuestion,
-  LangCode,
   Question,
 } from "../../../shared/schemas/exam.schema.js";
 import { AppError } from "../errors/AppError.js";
 import { supabaseAdmin } from "../supabaseClient.js";
 
-/** Columns stored once per language, as `<column>_<lang>`. */
-type BilingualColumn = "text" | "explanation";
-
 /**
- * Map column to PostgREST's `alias:column` syntax.
- */
-function aliasColumn(column: BilingualColumn, lang: LangCode): string {
-  return `${column}:${column}_${lang}`;
-}
-
-/**
- * What the select yields. `explanation` and `is_correct` are optional here because they are
+ * What the select yields. `explanation_*` and `is_correct` are optional here because they are
  * selected only when disclosing
  */
 type QuestionRow = Question &
-  Partial<Pick<DisclosedQuestion, "explanation">> & {
+  Partial<Pick<DisclosedQuestion, "explanation_ar" | "explanation_en">> & {
     choices: (Choice & Partial<Pick<DisclosedChoice, "is_correct">>)[];
   };
 
 /**
- * The content columns of a question and its choices, in one language.
+ * The content columns of a question and its choices, in every language.
  *
  * The answer key is selected only when disclosing, so it cannot leak by omission further up.
  * Assembled at runtime, which is why every caller has to override its row type.
  */
-function contentColumns(lang: LangCode, discloseAnswers: boolean): string {
+function contentColumns(discloseAnswers: boolean): string {
   // answer_count is a count, not the key — selected unconditionally, disclosed or not.
-  const questionColumns = ["id", "type", "answer_count", aliasColumn("text", lang)];
-  const choiceColumns = ["position", aliasColumn("text", lang)];
+  const questionColumns = ["id", "type", "answer_count", "text_ar", "text_en"];
+  const choiceColumns = ["position", "text_ar", "text_en"];
 
   if (discloseAnswers) {
-    questionColumns.push(aliasColumn("explanation", lang));
+    questionColumns.push("explanation_ar", "explanation_en");
     choiceColumns.push("is_correct");
   }
 
@@ -47,7 +36,7 @@ function contentColumns(lang: LangCode, discloseAnswers: boolean): string {
 }
 
 /**
- * Question content for a set of ids, in one language, ordered to match `questionIds`.
+ * Question content for a set of ids, in every language, ordered to match `questionIds`.
  *
  * When `discloseAnswers` is false the answer key is never selected, so it cannot leak by omission
  * further up. Callers that know they disclosed narrow the union themselves.
@@ -60,14 +49,13 @@ function contentColumns(lang: LangCode, discloseAnswers: boolean): string {
  */
 export async function getQuestions(
   questionIds: number[],
-  lang: LangCode,
   discloseAnswers: boolean,
 ): Promise<Question[] | DisclosedQuestion[]> {
   if (questionIds.length === 0) return [];
 
   const { data, error } = await supabaseAdmin
     .from("questions")
-    .select(contentColumns(lang, discloseAnswers))
+    .select(contentColumns(discloseAnswers))
     .in("id", questionIds)
     .order("position", { referencedTable: "choices", ascending: true })
     // The select is assembled at runtime, so it cannot be inferred from a string literal.
@@ -98,7 +86,7 @@ export async function getQuestions(
 }
 
 /**
- * Question content for a whole exam, in one language, in the order the exam defines.
+ * Question content for a whole exam, in every language, in the order the exam defines.
  *
  * One query: the exam's question set, its content and its choices are a single join, and the
  * order is `exam_questions.question_index` rather than anything the caller supplies. Use
@@ -110,12 +98,11 @@ export async function getQuestions(
  */
 export async function getExamQuestionContent(
   examId: number,
-  lang: LangCode,
   discloseAnswers: boolean,
 ): Promise<Question[] | DisclosedQuestion[]> {
   const { data, error } = await supabaseAdmin
     .from("exam_questions")
-    .select(`questions(${contentColumns(lang, discloseAnswers)})`)
+    .select(`questions(${contentColumns(discloseAnswers)})`)
     .eq("exam_id", examId)
     .order("question_index", { ascending: true })
     .order("position", { referencedTable: "questions.choices", ascending: true })

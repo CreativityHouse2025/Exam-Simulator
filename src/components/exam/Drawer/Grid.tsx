@@ -1,5 +1,5 @@
-import type { QuestionFilter } from "../../../types";
-import type { DisclosedAttemptQuestion } from "../../../apiTypes";
+import type { Localized, QuestionFilter } from "../../../types";
+import type { DisclosedQuestion } from "../../../apiTypes";
 
 import React from "react";
 import Cell from "./Cell";
@@ -25,7 +25,7 @@ const GridComponent: React.FC<GridProps> = ({ filter }) => {
       if (userAnswer.length === 0) return;
       answered.push(i);
 
-      const question = questions[i] as DisclosedAttemptQuestion | undefined;
+      const question = questions[i] as Localized<DisclosedQuestion> | undefined;
       // selectedChoices can outrun questions if the set shrank — skip rather than crash.
       if (isDisclosed && question) {
         const correctPositions = question.choices

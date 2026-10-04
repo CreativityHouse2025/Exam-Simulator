@@ -2,7 +2,6 @@ import camelcaseKeys from "camelcase-keys";
 import { AppApiError } from "../errors";
 import { apiFetch } from "../utils/apiFetch";
 import type { ApiResponse } from "@shared/api.schema";
-import type { LangCode } from "@shared/exam.schema";
 import type {
   AttemptList,
   AttemptWithExam,
@@ -23,12 +22,11 @@ type SaveAttemptAnswer = {
 
 export async function startAttempt(
   examId: number,
-  lang: LangCode,
 ): Promise<FrontendAttemptWithExam> {
   const response = await apiFetch("/api/attempts", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ exam_id: examId, lang }),
+    body: JSON.stringify({ exam_id: examId }),
     handleUnauthorized: true,
   });
   const result: ApiResponse<AttemptWithExam> = await response.json();
@@ -52,9 +50,8 @@ export async function startAttempt(
 
 export async function getAttempt(
   attemptId: string,
-  lang: LangCode,
 ): Promise<FrontendAttemptWithExam> {
-  const response = await apiFetch(`/api/attempts/${attemptId}?lang=${lang}`, {
+  const response = await apiFetch(`/api/attempts/${attemptId}`, {
     handleUnauthorized: true,
   });
   const result: ApiResponse<AttemptWithExam> = await response.json();
@@ -147,12 +144,10 @@ export async function submitAttempt(
 
 export async function getRevision(
   attemptId: string,
-  lang: LangCode,
 ): Promise<FrontendRevision> {
-  const response = await apiFetch(
-    `/api/attempts/${attemptId}/revision?lang=${lang}`,
-    { handleUnauthorized: true },
-  );
+  const response = await apiFetch(`/api/attempts/${attemptId}/revision`, {
+    handleUnauthorized: true,
+  });
   const result: ApiResponse<Revision> = await response.json();
 
   if (!result.success) {

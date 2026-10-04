@@ -85,16 +85,17 @@ Adding or removing questions means updating `questionCount` in `full-exams.json`
 ## Known issues (pre-existing, not introduced here)
 
 - `full/5.json` index 149, question id 1381: English has 6 choices, Arabic has 4.
-- Choice order differing between languages means the per-attempt `choices_order` stored at start
-  is only meaningful in the language the attempt began in. Worth keeping in mind when touching
-  language switching mid-session.
+- Students can switch language mid-exam, and answers are stored as choice `position`. Each
+  `choices` row holds both languages, paired by array index when seeded
+  (`supabase/legacy/generate-question-seed.py`), so position N must be the same answer in the ar
+  and en banks. Keep choice order identical across languages when editing.
 
 ## How the data is consumed
 
-Exams are loaded on demand by `loadFullExam(examId, langCode)` / `loadDomainExam(categoryId, langCode)`
-and passed through `applyQuestionChoiceOrders` before rendering. UI strings live separately in
-`src/data/langs/{ar,en}.json`, imported dynamically per language. See `frontend-guide` for how
-providers load and cache this.
+The app serves content from the database (`questions` / `choices`, both languages per row), not
+from these files. The API returns every language at once and the frontend localizes for display.
+UI strings live separately in `src/data/langs/{ar,en}.json`, imported dynamically per language.
+See `backend-guide` (Question content) and `frontend-guide` (Exam content and language).
 
 ## Related skills
 

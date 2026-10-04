@@ -1,8 +1,9 @@
 import { Check } from "lucide-react";
 import type { DisclosedChoice } from "@/apiTypes";
+import type { Localized } from "@/types";
 
 type ChoiceRowProps = {
-  choice: DisclosedChoice;
+  choice: Localized<DisclosedChoice>;
   letter: string;
 };
 

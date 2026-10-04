@@ -1,8 +1,5 @@
-import type { LangCode } from "../../types";
-import type {
-  DisclosedQuestion,
-  DisclosedAttemptQuestion,
-} from "../../apiTypes";
+import type { LangCode, Localized } from "../../types";
+import type { DisclosedQuestion } from "../../apiTypes";
 
 import React from "react";
 import { EyeOff } from "lucide-react";
@@ -90,7 +87,7 @@ ExplanationComponent.displayName = "Explanation";
 export default ExplanationComponent;
 
 export interface ExplanationProps {
-  question: DisclosedQuestion | DisclosedAttemptQuestion;
+  question: Localized<DisclosedQuestion>;
   userAnswer: number[];
   onHide?: () => void;
 }

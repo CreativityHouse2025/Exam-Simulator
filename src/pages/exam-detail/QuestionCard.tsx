@@ -6,10 +6,11 @@ import { formatChoiceLabel } from "@/utils/format";
 import { translate } from "@/utils/translation";
 import useSettings from "@/hooks/useSettings";
 import type { DisclosedQuestion } from "@/apiTypes";
+import type { Localized } from "@/types";
 import type { QuestionSection, SectionOpen } from "./types";
 
 type QuestionCardProps = {
-  question: DisclosedQuestion;
+  question: Localized<DisclosedQuestion>;
   number: number;
   open: SectionOpen;
   onToggle: (section: QuestionSection) => void;

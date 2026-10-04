@@ -3,7 +3,6 @@ import type {
   ExamConfig,
   ExamDetails,
   ExamWithQuestions,
-  LangCode,
   TrackExams,
 } from "../../../shared/schemas/exam.schema.js";
 import { AppError } from "../errors/AppError.js";
@@ -136,7 +135,7 @@ export async function getTrackExams(trackId: string): Promise<TrackExams> {
 }
 
 /**
- * An exam alongside its full question content, in one language.
+ * An exam alongside its full question content, in every language.
  *
  * Always disclosed — `is_correct` and `explanation` ride on every question. There is no
  * `discloseAnswers` parameter: who may call this is `withRole`'s decision, not this function's.
@@ -147,10 +146,10 @@ export async function getTrackExams(trackId: string): Promise<TrackExams> {
  *
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
-export async function getExamQuestions(exam: ExamDetails, lang: LangCode): Promise<ExamWithQuestions> {
+export async function getExamQuestions(exam: ExamDetails): Promise<ExamWithQuestions> {
   // The disclosed shape is what the content query returns whenever the flag is true, which its
   // return union cannot express on its own.
-  const questions = (await getExamQuestionContent(exam.id, lang, true)) as DisclosedQuestion[]
+  const questions = (await getExamQuestionContent(exam.id, true)) as DisclosedQuestion[]
 
   return { exam, questions }
 }

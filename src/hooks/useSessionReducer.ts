@@ -5,13 +5,13 @@ import { saveAttempt, submitAttempt } from "../services/attempt.service";
 import { resolveErrorKey } from "../utils/errorTranslation";
 import useToast from "../hooks/useToast";
 import type {
-  ExamContextType,
+  ExamContent,
   SaveProgressOptions,
   Session,
   SessionDispatch,
 } from "../types";
 
-const EMPTY_EXAM_CONTEXT: ExamContextType = {
+const EMPTY_EXAM_CONTEXT: ExamContent = {
   examDetails: null,
   questions: null,
 };
@@ -19,7 +19,7 @@ const EMPTY_EXAM_CONTEXT: ExamContextType = {
 export default function useSessionReducer() {
   const [session, updateSession] = React.useReducer(SessionReducer, null);
   const [examContext, setExamContext] =
-    React.useState<ExamContextType>(EMPTY_EXAM_CONTEXT);
+    React.useState<ExamContent>(EMPTY_EXAM_CONTEXT);
   const [isSyncing, setIsSyncing] = React.useState(false);
   // Ref guards against a second click landing while the first request is in flight
   const isSyncingRef = React.useRef(false);
@@ -38,7 +38,7 @@ export default function useSessionReducer() {
    * after submit.
    */
   const mountSession = React.useCallback(
-    (next: Session, exam: ExamContextType) => {
+    (next: Session, exam: ExamContent) => {
       setExamContext(exam);
       updateSession({
         type: SESSION_ACTION_TYPES.RESET_SESSION,
