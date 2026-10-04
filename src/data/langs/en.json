@@ -224,7 +224,8 @@
   },
   "history": {
     "title": "Attempt History",
-    "subtitle": "Your latest $1 exam attempts for $2",
+    "subtitle": "Your latest exam attempts for $1",
+    "attempt-count": "$1 attempts",
     "loading": "Loading...",
     "fetchError": "Failed to load attempt history. Please try again.",
     "table": {

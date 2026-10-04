@@ -22,7 +22,7 @@ import { getExam } from "./examService.js";
 import { getQuestions } from "./questionService.js";
 
 /** The per-track attempt cap. A track's list can never legitimately exceed it. */
-const TRACK_ATTEMPT_CAP = 25;
+const TRACK_ATTEMPT_CAP = 150;
 
 /**
  * The attempt columns every read selects. `exams` is joined only to filter by track.

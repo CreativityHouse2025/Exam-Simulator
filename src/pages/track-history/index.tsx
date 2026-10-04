@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Lock } from "lucide-react";
+import { ClipboardList, Lock } from "lucide-react";
 import AttemptsTable from "@/components/attempts/AttemptsTable";
 import AttemptsTableSkeleton from "@/components/attempts/AttemptsTableSkeleton";
 import EmptyState from "@/components/states/EmptyState";
@@ -17,9 +17,8 @@ import {
 } from "@/utils/queryOptions";
 import { translate } from "@/utils/translation";
 import { ROUTES } from "@/config/routes";
-import { TRACK_ATTEMPT_CAP } from "@/constants";
 
-/** The student's recent attempts in one track, capped server-side at TRACK_ATTEMPT_CAP. */
+/** The student's recent attempts in one track, capped server-side. */
 const AttemptHistoryPage: React.FC = () => {
   const { trackId = "" } = useParams();
   const { settings } = useSettings();
@@ -81,12 +80,15 @@ const AttemptHistoryPage: React.FC = () => {
         <h1 className="text-2xl font-bold text-tertiary md:text-3xl">
           {translate("history.title")}
         </h1>
-        <p className="mt-1.5 text-sm text-grey-800">
-          {translate("history.subtitle", [
-            TRACK_ATTEMPT_CAP,
-            track.name[langCode],
-          ])}
-        </p>
+        <div className="mt-1.5 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-sm text-grey-800">
+          <p>{translate("history.subtitle", [track.name[langCode]])}</p>
+          {attemptsQuery.isSuccess && (
+            <span className="flex items-center gap-1.5">
+              <ClipboardList className="size-3.5 shrink-0" />
+              {translate("history.attempt-count", [attempts.length])}
+            </span>
+          )}
+        </div>
       </header>
 
       {attemptsQuery.isPending ? (

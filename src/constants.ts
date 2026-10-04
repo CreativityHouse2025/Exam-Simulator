@@ -38,10 +38,6 @@ export const MENU_PADDING = "1.6rem 1.4rem";
 // Fixed session id for supervisor preview sessions — never a real attempt, never sent to the backend.
 export const PREVIEW_ATTEMPT_ID = "preview";
 
-// Mirrors TRACK_ATTEMPT_CAP in api/_lib/services/attemptService.ts — the server returns at most
-// this many attempts per track, so the history page is a recent window, not a full archive.
-export const TRACK_ATTEMPT_CAP = 25;
-
 /**
  * Revision is a client-only retry of a completed attempt's wrong/unanswered questions —
  * never written to the DB, so it has no row in exam_config. Untimed and ungraded (no pass/fail
