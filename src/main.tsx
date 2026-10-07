@@ -2,11 +2,11 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import App from "./App";
+import App from "@/App";
 import "./index.css";
-import SettingsProvider from "./providers/SettingsContextProvider";
-import AuthContextProvider from "./providers/AuthContextProvider";
-import ToastContextProvider from "./providers/ToastContextProvider";
+import SettingsProvider from "@/core/providers/SettingsContextProvider";
+import { AuthContextProvider } from "@/features/auth";
+import ToastContextProvider from "@/core/providers/ToastContextProvider";
 
 const queryClient = new QueryClient();
 

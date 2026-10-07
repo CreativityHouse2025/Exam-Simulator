@@ -1,19 +1,19 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import useAuth from "@/hooks/useAuth";
-import useToast from "@/hooks/useToast";
-import useFormField from "@/hooks/useFormField";
 import {
+  useAuth,
+  useFormField,
   validatePassword,
   validateConfirmPassword,
-} from "@/utils/authValidation";
-import { translate } from "@/utils/translation";
-import { resolveErrorKey } from "@/utils/errorTranslation";
-import { ROUTES } from "@/config/routes";
+  PasswordField,
+} from "@/features/auth";
+import useToast from "@/core/hooks/useToast";
+import { translate } from "@/core/utils/translation";
+import { resolveErrorKey } from "@/core/utils/errorTranslation";
+import { ROUTES } from "@/routes/routes";
 // @ts-expect-error -- pre-existing, unrelated to this change
 import Logo from "@/assets/logo.png";
-import PasswordField from "@/components/Auth/PasswordField";
 import {
   PageWrapper,
   Card,

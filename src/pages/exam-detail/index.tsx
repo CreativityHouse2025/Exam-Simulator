@@ -5,26 +5,26 @@ import { FileQuestion, Loader2, SearchX } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import SearchBar from "@/components/SearchBar";
-import ExamFacts from "@/components/exams/ExamFacts";
-import PreviewExamButton from "@/components/PreviewExamButton";
-import EmptyState from "@/components/states/EmptyState";
-import ErrorState from "@/components/states/ErrorState";
-import QuestionCard from "./QuestionCard";
-import QuestionNavigator from "./QuestionNavigator";
-import Pager from "./Pager";
-import BackButton from "@/components/BackButton";
 import {
+  ExamFacts,
+  QuestionCard,
+  QuestionNavigator,
+  Pager,
   createExamQuestionsQueryOptions,
   createTrackExamsQueryOptions,
-} from "@/utils/queryOptions";
-import { translate } from "@/utils/translation";
-import { examTypeAccent } from "@/utils/examTypeColour";
-import { ROUTES } from "@/config/routes";
+  examTypeAccent,
+} from "@/features/exams";
+import { PreviewExamButton } from "@/features/exam-session";
+import EmptyState from "@/components/states/EmptyState";
+import ErrorState from "@/components/states/ErrorState";
+import BackButton from "@/components/BackButton";
+import { translate } from "@/core/utils/translation";
+import { ROUTES } from "@/routes/routes";
 import { cn } from "@/components/ui/utils";
-import useSettings from "@/hooks/useSettings";
-import { localizeQuestion } from "@/utils/localize";
-import type { DisclosedQuestion } from "@/apiTypes";
-import type { OpenState, QuestionSection, SectionOpen } from "./types";
+import useSettings from "@/core/hooks/useSettings";
+import { localizeQuestion } from "@/core/utils/localize";
+import type { DisclosedQuestion } from "@/core/api/apiTypes";
+import type { OpenState, QuestionSection, SectionOpen } from "@/features/exams";
 
 const PER_PAGE = 10;
 const DEFAULT_OPEN: SectionOpen = { choices: true, explanation: false };

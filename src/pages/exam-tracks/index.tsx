@@ -1,14 +1,12 @@
 import React from "react";
 import { Layers } from "lucide-react";
-import TrackLinkCard, {
-  TRACK_GRID_CLASSES,
-} from "@/components/tracks/TrackLinkCard";
+import { TrackLinkCard, TRACK_GRID_CLASSES } from "@/features/tracks";
 import EmptyState from "@/components/states/EmptyState";
 import BackButton from "@/components/BackButton";
-import useAuth from "@/hooks/useAuth";
-import useSettings from "@/hooks/useSettings";
-import { translate } from "@/utils/translation";
-import { ROUTES } from "@/config/routes";
+import { useAuth } from "@/features/auth";
+import useSettings from "@/core/hooks/useSettings";
+import { translate } from "@/core/utils/translation";
+import { ROUTES } from "@/routes/routes";
 
 /**
  * `/exams` — pick the track whose exam library to open.

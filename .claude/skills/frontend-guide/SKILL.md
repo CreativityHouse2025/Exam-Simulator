@@ -1,6 +1,6 @@
 ---
 name: frontend-guide
-description: "React/TypeScript architecture for the Exam Simulator app — split context architecture, exam session facade hooks, provider trees per exam type, the session reducer and its persistence rules, TanStack Query server state, dynamic exam/language imports, and Vite fast-refresh constraints. Use this skill whenever touching anything under src/ — components, pages, hooks, providers, contexts, routes, or services — and before adding state, reading session data, creating a provider, wiring a new API read, or changing how an exam session behaves. Also use when a change causes unexpected re-renders, HMR errors, or 'cannot read context' failures. Routes on to styling-guide for any CSS/Tailwind work, auth-rbac-guide for route gating, and exam-data-guide for question banks."
+description: "React/TypeScript architecture for the Exam Simulator app — the core/components/features/pages/routes folder layout and its import rules, feature barrels (index.ts), split context architecture, the exam session facade hooks, the session reducer and its persistence rules, TanStack Query server state, dynamic language imports, and Vite fast-refresh constraints. Use this skill whenever touching anything under src/ — components, pages, features, hooks, providers, contexts, routes, or services — and before adding a file, deciding where code belongs, adding state, reading session data, creating a provider, wiring a new API read, or changing how an exam session behaves. Also use when a change causes unexpected re-renders, HMR errors, circular-import errors, or 'cannot read context' failures. Routes on to styling-guide for any CSS/Tailwind work, auth-rbac-guide for route gating, and exam-data-guide for question banks."
 ---
 
 # Frontend Guide (React + TypeScript)
@@ -13,79 +13,119 @@ whole tree on every keystroke of state. Almost every architectural decision belo
 serve those two goals. Read the relevant section before adding state or a provider — most
 "where do I put this?" questions already have an answer here.
 
+## Folder layout — where code belongs
+
+```
+src/
+├── main.tsx  App.tsx  index.css
+├── assets/  data/                 static files, question banks, translation JSON
+├── routes/                        routes.ts, nav.ts, icons.ts, RouteGuard.tsx
+├── core/                          shared by more than one feature
+│   ├── api/                       apiFetch.ts, apiTypes.ts
+│   ├── services/                  API clients used by more than one feature
+│   ├── providers/  hooks/  utils/
+│   └── contexts.ts  types.ts  constants.ts  errors.ts
+├── components/                    global UI with no feature knowledge (+ ui/ shadcn primitives)
+├── features/<name>/               auth, exam-session, exams, tracks, attempts, students
+│   ├── components/  providers/  hooks/  services/  utils/
+│   ├── contexts.ts  types.ts  constants.ts      (only when the feature has them)
+│   └── index.ts                   the feature's public API
+└── pages/<route>/index.tsx        assembly only — stitches feature and global components together
+```
+
+Placement rules:
+
+- **Used by one feature → inside that feature.** Components, hooks, utils, types, query options
+  (`services/<name>.queries.ts`) and API clients (`services/<name>.service.ts`).
+- **Used by two or more features → `core/`.** This is why `attempt.service.ts` and
+  `exams.service.ts` live in `core/services/`, and `localize.ts` in `core/utils/`.
+- **UI with no feature knowledge → `components/`.**
+- **Pages hold no components of their own.** A page folder is just `index.tsx`; anything it
+  renders lives in a feature or in `components/`.
+
+Import rules:
+
+- **Inside a feature, import with relative paths.**
+- **From outside a feature, import only from its `index.ts`** (`@/features/exams`), never from a
+  file inside it. When something new needs to be reachable from outside, add it to the barrel.
+  Default exports are re-exported as named: `export { default as ExamFacts } from "./components/ExamFacts"`.
+- **Everything else uses the `@/` alias** (`@/core/...`, `@/components/...`, `@/routes/...`).
+- **Leave shadcn defaults alone.** `components/ui/` keeps the CLI-generated imports
+  (`@/components/ui/utils`) and `components.json` keeps its aliases, even where they break the
+  rules above — a restructure or import cleanup must skip them. Styling edits to primitives follow
+  `styling-guide`.
+- **Features must not import each other in a cycle.** Barrels turn any two-way dependency into a
+  module cycle. If two features need the same code, move it to `core/` rather than importing in
+  both directions. Check with `npx madge --circular --extensions ts,tsx --ts-config tsconfig.app.json src`.
+
 ## Split Context Architecture
 
 Contexts are deliberately fragmented to minimise re-renders: a component that only needs the
-current question index should not re-render when the timer ticks. All context creation and
-typed hooks live together in `src/contexts.ts` (that file is not a provider, so multiple
-exports are safe there).
+current question index should not re-render when the timer ticks. Each context and its typed hook
+live in the `contexts.ts` of whoever owns it (never in a provider file — see fast refresh below):
 
-| Context | Owns |
-| --- | --- |
-| `AuthContext` | Current user + auth actions (signIn, signUp, signOut, exchangeToken, password reset/update) |
-| `ExamContext` | Current exam details + questions (read-only), already localized to the current language by `ExamProvider` |
-| `SettingsContext` | Language, user info (localStorage-backed) |
-| `ToastContext` | App-wide toast messages |
-| `SessionControlContext` | Lifecycle + persistence: `startNewExam`, `resumeAttempt`, `startRevision`, `saveProgress`, `submitExam`, current session, updater |
-| `SessionNavigationContext` | Current question index + updater |
-| `SessionTimerContext` | `time`, `maxTime`, `paused` + updater |
-| `SessionExamContext` | `examState`, `reviewState`, `categoryId`, `examId` + updater |
-| `SessionDataContext` | Bookmarks, selected answers, `examType`, `dirtyQuestions`, `isSyncing`, break offer timestamps + updater |
+| Context | File | Owns |
+| --- | --- | --- |
+| `SettingsContext` | `core/contexts.ts` | Language, user info (localStorage-backed) |
+| `ToastContext` | `core/contexts.ts` | App-wide toast messages |
+| `AuthContext` | `features/auth/contexts.ts` | Current user + auth actions (signIn, signUp, signOut, exchangeToken, password reset/update) |
+| `ExamContext` | `features/exam-session/contexts.ts` | Current exam details + questions (read-only), already localized to the current language by `ExamProvider` |
+| `SessionControlContext` | `features/exam-session/contexts.ts` | Lifecycle + persistence: `startNewExam`, `resumeAttempt`, `startRevision`, `saveProgress`, `submitExam`, current session, updater |
+| `SessionNavigationContext` | `features/exam-session/contexts.ts` | Current question index + updater |
+| `SessionTimerContext` | `features/exam-session/contexts.ts` | `time`, `maxTime`, `paused` + updater |
+| `SessionExamContext` | `features/exam-session/contexts.ts` | `examState`, `result` + updater |
+| `SessionDataContext` | `features/exam-session/contexts.ts` | Bookmarks, selected answers, `dirtyQuestions`, `offeredBreaks`, `isSyncing` + updater |
 
-Read them through the typed hooks in `src/contexts.ts` — `useExam()`, `useSessionControl()`,
-`useSessionNavigation()`, `useSessionTimer()`, `useSessionExam()`, `useSessionData()` — never
-via raw `React.useContext()`. The hooks throw a clear error when used outside their provider,
-which is much easier to debug than a silent `undefined`.
+Read them through the typed hooks — `useAuth()`, `useSettings()`, `useToast()`, `useExam()`,
+`useSessionControl()`, `useSessionNavigation()`, `useSessionTimer()`, `useSessionExam()`,
+`useSessionData()` — never via raw `React.useContext()`.
 
 ## Exam session facade hooks
 
-Components should not assemble session state from five contexts by hand. `src/hooks/examSession/`
-exposes one facade per exam type:
+Components inside the exam tree should not assemble session state from five contexts by hand.
+`features/exam-session/hooks/` exposes two facades:
 
-- `useExamSessionCore()` — shared by all three trees: exam data, index, `examState`/`reviewState`,
-  bookmarks, answers, `setIndex`, `setAnswer`, `toggleBookmark`
-- `useFullExamSession()` — timer, break offers, sync, submit, `startRevision`
-- `useDomainExamSession()` — timer, sync, submit (no breaks, no revision)
-- `useRevisionExamSession()` — submit only (ephemeral: no timer, no sync)
-
-When behaviour differs by exam type, put it in the matching facade rather than branching inside
-a component. That keeps the shared presentation components in `components/exam/shared/` free of
-exam-type conditionals, which is the whole point of the split.
+- `useExamSession()` — the single facade for the exam session tree: exam content, session state,
+  config-derived capability flags and the actions components need. No component branches on exam
+  type or reads `ExamConfig` directly; a new capability is one line here, not a branch in every
+  consumer.
+- `useExamTimer()` — the clock, split out on purpose. It is the only hook that subscribes to
+  `SessionTimerContext`'s 1Hz tick, so only components that render the clock (Timer,
+  TimerConfirms, BreakModals, the pause menu item) use it. Everything else stays off the tick.
 
 ## Providers
 
-Routing lives in `src/App.tsx`; every URL comes from `src/config/routes.ts` (dynamic routes
+Routing lives in `src/App.tsx`; every URL comes from `src/routes/routes.ts` (dynamic routes
 expose `pattern` for `<Route>` and `to()` for links — never hand-build a URL string).
 
 Provider order in `src/main.tsx`:
 `SettingsProvider` → `BrowserRouter` → `QueryClientProvider` → `AuthContextProvider` →
 `ToastContextProvider` → `App`.
 
-**SessionProvider** sits at the root of the authenticated route branch so a started session
-survives navigating from `/` to `/exam`. It owns the whole session lifecycle and *always*
-renders all 5 split providers, which keeps `{children}` in a stable tree position — conditional
-provider rendering would remount the subtree and lose component state. With no active session,
-`SessionControlContext.session` is `null` and `startNewExam` / `resumeAttempt` / `startRevision`
-are still callable. Starting a session sets `startingSession`, which resets the reducer via
-`RESET_SESSION`.
+**SessionProvider** (`features/exam-session/providers/`) sits at the root of the authenticated
+route branch so a started session survives navigating from `/` to `/exam`. It owns the whole
+session lifecycle and *always* renders all 5 split providers, which keeps `{children}` in a stable
+tree position — conditional provider rendering would remount the subtree and lose component state.
+With no active session, `SessionControlContext.session` is `null` and `startNewExam` /
+`resumeAttempt` / `startRevision` are still callable. Starting a session sets `startingSession`,
+which resets the reducer via `RESET_SESSION`.
 
 **ExamPage** (`src/pages/exam/index.tsx`) renders one config-driven shell for every exam type
 (`ExamSession`, plus `TimerConfirms` when timed and `BreakModals` when the config has breaks). It
 never resolves a session — a cold hit of `/exam` redirects home.
 
-**ExamProvider** (`src/providers/ExamProvider.tsx`) sits inside SessionProvider and supplies
-`ExamContext`. It never fetches; see "Exam content and language" below.
+**ExamProvider** (`features/exam-session/providers/ExamProvider.tsx`) sits inside SessionProvider
+and supplies `ExamContext`. It never fetches; see "Exam content and language" below.
 
 ## Session reducer and persistence
 
-`src/utils/session.ts` handles immutable state updates with typed actions (`SET_INDEX`,
-`SET_ANSWERS`, `SET_TIME`, `SET_TIMER_PAUSED`, `MARK_DIRTY`, `CLEAR_DIRTY`, `RESET_SESSION`,
-`SET_BREAK1/2_OFFERED_AT`). Break actions are ignored unless `examType === 'full'`. The reducer
-accepts a single action or an array and only allocates a new state object when something actually
-changed.
+`features/exam-session/utils/session.ts` handles immutable state updates with typed actions
+(`SET_INDEX`, `SET_ANSWERS`, `SET_TIME`, `SET_TIMER_PAUSED`, `MARK_DIRTY`, `CLEAR_DIRTY`,
+`RESET_SESSION`, `SET_OFFERED_BREAK`, …). The reducer accepts a single action or an array and only
+allocates a new state object when something actually changed.
 
-`src/hooks/useSessionReducer.ts` wraps it and owns both the session and the exam content it
-belongs to. Rules that are easy to break by accident:
+`features/exam-session/hooks/useSessionReducer.ts` wraps it and owns both the session and the exam
+content it belongs to. Rules that are easy to break by accident:
 
 - **Atomic mount** — `mountSession(session, examContext)` is the only way either is set, and it
   writes both in one commit. Start, resume, revision and the post-submit re-mount all end in one
@@ -100,7 +140,6 @@ belongs to. Rules that are easy to break by accident:
 - **Submit ordering** — `submitExam` only transitions to `completed` after a successful write
   (revision sessions transition locally with no DB call). Never flip the state optimistically;
   a failed write with a `completed` UI loses the attempt.
-
 - **One write path** — `saveProgress({ offeredBreak? })` is the only in-progress write: dirty
   answers, position, clock and a break offer all travel in the same PATCH. An empty answer diff is
   still sent, because the position and the clock move without any question going dirty. A break
@@ -111,13 +150,14 @@ inside `saveProgress` / `submitExam`, so no caller branches on it.
 
 ## Server state (TanStack Query)
 
-Query definitions are centralised in `src/utils/queryOptions.ts`
-(`createAttemptsQueryOptions`, `createStudentSearchQueryOptions`, `createStudentAttemptsQueryOptions`)
-and call the clients in `src/services/`. Add a new server read as a `queryOptions` factory there
-rather than inlining `useQuery` config in a component — that is what keeps cache keys consistent
-across the pages that share data.
+Query definitions live in each feature's `services/<name>.queries.ts`
+(`createAttemptsQueryOptions` in attempts, `createStudent*QueryOptions` in students,
+`createTracksQueryOptions` in tracks, `createTrackExamsQueryOptions` /
+`createExamQuestionsQueryOptions` in exams) and are exported through the feature's `index.ts`.
+Add a new server read as a `queryOptions` factory there rather than inlining `useQuery` config in a
+component — that is what keeps cache keys consistent across the pages that share data.
 
-All requests go through `src/utils/apiFetch.ts`, which converts Vercel 429s into `RateLimitError`
+All requests go through `core/api/apiFetch.ts`, which converts Vercel 429s into `RateLimitError`
 and routes 401s to the registered unauthorized handler. Don't call `fetch` directly.
 
 Backend errors are identified by their **error code**, not their message — see `backend-guide`
@@ -125,17 +165,18 @@ for the `AppError` shape the frontend parses.
 
 ## Vite fast refresh compliance (critical)
 
-Provider files (`src/providers/*.tsx` and the exam providers under `src/components/exam/*/`)
-must have **only a default export** — the React component. Any additional export (hook, styled
-wrapper, class-name constant, type) breaks fast refresh and produces HMR violations that look like
-random state loss.
+Provider files (`core/providers/*.tsx`, `features/*/providers/*.tsx`) must have **only a default
+export** — the React component. Any additional export (hook, context, class-name constant, type)
+breaks fast refresh and produces HMR violations that look like random state loss.
 
 The pattern:
 
-1. Contexts and hooks go in `src/contexts.ts` (not a provider file, so multiple exports are fine).
-2. Each provider file is **only** the component, default-exported.
+1. Contexts and their hooks go in the owner's `contexts.ts` (not a provider file, so multiple
+   exports are fine).
+2. Each provider file is **only** the component, default-exported. The feature's `index.ts`
+   re-exports it as named — that is fine, the barrel is not a component file.
 3. Shared markup or class names a provider's tree needs live in their own `*Styles.ts(x)` file
-   (e.g. `AttemptHistoryStyles.tsx`, `BreakModalsStyles.ts`).
+   (e.g. `features/exam-session/components/breaks/BreakModalsStyles.ts`).
 
 ## Exam content and language
 
@@ -152,7 +193,7 @@ Exam content comes from the API in **every language at once** — questions carr
 - **Storage** — `useSessionReducer` holds the bilingual content (`ExamContent` type) next to the
   session, set only through `mountSession`. Nothing about content is in localStorage.
 - **Localization** — `ExamProvider` reads `settings.language` and maps the content through
-  `localizeQuestion` / `localizeExamDetails` (`src/utils/localize.ts`) in a `useMemo`.
+  `localizeQuestion` / `localizeExamDetails` (`core/utils/localize.ts`) in a `useMemo`.
   `ExamContext` therefore holds `Localized<…>` types: `text`, `explanation`, `name` are plain
   strings and the per-language fields are gone.
 - **Switching language mid-exam** re-runs only that map. No fetch, and the session (answers,
@@ -167,9 +208,9 @@ Language-dependent UI chrome (choice letters, `dir`) is not content and may read
 ## Supervisor preview sessions
 
 Supervisors can run any exam without touching the DB. `startNewExam({ preview: true })` skips
-`startAttempt` and localStorage, uses `PREVIEW_ATTEMPT_ID` and `PREVIEW_TIME_SECONDS`, and the
-session gets `noopAttemptPersistence`. Preview routes live under `ROUTES.examPreview` and reuse
-the same `ExamPage` tree. Revision is unavailable for preview sessions.
+`startAttempt` and localStorage, uses `PREVIEW_ATTEMPT_ID` (`features/exam-session/constants.ts`),
+and the session never persists. Preview routes live under `ROUTES.examPreview` and reuse the same
+`ExamPage` tree. Revision is unavailable for preview sessions.
 
 Every supervisor URL is track-scoped (`/exams/:trackId/...`, `/students/:id/tracks/:trackId`),
 mirroring `assertTrackAccess` on the API. Access is checked twice on purpose: the page filters to
@@ -178,34 +219,16 @@ also renders a lock state when the API answers `FORBIDDEN` — which is what a d
 enrollment expiring mid-session produces. Leaving an exam routes by role: a supervisor's exit from
 a preview goes to `ROUTES.examLibrary`, never to the student-only `/tracks/:id`.
 
-## Page structure — folder per page, no page imports another
+## Pages — assembly only, no page imports another
 
-Every route component is `src/pages/<kebab-name>/index.tsx`, with its own sub-components beside it
-in that folder. There are no loose `XxxPage.tsx` files left in `src/pages/`.
+Every route component is `src/pages/<kebab-name>/index.tsx`, and that is the only file in the
+folder. Two rules hold this together:
 
-Two rules hold this together, and both are load-bearing:
-
-- **A page never imports from another page.** The moment two pages need the same component, it
-  moves to `src/components/<feature>/` — that is how `ExamBrowser`, `ExamFacts`, `TrackLinkCard`,
-  `TrackCardSkeleton`, `StudentSummaryCard` and `StudentBreadcrumb` got there.
+- **A page never imports from another page, and owns no components.** Whatever it renders comes
+  from a feature barrel or `components/`.
 - **Route composition lives in `App.tsx`, not in a page.** `/` resolves to the supervisor
-  dashboard or the student's track list by `roleOf(user)` *inside the router*. There is no
-  `HomePage` delegating to two other pages.
-
-Imports inside a page use the `@/` alias rather than `../..` chains.
-
-## Key directories
-
-- `src/components/exam/{full,domain,revision}/` — per-exam-type session trees
-- `src/components/exam/shared/` — reusable exam UI
-- `src/components/ui/` — shadcn/ui primitives (Tailwind)
-- `src/components/{exams,tracks,students,attempts,states}/` — cross-page feature components:
-  the exam browser and facts, track cards, student identity/breadcrumb, the attempts table, and
-  the shared `EmptyState`/`ErrorState`
-- `src/pages/<page>/index.tsx` — one folder per route (see above)
-- `src/hooks/examSession/` — exam session facade hooks
-- `src/config/` — `routes.ts`, `nav.ts`, `roles.ts`, `icons.ts`
-- `src/services/` — frontend API clients; `src/utils/queryOptions.ts` — query definitions
+  dashboard or the student's track list by `roleOf(user)` (exported from `@/features/auth`)
+  *inside the router*. There is no `HomePage` delegating to two other pages.
 
 ## Related skills — read these before you write the code
 

@@ -1,0 +1,135 @@
+import { useState, useEffect, useRef, useCallback } from "react";
+import { AuthContext } from "../contexts";
+import { registerUnauthorizedHandler } from "@/core/api/apiFetch";
+import * as authService from "../services/auth.service";
+import type { AuthStatus } from "../types";
+import type { EnrolledTrack, User } from "@/core/api/apiTypes";
+
+/** Provides auth state and lifecycle methods to the app. Restores session (and its enrolled tracks) from cookies via /me on mount. */
+export default function AuthContextProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [user, setUser] = useState<User | null>(null);
+  const [enrolledTracks, setEnrolledTracks] = useState<EnrolledTrack[]>([]);
+  const [authStatus, setAuthStatus] = useState<AuthStatus>("pending");
+  const sessionCheckCancelled = useRef(false);
+
+  const cancelSessionCheck = useCallback(() => {
+    sessionCheckCancelled.current = true;
+  }, []);
+
+  const signIn = useCallback(
+    async (email: string, password: string) => {
+      await authService.signIn(email, password);
+      // /me is the one call that carries enrolled tracks alongside the user — see auth-rbac-guide.
+      const me = await authService.getMe();
+
+      cancelSessionCheck();
+      setUser(me.user);
+      setEnrolledTracks(me.tracks);
+      setAuthStatus("authenticated");
+    },
+    [cancelSessionCheck],
+  );
+
+  const signUp = useCallback(
+    async (
+      email: string,
+      password: string,
+      firstName: string,
+      lastName: string,
+    ) => {
+      await authService.signUp(email, password, firstName, lastName);
+
+      // Do NOT set user — email confirmation is required first
+    },
+    [],
+  );
+
+  const exchangeToken = useCallback(
+    async (accessToken: string, refreshToken: string) => {
+      await authService.exchangeToken(accessToken, refreshToken);
+      const me = await authService.getMe();
+
+      cancelSessionCheck();
+      setUser(me.user);
+      setEnrolledTracks(me.tracks);
+      setAuthStatus("authenticated");
+    },
+    [cancelSessionCheck],
+  );
+
+  const requestPasswordReset = useCallback(async (email: string) => {
+    await authService.requestPasswordReset(email);
+  }, []);
+
+  const updatePassword = useCallback(async (password: string) => {
+    await authService.updatePassword(password);
+  }, []);
+
+  const signOut = useCallback(
+    async (onSuccess?: () => void) => {
+      try {
+        await authService.signOut();
+      } finally {
+        cancelSessionCheck();
+        setUser(null);
+        setEnrolledTracks([]);
+        setAuthStatus("unauthenticated");
+        onSuccess?.();
+      }
+    },
+    [cancelSessionCheck],
+  );
+
+  // Let apiFetch sign the user out when the backend returns 401 (session revoked/expired).
+  useEffect(() => {
+    registerUnauthorizedHandler(() => signOut());
+  }, [signOut]);
+
+  useEffect(() => {
+    let unmounted = false;
+
+    async function checkSession() {
+      try {
+        const me = await authService.getMe();
+
+        // unmounted: component no longer exists, don't update state
+        // sessionCheckCancelled: an active auth flow (signIn, exchangeToken) took over
+        if (unmounted || sessionCheckCancelled.current) return;
+
+        setUser(me.user);
+        setEnrolledTracks(me.tracks);
+        setAuthStatus("authenticated");
+      } catch {
+        //                don't override active auth flows
+        if (!unmounted && !sessionCheckCancelled.current) {
+          setAuthStatus("unauthenticated");
+        }
+      }
+    }
+
+    checkSession();
+
+    return () => {
+      unmounted = true;
+    };
+  }, []);
+
+  const value = {
+    user,
+    enrolledTracks,
+    isAuthenticated: authStatus === "authenticated",
+    isLoading: authStatus === "pending",
+    signIn,
+    signUp,
+    exchangeToken,
+    requestPasswordReset,
+    updatePassword,
+    signOut,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}

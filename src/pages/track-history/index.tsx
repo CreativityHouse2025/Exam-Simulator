@@ -2,21 +2,21 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ClipboardList, Lock } from "lucide-react";
-import AttemptsTable from "@/components/attempts/AttemptsTable";
-import AttemptsTableSkeleton from "@/components/attempts/AttemptsTableSkeleton";
+import {
+  AttemptsTable,
+  AttemptsTableSkeleton,
+  createAttemptsQueryOptions,
+} from "@/features/attempts";
 import EmptyState from "@/components/states/EmptyState";
 import ErrorState from "@/components/states/ErrorState";
 import BackButton from "@/components/BackButton";
 import Loading from "@/components/Loading";
-import useAuth from "@/hooks/useAuth";
-import useSettings from "@/hooks/useSettings";
-import useAttemptActions from "@/hooks/useAttemptActions";
-import {
-  createAttemptsQueryOptions,
-  createTrackExamsQueryOptions,
-} from "@/utils/queryOptions";
-import { translate } from "@/utils/translation";
-import { ROUTES } from "@/config/routes";
+import { useAuth } from "@/features/auth";
+import useSettings from "@/core/hooks/useSettings";
+import { useAttemptActions } from "@/features/exam-session";
+import { createTrackExamsQueryOptions } from "@/features/exams";
+import { translate } from "@/core/utils/translation";
+import { ROUTES } from "@/routes/routes";
 
 /** The student's recent attempts in one track, capped server-side. */
 const AttemptHistoryPage: React.FC = () => {

@@ -2,15 +2,17 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Lock } from "lucide-react";
-import ExamCard from "./ExamCard";
-import ExamBrowser from "@/components/exams/ExamBrowser";
+import {
+  LibraryExamCard,
+  ExamBrowser,
+  createTrackExamsQueryOptions,
+} from "@/features/exams";
 import EmptyState from "@/components/states/EmptyState";
 import BackButton from "@/components/BackButton";
-import useAuth from "@/hooks/useAuth";
-import useSettings from "@/hooks/useSettings";
-import { createTrackExamsQueryOptions } from "@/utils/queryOptions";
-import { translate } from "@/utils/translation";
-import { ROUTES } from "@/config/routes";
+import { useAuth } from "@/features/auth";
+import useSettings from "@/core/hooks/useSettings";
+import { translate } from "@/core/utils/translation";
+import { ROUTES } from "@/routes/routes";
 
 /**
  * `/exams/:trackId` — every exam in one track, for a supervisor.
@@ -72,7 +74,7 @@ const ExamLibraryPage: React.FC = () => {
         isRetrying={examsQuery.isFetching}
         emptyMessage={translate("exams.empty")}
         renderCard={(exam, examType) => (
-          <ExamCard
+          <LibraryExamCard
             exam={exam}
             examType={examType}
             trackId={trackId}

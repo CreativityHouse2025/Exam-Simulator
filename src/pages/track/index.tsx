@@ -2,25 +2,25 @@ import React from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronDown, History, Lock } from "lucide-react";
-import ExamCard from "./ExamCard";
-import ExamBrowser from "@/components/exams/ExamBrowser";
-import AttemptsTable from "@/components/attempts/AttemptsTable";
-import AttemptsTableSkeleton from "@/components/attempts/AttemptsTableSkeleton";
+import { TrackExamCard } from "@/features/tracks";
+import { ExamBrowser, createTrackExamsQueryOptions } from "@/features/exams";
+import {
+  AttemptsTable,
+  AttemptsTableSkeleton,
+  createAttemptsQueryOptions,
+  statsByExamId,
+  statsForExam,
+} from "@/features/attempts";
 import EmptyState from "@/components/states/EmptyState";
 import ErrorState from "@/components/states/ErrorState";
 import BackButton from "@/components/BackButton";
 import Loading from "@/components/Loading";
 import { Button } from "@/components/ui/button";
-import useAuth from "@/hooks/useAuth";
-import useSettings from "@/hooks/useSettings";
-import useAttemptActions from "@/hooks/useAttemptActions";
-import {
-  createAttemptsQueryOptions,
-  createTrackExamsQueryOptions,
-} from "@/utils/queryOptions";
-import { statsByExamId, statsForExam } from "@/utils/attempts";
-import { translate } from "@/utils/translation";
-import { ROUTES } from "@/config/routes";
+import { useAuth } from "@/features/auth";
+import useSettings from "@/core/hooks/useSettings";
+import { useAttemptActions } from "@/features/exam-session";
+import { translate } from "@/core/utils/translation";
+import { ROUTES } from "@/routes/routes";
 import { cn } from "@/components/ui/utils";
 
 const RECENT_ATTEMPT_COUNT = 5;
@@ -137,7 +137,7 @@ const TrackPage: React.FC = () => {
             isRetrying={examsQuery.isFetching}
             emptyMessage={translate("exams.empty")}
             renderCard={(exam, examType) => (
-              <ExamCard
+              <TrackExamCard
                 exam={exam}
                 examType={examType}
                 stats={statsForExam(attemptStats, exam.id)}

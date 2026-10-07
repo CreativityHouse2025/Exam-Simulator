@@ -2,27 +2,28 @@ import React from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Inbox, Lock } from "lucide-react";
-import AttemptsTable from "@/components/attempts/AttemptsTable";
-import AttemptsTableSkeleton from "@/components/attempts/AttemptsTableSkeleton";
-import StudentSummaryCard, {
-  StudentSummaryCardSkeleton,
-} from "@/components/students/StudentSummaryCard";
-import StudentBreadcrumb from "@/components/students/StudentBreadcrumb";
-import EmptyState from "@/components/states/EmptyState";
-import ErrorState from "@/components/states/ErrorState";
-import AttemptStats from "./AttemptStats";
-import AttemptDetailDialog from "./AttemptDetailDialog";
-import useAuth from "@/hooks/useAuth";
-import useSettings from "@/hooks/useSettings";
-import { AppApiError } from "@/errors";
 import {
+  AttemptsTable,
+  AttemptsTableSkeleton,
+  AttemptStats,
+  AttemptDetailDialog,
+} from "@/features/attempts";
+import {
+  StudentSummaryCard,
+  StudentSummaryCardSkeleton,
+  StudentBreadcrumb,
   createStudentAttemptsQueryOptions,
   createStudentQueryOptions,
-  createTrackExamsQueryOptions,
-} from "@/utils/queryOptions";
-import { resolveErrorKey } from "@/utils/errorTranslation";
-import { translate } from "@/utils/translation";
-import type { AttemptSummary } from "@/apiTypes";
+} from "@/features/students";
+import EmptyState from "@/components/states/EmptyState";
+import ErrorState from "@/components/states/ErrorState";
+import { useAuth } from "@/features/auth";
+import useSettings from "@/core/hooks/useSettings";
+import { AppApiError } from "@/core/errors";
+import { createTrackExamsQueryOptions } from "@/features/exams";
+import { resolveErrorKey } from "@/core/utils/errorTranslation";
+import { translate } from "@/core/utils/translation";
+import type { AttemptSummary } from "@/core/api/apiTypes";
 
 /**
  * `/students/:id/tracks/:trackId` — one student's attempts in one track.

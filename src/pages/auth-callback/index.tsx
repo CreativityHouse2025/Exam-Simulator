@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuth from "@/hooks/useAuth";
-import { translate } from "@/utils/translation";
-import { ROUTES } from "@/config/routes";
+import { useAuth } from "@/features/auth";
+import { translate } from "@/core/utils/translation";
+import { ROUTES } from "@/routes/routes";
 import Loading from "@/components/Loading";
 import {
   PageWrapper,

@@ -1,16 +1,18 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Layers } from "lucide-react";
-import TrackCard from "./TrackCard";
-import TrackCardSkeleton from "@/components/tracks/TrackCardSkeleton";
-import WelcomeHero from "./WelcomeHero";
+import {
+  TrackCard,
+  TrackCardSkeleton,
+  WelcomeHero,
+  createTracksQueryOptions,
+  mergeTrackAccess,
+} from "@/features/tracks";
 import EmptyState from "@/components/states/EmptyState";
 import ErrorState from "@/components/states/ErrorState";
-import useAuth from "@/hooks/useAuth";
-import useSettings from "@/hooks/useSettings";
-import { createTracksQueryOptions } from "@/utils/queryOptions";
-import { mergeTrackAccess } from "@/utils/tracks";
-import { translate } from "@/utils/translation";
+import { useAuth } from "@/features/auth";
+import useSettings from "@/core/hooks/useSettings";
+import { translate } from "@/core/utils/translation";
 
 const SKELETON_COUNT = 3;
 

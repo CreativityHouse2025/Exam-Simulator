@@ -16,7 +16,7 @@ costs one tool call and prevents the class of bug it exists to describe.
 
 | Working on | Invoke |
 | --- | --- |
-| Anything under `src/` — components, pages, hooks, contexts, providers, routes, services | `frontend-guide` |
+| Anything under `src/` — core, components, features, pages, routes | `frontend-guide` |
 | Anything under `api/` — endpoints, handlers, services, validators, middleware | `backend-guide` |
 | Anything under `supabase/` — migrations, RPCs, schema, generated types | `database-guide` |
 | Any CSS, Tailwind class, theme token, shadcn primitive, or new page layout | `styling-guide` |
@@ -36,6 +36,9 @@ Tripwires — if any of these describe your task, the skill above is not optiona
   `npm run db:reset`, never applied by hand, and `supabase migration new` breaks the `NNN_` numbering.
 - **Adding state or a provider** → `frontend-guide`. Contexts are split on purpose and provider
   files may only have a default export.
+- **Adding or moving a file under `src/`** → `frontend-guide`. Placement decides the import path:
+  other features are reached only through their `index.ts`, and a two-way feature import becomes
+  a module cycle.
 
 The skills cross-reference each other; follow the "Related skills" section at the bottom of each
 when a task spans layers.
@@ -49,6 +52,9 @@ npm run build     # Production build to dist/
 npm run preview   # Preview production build locally
 npm run format    # Format code with Prettier
 npm run typecheck # Type-check the entire project (tsc --build + vite config)
+npm run lint      # ESLint
+npm run verify    # typecheck + lint + build — run before calling a change done
+npm run db:start  # Local Supabase stack (also db:stop, db:reset, db:types) — see local-supabase-guide
 ```
 
 ## Technology Stack
@@ -57,31 +63,31 @@ npm run typecheck # Type-check the entire project (tsc --build + vite config)
 - React Router 7 for routing
 - Tailwind v4 + shadcn/ui primitives on `radix-ui` for all styling; `lucide-react` for icons
 - React Context API for client/session state (split into 5 session contexts for performance)
-- TanStack Query for server state (attempt lists, student search, student attempts)
+- TanStack Query for server state (tracks, track exams, exam questions, attempts, students)
 - Supabase (auth + Postgres) behind Vercel serverless functions (`/api`)
-- Mantine hooks for localStorage persistence
+- Mantine hooks: `useLocalStorage` (settings persistence), `useDebouncedValue` (student search)
 
 ## Key Directories
 
 ```
-src/components/exam/{full,domain,revision}/  per-exam-type session trees
-src/components/exam/shared/                  reusable exam UI
+src/core/                                    shared by 2+ features: api/, services/, providers/, hooks/, utils/, contexts, types, constants, errors
+src/components/                              global UI with no feature knowledge
 src/components/ui/                           shadcn/ui primitives
-src/components/{exams,tracks,students,attempts,states}/  cross-page feature components
-src/pages/<page>/index.tsx                   one folder per route; a page never imports another
-src/hooks/examSession/                       exam session facade hooks
-src/config/                                  routes.ts, nav.ts, roles.ts, icons.ts
+src/features/<name>/                         auth, exam-session, exams, tracks, attempts, students — public API is index.ts
+src/pages/<page>/index.tsx                   assembly only; a page owns no components and never imports another
+src/routes/                                  routes.ts, nav.ts, icons.ts, RouteGuard.tsx
 src/data/exam/                               question banks, exam definitions, categories
 src/data/langs/                              translation JSON (ar.json, en.json)
-src/services/  src/utils/queryOptions.ts     API clients, TanStack Query definitions
 
-api/_lib/{middleware,services,validators,utils,errors}/
-api/{auth,attempts,students}/                endpoints
+api/_lib/{middleware,services,utils,errors}/
+api/{auth,attempts,exams,students,tracks}/  endpoints
+shared/schemas/                              zod wire contract shared by src/ and api/ (`@shared/*`)
 
 supabase/migrations/                         numbered SQL migrations
 supabase/query/                              ad-hoc analytics queries and exports
 
 docs/specs/                                  feature specs
+scripts/                                     Python tooling for question banks and content migrations
 ```
 
 ## TypeScript Configuration
@@ -97,7 +103,8 @@ All projects are type-check only (`noEmit: true`, no `composite`); `tsc --build`
 
 ## Code Style
 
-- Prettier: 120 char line width, 2-space indent, no semicolons
+- Prettier runs with its defaults (no config file): 80 char line width, 2-space indent, semicolons, double quotes. `src/` and `shared/` follow them
+- `api/` is not Prettier-formatted: ~120 char lines, semicolons inconsistent between files. Match the file you are editing, and format only the files you changed — `npm run format` (`prettier . --write`) would rewrite all of `api/`
 - TypeScript strict mode
 - No explicit `any` allowed
 - Must use `unknown` and type-narrow for API/JSON data

@@ -1,13 +1,14 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useSessionControl } from "@/contexts";
-import { useExamSession } from "@/hooks/examSession/useExamSession";
-import useUnsavedChangesWarning from "@/hooks/useUnsavedChangesWarning";
-import { ROUTES } from "@/config/routes";
-import ExamSession from "@/components/exam/ExamSession";
-import TimerConfirms from "@/components/exam/TimerConfirms";
-import BreakModals from "@/components/exam/breaks/BreakModals";
-
+import {
+  useSessionControl,
+  useExamSession,
+  useUnsavedChangesWarning,
+  ExamSession,
+  TimerConfirms,
+  BreakModals,
+} from "@/features/exam-session";
+import { ROUTES } from "@/routes/routes";
 /**
  * Renders the exam tree for the mounted session — one config-driven shell for every exam type,
  * gated by capability rather than a switch on session.examType.

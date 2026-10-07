@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Layers, NotepadText, Users } from "lucide-react";
-import ActionCard from "./ActionCard";
-import SearchLauncher from "./SearchLauncher";
+import ActionCard from "@/components/ActionCard";
+import { SearchLauncher } from "@/features/students";
 import EmptyState from "@/components/states/EmptyState";
-import useAuth from "@/hooks/useAuth";
-import useSettings from "@/hooks/useSettings";
-import { translate } from "@/utils/translation";
-import { ROUTES } from "@/config/routes";
+import { useAuth } from "@/features/auth";
+import useSettings from "@/core/hooks/useSettings";
+import { translate } from "@/core/utils/translation";
+import { ROUTES } from "@/routes/routes";
 
 /**
  * `/` for supervisors — look a student up, or open a track's exam library.

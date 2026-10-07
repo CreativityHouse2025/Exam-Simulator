@@ -7,10 +7,13 @@ import SearchBar from "@/components/SearchBar";
 import BackButton from "@/components/BackButton";
 import EmptyState from "@/components/states/EmptyState";
 import ErrorState from "@/components/states/ErrorState";
-import StudentCard, { StudentCardSkeleton } from "./StudentCard";
-import { createStudentSearchQueryOptions } from "@/utils/queryOptions";
-import { translate } from "@/utils/translation";
-import { ROUTES } from "@/config/routes";
+import {
+  StudentCard,
+  StudentCardSkeleton,
+  createStudentSearchQueryOptions,
+} from "@/features/students";
+import { translate } from "@/core/utils/translation";
+import { ROUTES } from "@/routes/routes";
 
 const MIN_QUERY_LENGTH = 2;
 const SEARCH_DEBOUNCE_MS = 300;

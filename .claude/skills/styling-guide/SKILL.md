@@ -82,7 +82,8 @@ npx shadcn add <name>
 Files under `src/components/ui/` stay close to what the CLI emits: color/radius classes repointed
 at our `@theme` tokens, and a CVA variant added when a call site genuinely needs one. Anything
 else — extra props, hooks, structural JSX changes — belongs in a wrapper under
-`src/components/<feature>/`. Prefer fixing a shared defect in the primitive over patching each
+`src/components/` (global) or `src/features/<name>/components/`. Never change the CLI-generated
+imports (`@/components/ui/utils`) or the aliases in `components.json`. Prefer fixing a shared defect in the primitive over patching each
 call site.
 
 Note that Tailwind resolves an uncolored `border` to `currentColor` (Preflight does not set a

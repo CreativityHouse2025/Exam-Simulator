@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import useSettings from "@/hooks/useSettings";
+import { Button } from "./ui/button";
+import useSettings from "@/core/hooks/useSettings";
 
 type BackButtonProps = {
   /** Destination route. */

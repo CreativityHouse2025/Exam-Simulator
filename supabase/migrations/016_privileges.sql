@@ -2,8 +2,7 @@
 -- Migration 016: lock the public schema to service_role
 --
 -- The frontend never talks to Supabase directly. Every read and write goes
--- through a Vercel serverless function holding the secret key, so the Data API
--- needs to be reachable by service_role and by nobody else.
+-- through a Vercel serverless function holding the secret key.
 --
 -- Two layers, enforced separately because either one alone leaks:
 --

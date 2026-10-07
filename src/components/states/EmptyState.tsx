@@ -1,7 +1,7 @@
 import React from "react";
 import type { LucideIcon } from "lucide-react";
 import { Inbox } from "lucide-react";
-import { cn } from "@/components/ui/utils";
+import { cn } from "../ui/utils";
 
 type EmptyStateProps = {
   message: string;

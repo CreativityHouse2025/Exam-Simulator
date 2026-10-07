@@ -47,7 +47,7 @@ Handlers receive `(request, authUser, cookieHeaders)` and must pass `cookieHeade
 `successResponse`. Forgetting that silently drops a refreshed session, and the user gets logged
 out on the next request for no visible reason.
 
-Backend gating is independent of the frontend. Route guards in `src/guards/` are UX, not security —
+Backend gating is independent of the frontend. Route guards (`src/routes/RouteGuard.tsx`) are UX, not security —
 every non-public endpoint needs `withRole`.
 
 ## Endpoints

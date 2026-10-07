@@ -2,22 +2,24 @@ import React from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Layers } from "lucide-react";
-import StudentSummaryCard, {
+import {
+  StudentSummaryCard,
   StudentSummaryCardSkeleton,
-} from "@/components/students/StudentSummaryCard";
-import StudentBreadcrumb from "@/components/students/StudentBreadcrumb";
-import TrackLinkCard, {
+  StudentBreadcrumb,
+  createStudentQueryOptions,
+} from "@/features/students";
+import {
+  TrackLinkCard,
   TRACK_GRID_CLASSES,
-} from "@/components/tracks/TrackLinkCard";
-import TrackCardSkeleton from "@/components/tracks/TrackCardSkeleton";
+  TrackCardSkeleton,
+} from "@/features/tracks";
 import EmptyState from "@/components/states/EmptyState";
 import ErrorState from "@/components/states/ErrorState";
-import useAuth from "@/hooks/useAuth";
-import useSettings from "@/hooks/useSettings";
-import { createStudentQueryOptions } from "@/utils/queryOptions";
-import { formatDate } from "@/utils/format";
-import { translate } from "@/utils/translation";
-import { ROUTES } from "@/config/routes";
+import { useAuth } from "@/features/auth";
+import useSettings from "@/core/hooks/useSettings";
+import { formatDate } from "@/core/utils/format";
+import { translate } from "@/core/utils/translation";
+import { ROUTES } from "@/routes/routes";
 
 const SKELETON_COUNT = 2;
 

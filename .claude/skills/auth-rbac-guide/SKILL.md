@@ -1,6 +1,6 @@
 ---
 name: auth-rbac-guide
-description: "Authentication, roles, and access control for the Exam Simulator — the student/supervisor/guest role model, RouteGuard and nav gating on the frontend, withAuth/withRole enforcement on the backend, enrollment-based track access, and the single-session-per-account limit now enforced by Supabase Auth itself rather than by this codebase. Use this skill before touching sign-in, sign-up, sign-out, password reset, token exchange, session cookies, users.role, enrollments, RouteGuard, src/config/roles.ts or nav.ts, or any check of who is allowed to see or do something. Also use when debugging an unexpected 403, a user logged out for no reason, or a suspected account-sharing bypass. These rules fail open when improvised — read them before writing the check."
+description: "Authentication, roles, and access control for the Exam Simulator — the student/supervisor/guest role model, RouteGuard and nav gating on the frontend, withAuth/withRole enforcement on the backend, enrollment-based track access, and the single-session-per-account limit now enforced by Supabase Auth itself rather than by this codebase. Use this skill before touching sign-in, sign-up, sign-out, password reset, token exchange, session cookies, users.role, enrollments, RouteGuard, src/features/auth (roleOf, ViewerRole) or src/routes/nav.ts, or any check of who is allowed to see or do something. Also use when debugging an unexpected 403, a user logged out for no reason, or a suspected account-sharing bypass. These rules fail open when improvised — read them before writing the check."
 ---
 
 # Auth & RBAC Guide
@@ -17,16 +17,16 @@ The written specs behind these features are in `docs/specs/` (`spec-rbac.md`, `s
 
 ## Role model
 
-`Role = "student" | "supervisor" | "guest"` (`src/config/roles.ts`). `guest` means `user === null`
+`ViewerRole = Role | "guest"`, where `Role = "student" | "supervisor"` comes from `@shared/user.schema` (`src/features/auth/types.ts`). Resolve it with `roleOf(user)` (`src/features/auth/hooks/useAuth.ts`, exported from `@/features/auth`) — never derive it by hand. `guest` means `user === null`
 and is **never stored** — it is an absence, not a row value. Don't add it to the database or write
 a migration for it.
 
 ## Frontend gating (UX only)
 
-- `RouteGuard` (`src/guards/RouteGuard.tsx`) wraps route branches in `src/App.tsx` and redirects to
+- `RouteGuard` (`src/routes/RouteGuard.tsx`) wraps route branches in `src/App.tsx` and redirects to
   sign-in (guest) or home (wrong role).
-- Nav items per role live in `src/config/nav.ts`.
-- Every URL comes from `src/config/routes.ts` — dynamic routes expose `pattern` for `<Route>` and
+- Nav items per role live in `src/routes/nav.ts`.
+- Every URL comes from `src/routes/routes.ts` — dynamic routes expose `pattern` for `<Route>` and
   `to()` for links.
 
 Treat all of this as presentation. A route guard stops a student seeing a supervisor link; it does

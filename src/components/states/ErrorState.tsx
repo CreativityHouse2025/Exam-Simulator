@@ -1,8 +1,8 @@
 import React from "react";
 import { AlertTriangle, RefreshCw } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { translate } from "@/utils/translation";
-import { cn } from "@/components/ui/utils";
+import { Button } from "../ui/button";
+import { translate } from "@/core/utils/translation";
+import { cn } from "../ui/utils";
 
 type ErrorStateProps = {
   message: string;

@@ -1,14 +1,17 @@
 import React, { useRef, useState } from "react";
 import { MailCheck } from "lucide-react";
-import useAuth from "@/hooks/useAuth";
-import useFormField from "@/hooks/useFormField";
-import { validateEmail } from "@/utils/authValidation";
-import { translate } from "@/utils/translation";
-import { resolveErrorKey } from "@/utils/errorTranslation";
-import { ROUTES } from "@/config/routes";
+import {
+  useAuth,
+  useFormField,
+  validateEmail,
+  ConfirmationCard,
+  EmailField,
+} from "@/features/auth";
+import { translate } from "@/core/utils/translation";
+import { resolveErrorKey } from "@/core/utils/errorTranslation";
+import { ROUTES } from "@/routes/routes";
 // @ts-expect-error -- pre-existing, unrelated to this change
 import Logo from "@/assets/logo.png";
-import { ConfirmationCard, EmailField } from "@/components/Auth";
 import {
   PageWrapper,
   Card,
