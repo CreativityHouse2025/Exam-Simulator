@@ -60,6 +60,23 @@ control, and assuming a conventional shape will produce code that compiles and f
   exams — are `DEFERRABLE INITIALLY DEFERRED`. Reorder inside one migration transaction by
   rewriting the values freely; uniqueness is checked at commit, so swaps never collide.
 
+## Archiving (022)
+
+Content is retired, never deleted: `exams.archived_at` and `tags.archived_at` (nullable
+timestamptz, null = active). Clearing the column reopens the row.
+
+- **The catalog hides archived rows from every role** — supervisors included. That filter lives in
+  the services (`archived_at IS NULL`), not in RLS or a view.
+- **Only `start_attempt` enforces it in SQL**: an archived *exam* returns the sentinel `archived`
+  and inserts nothing. A tag's archive state never blocks starting.
+- Save, submit, review and revision never check either column — an attempt started before the
+  archive finishes normally.
+- **Never archive `full`.** It is shared, so it would empty Full exams on every track. Convention
+  only; nothing enforces it.
+- 022 archived every existing exam and the `legacy` tag. `seed_demo.sql` therefore reopens its four
+  demo exams, runs its journeys through the real RPCs, and archives them again — keep that
+  bracket if you add a journey, or `start_attempt` refuses it and `db:reset` fails.
+
 ## When to write an RPC
 
 Most reads belong in a service (`api/_lib/services/`). Reach for a Postgres function when the

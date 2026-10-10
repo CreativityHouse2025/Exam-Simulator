@@ -155,7 +155,8 @@ Query definitions live in each feature's `services/<name>.queries.ts`
 `createTracksQueryOptions` / `createTrackTagsQueryOptions` in tracks,
 `createTrackExamsQueryOptions(trackId, tagCode)` / `createExamQuestionsQueryOptions` in exams) and
 are exported through the feature's `index.ts`. The exams query is keyed per tag and does not retry
-a `NOT_FOUND` (an unknown tag stays unknown) — `isNotFoundError` in `core/errors.ts` is the check.
+a `NOT_FOUND` (an unknown or archived tag stays that way) — `isNotFoundError` in `core/errors.ts`
+is the check.
 Add a new server read as a `queryOptions` factory there rather than inlining `useQuery` config in a
 component — that is what keeps cache keys consistent across the pages that share data.
 
@@ -247,6 +248,10 @@ browses a track through the same three screens, under its own prefix, so no page
   track picker, never to the hub of the locked track.
 - A tag's colour reaches cards through `tagAccent(colorHexCode)`; its shape plugs straight into
   `ActionCard`'s `accent`.
+- **Archived content never reaches the catalog** — the API filters it for every role, so no
+  component checks `archived_at`. Starting an exam archived since the list loaded fails with
+  `EXAM_ARCHIVED`, which `startNewExam` already toasts via `resolveErrorKey`
+  (`attempts.errors.server-exam-archived`). Starting is a button action; there is no start URL.
 
 ## Pages — assembly only, no page imports another
 

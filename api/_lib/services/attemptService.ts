@@ -39,7 +39,7 @@ type SaveAttemptInput = {
  * list does not ship 25 × 180 int4 to read one number off.
  */
 const ATTEMPT_COLUMNS =
-  "id, exam_state, created_at, time_remaining, config_snapshot, total_questions, current_index, results(status, score, wrong_questions, time_taken), offered_breaks(show_at_index), exams!inner(id, display_order, name_ar, name_en, description_ar, description_en, question_count, tags(id, code, name_ar, name_en, color_hex_code, display_order), allowed_config(tracks(id, name_ar, name_en, description_ar, description_en)))";
+  "id, exam_state, created_at, time_remaining, config_snapshot, total_questions, current_index, results(status, score, wrong_questions, time_taken), offered_breaks(show_at_index), exams!inner(id, display_order, name_ar, name_en, description_ar, description_en, question_count, archived_at, tags(id, code, name_ar, name_en, color_hex_code, display_order, archived_at), allowed_config(tracks(id, name_ar, name_en, description_ar, description_en)))";
 
 /** What a read that also serves question CONTENT needs on top: the frozen set, in its frozen order. */
 const ATTEMPT_DETAIL_COLUMNS = `${ATTEMPT_COLUMNS}, question_ids_snapshot`;
@@ -124,6 +124,7 @@ function toAttempt({ results, offered_breaks, ...row }: AttemptRow, exam: Exam):
  *
  * @throws {AppError} 404 `NOT_FOUND` — no such exam, or an exam with no questions.
  * @throws {AppError} 403 `FORBIDDEN` — no active enrollment in the exam's track.
+ * @throws {AppError} 410 `EXAM_ARCHIVED` — the exam is archived.
  * @throws {AppError} 500 `ATTEMPT_CREATE_FAILED` — the call failed.
  */
 export async function startAttempt(
@@ -151,6 +152,14 @@ export async function startAttempt(
       statusCode: 404,
       code: "NOT_FOUND",
       message: `Exam ${exam_id} does not exist, or has no questions`,
+    });
+  }
+
+  if (data.result === "archived") {
+    throw new AppError({
+      statusCode: 410,
+      code: "EXAM_ARCHIVED",
+      message: `Exam ${exam_id} is archived and cannot be started`,
     });
   }
 

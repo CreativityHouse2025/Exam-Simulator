@@ -57,19 +57,24 @@ every non-public endpoint needs `withRole`.
 ## Endpoints
 
 - `api/auth/*` — signin, signup, signout, me, password-reset, update-password, token-exchange
-- `api/attempts/index.ts` — `POST` start attempt, `GET` recent attempts (student)
+- `api/attempts/index.ts` — `POST` start attempt, `GET` recent attempts (student). Starting an
+  archived exam is 410 `EXAM_ARCHIVED` (the RPC's `archived` sentinel); nothing is written
 - `api/attempts/[id].ts` — `GET` read / `PATCH` save a single attempt (owner)
 - `api/attempts/[id]/submit.ts` — `POST` submit and grade (owner)
 - `api/attempts/[id]/revision.ts` — `GET` the wrong-or-unanswered set (owner)
 - `api/exams/[examId]/questions.ts` — `GET` an exam's full disclosed content (supervisor)
 - `api/tracks/index.ts` — `GET` the track catalogue
-- `api/tracks/[trackId]/tags.ts` — `GET` the tags with at least one exam on the track, by
-  `display_order`, `full` included (both roles, `assertTrackAccess`)
-- `api/tracks/[trackId]/exams.ts` — `GET ?tag=<code>` one tag's exams on the track, by
+- `api/tracks/[trackId]/tags.ts` — `GET` the track's own tags plus the shared ones (`full`), by
+  `display_order`, whether or not they list any exam. Archived tags are left out (both roles,
+  `assertTrackAccess`)
+- `api/tracks/[trackId]/exams.ts` — `GET ?tag=<code>` one tag's active exams on the track, by
   `display_order` (both roles, `assertTrackAccess`). `tag` is required (400 if missing); an unknown
-  code is 404 `NOT_FOUND`; a known tag with no exams here is `200 { exams: [] }`. The service runs
-  `assertTagExists` first, because the exams query filters through the tag join
+  **or archived** tag is 404 `NOT_FOUND`; a tag with no active exams here is `200 { exams: [] }`.
+  The service runs `getTag` first, because the exams query filters through the tag join
   (`tags!inner`, `.eq("tags.code", …)`) and cannot tell "unknown" from "empty" on its own
+
+Archived content is hidden from **every** role — there is no role branch in the catalog
+services. `archived_at` is still returned on `Tag` and `Exam`; the UI does not use it.
 - `api/students/index.ts` — `GET /api/students?q=` student search (supervisor)
 - `api/students/[id]/attempts.ts` — a student's attempts (supervisor)
 

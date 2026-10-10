@@ -93,6 +93,12 @@ as $$
 $$;
 
 
+-- start_attempt refuses archived exams (022), and every exam is archived.
+-- Reopen the demo exams for the journeys, then archive them again: the result
+-- is history on retired exams, including an unfinished attempt to resume.
+update public.exams set archived_at = null where id in (2, 18, 44, 45);
+
+
 do $$
 declare
   c_student  constant uuid := '22222222-2222-4222-8222-222222222222';
@@ -266,6 +272,8 @@ begin
   raise notice 'seed_demo: RMP exam 45 -> % (%), % question(s) to revise',
     v_score, v_status, v_revision;
 end $$;
+
+update public.exams set archived_at = now() where id in (2, 18, 44, 45);
 
 
 -- ---------------------------------------------------------------------

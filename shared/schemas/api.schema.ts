@@ -23,6 +23,8 @@ export const AppErrorCodeSchema = z.enum([
   // Grading failed. Distinct from ATTEMPT_SAVE_FAILED so a lost submission is distinguishable
   // from a lost autosave, in logs and in what the student is told.
   "ATTEMPT_SUBMIT_FAILED",
+  // Starting an archived exam. Only starting is refused; existing attempts keep working.
+  "EXAM_ARCHIVED",
   "NOT_FOUND",
   "FORBIDDEN",
   "CONFLICT",

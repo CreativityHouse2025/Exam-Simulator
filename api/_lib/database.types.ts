@@ -315,6 +315,7 @@ export type Database = {
       }
       exams: {
         Row: {
+          archived_at: string | null
           config_id: number
           created_at: string
           description_ar: string
@@ -329,6 +330,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          archived_at?: string | null
           config_id: number
           created_at?: string
           description_ar: string
@@ -343,6 +345,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          archived_at?: string | null
           config_id?: number
           created_at?: string
           description_ar?: string
@@ -472,6 +475,7 @@ export type Database = {
       }
       tags: {
         Row: {
+          archived_at: string | null
           code: string
           color_hex_code: string | null
           created_at: string
@@ -483,6 +487,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          archived_at?: string | null
           code: string
           color_hex_code?: string | null
           created_at?: string
@@ -494,6 +499,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          archived_at?: string | null
           code?: string
           color_hex_code?: string | null
           created_at?: string

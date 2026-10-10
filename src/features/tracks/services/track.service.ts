@@ -18,7 +18,7 @@ export async function getTracks(): Promise<Track[]> {
   return camelcaseKeys(result.data.tracks, { deep: true });
 }
 
-/** Tags with at least one exam on the track, by `displayOrder`. */
+/** The track's active tags plus shared ones, by `displayOrder`. */
 export async function getTrackTags(trackId: string): Promise<Tag[]> {
   const response = await apiFetch(`/api/tracks/${trackId}/tags`, {
     handleUnauthorized: true,

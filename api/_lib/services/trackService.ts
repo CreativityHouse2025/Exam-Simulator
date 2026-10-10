@@ -49,9 +49,11 @@ export async function listTracks(): Promise<Track[]> {
   return data.map(toTrack);
 }
 
+const TAG_COLUMNS = "id, code, name_ar, name_en, color_hex_code, display_order, archived_at";
+
 type TagRow = Pick<
   Tables<"tags">,
-  "id" | "code" | "name_ar" | "name_en" | "color_hex_code" | "display_order"
+  "id" | "code" | "name_ar" | "name_en" | "color_hex_code" | "display_order" | "archived_at"
 >;
 
 /** Bilingual columns collapse into one object. */
@@ -62,11 +64,13 @@ export function toTag(row: TagRow): Tag {
     name: { ar: row.name_ar, en: row.name_en },
     color_hex_code: row.color_hex_code,
     display_order: row.display_order,
+    archived_at: row.archived_at,
   };
 }
 
 /**
- * The tags that list at least one exam on this track, ordered by `display_order`.
+ * The track's own active tags plus the shared ones, ordered by `display_order`. A tag with no
+ * exams is still listed.
  *
  * Access is the caller's job: the handler runs `assertTrackAccess` before calling this.
  *
@@ -75,9 +79,10 @@ export function toTag(row: TagRow): Tag {
 export async function getTrackTags(trackId: string): Promise<TrackTags> {
   const { data, error } = await supabaseAdmin
     .from("tags")
-    // The inner join drops tags with no exam on this track.
-    .select("id, code, name_ar, name_en, color_hex_code, display_order, exams!inner(id)")
-    .eq("exams.track_id", trackId)
+    .select(TAG_COLUMNS)
+    // trackId is a validated UUID, so it is safe inside the filter string.
+    .or(`track_id.eq.${trackId},track_id.is.null`)
+    .is("archived_at", null)
     .order("display_order", { ascending: true });
 
   if (error) {
@@ -92,15 +97,15 @@ export async function getTrackTags(trackId: string): Promise<TrackTags> {
 }
 
 /**
- * Fails when no tag has this code. Codes are global, so the check ignores tracks.
+ * One tag by code. Codes are global, so the lookup ignores tracks.
  *
  * @throws {AppError} 404 `NOT_FOUND` — no tag has this code.
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
-export async function assertTagExists(code: string): Promise<void> {
+export async function getTag(code: string): Promise<Tag> {
   const { data, error } = await supabaseAdmin
     .from("tags")
-    .select("id")
+    .select(TAG_COLUMNS)
     .eq("code", code)
     .maybeSingle();
 
@@ -119,6 +124,8 @@ export async function assertTagExists(code: string): Promise<void> {
       message: `Tag with code ${code} does not exist.`,
     });
   }
+
+  return toTag(data);
 }
 
 /**

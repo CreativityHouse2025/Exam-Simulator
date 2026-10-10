@@ -7,7 +7,7 @@ import type {
 import type { Tables } from "../database.types.js";
 import { AppError } from "../errors/AppError.js";
 import { supabaseAdmin } from "../supabaseClient.js";
-import { assertTagExists, toTag, toTrack } from "./trackService.js";
+import { getTag, toTag, toTrack } from "./trackService.js";
 
 /**
  * What `toExam` reads. The track is reached through `allowed_config`: exams hold no direct FK to
@@ -15,7 +15,7 @@ import { assertTagExists, toTag, toTrack } from "./trackService.js";
  */
 export type ExamRow = Pick<
   Tables<'exams'>,
-  'id' | 'display_order' | 'name_ar' | 'name_en' | 'description_ar' | 'description_en' | 'question_count'
+  'id' | 'display_order' | 'name_ar' | 'name_en' | 'description_ar' | 'description_en' | 'question_count' | 'archived_at'
 > & {
   tags: Parameters<typeof toTag>[0]
   allowed_config: { tracks: Parameters<typeof toTrack>[0] }
@@ -28,7 +28,7 @@ type ExamDetailsRow = ExamRow & { allowed_config: { exam_config: ExamConfig } }
  * Every exam column the API returns, with its track, tag and config. Must stay ONE string literal:
  * concatenation widens it to `string` and supabase-js loses the row type entirely.
  */
-const EXAM_DETAILS_COLUMNS = 'id, display_order, name_ar, name_en, description_ar, description_en, question_count, tags!inner(id, code, name_ar, name_en, color_hex_code, display_order), allowed_config(tracks(id, name_ar, name_en, description_ar, description_en), exam_config(exam_duration_minutes, passing_rate, can_reveal_answers, allow_retry_wrong, breaks(show_at_index, duration_minutes)))'
+const EXAM_DETAILS_COLUMNS = 'id, display_order, name_ar, name_en, description_ar, description_en, question_count, archived_at, tags!inner(id, code, name_ar, name_en, color_hex_code, display_order, archived_at), allowed_config(tracks(id, name_ar, name_en, description_ar, description_en), exam_config(exam_duration_minutes, passing_rate, can_reveal_answers, allow_retry_wrong, breaks(show_at_index, duration_minutes)))'
 
 /** Bilingual columns collapse into one object; track and tag come along whole. */
 export function toExam(row: ExamRow): Exam {
@@ -45,7 +45,8 @@ export function toExam(row: ExamRow): Exam {
       ar: row.description_ar,
       en: row.description_en
     },
-    question_count: row.question_count
+    question_count: row.question_count,
+    archived_at: row.archived_at
   }
 }
 
@@ -91,23 +92,33 @@ export async function getExam(examId: number): Promise<ExamDetails> {
 }
 
 /**
- * One tag's exams in a track, each carrying its own config, ordered by `display_order`.
+ * One active tag's active exams in a track, each carrying its own config, ordered by
+ * `display_order`.
  *
- * A known tag with no exams on this track is an empty list, not a 404.
+ * A known tag with no active exams on this track is an empty list, not a 404.
  *
  * Access is the caller's job: the handler runs `assertTrackAccess` before calling this.
  *
- * @throws {AppError} 404 `NOT_FOUND` — no tag has this code.
- * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
+ * @throws {AppError} 404 `NOT_FOUND` — no tag has this code, or it is archived.
+ * @throws {AppError} 500 `INTERNAL_ERROR` — a query failed.
  */
 export async function getTrackExams(trackId: string, tagCode: string): Promise<TrackExams> {
-  await assertTagExists(tagCode)
+  const tag = await getTag(tagCode)
+
+  if (tag.archived_at !== null) {
+    throw new AppError({
+      statusCode: 404,
+      code: "NOT_FOUND",
+      message: `Tag ${tagCode} is archived.`
+    })
+  }
 
   const { data, error } = await supabaseAdmin
     .from('exams')
     .select(EXAM_DETAILS_COLUMNS)
     .eq('track_id', trackId)
     .eq('tags.code', tagCode)
+    .is('archived_at', null)
     .order('display_order', { ascending: true })
     .order('show_at_index', { referencedTable: 'allowed_config.exam_config.breaks', ascending: true })
 

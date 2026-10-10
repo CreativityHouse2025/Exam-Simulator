@@ -23,7 +23,7 @@ The question layer (questions, choices, exam questions, configs, breaks) is unto
 
 Students navigate **Track → Full exams | Categories → (category) → exam**. Every page fetches its own data, so any URL works when opened cold.
 
-Exams can be **archived**. An archived exam disappears from every place a student could start it. It stays in the student's history and review, and an unfinished attempt on it can still be resumed and submitted. Supervisors keep seeing archived exams, clearly labelled. Every exam that exists today is archived by this change; new content arrives in later migrations.
+Exams and tags can be **archived**. An archived exam disappears from the catalog and can no longer be started. It stays in the student's history and review, and an unfinished attempt on it can still be resumed and submitted. An archived tag disappears from the catalog; it does not block starting its exams. Archived content is hidden from every role, supervisors included. Every exam that exists today, and the `legacy` tag, are archived by this change; new content arrives in later migrations.
 
 Attempts follow three rules:
 
@@ -38,7 +38,7 @@ Attempts follow three rules:
 1. As a student, I want to open a track and see two clear choices, Full exams and Categories, so that I can decide how to practise without scrolling a long list.
 2. As a student, I want the Full exams page to list only full exams in the track's order, so that I take them in the intended sequence.
 3. As a student, I want the Categories page to list the track's categories in the track's intended order (not alphabetical), so that the structure matches what I study.
-4. As a student, I want categories with nothing I can take hidden from the Categories page, so that I never open an empty category.
+4. As a student, I want retired (archived) categories hidden from the Categories page, so that I only see categories the business currently offers. A category with no exams yet is still listed and shows the empty state.
 5. As a student, I want to open a category and see its exams in order, so that I can work through them.
 6. As a student, I want each exam card to show its name, description, question count and duration, so that I know what I'm starting.
 7. As a student, I want to bookmark or refresh any catalog page and land on the same content, so that the browser's back, refresh and share all work.
@@ -66,9 +66,9 @@ Attempts follow three rules:
 ### Supervisor
 
 22. As a supervisor, I want to browse a track the same way students do (Full exams / Categories / exams), so that I see what they see.
-23. As a supervisor, I want archived exams included and clearly labelled "Archived", so that I can inspect legacy content when supporting a student.
-24. As a supervisor, I want categories that contain only archived exams to still appear for me, so that legacy content remains reachable.
-25. As a supervisor, I want the question viewer and preview sessions to keep working for active and archived exams, so that I can audit any exam.
+23. ~~Archived exams labelled for supervisors~~ — dropped: the business confirmed supervisors do not need archived content in the catalog.
+24. ~~Archived-only categories visible to supervisors~~ — dropped, same reason.
+25. As a supervisor, I want the question viewer and preview sessions to keep working for active and archived exams, so that I can audit any exam I can reach.
 26. As a supervisor, I want a student's attempt history to show exam names even for archived exams, so that support conversations make sense.
 
 ### Business / content
@@ -99,7 +99,7 @@ Each slice is finished end to end (database → API → frontend) and verified o
 
 Order: 1 → 2 → 3 → 4 → 5 → 6. Slices 1, 5 and 6 can move earlier if needed.
 
-Migrations: the existing uncommitted 019 (track code) stays as is. The existing uncommitted 020 (results) is edited in place, on the assumption that it has only ever run locally. Catalog changes go into a migration named for exam tags (021). Attempt-rule changes go into a migration named for attempt limits (022). Each migration is wrapped in a single transaction. When slices interleave across two migration files, the file content grows slice by slice, and `npm run db:reset` replays it every time.
+Migrations: the existing uncommitted 019 (track code) stays as is. The existing uncommitted 020 (results) is edited in place, on the assumption that it has only ever run locally. Catalog changes go into a migration named for exam tags (021). Archiving goes into its own migration (022). Attempt-rule changes go into a migration named for attempt limits (023). Each migration is wrapped in a single transaction. When slices interleave across two migration files, the file content grows slice by slice, and `npm run db:reset` replays it every time.
 
 ### Slice 1: Results record
 
@@ -119,11 +119,11 @@ Migrations: the existing uncommitted 019 (track code) stays as is. The existing 
   - `color_hex_code` (renamed from `colour`): `#RRGGBB`, checked by the database, nullable (null falls back to a neutral style). Replaces the old design-token keys.
 - Backfill: existing row 1 becomes `full` (shared, `#9a6b2f`). Existing row 2 becomes `legacy` (PMP track, `#7b4d8e`) and is never linked from the UI. New category tags arrive with new content.
 - No trigger ties an exam's tag to the exam's track (accepted risk).
-- **New endpoint** `GET /api/tracks/:trackId/tags`, with the same auth and enrollment gate as the track's exam list. It returns `{ tags: Tag[] }`: only tags that have at least one exam **visible to the caller** on that track, sorted by `display_order`. The frontend separates `full` from category tags.
+- **New endpoint** `GET /api/tracks/:trackId/tags`, with the same auth and enrollment gate as the track's exam list. It returns `{ tags: Tag[] }`: the track's own tags plus the shared ones, sorted by `display_order`, whether or not they list any exam. From slice 4, archived tags are left out. The frontend separates `full` from category tags.
 - Wire shape (`Tag` replaces `ExamType`):
 
   ```ts
-  Tag = { id: number; code: string; name: { ar: string; en: string }; color_hex_code: string | null; display_order: number }
+  Tag = { id: number; code: string; name: { ar: string; en: string }; color_hex_code: string | null; display_order: number; archived_at: string | null }
   ```
 
 - `FULL_TAG_CODE = "full"` is a single constant in the shared schema package, used by both the API and the frontend.
@@ -158,14 +158,17 @@ Migrations: the existing uncommitted 019 (track code) stays as is. The existing 
 
 ### Slice 4: Archiving
 
-- Exams get `archived_at` (timestamptz, nullable). Null means active. Clearing it reopens the exam.
-- The migration sets `archived_at = now()` on **every existing exam** (all full and legacy-tag exams).
-- **One visibility rule, written once** and shared by the tags and exams endpoints: students never receive archived exams, or tags whose exams are all archived; supervisors receive everything.
-- Exam wire shape gains `archived_at: string | null`. Supervisors see an "Archived" badge (shadcn Badge, existing tokens).
-- `start_attempt` returns a new result **`archived`** when the exam is archived. It maps to a dedicated error code the frontend parses and shows as "no longer available".
+- Migration 022. Exams **and tags** get `archived_at` (timestamptz, nullable). Null means active. Clearing it reopens the exam or tag.
+- The migration sets `archived_at = now()` on **every existing exam** and on the `legacy` tag. `full` is never archived: it is shared, so archiving it would hide Full exams on every track (convention, not enforced).
+- **No role distinction.** The catalog never returns archived content, to anyone:
+  - Tags endpoint: leaves out archived tags.
+  - Exams endpoint: leaves out archived exams; an archived tag is **404 `NOT_FOUND`**, like an unknown code.
+- Exam and tag wire shapes gain `archived_at: string | null` (returned, not used by the UI).
+- `start_attempt` returns a new result **`archived`** when the **exam** is archived, mapped to **410 `EXAM_ARCHIVED`**, which the frontend shows as "no longer available". A tag's archive state never blocks starting: an active exam in an archived tag is unreachable in the catalog but still startable through the API.
 - Archiving blocks **only** starting. Save, submit, review and the supervisor question viewer and preview keep working on archived exams.
-- Deep links: a student opening an archived exam's start path gets the not-available state; history and review links keep working.
-- **Release note:** after this slice, students see an empty catalog until new content is migrated in.
+- Starting is a button action, not a URL, so there is no start deep link. `EXAM_ARCHIVED` shows as a "no longer available" toast wherever Start is pressed; history and review links keep working.
+- `seed_demo.sql` reopens its four demo exams, runs its journeys, and archives them again, so the demo student holds completed and in-progress attempts on archived exams.
+- **Release note:** after this slice, the catalog is empty until new content is migrated in.
 
 ### Slice 5: One open attempt per exam
 
@@ -197,17 +200,17 @@ API smoke checks per slice (student = enrolled student cookie, sup = enrolled su
 |---|---|---|
 | 1 | Complete an attempt, then list attempts | Score, status, wrong count, time taken present; time taken null on untimed |
 | 1 | Review a pre-migration completed attempt | Wrong count present (recomputed) |
-| 2 | `GET /tracks/:id/tags` (student, sup) | Sorted by display order; `full` first when present |
+| 2 | `GET /tracks/:id/tags` (student, sup) | Track's tags + shared, sorted by display order; `full` first |
 | 2 | `GET /tracks/:id/tags` (not enrolled) | Same refusal as the exam list today |
 | 2 | List attempts | Each attempt carries its exam (name, tag) |
 | 3 | `GET /tracks/:id/exams` (no tag) | 400 |
 | 3 | `GET /tracks/:id/exams?tag=nope` | 404 `NOT_FOUND` |
 | 3 | `?tag=<valid, nothing visible>` | 200, empty list |
 | 3 | `?tag=full` | Exams ordered by per-tag display order; no `tags` key |
-| 4 | Student `?tag=full` / `?tag=legacy` after migration | 200, empty |
-| 4 | Sup same calls | All legacy exams, `archived_at` set |
-| 4 | Student `/tags` | No archived-only tags; sup sees them |
-| 4 | Start an archived exam | `archived` error code |
+| 4 | `?tag=full` after migration (student, sup) | 200, empty |
+| 4 | `?tag=legacy` after migration (student, sup) | 404 `NOT_FOUND` |
+| 4 | `/tags` (student, sup) | `full` only; no `legacy` |
+| 4 | Start an archived exam | 410 `EXAM_ARCHIVED` |
 | 4 | Save / submit / review an attempt on an archived exam | Works |
 | 5 | Start twice on the same exam | Second returns `in_progress` + same id; one row |
 | 5 | Two parallel starts | Exactly one attempt created |

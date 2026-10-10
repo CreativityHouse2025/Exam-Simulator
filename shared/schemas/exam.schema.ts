@@ -13,6 +13,8 @@ export const TagSchema = z.object({
   /** Hex, e.g. "#b5965d". Null falls back to a neutral style. */
   color_hex_code: z.string().nullable(),
   display_order: z.int(),
+  /** Null means active. The catalog never lists archived tags. */
+  archived_at: z.string().nullable(),
 });
 
 export type Tag = z.infer<typeof TagSchema>;
@@ -44,6 +46,8 @@ export const ExamSchema = z.object({
   name: BilingualTextSchema,
   description: BilingualTextSchema,
   question_count: z.int().positive(),
+  /** Null means active. The catalog never lists archived exams. */
+  archived_at: z.string().nullable(),
 });
 
 export type Exam = z.infer<typeof ExamSchema>;
@@ -110,7 +114,7 @@ export const TrackExamsSchema = z.object({
 
 export type TrackExams = z.infer<typeof TrackExamsSchema>;
 
-/** GET /api/tracks/:trackId/tags — tags with at least one exam on the track, by `display_order`. */
+/** GET /api/tracks/:trackId/tags — the track's active tags plus shared ones, by `display_order`. */
 export const TrackTagsSchema = z.object({
   tags: z.array(TagSchema),
 });
