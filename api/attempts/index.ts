@@ -5,7 +5,7 @@ import { successResponse } from "../_lib/utils/response.js"
 import { parseJsonBody } from "../_lib/utils/parseBody.js"
 import { parseOrThrow } from "../_lib/utils/parse.js"
 import { z } from "zod"
-import type { AttemptWithQuestions } from "../../shared/schemas/attempt.schema.js"
+import type { StartAttemptResponse } from "../../shared/schemas/attempt.schema.js"
 import { TrackIdSchema } from "../../shared/schemas/track.schema.js"
 import { listAttempts, startAttempt } from "../_lib/services/attemptService.js"
 
@@ -22,8 +22,9 @@ export const POST = withErrorHandler(
       const parsedBody = await parseJsonBody(request)
       const validatedInput = parseOrThrow(StartAttemptRequestSchema, parsedBody)
 
-      const result: AttemptWithQuestions = await startAttempt(authUser.id, validatedInput.exam_id)
-      return successResponse(result, 201, cookieHeaders)
+      // 201 only when an attempt was created; an open attempt on this exam is a 200.
+      const result: StartAttemptResponse = await startAttempt(authUser.id, validatedInput.exam_id)
+      return successResponse(result, result.result === "started" ? 201 : 200, cookieHeaders)
     }),
   ),
 )

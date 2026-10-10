@@ -19,7 +19,10 @@ import Loading from "@/components/Loading";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuth } from "@/features/auth";
 import useSettings from "@/core/hooks/useSettings";
-import { useAttemptActions } from "@/features/exam-session";
+import {
+  ResumeAttemptDialog,
+  useAttemptActions,
+} from "@/features/exam-session";
 import { translate } from "@/core/utils/translation";
 import { isNotFoundError } from "@/core/errors";
 import { ROUTES } from "@/routes/routes";
@@ -47,7 +50,13 @@ const TrackExamsPage: React.FC = () => {
     enabled: isEnrolled,
   });
 
-  const { startExam, isBusy } = useAttemptActions();
+  const {
+    startExam,
+    openAttempt,
+    isBusy,
+    openAttemptOffer,
+    dismissOpenAttemptOffer,
+  } = useAttemptActions();
 
   const attemptStats = React.useMemo(
     () => statsByExamId(attemptsQuery.data ?? []),
@@ -128,6 +137,15 @@ const TrackExamsPage: React.FC = () => {
           />
         )}
       />
+
+      {openAttemptOffer && (
+        <ResumeAttemptDialog
+          attempt={openAttemptOffer}
+          examName={openAttemptOffer.exam.name[langCode]}
+          onResume={() => openAttempt(openAttemptOffer.id)}
+          onOpenChange={(open) => !open && dismissOpenAttemptOffer()}
+        />
+      )}
     </div>
   );
 };

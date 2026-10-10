@@ -173,7 +173,7 @@ Migrations: the existing uncommitted 019 (track code) stays as is. The existing 
 ### Slice 5: One open attempt per exam
 
 - A partial unique index on attempts covers (user id, exam id) where `exam_state` is in progress **and `created_at` is on or after a fixed release cutoff** (literal timestamp with explicit UTC offset). Legacy rows before the cutoff are outside the index, so existing duplicate open attempts don't block the migration. They can only be finished, never multiplied. The cutoff gets a one-line comment.
-- `start_attempt` first checks for an open attempt on that exam (old or new). If one exists, it returns a new result **`in_progress`** with the existing attempt's id and creates nothing. The index is the race backstop.
+- `start_attempt` first checks for an open attempt on that exam (old or new). If one exists, it returns a new result **`in_progress`** with the existing attempt's id and creates nothing. The index is the race backstop.A
 - Frontend: Start receiving `in_progress` shows a dialog (shadcn Dialog) offering **Resume**, which opens the existing attempt.
 
 ### Slice 6: Per-exam attempt limit

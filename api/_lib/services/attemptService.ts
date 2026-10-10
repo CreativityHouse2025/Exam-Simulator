@@ -14,6 +14,7 @@ import type {
   ExamState,
   Revision,
   SaveAttemptAnswers,
+  StartAttemptResponse,
 } from "../../../shared/schemas/attempt.schema.js";
 import { getExam, toExam, type ExamRow } from "./examService.js";
 import { assertTrackAccess } from "./trackService.js";
@@ -115,8 +116,9 @@ function toAttempt({ results, offered_breaks, ...row }: AttemptRow, exam: Exam):
  * Starts an exam. The server decides the question set, the order, the config and the clock; the
  * client sends only which exam.
  *
- * Every call creates an attempt. Sending the request once is the frontend's job — several
- * unfinished attempts for one exam are a legitimate state, bounded by the per-track cap.
+ * A student has at most one unfinished attempt per exam. If one exists, nothing is created and it
+ * comes back as `in_progress`, shaped as in the list; the RPC's partial unique index settles
+ * concurrent starts.
  *
  * Starting an exam is track access, unlike reading an attempt already owned. The track is reachable
  * only through the exam, so it is checked before anything is written. The exam's config is dropped:
@@ -130,7 +132,7 @@ function toAttempt({ results, offered_breaks, ...row }: AttemptRow, exam: Exam):
 export async function startAttempt(
   userId: string,
   exam_id: number,
-): Promise<AttemptWithQuestions> {
+): Promise<StartAttemptResponse> {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { config: _config, ...exam } = await getExam(exam_id);
   await assertTrackAccess(userId, exam.track.id);
@@ -163,6 +165,10 @@ export async function startAttempt(
     });
   }
 
+  if (data.result === "in_progress") {
+    return { result: "in_progress", attempt: await getAttemptSummary(data.id) };
+  }
+
   // The RPC returns the snapshot, not the generated column, so the count comes off the array.
   // A just-started attempt has no result and has been offered no break, so neither needs a query.
   const attempt = toAttempt(
@@ -186,7 +192,30 @@ export async function startAttempt(
     is_bookmarked: false,
   })) as AttemptWithQuestions["questions"];
 
-  return { attempt, questions };
+  return { result: "started", attempt, questions };
+}
+
+/**
+ * One attempt as the list shows it, without questions. The caller already owns the id.
+ *
+ * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed or the attempt is gone.
+ */
+async function getAttemptSummary(attemptId: string): Promise<Attempt> {
+  const { data, error } = await supabaseAdmin
+    .from("exam_attempts")
+    .select(ATTEMPT_COLUMNS)
+    .eq("id", attemptId)
+    .single();
+
+  if (error || !data) {
+    throw new AppError({
+      statusCode: 500,
+      code: "INTERNAL_ERROR",
+      message: `Failed to fetch attempt ${attemptId} (${error?.message ?? "no row returned"})`,
+    });
+  }
+
+  return toAttempt(data, toExam(data.exams));
 }
 
 /** Turns an attempt RPC's sentinel into the error it stands for. `ok` passes through. */

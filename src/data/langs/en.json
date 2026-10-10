@@ -278,6 +278,12 @@
       "server-unknown": "An unexpected error occurred. Please try again.",
       "no-attempt-id": "No exam session found. Please start a new exam from the home page.",
       "no-mistakes": "You have no mistakes to revise."
+    },
+    "resume": {
+      "title": "You have an unfinished attempt",
+      "description": "You started $1 on $2 and reached question $3 of $4. Resume where you left off?",
+      "resume": "Resume",
+      "cancel": "Cancel"
     }
   },
   "dashboard": {

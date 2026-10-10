@@ -99,6 +99,11 @@ export type AttemptWithQuestions = Omit<
   "attempt"
 > & { attempt: Attempt };
 
+/** POST /api/attempts. `in_progress` is the student's open attempt on that exam; nothing was created. */
+export type StartAttemptResult =
+  | ({ result: "started" } & AttemptWithQuestions)
+  | { result: "in_progress"; attempt: Attempt };
+
 /**
  * Never returned by the API — submitting stores the grade (score, status, wrong questions)
  * instead of returning it, so this is assembled client-side from those same

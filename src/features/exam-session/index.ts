@@ -1,5 +1,6 @@
 export { default as ExamSession } from "./components/ExamSession";
 export { default as PreviewExamButton } from "./components/PreviewExamButton";
+export { default as ResumeAttemptDialog } from "./components/ResumeAttemptDialog";
 export { default as TimerConfirms } from "./components/TimerConfirms";
 export { default as BreakModals } from "./components/breaks/BreakModals";
 export { useSessionControl } from "./contexts";

@@ -88,7 +88,7 @@ export const AttemptListSchema = z.object({
 export type AttemptList = z.infer<typeof AttemptListSchema>;
 
 /**
- * POST /api/attempts and GET /api/attempts/:id. Questions are ordered by the attempt's
+ * GET /api/attempts/:id, and a started POST /api/attempts. Questions are ordered by the attempt's
  * `question_ids_snapshot`.
  */
 export const AttemptWithQuestionsSchema = z.object({
@@ -100,6 +100,17 @@ export const AttemptWithQuestionsSchema = z.object({
 });
 
 export type AttemptWithQuestions = z.infer<typeof AttemptWithQuestionsSchema>;
+
+/**
+ * POST /api/attempts. `started` (201) is the new attempt with its questions. `in_progress` (200) is
+ * the student's open attempt on that exam, shaped as in the attempt list; nothing was created.
+ */
+export const StartAttemptResponseSchema = z.discriminatedUnion("result", [
+  AttemptWithQuestionsSchema.extend({ result: z.literal("started") }),
+  z.object({ result: z.literal("in_progress"), attempt: AttemptSchema }),
+]);
+
+export type StartAttemptResponse = z.infer<typeof StartAttemptResponseSchema>;
 
 /**
  * GET /api/attempts/:id/revision — the "wrong or unanswered" set, always disclosed. Carries the

@@ -3,12 +3,19 @@ import { AppApiError } from "../errors";
 import { apiFetch } from "../api/apiFetch";
 import type { ApiResponse } from "@shared/api.schema";
 import type {
+  Attempt as SharedAttempt,
   AttemptList as SharedAttemptList,
   AttemptWithQuestions as SharedAttemptWithQuestions,
   Revision as SharedRevision,
+  StartAttemptResponse as SharedStartAttemptResponse,
 } from "@shared/attempt.schema";
 import { markPersisted } from "../api/apiTypes";
-import type { Attempt, AttemptWithQuestions, Revision } from "../api/apiTypes";
+import type {
+  Attempt,
+  AttemptWithQuestions,
+  Revision,
+  StartAttemptResult,
+} from "../api/apiTypes";
 
 type SaveAttemptAnswer = {
   questionId: number;
@@ -18,21 +25,24 @@ type SaveAttemptAnswer = {
 
 export async function startAttempt(
   examId: number,
-): Promise<AttemptWithQuestions> {
+): Promise<StartAttemptResult> {
   const response = await apiFetch("/api/attempts", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ exam_id: examId }),
     handleUnauthorized: true,
   });
-  const result: ApiResponse<SharedAttemptWithQuestions> =
-    await response.json();
+  const result: ApiResponse<SharedStartAttemptResponse> = await response.json();
 
   if (!result.success) {
     throw new AppApiError(result.error.code, "attempts");
   }
 
-  return toAttemptWithQuestions(result.data);
+  if (result.data.result === "in_progress") {
+    return { result: "in_progress", attempt: toAttempt(result.data.attempt) };
+  }
+
+  return { result: "started", ...toAttemptWithQuestions(result.data) };
 }
 
 export async function getAttempt(
@@ -161,12 +171,14 @@ export async function getAttempts(
     throw new AppApiError(result.error.code, "attempts");
   }
 
+  return result.data.attempts.map(toAttempt);
+}
+
+function toAttempt(data: SharedAttempt): Attempt {
+  const attempt = camelcaseKeys(data, { deep: true });
   // The backend pairs examState and result; the cast restores that pairing.
-  return camelcaseKeys(result.data.attempts, { deep: true }).map(
-    (attempt) =>
-      ({
-        ...attempt,
-        configSnapshot: markPersisted(attempt.configSnapshot),
-      }) as Attempt,
-  );
+  return {
+    ...attempt,
+    configSnapshot: markPersisted(attempt.configSnapshot),
+  } as Attempt;
 }
