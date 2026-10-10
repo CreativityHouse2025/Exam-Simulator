@@ -25,7 +25,7 @@
       "destination": "/api/$1"
     },
     {
-      "source": "/((?!api/).*)",
+      "source": "/((?!api/|favicon\\.|apple-touch-icon\\.).*)",
       "destination": "/index.html"
     }
   ]
