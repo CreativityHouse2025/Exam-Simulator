@@ -92,6 +92,36 @@ export async function getTrackTags(trackId: string): Promise<TrackTags> {
 }
 
 /**
+ * Fails when no tag has this code. Codes are global, so the check ignores tracks.
+ *
+ * @throws {AppError} 404 `NOT_FOUND` — no tag has this code.
+ * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
+ */
+export async function assertTagExists(code: string): Promise<void> {
+  const { data, error } = await supabaseAdmin
+    .from("tags")
+    .select("id")
+    .eq("code", code)
+    .maybeSingle();
+
+  if (error) {
+    throw new AppError({
+      statusCode: 500,
+      code: "INTERNAL_ERROR",
+      message: `Failed to fetch tag ${code} (${error.message})`,
+    });
+  }
+
+  if (!data) {
+    throw new AppError({
+      statusCode: 404,
+      code: "NOT_FOUND",
+      message: `Tag with code ${code} does not exist.`,
+    });
+  }
+}
+
+/**
  * Guards every track-scoped resource. Applies to BOTH roles — a supervisor enrolls in a track like
  * a student and is refused one they do not hold.
  *

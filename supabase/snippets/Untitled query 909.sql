@@ -1,1 +1,1 @@
-DESCRIBE TABLE exam_type
+select * from exams order by display_order asc

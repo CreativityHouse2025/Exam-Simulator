@@ -4,29 +4,37 @@ import { ArrowRight, type LucideIcon } from "lucide-react";
 import { Card } from "./ui/card";
 import { cn } from "./ui/utils";
 
+/** Classes for the rail, icon and hover border; `style` sets any CSS variable they read. */
+export type ActionCardTone = {
+  rail: string;
+  icon: string;
+  hoverBorder: string;
+  style?: React.CSSProperties;
+};
+
 type ActionCardProps = {
   icon: LucideIcon;
   title: string;
-  description: string;
+  description?: string;
   to: string;
   /** Gold reads as "act on the library", plum as "look someone up" — the two halves of the role. */
-  accent: "primary" | "secondary";
+  accent: keyof typeof ACCENTS | ActionCardTone;
 };
 
 const ACCENTS = {
   primary: {
     rail: "bg-primary",
     icon: "text-primary",
-    border: "hover:border-primary",
+    hoverBorder: "hover:border-primary",
   },
   secondary: {
     rail: "bg-secondary",
     icon: "text-secondary",
-    border: "hover:border-secondary",
+    hoverBorder: "hover:border-secondary",
   },
-} as const;
+} as const satisfies Record<string, ActionCardTone>;
 
-/** One destination on the supervisor dashboard, sized as a comfortable tap target on mobile. */
+/** One destination card, sized as a comfortable tap target on mobile. */
 const ActionCard: React.FC<ActionCardProps> = ({
   icon: Icon,
   title,
@@ -34,14 +42,16 @@ const ActionCard: React.FC<ActionCardProps> = ({
   to,
   accent,
 }) => {
-  const tone = ACCENTS[accent];
+  const tone: ActionCardTone =
+    typeof accent === "string" ? ACCENTS[accent] : accent;
 
   return (
     <Link to={to} className="no-select h-full">
       <Card
+        style={tone.style}
         className={cn(
           "group h-full gap-0 overflow-hidden border-grey-200 pt-0 transition-colors duration-200 hover:bg-grey-50",
-          tone.border,
+          tone.hoverBorder,
         )}
       >
         <div className={cn("h-1.5 w-full", tone.rail)} />
@@ -53,9 +63,11 @@ const ActionCard: React.FC<ActionCardProps> = ({
 
           <span className="min-w-0 flex-1">
             <span className="block font-bold text-tertiary">{title}</span>
-            <span className="mt-1 block text-sm leading-relaxed text-grey-800">
-              {description}
-            </span>
+            {description && (
+              <span className="mt-1 block text-sm leading-relaxed text-grey-800">
+                {description}
+              </span>
+            )}
           </span>
 
           <ArrowRight

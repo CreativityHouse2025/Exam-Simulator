@@ -7,7 +7,7 @@ import type {
 import type { Tables } from "../database.types.js";
 import { AppError } from "../errors/AppError.js";
 import { supabaseAdmin } from "../supabaseClient.js";
-import { toTag, toTrack } from "./trackService.js";
+import { assertTagExists, toTag, toTrack } from "./trackService.js";
 
 /**
  * What `toExam` reads. The track is reached through `allowed_config`: exams hold no direct FK to
@@ -28,7 +28,7 @@ type ExamDetailsRow = ExamRow & { allowed_config: { exam_config: ExamConfig } }
  * Every exam column the API returns, with its track, tag and config. Must stay ONE string literal:
  * concatenation widens it to `string` and supabase-js loses the row type entirely.
  */
-const EXAM_DETAILS_COLUMNS = 'id, display_order, name_ar, name_en, description_ar, description_en, question_count, tags(id, code, name_ar, name_en, color_hex_code, display_order), allowed_config(tracks(id, name_ar, name_en, description_ar, description_en), exam_config(exam_duration_minutes, passing_rate, can_reveal_answers, allow_retry_wrong, breaks(show_at_index, duration_minutes)))'
+const EXAM_DETAILS_COLUMNS = 'id, display_order, name_ar, name_en, description_ar, description_en, question_count, tags!inner(id, code, name_ar, name_en, color_hex_code, display_order), allowed_config(tracks(id, name_ar, name_en, description_ar, description_en), exam_config(exam_duration_minutes, passing_rate, can_reveal_answers, allow_retry_wrong, breaks(show_at_index, duration_minutes)))'
 
 /** Bilingual columns collapse into one object; track and tag come along whole. */
 export function toExam(row: ExamRow): Exam {
@@ -91,20 +91,23 @@ export async function getExam(examId: number): Promise<ExamDetails> {
 }
 
 /**
- * Every exam in a track, each carrying its own config, plus the tags those exams use.
+ * One tag's exams in a track, each carrying its own config, ordered by `display_order`.
  *
- * `tags` holds only the `tags` rows this track's exams actually reference, so a filter chip
- * can never render a tag with zero exams. Exams are ordered by `display_order`.
+ * A known tag with no exams on this track is an empty list, not a 404.
  *
  * Access is the caller's job: the handler runs `assertTrackAccess` before calling this.
  *
+ * @throws {AppError} 404 `NOT_FOUND` — no tag has this code.
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
-export async function getTrackExams(trackId: string): Promise<TrackExams> {
+export async function getTrackExams(trackId: string, tagCode: string): Promise<TrackExams> {
+  await assertTagExists(tagCode)
+
   const { data, error } = await supabaseAdmin
     .from('exams')
     .select(EXAM_DETAILS_COLUMNS)
     .eq('track_id', trackId)
+    .eq('tags.code', tagCode)
     .order('display_order', { ascending: true })
     .order('show_at_index', { referencedTable: 'allowed_config.exam_config.breaks', ascending: true })
 
@@ -116,13 +119,5 @@ export async function getTrackExams(trackId: string): Promise<TrackExams> {
     })
   }
 
-  // The same tag row repeats once per exam using it; the Map keeps the first of each, so tags
-  // come out in exam display_order. A track with no exams returns two empty arrays — a valid response,
-  // not a 404: a track the caller may not see was already refused by assertTrackAccess.
-  const usedTags = new Map(data.map((row) => [row.tags.id, row.tags]))
-
-  return {
-    exams: data.map(toExamDetails),
-    tags: [...usedTags.values()].map(toTag)
-  }
+  return { exams: data.map(toExamDetails) }
 }

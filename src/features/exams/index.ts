@@ -9,4 +9,5 @@ export {
   createTrackExamsQueryOptions,
 } from "./services/exams.queries";
 export type { OpenState, QuestionSection, SectionOpen } from "./types";
+export { examListTitle } from "./utils/examListTitle";
 export { tagAccent } from "./utils/tagAccent";

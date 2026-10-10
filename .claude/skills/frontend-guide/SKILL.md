@@ -152,8 +152,10 @@ inside `saveProgress` / `submitExam`, so no caller branches on it.
 
 Query definitions live in each feature's `services/<name>.queries.ts`
 (`createAttemptsQueryOptions` in attempts, `createStudent*QueryOptions` in students,
-`createTracksQueryOptions` in tracks, `createTrackExamsQueryOptions` /
-`createExamQuestionsQueryOptions` in exams) and are exported through the feature's `index.ts`.
+`createTracksQueryOptions` / `createTrackTagsQueryOptions` in tracks,
+`createTrackExamsQueryOptions(trackId, tagCode)` / `createExamQuestionsQueryOptions` in exams) and
+are exported through the feature's `index.ts`. The exams query is keyed per tag and does not retry
+a `NOT_FOUND` (an unknown tag stays unknown) — `isNotFoundError` in `core/errors.ts` is the check.
 Add a new server read as a `queryOptions` factory there rather than inlining `useQuery` config in a
 component — that is what keeps cache keys consistent across the pages that share data.
 
@@ -212,12 +214,39 @@ Supervisors can run any exam without touching the DB. `startNewExam({ preview: t
 and the session never persists. Preview routes live under `ROUTES.examPreview` and reuse the same
 `ExamPage` tree. Revision is unavailable for preview sessions.
 
-Every supervisor URL is track-scoped (`/exams/:trackId/...`, `/students/:id/tracks/:trackId`),
+Every supervisor URL is track-scoped (`/tracks/:trackId/library/...`, `/exams/:trackId/:examId`,
+`/students/:id/tracks/:trackId`),
 mirroring `assertTrackAccess` on the API. Access is checked twice on purpose: the page filters to
 the supervisor's own `enrolledTracks` so a doomed request is never sent, and the attempts page
 also renders a lock state when the API answers `FORBIDDEN` — which is what a deep link or an
 enrollment expiring mid-session produces. Leaving an exam routes by role: a supervisor's exit from
 a preview goes to `ROUTES.examLibrary`, never to the student-only `/tracks/:id`.
+
+## Exam catalog navigation (tags)
+
+Every exam has one tag (see `database-guide`). The shared `full` tag (`FULL_TAG_CODE` in
+`@shared/exam.schema`) lists it under **Full exams**; any other tag is a **category**. Each role
+browses a track through the same three screens, under its own prefix, so no page branches on role:
+
+| Screen | Student | Supervisor |
+| --- | --- | --- |
+| Hub | `ROUTES.track` `/tracks/:id` | `ROUTES.examLibrary` `/tracks/:id/library` |
+| Categories | `ROUTES.trackCategories` `…/by-category` | `ROUTES.libraryCategories` `…/library/by-category` |
+| Exam list | `ROUTES.trackExams` `…/exams?tag=<code>` | `ROUTES.libraryExams` `…/library/exams?tag=<code>` |
+
+- **Hub** — `CatalogEntryCards` (tracks): two static `ActionCard`s, Full exams and Categories. They
+  are UI copy and fetch nothing. The student hub also shows recent attempts.
+- **Categories** — the page reads the tags query and **drops `full` itself**, then hands the rest to
+  `CategoryGrid`, which only renders. Keep that filter in the page, where it is visible.
+- **Exam list** — reads `?tag=`, calls the exams query with it, and renders `ExamBrowser` with the
+  role's card (`TrackExamCard` or `LibraryExamCard`). `ExamBrowser` owns only the loading / error /
+  empty states and the list; there is no search, filter or paging. The heading is
+  `examListTitle(exams, langCode)` — the tag's name **from the data**, `full` included, with a
+  generic label for an empty list. A missing `?tag` or a `NOT_FOUND` shows the not-found state.
+- **Not enrolled** — every catalog page renders `TrackLockedState`, whose back link goes to the
+  track picker, never to the hub of the locked track.
+- A tag's colour reaches cards through `tagAccent(colorHexCode)`; its shape plugs straight into
+  `ActionCard`'s `accent`.
 
 ## Pages — assembly only, no page imports another
 

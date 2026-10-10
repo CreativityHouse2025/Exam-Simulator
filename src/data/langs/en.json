@@ -44,7 +44,7 @@
     },
     "top-display": {
       "question": "Question $1 of $2",
-      "category": "Category",
+      "exams": "Exams",
       "exam": "Exam",
       "save": "Save Progress"
     },
@@ -75,7 +75,7 @@
       "incomplete": "Unanswered",
       "home": "Go Home",
       "retake-wrong": "Retry Mistakes",
-      "category": "Category",
+      "exams": "Exams",
       "exam": "Exam",
       "result-unavailable": "Your exam was submitted, but the result could not be loaded."
     }
@@ -390,11 +390,8 @@
       "server-unknown": "Something went wrong. Please try again.",
       "fetch": "Failed to load exams."
     },
-    "title": "Exams",
     "start": "Start",
-    "search": "Search exams by name",
-    "empty": "No exams in this track yet",
-    "no-results": "No exams match your filters",
+    "empty": "No exams here yet",
     "no-results-hint": "Try a different name or exam type.",
     "taken": "Taken $1x",
     "questions": "$1 questions",
@@ -402,10 +399,6 @@
     "in-progress": "$1 attempts uncompleted",
     "show-details": "Show configuration",
     "hide-details": "Hide configuration",
-    "filter": {
-      "type": "Exam type",
-      "all": "All types"
-    },
     "config": {
       "duration": "Duration",
       "passing": "Passing rate",
@@ -418,11 +411,26 @@
       "allowed": "Allowed",
       "not-allowed": "Not allowed"
     },
-    "breaks": "$1 breaks",
-    "show-more": "Show $1 more",
-    "show-less": "Show fewer",
-    "hide-section": "Hide exams",
-    "show-section": "Show exams"
+    "breaks": "$1 breaks"
+  },
+  "catalog": {
+    "full": {
+      "title": "Full exams",
+      "description": "Complete practice exams, in the intended order."
+    },
+    "categories": {
+      "title": "Categories",
+      "description": "Practise one category at a time.",
+      "empty": "No categories in this track yet",
+      "errors": {
+        "fetch": "Failed to load categories."
+      }
+    },
+    "exams": "Exams",
+    "not-found": "This list doesn't exist",
+    "not-found-hint": "The link may be wrong or out of date.",
+    "back-to-track": "Back to track",
+    "back-to-categories": "All categories"
   },
   "tracks": {
     "errors": {

@@ -9,10 +9,13 @@ import type {
   TrackExams as FrontendTrackExams,
 } from "@/core/api/apiTypes";
 
+/** One tag's exams on a track. An unknown tag code throws `NOT_FOUND`. */
 export async function getTrackExams(
   trackId: string,
+  tagCode: string,
 ): Promise<FrontendTrackExams> {
-  const response = await apiFetch(`/api/tracks/${trackId}/exams`, {
+  const query = new URLSearchParams({ tag: tagCode });
+  const response = await apiFetch(`/api/tracks/${trackId}/exams?${query}`, {
     handleUnauthorized: true,
   });
   const result: ApiResponse<TrackExams> = await response.json();
@@ -21,13 +24,12 @@ export async function getTrackExams(
     throw new AppApiError(result.error.code, "exams");
   }
 
-  const { exams, tags } = camelcaseKeys(result.data, { deep: true });
+  const { exams } = camelcaseKeys(result.data, { deep: true });
   return {
     exams: exams.map((exam) => ({
       ...exam,
       config: markPersisted(exam.config),
     })),
-    tags,
   };
 }
 

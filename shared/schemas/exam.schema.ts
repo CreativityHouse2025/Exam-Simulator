@@ -3,7 +3,7 @@ import { BilingualTextSchema } from "./common.schema.js";
 import { TrackSchema } from "./track.schema.js";
 
 /** Code of the one tag shared by every track: it lists an exam under "Full exams". */
-export const FULL_TAG_CODE = "FULL";
+export const FULL_TAG_CODE = "full";
 
 /** Where an exam is listed: FULL, or one of a track's domains. */
 export const TagSchema = z.object({
@@ -103,10 +103,9 @@ export type DisclosedQuestion = z.infer<typeof DisclosedQuestionSchema>;
 // Responses — built by the API from database rows, never parsed at runtime.
 // ---------------------------------------------------------------------------
 
-/** GET /api/tracks/:trackId/exams — `tags` holds only the tags this track's exams actually use. */
+/** GET /api/tracks/:trackId/exams?tag=<code> — one tag's exams on the track, by `display_order`. */
 export const TrackExamsSchema = z.object({
   exams: z.array(ExamDetailsSchema),
-  tags: z.array(TagSchema),
 });
 
 export type TrackExams = z.infer<typeof TrackExamsSchema>;

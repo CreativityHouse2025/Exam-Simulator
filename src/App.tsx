@@ -13,9 +13,13 @@ import ResetPasswordPage from "@/pages/reset-password";
 import AttemptHistoryPage from "@/pages/track-history";
 import TracksPage from "@/pages/tracks";
 import TrackPage from "@/pages/track";
+import TrackCategoriesPage from "@/pages/track-categories";
+import TrackExamsPage from "@/pages/track-exams";
 import SupervisorDashboardPage from "@/pages/supervisor";
 import ExamTracksPage from "@/pages/exam-tracks";
 import ExamLibraryPage from "@/pages/exam-library";
+import LibraryCategoriesPage from "@/pages/library-categories";
+import LibraryExamsPage from "@/pages/library-exams";
 import ExamDetailPage from "@/pages/exam-detail";
 import StudentSearchPage from "@/pages/student-search";
 import StudentProfilePage from "@/pages/student-profile";
@@ -150,6 +154,14 @@ const App: React.FC = () => {
                   element={<ExamLibraryPage />}
                 />
                 <Route
+                  path={ROUTES.libraryCategories.pattern}
+                  element={<LibraryCategoriesPage />}
+                />
+                <Route
+                  path={ROUTES.libraryExams.pattern}
+                  element={<LibraryExamsPage />}
+                />
+                <Route
                   path={ROUTES.examDetail.pattern}
                   element={<ExamDetailPage />}
                 />
@@ -177,6 +189,14 @@ const App: React.FC = () => {
                 }
               >
                 <Route path={ROUTES.track.pattern} element={<TrackPage />} />
+                <Route
+                  path={ROUTES.trackCategories.pattern}
+                  element={<TrackCategoriesPage />}
+                />
+                <Route
+                  path={ROUTES.trackExams.pattern}
+                  element={<TrackExamsPage />}
+                />
                 <Route
                   path={ROUTES.trackHistory.pattern}
                   element={<AttemptHistoryPage />}

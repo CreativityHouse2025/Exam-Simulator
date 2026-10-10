@@ -46,3 +46,6 @@ export class AppApiError extends Error {
     this.name = "AppApiError";
   }
 }
+
+export const isNotFoundError = (error: unknown): boolean =>
+  error instanceof AppApiError && error.code === "NOT_FOUND";

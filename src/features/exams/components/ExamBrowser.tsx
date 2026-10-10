@@ -1,20 +1,13 @@
 import React from "react";
-import { ChevronDown, FileQuestion, SearchX } from "lucide-react";
+import { FileQuestion } from "lucide-react";
 import ExamCardSkeleton from "./ExamCardSkeleton";
-import ExamFilters from "./ExamFilters";
 import EmptyState from "@/components/states/EmptyState";
 import ErrorState from "@/components/states/ErrorState";
-import { Button } from "@/components/ui/button";
-import { translate } from "@/core/utils/translation";
-import { cn } from "@/components/ui/utils";
-import type { ExamDetails, Tag } from "@/core/api/apiTypes";
-import type { LangCode } from "@/core/types";
+import type { ExamDetails } from "@/core/api/apiTypes";
 
 type ExamBrowserProps = {
   exams: ExamDetails[];
-  tags: Tag[];
-  langCode: LangCode;
-  /** Renders one exam. The browser owns filtering and the four states; the caller owns the card. */
+  /** Renders one exam. The browser owns the states; the caller owns the card. */
   renderCard: (exam: ExamDetails) => React.ReactNode;
   isPending: boolean;
   isError: boolean;
@@ -23,25 +16,20 @@ type ExamBrowserProps = {
   isRetrying?: boolean;
   emptyMessage: string;
   emptyHint?: string;
-  pageSize?: number;
   skeletonCount?: number;
 };
 
-const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_SKELETON_COUNT = 3;
-const ALL_TAGS = "all";
 
 /**
- * The exam list every reader of a track's exams shares: search, tag filter, capped
- * list with a show-more, and the loading / error / empty / no-results states.
+ * The exam list every reader of a tag's exams shares: the list plus its loading / error / empty
+ * states.
  *
  * It knows nothing about who is reading or what an exam does — the caller supplies the card, so
  * a student's "Start" and a supervisor's "View questions" never meet inside a variant prop.
  */
 const ExamBrowser: React.FC<ExamBrowserProps> = ({
   exams,
-  tags,
-  langCode,
   renderCard,
   isPending,
   isError,
@@ -50,26 +38,8 @@ const ExamBrowser: React.FC<ExamBrowserProps> = ({
   isRetrying = false,
   emptyMessage,
   emptyHint,
-  pageSize = DEFAULT_PAGE_SIZE,
   skeletonCount = DEFAULT_SKELETON_COUNT,
 }) => {
-  const [tagFilter, setTagFilter] = React.useState<string>(ALL_TAGS);
-  const [search, setSearch] = React.useState("");
-  const [showAll, setShowAll] = React.useState(false);
-
-  const visibleExams = React.useMemo(() => {
-    const byTag =
-      tagFilter === ALL_TAGS
-        ? exams
-        : exams.filter((exam) => String(exam.tag.id) === tagFilter);
-    const query = search.trim().toLowerCase();
-    return query
-      ? byTag.filter((exam) =>
-          exam.name[langCode].toLowerCase().includes(query),
-        )
-      : byTag;
-  }, [exams, tagFilter, search, langCode]);
-
   if (isPending) {
     return (
       <div className="flex flex-col gap-4">
@@ -96,56 +66,12 @@ const ExamBrowser: React.FC<ExamBrowserProps> = ({
     );
   }
 
-  const shownExams = showAll ? visibleExams : visibleExams.slice(0, pageSize);
-  const hiddenCount = visibleExams.length - shownExams.length;
-
   return (
-    <>
-      <ExamFilters
-        search={search}
-        onSearchChange={setSearch}
-        tagFilter={tagFilter}
-        onTagFilterChange={setTagFilter}
-        tags={tags}
-        langCode={langCode}
-      />
-
-      {visibleExams.length === 0 ? (
-        <EmptyState
-          icon={SearchX}
-          message={translate("exams.no-results")}
-          hint={translate("exams.no-results-hint")}
-        />
-      ) : (
-        <>
-          <div className="flex flex-col gap-4">
-            {shownExams.map((exam) => (
-              <React.Fragment key={exam.id}>
-                {renderCard(exam)}
-              </React.Fragment>
-            ))}
-          </div>
-
-          {(hiddenCount > 0 || showAll) && (
-            <Button
-              variant="outline"
-              onClick={() => setShowAll((prev) => !prev)}
-              className="mt-4 w-full gap-1.5 border-grey-300 font-semibold text-grey-950 hover:border-primary hover:text-primary"
-            >
-              {showAll
-                ? translate("exams.show-less")
-                : translate("exams.show-more", [hiddenCount])}
-              <ChevronDown
-                className={cn(
-                  "size-4 transition-transform duration-200",
-                  showAll && "rotate-180",
-                )}
-              />
-            </Button>
-          )}
-        </>
-      )}
-    </>
+    <div className="flex flex-col gap-4">
+      {exams.map((exam) => (
+        <React.Fragment key={exam.id}>{renderCard(exam)}</React.Fragment>
+      ))}
+    </div>
   );
 };
 

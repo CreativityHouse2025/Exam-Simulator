@@ -62,6 +62,14 @@ every non-public endpoint needs `withRole`.
 - `api/attempts/[id]/submit.ts` — `POST` submit and grade (owner)
 - `api/attempts/[id]/revision.ts` — `GET` the wrong-or-unanswered set (owner)
 - `api/exams/[examId]/questions.ts` — `GET` an exam's full disclosed content (supervisor)
+- `api/tracks/index.ts` — `GET` the track catalogue
+- `api/tracks/[trackId]/tags.ts` — `GET` the tags with at least one exam on the track, by
+  `display_order`, `full` included (both roles, `assertTrackAccess`)
+- `api/tracks/[trackId]/exams.ts` — `GET ?tag=<code>` one tag's exams on the track, by
+  `display_order` (both roles, `assertTrackAccess`). `tag` is required (400 if missing); an unknown
+  code is 404 `NOT_FOUND`; a known tag with no exams here is `200 { exams: [] }`. The service runs
+  `assertTagExists` first, because the exams query filters through the tag join
+  (`tags!inner`, `.eq("tags.code", …)`) and cannot tell "unknown" from "empty" on its own
 - `api/students/index.ts` — `GET /api/students?q=` student search (supervisor)
 - `api/students/[id]/attempts.ts` — a student's attempts (supervisor)
 

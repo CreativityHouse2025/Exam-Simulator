@@ -135,7 +135,11 @@ const ExamDetailPage: React.FC = () => {
 
   const backButton = (
     <BackButton
-      to={ROUTES.examLibrary.to(trackId)}
+      to={
+        data
+          ? ROUTES.libraryExams.to(trackId, data.exam.tag.code)
+          : ROUTES.examLibrary.to(trackId)
+      }
       text={translate("exam.details.back")}
     />
   );

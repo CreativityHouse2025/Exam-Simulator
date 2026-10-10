@@ -25,6 +25,16 @@ export const ROUTES = {
     pattern: `${TRACKS}/:trackId`,
     to: (trackId: string) => `${TRACKS}/${trackId}`,
   },
+  trackCategories: {
+    pattern: `${TRACKS}/:trackId/by-category`,
+    to: (trackId: string) => `${TRACKS}/${trackId}/by-category`,
+  },
+  /** One tag's exams; the tag travels as `?tag=`, mirroring the API. */
+  trackExams: {
+    pattern: `${TRACKS}/:trackId/exams`,
+    to: (trackId: string, tagCode: string) =>
+      `${TRACKS}/${trackId}/exams?tag=${encodeURIComponent(tagCode)}`,
+  },
   trackHistory: {
     pattern: `${TRACKS}/:trackId/history`,
     to: (trackId: string) => `${TRACKS}/${trackId}/history`,
@@ -37,8 +47,17 @@ export const ROUTES = {
   /** Supervisor track picker — the entry point to the exam library. */
   exams: TRACKS,
   examLibrary: {
-    pattern: `${TRACKS}/:trackId/exams`,
-    to: (trackId: string) => `${TRACKS}/${trackId}/exams`,
+    pattern: `${TRACKS}/:trackId/library`,
+    to: (trackId: string) => `${TRACKS}/${trackId}/library`,
+  },
+  libraryCategories: {
+    pattern: `${TRACKS}/:trackId/library/by-category`,
+    to: (trackId: string) => `${TRACKS}/${trackId}/library/by-category`,
+  },
+  libraryExams: {
+    pattern: `${TRACKS}/:trackId/library/exams`,
+    to: (trackId: string, tagCode: string) =>
+      `${TRACKS}/${trackId}/library/exams?tag=${encodeURIComponent(tagCode)}`,
   },
   examDetail: {
     pattern: `${EXAMS}/:trackId/:examId`,

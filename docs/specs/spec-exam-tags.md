@@ -4,7 +4,7 @@ Status: ready for implementation. Resolved via `/grill-me` on 2026-10-09/10.
 
 ## Problem Statement
 
-Students see one long, flat list of every exam in a track, filtered by two hardcoded "types" (Full / Domain). The business now organises content by PMI domain (People, Process, Business Environment, and domains with no tasks), and wants students to browse that way: pick a track, pick full exams or a domain, then pick an exam.
+Students see one long, flat list of every exam in a track, filtered by two hardcoded "types" (Full / Domain). The business now organises content into categories and wants students to browse that way: pick a track, pick full exams or a category, then pick an exam.
 
 The business also needs to retire old content without erasing student history, and the current attempt rules no longer match what the business wants:
 
@@ -16,12 +16,12 @@ The business also needs to retire old content without erasing student history, a
 
 Every exam stays a single row with a single **tag**. The tag says where the exam is listed:
 
-- The shared `FULL` tag puts it under **Full exams**.
-- A track-specific domain tag (`PEOPLE`, `PROCESS`, `ENVIRONMENT`, …) puts it under **Domains**. A task is an exam tagged with its domain. A domain without tasks is a tag with one exam.
+- The shared `full` tag puts it under **Full exams**.
+- A track-specific category tag (`people`, `process`, `environment`, …) puts it under **Categories**. A category lists one or more exams.
 
 The question layer (questions, choices, exam questions, configs, breaks) is untouched.
 
-Students navigate **Track → Full exams | Domains → (domain) → exam**. Every page fetches its own data, so any URL works when opened cold.
+Students navigate **Track → Full exams | Categories → (category) → exam**. Every page fetches its own data, so any URL works when opened cold.
 
 Exams can be **archived**. An archived exam disappears from every place a student could start it. It stays in the student's history and review, and an unfinished attempt on it can still be resumed and submitted. Supervisors keep seeing archived exams, clearly labelled. Every exam that exists today is archived by this change; new content arrives in later migrations.
 
@@ -35,16 +35,16 @@ Attempts follow three rules:
 
 ### Browsing (student)
 
-1. As a student, I want to open a track and see two clear choices, Full exams and Domains, so that I can decide how to practise without scrolling a long list.
+1. As a student, I want to open a track and see two clear choices, Full exams and Categories, so that I can decide how to practise without scrolling a long list.
 2. As a student, I want the Full exams page to list only full exams in the track's order, so that I take them in the intended sequence.
-3. As a student, I want the Domains page to list the track's domains in PMI order (not alphabetical), so that the structure matches what I study.
-4. As a student, I want domains with nothing I can take hidden from the Domains page, so that I never open an empty domain.
-5. As a student, I want to open a domain and see its exams in order, so that I can work through its tasks.
+3. As a student, I want the Categories page to list the track's categories in the track's intended order (not alphabetical), so that the structure matches what I study.
+4. As a student, I want categories with nothing I can take hidden from the Categories page, so that I never open an empty category.
+5. As a student, I want to open a category and see its exams in order, so that I can work through them.
 6. As a student, I want each exam card to show its name, description, question count and duration, so that I know what I'm starting.
 7. As a student, I want to bookmark or refresh any catalog page and land on the same content, so that the browser's back, refresh and share all work.
-8. As a student, I want domain and exam names in Arabic or English to follow my language setting, so that the catalog reads naturally.
+8. As a student, I want category and exam names in Arabic or English to follow my language setting, so that the catalog reads naturally.
 9. As a student on a phone, I want the catalog cards to stack and stay tappable, so that I can practise on mobile.
-10. As a student, I want a clear message when a domain link is wrong or no longer exists, so that I'm not left on a blank page.
+10. As a student, I want a clear message when a category link is wrong or no longer exists, so that I'm not left on a blank page.
 
 ### Archived exams (student)
 
@@ -65,9 +65,9 @@ Attempts follow three rules:
 
 ### Supervisor
 
-22. As a supervisor, I want to browse a track the same way students do (Full exams / Domains / exams), so that I see what they see.
+22. As a supervisor, I want to browse a track the same way students do (Full exams / Categories / exams), so that I see what they see.
 23. As a supervisor, I want archived exams included and clearly labelled "Archived", so that I can inspect legacy content when supporting a student.
-24. As a supervisor, I want domains that contain only archived exams to still appear for me, so that legacy content remains reachable.
+24. As a supervisor, I want categories that contain only archived exams to still appear for me, so that legacy content remains reachable.
 25. As a supervisor, I want the question viewer and preview sessions to keep working for active and archived exams, so that I can audit any exam.
 26. As a supervisor, I want a student's attempt history to show exam names even for archived exams, so that support conversations make sense.
 
@@ -113,20 +113,20 @@ Migrations: the existing uncommitted 019 (track code) stays as is. The existing 
 
 - The exam type table is **renamed to tags**, and the exam column referencing it is renamed from type id to **tag id** (not null).
 - New tag columns:
-  - `code`: text, not null, **globally unique**, uppercase letters and digits only (`^[A-Z0-9]+$`, e.g. `FULL`, `PEOPLE`, `PROCESS`, `ENVIRONMENT`). The API and URLs address a tag by code.
-  - `track_id`: nullable. Null means a shared tag. Only `FULL` is shared — a content convention, not enforced by the database.
-  - `display_order`: smallint, unique per track, deferrable initially deferred. It orders the domain sections; `FULL` has order 0.
+  - `code`: text, not null, **globally unique**, lowercase letters and digits only (`^[a-z0-9]+$`, e.g. `full`, `people`, `process`, `environment`). The API and URLs address a tag by code.
+  - `track_id`: nullable. Null means a shared tag. Only `full` is shared — a content convention, not enforced by the database.
+  - `display_order`: smallint, unique per track, deferrable initially deferred. It orders the category sections; `full` has order 0.
   - `color_hex_code` (renamed from `colour`): `#RRGGBB`, checked by the database, nullable (null falls back to a neutral style). Replaces the old design-token keys.
-- Backfill: existing row 1 becomes `FULL` (shared, `#9a6b2f`). Existing row 2 becomes `LEGACY` (PMP track, `#7b4d8e`) and is never linked from the UI. New domain tags arrive with new content.
+- Backfill: existing row 1 becomes `full` (shared, `#9a6b2f`). Existing row 2 becomes `legacy` (PMP track, `#7b4d8e`) and is never linked from the UI. New category tags arrive with new content.
 - No trigger ties an exam's tag to the exam's track (accepted risk).
-- **New endpoint** `GET /api/tracks/:trackId/tags`, with the same auth and enrollment gate as the track's exam list. It returns `{ tags: Tag[] }`: only tags that have at least one exam **visible to the caller** on that track, sorted by `display_order`. The frontend separates `FULL` from domain tags.
+- **New endpoint** `GET /api/tracks/:trackId/tags`, with the same auth and enrollment gate as the track's exam list. It returns `{ tags: Tag[] }`: only tags that have at least one exam **visible to the caller** on that track, sorted by `display_order`. The frontend separates `full` from category tags.
 - Wire shape (`Tag` replaces `ExamType`):
 
   ```ts
   Tag = { id: number; code: string; name: { ar: string; en: string }; color_hex_code: string | null; display_order: number }
   ```
 
-- `FULL_TAG_CODE = "FULL"` is a single constant in the shared schema package, used by both the API and the frontend.
+- `FULL_TAG_CODE = "full"` is a single constant in the shared schema package, used by both the API and the frontend.
 - Exam shape: an exam carries its whole `tag` (`Tag`) instead of `type_id`. The track exams response renames `types` to `tags`, kept only until slice 3 for the existing filter.
 - **Attempt history must not depend on the exam list.** Attempts carry their whole exam (bilingual name and tag, without config), joined server-side, so history renders without fetching the exam list.
 - Frontend: no new pages in this slice. Existing exam cards read the tag off the exam; the tag's colour appears only on the tag chip.
@@ -135,23 +135,31 @@ Migrations: the existing uncommitted 019 (track code) stays as is. The existing 
 
 - `GET /api/tracks/:trackId/exams?tag=<code>`:
   - `tag` is **required**. Missing returns 400 (validation error code).
-  - Unknown code returns **404 `TAG_NOT_FOUND`**.
+  - Unknown code returns **404 `NOT_FOUND`**.
   - Known code with no caller-visible exams on this track returns **200 with an empty list**.
   - Response is `{ exams: ExamDetails[] }`. The `tags` array (renamed from `types` in slice 2) is **removed**; tags come only from the tags endpoint.
   - Sorted by exam `display_order`.
 - Exam `display_order` becomes **per (track, tag)**: unique on (track id, tag id, display order), deferrable initially deferred. The identity default is dropped, and new content sets explicit values. Backfill renumbers with a row number partitioned by (track, tag), keeping today's relative order.
 - Frontend pages (all inside the existing feature/page layout; pages assemble only):
-  - **Track page**: two cards, Full exams and Domains, plus the existing recent-attempts section. The cards are static. The track name comes from the existing tracks data.
-  - **Domains page**: calls the tags endpoint, drops `FULL`, and renders one card per domain tag.
-  - **Exam list page**, parameterised by tag code: one page serves Full exams (`FULL`) and each domain. It calls the exams endpoint with the tag and the tags endpoint for the heading. A 404 shows the not-found state.
+  - **Track page**: two cards, Full exams and Categories, plus the existing recent-attempts section. The cards are static. The track name comes from the existing tracks data.
+  - **Categories page**: calls the tags endpoint, drops `full`, and renders one card per category tag.
+  - **Exam list page**, parameterised by tag code: one page serves Full exams (`full`) and each category. It calls the exams endpoint with the tag only. Its heading is the tag's name, read from its exams' `tag` (for `full` too); an empty list falls back to a generic "Exams" label. Only the Track page's two cards use UI copy. A 404, or a missing `tag`, shows the not-found state.
   - Existing exam cards are reused.
-- The old tag filter chips and the flat browser for the student flow are removed. The supervisor library moves to the same Track → Full exams / Domains → exam flow, keeping its inspect and preview actions in place of Start.
+- Routes (the tag travels as a query parameter, mirroring the API):
+
+  | Page | Student | Supervisor |
+  |---|---|---|
+  | Track | `/tracks/:trackId` | `/tracks/:trackId/library` |
+  | Categories | `/tracks/:trackId/by-category` | `/tracks/:trackId/library/by-category` |
+  | Exam list | `/tracks/:trackId/exams?tag=<code>` | `/tracks/:trackId/library/exams?tag=<code>` |
+
+- The old tag filter chips, name search, show-more and the flat browser are removed. The supervisor library moves to the same Track → Full exams / Categories → exam flow, keeping its inspect and preview actions in place of Start.
 - Visual direction: modern, card-based, mobile-first. Use shadcn/ui primitives and Tailwind v4 with existing design tokens only; no new styling system, no plain CSS unless the styling guide allows it. Use lucide icons. Show skeletons while loading, plus the existing empty and error state components.
 
 ### Slice 4: Archiving
 
 - Exams get `archived_at` (timestamptz, nullable). Null means active. Clearing it reopens the exam.
-- The migration sets `archived_at = now()` on **every existing exam** (all full and legacy domain exams).
+- The migration sets `archived_at = now()` on **every existing exam** (all full and legacy-tag exams).
 - **One visibility rule, written once** and shared by the tags and exams endpoints: students never receive archived exams, or tags whose exams are all archived; supervisors receive everything.
 - Exam wire shape gains `archived_at: string | null`. Supervisors see an "Archived" badge (shadcn Badge, existing tokens).
 - `start_attempt` returns a new result **`archived`** when the exam is archived. It maps to a dedicated error code the frontend parses and shows as "no longer available".
@@ -189,14 +197,14 @@ API smoke checks per slice (student = enrolled student cookie, sup = enrolled su
 |---|---|---|
 | 1 | Complete an attempt, then list attempts | Score, status, wrong count, time taken present; time taken null on untimed |
 | 1 | Review a pre-migration completed attempt | Wrong count present (recomputed) |
-| 2 | `GET /tracks/:id/tags` (student, sup) | Sorted by display order; `FULL` first when present |
+| 2 | `GET /tracks/:id/tags` (student, sup) | Sorted by display order; `full` first when present |
 | 2 | `GET /tracks/:id/tags` (not enrolled) | Same refusal as the exam list today |
 | 2 | List attempts | Each attempt carries its exam (name, tag) |
 | 3 | `GET /tracks/:id/exams` (no tag) | 400 |
-| 3 | `GET /tracks/:id/exams?tag=nope` | 404 `TAG_NOT_FOUND` |
+| 3 | `GET /tracks/:id/exams?tag=nope` | 404 `NOT_FOUND` |
 | 3 | `?tag=<valid, nothing visible>` | 200, empty list |
-| 3 | `?tag=FULL` | Exams ordered by per-tag display order; no `tags` key |
-| 4 | Student `?tag=FULL` / `?tag=LEGACY` after migration | 200, empty |
+| 3 | `?tag=full` | Exams ordered by per-tag display order; no `tags` key |
+| 4 | Student `?tag=full` / `?tag=legacy` after migration | 200, empty |
 | 4 | Sup same calls | All legacy exams, `archived_at` set |
 | 4 | Student `/tags` | No archived-only tags; sup sees them |
 | 4 | Start an archived exam | `archived` error code |
@@ -211,19 +219,19 @@ Prior art: no automated tests exist in the repo. Checks follow the `DO $$ … RA
 
 ## Out of Scope
 
-- Domain or task tables, hierarchy, hidden tasks, question sets (considered and rejected in favour of tags).
+- Category or task tables, hierarchy, hidden tasks, question sets (considered and rejected in favour of tags).
 - Any admin UI for creating tags, ordering, archiving or editing limits (content changes stay in migrations).
 - A reorder API or UI.
-- Enforcing that a question belongs to at most one domain exam (true today, not enforced).
+- Enforcing that a question belongs to at most one category exam (true today, not enforced).
 - A trigger tying an exam's tag to its track.
 - New question types (the question shape stays type-agnostic; nothing new is built).
-- New exam content (PMP/RMP domains and tasks arrive in separate migrations).
+- New exam content (PMP/RMP categories and their exams arrive in separate migrations).
 - Automated test infrastructure.
 - Changes to the client-side retry-wrong session, breaks, timer or session persistence.
 
 ## Further Notes
 
-- **Terminology:** UI and code use "full" (not "mock") for full exams. "Domain" is a UI term only; in data it's any tag other than `FULL`.
+- **Terminology:** UI and code use "full" (not "mock") for full exams. "Category" is the UI term for any tag other than `full`. Categories are not PMI domains.
 - **Assumptions to verify before running:** (1) 020 has never run outside local Docker; if it has, convert the 020 edits into a patch migration. (2) No student has more than 10 attempts on one exam; the slice 6 pre-flight confirms it.
 - **Decisions added during spec writing** (confirm during review): attempts carry their exam (slice 2), because history can no longer borrow names from an untagged exam list; and the supervisor library adopts the same tag-based navigation (slice 3).
 - After implementation, update the database, backend and frontend guides in `.claude/skills/` to describe tags, archiving and the attempt rules.

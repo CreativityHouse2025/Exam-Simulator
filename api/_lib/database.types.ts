@@ -333,7 +333,7 @@ export type Database = {
           created_at?: string
           description_ar: string
           description_en: string
-          display_order?: number
+          display_order: number
           id?: number
           name_ar: string
           name_en: string

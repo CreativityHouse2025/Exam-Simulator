@@ -3,7 +3,8 @@ import { AppApiError } from "@/core/errors";
 import { apiFetch } from "@/core/api/apiFetch";
 import type { ApiResponse } from "@shared/api.schema";
 import type { TrackList } from "@shared/track.schema";
-import type { Track } from "@/core/api/apiTypes";
+import type { TrackTags } from "@shared/exam.schema";
+import type { Tag, Track } from "@/core/api/apiTypes";
 
 /** The whole track catalogue, unfiltered — which the caller may actually open comes from /api/auth/me. */
 export async function getTracks(): Promise<Track[]> {
@@ -15,4 +16,18 @@ export async function getTracks(): Promise<Track[]> {
   }
 
   return camelcaseKeys(result.data.tracks, { deep: true });
+}
+
+/** Tags with at least one exam on the track, by `displayOrder`. */
+export async function getTrackTags(trackId: string): Promise<Tag[]> {
+  const response = await apiFetch(`/api/tracks/${trackId}/tags`, {
+    handleUnauthorized: true,
+  });
+  const result: ApiResponse<TrackTags> = await response.json();
+
+  if (!result.success) {
+    throw new AppApiError(result.error.code, "tracks");
+  }
+
+  return camelcaseKeys(result.data.tags, { deep: true });
 }

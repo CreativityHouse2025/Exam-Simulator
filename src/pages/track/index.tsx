@@ -1,74 +1,55 @@
 import React from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ChevronDown, History, Lock } from "lucide-react";
-import { TrackExamCard } from "@/features/tracks";
-import { ExamBrowser, createTrackExamsQueryOptions } from "@/features/exams";
+import { History } from "lucide-react";
+import { CatalogEntryCards, TrackLockedState } from "@/features/tracks";
 import {
   AttemptsTable,
   AttemptsTableSkeleton,
   createAttemptsQueryOptions,
-  statsByExamId,
-  statsForExam,
 } from "@/features/attempts";
 import EmptyState from "@/components/states/EmptyState";
 import ErrorState from "@/components/states/ErrorState";
 import BackButton from "@/components/BackButton";
 import Loading from "@/components/Loading";
-import { Button } from "@/components/ui/button";
 import { useAuth } from "@/features/auth";
 import useSettings from "@/core/hooks/useSettings";
 import { useAttemptActions } from "@/features/exam-session";
 import { translate } from "@/core/utils/translation";
 import { ROUTES } from "@/routes/routes";
-import { cn } from "@/components/ui/utils";
+import { FULL_TAG_CODE } from "@shared/exam.schema";
 
 const RECENT_ATTEMPT_COUNT = 5;
 
-/** One track: its exams first, then the student's most recent attempts in it. */
+/** One track: its two ways into the exams, then the student's most recent attempts in it. */
 const TrackPage: React.FC = () => {
   const { trackId = "" } = useParams();
-  const navigate = useNavigate();
   const { settings } = useSettings();
   const langCode = settings.language;
   const { enrolledTracks } = useAuth();
 
-  const [examsCollapsed, setExamsCollapsed] = React.useState(false);
-
   const track = enrolledTracks.find((enrolled) => enrolled.id === trackId);
   const isEnrolled = track !== undefined;
 
-  const examsQuery = useQuery({
-    ...createTrackExamsQueryOptions(trackId),
-    enabled: isEnrolled,
-  });
   const attemptsQuery = useQuery({
     ...createAttemptsQueryOptions(trackId),
     enabled: isEnrolled,
   });
 
-  const { startExam, openAttempt, reviseAttempt, isBusy } = useAttemptActions();
+  const { openAttempt, reviseAttempt, isBusy } = useAttemptActions();
 
-  const attemptStats = React.useMemo(
-    () => statsByExamId(attemptsQuery.data ?? []),
-    [attemptsQuery.data],
+  const recentAttempts = (attemptsQuery.data ?? []).slice(
+    0,
+    RECENT_ATTEMPT_COUNT,
   );
-
-  const attempts = attemptsQuery.data ?? [];
-  const recentAttempts = attempts.slice(0, RECENT_ATTEMPT_COUNT);
 
   // Enrollment is the gate for everything below; the API would answer 403 anyway.
   if (!isEnrolled) {
     return (
-      <div className="mx-auto w-full max-w-4xl px-4 py-8">
-        <BackButton to={ROUTES.home} text={translate("tracks.back")} />
-        <EmptyState
-          icon={Lock}
-          message={translate("tracks.locked")}
-          hint={translate("tracks.locked-hint")}
-          className="mt-6"
-        />
-      </div>
+      <TrackLockedState
+        backTo={ROUTES.home}
+        backText={translate("tracks.back")}
+      />
     );
   }
 
@@ -90,53 +71,10 @@ const TrackPage: React.FC = () => {
       </header>
 
       <section className="mb-10">
-        <div className="mb-4 flex items-center justify-between gap-3">
-          <h2 className="text-lg font-bold text-tertiary md:text-xl">
-            {translate("exams.title")}
-          </h2>
-
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setExamsCollapsed((prev) => !prev)}
-            aria-expanded={!examsCollapsed}
-            className="gap-1.5 text-xs font-semibold text-grey-950 hover:text-primary"
-          >
-            {translate(
-              `exams.${examsCollapsed ? "show-section" : "hide-section"}`,
-            )}
-            <ChevronDown
-              className={cn(
-                "size-4 transition-transform duration-200",
-                examsCollapsed && "-rotate-90 rtl:rotate-90",
-              )}
-            />
-          </Button>
-        </div>
-
-        {!examsCollapsed && (
-          <ExamBrowser
-            exams={examsQuery.data?.exams ?? []}
-            tags={examsQuery.data?.tags ?? []}
-            langCode={langCode}
-            isPending={examsQuery.isPending}
-            isError={examsQuery.isError}
-            errorMessage={translate("exams.errors.fetch")}
-            onRetry={examsQuery.refetch}
-            isRetrying={examsQuery.isFetching}
-            emptyMessage={translate("exams.empty")}
-            renderCard={(exam) => (
-              <TrackExamCard
-                exam={exam}
-                stats={statsForExam(attemptStats, exam.id)}
-                langCode={langCode}
-                disabled={isBusy}
-                onStart={() => startExam(exam.id)}
-                onViewAttempts={() => navigate(ROUTES.trackHistory.to(trackId))}
-              />
-            )}
-          />
-        )}
+        <CatalogEntryCards
+          fullExamsTo={ROUTES.trackExams.to(trackId, FULL_TAG_CODE)}
+          categoriesTo={ROUTES.trackCategories.to(trackId)}
+        />
       </section>
 
       <section>

@@ -42,6 +42,24 @@ Before altering a table or writing a query against it, **read its migration**. T
 guessable — `users` carries a `role` column, and `enrollments` the expiry, that drive access
 control, and assuming a conventional shape will produce code that compiles and fails in production.
 
+## Tags and catalog order (021)
+
+`tags` (renamed from `exam_type`) says where an exam is listed. Every exam has exactly one
+(`exams.tag_id`, not null).
+
+- `code` — globally unique, **lowercase** letters and digits (`^[a-z0-9]+$`). The API and URLs
+  address a tag by code, never by id.
+- `track_id` — null means shared. Only `full` is shared, by convention; nothing enforces it, and
+  nothing ties an exam's tag to the exam's track.
+- `full` is the "Full exams" tag; every other tag is a category in the UI. `legacy` holds the old
+  domain exams and is never linked from the UI.
+- `tags.display_order` orders categories within a track (`full` is 0). `exams.display_order` orders
+  exams **within one (track, tag)**, starting at 1. It has no identity default, so new content
+  sets it explicitly.
+- Both order uniques — `(track_id, display_order)` on tags, `(track_id, tag_id, display_order)` on
+  exams — are `DEFERRABLE INITIALLY DEFERRED`. Reorder inside one migration transaction by
+  rewriting the values freely; uniqueness is checked at commit, so swaps never collide.
+
 ## When to write an RPC
 
 Most reads belong in a service (`api/_lib/services/`). Reach for a Postgres function when the
