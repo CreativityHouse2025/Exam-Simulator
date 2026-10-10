@@ -1,4 +1,4 @@
-import type { AttemptSummary } from "@/core/api/apiTypes";
+import type { Attempt } from "@/core/api/apiTypes";
 
 // What an exam card shows about this student's own history with that exam.
 export type ExamAttemptStats = {
@@ -15,7 +15,7 @@ const EMPTY_STATS: ExamAttemptStats = { count: 0, inProgressCount: 0 };
  * never a lifetime total — label it accordingly.
  */
 export function statsByExamId(
-  attempts: AttemptSummary[],
+  attempts: Attempt[],
 ): Map<number, ExamAttemptStats> {
   const statsByExam = new Map<number, ExamAttemptStats>();
 

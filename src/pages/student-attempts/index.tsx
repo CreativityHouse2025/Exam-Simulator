@@ -23,7 +23,7 @@ import { AppApiError } from "@/core/errors";
 import { createTrackExamsQueryOptions } from "@/features/exams";
 import { resolveErrorKey } from "@/core/utils/errorTranslation";
 import { translate } from "@/core/utils/translation";
-import type { AttemptSummary } from "@/core/api/apiTypes";
+import type { Attempt } from "@/core/api/apiTypes";
 
 /**
  * `/students/:id/tracks/:trackId` — one student's attempts in one track.
@@ -41,7 +41,7 @@ const StudentAttemptsPage: React.FC = () => {
   const { enrolledTracks } = useAuth();
 
   const [selectedAttempt, setSelectedAttempt] =
-    React.useState<AttemptSummary | null>(null);
+    React.useState<Attempt | null>(null);
 
   const supervisorTrack = enrolledTracks.find((track) => track.id === trackId);
   const hasAccess = supervisorTrack !== undefined;
@@ -51,7 +51,7 @@ const StudentAttemptsPage: React.FC = () => {
     ...createStudentAttemptsQueryOptions(id, trackId),
     enabled: hasAccess,
   });
-  // Only for resolving exam names — an AttemptSummary carries examId but never the name.
+  // Only for resolving exam names — an Attempt carries examId but never the name.
   const examsQuery = useQuery({
     ...createTrackExamsQueryOptions(trackId),
     enabled: hasAccess,

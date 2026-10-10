@@ -132,7 +132,7 @@ begin
   end if;
 
   select score, status into v_score, v_status
-    from public.exam_attempts where id = v_attempt;
+    from public.results where attempt_id = v_attempt;
   if v_status <> 'pass' then
     raise exception 'seed_demo: exam 2 was meant to pass, scored % (%)', v_score, v_status;
   end if;
@@ -172,7 +172,7 @@ begin
   end if;
 
   select score, status into v_score, v_status
-    from public.exam_attempts where id = v_attempt;
+    from public.results where attempt_id = v_attempt;
   raise notice 'seed_demo: PMP domain exam 18 -> % (%), untimed', v_score, v_status;
 
   -- =================================================================
@@ -239,7 +239,7 @@ begin
   end if;
 
   select score, status into v_score, v_status
-    from public.exam_attempts where id = v_attempt;
+    from public.results where attempt_id = v_attempt;
   if v_status <> 'fail' then
     raise exception 'seed_demo: exam 45 was meant to fail, scored % (%)', v_score, v_status;
   end if;
@@ -259,9 +259,9 @@ begin
   if v_revision = 0 then
     raise exception 'seed_demo: exam 45 failed but offers no revision questions';
   end if;
-  if v_revision <> (select wrong_questions from public.exam_attempts where id = v_attempt) then
+  if v_revision <> (select wrong_questions from public.results where attempt_id = v_attempt) then
     raise exception 'seed_demo: revision set (%) disagrees with wrong_questions (%)',
-      v_revision, (select wrong_questions from public.exam_attempts where id = v_attempt);
+      v_revision, (select wrong_questions from public.results where attempt_id = v_attempt);
   end if;
   raise notice 'seed_demo: RMP exam 45 -> % (%), % question(s) to revise',
     v_score, v_status, v_revision;
@@ -297,9 +297,10 @@ begin
     raise exception 'seed_demo: attempts cover % track(s), expected both', v_tracks;
   end if;
 
-  select string_agg(distinct coalesce(a.status, a.exam_state), ', ' order by coalesce(a.status, a.exam_state))
+  select string_agg(distinct coalesce(r.status, a.exam_state), ', ' order by coalesce(r.status, a.exam_state))
     into v_states
     from public.exam_attempts a
+    left join public.results r on r.attempt_id = a.id
    where a.user_id = c_student;
 
   raise notice 'seed_demo: % answer row(s) for student@local.test across % track(s); states: %',

@@ -8,10 +8,10 @@ import {
 import { Card } from "@/components/ui/card";
 import { translate } from "@/core/utils/translation";
 import { cn } from "@/components/ui/utils";
-import type { AttemptSummary } from "@/core/api/apiTypes";
+import type { Attempt, CompletedAttempt } from "@/core/api/apiTypes";
 
 type AttemptStatsProps = {
-  attempts: AttemptSummary[];
+  attempts: Attempt[];
 };
 
 const Tile = ({
@@ -38,13 +38,15 @@ const Tile = ({
  */
 const AttemptStats: React.FC<AttemptStatsProps> = ({ attempts }) => {
   const completed = attempts.filter(
-    (attempt) => attempt.examState === "completed",
+    (attempt): attempt is CompletedAttempt => attempt.examState === "completed",
   );
-  const passed = completed.filter((attempt) => attempt.status === "pass");
+  const passed = completed.filter(
+    (attempt) => attempt.result.status === "pass",
+  );
 
   const averageScore = completed.length
     ? Math.round(
-        completed.reduce((sum, attempt) => sum + attempt.score, 0) /
+        completed.reduce((sum, attempt) => sum + attempt.result.score, 0) /
           completed.length,
       )
     : 0;

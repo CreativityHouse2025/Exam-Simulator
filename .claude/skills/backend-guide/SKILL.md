@@ -21,8 +21,12 @@ in the wrong layer.
   response. No business logic.
 - **Service** (`api/_lib/services/`) — all business logic. Knows nothing about HTTP: no `Request`,
   no `Response`, no status codes. Throws `AppError` when something is wrong.
-- **Validation** (`api/_lib/validators/`) — pure functions that validate and parse request input,
-  called by the handler before the service. Throw `AppError` on failure.
+- **Validation** — zod request schemas, parsed by the handler with `parseOrThrow`
+  (`api/_lib/utils/parse.ts`) before the service is called; a failure is a 400 `VALIDATION_ERROR`.
+  A schema used by one endpoint lives in that endpoint's file. One shared by several endpoints
+  (e.g. `AttemptIdSchema`, `SaveAttemptAnswersSchema`) lives in `shared/schemas/`. Services never
+  import from a handler file: a service declares its own input type, and the call site proves the
+  parsed request satisfies it.
 
 The test: if logic can be unit tested without mocking an HTTP request, it belongs in the service.
 Keep handlers thin enough to read in one screen.

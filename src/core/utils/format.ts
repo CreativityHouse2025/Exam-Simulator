@@ -1,5 +1,6 @@
 import type { LangCode } from "../types";
 import { format } from "date-fns";
+import { translate } from "./translation";
 
 /**
  * Format a date to 'MM/dd/yyyy'
@@ -28,9 +29,9 @@ export function formatTimer(sec: number | null): string {
     const minutes = Math.floor(sec / 60);
     const seconds = sec % 60;
 
-    return `${minutes}m ${seconds.toString().padStart(2, "0")}s`;
+    return translate("content.duration.minutes-seconds", [minutes, seconds]);
   } catch {
-    return "0m 00s";
+    return translate("content.duration.minutes-seconds", [0, 0]);
   }
 }
 
@@ -49,7 +50,9 @@ export function formatDurationHoursMinutes(
   const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
 
-  return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+  return hours > 0
+    ? translate("content.duration.hours-minutes", [hours, minutes])
+    : translate("content.duration.minutes", [minutes]);
 }
 
 // Choice labels for different languages

@@ -37,6 +37,11 @@
   },
   "content": {
     "syncing": "جارٍ الحفظ...",
+    "duration": {
+      "minutes-seconds": "$1د $2ث",
+      "hours-minutes": "$1س $2د",
+      "minutes": "$1د"
+    },
     "top-display": {
       "question": "السؤال $1 من $2",
       "category": "التصنيف",
@@ -251,8 +256,10 @@
       "date": "التاريخ",
       "action": "الإجراء",
       "empty": "لا توجد محاولات حتى الآن.",
-      "exam": "الامتحان"
+      "exam": "الامتحان",
+      "time-taken": "الوقت المستغرق"
     },
+    "not-applicable": "غير متاح",
     "type": {
       "full": "اختبار كامل",
       "domain": "اختبار مجال"

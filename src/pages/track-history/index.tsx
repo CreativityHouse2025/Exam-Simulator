@@ -32,7 +32,7 @@ const AttemptHistoryPage: React.FC = () => {
     ...createAttemptsQueryOptions(trackId),
     enabled: isEnrolled,
   });
-  // Only for resolving exam names — AttemptSummary carries exam_id but never the name.
+  // Only for resolving exam names — Attempt carries exam_id but never the name.
   const examsQuery = useQuery({
     ...createTrackExamsQueryOptions(trackId),
     enabled: isEnrolled,

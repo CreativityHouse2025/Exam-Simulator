@@ -37,6 +37,11 @@
   },
   "content": {
     "syncing": "Saving...",
+    "duration": {
+      "minutes-seconds": "$1m $2s",
+      "hours-minutes": "$1h $2m",
+      "minutes": "$1m"
+    },
     "top-display": {
       "question": "Question $1 of $2",
       "category": "Category",
@@ -234,8 +239,10 @@
       "date": "Date",
       "action": "Action",
       "empty": "No attempts yet.",
-      "exam": "Exam"
+      "exam": "Exam",
+      "time-taken": "Time Taken"
     },
+    "not-applicable": "N/A",
     "type": {
       "full": "Full",
       "domain": "Domain"

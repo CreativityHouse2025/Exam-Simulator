@@ -21,8 +21,7 @@ import type {
   ExamWithQuestions as SharedExamWithQuestions,
 } from "@shared/exam.schema";
 import type {
-  AttemptSummary as SharedAttemptSummary,
-  AttemptDetail as SharedAttemptDetail,
+  Attempt as SharedAttempt,
   AttemptQuestion as SharedAttemptQuestion,
   DisclosedAttemptQuestion as SharedDisclosedAttemptQuestion,
   AttemptWithExam as SharedAttemptWithExam,
@@ -41,10 +40,7 @@ export type ExamType = CamelCaseKeys<SharedExamType, true>;
 export type ExamConfigBreak = CamelCaseKeys<SharedExamConfigBreak, true>;
 
 /**
- * `passingRate: null` and `persist: false` are frontend-only states, never on the wire — they
- * exist for exactly one config, REVISION_CONFIG (features/exam-session/constants.ts): a revision session is never
- * graded and never written to the DB. Every real config a service returns sets `persist: true`
- * and always carries a real `passingRate`.
+ * Add `persist` flag and mark passingRate as null for frontend revision/preview sessions only.
  */
 export type ExamConfig = Omit<
   CamelCaseKeys<SharedExamConfig, true>,
@@ -53,10 +49,12 @@ export type ExamConfig = Omit<
   passingRate: number | null;
   persist: boolean;
 };
+
 export type ExamDetails = Omit<
   CamelCaseKeys<SharedExamDetails, true>,
   "config"
 > & { config: ExamConfig };
+
 export type DisclosedChoice = CamelCaseKeys<SharedDisclosedChoice, true>;
 export type Question = CamelCaseKeys<SharedQuestion, true>;
 export type DisclosedQuestion = CamelCaseKeys<SharedDisclosedQuestion, true>;
@@ -69,18 +67,28 @@ export type ExamWithQuestions = Omit<
   "exam"
 > & { exam: ExamDetails };
 
-export type AttemptSummary = Omit<
-  CamelCaseKeys<SharedAttemptSummary, true>,
-  "configSnapshot"
+type WireAttempt = CamelCaseKeys<SharedAttempt, true>;
+
+type AttemptBase = Omit<
+  WireAttempt,
+  "configSnapshot" | "examState" | "result"
 > & {
   configSnapshot: ExamConfig;
 };
-export type AttemptDetail = Omit<
-  CamelCaseKeys<SharedAttemptDetail, true>,
-  "configSnapshot"
-> & {
-  configSnapshot: ExamConfig;
+
+export type InProgressAttempt = AttemptBase & {
+  examState: "in-progress";
+  result: null;
 };
+
+export type CompletedAttempt = AttemptBase & {
+  examState: "completed";
+  result: NonNullable<WireAttempt["result"]>;
+};
+
+/** Narrow on `examState` and `result` follows: present exactly when completed. */
+export type Attempt = InProgressAttempt | CompletedAttempt;
+
 export type AttemptQuestion = CamelCaseKeys<SharedAttemptQuestion, true>;
 export type DisclosedAttemptQuestion = CamelCaseKeys<
   SharedDisclosedAttemptQuestion,
@@ -89,12 +97,12 @@ export type DisclosedAttemptQuestion = CamelCaseKeys<
 export type AttemptWithExam = Omit<
   CamelCaseKeys<SharedAttemptWithExam, true>,
   "attempt"
-> & { attempt: AttemptDetail };
+> & { attempt: Attempt };
 
 /**
  * Never on the wire — `submit_attempt` writes the grade to the row (score, status,
  * wrong_questions) instead of returning it, so this is assembled client-side from those same
- * fields on a completed `AttemptDetail`/`AttemptSummary`, or by `features/exam-session/utils/results.ts
+ * fields on a completed `Attempt`, or by `features/exam-session/utils/results.ts
  * computeLocalResult` for a session that is never persisted (preview, revision).
  * `status: null` is the one frontend-only state: an ungraded config (`ExamConfig.passingRate ===
  * null`, i.e. revision) has no pass/fail. Every persisted result's status is "pass" or "fail".
@@ -107,7 +115,7 @@ export type AttemptResult = {
 };
 export type Revision = CamelCaseKeys<SharedRevision, true>;
 
-export type User = CamelCaseKeys<SharedUser, true>;
+export type User =CamelCaseKeys<SharedUser, true>;
 export type UserWithTracks = CamelCaseKeys<SharedUserWithTracks, true>;
 export type StudentProfile = CamelCaseKeys<SharedStudentProfile, true>;
 

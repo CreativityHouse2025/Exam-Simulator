@@ -6,22 +6,28 @@ import type {
   Question,
 } from "../../../shared/schemas/exam.schema.js";
 import type {
-  AttemptDetail,
+  Attempt,
   AttemptList,
   AttemptStatus,
-  AttemptSummary,
   AttemptWithQuestions,
   ExamState,
   Revision,
-  SaveAttemptRequestBody,
-  StartAttemptRequestBody,
-  SubmitAttemptRequestBody,
+  SaveAttemptAnswers,
 } from "../../../shared/schemas/attempt.schema.js";
 import { getExam } from "./examService.js";
 import { getQuestions } from "./questionService.js";
 
 /** The per-track attempt cap. A track's list can never legitimately exceed it. */
 const TRACK_ATTEMPT_CAP = 150;
+
+/** What save hands the service once the handler has validated it. Submit is the same minus breaks. */
+type SaveAttemptInput = {
+  current_index: number;
+  /** Null when the attempt is untimed. */
+  time_remaining: number | null;
+  answers: SaveAttemptAnswers;
+  offered_breaks: number[];
+};
 
 /**
  * The attempt columns every read selects. `exams` is joined only to filter by track.
@@ -30,7 +36,7 @@ const TRACK_ATTEMPT_CAP = 150;
  * list does not ship 25 × 180 int4 to read one number off.
  */
 const ATTEMPT_COLUMNS =
-  "id, exam_id, exam_state, score, status, created_at, time_remaining, config_snapshot, total_questions, wrong_questions";
+  "id, exam_id, exam_state, created_at, time_remaining, config_snapshot, total_questions, current_index, results(status, score, wrong_questions, time_taken), offered_breaks(show_at_index)";
 
 /** What a read that also serves question CONTENT needs on top: the frozen set, in its frozen order. */
 const ATTEMPT_DETAIL_COLUMNS = `${ATTEMPT_COLUMNS}, question_ids_snapshot`;
@@ -59,39 +65,45 @@ const RPC_FAILURES = {
   },
 } as const satisfies Record<string, AppErrorParams>;
 
-/** What `toAttemptSummary` reads. Every attempt read selects at least these. */
-type AttemptSummaryRow = {
+/** What `toAttempt` reads. Every attempt read selects at least these. */
+type AttemptRow = {
   id: string;
   exam_id: number;
   exam_state: string;
-  score: number;
-  status: string | null;
   created_at: string;
   /** NULL when the attempt is untimed. */
   time_remaining: number | null;
   config_snapshot: unknown;
   total_questions: number;
-  wrong_questions: number | null;
+  /** One-to-one embed: null while the attempt is in progress. */
+  results: {
+    status: string;
+    score: number;
+    wrong_questions: number;
+    time_taken: number | null;
+  } | null;
+  current_index: number;
+  offered_breaks: { show_at_index: number }[];
 };
 
 /**
- * The one place an attempt row becomes an `AttemptSummary` — start, resume and list share it.
+ * The one place an attempt row becomes an `Attempt` — start, resume and list share it.
  *
  * `exam_state` and `status` are text with a CHECK rather than enums, and `config_snapshot` is
  * jsonb, so those three are asserted.
  */
-function toAttemptSummary(row: AttemptSummaryRow): AttemptSummary {
+function toAttempt({ results, offered_breaks, ...row }: AttemptRow): Attempt {
   return {
     id: row.id,
     exam_id: row.exam_id,
     exam_state: row.exam_state as ExamState,
-    score: row.score,
-    status: row.status as AttemptStatus | null,
     created_at: row.created_at,
     time_remaining: row.time_remaining,
     config_snapshot: row.config_snapshot as ExamConfig,
     total_questions: row.total_questions,
-    wrong_questions: row.wrong_questions,
+    result: results && { ...results, status: results.status as AttemptStatus },
+    current_index: row.current_index,
+    offered_breaks: offered_breaks.map((offered) => offered.show_at_index),
   };
 }
 
@@ -108,7 +120,7 @@ function toAttemptSummary(row: AttemptSummaryRow): AttemptSummary {
  */
 export async function startAttempt(
   userId: string,
-  { exam_id }: StartAttemptRequestBody,
+  exam_id: number,
 ): Promise<AttemptWithQuestions> {
   const { data, error } = await supabaseAdmin
     .rpc("start_attempt", { p_user_id: userId, p_exam_id: exam_id })
@@ -130,15 +142,14 @@ export async function startAttempt(
     });
   }
 
-  const attempt: AttemptDetail = {
-    // The RPC returns the snapshot, not the generated column, so the count comes off the array.
-    // It also predates 021's wrong_questions column and never will carry it — a just-started
-    // attempt is always in-progress, so it is always null, the same reasoning as offered_breaks.
-    ...toAttemptSummary({ ...data, total_questions: data.question_ids_snapshot.length, wrong_questions: null }),
-    current_index: data.current_index,
-    // A new attempt has answered nothing and been offered no break, so neither needs a query.
+  // The RPC returns the snapshot, not the generated column, so the count comes off the array.
+  // A just-started attempt has no result and has been offered no break, so neither needs a query.
+  const attempt = toAttempt({
+    ...data,
+    total_questions: data.question_ids_snapshot.length,
+    results: null,
     offered_breaks: [],
-  };
+  });
 
   const content = (await getQuestions(
     data.question_ids_snapshot,
@@ -179,7 +190,7 @@ function throwOnRpcFailure(result: string): void {
 export async function saveAttempt(
   userId: string,
   attemptId: string,
-  { current_index, time_remaining, answers, offered_breaks }: SaveAttemptRequestBody,
+  { current_index, time_remaining, answers, offered_breaks }: SaveAttemptInput,
 ): Promise<void> {
   const { data: result, error } = await supabaseAdmin.rpc("save_attempt", {
     p_user_id: userId,
@@ -210,7 +221,7 @@ export async function saveAttempt(
  * rows, never the request — an unanswered question is wrong by absence — and the pass mark comes
  * from the attempt's own `config_snapshot`, not the exam's current config.
  *
- * Writes the grade (score, status, wrong_questions) to the row rather than returning it — the
+ * Writes the grade to `results` rather than returning it — the
  * caller reads it back with `getAttempt`, the same call a resume already makes, which is also
  * what discloses the questions. Question content is deliberately absent from this call: a student
  * who wants a question-by-question review reads the completed attempt, not this response.
@@ -224,7 +235,7 @@ export async function saveAttempt(
 export async function submitAttempt(
   userId: string,
   attemptId: string,
-  { current_index, time_remaining, answers }: SubmitAttemptRequestBody,
+  { current_index, time_remaining, answers }: Omit<SaveAttemptInput, "offered_breaks">,
 ): Promise<void> {
   const { data: result, error } = await supabaseAdmin.rpc("submit_attempt", {
     p_user_id: userId,
@@ -271,7 +282,7 @@ export async function listAttempts(userId: string, trackId: string): Promise<Att
     });
   }
 
-  return { attempts: data.map(toAttemptSummary) };
+  return { attempts: data.map(toAttempt) };
 }
 
 /**
@@ -292,7 +303,7 @@ export async function getAttempt(
   const { data, error } = await supabaseAdmin
     .from("exam_attempts")
     .select(
-      `${ATTEMPT_DETAIL_COLUMNS}, user_id, current_index, attempt_answers(question_id, selected_choices, is_bookmarked), offered_breaks(show_at_index)`,
+      `${ATTEMPT_DETAIL_COLUMNS}, user_id, attempt_answers(question_id, selected_choices, is_bookmarked)`,
     )
     .eq("id", attemptId)
     .maybeSingle();
@@ -321,11 +332,7 @@ export async function getAttempt(
     });
   }
 
-  const attempt: AttemptDetail = {
-    ...toAttemptSummary(data),
-    current_index: data.current_index,
-    offered_breaks: data.offered_breaks.map((offered) => offered.show_at_index),
-  };
+  const attempt = toAttempt(data);
 
   const content = (await getQuestions(
     data.question_ids_snapshot,

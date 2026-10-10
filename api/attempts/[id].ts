@@ -5,7 +5,22 @@ import { parseJsonBody } from "../_lib/utils/parseBody.js"
 import { getAttempt, saveAttempt } from "../_lib/services/attemptService.js"
 import { getExam } from "../_lib/services/examService.js"
 import { parseOrThrow } from "../_lib/utils/parse.js"
-import { AttemptIdSchema, SaveAttemptRequestSchema } from "../../shared/schemas/attempt.schema.js"
+import { z } from "zod"
+import { AttemptIdSchema, SaveAttemptAnswersSchema } from "../../shared/schemas/attempt.schema.js"
+
+/**
+ * In-progress state only. `score` and `status` are undeclared on purpose: with `strictObject` a
+ * client that tries to send either gets a 400. Grading lives behind submit and nowhere else.
+ */
+const SaveAttemptRequestSchema = z.strictObject({
+  current_index: z.int().nonnegative(),
+  /** Null exactly when the attempt is untimed; the RPC refuses a payload that disagrees with its
+   * config snapshot (`invalid_time`). */
+  time_remaining: z.int().nonnegative().nullable(),
+  answers: SaveAttemptAnswersSchema,
+  /** `show_at_index` values offered since the last save. `offered_at` is stamped by the server. */
+  offered_breaks: z.array(z.int().nonnegative()).default([]),
+})
 
 /** The attempt id is the last path segment. */
 function attemptIdOf(request: Request): string {

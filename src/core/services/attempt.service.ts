@@ -3,16 +3,12 @@ import { AppApiError } from "../errors";
 import { apiFetch } from "../api/apiFetch";
 import type { ApiResponse } from "@shared/api.schema";
 import type {
-  AttemptList,
-  AttemptWithExam,
-  Revision,
+  AttemptList as SharedAttemptList,
+  AttemptWithExam as SharedAttemptWithExam,
+  Revision as SharedRevision,
 } from "@shared/attempt.schema";
 import { markPersisted } from "../api/apiTypes";
-import type {
-  AttemptSummary as FrontendAttemptSummary,
-  AttemptWithExam as FrontendAttemptWithExam,
-  Revision as FrontendRevision,
-} from "../api/apiTypes";
+import type { Attempt, AttemptWithExam, Revision } from "../api/apiTypes";
 
 type SaveAttemptAnswer = {
   questionId: number;
@@ -22,14 +18,14 @@ type SaveAttemptAnswer = {
 
 export async function startAttempt(
   examId: number,
-): Promise<FrontendAttemptWithExam> {
+): Promise<AttemptWithExam> {
   const response = await apiFetch("/api/attempts", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ exam_id: examId }),
     handleUnauthorized: true,
   });
-  const result: ApiResponse<AttemptWithExam> = await response.json();
+  const result: ApiResponse<SharedAttemptWithExam> = await response.json();
 
   if (!result.success) {
     throw new AppApiError(result.error.code, "attempts");
@@ -39,10 +35,11 @@ export async function startAttempt(
     deep: true,
   });
   return {
+    // The backend pairs examState and result; the cast restores that pairing.
     attempt: {
       ...attempt,
       configSnapshot: markPersisted(attempt.configSnapshot),
-    },
+    } as Attempt,
     questions,
     exam,
   };
@@ -50,11 +47,11 @@ export async function startAttempt(
 
 export async function getAttempt(
   attemptId: string,
-): Promise<FrontendAttemptWithExam> {
+): Promise<AttemptWithExam> {
   const response = await apiFetch(`/api/attempts/${attemptId}`, {
     handleUnauthorized: true,
   });
-  const result: ApiResponse<AttemptWithExam> = await response.json();
+  const result: ApiResponse<SharedAttemptWithExam> = await response.json();
 
   if (!result.success) {
     throw new AppApiError(result.error.code, "attempts");
@@ -64,10 +61,11 @@ export async function getAttempt(
     deep: true,
   });
   return {
+    // The backend pairs examState and result; the cast restores that pairing.
     attempt: {
       ...attempt,
       configSnapshot: markPersisted(attempt.configSnapshot),
-    },
+    } as Attempt,
     questions,
     exam,
   };
@@ -144,11 +142,11 @@ export async function submitAttempt(
 
 export async function getRevision(
   attemptId: string,
-): Promise<FrontendRevision> {
+): Promise<Revision> {
   const response = await apiFetch(`/api/attempts/${attemptId}/revision`, {
     handleUnauthorized: true,
   });
-  const result: ApiResponse<Revision> = await response.json();
+  const result: ApiResponse<SharedRevision> = await response.json();
 
   if (!result.success) {
     throw new AppApiError(result.error.code, "attempts");
@@ -159,18 +157,22 @@ export async function getRevision(
 
 export async function getAttempts(
   trackId: string,
-): Promise<FrontendAttemptSummary[]> {
+): Promise<Attempt[]> {
   const response = await apiFetch(`/api/attempts?trackId=${trackId}`, {
     handleUnauthorized: true,
   });
-  const result: ApiResponse<AttemptList> = await response.json();
+  const result: ApiResponse<SharedAttemptList> = await response.json();
 
   if (!result.success) {
     throw new AppApiError(result.error.code, "attempts");
   }
 
-  return camelcaseKeys(result.data.attempts, { deep: true }).map((attempt) => ({
-    ...attempt,
-    configSnapshot: markPersisted(attempt.configSnapshot),
-  }));
+  // The backend pairs examState and result; the cast restores that pairing.
+  return camelcaseKeys(result.data.attempts, { deep: true }).map(
+    (attempt) =>
+      ({
+        ...attempt,
+        configSnapshot: markPersisted(attempt.configSnapshot),
+      }) as Attempt,
+  );
 }

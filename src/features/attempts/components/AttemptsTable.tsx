@@ -9,28 +9,58 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import AttemptStatusBadge from "./AttemptStatusBadge";
-import { formatDate } from "@/core/utils/format";
+import AttemptStatusBadge, { type AttemptTone } from "./AttemptStatusBadge";
+import { formatDate, formatTimer } from "@/core/utils/format";
 import { translate } from "@/core/utils/translation";
 import { cn } from "@/components/ui/utils";
-import type { AttemptSummary } from "@/core/api/apiTypes";
+import type {
+  Attempt,
+  CompletedAttempt,
+  InProgressAttempt,
+} from "@/core/api/apiTypes";
 
 type AttemptsTableProps = {
-  attempts: AttemptSummary[];
+  attempts: Attempt[];
   examNameById: Map<number, string>;
   /** Omitted for a supervisor: someone else's attempt is never resumed or retried, only read. */
   onOpen?: (attemptId: string) => void;
   onRevise?: (attemptId: string) => void;
   /** Opens the read-only breakdown. The supervisor's only action on a row. */
-  onDetails?: (attempt: AttemptSummary) => void;
+  onDetails?: (attempt: Attempt) => void;
   /** Refetches the list. Omitted where the caller has no query to refresh. */
   onRefresh?: () => void;
   isRefreshing?: boolean;
   disabled?: boolean;
 };
 
+/** The state-specific pieces of one row. Both layouts render these and nothing else varies. */
+type RowParts = {
+  tone: AttemptTone;
+  score: React.ReactNode;
+  timeTaken: string;
+  actions: React.ReactNode;
+};
+
 const HEAD_CLASSES =
   "h-11 text-xs font-bold uppercase tracking-wider text-secondary";
+
+const TONE_CLASSES: Record<
+  AttemptTone,
+  { scoreBar: string; scoreText: string }
+> = {
+  pass: {
+    scoreBar: "bg-correct",
+    scoreText: "text-correct-strong",
+  },
+  fail: {
+    scoreBar: "bg-destructive",
+    scoreText: "text-destructive-strong",
+  },
+  "in-progress": {
+    scoreBar: "bg-primary",
+    scoreText: "text-grey-700",
+  },
+};
 
 /** Attempt history — a table on md+, stacked cards below it. */
 const AttemptsTable: React.FC<AttemptsTableProps> = ({
@@ -43,95 +73,133 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
   isRefreshing = false,
   disabled = false,
 }) => {
-  // Retry is offered whenever the exam allows it, but only works on a completed, imperfect attempt.
-  const canRevise = (attempt: AttemptSummary) =>
-    attempt.examState === "completed" &&
-    attempt.configSnapshot.allowRetryWrong &&
-    attempt.score < 100;
-
-  const examName = (attempt: AttemptSummary) =>
+  const examName = (attempt: Attempt) =>
     examNameById.get(attempt.examId) ?? `#${attempt.examId}`;
-  const isDone = (attempt: AttemptSummary) => attempt.examState === "completed";
 
-  const scoreTone = (attempt: AttemptSummary) =>
-    attempt.status === "pass"
-      ? "text-correct-strong"
-      : "text-destructive-strong";
-
-  /** Score as a number plus a proportional bar, so a row is scannable without reading digits. */
-  const score = (attempt: AttemptSummary) => {
-    if (!isDone(attempt))
-      return <span className="text-sm text-grey-700">—</span>;
-
-    return (
-      <div className="flex flex-col gap-1">
-        <span
-          className={cn("text-sm font-bold tabular-nums", scoreTone(attempt))}
-        >
-          {attempt.score}%
-        </span>
-        <div className="h-1 w-16 overflow-hidden rounded-full bg-secondary/15">
-          <div
-            className={cn(
-              "h-full rounded-full",
-              attempt.status === "pass" ? "bg-correct" : "bg-destructive",
-            )}
-            style={{ width: `${Math.min(100, Math.max(0, attempt.score))}%` }}
-          />
-        </div>
-      </div>
+  // Retry is offered whenever the exam allows it, but only works on a completed, imperfect attempt.
+  const retryButton = (attempt: Attempt, enabled: boolean) =>
+    onRevise &&
+    attempt.configSnapshot.allowRetryWrong && (
+      <Button
+        size="sm"
+        variant="ghost"
+        disabled={disabled || !enabled}
+        onClick={() => onRevise(attempt.id)}
+        className="h-8 gap-1.5 text-xs font-semibold text-secondary hover:bg-secondary/10 hover:text-secondary"
+      >
+        <RotateCcw className="size-3.5" />
+        {translate("history.actions.retry")}
+      </Button>
     );
+
+  const detailsButton = (attempt: Attempt) =>
+    onDetails && (
+      <Button
+        size="sm"
+        variant="outline"
+        disabled={disabled}
+        onClick={() => onDetails(attempt)}
+        className="h-8 min-w-28 justify-center gap-1.5 border-grey-300 text-xs font-semibold text-grey-950 hover:border-secondary hover:text-secondary"
+      >
+        <Eye className="size-3.5" />
+        {translate("history.actions.details")}
+      </Button>
+    );
+
+  const openButton = (
+    attempt: Attempt,
+    label: string,
+    variant: "default" | "outline",
+    className: string,
+  ) =>
+    onOpen && (
+      <Button
+        size="sm"
+        variant={variant}
+        disabled={disabled}
+        onClick={() => onOpen(attempt.id)}
+        className={cn(
+          "h-8 min-w-28 justify-center gap-1.5 text-xs font-semibold",
+          className,
+        )}
+      >
+        <SquareArrowOutUpRight className="size-3.5 rtl:-scale-x-100" />
+        {translate(label)}
+      </Button>
+    );
+
+  const completedRow = (attempt: CompletedAttempt): RowParts => {
+    const { status, score, timeTaken } = attempt.result;
+
+    return {
+      tone: status,
+      // Score as a number plus a proportional bar, so a row is scannable without reading digits.
+      score: (
+        <div className="flex flex-col gap-1">
+          <span
+            className={cn(
+              "text-sm font-bold tabular-nums",
+              TONE_CLASSES[status].scoreText,
+            )}
+          >
+            {score}%
+          </span>
+          <div className="h-1 w-16 overflow-hidden rounded-full bg-secondary/15">
+            <div
+              className={cn("h-full rounded-full", TONE_CLASSES[status].scoreBar)}
+              style={{ width: `${Math.min(100, Math.max(0, score))}%` }}
+            />
+          </div>
+        </div>
+      ),
+      timeTaken:
+        timeTaken === null
+          ? translate("history.not-applicable")
+          : formatTimer(timeTaken),
+      actions: (
+        <>
+          {retryButton(attempt, score < 100)}
+          {openButton(
+            attempt,
+            "history.actions.review",
+            "outline",
+            "border-grey-300 text-grey-950 hover:border-primary hover:text-primary",
+          )}
+          {detailsButton(attempt)}
+        </>
+      ),
+    };
   };
 
-  const actions = (attempt: AttemptSummary) => (
-    <div className="flex flex-wrap items-center justify-end gap-2">
-      {onRevise && attempt.configSnapshot.allowRetryWrong && (
-        <Button
-          size="sm"
-          variant="ghost"
-          disabled={disabled || !canRevise(attempt)}
-          onClick={() => onRevise(attempt.id)}
-          className="h-8 gap-1.5 text-xs font-semibold text-secondary hover:bg-secondary/10 hover:text-secondary"
-        >
-          <RotateCcw className="size-3.5" />
-          {translate("history.actions.retry")}
-        </Button>
-      )}
+  const inProgressRow = (attempt: InProgressAttempt): RowParts => ({
+    tone: attempt.examState,
+    score: (
+      <span className={cn("text-sm", TONE_CLASSES[attempt.examState].scoreText)}>
+        —
+      </span>
+    ),
+    timeTaken: "—",
+    actions: (
+      <>
+        {retryButton(attempt, false)}
+        {openButton(
+          attempt,
+          "history.actions.continue",
+          "default",
+          "bg-primary text-white hover:bg-primary/90",
+        )}
+        {detailsButton(attempt)}
+      </>
+    ),
+  });
 
-      {onOpen && (
-        <Button
-          size="sm"
-          variant={isDone(attempt) ? "outline" : "default"}
-          disabled={disabled}
-          onClick={() => onOpen(attempt.id)}
-          className={cn(
-            "h-8 min-w-28 justify-center gap-1.5 text-xs font-semibold",
-            isDone(attempt)
-              ? "border-grey-300 text-grey-950 hover:border-primary hover:text-primary"
-              : "bg-primary text-white hover:bg-primary/90",
-          )}
-        >
-          <SquareArrowOutUpRight className="size-3.5 rtl:-scale-x-100" />
-          {translate(
-            `history.actions.${isDone(attempt) ? "review" : "continue"}`,
-          )}
-        </Button>
-      )}
-
-      {onDetails && (
-        <Button
-          size="sm"
-          variant="outline"
-          disabled={disabled}
-          onClick={() => onDetails(attempt)}
-          className="h-8 min-w-28 justify-center gap-1.5 border-grey-300 text-xs font-semibold text-grey-950 hover:border-secondary hover:text-secondary"
-        >
-          <Eye className="size-3.5" />
-          {translate("history.actions.details")}
-        </Button>
-      )}
-    </div>
-  );
+  const rows = attempts.map((attempt) => ({
+    attempt,
+    parts:
+      attempt.examState === "completed"
+        ? completedRow(attempt)
+        : inProgressRow(attempt),
+  }));
 
   return (
     <>
@@ -147,6 +215,9 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
               </TableHead>
               <TableHead className={HEAD_CLASSES}>
                 {translate("history.table.score")}
+              </TableHead>
+              <TableHead className={HEAD_CLASSES}>
+                {translate("history.table.time-taken")}
               </TableHead>
               <TableHead className={HEAD_CLASSES}>
                 {translate("history.table.date")}
@@ -177,42 +248,29 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
           </TableHeader>
 
           <TableBody>
-            {attempts.map((attempt) => (
+            {rows.map(({ attempt, parts }) => (
               <TableRow
                 key={attempt.id}
                 className="group border-grey-100 transition-colors duration-150 hover:bg-primary/6"
               >
                 <TableCell className="py-3">
-                  {/* The state rail gives the row a left edge that reads before any text does. */}
-                  <div className="flex items-center gap-3">
-                    <span
-                      className={cn(
-                        "h-8 w-1 shrink-0 rounded-full",
-                        isDone(attempt)
-                          ? attempt.status === "pass"
-                            ? "bg-correct"
-                            : "bg-destructive"
-                          : "bg-primary",
-                      )}
-                    />
-                    <span className="font-semibold text-tertiary">
-                      {examName(attempt)}
-                    </span>
-                  </div>
+                  <span className="font-semibold text-tertiary">
+                    {examName(attempt)}
+                  </span>
                 </TableCell>
                 <TableCell className="py-3">
-                  <AttemptStatusBadge
-                    state={attempt.examState}
-                    status={attempt.status}
-                  />
+                  <AttemptStatusBadge tone={parts.tone} />
                 </TableCell>
-                <TableCell className="py-3">{score(attempt)}</TableCell>
+                <TableCell className="py-3">{parts.score}</TableCell>
+                <TableCell className="py-3 whitespace-nowrap text-sm tabular-nums text-grey-800">
+                  {parts.timeTaken}
+                </TableCell>
                 <TableCell className="py-3 whitespace-nowrap text-sm text-grey-800">
                   {formatDate(attempt.createdAt)}
                 </TableCell>
                 <TableCell className="py-3">
-                  <div className="flex justify-end opacity-100 transition-opacity duration-150 md:opacity-70 md:group-hover:opacity-100">
-                    {actions(attempt)}
+                  <div className="flex flex-wrap items-center justify-end gap-2 opacity-100 transition-opacity duration-150 md:opacity-70 md:group-hover:opacity-100">
+                    {parts.actions}
                   </div>
                 </TableCell>
               </TableRow>
@@ -221,39 +279,32 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
         </Table>
       </div>
 
-      {/* Mobile: the same rows as cards, since a 5-column table cannot fit 360px. */}
+      {/* Mobile: the same rows as cards, since a 6-column table cannot fit 360px. */}
       <ul className="flex flex-col gap-3 md:hidden">
-        {attempts.map((attempt) => (
+        {rows.map(({ attempt, parts }) => (
           <li
             key={attempt.id}
-            className={cn(
-              "overflow-hidden rounded-xl border border-grey-200 bg-white border-s-4",
-              isDone(attempt)
-                ? attempt.status === "pass"
-                  ? "border-s-correct"
-                  : "border-s-destructive"
-                : "border-s-primary",
-            )}
+            className="overflow-hidden rounded-xl border border-grey-200 bg-white"
           >
             <div className="flex flex-col gap-3 p-4">
               <div className="flex items-start justify-between gap-3">
                 <span className="font-semibold text-tertiary">
                   {examName(attempt)}
                 </span>
-                <AttemptStatusBadge
-                  state={attempt.examState}
-                  status={attempt.status}
-                />
+                <AttemptStatusBadge tone={parts.tone} />
               </div>
 
               <div className="flex items-end justify-between gap-4">
-                {score(attempt)}
-                <span className="text-xs text-grey-800">
-                  {formatDate(attempt.createdAt)}
-                </span>
+                {parts.score}
+                <div className="flex flex-col items-end gap-0.5 text-xs text-grey-800">
+                  <span className="tabular-nums">{parts.timeTaken}</span>
+                  <span>{formatDate(attempt.createdAt)}</span>
+                </div>
               </div>
 
-              {actions(attempt)}
+              <div className="flex flex-wrap items-center justify-end gap-2">
+                {parts.actions}
+              </div>
             </div>
           </li>
         ))}

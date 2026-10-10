@@ -35,7 +35,7 @@ export interface Session {
   /** Never persisted to the DB — a supervisor preview or a revision retry. Neither has a real
    * backend attempt to write through to, so the session lifecycle skips the network entirely. */
   preview: boolean;
-  /** showAtIndex values already offered this session — mirrors AttemptDetail.offeredBreaks. */
+  /** showAtIndex values already offered this session — mirrors Attempt.offeredBreaks. */
   offeredBreaks: number[];
   /** The attempt row's created_at. A session that was never a row (preview, revision) is stamped
    * when it is built, so every session has a date to show. */

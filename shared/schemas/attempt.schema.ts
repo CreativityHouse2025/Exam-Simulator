@@ -15,7 +15,6 @@ export type AttemptStatus = z.infer<typeof AttemptStatusSchema>;
 export const AttemptIdSchema = z.uuid({ error: "id must be a valid UUID" });
 
 const nonNegativeInt = z.int().nonnegative();
-const positiveInt = z.int().positive();
 
 /** Postgres timestamptz in a response. Plain string — responses are built from rows, never parsed. */
 const timestamp = z.string();
@@ -25,39 +24,44 @@ const timestamp = z.string();
 // ---------------------------------------------------------------------------
 
 /**
- * One row of attempt history. `config_snapshot` is the attempt's own frozen config, not the exam's
- * current one. The exam NAME is absent — callers resolve it from the track's exam list.
+ * A completed attempt's grade, stored by `submit_attempt` in the `results` table. The backend is
+ * the only source of a persisted attempt's grade; nothing client-side recomputes it. A revision
+ * session has no row at all, so it has no analog — see `utils/results.ts computeLocalResult`.
  */
-export const AttemptSummarySchema = z.object({
+export const AttemptResultSchema = z.object({
+  status: AttemptStatusSchema,
+  score: z.number(),
+  /** Wrong OR unanswered. */
+  wrong_questions: nonNegativeInt,
+  /** Seconds, or null when the exam is untimed. */
+  time_taken: nonNegativeInt.nullable(),
+});
+
+export type AttemptResult = z.infer<typeof AttemptResultSchema>;
+
+/**
+ * One attempt — what history lists and what start/resume return. `config_snapshot` is the
+ * attempt's own frozen config, not the exam's current one. The exam NAME is absent — callers
+ * resolve it from the track's exam list.
+ */
+export const AttemptSchema = z.object({
   id: AttemptIdSchema,
   exam_id: z.int(),
   exam_state: ExamStateSchema,
-  score: z.number(),
-  status: AttemptStatusSchema.nullable(),
   created_at: timestamp,
   /** Seconds left, or null when the exam is untimed — same distinction as `exam_duration_minutes`. */
   time_remaining: z.int().nullable(),
   config_snapshot: ExamConfigSchema,
   /** `cardinality(question_ids_snapshot)`, never a count of answer rows — an unanswered question has no row. */
   total_questions: z.int(),
-  /**
-   * Wrong OR unanswered, stored by `submit_attempt` alongside score and status — null while
-   * `exam_state` is 'in-progress'. The backend is the only source of a persisted attempt's grade;
-   * nothing client-side recomputes it. A revision session has no row at all, so it has no analog
-   * — see `utils/results.ts computeLocalResult`.
-   */
-  wrong_questions: nonNegativeInt.nullable(),
-});
-
-export type AttemptSummary = z.infer<typeof AttemptSummarySchema>;
-
-export const AttemptDetailSchema = AttemptSummarySchema.extend({
+  /** Null exactly while `exam_state` is 'in-progress'. */
+  result: AttemptResultSchema.nullable(),
   current_index: z.int(),
   /** `show_at_index` values already offered, so a resumed attempt does not offer them again. */
   offered_breaks: z.array(nonNegativeInt),
 });
 
-export type AttemptDetail = z.infer<typeof AttemptDetailSchema>;
+export type Attempt = z.infer<typeof AttemptSchema>;
 
 /** A question inside an attempt: the content, plus what this student did with it. */
 const attemptAnswerState = {
@@ -78,7 +82,7 @@ export type DisclosedAttemptQuestion = z.infer<
 
 /** GET /api/attempts?trackId= — `trackId` is required, so no unfiltered query exists to call by accident. */
 export const AttemptListSchema = z.object({
-  attempts: z.array(AttemptSummarySchema),
+  attempts: z.array(AttemptSchema),
 });
 
 export type AttemptList = z.infer<typeof AttemptListSchema>;
@@ -88,7 +92,7 @@ export type AttemptList = z.infer<typeof AttemptListSchema>;
  * attempt's `question_ids_snapshot`.
  */
 export const AttemptWithQuestionsSchema = z.object({
-  attempt: AttemptDetailSchema,
+  attempt: AttemptSchema,
   questions: z.union([
     z.array(AttemptQuestionSchema),
     z.array(DisclosedAttemptQuestionSchema),
@@ -124,30 +128,19 @@ export const RevisionSchema = z.object({
 export type Revision = z.infer<typeof RevisionSchema>;
 
 // ---------------------------------------------------------------------------
-// Requests — parsed with safeParse at the handler boundary.
+// Requests shared by more than one endpoint. Endpoint-specific request schemas live in the
+// endpoint file. Parsed with safeParse at the handler boundary.
 // ---------------------------------------------------------------------------
-
-/**
- * The client sends only which exam. The server decides the question set, the order, the config
- * and the clock.
- */
-export const StartAttemptRequestSchema = z.strictObject({
-  exam_id: positiveInt,
-});
-
-export type StartAttemptRequestBody = z.infer<typeof StartAttemptRequestSchema>;
 
 /**
  * One entry of the answer diff. An empty `selected_choices` with `is_bookmarked: false` is a DELETE
  * instruction, not invalid input, so emptiness is accepted here on purpose.
  */
-export const SaveAttemptAnswerSchema = z.strictObject({
+const SaveAttemptAnswerSchema = z.strictObject({
   question_id: nonNegativeInt,
   selected_choices: z.array(nonNegativeInt),
   is_bookmarked: z.boolean(),
 });
-
-export type SaveAttemptAnswer = z.infer<typeof SaveAttemptAnswerSchema>;
 
 /**
  * The answer diff sent by save and submit — dirty questions only, never the complete set.
@@ -164,37 +157,4 @@ export const SaveAttemptAnswersSchema = z
     },
   );
 
-/**
- * In-progress state only. `score` and `status` are undeclared on purpose: with `strictObject` a
- * client that tries to send either gets a 400. Grading lives behind submit and nowhere else.
- */
-export const SaveAttemptRequestSchema = z.strictObject({
-  current_index: nonNegativeInt,
-  /** Null exactly when the attempt is untimed; the RPC refuses a payload that disagrees with its
-   * config snapshot (`invalid_time`). */
-  time_remaining: nonNegativeInt.nullable(),
-  answers: SaveAttemptAnswersSchema,
-  /** `show_at_index` values offered since the last save. `offered_at` is stamped by the server. */
-  offered_breaks: z.array(nonNegativeInt).default([]),
-});
-
-export type SaveAttemptRequestBody = z.infer<typeof SaveAttemptRequestSchema>;
-
-/**
- * The final diff travels WITH the submission, so the last answers and the grading share one
- * transaction rather than two a lost request could fall between.
- *
- * The response is `null`, same as save — the grade is written to the row (score, status,
- * wrong_questions), not returned. The client reads it back with a follow-up GET, the same call a
- * resume already makes, which is also what discloses the questions.
- */
-export const SubmitAttemptRequestSchema = z.strictObject({
-  current_index: nonNegativeInt,
-  /** Null exactly when the attempt is untimed — see SaveAttemptRequestSchema. */
-  time_remaining: nonNegativeInt.nullable(),
-  answers: SaveAttemptAnswersSchema,
-});
-
-export type SubmitAttemptRequestBody = z.infer<
-  typeof SubmitAttemptRequestSchema
->;
+export type SaveAttemptAnswers = z.infer<typeof SaveAttemptAnswersSchema>;

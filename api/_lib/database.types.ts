@@ -196,13 +196,10 @@ export type Database = {
           exam_state: string
           id: string
           question_ids_snapshot: number[]
-          score: number
-          status: string | null
           time_remaining: number | null
           total_questions: number
           updated_at: string
           user_id: string
-          wrong_questions: number | null
         }
         Insert: {
           config_snapshot: Json
@@ -212,13 +209,10 @@ export type Database = {
           exam_state?: string
           id?: string
           question_ids_snapshot: number[]
-          score?: number
-          status?: string | null
           time_remaining?: number | null
           total_questions?: number
           updated_at?: string
           user_id: string
-          wrong_questions?: number | null
         }
         Update: {
           config_snapshot?: Json
@@ -228,13 +222,10 @@ export type Database = {
           exam_state?: string
           id?: string
           question_ids_snapshot?: number[]
-          score?: number
-          status?: string | null
           time_remaining?: number | null
           total_questions?: number
           updated_at?: string
           user_id?: string
-          wrong_questions?: number | null
         }
         Relationships: [
           {
@@ -471,8 +462,44 @@ export type Database = {
         }
         Relationships: []
       }
+      results: {
+        Row: {
+          attempt_id: string
+          completed_at: string
+          score: number
+          status: string
+          time_taken: number | null
+          wrong_questions: number
+        }
+        Insert: {
+          attempt_id: string
+          completed_at?: string
+          score: number
+          status: string
+          time_taken?: number | null
+          wrong_questions: number
+        }
+        Update: {
+          attempt_id?: string
+          completed_at?: string
+          score?: number
+          status?: string
+          time_taken?: number | null
+          wrong_questions?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_results_attempt"
+            columns: ["attempt_id"]
+            isOneToOne: true
+            referencedRelation: "exam_attempts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tracks: {
         Row: {
+          code: string
           created_at: string
           description_ar: string | null
           description_en: string | null
@@ -483,6 +510,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          code: string
           created_at?: string
           description_ar?: string | null
           description_en?: string | null
@@ -493,6 +521,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          code?: string
           created_at?: string
           description_ar?: string | null
           description_en?: string | null
@@ -587,8 +616,6 @@ export type Database = {
           id: string
           question_ids_snapshot: number[]
           result: string
-          score: number
-          status: string
           time_remaining: number
         }[]
       }

@@ -7,11 +7,11 @@ import {
 } from "@/components/ui/dialog";
 import { formatDate, formatDurationHoursMinutes } from "@/core/utils/format";
 import { translate } from "@/core/utils/translation";
-import type { AttemptSummary } from "@/core/api/apiTypes";
+import type { Attempt } from "@/core/api/apiTypes";
 
 type AttemptDetailDialogProps = {
   /** The caller only mounts this component when a selection exists — Dialog stays `open` for its whole lifetime. */
-  attempt: AttemptSummary;
+  attempt: Attempt;
   /** Resolved by the caller from the track's exam list — an attempt carries only `examId`. */
   examName: string;
   onOpenChange: (open: boolean) => void;
@@ -49,27 +49,19 @@ const AttemptDetailDialog = ({
 
   const examLabel = examName;
   const isCompleted = attempt.examState === "completed";
-  const isPass = attempt.status === "pass";
+  const isPass = isCompleted && attempt.result.status === "pass";
   const scoreColor = isPass ? "text-correct" : "text-destructive";
   const ringColor = isPass ? "var(--correct)" : "var(--destructive)";
 
+  const incorrectCount = isCompleted ? attempt.result.wrongQuestions : 0;
   const correctCount = isCompleted
-    ? Math.round((attempt.score * attempt.totalQuestions) / 100)
+    ? attempt.totalQuestions - incorrectCount
     : 0;
-  const incorrectCount = isCompleted
-    ? attempt.totalQuestions - correctCount
-    : 0;
-  const { examDurationMinutes } = attempt.configSnapshot;
-  // An untimed attempt has no clock at either end, so there is no time taken to derive — the row
-  // falls back to its dash.
+  // Null on an untimed exam: there is no clock to measure against.
   const timeTaken =
-    isCompleted &&
-    examDurationMinutes !== null &&
-    attempt.timeRemaining !== null
-      ? formatDurationHoursMinutes(
-          examDurationMinutes * 60 - attempt.timeRemaining,
-        )
-      : null;
+    isCompleted && attempt.result.timeTaken !== null
+      ? formatDurationHoursMinutes(attempt.result.timeTaken)
+      : translate("history.not-applicable");
 
   return (
     <Dialog open={true} onOpenChange={onOpenChange}>
@@ -86,12 +78,12 @@ const AttemptDetailDialog = ({
                 <div
                   className="relative size-24 shrink-0 rounded-full"
                   style={{
-                    background: `conic-gradient(${ringColor} ${attempt.score * 3.6}deg, var(--grey-200) 0deg)`,
+                    background: `conic-gradient(${ringColor} ${attempt.result.score * 3.6}deg, var(--grey-200) 0deg)`,
                   }}
                 >
                   <div className="absolute inset-[6px] flex items-center justify-center rounded-full bg-card">
                     <span className={`text-2xl font-bold ${scoreColor}`}>
-                      {attempt.score}%
+                      {attempt.result.score}%
                     </span>
                   </div>
                 </div>

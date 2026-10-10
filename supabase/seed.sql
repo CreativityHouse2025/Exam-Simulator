@@ -62,13 +62,11 @@ on conflict (id) do nothing;
 -- question_ids_snapshot IS joined, from exam_questions. It is NOT NULL and
 -- non-empty by CHECK (migration 016 step 6), and the exams and question banks
 -- are migrations now (013-015), so the rows are there by the time this runs.
-insert into public.exam_attempts (user_id, exam_id, exam_state, status, score, time_remaining, created_at, config_snapshot, question_ids_snapshot)
+insert into public.exam_attempts (user_id, exam_id, exam_state, time_remaining, created_at, config_snapshot, question_ids_snapshot)
 select
   u.id,
   a.exam_id,
   a.exam_state,
-  a.status,
-  a.score,
   a.time_remaining,
   now() - a.age,
   '{
@@ -89,11 +87,30 @@ select
 from public.users u
 cross join (
   values
-    (2, 'completed',   'pass', 78.50,    0, interval '10 days'),
-    (4, 'completed',   'fail', 55.00,    0, interval '5 days'),
-    (2, 'in-progress', null,    0.00, 3600, interval '1 day')
-) as a(exam_id, exam_state, status, score, time_remaining, age)
+    (2, 'completed',      0, interval '10 days'),
+    (4, 'completed',      0, interval '5 days'),
+    (2, 'in-progress', 3600, interval '1 day')
+) as a(exam_id, exam_state, time_remaining, age)
 where u.role = 'student'
   -- dina.mahmoud is left with no attempts at all, so the empty-history state
   -- is reachable in the demo. Every other student gets the three above.
   and u.id <> '6672d13d-31e2-49c0-b30d-b947f44d6e40';
+
+-- The grade of each completed fixture above. Hand-written, not graded: these
+-- attempts have no answer rows. Each completed fixture is on a distinct exam,
+-- so exam_id identifies it.
+insert into public.results (attempt_id, status, score, wrong_questions, time_taken, completed_at)
+select
+  a.id,
+  r.status,
+  r.score,
+  cardinality(a.question_ids_snapshot) - round(cardinality(a.question_ids_snapshot) * r.score / 100)::smallint,
+  240 * 60 - a.time_remaining,
+  a.created_at
+from public.exam_attempts a
+join (
+  values
+    (2, 'pass', 78.50),
+    (4, 'fail', 55.00)
+) as r(exam_id, status, score) on r.exam_id = a.exam_id
+where a.exam_state = 'completed';

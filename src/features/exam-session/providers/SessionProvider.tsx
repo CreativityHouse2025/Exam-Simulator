@@ -21,15 +21,15 @@ import { computeLocalResult } from "../utils/results";
 import { PREVIEW_ATTEMPT_ID, REVISION_CONFIG } from "../constants";
 import type { Session, StartNewExamOptions } from "../types";
 import type {
-  AttemptDetail,
+  Attempt,
   AttemptQuestion,
   AttemptResult,
   DisclosedAttemptQuestion,
 } from "@/core/api/apiTypes";
 
-/** Shared by startNewExam and resumeAttempt — both resolve an AttemptDetail alongside its questions. */
+/** Shared by startNewExam and resumeAttempt — both resolve an Attempt alongside its questions. */
 function buildSessionFromAttempt(
-  attempt: AttemptDetail,
+  attempt: Attempt,
   questions: (AttemptQuestion | DisclosedAttemptQuestion)[],
 ): Session {
   const selectedChoices = questions.map((question) => question.selectedChoices);
@@ -61,9 +61,9 @@ function buildSessionFromAttempt(
     result:
       attempt.examState === "completed"
         ? {
-            score: attempt.score,
-            status: attempt.status,
-            wrongQuestions: attempt.wrongQuestions ?? 0,
+            score: attempt.result.score,
+            status: attempt.result.status,
+            wrongQuestions: attempt.result.wrongQuestions,
             totalQuestions: attempt.totalQuestions,
           }
         : null,

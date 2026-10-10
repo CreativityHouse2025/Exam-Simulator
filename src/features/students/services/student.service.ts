@@ -2,14 +2,14 @@ import camelcaseKeys from "camelcase-keys";
 import { AppApiError } from "@/core/errors";
 import { apiFetch } from "@/core/api/apiFetch";
 import type { ApiResponse } from "@shared/api.schema";
-import type { StudentList } from "@shared/student.schema";
-import type { AttemptList } from "@shared/attempt.schema";
-import type { UserWithTracks } from "@shared/user.schema";
+import type { StudentList as SharedStudentList } from "@shared/student.schema";
+import type { AttemptList as SharedAttemptList } from "@shared/attempt.schema";
+import type { UserWithTracks as SharedUserWithTracks } from "@shared/user.schema";
 import { markPersisted } from "@/core/api/apiTypes";
 import type {
-  AttemptSummary,
+  Attempt,
   StudentProfile,
-  UserWithTracks as FrontendUserWithTracks,
+  UserWithTracks,
 } from "@/core/api/apiTypes";
 
 export async function searchStudents(
@@ -20,7 +20,7 @@ export async function searchStudents(
     `/api/students?q=${encodeURIComponent(query)}`,
     { handleUnauthorized: true, signal },
   );
-  const result: ApiResponse<StudentList> = await response.json();
+  const result: ApiResponse<SharedStudentList> = await response.json();
 
   if (!result.success) {
     throw new AppApiError(result.error.code, "students");
@@ -30,11 +30,11 @@ export async function searchStudents(
 }
 
 /** A student's profile and the tracks they hold an active enrollment in. */
-export async function getStudent(id: string): Promise<FrontendUserWithTracks> {
+export async function getStudent(id: string): Promise<UserWithTracks> {
   const response = await apiFetch(`/api/students/${id}`, {
     handleUnauthorized: true,
   });
-  const result: ApiResponse<UserWithTracks> = await response.json();
+  const result: ApiResponse<SharedUserWithTracks> = await response.json();
 
   if (!result.success) {
     throw new AppApiError(result.error.code, "students");
@@ -47,19 +47,23 @@ export async function getStudentAttempts(
   id: string,
   trackId: string,
   signal?: AbortSignal,
-): Promise<AttemptSummary[]> {
+): Promise<Attempt[]> {
   const response = await apiFetch(
     `/api/students/${id}/attempts?trackId=${trackId}`,
     { handleUnauthorized: true, signal },
   );
-  const result: ApiResponse<AttemptList> = await response.json();
+  const result: ApiResponse<SharedAttemptList> = await response.json();
 
   if (!result.success) {
     throw new AppApiError(result.error.code, "students");
   }
 
-  return camelcaseKeys(result.data.attempts, { deep: true }).map((attempt) => ({
-    ...attempt,
-    configSnapshot: markPersisted(attempt.configSnapshot),
-  }));
+  // The backend pairs examState and result; the cast restores that pairing.
+  return camelcaseKeys(result.data.attempts, { deep: true }).map(
+    (attempt) =>
+      ({
+        ...attempt,
+        configSnapshot: markPersisted(attempt.configSnapshot),
+      }) as Attempt,
+  );
 }
