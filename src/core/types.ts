@@ -1,4 +1,4 @@
-import type { LangCode as SharedLangCode } from "@shared/exam.schema";
+import type { LangCode as SharedLangCode } from "@shared/common.schema";
 import type { ExamDetails } from "./api/apiTypes";
 
 // Language types

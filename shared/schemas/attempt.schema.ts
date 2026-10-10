@@ -41,12 +41,12 @@ export type AttemptResult = z.infer<typeof AttemptResultSchema>;
 
 /**
  * One attempt — what history lists and what start/resume return. `config_snapshot` is the
- * attempt's own frozen config, not the exam's current one. The exam NAME is absent — callers
- * resolve it from the track's exam list.
+ * attempt's own frozen config, not the exam's current one; the exam carries no config for that
+ * reason.
  */
 export const AttemptSchema = z.object({
   id: AttemptIdSchema,
-  exam_id: z.int(),
+  exam: ExamSchema,
   exam_state: ExamStateSchema,
   created_at: timestamp,
   /** Seconds left, or null when the exam is untimed — same distinction as `exam_duration_minutes`. */
@@ -88,8 +88,8 @@ export const AttemptListSchema = z.object({
 export type AttemptList = z.infer<typeof AttemptListSchema>;
 
 /**
- * What start, resume and submit all return, so they feed one adapter. Questions are ordered by the
- * attempt's `question_ids_snapshot`.
+ * POST /api/attempts and GET /api/attempts/:id. Questions are ordered by the attempt's
+ * `question_ids_snapshot`.
  */
 export const AttemptWithQuestionsSchema = z.object({
   attempt: AttemptSchema,
@@ -100,20 +100,6 @@ export const AttemptWithQuestionsSchema = z.object({
 });
 
 export type AttemptWithQuestions = z.infer<typeof AttemptWithQuestionsSchema>;
-
-/**
- * POST /api/attempts and GET /api/attempts/:id — an attempt, plus the exam it belongs to.
- *
- * The exam rides along because both starting and resuming navigate straight into the session,
- * which needs the name without waiting on the track's exam list. It carries no config: the
- * attempt's own `config_snapshot` is what governs the session, and a second, possibly newer
- * config in the same payload is only an opportunity to read the wrong one.
- */
-export const AttemptWithExamSchema = AttemptWithQuestionsSchema.extend({
-  exam: ExamSchema,
-});
-
-export type AttemptWithExam = z.infer<typeof AttemptWithExamSchema>;
 
 /**
  * GET /api/attempts/:id/revision — the "wrong or unanswered" set, always disclosed. Carries the

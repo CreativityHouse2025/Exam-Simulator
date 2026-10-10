@@ -14,7 +14,6 @@ import Loading from "@/components/Loading";
 import { useAuth } from "@/features/auth";
 import useSettings from "@/core/hooks/useSettings";
 import { useAttemptActions } from "@/features/exam-session";
-import { createTrackExamsQueryOptions } from "@/features/exams";
 import { translate } from "@/core/utils/translation";
 import { ROUTES } from "@/routes/routes";
 
@@ -32,24 +31,8 @@ const AttemptHistoryPage: React.FC = () => {
     ...createAttemptsQueryOptions(trackId),
     enabled: isEnrolled,
   });
-  // Only for resolving exam names — Attempt carries exam_id but never the name.
-  const examsQuery = useQuery({
-    ...createTrackExamsQueryOptions(trackId),
-    enabled: isEnrolled,
-  });
 
   const { openAttempt, reviseAttempt, isBusy } = useAttemptActions();
-
-  const examNameById = React.useMemo(
-    () =>
-      new Map(
-        (examsQuery.data?.exams ?? []).map((exam) => [
-          exam.id,
-          exam.name[langCode],
-        ]),
-      ),
-    [examsQuery.data, langCode],
-  );
 
   if (!isEnrolled) {
     return (
@@ -107,7 +90,7 @@ const AttemptHistoryPage: React.FC = () => {
       ) : (
         <AttemptsTable
           attempts={attempts}
-          examNameById={examNameById}
+          langCode={langCode}
           disabled={isBusy}
           onOpen={openAttempt}
           onRevise={reviseAttempt}

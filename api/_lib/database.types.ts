@@ -313,33 +313,6 @@ export type Database = {
           },
         ]
       }
-      exam_type: {
-        Row: {
-          colour: string | null
-          created_at: string
-          id: number
-          name_ar: string
-          name_en: string
-          updated_at: string
-        }
-        Insert: {
-          colour?: string | null
-          created_at?: string
-          id?: number
-          name_ar: string
-          name_en: string
-          updated_at?: string
-        }
-        Update: {
-          colour?: string | null
-          created_at?: string
-          id?: number
-          name_ar?: string
-          name_en?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
       exams: {
         Row: {
           config_id: number
@@ -351,8 +324,8 @@ export type Database = {
           name_ar: string
           name_en: string
           question_count: number
+          tag_id: number
           track_id: string
-          type_id: number
           updated_at: string
         }
         Insert: {
@@ -365,8 +338,8 @@ export type Database = {
           name_ar: string
           name_en: string
           question_count: number
+          tag_id: number
           track_id: string
-          type_id: number
           updated_at?: string
         }
         Update: {
@@ -379,8 +352,8 @@ export type Database = {
           name_ar?: string
           name_en?: string
           question_count?: number
+          tag_id?: number
           track_id?: string
-          type_id?: number
           updated_at?: string
         }
         Relationships: [
@@ -392,10 +365,10 @@ export type Database = {
             referencedColumns: ["track_id", "config_id"]
           },
           {
-            foreignKeyName: "exams_type_id_fkey"
-            columns: ["type_id"]
+            foreignKeyName: "exams_tag_id_fkey"
+            columns: ["tag_id"]
             isOneToOne: false
-            referencedRelation: "exam_type"
+            referencedRelation: "tags"
             referencedColumns: ["id"]
           },
         ]
@@ -493,6 +466,50 @@ export type Database = {
             columns: ["attempt_id"]
             isOneToOne: true
             referencedRelation: "exam_attempts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tags: {
+        Row: {
+          code: string
+          color_hex_code: string | null
+          created_at: string
+          display_order: number
+          id: number
+          name_ar: string
+          name_en: string
+          track_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          color_hex_code?: string | null
+          created_at?: string
+          display_order: number
+          id?: number
+          name_ar: string
+          name_en: string
+          track_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          color_hex_code?: string | null
+          created_at?: string
+          display_order?: number
+          id?: number
+          name_ar?: string
+          name_en?: string
+          track_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tags_track_id_fkey"
+            columns: ["track_id"]
+            isOneToOne: false
+            referencedRelation: "tracks"
             referencedColumns: ["id"]
           },
         ]

@@ -2,10 +2,13 @@ import type {
   Choice,
   DisclosedChoice,
   DisclosedQuestion,
+  ExamWithQuestions,
   Question,
 } from "../../../shared/schemas/exam.schema.js";
 import { AppError } from "../errors/AppError.js";
 import { supabaseAdmin } from "../supabaseClient.js";
+import { getExam } from "./examService.js";
+import { assertTrackAccess } from "./trackService.js";
 
 /**
  * What the select yields. `explanation_*` and `is_correct` are optional here because they are
@@ -47,7 +50,7 @@ function contentColumns(discloseAnswers: boolean): string {
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  * @throws {AppError} 404 `NOT_FOUND` — a question id was passed but not found in the database.
  */
-export async function getQuestions(
+export async function getQuestionsById(
   questionIds: number[],
   discloseAnswers: boolean,
 ): Promise<Question[] | DisclosedQuestion[]> {
@@ -86,28 +89,35 @@ export async function getQuestions(
 }
 
 /**
- * Question content for a whole exam, in every language, in the order the exam defines.
+ * An exam alongside its full question content, in every language, in the order the exam defines.
  *
- * One query: the exam's question set, its content and its choices are a single join, and the
- * order is `exam_questions.question_index` rather than anything the caller supplies. Use
- * `getQuestions` instead whenever the order is the caller's own, as an attempt's is.
+ * Always disclosed — `is_correct` and `explanation` ride on every question. Who may call this is
+ * `withRole`'s decision; which tracks' content is the enrollment's, checked here.
  *
- * @returns `DisclosedQuestion[]` when `discloseAnswers` is true, `Question[]` without the answer
- * key when it is false. An exam with no questions yields an empty array.
- * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
+ * One content query: the exam's question set, its content and its choices are a single join, and
+ * the order is `exam_questions.question_index`. Use `getQuestionsById` instead whenever the order is
+ * the caller's own, as an attempt's is.
+ *
+ * @returns An exam with no questions yields an empty `questions` array.
+ * @throws {AppError} 404 `NOT_FOUND` — no exam with this id.
+ * @throws {AppError} 403 `FORBIDDEN` — no active enrollment in the exam's track.
+ * @throws {AppError} 500 `INTERNAL_ERROR` — a query failed.
  */
 export async function getExamQuestionContent(
+  userId: string,
   examId: number,
-  discloseAnswers: boolean,
-): Promise<Question[] | DisclosedQuestion[]> {
+): Promise<ExamWithQuestions> {
+  const exam = await getExam(examId);
+  await assertTrackAccess(userId, exam.track.id);
+
   const { data, error } = await supabaseAdmin
     .from("exam_questions")
-    .select(`questions(${contentColumns(discloseAnswers)})`)
+    .select(`questions(${contentColumns(true)})`)
     .eq("exam_id", examId)
     .order("question_index", { ascending: true })
     .order("position", { referencedTable: "questions.choices", ascending: true })
     // The select is assembled at runtime, so it cannot be inferred from a string literal.
-    .overrideTypes<{ questions: QuestionRow }[], { merge: false }>();
+    .overrideTypes<{ questions: DisclosedQuestion }[], { merge: false }>();
 
   if (error || !data) {
     throw new AppError({
@@ -117,5 +127,5 @@ export async function getExamQuestionContent(
     });
   }
 
-  return data.map((row) => row.questions);
+  return { exam, questions: data.map((row) => row.questions) };
 }

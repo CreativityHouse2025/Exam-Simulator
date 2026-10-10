@@ -3,10 +3,9 @@ import { withAuth } from "../_lib/middleware/withAuth.js"
 import { successResponse } from "../_lib/utils/response.js"
 import { parseJsonBody } from "../_lib/utils/parseBody.js"
 import { getAttempt, saveAttempt } from "../_lib/services/attemptService.js"
-import { getExam } from "../_lib/services/examService.js"
 import { parseOrThrow } from "../_lib/utils/parse.js"
 import { z } from "zod"
-import { AttemptIdSchema, SaveAttemptAnswersSchema } from "../../shared/schemas/attempt.schema.js"
+import { AttemptIdSchema, SaveAttemptAnswersSchema, type AttemptWithQuestions } from "../../shared/schemas/attempt.schema.js"
 
 /**
  * In-progress state only. `score` and `status` are undeclared on purpose: with `strictObject` a
@@ -32,10 +31,8 @@ export const GET = withErrorHandler(
   withAuth(async (request, authUser, cookieHeaders) => {
     const attemptId = attemptIdOf(request)
 
-    const { attempt, questions } = await getAttempt(authUser.id, attemptId)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { config: _config, ...exam } = await getExam(attempt.exam_id)
-    return successResponse({ attempt, questions, exam }, 200, cookieHeaders)
+    const result: AttemptWithQuestions = await getAttempt(authUser.id, attemptId)
+    return successResponse(result, 200, cookieHeaders)
   }),
 )
 

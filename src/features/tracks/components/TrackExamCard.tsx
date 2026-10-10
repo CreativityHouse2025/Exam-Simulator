@@ -3,16 +3,15 @@ import { CircleAlert } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
-import { ExamFacts, examTypeAccent } from "@/features/exams";
+import { ExamFacts, tagAccent } from "@/features/exams";
 import { translate } from "@/core/utils/translation";
 import { cn } from "@/components/ui/utils";
-import type { ExamDetails, ExamType } from "@/core/api/apiTypes";
+import type { ExamDetails } from "@/core/api/apiTypes";
 import type { ExamAttemptStats } from "@/features/attempts";
 import type { LangCode } from "@/core/types";
 
 type TrackExamCardProps = {
   exam: ExamDetails;
-  examType: ExamType | undefined;
   stats: ExamAttemptStats;
   langCode: LangCode;
   onStart: () => void;
@@ -20,37 +19,32 @@ type TrackExamCardProps = {
   disabled?: boolean;
 };
 
-/** One exam in a track — every fact on the face of the card, accented by its exam type. */
+/** One exam in a track — every fact on the face of the card. Only the tag chip carries the tag's colour. */
 const TrackExamCard: React.FC<TrackExamCardProps> = ({
   exam,
-  examType,
   stats,
   langCode,
   onStart,
   onViewAttempts,
   disabled = false,
 }) => {
-  const accent = examTypeAccent(examType?.colour ?? null);
+  const accent = tagAccent(exam.tag.colorHexCode);
   const { canRevealAnswers, allowRetryWrong } = exam.config;
 
   return (
-    <Card
-      className={cn(
-        "overflow-hidden border-grey-200 pt-0 transition-colors duration-200",
-        accent.hoverBorder,
-      )}
-    >
-      <div className={cn("h-1.5 w-full", accent.rail)} />
+    <Card className="overflow-hidden border-grey-200 pt-0 transition-colors duration-200 hover:border-tertiary">
+      <div className="h-1.5 w-full bg-tertiary" />
 
       <CardHeader className="gap-3">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="flex min-w-0 flex-col gap-1.5">
             <div className="flex flex-wrap items-center gap-2">
-              {examType && (
-                <Badge className={cn("shrink-0 text-xs", accent.chip)}>
-                  {examType.name[langCode]}
-                </Badge>
-              )}
+              <Badge
+                style={accent.style}
+                className={cn("shrink-0 text-xs", accent.chip)}
+              >
+                {exam.tag.name[langCode]}
+              </Badge>
               {stats.count > 0 && (
                 <Badge
                   variant="outline"
@@ -85,7 +79,7 @@ const TrackExamCard: React.FC<TrackExamCardProps> = ({
           <Button
             onClick={onStart}
             disabled={disabled}
-            className={cn("shrink-0 font-semibold", accent.button)}
+            className="shrink-0 bg-tertiary font-semibold text-white hover:bg-tertiary/90"
           >
             {translate("exams.start")}
           </Button>
@@ -98,7 +92,7 @@ const TrackExamCard: React.FC<TrackExamCardProps> = ({
         <ExamFacts
           config={exam.config}
           questionCount={exam.questionCount}
-          iconClassName={accent.icon}
+          iconClassName="text-tertiary"
         />
 
         {stats.inProgressCount > 0 && (
@@ -106,7 +100,7 @@ const TrackExamCard: React.FC<TrackExamCardProps> = ({
             onClick={onViewAttempts}
             className="flex w-fit cursor-pointer items-center gap-1.5 rounded-md bg-grey-100 px-2.5 py-1.5 text-xs font-semibold text-grey-950 transition-colors duration-200 hover:bg-grey-200"
           >
-            <CircleAlert className={cn("size-3.5", accent.icon)} />
+            <CircleAlert className="size-3.5 text-tertiary" />
             {translate("exams.in-progress", [stats.inProgressCount])}
           </button>
         )}

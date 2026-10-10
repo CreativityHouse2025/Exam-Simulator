@@ -16,8 +16,8 @@ The business also needs to retire old content without erasing student history, a
 
 Every exam stays a single row with a single **tag**. The tag says where the exam is listed:
 
-- The shared `full` tag puts it under **Full exams**.
-- A track-specific domain tag (`people`, `process`, `environment`, …) puts it under **Domains**. A task is an exam tagged with its domain. A domain without tasks is a tag with one exam.
+- The shared `FULL` tag puts it under **Full exams**.
+- A track-specific domain tag (`PEOPLE`, `PROCESS`, `ENVIRONMENT`, …) puts it under **Domains**. A task is an exam tagged with its domain. A domain without tasks is a tag with one exam.
 
 The question layer (questions, choices, exam questions, configs, breaks) is untouched.
 
@@ -91,8 +91,8 @@ Each slice is finished end to end (database → API → frontend) and verified o
 | # | Slice | Depends on |
 |---|---|---|
 | 1 | Results record | — |
-| 2 | Tags and catalog navigation | — |
-| 3 | Tag-filtered exam lists | 2 |
+| 2 | Tags (data, API, exam and attempt shapes) | — |
+| 3 | Tag-filtered exam lists and catalog navigation | 2 |
 | 4 | Archiving | 3 |
 | 5 | One open attempt per exam | — |
 | 6 | Per-exam attempt limit | — |
@@ -109,43 +109,44 @@ Migrations: the existing uncommitted 019 (track code) stays as is. The existing 
 - Status, score and wrong question count are dropped from the attempt row. Every RPC and service that read them reads from results.
 - API contract: attempt responses keep exposing score, status, wrong-question count and time taken, now sourced from results. Time taken is new on the wire and nullable.
 
-### Slice 2: Tags and catalog navigation
+### Slice 2: Tags
 
 - The exam type table is **renamed to tags**, and the exam column referencing it is renamed from type id to **tag id** (not null).
 - New tag columns:
-  - `code`: text, not null, **globally unique** (e.g. `full`, `people`, `process`, `environment`). The API and URLs address a tag by code.
-  - `track_id`: nullable. Null means a shared tag. Only `full` is shared.
-  - `display_order`: smallint, unique per track, deferrable initially deferred. It orders the domain sections; `full` has order 0.
-- Backfill: existing row 1 becomes `full` (shared). Existing row 2 becomes `legacy-domain` (PMP track) and is never linked from the UI. New domain tags arrive with new content.
+  - `code`: text, not null, **globally unique**, uppercase letters and digits only (`^[A-Z0-9]+$`, e.g. `FULL`, `PEOPLE`, `PROCESS`, `ENVIRONMENT`). The API and URLs address a tag by code.
+  - `track_id`: nullable. Null means a shared tag. Only `FULL` is shared — a content convention, not enforced by the database.
+  - `display_order`: smallint, unique per track, deferrable initially deferred. It orders the domain sections; `FULL` has order 0.
+  - `color_hex_code` (renamed from `colour`): `#RRGGBB`, checked by the database, nullable (null falls back to a neutral style). Replaces the old design-token keys.
+- Backfill: existing row 1 becomes `FULL` (shared, `#9a6b2f`). Existing row 2 becomes `LEGACY` (PMP track, `#7b4d8e`) and is never linked from the UI. New domain tags arrive with new content.
 - No trigger ties an exam's tag to the exam's track (accepted risk).
-- **New endpoint** `GET /api/tracks/:trackId/tags`, with the same auth and enrollment gate as the track's exam list. It returns `{ tags: Tag[] }`: only tags that have at least one exam **visible to the caller** on that track, sorted by `display_order`. The frontend separates `full` from domain tags.
+- **New endpoint** `GET /api/tracks/:trackId/tags`, with the same auth and enrollment gate as the track's exam list. It returns `{ tags: Tag[] }`: only tags that have at least one exam **visible to the caller** on that track, sorted by `display_order`. The frontend separates `FULL` from domain tags.
 - Wire shape (`Tag` replaces `ExamType`):
 
   ```ts
-  Tag = { id: number; code: string; name: { ar: string; en: string }; colour: string | null; display_order: number }
+  Tag = { id: number; code: string; name: { ar: string; en: string }; color_hex_code: string | null; display_order: number }
   ```
 
-- `FULL_TAG_CODE = "full"` is a single constant in the shared schema package, used by both the API and the frontend.
-- Frontend pages (all inside the existing feature/page layout; pages assemble only):
-  - **Track page**: two cards, Full exams and Domains, plus the existing recent-attempts section. The cards are static. The track name comes from the existing tracks data.
-  - **Domains page**: calls the tags endpoint, drops `full`, and renders one card per domain tag.
-- Visual direction: modern, card-based, mobile-first. Use shadcn/ui primitives and Tailwind v4 with existing design tokens only; no new styling system, no plain CSS unless the styling guide allows it. Use lucide icons. Show skeletons while loading, plus the existing empty and error state components.
+- `FULL_TAG_CODE = "FULL"` is a single constant in the shared schema package, used by both the API and the frontend.
+- Exam shape: an exam carries its whole `tag` (`Tag`) instead of `type_id`. The track exams response renames `types` to `tags`, kept only until slice 3 for the existing filter.
+- **Attempt history must not depend on the exam list.** Attempts carry their whole exam (bilingual name and tag, without config), joined server-side, so history renders without fetching the exam list.
+- Frontend: no new pages in this slice. Existing exam cards read the tag off the exam; the tag's colour appears only on the tag chip.
 
-### Slice 3: Tag-filtered exam lists
+### Slice 3: Tag-filtered exam lists and catalog navigation
 
 - `GET /api/tracks/:trackId/exams?tag=<code>`:
   - `tag` is **required**. Missing returns 400 (validation error code).
   - Unknown code returns **404 `TAG_NOT_FOUND`**.
   - Known code with no caller-visible exams on this track returns **200 with an empty list**.
-  - Response is `{ exams: ExamDetails[] }`. The old `types` array is **removed**; tags come only from the tags endpoint.
+  - Response is `{ exams: ExamDetails[] }`. The `tags` array (renamed from `types` in slice 2) is **removed**; tags come only from the tags endpoint.
   - Sorted by exam `display_order`.
-- Exam wire shape: `type_id` becomes `tag_id`.
 - Exam `display_order` becomes **per (track, tag)**: unique on (track id, tag id, display order), deferrable initially deferred. The identity default is dropped, and new content sets explicit values. Backfill renumbers with a row number partitioned by (track, tag), keeping today's relative order.
-- **Attempt history must not depend on the exam list.** The track page used to resolve exam names from the full exam list, which no longer exists. Attempt summaries now carry the exam's bilingual name (joined server-side, archived or not) so history renders on its own.
-- Frontend pages:
-  - **Exam list page**, parameterised by tag code: one page serves Full exams (`full`) and each domain. It calls the exams endpoint with the tag and the tags endpoint for the heading. A 404 shows the not-found state.
+- Frontend pages (all inside the existing feature/page layout; pages assemble only):
+  - **Track page**: two cards, Full exams and Domains, plus the existing recent-attempts section. The cards are static. The track name comes from the existing tracks data.
+  - **Domains page**: calls the tags endpoint, drops `FULL`, and renders one card per domain tag.
+  - **Exam list page**, parameterised by tag code: one page serves Full exams (`FULL`) and each domain. It calls the exams endpoint with the tag and the tags endpoint for the heading. A 404 shows the not-found state.
   - Existing exam cards are reused.
-- The old type filter chips and the flat browser for the student flow are removed. The supervisor library moves to the same Track → Full exams / Domains → exam flow, keeping its inspect and preview actions in place of Start.
+- The old tag filter chips and the flat browser for the student flow are removed. The supervisor library moves to the same Track → Full exams / Domains → exam flow, keeping its inspect and preview actions in place of Start.
+- Visual direction: modern, card-based, mobile-first. Use shadcn/ui primitives and Tailwind v4 with existing design tokens only; no new styling system, no plain CSS unless the styling guide allows it. Use lucide icons. Show skeletons while loading, plus the existing empty and error state components.
 
 ### Slice 4: Archiving
 
@@ -188,14 +189,14 @@ API smoke checks per slice (student = enrolled student cookie, sup = enrolled su
 |---|---|---|
 | 1 | Complete an attempt, then list attempts | Score, status, wrong count, time taken present; time taken null on untimed |
 | 1 | Review a pre-migration completed attempt | Wrong count present (recomputed) |
-| 2 | `GET /tracks/:id/tags` (student, sup) | Sorted by display order; `full` first when present |
+| 2 | `GET /tracks/:id/tags` (student, sup) | Sorted by display order; `FULL` first when present |
 | 2 | `GET /tracks/:id/tags` (not enrolled) | Same refusal as the exam list today |
+| 2 | List attempts | Each attempt carries its exam (name, tag) |
 | 3 | `GET /tracks/:id/exams` (no tag) | 400 |
 | 3 | `GET /tracks/:id/exams?tag=nope` | 404 `TAG_NOT_FOUND` |
 | 3 | `?tag=<valid, nothing visible>` | 200, empty list |
-| 3 | `?tag=full` | Exams ordered by per-tag display order; no `types` key |
-| 3 | List attempts | Each summary carries the exam name |
-| 4 | Student `?tag=full` / `?tag=legacy-domain` after migration | 200, empty |
+| 3 | `?tag=FULL` | Exams ordered by per-tag display order; no `tags` key |
+| 4 | Student `?tag=FULL` / `?tag=LEGACY` after migration | 200, empty |
 | 4 | Sup same calls | All legacy exams, `archived_at` set |
 | 4 | Student `/tags` | No archived-only tags; sup sees them |
 | 4 | Start an archived exam | `archived` error code |
@@ -222,7 +223,7 @@ Prior art: no automated tests exist in the repo. Checks follow the `DO $$ … RA
 
 ## Further Notes
 
-- **Terminology:** UI and code use "full" (not "mock") for full exams. "Domain" is a UI term only; in data it's any tag other than `full`.
+- **Terminology:** UI and code use "full" (not "mock") for full exams. "Domain" is a UI term only; in data it's any tag other than `FULL`.
 - **Assumptions to verify before running:** (1) 020 has never run outside local Docker; if it has, convert the 020 edits into a patch migration. (2) No student has more than 10 attempts on one exam; the slice 6 pre-flight confirms it.
-- **Decisions added during spec writing** (confirm during review): attempt summaries carry the exam name (slice 3), because history can no longer borrow names from an untagged exam list; and the supervisor library adopts the same tag-based navigation (slice 3).
+- **Decisions added during spec writing** (confirm during review): attempts carry their exam (slice 2), because history can no longer borrow names from an untagged exam list; and the supervisor library adopts the same tag-based navigation (slice 3).
 - After implementation, update the database, backend and frontend guides in `.claude/skills/` to describe tags, archiving and the attempt rules.

@@ -22,8 +22,8 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({
 
   const shouldShowCorrectness = isReview || isAnswerRevealed;
   const isChoiceInteractionLocked = isReview;
-  // answerCount is a count, never the key — selected unconditionally on every question read
-  // (questionService.getQuestions), so it's known before the choices themselves are disclosed.
+  // answerCount is a count, never the key — present on every question, so it's known before the
+  // choices themselves are disclosed.
   const isSingleAnswer = question.answerCount === 1;
   const maxAnswersReached = selectedPositions.length >= question.answerCount;
 

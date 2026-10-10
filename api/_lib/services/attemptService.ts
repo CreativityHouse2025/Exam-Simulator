@@ -2,6 +2,7 @@ import { supabaseAdmin } from "../supabaseClient.js";
 import { AppError, type AppErrorParams } from "../errors/AppError.js";
 import type {
   DisclosedQuestion,
+  Exam,
   ExamConfig,
   Question,
 } from "../../../shared/schemas/exam.schema.js";
@@ -14,8 +15,9 @@ import type {
   Revision,
   SaveAttemptAnswers,
 } from "../../../shared/schemas/attempt.schema.js";
-import { getExam } from "./examService.js";
-import { getQuestions } from "./questionService.js";
+import { getExam, toExam, type ExamRow } from "./examService.js";
+import { assertTrackAccess } from "./trackService.js";
+import { getQuestionsById } from "./questionService.js";
 
 /** The per-track attempt cap. A track's list can never legitimately exceed it. */
 const TRACK_ATTEMPT_CAP = 150;
@@ -30,13 +32,14 @@ type SaveAttemptInput = {
 };
 
 /**
- * The attempt columns every read selects. `exams` is joined only to filter by track.
+ * The attempt columns every read selects, with the exam it belongs to (no config — the attempt's
+ * own snapshot governs). The inner join also lets the list filter by the exam's track.
  *
  * `total_questions` is the generated column from 018 rather than the snapshot's length, so the
  * list does not ship 25 × 180 int4 to read one number off.
  */
 const ATTEMPT_COLUMNS =
-  "id, exam_id, exam_state, created_at, time_remaining, config_snapshot, total_questions, current_index, results(status, score, wrong_questions, time_taken), offered_breaks(show_at_index)";
+  "id, exam_state, created_at, time_remaining, config_snapshot, total_questions, current_index, results(status, score, wrong_questions, time_taken), offered_breaks(show_at_index), exams!inner(id, display_order, name_ar, name_en, description_ar, description_en, question_count, tags(id, code, name_ar, name_en, color_hex_code, display_order), allowed_config(tracks(id, name_ar, name_en, description_ar, description_en)))";
 
 /** What a read that also serves question CONTENT needs on top: the frozen set, in its frozen order. */
 const ATTEMPT_DETAIL_COLUMNS = `${ATTEMPT_COLUMNS}, question_ids_snapshot`;
@@ -65,10 +68,9 @@ const RPC_FAILURES = {
   },
 } as const satisfies Record<string, AppErrorParams>;
 
-/** What `toAttempt` reads. Every attempt read selects at least these. */
+/** What `toAttempt` reads. Every attempt read selects at least these; the exam is mapped apart. */
 type AttemptRow = {
   id: string;
-  exam_id: number;
   exam_state: string;
   created_at: string;
   /** NULL when the attempt is untimed. */
@@ -90,12 +92,13 @@ type AttemptRow = {
  * The one place an attempt row becomes an `Attempt` — start, resume and list share it.
  *
  * `exam_state` and `status` are text with a CHECK rather than enums, and `config_snapshot` is
- * jsonb, so those three are asserted.
+ * jsonb, so those three are asserted. The exam is passed in: start already holds it, reads map
+ * their embedded `exams` row with `toExam`.
  */
-function toAttempt({ results, offered_breaks, ...row }: AttemptRow): Attempt {
+function toAttempt({ results, offered_breaks, ...row }: AttemptRow, exam: Exam): Attempt {
   return {
     id: row.id,
-    exam_id: row.exam_id,
+    exam,
     exam_state: row.exam_state as ExamState,
     created_at: row.created_at,
     time_remaining: row.time_remaining,
@@ -115,13 +118,22 @@ function toAttempt({ results, offered_breaks, ...row }: AttemptRow): Attempt {
  * Every call creates an attempt. Sending the request once is the frontend's job — several
  * unfinished attempts for one exam are a legitimate state, bounded by the per-track cap.
  *
+ * Starting an exam is track access, unlike reading an attempt already owned. The track is reachable
+ * only through the exam, so it is checked before anything is written. The exam's config is dropped:
+ * the attempt's own snapshot governs the session.
+ *
  * @throws {AppError} 404 `NOT_FOUND` — no such exam, or an exam with no questions.
+ * @throws {AppError} 403 `FORBIDDEN` — no active enrollment in the exam's track.
  * @throws {AppError} 500 `ATTEMPT_CREATE_FAILED` — the call failed.
  */
 export async function startAttempt(
   userId: string,
   exam_id: number,
 ): Promise<AttemptWithQuestions> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { config: _config, ...exam } = await getExam(exam_id);
+  await assertTrackAccess(userId, exam.track.id);
+
   const { data, error } = await supabaseAdmin
     .rpc("start_attempt", { p_user_id: userId, p_exam_id: exam_id })
     .single();
@@ -144,14 +156,17 @@ export async function startAttempt(
 
   // The RPC returns the snapshot, not the generated column, so the count comes off the array.
   // A just-started attempt has no result and has been offered no break, so neither needs a query.
-  const attempt = toAttempt({
-    ...data,
-    total_questions: data.question_ids_snapshot.length,
-    results: null,
-    offered_breaks: [],
-  });
+  const attempt = toAttempt(
+    {
+      ...data,
+      total_questions: data.question_ids_snapshot.length,
+      results: null,
+      offered_breaks: [],
+    },
+    exam,
+  );
 
-  const content = (await getQuestions(
+  const content = (await getQuestionsById(
     data.question_ids_snapshot,
     attempt.config_snapshot.can_reveal_answers,
   )) as Question[];
@@ -268,7 +283,7 @@ export async function submitAttempt(
 export async function listAttempts(userId: string, trackId: string): Promise<AttemptList> {
   const { data, error } = await supabaseAdmin
     .from("exam_attempts")
-    .select(`${ATTEMPT_COLUMNS}, exams!inner(track_id)`)
+    .select(ATTEMPT_COLUMNS)
     .eq("user_id", userId)
     .eq("exams.track_id", trackId)
     .order("created_at", { ascending: false })
@@ -282,7 +297,7 @@ export async function listAttempts(userId: string, trackId: string): Promise<Att
     });
   }
 
-  return { attempts: data.map(toAttempt) };
+  return { attempts: data.map((row) => toAttempt(row, toExam(row.exams))) };
 }
 
 /**
@@ -332,9 +347,9 @@ export async function getAttempt(
     });
   }
 
-  const attempt = toAttempt(data);
+  const attempt = toAttempt(data, toExam(data.exams as ExamRow));
 
-  const content = (await getQuestions(
+  const content = (await getQuestionsById(
     data.question_ids_snapshot,
     attempt.config_snapshot.can_reveal_answers || attempt.exam_state === "completed",
   )) as Question[];
@@ -382,14 +397,12 @@ export async function getRevision(userId: string, attemptId: string): Promise<Re
   // Not the owner, not completed and retry-disabled all answer alike: a flat refusal.
   throwOnRpcFailure(data.result);
 
-  const [exam, questions] = await Promise.all([
-    getExam(data.exam_id),
-    getQuestions(data.question_ids, true) as Promise<DisclosedQuestion[]>,
-  ]);
-
   // The parent exam sheds its config on the way out: `Exam`, not `ExamDetails`.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { config: _config, ...parent_exam } = exam;
+  const [{ config: _config, ...parent_exam }, questions] = await Promise.all([
+    getExam(data.exam_id),
+    getQuestionsById(data.question_ids, true) as Promise<DisclosedQuestion[]>,
+  ]);
 
   return { parent_exam, questions };
 }

@@ -7,15 +7,14 @@ import { Card, CardHeader } from "@/components/ui/card";
 import ExamFacts from "./ExamFacts";
 import { PreviewExamButton } from "@/features/exam-session";
 import { translate } from "@/core/utils/translation";
-import { examTypeAccent } from "../utils/examTypeColour";
+import { tagAccent } from "../utils/tagAccent";
 import { ROUTES } from "@/routes/routes";
 import { cn } from "@/components/ui/utils";
-import type { ExamDetails, ExamType } from "@/core/api/apiTypes";
+import type { ExamDetails } from "@/core/api/apiTypes";
 import type { LangCode } from "@/core/types";
 
 type LibraryExamCardProps = {
   exam: ExamDetails;
-  examType: ExamType | undefined;
   trackId: string;
   langCode: LangCode;
 };
@@ -26,14 +25,14 @@ type LibraryExamCardProps = {
  */
 const LibraryExamCard: React.FC<LibraryExamCardProps> = ({
   exam,
-  examType,
   trackId,
   langCode,
 }) => {
-  const accent = examTypeAccent(examType?.colour ?? null);
+  const accent = tagAccent(exam.tag.colorHexCode);
 
   return (
     <Card
+      style={accent.style}
       className={cn(
         "overflow-hidden border-grey-200 pt-0 transition-colors duration-200",
         accent.hoverBorder,
@@ -45,11 +44,9 @@ const LibraryExamCard: React.FC<LibraryExamCardProps> = ({
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="flex min-w-0 flex-col gap-1.5">
             <div className="flex flex-wrap items-center gap-2">
-              {examType && (
-                <Badge className={cn("shrink-0 text-xs", accent.chip)}>
-                  {examType.name[langCode]}
-                </Badge>
-              )}
+              <Badge className={cn("shrink-0 text-xs", accent.chip)}>
+                {exam.tag.name[langCode]}
+              </Badge>
               {exam.config.canRevealAnswers && (
                 <Badge
                   variant="outline"

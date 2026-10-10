@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { BilingualTextSchema } from "./exam.schema.js";
+import { BilingualTextSchema } from "./common.schema.js";
 
 /** Parsed from `?trackId=` and from the path, so the failure reads as a request error. */
 export const TrackIdSchema = z.uuid({ error: "trackId must be a valid UUID" });

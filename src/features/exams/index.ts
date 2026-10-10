@@ -9,4 +9,4 @@ export {
   createTrackExamsQueryOptions,
 } from "./services/exams.queries";
 export type { OpenState, QuestionSection, SectionOpen } from "./types";
-export { examTypeAccent } from "./utils/examTypeColour";
+export { tagAccent } from "./utils/tagAccent";

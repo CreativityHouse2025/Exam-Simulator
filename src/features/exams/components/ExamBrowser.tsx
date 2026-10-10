@@ -7,18 +7,15 @@ import ErrorState from "@/components/states/ErrorState";
 import { Button } from "@/components/ui/button";
 import { translate } from "@/core/utils/translation";
 import { cn } from "@/components/ui/utils";
-import type { ExamDetails, ExamType } from "@/core/api/apiTypes";
+import type { ExamDetails, Tag } from "@/core/api/apiTypes";
 import type { LangCode } from "@/core/types";
 
 type ExamBrowserProps = {
   exams: ExamDetails[];
-  types: ExamType[];
+  tags: Tag[];
   langCode: LangCode;
   /** Renders one exam. The browser owns filtering and the four states; the caller owns the card. */
-  renderCard: (
-    exam: ExamDetails,
-    examType: ExamType | undefined,
-  ) => React.ReactNode;
+  renderCard: (exam: ExamDetails) => React.ReactNode;
   isPending: boolean;
   isError: boolean;
   errorMessage: string;
@@ -32,10 +29,10 @@ type ExamBrowserProps = {
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_SKELETON_COUNT = 3;
-const ALL_TYPES = "all";
+const ALL_TAGS = "all";
 
 /**
- * The exam list every reader of `/api/tracks/:trackId/exams` shares: search, type filter, capped
+ * The exam list every reader of a track's exams shares: search, tag filter, capped
  * list with a show-more, and the loading / error / empty / no-results states.
  *
  * It knows nothing about who is reading or what an exam does — the caller supplies the card, so
@@ -43,7 +40,7 @@ const ALL_TYPES = "all";
  */
 const ExamBrowser: React.FC<ExamBrowserProps> = ({
   exams,
-  types,
+  tags,
   langCode,
   renderCard,
   isPending,
@@ -56,27 +53,22 @@ const ExamBrowser: React.FC<ExamBrowserProps> = ({
   pageSize = DEFAULT_PAGE_SIZE,
   skeletonCount = DEFAULT_SKELETON_COUNT,
 }) => {
-  const [typeFilter, setTypeFilter] = React.useState<string>(ALL_TYPES);
+  const [tagFilter, setTagFilter] = React.useState<string>(ALL_TAGS);
   const [search, setSearch] = React.useState("");
   const [showAll, setShowAll] = React.useState(false);
 
-  const typeById = React.useMemo(
-    () => new Map(types.map((examType) => [examType.id, examType])),
-    [types],
-  );
-
   const visibleExams = React.useMemo(() => {
-    const byType =
-      typeFilter === ALL_TYPES
+    const byTag =
+      tagFilter === ALL_TAGS
         ? exams
-        : exams.filter((exam) => String(exam.typeId) === typeFilter);
+        : exams.filter((exam) => String(exam.tag.id) === tagFilter);
     const query = search.trim().toLowerCase();
     return query
-      ? byType.filter((exam) =>
+      ? byTag.filter((exam) =>
           exam.name[langCode].toLowerCase().includes(query),
         )
-      : byType;
-  }, [exams, typeFilter, search, langCode]);
+      : byTag;
+  }, [exams, tagFilter, search, langCode]);
 
   if (isPending) {
     return (
@@ -112,9 +104,9 @@ const ExamBrowser: React.FC<ExamBrowserProps> = ({
       <ExamFilters
         search={search}
         onSearchChange={setSearch}
-        typeFilter={typeFilter}
-        onTypeFilterChange={setTypeFilter}
-        types={types}
+        tagFilter={tagFilter}
+        onTagFilterChange={setTagFilter}
+        tags={tags}
         langCode={langCode}
       />
 
@@ -129,7 +121,7 @@ const ExamBrowser: React.FC<ExamBrowserProps> = ({
           <div className="flex flex-col gap-4">
             {shownExams.map((exam) => (
               <React.Fragment key={exam.id}>
-                {renderCard(exam, typeById.get(exam.typeId))}
+                {renderCard(exam)}
               </React.Fragment>
             ))}
           </div>

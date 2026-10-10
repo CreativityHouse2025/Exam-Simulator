@@ -18,10 +18,11 @@ import type {
   CompletedAttempt,
   InProgressAttempt,
 } from "@/core/api/apiTypes";
+import type { LangCode } from "@/core/types";
 
 type AttemptsTableProps = {
   attempts: Attempt[];
-  examNameById: Map<number, string>;
+  langCode: LangCode;
   /** Omitted for a supervisor: someone else's attempt is never resumed or retried, only read. */
   onOpen?: (attemptId: string) => void;
   onRevise?: (attemptId: string) => void;
@@ -65,7 +66,7 @@ const TONE_CLASSES: Record<
 /** Attempt history — a table on md+, stacked cards below it. */
 const AttemptsTable: React.FC<AttemptsTableProps> = ({
   attempts,
-  examNameById,
+  langCode,
   onOpen,
   onRevise,
   onDetails,
@@ -73,9 +74,6 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
   isRefreshing = false,
   disabled = false,
 }) => {
-  const examName = (attempt: Attempt) =>
-    examNameById.get(attempt.examId) ?? `#${attempt.examId}`;
-
   // Retry is offered whenever the exam allows it, but only works on a completed, imperfect attempt.
   const retryButton = (attempt: Attempt, enabled: boolean) =>
     onRevise &&
@@ -255,7 +253,7 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
               >
                 <TableCell className="py-3">
                   <span className="font-semibold text-tertiary">
-                    {examName(attempt)}
+                    {attempt.exam.name[langCode]}
                   </span>
                 </TableCell>
                 <TableCell className="py-3">
@@ -289,7 +287,7 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
             <div className="flex flex-col gap-3 p-4">
               <div className="flex items-start justify-between gap-3">
                 <span className="font-semibold text-tertiary">
-                  {examName(attempt)}
+                  {attempt.exam.name[langCode]}
                 </span>
                 <AttemptStatusBadge tone={parts.tone} />
               </div>

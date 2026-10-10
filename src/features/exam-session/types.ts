@@ -139,7 +139,7 @@ export type SessionControlContextType = {
    * is already in flight or the session is never persisted. */
   saveProgress: (options?: SaveProgressOptions) => Promise<boolean>;
   /** Flushes dirty answers and submits for grading. The server writes the score/status/
-   * wrongQuestions to the row rather than returning them (submit_attempt, migration 021) — on
+   * wrongQuestions rather than returning them — on
    * success this re-fetches the attempt via the same read `resumeAttempt` uses, which both
    * discloses the questions (a completed attempt is always disclosed) and returns the graded
    * result. Returns null on failure/no-op. */

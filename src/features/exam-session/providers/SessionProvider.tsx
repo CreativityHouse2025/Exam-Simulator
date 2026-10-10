@@ -54,7 +54,7 @@ function buildSessionFromAttempt(
     preview: false,
     offeredBreaks: attempt.offeredBreaks,
     createdAt: attempt.createdAt,
-    // The stored grade, never a local recompute: submit_attempt rounds to 2dp against the
+    // The stored grade, never a local recompute: the server rounds to 2dp against the
     // attempt's own passing rate, and computeLocalResult rounds to whole percent — recomputing
     // here makes the same attempt read 74.72% fail in the history list and 75% pass in the
     // summary. The server is the only source of a persisted attempt's grade.
@@ -148,10 +148,10 @@ export default function SessionProvider({
           return PREVIEW_ATTEMPT_ID;
         }
 
-        const { attempt, questions, exam } = await startAttempt(examId);
+        const { attempt, questions } = await startAttempt(examId);
 
         mountSession(buildSessionFromAttempt(attempt, questions), {
-          examDetails: { ...exam, config: attempt.configSnapshot },
+          examDetails: { ...attempt.exam, config: attempt.configSnapshot },
           questions,
         });
         return attempt.id;
@@ -173,10 +173,10 @@ export default function SessionProvider({
   const resumeAttempt = React.useCallback(
     async (attemptId: string): Promise<string | null> => {
       try {
-        const { attempt, questions, exam } = await getAttempt(attemptId);
+        const { attempt, questions } = await getAttempt(attemptId);
 
         mountSession(buildSessionFromAttempt(attempt, questions), {
-          examDetails: { ...exam, config: attempt.configSnapshot },
+          examDetails: { ...attempt.exam, config: attempt.configSnapshot },
           questions,
         });
         return attempt.id;
@@ -192,7 +192,7 @@ export default function SessionProvider({
    * Flushes dirty answers and submits for grading.
    *
    * Persisted sessions: the server grades and writes the result to the row rather than returning
-   * it (submit_attempt, migration 021), so this follows up with the same read `resumeAttempt`
+   * it, so this follows up with the same read `resumeAttempt`
    * uses — disclosing the questions and returning the authoritative score/status/wrongQuestions in
    * one round trip.
    *
@@ -218,14 +218,14 @@ export default function SessionProvider({
         // reach the summary until a result exists to put in it.
         setIsSyncing(true);
         try {
-          const { attempt, questions, exam } = await getAttempt(session.id);
+          const { attempt, questions } = await getAttempt(session.id);
           // The graded row now disclosed: content and the completed session land together, so the
           // summary cannot render before there is a result in it. buildSessionFromAttempt reads
           // the result off the row — a just-graded attempt is always 'completed', which
-          // submit_attempt always resolves to pass or fail, never the frontend-only null.
+          // the server always grades as pass or fail, never the frontend-only null.
           const graded = buildSessionFromAttempt(attempt, questions);
           mountSession(graded, {
-            examDetails: { ...exam, config: attempt.configSnapshot },
+            examDetails: { ...attempt.exam, config: attempt.configSnapshot },
             questions,
           });
           return graded.result;

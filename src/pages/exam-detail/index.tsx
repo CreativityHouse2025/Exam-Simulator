@@ -11,8 +11,7 @@ import {
   QuestionNavigator,
   Pager,
   createExamQuestionsQueryOptions,
-  createTrackExamsQueryOptions,
-  examTypeAccent,
+  tagAccent,
 } from "@/features/exams";
 import { PreviewExamButton } from "@/features/exam-session";
 import EmptyState from "@/components/states/EmptyState";
@@ -44,13 +43,6 @@ const ExamDetailPage: React.FC = () => {
   const { data, isPending, isError, refetch, isFetching } = useQuery({
     ...createExamQuestionsQueryOptions(numericId),
     enabled: validId,
-  });
-
-  // Only for the type chip: the questions endpoint carries `typeId` but not the type's name or
-  // colour. The library page has already cached this list, so it is usually a cache hit.
-  const { data: trackExams } = useQuery({
-    ...createTrackExamsQueryOptions(trackId),
-    enabled: trackId !== "",
   });
 
   const questions: DisclosedQuestion[] | null = data?.questions ?? null;
@@ -173,10 +165,7 @@ const ExamDetailPage: React.FC = () => {
     );
   }
 
-  const examType = trackExams?.types.find(
-    (type) => type.id === data?.exam.typeId,
-  );
-  const accent = examTypeAccent(examType?.colour ?? null);
+  const accent = tagAccent(data?.exam.tag.colorHexCode ?? null);
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-8">
@@ -184,14 +173,14 @@ const ExamDetailPage: React.FC = () => {
       {backButton}
 
       <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
-        <div className="min-w-0">
+        <div className="min-w-0" style={accent.style}>
           <div className="mb-1.5 flex flex-wrap items-center gap-2">
             <h1 className="text-2xl font-bold text-tertiary">
               {data?.exam.name[langCode]}
             </h1>
-            {examType && (
+            {data && (
               <Badge className={cn("shrink-0 text-xs", accent.chip)}>
-                {examType.name[langCode]}
+                {data.exam.tag.name[langCode]}
               </Badge>
             )}
           </div>

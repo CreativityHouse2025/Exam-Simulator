@@ -20,8 +20,8 @@ export function statsByExamId(
   const statsByExam = new Map<number, ExamAttemptStats>();
 
   for (const attempt of attempts) {
-    const current = statsByExam.get(attempt.examId) ?? EMPTY_STATS;
-    statsByExam.set(attempt.examId, {
+    const current = statsByExam.get(attempt.exam.id) ?? EMPTY_STATS;
+    statsByExam.set(attempt.exam.id, {
       count: current.count + 1,
       inProgressCount:
         current.inProgressCount + (attempt.examState === "in-progress" ? 1 : 0),

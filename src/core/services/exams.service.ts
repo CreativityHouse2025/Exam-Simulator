@@ -21,13 +21,13 @@ export async function getTrackExams(
     throw new AppApiError(result.error.code, "exams");
   }
 
-  const { exams, types } = camelcaseKeys(result.data, { deep: true });
+  const { exams, tags } = camelcaseKeys(result.data, { deep: true });
   return {
     exams: exams.map((exam) => ({
       ...exam,
       config: markPersisted(exam.config),
     })),
-    types,
+    tags,
   };
 }
 

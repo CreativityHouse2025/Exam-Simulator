@@ -5,11 +5,9 @@ import { successResponse } from "../_lib/utils/response.js"
 import { parseJsonBody } from "../_lib/utils/parseBody.js"
 import { parseOrThrow } from "../_lib/utils/parse.js"
 import { z } from "zod"
-import type { AttemptWithExam } from "../../shared/schemas/attempt.schema.js"
+import type { AttemptWithQuestions } from "../../shared/schemas/attempt.schema.js"
 import { TrackIdSchema } from "../../shared/schemas/track.schema.js"
 import { listAttempts, startAttempt } from "../_lib/services/attemptService.js"
-import { getExam } from "../_lib/services/examService.js"
-import { assertTrackAccess } from "../_lib/services/trackService.js"
 
 /** The client sends only which exam. The server decides the question set, the order, the config and the clock. */
 const StartAttemptRequestSchema = z.strictObject({
@@ -24,13 +22,7 @@ export const POST = withErrorHandler(
       const parsedBody = await parseJsonBody(request)
       const validatedInput = parseOrThrow(StartAttemptRequestSchema, parsedBody)
 
-      // Starting an exam is track access, unlike reading an attempt already owned. The track is
-      // reachable only through the exam, so it is resolved before anything is written.
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { config: _config, ...exam } = await getExam(validatedInput.exam_id)
-      await assertTrackAccess(authUser.id, exam.track_id)
-
-      const result: AttemptWithExam = { ...(await startAttempt(authUser.id, validatedInput.exam_id)), exam }
+      const result: AttemptWithQuestions = await startAttempt(authUser.id, validatedInput.exam_id)
       return successResponse(result, 201, cookieHeaders)
     }),
   ),

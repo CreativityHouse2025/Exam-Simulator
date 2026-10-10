@@ -54,17 +54,6 @@ const TrackPage: React.FC = () => {
     [attemptsQuery.data],
   );
 
-  const examNameById = React.useMemo(
-    () =>
-      new Map(
-        (examsQuery.data?.exams ?? []).map((exam) => [
-          exam.id,
-          exam.name[langCode],
-        ]),
-      ),
-    [examsQuery.data, langCode],
-  );
-
   const attempts = attemptsQuery.data ?? [];
   const recentAttempts = attempts.slice(0, RECENT_ATTEMPT_COUNT);
 
@@ -128,7 +117,7 @@ const TrackPage: React.FC = () => {
         {!examsCollapsed && (
           <ExamBrowser
             exams={examsQuery.data?.exams ?? []}
-            types={examsQuery.data?.types ?? []}
+            tags={examsQuery.data?.tags ?? []}
             langCode={langCode}
             isPending={examsQuery.isPending}
             isError={examsQuery.isError}
@@ -136,10 +125,9 @@ const TrackPage: React.FC = () => {
             onRetry={examsQuery.refetch}
             isRetrying={examsQuery.isFetching}
             emptyMessage={translate("exams.empty")}
-            renderCard={(exam, examType) => (
+            renderCard={(exam) => (
               <TrackExamCard
                 exam={exam}
-                examType={examType}
                 stats={statsForExam(attemptStats, exam.id)}
                 langCode={langCode}
                 disabled={isBusy}
@@ -173,7 +161,7 @@ const TrackPage: React.FC = () => {
           <>
             <AttemptsTable
               attempts={recentAttempts}
-              examNameById={examNameById}
+              langCode={langCode}
               disabled={isBusy}
               onOpen={openAttempt}
               onRevise={reviseAttempt}

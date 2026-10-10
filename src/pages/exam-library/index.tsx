@@ -65,7 +65,7 @@ const ExamLibraryPage: React.FC = () => {
 
       <ExamBrowser
         exams={examsQuery.data?.exams ?? []}
-        types={examsQuery.data?.types ?? []}
+        tags={examsQuery.data?.tags ?? []}
         langCode={langCode}
         isPending={examsQuery.isPending}
         isError={examsQuery.isError}
@@ -73,10 +73,9 @@ const ExamLibraryPage: React.FC = () => {
         onRetry={examsQuery.refetch}
         isRetrying={examsQuery.isFetching}
         emptyMessage={translate("exams.empty")}
-        renderCard={(exam, examType) => (
+        renderCard={(exam) => (
           <LibraryExamCard
             exam={exam}
-            examType={examType}
             trackId={trackId}
             langCode={langCode}
           />

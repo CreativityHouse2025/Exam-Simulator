@@ -4,11 +4,11 @@ import { apiFetch } from "../api/apiFetch";
 import type { ApiResponse } from "@shared/api.schema";
 import type {
   AttemptList as SharedAttemptList,
-  AttemptWithExam as SharedAttemptWithExam,
+  AttemptWithQuestions as SharedAttemptWithQuestions,
   Revision as SharedRevision,
 } from "@shared/attempt.schema";
 import { markPersisted } from "../api/apiTypes";
-import type { Attempt, AttemptWithExam, Revision } from "../api/apiTypes";
+import type { Attempt, AttemptWithQuestions, Revision } from "../api/apiTypes";
 
 type SaveAttemptAnswer = {
   questionId: number;
@@ -18,48 +18,43 @@ type SaveAttemptAnswer = {
 
 export async function startAttempt(
   examId: number,
-): Promise<AttemptWithExam> {
+): Promise<AttemptWithQuestions> {
   const response = await apiFetch("/api/attempts", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ exam_id: examId }),
     handleUnauthorized: true,
   });
-  const result: ApiResponse<SharedAttemptWithExam> = await response.json();
+  const result: ApiResponse<SharedAttemptWithQuestions> =
+    await response.json();
 
   if (!result.success) {
     throw new AppApiError(result.error.code, "attempts");
   }
 
-  const { attempt, questions, exam } = camelcaseKeys(result.data, {
-    deep: true,
-  });
-  return {
-    // The backend pairs examState and result; the cast restores that pairing.
-    attempt: {
-      ...attempt,
-      configSnapshot: markPersisted(attempt.configSnapshot),
-    } as Attempt,
-    questions,
-    exam,
-  };
+  return toAttemptWithQuestions(result.data);
 }
 
 export async function getAttempt(
   attemptId: string,
-): Promise<AttemptWithExam> {
+): Promise<AttemptWithQuestions> {
   const response = await apiFetch(`/api/attempts/${attemptId}`, {
     handleUnauthorized: true,
   });
-  const result: ApiResponse<SharedAttemptWithExam> = await response.json();
+  const result: ApiResponse<SharedAttemptWithQuestions> =
+    await response.json();
 
   if (!result.success) {
     throw new AppApiError(result.error.code, "attempts");
   }
 
-  const { attempt, questions, exam } = camelcaseKeys(result.data, {
-    deep: true,
-  });
+  return toAttemptWithQuestions(result.data);
+}
+
+function toAttemptWithQuestions(
+  data: SharedAttemptWithQuestions,
+): AttemptWithQuestions {
+  const { attempt, questions } = camelcaseKeys(data, { deep: true });
   return {
     // The backend pairs examState and result; the cast restores that pairing.
     attempt: {
@@ -67,7 +62,6 @@ export async function getAttempt(
       configSnapshot: markPersisted(attempt.configSnapshot),
     } as Attempt,
     questions,
-    exam,
   };
 }
 

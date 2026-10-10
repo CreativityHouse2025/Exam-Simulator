@@ -69,8 +69,8 @@ const ExamMenu: React.FC<ExamMenuProps> = ({ open }) => {
     // sending them there would bounce off RouteGuard straight to the dashboard.
     navigate(
       roleOf(user) === "supervisor"
-        ? ROUTES.examLibrary.to(examDetails.trackId)
-        : ROUTES.track.to(examDetails.trackId),
+        ? ROUTES.examLibrary.to(examDetails.track.id)
+        : ROUTES.track.to(examDetails.track.id),
     );
   };
 

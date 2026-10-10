@@ -10,7 +10,7 @@ import type {
   EnrolledTrack as SharedEnrolledTrack,
 } from "@shared/track.schema";
 import type {
-  ExamType as SharedExamType,
+  Tag as SharedTag,
   ExamConfig as SharedExamConfig,
   ExamConfigBreak as SharedExamConfigBreak,
   ExamDetails as SharedExamDetails,
@@ -24,7 +24,7 @@ import type {
   Attempt as SharedAttempt,
   AttemptQuestion as SharedAttemptQuestion,
   DisclosedAttemptQuestion as SharedDisclosedAttemptQuestion,
-  AttemptWithExam as SharedAttemptWithExam,
+  AttemptWithQuestions as SharedAttemptWithQuestions,
   Revision as SharedRevision,
 } from "@shared/attempt.schema";
 import type {
@@ -36,7 +36,7 @@ import type { StudentProfile as SharedStudentProfile } from "@shared/student.sch
 export type Track = CamelCaseKeys<SharedTrack, true>;
 export type EnrolledTrack = CamelCaseKeys<SharedEnrolledTrack, true>;
 
-export type ExamType = CamelCaseKeys<SharedExamType, true>;
+export type Tag = CamelCaseKeys<SharedTag, true>;
 export type ExamConfigBreak = CamelCaseKeys<SharedExamConfigBreak, true>;
 
 /**
@@ -94,14 +94,14 @@ export type DisclosedAttemptQuestion = CamelCaseKeys<
   SharedDisclosedAttemptQuestion,
   true
 >;
-export type AttemptWithExam = Omit<
-  CamelCaseKeys<SharedAttemptWithExam, true>,
+export type AttemptWithQuestions = Omit<
+  CamelCaseKeys<SharedAttemptWithQuestions, true>,
   "attempt"
 > & { attempt: Attempt };
 
 /**
- * Never on the wire — `submit_attempt` writes the grade to the row (score, status,
- * wrong_questions) instead of returning it, so this is assembled client-side from those same
+ * Never returned by the API — submitting stores the grade (score, status, wrong questions)
+ * instead of returning it, so this is assembled client-side from those same
  * fields on a completed `Attempt`, or by `features/exam-session/utils/results.ts
  * computeLocalResult` for a session that is never persisted (preview, revision).
  * `status: null` is the one frontend-only state: an ungraded config (`ExamConfig.passingRate ===

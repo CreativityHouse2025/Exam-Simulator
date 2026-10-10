@@ -21,7 +21,7 @@ export function isAnswerCorrect(
 /**
  * Grades a session entirely client-side, from disclosed content — the only path available to a
  * session that never reaches the server (a supervisor preview, or a revision retry). A real,
- * persisted session is graded by submit_attempt instead; this exists to give both the exact same
+ * persisted session is graded by the server instead; this exists to give both the exact same
  * Session.result shape.
  */
 export function computeLocalResult(

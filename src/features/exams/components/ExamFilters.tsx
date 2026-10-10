@@ -10,25 +10,25 @@ import {
 } from "@/components/ui/select";
 import { translate } from "@/core/utils/translation";
 import { LANGUAGES } from "@/core/constants";
-import type { ExamType } from "@/core/api/apiTypes";
+import type { Tag } from "@/core/api/apiTypes";
 import type { LangCode } from "@/core/types";
 
 type ExamFiltersProps = {
   search: string;
   onSearchChange: (value: string) => void;
-  typeFilter: string;
-  onTypeFilterChange: (value: string) => void;
-  types: ExamType[];
+  tagFilter: string;
+  onTagFilterChange: (value: string) => void;
+  tags: Tag[];
   langCode: LangCode;
 };
 
-/** Name search plus a type select built from whichever types this track's exams actually use. */
+/** Name search plus a tag select built from whichever tags this track's exams actually use. */
 const ExamFilters: React.FC<ExamFiltersProps> = ({
   search,
   onSearchChange,
-  typeFilter,
-  onTypeFilterChange,
-  types,
+  tagFilter,
+  onTagFilterChange,
+  tags,
   langCode,
 }) => (
   <div className="mb-5 flex flex-col gap-2.5 sm:flex-row sm:items-center">
@@ -54,8 +54,8 @@ const ExamFilters: React.FC<ExamFiltersProps> = ({
     </div>
 
     <Select
-      value={typeFilter}
-      onValueChange={onTypeFilterChange}
+      value={tagFilter}
+      onValueChange={onTagFilterChange}
       dir={LANGUAGES[langCode].dir}
     >
       {/* The primitive ships bg-transparent + border-input, which disappears over the page gradient. */}
@@ -64,9 +64,9 @@ const ExamFilters: React.FC<ExamFiltersProps> = ({
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="all">{translate("exams.filter.all")}</SelectItem>
-        {types.map((examType) => (
-          <SelectItem key={examType.id} value={String(examType.id)}>
-            {examType.name[langCode]}
+        {tags.map((tag) => (
+          <SelectItem key={tag.id} value={String(tag.id)}>
+            {tag.name[langCode]}
           </SelectItem>
         ))}
       </SelectContent>

@@ -43,7 +43,7 @@ const ExamContent: React.FC<ExamContentProps> = ({ isReview }) => {
   }, []);
 
   // canReveal (ExamConfig.canRevealAnswers) means the backend already disclosed this session's
-  // questions from the moment it started (questionService.getQuestions) — the button only
+  // questions from the moment it started — the button only
   // toggles LOCAL visibility of data already in memory, never a fetch. A full exam's config sets
   // this false, so it never gets the button; domain and revision both set it true.
   const canToggleReveal = canReveal && !isReview;

@@ -1,26 +1,21 @@
 import { z } from "zod";
+import { BilingualTextSchema } from "./common.schema.js";
+import { TrackSchema } from "./track.schema.js";
 
-/** Supported content languages. */
-export const LangSchema = z.enum(["ar", "en"]);
+/** Code of the one tag shared by every track: it lists an exam under "Full exams". */
+export const FULL_TAG_CODE = "FULL";
 
-export type LangCode = z.infer<typeof LangSchema>;
-
-/** One string per language. */
-export const BilingualTextSchema = z.object({
-  ar: z.string(),
-  en: z.string(),
-});
-
-export type BilingualText = z.infer<typeof BilingualTextSchema>;
-
-export const ExamTypeSchema = z.object({
+/** Where an exam is listed: FULL, or one of a track's domains. */
+export const TagSchema = z.object({
   id: z.int(),
+  code: z.string(),
   name: BilingualTextSchema,
-  /** Token key the frontend maps to a CSS custom property (e.g. "primary"). Null or an unrecognised key falls back to a neutral style. */
-  colour: z.string().nullable(),
+  /** Hex, e.g. "#b5965d". Null falls back to a neutral style. */
+  color_hex_code: z.string().nullable(),
+  display_order: z.int(),
 });
 
-export type ExamType = z.infer<typeof ExamTypeSchema>;
+export type Tag = z.infer<typeof TagSchema>;
 
 export const ExamConfigBreakSchema = z.object({
   show_at_index: z.int().nonnegative(),
@@ -43,8 +38,8 @@ export type ExamConfig = z.infer<typeof ExamConfigSchema>;
 
 export const ExamSchema = z.object({
   id: z.int(),
-  track_id: z.uuid(),
-  type_id: z.int(),
+  track: TrackSchema,
+  tag: TagSchema,
   display_order: z.int(),
   name: BilingualTextSchema,
   description: BilingualTextSchema,
@@ -108,13 +103,20 @@ export type DisclosedQuestion = z.infer<typeof DisclosedQuestionSchema>;
 // Responses — built by the API from database rows, never parsed at runtime.
 // ---------------------------------------------------------------------------
 
-/** GET /api/tracks/:trackId/exams — `types` holds only the types this track's exams actually use. */
+/** GET /api/tracks/:trackId/exams — `tags` holds only the tags this track's exams actually use. */
 export const TrackExamsSchema = z.object({
   exams: z.array(ExamDetailsSchema),
-  types: z.array(ExamTypeSchema),
+  tags: z.array(TagSchema),
 });
 
 export type TrackExams = z.infer<typeof TrackExamsSchema>;
+
+/** GET /api/tracks/:trackId/tags — tags with at least one exam on the track, by `display_order`. */
+export const TrackTagsSchema = z.object({
+  tags: z.array(TagSchema),
+});
+
+export type TrackTags = z.infer<typeof TrackTagsSchema>;
 
 /**
  * GET /api/exams/:examId/questions — supervisor content, always disclosed.

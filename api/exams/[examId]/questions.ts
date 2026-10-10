@@ -5,8 +5,7 @@ import { withRole } from "../../_lib/middleware/withRole.js"
 import { successResponse } from "../../_lib/utils/response.js"
 import { parseOrThrow } from "../../_lib/utils/parse.js"
 import type { ExamWithQuestions } from "../../../shared/schemas/exam.schema.js"
-import { getExam, getExamQuestions } from "../../_lib/services/examService.js"
-import { assertTrackAccess } from "../../_lib/services/trackService.js"
+import { getExamQuestionContent } from "../../_lib/services/questionService.js"
 
 /** Exam ids are `exams.id`, a smallint identity — not a UUID like every other id in the API. */
 const ExamIdSchema = z.coerce.number().int().positive({ error: "examId must be a positive integer" })
@@ -22,12 +21,7 @@ export const GET = withErrorHandler(
       // Path is /api/exams/<id>/questions — the id is the second-to-last segment.
       const examId = parseOrThrow(ExamIdSchema, url.pathname.split("/").at(-2) ?? "")
 
-      // The exam names its own track; a supervisor without an active enrollment sees nothing.
-      // Read once and handed on — the response carries it anyway.
-      const exam = await getExam(examId)
-      await assertTrackAccess(authUser.id, exam.track_id)
-
-      const result: ExamWithQuestions = await getExamQuestions(exam)
+      const result: ExamWithQuestions = await getExamQuestionContent(authUser.id, examId)
       return successResponse(result, 200, cookieHeaders)
     }),
   ),

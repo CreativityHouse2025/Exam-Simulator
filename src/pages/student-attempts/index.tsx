@@ -20,7 +20,6 @@ import ErrorState from "@/components/states/ErrorState";
 import { useAuth } from "@/features/auth";
 import useSettings from "@/core/hooks/useSettings";
 import { AppApiError } from "@/core/errors";
-import { createTrackExamsQueryOptions } from "@/features/exams";
 import { resolveErrorKey } from "@/core/utils/errorTranslation";
 import { translate } from "@/core/utils/translation";
 import type { Attempt } from "@/core/api/apiTypes";
@@ -51,23 +50,6 @@ const StudentAttemptsPage: React.FC = () => {
     ...createStudentAttemptsQueryOptions(id, trackId),
     enabled: hasAccess,
   });
-  // Only for resolving exam names — an Attempt carries examId but never the name.
-  const examsQuery = useQuery({
-    ...createTrackExamsQueryOptions(trackId),
-    enabled: hasAccess,
-  });
-
-  const examNameById = React.useMemo(
-    () =>
-      new Map(
-        (examsQuery.data?.exams ?? []).map((exam) => [
-          exam.id,
-          exam.name[langCode],
-        ]),
-      ),
-    [examsQuery.data, langCode],
-  );
-
   const studentName = profileQuery.data
     ? `${profileQuery.data.user.firstName} ${profileQuery.data.user.lastName}`
     : "…";
@@ -153,7 +135,7 @@ const StudentAttemptsPage: React.FC = () => {
                 <div className="mt-6">
                   <AttemptsTable
                     attempts={attempts}
-                    examNameById={examNameById}
+                    langCode={langCode}
                     onDetails={setSelectedAttempt}
                     onRefresh={attemptsQuery.refetch}
                     isRefreshing={attemptsQuery.isFetching}
@@ -168,10 +150,7 @@ const StudentAttemptsPage: React.FC = () => {
       {selectedAttempt && (
         <AttemptDetailDialog
           attempt={selectedAttempt}
-          examName={
-            examNameById.get(selectedAttempt.examId) ??
-            `#${selectedAttempt.examId}`
-          }
+          examName={selectedAttempt.exam.name[langCode]}
           onOpenChange={(open) => !open && setSelectedAttempt(null)}
         />
       )}
