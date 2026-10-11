@@ -8,6 +8,7 @@ import type {
 } from "../../../shared/schemas/exam.schema.js";
 import type {
   Attempt,
+  AttemptPage,
   AttemptStatus,
   AttemptWithQuestions,
   ExamState,
@@ -17,9 +18,6 @@ import type { ExamWithQuestions } from "../../../shared/schemas/exam.schema.js";
 import { getExam, toExam, type ExamRow } from "./examService.js";
 import { assertTrackAccess } from "./trackService.js";
 import { getQuestionsById } from "./questionService.js";
-
-/** The per-track attempt cap. A track's list can never legitimately exceed it. */
-const TRACK_ATTEMPT_CAP = 150;
 
 /** What save hands the service once the handler has validated it. Submit is the same minus breaks. */
 type SaveAttemptInput = {
@@ -287,32 +285,71 @@ export async function submitAttempt(
   throwOnRpcFailure(result);
 }
 
+/** PostgREST's answer to an offset past the last row when an exact count was asked for (416). */
+const RANGE_PAST_END = "PGRST103";
+
 /**
- * One user's attempts within one track, newest first.
+ * One page of a user's attempts within one track, newest first, plus how many there are in all.
  *
- * The track filter is an inner join on `exams`, applied before the limit: limiting first would
- * silently drop a track's older attempts once the account holds enough newer ones elsewhere.
+ * The track filter is an inner join on `exams`, so both the page and the count cover this track
+ * only. A page past the end is an empty page, not an error.
  *
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
-export async function listAttempts(userId: string, trackId: string): Promise<Attempt[]> {
-  const { data, error } = await supabaseAdmin
+export async function listAttempts(
+  userId: string,
+  trackId: string,
+  { page, per_page }: AttemptPage,
+): Promise<{ attempts: Attempt[]; total: number }> {
+  const from = (page - 1) * per_page;
+
+  const { data, count, error } = await supabaseAdmin
     .from("exam_attempts")
-    .select(ATTEMPT_COLUMNS)
+    .select(ATTEMPT_COLUMNS, { count: "exact" })
     .eq("user_id", userId)
     .eq("exams.track_id", trackId)
     .order("created_at", { ascending: false })
-    .limit(TRACK_ATTEMPT_CAP);
+    // Ties on created_at would otherwise let a row move between pages.
+    .order("id", { ascending: false })
+    .range(from, from + per_page - 1);
 
-  if (error || !data) {
+  if (error?.code === RANGE_PAST_END) {
+    return { attempts: [], total: await countAttempts(userId, trackId) };
+  }
+
+  if (error || !data || count === null) {
     throw new AppError({
       statusCode: 500,
       code: "INTERNAL_ERROR",
-      message: `Failed to fetch attempts for track ${trackId} (${error?.message ?? "no rows returned"})`,
+      message: `Failed to fetch attempts for track ${trackId} (${error?.message ?? "no rows or count returned"})`,
     });
   }
 
-  return data.map((row) => toAttempt(row, toExam(row.exams)));
+  return { attempts: data.map((row) => toAttempt(row, toExam(row.exams))), total: count };
+}
+
+/**
+ * How many attempts a user has within one track. Only for a page past the end, where the page
+ * query fails before it reports its count.
+ *
+ * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
+ */
+async function countAttempts(userId: string, trackId: string): Promise<number> {
+  const { count, error } = await supabaseAdmin
+    .from("exam_attempts")
+    .select("id, exams!inner(track_id)", { count: "exact", head: true })
+    .eq("user_id", userId)
+    .eq("exams.track_id", trackId);
+
+  if (error || count === null) {
+    throw new AppError({
+      statusCode: 500,
+      code: "INTERNAL_ERROR",
+      message: `Failed to count attempts for track ${trackId} (${error?.message ?? "no count returned"})`,
+    });
+  }
+
+  return count;
 }
 
 /**

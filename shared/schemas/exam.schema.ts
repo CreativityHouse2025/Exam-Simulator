@@ -57,6 +57,16 @@ export const ExamSchema = z.object({
 
 export type Exam = z.infer<typeof ExamSchema>;
 
+/** A catalog exam, with the caller's own progress on it. */
+export const ExamWithProgressSchema = ExamSchema.extend({
+  /** The caller's completed attempts on this exam. */
+  attempts_count: z.int().nonnegative(),
+  /** The caller's in-progress attempt on this exam. At most one exists. */
+  open_attempt_id: z.uuid().nullable(),
+});
+
+export type ExamWithProgress = z.infer<typeof ExamWithProgressSchema>;
+
 // ---------------------------------------------------------------------------
 // Question content. Disclosure is a TYPE distinction, not an optional field — a handler cannot
 // forget to strip a key its return type does not have.
@@ -107,7 +117,7 @@ export type DisclosedQuestion = z.infer<typeof DisclosedQuestionSchema>;
 
 /** GET /api/tracks/:trackId/exams?tag=<code> — one tag's exams on the track, by `display_order`. */
 export const ExamListSchema = z.object({
-  exams: z.array(ExamSchema),
+  exams: z.array(ExamWithProgressSchema),
 });
 
 export type ExamList = z.infer<typeof ExamListSchema>;

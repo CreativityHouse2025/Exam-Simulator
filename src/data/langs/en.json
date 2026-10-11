@@ -230,6 +230,7 @@
     "title": "Attempt History",
     "subtitle": "Your latest exam attempts for $1",
     "attempt-count": "$1 attempts",
+    "per-page": "Per page",
     "loading": "Loading...",
     "fetchError": "Failed to load attempt history. Please try again.",
     "table": {
@@ -349,11 +350,6 @@
     },
     "attempts": {
       "breadcrumb-root": "Students",
-      "stats": {
-        "total": "Total Attempts",
-        "average": "Average Score",
-        "pass-rate": "Pass Rate"
-      },
       "empty": "This student hasn't made any attempts yet.",
       "error": "Failed to load this student's attempts. Please try again.",
       "title-in-track": "Attempts in $1",
@@ -393,12 +389,12 @@
       "fetch": "Failed to load exams."
     },
     "start": "Start",
+    "resume": "Resume last attempt",
     "empty": "No exams here yet",
     "no-results-hint": "Try a different name or exam type.",
     "taken": "Taken $1x",
     "questions": "$1 questions",
     "pass-mark": "$1% to pass",
-    "in-progress": "$1 attempts uncompleted",
     "show-details": "Show configuration",
     "hide-details": "Hide configuration",
     "config": {

@@ -11,6 +11,8 @@ import type { ExamWithQuestions as SharedExamWithQuestions } from "@shared/exam.
 import { markPersisted, toPersistedExam } from "../api/apiTypes";
 import type {
   Attempt,
+  AttemptList,
+  AttemptPage,
   AttemptWithQuestions,
   ExamWithQuestions,
 } from "../api/apiTypes";
@@ -153,19 +155,36 @@ export async function getRevision(
   return { exam: toPersistedExam(exam), questions };
 }
 
+/** The query string every attempt-history endpoint takes: the track and the page. */
+export function attemptPageQuery(
+  trackId: string,
+  { page, perPage }: AttemptPage,
+): URLSearchParams {
+  return new URLSearchParams({
+    trackId,
+    page: String(page),
+    per_page: String(perPage),
+  });
+}
+
 export async function getAttempts(
   trackId: string,
-): Promise<Attempt[]> {
-  const response = await apiFetch(`/api/attempts?trackId=${trackId}`, {
-    handleUnauthorized: true,
-  });
+  page: AttemptPage,
+): Promise<AttemptList> {
+  const response = await apiFetch(
+    `/api/attempts?${attemptPageQuery(trackId, page)}`,
+    { handleUnauthorized: true },
+  );
   const result: ApiResponse<SharedAttemptList> = await response.json();
 
   if (!result.success) {
     throw new AppApiError(result.error.code, "attempts");
   }
 
-  return result.data.attempts.map(toAttempt);
+  return {
+    attempts: result.data.attempts.map(toAttempt),
+    total: result.data.total,
+  };
 }
 
 function toAttempt(data: SharedAttempt): Attempt {

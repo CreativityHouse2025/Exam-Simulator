@@ -5,6 +5,7 @@ import {
   getStudentAttempts,
 } from "./student.service";
 import { forSignedInUser } from "@/core/utils/forSignedInUser";
+import type { AttemptPage } from "@/core/api/apiTypes";
 
 /** query must already be trimmed and >= the minimum search length. */
 export const createStudentSearchQueryOptions = (
@@ -24,14 +25,24 @@ export const createStudentSearchQueryOptions = (
 export const createStudentAttemptsQueryOptions = (
   id: string,
   trackId: string,
+  page: AttemptPage,
   userId: string | undefined,
 ) =>
   queryOptions({
-    queryKey: ["students", id, "attempts", trackId, userId],
+    queryKey: [
+      "students",
+      id,
+      "attempts",
+      trackId,
+      page.page,
+      page.perPage,
+      userId,
+    ],
     queryFn: forSignedInUser(userId, ({ signal }: { signal: AbortSignal }) =>
-      getStudentAttempts(id, trackId, signal),
+      getStudentAttempts(id, trackId, page, signal),
     ),
-    staleTime: 3 * 60 * 1000,
+    // Always stale: the student may be practising while the supervisor watches.
+    staleTime: 0,
     gcTime: 5 * 60 * 1000,
     retry: 1,
   });

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { translate } from "@/core/utils/translation";
-import Pager from "./Pager";
+import Pager from "@/components/Pager";
 
 /** How many number cells the navigator shows at once — its pager scrolls through these windows. */
 const NAV_CHUNK = 60;

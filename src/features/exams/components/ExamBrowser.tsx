@@ -3,12 +3,12 @@ import { FileQuestion } from "lucide-react";
 import ExamCardSkeleton from "./ExamCardSkeleton";
 import EmptyState from "@/components/states/EmptyState";
 import ErrorState from "@/components/states/ErrorState";
-import type { Exam } from "@/core/api/apiTypes";
+import type { ExamWithProgress } from "@/core/api/apiTypes";
 
 type ExamBrowserProps = {
-  exams: Exam[];
+  exams: ExamWithProgress[];
   /** Renders one exam. The browser owns the states; the caller owns the card. */
-  renderCard: (exam: Exam) => React.ReactNode;
+  renderCard: (exam: ExamWithProgress) => React.ReactNode;
   isPending: boolean;
   isError: boolean;
   errorMessage: string;

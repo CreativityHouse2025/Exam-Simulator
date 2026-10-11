@@ -1,4 +1,4 @@
-import type { Exam, ExamConfig } from "../../../shared/schemas/exam.schema.js";
+import type { Exam, ExamConfig, ExamWithProgress } from "../../../shared/schemas/exam.schema.js";
 import type { Tables } from "../database.types.js";
 import { AppError } from "../errors/AppError.js";
 import { supabaseAdmin } from "../supabaseClient.js";
@@ -78,8 +78,8 @@ export async function getExam(examId: number): Promise<Exam> {
 }
 
 /**
- * One active tag's active exams in a track, each carrying its own config, ordered by
- * `display_order`.
+ * One active tag's active exams in a track, each carrying its own config and the caller's progress
+ * on it, ordered by `display_order`.
  *
  * A known tag with no active exams on this track is an empty list, not a 404.
  *
@@ -88,7 +88,7 @@ export async function getExam(examId: number): Promise<Exam> {
  * @throws {AppError} 404 `NOT_FOUND` — no tag has this code, or it is archived.
  * @throws {AppError} 500 `INTERNAL_ERROR` — a query failed.
  */
-export async function getTrackExams(trackId: string, tagCode: string): Promise<Exam[]> {
+export async function getTrackExams(trackId: string, tagCode: string, userId: string): Promise<ExamWithProgress[]> {
   const tag = await getTag(tagCode)
 
   if (tag.archived_at !== null) {
@@ -101,10 +101,16 @@ export async function getTrackExams(trackId: string, tagCode: string): Promise<E
 
   const { data, error } = await supabaseAdmin
     .from('exams')
-    .select(EXAM_COLUMNS)
+    // The caller's own attempts, counted in Postgres so the payload stays one number per exam.
+    // Embed filters narrow the embedded rows, never the exams.
+    .select(`${EXAM_COLUMNS}, completed:exam_attempts(count), open:exam_attempts(id)`)
     .eq('track_id', trackId)
     .eq('tags.code', tagCode)
     .is('archived_at', null)
+    .eq('completed.user_id', userId)
+    .eq('completed.exam_state', 'completed')
+    .eq('open.user_id', userId)
+    .eq('open.exam_state', 'in-progress')
     .order('display_order', { ascending: true })
     .order('show_at_index', { referencedTable: 'allowed_config.exam_config.breaks', ascending: true })
 
@@ -116,5 +122,9 @@ export async function getTrackExams(trackId: string, tagCode: string): Promise<E
     })
   }
 
-  return data.map(toExam)
+  return data.map(({ completed, open, ...row }) => ({
+    ...toExam(row),
+    attempts_count: completed[0]?.count ?? 0,
+    open_attempt_id: open[0]?.id ?? null
+  }))
 }

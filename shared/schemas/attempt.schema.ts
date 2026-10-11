@@ -79,9 +79,14 @@ export type DisclosedAttemptQuestion = z.infer<
   typeof DisclosedAttemptQuestionSchema
 >;
 
-/** GET /api/attempts?trackId= — `trackId` is required, so no unfiltered query exists to call by accident. */
+/**
+ * GET /api/attempts?trackId=&page=&per_page= — `trackId` is required, so no unfiltered query exists
+ * to call by accident. Newest first.
+ */
 export const AttemptListSchema = z.object({
   attempts: z.array(AttemptSchema),
+  /** The user's attempts in the track, every state, across all pages. */
+  total: nonNegativeInt,
 });
 
 export type AttemptList = z.infer<typeof AttemptListSchema>;
@@ -104,6 +109,27 @@ export type AttemptWithQuestions = z.infer<typeof AttemptWithQuestionsSchema>;
 // Requests shared by more than one endpoint. Endpoint-specific request schemas live in the
 // endpoint file. Parsed with safeParse at the handler boundary.
 // ---------------------------------------------------------------------------
+
+export const PER_PAGE_MIN = 10;
+export const PER_PAGE_MAX = 100;
+export const PER_PAGE_STEP = 5;
+
+/**
+ * Which page of an attempt history. Query-string values arrive as text, so they are coerced;
+ * an absent one takes its default.
+ */
+export const AttemptPageSchema = z.object({
+  page: z.coerce.number().int().min(1).default(1),
+  per_page: z.coerce
+    .number()
+    .int()
+    .min(PER_PAGE_MIN)
+    .max(PER_PAGE_MAX)
+    .multipleOf(PER_PAGE_STEP)
+    .default(PER_PAGE_MIN),
+});
+
+export type AttemptPage = z.infer<typeof AttemptPageSchema>;
 
 /**
  * One entry of the answer diff. An empty `selected_choices` with `is_bookmarked: false` is a DELETE

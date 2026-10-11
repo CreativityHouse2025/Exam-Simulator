@@ -1,12 +1,13 @@
 import React from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Inbox, Lock } from "lucide-react";
+import { ClipboardList, Inbox, Lock } from "lucide-react";
 import {
+  AttemptsPagination,
   AttemptsTable,
   AttemptsTableSkeleton,
-  AttemptStats,
   AttemptDetailDialog,
+  useAttemptPageParams,
 } from "@/features/attempts";
 import {
   StudentSummaryCard,
@@ -38,6 +39,7 @@ const StudentAttemptsPage: React.FC = () => {
   const { settings } = useSettings();
   const langCode = settings.language;
   const { user, enrolledTracks } = useAuth();
+  const { attemptPage, setPage, setPerPage } = useAttemptPageParams();
 
   const [selectedAttempt, setSelectedAttempt] =
     React.useState<Attempt | null>(null);
@@ -47,7 +49,7 @@ const StudentAttemptsPage: React.FC = () => {
 
   const profileQuery = useQuery(createStudentQueryOptions(id, user?.id));
   const attemptsQuery = useQuery({
-    ...createStudentAttemptsQueryOptions(id, trackId, user?.id),
+    ...createStudentAttemptsQueryOptions(id, trackId, attemptPage, user?.id),
     enabled: hasAccess,
   });
   const studentName = profileQuery.data
@@ -87,7 +89,8 @@ const StudentAttemptsPage: React.FC = () => {
     );
   }
 
-  const attempts = attemptsQuery.data ?? [];
+  const attempts = attemptsQuery.data?.attempts ?? [];
+  const total = attemptsQuery.data?.total ?? 0;
   const isPending = profileQuery.isPending || attemptsQuery.isPending;
 
   return (
@@ -112,9 +115,17 @@ const StudentAttemptsPage: React.FC = () => {
           <StudentSummaryCard student={profileQuery.data.user} />
 
           <section className="mt-6">
-            <h1 className="mb-4 text-lg font-bold text-tertiary md:text-xl">
-              {translate("students.attempts.title-in-track", [trackName])}
-            </h1>
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+              <h1 className="text-lg font-bold text-tertiary md:text-xl">
+                {translate("students.attempts.title-in-track", [trackName])}
+              </h1>
+              {attemptsQuery.isSuccess && (
+                <span className="flex items-center gap-1.5 text-sm text-grey-800">
+                  <ClipboardList className="size-3.5 shrink-0" />
+                  {translate("history.attempt-count", [total])}
+                </span>
+              )}
+            </div>
 
             {attemptsQuery.isError ? (
               <ErrorState
@@ -122,17 +133,16 @@ const StudentAttemptsPage: React.FC = () => {
                 onRetry={attemptsQuery.refetch}
                 isRetrying={attemptsQuery.isFetching}
               />
-            ) : attempts.length === 0 ? (
-              <EmptyState
-                icon={Inbox}
-                message={translate("students.attempts.empty")}
-                hint={translate("students.attempts.empty-hint")}
-              />
             ) : (
               <>
-                <AttemptStats attempts={attempts} />
-
-                <div className="mt-6">
+                {/* Empty with a non-zero total: a page past the end, so the pager stays to go back. */}
+                {attempts.length === 0 ? (
+                  <EmptyState
+                    icon={Inbox}
+                    message={translate("students.attempts.empty")}
+                    hint={translate("students.attempts.empty-hint")}
+                  />
+                ) : (
                   <AttemptsTable
                     attempts={attempts}
                     langCode={langCode}
@@ -140,7 +150,15 @@ const StudentAttemptsPage: React.FC = () => {
                     onRefresh={attemptsQuery.refetch}
                     isRefreshing={attemptsQuery.isFetching}
                   />
-                </div>
+                )}
+                {total > 0 && (
+                  <AttemptsPagination
+                    page={attemptPage}
+                    total={total}
+                    onPageChange={setPage}
+                    onPerPageChange={setPerPage}
+                  />
+                )}
               </>
             )}
           </section>

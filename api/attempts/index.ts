@@ -5,7 +5,7 @@ import { successResponse } from "../_lib/utils/response.js"
 import { parseJsonBody } from "../_lib/utils/parseBody.js"
 import { parseOrThrow } from "../_lib/utils/parse.js"
 import { z } from "zod"
-import type { AttemptList, AttemptWithQuestions } from "../../shared/schemas/attempt.schema.js"
+import { AttemptPageSchema, type AttemptList, type AttemptWithQuestions } from "../../shared/schemas/attempt.schema.js"
 import { TrackIdSchema } from "../../shared/schemas/track.schema.js"
 import { listAttempts, startAttempt } from "../_lib/services/attemptService.js"
 
@@ -28,17 +28,21 @@ export const POST = withErrorHandler(
   ),
 )
 
-// Maps to GET /api/attempts?trackId=<uuid>
+// Maps to GET /api/attempts?trackId=<uuid>&page=<n>&per_page=<n>
 // Ownership is the whole gate: the query is scoped to the caller's own id, so there is no role to
 // check and nothing a role could widen.
 export const GET = withErrorHandler(
   withAuth(async (request, authUser, cookieHeaders) => {
-    // Required: every screen that lists attempts is inside a track, and an unfiltered query would
-    // silently drop a track's older attempts once the cap starts evicting.
-    const trackId = new URL(request.url).searchParams.get("trackId") ?? ""
-    const validatedTrackId = parseOrThrow(TrackIdSchema, trackId)
+    const { searchParams } = new URL(request.url)
+    // Required: every screen that lists attempts is inside a track.
+    const validatedTrackId = parseOrThrow(TrackIdSchema, searchParams.get("trackId") ?? "")
+    // An absent param is undefined, not null, so its default applies.
+    const page = parseOrThrow(AttemptPageSchema, {
+      page: searchParams.get("page") ?? undefined,
+      per_page: searchParams.get("per_page") ?? undefined,
+    })
 
-    const result: AttemptList = { attempts: await listAttempts(authUser.id, validatedTrackId) }
+    const result: AttemptList = await listAttempts(authUser.id, validatedTrackId, page)
     return successResponse(result, 200, cookieHeaders)
   }),
 )

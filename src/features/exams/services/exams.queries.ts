@@ -15,7 +15,8 @@ export const createTrackExamsQueryOptions = (
   queryOptions({
     queryKey: ["tracks", trackId, "exams", tagCode, userId],
     queryFn: forSignedInUser(userId, () => getTrackExams(trackId, tagCode)),
-    staleTime: 10 * 60 * 1000,
+    // Always stale: each exam's progress changes with every start and submit.
+    staleTime: 0,
     gcTime: 30 * 60 * 1000,
     retry: retryUnlessNotFound,
   });

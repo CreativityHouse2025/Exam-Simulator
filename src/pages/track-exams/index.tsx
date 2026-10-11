@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { SearchX } from "lucide-react";
 import { TrackExamCard, TrackLockedState } from "@/features/tracks";
@@ -8,11 +8,6 @@ import {
   createTrackExamsQueryOptions,
   examListTitle,
 } from "@/features/exams";
-import {
-  createAttemptsQueryOptions,
-  statsByExamId,
-  statsForExam,
-} from "@/features/attempts";
 import EmptyState from "@/components/states/EmptyState";
 import BackButton from "@/components/BackButton";
 import Loading from "@/components/Loading";
@@ -30,7 +25,6 @@ const TrackExamsPage: React.FC = () => {
   const { trackId = "" } = useParams();
   const [searchParams] = useSearchParams();
   const tagCode = searchParams.get("tag") ?? "";
-  const navigate = useNavigate();
   const { settings } = useSettings();
   const langCode = settings.language;
   const { user, enrolledTracks } = useAuth();
@@ -42,17 +36,8 @@ const TrackExamsPage: React.FC = () => {
     ...createTrackExamsQueryOptions(trackId, tagCode, user?.id),
     enabled: isEnrolled && tagCode !== "",
   });
-  const attemptsQuery = useQuery({
-    ...createAttemptsQueryOptions(trackId, user?.id),
-    enabled: isEnrolled,
-  });
 
-  const { startExam, isBusy } = useAttemptActions();
-
-  const attemptStats = React.useMemo(
-    () => statsByExamId(attemptsQuery.data ?? []),
-    [attemptsQuery.data],
-  );
+  const { startExam, openAttempt, isBusy } = useAttemptActions();
 
   const exams = examsQuery.data ?? [];
 
@@ -120,11 +105,10 @@ const TrackExamsPage: React.FC = () => {
         renderCard={(exam) => (
           <TrackExamCard
             exam={exam}
-            stats={statsForExam(attemptStats, exam.id)}
             langCode={langCode}
             disabled={isBusy}
             onStart={() => startExam(exam.id)}
-            onViewAttempts={() => navigate(ROUTES.trackHistory.to(trackId))}
+            onResume={openAttempt}
           />
         )}
       />

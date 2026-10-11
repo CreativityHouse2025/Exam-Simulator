@@ -6,6 +6,7 @@ import { CatalogEntryCards, TrackLockedState } from "@/features/tracks";
 import {
   AttemptsTable,
   AttemptsTableSkeleton,
+  DEFAULT_ATTEMPT_PAGE,
   createAttemptsQueryOptions,
 } from "@/features/attempts";
 import EmptyState from "@/components/states/EmptyState";
@@ -31,14 +32,15 @@ const TrackPage: React.FC = () => {
   const track = enrolledTracks.find((enrolled) => enrolled.id === trackId);
   const isEnrolled = track !== undefined;
 
+  // The history page's default page, so both share one cache entry.
   const attemptsQuery = useQuery({
-    ...createAttemptsQueryOptions(trackId, user?.id),
+    ...createAttemptsQueryOptions(trackId, DEFAULT_ATTEMPT_PAGE, user?.id),
     enabled: isEnrolled,
   });
 
   const { openAttempt, reviseAttempt, isBusy } = useAttemptActions();
 
-  const recentAttempts = (attemptsQuery.data ?? []).slice(
+  const recentAttempts = (attemptsQuery.data?.attempts ?? []).slice(
     0,
     RECENT_ATTEMPT_COUNT,
   );

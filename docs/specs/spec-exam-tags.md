@@ -1,6 +1,6 @@
 # Spec: Exam tags, archiving and attempt rules
 
-Status: ready for implementation. Resolved via `/grill-me` on 2026-10-09/10. Slices 6–7 revised via `/grill-me` on 2026-10-11 (the per-exam attempt limit was dropped).
+Status: ready for implementation. Resolved via `/grill-me` on 2026-10-09/10. Slices 6–7 revised via `/grill-me` on 2026-10-11 (the per-exam attempt limit was dropped); slices 5 and 7 revised again the same day (legacy duplicates auto-submitted, progress fields catalog-only, paging details).
 
 ## Problem Statement
 
@@ -180,8 +180,9 @@ Migrations: the existing uncommitted 019 (track code) stays as is. The existing 
 
 ### Slice 5: One open attempt per exam
 
-- A partial unique index on attempts covers (user id, exam id) where `exam_state` is in progress **and `created_at` is on or after a fixed release cutoff** (literal timestamp with explicit UTC offset). Legacy rows before the cutoff are outside the index, so existing duplicate open attempts don't block the migration. They can only be finished, never multiplied. The cutoff gets a one-line comment.
-- `start_attempt` first checks for an open attempt on that exam (old or new). If one exists, it returns a new result **`in_progress`** with the existing attempt's id and creates nothing. The index is the race backstop.A
+- Legacy duplicates: before the index is built, every open attempt except the newest per (user, exam) is **auto-submitted** through `submit_attempt` with an empty answer diff, so it is graded on its stored answers and gains a results row. Any result other than `ok` aborts the migration.
+- A partial unique index on attempts covers (user id, exam id) where `exam_state` is in progress. No cutoff: after the auto-submit, no duplicates remain.
+- `start_attempt` first checks for an open attempt on that exam. If one exists, it returns a new result **`in_progress`** with the existing attempt's id and creates nothing. The index is the race backstop.
 - Frontend: Start receiving `in_progress` shows a dialog (shadcn Dialog) offering **Resume**, which opens the existing attempt. *Superseded by slice 6: the API answers 409 `ATTEMPT_IN_PROGRESS` and the dialog is removed.*
 
 ### Slice 6: Wire contract and cache structure
@@ -217,34 +218,40 @@ A refactor: no new feature. Two visible changes only, the start-conflict toast a
   | `GET /api/students/:id/attempts?trackId=` | `ApiResponse<AttemptList>` |
 
 - **Start conflict:** the RPC's `in_progress` result becomes **409 `ATTEMPT_IN_PROGRESS`** (new error code), a plain error with no data. It only happens in a stale tab, so the frontend shows a translated error toast. Slice 5's Resume dialog is removed. Slice 7's card makes resuming explicit.
-- **User-scoped query keys:** every TanStack query key ends with the signed-in user's id, e.g. `["tracks", trackId, "exams", tagCode, userId]`. This applies to all queries, supervisor ones included. Each query-options factory takes `userId`; pages pass `user.id` from `useAuth()`. Nothing clears the cache on sign-in or sign-out: a previous user's entries are unreachable and expire with `gcTime`. The id goes **last** so prefix invalidation (slice 7) never needs it.
+- **User-scoped query keys:** every TanStack query key ends with the signed-in user's id, e.g. `["tracks", trackId, "exams", tagCode, userId]`. This applies to all queries, supervisor ones included. Each query-options factory takes `userId`; pages pass `user.id` from `useAuth()`. Nothing clears the cache on sign-in or sign-out: a previous user's entries are unreachable and expire with `gcTime`. The id goes **last** so a key prefix never needs it.
 
 ### Slice 7: Unlimited attempts, per-exam progress, paged history
 
-- **Migration 023** drops `trg_enforce_attempt_limit` and `enforce_attempt_limit()`. Attempts are never deleted automatically. No per-track or per-exam limit column. `TRACK_ATTEMPT_CAP` is removed from the attempt service.
-- **`Exam` gains two caller-specific fields**, on every endpoint that returns an exam (attempt lists and the preview included):
+- **Migration 023** (the existing attempt-limits file, new section) drops `trg_enforce_attempt_limit` and `enforce_attempt_limit()`. Attempts are never deleted automatically. No per-track or per-exam limit column. `TRACK_ATTEMPT_CAP` is removed from the attempt service.
+- **Catalog exams gain two caller-specific fields.** Only `GET /api/tracks/:trackId/exams?tag=` returns them; attempts, the preview and revision keep plain `Exam`, since nothing there reads them:
+
+  ```ts
+  ExamWithProgress = Exam & { attempts_count: number; open_attempt_id: string | null }
+  ExamList         = { exams: ExamWithProgress[] }
+  ```
+
   - `attempts_count`: int ≥ 0, the caller's **completed** attempts on this exam.
-  - `open_attempt_id`: uuid or null, the caller's in-progress attempt on this exam.
+  - `open_attempt_id`: uuid or null, the caller's in-progress attempt on this exam (at most one, by slice 5's index).
 
   Both are computed for the requesting user through PostgREST embeds filtered by user id. No new RPC. Supervisors get `0` / `null` in practice (not enforced).
 - **Exam card:**
-  - The count badge reads "Attempted $1 times" (English `exams.taken`; Arabic copy unchanged), hidden at 0.
-  - When `open_attempt_id` is set, Start is replaced by **"Resume last attempt"**, which opens that attempt through the existing open-attempt flow (no `POST /attempts`).
+  - The count badge reads "Taken $1x" (`exams.taken`, copy unchanged in both languages), hidden at 0.
+  - When `open_attempt_id` is set, Start is replaced by **"Resume last attempt"** (`exams.resume`; Arabic "استئناف المحاولة الأخيرة"), which opens that attempt through the existing open-attempt flow (no `POST /attempts`).
   - Removed: the "X attempts uncompleted" link and its `exams.in-progress` key, `statsByExamId`, `statsForExam`, `ExamAttemptStats`, and the attempts query on the track-exams page.
 - **Paged history:** `GET /api/attempts?trackId=&page=&per_page=` and `GET /api/students/:id/attempts?trackId=&page=&per_page=`.
   - `page`: int ≥ 1, default 1. `per_page`: int from 10 to 100, multiple of 5, default 10. Anything else is 400 `VALIDATION_ERROR`.
   - `PER_PAGE_MIN = 10`, `PER_PAGE_MAX = 100`, `PER_PAGE_STEP = 5` live in the shared schema package and drive both the API validation and the UI's per-page select.
   - Newest first. A page past the end is 200 with an empty list.
-  - `AttemptList` gains `total`: the user's attempt count in the track across all pages. One query: `count: "exact"` plus `range`.
+  - `AttemptList` gains `total`: the user's attempt count in the track (every state) across all pages. One query: `count: "exact"` plus `range`. A page past the end makes PostgREST answer 416 `PGRST103`; only then a second, count-only query (`head: true`) supplies `total` for the empty page.
 - **History pages** (student history and supervisor student attempts):
   - `page` and `per_page` live in URL search params. Invalid values fall back to the defaults client-side, so a hand-edited URL never triggers a 400.
-  - Reuse the existing `Pagination` component, plus a per-page select built from the constants. The header count reads `total`.
+  - Reuse the existing `Pager` component (moved to `src/components/` now that it is shared), plus a per-page select built from the constants. The URL's 1-based `page` maps to Pager's 0-based one. The header count reads `total`.
   - The Track page's recent attempts request `page=1&per_page=10` and show the first 5, sharing the cache with the history page's default view.
-- **Centralized cache invalidation:**
-  - Start and submit become `useMutation`s declaring `meta: { invalidates: [["tracks"], ["attempts"]] }`.
-  - One `MutationCache.onSettled` on the `QueryClient` invalidates every key a settled mutation names, on success **and** failure. It is the only caller of `invalidateQueries`. `meta` is typed through TanStack's `Register` (`mutationMeta`).
-  - Save declares nothing.
-  - Broad prefixes on purpose: only mounted queries refetch. A stale-tab 409 therefore refreshes the list on screen, and the card flips to Resume.
+- **Cache freshness by `staleTime`, not invalidation** (revised 2026-10-12: a mutation-driven invalidation was tried and visibly reloaded pages):
+  - The three queries a student's own actions change have `staleTime: 0`: track exams (progress fields), the student's attempts, and a student's attempts as a supervisor reads them. Every mount refetches in the background over the cached data, so no skeleton shows; `gcTime` is unchanged.
+  - Every other query keeps its longer `staleTime`: catalogue, tags, question content and profiles do not change with start or submit.
+  - Nothing calls `invalidateQueries`, and start and submit stay plain service calls.
+  - A stale tab updates on its next mount or window focus, not in place. Pressing Start there still shows the `ATTEMPT_IN_PROGRESS` toast.
 
 ### Unchanged
 
@@ -276,6 +283,7 @@ API smoke checks per slice (student = enrolled student cookie, sup = enrolled su
 | 4 | Save / submit / review an attempt on an archived exam | Works |
 | 5 | Start twice on the same exam | Second returns `in_progress` + same id; one row |
 | 5 | Two parallel starts | Exactly one attempt created |
+| 5 | Pre-migration duplicate open attempts on one exam, then migrate | Newest stays open; the rest are completed with a results row |
 | 6 | Start twice on the same exam | Second is 409 `ATTEMPT_IN_PROGRESS`; one row |
 | 6 | Any response carrying an exam | Exam has `config`, including inside attempts |
 | 6 | `GET /attempts/:id/revision` | `{ exam, questions }` |
@@ -285,7 +293,8 @@ API smoke checks per slice (student = enrolled student cookie, sup = enrolled su
 | 7 | `?tag=` (sup) | `attempts_count` 0, `open_attempt_id` null |
 | 7 | `/attempts?per_page=7`, `per_page=110`, `page=0` | 400 |
 | 7 | 23 attempts, `per_page=10`, pages 1–4 | 10 / 10 / 3 / 0 rows; `total` 23 on each |
-| 7 | Stale tab: press Start on an exam with an open attempt (manual) | Error toast; card flips to Resume |
+| 7 | Stale tab: press Start on an exam with an open attempt (manual) | Error toast; card shows Resume after refocusing the tab or reopening the list |
+| 7 | Start an exam, go back to its list; submit it, go back again (manual) | No skeleton or reload; the card switches to Resume, then to Start with the count up by one |
 
 Prior art: no automated tests exist in the repo. Checks follow the `DO $$ … RAISE EXCEPTION` guard pattern already used in the attempts migration for pre-flight data validation.
 

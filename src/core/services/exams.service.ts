@@ -5,15 +5,15 @@ import type { ApiResponse } from "@shared/api.schema";
 import type { ExamList, ExamWithQuestions } from "@shared/exam.schema";
 import { toPersistedExam } from "@/core/api/apiTypes";
 import type {
-  Exam,
+  ExamWithProgress,
   ExamWithQuestions as FrontendExamWithQuestions,
 } from "@/core/api/apiTypes";
 
-/** One tag's exams on a track. An unknown tag code throws `NOT_FOUND`. */
+/** One tag's exams on a track, with the caller's progress on each. An unknown tag code throws `NOT_FOUND`. */
 export async function getTrackExams(
   trackId: string,
   tagCode: string,
-): Promise<Exam[]> {
+): Promise<ExamWithProgress[]> {
   const query = new URLSearchParams({ tag: tagCode });
   const response = await apiFetch(`/api/tracks/${trackId}/exams?${query}`, {
     handleUnauthorized: true,

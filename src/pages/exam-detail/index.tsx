@@ -9,10 +9,10 @@ import {
   ExamFacts,
   QuestionCard,
   QuestionNavigator,
-  Pager,
   createExamQuestionsQueryOptions,
   tagAccent,
 } from "@/features/exams";
+import Pager from "@/components/Pager";
 import { PreviewExamButton } from "@/features/exam-session";
 import { useAuth } from "@/features/auth";
 import EmptyState from "@/components/states/EmptyState";

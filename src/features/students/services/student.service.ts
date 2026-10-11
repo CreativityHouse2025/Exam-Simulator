@@ -6,8 +6,11 @@ import type { StudentList as SharedStudentList } from "@shared/student.schema";
 import type { AttemptList as SharedAttemptList } from "@shared/attempt.schema";
 import type { UserWithTracks as SharedUserWithTracks } from "@shared/user.schema";
 import { markPersisted } from "@/core/api/apiTypes";
+import { attemptPageQuery } from "@/core/services/attempt.service";
 import type {
   Attempt,
+  AttemptList,
+  AttemptPage,
   StudentProfile,
   UserWithTracks,
 } from "@/core/api/apiTypes";
@@ -46,10 +49,11 @@ export async function getStudent(id: string): Promise<UserWithTracks> {
 export async function getStudentAttempts(
   id: string,
   trackId: string,
+  page: AttemptPage,
   signal?: AbortSignal,
-): Promise<Attempt[]> {
+): Promise<AttemptList> {
   const response = await apiFetch(
-    `/api/students/${id}/attempts?trackId=${trackId}`,
+    `/api/students/${id}/attempts?${attemptPageQuery(trackId, page)}`,
     { handleUnauthorized: true, signal },
   );
   const result: ApiResponse<SharedAttemptList> = await response.json();
@@ -59,11 +63,13 @@ export async function getStudentAttempts(
   }
 
   // The backend pairs examState and result; the cast restores that pairing.
-  return camelcaseKeys(result.data.attempts, { deep: true }).map(
+  const attempts = camelcaseKeys(result.data.attempts, { deep: true }).map(
     (attempt) =>
       ({
         ...attempt,
         configSnapshot: markPersisted(attempt.configSnapshot),
       }) as Attempt,
   );
+
+  return { attempts, total: result.data.total };
 }

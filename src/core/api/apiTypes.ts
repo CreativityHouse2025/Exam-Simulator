@@ -14,6 +14,7 @@ import type {
   ExamConfig as SharedExamConfig,
   ExamConfigBreak as SharedExamConfigBreak,
   Exam as SharedExam,
+  ExamWithProgress as SharedExamWithProgress,
   DisclosedChoice as SharedDisclosedChoice,
   Question as SharedQuestion,
   DisclosedQuestion as SharedDisclosedQuestion,
@@ -24,6 +25,8 @@ import type {
   AttemptQuestion as SharedAttemptQuestion,
   DisclosedAttemptQuestion as SharedDisclosedAttemptQuestion,
   AttemptWithQuestions as SharedAttemptWithQuestions,
+  AttemptList as SharedAttemptList,
+  AttemptPage as SharedAttemptPage,
 } from "@shared/attempt.schema";
 import type {
   User as SharedUser,
@@ -51,6 +54,12 @@ export type ExamConfig = Omit<
 type WireExam = CamelCaseKeys<SharedExam, true>;
 
 export type Exam = Omit<WireExam, "config"> & { config: ExamConfig };
+
+type WireExamWithProgress = CamelCaseKeys<SharedExamWithProgress, true>;
+
+export type ExamWithProgress = Omit<WireExamWithProgress, "config"> & {
+  config: ExamConfig;
+};
 
 export type DisclosedChoice = CamelCaseKeys<SharedDisclosedChoice, true>;
 export type Question = CamelCaseKeys<SharedQuestion, true>;
@@ -82,6 +91,15 @@ export type CompletedAttempt = AttemptBase & {
 
 /** Narrow on `examState` and `result` follows: present exactly when completed. */
 export type Attempt = InProgressAttempt | CompletedAttempt;
+
+/** One page of attempt history, plus how many attempts there are across all pages. */
+export type AttemptList = Omit<
+  CamelCaseKeys<SharedAttemptList, true>,
+  "attempts"
+> & { attempts: Attempt[] };
+
+/** Which page of attempt history to fetch. */
+export type AttemptPage = CamelCaseKeys<SharedAttemptPage>;
 
 export type AttemptQuestion = CamelCaseKeys<SharedAttemptQuestion, true>;
 export type DisclosedAttemptQuestion = CamelCaseKeys<
@@ -120,6 +138,8 @@ export function markPersisted(
 }
 
 /** An exam off the wire, its config stamped as persisted. */
-export function toPersistedExam(exam: WireExam): Exam {
+export function toPersistedExam<T extends WireExam>(
+  exam: T,
+): Omit<T, "config"> & { config: ExamConfig } {
   return { ...exam, config: markPersisted(exam.config) };
 }

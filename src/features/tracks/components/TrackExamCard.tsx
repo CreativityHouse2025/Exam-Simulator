@@ -1,35 +1,33 @@
 import React from "react";
-import { CircleAlert } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
 import { ExamFacts, tagAccent } from "@/features/exams";
 import { translate } from "@/core/utils/translation";
 import { cn } from "@/components/ui/utils";
-import type { Exam } from "@/core/api/apiTypes";
-import type { ExamAttemptStats } from "@/features/attempts";
+import type { ExamWithProgress } from "@/core/api/apiTypes";
 import type { LangCode } from "@/core/types";
 
 type TrackExamCardProps = {
-  exam: Exam;
-  stats: ExamAttemptStats;
+  exam: ExamWithProgress;
   langCode: LangCode;
   onStart: () => void;
-  onViewAttempts: () => void;
+  /** Opens the exam's unfinished attempt. Offered instead of Start while one exists. */
+  onResume: (attemptId: string) => void;
   disabled?: boolean;
 };
 
 /** One exam in a track — every fact on the face of the card. Only the tag chip carries the tag's colour. */
 const TrackExamCard: React.FC<TrackExamCardProps> = ({
   exam,
-  stats,
   langCode,
   onStart,
-  onViewAttempts,
+  onResume,
   disabled = false,
 }) => {
   const accent = tagAccent(exam.tag.colorHexCode);
   const { canRevealAnswers, allowRetryWrong } = exam.config;
+  const { attemptsCount, openAttemptId } = exam;
 
   return (
     <Card className="overflow-hidden border-grey-200 pt-0 transition-colors duration-200 hover:border-tertiary">
@@ -45,12 +43,12 @@ const TrackExamCard: React.FC<TrackExamCardProps> = ({
               >
                 {exam.tag.name[langCode]}
               </Badge>
-              {stats.count > 0 && (
+              {attemptsCount > 0 && (
                 <Badge
                   variant="outline"
                   className="shrink-0 border-grey-300 text-xs text-grey-800"
                 >
-                  {translate("exams.taken", [stats.count])}
+                  {translate("exams.taken", [attemptsCount])}
                 </Badge>
               )}
               {canRevealAnswers && (
@@ -77,11 +75,13 @@ const TrackExamCard: React.FC<TrackExamCardProps> = ({
           </div>
 
           <Button
-            onClick={onStart}
+            onClick={
+              openAttemptId === null ? onStart : () => onResume(openAttemptId)
+            }
             disabled={disabled}
             className="shrink-0 bg-tertiary font-semibold text-white hover:bg-tertiary/90"
           >
-            {translate("exams.start")}
+            {translate(openAttemptId === null ? "exams.start" : "exams.resume")}
           </Button>
         </div>
 
@@ -94,16 +94,6 @@ const TrackExamCard: React.FC<TrackExamCardProps> = ({
           questionCount={exam.questionCount}
           iconClassName="text-tertiary"
         />
-
-        {stats.inProgressCount > 0 && (
-          <button
-            onClick={onViewAttempts}
-            className="flex w-fit cursor-pointer items-center gap-1.5 rounded-md bg-grey-100 px-2.5 py-1.5 text-xs font-semibold text-grey-950 transition-colors duration-200 hover:bg-grey-200"
-          >
-            <CircleAlert className="size-3.5 text-tertiary" />
-            {translate("exams.in-progress", [stats.inProgressCount])}
-          </button>
-        )}
       </CardHeader>
     </Card>
   );

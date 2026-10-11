@@ -23,7 +23,7 @@ export const GET = withErrorHandler(
 
     await assertTrackAccess(authUser.id, trackId)
 
-    const result: ExamList = { exams: await getTrackExams(trackId, tagCode) }
+    const result: ExamList = { exams: await getTrackExams(trackId, tagCode, authUser.id) }
     return successResponse(result, 200, cookieHeaders)
   }),
 )
