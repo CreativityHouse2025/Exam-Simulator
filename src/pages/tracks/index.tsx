@@ -31,7 +31,7 @@ const TracksPage: React.FC = () => {
     isFetching,
     error,
     refetch,
-  } = useQuery(createTracksQueryOptions());
+  } = useQuery(createTracksQueryOptions(user?.id));
 
   const tracks = React.useMemo(
     () => mergeTrackAccess(catalogue ?? [], enrolledTracks),

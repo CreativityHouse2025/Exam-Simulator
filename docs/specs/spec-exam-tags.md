@@ -1,6 +1,6 @@
-# Spec: Exam tags, archiving and per-exam attempt limits
+# Spec: Exam tags, archiving and attempt rules
 
-Status: ready for implementation. Resolved via `/grill-me` on 2026-10-09/10.
+Status: ready for implementation. Resolved via `/grill-me` on 2026-10-09/10. Slices 6–7 revised via `/grill-me` on 2026-10-11 (the per-exam attempt limit was dropped).
 
 ## Problem Statement
 
@@ -11,6 +11,7 @@ The business also needs to retire old content without erasing student history, a
 - History is capped at 150 attempts per track, so one heavily retried exam can push every other exam's history out.
 - A student can open any number of unfinished attempts on the same exam at once.
 - Old exams cannot be taken off the shelf. Removing them would orphan the attempts that reference them.
+- Signing in as another user in the same tab can show the previous user's cached data.
 
 ## Solution
 
@@ -27,9 +28,11 @@ Exams and tags can be **archived**. An archived exam disappears from the catalog
 
 Attempts follow three rules:
 
-1. A student can have at most one unfinished attempt per exam. Starting again resumes it.
-2. The track defines how many attempts per exam are kept (default 10). Older ones are deleted automatically.
+1. A student can have at most one unfinished attempt per exam. The exam card offers to resume it instead of starting a new one.
+2. Attempts are unlimited and never deleted automatically. History is paged.
 3. A completed attempt's grade lives in its own results record.
+
+Every exam the API returns tells the caller how many times they have completed it and which unfinished attempt, if any, they can resume.
 
 ## User Stories
 
@@ -56,12 +59,16 @@ Attempts follow three rules:
 
 ### Attempts (student)
 
-16. As a student, when I press Start on an exam where I already have an unfinished attempt, I want to be offered to resume it, so that I don't lose answers or start a duplicate by mistake.
+16. As a student, when I already have an unfinished attempt on an exam, I want its card to offer "Resume last attempt" instead of Start, so that I don't lose answers or start a duplicate by mistake.
 17. As a student, I want two tabs pressing Start at the same moment to result in a single attempt, so that I never end up with duplicates.
 18. As a student, I want unlimited retries on an exam after finishing my previous attempt, so that I can practise as much as I like.
-19. As a student, I want my most recent attempts per exam kept (up to the track's limit), so that heavy practice on one exam never erases my history on another.
+19. As a student, I want every attempt I make kept, so that heavy practice on one exam never erases any of my history.
 20. As a student, I want my completed attempts to show score, pass/fail, wrong-question count and time taken, so that I can track improvement.
 21. As a student, I want the time taken to show as not applicable on untimed exams, so that I'm not shown a meaningless number.
+35. As a student, I want each exam card to show how many times I have completed that exam, so that I see my practice at a glance.
+36. As a student, I want my history paged, with a choice of how many attempts per page (10 to 100), so that a long history stays fast and readable.
+37. As a student, I want a clear message if I press Start in a stale tab where I already have an unfinished attempt, and the card to update to Resume, so that I'm never confused about my state.
+38. As any user, I want to never see another account's data after signing in on the same browser, so that my data and theirs stay private.
 
 ### Supervisor
 
@@ -73,8 +80,8 @@ Attempts follow three rules:
 
 ### Business / content
 
-27. As the business, I want to set the number of attempts kept per exam on each track, so that storage and history match the product offer.
-28. As the business, I want lowering that number to trim every student's history immediately, so that the rule is always true and never "eventually" true.
+27. ~~Per-track attempts-kept limit~~ — dropped 2026-10-11: attempts are unlimited.
+28. ~~Lowering the limit trims history~~ — dropped, same reason.
 29. As the business, I want to retire an exam by archiving it, never by deleting it, so that student history is preserved.
 30. As the business, I want to reopen an archived exam by clearing its archive date, so that retirement is reversible.
 31. As the business, I want to know when an exam was archived, so that support and future admin tools can explain changes.
@@ -95,11 +102,12 @@ Each slice is finished end to end (database → API → frontend) and verified o
 | 3 | Tag-filtered exam lists and catalog navigation | 2 |
 | 4 | Archiving | 3 |
 | 5 | One open attempt per exam | — |
-| 6 | Per-exam attempt limit | — |
+| 6 | Wire contract and cache structure (refactor) | 5 |
+| 7 | Unlimited attempts, per-exam progress, paged history | 6 |
 
-Order: 1 → 2 → 3 → 4 → 5 → 6. Slices 1, 5 and 6 can move earlier if needed.
+Order: 1 → 2 → 3 → 4 → 5 → 6 → 7. Refactor before features: slice 6 changes structure only, slice 7 adds the behaviour. Slices 1 and 5 can move earlier if needed.
 
-Migrations: the existing uncommitted 019 (track code) stays as is. The existing uncommitted 020 (results) is edited in place, on the assumption that it has only ever run locally. Catalog changes go into a migration named for exam tags (021). Archiving goes into its own migration (022). Attempt-rule changes go into a migration named for attempt limits (023). Each migration is wrapped in a single transaction. When slices interleave across two migration files, the file content grows slice by slice, and `npm run db:reset` replays it every time.
+Migrations: the existing uncommitted 019 (track code) stays as is. The existing uncommitted 020 (results) is edited in place, on the assumption that it has only ever run locally. Catalog changes go into a migration named for exam tags (021). Archiving goes into its own migration (022). Dropping the attempt cap goes into a migration named for unlimited attempts (023). Each migration is wrapped in a single transaction. When slices interleave across two migration files, the file content grows slice by slice, and `npm run db:reset` replays it every time.
 
 ### Slice 1: Results record
 
@@ -174,15 +182,69 @@ Migrations: the existing uncommitted 019 (track code) stays as is. The existing 
 
 - A partial unique index on attempts covers (user id, exam id) where `exam_state` is in progress **and `created_at` is on or after a fixed release cutoff** (literal timestamp with explicit UTC offset). Legacy rows before the cutoff are outside the index, so existing duplicate open attempts don't block the migration. They can only be finished, never multiplied. The cutoff gets a one-line comment.
 - `start_attempt` first checks for an open attempt on that exam (old or new). If one exists, it returns a new result **`in_progress`** with the existing attempt's id and creates nothing. The index is the race backstop.A
-- Frontend: Start receiving `in_progress` shows a dialog (shadcn Dialog) offering **Resume**, which opens the existing attempt.
+- Frontend: Start receiving `in_progress` shows a dialog (shadcn Dialog) offering **Resume**, which opens the existing attempt. *Superseded by slice 6: the API answers 409 `ATTEMPT_IN_PROGRESS` and the dialog is removed.*
 
-### Slice 6: Per-exam attempt limit
+### Slice 6: Wire contract and cache structure
 
-- Tracks get `attempts_per_exam` (smallint, not null, default 10, > 0).
-- The eviction trigger is rewritten: after an attempt is inserted, it keeps the newest N attempts per (user, exam), where N comes from the exam's track, and deletes older ones. The just-inserted row is never evicted. Because of slice 5, eviction only ever removes completed attempts.
-- **Eager trim:** updating a track's `attempts_per_exam` immediately deletes everything beyond the new limit for every student on that track.
-- **Pre-flight check** before the change: if any (user, exam) already exceeds 10, the migration raises and lists the offenders instead of deleting silently.
-- The previous 150-per-track cap is removed from the database and from the attempt service, including its use as the history list limit.
+A refactor: no new feature. Two visible changes only, the start-conflict toast and the end of the account-switch leak.
+
+- **These wire schemas** in `shared/schemas` are the only exam and attempt response shapes. *Item* schemas are list entries; `*List` schemas wrap a list in a named key; `*WithQuestions` schemas are sessions.
+
+  ```ts
+  Exam                 = { id, track, tag, display_order, name, description, question_count, archived_at, config: ExamConfig }
+  ExamList             = { exams: Exam[] }
+  TagList              = { tags: Tag[] }
+  ExamWithQuestions    = { exam: Exam; questions: DisclosedQuestion[] }
+  Attempt              = { id, exam: Exam, exam_state, created_at, time_remaining, config_snapshot, total_questions, result, current_index, offered_breaks }
+  AttemptWithQuestions = { attempt: Attempt; questions: AttemptQuestion[] | DisclosedAttemptQuestion[] }
+  AttemptList          = { attempts: Attempt[] }   // slice 7 adds `total`
+  ```
+
+- `Exam` **always** carries `config`, including inside an attempt, even where unused. Inside an attempt, `config_snapshot` governs; `exam.config` is the exam's current config and must not be read for the session (JSDoc on the field says so). Its breaks are unordered there.
+- **Deleted:** `ExamDetails`, `StartAttemptResponse`, `Revision`. `TrackExams` and `TrackTags` are renamed `ExamList` and `TagList`.
+- A response's `data` is always an object, never a bare array, so it can grow (e.g. `total`) without a breaking change. Services return plain values (`Exam[]`, `Tag[]`, `Attempt[]`); the **handler** wraps them in the `*List` schema.
+- Envelopes are `ApiResponse<schema>`:
+
+  | Endpoint | Response |
+  |---|---|
+  | `GET /api/tracks/:trackId/exams?tag=` | `ApiResponse<ExamList>` |
+  | `GET /api/tracks/:trackId/tags` | `ApiResponse<TagList>` |
+  | `GET /api/exams/:examId/questions` | `ApiResponse<ExamWithQuestions>` |
+  | `GET /api/attempts/:id/revision` | `ApiResponse<ExamWithQuestions>` — the parent exam and the wrong-or-unanswered subset (`parent_exam` becomes `exam`) |
+  | `POST /api/attempts` | `ApiResponse<AttemptWithQuestions>`, 201 |
+  | `GET /api/attempts/:id` | `ApiResponse<AttemptWithQuestions>` |
+  | `GET /api/attempts?trackId=` | `ApiResponse<AttemptList>` |
+  | `GET /api/students/:id/attempts?trackId=` | `ApiResponse<AttemptList>` |
+
+- **Start conflict:** the RPC's `in_progress` result becomes **409 `ATTEMPT_IN_PROGRESS`** (new error code), a plain error with no data. It only happens in a stale tab, so the frontend shows a translated error toast. Slice 5's Resume dialog is removed. Slice 7's card makes resuming explicit.
+- **User-scoped query keys:** every TanStack query key ends with the signed-in user's id, e.g. `["tracks", trackId, "exams", tagCode, userId]`. This applies to all queries, supervisor ones included. Each query-options factory takes `userId`; pages pass `user.id` from `useAuth()`. Nothing clears the cache on sign-in or sign-out: a previous user's entries are unreachable and expire with `gcTime`. The id goes **last** so prefix invalidation (slice 7) never needs it.
+
+### Slice 7: Unlimited attempts, per-exam progress, paged history
+
+- **Migration 023** drops `trg_enforce_attempt_limit` and `enforce_attempt_limit()`. Attempts are never deleted automatically. No per-track or per-exam limit column. `TRACK_ATTEMPT_CAP` is removed from the attempt service.
+- **`Exam` gains two caller-specific fields**, on every endpoint that returns an exam (attempt lists and the preview included):
+  - `attempts_count`: int ≥ 0, the caller's **completed** attempts on this exam.
+  - `open_attempt_id`: uuid or null, the caller's in-progress attempt on this exam.
+
+  Both are computed for the requesting user through PostgREST embeds filtered by user id. No new RPC. Supervisors get `0` / `null` in practice (not enforced).
+- **Exam card:**
+  - The count badge reads "Attempted $1 times" (English `exams.taken`; Arabic copy unchanged), hidden at 0.
+  - When `open_attempt_id` is set, Start is replaced by **"Resume last attempt"**, which opens that attempt through the existing open-attempt flow (no `POST /attempts`).
+  - Removed: the "X attempts uncompleted" link and its `exams.in-progress` key, `statsByExamId`, `statsForExam`, `ExamAttemptStats`, and the attempts query on the track-exams page.
+- **Paged history:** `GET /api/attempts?trackId=&page=&per_page=` and `GET /api/students/:id/attempts?trackId=&page=&per_page=`.
+  - `page`: int ≥ 1, default 1. `per_page`: int from 10 to 100, multiple of 5, default 10. Anything else is 400 `VALIDATION_ERROR`.
+  - `PER_PAGE_MIN = 10`, `PER_PAGE_MAX = 100`, `PER_PAGE_STEP = 5` live in the shared schema package and drive both the API validation and the UI's per-page select.
+  - Newest first. A page past the end is 200 with an empty list.
+  - `AttemptList` gains `total`: the user's attempt count in the track across all pages. One query: `count: "exact"` plus `range`.
+- **History pages** (student history and supervisor student attempts):
+  - `page` and `per_page` live in URL search params. Invalid values fall back to the defaults client-side, so a hand-edited URL never triggers a 400.
+  - Reuse the existing `Pagination` component, plus a per-page select built from the constants. The header count reads `total`.
+  - The Track page's recent attempts request `page=1&per_page=10` and show the first 5, sharing the cache with the history page's default view.
+- **Centralized cache invalidation:**
+  - Start and submit become `useMutation`s declaring `meta: { invalidates: [["tracks"], ["attempts"]] }`.
+  - One `MutationCache.onSettled` on the `QueryClient` invalidates every key a settled mutation names, on success **and** failure. It is the only caller of `invalidateQueries`. `meta` is typed through TanStack's `Register` (`mutationMeta`).
+  - Save declares nothing.
+  - Broad prefixes on purpose: only mounted queries refetch. A stale-tab 409 therefore refreshes the list on screen, and the card flips to Resume.
 
 ### Unchanged
 
@@ -214,9 +276,16 @@ API smoke checks per slice (student = enrolled student cookie, sup = enrolled su
 | 4 | Save / submit / review an attempt on an archived exam | Works |
 | 5 | Start twice on the same exam | Second returns `in_progress` + same id; one row |
 | 5 | Two parallel starts | Exactly one attempt created |
-| 6 | Complete 11 attempts on one exam | 10 remain; oldest gone; other exams untouched |
-| 6 | Lower the track's limit to 3 (SQL) | Every student trimmed to 3 per exam immediately |
-| 6 | Migration on data with >10 per exam | Migration aborts, listing offenders |
+| 6 | Start twice on the same exam | Second is 409 `ATTEMPT_IN_PROGRESS`; one row |
+| 6 | Any response carrying an exam | Exam has `config`, including inside attempts |
+| 6 | `GET /attempts/:id/revision` | `{ exam, questions }` |
+| 6 | Sign in as X, open history, sign out, sign in as Y (manual) | Y never sees X's data |
+| 7 | Complete 151+ attempts in one track | All remain |
+| 7 | `?tag=` with one completed and one open attempt on an exam | `attempts_count` 1, `open_attempt_id` = the open attempt; after submit, 2 and null |
+| 7 | `?tag=` (sup) | `attempts_count` 0, `open_attempt_id` null |
+| 7 | `/attempts?per_page=7`, `per_page=110`, `page=0` | 400 |
+| 7 | 23 attempts, `per_page=10`, pages 1–4 | 10 / 10 / 3 / 0 rows; `total` 23 on each |
+| 7 | Stale tab: press Start on an exam with an open attempt (manual) | Error toast; card flips to Resume |
 
 Prior art: no automated tests exist in the repo. Checks follow the `DO $$ … RAISE EXCEPTION` guard pattern already used in the attempts migration for pre-flight data validation.
 
@@ -235,6 +304,6 @@ Prior art: no automated tests exist in the repo. Checks follow the `DO $$ … RA
 ## Further Notes
 
 - **Terminology:** UI and code use "full" (not "mock") for full exams. "Category" is the UI term for any tag other than `full`. Categories are not PMI domains.
-- **Assumptions to verify before running:** (1) 020 has never run outside local Docker; if it has, convert the 020 edits into a patch migration. (2) No student has more than 10 attempts on one exam; the slice 6 pre-flight confirms it.
+- **Assumption to verify before running:** 020 has never run outside local Docker; if it has, convert the 020 edits into a patch migration.
 - **Decisions added during spec writing** (confirm during review): attempts carry their exam (slice 2), because history can no longer borrow names from an untagged exam list; and the supervisor library adopts the same tag-based navigation (slice 3).
 - After implementation, update the database, backend and frontend guides in `.claude/skills/` to describe tags, archiving and the attempt rules.

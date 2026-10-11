@@ -1,4 +1,4 @@
-import type { DisclosedQuestion, ExamDetails, Question } from "../api/apiTypes";
+import type { DisclosedQuestion, Exam, Question } from "../api/apiTypes";
 import type { LangCode, Localized, LocalizedExamDetails } from "../types";
 
 /** A question with its text, explanation and choices in `lang`. */
@@ -26,7 +26,7 @@ export function localizeQuestion<Q extends Question | DisclosedQuestion>(
 
 /** Exam details with name and description in `lang`. */
 export function localizeExamDetails(
-  examDetails: ExamDetails,
+  examDetails: Exam,
   lang: LangCode,
 ): LocalizedExamDetails {
   return {

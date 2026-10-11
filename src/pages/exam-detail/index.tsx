@@ -14,6 +14,7 @@ import {
   tagAccent,
 } from "@/features/exams";
 import { PreviewExamButton } from "@/features/exam-session";
+import { useAuth } from "@/features/auth";
 import EmptyState from "@/components/states/EmptyState";
 import ErrorState from "@/components/states/ErrorState";
 import BackButton from "@/components/BackButton";
@@ -32,6 +33,7 @@ const DEFAULT_OPEN: SectionOpen = { choices: true, explanation: false };
 const ExamDetailPage: React.FC = () => {
   const { settings } = useSettings();
   const langCode = settings.language;
+  const { user } = useAuth();
   const { trackId = "", examId } = useParams<{
     trackId: string;
     examId: string;
@@ -41,7 +43,7 @@ const ExamDetailPage: React.FC = () => {
   const validId = Number.isInteger(numericId) && numericId > 0;
 
   const { data, isPending, isError, refetch, isFetching } = useQuery({
-    ...createExamQuestionsQueryOptions(numericId),
+    ...createExamQuestionsQueryOptions(numericId, user?.id),
     enabled: validId,
   });
 

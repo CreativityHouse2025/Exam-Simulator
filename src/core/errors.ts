@@ -22,6 +22,7 @@ export type DomainErrorCodes = {
     | "FORBIDDEN"
     | "CONFLICT"
     | "ATTEMPT_CREATE_FAILED"
+    | "ATTEMPT_IN_PROGRESS"
     | "EXAM_ARCHIVED"
     | "ATTEMPT_SAVE_FAILED"
     | "ATTEMPT_SUBMIT_FAILED"

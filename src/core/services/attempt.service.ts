@@ -6,15 +6,13 @@ import type {
   Attempt as SharedAttempt,
   AttemptList as SharedAttemptList,
   AttemptWithQuestions as SharedAttemptWithQuestions,
-  Revision as SharedRevision,
-  StartAttemptResponse as SharedStartAttemptResponse,
 } from "@shared/attempt.schema";
-import { markPersisted } from "../api/apiTypes";
+import type { ExamWithQuestions as SharedExamWithQuestions } from "@shared/exam.schema";
+import { markPersisted, toPersistedExam } from "../api/apiTypes";
 import type {
   Attempt,
   AttemptWithQuestions,
-  Revision,
-  StartAttemptResult,
+  ExamWithQuestions,
 } from "../api/apiTypes";
 
 type SaveAttemptAnswer = {
@@ -23,26 +21,24 @@ type SaveAttemptAnswer = {
   isBookmarked: boolean;
 };
 
+/** An open attempt on this exam throws `ATTEMPT_IN_PROGRESS`; nothing is created. */
 export async function startAttempt(
   examId: number,
-): Promise<StartAttemptResult> {
+): Promise<AttemptWithQuestions> {
   const response = await apiFetch("/api/attempts", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ exam_id: examId }),
     handleUnauthorized: true,
   });
-  const result: ApiResponse<SharedStartAttemptResponse> = await response.json();
+  const result: ApiResponse<SharedAttemptWithQuestions> =
+    await response.json();
 
   if (!result.success) {
     throw new AppApiError(result.error.code, "attempts");
   }
 
-  if (result.data.result === "in_progress") {
-    return { result: "in_progress", attempt: toAttempt(result.data.attempt) };
-  }
-
-  return { result: "started", ...toAttemptWithQuestions(result.data) };
+  return toAttemptWithQuestions(result.data);
 }
 
 export async function getAttempt(
@@ -61,17 +57,13 @@ export async function getAttempt(
   return toAttemptWithQuestions(result.data);
 }
 
-function toAttemptWithQuestions(
-  data: SharedAttemptWithQuestions,
-): AttemptWithQuestions {
-  const { attempt, questions } = camelcaseKeys(data, { deep: true });
+function toAttemptWithQuestions({
+  attempt,
+  questions,
+}: SharedAttemptWithQuestions): AttemptWithQuestions {
   return {
-    // The backend pairs examState and result; the cast restores that pairing.
-    attempt: {
-      ...attempt,
-      configSnapshot: markPersisted(attempt.configSnapshot),
-    } as Attempt,
-    questions,
+    attempt: toAttempt(attempt),
+    questions: camelcaseKeys(questions, { deep: true }),
   };
 }
 
@@ -144,19 +136,21 @@ export async function submitAttempt(
   }
 }
 
+/** The parent exam and its wrong-or-unanswered questions. */
 export async function getRevision(
   attemptId: string,
-): Promise<Revision> {
+): Promise<ExamWithQuestions> {
   const response = await apiFetch(`/api/attempts/${attemptId}/revision`, {
     handleUnauthorized: true,
   });
-  const result: ApiResponse<SharedRevision> = await response.json();
+  const result: ApiResponse<SharedExamWithQuestions> = await response.json();
 
   if (!result.success) {
     throw new AppApiError(result.error.code, "attempts");
   }
 
-  return camelcaseKeys(result.data, { deep: true });
+  const { exam, questions } = camelcaseKeys(result.data, { deep: true });
+  return { exam: toPersistedExam(exam), questions };
 }
 
 export async function getAttempts(
@@ -179,6 +173,7 @@ function toAttempt(data: SharedAttempt): Attempt {
   // The backend pairs examState and result; the cast restores that pairing.
   return {
     ...attempt,
+    exam: toPersistedExam(attempt.exam),
     configSnapshot: markPersisted(attempt.configSnapshot),
   } as Attempt;
 }

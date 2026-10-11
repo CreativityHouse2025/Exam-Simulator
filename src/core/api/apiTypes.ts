@@ -13,11 +13,10 @@ import type {
   Tag as SharedTag,
   ExamConfig as SharedExamConfig,
   ExamConfigBreak as SharedExamConfigBreak,
-  ExamDetails as SharedExamDetails,
+  Exam as SharedExam,
   DisclosedChoice as SharedDisclosedChoice,
   Question as SharedQuestion,
   DisclosedQuestion as SharedDisclosedQuestion,
-  TrackExams as SharedTrackExams,
   ExamWithQuestions as SharedExamWithQuestions,
 } from "@shared/exam.schema";
 import type {
@@ -25,7 +24,6 @@ import type {
   AttemptQuestion as SharedAttemptQuestion,
   DisclosedAttemptQuestion as SharedDisclosedAttemptQuestion,
   AttemptWithQuestions as SharedAttemptWithQuestions,
-  Revision as SharedRevision,
 } from "@shared/attempt.schema";
 import type {
   User as SharedUser,
@@ -50,29 +48,25 @@ export type ExamConfig = Omit<
   persist: boolean;
 };
 
-export type ExamDetails = Omit<
-  CamelCaseKeys<SharedExamDetails, true>,
-  "config"
-> & { config: ExamConfig };
+type WireExam = CamelCaseKeys<SharedExam, true>;
+
+export type Exam = Omit<WireExam, "config"> & { config: ExamConfig };
 
 export type DisclosedChoice = CamelCaseKeys<SharedDisclosedChoice, true>;
 export type Question = CamelCaseKeys<SharedQuestion, true>;
 export type DisclosedQuestion = CamelCaseKeys<SharedDisclosedQuestion, true>;
-export type TrackExams = Omit<
-  CamelCaseKeys<SharedTrackExams, true>,
-  "exams"
-> & { exams: ExamDetails[] };
 export type ExamWithQuestions = Omit<
   CamelCaseKeys<SharedExamWithQuestions, true>,
   "exam"
-> & { exam: ExamDetails };
+> & { exam: Exam };
 
 type WireAttempt = CamelCaseKeys<SharedAttempt, true>;
 
 type AttemptBase = Omit<
   WireAttempt,
-  "configSnapshot" | "examState" | "result"
+  "exam" | "configSnapshot" | "examState" | "result"
 > & {
+  exam: Exam;
   configSnapshot: ExamConfig;
 };
 
@@ -99,11 +93,6 @@ export type AttemptWithQuestions = Omit<
   "attempt"
 > & { attempt: Attempt };
 
-/** POST /api/attempts. `in_progress` is the student's open attempt on that exam; nothing was created. */
-export type StartAttemptResult =
-  | ({ result: "started" } & AttemptWithQuestions)
-  | { result: "in_progress"; attempt: Attempt };
-
 /**
  * Never returned by the API — submitting stores the grade (score, status, wrong questions)
  * instead of returning it, so this is assembled client-side from those same
@@ -118,7 +107,6 @@ export type AttemptResult = {
   wrongQuestions: number;
   totalQuestions: number;
 };
-export type Revision = CamelCaseKeys<SharedRevision, true>;
 
 export type User =CamelCaseKeys<SharedUser, true>;
 export type UserWithTracks = CamelCaseKeys<SharedUserWithTracks, true>;
@@ -129,4 +117,9 @@ export function markPersisted(
   config: CamelCaseKeys<SharedExamConfig, true>,
 ): ExamConfig {
   return { ...config, persist: true };
+}
+
+/** An exam off the wire, its config stamped as persisted. */
+export function toPersistedExam(exam: WireExam): Exam {
+  return { ...exam, config: markPersisted(exam.config) };
 }

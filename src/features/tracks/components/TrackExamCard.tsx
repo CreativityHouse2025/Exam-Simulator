@@ -6,12 +6,12 @@ import { Card, CardHeader } from "@/components/ui/card";
 import { ExamFacts, tagAccent } from "@/features/exams";
 import { translate } from "@/core/utils/translation";
 import { cn } from "@/components/ui/utils";
-import type { ExamDetails } from "@/core/api/apiTypes";
+import type { Exam } from "@/core/api/apiTypes";
 import type { ExamAttemptStats } from "@/features/attempts";
 import type { LangCode } from "@/core/types";
 
 type TrackExamCardProps = {
-  exam: ExamDetails;
+  exam: Exam;
   stats: ExamAttemptStats;
   langCode: LangCode;
   onStart: () => void;

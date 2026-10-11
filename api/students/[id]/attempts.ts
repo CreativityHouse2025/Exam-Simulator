@@ -22,7 +22,7 @@ export const GET = withErrorHandler(
       // not its content, and not a student's attempts within it.
       await assertTrackAccess(authUser.id, trackId);
 
-      const result: AttemptList = await listAttempts(studentId, trackId);
+      const result: AttemptList = { attempts: await listAttempts(studentId, trackId) };
       return successResponse(result, 200, cookieHeaders);
     }),
   ),

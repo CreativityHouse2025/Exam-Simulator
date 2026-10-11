@@ -11,9 +11,9 @@ export default function useExamPreview(trackId: string, examId: number) {
 
   const handlePreview = async () => {
     setIsPreviewing(true);
-    const started = await startNewExam(examId, { preview: true });
-    if (started?.result === "started") {
-      navigate(ROUTES.examPreview.to(trackId, examId, started.attemptId));
+    const attemptId = await startNewExam(examId, { preview: true });
+    if (attemptId) {
+      navigate(ROUTES.examPreview.to(trackId, examId, attemptId));
     } else setIsPreviewing(false);
   };
 

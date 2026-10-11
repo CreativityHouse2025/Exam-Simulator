@@ -41,8 +41,7 @@ export type AttemptResult = z.infer<typeof AttemptResultSchema>;
 
 /**
  * One attempt — what history lists and what start/resume return. `config_snapshot` is the
- * attempt's own frozen config, not the exam's current one; the exam carries no config for that
- * reason.
+ * attempt's own frozen config and governs the session, not `exam.config`.
  */
 export const AttemptSchema = z.object({
   id: AttemptIdSchema,
@@ -88,7 +87,7 @@ export const AttemptListSchema = z.object({
 export type AttemptList = z.infer<typeof AttemptListSchema>;
 
 /**
- * GET /api/attempts/:id, and a started POST /api/attempts. Questions are ordered by the attempt's
+ * GET /api/attempts/:id, and POST /api/attempts. Questions are ordered by the attempt's
  * `question_ids_snapshot`.
  */
 export const AttemptWithQuestionsSchema = z.object({
@@ -100,29 +99,6 @@ export const AttemptWithQuestionsSchema = z.object({
 });
 
 export type AttemptWithQuestions = z.infer<typeof AttemptWithQuestionsSchema>;
-
-/**
- * POST /api/attempts. `started` (201) is the new attempt with its questions. `in_progress` (200) is
- * the student's open attempt on that exam, shaped as in the attempt list; nothing was created.
- */
-export const StartAttemptResponseSchema = z.discriminatedUnion("result", [
-  AttemptWithQuestionsSchema.extend({ result: z.literal("started") }),
-  z.object({ result: z.literal("in_progress"), attempt: AttemptSchema }),
-]);
-
-export type StartAttemptResponse = z.infer<typeof StartAttemptResponseSchema>;
-
-/**
- * GET /api/attempts/:id/revision — the "wrong or unanswered" set, always disclosed. Carries the
- * parent exam without its config; the revision session's config is a frontend constant.
- * An empty `questions` array is a valid 200.
- */
-export const RevisionSchema = z.object({
-  parent_exam: ExamSchema,
-  questions: z.array(DisclosedQuestionSchema),
-});
-
-export type Revision = z.infer<typeof RevisionSchema>;
 
 // ---------------------------------------------------------------------------
 // Requests shared by more than one endpoint. Endpoint-specific request schemas live in the

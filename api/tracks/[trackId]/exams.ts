@@ -4,7 +4,7 @@ import { withAuth } from "../../_lib/middleware/withAuth.js"
 import { successResponse } from "../../_lib/utils/response.js"
 import { parseOrThrow } from "../../_lib/utils/parse.js"
 import { TrackIdSchema } from "../../../shared/schemas/track.schema.js"
-import type { TrackExams } from "../../../shared/schemas/exam.schema.js"
+import type { ExamList } from "../../../shared/schemas/exam.schema.js"
 import { getTrackExams } from "../../_lib/services/examService.js"
 import { assertTrackAccess } from "../../_lib/services/trackService.js"
 
@@ -23,7 +23,7 @@ export const GET = withErrorHandler(
 
     await assertTrackAccess(authUser.id, trackId)
 
-    const result: TrackExams = await getTrackExams(trackId, tagCode)
+    const result: ExamList = { exams: await getTrackExams(trackId, tagCode) }
     return successResponse(result, 200, cookieHeaders)
   }),
 )

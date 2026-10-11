@@ -48,16 +48,14 @@ export const ExamSchema = z.object({
   question_count: z.int().positive(),
   /** Null means active. The catalog never lists archived exams. */
   archived_at: z.string().nullable(),
-});
-
-export type Exam = z.infer<typeof ExamSchema>;
-
-/** One entry of a track's exam list. There is no standalone single-exam endpoint. */
-export const ExamDetailsSchema = ExamSchema.extend({
+  /**
+   * The exam's CURRENT config. Inside an attempt, `config_snapshot` governs the session; never
+   * read this one for it.
+   */
   config: ExamConfigSchema,
 });
 
-export type ExamDetails = z.infer<typeof ExamDetailsSchema>;
+export type Exam = z.infer<typeof ExamSchema>;
 
 // ---------------------------------------------------------------------------
 // Question content. Disclosure is a TYPE distinction, not an optional field — a handler cannot
@@ -108,27 +106,25 @@ export type DisclosedQuestion = z.infer<typeof DisclosedQuestionSchema>;
 // ---------------------------------------------------------------------------
 
 /** GET /api/tracks/:trackId/exams?tag=<code> — one tag's exams on the track, by `display_order`. */
-export const TrackExamsSchema = z.object({
-  exams: z.array(ExamDetailsSchema),
+export const ExamListSchema = z.object({
+  exams: z.array(ExamSchema),
 });
 
-export type TrackExams = z.infer<typeof TrackExamsSchema>;
+export type ExamList = z.infer<typeof ExamListSchema>;
 
 /** GET /api/tracks/:trackId/tags — the track's active tags plus shared ones, by `display_order`. */
-export const TrackTagsSchema = z.object({
+export const TagListSchema = z.object({
   tags: z.array(TagSchema),
 });
 
-export type TrackTags = z.infer<typeof TrackTagsSchema>;
+export type TagList = z.infer<typeof TagListSchema>;
 
 /**
- * GET /api/exams/:examId/questions — supervisor content, always disclosed.
- *
- * Carries the whole exam, not just its config: a preview session needs the name and question
- * count as much as the duration and break layout, and it never reads the track's exam list.
+ * An exam session's content, always disclosed: GET /api/exams/:examId/questions (supervisor), and
+ * GET /api/attempts/:id/revision (the parent exam with its wrong-or-unanswered subset).
  */
 export const ExamWithQuestionsSchema = z.object({
-  exam: ExamDetailsSchema,
+  exam: ExamSchema,
   questions: z.array(DisclosedQuestionSchema),
 });
 

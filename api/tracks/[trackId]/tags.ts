@@ -3,7 +3,7 @@ import { withAuth } from "../../_lib/middleware/withAuth.js"
 import { successResponse } from "../../_lib/utils/response.js"
 import { parseOrThrow } from "../../_lib/utils/parse.js"
 import { TrackIdSchema } from "../../../shared/schemas/track.schema.js"
-import type { TrackTags } from "../../../shared/schemas/exam.schema.js"
+import type { TagList } from "../../../shared/schemas/exam.schema.js"
 import { assertTrackAccess, getTrackTags } from "../../_lib/services/trackService.js"
 
 // Maps to GET /api/tracks/<track_id>/tags
@@ -15,7 +15,7 @@ export const GET = withErrorHandler(
 
     await assertTrackAccess(authUser.id, trackId)
 
-    const result: TrackTags = await getTrackTags(trackId)
+    const result: TagList = { tags: await getTrackTags(trackId) }
     return successResponse(result, 200, cookieHeaders)
   }),
 )

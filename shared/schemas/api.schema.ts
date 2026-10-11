@@ -25,6 +25,8 @@ export const AppErrorCodeSchema = z.enum([
   "ATTEMPT_SUBMIT_FAILED",
   // Starting an archived exam. Only starting is refused; existing attempts keep working.
   "EXAM_ARCHIVED",
+  // Starting an exam the student already has an unfinished attempt on. Nothing is written.
+  "ATTEMPT_IN_PROGRESS",
   "NOT_FOUND",
   "FORBIDDEN",
   "CONFLICT",

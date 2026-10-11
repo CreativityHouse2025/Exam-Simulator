@@ -4,12 +4,18 @@ import {
   getStudent,
   getStudentAttempts,
 } from "./student.service";
+import { forSignedInUser } from "@/core/utils/forSignedInUser";
 
 /** query must already be trimmed and >= the minimum search length. */
-export const createStudentSearchQueryOptions = (query: string) =>
+export const createStudentSearchQueryOptions = (
+  query: string,
+  userId: string | undefined,
+) =>
   queryOptions({
-    queryKey: ["students", "search", query],
-    queryFn: ({ signal }) => searchStudents(query, signal),
+    queryKey: ["students", "search", query, userId],
+    queryFn: forSignedInUser(userId, ({ signal }: { signal: AbortSignal }) =>
+      searchStudents(query, signal),
+    ),
     enabled: query.length >= 2,
     staleTime: 3 * 60 * 1000, // refresh each 3 minutes
     gcTime: 5 * 60 * 1000,
@@ -18,19 +24,25 @@ export const createStudentSearchQueryOptions = (query: string) =>
 export const createStudentAttemptsQueryOptions = (
   id: string,
   trackId: string,
+  userId: string | undefined,
 ) =>
   queryOptions({
-    queryKey: ["students", id, "attempts", trackId],
-    queryFn: ({ signal }) => getStudentAttempts(id, trackId, signal),
+    queryKey: ["students", id, "attempts", trackId, userId],
+    queryFn: forSignedInUser(userId, ({ signal }: { signal: AbortSignal }) =>
+      getStudentAttempts(id, trackId, signal),
+    ),
     staleTime: 3 * 60 * 1000,
     gcTime: 5 * 60 * 1000,
     retry: 1,
   });
 /** A student's profile and the tracks they hold an active enrollment in — what a supervisor opens a search hit into. */
-export const createStudentQueryOptions = (id: string) =>
+export const createStudentQueryOptions = (
+  id: string,
+  userId: string | undefined,
+) =>
   queryOptions({
-    queryKey: ["students", id],
-    queryFn: () => getStudent(id),
+    queryKey: ["students", id, userId],
+    queryFn: forSignedInUser(userId, () => getStudent(id)),
     staleTime: 3 * 60 * 1000,
     gcTime: 5 * 60 * 1000,
     retry: 1,

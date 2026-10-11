@@ -30,6 +30,7 @@ const ERROR_DOMAINS: { [D in ErrorDomain]: ErrorDomainEntry<D> } = {
       FORBIDDEN: "attempts.errors.server-forbidden",
       CONFLICT: "attempts.errors.server-conflict",
       ATTEMPT_CREATE_FAILED: "attempts.errors.server-create-failed",
+      ATTEMPT_IN_PROGRESS: "attempts.errors.server-in-progress",
       EXAM_ARCHIVED: "attempts.errors.server-exam-archived",
       ATTEMPT_SAVE_FAILED: "attempts.errors.server-save-failed",
       ATTEMPT_SUBMIT_FAILED: "attempts.errors.server-submit-failed",

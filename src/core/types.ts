@@ -1,5 +1,5 @@
 import type { LangCode as SharedLangCode } from "@shared/common.schema";
-import type { ExamDetails } from "./api/apiTypes";
+import type { Exam } from "./api/apiTypes";
 
 // Language types
 export type LangDir = "rtl" | "ltr";
@@ -38,7 +38,7 @@ export type Localized<T> = T extends unknown
         : unknown)
   : never;
 /** Exam details with name and description in the chosen language. */
-export type LocalizedExamDetails = Omit<ExamDetails, "name" | "description"> & {
+export type LocalizedExamDetails = Omit<Exam, "name" | "description"> & {
   name: string;
   description: string;
 };

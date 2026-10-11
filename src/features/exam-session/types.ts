@@ -1,9 +1,8 @@
 import type { ExamState } from "@shared/attempt.schema";
 import type {
-  Attempt,
   AttemptResult,
   DisclosedQuestion,
-  ExamDetails,
+  Exam,
   Question,
 } from "@/core/api/apiTypes";
 import type { Localized, LocalizedExamDetails } from "@/core/types";
@@ -113,10 +112,6 @@ export type StartNewExamOptions = {
   /** Supervisor preview: skips persistence and builds a client-only session. Defaults to false. */
   preview?: boolean;
 };
-/** `in_progress`: the student already has an open attempt on that exam. Nothing was created or mounted. */
-export type StartNewExamResult =
-  | { result: "started"; attemptId: string }
-  | { result: "in_progress"; attempt: Attempt };
 export type SaveProgressOptions = {
   /** A break's showAtIndex, when this save is the one wrecording that it was offered. Recorded
    * locally even for a session that never persists, so it is never offered twice. */
@@ -126,12 +121,12 @@ export type SessionControlContextType = {
   session: Session | null;
   update: SessionDispatch;
   /** Starts a real attempt (student) or builds a client-only preview session (supervisor), and
-   * mounts it. Returns the new attemptId on success, the open attempt when one already exists, or
-   * null on failure. */
+   * mounts it. Returns the new attemptId on success, or null on failure (including an open attempt
+   * already existing) so callers can reset their loading state. */
   startNewExam: (
     examId: number,
     options?: StartNewExamOptions,
-  ) => Promise<StartNewExamResult | null>;
+  ) => Promise<string | null>;
   /** Fetches an in-progress attempt snapshot from the DB, hydrates the full Session state, mounts the active
    * session, and persists the attemptId to localStorage.
    * Returns the attemptId on success, or null on failure so callers can reset their loading state. */
@@ -153,7 +148,7 @@ export type SessionControlContextType = {
 };
 /** Exam content as the API returns it, in every language. */
 export type ExamContent = {
-  examDetails: ExamDetails | null;
+  examDetails: Exam | null;
   questions: (Question | DisclosedQuestion)[] | null;
 };
 /** Exam content in the chosen language — what the exam UI reads. */

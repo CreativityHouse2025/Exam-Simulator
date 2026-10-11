@@ -8,14 +8,12 @@ import type {
 } from "../../../shared/schemas/exam.schema.js";
 import type {
   Attempt,
-  AttemptList,
   AttemptStatus,
   AttemptWithQuestions,
   ExamState,
-  Revision,
   SaveAttemptAnswers,
-  StartAttemptResponse,
 } from "../../../shared/schemas/attempt.schema.js";
+import type { ExamWithQuestions } from "../../../shared/schemas/exam.schema.js";
 import { getExam, toExam, type ExamRow } from "./examService.js";
 import { assertTrackAccess } from "./trackService.js";
 import { getQuestionsById } from "./questionService.js";
@@ -33,15 +31,15 @@ type SaveAttemptInput = {
 };
 
 /**
- * The attempt columns every read selects, with the exam it belongs to (no config — the attempt's
- * own snapshot governs). The inner join also lets the list filter by the exam's track.
+ * The attempt columns every read selects, with the exam it belongs to. The exam carries its current
+ * config only because `Exam` always does, and its breaks are unordered; the attempt's own snapshot
+ * governs. The inner join also lets the list filter by the exam's track.
  *
  * `total_questions` is the generated column from 018 rather than the snapshot's length, so the
  * list does not ship 25 × 180 int4 to read one number off.
  */
 const ATTEMPT_COLUMNS =
-  "id, exam_state, created_at, time_remaining, config_snapshot, total_questions, current_index, results(status, score, wrong_questions, time_taken), offered_breaks(show_at_index), exams!inner(id, display_order, name_ar, name_en, description_ar, description_en, question_count, archived_at, tags(id, code, name_ar, name_en, color_hex_code, display_order, archived_at), allowed_config(tracks(id, name_ar, name_en, description_ar, description_en)))";
-
+  "id, exam_state, created_at, time_remaining, config_snapshot, total_questions, current_index, results(status, score, wrong_questions, time_taken), offered_breaks(show_at_index), exams!inner(id, display_order, name_ar, name_en, description_ar, description_en, question_count, archived_at, tags(id, code, name_ar, name_en, color_hex_code, display_order, archived_at), allowed_config(tracks(id, name_ar, name_en, description_ar, description_en), exam_config(exam_duration_minutes, passing_rate, can_reveal_answers, allow_retry_wrong, breaks(show_at_index, duration_minutes))))";
 /** What a read that also serves question CONTENT needs on top: the frozen set, in its frozen order. */
 const ATTEMPT_DETAIL_COLUMNS = `${ATTEMPT_COLUMNS}, question_ids_snapshot`;
 
@@ -116,25 +114,23 @@ function toAttempt({ results, offered_breaks, ...row }: AttemptRow, exam: Exam):
  * Starts an exam. The server decides the question set, the order, the config and the clock; the
  * client sends only which exam.
  *
- * A student has at most one unfinished attempt per exam. If one exists, nothing is created and it
- * comes back as `in_progress`, shaped as in the list; the RPC's partial unique index settles
- * concurrent starts.
+ * A student has at most one unfinished attempt per exam. If one exists, nothing is created; the
+ * RPC's partial unique index settles concurrent starts.
  *
  * Starting an exam is track access, unlike reading an attempt already owned. The track is reachable
- * only through the exam, so it is checked before anything is written. The exam's config is dropped:
- * the attempt's own snapshot governs the session.
+ * only through the exam, so it is checked before anything is written.
  *
  * @throws {AppError} 404 `NOT_FOUND` — no such exam, or an exam with no questions.
  * @throws {AppError} 403 `FORBIDDEN` — no active enrollment in the exam's track.
+ * @throws {AppError} 409 `ATTEMPT_IN_PROGRESS` — the student already has an open attempt on this exam.
  * @throws {AppError} 410 `EXAM_ARCHIVED` — the exam is archived.
  * @throws {AppError} 500 `ATTEMPT_CREATE_FAILED` — the call failed.
  */
 export async function startAttempt(
   userId: string,
   exam_id: number,
-): Promise<StartAttemptResponse> {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { config: _config, ...exam } = await getExam(exam_id);
+): Promise<AttemptWithQuestions> {
+  const exam = await getExam(exam_id);
   await assertTrackAccess(userId, exam.track.id);
 
   const { data, error } = await supabaseAdmin
@@ -166,7 +162,11 @@ export async function startAttempt(
   }
 
   if (data.result === "in_progress") {
-    return { result: "in_progress", attempt: await getAttemptSummary(data.id) };
+    throw new AppError({
+      statusCode: 409,
+      code: "ATTEMPT_IN_PROGRESS",
+      message: `User ${userId} already has open attempt ${data.id} on exam ${exam_id}`,
+    });
   }
 
   // The RPC returns the snapshot, not the generated column, so the count comes off the array.
@@ -192,30 +192,7 @@ export async function startAttempt(
     is_bookmarked: false,
   })) as AttemptWithQuestions["questions"];
 
-  return { result: "started", attempt, questions };
-}
-
-/**
- * One attempt as the list shows it, without questions. The caller already owns the id.
- *
- * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed or the attempt is gone.
- */
-async function getAttemptSummary(attemptId: string): Promise<Attempt> {
-  const { data, error } = await supabaseAdmin
-    .from("exam_attempts")
-    .select(ATTEMPT_COLUMNS)
-    .eq("id", attemptId)
-    .single();
-
-  if (error || !data) {
-    throw new AppError({
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: `Failed to fetch attempt ${attemptId} (${error?.message ?? "no row returned"})`,
-    });
-  }
-
-  return toAttempt(data, toExam(data.exams));
+  return { attempt, questions };
 }
 
 /** Turns an attempt RPC's sentinel into the error it stands for. `ok` passes through. */
@@ -318,7 +295,7 @@ export async function submitAttempt(
  *
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
-export async function listAttempts(userId: string, trackId: string): Promise<AttemptList> {
+export async function listAttempts(userId: string, trackId: string): Promise<Attempt[]> {
   const { data, error } = await supabaseAdmin
     .from("exam_attempts")
     .select(ATTEMPT_COLUMNS)
@@ -335,7 +312,7 @@ export async function listAttempts(userId: string, trackId: string): Promise<Att
     });
   }
 
-  return { attempts: data.map((row) => toAttempt(row, toExam(row.exams))) };
+  return data.map((row) => toAttempt(row, toExam(row.exams)));
 }
 
 /**
@@ -412,14 +389,14 @@ export async function getAttempt(
  * `submit_attempt` grades with, so the rule lives in one place rather than being recomputed here.
  * Ids arrive in the attempt's frozen order; an unopened question falls in by absence.
  *
- * Nothing is persisted, and an empty set is a normal outcome. The parent exam travels without its
- * config: a revision session's rules are a frontend constant, not the exam's.
+ * Nothing is persisted, and an empty set is a normal outcome. The parent exam's config is not the
+ * session's: a revision session's rules are a frontend constant.
  *
  * @throws {AppError} 404 `NOT_FOUND` — no attempt with this id.
  * @throws {AppError} 403 `FORBIDDEN` — not the owner, not completed, or retry is disabled.
  * @throws {AppError} 500 `INTERNAL_ERROR` — the call failed.
  */
-export async function getRevision(userId: string, attemptId: string): Promise<Revision> {
+export async function getRevision(userId: string, attemptId: string): Promise<ExamWithQuestions> {
   const { data, error } = await supabaseAdmin
     .rpc("revision_question_ids", { p_user_id: userId, p_attempt_id: attemptId })
     .single();
@@ -435,12 +412,10 @@ export async function getRevision(userId: string, attemptId: string): Promise<Re
   // Not the owner, not completed and retry-disabled all answer alike: a flat refusal.
   throwOnRpcFailure(data.result);
 
-  // The parent exam sheds its config on the way out: `Exam`, not `ExamDetails`.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [{ config: _config, ...parent_exam }, questions] = await Promise.all([
+  const [exam, questions] = await Promise.all([
     getExam(data.exam_id),
     getQuestionsById(data.question_ids, true) as Promise<DisclosedQuestion[]>,
   ]);
 
-  return { parent_exam, questions };
+  return { exam, questions };
 }

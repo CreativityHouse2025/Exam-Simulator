@@ -19,10 +19,7 @@ import Loading from "@/components/Loading";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuth } from "@/features/auth";
 import useSettings from "@/core/hooks/useSettings";
-import {
-  ResumeAttemptDialog,
-  useAttemptActions,
-} from "@/features/exam-session";
+import { useAttemptActions } from "@/features/exam-session";
 import { translate } from "@/core/utils/translation";
 import { isNotFoundError } from "@/core/errors";
 import { ROUTES } from "@/routes/routes";
@@ -36,34 +33,28 @@ const TrackExamsPage: React.FC = () => {
   const navigate = useNavigate();
   const { settings } = useSettings();
   const langCode = settings.language;
-  const { enrolledTracks } = useAuth();
+  const { user, enrolledTracks } = useAuth();
 
   const track = enrolledTracks.find((enrolled) => enrolled.id === trackId);
   const isEnrolled = track !== undefined;
 
   const examsQuery = useQuery({
-    ...createTrackExamsQueryOptions(trackId, tagCode),
+    ...createTrackExamsQueryOptions(trackId, tagCode, user?.id),
     enabled: isEnrolled && tagCode !== "",
   });
   const attemptsQuery = useQuery({
-    ...createAttemptsQueryOptions(trackId),
+    ...createAttemptsQueryOptions(trackId, user?.id),
     enabled: isEnrolled,
   });
 
-  const {
-    startExam,
-    openAttempt,
-    isBusy,
-    openAttemptOffer,
-    dismissOpenAttemptOffer,
-  } = useAttemptActions();
+  const { startExam, isBusy } = useAttemptActions();
 
   const attemptStats = React.useMemo(
     () => statsByExamId(attemptsQuery.data ?? []),
     [attemptsQuery.data],
   );
 
-  const exams = examsQuery.data?.exams ?? [];
+  const exams = examsQuery.data ?? [];
 
   // Full exams sit directly under the track; a category sits under the categories page.
   const backTo =
@@ -137,15 +128,6 @@ const TrackExamsPage: React.FC = () => {
           />
         )}
       />
-
-      {openAttemptOffer && (
-        <ResumeAttemptDialog
-          attempt={openAttemptOffer}
-          examName={openAttemptOffer.exam.name[langCode]}
-          onResume={() => openAttempt(openAttemptOffer.id)}
-          onOpenChange={(open) => !open && dismissOpenAttemptOffer()}
-        />
-      )}
     </div>
   );
 };

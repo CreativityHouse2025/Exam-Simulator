@@ -19,11 +19,7 @@ import useSessionReducer from "../hooks/useSessionReducer";
 import { resolveErrorKey } from "@/core/utils/errorTranslation";
 import { computeLocalResult } from "../utils/results";
 import { PREVIEW_ATTEMPT_ID, REVISION_CONFIG } from "../constants";
-import type {
-  Session,
-  StartNewExamOptions,
-  StartNewExamResult,
-} from "../types";
+import type { Session, StartNewExamOptions } from "../types";
 import type {
   Attempt,
   AttemptQuestion,
@@ -114,7 +110,7 @@ export default function SessionProvider({
     async (
       examId: number,
       { preview = false }: StartNewExamOptions = {},
-    ): Promise<StartNewExamResult | null> => {
+    ): Promise<string | null> => {
       try {
         if (preview) {
           const { exam, questions } = await getExamQuestions(examId);
@@ -149,19 +145,15 @@ export default function SessionProvider({
             },
             questions,
           });
-          return { result: "started", attemptId: PREVIEW_ATTEMPT_ID };
+          return PREVIEW_ATTEMPT_ID;
         }
 
-        const started = await startAttempt(examId);
-        // The caller decides whether to resume it; nothing is mounted.
-        if (started.result === "in_progress") return started;
-
-        const { attempt, questions } = started;
+        const { attempt, questions } = await startAttempt(examId);
         mountSession(buildSessionFromAttempt(attempt, questions), {
           examDetails: { ...attempt.exam, config: attempt.configSnapshot },
           questions,
         });
-        return { result: "started", attemptId: attempt.id };
+        return attempt.id;
       } catch (error) {
         showToast(resolveErrorKey(error), 5000);
         return null;
@@ -286,7 +278,7 @@ export default function SessionProvider({
       if (session?.preview) return null;
 
       try {
-        const { parentExam, questions } = await getRevision(attemptId);
+        const { exam, questions } = await getRevision(attemptId);
 
         if (questions.length === 0) {
           showToast("attempts.errors.no-mistakes", 5000);
@@ -312,7 +304,7 @@ export default function SessionProvider({
         };
 
         mountSession(nextSession, {
-          examDetails: { ...parentExam, config: REVISION_CONFIG },
+          examDetails: { ...exam, config: REVISION_CONFIG },
           questions,
         });
         return attemptId;

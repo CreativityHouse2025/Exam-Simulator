@@ -1,5 +1,5 @@
 import type { Track } from "../../../shared/schemas/track.schema.js";
-import type { Tag, TrackTags } from "../../../shared/schemas/exam.schema.js";
+import type { Tag } from "../../../shared/schemas/exam.schema.js";
 import type { Tables } from "../database.types.js";
 import { AppError } from "../errors/AppError.js";
 import { supabaseAdmin } from "../supabaseClient.js";
@@ -76,7 +76,7 @@ export function toTag(row: TagRow): Tag {
  *
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
-export async function getTrackTags(trackId: string): Promise<TrackTags> {
+export async function getTrackTags(trackId: string): Promise<Tag[]> {
   const { data, error } = await supabaseAdmin
     .from("tags")
     .select(TAG_COLUMNS)
@@ -93,7 +93,7 @@ export async function getTrackTags(trackId: string): Promise<TrackTags> {
     });
   }
 
-  return { tags: data.map(toTag) };
+  return data.map(toTag);
 }
 
 /**

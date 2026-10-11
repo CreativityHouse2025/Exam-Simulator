@@ -12,6 +12,7 @@ import {
   StudentCardSkeleton,
   createStudentSearchQueryOptions,
 } from "@/features/students";
+import { useAuth } from "@/features/auth";
 import { translate } from "@/core/utils/translation";
 import { ROUTES } from "@/routes/routes";
 
@@ -25,6 +26,7 @@ const LIST_CLASSES =
 /** Supervisor-only: search students by name or email, then open one to review their attempts. */
 const StudentSearchPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { user } = useAuth();
   const [inputValue, setInputValue] = React.useState(
     searchParams.get("q") ?? "",
   );
@@ -43,7 +45,7 @@ const StudentSearchPage: React.FC = () => {
     isFetching,
     isError,
     refetch,
-  } = useQuery(createStudentSearchQueryOptions(query));
+  } = useQuery(createStudentSearchQueryOptions(query, user?.id));
 
   const fromSearch = searchParams.toString()
     ? `?${searchParams.toString()}`

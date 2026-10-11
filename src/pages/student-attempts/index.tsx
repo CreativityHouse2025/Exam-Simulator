@@ -37,7 +37,7 @@ const StudentAttemptsPage: React.FC = () => {
   const fromSearch = (location.state as { from?: string } | null)?.from ?? "";
   const { settings } = useSettings();
   const langCode = settings.language;
-  const { enrolledTracks } = useAuth();
+  const { user, enrolledTracks } = useAuth();
 
   const [selectedAttempt, setSelectedAttempt] =
     React.useState<Attempt | null>(null);
@@ -45,9 +45,9 @@ const StudentAttemptsPage: React.FC = () => {
   const supervisorTrack = enrolledTracks.find((track) => track.id === trackId);
   const hasAccess = supervisorTrack !== undefined;
 
-  const profileQuery = useQuery(createStudentQueryOptions(id));
+  const profileQuery = useQuery(createStudentQueryOptions(id, user?.id));
   const attemptsQuery = useQuery({
-    ...createStudentAttemptsQueryOptions(id, trackId),
+    ...createStudentAttemptsQueryOptions(id, trackId, user?.id),
     enabled: hasAccess,
   });
   const studentName = profileQuery.data

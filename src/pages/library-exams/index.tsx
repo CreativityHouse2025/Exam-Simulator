@@ -26,17 +26,17 @@ const LibraryExamsPage: React.FC = () => {
   const tagCode = searchParams.get("tag") ?? "";
   const { settings } = useSettings();
   const langCode = settings.language;
-  const { enrolledTracks } = useAuth();
+  const { user, enrolledTracks } = useAuth();
 
   const track = enrolledTracks.find((enrolled) => enrolled.id === trackId);
   const isEnrolled = track !== undefined;
 
   const examsQuery = useQuery({
-    ...createTrackExamsQueryOptions(trackId, tagCode),
+    ...createTrackExamsQueryOptions(trackId, tagCode, user?.id),
     enabled: isEnrolled && tagCode !== "",
   });
 
-  const exams = examsQuery.data?.exams ?? [];
+  const exams = examsQuery.data ?? [];
 
   // Full exams sit directly under the library; a category sits under the categories page.
   const backTo =

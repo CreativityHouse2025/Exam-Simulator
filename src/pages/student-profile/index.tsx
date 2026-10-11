@@ -37,10 +37,10 @@ const StudentProfilePage: React.FC = () => {
   const fromSearch = (location.state as { from?: string } | null)?.from ?? "";
   const { settings } = useSettings();
   const langCode = settings.language;
-  const { enrolledTracks } = useAuth();
+  const { user, enrolledTracks } = useAuth();
 
   const { data, isPending, isError, refetch, isFetching } = useQuery(
-    createStudentQueryOptions(id),
+    createStudentQueryOptions(id, user?.id),
   );
 
   const supervisorTrackIds = React.useMemo(

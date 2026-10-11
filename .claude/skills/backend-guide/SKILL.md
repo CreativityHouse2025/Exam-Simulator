@@ -57,8 +57,12 @@ every non-public endpoint needs `withRole`.
 ## Endpoints
 
 - `api/auth/*` — signin, signup, signout, me, password-reset, update-password, token-exchange
-- `api/attempts/index.ts` — `POST` start attempt, `GET` recent attempts (student). Starting an
-  archived exam is 410 `EXAM_ARCHIVED` (the RPC's `archived` sentinel); nothing is written
+- `api/attempts/index.ts` — `POST` start attempt (201, `AttemptWithQuestions`), `GET` recent
+  attempts (student). Starting an archived exam is 410 `EXAM_ARCHIVED` (the RPC's `archived`
+  sentinel); starting while an attempt on that exam is open is 409 `ATTEMPT_IN_PROGRESS` (the RPC's
+  `in_progress` sentinel), a plain error with no data. Either way nothing is written
+- `api/attempts/[id]/revision.ts` returns `ExamWithQuestions`: the parent exam (`exam`, with its
+  config) and the wrong-or-unanswered subset
 - `api/attempts/[id].ts` — `GET` read / `PATCH` save a single attempt (owner)
 - `api/attempts/[id]/submit.ts` — `POST` submit and grade (owner)
 - `api/attempts/[id]/revision.ts` — `GET` the wrong-or-unanswered set (owner)
@@ -77,6 +81,20 @@ Archived content is hidden from **every** role — there is no role branch in th
 services. `archived_at` is still returned on `Tag` and `Exam`; the UI does not use it.
 - `api/students/index.ts` — `GET /api/students?q=` student search (supervisor)
 - `api/students/[id]/attempts.ts` — a student's attempts (supervisor)
+
+## Response shapes
+
+The wire schemas in `shared/schemas/` are the only response shapes. `Exam` **always** carries its
+current `config`, including inside an `Attempt`, where `config_snapshot` governs the session and
+`exam.config` must not be read (its breaks are unordered there). `ExamWithQuestions` and
+`AttemptWithQuestions` are sessions; `ExamList`, `TagList`, `AttemptList`, `TrackList` and
+`StudentList` wrap a list.
+
+- **`data` is always an object, never a bare array**, so a response can grow (e.g. `total`)
+  without a breaking change.
+- **Services return plain values** (`Exam[]`, `Tag[]`, `Attempt[]`, `Exam`). The **handler** wraps
+  a list in its `*List` schema: `const result: TagList = { tags: await getTrackTags(trackId) }`.
+  The envelope is an HTTP concern; services know nothing about HTTP.
 
 ## Question content
 

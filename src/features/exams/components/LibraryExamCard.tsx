@@ -10,11 +10,11 @@ import { translate } from "@/core/utils/translation";
 import { tagAccent } from "../utils/tagAccent";
 import { ROUTES } from "@/routes/routes";
 import { cn } from "@/components/ui/utils";
-import type { ExamDetails } from "@/core/api/apiTypes";
+import type { Exam } from "@/core/api/apiTypes";
 import type { LangCode } from "@/core/types";
 
 type LibraryExamCardProps = {
-  exam: ExamDetails;
+  exam: Exam;
   trackId: string;
   langCode: LangCode;
 };

@@ -26,13 +26,13 @@ const TrackPage: React.FC = () => {
   const { trackId = "" } = useParams();
   const { settings } = useSettings();
   const langCode = settings.language;
-  const { enrolledTracks } = useAuth();
+  const { user, enrolledTracks } = useAuth();
 
   const track = enrolledTracks.find((enrolled) => enrolled.id === trackId);
   const isEnrolled = track !== undefined;
 
   const attemptsQuery = useQuery({
-    ...createAttemptsQueryOptions(trackId),
+    ...createAttemptsQueryOptions(trackId, user?.id),
     enabled: isEnrolled,
   });
 

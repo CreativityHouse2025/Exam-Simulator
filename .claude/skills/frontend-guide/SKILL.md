@@ -153,12 +153,24 @@ inside `saveProgress` / `submitExam`, so no caller branches on it.
 Query definitions live in each feature's `services/<name>.queries.ts`
 (`createAttemptsQueryOptions` in attempts, `createStudent*QueryOptions` in students,
 `createTracksQueryOptions` / `createTrackTagsQueryOptions` in tracks,
-`createTrackExamsQueryOptions(trackId, tagCode)` / `createExamQuestionsQueryOptions` in exams) and
-are exported through the feature's `index.ts`. The exams query is keyed per tag and does not retry
-a `NOT_FOUND` (an unknown or archived tag stays that way) — `isNotFoundError` in `core/errors.ts`
-is the check.
+`createTrackExamsQueryOptions(trackId, tagCode, userId)` / `createExamQuestionsQueryOptions` in
+exams) and are exported through the feature's `index.ts`. The exams query is keyed per tag and does
+not retry a `NOT_FOUND` (an unknown or archived tag stays that way) — `isNotFoundError` in
+`core/errors.ts` is the check.
 Add a new server read as a `queryOptions` factory there rather than inlining `useQuery` config in a
 component — that is what keeps cache keys consistent across the pages that share data.
+
+**Every query is user-scoped.** Each factory takes `userId: string | undefined` as its last
+argument, puts it **last** in the key (`["tracks", trackId, "exams", tagCode, userId]`, so a prefix
+like `["tracks"]` still matches for invalidation), and wraps its fetcher in
+`forSignedInUser(userId, fetcher)` (`core/utils/forSignedInUser.ts`), which yields `skipToken` with
+no user so the query idles. Pages pass `user?.id` from `useAuth()` and keep their own `enabled` —
+`skipToken` and `enabled` combine, neither overrides the other. Nothing clears the cache on sign-in
+or sign-out: a previous user's entries are unreachable and expire with `gcTime`. Skipping the user
+id in a new factory reopens the account-switch leak.
+
+Services return plain values (`Exam[]`, `Tag[]`, `Attempt[]`), unwrapping the API's `*List`
+envelope, and stamp every exam's config through `toPersistedExam` (`core/api/apiTypes.ts`).
 
 All requests go through `core/api/apiFetch.ts`, which converts Vercel 429s into `RateLimitError`
 and routes 401s to the registered unauthorized handler. Don't call `fetch` directly.
@@ -252,6 +264,10 @@ browses a track through the same three screens, under its own prefix, so no page
   component checks `archived_at`. Starting an exam archived since the list loaded fails with
   `EXAM_ARCHIVED`, which `startNewExam` already toasts via `resolveErrorKey`
   (`attempts.errors.server-exam-archived`). Starting is a button action; there is no start URL.
+- **One open attempt per exam** — pressing Start where the student already has an unfinished
+  attempt (only possible from a stale tab) fails with `ATTEMPT_IN_PROGRESS`, toasted the same way
+  (`attempts.errors.server-in-progress`). There is no resume dialog; `startNewExam` resolves the new
+  attempt id or null, like `resumeAttempt`.
 
 ## Pages — assembly only, no page imports another
 
