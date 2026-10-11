@@ -53,14 +53,18 @@ const ExamMenu: React.FC<ExamMenuProps> = ({ open }) => {
     );
   };
 
-  /** Flushes unsaved answers before leaving; a session that never persists has nothing to write. */
-  const saveAndLeave = async () => {
+  // A completed attempt is read-only (saving it is a 409), and a session that never persists has
+  // nothing to write — both just leave.
+  const savesOnLeave = persists && examState === "in-progress";
+
+  /** Flushes unsaved answers before leaving, when there is anything to save. */
+  const leave = async () => {
     if (isLeaving) return;
     setIsLeaving(true);
 
     // saveProgress reports failure rather than throwing — stay put rather than navigate away
     // from answers that were never written.
-    if (persists && !(await saveProgress())) {
+    if (savesOnLeave && !(await saveProgress())) {
       setIsLeaving(false);
       return;
     }
@@ -113,29 +117,30 @@ const ExamMenu: React.FC<ExamMenuProps> = ({ open }) => {
         </>
       )}
 
-      {examState === "in-progress" && (
-        <>
-          {canPause && <PauseMenuItem />}
-          <MenuItem
-            icon={<LogOut size={20} />}
-            label={translate(
-              `nav.drawer.${persists ? "save-and-leave" : "leave"}`,
-            )}
-            onClick={saveAndLeave}
-          />
-          <MenuItem
-            icon={<ClipboardCheck size={20} />}
-            label={translate("nav.drawer.stop")}
-            onClick={() => setShowSubmitConfirm(true)}
-          />
-        </>
-      )}
+      {/* First after the cells in every view, so it never moves. */}
+      <MenuItem
+        icon={<LogOut size={20} />}
+        label={translate(
+          `nav.drawer.${savesOnLeave ? "save-and-leave" : "leave"}`,
+        )}
+        onClick={leave}
+      />
+
+      {examState === "in-progress" && canPause && <PauseMenuItem />}
 
       {examState === "completed" && (
         <MenuItem
           icon={<FileCheckCorner size={20} />}
           label={translate("nav.drawer.summary")}
           onClick={backToSummary}
+        />
+      )}
+
+      {examState === "in-progress" && (
+        <MenuItem
+          icon={<ClipboardCheck size={20} />}
+          label={translate("nav.drawer.stop")}
+          onClick={() => setShowSubmitConfirm(true)}
         />
       )}
 
