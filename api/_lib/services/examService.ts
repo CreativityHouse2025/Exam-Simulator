@@ -1,8 +1,8 @@
-import type { Exam, ExamConfig, ExamWithProgress } from "../../../shared/schemas/exam.schema.js";
+import type { Exam, ExamConfig, ExamWithProgress, Tag } from "../../../shared/schemas/exam.schema.js";
 import type { Tables } from "../database.types.js";
 import { AppError } from "../errors/AppError.js";
 import { supabaseAdmin } from "../supabaseClient.js";
-import { getTag, toTag, toTrack } from "./trackService.js";
+import { getActiveTag, toTag, toTrack } from "./trackService.js";
 
 /**
  * What `toExam` reads. The track and config are reached through `allowed_config`: exams hold no
@@ -78,8 +78,8 @@ export async function getExam(examId: number): Promise<Exam> {
 }
 
 /**
- * One active tag's active exams in a track, each carrying its own config and the caller's progress
- * on it, ordered by `display_order`.
+ * One active tag and its active exams in a track, each exam carrying its own config and the
+ * caller's progress on it, ordered by `display_order`.
  *
  * A known tag with no active exams on this track is an empty list, not a 404.
  *
@@ -88,16 +88,12 @@ export async function getExam(examId: number): Promise<Exam> {
  * @throws {AppError} 404 `NOT_FOUND` — no tag has this code, or it is archived.
  * @throws {AppError} 500 `INTERNAL_ERROR` — a query failed.
  */
-export async function getTrackExams(trackId: string, tagCode: string, userId: string): Promise<ExamWithProgress[]> {
-  const tag = await getTag(tagCode)
-
-  if (tag.archived_at !== null) {
-    throw new AppError({
-      statusCode: 404,
-      code: "NOT_FOUND",
-      message: `Tag ${tagCode} is archived.`
-    })
-  }
+export async function getTrackExams(
+  trackId: string,
+  tagCode: string,
+  userId: string
+): Promise<{ tag: Tag; exams: ExamWithProgress[] }> {
+  const tag = await getActiveTag(tagCode)
 
   const { data, error } = await supabaseAdmin
     .from('exams')
@@ -122,9 +118,11 @@ export async function getTrackExams(trackId: string, tagCode: string, userId: st
     })
   }
 
-  return data.map(({ completed, open, ...row }) => ({
+  const exams = data.map(({ completed, open, ...row }) => ({
     ...toExam(row),
     attempts_count: completed[0]?.count ?? 0,
     open_attempt_id: open[0]?.id ?? null
   }))
+
+  return { tag, exams }
 }

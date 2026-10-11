@@ -15,6 +15,7 @@ import type {
   ExamConfigBreak as SharedExamConfigBreak,
   Exam as SharedExam,
   ExamWithProgress as SharedExamWithProgress,
+  ExamList as SharedExamList,
   DisclosedChoice as SharedDisclosedChoice,
   Question as SharedQuestion,
   DisclosedQuestion as SharedDisclosedQuestion,
@@ -59,6 +60,10 @@ type WireExamWithProgress = CamelCaseKeys<SharedExamWithProgress, true>;
 
 export type ExamWithProgress = Omit<WireExamWithProgress, "config"> & {
   config: ExamConfig;
+};
+
+export type ExamList = Omit<CamelCaseKeys<SharedExamList, true>, "exams"> & {
+  exams: ExamWithProgress[];
 };
 
 export type DisclosedChoice = CamelCaseKeys<SharedDisclosedChoice, true>;

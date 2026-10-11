@@ -73,9 +73,10 @@ every non-public endpoint needs `withRole`.
   `display_order`, whether or not they list any exam. Archived tags are left out (both roles,
   `assertTrackAccess`)
 - `api/tracks/[trackId]/exams.ts` — `GET ?tag=<code>` one tag's active exams on the track, by
-  `display_order` (both roles, `assertTrackAccess`). `tag` is required (400 if missing); an unknown
-  **or archived** tag is 404 `NOT_FOUND`; a tag with no active exams here is `200 { exams: [] }`.
-  The service runs `getTag` first, because the exams query filters through the tag join
+  `display_order` (both roles, `assertTrackAccess`), returned as `{ tag, exams }`. `tag` is required
+  (400 if missing); an unknown **or archived** tag is 404 `NOT_FOUND`; a tag with no active exams
+  here is `200 { tag, exams: [] }`.
+  The service runs `getActiveTag` first, because the exams query filters through the tag join
   (`tags!inner`, `.eq("tags.code", …)`) and cannot tell "unknown" from "empty" on its own.
   Each exam is an `ExamWithProgress`: the caller's `attempts_count` (completed) and
   `open_attempt_id`, from two aliased `exam_attempts` embeds (`completed:…(count)`, `open:…(id)`)
@@ -93,8 +94,7 @@ Attempts are unlimited (023 dropped the cap). Both history endpoints take `page`
 and `per_page` (10–100, multiple of 5, default 10), parsed with the shared `AttemptPageSchema`;
 anything else is 400. `PER_PAGE_MIN/MAX/STEP` live beside it and also drive the UI's select.
 
-- `listAttempts` returns `{ attempts, total }` — the one service that returns more than a plain
-  list, because `total` cannot ride on an array. Newest first, `id` as tie-breaker.
+- `listAttempts` returns `{ attempts, total }`, because `total` cannot ride on an array. Newest first, `id` as tie-breaker.
 - `total` comes from `count: "exact"` on the same filtered query, so it counts this track only.
 - A page past the end makes PostgREST answer 416 `PGRST103` instead of an empty page; only then
   `countAttempts` runs a `head: true` count, and the response is `{ attempts: [], total }`.
@@ -111,8 +111,9 @@ current `config`, including inside an `Attempt`, where `config_snapshot` governs
   without a breaking change.
 - **Services return plain values** (`Exam[]`, `Tag[]`, `Attempt[]`, `Exam`). The **handler** wraps
   a list in its `*List` schema: `const result: TagList = { tags: await getTrackTags(trackId) }`.
-  The envelope is an HTTP concern; services know nothing about HTTP. The exception is a paged
-  list, whose service returns `{ attempts, total }` (see **Paged history**).
+  The envelope is an HTTP concern; services know nothing about HTTP. The exceptions carry more
+  than the list: a paged list, whose service returns `{ attempts, total }` (see **Paged history**),
+  and the track exam list, whose service returns `{ tag, exams }`.
 
 ## Question content
 

@@ -5,15 +5,15 @@ import type { ApiResponse } from "@shared/api.schema";
 import type { ExamList, ExamWithQuestions } from "@shared/exam.schema";
 import { toPersistedExam } from "@/core/api/apiTypes";
 import type {
-  ExamWithProgress,
+  ExamList as FrontendExamList,
   ExamWithQuestions as FrontendExamWithQuestions,
 } from "@/core/api/apiTypes";
 
-/** One tag's exams on a track, with the caller's progress on each. An unknown tag code throws `NOT_FOUND`. */
+/** One tag and its exams on a track, with the caller's progress on each. An unknown tag code throws `NOT_FOUND`. */
 export async function getTrackExams(
   trackId: string,
   tagCode: string,
-): Promise<ExamWithProgress[]> {
+): Promise<FrontendExamList> {
   const query = new URLSearchParams({ tag: tagCode });
   const response = await apiFetch(`/api/tracks/${trackId}/exams?${query}`, {
     handleUnauthorized: true,
@@ -24,7 +24,8 @@ export async function getTrackExams(
     throw new AppApiError(result.error.code, "exams");
   }
 
-  return camelcaseKeys(result.data.exams, { deep: true }).map(toPersistedExam);
+  const { tag, exams } = camelcaseKeys(result.data, { deep: true });
+  return { tag, exams: exams.map(toPersistedExam) };
 }
 
 /** Supervisor-only: full, disclosed content of one exam. Powers the question viewer and preview sessions. */

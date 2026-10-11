@@ -180,7 +180,7 @@ with start or submit gets `staleTime: 0` too.
 Services return plain values (`Exam[]`, `Tag[]`, `Attempt[]`), unwrapping the API's `*List`
 envelope, and stamp every exam's config through `toPersistedExam` (`core/api/apiTypes.ts`). The
 paged attempt reads return `AttemptList` (`{ attempts, total }`) instead, built on the shared
-`attemptPageQuery` helper.
+`attemptPageQuery` helper, and `getTrackExams` returns `ExamList` (`{ tag, exams }`).
 
 All requests go through `core/api/apiFetch.ts`, which converts Vercel 429s into `RateLimitError`
 and routes 401s to the registered unauthorized handler. Don't call `fetch` directly.
@@ -263,9 +263,9 @@ browses a track through the same three screens, under its own prefix, so no page
   `CategoryGrid`, which only renders. Keep that filter in the page, where it is visible.
 - **Exam list** — reads `?tag=`, calls the exams query with it, and renders `ExamBrowser` with the
   role's card (`TrackExamCard` or `LibraryExamCard`). `ExamBrowser` owns only the loading / error /
-  empty states and the list; there is no search, filter or paging. The heading is
-  `examListTitle(exams, langCode)` — the tag's name **from the data**, `full` included, with a
-  generic label for an empty list. A missing `?tag` or a `NOT_FOUND` shows the not-found state.
+  empty states and the list; there is no search, filter or paging. The heading is the response's
+  `tag` name, `full` included, so an empty category still shows its own name; a skeleton holds
+  its place until data arrives. A missing `?tag` or a `NOT_FOUND` shows the not-found state.
 - **Not enrolled** — every catalog page renders `TrackLockedState`, whose back link goes to the
   track picker, never to the hub of the locked track.
 - A tag's colour reaches cards through `tagAccent(colorHexCode)`; its shape plugs straight into

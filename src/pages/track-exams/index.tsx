@@ -7,11 +7,7 @@ import {
   TrackLockedState,
   TrackSectionHeader,
 } from "@/features/tracks";
-import {
-  ExamBrowser,
-  createTrackExamsQueryOptions,
-  examListTitle,
-} from "@/features/exams";
+import { ExamBrowser, createTrackExamsQueryOptions } from "@/features/exams";
 import EmptyState from "@/components/states/EmptyState";
 import BackButton from "@/components/BackButton";
 import Loading from "@/components/Loading";
@@ -42,7 +38,7 @@ const TrackExamsPage: React.FC = () => {
 
   const { startExam, openAttempt, isBusy } = useAttemptActions();
 
-  const exams = examsQuery.data ?? [];
+  const exams = examsQuery.data?.exams ?? [];
   const isFullExams = tagCode === FULL_TAG_CODE;
 
   // Full exams sit directly under the track; a category sits under the categories page.
@@ -87,7 +83,7 @@ const TrackExamsPage: React.FC = () => {
 
       <div className="mb-6">
         <TrackSectionHeader
-          title={examsQuery.isPending ? null : examListTitle(exams, langCode)}
+          title={examsQuery.data?.tag.name[langCode] ?? null}
           description={translate(
             isFullExams ? "catalog.full.lead" : "catalog.category-lead",
             [track.name[langCode]],

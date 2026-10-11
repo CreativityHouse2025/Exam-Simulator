@@ -431,7 +431,6 @@
         "fetch": "Failed to load categories."
       }
     },
-    "exams": "Exams",
     "category-lead": "The exams in this category of $1.",
     "not-found": "This list doesn't exist",
     "not-found-hint": "The link may be wrong or out of date.",

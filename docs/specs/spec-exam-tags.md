@@ -1,6 +1,6 @@
 # Spec: Exam tags, archiving and attempt rules
 
-Status: ready for implementation. Resolved via `/grill-me` on 2026-10-09/10. Slices 6–7 revised via `/grill-me` on 2026-10-11 (the per-exam attempt limit was dropped); slices 5 and 7 revised again the same day (legacy duplicates auto-submitted, progress fields catalog-only, paging details).
+Status: ready for implementation. Resolved via `/grill-me` on 2026-10-09/10. Slices 6–7 revised via `/grill-me` on 2026-10-11 (the per-exam attempt limit was dropped); slices 5 and 7 revised again the same day (legacy duplicates auto-submitted, progress fields catalog-only, paging details). Slice 8 added via `/grill-me` on 2026-10-12 (the exam list returns its tag).
 
 ## Problem Statement
 
@@ -69,6 +69,7 @@ Every exam the API returns tells the caller how many times they have completed i
 36. As a student, I want my history paged, with a choice of how many attempts per page (10 to 100), so that a long history stays fast and readable.
 37. As a student, I want a clear message if I press Start in a stale tab where I already have an unfinished attempt, and the card to update to Resume, so that I'm never confused about my state.
 38. As any user, I want to never see another account's data after signing in on the same browser, so that my data and theirs stay private.
+39. As a student, I want an exam list page to show its category's name even when the category has no exams yet, so that I know where I am.
 
 ### Supervisor
 
@@ -104,8 +105,9 @@ Each slice is finished end to end (database → API → frontend) and verified o
 | 5 | One open attempt per exam | — |
 | 6 | Wire contract and cache structure (refactor) | 5 |
 | 7 | Unlimited attempts, per-exam progress, paged history | 6 |
+| 8 | Exam list returns its tag | 7 |
 
-Order: 1 → 2 → 3 → 4 → 5 → 6 → 7. Refactor before features: slice 6 changes structure only, slice 7 adds the behaviour. Slices 1 and 5 can move earlier if needed.
+Order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8. Refactor before features: slice 6 changes structure only, slice 7 adds the behaviour. Slices 1 and 5 can move earlier if needed.
 
 Migrations: the existing uncommitted 019 (track code) stays as is. The existing uncommitted 020 (results) is edited in place, on the assumption that it has only ever run locally. Catalog changes go into a migration named for exam tags (021). Archiving goes into its own migration (022). Dropping the attempt cap goes into a migration named for unlimited attempts (023). Each migration is wrapped in a single transaction. When slices interleave across two migration files, the file content grows slice by slice, and `npm run db:reset` replays it every time.
 
@@ -151,7 +153,7 @@ Migrations: the existing uncommitted 019 (track code) stays as is. The existing 
 - Frontend pages (all inside the existing feature/page layout; pages assemble only):
   - **Track page**: two cards, Full exams and Categories, plus the existing recent-attempts section. The cards are static. The track name comes from the existing tracks data.
   - **Categories page**: calls the tags endpoint, drops `full`, and renders one card per category tag.
-  - **Exam list page**, parameterised by tag code: one page serves Full exams (`full`) and each category. It calls the exams endpoint with the tag only. Its heading is the tag's name, read from its exams' `tag` (for `full` too); an empty list falls back to a generic "Exams" label. Only the Track page's two cards use UI copy. A 404, or a missing `tag`, shows the not-found state.
+  - **Exam list page**, parameterised by tag code: one page serves Full exams (`full`) and each category. It calls the exams endpoint with the tag only. Its heading is the tag's name, read from its exams' `tag` (for `full` too); an empty list falls back to a generic "Exams" label. *Superseded by slice 8: the heading is the returned tag's name, with no fallback.* Only the Track page's two cards use UI copy. A 404, or a missing `tag`, shows the not-found state.
   - Existing exam cards are reused.
 - Routes (the tag travels as a query parameter, mirroring the API):
 
@@ -253,6 +255,21 @@ A refactor: no new feature. Two visible changes only, the start-conflict toast a
   - Nothing calls `invalidateQueries`, and start and submit stay plain service calls.
   - A stale tab updates on its next mount or window focus, not in place. Pressing Start there still shows the `ATTEMPT_IN_PROGRESS` toast.
 
+### Slice 8: Exam list returns its tag
+
+- `GET /api/tracks/:trackId/exams?tag=` returns the requested tag next to its exams:
+
+  ```ts
+  ExamList = { tag: Tag; exams: ExamWithProgress[] }
+  ```
+
+  - `tag` is the tag the `tag` query parameter names, in the same `Tag` shape as the tags endpoint.
+  - It is returned for an empty list too.
+  - Each exam keeps its own `tag`: `Exam` stays the single exam shape (slice 6), so the duplication is accepted.
+- Errors are unchanged: a missing `tag` is 400, and an unknown or archived tag is 404 `NOT_FOUND`.
+- **Exam list heading** (student and supervisor): always the returned tag's name, in the user's language, for `full` too. The generic "Exams" fallback is removed. An empty category shows its own name above the empty state.
+- No database change.
+
 ### Unchanged
 
 Questions (including answer count), choices, exam questions (question order), exam config, breaks and both break-index triggers, allowed config, attempt answers, offered breaks, enrollments, auth and roles. Content tables keep the existing privilege pattern (no app-level delete); exams are never deleted, only archived.
@@ -295,6 +312,10 @@ API smoke checks per slice (student = enrolled student cookie, sup = enrolled su
 | 7 | 23 attempts, `per_page=10`, pages 1–4 | 10 / 10 / 3 / 0 rows; `total` 23 on each |
 | 7 | Stale tab: press Start on an exam with an open attempt (manual) | Error toast; card shows Resume after refocusing the tab or reopening the list |
 | 7 | Start an exam, go back to its list; submit it, go back again (manual) | No skeleton or reload; the card switches to Resume, then to Start with the count up by one |
+| 8 | `?tag=full` | `tag` is the `full` tag; `exams` as before |
+| 8 | `?tag=<valid, nothing visible>` | 200, `tag` present, `exams` empty |
+| 8 | `?tag=nope`, `?tag=legacy` | 404 `NOT_FOUND`, no `tag` |
+| 8 | Open an empty category page (manual, both languages) | Heading is the category's name, not "Exams" |
 
 Prior art: no automated tests exist in the repo. Checks follow the `DO $$ … RAISE EXCEPTION` guard pattern already used in the attempts migration for pre-flight data validation.
 

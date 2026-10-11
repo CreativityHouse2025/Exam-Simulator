@@ -7,7 +7,6 @@ import {
   ExamBrowser,
   LibraryExamCard,
   createTrackExamsQueryOptions,
-  examListTitle,
 } from "@/features/exams";
 import EmptyState from "@/components/states/EmptyState";
 import BackButton from "@/components/BackButton";
@@ -36,7 +35,7 @@ const LibraryExamsPage: React.FC = () => {
     enabled: isEnrolled && tagCode !== "",
   });
 
-  const exams = examsQuery.data ?? [];
+  const exams = examsQuery.data?.exams ?? [];
 
   // Full exams sit directly under the library; a category sits under the categories page.
   const backTo =
@@ -80,12 +79,12 @@ const LibraryExamsPage: React.FC = () => {
         <p className="text-sm font-semibold text-grey-800">
           {track.name[langCode]}
         </p>
-        {examsQuery.isPending ? (
-          <Skeleton className="mt-1 h-8 w-48" />
-        ) : (
+        {examsQuery.data ? (
           <h1 className="text-2xl font-bold text-tertiary md:text-3xl">
-            {examListTitle(exams, langCode)}
+            {examsQuery.data.tag.name[langCode]}
           </h1>
+        ) : (
+          <Skeleton className="mt-1 h-8 w-48" />
         )}
       </header>
 

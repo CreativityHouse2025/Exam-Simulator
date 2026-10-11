@@ -97,12 +97,12 @@ export async function getTrackTags(trackId: string): Promise<Tag[]> {
 }
 
 /**
- * One tag by code. Codes are global, so the lookup ignores tracks.
+ * One active tag by code. Codes are global, so the lookup ignores tracks.
  *
- * @throws {AppError} 404 `NOT_FOUND` — no tag has this code.
+ * @throws {AppError} 404 `NOT_FOUND` — no tag has this code, or it is archived.
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
-export async function getTag(code: string): Promise<Tag> {
+export async function getActiveTag(code: string): Promise<Tag> {
   const { data, error } = await supabaseAdmin
     .from("tags")
     .select(TAG_COLUMNS)
@@ -122,6 +122,14 @@ export async function getTag(code: string): Promise<Tag> {
       statusCode: 404,
       code: "NOT_FOUND",
       message: `Tag with code ${code} does not exist.`,
+    });
+  }
+
+  if (data.archived_at !== null) {
+    throw new AppError({
+      statusCode: 404,
+      code: "NOT_FOUND",
+      message: `Tag ${code} is archived.`,
     });
   }
 

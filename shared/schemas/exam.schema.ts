@@ -115,8 +115,9 @@ export type DisclosedQuestion = z.infer<typeof DisclosedQuestionSchema>;
 // Responses — built by the API from database rows, never parsed at runtime.
 // ---------------------------------------------------------------------------
 
-/** GET /api/tracks/:trackId/exams?tag=<code> — one tag's exams on the track, by `display_order`. */
+/** GET /api/tracks/:trackId/exams?tag=<code> — the requested tag and its exams on the track, by `display_order`. */
 export const ExamListSchema = z.object({
+  tag: TagSchema,
   exams: z.array(ExamWithProgressSchema),
 });
 
