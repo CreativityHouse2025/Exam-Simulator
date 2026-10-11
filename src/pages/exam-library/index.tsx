@@ -32,7 +32,7 @@ const ExamLibraryPage: React.FC = () => {
         <h1 className="text-2xl font-bold text-tertiary md:text-3xl">
           {track.name[langCode]}
         </h1>
-        <p className="mt-1.5 text-sm text-grey-800">
+        <p className="mt-1.5 text-sm text-grey-1000">
           {translate("exam.library.subtitle")}
         </p>
       </header>

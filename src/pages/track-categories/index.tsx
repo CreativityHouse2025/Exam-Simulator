@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   CategoryGrid,
   TrackLockedState,
+  TrackSectionHeader,
   createTrackTagsQueryOptions,
 } from "@/features/tracks";
 import BackButton from "@/components/BackButton";
@@ -46,17 +47,17 @@ const TrackCategoriesPage: React.FC = () => {
   }
 
   return (
-    <div className="mx-auto w-full max-w-4xl px-4 py-8">
+    <div className="mx-auto w-full max-w-5xl px-4 py-8">
       <BackButton to={backTo} text={backText} />
 
-      <header className="mb-6">
-        <p className="text-sm font-semibold text-grey-800">
-          {track.name[langCode]}
-        </p>
-        <h1 className="text-2xl font-bold text-tertiary md:text-3xl">
-          {translate("catalog.categories.title")}
-        </h1>
-      </header>
+      <div className="mb-6">
+        <TrackSectionHeader
+          title={translate("catalog.categories.title")}
+          description={translate("catalog.categories.lead", [
+            track.name[langCode],
+          ])}
+        />
+      </div>
 
       <CategoryGrid
         categories={categories}

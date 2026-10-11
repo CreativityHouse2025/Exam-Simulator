@@ -50,7 +50,7 @@ const LibraryCategoriesPage: React.FC = () => {
       <BackButton to={backTo} text={backText} />
 
       <header className="mb-6">
-        <p className="text-sm font-semibold text-grey-800">
+        <p className="text-sm font-semibold text-grey-1000">
           {track.name[langCode]}
         </p>
         <h1 className="text-2xl font-bold text-tertiary md:text-3xl">

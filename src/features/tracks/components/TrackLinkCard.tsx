@@ -30,7 +30,7 @@ type TrackLinkCardProps = {
 
 /**
  * One always-openable track. Supervisor pickers list only tracks the supervisor can actually
- * open, so unlike the student's TrackCard there is no locked variant to style for.
+ * open, so unlike the student's dashboard there is no locked variant to style for.
  *
  * The plum rail is the supervisor accent throughout; gold stays reserved for primary actions.
  */
@@ -69,7 +69,7 @@ const TrackLinkCard: React.FC<TrackLinkCardProps> = ({
             translate("tracks.expires", [formatDate(track.expiresAt)])}
         </span>
 
-        <ArrowRight className="size-4 shrink-0 text-secondary transition-transform duration-200 group-hover:translate-x-0.5 rtl:rotate-180" />
+        <ArrowRight className="size-4 shrink-0 text-secondary transition-transform duration-200 group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
       </CardFooter>
     </Card>
   </Link>

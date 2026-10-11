@@ -1,11 +1,9 @@
 import React from "react";
-import { Folder, LayoutGrid } from "lucide-react";
-import ActionCard from "@/components/ActionCard";
+import { LayoutGrid } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 import EmptyState from "@/components/states/EmptyState";
 import ErrorState from "@/components/states/ErrorState";
-import TrackCardSkeleton from "./TrackCardSkeleton";
-import { TRACK_GRID_CLASSES } from "./TrackLinkCard";
-import { tagAccent } from "@/features/exams";
+import CategoryTile from "./CategoryTile";
 import { translate } from "@/core/utils/translation";
 import type { Tag } from "@/core/api/apiTypes";
 import type { LangCode } from "@/core/types";
@@ -13,7 +11,7 @@ import type { LangCode } from "@/core/types";
 type CategoryGridProps = {
   categories: Tag[];
   langCode: LangCode;
-  /** Where a category's card leads — the student or the supervisor exam list. */
+  /** Where a category's tile leads — the student or the supervisor exam list. */
   toCategory: (tagCode: string) => string;
   isPending: boolean;
   isError: boolean;
@@ -21,9 +19,11 @@ type CategoryGridProps = {
   isRetrying?: boolean;
 };
 
-const SKELETON_COUNT = 3;
+const SKELETON_COUNT = 4;
 
-/** One card per category, in the track's order, with the loading / error / empty states. */
+const GRID_CLASSES = "grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3";
+
+/** One tile per category, in the track's order, with the loading / error / empty states. */
 const CategoryGrid: React.FC<CategoryGridProps> = ({
   categories,
   langCode,
@@ -35,9 +35,9 @@ const CategoryGrid: React.FC<CategoryGridProps> = ({
 }) => {
   if (isPending) {
     return (
-      <div className={TRACK_GRID_CLASSES}>
+      <div className={GRID_CLASSES}>
         {Array.from({ length: SKELETON_COUNT }, (_, i) => (
-          <TrackCardSkeleton key={i} />
+          <Skeleton key={i} className="h-14 rounded-xl" />
         ))}
       </div>
     );
@@ -63,14 +63,13 @@ const CategoryGrid: React.FC<CategoryGridProps> = ({
   }
 
   return (
-    <div className={TRACK_GRID_CLASSES}>
+    <div className={GRID_CLASSES}>
       {categories.map((tag) => (
-        <ActionCard
+        <CategoryTile
           key={tag.id}
-          icon={Folder}
-          title={tag.name[langCode]}
+          category={tag}
+          langCode={langCode}
           to={toCategory(tag.code)}
-          accent={tagAccent(tag.colorHexCode)}
         />
       ))}
     </div>

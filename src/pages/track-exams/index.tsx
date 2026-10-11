@@ -2,7 +2,11 @@ import React from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { SearchX } from "lucide-react";
-import { TrackExamCard, TrackLockedState } from "@/features/tracks";
+import {
+  TrackExamCard,
+  TrackLockedState,
+  TrackSectionHeader,
+} from "@/features/tracks";
 import {
   ExamBrowser,
   createTrackExamsQueryOptions,
@@ -11,7 +15,6 @@ import {
 import EmptyState from "@/components/states/EmptyState";
 import BackButton from "@/components/BackButton";
 import Loading from "@/components/Loading";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useAuth } from "@/features/auth";
 import useSettings from "@/core/hooks/useSettings";
 import { useAttemptActions } from "@/features/exam-session";
@@ -40,6 +43,7 @@ const TrackExamsPage: React.FC = () => {
   const { startExam, openAttempt, isBusy } = useAttemptActions();
 
   const exams = examsQuery.data ?? [];
+  const isFullExams = tagCode === FULL_TAG_CODE;
 
   // Full exams sit directly under the track; a category sits under the categories page.
   const backTo =
@@ -65,7 +69,7 @@ const TrackExamsPage: React.FC = () => {
 
   if (tagCode === "" || isNotFoundError(examsQuery.error)) {
     return (
-      <div className="mx-auto w-full max-w-4xl px-4 py-8">
+      <div className="mx-auto w-full max-w-5xl px-4 py-8">
         <BackButton to={backTo} text={backText} />
         <EmptyState
           icon={SearchX}
@@ -78,21 +82,18 @@ const TrackExamsPage: React.FC = () => {
   }
 
   return (
-    <div className="mx-auto w-full max-w-4xl px-4 py-8">
+    <div className="mx-auto w-full max-w-5xl px-4 py-8">
       <BackButton to={backTo} text={backText} />
 
-      <header className="mb-6">
-        <p className="text-sm font-semibold text-grey-800">
-          {track.name[langCode]}
-        </p>
-        {examsQuery.isPending ? (
-          <Skeleton className="mt-1 h-8 w-48" />
-        ) : (
-          <h1 className="text-2xl font-bold text-tertiary md:text-3xl">
-            {examListTitle(exams, langCode)}
-          </h1>
-        )}
-      </header>
+      <div className="mb-6">
+        <TrackSectionHeader
+          title={examsQuery.isPending ? null : examListTitle(exams, langCode)}
+          description={translate(
+            isFullExams ? "catalog.full.lead" : "catalog.category-lead",
+            [track.name[langCode]],
+          )}
+        />
+      </div>
 
       <ExamBrowser
         exams={exams}

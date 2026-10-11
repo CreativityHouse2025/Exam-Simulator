@@ -162,15 +162,25 @@ component — that is what keeps cache keys consistent across the pages that sha
 
 **Every query is user-scoped.** Each factory takes `userId: string | undefined` as its last
 argument, puts it **last** in the key (`["tracks", trackId, "exams", tagCode, userId]`, so a prefix
-like `["tracks"]` still matches for invalidation), and wraps its fetcher in
+never needs it), and wraps its fetcher in
 `forSignedInUser(userId, fetcher)` (`core/utils/forSignedInUser.ts`), which yields `skipToken` with
 no user so the query idles. Pages pass `user?.id` from `useAuth()` and keep their own `enabled` —
 `skipToken` and `enabled` combine, neither overrides the other. Nothing clears the cache on sign-in
 or sign-out: a previous user's entries are unreachable and expire with `gcTime`. Skipping the user
 id in a new factory reopens the account-switch leak.
 
+**Freshness is `staleTime`, never invalidation.** The three queries a student's own actions
+change — track exams (progress fields), `createAttemptsQueryOptions` and
+`createStudentAttemptsQueryOptions` — have `staleTime: 0`: each mount refetches in the background
+over cached data, so no skeleton shows. Everything else keeps a long `staleTime`. Nothing calls
+`invalidateQueries`, and start and submit are plain service calls, not `useMutation`s: a
+mutation-driven invalidation was tried and visibly reloaded pages. A new query whose data changes
+with start or submit gets `staleTime: 0` too.
+
 Services return plain values (`Exam[]`, `Tag[]`, `Attempt[]`), unwrapping the API's `*List`
-envelope, and stamp every exam's config through `toPersistedExam` (`core/api/apiTypes.ts`).
+envelope, and stamp every exam's config through `toPersistedExam` (`core/api/apiTypes.ts`). The
+paged attempt reads return `AttemptList` (`{ attempts, total }`) instead, built on the shared
+`attemptPageQuery` helper.
 
 All requests go through `core/api/apiFetch.ts`, which converts Vercel 429s into `RateLimitError`
 and routes 401s to the registered unauthorized handler. Don't call `fetch` directly.
@@ -264,10 +274,35 @@ browses a track through the same three screens, under its own prefix, so no page
   component checks `archived_at`. Starting an exam archived since the list loaded fails with
   `EXAM_ARCHIVED`, which `startNewExam` already toasts via `resolveErrorKey`
   (`attempts.errors.server-exam-archived`). Starting is a button action; there is no start URL.
+- **Progress on the card** — the exams query returns `ExamWithProgress` (`attemptsCount`,
+  `openAttemptId`); `ExamBrowser` is typed to it. `TrackExamCard` shows the "Taken $1x" badge
+  (hidden at 0) and, while `openAttemptId` is set, **Resume last attempt** in place of Start, which
+  calls `openAttempt` — no `POST`. Never derive these from the attempts list: history is paged, so
+  it no longer holds every attempt.
 - **One open attempt per exam** — pressing Start where the student already has an unfinished
   attempt (only possible from a stale tab) fails with `ATTEMPT_IN_PROGRESS`, toasted the same way
   (`attempts.errors.server-in-progress`). There is no resume dialog; `startNewExam` resolves the new
   attempt id or null, like `resumeAttempt`.
+
+## Attempt history (paged)
+
+Both history pages (`track-history`, `student-attempts`) read `page` / `per_page` from the URL
+through `useAttemptPageParams` (attempts), which validates them with the API's own
+`AttemptPageSchema` and falls back to `DEFAULT_ATTEMPT_PAGE` — a hand-edited URL never becomes a
+400. Changing the page size returns to page 1. `AttemptsPagination` renders the per-page select
+(from `PER_PAGE_MIN/MAX/STEP` in `@shared/attempt.schema`) beside `Pager`
+(`components/Pager.tsx`, 0-based; the URL is 1-based). Header counts read `total`, never
+`attempts.length`. An empty page with a non-zero total is a page past the end: the empty state
+shows and the pager stays so the user can go back. The track hub's recent attempts request
+`DEFAULT_ATTEMPT_PAGE` and show the first 5, sharing that cache entry with the history page's
+default view. There are no client-side stats over a page — they would describe the page, not the
+student.
+
+## Exam menu
+
+`ExamMenu` shows **Leave** in every session, first after the question grid. It reads "Save and
+leave" and saves first only when the session persists **and** is in progress; a completed attempt
+(saving it is a 409), a revision or a preview just leaves.
 
 ## Pages — assembly only, no page imports another
 

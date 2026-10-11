@@ -262,6 +262,11 @@
       "retry": "Retry Mistakes",
       "details": "Details"
     },
+    "resume": {
+      "title": "Continue where you left off",
+      "progress": "Question $1 of $2",
+      "time-left": "$1 left"
+    },
     "recent": "Recent attempts",
     "view-all": "View all",
     "empty-hint": "Start an exam above to see it here.",
@@ -414,17 +419,20 @@
   "catalog": {
     "full": {
       "title": "Full exams",
-      "description": "Complete practice exams, in the intended order."
+      "description": "Complete practice exams, in the intended order.",
+      "lead": "Complete practice exams for $1, in the intended order."
     },
     "categories": {
       "title": "Categories",
       "description": "Practise one category at a time.",
+      "lead": "Pick a category in $1 to practise it on its own.",
       "empty": "No categories in this track yet",
       "errors": {
         "fetch": "Failed to load categories."
       }
     },
     "exams": "Exams",
+    "category-lead": "The exams in this category of $1.",
     "not-found": "This list doesn't exist",
     "not-found-hint": "The link may be wrong or out of date.",
     "back-to-track": "Back to track",
@@ -436,18 +444,20 @@
       "server-unknown": "Something went wrong. Please try again.",
       "fetch": "Failed to load tracks."
     },
-    "title": "Your tracks",
-    "subtitle": "Pick a track to see its exams and your attempts.",
     "empty": "No tracks available",
     "empty-hint": "There are no tracks in the catalogue yet.",
     "locked-hint": "Contact Creativity House for access.",
     "expires": "Expires $1",
-    "badge": {
-      "active": "Active",
-      "locked": "Not enrolled"
+    "ends": "Access ends $1",
+    "overview": "Track overview",
+    "other": "Other tracks",
+    "none-enrolled": "You're not enrolled in any track yet",
+    "history": {
+      "title": "Attempt history",
+      "description": "Review and revise your past attempts."
     },
     "welcome": "Welcome back, $1",
-    "continue": "Continue $1",
+    "lead": "Pick up your practice where you left off.",
     "back": "All tracks",
     "locked": "You are not enrolled in this track"
   }

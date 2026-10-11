@@ -101,8 +101,6 @@ const AttemptHistoryPage: React.FC = () => {
               disabled={isBusy}
               onOpen={openAttempt}
               onRevise={reviseAttempt}
-              onRefresh={attemptsQuery.refetch}
-              isRefreshing={attemptsQuery.isFetching}
             />
           )}
           {total > 0 && (

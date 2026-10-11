@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-/** Loading placeholder matching TrackCard's rail / title / description / footer rhythm. */
+/** Loading placeholder matching TrackLinkCard's rail / title / description / footer rhythm. */
 const TrackCardSkeleton: React.FC = () => (
   <Card className="h-full gap-5 overflow-hidden border-grey-200 pt-0 pb-4">
     <Skeleton className="h-1.5 w-full rounded-none" />

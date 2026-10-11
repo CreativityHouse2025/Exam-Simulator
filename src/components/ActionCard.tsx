@@ -72,7 +72,7 @@ const ActionCard: React.FC<ActionCardProps> = ({
 
           <ArrowRight
             className={cn(
-              "mt-3 size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 rtl:rotate-180",
+              "mt-3 size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5",
               tone.icon,
             )}
           />

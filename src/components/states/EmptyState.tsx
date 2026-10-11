@@ -24,8 +24,8 @@ const EmptyState: React.FC<EmptyStateProps> = ({
     )}
   >
     <Icon className="size-9 text-grey-500" strokeWidth={1.4} />
-    <p className="text-sm font-semibold text-grey-900">{message}</p>
-    {hint && <p className="max-w-80 text-xs text-grey-700">{hint}</p>}
+    <p className="text-sm font-semibold text-grey-1000">{message}</p>
+    {hint && <p className="max-w-80 text-xs text-grey-1000">{hint}</p>}
   </div>
 );
 

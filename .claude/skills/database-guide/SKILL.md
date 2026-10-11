@@ -77,6 +77,20 @@ timestamptz, null = active). Clearing the column reopens the row.
   demo exams, runs its journeys through the real RPCs, and archives them again — keep that
   bracket if you add a journey, or `start_attempt` refuses it and `db:reset` fails.
 
+## Attempt rules (020, 023)
+
+- **A completed attempt's grade lives in `results`** (020), one row per attempt. `exam_state` is
+  the source of truth for completion; `submit_attempt` flips it and inserts the row in one
+  transaction. Grade an attempt only through `submit_attempt` — 023 does exactly that for its
+  backfill rather than writing `results` by hand.
+- **At most one open attempt per (user, exam).** A partial unique index
+  (`exam_attempts_one_open_per_exam`, `WHERE exam_state = 'in-progress'`) backs `start_attempt`'s
+  own check, which returns `in_progress` instead of inserting. 023 auto-submitted every older
+  duplicate before building the index, so it covers every row with no cutoff.
+- **Attempts are unlimited and never deleted automatically.** 023 dropped
+  `trg_enforce_attempt_limit` and `enforce_attempt_limit()`; there is no cap anywhere, in SQL or
+  in the services.
+
 ## When to write an RPC
 
 Most reads belong in a service (`api/_lib/services/`). Reach for a Postgres function when the

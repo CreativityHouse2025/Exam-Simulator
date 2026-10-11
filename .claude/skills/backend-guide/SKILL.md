@@ -57,10 +57,11 @@ every non-public endpoint needs `withRole`.
 ## Endpoints
 
 - `api/auth/*` — signin, signup, signout, me, password-reset, update-password, token-exchange
-- `api/attempts/index.ts` — `POST` start attempt (201, `AttemptWithQuestions`), `GET` recent
-  attempts (student). Starting an archived exam is 410 `EXAM_ARCHIVED` (the RPC's `archived`
-  sentinel); starting while an attempt on that exam is open is 409 `ATTEMPT_IN_PROGRESS` (the RPC's
-  `in_progress` sentinel), a plain error with no data. Either way nothing is written
+- `api/attempts/index.ts` — `POST` start attempt (201, `AttemptWithQuestions`), `GET
+  ?trackId=&page=&per_page=` one page of the caller's attempts in a track (see **Paged history**).
+  Starting an archived exam is 410 `EXAM_ARCHIVED` (the RPC's `archived` sentinel); starting while
+  an attempt on that exam is open is 409 `ATTEMPT_IN_PROGRESS` (the RPC's `in_progress` sentinel),
+  a plain error with no data. Either way nothing is written
 - `api/attempts/[id]/revision.ts` returns `ExamWithQuestions`: the parent exam (`exam`, with its
   config) and the wrong-or-unanswered subset
 - `api/attempts/[id].ts` — `GET` read / `PATCH` save a single attempt (owner)
@@ -75,12 +76,28 @@ every non-public endpoint needs `withRole`.
   `display_order` (both roles, `assertTrackAccess`). `tag` is required (400 if missing); an unknown
   **or archived** tag is 404 `NOT_FOUND`; a tag with no active exams here is `200 { exams: [] }`.
   The service runs `getTag` first, because the exams query filters through the tag join
-  (`tags!inner`, `.eq("tags.code", …)`) and cannot tell "unknown" from "empty" on its own
+  (`tags!inner`, `.eq("tags.code", …)`) and cannot tell "unknown" from "empty" on its own.
+  Each exam is an `ExamWithProgress`: the caller's `attempts_count` (completed) and
+  `open_attempt_id`, from two aliased `exam_attempts` embeds (`completed:…(count)`, `open:…(id)`)
+  filtered by user id and state. The admin client bypasses RLS, so **the `user_id` filter is what
+  keeps another student's attempts out** — never drop it. No other endpoint returns these fields
 
 Archived content is hidden from **every** role — there is no role branch in the catalog
 services. `archived_at` is still returned on `Tag` and `Exam`; the UI does not use it.
 - `api/students/index.ts` — `GET /api/students?q=` student search (supervisor)
-- `api/students/[id]/attempts.ts` — a student's attempts (supervisor)
+- `api/students/[id]/attempts.ts` — one page of a student's attempts (supervisor), same paging
+
+### Paged history
+
+Attempts are unlimited (023 dropped the cap). Both history endpoints take `page` (≥ 1, default 1)
+and `per_page` (10–100, multiple of 5, default 10), parsed with the shared `AttemptPageSchema`;
+anything else is 400. `PER_PAGE_MIN/MAX/STEP` live beside it and also drive the UI's select.
+
+- `listAttempts` returns `{ attempts, total }` — the one service that returns more than a plain
+  list, because `total` cannot ride on an array. Newest first, `id` as tie-breaker.
+- `total` comes from `count: "exact"` on the same filtered query, so it counts this track only.
+- A page past the end makes PostgREST answer 416 `PGRST103` instead of an empty page; only then
+  `countAttempts` runs a `head: true` count, and the response is `{ attempts: [], total }`.
 
 ## Response shapes
 
@@ -94,7 +111,8 @@ current `config`, including inside an `Attempt`, where `config_snapshot` governs
   without a breaking change.
 - **Services return plain values** (`Exam[]`, `Tag[]`, `Attempt[]`, `Exam`). The **handler** wraps
   a list in its `*List` schema: `const result: TagList = { tags: await getTrackTags(trackId) }`.
-  The envelope is an HTTP concern; services know nothing about HTTP.
+  The envelope is an HTTP concern; services know nothing about HTTP. The exception is a paged
+  list, whose service returns `{ attempts, total }` (see **Paged history**).
 
 ## Question content
 

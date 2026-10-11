@@ -26,7 +26,7 @@ const ErrorState: React.FC<ErrorStateProps> = ({
     )}
   >
     <AlertTriangle className="size-8 text-destructive" strokeWidth={1.6} />
-    <p className="max-w-80 text-sm text-grey-900">{message}</p>
+    <p className="max-w-80 text-sm text-grey-1000">{message}</p>
 
     {onRetry && (
       <Button

@@ -147,8 +147,6 @@ const StudentAttemptsPage: React.FC = () => {
                     attempts={attempts}
                     langCode={langCode}
                     onDetails={setSelectedAttempt}
-                    onRefresh={attemptsQuery.refetch}
-                    isRefreshing={attemptsQuery.isFetching}
                   />
                 )}
                 {total > 0 && (

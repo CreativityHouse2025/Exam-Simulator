@@ -22,36 +22,32 @@ const BADGES: Record<
   {
     icon: LucideIcon;
     labelKey: string;
-    variant: "default" | "outline";
     className: string;
   }
 > = {
   pass: {
     icon: CheckCircle2,
     labelKey: "history.status.pass",
-    variant: "default",
-    className: "bg-correct text-white",
+    className: "border-correct/30 bg-correct-bg text-correct-text",
   },
   fail: {
     icon: XCircle,
     labelKey: "history.status.fail",
-    variant: "default",
-    className: "bg-destructive text-white",
+    className: "border-destructive/30 bg-destructive-bg text-destructive-text",
   },
   "in-progress": {
     icon: CircleDot,
     labelKey: "history.state.in-progress",
-    variant: "outline",
-    className: "border-primary/40 text-primary",
+    className: "border-secondary/30 bg-secondary/8 text-secondary",
   },
 };
 
 /** One badge carrying both state and outcome — in-progress attempts have no pass/fail yet. */
 const AttemptStatusBadge: React.FC<{ tone: AttemptTone }> = ({ tone }) => {
-  const { icon: Icon, labelKey, variant, className } = BADGES[tone];
+  const { icon: Icon, labelKey, className } = BADGES[tone];
 
   return (
-    <Badge variant={variant} className={`gap-1 ${className}`}>
+    <Badge variant="outline" className={`gap-1 ${className}`}>
       <Icon className="size-3" />
       {translate(labelKey)}
     </Badge>

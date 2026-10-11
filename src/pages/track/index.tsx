@@ -1,11 +1,15 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { History } from "lucide-react";
-import { CatalogEntryCards, TrackLockedState } from "@/features/tracks";
+import {
+  TrackCatalogShortcuts,
+  TrackHero,
+  TrackLockedState,
+} from "@/features/tracks";
 import {
   AttemptsTable,
   AttemptsTableSkeleton,
+  ContinueAttemptCard,
   DEFAULT_ATTEMPT_PAGE,
   createAttemptsQueryOptions,
 } from "@/features/attempts";
@@ -18,11 +22,14 @@ import useSettings from "@/core/hooks/useSettings";
 import { useAttemptActions } from "@/features/exam-session";
 import { translate } from "@/core/utils/translation";
 import { ROUTES } from "@/routes/routes";
-import { FULL_TAG_CODE } from "@shared/exam.schema";
+import type { Attempt, InProgressAttempt } from "@/core/api/apiTypes";
 
 const RECENT_ATTEMPT_COUNT = 5;
 
-/** One track: its two ways into the exams, then the student's most recent attempts in it. */
+const isInProgress = (attempt: Attempt): attempt is InProgressAttempt =>
+  attempt.examState === "in-progress";
+
+/** One track: its identity and two ways into the exams, an unfinished exam to resume, then recent attempts. */
 const TrackPage: React.FC = () => {
   const { trackId = "" } = useParams();
   const { settings } = useSettings();
@@ -40,10 +47,10 @@ const TrackPage: React.FC = () => {
 
   const { openAttempt, reviseAttempt, isBusy } = useAttemptActions();
 
-  const recentAttempts = (attemptsQuery.data?.attempts ?? []).slice(
-    0,
-    RECENT_ATTEMPT_COUNT,
-  );
+  const attempts = attemptsQuery.data?.attempts ?? [];
+  const recentAttempts = attempts.slice(0, RECENT_ATTEMPT_COUNT);
+  // History is newest first, so this is the most recently started unfinished exam.
+  const unfinishedAttempt = attempts.find(isInProgress);
 
   // Enrollment is the gate for everything below; the API would answer 403 anyway.
   if (!isEnrolled) {
@@ -58,31 +65,46 @@ const TrackPage: React.FC = () => {
   if (isBusy) return <Loading size={100} />;
 
   return (
-    <div className="mx-auto w-full max-w-4xl px-4 py-8">
+    <div className="mx-auto w-full max-w-5xl px-4 py-8">
       <BackButton to={ROUTES.home} text={translate("tracks.back")} />
 
-      <header className="mb-5">
-        <h1 className="text-2xl font-bold text-tertiary md:text-3xl">
-          {track.name[langCode]}
-        </h1>
-        {track.description && (
-          <p className="mt-1.5 text-sm text-grey-800">
-            {track.description[langCode]}
-          </p>
-        )}
-      </header>
+      <TrackHero
+        title={track.name[langCode]}
+        description={track.description?.[langCode]}
+        expiresAt={track.expiresAt}
+        langCode={langCode}
+        headingLevel="h1"
+        columns={2}
+      >
+        <TrackCatalogShortcuts trackId={trackId} />
+      </TrackHero>
 
-      <section className="mb-10">
-        <CatalogEntryCards
-          fullExamsTo={ROUTES.trackExams.to(trackId, FULL_TAG_CODE)}
-          categoriesTo={ROUTES.trackCategories.to(trackId)}
-        />
-      </section>
+      {unfinishedAttempt && (
+        <div className="mt-6">
+          <ContinueAttemptCard
+            attempt={unfinishedAttempt}
+            langCode={langCode}
+            onContinue={openAttempt}
+            disabled={isBusy}
+          />
+        </div>
+      )}
 
-      <section>
-        <h2 className="mb-4 text-lg font-bold text-tertiary md:text-xl">
-          {translate("history.recent")}
-        </h2>
+      <section className="mt-10">
+        <div className="mb-4 flex items-baseline justify-between gap-4">
+          <h2 className="text-lg font-bold text-tertiary md:text-xl">
+            {translate("history.recent")}
+          </h2>
+
+          {recentAttempts.length > 0 && (
+            <Link
+              to={ROUTES.trackHistory.to(trackId)}
+              className="shrink-0 rounded-md text-sm font-semibold text-secondary underline-offset-4 outline-none transition-colors duration-150 hover:text-secondary-hover hover:underline focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2"
+            >
+              {translate("history.view-all")}
+            </Link>
+          )}
+        </div>
 
         {attemptsQuery.isPending ? (
           <AttemptsTableSkeleton />
@@ -98,27 +120,13 @@ const TrackPage: React.FC = () => {
             hint={translate("history.empty-hint")}
           />
         ) : (
-          <>
-            <AttemptsTable
-              attempts={recentAttempts}
-              langCode={langCode}
-              disabled={isBusy}
-              onOpen={openAttempt}
-              onRevise={reviseAttempt}
-              onRefresh={attemptsQuery.refetch}
-              isRefreshing={attemptsQuery.isFetching}
-            />
-
-            <div className="mt-4 flex justify-center">
-              <Link
-                to={ROUTES.trackHistory.to(trackId)}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline-offset-4 transition-colors duration-150 hover:text-secondary hover:underline"
-              >
-                <History className="size-4" />
-                {translate("history.view-all")}
-              </Link>
-            </div>
-          </>
+          <AttemptsTable
+            attempts={recentAttempts}
+            langCode={langCode}
+            disabled={isBusy}
+            onOpen={openAttempt}
+            onRevise={reviseAttempt}
+          />
         )}
       </section>
     </div>

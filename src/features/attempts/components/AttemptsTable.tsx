@@ -1,5 +1,5 @@
 import React from "react";
-import { Eye, RefreshCw, RotateCcw, SquareArrowOutUpRight } from "lucide-react";
+import { Eye, RotateCcw, SquareArrowOutUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -28,9 +28,6 @@ type AttemptsTableProps = {
   onRevise?: (attemptId: string) => void;
   /** Opens the read-only breakdown. The supervisor's only action on a row. */
   onDetails?: (attempt: Attempt) => void;
-  /** Refetches the list. Omitted where the caller has no query to refresh. */
-  onRefresh?: () => void;
-  isRefreshing?: boolean;
   disabled?: boolean;
 };
 
@@ -51,15 +48,15 @@ const TONE_CLASSES: Record<
 > = {
   pass: {
     scoreBar: "bg-correct",
-    scoreText: "text-correct-strong",
+    scoreText: "text-correct-text",
   },
   fail: {
     scoreBar: "bg-destructive",
-    scoreText: "text-destructive-strong",
+    scoreText: "text-destructive-text",
   },
   "in-progress": {
     scoreBar: "bg-primary",
-    scoreText: "text-grey-700",
+    scoreText: "text-grey-1000",
   },
 };
 
@@ -70,20 +67,19 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
   onOpen,
   onRevise,
   onDetails,
-  onRefresh,
-  isRefreshing = false,
   disabled = false,
 }) => {
-  // Retry is offered whenever the exam allows it, but only works on a completed, imperfect attempt.
-  const retryButton = (attempt: Attempt, enabled: boolean) =>
+  // Shown only where it can act: the exam allows it and the attempt is completed and imperfect.
+  const retryButton = (attempt: CompletedAttempt) =>
     onRevise &&
-    attempt.configSnapshot.allowRetryWrong && (
+    attempt.configSnapshot.allowRetryWrong &&
+    attempt.result.score < 100 && (
       <Button
         size="sm"
         variant="ghost"
-        disabled={disabled || !enabled}
+        disabled={disabled}
         onClick={() => onRevise(attempt.id)}
-        className="h-8 gap-1.5 text-xs font-semibold text-secondary hover:bg-secondary/10 hover:text-secondary"
+        className="h-11 gap-1.5 text-xs font-semibold text-secondary hover:bg-secondary/10 hover:text-secondary md:h-8"
       >
         <RotateCcw className="size-3.5" />
         {translate("history.actions.retry")}
@@ -97,7 +93,7 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
         variant="outline"
         disabled={disabled}
         onClick={() => onDetails(attempt)}
-        className="h-8 min-w-28 justify-center gap-1.5 border-grey-300 text-xs font-semibold text-grey-950 hover:border-secondary hover:text-secondary"
+        className="h-11 min-w-28 justify-center gap-1.5 border-grey-300 text-xs font-semibold text-grey-950 hover:border-secondary hover:text-secondary md:h-8"
       >
         <Eye className="size-3.5" />
         {translate("history.actions.details")}
@@ -117,7 +113,7 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
         disabled={disabled}
         onClick={() => onOpen(attempt.id)}
         className={cn(
-          "h-8 min-w-28 justify-center gap-1.5 text-xs font-semibold",
+          "h-11 min-w-28 justify-center gap-1.5 text-xs font-semibold md:h-8",
           className,
         )}
       >
@@ -156,7 +152,7 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
           : formatTimer(timeTaken),
       actions: (
         <>
-          {retryButton(attempt, score < 100)}
+          {retryButton(attempt)}
           {openButton(
             attempt,
             "history.actions.review",
@@ -179,7 +175,6 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
     timeTaken: "—",
     actions: (
       <>
-        {retryButton(attempt, false)}
         {openButton(
           attempt,
           "history.actions.continue",
@@ -221,26 +216,7 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
                 {translate("history.table.date")}
               </TableHead>
               <TableHead className={cn(HEAD_CLASSES, "text-end")}>
-                <span className="inline-flex items-center gap-1.5">
-                  {translate("history.table.action")}
-                  {onRefresh && (
-                    <Button
-                      size="icon-sm"
-                      variant="ghost"
-                      disabled={isRefreshing}
-                      onClick={onRefresh}
-                      aria-label={translate("common.retry")}
-                      className="text-secondary hover:bg-secondary/10 hover:text-secondary"
-                    >
-                      <RefreshCw
-                        className={cn(
-                          "size-4.5",
-                          isRefreshing && "animate-spin-fast",
-                        )}
-                      />
-                    </Button>
-                  )}
-                </span>
+                {translate("history.table.action")}
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -249,7 +225,7 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
             {rows.map(({ attempt, parts }) => (
               <TableRow
                 key={attempt.id}
-                className="group border-grey-100 transition-colors duration-150 hover:bg-primary/6"
+                className="border-grey-100 transition-colors duration-150 hover:bg-secondary/5"
               >
                 <TableCell className="py-3">
                   <span className="font-semibold text-tertiary">
@@ -260,14 +236,14 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
                   <AttemptStatusBadge tone={parts.tone} />
                 </TableCell>
                 <TableCell className="py-3">{parts.score}</TableCell>
-                <TableCell className="py-3 whitespace-nowrap text-sm tabular-nums text-grey-800">
+                <TableCell className="py-3 whitespace-nowrap text-sm tabular-nums text-grey-1000">
                   {parts.timeTaken}
                 </TableCell>
-                <TableCell className="py-3 whitespace-nowrap text-sm text-grey-800">
+                <TableCell className="py-3 whitespace-nowrap text-sm text-grey-1000">
                   {formatDate(attempt.createdAt)}
                 </TableCell>
                 <TableCell className="py-3">
-                  <div className="flex flex-wrap items-center justify-end gap-2 opacity-100 transition-opacity duration-150 md:opacity-70 md:group-hover:opacity-100">
+                  <div className="flex flex-wrap items-center justify-end gap-2">
                     {parts.actions}
                   </div>
                 </TableCell>
@@ -294,7 +270,7 @@ const AttemptsTable: React.FC<AttemptsTableProps> = ({
 
               <div className="flex items-end justify-between gap-4">
                 {parts.score}
-                <div className="flex flex-col items-end gap-0.5 text-xs text-grey-800">
+                <div className="flex flex-col items-end gap-0.5 text-xs text-grey-1000">
                   <span className="tabular-nums">{parts.timeTaken}</span>
                   <span>{formatDate(attempt.createdAt)}</span>
                 </div>
