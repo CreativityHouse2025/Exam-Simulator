@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Loader2 } from "lucide-react";
+import { ClipboardCheck, Loader2, RotateCcw } from "lucide-react";
 import SummaryRow from "./SummaryRow";
 import { formatDate, formatTimer } from "@/core/utils/format";
 import { translate } from "@/core/utils/translation";
@@ -27,6 +27,7 @@ const ExamSummary: React.FC = () => {
     createdAt,
     canRetake,
     startRevision,
+    setIndex,
   } = useExamSession();
   // Safe off the tick here — Timer's own interval never runs once examState is 'completed', which
   // is the only state ExamMain renders this component in.
@@ -64,8 +65,8 @@ const ExamSummary: React.FC = () => {
       pass !== undefined
         ? translate(`content.summary.${pass ? "pass" : "fail"}`)
         : "",
-    home: translate("content.summary.home"),
     retake: translate("content.summary.retake-wrong"),
+    review: translate("content.summary.review"),
   };
 
   return (
@@ -157,19 +158,25 @@ const ExamSummary: React.FC = () => {
               else setIsStartingRevision(false);
             }}
           >
-            {isStartingRevision && (
+            {isStartingRevision ? (
               <Loader2 className="size-4 animate-spin-fast" />
+            ) : (
+              <RotateCcw aria-hidden className="size-4 rtl:-scale-x-100" />
             )}
             {translated.retake}
           </button>
         )}
+        {/* setIndex switches a completed exam out of the summary into the question view. */}
         <button
-          id="restart-button"
-          title="Homepage"
-          className={cn(BUTTON_BASE, "no-select bg-primary")}
-          onClick={() => navigate(ROUTES.home)}
+          id="review-button"
+          className={cn(
+            BUTTON_BASE,
+            "no-select bg-primary inline-flex items-center justify-center gap-2",
+          )}
+          onClick={() => setIndex(0)}
         >
-          {translated.home}
+          <ClipboardCheck aria-hidden className="size-4" />
+          {translated.review}
         </button>
       </div>
     </div>

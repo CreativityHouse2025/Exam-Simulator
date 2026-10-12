@@ -73,8 +73,8 @@
       "correct": "Correct",
       "incorrect": "Wrong",
       "incomplete": "Unanswered",
-      "home": "Go Home",
       "retake-wrong": "Retry Mistakes",
+      "review": "Review Questions",
       "exams": "Exams",
       "exam": "Exam",
       "result-unavailable": "Your exam was submitted, but the result could not be loaded."
