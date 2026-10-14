@@ -385,11 +385,11 @@ def collect(banks, kept_ids, id_offset=0):
     return [questions[key] for key in sorted(questions)], choice_rows, exam_questions
 
 
-def render_inserts(table, columns, rows, render_row):
+def render_inserts(table, columns, rows, render_row, schema="public."):
     lines = []
     for start in range(0, len(rows), ROWS_PER_INSERT):
         batch = rows[start : start + ROWS_PER_INSERT]
-        lines.append(f"INSERT INTO public.{table} ({', '.join(columns)}) VALUES")
+        lines.append(f"INSERT INTO {schema}{table} ({', '.join(columns)}) VALUES")
         lines += [f"  ({render_row(row)})," for row in batch[:-1]]
         lines.append(f"  ({render_row(batch[-1])});")
         lines.append("")
