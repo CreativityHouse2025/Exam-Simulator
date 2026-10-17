@@ -2,8 +2,10 @@ import React from "react";
 import {
   Clock,
   Coffee,
+  Eye,
   FileText,
   Infinity as InfinityIcon,
+  RotateCcw,
   Target,
 } from "lucide-react";
 import { translate } from "@/core/utils/translation";
@@ -19,7 +21,7 @@ type ExamFactsProps = {
 };
 
 /**
- * The four facts that describe an exam — question count, duration, pass mark, breaks — read
+ * The facts that describe an exam — question count, duration, pass mark, breaks, reveal, retry — read
  * straight off its config. Shared by the student's exam card, the supervisor's, and the question
  * viewer's header so one exam never describes itself two ways.
  */
@@ -29,7 +31,13 @@ const ExamFacts: React.FC<ExamFactsProps> = ({
   iconClassName,
   className,
 }) => {
-  const { examDurationMinutes, passingRate, breaks } = config;
+  const {
+    examDurationMinutes,
+    passingRate,
+    breaks,
+    canRevealAnswers,
+    allowRetryWrong,
+  } = config;
 
   // Null is the only untimed value an exam can carry — the column forbids 0.
   const isUntimed = examDurationMinutes === null;
@@ -48,6 +56,12 @@ const ExamFacts: React.FC<ExamFactsProps> = ({
       ? [{ icon: Target, label: translate("exams.pass-mark", [passingRate]) }]
       : []),
     { icon: Coffee, label: translate("exams.breaks", [breaks.length]) },
+    ...(canRevealAnswers
+      ? [{ icon: Eye, label: translate("exams.config.reveal") }]
+      : []),
+    ...(allowRetryWrong
+      ? [{ icon: RotateCcw, label: translate("exams.config.retry") }]
+      : []),
   ];
 
   return (

@@ -47,22 +47,6 @@ const LibraryExamCard: React.FC<LibraryExamCardProps> = ({
               <Badge className={cn("shrink-0 text-xs", accent.chip)}>
                 {exam.tag.name[langCode]}
               </Badge>
-              {exam.config.canRevealAnswers && (
-                <Badge
-                  variant="outline"
-                  className="shrink-0 border-grey-300 text-xs text-grey-800"
-                >
-                  {translate("exams.config.reveal")}
-                </Badge>
-              )}
-              {exam.config.allowRetryWrong && (
-                <Badge
-                  variant="outline"
-                  className="shrink-0 border-grey-300 text-xs text-grey-800"
-                >
-                  {translate("exams.config.retry")}
-                </Badge>
-              )}
             </div>
 
             <h3 className="text-base font-bold text-tertiary md:text-lg">

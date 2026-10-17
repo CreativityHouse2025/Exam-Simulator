@@ -26,7 +26,6 @@ const TrackExamCard: React.FC<TrackExamCardProps> = ({
   disabled = false,
 }) => {
   const accent = tagAccent(exam.tag.colorHexCode);
-  const { canRevealAnswers, allowRetryWrong } = exam.config;
   const { attemptsCount, openAttemptId } = exam;
 
   return (
@@ -49,22 +48,6 @@ const TrackExamCard: React.FC<TrackExamCardProps> = ({
                   className="shrink-0 border-grey-300 text-xs text-grey-800"
                 >
                   {translate("exams.taken", [attemptsCount])}
-                </Badge>
-              )}
-              {canRevealAnswers && (
-                <Badge
-                  variant="outline"
-                  className="shrink-0 border-grey-300 text-xs text-grey-800"
-                >
-                  {translate("exams.config.reveal")}
-                </Badge>
-              )}
-              {allowRetryWrong && (
-                <Badge
-                  variant="outline"
-                  className="shrink-0 border-grey-300 text-xs text-grey-800"
-                >
-                  {translate("exams.config.retry")}
                 </Badge>
               )}
             </div>
