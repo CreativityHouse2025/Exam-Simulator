@@ -42,6 +42,55 @@ Before altering a table or writing a query against it, **read its migration**. T
 guessable — `users` carries a `role` column, and `enrollments` the expiry, that drive access
 control, and assuming a conventional shape will produce code that compiles and fails in production.
 
+## Tags and catalog order (021)
+
+`tags` (renamed from `exam_type`) says where an exam is listed. Every exam has exactly one
+(`exams.tag_id`, not null).
+
+- `code` — globally unique, **lowercase** letters and digits (`^[a-z0-9]+$`). The API and URLs
+  address a tag by code, never by id.
+- `track_id` — null means shared. Only `full` is shared, by convention; nothing enforces it, and
+  nothing ties an exam's tag to the exam's track.
+- `full` is the "Full exams" tag; every other tag is a category in the UI. `legacy` holds the old
+  domain exams and is never linked from the UI.
+- `tags.display_order` orders categories within a track (`full` is 0). `exams.display_order` orders
+  exams **within one (track, tag)**, starting at 1. It has no identity default, so new content
+  sets it explicitly.
+- Both order uniques — `(track_id, display_order)` on tags, `(track_id, tag_id, display_order)` on
+  exams — are `DEFERRABLE INITIALLY DEFERRED`. Reorder inside one migration transaction by
+  rewriting the values freely; uniqueness is checked at commit, so swaps never collide.
+
+## Archiving (022)
+
+Content is retired, never deleted: `exams.archived_at` and `tags.archived_at` (nullable
+timestamptz, null = active). Clearing the column reopens the row.
+
+- **The catalog hides archived rows from every role** — supervisors included. That filter lives in
+  the services (`archived_at IS NULL`), not in RLS or a view.
+- **Only `start_attempt` enforces it in SQL**: an archived *exam* returns the sentinel `archived`
+  and inserts nothing. A tag's archive state never blocks starting.
+- Save, submit, review and revision never check either column — an attempt started before the
+  archive finishes normally.
+- **Never archive `full`.** It is shared, so it would empty Full exams on every track. Convention
+  only; nothing enforces it.
+- 022 archived every existing exam and the `legacy` tag. `seed_demo.sql` therefore reopens its four
+  demo exams, runs its journeys through the real RPCs, and archives them again — keep that
+  bracket if you add a journey, or `start_attempt` refuses it and `db:reset` fails.
+
+## Attempt rules (020, 023)
+
+- **A completed attempt's grade lives in `results`** (020), one row per attempt. `exam_state` is
+  the source of truth for completion; `submit_attempt` flips it and inserts the row in one
+  transaction. Grade an attempt only through `submit_attempt` — 023 does exactly that for its
+  backfill rather than writing `results` by hand.
+- **At most one open attempt per (user, exam).** A partial unique index
+  (`exam_attempts_one_open_per_exam`, `WHERE exam_state = 'in-progress'`) backs `start_attempt`'s
+  own check, which returns `in_progress` instead of inserting. 023 auto-submitted every older
+  duplicate before building the index, so it covers every row with no cutoff.
+- **Attempts are unlimited and never deleted automatically.** 023 dropped
+  `trg_enforce_attempt_limit` and `enforce_attempt_limit()`; there is no cap anywhere, in SQL or
+  in the services.
+
 ## When to write an RPC
 
 Most reads belong in a service (`api/_lib/services/`). Reach for a Postgres function when the

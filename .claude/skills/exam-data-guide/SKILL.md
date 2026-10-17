@@ -38,7 +38,7 @@ Each bank file is a **flat array of questions**:
 ```
 
 Questions may have **more than one correct choice** — scoring compares index *sets*
-(`getCorrectOriginalIndices` / `isAnswerCorrect` in `src/utils/`), so multi-answer questions are
+(`isAnswerCorrect` in `src/features/exam-session/utils/results.ts`), so multi-answer questions are
 supported by design. Don't "fix" a question that has two `correct: true` choices.
 
 ## Invariants

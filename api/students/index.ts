@@ -12,7 +12,7 @@ export const GET = withErrorHandler(
     withRole(["supervisor"], async (request, _authUser, cookieHeaders) => {
       const rawQuery = new URL(request.url).searchParams.get("q") ?? "";
       const validatedQuery = parseOrThrow(StudentSearchQuerySchema, rawQuery);
-      const result: StudentList = await searchStudentsByEmailOrName(validatedQuery);
+      const result: StudentList = { students: await searchStudentsByEmailOrName(validatedQuery) };
       return successResponse(result, 200, cookieHeaders);
     }),
   ),

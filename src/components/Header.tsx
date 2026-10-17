@@ -3,12 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Globe, Menu, X } from "lucide-react";
 // @ts-expect-error -- pre-existing, unrelated to this change
 import Logo from "../assets/logo.png";
-import { translate } from "../utils/translation";
-import useSettings from "../hooks/useSettings";
-import useAuth from "../hooks/useAuth";
-import { roleOf } from "../config/roles";
-import { ROUTES } from "../config/routes";
-import { getNavItems } from "../config/nav";
+import { translate } from "@/core/utils/translation";
+import useSettings from "@/core/hooks/useSettings";
+import { useAuth, roleOf } from "@/features/auth";
+import { ROUTES } from "@/routes/routes";
+import { getNavItems } from "@/routes/nav";
 import { cn } from "./ui/utils";
 
 const NAV_ITEM_BASE =

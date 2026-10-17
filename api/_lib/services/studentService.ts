@@ -1,6 +1,6 @@
 import { supabaseAdmin } from "../supabaseClient.js";
 import { AppError } from "../errors/AppError.js";
-import type { StudentList } from "../../../shared/schemas/student.schema.js";
+import type { StudentProfile } from "../../../shared/schemas/student.schema.js";
 
 /**
  * Searches students by name/email prefix via the `search_students` RPC.
@@ -12,9 +12,9 @@ import type { StudentList } from "../../../shared/schemas/student.schema.js";
 export async function searchStudentsByEmailOrName(
   query: string | null,
   rowLimit: number = 30
-): Promise<StudentList> {
+): Promise<StudentProfile[]> {
   if (query === null) {
-    return { students: [] };
+    return [];
   }
 
   const { data, error } = await supabaseAdmin.rpc("search_students", {
@@ -31,5 +31,5 @@ export async function searchStudentsByEmailOrName(
     });
   }
 
-  return { students: (data ?? []) } as StudentList;
+  return (data ?? []) as StudentProfile[];
 }

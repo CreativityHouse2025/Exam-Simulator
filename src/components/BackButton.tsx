@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import useSettings from "@/hooks/useSettings";
+import { Button } from "./ui/button";
+import useSettings from "@/core/hooks/useSettings";
 
 type BackButtonProps = {
   /** Destination route. */
@@ -21,7 +21,7 @@ const BackButton = ({ to, text, className }: BackButtonProps) => {
       variant="ghost"
       size="sm"
       asChild
-      className={`-ms-2 mb-4 gap-1.5 text-grey-900 hover:text-tertiary ${className ?? ""}`}
+      className={`-ms-2 mb-4 gap-1.5 text-grey-1000 hover:text-tertiary ${className ?? ""}`}
     >
       <Link to={to}>
         <Icon className="size-4" />

@@ -21,8 +21,12 @@ in the wrong layer.
   response. No business logic.
 - **Service** (`api/_lib/services/`) — all business logic. Knows nothing about HTTP: no `Request`,
   no `Response`, no status codes. Throws `AppError` when something is wrong.
-- **Validation** (`api/_lib/validators/`) — pure functions that validate and parse request input,
-  called by the handler before the service. Throw `AppError` on failure.
+- **Validation** — zod request schemas, parsed by the handler with `parseOrThrow`
+  (`api/_lib/utils/parse.ts`) before the service is called; a failure is a 400 `VALIDATION_ERROR`.
+  A schema used by one endpoint lives in that endpoint's file. One shared by several endpoints
+  (e.g. `AttemptIdSchema`, `SaveAttemptAnswersSchema`) lives in `shared/schemas/`. Services never
+  import from a handler file: a service declares its own input type, and the call site proves the
+  parsed request satisfies it.
 
 The test: if logic can be unit tested without mocking an HTTP request, it belongs in the service.
 Keep handlers thin enough to read in one screen.
@@ -47,19 +51,69 @@ Handlers receive `(request, authUser, cookieHeaders)` and must pass `cookieHeade
 `successResponse`. Forgetting that silently drops a refreshed session, and the user gets logged
 out on the next request for no visible reason.
 
-Backend gating is independent of the frontend. Route guards in `src/guards/` are UX, not security —
+Backend gating is independent of the frontend. Route guards (`src/routes/RouteGuard.tsx`) are UX, not security —
 every non-public endpoint needs `withRole`.
 
 ## Endpoints
 
 - `api/auth/*` — signin, signup, signout, me, password-reset, update-password, token-exchange
-- `api/attempts/index.ts` — `POST` start attempt, `GET` recent attempts (student)
+- `api/attempts/index.ts` — `POST` start attempt (201, `AttemptWithQuestions`), `GET
+  ?trackId=&page=&per_page=` one page of the caller's attempts in a track (see **Paged history**).
+  Starting an archived exam is 410 `EXAM_ARCHIVED` (the RPC's `archived` sentinel); starting while
+  an attempt on that exam is open is 409 `ATTEMPT_IN_PROGRESS` (the RPC's `in_progress` sentinel),
+  a plain error with no data. Either way nothing is written
+- `api/attempts/[id]/revision.ts` returns `ExamWithQuestions`: the parent exam (`exam`, with its
+  config) and the wrong-or-unanswered subset
 - `api/attempts/[id].ts` — `GET` read / `PATCH` save a single attempt (owner)
 - `api/attempts/[id]/submit.ts` — `POST` submit and grade (owner)
 - `api/attempts/[id]/revision.ts` — `GET` the wrong-or-unanswered set (owner)
 - `api/exams/[examId]/questions.ts` — `GET` an exam's full disclosed content (supervisor)
+- `api/tracks/index.ts` — `GET` the track catalogue
+- `api/tracks/[trackId]/tags.ts` — `GET` the track's own tags plus the shared ones (`full`), by
+  `display_order`, whether or not they list any exam. Archived tags are left out (both roles,
+  `assertTrackAccess`)
+- `api/tracks/[trackId]/exams.ts` — `GET ?tag=<code>` one tag's active exams on the track, by
+  `display_order` (both roles, `assertTrackAccess`), returned as `{ tag, exams }`. `tag` is required
+  (400 if missing); an unknown **or archived** tag is 404 `NOT_FOUND`; a tag with no active exams
+  here is `200 { tag, exams: [] }`.
+  The service runs `getActiveTag` first, because the exams query filters through the tag join
+  (`tags!inner`, `.eq("tags.code", …)`) and cannot tell "unknown" from "empty" on its own.
+  Each exam is an `ExamWithProgress`: the caller's `attempts_count` (completed) and
+  `open_attempt_id`, from two aliased `exam_attempts` embeds (`completed:…(count)`, `open:…(id)`)
+  filtered by user id and state. The admin client bypasses RLS, so **the `user_id` filter is what
+  keeps another student's attempts out** — never drop it. No other endpoint returns these fields
+
+Archived content is hidden from **every** role — there is no role branch in the catalog
+services. `archived_at` is still returned on `Tag` and `Exam`; the UI does not use it.
 - `api/students/index.ts` — `GET /api/students?q=` student search (supervisor)
-- `api/students/[id]/attempts.ts` — a student's attempts (supervisor)
+- `api/students/[id]/attempts.ts` — one page of a student's attempts (supervisor), same paging
+
+### Paged history
+
+Attempts are unlimited (023 dropped the cap). Both history endpoints take `page` (≥ 1, default 1)
+and `per_page` (10–100, multiple of 5, default 10), parsed with the shared `AttemptPageSchema`;
+anything else is 400. `PER_PAGE_MIN/MAX/STEP` live beside it and also drive the UI's select.
+
+- `listAttempts` returns `{ attempts, total }`, because `total` cannot ride on an array. Newest first, `id` as tie-breaker.
+- `total` comes from `count: "exact"` on the same filtered query, so it counts this track only.
+- A page past the end makes PostgREST answer 416 `PGRST103` instead of an empty page; only then
+  `countAttempts` runs a `head: true` count, and the response is `{ attempts: [], total }`.
+
+## Response shapes
+
+The wire schemas in `shared/schemas/` are the only response shapes. `Exam` **always** carries its
+current `config`, including inside an `Attempt`, where `config_snapshot` governs the session and
+`exam.config` must not be read (its breaks are unordered there). `ExamWithQuestions` and
+`AttemptWithQuestions` are sessions; `ExamList`, `TagList`, `AttemptList`, `TrackList` and
+`StudentList` wrap a list.
+
+- **`data` is always an object, never a bare array**, so a response can grow (e.g. `total`)
+  without a breaking change.
+- **Services return plain values** (`Exam[]`, `Tag[]`, `Attempt[]`, `Exam`). The **handler** wraps
+  a list in its `*List` schema: `const result: TagList = { tags: await getTrackTags(trackId) }`.
+  The envelope is an HTTP concern; services know nothing about HTTP. The exceptions carry more
+  than the list: a paged list, whose service returns `{ attempts, total }` (see **Paged history**),
+  and the track exam list, whose service returns `{ tag, exams }`.
 
 ## Question content
 

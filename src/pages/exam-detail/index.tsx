@@ -5,26 +5,26 @@ import { FileQuestion, Loader2, SearchX } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import SearchBar from "@/components/SearchBar";
-import ExamFacts from "@/components/exams/ExamFacts";
-import PreviewExamButton from "@/components/PreviewExamButton";
+import {
+  ExamFacts,
+  QuestionCard,
+  QuestionNavigator,
+  createExamQuestionsQueryOptions,
+  tagAccent,
+} from "@/features/exams";
+import Pager from "@/components/Pager";
+import { PreviewExamButton } from "@/features/exam-session";
+import { useAuth } from "@/features/auth";
 import EmptyState from "@/components/states/EmptyState";
 import ErrorState from "@/components/states/ErrorState";
-import QuestionCard from "./QuestionCard";
-import QuestionNavigator from "./QuestionNavigator";
-import Pager from "./Pager";
 import BackButton from "@/components/BackButton";
-import {
-  createExamQuestionsQueryOptions,
-  createTrackExamsQueryOptions,
-} from "@/utils/queryOptions";
-import { translate } from "@/utils/translation";
-import { examTypeAccent } from "@/utils/examTypeColour";
-import { ROUTES } from "@/config/routes";
+import { translate } from "@/core/utils/translation";
+import { ROUTES } from "@/routes/routes";
 import { cn } from "@/components/ui/utils";
-import useSettings from "@/hooks/useSettings";
-import { localizeQuestion } from "@/utils/localize";
-import type { DisclosedQuestion } from "@/apiTypes";
-import type { OpenState, QuestionSection, SectionOpen } from "./types";
+import useSettings from "@/core/hooks/useSettings";
+import { localizeQuestion } from "@/core/utils/localize";
+import type { DisclosedQuestion } from "@/core/api/apiTypes";
+import type { OpenState, QuestionSection, SectionOpen } from "@/features/exams";
 
 const PER_PAGE = 10;
 const DEFAULT_OPEN: SectionOpen = { choices: true, explanation: false };
@@ -33,6 +33,7 @@ const DEFAULT_OPEN: SectionOpen = { choices: true, explanation: false };
 const ExamDetailPage: React.FC = () => {
   const { settings } = useSettings();
   const langCode = settings.language;
+  const { user } = useAuth();
   const { trackId = "", examId } = useParams<{
     trackId: string;
     examId: string;
@@ -42,15 +43,8 @@ const ExamDetailPage: React.FC = () => {
   const validId = Number.isInteger(numericId) && numericId > 0;
 
   const { data, isPending, isError, refetch, isFetching } = useQuery({
-    ...createExamQuestionsQueryOptions(numericId),
+    ...createExamQuestionsQueryOptions(numericId, user?.id),
     enabled: validId,
-  });
-
-  // Only for the type chip: the questions endpoint carries `typeId` but not the type's name or
-  // colour. The library page has already cached this list, so it is usually a cache hit.
-  const { data: trackExams } = useQuery({
-    ...createTrackExamsQueryOptions(trackId),
-    enabled: trackId !== "",
   });
 
   const questions: DisclosedQuestion[] | null = data?.questions ?? null;
@@ -143,7 +137,11 @@ const ExamDetailPage: React.FC = () => {
 
   const backButton = (
     <BackButton
-      to={ROUTES.examLibrary.to(trackId)}
+      to={
+        data
+          ? ROUTES.libraryExams.to(trackId, data.exam.tag.code)
+          : ROUTES.examLibrary.to(trackId)
+      }
       text={translate("exam.details.back")}
     />
   );
@@ -173,10 +171,7 @@ const ExamDetailPage: React.FC = () => {
     );
   }
 
-  const examType = trackExams?.types.find(
-    (type) => type.id === data?.exam.typeId,
-  );
-  const accent = examTypeAccent(examType?.colour ?? null);
+  const accent = tagAccent(data?.exam.tag.colorHexCode ?? null);
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-8">
@@ -184,14 +179,14 @@ const ExamDetailPage: React.FC = () => {
       {backButton}
 
       <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
-        <div className="min-w-0">
+        <div className="min-w-0" style={accent.style}>
           <div className="mb-1.5 flex flex-wrap items-center gap-2">
             <h1 className="text-2xl font-bold text-tertiary">
               {data?.exam.name[langCode]}
             </h1>
-            {examType && (
+            {data && (
               <Badge className={cn("shrink-0 text-xs", accent.chip)}>
-                {examType.name[langCode]}
+                {data.exam.tag.name[langCode]}
               </Badge>
             )}
           </div>

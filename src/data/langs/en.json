@@ -37,9 +37,14 @@
   },
   "content": {
     "syncing": "Saving...",
+    "duration": {
+      "minutes-seconds": "$1m $2s",
+      "hours-minutes": "$1h $2m",
+      "minutes": "$1m"
+    },
     "top-display": {
       "question": "Question $1 of $2",
-      "category": "Category",
+      "exams": "Exams",
       "exam": "Exam",
       "save": "Save Progress"
     },
@@ -68,9 +73,9 @@
       "correct": "Correct",
       "incorrect": "Wrong",
       "incomplete": "Unanswered",
-      "home": "Go Home",
       "retake-wrong": "Retry Mistakes",
-      "category": "Category",
+      "review": "Review Questions",
+      "exams": "Exams",
       "exam": "Exam",
       "result-unavailable": "Your exam was submitted, but the result could not be loaded."
     }
@@ -225,6 +230,7 @@
     "title": "Attempt History",
     "subtitle": "Your latest exam attempts for $1",
     "attempt-count": "$1 attempts",
+    "per-page": "Per page",
     "loading": "Loading...",
     "fetchError": "Failed to load attempt history. Please try again.",
     "table": {
@@ -234,8 +240,10 @@
       "date": "Date",
       "action": "Action",
       "empty": "No attempts yet.",
-      "exam": "Exam"
+      "exam": "Exam",
+      "time-taken": "Time Taken"
     },
+    "not-applicable": "N/A",
     "type": {
       "full": "Full",
       "domain": "Domain"
@@ -254,6 +262,11 @@
       "retry": "Retry Mistakes",
       "details": "Details"
     },
+    "resume": {
+      "title": "Continue where you left off",
+      "progress": "Question $1 of $2",
+      "time-left": "$1 left"
+    },
     "recent": "Recent attempts",
     "view-all": "View all",
     "empty-hint": "Start an exam above to see it here.",
@@ -265,6 +278,8 @@
       "server-forbidden": "You do not have access to this attempt.",
       "server-conflict": "This attempt has already been submitted.",
       "server-create-failed": "Failed to start the attempt. Please try again.",
+      "server-in-progress": "You already have an unfinished attempt on this exam.",
+      "server-exam-archived": "This exam is no longer available.",
       "server-save-failed": "Failed to save your exam. Please try again.",
       "server-submit-failed": "Failed to submit your exam. Please try again.",
       "server-unknown": "An unexpected error occurred. Please try again.",
@@ -340,11 +355,6 @@
     },
     "attempts": {
       "breadcrumb-root": "Students",
-      "stats": {
-        "total": "Total Attempts",
-        "average": "Average Score",
-        "pass-rate": "Pass Rate"
-      },
       "empty": "This student hasn't made any attempts yet.",
       "error": "Failed to load this student's attempts. Please try again.",
       "title-in-track": "Attempts in $1",
@@ -383,22 +393,15 @@
       "server-unknown": "Something went wrong. Please try again.",
       "fetch": "Failed to load exams."
     },
-    "title": "Exams",
     "start": "Start",
-    "search": "Search exams by name",
-    "empty": "No exams in this track yet",
-    "no-results": "No exams match your filters",
+    "resume": "Resume last attempt",
+    "empty": "No exams here yet",
     "no-results-hint": "Try a different name or exam type.",
     "taken": "Taken $1x",
     "questions": "$1 questions",
     "pass-mark": "$1% to pass",
-    "in-progress": "$1 attempts uncompleted",
     "show-details": "Show configuration",
     "hide-details": "Hide configuration",
-    "filter": {
-      "type": "Exam type",
-      "all": "All types"
-    },
     "config": {
       "duration": "Duration",
       "passing": "Passing rate",
@@ -411,11 +414,28 @@
       "allowed": "Allowed",
       "not-allowed": "Not allowed"
     },
-    "breaks": "$1 breaks",
-    "show-more": "Show $1 more",
-    "show-less": "Show fewer",
-    "hide-section": "Hide exams",
-    "show-section": "Show exams"
+    "breaks": "$1 breaks"
+  },
+  "catalog": {
+    "full": {
+      "title": "Full exams",
+      "description": "Complete practice exams, in the intended order.",
+      "lead": "Complete practice exams for $1, in the intended order."
+    },
+    "categories": {
+      "title": "Categories",
+      "description": "Practise one category at a time.",
+      "lead": "Pick a category in $1 to practise it on its own.",
+      "empty": "No categories in this track yet",
+      "errors": {
+        "fetch": "Failed to load categories."
+      }
+    },
+    "category-lead": "The exams in this category of $1.",
+    "not-found": "This list doesn't exist",
+    "not-found-hint": "The link may be wrong or out of date.",
+    "back-to-track": "Back to track",
+    "back-to-categories": "All categories"
   },
   "tracks": {
     "errors": {
@@ -423,18 +443,20 @@
       "server-unknown": "Something went wrong. Please try again.",
       "fetch": "Failed to load tracks."
     },
-    "title": "Your tracks",
-    "subtitle": "Pick a track to see its exams and your attempts.",
     "empty": "No tracks available",
     "empty-hint": "There are no tracks in the catalogue yet.",
     "locked-hint": "Contact Creativity House for access.",
     "expires": "Expires $1",
-    "badge": {
-      "active": "Active",
-      "locked": "Not enrolled"
+    "ends": "Access ends $1",
+    "overview": "Track overview",
+    "other": "Other tracks",
+    "none-enrolled": "You're not enrolled in any track yet",
+    "history": {
+      "title": "Attempt history",
+      "description": "Review and revise your past attempts."
     },
     "welcome": "Welcome back, $1",
-    "continue": "Continue $1",
+    "lead": "Pick up your practice where you left off.",
     "back": "All tracks",
     "locked": "You are not enrolled in this track"
   }

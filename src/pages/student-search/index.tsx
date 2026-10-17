@@ -7,10 +7,14 @@ import SearchBar from "@/components/SearchBar";
 import BackButton from "@/components/BackButton";
 import EmptyState from "@/components/states/EmptyState";
 import ErrorState from "@/components/states/ErrorState";
-import StudentCard, { StudentCardSkeleton } from "./StudentCard";
-import { createStudentSearchQueryOptions } from "@/utils/queryOptions";
-import { translate } from "@/utils/translation";
-import { ROUTES } from "@/config/routes";
+import {
+  StudentCard,
+  StudentCardSkeleton,
+  createStudentSearchQueryOptions,
+} from "@/features/students";
+import { useAuth } from "@/features/auth";
+import { translate } from "@/core/utils/translation";
+import { ROUTES } from "@/routes/routes";
 
 const MIN_QUERY_LENGTH = 2;
 const SEARCH_DEBOUNCE_MS = 300;
@@ -22,6 +26,7 @@ const LIST_CLASSES =
 /** Supervisor-only: search students by name or email, then open one to review their attempts. */
 const StudentSearchPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { user } = useAuth();
   const [inputValue, setInputValue] = React.useState(
     searchParams.get("q") ?? "",
   );
@@ -40,7 +45,7 @@ const StudentSearchPage: React.FC = () => {
     isFetching,
     isError,
     refetch,
-  } = useQuery(createStudentSearchQueryOptions(query));
+  } = useQuery(createStudentSearchQueryOptions(query, user?.id));
 
   const fromSearch = searchParams.toString()
     ? `?${searchParams.toString()}`

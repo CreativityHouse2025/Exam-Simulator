@@ -1,26 +1,23 @@
 import { z } from "zod";
+import { BilingualTextSchema } from "./common.schema.js";
+import { TrackSchema } from "./track.schema.js";
 
-/** Supported content languages. */
-export const LangSchema = z.enum(["ar", "en"]);
+/** Code of the one tag shared by every track: it lists an exam under "Full exams". */
+export const FULL_TAG_CODE = "full";
 
-export type LangCode = z.infer<typeof LangSchema>;
-
-/** One string per language. */
-export const BilingualTextSchema = z.object({
-  ar: z.string(),
-  en: z.string(),
-});
-
-export type BilingualText = z.infer<typeof BilingualTextSchema>;
-
-export const ExamTypeSchema = z.object({
+/** Where an exam is listed: FULL, or one of a track's domains. */
+export const TagSchema = z.object({
   id: z.int(),
+  code: z.string(),
   name: BilingualTextSchema,
-  /** Token key the frontend maps to a CSS custom property (e.g. "primary"). Null or an unrecognised key falls back to a neutral style. */
-  colour: z.string().nullable(),
+  /** Hex, e.g. "#b5965d". Null falls back to a neutral style. */
+  color_hex_code: z.string().nullable(),
+  display_order: z.int(),
+  /** Null means active. The catalog never lists archived tags. */
+  archived_at: z.string().nullable(),
 });
 
-export type ExamType = z.infer<typeof ExamTypeSchema>;
+export type Tag = z.infer<typeof TagSchema>;
 
 export const ExamConfigBreakSchema = z.object({
   show_at_index: z.int().nonnegative(),
@@ -43,22 +40,32 @@ export type ExamConfig = z.infer<typeof ExamConfigSchema>;
 
 export const ExamSchema = z.object({
   id: z.int(),
-  track_id: z.uuid(),
-  type_id: z.int(),
+  track: TrackSchema,
+  tag: TagSchema,
   display_order: z.int(),
   name: BilingualTextSchema,
   description: BilingualTextSchema,
   question_count: z.int().positive(),
+  /** Null means active. The catalog never lists archived exams. */
+  archived_at: z.string().nullable(),
+  /**
+   * The exam's CURRENT config. Inside an attempt, `config_snapshot` governs the session; never
+   * read this one for it.
+   */
+  config: ExamConfigSchema,
 });
 
 export type Exam = z.infer<typeof ExamSchema>;
 
-/** One entry of a track's exam list. There is no standalone single-exam endpoint. */
-export const ExamDetailsSchema = ExamSchema.extend({
-  config: ExamConfigSchema,
+/** A catalog exam, with the caller's own progress on it. */
+export const ExamWithProgressSchema = ExamSchema.extend({
+  /** The caller's completed attempts on this exam. */
+  attempts_count: z.int().nonnegative(),
+  /** The caller's in-progress attempt on this exam. At most one exists. */
+  open_attempt_id: z.uuid().nullable(),
 });
 
-export type ExamDetails = z.infer<typeof ExamDetailsSchema>;
+export type ExamWithProgress = z.infer<typeof ExamWithProgressSchema>;
 
 // ---------------------------------------------------------------------------
 // Question content. Disclosure is a TYPE distinction, not an optional field — a handler cannot
@@ -108,22 +115,27 @@ export type DisclosedQuestion = z.infer<typeof DisclosedQuestionSchema>;
 // Responses — built by the API from database rows, never parsed at runtime.
 // ---------------------------------------------------------------------------
 
-/** GET /api/tracks/:trackId/exams — `types` holds only the types this track's exams actually use. */
-export const TrackExamsSchema = z.object({
-  exams: z.array(ExamDetailsSchema),
-  types: z.array(ExamTypeSchema),
+/** GET /api/tracks/:trackId/exams?tag=<code> — the requested tag and its exams on the track, by `display_order`. */
+export const ExamListSchema = z.object({
+  tag: TagSchema,
+  exams: z.array(ExamWithProgressSchema),
 });
 
-export type TrackExams = z.infer<typeof TrackExamsSchema>;
+export type ExamList = z.infer<typeof ExamListSchema>;
+
+/** GET /api/tracks/:trackId/tags — the track's active tags plus shared ones, by `display_order`. */
+export const TagListSchema = z.object({
+  tags: z.array(TagSchema),
+});
+
+export type TagList = z.infer<typeof TagListSchema>;
 
 /**
- * GET /api/exams/:examId/questions — supervisor content, always disclosed.
- *
- * Carries the whole exam, not just its config: a preview session needs the name and question
- * count as much as the duration and break layout, and it never reads the track's exam list.
+ * An exam session's content, always disclosed: GET /api/exams/:examId/questions (supervisor), and
+ * GET /api/attempts/:id/revision (the parent exam with its wrong-or-unanswered subset).
  */
 export const ExamWithQuestionsSchema = z.object({
-  exam: ExamDetailsSchema,
+  exam: ExamSchema,
   questions: z.array(DisclosedQuestionSchema),
 });
 

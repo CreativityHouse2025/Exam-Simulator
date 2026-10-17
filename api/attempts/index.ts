@@ -4,11 +4,15 @@ import { withRole } from "../_lib/middleware/withRole.js"
 import { successResponse } from "../_lib/utils/response.js"
 import { parseJsonBody } from "../_lib/utils/parseBody.js"
 import { parseOrThrow } from "../_lib/utils/parse.js"
-import { StartAttemptRequestSchema, type AttemptWithExam } from "../../shared/schemas/attempt.schema.js"
+import { z } from "zod"
+import { AttemptPageSchema, type AttemptList, type AttemptWithQuestions } from "../../shared/schemas/attempt.schema.js"
 import { TrackIdSchema } from "../../shared/schemas/track.schema.js"
 import { listAttempts, startAttempt } from "../_lib/services/attemptService.js"
-import { getExam } from "../_lib/services/examService.js"
-import { assertTrackAccess } from "../_lib/services/trackService.js"
+
+/** The client sends only which exam. The server decides the question set, the order, the config and the clock. */
+const StartAttemptRequestSchema = z.strictObject({
+  exam_id: z.int().positive(),
+})
 
 // Maps to POST /api/attempts
 export const POST = withErrorHandler(
@@ -18,29 +22,27 @@ export const POST = withErrorHandler(
       const parsedBody = await parseJsonBody(request)
       const validatedInput = parseOrThrow(StartAttemptRequestSchema, parsedBody)
 
-      // Starting an exam is track access, unlike reading an attempt already owned. The track is
-      // reachable only through the exam, so it is resolved before anything is written.
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { config: _config, ...exam } = await getExam(validatedInput.exam_id)
-      await assertTrackAccess(authUser.id, exam.track_id)
-
-      const result: AttemptWithExam = { ...(await startAttempt(authUser.id, validatedInput)), exam }
+      const result: AttemptWithQuestions = await startAttempt(authUser.id, validatedInput.exam_id)
       return successResponse(result, 201, cookieHeaders)
     }),
   ),
 )
 
-// Maps to GET /api/attempts?trackId=<uuid>
+// Maps to GET /api/attempts?trackId=<uuid>&page=<n>&per_page=<n>
 // Ownership is the whole gate: the query is scoped to the caller's own id, so there is no role to
 // check and nothing a role could widen.
 export const GET = withErrorHandler(
   withAuth(async (request, authUser, cookieHeaders) => {
-    // Required: every screen that lists attempts is inside a track, and an unfiltered query would
-    // silently drop a track's older attempts once the cap starts evicting.
-    const trackId = new URL(request.url).searchParams.get("trackId") ?? ""
-    const validatedTrackId = parseOrThrow(TrackIdSchema, trackId)
+    const { searchParams } = new URL(request.url)
+    // Required: every screen that lists attempts is inside a track.
+    const validatedTrackId = parseOrThrow(TrackIdSchema, searchParams.get("trackId") ?? "")
+    // An absent param is undefined, not null, so its default applies.
+    const page = parseOrThrow(AttemptPageSchema, {
+      page: searchParams.get("page") ?? undefined,
+      per_page: searchParams.get("per_page") ?? undefined,
+    })
 
-    const result = await listAttempts(authUser.id, validatedTrackId)
+    const result: AttemptList = await listAttempts(authUser.id, validatedTrackId, page)
     return successResponse(result, 200, cookieHeaders)
   }),
 )

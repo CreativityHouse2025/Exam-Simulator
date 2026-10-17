@@ -1,34 +1,37 @@
 import React from "react";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
-import Toast from "./components/Toast";
-import Header from "./components/Header";
-import Loading from "./components/Loading";
-import RouteGuard from "./guards/RouteGuard";
-import SignInPage from "./pages/sign-in";
-import SignUpPage from "./pages/sign-up";
-import ProfilePage from "./pages/profile";
-import AuthCallbackPage from "./pages/auth-callback";
-import ForgotPasswordPage from "./pages/forgot-password";
-import ResetPasswordPage from "./pages/reset-password";
-import AttemptHistoryPage from "./pages/track-history";
-import TracksPage from "./pages/tracks";
-import TrackPage from "./pages/track";
-import SupervisorDashboardPage from "./pages/supervisor";
-import ExamTracksPage from "./pages/exam-tracks";
-import ExamLibraryPage from "./pages/exam-library";
-import ExamDetailPage from "./pages/exam-detail";
-import StudentSearchPage from "./pages/student-search";
-import StudentProfilePage from "./pages/student-profile";
-import StudentAttemptsPage from "./pages/student-attempts";
-import ExamPage from "./pages/exam";
-import { hasTranslation, setTranslation } from "./utils/translation";
-import { LANGUAGES } from "./constants";
-import { ROUTES } from "./config/routes";
-import { roleOf } from "./config/roles";
-import useAuth from "./hooks/useAuth";
-import useSettings from "./hooks/useSettings";
-import type { LangCode } from "./types";
-import SessionProvider from "./providers/SessionProvider";
+import Toast from "@/components/Toast";
+import Header from "@/components/Header";
+import Loading from "@/components/Loading";
+import RouteGuard from "@/routes/RouteGuard";
+import SignInPage from "@/pages/sign-in";
+import SignUpPage from "@/pages/sign-up";
+import ProfilePage from "@/pages/profile";
+import AuthCallbackPage from "@/pages/auth-callback";
+import ForgotPasswordPage from "@/pages/forgot-password";
+import ResetPasswordPage from "@/pages/reset-password";
+import AttemptHistoryPage from "@/pages/track-history";
+import TracksPage from "@/pages/tracks";
+import TrackPage from "@/pages/track";
+import TrackCategoriesPage from "@/pages/track-categories";
+import TrackExamsPage from "@/pages/track-exams";
+import SupervisorDashboardPage from "@/pages/supervisor";
+import ExamTracksPage from "@/pages/exam-tracks";
+import ExamLibraryPage from "@/pages/exam-library";
+import LibraryCategoriesPage from "@/pages/library-categories";
+import LibraryExamsPage from "@/pages/library-exams";
+import ExamDetailPage from "@/pages/exam-detail";
+import StudentSearchPage from "@/pages/student-search";
+import StudentProfilePage from "@/pages/student-profile";
+import StudentAttemptsPage from "@/pages/student-attempts";
+import ExamPage from "@/pages/exam";
+import { hasTranslation, setTranslation } from "@/core/utils/translation";
+import { LANGUAGES } from "@/core/constants";
+import { ROUTES } from "@/routes/routes";
+import { roleOf, useAuth } from "@/features/auth";
+import useSettings from "@/core/hooks/useSettings";
+import type { LangCode } from "@/core/types";
+import { SessionProvider } from "@/features/exam-session";
 
 const App: React.FC = () => {
   const { settings } = useSettings();
@@ -151,6 +154,14 @@ const App: React.FC = () => {
                   element={<ExamLibraryPage />}
                 />
                 <Route
+                  path={ROUTES.libraryCategories.pattern}
+                  element={<LibraryCategoriesPage />}
+                />
+                <Route
+                  path={ROUTES.libraryExams.pattern}
+                  element={<LibraryExamsPage />}
+                />
+                <Route
                   path={ROUTES.examDetail.pattern}
                   element={<ExamDetailPage />}
                 />
@@ -178,6 +189,14 @@ const App: React.FC = () => {
                 }
               >
                 <Route path={ROUTES.track.pattern} element={<TrackPage />} />
+                <Route
+                  path={ROUTES.trackCategories.pattern}
+                  element={<TrackCategoriesPage />}
+                />
+                <Route
+                  path={ROUTES.trackExams.pattern}
+                  element={<TrackExamsPage />}
+                />
                 <Route
                   path={ROUTES.trackHistory.pattern}
                   element={<AttemptHistoryPage />}

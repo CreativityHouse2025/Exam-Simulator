@@ -1,37 +1,34 @@
-import type {
-  DisclosedQuestion,
-  ExamConfig,
-  ExamDetails,
-  ExamWithQuestions,
-  TrackExams,
-} from "../../../shared/schemas/exam.schema.js";
+import type { Exam, ExamConfig, ExamWithProgress, Tag } from "../../../shared/schemas/exam.schema.js";
+import type { Tables } from "../database.types.js";
 import { AppError } from "../errors/AppError.js";
 import { supabaseAdmin } from "../supabaseClient.js";
-import { getExamQuestionContent } from "./questionService.js";
+import { getActiveTag, toTag, toTrack } from "./trackService.js";
 
 /**
- * The exam columns both readers select. `allowed_config` is the join table the config is reached
- * through; the embed below it is already `ExamConfig`, field for field.
+ * What `toExam` reads. The track and config are reached through `allowed_config`: exams hold no
+ * direct FK to tracks or to exam_config, because which configs a track may use is allowed_config's
+ * job. The config is already `ExamConfig` field for field.
  */
-type ExamRow = {
-  id: number
-  track_id: string
-  type_id: number
-  display_order: number
-  name_ar: string
-  name_en: string
-  description_ar: string
-  description_en: string
-  question_count: number
-  allowed_config: { exam_config: ExamConfig }
+export type ExamRow = Pick<
+  Tables<'exams'>,
+  'id' | 'display_order' | 'name_ar' | 'name_en' | 'description_ar' | 'description_en' | 'question_count' | 'archived_at'
+> & {
+  tags: Parameters<typeof toTag>[0]
+  allowed_config: { tracks: Parameters<typeof toTrack>[0]; exam_config: ExamConfig }
 }
 
-/** Bilingual columns collapse into one object; the embedded config passes through untouched. */
-function toExamDetails(row: ExamRow): ExamDetails {
+/**
+ * Every exam column the API returns, with its track, tag and config. Must stay ONE string literal:
+ * concatenation widens it to `string` and supabase-js loses the row type entirely.
+ */
+const EXAM_COLUMNS = 'id, display_order, name_ar, name_en, description_ar, description_en, question_count, archived_at, tags!inner(id, code, name_ar, name_en, color_hex_code, display_order, archived_at), allowed_config(tracks(id, name_ar, name_en, description_ar, description_en), exam_config(exam_duration_minutes, passing_rate, can_reveal_answers, allow_retry_wrong, breaks(show_at_index, duration_minutes)))'
+
+/** Bilingual columns collapse into one object; track and tag come along whole. */
+export function toExam(row: ExamRow): Exam {
   return {
     id: row.id,
-    track_id: row.track_id,
-    type_id: row.type_id,
+    track: toTrack(row.allowed_config.tracks),
+    tag: toTag(row.tags),
     display_order: row.display_order,
     name: {
       ar: row.name_ar,
@@ -42,29 +39,21 @@ function toExamDetails(row: ExamRow): ExamDetails {
       en: row.description_en
     },
     question_count: row.question_count,
+    archived_at: row.archived_at,
     config: row.allowed_config.exam_config
   }
 }
 
 /**
- * One exam, with its config assembled.
- *
- * The single way to read an exam by id. Callers that want less take less: the attempt write path
- * reads `track_id` off it for `assertTrackAccess`, and the revision response drops `config`
- * because a revision session's rules are a frontend constant. Neither justifies a second, leaner
- * reader — `config_id` would have to leave the service for that, and it is not a response field.
+ * One exam, with its config assembled. The single way to read an exam by id.
  *
  * @throws {AppError} 404 `NOT_FOUND` — no exam with this id.
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
-export async function getExam(examId: number): Promise<ExamDetails> {
+export async function getExam(examId: number): Promise<Exam> {
   const { data, error } = await supabaseAdmin
     .from('exams')
-    // Config is reached through allowed_config: exams holds no direct FK to exam_config, because
-    // which configs a track may use is allowed_config's job. One roundtrip either way.
-    // Must stay ONE string literal: concatenation widens it to `string` and supabase-js loses the
-    // row type entirely.
-    .select('id, track_id, type_id, display_order, name_ar, name_en, description_ar, description_en, question_count, allowed_config(exam_config(exam_duration_minutes, passing_rate, can_reveal_answers, allow_retry_wrong, breaks(show_at_index, duration_minutes)))')
+    .select(EXAM_COLUMNS)
     .eq('id', examId)
     // A break's position is part of the config, not something the caller sorts.
     .order('show_at_index', { referencedTable: 'allowed_config.exam_config.breaks', ascending: true })
@@ -85,26 +74,39 @@ export async function getExam(examId: number): Promise<ExamDetails> {
     })
   }
 
-  return toExamDetails(data)
+  return toExam(data)
 }
 
 /**
- * Every exam in a track, each carrying its own config, plus the exam types those exams use.
+ * One active tag and its active exams in a track, each exam carrying its own config and the
+ * caller's progress on it, ordered by `display_order`.
  *
- * `types` holds only the `exam_type` rows this track's exams actually reference, so a filter chip
- * can never render a type with zero exams. Exams are ordered by `display_order`.
+ * A known tag with no active exams on this track is an empty list, not a 404.
  *
  * Access is the caller's job: the handler runs `assertTrackAccess` before calling this.
  *
- * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
+ * @throws {AppError} 404 `NOT_FOUND` — no tag has this code, or it is archived.
+ * @throws {AppError} 500 `INTERNAL_ERROR` — a query failed.
  */
-export async function getTrackExams(trackId: string): Promise<TrackExams> {
+export async function getTrackExams(
+  trackId: string,
+  tagCode: string,
+  userId: string
+): Promise<{ tag: Tag; exams: ExamWithProgress[] }> {
+  const tag = await getActiveTag(tagCode)
+
   const { data, error } = await supabaseAdmin
     .from('exams')
-    // `getExam`'s select plus the type row, which rides along on every exam that uses it. One
-    // string literal, for the reason given there.
-    .select('id, track_id, type_id, display_order, name_ar, name_en, description_ar, description_en, question_count, allowed_config(exam_config(exam_duration_minutes, passing_rate, can_reveal_answers, allow_retry_wrong, breaks(show_at_index, duration_minutes))), exam_type(id, name_ar, name_en, colour)')
+    // The caller's own attempts, counted in Postgres so the payload stays one number per exam.
+    // Embed filters narrow the embedded rows, never the exams.
+    .select(`${EXAM_COLUMNS}, completed:exam_attempts(count), open:exam_attempts(id)`)
     .eq('track_id', trackId)
+    .eq('tags.code', tagCode)
+    .is('archived_at', null)
+    .eq('completed.user_id', userId)
+    .eq('completed.exam_state', 'completed')
+    .eq('open.user_id', userId)
+    .eq('open.exam_state', 'in-progress')
     .order('display_order', { ascending: true })
     .order('show_at_index', { referencedTable: 'allowed_config.exam_config.breaks', ascending: true })
 
@@ -116,40 +118,11 @@ export async function getTrackExams(trackId: string): Promise<TrackExams> {
     })
   }
 
-  // The same type row repeats once per exam using it; the Map keeps the first of each, so types
-  // come out in display_order. A track with no exams returns two empty arrays — a valid response,
-  // not a 404: a track the caller may not see was already refused by assertTrackAccess.
-  const usedTypes = new Map(data.map((row) => [row.exam_type.id, row.exam_type]))
+  const exams = data.map(({ completed, open, ...row }) => ({
+    ...toExam(row),
+    attempts_count: completed[0]?.count ?? 0,
+    open_attempt_id: open[0]?.id ?? null
+  }))
 
-  return {
-    exams: data.map(toExamDetails),
-    types: [...usedTypes.values()].map((type) => ({
-      id: type.id,
-      name: {
-        ar: type.name_ar,
-        en: type.name_en
-      },
-      colour: type.colour
-    }))
-  }
-}
-
-/**
- * An exam alongside its full question content, in every language.
- *
- * Always disclosed — `is_correct` and `explanation` ride on every question. There is no
- * `discloseAnswers` parameter: who may call this is `withRole`'s decision, not this function's.
- * Question ids come from `exam_questions`, ordered by `question_index`.
- *
- * Takes the exam rather than reading it — the caller already read it for its `track_id`, and
- * re-reading ran the config join twice per request.
- *
- * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
- */
-export async function getExamQuestions(exam: ExamDetails): Promise<ExamWithQuestions> {
-  // The disclosed shape is what the content query returns whenever the flag is true, which its
-  // return union cannot express on its own.
-  const questions = (await getExamQuestionContent(exam.id, true)) as DisclosedQuestion[]
-
-  return { exam, questions }
+  return { tag, exams }
 }

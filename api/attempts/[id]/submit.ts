@@ -3,14 +3,26 @@ import { withAuth } from "../../_lib/middleware/withAuth.js"
 import { successResponse } from "../../_lib/utils/response.js"
 import { parseJsonBody } from "../../_lib/utils/parseBody.js"
 import { parseOrThrow } from "../../_lib/utils/parse.js"
-import { AttemptIdSchema, SubmitAttemptRequestSchema } from "../../../shared/schemas/attempt.schema.js"
+import { z } from "zod"
+import { AttemptIdSchema, SaveAttemptAnswersSchema } from "../../../shared/schemas/attempt.schema.js"
 import { submitAttempt } from "../../_lib/services/attemptService.js"
+
+/**
+ * The final diff travels WITH the submission, so the last answers and the grading share one
+ * transaction rather than two a lost request could fall between.
+ */
+const SubmitAttemptRequestSchema = z.strictObject({
+  current_index: z.int().nonnegative(),
+  /** Null exactly when the attempt is untimed — the RPC refuses a payload that disagrees (`invalid_time`). */
+  time_remaining: z.int().nonnegative().nullable(),
+  answers: SaveAttemptAnswersSchema,
+})
 
 // Maps to POST /api/attempts/<attempt_id>/submit
 // Ownership is the gate, and the service enforces it: grading someone else's attempt is refused
 // by the RPC, not by a role check here.
 //
-// Grades the attempt and stores the result (score, status, wrong_questions) — it does not return
+// Grades the attempt and stores the result in `results` — it does not return
 // it. The client reads the grade back with GET /api/attempts/<attempt_id>, same as a resume.
 export const POST = withErrorHandler(
   withAuth(async (request, authUser, cookieHeaders) => {

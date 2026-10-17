@@ -1,8 +1,8 @@
 import React from "react";
 import { AlertTriangle, RefreshCw } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { translate } from "@/utils/translation";
-import { cn } from "@/components/ui/utils";
+import { Button } from "../ui/button";
+import { translate } from "@/core/utils/translation";
+import { cn } from "../ui/utils";
 
 type ErrorStateProps = {
   message: string;
@@ -26,7 +26,7 @@ const ErrorState: React.FC<ErrorStateProps> = ({
     )}
   >
     <AlertTriangle className="size-8 text-destructive" strokeWidth={1.6} />
-    <p className="max-w-80 text-sm text-grey-900">{message}</p>
+    <p className="max-w-80 text-sm text-grey-1000">{message}</p>
 
     {onRetry && (
       <Button

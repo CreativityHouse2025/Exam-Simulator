@@ -16,10 +16,10 @@
 --   3. Running this against the remote is a live smoke test of all three RPCs
 --      on that database, which is most of the point of staging.
 --
--- Four journeys, chosen to cover every config in the catalogue and every state
--- the attempt UI can be in:
+-- Three journeys, chosen to cover every config in the catalogue and every state
+-- the attempt UI can be in. No PMP Full journey: seed.sql already leaves this
+-- student an open attempt on exam 2, and a student holds one per exam (023).
 --
---   exam  2  PMP Full    timed 240m   completed, pass   review with answers
 --   exam 18  PMP Domain  untimed      completed, pass   NULL clock, reveal mode
 --   exam 44  RMP Full    timed 150m   in-progress       resume, bookmarks, break
 --   exam 45  RMP Full    timed 150m   completed, fail   revision set available
@@ -93,6 +93,12 @@ as $$
 $$;
 
 
+-- start_attempt refuses archived exams (022), and every exam is archived.
+-- Reopen the demo exams for the journeys, then archive them again: the result
+-- is history on retired exams, including an unfinished attempt to resume.
+update public.exams set archived_at = null where id in (18, 44, 45);
+
+
 do $$
 declare
   c_student  constant uuid := '22222222-2222-4222-8222-222222222222';
@@ -106,40 +112,7 @@ declare
   v_revision integer;
 begin
   -- =================================================================
-  -- 1. PMP Full exam, completed with a pass.
-  --    passing_rate is 75.00, so 82% correct clears it with room to
-  --    spare without looking suspiciously perfect.
-  -- =================================================================
-  select s.id, s.question_ids_snapshot
-    into v_attempt, v_qids
-    from public.start_attempt(c_student, 2::smallint) s;
-
-  if v_attempt is null then
-    raise exception 'seed_demo: start_attempt returned no attempt for exam 2';
-  end if;
-  v_n := cardinality(v_qids);
-
-  select public.submit_attempt(
-           c_student,
-           v_attempt,
-           v_n - 1,
-           3600,   -- an hour left on a four-hour clock
-           pg_temp.answer_payload(v_qids, ceil(v_n * 0.82)::integer, 4)
-         )
-    into v_result;
-  if v_result <> 'ok' then
-    raise exception 'seed_demo: submit_attempt on exam 2 returned %', v_result;
-  end if;
-
-  select score, status into v_score, v_status
-    from public.exam_attempts where id = v_attempt;
-  if v_status <> 'pass' then
-    raise exception 'seed_demo: exam 2 was meant to pass, scored % (%)', v_score, v_status;
-  end if;
-  raise notice 'seed_demo: PMP full exam 2 -> % (%)', v_score, v_status;
-
-  -- =================================================================
-  -- 2. PMP Domain exam, untimed, completed with a pass.
+  -- 1. PMP Domain exam, untimed, completed with a pass.
   --    passing_rate is 85.00 here and the config reveals answers as
   --    you go, so a high score is the realistic outcome.
   --
@@ -172,11 +145,11 @@ begin
   end if;
 
   select score, status into v_score, v_status
-    from public.exam_attempts where id = v_attempt;
+    from public.results where attempt_id = v_attempt;
   raise notice 'seed_demo: PMP domain exam 18 -> % (%), untimed', v_score, v_status;
 
   -- =================================================================
-  -- 3. RMP Full exam, left in progress.
+  -- 2. RMP Full exam, left in progress.
   --    Roughly half answered, with the break at index 58 recorded as
   --    already offered — the state a student is in when they close the
   --    tab mid-sitting and come back to a resume prompt.
@@ -212,7 +185,7 @@ begin
   raise notice 'seed_demo: RMP exam 44 -> in-progress at index 62, break 58 offered';
 
   -- =================================================================
-  -- 4. RMP Full exam, completed with a fail.
+  -- 3. RMP Full exam, completed with a fail.
   --    Below the 75.00 threshold on purpose: config 3 sets
   --    allow_retry_wrong, so this is the attempt that gives the
   --    reviewer a revision session to open.
@@ -239,7 +212,7 @@ begin
   end if;
 
   select score, status into v_score, v_status
-    from public.exam_attempts where id = v_attempt;
+    from public.results where attempt_id = v_attempt;
   if v_status <> 'fail' then
     raise exception 'seed_demo: exam 45 was meant to fail, scored % (%)', v_score, v_status;
   end if;
@@ -259,13 +232,15 @@ begin
   if v_revision = 0 then
     raise exception 'seed_demo: exam 45 failed but offers no revision questions';
   end if;
-  if v_revision <> (select wrong_questions from public.exam_attempts where id = v_attempt) then
+  if v_revision <> (select wrong_questions from public.results where attempt_id = v_attempt) then
     raise exception 'seed_demo: revision set (%) disagrees with wrong_questions (%)',
-      v_revision, (select wrong_questions from public.exam_attempts where id = v_attempt);
+      v_revision, (select wrong_questions from public.results where attempt_id = v_attempt);
   end if;
   raise notice 'seed_demo: RMP exam 45 -> % (%), % question(s) to revise',
     v_score, v_status, v_revision;
 end $$;
+
+update public.exams set archived_at = now() where id in (18, 44, 45);
 
 
 -- ---------------------------------------------------------------------
@@ -297,9 +272,10 @@ begin
     raise exception 'seed_demo: attempts cover % track(s), expected both', v_tracks;
   end if;
 
-  select string_agg(distinct coalesce(a.status, a.exam_state), ', ' order by coalesce(a.status, a.exam_state))
+  select string_agg(distinct coalesce(r.status, a.exam_state), ', ' order by coalesce(r.status, a.exam_state))
     into v_states
     from public.exam_attempts a
+    left join public.results r on r.attempt_id = a.id
    where a.user_id = c_student;
 
   raise notice 'seed_demo: % answer row(s) for student@local.test across % track(s); states: %',

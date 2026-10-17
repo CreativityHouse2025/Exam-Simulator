@@ -2,7 +2,8 @@ import { withErrorHandler } from "../../_lib/middleware/withErrorHandler.js"
 import { withAuth } from "../../_lib/middleware/withAuth.js"
 import { successResponse } from "../../_lib/utils/response.js"
 import { parseOrThrow } from "../../_lib/utils/parse.js"
-import { AttemptIdSchema, type Revision } from "../../../shared/schemas/attempt.schema.js"
+import { AttemptIdSchema } from "../../../shared/schemas/attempt.schema.js"
+import type { ExamWithQuestions } from "../../../shared/schemas/exam.schema.js"
 import { getRevision } from "../../_lib/services/attemptService.js"
 
 // Maps to GET /api/attempts/<attempt_id>/revision
@@ -13,7 +14,7 @@ export const GET = withErrorHandler(
     // Path is /api/attempts/<id>/revision — the id is the second-to-last segment.
     const attemptId = parseOrThrow(AttemptIdSchema, url.pathname.split("/").at(-2) ?? "")
 
-    const result: Revision = await getRevision(authUser.id, attemptId)
+    const result: ExamWithQuestions = await getRevision(authUser.id, attemptId)
     return successResponse(result, 200, cookieHeaders)
   }),
 )

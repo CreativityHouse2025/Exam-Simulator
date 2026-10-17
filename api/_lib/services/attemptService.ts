@@ -2,36 +2,42 @@ import { supabaseAdmin } from "../supabaseClient.js";
 import { AppError, type AppErrorParams } from "../errors/AppError.js";
 import type {
   DisclosedQuestion,
+  Exam,
   ExamConfig,
   Question,
 } from "../../../shared/schemas/exam.schema.js";
 import type {
-  AttemptDetail,
-  AttemptList,
+  Attempt,
+  AttemptPage,
   AttemptStatus,
-  AttemptSummary,
   AttemptWithQuestions,
   ExamState,
-  Revision,
-  SaveAttemptRequestBody,
-  StartAttemptRequestBody,
-  SubmitAttemptRequestBody,
+  SaveAttemptAnswers,
 } from "../../../shared/schemas/attempt.schema.js";
-import { getExam } from "./examService.js";
-import { getQuestions } from "./questionService.js";
+import type { ExamWithQuestions } from "../../../shared/schemas/exam.schema.js";
+import { getExam, toExam, type ExamRow } from "./examService.js";
+import { assertTrackAccess } from "./trackService.js";
+import { getQuestionsById } from "./questionService.js";
 
-/** The per-track attempt cap. A track's list can never legitimately exceed it. */
-const TRACK_ATTEMPT_CAP = 150;
+/** What save hands the service once the handler has validated it. Submit is the same minus breaks. */
+type SaveAttemptInput = {
+  current_index: number;
+  /** Null when the attempt is untimed. */
+  time_remaining: number | null;
+  answers: SaveAttemptAnswers;
+  offered_breaks: number[];
+};
 
 /**
- * The attempt columns every read selects. `exams` is joined only to filter by track.
+ * The attempt columns every read selects, with the exam it belongs to. The exam carries its current
+ * config only because `Exam` always does, and its breaks are unordered; the attempt's own snapshot
+ * governs. The inner join also lets the list filter by the exam's track.
  *
  * `total_questions` is the generated column from 018 rather than the snapshot's length, so the
  * list does not ship 25 × 180 int4 to read one number off.
  */
 const ATTEMPT_COLUMNS =
-  "id, exam_id, exam_state, score, status, created_at, time_remaining, config_snapshot, total_questions, wrong_questions";
-
+  "id, exam_state, created_at, time_remaining, config_snapshot, total_questions, current_index, results(status, score, wrong_questions, time_taken), offered_breaks(show_at_index), exams!inner(id, display_order, name_ar, name_en, description_ar, description_en, question_count, archived_at, tags(id, code, name_ar, name_en, color_hex_code, display_order, archived_at), allowed_config(tracks(id, name_ar, name_en, description_ar, description_en), exam_config(exam_duration_minutes, passing_rate, can_reveal_answers, allow_retry_wrong, breaks(show_at_index, duration_minutes))))";
 /** What a read that also serves question CONTENT needs on top: the frozen set, in its frozen order. */
 const ATTEMPT_DETAIL_COLUMNS = `${ATTEMPT_COLUMNS}, question_ids_snapshot`;
 
@@ -59,39 +65,45 @@ const RPC_FAILURES = {
   },
 } as const satisfies Record<string, AppErrorParams>;
 
-/** What `toAttemptSummary` reads. Every attempt read selects at least these. */
-type AttemptSummaryRow = {
+/** What `toAttempt` reads. Every attempt read selects at least these; the exam is mapped apart. */
+type AttemptRow = {
   id: string;
-  exam_id: number;
   exam_state: string;
-  score: number;
-  status: string | null;
   created_at: string;
   /** NULL when the attempt is untimed. */
   time_remaining: number | null;
   config_snapshot: unknown;
   total_questions: number;
-  wrong_questions: number | null;
+  /** One-to-one embed: null while the attempt is in progress. */
+  results: {
+    status: string;
+    score: number;
+    wrong_questions: number;
+    time_taken: number | null;
+  } | null;
+  current_index: number;
+  offered_breaks: { show_at_index: number }[];
 };
 
 /**
- * The one place an attempt row becomes an `AttemptSummary` — start, resume and list share it.
+ * The one place an attempt row becomes an `Attempt` — start, resume and list share it.
  *
  * `exam_state` and `status` are text with a CHECK rather than enums, and `config_snapshot` is
- * jsonb, so those three are asserted.
+ * jsonb, so those three are asserted. The exam is passed in: start already holds it, reads map
+ * their embedded `exams` row with `toExam`.
  */
-function toAttemptSummary(row: AttemptSummaryRow): AttemptSummary {
+function toAttempt({ results, offered_breaks, ...row }: AttemptRow, exam: Exam): Attempt {
   return {
     id: row.id,
-    exam_id: row.exam_id,
+    exam,
     exam_state: row.exam_state as ExamState,
-    score: row.score,
-    status: row.status as AttemptStatus | null,
     created_at: row.created_at,
     time_remaining: row.time_remaining,
     config_snapshot: row.config_snapshot as ExamConfig,
     total_questions: row.total_questions,
-    wrong_questions: row.wrong_questions,
+    result: results && { ...results, status: results.status as AttemptStatus },
+    current_index: row.current_index,
+    offered_breaks: offered_breaks.map((offered) => offered.show_at_index),
   };
 }
 
@@ -100,16 +112,25 @@ function toAttemptSummary(row: AttemptSummaryRow): AttemptSummary {
  * Starts an exam. The server decides the question set, the order, the config and the clock; the
  * client sends only which exam.
  *
- * Every call creates an attempt. Sending the request once is the frontend's job — several
- * unfinished attempts for one exam are a legitimate state, bounded by the per-track cap.
+ * A student has at most one unfinished attempt per exam. If one exists, nothing is created; the
+ * RPC's partial unique index settles concurrent starts.
+ *
+ * Starting an exam is track access, unlike reading an attempt already owned. The track is reachable
+ * only through the exam, so it is checked before anything is written.
  *
  * @throws {AppError} 404 `NOT_FOUND` — no such exam, or an exam with no questions.
+ * @throws {AppError} 403 `FORBIDDEN` — no active enrollment in the exam's track.
+ * @throws {AppError} 409 `ATTEMPT_IN_PROGRESS` — the student already has an open attempt on this exam.
+ * @throws {AppError} 410 `EXAM_ARCHIVED` — the exam is archived.
  * @throws {AppError} 500 `ATTEMPT_CREATE_FAILED` — the call failed.
  */
 export async function startAttempt(
   userId: string,
-  { exam_id }: StartAttemptRequestBody,
+  exam_id: number,
 ): Promise<AttemptWithQuestions> {
+  const exam = await getExam(exam_id);
+  await assertTrackAccess(userId, exam.track.id);
+
   const { data, error } = await supabaseAdmin
     .rpc("start_attempt", { p_user_id: userId, p_exam_id: exam_id })
     .single();
@@ -130,17 +151,35 @@ export async function startAttempt(
     });
   }
 
-  const attempt: AttemptDetail = {
-    // The RPC returns the snapshot, not the generated column, so the count comes off the array.
-    // It also predates 021's wrong_questions column and never will carry it — a just-started
-    // attempt is always in-progress, so it is always null, the same reasoning as offered_breaks.
-    ...toAttemptSummary({ ...data, total_questions: data.question_ids_snapshot.length, wrong_questions: null }),
-    current_index: data.current_index,
-    // A new attempt has answered nothing and been offered no break, so neither needs a query.
-    offered_breaks: [],
-  };
+  if (data.result === "archived") {
+    throw new AppError({
+      statusCode: 410,
+      code: "EXAM_ARCHIVED",
+      message: `Exam ${exam_id} is archived and cannot be started`,
+    });
+  }
 
-  const content = (await getQuestions(
+  if (data.result === "in_progress") {
+    throw new AppError({
+      statusCode: 409,
+      code: "ATTEMPT_IN_PROGRESS",
+      message: `User ${userId} already has open attempt ${data.id} on exam ${exam_id}`,
+    });
+  }
+
+  // The RPC returns the snapshot, not the generated column, so the count comes off the array.
+  // A just-started attempt has no result and has been offered no break, so neither needs a query.
+  const attempt = toAttempt(
+    {
+      ...data,
+      total_questions: data.question_ids_snapshot.length,
+      results: null,
+      offered_breaks: [],
+    },
+    exam,
+  );
+
+  const content = (await getQuestionsById(
     data.question_ids_snapshot,
     attempt.config_snapshot.can_reveal_answers,
   )) as Question[];
@@ -179,7 +218,7 @@ function throwOnRpcFailure(result: string): void {
 export async function saveAttempt(
   userId: string,
   attemptId: string,
-  { current_index, time_remaining, answers, offered_breaks }: SaveAttemptRequestBody,
+  { current_index, time_remaining, answers, offered_breaks }: SaveAttemptInput,
 ): Promise<void> {
   const { data: result, error } = await supabaseAdmin.rpc("save_attempt", {
     p_user_id: userId,
@@ -210,7 +249,7 @@ export async function saveAttempt(
  * rows, never the request — an unanswered question is wrong by absence — and the pass mark comes
  * from the attempt's own `config_snapshot`, not the exam's current config.
  *
- * Writes the grade (score, status, wrong_questions) to the row rather than returning it — the
+ * Writes the grade to `results` rather than returning it — the
  * caller reads it back with `getAttempt`, the same call a resume already makes, which is also
  * what discloses the questions. Question content is deliberately absent from this call: a student
  * who wants a question-by-question review reads the completed attempt, not this response.
@@ -224,7 +263,7 @@ export async function saveAttempt(
 export async function submitAttempt(
   userId: string,
   attemptId: string,
-  { current_index, time_remaining, answers }: SubmitAttemptRequestBody,
+  { current_index, time_remaining, answers }: Omit<SaveAttemptInput, "offered_breaks">,
 ): Promise<void> {
   const { data: result, error } = await supabaseAdmin.rpc("submit_attempt", {
     p_user_id: userId,
@@ -246,32 +285,71 @@ export async function submitAttempt(
   throwOnRpcFailure(result);
 }
 
+/** PostgREST's answer to an offset past the last row when an exact count was asked for (416). */
+const RANGE_PAST_END = "PGRST103";
+
 /**
- * One user's attempts within one track, newest first.
+ * One page of a user's attempts within one track, newest first, plus how many there are in all.
  *
- * The track filter is an inner join on `exams`, applied before the limit: limiting first would
- * silently drop a track's older attempts once the account holds enough newer ones elsewhere.
+ * The track filter is an inner join on `exams`, so both the page and the count cover this track
+ * only. A page past the end is an empty page, not an error.
  *
  * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
  */
-export async function listAttempts(userId: string, trackId: string): Promise<AttemptList> {
-  const { data, error } = await supabaseAdmin
+export async function listAttempts(
+  userId: string,
+  trackId: string,
+  { page, per_page }: AttemptPage,
+): Promise<{ attempts: Attempt[]; total: number }> {
+  const from = (page - 1) * per_page;
+
+  const { data, count, error } = await supabaseAdmin
     .from("exam_attempts")
-    .select(`${ATTEMPT_COLUMNS}, exams!inner(track_id)`)
+    .select(ATTEMPT_COLUMNS, { count: "exact" })
     .eq("user_id", userId)
     .eq("exams.track_id", trackId)
     .order("created_at", { ascending: false })
-    .limit(TRACK_ATTEMPT_CAP);
+    // Ties on created_at would otherwise let a row move between pages.
+    .order("id", { ascending: false })
+    .range(from, from + per_page - 1);
 
-  if (error || !data) {
+  if (error?.code === RANGE_PAST_END) {
+    return { attempts: [], total: await countAttempts(userId, trackId) };
+  }
+
+  if (error || !data || count === null) {
     throw new AppError({
       statusCode: 500,
       code: "INTERNAL_ERROR",
-      message: `Failed to fetch attempts for track ${trackId} (${error?.message ?? "no rows returned"})`,
+      message: `Failed to fetch attempts for track ${trackId} (${error?.message ?? "no rows or count returned"})`,
     });
   }
 
-  return { attempts: data.map(toAttemptSummary) };
+  return { attempts: data.map((row) => toAttempt(row, toExam(row.exams))), total: count };
+}
+
+/**
+ * How many attempts a user has within one track. Only for a page past the end, where the page
+ * query fails before it reports its count.
+ *
+ * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
+ */
+async function countAttempts(userId: string, trackId: string): Promise<number> {
+  const { count, error } = await supabaseAdmin
+    .from("exam_attempts")
+    .select("id, exams!inner(track_id)", { count: "exact", head: true })
+    .eq("user_id", userId)
+    .eq("exams.track_id", trackId);
+
+  if (error || count === null) {
+    throw new AppError({
+      statusCode: 500,
+      code: "INTERNAL_ERROR",
+      message: `Failed to count attempts for track ${trackId} (${error?.message ?? "no count returned"})`,
+    });
+  }
+
+  return count;
 }
 
 /**
@@ -292,7 +370,7 @@ export async function getAttempt(
   const { data, error } = await supabaseAdmin
     .from("exam_attempts")
     .select(
-      `${ATTEMPT_DETAIL_COLUMNS}, user_id, current_index, attempt_answers(question_id, selected_choices, is_bookmarked), offered_breaks(show_at_index)`,
+      `${ATTEMPT_DETAIL_COLUMNS}, user_id, attempt_answers(question_id, selected_choices, is_bookmarked)`,
     )
     .eq("id", attemptId)
     .maybeSingle();
@@ -321,13 +399,9 @@ export async function getAttempt(
     });
   }
 
-  const attempt: AttemptDetail = {
-    ...toAttemptSummary(data),
-    current_index: data.current_index,
-    offered_breaks: data.offered_breaks.map((offered) => offered.show_at_index),
-  };
+  const attempt = toAttempt(data, toExam(data.exams as ExamRow));
 
-  const content = (await getQuestions(
+  const content = (await getQuestionsById(
     data.question_ids_snapshot,
     attempt.config_snapshot.can_reveal_answers || attempt.exam_state === "completed",
   )) as Question[];
@@ -352,14 +426,14 @@ export async function getAttempt(
  * `submit_attempt` grades with, so the rule lives in one place rather than being recomputed here.
  * Ids arrive in the attempt's frozen order; an unopened question falls in by absence.
  *
- * Nothing is persisted, and an empty set is a normal outcome. The parent exam travels without its
- * config: a revision session's rules are a frontend constant, not the exam's.
+ * Nothing is persisted, and an empty set is a normal outcome. The parent exam's config is not the
+ * session's: a revision session's rules are a frontend constant.
  *
  * @throws {AppError} 404 `NOT_FOUND` — no attempt with this id.
  * @throws {AppError} 403 `FORBIDDEN` — not the owner, not completed, or retry is disabled.
  * @throws {AppError} 500 `INTERNAL_ERROR` — the call failed.
  */
-export async function getRevision(userId: string, attemptId: string): Promise<Revision> {
+export async function getRevision(userId: string, attemptId: string): Promise<ExamWithQuestions> {
   const { data, error } = await supabaseAdmin
     .rpc("revision_question_ids", { p_user_id: userId, p_attempt_id: attemptId })
     .single();
@@ -377,12 +451,8 @@ export async function getRevision(userId: string, attemptId: string): Promise<Re
 
   const [exam, questions] = await Promise.all([
     getExam(data.exam_id),
-    getQuestions(data.question_ids, true) as Promise<DisclosedQuestion[]>,
+    getQuestionsById(data.question_ids, true) as Promise<DisclosedQuestion[]>,
   ]);
 
-  // The parent exam sheds its config on the way out: `Exam`, not `ExamDetails`.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { config: _config, ...parent_exam } = exam;
-
-  return { parent_exam, questions };
+  return { exam, questions };
 }

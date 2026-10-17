@@ -1,4 +1,6 @@
 import type { Track } from "../../../shared/schemas/track.schema.js";
+import type { Tag } from "../../../shared/schemas/exam.schema.js";
+import type { Tables } from "../database.types.js";
 import { AppError } from "../errors/AppError.js";
 import { supabaseAdmin } from "../supabaseClient.js";
 
@@ -45,6 +47,93 @@ export async function listTracks(): Promise<Track[]> {
   }
 
   return data.map(toTrack);
+}
+
+const TAG_COLUMNS = "id, code, name_ar, name_en, color_hex_code, display_order, archived_at";
+
+type TagRow = Pick<
+  Tables<"tags">,
+  "id" | "code" | "name_ar" | "name_en" | "color_hex_code" | "display_order" | "archived_at"
+>;
+
+/** Bilingual columns collapse into one object. */
+export function toTag(row: TagRow): Tag {
+  return {
+    id: row.id,
+    code: row.code,
+    name: { ar: row.name_ar, en: row.name_en },
+    color_hex_code: row.color_hex_code,
+    display_order: row.display_order,
+    archived_at: row.archived_at,
+  };
+}
+
+/**
+ * The track's own active tags plus the shared ones, ordered by `display_order`. A tag with no
+ * exams is still listed.
+ *
+ * Access is the caller's job: the handler runs `assertTrackAccess` before calling this.
+ *
+ * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
+ */
+export async function getTrackTags(trackId: string): Promise<Tag[]> {
+  const { data, error } = await supabaseAdmin
+    .from("tags")
+    .select(TAG_COLUMNS)
+    // trackId is a validated UUID, so it is safe inside the filter string.
+    .or(`track_id.eq.${trackId},track_id.is.null`)
+    .is("archived_at", null)
+    .order("display_order", { ascending: true });
+
+  if (error) {
+    throw new AppError({
+      statusCode: 500,
+      code: "INTERNAL_ERROR",
+      message: `Failed to fetch tags for track ${trackId} (${error.message})`,
+    });
+  }
+
+  return data.map(toTag);
+}
+
+/**
+ * One active tag by code. Codes are global, so the lookup ignores tracks.
+ *
+ * @throws {AppError} 404 `NOT_FOUND` — no tag has this code, or it is archived.
+ * @throws {AppError} 500 `INTERNAL_ERROR` — the query failed.
+ */
+export async function getActiveTag(code: string): Promise<Tag> {
+  const { data, error } = await supabaseAdmin
+    .from("tags")
+    .select(TAG_COLUMNS)
+    .eq("code", code)
+    .maybeSingle();
+
+  if (error) {
+    throw new AppError({
+      statusCode: 500,
+      code: "INTERNAL_ERROR",
+      message: `Failed to fetch tag ${code} (${error.message})`,
+    });
+  }
+
+  if (!data) {
+    throw new AppError({
+      statusCode: 404,
+      code: "NOT_FOUND",
+      message: `Tag with code ${code} does not exist.`,
+    });
+  }
+
+  if (data.archived_at !== null) {
+    throw new AppError({
+      statusCode: 404,
+      code: "NOT_FOUND",
+      message: `Tag ${code} is archived.`,
+    });
+  }
+
+  return toTag(data);
 }
 
 /**

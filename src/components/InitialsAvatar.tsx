@@ -1,4 +1,4 @@
-import { cn } from "@/components/ui/utils";
+import { cn } from "./ui/utils";
 
 type InitialsAvatarProps = {
   firstName: string;

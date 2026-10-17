@@ -149,6 +149,12 @@
   /* ProfilePage.tsx's danger-variant ActionButton hover background — a distinct raw hex from
      Modal.tsx's --danger-hover above (that one darkens a solid button; this lightens a pale one). */
   --danger-bg-hover: #fde8e8;
+  /* Expiring-access chip — amber text passes 4.5:1 on its own tint. */
+  --warning: #a2510a;
+  /* Outcome text on white or its own tint — the brighter correct/destructive fail 4.5:1 there. */
+  --correct-text: #2e6b31;
+  --destructive-text: #b42318;
+  --warning-bg: #fdf1e3;
   /* Precomputed via polished's lighten(0.2, ...) — reused across Arrows.tsx hover, Cell.tsx's
      "answered" swatch, and MenuItem.tsx hover; all three use the identical value. */
   --primary-light: #d5c3a3;
@@ -212,6 +218,12 @@
   --animate-slide-down: slide-down 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   --animate-spin-fast: spin-fast 0.8s linear infinite;
   --animate-grow: grow 200ms ease;
+
+  /* Plum-tinted elevation for the dashboard's track panel and its shortcut tiles. */
+  --shadow-tile:
+    0 1px 2px rgba(48, 30, 44, 0.06), 0 8px 24px -10px rgba(48, 30, 44, 0.22);
+  --shadow-tile-lift:
+    0 2px 4px rgba(48, 30, 44, 0.08), 0 16px 32px -12px rgba(48, 30, 44, 0.3);
 }
 
 /* Modal.tsx's Inner grid — a fixed/fr/fixed row template with no equivalent named Tailwind
@@ -323,6 +335,10 @@
   --color-danger: var(--danger);
   --color-danger-hover: var(--danger-hover);
   --color-danger-bg-hover: var(--danger-bg-hover);
+  --color-warning: var(--warning);
+  --color-correct-text: var(--correct-text);
+  --color-destructive-text: var(--destructive-text);
+  --color-warning-bg: var(--warning-bg);
   --color-primary-light: var(--primary-light);
   --color-secondary-light: var(--secondary-light);
   --color-correct-bg: var(--correct-bg);

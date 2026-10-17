@@ -5,16 +5,16 @@ insert into auth.users (
   confirmation_token, email_change, email_change_token_new, recovery_token
 )
 values
-  ('00000000-0000-0000-0000-000000000000', 'c9e8f071-9a48-4798-8e80-23e3a3a43917', 'authenticated', 'authenticated', 'amira.hassan@example.com',   crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', 'd88a3314-3ffa-4e66-bfac-0754be02b379', 'authenticated', 'authenticated', 'omar.khalil@example.com',    crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', '05b0aae0-61df-47de-8714-79f9c55b72f4', 'authenticated', 'authenticated', 'sara.ibrahim@example.com',   crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', '4f475484-3398-4437-959f-1342d8e8303a', 'authenticated', 'authenticated', 'youssef.adel@example.com',   crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', 'b03c5dae-42b5-4bb6-a0d2-5283588741d7', 'authenticated', 'authenticated', 'layla.mostafa@example.com',  crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', '9ad8a618-45b1-41d7-b321-501d799480ac', 'authenticated', 'authenticated', 'karim.said@example.com',     crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', '6334ded8-addc-4c28-a1f2-513af182dd79', 'authenticated', 'authenticated', 'nour.fathy@example.com',     crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', 'a0d45d1e-5c0a-414c-92e3-1cdafcfba337', 'authenticated', 'authenticated', 'mohamed.ali@example.com',    crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', '6672d13d-31e2-49c0-b30d-b947f44d6e40', 'authenticated', 'authenticated', 'dina.mahmoud@example.com',   crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', '91e9a4fe-9760-4900-a46f-03ceb3559f4c', 'authenticated', 'authenticated', 'tarek.nabil@example.com',    crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', '')
+  ('00000000-0000-0000-0000-000000000000', 'c9e8f071-9a48-4798-8e80-23e3a3a43917', 'authenticated', 'authenticated', 'amira.hassan@example.com',   extensions.crypt('password123', extensions.gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', 'd88a3314-3ffa-4e66-bfac-0754be02b379', 'authenticated', 'authenticated', 'omar.khalil@example.com',    extensions.crypt('password123', extensions.gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', '05b0aae0-61df-47de-8714-79f9c55b72f4', 'authenticated', 'authenticated', 'sara.ibrahim@example.com',   extensions.crypt('password123', extensions.gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', '4f475484-3398-4437-959f-1342d8e8303a', 'authenticated', 'authenticated', 'youssef.adel@example.com',   extensions.crypt('password123', extensions.gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', 'b03c5dae-42b5-4bb6-a0d2-5283588741d7', 'authenticated', 'authenticated', 'layla.mostafa@example.com',  extensions.crypt('password123', extensions.gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', '9ad8a618-45b1-41d7-b321-501d799480ac', 'authenticated', 'authenticated', 'karim.said@example.com',     extensions.crypt('password123', extensions.gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', '6334ded8-addc-4c28-a1f2-513af182dd79', 'authenticated', 'authenticated', 'nour.fathy@example.com',     extensions.crypt('password123', extensions.gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', 'a0d45d1e-5c0a-414c-92e3-1cdafcfba337', 'authenticated', 'authenticated', 'mohamed.ali@example.com',    extensions.crypt('password123', extensions.gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', '6672d13d-31e2-49c0-b30d-b947f44d6e40', 'authenticated', 'authenticated', 'dina.mahmoud@example.com',   extensions.crypt('password123', extensions.gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', '91e9a4fe-9760-4900-a46f-03ceb3559f4c', 'authenticated', 'authenticated', 'tarek.nabil@example.com',    extensions.crypt('password123', extensions.gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', '')
 on conflict (id) do nothing;
 
 insert into public.users (id, first_name, last_name, role)
@@ -40,8 +40,8 @@ insert into auth.users (
   confirmation_token, email_change, email_change_token_new, recovery_token
 )
 values
-  ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-111111111111', 'authenticated', 'authenticated', 'supervisor@local.test', crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', '22222222-2222-4222-8222-222222222222', 'authenticated', 'authenticated', 'student@local.test',    crypt('password123', gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', '')
+  ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-111111111111', 'authenticated', 'authenticated', 'supervisor@local.test', extensions.crypt('password123', extensions.gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', '22222222-2222-4222-8222-222222222222', 'authenticated', 'authenticated', 'student@local.test',    extensions.crypt('password123', extensions.gen_salt('bf')), now(), '{}', '{}', now(), now(), '', '', '', '')
 on conflict (id) do nothing;
 
 insert into public.users (id, first_name, last_name, role)
@@ -62,13 +62,11 @@ on conflict (id) do nothing;
 -- question_ids_snapshot IS joined, from exam_questions. It is NOT NULL and
 -- non-empty by CHECK (migration 016 step 6), and the exams and question banks
 -- are migrations now (013-015), so the rows are there by the time this runs.
-insert into public.exam_attempts (user_id, exam_id, exam_state, status, score, time_remaining, created_at, config_snapshot, question_ids_snapshot)
+insert into public.exam_attempts (user_id, exam_id, exam_state, time_remaining, created_at, config_snapshot, question_ids_snapshot)
 select
   u.id,
   a.exam_id,
   a.exam_state,
-  a.status,
-  a.score,
   a.time_remaining,
   now() - a.age,
   '{
@@ -89,11 +87,30 @@ select
 from public.users u
 cross join (
   values
-    (2, 'completed',   'pass', 78.50,    0, interval '10 days'),
-    (4, 'completed',   'fail', 55.00,    0, interval '5 days'),
-    (2, 'in-progress', null,    0.00, 3600, interval '1 day')
-) as a(exam_id, exam_state, status, score, time_remaining, age)
+    (2, 'completed',      0, interval '10 days'),
+    (4, 'completed',      0, interval '5 days'),
+    (2, 'in-progress', 3600, interval '1 day')
+) as a(exam_id, exam_state, time_remaining, age)
 where u.role = 'student'
   -- dina.mahmoud is left with no attempts at all, so the empty-history state
   -- is reachable in the demo. Every other student gets the three above.
   and u.id <> '6672d13d-31e2-49c0-b30d-b947f44d6e40';
+
+-- The grade of each completed fixture above. Hand-written, not graded: these
+-- attempts have no answer rows. Each completed fixture is on a distinct exam,
+-- so exam_id identifies it.
+insert into public.results (attempt_id, status, score, wrong_questions, time_taken, completed_at)
+select
+  a.id,
+  r.status,
+  r.score,
+  cardinality(a.question_ids_snapshot) - round(cardinality(a.question_ids_snapshot) * r.score / 100)::smallint,
+  240 * 60 - a.time_remaining,
+  a.created_at
+from public.exam_attempts a
+join (
+  values
+    (2, 'pass', 78.50),
+    (4, 'fail', 55.00)
+) as r(exam_id, status, score) on r.exam_id = a.exam_id
+where a.exam_state = 'completed';

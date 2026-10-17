@@ -2,54 +2,40 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ClipboardList, Lock } from "lucide-react";
-import AttemptsTable from "@/components/attempts/AttemptsTable";
-import AttemptsTableSkeleton from "@/components/attempts/AttemptsTableSkeleton";
+import {
+  AttemptsPagination,
+  AttemptsTable,
+  AttemptsTableSkeleton,
+  createAttemptsQueryOptions,
+  useAttemptPageParams,
+} from "@/features/attempts";
 import EmptyState from "@/components/states/EmptyState";
 import ErrorState from "@/components/states/ErrorState";
 import BackButton from "@/components/BackButton";
 import Loading from "@/components/Loading";
-import useAuth from "@/hooks/useAuth";
-import useSettings from "@/hooks/useSettings";
-import useAttemptActions from "@/hooks/useAttemptActions";
-import {
-  createAttemptsQueryOptions,
-  createTrackExamsQueryOptions,
-} from "@/utils/queryOptions";
-import { translate } from "@/utils/translation";
-import { ROUTES } from "@/config/routes";
+import { useAuth } from "@/features/auth";
+import useSettings from "@/core/hooks/useSettings";
+import { useAttemptActions } from "@/features/exam-session";
+import { translate } from "@/core/utils/translation";
+import { ROUTES } from "@/routes/routes";
 
-/** The student's recent attempts in one track, capped server-side. */
+/** The student's attempts in one track, newest first, one page at a time. */
 const AttemptHistoryPage: React.FC = () => {
   const { trackId = "" } = useParams();
   const { settings } = useSettings();
   const langCode = settings.language;
-  const { enrolledTracks } = useAuth();
+  const { user, enrolledTracks } = useAuth();
+  const { attemptPage, setPage, setPerPage } = useAttemptPageParams();
 
   const track = enrolledTracks.find((enrolled) => enrolled.id === trackId);
   const isEnrolled = track !== undefined;
 
   const attemptsQuery = useQuery({
-    ...createAttemptsQueryOptions(trackId),
-    enabled: isEnrolled,
-  });
-  // Only for resolving exam names — AttemptSummary carries exam_id but never the name.
-  const examsQuery = useQuery({
-    ...createTrackExamsQueryOptions(trackId),
+    ...createAttemptsQueryOptions(trackId, attemptPage, user?.id),
     enabled: isEnrolled,
   });
 
   const { openAttempt, reviseAttempt, isBusy } = useAttemptActions();
-
-  const examNameById = React.useMemo(
-    () =>
-      new Map(
-        (examsQuery.data?.exams ?? []).map((exam) => [
-          exam.id,
-          exam.name[langCode],
-        ]),
-      ),
-    [examsQuery.data, langCode],
-  );
 
   if (!isEnrolled) {
     return (
@@ -67,7 +53,8 @@ const AttemptHistoryPage: React.FC = () => {
 
   if (isBusy) return <Loading size={100} />;
 
-  const attempts = attemptsQuery.data ?? [];
+  const attempts = attemptsQuery.data?.attempts ?? [];
+  const total = attemptsQuery.data?.total ?? 0;
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-8">
@@ -85,7 +72,7 @@ const AttemptHistoryPage: React.FC = () => {
           {attemptsQuery.isSuccess && (
             <span className="flex items-center gap-1.5">
               <ClipboardList className="size-3.5 shrink-0" />
-              {translate("history.attempt-count", [attempts.length])}
+              {translate("history.attempt-count", [total])}
             </span>
           )}
         </div>
@@ -99,21 +86,32 @@ const AttemptHistoryPage: React.FC = () => {
           onRetry={attemptsQuery.refetch}
           isRetrying={attemptsQuery.isFetching}
         />
-      ) : attempts.length === 0 ? (
-        <EmptyState
-          message={translate("history.table.empty")}
-          hint={translate("history.empty-hint")}
-        />
       ) : (
-        <AttemptsTable
-          attempts={attempts}
-          examNameById={examNameById}
-          disabled={isBusy}
-          onOpen={openAttempt}
-          onRevise={reviseAttempt}
-          onRefresh={attemptsQuery.refetch}
-          isRefreshing={attemptsQuery.isFetching}
-        />
+        <>
+          {/* Empty with a non-zero total: a page past the end, so the pager stays to go back. */}
+          {attempts.length === 0 ? (
+            <EmptyState
+              message={translate("history.table.empty")}
+              hint={translate("history.empty-hint")}
+            />
+          ) : (
+            <AttemptsTable
+              attempts={attempts}
+              langCode={langCode}
+              disabled={isBusy}
+              onOpen={openAttempt}
+              onRevise={reviseAttempt}
+            />
+          )}
+          {total > 0 && (
+            <AttemptsPagination
+              page={attemptPage}
+              total={total}
+              onPageChange={setPage}
+              onPerPageChange={setPerPage}
+            />
+          )}
+        </>
       )}
     </div>
   );

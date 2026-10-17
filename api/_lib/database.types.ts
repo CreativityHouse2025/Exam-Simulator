@@ -196,13 +196,10 @@ export type Database = {
           exam_state: string
           id: string
           question_ids_snapshot: number[]
-          score: number
-          status: string | null
           time_remaining: number | null
           total_questions: number
           updated_at: string
           user_id: string
-          wrong_questions: number | null
         }
         Insert: {
           config_snapshot: Json
@@ -212,13 +209,10 @@ export type Database = {
           exam_state?: string
           id?: string
           question_ids_snapshot: number[]
-          score?: number
-          status?: string | null
           time_remaining?: number | null
           total_questions?: number
           updated_at?: string
           user_id: string
-          wrong_questions?: number | null
         }
         Update: {
           config_snapshot?: Json
@@ -228,13 +222,10 @@ export type Database = {
           exam_state?: string
           id?: string
           question_ids_snapshot?: number[]
-          score?: number
-          status?: string | null
           time_remaining?: number | null
           total_questions?: number
           updated_at?: string
           user_id?: string
-          wrong_questions?: number | null
         }
         Relationships: [
           {
@@ -322,35 +313,9 @@ export type Database = {
           },
         ]
       }
-      exam_type: {
-        Row: {
-          colour: string | null
-          created_at: string
-          id: number
-          name_ar: string
-          name_en: string
-          updated_at: string
-        }
-        Insert: {
-          colour?: string | null
-          created_at?: string
-          id?: number
-          name_ar: string
-          name_en: string
-          updated_at?: string
-        }
-        Update: {
-          colour?: string | null
-          created_at?: string
-          id?: number
-          name_ar?: string
-          name_en?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
       exams: {
         Row: {
+          archived_at: string | null
           config_id: number
           created_at: string
           description_ar: string
@@ -360,25 +325,27 @@ export type Database = {
           name_ar: string
           name_en: string
           question_count: number
+          tag_id: number
           track_id: string
-          type_id: number
           updated_at: string
         }
         Insert: {
+          archived_at?: string | null
           config_id: number
           created_at?: string
           description_ar: string
           description_en: string
-          display_order?: number
+          display_order: number
           id?: number
           name_ar: string
           name_en: string
           question_count: number
+          tag_id: number
           track_id: string
-          type_id: number
           updated_at?: string
         }
         Update: {
+          archived_at?: string | null
           config_id?: number
           created_at?: string
           description_ar?: string
@@ -388,8 +355,8 @@ export type Database = {
           name_ar?: string
           name_en?: string
           question_count?: number
+          tag_id?: number
           track_id?: string
-          type_id?: number
           updated_at?: string
         }
         Relationships: [
@@ -401,10 +368,10 @@ export type Database = {
             referencedColumns: ["track_id", "config_id"]
           },
           {
-            foreignKeyName: "exams_type_id_fkey"
-            columns: ["type_id"]
+            foreignKeyName: "exams_tag_id_fkey"
+            columns: ["tag_id"]
             isOneToOne: false
-            referencedRelation: "exam_type"
+            referencedRelation: "tags"
             referencedColumns: ["id"]
           },
         ]
@@ -471,8 +438,91 @@ export type Database = {
         }
         Relationships: []
       }
+      results: {
+        Row: {
+          attempt_id: string
+          completed_at: string
+          score: number
+          status: string
+          time_taken: number | null
+          wrong_questions: number
+        }
+        Insert: {
+          attempt_id: string
+          completed_at?: string
+          score: number
+          status: string
+          time_taken?: number | null
+          wrong_questions: number
+        }
+        Update: {
+          attempt_id?: string
+          completed_at?: string
+          score?: number
+          status?: string
+          time_taken?: number | null
+          wrong_questions?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_results_attempt"
+            columns: ["attempt_id"]
+            isOneToOne: true
+            referencedRelation: "exam_attempts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tags: {
+        Row: {
+          archived_at: string | null
+          code: string
+          color_hex_code: string | null
+          created_at: string
+          display_order: number
+          id: number
+          name_ar: string
+          name_en: string
+          track_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          archived_at?: string | null
+          code: string
+          color_hex_code?: string | null
+          created_at?: string
+          display_order: number
+          id?: number
+          name_ar: string
+          name_en: string
+          track_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          archived_at?: string | null
+          code?: string
+          color_hex_code?: string | null
+          created_at?: string
+          display_order?: number
+          id?: number
+          name_ar?: string
+          name_en?: string
+          track_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tags_track_id_fkey"
+            columns: ["track_id"]
+            isOneToOne: false
+            referencedRelation: "tracks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tracks: {
         Row: {
+          code: string
           created_at: string
           description_ar: string | null
           description_en: string | null
@@ -483,6 +533,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          code: string
           created_at?: string
           description_ar?: string | null
           description_en?: string | null
@@ -493,6 +544,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          code?: string
           created_at?: string
           description_ar?: string | null
           description_en?: string | null
@@ -587,8 +639,6 @@ export type Database = {
           id: string
           question_ids_snapshot: number[]
           result: string
-          score: number
-          status: string
           time_remaining: number
         }[]
       }

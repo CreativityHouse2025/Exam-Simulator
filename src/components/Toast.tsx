@@ -1,6 +1,6 @@
 import React from "react";
-import useToast from "../hooks/useToast";
-import { translate } from "../utils/translation";
+import useToast from "@/core/hooks/useToast";
+import { translate } from "@/core/utils/translation";
 import { cn } from "./ui/utils";
 
 const Toast: React.FC = () => {

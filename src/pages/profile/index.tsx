@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import useAuth from "@/hooks/useAuth";
-import useToast from "@/hooks/useToast";
-import { translate } from "@/utils/translation";
-import { ROUTES } from "@/config/routes";
+import { useAuth } from "@/features/auth";
+import useToast from "@/core/hooks/useToast";
+import { translate } from "@/core/utils/translation";
+import { ROUTES } from "@/routes/routes";
 import {
   PageWrapper,
   Card,
